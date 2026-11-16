@@ -6,16 +6,16 @@ namespace System.Runtime.Diagnostics
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Runtime.Interop;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Interop;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Text;
-    using System.Diagnostics.CodeAnalysis;
 
     sealed class EventLogger
     {
@@ -26,9 +26,12 @@ namespace System.Runtime.Diagnostics
         static int logCountForPT;
         static bool canLogEvent = true;
 
-        DiagnosticTraceBase diagnosticTrace;        
-        [Fx.Tag.SecurityNote(Critical = "Protect the string that defines the event source name.",
-            Safe = "It demands UnmanagedCode=true so PT cannot call.")]
+        DiagnosticTraceBase diagnosticTrace;
+
+        [Fx.Tag.SecurityNote(
+            Critical = "Protect the string that defines the event source name.",
+            Safe = "It demands UnmanagedCode=true so PT cannot call."
+        )]
         [SecurityCritical]
         string eventLogSourceName;
         bool isInPartialTrust;
@@ -56,20 +59,31 @@ namespace System.Runtime.Diagnostics
                 canLogEvent = false;
                 // not throwing exception on purpose
             }
-        }       
+        }
 
-        [Fx.Tag.SecurityNote(Critical = "Unsafe method to create event logger (sets the event source name).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Unsafe method to create event logger (sets the event source name)."
+        )]
         [SecurityCritical]
-        public static EventLogger UnsafeCreateEventLogger(string eventLogSourceName, DiagnosticTraceBase diagnosticTrace)
+        public static EventLogger UnsafeCreateEventLogger(
+            string eventLogSourceName,
+            DiagnosticTraceBase diagnosticTrace
+        )
         {
             EventLogger logger = new EventLogger();
             logger.SetLogSourceName(eventLogSourceName, diagnosticTrace);
             return logger;
-        }       
+        }
 
         [Fx.Tag.SecurityNote(Critical = "Logs event to the event log and asserts Unmanaged code.")]
         [SecurityCritical]
-        public void UnsafeLogEvent(TraceEventType type, ushort eventLogCategory, uint eventId, bool shouldTrace, params string[] values)
+        public void UnsafeLogEvent(
+            TraceEventType type,
+            ushort eventLogCategory,
+            uint eventId,
+            bool shouldTrace,
+            params string[] values
+        )
         {
             if (logCountForPT < MaxEventLogsInPT)
             {
@@ -101,11 +115,14 @@ namespace System.Runtime.Diagnostics
                         eventLogEntryLength += stringValue.Length + 1;
                     }
 
-                    string normalizedProcessName = NormalizeEventLogParameter(UnsafeGetProcessName());
+                    string normalizedProcessName = NormalizeEventLogParameter(
+                        UnsafeGetProcessName()
+                    );
                     logValues[logValues.Length - 2] = normalizedProcessName;
                     eventLogEntryLength += (normalizedProcessName.Length + 1);
 
-                    string invariantProcessId = UnsafeGetProcessId().ToString(CultureInfo.InvariantCulture);
+                    string invariantProcessId = UnsafeGetProcessId()
+                        .ToString(CultureInfo.InvariantCulture);
                     logValues[logValues.Length - 1] = invariantProcessId;
                     eventLogEntryLength += (invariantProcessId.Length + 1);
 
@@ -114,7 +131,7 @@ namespace System.Runtime.Diagnostics
                     // have a very long exception and stack trace in our parameter
                     // strings.  Truncate each string by MaxEventLogEntryLength
                     // divided by number of strings in the entry.
-                    // Truncation algorithm is overly aggressive by design to 
+                    // Truncation algorithm is overly aggressive by design to
                     // simplify the code change due to Product Cycle timing.
                     if (eventLogEntryLength > MaxEventLogEntryLength)
                     {
@@ -135,7 +152,7 @@ namespace System.Runtime.Diagnostics
                     byte[] sidBA = new byte[sid.BinaryLength];
                     sid.GetBinaryForm(sidBA, 0);
                     IntPtr[] stringRoots = new IntPtr[logValues.Length];
-                    GCHandle stringsRootHandle = new GCHandle(); 
+                    GCHandle stringsRootHandle = new GCHandle();
                     GCHandle[] stringHandles = null;
 
                     try
@@ -144,10 +161,20 @@ namespace System.Runtime.Diagnostics
                         stringHandles = new GCHandle[logValues.Length];
                         for (int strIndex = 0; strIndex < logValues.Length; strIndex++)
                         {
-                            stringHandles[strIndex] = GCHandle.Alloc(logValues[strIndex], GCHandleType.Pinned);
+                            stringHandles[strIndex] = GCHandle.Alloc(
+                                logValues[strIndex],
+                                GCHandleType.Pinned
+                            );
                             stringRoots[strIndex] = stringHandles[strIndex].AddrOfPinnedObject();
                         }
-                        UnsafeWriteEventLog(type, eventLogCategory, eventId, logValues, sidBA, stringsRootHandle);
+                        UnsafeWriteEventLog(
+                            type,
+                            eventLogCategory,
+                            eventId,
+                            logValues,
+                            sidBA,
+                            stringsRootHandle
+                        );
                     }
                     finally
                     {
@@ -166,21 +193,39 @@ namespace System.Runtime.Diagnostics
                             }
                         }
                     }
-                    
-                    if (shouldTrace && this.diagnosticTrace != null && this.diagnosticTrace.IsEnabled())
+
+                    if (
+                        shouldTrace
+                        && this.diagnosticTrace != null
+                        && this.diagnosticTrace.IsEnabled()
+                    )
                     {
                         const int RequiredValueCount = 4;
-                        Dictionary<string, string> eventValues = new Dictionary<string, string>(logValues.Length + RequiredValueCount);
+                        Dictionary<string, string> eventValues = new Dictionary<string, string>(
+                            logValues.Length + RequiredValueCount
+                        );
                         eventValues["CategoryID.Name"] = "EventLogCategory";
-                        eventValues["CategoryID.Value"] = eventLogCategory.ToString(CultureInfo.InvariantCulture);
+                        eventValues["CategoryID.Value"] = eventLogCategory.ToString(
+                            CultureInfo.InvariantCulture
+                        );
                         eventValues["InstanceID.Name"] = "EventId";
-                        eventValues["InstanceID.Value"] = eventId.ToString(CultureInfo.InvariantCulture);
+                        eventValues["InstanceID.Value"] = eventId.ToString(
+                            CultureInfo.InvariantCulture
+                        );
                         for (int i = 0; i < values.Length; ++i)
                         {
-                            eventValues.Add("Value" + i.ToString(CultureInfo.InvariantCulture), values[i] == null ? string.Empty : DiagnosticTraceBase.XmlEncode(values[i]));
+                            eventValues.Add(
+                                "Value" + i.ToString(CultureInfo.InvariantCulture),
+                                values[i] == null
+                                    ? string.Empty
+                                    : DiagnosticTraceBase.XmlEncode(values[i])
+                            );
                         }
 
-                        this.diagnosticTrace.TraceEventLogEvent(type, new DictionaryTraceRecord((eventValues)));
+                        this.diagnosticTrace.TraceEventLogEvent(
+                            type,
+                            new DictionaryTraceRecord((eventValues))
+                        );
                     }
                 }
                 catch (Exception e)
@@ -199,7 +244,13 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        public void LogEvent(TraceEventType type, ushort eventLogCategory, uint eventId, bool shouldTrace, params string[] values)
+        public void LogEvent(
+            TraceEventType type,
+            ushort eventLogCategory,
+            uint eventId,
+            bool shouldTrace,
+            params string[] values
+        )
         {
             if (canLogEvent)
             {
@@ -221,7 +272,12 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        public void LogEvent(TraceEventType type, ushort eventLogCategory, uint eventId, params string[] values)
+        public void LogEvent(
+            TraceEventType type,
+            ushort eventLogCategory,
+            uint eventId,
+            params string[] values
+        )
         {
             this.LogEvent(type, eventLogCategory, eventId, true, values);
         }
@@ -243,17 +299,27 @@ namespace System.Runtime.Diagnostics
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Logs event to the event log by calling unsafe method.",
-           Safe = "Demands the same permission that is asserted by the unsafe method.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Logs event to the event log by calling unsafe method.",
+            Safe = "Demands the same permission that is asserted by the unsafe method."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-        void SafeLogEvent(TraceEventType type, ushort eventLogCategory, uint eventId, bool shouldTrace, params string[] values)
+        void SafeLogEvent(
+            TraceEventType type,
+            ushort eventLogCategory,
+            uint eventId,
+            bool shouldTrace,
+            params string[] values
+        )
         {
             UnsafeLogEvent(type, eventLogCategory, eventId, shouldTrace, values);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Protect the string that defines the event source name.",
-            Safe = "It demands UnmanagedCode=true so PT cannot call.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Protect the string that defines the event source name.",
+            Safe = "It demands UnmanagedCode=true so PT cannot call."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
         void SafeSetLogSourceName(string eventLogSourceName)
@@ -269,11 +335,16 @@ namespace System.Runtime.Diagnostics
             this.diagnosticTrace = diagnosticTrace;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess", 
-            Safe = "Does not leak any resource")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
+            Safe = "Does not leak any resource"
+        )]
         [SecuritySafeCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecuritySafeCritical method, Does not expose critical resources returned by methods with Link Demands")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "SecuritySafeCritical method, Does not expose critical resources returned by methods with Link Demands"
+        )]
         bool IsInPartialTrust()
         {
             bool retval = false;
@@ -294,39 +365,59 @@ namespace System.Runtime.Diagnostics
         }
 
         [SecurityCritical]
-        [Fx.Tag.SecurityNote(Critical = "Accesses security critical code RegisterEventSource and ReportEvent")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses security critical code RegisterEventSource and ReportEvent"
+        )]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         [ResourceConsumption(ResourceScope.Machine)]
         [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts)]
-        void UnsafeWriteEventLog(TraceEventType type, ushort eventLogCategory, uint eventId, string[] logValues, byte[] sidBA, GCHandle stringsRootHandle)
+        void UnsafeWriteEventLog(
+            TraceEventType type,
+            ushort eventLogCategory,
+            uint eventId,
+            string[] logValues,
+            byte[] sidBA,
+            GCHandle stringsRootHandle
+        )
         {
-            using (SafeEventLogWriteHandle handle = SafeEventLogWriteHandle.RegisterEventSource(null, this.eventLogSourceName))
+            using (
+                SafeEventLogWriteHandle handle = SafeEventLogWriteHandle.RegisterEventSource(
+                    null,
+                    this.eventLogSourceName
+                )
+            )
             {
                 if (handle != null)
                 {
                     HandleRef data = new HandleRef(handle, stringsRootHandle.AddrOfPinnedObject());
                     UnsafeNativeMethods.ReportEvent(
-                         handle,
-                         (ushort)EventLogEntryTypeFromEventType(type),
-                         eventLogCategory,
-                         eventId,
-                         sidBA,
-                         (ushort)logValues.Length,
-                         0,
-                         data,
-                         null);
+                        handle,
+                        (ushort)EventLogEntryTypeFromEventType(type),
+                        eventLogCategory,
+                        eventId,
+                        sidBA,
+                        (ushort)logValues.Length,
+                        0,
+                        data,
+                        null
+                    );
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
-            Safe = "Does not leak any resource")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
+            Safe = "Does not leak any resource"
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts)]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecurityCritical method, Does not expose critical resources returned by methods with Link Demands")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "SecurityCritical method, Does not expose critical resources returned by methods with Link Demands"
+        )]
         string UnsafeGetProcessName()
         {
             string retval = null;
@@ -337,14 +428,19 @@ namespace System.Runtime.Diagnostics
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
-            Safe = "Does not leak any resource")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Satisfies a LinkDemand for 'PermissionSetAttribute' on type 'Process' when calling method GetCurrentProcess",
+            Safe = "Does not leak any resource"
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts)]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecurityCritical method, Does not expose critical resources returned by methods with Link Demands")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "SecurityCritical method, Does not expose critical resources returned by methods with Link Demands"
+        )]
         int UnsafeGetProcessId()
         {
             int retval = -1;
@@ -354,7 +450,7 @@ namespace System.Runtime.Diagnostics
             }
             return retval;
         }
-        
+
         internal static string NormalizeEventLogParameter(string eventLogParameter)
         {
             if (eventLogParameter.IndexOf('%') < 0)
@@ -371,21 +467,24 @@ namespace System.Runtime.Diagnostics
                 // Not '%'
                 if (c != '%')
                 {
-                    if (parameterBuilder != null) parameterBuilder.Append(c);
+                    if (parameterBuilder != null)
+                        parameterBuilder.Append(c);
                     continue;
                 }
 
                 // Last char
                 if ((i + 1) >= len)
                 {
-                    if (parameterBuilder != null) parameterBuilder.Append(c);
+                    if (parameterBuilder != null)
+                        parameterBuilder.Append(c);
                     continue;
                 }
 
                 // Next char is not number
                 if (eventLogParameter[i + 1] < '0' || eventLogParameter[i + 1] > '9')
                 {
-                    if (parameterBuilder != null) parameterBuilder.Append(c);
+                    if (parameterBuilder != null)
+                        parameterBuilder.Append(c);
                     continue;
                 }
 

@@ -32,7 +32,10 @@ namespace Microsoft.VSDesigner.WCFModel
         // function should throw if the assembly can't be loaded
         Assembly LoadAssembly(string assemblyName);
 
-        void LoadAllAssemblies(out IEnumerable<Assembly> loadedAssemblies, out IEnumerable<Exception> loadingErrors);
+        void LoadAllAssemblies(
+            out IEnumerable<Assembly> loadedAssemblies,
+            out IEnumerable<Exception> loadingErrors
+        );
     }
 
 #if WEB_EXTENSIONS_CODE
@@ -48,4 +51,3 @@ namespace Microsoft.VSDesigner.WCFModel
         IEnumerable<Type> LoadExportedTypes(Assembly assembly);
     }
 }
-

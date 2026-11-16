@@ -24,84 +24,95 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using Mono.Security.Interface;
 using System.Security.Cryptography.X509Certificates;
+using Mono.Security.Interface;
 using MNS = Mono.Net.Security;
 
 namespace Mono.Btls.Interface
 {
-	public static class BtlsProvider
-	{
-		public static bool IsSupported ()
-		{
-			return MNS.MonoTlsProviderFactory.IsBtlsSupported ();
-		}
+    public static class BtlsProvider
+    {
+        public static bool IsSupported()
+        {
+            return MNS.MonoTlsProviderFactory.IsBtlsSupported();
+        }
 
-		public static MonoTlsProvider GetProvider ()
-		{
-			return new MonoBtlsProvider ();
-		}
+        public static MonoTlsProvider GetProvider()
+        {
+            return new MonoBtlsProvider();
+        }
 
-		public static BtlsX509 CreateNative (byte[] data, BtlsX509Format format)
-		{
-			var x509 = MonoBtlsX509.LoadFromData (data, (MonoBtlsX509Format)format);
-			return new BtlsX509 (x509);
-		}
+        public static BtlsX509 CreateNative(byte[] data, BtlsX509Format format)
+        {
+            var x509 = MonoBtlsX509.LoadFromData(data, (MonoBtlsX509Format)format);
+            return new BtlsX509(x509);
+        }
 
-		public static X509Certificate CreateCertificate (byte[] data, BtlsX509Format format, bool disallowFallback = false)
-		{
-			return MonoBtlsProvider.CreateCertificate (data, (MonoBtlsX509Format)format);
-		}
+        public static X509Certificate CreateCertificate(
+            byte[] data,
+            BtlsX509Format format,
+            bool disallowFallback = false
+        )
+        {
+            return MonoBtlsProvider.CreateCertificate(data, (MonoBtlsX509Format)format);
+        }
 
-		public static X509Certificate2 CreateCertificate2 (byte[] data, BtlsX509Format format, bool disallowFallback = false)
-		{
-			return MonoBtlsProvider.CreateCertificate (data, (MonoBtlsX509Format)format);
-		}
+        public static X509Certificate2 CreateCertificate2(
+            byte[] data,
+            BtlsX509Format format,
+            bool disallowFallback = false
+        )
+        {
+            return MonoBtlsProvider.CreateCertificate(data, (MonoBtlsX509Format)format);
+        }
 
-		public static X509Certificate2 CreateCertificate2 (byte[] data, string password, bool disallowFallback = false)
-		{
-			return MonoBtlsProvider.CreateCertificate (data, password);
-		}
+        public static X509Certificate2 CreateCertificate2(
+            byte[] data,
+            string password,
+            bool disallowFallback = false
+        )
+        {
+            return MonoBtlsProvider.CreateCertificate(data, password);
+        }
 
-		public static BtlsX509Chain CreateNativeChain ()
-		{
-			return new BtlsX509Chain (new MonoBtlsX509Chain ());
-		}
+        public static BtlsX509Chain CreateNativeChain()
+        {
+            return new BtlsX509Chain(new MonoBtlsX509Chain());
+        }
 
-		public static BtlsX509Store CreateNativeStore ()
-		{
-			return new BtlsX509Store (new MonoBtlsX509Store ());
-		}
+        public static BtlsX509Store CreateNativeStore()
+        {
+            return new BtlsX509Store(new MonoBtlsX509Store());
+        }
 
-		public static BtlsX509StoreCtx CreateNativeStoreCtx ()
-		{
-			return new BtlsX509StoreCtx (new MonoBtlsX509StoreCtx ());
-		}
+        public static BtlsX509StoreCtx CreateNativeStoreCtx()
+        {
+            return new BtlsX509StoreCtx(new MonoBtlsX509StoreCtx());
+        }
 
-		public static X509Chain CreateChain ()
-		{
-			return MonoBtlsProvider.CreateChain ();
-		}
+        public static X509Chain CreateChain()
+        {
+            return MonoBtlsProvider.CreateChain();
+        }
 
-		public static string GetSystemStoreLocation ()
-		{
-			return MonoBtlsProvider.GetSystemStoreLocation ();
-		}
+        public static string GetSystemStoreLocation()
+        {
+            return MonoBtlsProvider.GetSystemStoreLocation();
+        }
 
-		public static BtlsX509VerifyParam GetVerifyParam_SslClient ()
-		{
-			return new BtlsX509VerifyParam (MonoBtlsX509VerifyParam.GetSslClient ());
-		}
+        public static BtlsX509VerifyParam GetVerifyParam_SslClient()
+        {
+            return new BtlsX509VerifyParam(MonoBtlsX509VerifyParam.GetSslClient());
+        }
 
-		public static BtlsX509VerifyParam GetVerifyParam_SslServer ()
-		{
-			return new BtlsX509VerifyParam (MonoBtlsX509VerifyParam.GetSslServer ());
-		}
+        public static BtlsX509VerifyParam GetVerifyParam_SslServer()
+        {
+            return new BtlsX509VerifyParam(MonoBtlsX509VerifyParam.GetSslServer());
+        }
 
-		public static X509Chain GetManagedChain (BtlsX509Chain chain)
-		{
-			return MonoBtlsProvider.GetManagedChain (chain.Instance);
-		}
-	}
+        public static X509Chain GetManagedChain(BtlsX509Chain chain)
+        {
+            return MonoBtlsProvider.GetManagedChain(chain.Instance);
+        }
+    }
 }
-

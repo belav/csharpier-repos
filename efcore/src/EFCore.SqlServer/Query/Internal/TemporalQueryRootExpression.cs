@@ -18,9 +18,7 @@ public abstract class TemporalQueryRootExpression : EntityQueryRootExpression
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected TemporalQueryRootExpression(IEntityType entityType)
-        : base(entityType)
-    {
-    }
+        : base(entityType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,10 +26,11 @@ public abstract class TemporalQueryRootExpression : EntityQueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected TemporalQueryRootExpression(IAsyncQueryProvider asyncQueryProvider, IEntityType entityType)
-        : base(asyncQueryProvider, entityType)
-    {
-    }
+    protected TemporalQueryRootExpression(
+        IAsyncQueryProvider asyncQueryProvider,
+        IEntityType entityType
+    )
+        : base(asyncQueryProvider, entityType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,6 +38,5 @@ public abstract class TemporalQueryRootExpression : EntityQueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 }

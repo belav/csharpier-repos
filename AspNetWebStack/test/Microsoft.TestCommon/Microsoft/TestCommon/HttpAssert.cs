@@ -20,7 +20,10 @@ namespace Microsoft.TestCommon
         private const string CommaSeperator = ", ";
         private static readonly HttpAssert singleton = new HttpAssert();
 
-        public static HttpAssert Singleton { get { return singleton; } }
+        public static HttpAssert Singleton
+        {
+            get { return singleton; }
+        }
 
         /// <summary>
         /// Asserts that the expected <see cref="HttpRequestMessage"/> is equal to the actual <see cref="HttpRequestMessage"/>.
@@ -41,7 +44,9 @@ namespace Microsoft.TestCommon
             }
             else
             {
-                string expectedContent = CleanContentString(await expected.Content.ReadAsStringAsync());
+                string expectedContent = CleanContentString(
+                    await expected.Content.ReadAsStringAsync()
+                );
                 string actualContent = CleanContentString(await actual.Content.ReadAsStringAsync());
                 Assert.Equal(expectedContent, actualContent);
                 Equal(expected.Content.Headers, actual.Content.Headers);
@@ -64,7 +69,11 @@ namespace Microsoft.TestCommon
         /// <param name="expected">The expected <see cref="HttpResponseMessage"/>. Should not be <c>null</c>.</param>
         /// <param name="actual">The actual <see cref="HttpResponseMessage"/>. Should not be <c>null</c>.</param>
         /// <param name="verifyContentCallback">The callback to verify the Content string. If it is null, Assert.Equal will be used. </param>
-        public async Task EqualAsync(HttpResponseMessage expected, HttpResponseMessage actual, Action<string, string> verifyContentStringCallback)
+        public async Task EqualAsync(
+            HttpResponseMessage expected,
+            HttpResponseMessage actual,
+            Action<string, string> verifyContentStringCallback
+        )
         {
             Assert.NotNull(expected);
             Assert.NotNull(actual);
@@ -80,7 +89,9 @@ namespace Microsoft.TestCommon
             }
             else
             {
-                string expectedContent = CleanContentString(await expected.Content.ReadAsStringAsync());
+                string expectedContent = CleanContentString(
+                    await expected.Content.ReadAsStringAsync()
+                );
                 string actualContent = CleanContentString(await actual.Content.ReadAsStringAsync());
                 if (verifyContentStringCallback != null)
                 {
@@ -108,7 +119,8 @@ namespace Microsoft.TestCommon
 
             foreach (KeyValuePair<string, IEnumerable<string>> expectedHeader in expectedHeaders)
             {
-                KeyValuePair<string, IEnumerable<string>> actualHeader = actualHeaders.FirstOrDefault(h => h.Key == expectedHeader.Key);
+                KeyValuePair<string, IEnumerable<string>> actualHeader =
+                    actualHeaders.FirstOrDefault(h => h.Key == expectedHeader.Key);
                 if (expectedHeader.Key == "Date")
                 {
                     HandleDateHeader(expectedHeader.Value.ToArray(), actualHeader.Value.ToArray());
@@ -145,7 +157,10 @@ namespace Microsoft.TestCommon
             }
         }
 
-        public bool IsKnownUnserializableType(Type type, Func<Type, bool> isTypeUnserializableCallback)
+        public bool IsKnownUnserializableType(
+            Type type,
+            Func<Type, bool> isTypeUnserializableCallback
+        )
         {
             if (isTypeUnserializableCallback != null && isTypeUnserializableCallback(type))
             {
@@ -163,10 +178,16 @@ namespace Microsoft.TestCommon
                 }
 
                 // Generic type -- recursively analyze generic arguments
-                return IsKnownUnserializableType(type.GetGenericArguments()[0], isTypeUnserializableCallback);
+                return IsKnownUnserializableType(
+                    type.GetGenericArguments()[0],
+                    isTypeUnserializableCallback
+                );
             }
 
-            if (type.HasElementType && IsKnownUnserializableType(type.GetElementType(), isTypeUnserializableCallback))
+            if (
+                type.HasElementType
+                && IsKnownUnserializableType(type.GetElementType(), isTypeUnserializableCallback)
+            )
             {
                 return true;
             }
@@ -174,14 +195,19 @@ namespace Microsoft.TestCommon
             return false;
         }
 
-        public bool IsKnownUnserializable(Type type, object obj, Func<Type, bool> isTypeUnserializableCallback)
+        public bool IsKnownUnserializable(
+            Type type,
+            object obj,
+            Func<Type, bool> isTypeUnserializableCallback
+        )
         {
             if (IsKnownUnserializableType(type, isTypeUnserializableCallback))
             {
                 return true;
             }
 
-            return obj != null && IsKnownUnserializableType(obj.GetType(), isTypeUnserializableCallback);
+            return obj != null
+                && IsKnownUnserializableType(obj.GetType(), isTypeUnserializableCallback);
         }
 
         public bool IsKnownUnserializable(Type type, object obj)
@@ -220,7 +246,10 @@ namespace Microsoft.TestCommon
             return true;
         }
 
-        private static void HandleDateHeader(string[] expectedDateHeaderValues, string[] actualDateHeaderValues)
+        private static void HandleDateHeader(
+            string[] expectedDateHeaderValues,
+            string[] actualDateHeaderValues
+        )
         {
             Assert.Equal(expectedDateHeaderValues.Length, actualDateHeaderValues.Length);
 

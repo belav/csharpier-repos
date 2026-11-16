@@ -32,7 +32,6 @@ namespace System.Xml
         private const string strStandalone = "standalone";
         private const string strEncoding = "encoding";
 
-
         //caching variables for perf reasons
         private int _nDeclarationAttrCount;
         private int _nDocTypeAttrCount;
@@ -55,16 +54,18 @@ namespace System.Xml
             }
         };
 
-        internal VirtualAttribute[] decNodeAttributes = {
-                new VirtualAttribute( null, null ),
-                new VirtualAttribute( null, null ),
-                new VirtualAttribute( null, null )
-            };
+        internal VirtualAttribute[] decNodeAttributes =
+        {
+            new VirtualAttribute(null, null),
+            new VirtualAttribute(null, null),
+            new VirtualAttribute(null, null),
+        };
 
-        internal VirtualAttribute[] docTypeNodeAttributes = {
-                new VirtualAttribute( null, null ),
-                new VirtualAttribute( null, null )
-            };
+        internal VirtualAttribute[] docTypeNodeAttributes =
+        {
+            new VirtualAttribute(null, null),
+            new VirtualAttribute(null, null),
+        };
 
         private bool _bOnAttrVal;
 
@@ -107,7 +108,9 @@ namespace System.Xml
                 XmlNodeType nt = _curNode.NodeType;
                 if (_nAttrInd != -1)
                 {
-                    Debug.Assert(nt == XmlNodeType.XmlDeclaration || nt == XmlNodeType.DocumentType);
+                    Debug.Assert(
+                        nt == XmlNodeType.XmlDeclaration || nt == XmlNodeType.DocumentType
+                    );
                     if (_bOnAttrVal)
                         return XmlNodeType.Text;
                     else
@@ -128,7 +131,10 @@ namespace System.Xml
             {
                 if (_nAttrInd != -1)
                 {
-                    Debug.Assert(_curNode.NodeType == XmlNodeType.XmlDeclaration || _curNode.NodeType == XmlNodeType.DocumentType);
+                    Debug.Assert(
+                        _curNode.NodeType == XmlNodeType.XmlDeclaration
+                            || _curNode.NodeType == XmlNodeType.DocumentType
+                    );
                     if (_bOnAttrVal)
                         return string.Empty; //Text node's name is String.Empty
                     else
@@ -161,10 +167,7 @@ namespace System.Xml
 
         internal bool CreatedOnAttribute
         {
-            get
-            {
-                return _bCreatedOnAttribute;
-            }
+            get { return _bCreatedOnAttribute; }
         }
 
         private static bool IsLocalNameEmpty(XmlNodeType nt)
@@ -211,7 +214,10 @@ namespace System.Xml
                 if (_nAttrInd != -1)
                 {
                     //Pointing at the one of virtual attributes of Declaration or DocumentType nodes
-                    Debug.Assert(_curNode.NodeType == XmlNodeType.XmlDeclaration || _curNode.NodeType == XmlNodeType.DocumentType);
+                    Debug.Assert(
+                        _curNode.NodeType == XmlNodeType.XmlDeclaration
+                            || _curNode.NodeType == XmlNodeType.DocumentType
+                    );
                     Debug.Assert(_nAttrInd >= 0 && _nAttrInd < AttributeCount);
                     return true;
                 }
@@ -232,11 +238,13 @@ namespace System.Xml
                 if (_nAttrInd != -1)
                 {
                     //Pointing at the one of virtual attributes of Declaration or DocumentType nodes
-                    Debug.Assert(nt == XmlNodeType.XmlDeclaration || nt == XmlNodeType.DocumentType);
+                    Debug.Assert(
+                        nt == XmlNodeType.XmlDeclaration || nt == XmlNodeType.DocumentType
+                    );
                     Debug.Assert(_nAttrInd >= 0 && _nAttrInd < AttributeCount);
-                    return _curNode.NodeType == XmlNodeType.XmlDeclaration ?
-                        decNodeAttributes[_nAttrInd].value! :
-                        docTypeNodeAttributes[_nAttrInd].value!;
+                    return _curNode.NodeType == XmlNodeType.XmlDeclaration
+                        ? decNodeAttributes[_nAttrInd].value!
+                        : docTypeNodeAttributes[_nAttrInd].value!;
                 }
 
                 if (nt == XmlNodeType.DocumentType)
@@ -253,7 +261,9 @@ namespace System.Xml
 
                     for (int i = 0; i < _nDeclarationAttrCount; i++)
                     {
-                        strb.Append($"{decNodeAttributes[i].name}=\"{decNodeAttributes[i].value}\"");
+                        strb.Append(
+                            $"{decNodeAttributes[i].name}=\"{decNodeAttributes[i].value}\""
+                        );
                         if (i != (_nDeclarationAttrCount - 1))
                         {
                             strb.Append(' ');
@@ -312,10 +322,7 @@ namespace System.Xml
 
         public IXmlSchemaInfo SchemaInfo
         {
-            get
-            {
-                return _curNode.SchemaInfo;
-            }
+            get { return _curNode.SchemaInfo; }
         }
 
         public XmlNameTable NameTable
@@ -332,8 +339,14 @@ namespace System.Xml
                 XmlNodeType nt = _curNode.NodeType;
                 if (nt == XmlNodeType.Element)
                     return ((XmlElement)_curNode).Attributes.Count;
-                else if (nt == XmlNodeType.Attribute
-                        || (_bOnAttrVal && nt != XmlNodeType.XmlDeclaration && nt != XmlNodeType.DocumentType))
+                else if (
+                    nt == XmlNodeType.Attribute
+                    || (
+                        _bOnAttrVal
+                        && nt != XmlNodeType.XmlDeclaration
+                        && nt != XmlNodeType.DocumentType
+                    )
+                )
                     return _elemNode!.Attributes!.Count;
                 else if (nt == XmlNodeType.XmlDeclaration)
                 {
@@ -506,6 +519,7 @@ namespace System.Xml
                 return attr.Value;
             return null;
         }
+
         public string? GetAttribute(string name, string ns)
         {
             if (_bCreatedOnAttribute)
@@ -515,8 +529,12 @@ namespace System.Xml
             {
                 XmlNodeType.Element => GetAttributeFromElement((XmlElement)_curNode, name, ns),
                 XmlNodeType.Attribute => GetAttributeFromElement((XmlElement)_elemNode!, name, ns),
-                XmlNodeType.XmlDeclaration => (ns.Length == 0) ? GetDeclarationAttr((XmlDeclaration)_curNode, name) : null,
-                XmlNodeType.DocumentType => (ns.Length == 0) ? GetDocumentTypeAttr((XmlDocumentType)_curNode, name) : null,
+                XmlNodeType.XmlDeclaration => (ns.Length == 0)
+                    ? GetDeclarationAttr((XmlDeclaration)_curNode, name)
+                    : null,
+                XmlNodeType.DocumentType => (ns.Length == 0)
+                    ? GetDocumentTypeAttr((XmlDocumentType)_curNode, name)
+                    : null,
                 _ => null,
             };
         }
@@ -534,15 +552,15 @@ namespace System.Xml
                     CheckIndexCondition(attributeIndex);
                     return ((XmlElement)_elemNode!).Attributes[attributeIndex].Value;
                 case XmlNodeType.XmlDeclaration:
-                    {
-                        CheckIndexCondition(attributeIndex);
-                        return GetDeclarationAttr(attributeIndex);
-                    }
+                {
+                    CheckIndexCondition(attributeIndex);
+                    return GetDeclarationAttr(attributeIndex);
+                }
                 case XmlNodeType.DocumentType:
-                    {
-                        CheckIndexCondition(attributeIndex);
-                        return GetDocumentTypeAttr(attributeIndex);
-                    }
+                {
+                    CheckIndexCondition(attributeIndex);
+                    return GetDocumentTypeAttr(attributeIndex);
+                }
             }
             throw new ArgumentOutOfRangeException(nameof(attributeIndex)); //for other senario, AttributeCount is 0, i has to be out of range
         }
@@ -590,7 +608,10 @@ namespace System.Xml
                 }
                 else
                 {
-                    while (_curNode.NodeType != XmlNodeType.Attribute && ((_curNode = _curNode.ParentNode!) != null))
+                    while (
+                        _curNode.NodeType != XmlNodeType.Attribute
+                        && ((_curNode = _curNode.ParentNode!) != null)
+                    )
                         level--;
                 }
 
@@ -634,6 +655,7 @@ namespace System.Xml
         {
             return MoveToAttribute(name, string.Empty);
         }
+
         private bool MoveToAttributeFromElement(XmlElement elem, string name, string ns)
         {
             XmlAttribute? attr;
@@ -750,7 +772,8 @@ namespace System.Xml
                 _nAttrInd++;
                 if (_nAttrInd < _nDeclarationAttrCount)
                 {
-                    if (_nAttrInd == 0) level++;
+                    if (_nAttrInd == 0)
+                        level++;
                     _bOnAttrVal = false;
                     return true;
                 }
@@ -763,7 +786,8 @@ namespace System.Xml
                 _nAttrInd++;
                 if (_nAttrInd < _nDocTypeAttrCount)
                 {
-                    if (_nAttrInd == 0) level++;
+                    if (_nAttrInd == 0)
+                        level++;
                     _bOnAttrVal = false;
                     return true;
                 }
@@ -837,14 +861,14 @@ namespace System.Xml
                     break;
                 case XmlNodeType.XmlDeclaration:
                 case XmlNodeType.DocumentType:
+                {
+                    if (_nAttrInd != -1)
                     {
-                        if (_nAttrInd != -1)
-                        {
-                            _nAttrInd = -1;
-                            return true;
-                        }
-                        break;
+                        _nAttrInd = -1;
+                        return true;
                     }
+                    break;
+                }
             }
             return false;
         }
@@ -864,9 +888,7 @@ namespace System.Xml
 
             // construct the name of the xmlns attribute
             prefix ??= string.Empty;
-            string attrName = prefix.Length == 0 ?
-                "xmlns" :
-                $"xmlns:{prefix}";
+            string attrName = prefix.Length == 0 ? "xmlns" : $"xmlns:{prefix}";
 
             // walk up the XmlNode parent chain, looking for the xmlns attribute
             XmlNode? node = _curNode;
@@ -1005,7 +1027,10 @@ namespace System.Xml
                             {
                                 if (!dict.ContainsKey(string.Empty))
                                 {
-                                    dict.Add(_nameTable.Add(string.Empty), _nameTable.Add(a.Value!));
+                                    dict.Add(
+                                        _nameTable.Add(string.Empty),
+                                        _nameTable.Add(a.Value!)
+                                    );
                                 }
                             }
                             else if (a.Prefix == "xmlns")
@@ -1050,7 +1075,10 @@ namespace System.Xml
         {
             if (_nAttrInd != -1)
             {
-                Debug.Assert(_curNode.NodeType == XmlNodeType.XmlDeclaration || _curNode.NodeType == XmlNodeType.DocumentType);
+                Debug.Assert(
+                    _curNode.NodeType == XmlNodeType.XmlDeclaration
+                        || _curNode.NodeType == XmlNodeType.DocumentType
+                );
                 if (!_bOnAttrVal)
                 {
                     _bOnAttrVal = true;
@@ -1114,10 +1142,7 @@ namespace System.Xml
 
         public XmlDocument Document
         {
-            get
-            {
-                return _doc;
-            }
+            get { return _doc; }
         }
     }
 
@@ -1127,17 +1152,17 @@ namespace System.Xml
     {
         private readonly XmlNodeReaderNavigator _readerNav;
 
-        private XmlNodeType _nodeType;   // nodeType of the node that the reader is currently positioned on
-        private int _curDepth;   // depth of attrNav ( also functions as reader's depth )
-        private ReadState _readState;  // current reader's state
-        private bool _fEOF;       // flag to show if reaches the end of file
+        private XmlNodeType _nodeType; // nodeType of the node that the reader is currently positioned on
+        private int _curDepth; // depth of attrNav ( also functions as reader's depth )
+        private ReadState _readState; // current reader's state
+        private bool _fEOF; // flag to show if reaches the end of file
+
         //mark to the state that EntityReference node is supposed to be resolved
         private bool _bResolveEntity;
         private bool _bStartFromDocument;
 
         private bool _bInReadBinary;
         private ReadContentAsBinaryHelper? _readBinaryHelper;
-
 
         // Creates an instance of the XmlNodeReader class using the specified XmlNode.
         public XmlNodeReader(XmlNode node)
@@ -1501,6 +1526,7 @@ namespace System.Xml
         {
             return Read(false);
         }
+
         private bool Read(bool fSkipChildren)
         {
             if (_fEOF)
@@ -1510,7 +1536,10 @@ namespace System.Xml
             {
                 // if nav is pointing at the document node, start with its children
                 // otherwise,start with the node.
-                if ((_readerNav.NodeType == XmlNodeType.Document) || (_readerNav.NodeType == XmlNodeType.DocumentFragment))
+                if (
+                    (_readerNav.NodeType == XmlNodeType.Document)
+                    || (_readerNav.NodeType == XmlNodeType.DocumentFragment)
+                )
                 {
                     _bStartFromDocument = true;
                     if (!ReadNextNode(fSkipChildren))
@@ -1561,11 +1590,21 @@ namespace System.Xml
             XmlNodeType nt = _readerNav.NodeType;
             //only goes down when nav.NodeType is of element or of document at the initial state, other nav.NodeType will not be parsed down
             //if nav.NodeType is of EntityReference, ResolveEntity() could be called to get the content parsed;
-            bDrillDown = bDrillDown
-                        && (_nodeType != XmlNodeType.EndElement)
-                        && (_nodeType != XmlNodeType.EndEntity)
-                        && (nt == XmlNodeType.Element || (nt == XmlNodeType.EntityReference && _bResolveEntity) ||
-                            (((_readerNav.NodeType == XmlNodeType.Document) || (_readerNav.NodeType == XmlNodeType.DocumentFragment)) && _readState == ReadState.Initial));
+            bDrillDown =
+                bDrillDown
+                && (_nodeType != XmlNodeType.EndElement)
+                && (_nodeType != XmlNodeType.EndEntity)
+                && (
+                    nt == XmlNodeType.Element
+                    || (nt == XmlNodeType.EntityReference && _bResolveEntity)
+                    || (
+                        (
+                            (_readerNav.NodeType == XmlNodeType.Document)
+                            || (_readerNav.NodeType == XmlNodeType.DocumentFragment)
+                        )
+                        && _readState == ReadState.Initial
+                    )
+                );
             //first see if there are children of current node, so to move down
             if (bDrillDown)
             {
@@ -1577,8 +1616,7 @@ namespace System.Xml
                         _bResolveEntity = false;
                     return true;
                 }
-                else if (_readerNav.NodeType == XmlNodeType.Element
-                          && !_readerNav.IsEmptyElement)
+                else if (_readerNav.NodeType == XmlNodeType.Element && !_readerNav.IsEmptyElement)
                 {
                     _nodeType = XmlNodeType.EndElement;
                     return true;
@@ -1612,7 +1650,7 @@ namespace System.Xml
                     return true;
                 }
             }
-            return ReadForward(fSkipChildren);  //has to get the next node by moving forward
+            return ReadForward(fSkipChildren); //has to get the next node by moving forward
         }
 
         private void SetEndOfFile()
@@ -1625,10 +1663,12 @@ namespace System.Xml
         private bool ReadAtZeroLevel(bool fSkipChildren)
         {
             Debug.Assert(_curDepth == 0);
-            if (!fSkipChildren
+            if (
+                !fSkipChildren
                 && _nodeType != XmlNodeType.EndElement
                 && _readerNav.NodeType == XmlNodeType.Element
-                && !_readerNav.IsEmptyElement)
+                && !_readerNav.IsEmptyElement
+            )
             {
                 _nodeType = XmlNodeType.EndElement;
                 return true;
@@ -1739,10 +1779,7 @@ namespace System.Xml
         // has any attributes.
         public override bool HasAttributes
         {
-            get
-            {
-                return (AttributeCount > 0);
-            }
+            get { return (AttributeCount > 0); }
         }
 
         //
@@ -1792,10 +1829,7 @@ namespace System.Xml
 
         public override bool CanReadBinaryContent
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
@@ -1808,7 +1842,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (!_bInReadBinary)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
             }
 
             // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
@@ -1832,7 +1869,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (!_bInReadBinary)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
             }
 
             // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
@@ -1856,7 +1896,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (!_bInReadBinary)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
             }
 
             // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
@@ -1880,7 +1923,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (!_bInReadBinary)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
             }
 
             // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
@@ -1904,7 +1950,9 @@ namespace System.Xml
         // IXmlNamespaceResolver
         //
 
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return _readerNav.GetNamespacesInScope(scope);
         }
@@ -1933,10 +1981,7 @@ namespace System.Xml
         // DTD/Schema info used by XmlReader.GetDtdSchemaInfo()
         internal override IDtdInfo? DtdInfo
         {
-            get
-            {
-                return _readerNav.Document.DtdSchemaInfo;
-            }
+            get { return _readerNav.Document.DtdSchemaInfo; }
         }
     }
 }

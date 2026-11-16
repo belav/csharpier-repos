@@ -9,7 +9,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Xsl.Qil;
 
-namespace System.Xml.Xsl.Xslt {
+namespace System.Xml.Xsl.Xslt
+{
     using T = XmlQueryTypeFactory;
 
     /**
@@ -23,45 +24,66 @@ namespace System.Xml.Xsl.Xslt {
                                   is used as invokeArg, otherwise formalArg's default value is cloned and used.
     **/
 
-    internal class InvokeGenerator : QilCloneVisitor {
-        private bool                debug;
-        private Stack<QilIterator>  iterStack;
+    internal class InvokeGenerator : QilCloneVisitor
+    {
+        private bool debug;
+        private Stack<QilIterator> iterStack;
 
-        private QilList             formalArgs;
-        private QilList             invokeArgs;
-        private int                 curArg;     // this.Clone() depends on this value
+        private QilList formalArgs;
+        private QilList invokeArgs;
+        private int curArg; // this.Clone() depends on this value
 
-        private XsltQilFactory      fac;
+        private XsltQilFactory fac;
 
-        public InvokeGenerator(XsltQilFactory f, bool debug) : base(f.BaseFactory) {
-            this.debug  = debug;
-            this.fac    = f;
+        public InvokeGenerator(XsltQilFactory f, bool debug)
+            : base(f.BaseFactory)
+        {
+            this.debug = debug;
+            this.fac = f;
             this.iterStack = new Stack<QilIterator>();
         }
 
-        public QilNode GenerateInvoke(QilFunction func, IList<XslNode> actualArgs) {
+        public QilNode GenerateInvoke(QilFunction func, IList<XslNode> actualArgs)
+        {
             iterStack.Clear();
             formalArgs = func.Arguments;
             invokeArgs = fac.ActualParameterList();
 
             // curArg is an instance variable used in Clone() method
-            for (curArg = 0; curArg < formalArgs.Count; curArg ++) {
+            for (curArg = 0; curArg < formalArgs.Count; curArg++)
+            {
                 // Find actual value for a given formal arg
                 QilParameter formalArg = (QilParameter)formalArgs[curArg];
-                QilNode      invokeArg = FindActualArg(formalArg, actualArgs);
+                QilNode invokeArg = FindActualArg(formalArg, actualArgs);
 
                 // If actual value was not specified, use the default value and copy its debug comment
-                if (invokeArg == null) {
-                    if (debug) {
-                        if (formalArg.Name.NamespaceUri == XmlReservedNs.NsXslDebug) {
-                            Debug.Assert(formalArg.Name.LocalName == "namespaces", "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs()");
-                            Debug.Assert(formalArg.DefaultValue != null, "PrecompileProtoTemplatesHeaders() set it");
+                if (invokeArg == null)
+                {
+                    if (debug)
+                    {
+                        if (formalArg.Name.NamespaceUri == XmlReservedNs.NsXslDebug)
+                        {
+                            Debug.Assert(
+                                formalArg.Name.LocalName == "namespaces",
+                                "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs()"
+                            );
+                            Debug.Assert(
+                                formalArg.DefaultValue != null,
+                                "PrecompileProtoTemplatesHeaders() set it"
+                            );
                             invokeArg = Clone(formalArg.DefaultValue);
-                        } else {
+                        }
+                        else
+                        {
                             invokeArg = fac.DefaultValueMarker();
                         }
-                    } else {
-                        Debug.Assert(formalArg.Name.NamespaceUri != XmlReservedNs.NsXslDebug, "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs(). We don't have $namespaces in !debug.");
+                    }
+                    else
+                    {
+                        Debug.Assert(
+                            formalArg.Name.NamespaceUri != XmlReservedNs.NsXslDebug,
+                            "Cur,Pos,Last don't have default values and should be always added to by caller in AddImplicitArgs(). We don't have $namespaces in !debug."
+                        );
                         invokeArg = Clone(formalArg.DefaultValue);
                     }
                 }
@@ -73,9 +95,13 @@ namespace System.Xml.Xsl.Xslt {
                 fac.CheckXsltType(formalArg);
                 fac.CheckXsltType(invokeArg);
 
-                if (!invokeType.IsSubtypeOf(formalType)) {
+                if (!invokeType.IsSubtypeOf(formalType))
+                {
                     // This may occur only if inferred type of invokeArg is XslFlags.None
-                    Debug.Assert(invokeType == T.ItemS, "Actual argument type is not a subtype of formal argument type");
+                    Debug.Assert(
+                        invokeType == T.ItemS,
+                        "Actual argument type is not a subtype of formal argument type"
+                    );
                     invokeArg = fac.TypeAssert(invokeArg, formalType);
                 }
 
@@ -90,11 +116,14 @@ namespace System.Xml.Xsl.Xslt {
             return invoke;
         }
 
-        private QilNode FindActualArg(QilParameter formalArg, IList<XslNode> actualArgs) {
+        private QilNode FindActualArg(QilParameter formalArg, IList<XslNode> actualArgs)
+        {
             QilName argName = formalArg.Name;
             Debug.Assert(argName != null);
-            foreach (XslNode actualArg in actualArgs) {
-                if (actualArg.Name.Equals(argName)) {
+            foreach (XslNode actualArg in actualArgs)
+            {
+                if (actualArg.Name.Equals(argName))
+                {
                     return ((VarPar)actualArg).Value;
                 }
             }
@@ -103,30 +132,36 @@ namespace System.Xml.Xsl.Xslt {
 
         // ------------------------------------ QilCloneVisitor -------------------------------------
 
-        protected override QilNode VisitReference(QilNode n) {
+        protected override QilNode VisitReference(QilNode n)
+        {
             QilNode replacement = FindClonedReference(n);
 
             // If the reference is internal for the subtree being cloned, return it as is
-            if (replacement != null) {
+            if (replacement != null)
+            {
                 return replacement;
             }
 
             // Replacement was not found, thus the reference is external for the subtree being cloned.
             // The case when it refers to one of previous arguments (xsl:param can refer to previous
             // xsl:param's) must be taken care of.
-            for (int prevArg = 0; prevArg < curArg; prevArg++) {
+            for (int prevArg = 0; prevArg < curArg; prevArg++)
+            {
                 Debug.Assert(formalArgs[prevArg] != null, "formalArg must be in the list");
                 Debug.Assert(invokeArgs[prevArg] != null, "This arg should be compiled already");
 
                 // Is this a reference to prevArg?
-                if (n == formalArgs[prevArg]) {
+                if (n == formalArgs[prevArg])
+                {
                     // If prevArg is a literal, just clone it
-                    if (invokeArgs[prevArg] is QilLiteral) {
+                    if (invokeArgs[prevArg] is QilLiteral)
+                    {
                         return invokeArgs[prevArg].ShallowClone(fac.BaseFactory);
                     }
 
                     // If prevArg is not an iterator, cache it in an iterator, and return it
-                    if (!(invokeArgs[prevArg] is QilIterator)) {
+                    if (!(invokeArgs[prevArg] is QilIterator))
+                    {
                         QilIterator var = fac.BaseFactory.Let(invokeArgs[prevArg]);
                         iterStack.Push(var);
                         invokeArgs[prevArg] = var;
@@ -140,7 +175,8 @@ namespace System.Xml.Xsl.Xslt {
             return n;
         }
 
-        protected override QilNode VisitFunction(QilFunction n) {
+        protected override QilNode VisitFunction(QilFunction n)
+        {
             // No need to change function references
             return n;
         }

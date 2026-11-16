@@ -13,12 +13,12 @@ namespace AppWithCustomEntryPoints
         static Program()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
-            Console.WriteLine($"{asm.GetName().Name}: AssemblyLoadContext = {AssemblyLoadContext.GetLoadContext(asm)}");
+            Console.WriteLine(
+                $"{asm.GetName().Name}: AssemblyLoadContext = {AssemblyLoadContext.GetLoadContext(asm)}"
+            );
         }
 
-        public static void Main(string[] args)
-        {
-        }
+        public static void Main(string[] args) { }
 
         private static int functionPointerCallCount = 0;
         private static int entryPoint1CallCount = 0;
@@ -27,10 +27,14 @@ namespace AppWithCustomEntryPoints
 
         private static void PrintFunctionPointerCallLog(string name, IntPtr arg, int size)
         {
-            Console.WriteLine($"Called {name}(0x{arg.ToString("x")}, {size}) - call count: {functionPointerCallCount}");
+            Console.WriteLine(
+                $"Called {name}(0x{arg.ToString("x")}, {size}) - call count: {functionPointerCallCount}"
+            );
 
             Assembly asm = Assembly.GetExecutingAssembly();
-            Console.WriteLine($"{asm.GetName().Name}: AssemblyLoadContext = {AssemblyLoadContext.GetLoadContext(asm)}");
+            Console.WriteLine(
+                $"{asm.GetName().Name}: AssemblyLoadContext = {AssemblyLoadContext.GetLoadContext(asm)}"
+            );
         }
 
         public static int FunctionPointerEntryPoint1(IntPtr arg, int size)

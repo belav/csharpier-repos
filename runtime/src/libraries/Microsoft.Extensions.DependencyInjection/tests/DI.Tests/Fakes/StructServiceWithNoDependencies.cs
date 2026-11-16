@@ -5,10 +5,8 @@ using Microsoft.Extensions.DependencyInjection.Specification.Fakes;
 
 namespace Microsoft.Extensions.DependencyInjection.Fakes
 {
-    public struct StructServiceWithNoDependencies: IFakeService
+    public struct StructServiceWithNoDependencies : IFakeService
     {
-        public StructServiceWithNoDependencies()
-        {
-        }
+        public StructServiceWithNoDependencies() { }
     }
 }

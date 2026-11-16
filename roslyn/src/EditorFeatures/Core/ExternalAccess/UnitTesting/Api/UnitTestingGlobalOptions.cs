@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
     {
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
-        public bool IsServiceHubProcessCoreClr
-            => _globalOptions.GetOption(RemoteHostOptionsStorage.OOPCoreClr);
+        public bool IsServiceHubProcessCoreClr =>
+            _globalOptions.GetOption(RemoteHostOptionsStorage.OOPCoreClr);
     }
 }

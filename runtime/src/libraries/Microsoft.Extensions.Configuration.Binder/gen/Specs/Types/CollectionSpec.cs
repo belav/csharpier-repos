@@ -8,15 +8,16 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 {
     internal abstract record CollectionSpec : ComplexTypeSpec
     {
-        protected CollectionSpec(ITypeSymbol type) : base(type) { }
+        protected CollectionSpec(ITypeSymbol type)
+            : base(type) { }
 
         public required TypeRef ElementTypeRef { get; init; }
-
     }
 
     internal abstract record CollectionWithCtorInitSpec : CollectionSpec
     {
-        protected CollectionWithCtorInitSpec(ITypeSymbol type) : base(type) { }
+        protected CollectionWithCtorInitSpec(ITypeSymbol type)
+            : base(type) { }
 
         public required CollectionInstantiationStrategy InstantiationStrategy { get; init; }
 
@@ -27,17 +28,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
     internal sealed record ArraySpec : CollectionSpec
     {
-        public ArraySpec(ITypeSymbol type) : base(type) { }
+        public ArraySpec(ITypeSymbol type)
+            : base(type) { }
     }
 
     internal sealed record EnumerableSpec : CollectionWithCtorInitSpec
     {
-        public EnumerableSpec(ITypeSymbol type) : base(type) { }
+        public EnumerableSpec(ITypeSymbol type)
+            : base(type) { }
     }
 
     internal sealed record DictionarySpec : CollectionWithCtorInitSpec
     {
-        public DictionarySpec(INamedTypeSymbol type) : base(type) { }
+        public DictionarySpec(INamedTypeSymbol type)
+            : base(type) { }
 
         public required TypeRef KeyTypeRef { get; init; }
     }

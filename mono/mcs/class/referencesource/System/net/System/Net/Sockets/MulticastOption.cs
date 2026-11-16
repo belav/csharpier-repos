@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="MulticastOption.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System.Net;
 
     /// <devdoc>
@@ -13,10 +14,11 @@ namespace System.Net.Sockets {
     ///       for IP multicast packets.
     ///    </para>
     /// </devdoc>
-    public class MulticastOption {
+    public class MulticastOption
+    {
 #if MONO
-		// Don't change the names of these fields without also
-		// changing socket-io.c in the runtime
+        // Don't change the names of these fields without also
+        // changing socket-io.c in the runtime
 #endif
         IPAddress group;
         IPAddress localAddress;
@@ -28,13 +30,15 @@ namespace System.Net.Sockets {
         ///       address group and local address.
         ///    </para>
         /// </devdoc>
-        public MulticastOption(IPAddress group, IPAddress mcint) {
-
-            if (group == null) {
+        public MulticastOption(IPAddress group, IPAddress mcint)
+        {
+            if (group == null)
+            {
                 throw new ArgumentNullException("group");
             }
 
-            if (mcint == null) {
+            if (mcint == null)
+            {
                 throw new ArgumentNullException("mcint");
             }
 
@@ -42,14 +46,15 @@ namespace System.Net.Sockets {
             LocalAddress = mcint;
         }
 
-
-        public MulticastOption(IPAddress group, int interfaceIndex) {
-
-            if (group == null) {
+        public MulticastOption(IPAddress group, int interfaceIndex)
+        {
+            if (group == null)
+            {
                 throw new ArgumentNullException("group");
             }
-            
-            if ( interfaceIndex < 0 || interfaceIndex > 0x00FFFFFF ) {
+
+            if (interfaceIndex < 0 || interfaceIndex > 0x00FFFFFF)
+            {
                 throw new ArgumentOutOfRangeException("interfaceIndex");
             }
 
@@ -57,16 +62,16 @@ namespace System.Net.Sockets {
             ifIndex = interfaceIndex;
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Creates a new version of the MulticastOption class for the specified
         ///       group.
         ///    </para>
         /// </devdoc>
-        public MulticastOption(IPAddress group) {
-
-            if (group == null) {
+        public MulticastOption(IPAddress group)
+        {
+            if (group == null)
+            {
                 throw new ArgumentNullException("group");
             }
 
@@ -74,19 +79,16 @@ namespace System.Net.Sockets {
 
             LocalAddress = IPAddress.Any;
         }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Sets the IP address of a multicast group.
         ///    </para>
         /// </devdoc>
-        public IPAddress Group {
-            get {
-                return group;
-            }
-            set {
-                group = value;
-            }
+        public IPAddress Group
+        {
+            get { return group; }
+            set { group = value; }
         }
 
         /// <devdoc>
@@ -94,23 +96,23 @@ namespace System.Net.Sockets {
         ///       Sets the local address of a multicast group.
         ///    </para>
         /// </devdoc>
-        public IPAddress LocalAddress {
-            get {
-                return localAddress;
-            }
-            set {
+        public IPAddress LocalAddress
+        {
+            get { return localAddress; }
+            set
+            {
                 ifIndex = 0;
                 localAddress = value;
             }
         }
 
-        
-        public int InterfaceIndex {
-            get {
-                return ifIndex;
-            }
-            set {
-                if ( value < 0 || value > 0x00FFFFFF ) {
+        public int InterfaceIndex
+        {
+            get { return ifIndex; }
+            set
+            {
+                if (value < 0 || value > 0x00FFFFFF)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
 
@@ -125,13 +127,14 @@ namespace System.Net.Sockets {
     /// Contains option values for joining an IPv6 multicast group.
     /// </para>
     /// </devdoc>
-    public class IPv6MulticastOption {
+    public class IPv6MulticastOption
+    {
 #if MONO
-		// Don't change the names of these fields without also
-		// changing socket-io.c in the runtime
+        // Don't change the names of these fields without also
+        // changing socket-io.c in the runtime
 #endif
         IPAddress m_Group;
-        long      m_Interface;
+        long m_Interface;
 
         /// <devdoc>
         /// <para>
@@ -139,17 +142,19 @@ namespace System.Net.Sockets {
         /// address group and local address.
         /// </para>
         /// </devdoc>
-        public IPv6MulticastOption(IPAddress group, long ifindex) {
-
-            if (group == null) {
+        public IPv6MulticastOption(IPAddress group, long ifindex)
+        {
+            if (group == null)
+            {
                 throw new ArgumentNullException("group");
             }
 
-            if ( ifindex < 0 || ifindex > 0x00000000FFFFFFFF ) {
+            if (ifindex < 0 || ifindex > 0x00000000FFFFFFFF)
+            {
                 throw new ArgumentOutOfRangeException("ifindex");
             }
 
-            Group          = group;
+            Group = group;
             InterfaceIndex = ifindex;
         }
 
@@ -159,27 +164,29 @@ namespace System.Net.Sockets {
         /// group.
         /// </para>
         /// </devdoc>
-        public IPv6MulticastOption(IPAddress group) {
-
-            if (group == null) {
+        public IPv6MulticastOption(IPAddress group)
+        {
+            if (group == null)
+            {
                 throw new ArgumentNullException("group");
             }
 
-            Group          = group;
+            Group = group;
             InterfaceIndex = 0;
         }
-        
+
         /// <devdoc>
         /// <para>
         /// Sets the IP address of a multicast group.
         /// </para>
         /// </devdoc>
-        public IPAddress Group {
-            get {
-                return m_Group;
-            }
-            set {
-                if (value == null) {
+        public IPAddress Group
+        {
+            get { return m_Group; }
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
 
@@ -192,19 +199,18 @@ namespace System.Net.Sockets {
         /// Sets the interface index.
         /// </para>
         /// </devdoc>
-        public long InterfaceIndex {
-            get {
-                return m_Interface;
-            }
-            set {
-                if ( value < 0 || value > 0x00000000FFFFFFFF ) {
+        public long InterfaceIndex
+        {
+            get { return m_Interface; }
+            set
+            {
+                if (value < 0 || value > 0x00000000FFFFFFFF)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
 
                 m_Interface = value;
             }
         }
-
     } // class MulticastOptionIPv6
-
 } // namespace System.Net.Sockets

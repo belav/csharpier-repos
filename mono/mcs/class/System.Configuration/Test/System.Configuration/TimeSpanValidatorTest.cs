@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,84 +27,105 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class TimeSpanValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			TimeSpan t = new TimeSpan (1000);
-			TimeSpanValidator v = new TimeSpanValidator (t, t);
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class TimeSpanValidatorTest
+    {
+        [Test]
+        public void CanValidate()
+        {
+            TimeSpan t = new TimeSpan(1000);
+            TimeSpanValidator v = new TimeSpanValidator(t, t);
 
-			Assert.IsTrue (v.CanValidate (typeof (TimeSpan)), "A1");
-			Assert.IsFalse (v.CanValidate (typeof (int)), "A2");
-			Assert.IsFalse (v.CanValidate (typeof (long)), "A3");
-		}
+            Assert.IsTrue(v.CanValidate(typeof(TimeSpan)), "A1");
+            Assert.IsFalse(v.CanValidate(typeof(int)), "A2");
+            Assert.IsFalse(v.CanValidate(typeof(long)), "A3");
+        }
 
-		[Test]
-		public void Validate_inRange ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (5000), new TimeSpan (10000));
-			v.Validate (new TimeSpan (7000));
-		}
+        [Test]
+        public void Validate_inRange()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(5000), new TimeSpan(10000));
+            v.Validate(new TimeSpan(7000));
+        }
 
-		[Test]
-		public void Validate_Inclusive ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (5000), new TimeSpan (10000), false);
-			v.Validate (new TimeSpan (5000));
-			v.Validate (new TimeSpan (10000));
-		}
+        [Test]
+        public void Validate_Inclusive()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                false
+            );
+            v.Validate(new TimeSpan(5000));
+            v.Validate(new TimeSpan(10000));
+        }
 
-		[Test]
-		public void Validate_Exclusive ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (5000), new TimeSpan (10000), true);
-			v.Validate (new TimeSpan (1000));
-			v.Validate (new TimeSpan (15000));
-		}
+        [Test]
+        public void Validate_Exclusive()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
+            v.Validate(new TimeSpan(1000));
+            v.Validate(new TimeSpan(15000));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail1 ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (5000), new TimeSpan (10000), true);
-			v.Validate (new TimeSpan (5000));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail1()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
+            v.Validate(new TimeSpan(5000));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail2 ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (5000), new TimeSpan (10000), true);
-			v.Validate (new TimeSpan (10000));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail2()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
+            v.Validate(new TimeSpan(10000));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail3 ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (5000), new TimeSpan (10000), true);
-			v.Validate (new TimeSpan (7000));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail3()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
+            v.Validate(new TimeSpan(7000));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Resolution ()
-		{
-			TimeSpanValidator v = new TimeSpanValidator (new TimeSpan (20000),
-								     new TimeSpan (50000),
-								     false,
-								     2);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Resolution()
+        {
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(20000),
+                new TimeSpan(50000),
+                false,
+                2
+            );
 
-			v.Validate (TimeSpan.FromTicks (40000));
-		}
-	}
+            v.Validate(TimeSpan.FromTicks(40000));
+        }
+    }
 }
-

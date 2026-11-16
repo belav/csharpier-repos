@@ -130,6 +130,7 @@ namespace System.Numerics.Tests
         {
             return GetRandomByteArray(random, random.Next(0, 1024));
         }
+
         private static byte[] GetRandomByteArray(Random random, int size)
         {
             return MyBigIntImp.GetRandomByteArray(random, size);

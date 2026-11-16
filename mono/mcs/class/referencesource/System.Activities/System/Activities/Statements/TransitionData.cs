@@ -16,29 +16,17 @@ namespace System.Activities.Statements
         /// <summary>
         /// Gets or sets Action of transition.
         /// </summary>
-        public Activity Action
-        {
-            get;
-            set;
-        }
+        public Activity Action { get; set; }
 
         /// <summary>
         /// Gets or sets Condition of transition.
         /// If condition is null, it means it's an unconditional transition.
         /// </summary>
-        public Activity<bool> Condition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> Condition { get; set; }
 
         /// <summary>
         /// Gets or sets To of transition, which represent the target InternalState.
         /// </summary>
-        public InternalState To
-        {
-            get;
-            set;
-        }
+        public InternalState To { get; set; }
     }
 }

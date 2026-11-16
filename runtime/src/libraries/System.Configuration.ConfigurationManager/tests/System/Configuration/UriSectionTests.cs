@@ -11,7 +11,7 @@ namespace System.ConfigurationTests
         // In core we don't include framework configuration objects in the implicit
         // machine.config as they don't have any function.
         public static string UriSectionConfiguration_Core =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='uri' type='System.Configuration.UriSection, System' />
@@ -26,7 +26,7 @@ namespace System.ConfigurationTests
 </configuration>";
 
         public static string UriSectionConfiguration_NetFX =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <uri>
         <idn enabled='All' />
@@ -40,7 +40,13 @@ namespace System.ConfigurationTests
         [Fact]
         public void UriSectionIdnIriParsing()
         {
-            using (var temp = new TempConfig(PlatformDetection.IsNetFramework ? UriSectionConfiguration_NetFX : UriSectionConfiguration_Core))
+            using (
+                var temp = new TempConfig(
+                    PlatformDetection.IsNetFramework
+                        ? UriSectionConfiguration_NetFX
+                        : UriSectionConfiguration_Core
+                )
+            )
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
                 UriSection uriSection = (UriSection)config.GetSection("uri");
@@ -52,14 +58,23 @@ namespace System.ConfigurationTests
         [Fact]
         public void UriSectionSchemeSettings()
         {
-            using (var temp = new TempConfig(PlatformDetection.IsNetFramework ? UriSectionConfiguration_NetFX : UriSectionConfiguration_Core))
+            using (
+                var temp = new TempConfig(
+                    PlatformDetection.IsNetFramework
+                        ? UriSectionConfiguration_NetFX
+                        : UriSectionConfiguration_Core
+                )
+            )
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
                 UriSection uriSection = (UriSection)config.GetSection("uri");
                 Assert.Equal(1, uriSection.SchemeSettings.Count);
                 SchemeSettingElement schemeSettingElement = uriSection.SchemeSettings[0];
                 Assert.Equal("ftp", schemeSettingElement.Name);
-                Assert.Equal(GenericUriParserOptions.DontCompressPath, schemeSettingElement.GenericUriParserOptions);
+                Assert.Equal(
+                    GenericUriParserOptions.DontCompressPath,
+                    schemeSettingElement.GenericUriParserOptions
+                );
             }
         }
     }

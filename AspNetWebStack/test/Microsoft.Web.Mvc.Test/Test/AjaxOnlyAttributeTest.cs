@@ -46,7 +46,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.IsValidForRequest(null, null); }, "controllerContext");
+                delegate
+                {
+                    attr.IsValidForRequest(null, null);
+                },
+                "controllerContext"
+            );
         }
 
         private static ControllerContext GetControllerContext(bool containsHeader)
@@ -60,7 +65,9 @@ namespace Microsoft.Web.Mvc.Test
             }
 
             mockContext.Setup(o => o.HttpContext.Request.Headers).Returns(nvc);
-            mockContext.Setup(o => o.HttpContext.Request["X-Requested-With"]).Returns("XMLHttpRequest"); // always assume the request contains this, e.g. as a form value
+            mockContext
+                .Setup(o => o.HttpContext.Request["X-Requested-With"])
+                .Returns("XMLHttpRequest"); // always assume the request contains this, e.g. as a form value
 
             return mockContext.Object;
         }

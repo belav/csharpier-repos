@@ -12,7 +12,8 @@ internal static partial class Interop
         // [return: NativeTypeName("HLOCAL")]
         private static partial nint LocalFree(
             // [NativeTypeName("HLOCAL")]
-            nint hMem);
+            nint hMem
+        );
 
         internal static unsafe void* LocalFree(void* ptr) => (void*)LocalFree((nint)ptr);
     }

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using Internal.ReadyToRunConstants;
 using Internal.Runtime;
 
@@ -51,9 +50,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         public IDictionary<ReadyToRunSectionType, ReadyToRunSection> Sections { get; private set; }
 
-        public ReadyToRunCoreHeader()
-        {
-        }
+        public ReadyToRunCoreHeader() { }
 
         public ReadyToRunCoreHeader(byte[] image, ref int curOffset)
         {
@@ -81,11 +78,14 @@ namespace ILCompiler.Reflection.ReadyToRun
                 }
                 int sectionStartRva = NativeReader.ReadInt32(image, ref curOffset);
                 int sectionLength = NativeReader.ReadInt32(image, ref curOffset);
-                Sections[sectionType] = new ReadyToRunSection(sectionType, sectionStartRva, sectionLength);
+                Sections[sectionType] = new ReadyToRunSection(
+                    sectionType,
+                    sectionStartRva,
+                    sectionLength
+                );
             }
         }
     }
-
 
     /// <summary>
     /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/readytorun.h">src/inc/readytorun.h</a> READYTORUN_HEADER
@@ -139,7 +139,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             Signature = NativeReader.ReadUInt32(image, ref curOffset);
             if (Signature != READYTORUN_SIGNATURE)
             {
-                throw new System.BadImageFormatException("Incorrect R2R header signature: " + SignatureString);
+                throw new System.BadImageFormatException(
+                    "Incorrect R2R header signature: " + SignatureString
+                );
             }
 
             MajorVersion = NativeReader.ReadUInt16(image, ref curOffset);

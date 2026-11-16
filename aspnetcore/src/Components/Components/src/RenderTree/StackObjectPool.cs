@@ -19,8 +19,8 @@ internal sealed class StackObjectPool<T>
     public StackObjectPool(int maxPreservedItems, Func<T> instanceFactory)
     {
         _maxPreservedItems = maxPreservedItems;
-        _instanceFactory =
-            instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
+        _instanceFactory = instanceFactory
+            ?? throw new ArgumentNullException(nameof(instanceFactory));
         _contents = new T[_maxPreservedItems];
     }
 

@@ -29,18 +29,16 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 get
                 {
-                    return this._catalog._assemblyCatalogs.Values.Select(catalog => catalog.Assembly)
-                                                                 .ToReadOnlyCollection();
+                    return this
+                        ._catalog._assemblyCatalogs.Values.Select(catalog => catalog.Assembly)
+                        .ToReadOnlyCollection();
                 }
             }
 
 #if FEATURE_REFLECTIONCONTEXT
             public ReflectionContext ReflectionContext
             {
-                get
-                {
-                    return this._catalog._reflectionContext;
-                }
+                get { return this._catalog._reflectionContext; }
             }
 #endif //FEATURE_REFLECTIONCONTEXT
 
@@ -68,7 +66,7 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 // NOTE: This shouldn't be cached, so that on every query of
                 // the current value of the underlying catalog is respected.
-                // We use ReadOnlyCollection as arrays do not have the 
+                // We use ReadOnlyCollection as arrays do not have the
                 // appropriate debugger display attributes applied to them.
                 get { return this._catalog.Parts.ToReadOnlyCollection(); }
             }

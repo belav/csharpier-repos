@@ -10,8 +10,8 @@ namespace System.Activities.Expressions
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Runtime.Serialization;
-    using System.Windows.Markup;
     using System.Threading;
+    using System.Windows.Markup;
 
     [ContentProperty("Indices")]
     public sealed class ValueTypeIndexerReference<TOperand, TItem> : CodeActivity<Location<TItem>>
@@ -23,17 +23,15 @@ namespace System.Activities.Expressions
         Func<object, object[], object> getFunc;
         Func<object, object[], object> setFunc;
 
-        static MruCache<MethodInfo, Func<object, object[], object>> funcCache =
-            new MruCache<MethodInfo, Func<object, object[], object>>(MethodCallExpressionHelper.FuncCacheCapacity);
+        static MruCache<MethodInfo, Func<object, object[], object>> funcCache = new MruCache<
+            MethodInfo,
+            Func<object, object[], object>
+        >(MethodCallExpressionHelper.FuncCacheCapacity);
         static ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InOutArgument<TOperand> OperandLocation
-        {
-            get;
-            set;
-        }
+        public InOutArgument<TOperand> OperandLocation { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
@@ -69,18 +67,31 @@ namespace System.Activities.Expressions
             }
             if (this.Indices.Count == 0)
             {
-                metadata.AddValidationError(SR.IndicesAreNeeded(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.IndicesAreNeeded(this.GetType().Name, this.DisplayName)
+                );
             }
             else
             {
-                IndexerHelper.CacheMethod<TOperand, TItem>(this.Indices, ref this.getMethod, ref this.setMethod);
+                IndexerHelper.CacheMethod<TOperand, TItem>(
+                    this.Indices,
+                    ref this.getMethod,
+                    ref this.setMethod
+                );
                 if (this.setMethod == null)
                 {
-                    metadata.AddValidationError(SR.SpecialMethodNotFound("set_Item", typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.SpecialMethodNotFound("set_Item", typeof(TOperand).Name)
+                    );
                 }
             }
 
-            RuntimeArgument operandArgument = new RuntimeArgument("OperandLocation", typeof(TOperand), ArgumentDirection.InOut, true);
+            RuntimeArgument operandArgument = new RuntimeArgument(
+                "OperandLocation",
+                typeof(TOperand),
+                ArgumentDirection.InOut,
+                true
+            );
             metadata.Bind(this.OperandLocation, operandArgument);
             metadata.AddArgument(operandArgument);
 
@@ -88,11 +99,22 @@ namespace System.Activities.Expressions
 
             if (MethodCallExpressionHelper.NeedRetrieve(this.getMethod, oldGetMethod, this.getFunc))
             {
-                this.getFunc = MethodCallExpressionHelper.GetFunc(metadata, this.getMethod, funcCache, locker);
+                this.getFunc = MethodCallExpressionHelper.GetFunc(
+                    metadata,
+                    this.getMethod,
+                    funcCache,
+                    locker
+                );
             }
             if (MethodCallExpressionHelper.NeedRetrieve(this.setMethod, oldSetMethod, this.setFunc))
             {
-                this.setFunc = MethodCallExpressionHelper.GetFunc(metadata, this.setMethod, funcCache, locker, true);
+                this.setFunc = MethodCallExpressionHelper.GetFunc(
+                    metadata,
+                    this.setMethod,
+                    funcCache,
+                    locker,
+                    true
+                );
             }
         }
 
@@ -105,7 +127,14 @@ namespace System.Activities.Expressions
             }
             Location<TOperand> operandLocationValue = this.OperandLocation.GetLocation(context);
             Fx.Assert(operandLocationValue != null, "OperandLocation must not be null");
-            return new IndexerLocation(operandLocationValue, indicesValue, getMethod, setMethod, this.getFunc, this.setFunc);
+            return new IndexerLocation(
+                operandLocationValue,
+                indicesValue,
+                getMethod,
+                setMethod,
+                this.getFunc,
+                this.setFunc
+            );
         }
 
         [DataContract]
@@ -124,8 +153,14 @@ namespace System.Activities.Expressions
             Func<object, object[], object> getFunc;
             Func<object, object[], object> setFunc;
 
-            public IndexerLocation(Location<TOperand> operandLocation, object[] indices, MethodInfo getMethod, MethodInfo setMethod, 
-                Func<object, object[], object> getFunc, Func<object, object[], object> setFunc)
+            public IndexerLocation(
+                Location<TOperand> operandLocation,
+                object[] indices,
+                MethodInfo getMethod,
+                MethodInfo setMethod,
+                Func<object, object[], object> getFunc,
+                Func<object, object[], object> setFunc
+            )
                 : base()
             {
                 this.operandLocation = operandLocation;
@@ -148,9 +183,13 @@ namespace System.Activities.Expressions
                     }
                     else if (this.getMethod != null)
                     {
-                        return (TItem)this.getMethod.Invoke(this.operandLocation.Value, indices);    
+                        return (TItem)this.getMethod.Invoke(this.operandLocation.Value, indices);
                     }
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SpecialMethodNotFound("get_Item", typeof(TOperand).Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.SpecialMethodNotFound("get_Item", typeof(TOperand).Name)
+                        )
+                    );
                 }
                 set
                 {

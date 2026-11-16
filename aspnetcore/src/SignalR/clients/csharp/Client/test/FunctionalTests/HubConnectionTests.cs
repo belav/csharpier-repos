@@ -549,18 +549,15 @@ public class HubConnectionTests : FunctionalTestBase
 
                 var helloWorldTcs = new TaskCompletionSource<string>();
                 var echoTcs = new TaskCompletionSource<string>();
-                connection.On<string>(
-                    "Echo",
-                    async (message) =>
-                    {
-                        echoTcs.SetResult(message);
-                        helloWorldTcs.SetResult(
-                            await connection
-                                .InvokeAsync<string>(nameof(TestHub.HelloWorld))
-                                .DefaultTimeout()
-                        );
-                    }
-                );
+                connection.On<string>("Echo", async (message) =>
+                {
+                    echoTcs.SetResult(message);
+                    helloWorldTcs.SetResult(
+                        await connection
+                            .InvokeAsync<string>(nameof(TestHub.HelloWorld))
+                            .DefaultTimeout()
+                    );
+                });
 
                 await connection.InvokeAsync("CallEcho", originalMessage).DefaultTimeout();
 
@@ -1355,11 +1352,8 @@ public class HubConnectionTests : FunctionalTestBase
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        connection
-                            .StreamAsChannelAsync<int>("Stream", 5, cts.Token)
-                            .DefaultTimeout()
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    connection.StreamAsChannelAsync<int>("Stream", 5, cts.Token).DefaultTimeout()
                 );
             }
             catch (Exception ex)
@@ -1407,8 +1401,8 @@ public class HubConnectionTests : FunctionalTestBase
                     .StreamAsChannelAsync<int>("StreamException")
                     .DefaultTimeout();
 
-                var ex = await Assert.ThrowsAsync<HubException>(
-                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(() =>
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "An unexpected error occurred invoking 'StreamException' on the server. InvalidOperationException: Error occurred while streaming.",
@@ -1626,8 +1620,8 @@ public class HubConnectionTests : FunctionalTestBase
                 await connection.StartAsync().DefaultTimeout();
 
                 var channel = await connection.StreamAsChannelAsync<int>("!@#$%");
-                var ex = await Assert.ThrowsAsync<HubException>(
-                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(() =>
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Failed to invoke '!@#$%' due to an error on the server. HubException: Method does not exist.",
@@ -1671,8 +1665,8 @@ public class HubConnectionTests : FunctionalTestBase
                 await connection.StartAsync().DefaultTimeout();
 
                 var channel = await connection.StreamAsChannelAsync<int>("Stream", 42, 42);
-                var ex = await Assert.ThrowsAsync<HubException>(
-                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(() =>
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Failed to invoke 'Stream' due to an error on the server. InvalidDataException: Invocation provides 2 argument(s) but target expects 1.",
@@ -1716,8 +1710,8 @@ public class HubConnectionTests : FunctionalTestBase
                 await connection.StartAsync().DefaultTimeout();
 
                 var channel = await connection.StreamAsChannelAsync<int>("Stream", "xyz");
-                var ex = await Assert.ThrowsAsync<HubException>(
-                    () => channel.ReadAndCollectAllAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAsync<HubException>(() =>
+                    channel.ReadAndCollectAllAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Failed to invoke 'Stream' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
@@ -2053,11 +2047,10 @@ public class HubConnectionTests : FunctionalTestBase
             await connection.StartAsync().DefaultTimeout();
             // List<T> will be looked at to replace with a StreamPlaceholder and should be skipped, so an error will be thrown from the
             // protocol on the server when it tries to match List<T> with a StreamPlaceholder
-            var hubException = await Assert.ThrowsAsync<HubException>(
-                () =>
-                    connection
-                        .InvokeAsync<int>("StreamEcho", new List<string> { "1", "2" })
-                        .DefaultTimeout()
+            var hubException = await Assert.ThrowsAsync<HubException>(() =>
+                connection
+                    .InvokeAsync<int>("StreamEcho", new List<string> { "1", "2" })
+                    .DefaultTimeout()
             );
             Assert.Equal(
                 "Failed to invoke 'StreamEcho' due to an error on the server. InvalidDataException: Invocation provides 1 argument(s) but target expects 0.",
@@ -2085,14 +2078,10 @@ public class HubConnectionTests : FunctionalTestBase
 
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/authorizedhub",
-                    transportType,
-                    options =>
-                    {
-                        options.AccessTokenProvider = AccessTokenProvider;
-                    }
-                )
+                .WithUrl(server.Url + "/authorizedhub", transportType, options =>
+                {
+                    options.AccessTokenProvider = AccessTokenProvider;
+                })
                 .Build();
             try
             {
@@ -2136,8 +2125,8 @@ public class HubConnectionTests : FunctionalTestBase
                 .Build();
             try
             {
-                var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                    () => hubConnection.StartAsync().DefaultTimeout()
+                var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
+                    hubConnection.StartAsync().DefaultTimeout()
                 );
                 Assert.Equal(
                     "Response status code does not indicate success: 401 (Unauthorized).",
@@ -2193,15 +2182,11 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    transportType,
-                    options =>
-                    {
-                        options.Headers["X-test"] = "42";
-                        options.Headers["X-42"] = "test";
-                    }
-                )
+                .WithUrl(server.Url + "/default", transportType, options =>
+                {
+                    options.Headers["X-test"] = "42";
+                    options.Headers["X-42"] = "test";
+                })
                 .Build();
             try
             {
@@ -2235,15 +2220,11 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.LongPolling,
-                    options =>
-                    {
-                        options.Headers["X-test"] = "42";
-                        options.Headers["X-42"] = "test";
-                    }
-                )
+                .WithUrl(server.Url + "/default", HttpTransportType.LongPolling, options =>
+                {
+                    options.Headers["X-test"] = "42";
+                    options.Headers["X-42"] = "test";
+                })
                 .Build();
             try
             {
@@ -2284,14 +2265,10 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.LongPolling,
-                    options =>
-                    {
-                        options.Headers["User-Agent"] = "";
-                    }
-                )
+                .WithUrl(server.Url + "/default", HttpTransportType.LongPolling, options =>
+                {
+                    options.Headers["User-Agent"] = "";
+                })
                 .Build();
             try
             {
@@ -2327,14 +2304,10 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.LongPolling,
-                    options =>
-                    {
-                        options.Headers["User-Agent"] = "User Value";
-                    }
-                )
+                .WithUrl(server.Url + "/default", HttpTransportType.LongPolling, options =>
+                {
+                    options.Headers["User-Agent"] = "User Value";
+                })
                 .Build();
             try
             {
@@ -2375,14 +2348,10 @@ public class HubConnectionTests : FunctionalTestBase
 
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    options =>
-                    {
-                        options.WebSocketConfiguration = o => o.Cookies = cookieJar;
-                    }
-                )
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, options =>
+                {
+                    options.WebSocketConfiguration = o => o.Cookies = cookieJar;
+                })
                 .Build();
             try
             {
@@ -2427,28 +2396,24 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    options =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, options =>
+                {
+                    options.HttpMessageHandlerFactory = h =>
                     {
-                        options.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        };
-                        options.WebSocketConfiguration = o =>
-                        {
-                            o.HttpVersion = HttpVersion.Version20;
-                            o.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
-                        };
-                    }
-                )
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    };
+                    options.WebSocketConfiguration = o =>
+                    {
+                        o.HttpVersion = HttpVersion.Version20;
+                        o.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                    };
+                })
                 .Build();
             try
             {
@@ -2472,17 +2437,14 @@ public class HubConnectionTests : FunctionalTestBase
         }
 
         // Triple check that the WebSocket ran over HTTP/2, also verify the negotiate was HTTP/2
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request starting HTTP/2 POST")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 POST")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request starting HTTP/2 CONNECT")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 CONNECT")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request finished HTTP/2 CONNECT")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request finished HTTP/2 CONNECT")
         );
     }
 
@@ -2511,29 +2473,25 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/windowsauthhub",
-                    httpTransportType,
-                    options =>
+                .WithUrl(server.Url + "/windowsauthhub", httpTransportType, options =>
+                {
+                    options.HttpMessageHandlerFactory = h =>
                     {
-                        options.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        };
-                        options.WebSocketConfiguration = o =>
-                        {
-                            o.RemoteCertificateValidationCallback = (_, _, _, _) => true;
-                            o.HttpVersion = HttpVersion.Version20;
-                        };
-                        options.UseDefaultCredentials = true;
-                    }
-                )
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    };
+                    options.WebSocketConfiguration = o =>
+                    {
+                        o.RemoteCertificateValidationCallback = (_, _, _, _) => true;
+                        o.HttpVersion = HttpVersion.Version20;
+                    };
+                    options.UseDefaultCredentials = true;
+                })
                 .Build();
             try
             {
@@ -2557,17 +2515,14 @@ public class HubConnectionTests : FunctionalTestBase
         }
 
         // Check that HTTP/1.1 was used instead of the configured HTTP/2 since Windows Auth is being used
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request starting HTTP/1.1 POST")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/1.1 POST")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request starting HTTP/1.1 GET")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/1.1 GET")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request finished HTTP/1.1 GET")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request finished HTTP/1.1 GET")
         );
     }
 
@@ -2597,34 +2552,30 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/windowsauthhub",
-                    HttpTransportType.WebSockets,
-                    options =>
+                .WithUrl(server.Url + "/windowsauthhub", HttpTransportType.WebSockets, options =>
+                {
+                    options.HttpMessageHandlerFactory = h =>
                     {
-                        options.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        };
-                        options.WebSocketConfiguration = o =>
-                        {
-                            o.RemoteCertificateValidationCallback = (_, _, _, _) => true;
-                            o.HttpVersion = HttpVersion.Version20;
-                            o.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
-                        };
-                        options.UseDefaultCredentials = true;
-                    }
-                )
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    };
+                    options.WebSocketConfiguration = o =>
+                    {
+                        o.RemoteCertificateValidationCallback = (_, _, _, _) => true;
+                        o.HttpVersion = HttpVersion.Version20;
+                        o.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                    };
+                    options.UseDefaultCredentials = true;
+                })
                 .Build();
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(
-                () => hubConnection.StartAsync().DefaultTimeout()
+            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
+                hubConnection.StartAsync().DefaultTimeout()
             );
             Assert.Contains(
                 "Negotiate Authentication doesn't work with HTTP/2 or higher.",
@@ -2656,33 +2607,29 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    options =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, options =>
+                {
+                    options.HttpMessageHandlerFactory = h =>
                     {
-                        options.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        };
-                        options.WebSocketConfiguration = o =>
-                        {
-                            o.HttpVersion = HttpVersion.Version20;
-                            o.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
-                        };
-                        options.AccessTokenProvider = () =>
-                        {
-                            accessTokenCallCount++;
-                            return Task.FromResult("test");
-                        };
-                    }
-                )
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    };
+                    options.WebSocketConfiguration = o =>
+                    {
+                        o.HttpVersion = HttpVersion.Version20;
+                        o.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                    };
+                    options.AccessTokenProvider = () =>
+                    {
+                        accessTokenCallCount++;
+                        return Task.FromResult("test");
+                    };
+                })
                 .Build();
             try
             {
@@ -2712,17 +2659,14 @@ public class HubConnectionTests : FunctionalTestBase
         Assert.Equal(1, accessTokenCallCount);
 
         // Triple check that the WebSocket ran over HTTP/2, also verify the negotiate was HTTP/2
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request starting HTTP/2 POST")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 POST")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request starting HTTP/2 CONNECT")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 CONNECT")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context => context.Message.Contains("Request finished HTTP/2 CONNECT")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request finished HTTP/2 CONNECT")
         );
     }
 
@@ -2805,13 +2749,10 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    options =>
-                    {
-                        options.Headers.Add(HeaderUserIdProvider.HeaderName, "SuperAdmin");
-                    }
-                )
+                .WithUrl(server.Url + "/default", options =>
+                {
+                    options.Headers.Add(HeaderUserIdProvider.HeaderName, "SuperAdmin");
+                })
                 .Build();
             try
             {
@@ -2878,18 +2819,15 @@ public class HubConnectionTests : FunctionalTestBase
             PollTrackingMessageHandler pollTracker = null;
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    options =>
+                .WithUrl(server.Url + "/default", options =>
+                {
+                    options.Transports = HttpTransportType.LongPolling;
+                    options.HttpMessageHandlerFactory = handler =>
                     {
-                        options.Transports = HttpTransportType.LongPolling;
-                        options.HttpMessageHandlerFactory = handler =>
-                        {
-                            pollTracker = new PollTrackingMessageHandler(handler);
-                            return pollTracker;
-                        };
-                    }
-                )
+                        pollTracker = new PollTrackingMessageHandler(handler);
+                        return pollTracker;
+                    };
+                })
                 .Build();
 
             await hubConnection.StartAsync();
@@ -3195,20 +3133,17 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.LongPolling,
-                    o =>
-                        o.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        }
+                .WithUrl(server.Url + "/default", HttpTransportType.LongPolling, o =>
+                    o.HttpMessageHandlerFactory = h =>
+                    {
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    }
                 )
                 .Build();
             try
@@ -3234,33 +3169,25 @@ public class HubConnectionTests : FunctionalTestBase
         }
 
         // negotiate is HTTP2
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request starting HTTP/2 POST")
-                && context.Message.Contains("/negotiate?")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 POST")
+            && context.Message.Contains("/negotiate?")
         );
 
         // LongPolling polls and sends are HTTP2
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request starting HTTP/2 POST")
-                && context.Message.Contains("?id=")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 POST")
+            && context.Message.Contains("?id=")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request finished HTTP/2 GET")
-                && context.Message.Contains("?id=")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request finished HTTP/2 GET")
+            && context.Message.Contains("?id=")
         );
 
         // LongPolling delete is HTTP2
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request finished HTTP/2 DELETE")
-                && context.Message.Contains("?id=")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request finished HTTP/2 DELETE")
+            && context.Message.Contains("?id=")
         );
     }
 
@@ -3284,20 +3211,17 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.LongPolling,
-                    o =>
-                        o.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        }
+                .WithUrl(server.Url + "/default", HttpTransportType.LongPolling, o =>
+                    o.HttpMessageHandlerFactory = h =>
+                    {
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    }
                 )
                 .Build();
             try
@@ -3343,20 +3267,17 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.ServerSentEvents,
-                    o =>
-                        o.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        }
+                .WithUrl(server.Url + "/default", HttpTransportType.ServerSentEvents, o =>
+                    o.HttpMessageHandlerFactory = h =>
+                    {
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    }
                 )
                 .Build();
             try
@@ -3382,25 +3303,19 @@ public class HubConnectionTests : FunctionalTestBase
         }
 
         // negotiate is HTTP2
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request starting HTTP/2 POST")
-                && context.Message.Contains("/negotiate?")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 POST")
+            && context.Message.Contains("/negotiate?")
         );
 
         // ServerSentEvents eventsource and sendsos are HTTP2
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request starting HTTP/2 POST")
-                && context.Message.Contains("?id=")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request starting HTTP/2 POST")
+            && context.Message.Contains("?id=")
         );
-        Assert.Contains(
-            TestSink.Writes,
-            context =>
-                context.Message.Contains("Request finished HTTP/2 GET")
-                && context.Message.Contains("?id=")
+        Assert.Contains(TestSink.Writes, context =>
+            context.Message.Contains("Request finished HTTP/2 GET")
+            && context.Message.Contains("?id=")
         );
     }
 
@@ -3424,20 +3339,17 @@ public class HubConnectionTests : FunctionalTestBase
         {
             var hubConnection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.ServerSentEvents,
-                    o =>
-                        o.HttpMessageHandlerFactory = h =>
-                        {
-                            ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
-                                _,
-                                _,
-                                _,
-                                _
-                            ) => true;
-                            return h;
-                        }
+                .WithUrl(server.Url + "/default", HttpTransportType.ServerSentEvents, o =>
+                    o.HttpMessageHandlerFactory = h =>
+                    {
+                        ((HttpClientHandler)h).ServerCertificateCustomValidationCallback = (
+                            _,
+                            _,
+                            _,
+                            _
+                        ) => true;
+                        return h;
+                    }
                 )
                 .Build();
             try
@@ -3480,23 +3392,19 @@ public class HubConnectionTests : FunctionalTestBase
             const string originalMessage = "SignalR";
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    o =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, o =>
+                {
+                    o.WebSocketFactory = async (context, token) =>
                     {
-                        o.WebSocketFactory = async (context, token) =>
-                        {
-                            await tcs.Task;
-                            await websocket.ConnectAsync(context.Uri, token);
-                            tcs = new TaskCompletionSource(
-                                TaskCreationOptions.RunContinuationsAsynchronously
-                            );
-                            return websocket;
-                        };
-                        o.UseStatefulReconnect = true;
-                    }
-                );
+                        await tcs.Task;
+                        await websocket.ConnectAsync(context.Uri, token);
+                        tcs = new TaskCompletionSource(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
+                        return websocket;
+                    };
+                    o.UseStatefulReconnect = true;
+                });
             connectionBuilder.Services.AddSingleton(protocol);
             var connection = connectionBuilder.Build();
 
@@ -3554,20 +3462,16 @@ public class HubConnectionTests : FunctionalTestBase
             const string originalMessage = "SignalR";
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    o =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, o =>
+                {
+                    o.WebSocketFactory = async (context, token) =>
                     {
-                        o.WebSocketFactory = async (context, token) =>
-                        {
-                            await websocket.ConnectAsync(context.Uri, token);
-                            tcs.SetResult();
-                            return websocket;
-                        };
-                        o.UseStatefulReconnect = true;
-                    }
-                )
+                        await websocket.ConnectAsync(context.Uri, token);
+                        tcs.SetResult();
+                        return websocket;
+                    };
+                    o.UseStatefulReconnect = true;
+                })
                 .WithAutomaticReconnect();
             connectionBuilder.Services.AddSingleton(protocol);
             var connection = connectionBuilder.Build();
@@ -3633,29 +3537,22 @@ public class HubConnectionTests : FunctionalTestBase
             var userName = "test1";
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    o =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, o =>
+                {
+                    o.WebSocketFactory = async (context, token) =>
                     {
-                        o.WebSocketFactory = async (context, token) =>
-                        {
-                            var httpResponse = await new HttpClient().GetAsync(
-                                server.Url + $"/generateJwtToken/{userName}"
-                            );
-                            httpResponse.EnsureSuccessStatusCode();
-                            var authHeader = await httpResponse.Content.ReadAsStringAsync();
-                            websocket.Options.SetRequestHeader(
-                                "Authorization",
-                                $"Bearer {authHeader}"
-                            );
+                        var httpResponse = await new HttpClient().GetAsync(
+                            server.Url + $"/generateJwtToken/{userName}"
+                        );
+                        httpResponse.EnsureSuccessStatusCode();
+                        var authHeader = await httpResponse.Content.ReadAsStringAsync();
+                        websocket.Options.SetRequestHeader("Authorization", $"Bearer {authHeader}");
 
-                            await websocket.ConnectAsync(context.Uri, token);
-                            tcs.SetResult();
-                            return websocket;
-                        };
-                    }
-                )
+                        await websocket.ConnectAsync(context.Uri, token);
+                        tcs.SetResult();
+                        return websocket;
+                    };
+                })
                 .WithStatefulReconnect()
                 .WithAutomaticReconnect();
             connectionBuilder.Services.AddSingleton(protocol);
@@ -3718,21 +3615,17 @@ public class HubConnectionTests : FunctionalTestBase
             var connectCount = 0;
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    o =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, o =>
+                {
+                    o.WebSocketFactory = async (context, token) =>
                     {
-                        o.WebSocketFactory = async (context, token) =>
-                        {
-                            connectCount++;
-                            var ws = new ClientWebSocket();
-                            await ws.ConnectAsync(context.Uri, token);
-                            return ws;
-                        };
-                        o.UseStatefulReconnect = true;
-                    }
-                );
+                        connectCount++;
+                        var ws = new ClientWebSocket();
+                        await ws.ConnectAsync(context.Uri, token);
+                        return ws;
+                    };
+                    o.UseStatefulReconnect = true;
+                });
             connectionBuilder.Services.AddSingleton(protocol);
             var connection = connectionBuilder.Build();
 
@@ -3842,23 +3735,19 @@ public class HubConnectionTests : FunctionalTestBase
             const string originalMessage = "SignalR";
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    server.Url + "/default",
-                    HttpTransportType.WebSockets,
-                    o =>
+                .WithUrl(server.Url + "/default", HttpTransportType.WebSockets, o =>
+                {
+                    o.WebSocketFactory = async (context, token) =>
                     {
-                        o.WebSocketFactory = async (context, token) =>
-                        {
-                            await tcs.Task;
-                            await websocket.ConnectAsync(context.Uri, token);
-                            tcs = new TaskCompletionSource(
-                                TaskCreationOptions.RunContinuationsAsynchronously
-                            );
-                            return websocket;
-                        };
-                        o.UseStatefulReconnect = true;
-                    }
-                );
+                        await tcs.Task;
+                        await websocket.ConnectAsync(context.Uri, token);
+                        tcs = new TaskCompletionSource(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
+                        return websocket;
+                    };
+                    o.UseStatefulReconnect = true;
+                });
             // Force version 1 on the server so it turns off Stateful Reconnects
             connectionBuilder.Services.AddSingleton<IHubProtocol>(
                 new HubProtocolVersionTests.SingleVersionHubProtocol(HubProtocols["json"], 1)

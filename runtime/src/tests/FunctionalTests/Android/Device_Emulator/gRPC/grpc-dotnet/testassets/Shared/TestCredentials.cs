@@ -30,26 +30,17 @@ namespace Grpc.Shared.TestAssets
 
         public static string ClientCertAuthorityPath
         {
-            get
-            {
-                return GetPath("data/ca.pem");
-            }
+            get { return GetPath("data/ca.pem"); }
         }
 
         public static string ServerCertChainPath
         {
-            get
-            {
-                return GetPath("data/server1.pem");
-            }
+            get { return GetPath("data/server1.pem"); }
         }
 
         public static string ServerPrivateKeyPath
         {
-            get
-            {
-                return GetPath("data/server1.key");
-            }
+            get { return GetPath("data/server1.key"); }
         }
 
         public static SslCredentials CreateSslCredentials()
@@ -61,13 +52,16 @@ namespace Grpc.Shared.TestAssets
         {
             var keyCertPair = new KeyCertificatePair(
                 File.ReadAllText(ServerCertChainPath),
-                File.ReadAllText(ServerPrivateKeyPath));
+                File.ReadAllText(ServerPrivateKeyPath)
+            );
             return new SslServerCredentials(new[] { keyCertPair });
         }
 
         private static string GetPath(string relativePath)
         {
-            var assemblyDir = Path.GetDirectoryName(typeof(TestCredentials).GetTypeInfo().Assembly.Location);
+            var assemblyDir = Path.GetDirectoryName(
+                typeof(TestCredentials).GetTypeInfo().Assembly.Location
+            );
             return Path.Combine(assemblyDir!, relativePath);
         }
     }

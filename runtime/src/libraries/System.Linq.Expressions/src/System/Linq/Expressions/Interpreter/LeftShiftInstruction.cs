@@ -7,7 +7,14 @@ namespace System.Linq.Expressions.Interpreter
 {
     internal abstract class LeftShiftInstruction : Instruction
     {
-        private static Instruction? s_SByte, s_Int16, s_Int32, s_Int64, s_Byte, s_UInt16, s_UInt32, s_UInt64;
+        private static Instruction? s_SByte,
+            s_Int16,
+            s_Int32,
+            s_Int64,
+            s_Byte,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64;
 
         public override int ConsumedStack => 2;
         public override int ProducedStack => 1;

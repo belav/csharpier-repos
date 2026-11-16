@@ -19,6 +19,7 @@ public class Runtime_61077
     }
 
     public static long s_14 = 1;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static long Go()
     {

@@ -26,89 +26,89 @@
 //
 //
 
-
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
 namespace System.Drawing
 {
-	public sealed class BufferedGraphics : IDisposable
-	{
-		private Rectangle size;
-		private Bitmap membmp = null;
-		private Graphics target = null;
-		private Graphics source = null;
+    public sealed class BufferedGraphics : IDisposable
+    {
+        private Rectangle size;
+        private Bitmap membmp = null;
+        private Graphics target = null;
+        private Graphics source = null;
 
-		private BufferedGraphics ()
-		{
+        private BufferedGraphics() { }
 
-		}
+        internal BufferedGraphics(Graphics targetGraphics, Rectangle targetRectangle)
+        {
+            size = targetRectangle;
+            target = targetGraphics;
+            membmp = new Bitmap(size.Width, size.Height);
+        }
 
-		internal BufferedGraphics (Graphics targetGraphics, Rectangle targetRectangle)
-		{
-			size = targetRectangle;
-			target = targetGraphics;			
-			membmp = new Bitmap (size.Width, size.Height);
-		}
+        ~BufferedGraphics()
+        {
+            Dispose(false);
+        }
 
-		~BufferedGraphics ()
-		{
-			Dispose (false);
-		}
+        public Graphics Graphics
+        {
+            get
+            {
+                if (source == null)
+                {
+                    source = Graphics.FromImage(membmp);
+                }
 
-	      	public Graphics Graphics {
-			get {
-				if (source == null) {
-					source = Graphics.FromImage (membmp);
-				}
+                return source;
+            }
+        }
 
-				return source;
-			}
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            System.GC.SuppressFinalize(this);
+        }
 
-	      	public void Dispose ()
-		{
-			Dispose (true);
-			System.GC.SuppressFinalize (this);
-		}
+        private void Dispose(bool disposing)
+        {
+            if (disposing == false)
+                return;
 
-		private void Dispose (bool disposing)
-		{
-			if (disposing == false)
-				return;
+            if (membmp != null)
+            {
+                membmp.Dispose();
+                membmp = null;
+            }
 
-			if (membmp != null) {
-				membmp.Dispose ();
-				membmp = null;
-			}
+            if (source != null)
+            {
+                source.Dispose();
+                source = null;
+            }
 
-			if (source != null) {
-				source.Dispose ();
-				source = null;
-			}
+            target = null;
+        }
 
-			target = null;
-		}
+        public void Render()
+        {
+            Render(target);
+        }
 
-	      	public void Render ()
-		{
-			Render (target);
-		}
+        public void Render(Graphics target)
+        {
+            if (target == null)
+                return;
 
-	      	public void Render (Graphics target)
-		{
-			if (target == null)
-				return;
+            target.DrawImage(membmp, size);
+        }
 
-			target.DrawImage (membmp, size);
-		}
-
-		[MonoTODO ("The targetDC parameter has no equivalent in libgdiplus.")]
-	      	public void Render (IntPtr targetDC)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO("The targetDC parameter has no equivalent in libgdiplus.")]
+        public void Render(IntPtr targetDC)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

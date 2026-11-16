@@ -16,19 +16,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal partial class CSharpCastReducer : AbstractCSharpReducer
     {
-        private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool));
+        private static readonly ObjectPool<IReductionRewriter> s_pool = new(() =>
+            new Rewriter(s_pool)
+        );
 
-        public CSharpCastReducer() : base(s_pool)
-        {
-        }
+        public CSharpCastReducer()
+            : base(s_pool) { }
 
-        protected override bool IsApplicable(CSharpSimplifierOptions options)
-            => true;
+        protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 
-        private static readonly Func<CastExpressionSyntax, SemanticModel, SimplifierOptions, CancellationToken, ExpressionSyntax> s_simplifyCast = SimplifyCast;
+        private static readonly Func<
+            CastExpressionSyntax,
+            SemanticModel,
+            SimplifierOptions,
+            CancellationToken,
+            ExpressionSyntax
+        > s_simplifyCast = SimplifyCast;
 
-        private static ExpressionSyntax SimplifyCast(CastExpressionSyntax node, SemanticModel semanticModel, SimplifierOptions options, CancellationToken cancellationToken)
+        private static ExpressionSyntax SimplifyCast(
+            CastExpressionSyntax node,
+            SemanticModel semanticModel,
+            SimplifierOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (!CastSimplifier.IsUnnecessaryCast(node, semanticModel, cancellationToken))
             {

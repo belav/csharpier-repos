@@ -5,23 +5,23 @@ using System.Diagnostics;
 
 namespace TestDebug
 {
-	class Program
-	{
-		[Conditional ("DEBUG")]
-		public static void Excluded ()
-		{
-			throw new ApplicationException ("1");
-		}
+    class Program
+    {
+        [Conditional("DEBUG")]
+        public static void Excluded()
+        {
+            throw new ApplicationException("1");
+        }
 
-		public static int Main ()
-		{
-			C.Method (); // Only checks that DEBUG is defined in second file
-			
-			Excluded ();
+        public static int Main()
+        {
+            C.Method(); // Only checks that DEBUG is defined in second file
+
+            Excluded();
 #if DEBUG
-			throw new ApplicationException ("1");
+            throw new ApplicationException("1");
 #endif
-			return 0;
-		}
-	}
+            return 0;
+        }
+    }
 }

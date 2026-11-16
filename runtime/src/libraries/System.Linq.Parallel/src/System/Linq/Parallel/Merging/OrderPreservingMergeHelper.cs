@@ -20,7 +20,8 @@ namespace System.Linq.Parallel
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    internal sealed class OrderPreservingMergeHelper<TInputOutput, TKey> : IMergeHelper<TInputOutput>
+    internal sealed class OrderPreservingMergeHelper<TInputOutput, TKey>
+        : IMergeHelper<TInputOutput>
     {
         private readonly QueryTaskGroupState _taskGroupState; // State shared among tasks.
         private readonly PartitionedStream<TInputOutput, TKey> _partitions; // Source partitions.
@@ -35,12 +36,18 @@ namespace System.Linq.Parallel
         //     ignoreOutput - whether we're enumerating "for effect" or for output.
         //
 
-        internal OrderPreservingMergeHelper(PartitionedStream<TInputOutput, TKey> partitions, TaskScheduler taskScheduler,
-            CancellationState cancellationState, int queryId)
+        internal OrderPreservingMergeHelper(
+            PartitionedStream<TInputOutput, TKey> partitions,
+            TaskScheduler taskScheduler,
+            CancellationState cancellationState,
+            int queryId
+        )
         {
             Debug.Assert(partitions != null);
 
-            TraceHelpers.TraceInfo("KeyOrderPreservingMergeHelper::.ctor(..): creating an order preserving merge helper");
+            TraceHelpers.TraceInfo(
+                "KeyOrderPreservingMergeHelper::.ctor(..): creating an order preserving merge helper"
+            );
 
             _taskGroupState = new QueryTaskGroupState(cancellationState, queryId);
             _partitions = partitions;
@@ -57,7 +64,12 @@ namespace System.Linq.Parallel
 
         void IMergeHelper<TInputOutput>.Execute()
         {
-            OrderPreservingSpoolingTask<TInputOutput, TKey>.Spool(_taskGroupState, _partitions, _results, _taskScheduler);
+            OrderPreservingSpoolingTask<TInputOutput, TKey>.Spool(
+                _taskGroupState,
+                _partitions,
+                _results,
+                _taskScheduler
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -69,7 +81,6 @@ namespace System.Linq.Parallel
             Debug.Assert(_results.Value != null);
             return ((IEnumerable<TInputOutput>)_results.Value).GetEnumerator();
         }
-
 
         //-----------------------------------------------------------------------------------
         // Returns the results as an array.

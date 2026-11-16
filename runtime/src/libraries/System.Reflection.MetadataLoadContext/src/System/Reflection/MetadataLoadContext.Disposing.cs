@@ -15,7 +15,10 @@ namespace System.Reflection
         internal void DisposeCheck()
         {
             if (IsDisposed)
-                throw new ObjectDisposedException(message: SR.MetadataLoadContextDisposed, innerException: null);
+                throw new ObjectDisposedException(
+                    message: SR.MetadataLoadContextDisposed,
+                    innerException: null
+                );
         }
 
         /// <summary>

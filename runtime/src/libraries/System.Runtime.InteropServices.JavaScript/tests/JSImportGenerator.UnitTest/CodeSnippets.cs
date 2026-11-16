@@ -127,7 +127,6 @@ namespace JSImportGenerator.Unit.Tests
             }
             """;
 
-
         public static readonly string TrivialClassDeclarations = """
             //TrivialClassDeclarations
             using System.Runtime.InteropServices.JavaScript;
@@ -159,7 +158,9 @@ namespace JSImportGenerator.Unit.Tests
 
             }
             """;
-        public static string DefaultReturnMarshaler<T>() => DefaultReturnMarshaler(typeof(T).ToString());
+
+        public static string DefaultReturnMarshaler<T>() =>
+            DefaultReturnMarshaler(typeof(T).ToString());
 
         public static string DefaultReturnMarshaler(string type) => $$"""
             //DefaultReturnMarshaler<{{type}}>
@@ -168,11 +169,10 @@ namespace JSImportGenerator.Unit.Tests
             {
                 [JSImport("DoesNotExist")]
                 public static partial {{type}} Import1();
-            
+
                 [JSExport()]
                 public static {{type}} Export1(){ throw null; }
             }
             """;
-
     }
 }

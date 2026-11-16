@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis
                 var oldState = old.GetProjectState(id);
                 if (oldState != null && newState != null && newState != oldState)
                 {
-                    yield return _newSolution.GetRequiredProject(id).GetChanges(_oldSolution.GetRequiredProject(id));
+                    yield return _newSolution
+                        .GetRequiredProject(id)
+                        .GetChanges(_oldSolution.GetRequiredProject(id));
                 }
             }
         }
@@ -59,7 +61,9 @@ namespace Microsoft.CodeAnalysis
 
         public IEnumerable<AnalyzerReference> GetAddedAnalyzerReferences()
         {
-            var oldAnalyzerReferences = new HashSet<AnalyzerReference>(_oldSolution.AnalyzerReferences);
+            var oldAnalyzerReferences = new HashSet<AnalyzerReference>(
+                _oldSolution.AnalyzerReferences
+            );
             foreach (var analyzerReference in _newSolution.AnalyzerReferences)
             {
                 if (!oldAnalyzerReferences.Contains(analyzerReference))
@@ -71,7 +75,9 @@ namespace Microsoft.CodeAnalysis
 
         public IEnumerable<AnalyzerReference> GetRemovedAnalyzerReferences()
         {
-            var newAnalyzerReferences = new HashSet<AnalyzerReference>(_newSolution.AnalyzerReferences);
+            var newAnalyzerReferences = new HashSet<AnalyzerReference>(
+                _newSolution.AnalyzerReferences
+            );
             foreach (var analyzerReference in _oldSolution.AnalyzerReferences)
             {
                 if (!newAnalyzerReferences.Contains(analyzerReference))

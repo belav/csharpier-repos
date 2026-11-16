@@ -1,33 +1,32 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security;
 using System.Collections.Generic;
-
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Reflection
 {
     //
     // We can destroy the unmanaged part of collectible type only after the managed part is definitely gone and thus
-    // nobody can call/allocate/reference anything related to the collectible assembly anymore. A call to finalizer 
+    // nobody can call/allocate/reference anything related to the collectible assembly anymore. A call to finalizer
     // alone does not guarantee that the managed part is gone. A malicious code can keep a reference to some object
     // in a way that that survives finalization, or we can be running during shutdown where everything is finalized.
     //
-    // The unmanaged LoaderAllocator keeps a reference to the managed LoaderAllocator in long weak handle. If the long 
-    // weak handle is null, we can be sure that the managed part of the LoaderAllocator is definitely gone and that it 
+    // The unmanaged LoaderAllocator keeps a reference to the managed LoaderAllocator in long weak handle. If the long
+    // weak handle is null, we can be sure that the managed part of the LoaderAllocator is definitely gone and that it
     // is safe to destroy the unmanaged part. Unfortunately, we can not perform the above check in a finalizer on the
-    // LoaderAllocator, but it can be performed on a helper object. 
+    // LoaderAllocator, but it can be performed on a helper object.
     //
-    // The finalization does not have to be done using CriticalFinalizerObject. We have to go over all LoaderAllocators 
+    // The finalization does not have to be done using CriticalFinalizerObject. We have to go over all LoaderAllocators
     // during AppDomain shutdown anyway to avoid leaks e.g. if somebody stores reference to LoaderAllocator in a static.
     //
     internal sealed class LoaderAllocatorScout
@@ -50,10 +49,8 @@ namespace System.Reflection
             // unmanaged code
             // So it is ok to skip reregistration and cleanup for finalization during appdomain shutdown.
             // We also avoid early finalization of LoaderAllocatorScout due to AD unload when the object was inside DelayedFinalizationList.
-            if (!Environment.HasShutdownStarted &&
-                !AppDomain.CurrentDomain.IsFinalizingForUnload())
+            if (!Environment.HasShutdownStarted && !AppDomain.CurrentDomain.IsFinalizingForUnload())
             {
-
                 // Destroy returns false if the managed LoaderAllocator is still alive.
                 if (!Destroy(m_nativeLoaderAllocator))
                 {
@@ -69,7 +66,7 @@ namespace System.Reflection
     {
         LoaderAllocator()
         {
-            m_slots = new object [5];
+            m_slots = new object[5];
             // m_slotsUsed = 0;
 
             m_scout = new LoaderAllocatorScout();
@@ -78,11 +75,10 @@ namespace System.Reflection
 #pragma warning disable 169
 #pragma warning disable 414
         LoaderAllocatorScout m_scout;
-        object [] m_slots;
+        object[] m_slots;
         internal CerHashtable<RuntimeMethodInfo, RuntimeMethodInfo> m_methodInstantiations;
         int m_slotsUsed;
 #pragma warning restore 414
 #pragma warning restore 169
     }
 }
-

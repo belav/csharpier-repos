@@ -49,7 +49,7 @@ public class Runtime_31615
 
     const float f0 = -101f;
     const float f1 = -7f;
- 
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static Vector2 G2()
     {
@@ -87,7 +87,9 @@ public class Runtime_31615
         if ((v2.x != x) || (v2.y != y))
         {
             s_errors++;
-            Console.WriteLine($"Check at line {line} failed; have ({v2.x},{v2.y}); expected ({x},{y})");
+            Console.WriteLine(
+                $"Check at line {line} failed; have ({v2.x},{v2.y}); expected ({x},{y})"
+            );
         }
     }
 
@@ -98,7 +100,9 @@ public class Runtime_31615
         if ((v3.x != x) || (v3.y != y) || (v3.z != z))
         {
             s_errors++;
-            Console.WriteLine($"Check at line {line} failed; have ({v3.x},{v3.y},{v3.z}); expected ({x},{y},{z})");
+            Console.WriteLine(
+                $"Check at line {line} failed; have ({v3.x},{v3.y},{v3.z}); expected ({x},{y},{z})"
+            );
         }
     }
 
@@ -109,10 +113,12 @@ public class Runtime_31615
         if ((v4.x != x) || (v4.y != y) || (v4.z != z) || (v4.w != w))
         {
             s_errors++;
-            Console.WriteLine($"Check at line {line} failed; have ({v4.x},{v4.y},{v4.z},{v4.w}); expected ({x},{y},{z},{w})");
+            Console.WriteLine(
+                $"Check at line {line} failed; have ({v4.x},{v4.y},{v4.z},{v4.w}); expected ({x},{y},{z},{w})"
+            );
         }
     }
-    
+
     static void TestV2A()
     {
         Vector2 g2 = G2();
@@ -175,7 +181,7 @@ public class Runtime_31615
         v3b.z = g2.Y;
         Check(v3b, 0f, g2X, g2Y);
     }
-    
+
     static void TestV3C()
     {
         Vector3 g3 = G3();
@@ -184,7 +190,7 @@ public class Runtime_31615
         v3c.y = g3.Z;
         Check(v3c, g3Y, g3Z, 0f);
     }
-    
+
     static void TestV3D()
     {
         Vector3 g3 = G3();
@@ -235,7 +241,7 @@ public class Runtime_31615
         v4a.w = g4.W;
         Check(v4a, g4X, g4Y, g4Z, g4W);
     }
-    
+
     static void TestV4B()
     {
         Vector4 g4 = G4();
@@ -246,9 +252,8 @@ public class Runtime_31615
         v4b.w = g4.Z;
         Check(v4b, g4Y, g4X, g4W, g4Z);
     }
-    
+
     static void TestV4C()
-    
     {
         Vector2 g2 = G2();
         V4 v4c = new V4();
@@ -258,7 +263,7 @@ public class Runtime_31615
         v4c.w = g2.Y;
         Check(v4c, g2X, g2Y, g2X, g2Y);
     }
-    
+
     static void TestV4D()
     {
         Vector3 g3 = G3();
@@ -269,7 +274,7 @@ public class Runtime_31615
         v4d.w = f1;
         Check(v4d, g3X, g3Y, g3Z, f1);
     }
-    
+
     static void TestV4E()
     {
         Vector2 g2 = G2();
@@ -280,7 +285,7 @@ public class Runtime_31615
         v4e.w = f1;
         Check(v4e, f0, g2X, g2Y, f1);
     }
-    
+
     static void TestV4F()
     {
         Vector2 g2 = G2();
@@ -291,7 +296,7 @@ public class Runtime_31615
         v4f.w = g2.Y;
         Check(v4f, f0, f1, g2X, g2Y);
     }
-    
+
     static void TestV4G()
     {
         Vector3 g3 = G3();
@@ -302,7 +307,7 @@ public class Runtime_31615
         v4g.w = g3.Z;
         Check(v4g, f1, g3X, g3Y, g3Z);
     }
-    
+
     static void TestV4H()
     {
         Vector4 g4 = G4();
@@ -321,25 +326,25 @@ public class Runtime_31615
         Vector3 g3 = G3();
         Vector4 g4 = G4();
 
-        TestV2A();        
+        TestV2A();
         TestV2B();
         TestV2C();
         TestV2D();
         TestV2E();
 
-        TestV3A();        
+        TestV3A();
         TestV3B();
         TestV3C();
         TestV3D();
-        TestV3E();        
+        TestV3E();
         TestV3F();
         TestV3G();
 
-        TestV4A();        
+        TestV4A();
         TestV4B();
         TestV4C();
         TestV4D();
-        TestV4E();        
+        TestV4E();
         TestV4F();
         TestV4G();
         TestV4H();
@@ -356,4 +361,3 @@ public class Runtime_31615
         }
     }
 }
-

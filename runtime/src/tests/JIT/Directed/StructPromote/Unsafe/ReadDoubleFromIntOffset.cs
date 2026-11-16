@@ -6,10 +6,10 @@
 // Especially if the struct was casted by 'Unsafe.As` from a promoted type
 // and the promoted type had another field on the same offset but with a different type/size.
 
+using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System;
 using Xunit;
 
 public class TestReadIntAsDouble
@@ -27,22 +27,27 @@ public class TestReadIntAsDouble
     {
         [FieldOffset(0)]
         public int uflags;
+
         [FieldOffset(4)]
         public int uhi;
+
         [FieldOffset(8)]
         public int ulo;
+
         [FieldOffset(12)]
         public int umid;
+
         [FieldOffset(8)]
         public double ulomidLE;
     }
 
     public struct Data
     {
-        public int x, y, z;
+        public int x,
+            y,
+            z;
         public double m;
     }
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     internal static void TestDoubleAssignment(Data d)
@@ -59,15 +64,18 @@ public class TestReadIntAsDouble
     {
         [FieldOffset(0)]
         public int uflags;
+
         [FieldOffset(4)]
         public int uhi;
+
         [FieldOffset(8)]
         public double ulomidLE;
+
         [FieldOffset(8)]
         public int ulo;
+
         [FieldOffset(12)]
         public int umid;
-
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

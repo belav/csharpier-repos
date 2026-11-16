@@ -7,7 +7,10 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsMarshalGetExceptionPointersSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMarshalGetExceptionPointersSupported)
+    )]
     public class GetExceptionCodeTests
     {
         [Fact]
@@ -58,7 +61,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class HResultException : Exception
         {
-            public HResultException(int hresult) : base()
+            public HResultException(int hresult)
+                : base()
             {
                 HResult = hresult;
             }

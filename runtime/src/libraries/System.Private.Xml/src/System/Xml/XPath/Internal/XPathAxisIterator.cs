@@ -22,12 +22,19 @@ namespace MS.Internal.Xml.XPath
             this.matchSelf = matchSelf;
         }
 
-        public XPathAxisIterator(XPathNavigator nav, XPathNodeType type, bool matchSelf) : this(nav, matchSelf)
+        public XPathAxisIterator(XPathNavigator nav, XPathNodeType type, bool matchSelf)
+            : this(nav, matchSelf)
         {
             this.type = type;
         }
 
-        public XPathAxisIterator(XPathNavigator nav, string name, string namespaceURI, bool matchSelf) : this(nav, matchSelf)
+        public XPathAxisIterator(
+            XPathNavigator nav,
+            string name,
+            string namespaceURI,
+            bool matchSelf
+        )
+            : this(nav, matchSelf)
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(namespaceURI);
@@ -67,20 +74,21 @@ namespace MS.Internal.Xml.XPath
                 if (name == null)
                 {
                     return (
-                        type == nav.NodeType ||
-                        type == XPathNodeType.All ||
-                        type == XPathNodeType.Text && (
-                            nav.NodeType == XPathNodeType.Whitespace ||
-                            nav.NodeType == XPathNodeType.SignificantWhitespace
-                        )
+                        type == nav.NodeType
+                        || type == XPathNodeType.All
+                        || type == XPathNodeType.Text
+                            && (
+                                nav.NodeType == XPathNodeType.Whitespace
+                                || nav.NodeType == XPathNodeType.SignificantWhitespace
+                            )
                     );
                 }
                 else
                 {
                     return (
-                        nav.NodeType == XPathNodeType.Element &&
-                        (name.Length == 0 || name == nav.LocalName) &&
-                        (uri == nav.NamespaceURI)
+                        nav.NodeType == XPathNodeType.Element
+                        && (name.Length == 0 || name == nav.LocalName)
+                        && (uri == nav.NamespaceURI)
                     );
                 }
             }

@@ -19,7 +19,11 @@ namespace System.Security.AccessControl.Tests
             Assert.Equal(expectedAce.PropagationFlags, resultAce.PropagationFlags);
         }
 
-        public void GenericAce_VerifyBinaryForms(byte[] expectedBinaryForm, byte[] resultBinaryForm, int resultOffset)
+        public void GenericAce_VerifyBinaryForms(
+            byte[] expectedBinaryForm,
+            byte[] resultBinaryForm,
+            int resultOffset
+        )
         {
             Assert.Equal(expectedBinaryForm, resultBinaryForm.Skip(resultOffset));
         }

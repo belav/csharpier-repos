@@ -78,8 +78,13 @@ namespace System.Web.WebPages.Test.ApplicationModule
             registry.Register(part, myFunc);
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => registry.Register(part, myFunc),
-                                                              String.Format("The assembly \"{0}\" is already registered.", part.Assembly.ToString()));
+            Assert.Throws<InvalidOperationException>(
+                () => registry.Register(part, myFunc),
+                String.Format(
+                    "The assembly \"{0}\" is already registered.",
+                    part.Assembly.ToString()
+                )
+            );
         }
 
         [Fact]
@@ -96,8 +101,10 @@ namespace System.Web.WebPages.Test.ApplicationModule
 
             // Assert
             var newPart = new ApplicationPart(BuildAssembly("different-assembly"), "~/mymodule");
-            Assert.Throws<InvalidOperationException>(() => registry.Register(newPart, myFunc),
-                                                              "An application module is already registered for virtual path \"~/mymodule/\".");
+            Assert.Throws<InvalidOperationException>(
+                () => registry.Register(newPart, myFunc),
+                "An application module is already registered for virtual path \"~/mymodule/\"."
+            );
         }
 
         [Fact]
@@ -124,14 +131,20 @@ namespace System.Web.WebPages.Test.ApplicationModule
             Mock<TestResourceAssembly> assembly = new Mock<TestResourceAssembly>();
             assembly.SetupGet(c => c.Name).Returns(name);
             assembly.Setup(c => c.GetHashCode()).Returns(name.GetHashCode());
-            assembly.Setup(c => c.Equals(It.IsAny<TestResourceAssembly>())).Returns((TestResourceAssembly c) => c.Name == name);
+            assembly
+                .Setup(c => c.Equals(It.IsAny<TestResourceAssembly>()))
+                .Returns((TestResourceAssembly c) => c.Name == name);
 
-            assembly.Setup(c => c.GetTypes()).Returns(new[]
-            {
-                BuildPageType(inherits: true, virtualPath: "~/Page1"),
-                BuildPageType(inherits: true, virtualPath: null),
-                BuildPageType(inherits: false, virtualPath: "~/Page3"),
-            });
+            assembly
+                .Setup(c => c.GetTypes())
+                .Returns(
+                    new[]
+                    {
+                        BuildPageType(inherits: true, virtualPath: "~/Page1"),
+                        BuildPageType(inherits: true, virtualPath: null),
+                        BuildPageType(inherits: false, virtualPath: "~/Page3"),
+                    }
+                );
 
             return assembly.Object;
         }

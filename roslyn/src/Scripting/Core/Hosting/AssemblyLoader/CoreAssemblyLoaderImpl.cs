@@ -32,7 +32,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             // Create a new context that knows the directory where the assembly was loaded from
             // and uses it to resolve dependencies of the assembly. We could create one context per directory,
             // but there is no need to reuse contexts.
-            var assembly = new LoadContext(Loader, Path.GetDirectoryName(path)).LoadFromAssemblyPath(path);
+            var assembly = new LoadContext(
+                Loader,
+                Path.GetDirectoryName(path)
+            ).LoadFromAssemblyPath(path);
 
             return new AssemblyAndLocation(assembly, path, fromGac: false);
         }
@@ -60,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 //   2) TPA list
                 //   3) Default.Resolving event
                 //   4) AssemblyLoadContext.Resolving event -- hooked below
-                // 
+                //
                 // What we want is to let the default context load assemblies it knows about (this includes already loaded assemblies,
                 // assemblies in AppPath, platform assemblies, assemblies explciitly resolved by the App by hooking Default.Resolving, etc.).
                 // Only if the assembly can't be resolved that way, the interactive resolver steps in.
@@ -68,7 +71,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 // This order is necessary to avoid loading assemblies twice (by the host App and by interactive loader).
 
                 Resolving += (_, assemblyName) =>
-                    _loader.ResolveAssembly(AssemblyIdentity.FromAssemblyReference(assemblyName), _loadDirectoryOpt);
+                    _loader.ResolveAssembly(
+                        AssemblyIdentity.FromAssemblyReference(assemblyName),
+                        _loadDirectoryOpt
+                    );
             }
 
             protected override Assembly Load(AssemblyName assemblyName) => null;

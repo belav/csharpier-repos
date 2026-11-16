@@ -9,15 +9,9 @@ namespace System.ServiceModel.Activities.Dispatcher
     class OptionalMessageQuery : MessageQuery
     {
         public OptionalMessageQuery()
-            : base()
-        {
-        }
+            : base() { }
 
-        public MessageQuery Query
-        {
-            get;
-            set;
-        }
+        public MessageQuery Query { get; set; }
 
         public override TResult Evaluate<TResult>(MessageBuffer buffer)
         {

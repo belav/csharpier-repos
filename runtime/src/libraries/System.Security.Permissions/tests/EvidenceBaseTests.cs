@@ -39,10 +39,15 @@ namespace System.Security.Permissions.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Security.Cryptography.Algorithms is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Security.Cryptography.Algorithms is not supported on this platform."
+        )]
         public static void HashCallMethods()
         {
-            Hash hash = new Hash(Reflection.Assembly.Load(new Reflection.AssemblyName("System.Reflection")));
+            Hash hash = new Hash(
+                Reflection.Assembly.Load(new Reflection.AssemblyName("System.Reflection"))
+            );
             byte[] barr = hash.GenerateHash(Cryptography.SHA1.Create());
             string str = hash.ToString();
             hash = Hash.CreateMD5(new byte[1]);

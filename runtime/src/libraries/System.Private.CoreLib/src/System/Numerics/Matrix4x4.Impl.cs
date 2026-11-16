@@ -29,7 +29,8 @@ namespace System.Numerics
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal readonly ref readonly Impl AsROImpl() => ref Unsafe.As<Matrix4x4, Impl>(ref Unsafe.AsRef(in this));
+        internal readonly ref readonly Impl AsROImpl() =>
+            ref Unsafe.As<Matrix4x4, Impl>(ref Unsafe.AsRef(in this));
 
         internal struct Impl : IEquatable<Impl>
         {
@@ -47,10 +48,24 @@ namespace System.Numerics
             public Vector4 W;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Init(float m11, float m12, float m13, float m14,
-                             float m21, float m22, float m23, float m24,
-                             float m31, float m32, float m33, float m34,
-                             float m41, float m42, float m43, float m44)
+            public void Init(
+                float m11,
+                float m12,
+                float m13,
+                float m14,
+                float m21,
+                float m22,
+                float m23,
+                float m24,
+                float m31,
+                float m32,
+                float m33,
+                float m34,
+                float m41,
+                float m42,
+                float m43,
+                float m44
+            )
             {
                 X = new Vector4(m11, m12, m13, m14);
                 Y = new Vector4(m21, m22, m23, m24);
@@ -95,7 +110,6 @@ namespace System.Numerics
 
                     return Unsafe.Add(ref Unsafe.AsRef(in this.X), row)[column];
                 }
-
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
@@ -123,12 +137,8 @@ namespace System.Numerics
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 readonly get => new Vector3(W.X, W.Y, W.Z);
-
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                set
-                {
-                    W = new Vector4(value, W.W);
-                }
+                set { W = new Vector4(value, W.W); }
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -234,7 +244,12 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateBillboard(in Vector3 objectPosition, in Vector3 cameraPosition, in Vector3 cameraUpVector, in Vector3 cameraForwardVector)
+            public static Impl CreateBillboard(
+                in Vector3 objectPosition,
+                in Vector3 cameraPosition,
+                in Vector3 cameraUpVector,
+                in Vector3 cameraForwardVector
+            )
             {
                 Vector3 axisZ = objectPosition - cameraPosition;
                 float norm = axisZ.LengthSquared();
@@ -262,7 +277,13 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateConstrainedBillboard(in Vector3 objectPosition, in Vector3 cameraPosition, in Vector3 rotateAxis, in Vector3 cameraForwardVector, in Vector3 objectForwardVector)
+            public static Impl CreateConstrainedBillboard(
+                in Vector3 objectPosition,
+                in Vector3 cameraPosition,
+                in Vector3 rotateAxis,
+                in Vector3 cameraForwardVector,
+                in Vector3 objectForwardVector
+            )
             {
                 // Treat the case when object and camera positions are too close.
                 Vector3 faceDir = objectPosition - cameraPosition;
@@ -291,7 +312,10 @@ namespace System.Numerics
 
                     if (MathF.Abs(dot) > BillboardMinAngle)
                     {
-                        faceDir = (MathF.Abs(axisY.Z) > BillboardMinAngle) ? Vector3.UnitX : new Vector3(0, 0, -1);
+                        faceDir =
+                            (MathF.Abs(axisY.Z) > BillboardMinAngle)
+                                ? Vector3.UnitX
+                                : new Vector3(0, 0, -1);
                     }
                 }
 
@@ -424,7 +448,11 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateLookTo(in Vector3 cameraPosition, in Vector3 cameraDirection, in Vector3 cameraUpVector)
+            public static Impl CreateLookTo(
+                in Vector3 cameraPosition,
+                in Vector3 cameraDirection,
+                in Vector3 cameraUpVector
+            )
             {
                 Vector3 axisZ = Vector3.Normalize(-cameraDirection);
                 Vector3 axisX = Vector3.Normalize(Vector3.Cross(cameraUpVector, axisZ));
@@ -433,24 +461,9 @@ namespace System.Numerics
 
                 Impl result;
 
-                result.X = new Vector4(
-                    axisX.X,
-                    axisY.X,
-                    axisZ.X,
-                    0
-                );
-                result.Y = new Vector4(
-                    axisX.Y,
-                    axisY.Y,
-                    axisZ.Y,
-                    0
-                );
-                result.Z = new Vector4(
-                    axisX.Z,
-                    axisY.Z,
-                    axisZ.Z,
-                    0
-                );
+                result.X = new Vector4(axisX.X, axisY.X, axisZ.X, 0);
+                result.Y = new Vector4(axisX.Y, axisY.Y, axisZ.Y, 0);
+                result.Z = new Vector4(axisX.Z, axisY.Z, axisZ.Z, 0);
                 result.W = new Vector4(
                     Vector3.Dot(axisX, negativeCameraPosition),
                     Vector3.Dot(axisY, negativeCameraPosition),
@@ -462,7 +475,11 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateLookToLeftHanded(in Vector3 cameraPosition, in Vector3 cameraDirection, in Vector3 cameraUpVector)
+            public static Impl CreateLookToLeftHanded(
+                in Vector3 cameraPosition,
+                in Vector3 cameraDirection,
+                in Vector3 cameraUpVector
+            )
             {
                 Vector3 axisZ = Vector3.Normalize(cameraDirection);
                 Vector3 axisX = Vector3.Normalize(Vector3.Cross(cameraUpVector, axisZ));
@@ -471,24 +488,9 @@ namespace System.Numerics
 
                 Impl result;
 
-                result.X = new Vector4(
-                    axisX.X,
-                    axisY.X,
-                    axisZ.X,
-                    0
-                );
-                result.Y = new Vector4(
-                    axisX.Y,
-                    axisY.Y,
-                    axisZ.Y,
-                    0
-                );
-                result.Z = new Vector4(
-                    axisX.Z,
-                    axisY.Z,
-                    axisZ.Z,
-                    0
-                );
+                result.X = new Vector4(axisX.X, axisY.X, axisZ.X, 0);
+                result.Y = new Vector4(axisX.Y, axisY.Y, axisZ.Y, 0);
+                result.Z = new Vector4(axisX.Z, axisY.Z, axisZ.Z, 0);
                 result.W = new Vector4(
                     Vector3.Dot(axisX, negativeCameraPosition),
                     Vector3.Dot(axisY, negativeCameraPosition),
@@ -500,7 +502,12 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographic(
+                float width,
+                float height,
+                float zNearPlane,
+                float zFarPlane
+            )
             {
                 float range = 1.0f / (zNearPlane - zFarPlane);
 
@@ -515,7 +522,12 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographicLeftHanded(float width, float height, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographicLeftHanded(
+                float width,
+                float height,
+                float zNearPlane,
+                float zFarPlane
+            )
             {
                 float range = 1.0f / (zFarPlane - zNearPlane);
 
@@ -530,7 +542,14 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographicOffCenter(
+                float left,
+                float right,
+                float bottom,
+                float top,
+                float zNearPlane,
+                float zFarPlane
+            )
             {
                 float reciprocalWidth = 1.0f / (right - left);
                 float reciprocalHeight = 1.0f / (top - bottom);
@@ -552,7 +571,14 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateOrthographicOffCenterLeftHanded(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+            public static Impl CreateOrthographicOffCenterLeftHanded(
+                float left,
+                float right,
+                float bottom,
+                float top,
+                float zNearPlane,
+                float zFarPlane
+            )
             {
                 float reciprocalWidth = 1.0f / (right - left);
                 float reciprocalHeight = 1.0f / (top - bottom);
@@ -574,14 +600,24 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspective(
+                float width,
+                float height,
+                float nearPlaneDistance,
+                float farPlaneDistance
+            )
             {
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    nearPlaneDistance,
+                    farPlaneDistance
+                );
 
                 float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? -1.0f : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                float range = float.IsPositiveInfinity(farPlaneDistance)
+                    ? -1.0f
+                    : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
                 Impl result;
 
@@ -594,14 +630,24 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveLeftHanded(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveLeftHanded(
+                float width,
+                float height,
+                float nearPlaneDistance,
+                float farPlaneDistance
+            )
             {
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    nearPlaneDistance,
+                    farPlaneDistance
+                );
 
                 float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? 1.0f : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
+                float range = float.IsPositiveInfinity(farPlaneDistance)
+                    ? 1.0f
+                    : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
 
                 Impl result;
 
@@ -614,18 +660,28 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveFieldOfView(
+                float fieldOfView,
+                float aspectRatio,
+                float nearPlaneDistance,
+                float farPlaneDistance
+            )
             {
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fieldOfView, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fieldOfView, float.Pi);
 
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    nearPlaneDistance,
+                    farPlaneDistance
+                );
 
                 float height = 1.0f / MathF.Tan(fieldOfView * 0.5f);
                 float width = height / aspectRatio;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? -1.0f : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                float range = float.IsPositiveInfinity(farPlaneDistance)
+                    ? -1.0f
+                    : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
                 Impl result;
 
@@ -638,18 +694,28 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveFieldOfViewLeftHanded(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveFieldOfViewLeftHanded(
+                float fieldOfView,
+                float aspectRatio,
+                float nearPlaneDistance,
+                float farPlaneDistance
+            )
             {
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fieldOfView, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fieldOfView, float.Pi);
 
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    nearPlaneDistance,
+                    farPlaneDistance
+                );
 
                 float height = 1.0f / MathF.Tan(fieldOfView * 0.5f);
                 float width = height / aspectRatio;
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? 1.0f : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
+                float range = float.IsPositiveInfinity(farPlaneDistance)
+                    ? 1.0f
+                    : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
 
                 Impl result;
 
@@ -662,16 +728,28 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveOffCenter(
+                float left,
+                float right,
+                float bottom,
+                float top,
+                float nearPlaneDistance,
+                float farPlaneDistance
+            )
             {
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    nearPlaneDistance,
+                    farPlaneDistance
+                );
 
                 float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
                 float reciprocalWidth = 1.0f / (right - left);
                 float reciprocalHeight = 1.0f / (top - bottom);
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? -1.0f : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                float range = float.IsPositiveInfinity(farPlaneDistance)
+                    ? -1.0f
+                    : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
                 Impl result;
 
@@ -689,16 +767,28 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreatePerspectiveOffCenterLeftHanded(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+            public static Impl CreatePerspectiveOffCenterLeftHanded(
+                float left,
+                float right,
+                float bottom,
+                float top,
+                float nearPlaneDistance,
+                float farPlaneDistance
+            )
             {
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(nearPlaneDistance, 0.0f);
                 ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(farPlaneDistance, 0.0f);
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(nearPlaneDistance, farPlaneDistance);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    nearPlaneDistance,
+                    farPlaneDistance
+                );
 
                 float dblNearPlaneDistance = nearPlaneDistance + nearPlaneDistance;
                 float reciprocalWidth = 1.0f / (right - left);
                 float reciprocalHeight = 1.0f / (top - bottom);
-                float range = float.IsPositiveInfinity(farPlaneDistance) ? 1.0f : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
+                float range = float.IsPositiveInfinity(farPlaneDistance)
+                    ? 1.0f
+                    : farPlaneDistance / (farPlaneDistance - nearPlaneDistance);
 
                 Impl result;
 
@@ -745,7 +835,7 @@ namespace System.Numerics
                 Impl result;
 
                 result.X = Vector4.UnitX;
-                result.Y = new Vector4(0,  c, s, 0);
+                result.Y = new Vector4(0, c, s, 0);
                 result.Z = new Vector4(0, -s, c, 0);
                 result.W = Vector4.UnitW;
 
@@ -769,9 +859,9 @@ namespace System.Numerics
                 Impl result;
 
                 result.X = Vector4.UnitX;
-                result.Y = new Vector4(0,  c, s, 0);
+                result.Y = new Vector4(0, c, s, 0);
                 result.Z = new Vector4(0, -s, c, 0);
-                result.W = new Vector4(0,  y, z, 1);
+                result.W = new Vector4(0, y, z, 1);
 
                 return result;
             }
@@ -791,7 +881,7 @@ namespace System.Numerics
 
                 result.X = new Vector4(c, 0, -s, 0);
                 result.Y = Vector4.UnitY;
-                result.Z = new Vector4(s, 0,  c, 0);
+                result.Z = new Vector4(s, 0, c, 0);
                 result.W = Vector4.UnitW;
 
                 return result;
@@ -815,8 +905,8 @@ namespace System.Numerics
 
                 result.X = new Vector4(c, 0, -s, 0);
                 result.Y = Vector4.UnitY;
-                result.Z = new Vector4(s, 0,  c, 0);
-                result.W = new Vector4(x, 0,  z, 1);
+                result.Z = new Vector4(s, 0, c, 0);
+                result.W = new Vector4(x, 0, z, 1);
 
                 return result;
             }
@@ -824,7 +914,6 @@ namespace System.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Impl CreateRotationZ(float radians)
             {
-
                 float c = MathF.Cos(radians);
                 float s = MathF.Sin(radians);
 
@@ -835,7 +924,7 @@ namespace System.Numerics
 
                 Impl result;
 
-                result.X = new Vector4( c, s, 0, 0);
+                result.X = new Vector4(c, s, 0, 0);
                 result.Y = new Vector4(-s, c, 0, 0);
                 result.Z = Vector4.UnitZ;
                 result.W = Vector4.UnitW;
@@ -859,7 +948,7 @@ namespace System.Numerics
 
                 Impl result;
 
-                result.X = new Vector4( c, s, 0, 0);
+                result.X = new Vector4(c, s, 0, 0);
                 result.Y = new Vector4(-s, c, 0, 0);
                 result.Z = Vector4.UnitZ;
                 result.W = new Vector4(x, y, 0, 1);
@@ -881,14 +970,22 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateScale(float scaleX, float scaleY, float scaleZ, in Vector3 centerPoint)
+            public static Impl CreateScale(
+                float scaleX,
+                float scaleY,
+                float scaleZ,
+                in Vector3 centerPoint
+            )
             {
                 Impl result;
 
                 result.X = new Vector4(scaleX, 0, 0, 0);
                 result.Y = new Vector4(0, scaleY, 0, 0);
                 result.Z = new Vector4(0, 0, scaleZ, 0);
-                result.W = new Vector4(centerPoint * (Vector3.One - new Vector3(scaleX, scaleY, scaleZ)), 1);
+                result.W = new Vector4(
+                    centerPoint * (Vector3.One - new Vector3(scaleX, scaleY, scaleZ)),
+                    1
+                );
 
                 return result;
             }
@@ -989,9 +1086,15 @@ namespace System.Numerics
                 return result;
             }
 
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateViewport(float x, float y, float width, float height, float minDepth, float maxDepth)
+            public static Impl CreateViewport(
+                float x,
+                float y,
+                float width,
+                float height,
+                float minDepth,
+                float maxDepth
+            )
             {
                 Impl result;
 
@@ -1008,7 +1111,14 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Impl CreateViewportLeftHanded(float x, float y, float width, float height, float minDepth, float maxDepth)
+            public static Impl CreateViewportLeftHanded(
+                float x,
+                float y,
+                float width,
+                float height,
+                float minDepth,
+                float maxDepth
+            )
             {
                 Impl result;
 
@@ -1042,7 +1152,12 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe bool Decompose(in Impl matrix, out Vector3 scale, out Quaternion rotation, out Vector3 translation)
+            public static unsafe bool Decompose(
+                in Impl matrix,
+                out Vector3 scale,
+                out Quaternion rotation,
+                out Vector3 translation
+            )
             {
                 bool result = true;
 
@@ -1062,10 +1177,7 @@ namespace System.Numerics
                     canonicalBasis.Row1 = new Vector3(0.0f, 1.0f, 0.0f);
                     canonicalBasis.Row2 = new Vector3(0.0f, 0.0f, 1.0f);
 
-                    translation = new Vector3(
-                        matrix.W.X,
-                        matrix.W.Y,
-                        matrix.W.Z);
+                    translation = new Vector3(matrix.W.X, matrix.W.Y, matrix.W.Z);
 
                     pVectorBasis[0] = (Vector3*)&matTemp.X;
                     pVectorBasis[1] = (Vector3*)&matTemp.Y;
@@ -1079,7 +1191,9 @@ namespace System.Numerics
                     scale.Y = pVectorBasis[1]->Length();
                     scale.Z = pVectorBasis[2]->Length();
 
-                    uint a, b, c;
+                    uint a,
+                        b,
+                        c;
 
                     #region Ranking
                     float x = pfScales[0];
@@ -1146,7 +1260,9 @@ namespace System.Numerics
                     if (pfScales[b] < DecomposeEpsilon)
                     {
                         uint cc;
-                        float fAbsX, fAbsY, fAbsZ;
+                        float fAbsX,
+                            fAbsY,
+                            fAbsZ;
 
                         fAbsX = MathF.Abs(pVectorBasis[a]->X);
                         fAbsY = MathF.Abs(pVectorBasis[a]->Y);
@@ -1227,7 +1343,9 @@ namespace System.Numerics
                     else
                     {
                         // generate the quaternion from the matrix
-                        rotation = Quaternion.CreateFromRotationMatrix(Unsafe.As<Impl, Matrix4x4>(ref matTemp));
+                        rotation = Quaternion.CreateFromRotationMatrix(
+                            Unsafe.As<Impl, Matrix4x4>(ref matTemp)
+                        );
                     }
                 }
 
@@ -1273,10 +1391,10 @@ namespace System.Numerics
                     row3 = Sse.Shuffle(vTemp3, vTemp4, 0x88); //_MM_SHUFFLE(2, 0, 2, 0)
                     row4 = Sse.Shuffle(vTemp3, vTemp4, 0xDD); //_MM_SHUFFLE(3, 1, 3, 1)
 
-                    Vector128<float> V00 = Permute(row3, 0x50);           //_MM_SHUFFLE(1, 1, 0, 0)
-                    Vector128<float> V10 = Permute(row4, 0xEE);           //_MM_SHUFFLE(3, 2, 3, 2)
-                    Vector128<float> V01 = Permute(row1, 0x50);           //_MM_SHUFFLE(1, 1, 0, 0)
-                    Vector128<float> V11 = Permute(row2, 0xEE);           //_MM_SHUFFLE(3, 2, 3, 2)
+                    Vector128<float> V00 = Permute(row3, 0x50); //_MM_SHUFFLE(1, 1, 0, 0)
+                    Vector128<float> V10 = Permute(row4, 0xEE); //_MM_SHUFFLE(3, 2, 3, 2)
+                    Vector128<float> V01 = Permute(row1, 0x50); //_MM_SHUFFLE(1, 1, 0, 0)
+                    Vector128<float> V11 = Permute(row2, 0xEE); //_MM_SHUFFLE(3, 2, 3, 2)
                     Vector128<float> V02 = Sse.Shuffle(row3, row1, 0x88); //_MM_SHUFFLE(2, 0, 2, 0)
                     Vector128<float> V12 = Sse.Shuffle(row4, row2, 0xDD); //_MM_SHUFFLE(3, 1, 3, 1)
 
@@ -1284,10 +1402,10 @@ namespace System.Numerics
                     Vector128<float> D1 = V01 * V11;
                     Vector128<float> D2 = V02 * V12;
 
-                    V00 = Permute(row3, 0xEE);           //_MM_SHUFFLE(3, 2, 3, 2)
-                    V10 = Permute(row4, 0x50);           //_MM_SHUFFLE(1, 1, 0, 0)
-                    V01 = Permute(row1, 0xEE);           //_MM_SHUFFLE(3, 2, 3, 2)
-                    V11 = Permute(row2, 0x50);           //_MM_SHUFFLE(1, 1, 0, 0)
+                    V00 = Permute(row3, 0xEE); //_MM_SHUFFLE(3, 2, 3, 2)
+                    V10 = Permute(row4, 0x50); //_MM_SHUFFLE(1, 1, 0, 0)
+                    V01 = Permute(row1, 0xEE); //_MM_SHUFFLE(3, 2, 3, 2)
+                    V11 = Permute(row2, 0x50); //_MM_SHUFFLE(1, 1, 0, 0)
                     V02 = Sse.Shuffle(row3, row1, 0xDD); //_MM_SHUFFLE(3, 1, 3, 1)
                     V12 = Sse.Shuffle(row4, row2, 0x88); //_MM_SHUFFLE(2, 0, 2, 0)
 
@@ -1298,18 +1416,18 @@ namespace System.Numerics
                     D2 -= V02 * V12;
 
                     // V11 = D0Y,D0W,D2Y,D2Y
-                    V11 = Sse.Shuffle(D0, D2, 0x5D);  //_MM_SHUFFLE(1, 1, 3, 1)
-                    V00 = Permute(row2, 0x49);        //_MM_SHUFFLE(1, 0, 2, 1)
+                    V11 = Sse.Shuffle(D0, D2, 0x5D); //_MM_SHUFFLE(1, 1, 3, 1)
+                    V00 = Permute(row2, 0x49); //_MM_SHUFFLE(1, 0, 2, 1)
                     V10 = Sse.Shuffle(V11, D0, 0x32); //_MM_SHUFFLE(0, 3, 0, 2)
-                    V01 = Permute(row1, 0x12);        //_MM_SHUFFLE(0, 1, 0, 2)
+                    V01 = Permute(row1, 0x12); //_MM_SHUFFLE(0, 1, 0, 2)
                     V11 = Sse.Shuffle(V11, D0, 0x99); //_MM_SHUFFLE(2, 1, 2, 1)
 
                     // V13 = D1Y,D1W,D2W,D2W
                     Vector128<float> V13 = Sse.Shuffle(D1, D2, 0xFD); //_MM_SHUFFLE(3, 3, 3, 1)
-                    V02 = Permute(row4, 0x49);                        //_MM_SHUFFLE(1, 0, 2, 1)
-                    V12 = Sse.Shuffle(V13, D1, 0x32);                 //_MM_SHUFFLE(0, 3, 0, 2)
-                    Vector128<float> V03 = Permute(row3, 0x12);       //_MM_SHUFFLE(0, 1, 0, 2)
-                    V13 = Sse.Shuffle(V13, D1, 0x99);                 //_MM_SHUFFLE(2, 1, 2, 1)
+                    V02 = Permute(row4, 0x49); //_MM_SHUFFLE(1, 0, 2, 1)
+                    V12 = Sse.Shuffle(V13, D1, 0x32); //_MM_SHUFFLE(0, 3, 0, 2)
+                    Vector128<float> V03 = Permute(row3, 0x12); //_MM_SHUFFLE(0, 1, 0, 2)
+                    V13 = Sse.Shuffle(V13, D1, 0x99); //_MM_SHUFFLE(2, 1, 2, 1)
 
                     Vector128<float> C0 = V00 * V10;
                     Vector128<float> C2 = V01 * V11;
@@ -1317,18 +1435,18 @@ namespace System.Numerics
                     Vector128<float> C6 = V03 * V13;
 
                     // V11 = D0X,D0Y,D2X,D2X
-                    V11 = Sse.Shuffle(D0, D2, 0x4);    //_MM_SHUFFLE(0, 0, 1, 0)
-                    V00 = Permute(row2, 0x9e);         //_MM_SHUFFLE(2, 1, 3, 2)
-                    V10 = Sse.Shuffle(D0, V11, 0x93);  //_MM_SHUFFLE(2, 1, 0, 3)
-                    V01 = Permute(row1, 0x7b);         //_MM_SHUFFLE(1, 3, 2, 3)
-                    V11 = Sse.Shuffle(D0, V11, 0x26);  //_MM_SHUFFLE(0, 2, 1, 2)
+                    V11 = Sse.Shuffle(D0, D2, 0x4); //_MM_SHUFFLE(0, 0, 1, 0)
+                    V00 = Permute(row2, 0x9e); //_MM_SHUFFLE(2, 1, 3, 2)
+                    V10 = Sse.Shuffle(D0, V11, 0x93); //_MM_SHUFFLE(2, 1, 0, 3)
+                    V01 = Permute(row1, 0x7b); //_MM_SHUFFLE(1, 3, 2, 3)
+                    V11 = Sse.Shuffle(D0, V11, 0x26); //_MM_SHUFFLE(0, 2, 1, 2)
 
                     // V13 = D1X,D1Y,D2Z,D2Z
-                    V13 = Sse.Shuffle(D1, D2, 0xa4);   //_MM_SHUFFLE(2, 2, 1, 0)
-                    V02 = Permute(row4, 0x9e);         //_MM_SHUFFLE(2, 1, 3, 2)
-                    V12 = Sse.Shuffle(D1, V13, 0x93);  //_MM_SHUFFLE(2, 1, 0, 3)
-                    V03 = Permute(row3, 0x7b);         //_MM_SHUFFLE(1, 3, 2, 3)
-                    V13 = Sse.Shuffle(D1, V13, 0x26);  //_MM_SHUFFLE(0, 2, 1, 2)
+                    V13 = Sse.Shuffle(D1, D2, 0xa4); //_MM_SHUFFLE(2, 2, 1, 0)
+                    V02 = Permute(row4, 0x9e); //_MM_SHUFFLE(2, 1, 3, 2)
+                    V12 = Sse.Shuffle(D1, V13, 0x93); //_MM_SHUFFLE(2, 1, 0, 3)
+                    V03 = Permute(row3, 0x7b); //_MM_SHUFFLE(1, 3, 2, 3)
+                    V13 = Sse.Shuffle(D1, V13, 0x26); //_MM_SHUFFLE(0, 2, 1, 2)
 
                     C0 -= V00 * V10;
                     C2 -= V01 * V11;
@@ -1339,22 +1457,22 @@ namespace System.Numerics
 
                     // V10 = D0Z,D0Z,D2X,D2Y
                     V10 = Sse.Shuffle(D0, D2, 0x4A); //_MM_SHUFFLE(1, 0, 2, 2)
-                    V10 = Permute(V10, 0x2C);        //_MM_SHUFFLE(0, 2, 3, 0)
-                    V01 = Permute(row1, 0x8D);       //_MM_SHUFFLE(2, 0, 3, 1)
+                    V10 = Permute(V10, 0x2C); //_MM_SHUFFLE(0, 2, 3, 0)
+                    V01 = Permute(row1, 0x8D); //_MM_SHUFFLE(2, 0, 3, 1)
 
                     // V11 = D0X,D0W,D2X,D2Y
                     V11 = Sse.Shuffle(D0, D2, 0x4C); //_MM_SHUFFLE(1, 0, 3, 0)
-                    V11 = Permute(V11, 0x93);        //_MM_SHUFFLE(2, 1, 0, 3)
-                    V02 = Permute(row4, 0x33);       //_MM_SHUFFLE(0, 3, 0, 3)
+                    V11 = Permute(V11, 0x93); //_MM_SHUFFLE(2, 1, 0, 3)
+                    V02 = Permute(row4, 0x33); //_MM_SHUFFLE(0, 3, 0, 3)
 
                     // V12 = D1Z,D1Z,D2Z,D2W
                     V12 = Sse.Shuffle(D1, D2, 0xEA); //_MM_SHUFFLE(3, 2, 2, 2)
-                    V12 = Permute(V12, 0x2C);        //_MM_SHUFFLE(0, 2, 3, 0)
-                    V03 = Permute(row3, 0x8D);       //_MM_SHUFFLE(2, 0, 3, 1)
+                    V12 = Permute(V12, 0x2C); //_MM_SHUFFLE(0, 2, 3, 0)
+                    V03 = Permute(row3, 0x8D); //_MM_SHUFFLE(2, 0, 3, 1)
 
                     // V13 = D1X,D1W,D2Z,D2W
                     V13 = Sse.Shuffle(D1, D2, 0xEC); //_MM_SHUFFLE(3, 2, 3, 0)
-                    V13 = Permute(V13, 0x93);        //_MM_SHUFFLE(2, 1, 0, 3)
+                    V13 = Permute(V13, 0x93); //_MM_SHUFFLE(2, 1, 0, 3)
 
                     V00 *= V10;
                     V01 *= V11;
@@ -1415,7 +1533,10 @@ namespace System.Numerics
                 }
 
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                static Vector128<float> Permute(Vector128<float> value, [ConstantExpected] byte control)
+                static Vector128<float> Permute(
+                    Vector128<float> value,
+                    [ConstantExpected] byte control
+                )
                 {
                     if (Avx.IsSupported)
                     {
@@ -1527,10 +1648,22 @@ namespace System.Numerics
                     // Cost of operation
                     // 53 adds, 104 muls, and 1 div.
 
-                    float a = matrix.X.X, b = matrix.X.Y, c = matrix.X.Z, d = matrix.X.W;
-                    float e = matrix.Y.X, f = matrix.Y.Y, g = matrix.Y.Z, h = matrix.Y.W;
-                    float i = matrix.Z.X, j = matrix.Z.Y, k = matrix.Z.Z, l = matrix.Z.W;
-                    float m = matrix.W.X, n = matrix.W.Y, o = matrix.W.Z, p = matrix.W.W;
+                    float a = matrix.X.X,
+                        b = matrix.X.Y,
+                        c = matrix.X.Z,
+                        d = matrix.X.W;
+                    float e = matrix.Y.X,
+                        f = matrix.Y.Y,
+                        g = matrix.Y.Z,
+                        h = matrix.Y.W;
+                    float i = matrix.Z.X,
+                        j = matrix.Z.Y,
+                        k = matrix.Z.Z,
+                        l = matrix.Z.W;
+                    float m = matrix.W.X,
+                        n = matrix.W.Y,
+                        o = matrix.W.Z,
+                        p = matrix.W.W;
 
                     float kp_lo = k * p - l * o;
                     float jp_ln = j * p - l * n;
@@ -1688,14 +1821,14 @@ namespace System.Numerics
                     Vector128<float> z = matrix.Z.AsVector128();
                     Vector128<float> w = matrix.W.AsVector128();
 
-                    Vector128<float> lowerXZ = AdvSimd.Arm64.ZipLow(x, z);          // x[0], z[0], x[1], z[1]
-                    Vector128<float> lowerYW = AdvSimd.Arm64.ZipLow(y, w);          // y[0], w[0], y[1], w[1]
-                    Vector128<float> upperXZ = AdvSimd.Arm64.ZipHigh(x, z);         // x[2], z[2], x[3], z[3]
-                    Vector128<float> upperYW = AdvSimd.Arm64.ZipHigh(y, w);         // y[2], w[2], y[3], z[3]
+                    Vector128<float> lowerXZ = AdvSimd.Arm64.ZipLow(x, z); // x[0], z[0], x[1], z[1]
+                    Vector128<float> lowerYW = AdvSimd.Arm64.ZipLow(y, w); // y[0], w[0], y[1], w[1]
+                    Vector128<float> upperXZ = AdvSimd.Arm64.ZipHigh(x, z); // x[2], z[2], x[3], z[3]
+                    Vector128<float> upperYW = AdvSimd.Arm64.ZipHigh(y, w); // y[2], w[2], y[3], z[3]
 
-                    result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4();  // x[0], y[0], z[0], w[0]
+                    result.X = AdvSimd.Arm64.ZipLow(lowerXZ, lowerYW).AsVector4(); // x[0], y[0], z[0], w[0]
                     result.Y = AdvSimd.Arm64.ZipHigh(lowerXZ, lowerYW).AsVector4(); // x[1], y[1], z[1], w[1]
-                    result.Z = AdvSimd.Arm64.ZipLow(upperXZ, upperYW).AsVector4();  // x[2], y[2], z[2], w[2]
+                    result.Z = AdvSimd.Arm64.ZipLow(upperXZ, upperYW).AsVector4(); // x[2], y[2], z[2], w[2]
                     result.W = AdvSimd.Arm64.ZipHigh(upperXZ, upperYW).AsVector4(); // x[3], y[3], z[3], w[3]
                 }
                 else if (Sse.IsSupported)
@@ -1705,15 +1838,15 @@ namespace System.Numerics
                     Vector128<float> z = matrix.Z.AsVector128();
                     Vector128<float> w = matrix.W.AsVector128();
 
-                    Vector128<float> lowerXZ = Sse.UnpackLow(x, z);                 // x[0], z[0], x[1], z[1]
-                    Vector128<float> lowerYW = Sse.UnpackLow(y, w);                 // y[0], w[0], y[1], w[1]
-                    Vector128<float> upperXZ = Sse.UnpackHigh(x, z);                // x[2], z[2], x[3], z[3]
-                    Vector128<float> upperYW = Sse.UnpackHigh(y, w);                // y[2], w[2], y[3], z[3]
+                    Vector128<float> lowerXZ = Sse.UnpackLow(x, z); // x[0], z[0], x[1], z[1]
+                    Vector128<float> lowerYW = Sse.UnpackLow(y, w); // y[0], w[0], y[1], w[1]
+                    Vector128<float> upperXZ = Sse.UnpackHigh(x, z); // x[2], z[2], x[3], z[3]
+                    Vector128<float> upperYW = Sse.UnpackHigh(y, w); // y[2], w[2], y[3], z[3]
 
-                    result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4();         // x[0], y[0], z[0], w[0]
-                    result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4();        // x[1], y[1], z[1], w[1]
-                    result.Z = Sse.UnpackLow(upperXZ, upperYW).AsVector4();         // x[2], y[2], z[2], w[2]
-                    result.W = Sse.UnpackHigh(upperXZ, upperYW).AsVector4();        // x[3], y[3], z[3], w[3]
+                    result.X = Sse.UnpackLow(lowerXZ, lowerYW).AsVector4(); // x[0], y[0], z[0], w[0]
+                    result.Y = Sse.UnpackHigh(lowerXZ, lowerYW).AsVector4(); // x[1], y[1], z[1], w[1]
+                    result.Z = Sse.UnpackLow(upperXZ, upperYW).AsVector4(); // x[2], y[2], z[2], w[2]
+                    result.W = Sse.UnpackHigh(upperXZ, upperYW).AsVector4(); // x[3], y[3], z[3], w[3]
                 }
                 else
                 {
@@ -1727,8 +1860,8 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public override readonly bool Equals([NotNullWhen(true)] object? obj)
-                => (obj is Matrix4x4 other) && Equals(in other.AsImpl());
+            public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+                (obj is Matrix4x4 other) && Equals(in other.AsImpl());
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public readonly bool Equals(in Impl other)
@@ -1772,10 +1905,22 @@ namespace System.Numerics
                 // add: 6 + 8 + 3 = 17
                 // mul: 12 + 16 = 28
 
-                float a = X.X, b = X.Y, c = X.Z, d = X.W;
-                float e = Y.X, f = Y.Y, g = Y.Z, h = Y.W;
-                float i = Z.X, j = Z.Y, k = Z.Z, l = Z.W;
-                float m = W.X, n = W.Y, o = W.Z, p = W.W;
+                float a = X.X,
+                    b = X.Y,
+                    c = X.Z,
+                    d = X.W;
+                float e = Y.X,
+                    f = Y.Y,
+                    g = Y.Z,
+                    h = Y.W;
+                float i = Z.X,
+                    j = Z.Y,
+                    k = Z.Z,
+                    l = Z.W;
+                float m = W.X,
+                    n = W.Y,
+                    o = W.Z,
+                    p = W.W;
 
                 float kp_lo = k * p - l * o;
                 float jp_ln = j * p - l * n;
@@ -1784,10 +1929,10 @@ namespace System.Numerics
                 float io_km = i * o - k * m;
                 float in_jm = i * n - j * m;
 
-                return a * (f * kp_lo - g * jp_ln + h * jo_kn) -
-                       b * (e * kp_lo - g * ip_lm + h * io_km) +
-                       c * (e * jp_ln - f * ip_lm + h * in_jm) -
-                       d * (e * jo_kn - f * io_km + g * in_jm);
+                return a * (f * kp_lo - g * jp_ln + h * jo_kn)
+                    - b * (e * kp_lo - g * ip_lm + h * io_km)
+                    + c * (e * jp_ln - f * ip_lm + h * in_jm)
+                    - d * (e * jo_kn - f * io_km + g * in_jm);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

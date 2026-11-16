@@ -29,7 +29,9 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullUrl_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("url", () => new UrlSyndicationContent(null, "mediaType"));
+            AssertExtensions.Throws<ArgumentNullException>("url", () =>
+                new UrlSyndicationContent(null, "mediaType")
+            );
         }
 
         [Fact]
@@ -60,7 +62,9 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => new UrlSyndicationContentSubclass(null));
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new UrlSyndicationContentSubclass(null)
+            );
         }
 
         [Fact]
@@ -90,7 +94,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class UrlSyndicationContentSubclass : UrlSyndicationContent
         {
-            public UrlSyndicationContentSubclass(UrlSyndicationContent source) : base(source) { }
+            public UrlSyndicationContentSubclass(UrlSyndicationContent source)
+                : base(source) { }
         }
     }
 }

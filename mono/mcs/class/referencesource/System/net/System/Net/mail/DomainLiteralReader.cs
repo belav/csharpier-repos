@@ -4,10 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
-namespace System.Net.Mail{
-
-    using System.Net.Mime;
+namespace System.Net.Mail
+{
     using System.Diagnostics;
+    using System.Net.Mime;
     using System.Text;
 
     //
@@ -19,13 +19,13 @@ namespace System.Net.Mail{
     {
         //
         // Reads a domain literal in reverse
-        // 
-        // Preconditions: 
+        //
+        // Preconditions:
         //  - Index must be within the bounds of the data string.
         //  - The char at the given index is the initial bracket. (data[index] == EndSquareBracket)
         //
-        // Return value: 
-        // - The next index past the terminating bracket (data[index + 1] == StartSquareBracket). 
+        // Return value:
+        // - The next index past the terminating bracket (data[index + 1] == StartSquareBracket).
         //   e.g. In (user@[domain]), starting at index=12 (]) returns index=4 (@).
         //
         // A FormatException will be thrown if:
@@ -34,8 +34,14 @@ namespace System.Net.Mail{
         //
         internal static int ReadReverse(string data, int index)
         {
-            Debug.Assert(0 <= index && index < data.Length, "index was outside the bounds of the string: " + index);
-            Debug.Assert(data[index] == MailBnfHelper.EndSquareBracket, "data did not end with a square bracket");
+            Debug.Assert(
+                0 <= index && index < data.Length,
+                "index was outside the bounds of the string: " + index
+            );
+            Debug.Assert(
+                data[index] == MailBnfHelper.EndSquareBracket,
+                "data did not end with a square bracket"
+            );
 
             // Skip the end bracket
             index--;
@@ -50,7 +56,7 @@ namespace System.Net.Mail{
                 }
                 // Check for escaped characters
                 int quotedCharCount = QuotedPairReader.CountQuotedChars(data, index, false);
-                if (quotedCharCount > 0) 
+                if (quotedCharCount > 0)
                 {
                     // Skip quoted pairs
                     index = index - quotedCharCount;
@@ -62,21 +68,26 @@ namespace System.Net.Mail{
                     return index - 1;
                 }
                 // Check for invalid characters
-                else if (data[index] > MailBnfHelper.Ascii7bitMaxValue || !MailBnfHelper.Dtext[data[index]])
+                else if (
+                    data[index] > MailBnfHelper.Ascii7bitMaxValue
+                    || !MailBnfHelper.Dtext[data[index]]
+                )
                 {
-                    throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                    throw new FormatException(
+                        SR.GetString(SR.MailHeaderFieldInvalidCharacter, data[index])
+                    );
                 }
                 // Valid char
                 else
                 {
                     index--;
                 }
-            }
-            while (index >= 0);
+            } while (index >= 0);
 
             // We didn't find a matching '[', throw.
-            throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, 
-                MailBnfHelper.EndSquareBracket));
+            throw new FormatException(
+                SR.GetString(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.EndSquareBracket)
+            );
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// Base class for parameters can be referred to from source code.
     /// </summary>
     /// <remarks>
-    /// These parameters can potentially be targeted by an attribute specified in source code. 
+    /// These parameters can potentially be targeted by an attribute specified in source code.
     /// As an optimization we distinguish simple parameters (no attributes, no modifiers, etc.) and complex parameters.
     /// </remarks>
     internal abstract class SourceParameterSymbol : SourceParameterSymbolBase
@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly Location? _location;
         private readonly RefKind _refKind;
         private readonly ScopedKind _scope;
+
 #nullable disable
 
         public static SourceParameterSymbol Create(
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isExtensionMethodThis,
             bool addRefReadOnlyModifier,
             ScopedKind scope,
-            BindingDiagnosticBag declarationDiagnostics)
+            BindingDiagnosticBag declarationDiagnostics
+        )
         {
             Debug.Assert(owner is not LambdaSymbol); // therefore we don't need to deal with discard parameters
 
@@ -52,13 +54,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (isParams)
             {
                 // touch the constructor in order to generate proper use-site diagnostics
-                Binder.ReportUseSiteDiagnosticForSynthesizedAttribute(context.Compilation,
+                Binder.ReportUseSiteDiagnosticForSynthesizedAttribute(
+                    context.Compilation,
                     WellKnownMember.System_ParamArrayAttribute__ctor,
                     declarationDiagnostics,
-                    identifier.Parent.GetLocation());
+                    identifier.Parent.GetLocation()
+                );
             }
 
-            ImmutableArray<CustomModifier> inModifiers = ParameterHelpers.ConditionallyCreateInModifiers(refKind, addRefReadOnlyModifier, context, declarationDiagnostics, syntax);
+            ImmutableArray<CustomModifier> inModifiers =
+                ParameterHelpers.ConditionallyCreateInModifiers(
+                    refKind,
+                    addRefReadOnlyModifier,
+                    context,
+                    declarationDiagnostics,
+                    syntax
+                );
             Debug.Assert(!inModifiers.IsDefault);
 
             if (!inModifiers.IsDefaultOrEmpty)
@@ -74,16 +85,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     syntax.GetReference(),
                     isParams,
                     isExtensionMethodThis,
-                    scope);
+                    scope
+                );
             }
 
-            if (!isParams &&
-                !isExtensionMethodThis &&
-                (syntax.Default == null) &&
-                (syntax.AttributeLists.Count == 0) &&
-                !owner.IsPartialMethod())
+            if (
+                !isParams
+                && !isExtensionMethodThis
+                && (syntax.Default == null)
+                && (syntax.AttributeLists.Count == 0)
+                && !owner.IsPartialMethod()
+            )
             {
-                return new SourceSimpleParameterSymbol(owner, parameterType, ordinal, refKind, scope, name, location);
+                return new SourceSimpleParameterSymbol(
+                    owner,
+                    parameterType,
+                    ordinal,
+                    refKind,
+                    scope,
+                    name,
+                    location
+                );
             }
 
             return new SourceComplexParameterSymbol(
@@ -96,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 syntax.GetReference(),
                 isParams,
                 isExtensionMethodThis,
-                scope);
+                scope
+            );
         }
 
         protected SourceParameterSymbol(
@@ -106,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             RefKind refKind,
             ScopedKind scope,
             string name,
-            Location location)
+            Location location
+        )
             : base(owner, ordinal)
         {
             Debug.Assert((owner.Kind == SymbolKind.Method) || (owner.Kind == SymbolKind.Property));
@@ -117,16 +141,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _location = location;
         }
 
-        internal override ParameterSymbol WithCustomModifiersAndParams(TypeSymbol newType, ImmutableArray<CustomModifier> newCustomModifiers, ImmutableArray<CustomModifier> newRefCustomModifiers, bool newIsParams)
+        internal override ParameterSymbol WithCustomModifiersAndParams(
+            TypeSymbol newType,
+            ImmutableArray<CustomModifier> newCustomModifiers,
+            ImmutableArray<CustomModifier> newRefCustomModifiers,
+            bool newIsParams
+        )
         {
-            return WithCustomModifiersAndParamsCore(newType, newCustomModifiers, newRefCustomModifiers, newIsParams);
+            return WithCustomModifiersAndParamsCore(
+                newType,
+                newCustomModifiers,
+                newRefCustomModifiers,
+                newIsParams
+            );
         }
 
-        internal SourceParameterSymbol WithCustomModifiersAndParamsCore(TypeSymbol newType, ImmutableArray<CustomModifier> newCustomModifiers, ImmutableArray<CustomModifier> newRefCustomModifiers, bool newIsParams)
+        internal SourceParameterSymbol WithCustomModifiersAndParamsCore(
+            TypeSymbol newType,
+            ImmutableArray<CustomModifier> newCustomModifiers,
+            ImmutableArray<CustomModifier> newRefCustomModifiers,
+            bool newIsParams
+        )
         {
-            newType = CustomModifierUtils.CopyTypeCustomModifiers(newType, this.Type, this.ContainingAssembly);
+            newType = CustomModifierUtils.CopyTypeCustomModifiers(
+                newType,
+                this.Type,
+                this.ContainingAssembly
+            );
 
-            TypeWithAnnotations newTypeWithModifiers = this.TypeWithAnnotations.WithTypeAndModifiers(newType, newCustomModifiers);
+            TypeWithAnnotations newTypeWithModifiers =
+                this.TypeWithAnnotations.WithTypeAndModifiers(newType, newCustomModifiers);
 
             if (newRefCustomModifiers.IsEmpty)
             {
@@ -140,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.SyntaxReference,
                     newIsParams,
                     this.IsExtensionMethodThis,
-                    this.DeclaredScope);
+                    this.DeclaredScope
+                );
             }
 
             // Local functions should never have custom modifiers
@@ -157,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.SyntaxReference,
                 newIsParams,
                 this.IsExtensionMethodThis,
-                this.DeclaredScope);
+                this.DeclaredScope
+            );
         }
 
         internal sealed override bool RequiresCompletion
@@ -170,7 +216,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return state.HasComplete(part);
         }
 
-        internal override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             state.DefaultForceComplete(this, cancellationToken);
         }
@@ -204,8 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// go on the compilation, but if it is a local function it is part of the local
         /// function's declaration diagnostics.
         /// </summary>
-        internal override void AddDeclarationDiagnostics(BindingDiagnosticBag diagnostics)
-            => ContainingSymbol.AddDeclarationDiagnostics(diagnostics);
+        internal override void AddDeclarationDiagnostics(BindingDiagnosticBag diagnostics) =>
+            ContainingSymbol.AddDeclarationDiagnostics(diagnostics);
 
         internal abstract SyntaxReference SyntaxReference { get; }
 
@@ -213,10 +262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override RefKind RefKind
         {
-            get
-            {
-                return _refKind;
-            }
+            get { return _refKind; }
         }
 
         /// <summary>
@@ -229,28 +275,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected ScopedKind CalculateEffectiveScopeIgnoringAttributes()
         {
             var declaredScope = this.DeclaredScope;
-            return declaredScope == ScopedKind.None && ParameterHelpers.IsRefScopedByDefault(this) ?
-                ScopedKind.ScopedRef :
-                declaredScope;
+            return declaredScope == ScopedKind.None && ParameterHelpers.IsRefScopedByDefault(this)
+                ? ScopedKind.ScopedRef
+                : declaredScope;
         }
 
-        internal sealed override bool UseUpdatedEscapeRules => ContainingModule.UseUpdatedEscapeRules;
+        internal sealed override bool UseUpdatedEscapeRules =>
+            ContainingModule.UseUpdatedEscapeRules;
 
         public sealed override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
-        public sealed override ImmutableArray<Location> Locations
-            => _location is null ? ImmutableArray<Location>.Empty : ImmutableArray.Create(_location);
+        public sealed override ImmutableArray<Location> Locations =>
+            _location is null ? ImmutableArray<Location>.Empty : ImmutableArray.Create(_location);
 
 #nullable enable
 
-        public override Location? TryGetFirstLocation()
-            => _location;
+        public override Location? TryGetFirstLocation() => _location;
 
 #nullable disable
 
@@ -258,18 +301,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return IsImplicitlyDeclared ?
-                    ImmutableArray<SyntaxReference>.Empty :
-                    GetDeclaringSyntaxReferenceHelper<ParameterSyntax>(this.Locations);
+                return IsImplicitlyDeclared
+                    ? ImmutableArray<SyntaxReference>.Empty
+                    : GetDeclaringSyntaxReferenceHelper<ParameterSyntax>(this.Locations);
             }
         }
 
         public sealed override TypeWithAnnotations TypeWithAnnotations
         {
-            get
-            {
-                return this.parameterType;
-            }
+            get { return this.parameterType; }
         }
 
         public override bool IsImplicitlyDeclared
@@ -283,7 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override bool IsMetadataIn => RefKind is RefKind.In or RefKind.RefReadOnlyParameter;
+        internal override bool IsMetadataIn =>
+            RefKind is RefKind.In or RefKind.RefReadOnlyParameter;
 
         internal override bool IsMetadataOut => RefKind == RefKind.Out;
     }

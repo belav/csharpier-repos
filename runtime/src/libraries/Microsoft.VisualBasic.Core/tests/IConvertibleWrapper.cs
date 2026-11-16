@@ -40,7 +40,8 @@ namespace Microsoft.VisualBasic.Tests
 
         public string ToString(IFormatProvider provider) => Value.ToString(provider);
 
-        public object ToType(Type conversionType, IFormatProvider provider) => Value.ToType(conversionType, provider);
+        public object ToType(Type conversionType, IFormatProvider provider) =>
+            Value.ToType(conversionType, provider);
 
         public ushort ToUInt16(IFormatProvider provider) => Value.ToUInt16(provider);
 

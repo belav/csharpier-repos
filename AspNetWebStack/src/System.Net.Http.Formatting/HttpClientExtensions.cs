@@ -29,8 +29,17 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(this HttpClient client, string requestUri, T value)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value
+        )
         {
             return client.PostAsJsonAsync(requestUri, value, CancellationToken.None);
         }
@@ -48,10 +57,25 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(this HttpClient client, string requestUri, T value, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, new JsonMediaTypeFormatter(), cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                new JsonMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -66,7 +90,11 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(this HttpClient client, Uri requestUri, T value)
+        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value
+        )
         {
             return client.PostAsJsonAsync(requestUri, value, CancellationToken.None);
         }
@@ -84,9 +112,19 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(this HttpClient client, Uri requestUri, T value, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, new JsonMediaTypeFormatter(), cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                new JsonMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -101,8 +139,17 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(this HttpClient client, string requestUri, T value)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value
+        )
         {
             return client.PostAsXmlAsync(requestUri, value, CancellationToken.None);
         }
@@ -120,10 +167,25 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(this HttpClient client, string requestUri, T value, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, new XmlMediaTypeFormatter(), cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                new XmlMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -138,7 +200,11 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(this HttpClient client, Uri requestUri, T value)
+        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value
+        )
         {
             return client.PostAsXmlAsync(requestUri, value, CancellationToken.None);
         }
@@ -156,9 +222,19 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(this HttpClient client, Uri requestUri, T value, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PostAsXmlAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, new XmlMediaTypeFormatter(), cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                new XmlMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -172,8 +248,18 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter
+        )
         {
             return client.PostAsync(requestUri, value, formatter, CancellationToken.None);
         }
@@ -190,10 +276,27 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, formatter, mediaType: (MediaTypeHeaderValue)null, cancellationToken: cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                formatter,
+                mediaType: (MediaTypeHeaderValue)null,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -209,10 +312,27 @@ namespace System.Net.Http
         /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, string mediaType)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
         {
-            return client.PostAsync(requestUri, value, formatter, mediaType, CancellationToken.None);
+            return client.PostAsync(
+                requestUri,
+                value,
+                formatter,
+                mediaType,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -228,10 +348,28 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, string mediaType, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, formatter, ObjectContent.BuildHeaderValue(mediaType), cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                formatter,
+                ObjectContent.BuildHeaderValue(mediaType),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -247,10 +385,30 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The caller is responsible for disposing the object")]
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "The called method will convert to Uri instance.")]
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The caller is responsible for disposing the object"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2234:PassSystemUriObjectsInsteadOfStrings",
+            Justification = "The called method will convert to Uri instance."
+        )]
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            CancellationToken cancellationToken
+        )
         {
             if (client == null)
             {
@@ -273,7 +431,12 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter)
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter
+        )
         {
             return client.PostAsync(requestUri, value, formatter, CancellationToken.None);
         }
@@ -290,9 +453,21 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, formatter, mediaType: (MediaTypeHeaderValue)null, cancellationToken: cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                formatter,
+                mediaType: (MediaTypeHeaderValue)null,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -308,9 +483,21 @@ namespace System.Net.Http
         /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, string mediaType)
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
         {
-            return client.PostAsync(requestUri, value, formatter, mediaType, CancellationToken.None);
+            return client.PostAsync(
+                requestUri,
+                value,
+                formatter,
+                mediaType,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -326,9 +513,22 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, string mediaType, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PostAsync(requestUri, value, formatter, ObjectContent.BuildHeaderValue(mediaType), cancellationToken);
+            return client.PostAsync(
+                requestUri,
+                value,
+                formatter,
+                ObjectContent.BuildHeaderValue(mediaType),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -344,8 +544,19 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The caller is responsible for disposing the object")]
-        public static Task<HttpResponseMessage> PostAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The caller is responsible for disposing the object"
+        )]
+        public static Task<HttpResponseMessage> PostAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            CancellationToken cancellationToken
+        )
         {
             if (client == null)
             {
@@ -369,8 +580,17 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(this HttpClient client, string requestUri, T value)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value
+        )
         {
             return client.PutAsJsonAsync(requestUri, value, CancellationToken.None);
         }
@@ -388,10 +608,25 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(this HttpClient client, string requestUri, T value, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, new JsonMediaTypeFormatter(), cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                new JsonMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -406,7 +641,11 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(this HttpClient client, Uri requestUri, T value)
+        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value
+        )
         {
             return client.PutAsJsonAsync(requestUri, value, CancellationToken.None);
         }
@@ -424,9 +663,19 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(this HttpClient client, Uri requestUri, T value, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PutAsJsonAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, new JsonMediaTypeFormatter(), cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                new JsonMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -441,8 +690,17 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(this HttpClient client, string requestUri, T value)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value
+        )
         {
             return client.PutAsXmlAsync(requestUri, value, CancellationToken.None);
         }
@@ -460,10 +718,25 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(this HttpClient client, string requestUri, T value, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, new XmlMediaTypeFormatter(), cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                new XmlMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -478,7 +751,11 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(this HttpClient client, Uri requestUri, T value)
+        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value
+        )
         {
             return client.PutAsXmlAsync(requestUri, value, CancellationToken.None);
         }
@@ -496,9 +773,19 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(this HttpClient client, Uri requestUri, T value, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PutAsXmlAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, new XmlMediaTypeFormatter(), cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                new XmlMediaTypeFormatter(),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -512,8 +799,18 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter
+        )
         {
             return client.PutAsync(requestUri, value, formatter, CancellationToken.None);
         }
@@ -530,10 +827,27 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, formatter, mediaType: (MediaTypeHeaderValue)null, cancellationToken: cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                formatter,
+                mediaType: (MediaTypeHeaderValue)null,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -549,8 +863,19 @@ namespace System.Net.Http
         /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, string mediaType)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
         {
             return client.PutAsync(requestUri, value, formatter, mediaType, CancellationToken.None);
         }
@@ -568,10 +893,28 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, string mediaType, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, formatter, ObjectContent.BuildHeaderValue(mediaType), cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                formatter,
+                ObjectContent.BuildHeaderValue(mediaType),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -587,10 +930,30 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to support URIs as strings")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The caller is responsible for disposing the object")]
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "The called method will convert to Uri instance.")]
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, string requestUri, T value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to support URIs as strings"
+        )]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The caller is responsible for disposing the object"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2234:PassSystemUriObjectsInsteadOfStrings",
+            Justification = "The called method will convert to Uri instance."
+        )]
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            string requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            CancellationToken cancellationToken
+        )
         {
             if (client == null)
             {
@@ -613,7 +976,12 @@ namespace System.Net.Http
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter)
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter
+        )
         {
             return client.PutAsync(requestUri, value, formatter, CancellationToken.None);
         }
@@ -630,9 +998,21 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, formatter, mediaType: (MediaTypeHeaderValue)null, cancellationToken: cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                formatter,
+                mediaType: (MediaTypeHeaderValue)null,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -648,7 +1028,13 @@ namespace System.Net.Http
         /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, string mediaType)
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
         {
             return client.PutAsync(requestUri, value, formatter, mediaType, CancellationToken.None);
         }
@@ -666,9 +1052,22 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, string mediaType, CancellationToken cancellationToken)
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType,
+            CancellationToken cancellationToken
+        )
         {
-            return client.PutAsync(requestUri, value, formatter, ObjectContent.BuildHeaderValue(mediaType), cancellationToken);
+            return client.PutAsync(
+                requestUri,
+                value,
+                formatter,
+                ObjectContent.BuildHeaderValue(mediaType),
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -684,8 +1083,19 @@ namespace System.Net.Http
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The caller is responsible for disposing the object")]
-        public static Task<HttpResponseMessage> PutAsync<T>(this HttpClient client, Uri requestUri, T value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The caller is responsible for disposing the object"
+        )]
+        public static Task<HttpResponseMessage> PutAsync<T>(
+            this HttpClient client,
+            Uri requestUri,
+            T value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            CancellationToken cancellationToken
+        )
         {
             if (client == null)
             {

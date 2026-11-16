@@ -22,7 +22,11 @@ namespace System
             cultureInfo ??= CultureInfo.CurrentCulture;
 
 #if DISPLAY_DEBUG_INFO
-            Console.WriteLine("In OleAutBinder::ChangeType converting variant of type: {0} to type: {1}", myValue.VariantType, type.Name);
+            Console.WriteLine(
+                "In OleAutBinder::ChangeType converting variant of type: {0} to type: {1}",
+                myValue.VariantType,
+                type.Name
+            );
 #endif
 
             if (type.IsByRef)
@@ -62,16 +66,20 @@ namespace System
 #endif
                 // Specify the LocalBool flag to have BOOL values converted to local language rather
                 // than 0 or -1.
-                object RetObj = OAVariantLib.ChangeType(myValue, type, OAVariantLib.LocalBool, cultureInfo).ToObject()!;
+                object RetObj = OAVariantLib
+                    .ChangeType(myValue, type, OAVariantLib.LocalBool, cultureInfo)
+                    .ToObject()!;
 
 #if DISPLAY_DEBUG_INFO
-                Console.WriteLine("Object returned from ChangeType is of type: " + RetObj.GetType().Name);
+                Console.WriteLine(
+                    "Object returned from ChangeType is of type: " + RetObj.GetType().Name
+                );
 #endif
 
                 return RetObj;
             }
 #if DISPLAY_DEBUG_INFO
-            catch(NotSupportedException e)
+            catch (NotSupportedException e)
 #else
             catch (NotSupportedException)
 #endif

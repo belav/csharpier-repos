@@ -25,7 +25,12 @@ namespace System.Reflection.TypeLoading.Ecma
             Module? moduleFromEvent = ModuleResolve?.Invoke(this, new ResolveEventArgs(moduleName));
             if (moduleFromEvent != null)
             {
-                if (!(moduleFromEvent is RoModule roModuleFromEvent && roModuleFromEvent.Loader == Loader))
+                if (
+                    !(
+                        moduleFromEvent is RoModule roModuleFromEvent
+                        && roModuleFromEvent.Loader == Loader
+                    )
+                )
                     throw new FileLoadException(SR.ModuleResolveEventReturnedExternalModule);
                 return roModuleFromEvent;
             }
@@ -33,8 +38,11 @@ namespace System.Reflection.TypeLoading.Ecma
             throw new FileNotFoundException(SR.Format(SR.FileNotFoundModule, moduleName));
         }
 
-        [UnconditionalSuppressMessage("SingleFile", "IL3000: Avoid accessing Assembly file path when publishing as a single file",
-            Justification = "The code has a fallback using a ModuleResolveEventHandler")]
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3000: Avoid accessing Assembly file path when publishing as a single file",
+            Justification = "The code has a fallback using a ModuleResolveEventHandler"
+        )]
         private FileStream? FindModuleNextToAssembly(string moduleName)
         {
             Assembly containingAssembly = this;
@@ -68,12 +76,19 @@ namespace System.Reflection.TypeLoading.Ecma
             return new EcmaModule(this, location, peReader, peReader.GetMetadataReader());
         }
 
-        protected sealed override IEnumerable<AssemblyFileInfo> GetAssemblyFileInfosFromManifest(bool includeManifestModule, bool includeResourceModules)
+        protected sealed override IEnumerable<AssemblyFileInfo> GetAssemblyFileInfosFromManifest(
+            bool includeManifestModule,
+            bool includeResourceModules
+        )
         {
             MetadataReader reader = Reader;
             if (includeManifestModule)
             {
-                yield return new AssemblyFileInfo(reader.GetModuleDefinition().Name.GetString(reader), true, 0);
+                yield return new AssemblyFileInfo(
+                    reader.GetModuleDefinition().Name.GetString(reader),
+                    true,
+                    0
+                );
             }
 
             foreach (AssemblyFileHandle h in reader.AssemblyFiles)
@@ -81,7 +96,11 @@ namespace System.Reflection.TypeLoading.Ecma
                 AssemblyFile af = h.GetAssemblyFile(reader);
                 if (includeResourceModules || af.ContainsMetadata)
                 {
-                    yield return new AssemblyFileInfo(af.Name.GetString(reader), af.ContainsMetadata, h.GetToken().GetTokenRowNumber());
+                    yield return new AssemblyFileInfo(
+                        af.Name.GetString(reader),
+                        af.ContainsMetadata,
+                        h.GetToken().GetTokenRowNumber()
+                    );
                 }
             }
         }

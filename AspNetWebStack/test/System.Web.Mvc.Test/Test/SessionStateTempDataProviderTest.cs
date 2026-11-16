@@ -16,7 +16,9 @@ namespace System.Web.Mvc.Test
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
 
             // Act
-            IDictionary<string, object> tempDataDictionary = testProvider.LoadTempData(GetControllerContext());
+            IDictionary<string, object> tempDataDictionary = testProvider.LoadTempData(
+                GetControllerContext()
+            );
 
             // Assert
             Assert.Empty(tempDataDictionary);
@@ -29,10 +31,14 @@ namespace System.Web.Mvc.Test
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             Mock<HttpSessionStateBase> mockSessionStateBase = new Mock<HttpSessionStateBase>();
-            mockControllerContext.Setup(c => c.HttpContext.Session).Returns(mockSessionStateBase.Object);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Session)
+                .Returns(mockSessionStateBase.Object);
 
             // Act
-            IDictionary<string, object> result = testProvider.LoadTempData(mockControllerContext.Object);
+            IDictionary<string, object> result = testProvider.LoadTempData(
+                mockControllerContext.Object
+            );
 
             // Assert
             Assert.Empty(result);
@@ -45,11 +51,17 @@ namespace System.Web.Mvc.Test
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             Mock<HttpSessionStateBase> mockSessionStateBase = new Mock<HttpSessionStateBase>();
-            mockControllerContext.Setup(c => c.HttpContext.Session).Returns(mockSessionStateBase.Object);
-            mockSessionStateBase.Setup(ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey]).Returns(42);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Session)
+                .Returns(mockSessionStateBase.Object);
+            mockSessionStateBase
+                .Setup(ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey])
+                .Returns(42);
 
             // Act
-            IDictionary<string, object> result = testProvider.LoadTempData(mockControllerContext.Object);
+            IDictionary<string, object> result = testProvider.LoadTempData(
+                mockControllerContext.Object
+            );
 
             // Assert
             Assert.Empty(result);
@@ -60,11 +72,18 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
-            Dictionary<string, object> tempData = new Dictionary<string, object> { { "foo", "bar" } };
+            Dictionary<string, object> tempData = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+            };
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             Mock<HttpSessionStateBase> mockSessionStateBase = new Mock<HttpSessionStateBase>();
-            mockControllerContext.Setup(c => c.HttpContext.Session).Returns(mockSessionStateBase.Object);
-            mockSessionStateBase.Setup(ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey]).Returns(tempData);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Session)
+                .Returns(mockSessionStateBase.Object);
+            mockSessionStateBase
+                .Setup(ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey])
+                .Returns(tempData);
 
             // Act
             var result = testProvider.LoadTempData(mockControllerContext.Object);
@@ -101,8 +120,15 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { testProvider.SaveTempData(GetControllerContext(), new Dictionary<string, object> { { "foo", "bar" } }); },
-                "The SessionStateTempDataProvider class requires session state to be enabled.");
+                delegate
+                {
+                    testProvider.SaveTempData(
+                        GetControllerContext(),
+                        new Dictionary<string, object> { { "foo", "bar" } }
+                    );
+                },
+                "The SessionStateTempDataProvider class requires session state to be enabled."
+            );
         }
 
         [Fact]
@@ -110,11 +136,18 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
-            Dictionary<string, object> tempData = new Dictionary<string, object> { { "foo", "bar" } };
+            Dictionary<string, object> tempData = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+            };
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             Mock<HttpSessionStateBase> mockSessionStateBase = new Mock<HttpSessionStateBase>();
-            mockControllerContext.Setup(c => c.HttpContext.Session).Returns(mockSessionStateBase.Object);
-            mockSessionStateBase.SetupSet(ssb => ssb[SessionStateTempDataProvider.TempDataSessionStateKey] = tempData);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Session)
+                .Returns(mockSessionStateBase.Object);
+            mockSessionStateBase.SetupSet(ssb =>
+                ssb[SessionStateTempDataProvider.TempDataSessionStateKey] = tempData
+            );
 
             // Act
             testProvider.SaveTempData(mockControllerContext.Object, tempData);
@@ -130,8 +163,14 @@ namespace System.Web.Mvc.Test
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
             Dictionary<string, object> tempData = new Dictionary<string, object>();
 
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.Setup(o => o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]).Returns(null);
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .Setup(o =>
+                    o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
+                )
+                .Returns(null);
 
             // Act
             testProvider.SaveTempData(mockControllerContext.Object, tempData);
@@ -147,9 +186,21 @@ namespace System.Web.Mvc.Test
             SessionStateTempDataProvider testProvider = new SessionStateTempDataProvider();
             Dictionary<string, object> tempData = new Dictionary<string, object>();
 
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.Setup(o => o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]).Returns(new object());
-            mockControllerContext.Setup(o => o.HttpContext.Session.Remove(SessionStateTempDataProvider.TempDataSessionStateKey)).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .Setup(o =>
+                    o.HttpContext.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
+                )
+                .Returns(new object());
+            mockControllerContext
+                .Setup(o =>
+                    o.HttpContext.Session.Remove(
+                        SessionStateTempDataProvider.TempDataSessionStateKey
+                    )
+                )
+                .Verifiable();
 
             // Act
             testProvider.SaveTempData(mockControllerContext.Object, tempData);
@@ -161,7 +212,9 @@ namespace System.Web.Mvc.Test
         private static ControllerContext GetControllerContext()
         {
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(c => c.HttpContext.Session).Returns((HttpSessionStateBase)null);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Session)
+                .Returns((HttpSessionStateBase)null);
             return mockControllerContext.Object;
         }
     }

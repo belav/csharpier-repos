@@ -21,7 +21,7 @@ namespace System.CommandLine.Rendering.Views
             }
 
             _children.Add(child);
-            
+
             child.Updated -= OnChildUpdated;
             child.Updated += OnChildUpdated;
         }

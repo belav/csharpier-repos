@@ -10,7 +10,6 @@ using System.Web.Profile;
 
 namespace System.Web.ApplicationServices
 {
-
     public static class KnownTypesProvider
     {
         public static Type[] GetKnownTypes(ICustomAttributeProvider knownTypeAttributeTarget)
@@ -25,6 +24,5 @@ namespace System.Web.ApplicationServices
             }
             return retArray;
         }
-
     }
 }

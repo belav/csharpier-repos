@@ -9,7 +9,9 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 {
-    public class AdditionalDeps : DependencyResolutionBase, IClassFixture<AdditionalDeps.SharedTestState>
+    public class AdditionalDeps
+        : DependencyResolutionBase,
+            IClassFixture<AdditionalDeps.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 
@@ -28,31 +30,49 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         // and equal or lesser patch, release or pre-release.
         [Theory]
         // exact match
-        [InlineData("4.1.1",            new string[] { "4.1.0", "4.1.1" },              "4.1.1")]
-        [InlineData("4.1.2-preview.2",  new string[] { "4.1.1", "4.1.2-preview.2" },    "4.1.2-preview.2")]
+        [InlineData("4.1.1", new string[] { "4.1.0", "4.1.1" }, "4.1.1")]
+        [InlineData(
+            "4.1.2-preview.2",
+            new string[] { "4.1.1", "4.1.2-preview.2" },
+            "4.1.2-preview.2"
+        )]
         // lower patch version
-        [InlineData("4.1.1",            new string[] { "4.1.0", "4.1.2-preview.1" },    "4.1.0")]
-        [InlineData("4.1.2-preview.2",  new string[] { "4.1.1", "4.1.2" },              "4.1.1")]
+        [InlineData("4.1.1", new string[] { "4.1.0", "4.1.2-preview.1" }, "4.1.0")]
+        [InlineData("4.1.2-preview.2", new string[] { "4.1.1", "4.1.2" }, "4.1.1")]
         // lower prerelease
-        [InlineData("4.1.1",            new string[] { "4.1.0", "4.1.1-preview.1" },    "4.1.1-preview.1")]
-        [InlineData("4.1.2-preview.2",  new string[] { "4.1.1", "4.1.2-preview.1" },    "4.1.2-preview.1")]
+        [InlineData("4.1.1", new string[] { "4.1.0", "4.1.1-preview.1" }, "4.1.1-preview.1")]
+        [InlineData(
+            "4.1.2-preview.2",
+            new string[] { "4.1.1", "4.1.2-preview.1" },
+            "4.1.2-preview.1"
+        )]
         // no match
-        [InlineData("4.1.1",            new string[] { "4.0.0", "4.1.2", "4.2.0" },     null)]
-        [InlineData("4.1.2-preview.2",  new string[] { "4.0.0", "4.1.2", "4.2.0" },     null)]
+        [InlineData("4.1.1", new string[] { "4.0.0", "4.1.2", "4.2.0" }, null)]
+        [InlineData("4.1.2-preview.2", new string[] { "4.0.0", "4.1.2", "4.2.0" }, null)]
         public void DepsDirectory(string fxVersion, string[] versions, string usedVersion)
         {
-            string additionalDepsDirectory = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(SharedState.Location, "additionalDeps"));
+            string additionalDepsDirectory = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(SharedState.Location, "additionalDeps")
+            );
             using (TestArtifact artifact = new TestArtifact(additionalDepsDirectory))
             {
-                string depsJsonName = Path.GetFileName(SharedState.AdditionalDepsComponent.DepsJson);
+                string depsJsonName = Path.GetFileName(
+                    SharedState.AdditionalDepsComponent.DepsJson
+                );
                 foreach (string version in versions)
                 {
-                    string path = Path.Combine(additionalDepsDirectory, "shared", MicrosoftNETCoreApp, version);
+                    string path = Path.Combine(
+                        additionalDepsDirectory,
+                        "shared",
+                        MicrosoftNETCoreApp,
+                        version
+                    );
                     Directory.CreateDirectory(path);
                     File.Copy(
                         SharedState.AdditionalDepsComponent.DepsJson,
                         Path.Combine(path, depsJsonName),
-                        true);
+                        true
+                    );
                 }
 
                 TestApp app = SharedState.FrameworkReferenceApp;
@@ -60,24 +80,44 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 {
                     // Make a copy of the app and update its framework version
                     app = SharedState.FrameworkReferenceApp.Copy();
-                    RuntimeConfig.FromFile(app.RuntimeConfigJson)
+                    RuntimeConfig
+                        .FromFile(app.RuntimeConfigJson)
                         .RemoveFramework(MicrosoftNETCoreApp)
                         .WithFramework(MicrosoftNETCoreApp, fxVersion)
                         .Save();
                 }
 
-                CommandResult result = SharedState.DotNetWithNetCoreApp.Exec(Constants.AdditionalDeps.CommandLineArgument, additionalDepsDirectory, app.AppDll)
+                CommandResult result = SharedState
+                    .DotNetWithNetCoreApp.Exec(
+                        Constants.AdditionalDeps.CommandLineArgument,
+                        additionalDepsDirectory,
+                        app.AppDll
+                    )
                     .EnableTracingAndCaptureOutputs()
                     .Execute();
 
                 result.Should().Pass();
                 if (string.IsNullOrEmpty(usedVersion))
                 {
-                    result.Should().HaveStdErrContaining($"No additional deps directory less than or equal to [{fxVersion}] found with same major and minor version.");
+                    result
+                        .Should()
+                        .HaveStdErrContaining(
+                            $"No additional deps directory less than or equal to [{fxVersion}] found with same major and minor version."
+                        );
                 }
                 else
                 {
-                    result.Should().HaveUsedAdditionalDeps(Path.Combine(additionalDepsDirectory, "shared", MicrosoftNETCoreApp, usedVersion, depsJsonName));
+                    result
+                        .Should()
+                        .HaveUsedAdditionalDeps(
+                            Path.Combine(
+                                additionalDepsDirectory,
+                                "shared",
+                                MicrosoftNETCoreApp,
+                                usedVersion,
+                                depsJsonName
+                            )
+                        );
                 }
             }
         }
@@ -98,22 +138,37 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 File.Delete(Path.Combine(app.Location, $"{additionalLibName}.dll"));
             }
 
-            CommandResult result = SharedState.DotNetWithNetCoreApp.Exec(Constants.AdditionalDeps.CommandLineArgument, additionalDepsFile, app.AppDll)
+            CommandResult result = SharedState
+                .DotNetWithNetCoreApp.Exec(
+                    Constants.AdditionalDeps.CommandLineArgument,
+                    additionalDepsFile,
+                    app.AppDll
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute(expectedToFail: !dependencyExists);
 
             result.Should().HaveUsedAdditionalDeps(additionalDepsFile);
             if (dependencyExists)
             {
-                result.Should().Pass()
-                    .And.HaveResolvedAssembly(Path.Combine(app.Location, $"{additionalLibName}.dll"));
+                result
+                    .Should()
+                    .Pass()
+                    .And.HaveResolvedAssembly(
+                        Path.Combine(app.Location, $"{additionalLibName}.dll")
+                    );
             }
             else
             {
                 // Specifying an additional deps file triggers file existence checking, so execution
                 // should fail when the dependency doesn't exist.
-                result.Should().Fail()
-                    .And.ErrorWithMissingAssembly($"{additionalLibName}.deps.json", additionalLibName, "1.0.0");
+                result
+                    .Should()
+                    .Fail()
+                    .And.ErrorWithMissingAssembly(
+                        $"{additionalLibName}.deps.json",
+                        additionalLibName,
+                        "1.0.0"
+                    );
             }
         }
 
@@ -125,12 +180,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 File.WriteAllText(invalidDepsFile, "{");
 
-                SharedState.DotNetWithNetCoreApp.Exec(Constants.AdditionalDeps.CommandLineArgument, invalidDepsFile, SharedState.FrameworkReferenceApp.AppDll)
+                SharedState
+                    .DotNetWithNetCoreApp.Exec(
+                        Constants.AdditionalDeps.CommandLineArgument,
+                        invalidDepsFile,
+                        SharedState.FrameworkReferenceApp.AppDll
+                    )
                     .EnableTracingAndCaptureOutputs()
                     .Execute(expectedToFail: true)
-                    .Should().Fail()
+                    .Should()
+                    .Fail()
                     .And.HaveUsedAdditionalDeps(invalidDepsFile)
-                    .And.HaveStdErrContaining($"Error initializing the dependency resolver: An error occurred while parsing: {invalidDepsFile}");
+                    .And.HaveStdErrContaining(
+                        $"Error initializing the dependency resolver: An error occurred while parsing: {invalidDepsFile}"
+                    );
             }
             finally
             {
@@ -155,10 +218,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
                 AdditionalDepsComponent = CreateComponentWithNoDependencies();
 
-                FrameworkReferenceApp = CreateFrameworkReferenceApp(MicrosoftNETCoreApp, NetCoreAppVersion);
+                FrameworkReferenceApp = CreateFrameworkReferenceApp(
+                    MicrosoftNETCoreApp,
+                    NetCoreAppVersion
+                );
 
                 // Copy dependency next to app
-                File.Copy(AdditionalDepsComponent.AppDll, Path.Combine(FrameworkReferenceApp.Location, $"{AdditionalDepsComponent.AssemblyName}.dll"));
+                File.Copy(
+                    AdditionalDepsComponent.AppDll,
+                    Path.Combine(
+                        FrameworkReferenceApp.Location,
+                        $"{AdditionalDepsComponent.AssemblyName}.dll"
+                    )
+                );
             }
         }
     }

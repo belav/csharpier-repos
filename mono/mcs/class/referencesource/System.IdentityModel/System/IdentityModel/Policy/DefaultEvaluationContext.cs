@@ -31,7 +31,7 @@ namespace System.IdentityModel.Policy
 
         public override ReadOnlyCollection<ClaimSet> ClaimSets
         {
-            get 
+            get
             {
                 if (this.claimSets == null)
                     return EmptyReadOnlyCollection<ClaimSet>.Instance;
@@ -39,7 +39,7 @@ namespace System.IdentityModel.Policy
                 if (this.readOnlyClaimSets == null)
                     this.readOnlyClaimSets = new ReadOnlyCollection<ClaimSet>(this.claimSets);
 
-                return this.readOnlyClaimSets; 
+                return this.readOnlyClaimSets;
             }
         }
 

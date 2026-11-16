@@ -7,20 +7,19 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.CodeDom;
 using System.Data;
-using System.Data.EntityModel.SchemaObjectModel;
-using Som = System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design;
-using System.Data.Metadata.Edm;
-using System.Diagnostics;
-using System.Reflection;
-using System.Data.Objects.DataClasses;
 using System.Data.Entity.Design.Common;
 using System.Data.Entity.Design.SsdlGenerator;
-
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
+using System.Diagnostics;
+using System.Reflection;
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -32,10 +31,8 @@ namespace System.Data.EntityModel.Emitters
         #region Public Methods
         private bool _usingStandardBaseClass = true;
 
-
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public override CodeTypeDeclarationCollection EmitApiClass()
@@ -69,7 +66,7 @@ namespace System.Data.EntityModel.Emitters
             CommentEmitter.EmitSummaryComments(Item, typeDecl.Comments);
 
             // Since abstract types cannot be instantiated, skip the factory method for abstract types
-            if ( (typeDecl.TypeAttributes & System.Reflection.TypeAttributes.Abstract) == 0)
+            if ((typeDecl.TypeAttributes & System.Reflection.TypeAttributes.Abstract) == 0)
                 EmitFactoryMethod(typeDecl);
 
             EmitProperties(typeDecl);
@@ -87,7 +84,7 @@ namespace System.Data.EntityModel.Emitters
         #region Protected Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         protected virtual CodeTypeReference GetBaseType()
@@ -99,17 +96,15 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="generator"></param>
         /// <param name="structuredType"></param>
         protected StructuredTypeEmitter(ClientApiGenerator generator, StructuralType structuralType)
-            : base(generator, structuralType)
-        {
-        }
+            : base(generator, structuralType) { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="typeDecl"></param>
         protected override void EmitTypeAttributes(CodeTypeDeclaration typeDecl)
@@ -119,21 +114,24 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="typeDecl"></param>
         protected virtual void EmitProperties(CodeTypeDeclaration typeDecl)
         {
-
             foreach (EdmProperty property in Item.GetDeclaredOnlyMembers<EdmProperty>())
             {
-                PropertyEmitter propertyEmitter = new PropertyEmitter(Generator, property, _usingStandardBaseClass);
+                PropertyEmitter propertyEmitter = new PropertyEmitter(
+                    Generator,
+                    property,
+                    _usingStandardBaseClass
+                );
                 propertyEmitter.Emit(typeDecl);
             }
         }
 
         protected abstract ReadOnlyMetadataCollection<EdmProperty> GetProperties();
-    
+
         /// <summary>
         /// Emit static factory method which creates an instance of the class and initializes
         /// non-nullable properties (taken as arguments)
@@ -141,8 +139,6 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="typeDecl"></param>
         protected virtual void EmitFactoryMethod(CodeTypeDeclaration typeDecl)
         {
-            
-            
             // build list of non-nullable properties
             ReadOnlyMetadataCollection<EdmProperty> properties = GetProperties();
             List<EdmProperty> parameters = new List<EdmProperty>(properties.Count);
@@ -166,58 +162,92 @@ namespace System.Data.EntityModel.Emitters
             Generator.AttributeEmitter.EmitGeneratedCodeAttribute(method);
 
             CodeTypeReference typeRef = TypeReference.FromString(Item.Name);
-            UniqueIdentifierService uniqueIdentifierService = new UniqueIdentifierService(Generator.IsLanguageCaseSensitive, name => Utils.FixParameterName(name));
+            UniqueIdentifierService uniqueIdentifierService = new UniqueIdentifierService(
+                Generator.IsLanguageCaseSensitive,
+                name => Utils.FixParameterName(name)
+            );
             string instanceName = uniqueIdentifierService.AdjustIdentifier(Item.Name);
 
             // public static Class CreateClass(...)
-            method.Attributes = MemberAttributes.Static|MemberAttributes.Public;
+            method.Attributes = MemberAttributes.Static | MemberAttributes.Public;
             method.Name = "Create" + Item.Name;
-            if (NavigationPropertyEmitter.IsNameAlreadyAMemberName(Item, method.Name, Generator.LanguageAppropriateStringComparer))
+            if (
+                NavigationPropertyEmitter.IsNameAlreadyAMemberName(
+                    Item,
+                    method.Name,
+                    Generator.LanguageAppropriateStringComparer
+                )
+            )
             {
-                Generator.AddError(Strings.GeneratedFactoryMethodNameConflict(method.Name, Item.Name),
+                Generator.AddError(
+                    Strings.GeneratedFactoryMethodNameConflict(method.Name, Item.Name),
                     ModelBuilderErrorCode.GeneratedFactoryMethodNameConflict,
-                    EdmSchemaErrorSeverity.Error, Item.FullName);
+                    EdmSchemaErrorSeverity.Error,
+                    Item.FullName
+                );
             }
 
             method.ReturnType = typeRef;
-            
-            // output method summary comments 
-            CommentEmitter.EmitSummaryComments(Strings.FactoryMethodSummaryComment(Item.Name), method.Comments);
 
+            // output method summary comments
+            CommentEmitter.EmitSummaryComments(
+                Strings.FactoryMethodSummaryComment(Item.Name),
+                method.Comments
+            );
 
             // Class class = new Class();
-            CodeVariableDeclarationStatement createNewInstance = new CodeVariableDeclarationStatement(
-                typeRef, instanceName, new CodeObjectCreateExpression(typeRef));
+            CodeVariableDeclarationStatement createNewInstance =
+                new CodeVariableDeclarationStatement(
+                    typeRef,
+                    instanceName,
+                    new CodeObjectCreateExpression(typeRef)
+                );
             method.Statements.Add(createNewInstance);
-            CodeVariableReferenceExpression instanceRef = new CodeVariableReferenceExpression(instanceName);
+            CodeVariableReferenceExpression instanceRef = new CodeVariableReferenceExpression(
+                instanceName
+            );
 
             // iterate over the properties figuring out which need included in the factory method
             foreach (EdmProperty property in parameters)
             {
                 // CreateClass( ... , propType propName ...)
-                PropertyEmitter propertyEmitter = new PropertyEmitter(Generator, property, UsingStandardBaseClass);
+                PropertyEmitter propertyEmitter = new PropertyEmitter(
+                    Generator,
+                    property,
+                    UsingStandardBaseClass
+                );
                 CodeTypeReference propertyTypeReference = propertyEmitter.PropertyType;
-                String parameterName = uniqueIdentifierService.AdjustIdentifier(propertyEmitter.PropertyName);
-                CodeParameterDeclarationExpression paramDecl = new CodeParameterDeclarationExpression(
-                    propertyTypeReference, parameterName);
-                CodeArgumentReferenceExpression paramRef = new CodeArgumentReferenceExpression(paramDecl.Name);
+                String parameterName = uniqueIdentifierService.AdjustIdentifier(
+                    propertyEmitter.PropertyName
+                );
+                CodeParameterDeclarationExpression paramDecl =
+                    new CodeParameterDeclarationExpression(propertyTypeReference, parameterName);
+                CodeArgumentReferenceExpression paramRef = new CodeArgumentReferenceExpression(
+                    paramDecl.Name
+                );
                 method.Parameters.Add(paramDecl);
 
                 // add comment describing the parameter
-                CommentEmitter.EmitParamComments(paramDecl, Strings.FactoryParamCommentGeneral(propertyEmitter.PropertyName), method.Comments);
+                CommentEmitter.EmitParamComments(
+                    paramDecl,
+                    Strings.FactoryParamCommentGeneral(propertyEmitter.PropertyName),
+                    method.Comments
+                );
 
                 CodeExpression newPropertyValue;
                 if (MetadataUtil.IsComplexType(propertyEmitter.Item.TypeUsage.EdmType))
                 {
                     List<CodeExpression> complexVerifyParameters = new List<CodeExpression>();
                     complexVerifyParameters.Add(paramRef);
-                    complexVerifyParameters.Add(new CodePrimitiveExpression(propertyEmitter.PropertyName));
-                    
-                    newPropertyValue =
-                        new CodeMethodInvokeExpression(
-                            PropertyEmitter.CreateEdmStructuralObjectRef(TypeReference),
-                            Utils.VerifyComplexObjectIsNotNullName,
-                            complexVerifyParameters.ToArray());
+                    complexVerifyParameters.Add(
+                        new CodePrimitiveExpression(propertyEmitter.PropertyName)
+                    );
+
+                    newPropertyValue = new CodeMethodInvokeExpression(
+                        PropertyEmitter.CreateEdmStructuralObjectRef(TypeReference),
+                        Utils.VerifyComplexObjectIsNotNullName,
+                        complexVerifyParameters.ToArray()
+                    );
                 }
                 else
                 {
@@ -229,7 +259,15 @@ namespace System.Data.EntityModel.Emitters
                 // Complex property:
                 //     Property = StructuralObject.VerifyComplexObjectIsNotNull(param, propertyName);
 
-                method.Statements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(instanceRef, propertyEmitter.PropertyName), newPropertyValue));            
+                method.Statements.Add(
+                    new CodeAssignStatement(
+                        new CodePropertyReferenceExpression(
+                            instanceRef,
+                            propertyEmitter.PropertyName
+                        ),
+                        newPropertyValue
+                    )
+                );
             }
 
             // return class;
@@ -238,18 +276,14 @@ namespace System.Data.EntityModel.Emitters
             // actually add the method to the class
             typeDecl.Members.Add(method);
         }
-        
 
         #endregion
-        
+
         #region Protected Properties
 
         internal new StructuralType Item
         {
-            get
-            {
-                return base.Item as StructuralType;
-            }
+            get { return base.Item as StructuralType; }
         }
 
         protected bool UsingStandardBaseClass
@@ -258,11 +292,11 @@ namespace System.Data.EntityModel.Emitters
         }
 
         #endregion
-            
+
         #region Private Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="property"></param>
         /// <returns></returns>
@@ -278,11 +312,18 @@ namespace System.Data.EntityModel.Emitters
                 return false;
             }
 
-            if ((PropertyEmitter.GetGetterAccessibility(property) != MemberAttributes.Public &&
-                PropertyEmitter.GetSetterAccessibility(property) != MemberAttributes.Public) ||
+            if (
+                (
+                    PropertyEmitter.GetGetterAccessibility(property) != MemberAttributes.Public
+                    && PropertyEmitter.GetSetterAccessibility(property) != MemberAttributes.Public
+                )
+                ||
                 // declared in a sub type, but not setter accessbile from this type
-                (Item != property.DeclaringType && PropertyEmitter.GetSetterAccessibility(property) == MemberAttributes.Private)
-               )
+                (
+                    Item != property.DeclaringType
+                    && PropertyEmitter.GetSetterAccessibility(property) == MemberAttributes.Private
+                )
+            )
             {
                 return false;
             }
@@ -290,16 +331,18 @@ namespace System.Data.EntityModel.Emitters
             return true;
         }
 
-        private void AssignBaseType(CodeTypeDeclaration typeDecl,
-                                    CodeTypeReference baseType,
-                                    CodeTypeReference eventReturnedBaseType)
+        private void AssignBaseType(
+            CodeTypeDeclaration typeDecl,
+            CodeTypeReference baseType,
+            CodeTypeReference eventReturnedBaseType
+        )
         {
             if (eventReturnedBaseType != null && !eventReturnedBaseType.Equals(baseType))
             {
                 _usingStandardBaseClass = false;
                 typeDecl.BaseTypes.Add(eventReturnedBaseType);
             }
-            else 
+            else
             {
                 if (baseType != null)
                 {

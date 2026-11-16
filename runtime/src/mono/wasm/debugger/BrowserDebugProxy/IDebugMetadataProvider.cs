@@ -18,7 +18,11 @@ public interface IDebugMetadataProvider
 {
     public ImmutableArray<DebugDirectoryEntry> ReadDebugDirectory();
     public CodeViewDebugDirectoryData ReadCodeViewDebugDirectoryData(DebugDirectoryEntry entry);
-    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(DebugDirectoryEntry entry);
+    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(
+        DebugDirectoryEntry entry
+    );
 
-    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(DebugDirectoryEntry entry);
+    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(
+        DebugDirectoryEntry entry
+    );
 }

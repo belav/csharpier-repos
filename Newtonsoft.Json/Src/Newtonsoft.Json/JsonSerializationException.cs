@@ -59,9 +59,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializationException"/> class.
         /// </summary>
-        public JsonSerializationException()
-        {
-        }
+        public JsonSerializationException() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializationException"/> class
@@ -69,9 +67,7 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public JsonSerializationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializationException"/> class
@@ -80,9 +76,7 @@ namespace Newtonsoft.Json
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
         public JsonSerializationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
         /// <summary>
@@ -93,9 +87,7 @@ namespace Newtonsoft.Json
         /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is <c>null</c>.</exception>
         /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
         public JsonSerializationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 #endif
 
         /// <summary>
@@ -107,7 +99,13 @@ namespace Newtonsoft.Json
         /// <param name="lineNumber">The line number indicating where the error occurred.</param>
         /// <param name="linePosition">The line position indicating where the error occurred.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
-        public JsonSerializationException(string message, string path, int lineNumber, int linePosition, Exception? innerException)
+        public JsonSerializationException(
+            string message,
+            string path,
+            int lineNumber,
+            int linePosition,
+            Exception? innerException
+        )
             : base(message, innerException)
         {
             Path = path;
@@ -120,12 +118,21 @@ namespace Newtonsoft.Json
             return Create(reader, message, null);
         }
 
-        internal static JsonSerializationException Create(JsonReader reader, string message, Exception? ex)
+        internal static JsonSerializationException Create(
+            JsonReader reader,
+            string message,
+            Exception? ex
+        )
         {
             return Create(reader as IJsonLineInfo, reader.Path, message, ex);
         }
 
-        internal static JsonSerializationException Create(IJsonLineInfo? lineInfo, string path, string message, Exception? ex)
+        internal static JsonSerializationException Create(
+            IJsonLineInfo? lineInfo,
+            string path,
+            string message,
+            Exception? ex
+        )
         {
             message = JsonPosition.FormatMessage(lineInfo, path, message);
 

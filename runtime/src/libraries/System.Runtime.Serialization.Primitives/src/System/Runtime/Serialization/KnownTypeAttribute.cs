@@ -3,7 +3,11 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Struct,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public sealed class KnownTypeAttribute : Attribute
     {
         public KnownTypeAttribute(Type type)

@@ -21,20 +21,35 @@ namespace System.ServiceModel
             if (certificate == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
 
-            base.Initialize(new Claim(ClaimTypes.Thumbprint, certificate.GetCertHash(), Rights.PossessProperty));
+            base.Initialize(
+                new Claim(ClaimTypes.Thumbprint, certificate.GetCertHash(), Rights.PossessProperty)
+            );
 
             this.certificateCollection.Add(certificate);
         }
 
-        public X509CertificateEndpointIdentity(X509Certificate2 primaryCertificate, X509Certificate2Collection supportingCertificates)
+        public X509CertificateEndpointIdentity(
+            X509Certificate2 primaryCertificate,
+            X509Certificate2Collection supportingCertificates
+        )
         {
             if (primaryCertificate == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("primaryCertificate");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "primaryCertificate"
+                );
 
             if (supportingCertificates == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("supportingCertificates");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "supportingCertificates"
+                );
 
-            base.Initialize(new Claim(ClaimTypes.Thumbprint, primaryCertificate.GetCertHash(), Rights.PossessProperty));
+            base.Initialize(
+                new Claim(
+                    ClaimTypes.Thumbprint,
+                    primaryCertificate.GetCertHash(),
+                    Rights.PossessProperty
+                )
+            );
 
             this.certificateCollection.Add(primaryCertificate);
 
@@ -51,17 +66,41 @@ namespace System.ServiceModel
 
             reader.MoveToContent();
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnexpectedEmptyElementExpectingClaim, XD.AddressingDictionary.X509v3Certificate.Value, XD.AddressingDictionary.IdentityExtensionNamespace.Value)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.UnexpectedEmptyElementExpectingClaim,
+                            XD.AddressingDictionary.X509v3Certificate.Value,
+                            XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                        )
+                    )
+                );
 
-            reader.ReadStartElement(XD.XmlSignatureDictionary.X509Data, XD.XmlSignatureDictionary.Namespace);
-            while (reader.IsStartElement(XD.XmlSignatureDictionary.X509Certificate, XD.XmlSignatureDictionary.Namespace))
+            reader.ReadStartElement(
+                XD.XmlSignatureDictionary.X509Data,
+                XD.XmlSignatureDictionary.Namespace
+            );
+            while (
+                reader.IsStartElement(
+                    XD.XmlSignatureDictionary.X509Certificate,
+                    XD.XmlSignatureDictionary.Namespace
+                )
+            )
             {
-                X509Certificate2 certificate = new X509Certificate2(Convert.FromBase64String(reader.ReadElementString()));
+                X509Certificate2 certificate = new X509Certificate2(
+                    Convert.FromBase64String(reader.ReadElementString())
+                );
                 if (this.certificateCollection.Count == 0)
                 {
-                    // This is the first certificate. We assume this as the primary 
+                    // This is the first certificate. We assume this as the primary
                     // certificate and initialize the base class.
-                    base.Initialize(new Claim(ClaimTypes.Thumbprint, certificate.GetCertHash(), Rights.PossessProperty));
+                    base.Initialize(
+                        new Claim(
+                            ClaimTypes.Thumbprint,
+                            certificate.GetCertHash(),
+                            Rights.PossessProperty
+                        )
+                    );
                 }
 
                 this.certificateCollection.Add(certificate);
@@ -70,7 +109,15 @@ namespace System.ServiceModel
             reader.ReadEndElement();
 
             if (this.certificateCollection.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnexpectedEmptyElementExpectingClaim, XD.AddressingDictionary.X509v3Certificate.Value, XD.AddressingDictionary.IdentityExtensionNamespace.Value)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.UnexpectedEmptyElementExpectingClaim,
+                            XD.AddressingDictionary.X509v3Certificate.Value,
+                            XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                        )
+                    )
+                );
         }
 
         public X509Certificate2Collection Certificates
@@ -83,11 +130,23 @@ namespace System.ServiceModel
             if (writer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
-            writer.WriteStartElement(XD.XmlSignatureDictionary.Prefix.Value, XD.XmlSignatureDictionary.KeyInfo, XD.XmlSignatureDictionary.Namespace);
-            writer.WriteStartElement(XD.XmlSignatureDictionary.Prefix.Value, XD.XmlSignatureDictionary.X509Data, XD.XmlSignatureDictionary.Namespace);
+            writer.WriteStartElement(
+                XD.XmlSignatureDictionary.Prefix.Value,
+                XD.XmlSignatureDictionary.KeyInfo,
+                XD.XmlSignatureDictionary.Namespace
+            );
+            writer.WriteStartElement(
+                XD.XmlSignatureDictionary.Prefix.Value,
+                XD.XmlSignatureDictionary.X509Data,
+                XD.XmlSignatureDictionary.Namespace
+            );
             for (int i = 0; i < certificateCollection.Count; ++i)
             {
-                writer.WriteElementString(XD.XmlSignatureDictionary.X509Certificate, XD.XmlSignatureDictionary.Namespace, Convert.ToBase64String(certificateCollection[i].RawData));
+                writer.WriteElementString(
+                    XD.XmlSignatureDictionary.X509Certificate,
+                    XD.XmlSignatureDictionary.Namespace,
+                    Convert.ToBase64String(certificateCollection[i].RawData)
+                );
             }
             writer.WriteEndElement();
             writer.WriteEndElement();

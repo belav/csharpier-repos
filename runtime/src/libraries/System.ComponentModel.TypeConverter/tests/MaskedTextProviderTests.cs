@@ -42,7 +42,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_Mask_Culture()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, new CultureInfo("en-US"));
+            var maskedTextProvider = new MaskedTextProvider(
+                TestSimpleDigitMask,
+                new CultureInfo("en-US")
+            );
             Assert.Same(TestSimpleDigitMask, maskedTextProvider.Mask);
             Assert.Equal(TestLCID, maskedTextProvider.Culture.LCID);
         }
@@ -50,7 +53,11 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_Mask_Culture__RestrictToAscii()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, new CultureInfo("en-US"), true);
+            var maskedTextProvider = new MaskedTextProvider(
+                TestSimpleDigitMask,
+                new CultureInfo("en-US"),
+                true
+            );
             Assert.Same(TestSimpleDigitMask, maskedTextProvider.Mask);
             Assert.Equal(TestLCID, maskedTextProvider.Culture.LCID);
             Assert.True(maskedTextProvider.AsciiOnly);
@@ -59,7 +66,11 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_Mask_PasswordChar_AllowPromptAsInput()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, TestPasswordChar, false);
+            var maskedTextProvider = new MaskedTextProvider(
+                TestSimpleDigitMask,
+                TestPasswordChar,
+                false
+            );
             Assert.Same(TestSimpleDigitMask, maskedTextProvider.Mask);
             Assert.Equal(TestPasswordChar, maskedTextProvider.PasswordChar);
             Assert.False(maskedTextProvider.AllowPromptAsInput);
@@ -68,7 +79,12 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_Mask_Culture_PasswordChar_AllowPromptAsInput()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, new CultureInfo("en-US"), TestPasswordChar, false);
+            var maskedTextProvider = new MaskedTextProvider(
+                TestSimpleDigitMask,
+                new CultureInfo("en-US"),
+                TestPasswordChar,
+                false
+            );
             Assert.Same(TestSimpleDigitMask, maskedTextProvider.Mask);
             Assert.Equal(TestLCID, maskedTextProvider.Culture.LCID);
             Assert.Equal(TestPasswordChar, maskedTextProvider.PasswordChar);
@@ -78,7 +94,14 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_Mask_Culture_AllowPromptAsInput_PromptChar_PasswordChar_RestrictToAscii()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, new CultureInfo("en-US"), false, TestPromptChar, TestPasswordChar, false);
+            var maskedTextProvider = new MaskedTextProvider(
+                TestSimpleDigitMask,
+                new CultureInfo("en-US"),
+                false,
+                TestPromptChar,
+                TestPasswordChar,
+                false
+            );
             Assert.Same(TestSimpleDigitMask, maskedTextProvider.Mask);
             Assert.Equal(TestLCID, maskedTextProvider.Culture.LCID);
             Assert.False(maskedTextProvider.AllowPromptAsInput);
@@ -243,8 +266,14 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void GetOperationResultFromHint()
         {
-            Assert.True(MaskedTextProvider.GetOperationResultFromHint(MaskedTextResultHint.Success));
-            Assert.False(MaskedTextProvider.GetOperationResultFromHint(MaskedTextResultHint.PositionOutOfRange));
+            Assert.True(
+                MaskedTextProvider.GetOperationResultFromHint(MaskedTextResultHint.Success)
+            );
+            Assert.False(
+                MaskedTextProvider.GetOperationResultFromHint(
+                    MaskedTextResultHint.PositionOutOfRange
+                )
+            );
         }
 
         [Fact]
@@ -260,7 +289,14 @@ namespace System.ComponentModel.Tests
         public void InsertAt_Input_Position_TestPosition_ResultHint()
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
-            Assert.True(maskedTextProvider.InsertAt(string.Empty, 0, out int testPosition, out var resultHint));
+            Assert.True(
+                maskedTextProvider.InsertAt(
+                    string.Empty,
+                    0,
+                    out int testPosition,
+                    out var resultHint
+                )
+            );
             Assert.Equal(MaskedTextResultHint.NoEffect, resultHint);
 
             Assert.True(maskedTextProvider.InsertAt('1', 0, out testPosition, out resultHint));
@@ -285,7 +321,14 @@ namespace System.ComponentModel.Tests
         public void InsertAt_InputString_Position_TestPosition_ResultHint()
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
-            Assert.True(maskedTextProvider.InsertAt(string.Empty, 0, out int testPosition, out var resultHint));
+            Assert.True(
+                maskedTextProvider.InsertAt(
+                    string.Empty,
+                    0,
+                    out int testPosition,
+                    out var resultHint
+                )
+            );
             Assert.Equal(0, testPosition);
             Assert.Equal(MaskedTextResultHint.NoEffect, resultHint);
 
@@ -342,7 +385,9 @@ namespace System.ComponentModel.Tests
             Assert.True(maskedTextProvider.InsertAt("1", 0));
             Assert.Equal(1, maskedTextProvider.AssignedEditPositionCount);
 
-            Assert.True(maskedTextProvider.Remove(out var testPosition, out MaskedTextResultHint resultHint));
+            Assert.True(
+                maskedTextProvider.Remove(out var testPosition, out MaskedTextResultHint resultHint)
+            );
             Assert.Equal(MaskedTextResultHint.Success, resultHint);
             Assert.Equal(0, testPosition);
         }
@@ -366,7 +411,7 @@ namespace System.ComponentModel.Tests
             Assert.True(maskedTextProvider.InsertAt("12", 0));
             Assert.Equal(2, maskedTextProvider.AssignedEditPositionCount);
 
-            Assert.True(maskedTextProvider.RemoveAt(0,2));
+            Assert.True(maskedTextProvider.RemoveAt(0, 2));
             Assert.Equal(0, maskedTextProvider.AssignedEditPositionCount);
         }
 
@@ -377,7 +422,14 @@ namespace System.ComponentModel.Tests
             Assert.True(maskedTextProvider.InsertAt("12", 0));
             Assert.Equal(2, maskedTextProvider.AssignedEditPositionCount);
 
-            Assert.False(maskedTextProvider.RemoveAt(0, 6, out int testPosition, out MaskedTextResultHint resultHint));
+            Assert.False(
+                maskedTextProvider.RemoveAt(
+                    0,
+                    6,
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal(6, testPosition);
             Assert.Equal(MaskedTextResultHint.PositionOutOfRange, resultHint);
 
@@ -405,8 +457,15 @@ namespace System.ComponentModel.Tests
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
             Assert.True(maskedTextProvider.InsertAt("12", 0));
-            
-            Assert.True(maskedTextProvider.Replace('2', 0, out int testPosition, out MaskedTextResultHint resultHint));
+
+            Assert.True(
+                maskedTextProvider.Replace(
+                    '2',
+                    0,
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal(TestMaskResultReplaceChar, maskedTextProvider.ToDisplayString());
             Assert.Equal(0, testPosition);
             Assert.Equal(MaskedTextResultHint.Success, resultHint);
@@ -417,8 +476,16 @@ namespace System.ComponentModel.Tests
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
             Assert.True(maskedTextProvider.InsertAt("12", 0));
-            
-            Assert.True(maskedTextProvider.Replace('2', 0, 5, out int testPosition, out MaskedTextResultHint resultHint));
+
+            Assert.True(
+                maskedTextProvider.Replace(
+                    '2',
+                    0,
+                    5,
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal("2-__-_", maskedTextProvider.ToDisplayString());
             Assert.Equal(0, testPosition);
             Assert.Equal(MaskedTextResultHint.Success, resultHint);
@@ -438,8 +505,15 @@ namespace System.ComponentModel.Tests
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
             Assert.True(maskedTextProvider.InsertAt("12", 0));
-            
-            Assert.True(maskedTextProvider.Replace("23", 0, out int testPosition, out MaskedTextResultHint resultHint));
+
+            Assert.True(
+                maskedTextProvider.Replace(
+                    "23",
+                    0,
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal(TestMaskResultReplaceString, maskedTextProvider.ToDisplayString());
             Assert.Equal(2, testPosition);
             Assert.Equal(MaskedTextResultHint.Success, resultHint);
@@ -451,10 +525,18 @@ namespace System.ComponentModel.Tests
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
             Assert.True(maskedTextProvider.InsertAt("12", 0));
 
-            Assert.False(maskedTextProvider.Replace("2", 0, 6, out int testPosition, out MaskedTextResultHint resultHint));
+            Assert.False(
+                maskedTextProvider.Replace(
+                    "2",
+                    0,
+                    6,
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal(MaskedTextResultHint.PositionOutOfRange, resultHint);
 
-            Assert.False(maskedTextProvider.Replace("2", -1, 5, out  testPosition, out resultHint));
+            Assert.False(maskedTextProvider.Replace("2", -1, 5, out testPosition, out resultHint));
             Assert.Equal(MaskedTextResultHint.PositionOutOfRange, resultHint);
 
             Assert.True(maskedTextProvider.Replace("2", 0, 5, out testPosition, out resultHint));
@@ -475,7 +557,13 @@ namespace System.ComponentModel.Tests
         public void Set_InputString_TestPosition_ResultHint()
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask);
-            Assert.True(maskedTextProvider.Set("1234", out int testPosition, out MaskedTextResultHint resultHint));
+            Assert.True(
+                maskedTextProvider.Set(
+                    "1234",
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal("1-23-4", maskedTextProvider.ToDisplayString());
             Assert.Equal(5, testPosition);
             Assert.Equal(MaskedTextResultHint.Success, resultHint);
@@ -490,14 +578,14 @@ namespace System.ComponentModel.Tests
             Assert.True(maskedTextProvider.Set("1234"));
             Assert.Equal("1-23-4", maskedTextProvider.ToString());
             Assert.Equal("*-**-*", maskedTextProvider.ToString(false));
-            Assert.Equal("1-2", maskedTextProvider.ToString(0,3));
-            Assert.Equal("*-*", maskedTextProvider.ToString(false,0,3));
+            Assert.Equal("1-2", maskedTextProvider.ToString(0, 3));
+            Assert.Equal("*-*", maskedTextProvider.ToString(false, 0, 3));
             Assert.Equal("*-**-*", maskedTextProvider.ToDisplayString());
 
             Assert.True(maskedTextProvider.Set("12"));
             Assert.Equal("1-2_-_", maskedTextProvider.ToString(true, true));
             Assert.Equal("2_-", maskedTextProvider.ToString(true, true, 2, 3));
-            Assert.Equal("*_-", maskedTextProvider.ToString(false,true, true, 2, 3));
+            Assert.Equal("*_-", maskedTextProvider.ToString(false, true, true, 2, 3));
         }
 
         [Fact]
@@ -513,8 +601,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void VerifyEscapeChar()
         {
-            var maskedTextProvider = new MaskedTextProvider
-                (TestSimpleDigitMask, '*', true) {ResetOnSpace = true};
+            var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, '*', true)
+            {
+                ResetOnSpace = true,
+            };
             Assert.True(maskedTextProvider.VerifyEscapeChar(' ', 0));
             Assert.True(maskedTextProvider.VerifyEscapeChar('_', 0));
             Assert.False(maskedTextProvider.VerifyEscapeChar('T', 0));
@@ -523,7 +613,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void VerifyString_Input()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestComplexDigitMask, new CultureInfo("en-US"));
+            var maskedTextProvider = new MaskedTextProvider(
+                TestComplexDigitMask,
+                new CultureInfo("en-US")
+            );
             Assert.True(maskedTextProvider.VerifyString("10000000"));
             Assert.False(maskedTextProvider.VerifyString("A"));
         }
@@ -531,13 +624,22 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void VerifyString_Input_TestPosition_ResultHint()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestComplexDigitMask, new CultureInfo("en-US"));
+            var maskedTextProvider = new MaskedTextProvider(
+                TestComplexDigitMask,
+                new CultureInfo("en-US")
+            );
 
-            Assert.True(maskedTextProvider.VerifyString("10000000", out int testPosition, out MaskedTextResultHint resultHint));
+            Assert.True(
+                maskedTextProvider.VerifyString(
+                    "10000000",
+                    out int testPosition,
+                    out MaskedTextResultHint resultHint
+                )
+            );
             Assert.Equal(10, testPosition);
             Assert.Equal(MaskedTextResultHint.Success, resultHint);
 
-            Assert.False(maskedTextProvider.VerifyString("A", out testPosition, out  resultHint));
+            Assert.False(maskedTextProvider.VerifyString("A", out testPosition, out resultHint));
             Assert.Equal(1, testPosition);
             Assert.Equal(MaskedTextResultHint.DigitExpected, resultHint);
         }
@@ -545,7 +647,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void ComplexDigitMaskTest()
         {
-            var maskedTextProvider = new MaskedTextProvider(TestComplexDigitMask, new CultureInfo("en-US"));
+            var maskedTextProvider = new MaskedTextProvider(
+                TestComplexDigitMask,
+                new CultureInfo("en-US")
+            );
             maskedTextProvider.Set("10000000");
             Assert.Equal("$100,000.00", maskedTextProvider.ToString());
         }
@@ -557,7 +662,10 @@ namespace System.ComponentModel.Tests
             string expectedSeparator = cultureInfo.DateTimeFormat.DateSeparator;
             var maskedTextProvider = new MaskedTextProvider(TestComplexDateTimeMask, cultureInfo);
             maskedTextProvider.Set("01012000101010");
-            Assert.Equal($"01{expectedSeparator}01{expectedSeparator}2000 10:10:10", maskedTextProvider.ToString());
+            Assert.Equal(
+                $"01{expectedSeparator}01{expectedSeparator}2000 10:10:10",
+                maskedTextProvider.ToString()
+            );
         }
 
         [Fact]

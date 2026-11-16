@@ -8,7 +8,11 @@ using System.Diagnostics;
 
 namespace System.DirectoryServices.AccountManagement
 {
-    internal sealed class TrackedCollection<T> : ICollection<T>, ICollection, IEnumerable<T>, IEnumerable
+    internal sealed class TrackedCollection<T>
+        : ICollection<T>,
+            ICollection,
+            IEnumerable<T>,
+            IEnumerable
     {
         //
         // ICollection
@@ -35,24 +39,21 @@ namespace System.DirectoryServices.AccountManagement
             foreach (ValueEl el in this.combinedValues)
             {
                 array.SetValue(el.GetCurrentValue(), index);
-                checked { index++; }
+                checked
+                {
+                    index++;
+                }
             }
         }
 
         int ICollection.Count
         {
-            get
-            {
-                return Count;
-            }
+            get { return Count; }
         }
 
         bool ICollection.IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         object ICollection.SyncRoot
@@ -86,10 +87,7 @@ namespace System.DirectoryServices.AccountManagement
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public int Count
@@ -108,7 +106,11 @@ namespace System.DirectoryServices.AccountManagement
         public IEnumerator<T> GetEnumerator()
         {
             Debug.Fail("TrackedCollection.GetEnumerator(): should not be here");
-            return new TrackedCollectionEnumerator<T>("TrackedCollectionEnumerator", this, this.combinedValues);
+            return new TrackedCollectionEnumerator<T>(
+                "TrackedCollectionEnumerator",
+                this,
+                this.combinedValues
+            );
         }
 
         //
@@ -149,7 +151,12 @@ namespace System.DirectoryServices.AccountManagement
         // Adds obj to the end of the list by inserting it into combinedValues.
         public void Add(T o)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollection", "Add({0})", o.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "TrackedCollection",
+                "Add({0})",
+                o.ToString()
+            );
 
             MarkChange();
 
@@ -165,7 +172,12 @@ namespace System.DirectoryServices.AccountManagement
         // and adds the left-side of that pair to removedValues, to record the removal.
         public bool Remove(T value)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollection", "Remove({0})", value.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "TrackedCollection",
+                "Remove({0})",
+                value.ToString()
+            );
 
             MarkChange();
 
@@ -173,7 +185,11 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if (el.isInserted && el.insertedValue.Equals(value))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollection", "found value to remove on inserted");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "TrackedCollection",
+                        "found value to remove on inserted"
+                    );
 
                     this.combinedValues.Remove(el);
                     return true;
@@ -181,7 +197,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (!el.isInserted && el.originalValue.Right.Equals(value))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollection", "found value to remove on original");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "TrackedCollection",
+                        "found value to remove on original"
+                    );
 
                     this.combinedValues.Remove(el);
                     this.removedValues.Add(el.originalValue.Left);
@@ -210,7 +230,7 @@ namespace System.DirectoryServices.AccountManagement
                 if (this.isInserted)
                     return this.insertedValue;
                 else
-                    return this.originalValue.Right;    // Right == current value
+                    return this.originalValue.Right; // Right == current value
             }
         }
 
@@ -261,10 +281,7 @@ namespace System.DirectoryServices.AccountManagement
 
         internal List<T> Removed
         {
-            get
-            {
-                return this.removedValues;
-            }
+            get { return this.removedValues; }
         }
 
         internal List<Pair<T, T>> ChangedValues
@@ -281,7 +298,9 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             // Don't need to worry about whether we need to copy the T,
                             // since we're not handing it out to the app and we'll internally treat it as read-only
-                            changedList.Add(new Pair<T, T>(el.originalValue.Left, el.originalValue.Right));
+                            changedList.Add(
+                                new Pair<T, T>(el.originalValue.Left, el.originalValue.Right)
+                            );
                         }
                     }
                 }

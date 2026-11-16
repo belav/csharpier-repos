@@ -7,9 +7,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     internal interface IRazorDocumentServiceProvider : IRazorDocumentOperationService
     {
         /// <summary>
-        /// Gets a document specific service provided by the host identified by the service type. 
+        /// Gets a document specific service provided by the host identified by the service type.
         /// If the host does not provide the service, this method returns null.
         /// </summary>
-        TService? GetService<TService>() where TService : class;
+        TService? GetService<TService>()
+            where TService : class;
     }
 }

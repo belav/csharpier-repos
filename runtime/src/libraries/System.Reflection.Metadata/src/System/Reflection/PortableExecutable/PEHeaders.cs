@@ -26,9 +26,9 @@ namespace System.Reflection.PortableExecutable
         private readonly int _corHeaderStartOffset = -1;
         private readonly int _peHeaderStartOffset = -1;
 
-        internal const ushort DosSignature = 0x5A4D;     // 'M' 'Z'
+        internal const ushort DosSignature = 0x5A4D; // 'M' 'Z'
         internal const int PESignatureOffsetLocation = 0x3C;
-        internal const uint PESignature = 0x00004550;    // PE00
+        internal const uint PESignature = 0x00004550; // PE00
         internal const int PESignatureSize = sizeof(uint);
 
         /// <summary>
@@ -40,9 +40,7 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
         public PEHeaders(Stream peStream)
-           : this(peStream, 0)
-        {
-        }
+            : this(peStream, 0) { }
 
         /// <summary>
         /// Reads PE headers from the current location in the stream.
@@ -55,9 +53,7 @@ namespace System.Reflection.PortableExecutable
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the stream.</exception>
         public PEHeaders(Stream peStream, int size)
-            : this(peStream, size, isLoadedImage: false)
-        {
-        }
+            : this(peStream, size, isLoadedImage: false) { }
 
         /// <summary>
         /// Reads PE headers from the current location in the stream.
@@ -201,10 +197,7 @@ namespace System.Reflection.PortableExecutable
         /// </summary>
         public bool IsConsoleApplication
         {
-            get
-            {
-                return _peHeader != null && _peHeader.Subsystem == Subsystem.WindowsCui;
-            }
+            get { return _peHeader != null && _peHeader.Subsystem == Subsystem.WindowsCui; }
         }
 
         /// <summary>
@@ -212,10 +205,7 @@ namespace System.Reflection.PortableExecutable
         /// </summary>
         public bool IsDll
         {
-            get
-            {
-                return (_coffHeader.Characteristics & Characteristics.Dll) != 0;
-            }
+            get { return (_coffHeader.Characteristics & Characteristics.Dll) != 0; }
         }
 
         /// <summary>
@@ -223,15 +213,18 @@ namespace System.Reflection.PortableExecutable
         /// </summary>
         public bool IsExe
         {
-            get
-            {
-                return (_coffHeader.Characteristics & Characteristics.Dll) == 0;
-            }
+            get { return (_coffHeader.Characteristics & Characteristics.Dll) == 0; }
         }
 
         private bool TryCalculateCorHeaderOffset(out int startOffset)
         {
-            if (!TryGetDirectoryOffset(_peHeader!.CorHeaderTableDirectory, out startOffset, canCrossSectionBoundary: false))
+            if (
+                !TryGetDirectoryOffset(
+                    _peHeader!.CorHeaderTableDirectory,
+                    out startOffset,
+                    canCrossSectionBoundary: false
+                )
+            )
             {
                 startOffset = -1;
                 return false;
@@ -319,7 +312,11 @@ namespace System.Reflection.PortableExecutable
             return TryGetDirectoryOffset(directory, out offset, canCrossSectionBoundary: true);
         }
 
-        internal bool TryGetDirectoryOffset(DirectoryEntry directory, out int offset, bool canCrossSectionBoundary)
+        internal bool TryGetDirectoryOffset(
+            DirectoryEntry directory,
+            out int offset,
+            bool canCrossSectionBoundary
+        )
         {
             int sectionIndex = GetContainingSectionIndex(directory.RelativeVirtualAddress);
             if (sectionIndex < 0)
@@ -328,13 +325,19 @@ namespace System.Reflection.PortableExecutable
                 return false;
             }
 
-            int relativeOffset = directory.RelativeVirtualAddress - _sectionHeaders[sectionIndex].VirtualAddress;
-            if (!canCrossSectionBoundary && directory.Size > _sectionHeaders[sectionIndex].VirtualSize - relativeOffset)
+            int relativeOffset =
+                directory.RelativeVirtualAddress - _sectionHeaders[sectionIndex].VirtualAddress;
+            if (
+                !canCrossSectionBoundary
+                && directory.Size > _sectionHeaders[sectionIndex].VirtualSize - relativeOffset
+            )
             {
                 throw new BadImageFormatException(SR.SectionTooSmall);
             }
 
-            offset = _isLoadedImage ? directory.RelativeVirtualAddress : _sectionHeaders[sectionIndex].PointerToRawData + relativeOffset;
+            offset = _isLoadedImage
+                ? directory.RelativeVirtualAddress
+                : _sectionHeaders[sectionIndex].PointerToRawData + relativeOffset;
             return true;
         }
 
@@ -350,8 +353,11 @@ namespace System.Reflection.PortableExecutable
         {
             for (int i = 0; i < _sectionHeaders.Length; i++)
             {
-                if (_sectionHeaders[i].VirtualAddress <= relativeVirtualAddress &&
-                    relativeVirtualAddress < _sectionHeaders[i].VirtualAddress + _sectionHeaders[i].VirtualSize)
+                if (
+                    _sectionHeaders[i].VirtualAddress <= relativeVirtualAddress
+                    && relativeVirtualAddress
+                        < _sectionHeaders[i].VirtualAddress + _sectionHeaders[i].VirtualSize
+                )
                 {
                     return i;
                 }
@@ -404,7 +410,13 @@ namespace System.Reflection.PortableExecutable
             }
             else
             {
-                if (!TryGetDirectoryOffset(_corHeader.MetadataDirectory, out start, canCrossSectionBoundary: false))
+                if (
+                    !TryGetDirectoryOffset(
+                        _corHeader.MetadataDirectory,
+                        out start,
+                        canCrossSectionBoundary: false
+                    )
+                )
                 {
                     throw new BadImageFormatException(SR.MissingDataDirectory);
                 }
@@ -412,10 +424,7 @@ namespace System.Reflection.PortableExecutable
                 size = _corHeader.MetadataDirectory.Size;
             }
 
-            if (start < 0 ||
-                start >= peImageSize ||
-                size <= 0 ||
-                start > peImageSize - size)
+            if (start < 0 || start >= peImageSize || size <= 0 || start > peImageSize - size)
             {
                 throw new BadImageFormatException(SR.InvalidMetadataSectionSpan);
             }

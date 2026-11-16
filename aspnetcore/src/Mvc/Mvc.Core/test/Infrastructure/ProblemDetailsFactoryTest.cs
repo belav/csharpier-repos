@@ -24,14 +24,11 @@ public class ProblemDetailsFactoryTest
         Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.6.1", problemDetails.Type);
         Assert.Null(problemDetails.Instance);
         Assert.Null(problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal("some-trace", kvp.Value);
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal("some-trace", kvp.Value);
+        });
     }
 
     [Fact]
@@ -46,14 +43,11 @@ public class ProblemDetailsFactoryTest
         Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.5.7", problemDetails.Type);
         Assert.Null(problemDetails.Instance);
         Assert.Null(problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal("some-trace", kvp.Value);
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal("some-trace", kvp.Value);
+        });
     }
 
     [Fact]
@@ -75,14 +69,11 @@ public class ProblemDetailsFactoryTest
         Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.5.7", problemDetails.Type);
         Assert.Null(problemDetails.Instance);
         Assert.Equal(detail, problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal("some-trace", kvp.Value);
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal("some-trace", kvp.Value);
+        });
     }
 
     [Fact]
@@ -99,22 +90,16 @@ public class ProblemDetailsFactoryTest
         Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.5.1", problemDetails.Type);
         Assert.Null(problemDetails.Instance);
         Assert.Null(problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal("some-trace", kvp.Value);
-            }
-        );
-        Assert.Collection(
-            problemDetails.Errors,
-            kvp =>
-            {
-                Assert.Equal("some-key", kvp.Key);
-                Assert.Equal(new[] { "some-value" }, kvp.Value);
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal("some-trace", kvp.Value);
+        });
+        Assert.Collection(problemDetails.Errors, kvp =>
+        {
+            Assert.Equal("some-key", kvp.Key);
+            Assert.Equal(new[] { "some-value" }, kvp.Value);
+        });
     }
 
     [Fact]
@@ -135,22 +120,16 @@ public class ProblemDetailsFactoryTest
         Assert.Equal("https://tools.ietf.org/html/rfc4918#section-11.2", problemDetails.Type);
         Assert.Null(problemDetails.Instance);
         Assert.Null(problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal("some-trace", kvp.Value);
-            }
-        );
-        Assert.Collection(
-            problemDetails.Errors,
-            kvp =>
-            {
-                Assert.Equal("some-key", kvp.Key);
-                Assert.Equal(new[] { "some-value" }, kvp.Value);
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal("some-trace", kvp.Value);
+        });
+        Assert.Collection(problemDetails.Errors, kvp =>
+        {
+            Assert.Equal("some-key", kvp.Key);
+            Assert.Equal(new[] { "some-value" }, kvp.Value);
+        });
     }
 
     [Fact]
@@ -174,22 +153,16 @@ public class ProblemDetailsFactoryTest
         Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.5.1", problemDetails.Type);
         Assert.Equal(instance, problemDetails.Instance);
         Assert.Null(problemDetails.Detail);
-        Assert.Collection(
-            problemDetails.Extensions,
-            kvp =>
-            {
-                Assert.Equal("traceId", kvp.Key);
-                Assert.Equal("some-trace", kvp.Value);
-            }
-        );
-        Assert.Collection(
-            problemDetails.Errors,
-            kvp =>
-            {
-                Assert.Equal("some-key", kvp.Key);
-                Assert.Equal(new[] { "some-value" }, kvp.Value);
-            }
-        );
+        Assert.Collection(problemDetails.Extensions, kvp =>
+        {
+            Assert.Equal("traceId", kvp.Key);
+            Assert.Equal("some-trace", kvp.Value);
+        });
+        Assert.Collection(problemDetails.Errors, kvp =>
+        {
+            Assert.Equal("some-key", kvp.Key);
+            Assert.Equal(new[] { "some-value" }, kvp.Value);
+        });
     }
 
     private static DefaultHttpContext GetHttpContext()

@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     /// null implementation of the service. it doesn't do anything since there is no way to observe
     /// its impact in this layer.
     /// </summary>
-    [ExportWorkspaceService(typeof(ISolutionCrawlerRegistrationService), ServiceLayer.Default), Shared]
-    internal partial class NullSolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
+    [
+        ExportWorkspaceService(typeof(ISolutionCrawlerRegistrationService), ServiceLayer.Default),
+        Shared
+    ]
+    internal partial class NullSolutionCrawlerRegistrationService
+        : ISolutionCrawlerRegistrationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NullSolutionCrawlerRegistrationService()
-        {
-        }
+        public NullSolutionCrawlerRegistrationService() { }
 
         public void Register(Workspace workspace)
         {
@@ -33,7 +35,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             // base implementation do nothing.
         }
 
-        public void AddAnalyzerProvider(IIncrementalAnalyzerProvider provider, IncrementalAnalyzerProviderMetadata metadata)
+        public void AddAnalyzerProvider(
+            IIncrementalAnalyzerProvider provider,
+            IncrementalAnalyzerProviderMetadata metadata
+        )
         {
             // base implementation do nothing.
         }

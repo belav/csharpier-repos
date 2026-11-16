@@ -25,7 +25,14 @@ namespace System.ServiceModel.Channels
         // PeerNode is serialized
         class SimpleStateManager
         {
-            internal enum State { NotOpened, Opening, Opened, Closing };
+            internal enum State
+            {
+                NotOpened,
+                Opening,
+                Opened,
+                Closing,
+            };
+
             State currentState = State.NotOpened;
             object thisLock = new object();
             Queue<IOperation> queue = new Queue<IOperation>();
@@ -93,8 +100,12 @@ namespace System.ServiceModel.Channels
                 return op;
             }
 
-
-            public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state, bool waitForOnline)
+            public IAsyncResult BeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state,
+                bool waitForOnline
+            )
             {
                 bool completedSynchronously = false;
                 OpenOperation op = null;
@@ -107,7 +118,14 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        op = new OpenOperation(this, peerNode, timeout, callback, state, waitForOnline);
+                        op = new OpenOperation(
+                            this,
+                            peerNode,
+                            timeout,
+                            callback,
+                            state,
+                            waitForOnline
+                        );
                         queue.Enqueue(op);
                         RunQueue();
                     }
@@ -198,8 +216,12 @@ namespace System.ServiceModel.Channels
                             }
                             catch (Exception e)
                             {
-                                if (Fx.IsFatal(e)) throw;
-                                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+                                if (Fx.IsFatal(e))
+                                    throw;
+                                DiagnosticUtility.TraceHandledException(
+                                    e,
+                                    TraceEventType.Information
+                                );
                             }
                         }
                         else
@@ -219,8 +241,13 @@ namespace System.ServiceModel.Channels
             {
                 PeerNodeImplementation peerNode;
 
-                public CloseOperation(SimpleStateManager stateManager,
-                    PeerNodeImplementation peerNode, TimeSpan timeout, AsyncCallback callback, object state)
+                public CloseOperation(
+                    SimpleStateManager stateManager,
+                    PeerNodeImplementation peerNode,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(stateManager, timeout, callback, state)
                 {
                     this.peerNode = peerNode;
@@ -245,17 +272,26 @@ namespace System.ServiceModel.Channels
                             }
                             else if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                             {
-                                // Time out has already happened complete will be taken care of in the 
+                                // Time out has already happened complete will be taken care of in the
                                 // OperationBase class
                                 invokeOperation = false;
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException());
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new TimeoutException()
+                                );
                             }
                             else
                             {
                                 // the PeerNode needs to be closed
-                                if (!(stateManager.currentState != State.Opening && stateManager.currentState != State.Closing))
+                                if (
+                                    !(
+                                        stateManager.currentState != State.Opening
+                                        && stateManager.currentState != State.Closing
+                                    )
+                                )
                                 {
-                                    throw Fx.AssertAndThrow("Open and close are serialized by queue We should not be either in Closing or Opening state at this point");
+                                    throw Fx.AssertAndThrow(
+                                        "Open and close are serialized by queue We should not be either in Closing or Opening state at this point"
+                                    );
                                 }
                                 if (stateManager.currentState != State.NotOpened)
                                 {
@@ -267,7 +303,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                         lclException = e;
                     }
@@ -280,7 +317,8 @@ namespace System.ServiceModel.Channels
                         }
                         catch (Exception e)
                         {
-                            if (Fx.IsFatal(e)) throw;
+                            if (Fx.IsFatal(e))
+                                throw;
                             DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                             lclException = e;
                         }
@@ -298,8 +336,14 @@ namespace System.ServiceModel.Channels
                 PeerNodeImplementation peerNode;
                 bool waitForOnline;
 
-                public OpenOperation(SimpleStateManager stateManager, PeerNodeImplementation peerNode, TimeSpan timeout,
-                    AsyncCallback callback, object state, bool waitForOnline)
+                public OpenOperation(
+                    SimpleStateManager stateManager,
+                    PeerNodeImplementation peerNode,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state,
+                    bool waitForOnline
+                )
                     : base(stateManager, timeout, callback, state)
                 {
                     this.peerNode = peerNode;
@@ -325,17 +369,26 @@ namespace System.ServiceModel.Channels
                             }
                             else if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                             {
-                                // Time out has already happened complete will be taken care of in the 
+                                // Time out has already happened complete will be taken care of in the
                                 // OperationBase class
                                 invokeOperation = false;
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException());
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new TimeoutException()
+                                );
                             }
                             else
                             {
                                 // the PeerNode needs to be opened
-                                if (!(stateManager.currentState != State.Opening && stateManager.currentState != State.Closing))
+                                if (
+                                    !(
+                                        stateManager.currentState != State.Opening
+                                        && stateManager.currentState != State.Closing
+                                    )
+                                )
                                 {
-                                    throw Fx.AssertAndThrow("Open and close are serialized by queue We should not be either in Closing or Opening state at this point");
+                                    throw Fx.AssertAndThrow(
+                                        "Open and close are serialized by queue We should not be either in Closing or Opening state at this point"
+                                    );
                                 }
                                 if (stateManager.currentState != State.Opened)
                                 {
@@ -347,7 +400,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                         lclException = e;
                     }
@@ -364,7 +418,8 @@ namespace System.ServiceModel.Channels
                         }
                         catch (Exception e)
                         {
-                            if (Fx.IsFatal(e)) throw;
+                            if (Fx.IsFatal(e))
+                                throw;
                             lock (ThisLock)
                             {
                                 stateManager.currentState = State.NotOpened;
@@ -387,12 +442,16 @@ namespace System.ServiceModel.Channels
                 protected TimeoutHelper timeoutHelper;
                 AsyncCallback callback;
                 protected bool invokeOperation;
-                
+
                 // Double-checked locking pattern requires volatile for read/write synchronization
                 volatile bool completed;
 
-                public OperationBase(SimpleStateManager stateManager, TimeSpan timeout,
-                    AsyncCallback callback, object state)
+                public OperationBase(
+                    SimpleStateManager stateManager,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.stateManager = stateManager;
@@ -410,8 +469,12 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.AsyncCallbackException), e);
+                        if (Fx.IsFatal(e))
+                            throw;
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                            SR.GetString(SR.AsyncCallbackException),
+                            e
+                        );
                     }
                 }
 
@@ -453,8 +516,12 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.MessagePropagationException), e);
+                        if (Fx.IsFatal(e))
+                            throw;
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                            SR.GetString(SR.MessagePropagationException),
+                            e
+                        );
                     }
                 }
 
@@ -463,7 +530,7 @@ namespace System.ServiceModel.Channels
                     get { return stateManager.thisLock; }
                 }
 
-                static public void End(IAsyncResult result)
+                public static void End(IAsyncResult result)
                 {
                     AsyncResult.End<OperationBase>(result);
                 }

@@ -12,8 +12,6 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public class BasicErrorListDesktop : BasicErrorListCommon
     {
         public BasicErrorListDesktop()
-            : base(WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+            : base(WellKnownProjectTemplates.ClassLibrary) { }
     }
 }

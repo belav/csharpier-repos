@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class foo
 {
     [Fact]
@@ -10,7 +11,6 @@ public class foo
         return bar.getX();
     }
 }
-
 
 public class bar
 {
@@ -28,10 +28,9 @@ public class bar
     }
 }
 
-
 public class bar2
 {
-    static public int x;
+    public static int x;
 
     static bar2()
     {

@@ -31,12 +31,18 @@ namespace Microsoft.Web.Mvc.Controls.Test
             string html = MvcTestHelper.GetControlRendering(c, true);
 
             // Verify
-            Assert.Equal("<select>" + Environment.NewLine
-                       + "\t<option>" + Environment.NewLine
-                       + "\t\tSample Item" + Environment.NewLine
-                       + "\t</option>" + Environment.NewLine
-                       + "</select>",
-                         html);
+            Assert.Equal(
+                "<select>"
+                    + Environment.NewLine
+                    + "\t<option>"
+                    + Environment.NewLine
+                    + "\t\tSample Item"
+                    + Environment.NewLine
+                    + "\t</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html
+            );
         }
 
         [Fact]
@@ -55,16 +61,26 @@ namespace Microsoft.Web.Mvc.Controls.Test
             string html = MvcTestHelper.GetControlRendering(c, false);
 
             // Verify
-            Assert.Equal("<select name=\"nameKey\">" + Environment.NewLine
-                       + "\t<option>" + Environment.NewLine
-                       + "\t\taaa" + Environment.NewLine
-                       + "\t</option><option selected=\"selected\">" + Environment.NewLine
-                       + "\t\tbbb" + Environment.NewLine
-                       + "\t</option><option>" + Environment.NewLine
-                       + "\t\tccc" + Environment.NewLine
-                       + "\t</option>" + Environment.NewLine
-                       + "</select>",
-                         html);
+            Assert.Equal(
+                "<select name=\"nameKey\">"
+                    + Environment.NewLine
+                    + "\t<option>"
+                    + Environment.NewLine
+                    + "\t\taaa"
+                    + Environment.NewLine
+                    + "\t</option><option selected=\"selected\">"
+                    + Environment.NewLine
+                    + "\t\tbbb"
+                    + Environment.NewLine
+                    + "\t</option><option>"
+                    + Environment.NewLine
+                    + "\t\tccc"
+                    + Environment.NewLine
+                    + "\t</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html
+            );
         }
 
         [Fact]
@@ -82,25 +98,37 @@ namespace Microsoft.Web.Mvc.Controls.Test
                 {
                     new { Text = "aaa", Value = "111" },
                     new { Text = "bbb", Value = "222" },
-                    new { Text = "ccc", Value = "333" }
+                    new { Text = "ccc", Value = "333" },
                 },
                 "Value",
                 "Text",
-                "222");
+                "222"
+            );
 
             // Execute
             string html = MvcTestHelper.GetControlRendering(c, false);
 
             // Verify
-            Assert.Equal("<select name=\"nameKey\">" + Environment.NewLine
-                       + "\t<option value=\"111\">" + Environment.NewLine
-                       + "\t\taaa" + Environment.NewLine
-                       + "\t</option><option value=\"222\" selected=\"selected\">" + Environment.NewLine
-                       + "\t\tbbb" + Environment.NewLine
-                       + "\t</option><option value=\"333\">" + Environment.NewLine
-                       + "\t\tccc" + Environment.NewLine
-                       + "\t</option>" + Environment.NewLine
-                       + "</select>", html);
+            Assert.Equal(
+                "<select name=\"nameKey\">"
+                    + Environment.NewLine
+                    + "\t<option value=\"111\">"
+                    + Environment.NewLine
+                    + "\t\taaa"
+                    + Environment.NewLine
+                    + "\t</option><option value=\"222\" selected=\"selected\">"
+                    + Environment.NewLine
+                    + "\t\tbbb"
+                    + Environment.NewLine
+                    + "\t</option><option value=\"333\">"
+                    + Environment.NewLine
+                    + "\t\tccc"
+                    + Environment.NewLine
+                    + "\t</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html
+            );
         }
 
         [Fact]
@@ -120,16 +148,26 @@ namespace Microsoft.Web.Mvc.Controls.Test
             string html = MvcTestHelper.GetControlRendering(c, false);
 
             // Verify
-            Assert.Equal("<select id=\"someID\" name=\"nameKey\">" + Environment.NewLine
-                       + "\t<option>" + Environment.NewLine
-                       + "\t\taaa" + Environment.NewLine
-                       + "\t</option><option selected=\"selected\">" + Environment.NewLine
-                       + "\t\tbbb" + Environment.NewLine
-                       + "\t</option><option>" + Environment.NewLine
-                       + "\t\tccc" + Environment.NewLine
-                       + "\t</option>" + Environment.NewLine
-                       + "</select>",
-                         html);
+            Assert.Equal(
+                "<select id=\"someID\" name=\"nameKey\">"
+                    + Environment.NewLine
+                    + "\t<option>"
+                    + Environment.NewLine
+                    + "\t\taaa"
+                    + Environment.NewLine
+                    + "\t</option><option selected=\"selected\">"
+                    + Environment.NewLine
+                    + "\t\tbbb"
+                    + Environment.NewLine
+                    + "\t</option><option>"
+                    + Environment.NewLine
+                    + "\t\tccc"
+                    + Environment.NewLine
+                    + "\t</option>"
+                    + Environment.NewLine
+                    + "</select>",
+                html
+            );
         }
     }
 }

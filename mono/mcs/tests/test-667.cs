@@ -1,18 +1,14 @@
 interface IA
 {
-	void M ();
+    void M();
 }
 
 class CA : IA
 {
-	void IA.M ()
-	{
-	}
+    void IA.M() { }
 }
 
 class CC : CA, IA
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

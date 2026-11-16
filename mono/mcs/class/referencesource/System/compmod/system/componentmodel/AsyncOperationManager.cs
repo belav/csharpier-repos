@@ -7,43 +7,41 @@
 namespace System.ComponentModel
 {
     using System.Collections;
-    using System.Threading;
     using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Threading;
 
     [HostProtection(SharedState = true)]
-    public static class AsyncOperationManager {
-        public static AsyncOperation CreateOperation(object userSuppliedState) {
+    public static class AsyncOperationManager
+    {
+        public static AsyncOperation CreateOperation(object userSuppliedState)
+        {
             return AsyncOperation.CreateOperation(userSuppliedState, SynchronizationContext);
         }
 
         /// <include file='doc\AsyncOperationManager.uex' path='docs/doc[@for="AsyncOperationManager.SynchronizationContext"]/*' />
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public static SynchronizationContext SynchronizationContext {
-            get {
-                if (SynchronizationContext.Current == null) {
+        public static SynchronizationContext SynchronizationContext
+        {
+            get
+            {
+                if (SynchronizationContext.Current == null)
+                {
                     SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
                 }
 
                 return SynchronizationContext.Current;
             }
-
 #if SILVERLIGHT
             // a thread should set this to null  when it is done, else the context will never be disposed/GC'd
             [SecurityCritical]
             [FriendAccessAllowed]
-            internal set {
-                SynchronizationContext.SetSynchronizationContext(value);
-            }
+            internal set { SynchronizationContext.SetSynchronizationContext(value); }
 #else
             // a thread should set this to null  when it is done, else the context will never be disposed/GC'd
-            [PermissionSetAttribute(SecurityAction.LinkDemand, Name="FullTrust")]
-            set {
-                SynchronizationContext.SetSynchronizationContext(value);
-            }
+            [PermissionSetAttribute(SecurityAction.LinkDemand, Name = "FullTrust")]
+            set { SynchronizationContext.SetSynchronizationContext(value); }
 #endif
         }
     }
 }
-
-        

@@ -47,7 +47,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// An array of child operations for this operation. Deprecated: please use <see cref="ChildOperations"/>.
         /// </summary>
-        [Obsolete($"This API has performance penalties, please use {nameof(ChildOperations)} instead.", error: false)]
+        [Obsolete(
+            $"This API has performance penalties, please use {nameof(ChildOperations)} instead.",
+            error: false
+        )]
         IEnumerable<IOperation> Children { get; }
 
         /// <summary>
@@ -62,7 +65,10 @@ namespace Microsoft.CodeAnalysis
 
         void Accept(OperationVisitor visitor);
 
-        TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument);
+        TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        );
 
         /// <summary>
         /// Set to True if compiler generated /implicitly computed by compiler code

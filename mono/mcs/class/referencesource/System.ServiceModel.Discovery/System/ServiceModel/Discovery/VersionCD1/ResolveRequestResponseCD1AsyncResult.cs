@@ -6,19 +6,21 @@ namespace System.ServiceModel.Discovery.VersionCD1
 {
     using System.Runtime;
 
-    sealed class ResolveRequestResponseCD1AsyncResult : ResolveRequestResponseAsyncResult<ResolveMessageCD1, ResolveMatchesMessageCD1>
+    sealed class ResolveRequestResponseCD1AsyncResult
+        : ResolveRequestResponseAsyncResult<ResolveMessageCD1, ResolveMatchesMessageCD1>
     {
-        internal ResolveRequestResponseCD1AsyncResult(ResolveMessageCD1 resolveMessage,
+        internal ResolveRequestResponseCD1AsyncResult(
+            ResolveMessageCD1 resolveMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             AsyncCallback callback,
-            object state)
-            : base(resolveMessage, discoveryServiceImpl, callback, state)
-        {
-        }
+            object state
+        )
+            : base(resolveMessage, discoveryServiceImpl, callback, state) { }
 
         public static ResolveMatchesMessageCD1 End(IAsyncResult result)
         {
-            ResolveRequestResponseCD1AsyncResult thisPtr = AsyncResult.End<ResolveRequestResponseCD1AsyncResult>(result);
+            ResolveRequestResponseCD1AsyncResult thisPtr =
+                AsyncResult.End<ResolveRequestResponseCD1AsyncResult>(result);
             return thisPtr.End();
         }
 
@@ -28,7 +30,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
             {
                 if (TD.DiscoveryMessageWithNoContentIsEnabled())
                 {
-                    TD.DiscoveryMessageWithNoContent(this.Context.EventTraceActivity, ProtocolStrings.TracingStrings.Resolve);
+                    TD.DiscoveryMessageWithNoContent(
+                        this.Context.EventTraceActivity,
+                        ProtocolStrings.TracingStrings.Resolve
+                    );
                 }
 
                 return false;
@@ -43,7 +48,8 @@ namespace System.ServiceModel.Discovery.VersionCD1
 
         protected override ResolveMatchesMessageCD1 GetResolveResponse(
             DiscoveryMessageSequence discoveryMessageSequence,
-            EndpointDiscoveryMetadata matchingEndpoint)
+            EndpointDiscoveryMetadata matchingEndpoint
+        )
         {
             return ResolveMatchesMessageCD1.Create(discoveryMessageSequence, matchingEndpoint);
         }

@@ -8,10 +8,10 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel;
     using System.ServiceModel.PeerResolvers;
 
-
     public sealed class PnrpPeerResolverBindingElement : PeerResolverBindingElement
     {
         PeerReferralPolicy referralPolicy;
+
         public PnrpPeerResolverBindingElement() { }
 
         public PnrpPeerResolverBindingElement(PeerReferralPolicy referralPolicy)
@@ -27,15 +27,18 @@ namespace System.ServiceModel.Channels
 
         public override PeerReferralPolicy ReferralPolicy
         {
-            get
-            {
-                return referralPolicy;
-            }
+            get { return referralPolicy; }
             set
             {
                 if (!PeerReferralPolicyHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value, typeof(PeerReferralPolicy)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(PeerReferralPolicy)
+                        )
+                    );
                 }
                 referralPolicy = value;
             }
@@ -46,10 +49,14 @@ namespace System.ServiceModel.Channels
             return new PnrpPeerResolverBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
             context.BindingParameters.Add(this);
             return context.BuildInnerChannelFactory<TChannel>();
@@ -58,16 +65,22 @@ namespace System.ServiceModel.Channels
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
             context.BindingParameters.Add(this);
             return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
             context.BindingParameters.Add(this);
             return context.BuildInnerChannelListener<TChannel>();
@@ -76,7 +89,9 @@ namespace System.ServiceModel.Channels
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
 
             context.BindingParameters.Add(this);
             return context.CanBuildInnerChannelListener<TChannel>();

@@ -22,7 +22,8 @@ namespace System.Reflection.Context.Virtual
             IEnumerable<Attribute>? propertyAttributes,
             IEnumerable<Attribute>? getterAttributes,
             IEnumerable<Attribute>? setterAttributes,
-            CustomReflectionContext context)
+            CustomReflectionContext context
+        )
             : base(propertyType, name, context)
         {
             if (getter == null && setter == null)
@@ -57,7 +58,10 @@ namespace System.Reflection.Context.Virtual
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
-            return CollectionServices.IEnumerableToArray(AttributeUtils.FilterCustomAttributes(_attributes, attributeType), attributeType);
+            return CollectionServices.IEnumerableToArray(
+                AttributeUtils.FilterCustomAttributes(_attributes, attributeType),
+                attributeType
+            );
         }
 
         public override object[] GetCustomAttributes(bool inherit)

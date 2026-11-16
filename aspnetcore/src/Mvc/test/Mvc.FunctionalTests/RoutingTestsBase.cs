@@ -13,8 +13,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
 {
     protected RoutingTestsBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
@@ -167,9 +166,8 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<ResultData>(body);
         Assert.Single(result.DataTokens);
-        Assert.Single(
-            result.DataTokens,
-            kvp => kvp.Key == "actionName" && ((string)kvp.Value) == "DataTokens"
+        Assert.Single(result.DataTokens, kvp =>
+            kvp.Key == "actionName" && ((string)kvp.Value) == "DataTokens"
         );
 
         // Act
@@ -182,9 +180,8 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
         result = JsonConvert.DeserializeObject<ResultData>(body);
 
         Assert.Single(result.DataTokens);
-        Assert.Single(
-            result.DataTokens,
-            kvp => kvp.Key == "actionName" && ((string)kvp.Value) == "Conventional"
+        Assert.Single(result.DataTokens, kvp =>
+            kvp.Key == "actionName" && ((string)kvp.Value) == "Conventional"
         );
     }
 

@@ -3,18 +3,15 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Reflection;
-using Microsoft.Internal;
 using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal abstract class ReflectionMember : ReflectionItem
     {
-        public abstract bool CanRead
-        {
-            get;
-        }
-        
+        public abstract bool CanRead { get; }
+
         public Type DeclaringType
         {
             get { return this.UnderlyingMember.DeclaringType; }
@@ -30,10 +27,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return this.UnderlyingMember.GetDisplayName();
         }
 
-        public abstract bool RequiresInstance
-        {
-            get;
-        }
+        public abstract bool RequiresInstance { get; }
 
         public abstract MemberInfo UnderlyingMember { get; }
 

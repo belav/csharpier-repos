@@ -167,8 +167,8 @@ internal sealed class DataAnnotationsMetadataProvider
         }
 
         // IsEnum et cetera
-        var underlyingType =
-            Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
+        var underlyingType = Nullable.GetUnderlyingType(context.Key.ModelType)
+            ?? context.Key.ModelType;
 
         if (underlyingType.IsEnum)
         {

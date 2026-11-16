@@ -19,10 +19,19 @@ namespace System.IO
             _millisecondsDelay = millisecondsDelay;
         }
 
-        protected override void Dispose(bool disposing) { if (disposing) _innerStream.Dispose(); }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                _innerStream.Dispose();
+        }
+
         public override ValueTask DisposeAsync() => _innerStream.DisposeAsync();
 
-        public int DelayMilliseconds { get => _millisecondsDelay; set => _millisecondsDelay = value; }
+        public int DelayMilliseconds
+        {
+            get => _millisecondsDelay;
+            set => _millisecondsDelay = value;
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -42,39 +51,67 @@ namespace System.IO
             return _innerStream.ReadByte();
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count), callback, state);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count), callback, state);
 
-        public override int EndRead(IAsyncResult asyncResult) => TaskToAsyncResult.End<int>(asyncResult);
+        public override int EndRead(IAsyncResult asyncResult) =>
+            TaskToAsyncResult.End<int>(asyncResult);
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             return await _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             return await _innerStream.ReadAsync(buffer, cancellationToken);
         }
 
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             await _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             await Task.Delay(_millisecondsDelay, cancellationToken);
             await _innerStream.WriteAsync(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count), callback, state);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count), callback, state);
 
-        public override void EndWrite(IAsyncResult asyncResult) => TaskToAsyncResult.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) =>
+            TaskToAsyncResult.End(asyncResult);
 
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -112,11 +149,26 @@ namespace System.IO
         public override bool CanTimeout => _innerStream.CanTimeout;
 
         public override long Length => _innerStream.Length;
-        public override long Position { get => _innerStream.Position; set => _innerStream.Position = value; }
-        public override long Seek(long offset, SeekOrigin origin) => _innerStream.Seek(offset, origin);
+        public override long Position
+        {
+            get => _innerStream.Position;
+            set => _innerStream.Position = value;
+        }
+
+        public override long Seek(long offset, SeekOrigin origin) =>
+            _innerStream.Seek(offset, origin);
+
         public override void SetLength(long value) => _innerStream.SetLength(value);
 
-        public override int ReadTimeout { get => _innerStream.ReadTimeout; set => _innerStream.ReadTimeout = value; }
-        public override int WriteTimeout { get => _innerStream.WriteTimeout; set => _innerStream.WriteTimeout = value; }
+        public override int ReadTimeout
+        {
+            get => _innerStream.ReadTimeout;
+            set => _innerStream.ReadTimeout = value;
+        }
+        public override int WriteTimeout
+        {
+            get => _innerStream.WriteTimeout;
+            set => _innerStream.WriteTimeout = value;
+        }
     }
 }

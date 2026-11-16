@@ -39,13 +39,10 @@ public class FallbackStaticFileTest : LoggedTest
                         app.UseRouting();
                         app.UseEndpoints(endpoints =>
                         {
-                            endpoints.Map(
-                                "/hello",
-                                context =>
-                                {
-                                    return context.Response.WriteAsync("Hello, world!");
-                                }
-                            );
+                            endpoints.Map("/hello", context =>
+                            {
+                                return context.Response.WriteAsync("Hello, world!");
+                            });
 
                             endpoints.MapFallbackToFile(
                                 "default.html",
@@ -100,13 +97,10 @@ public class FallbackStaticFileTest : LoggedTest
                         app.UseRouting();
                         app.UseEndpoints(endpoints =>
                         {
-                            endpoints.Map(
-                                "/hello",
-                                context =>
-                                {
-                                    return context.Response.WriteAsync("Hello, world!");
-                                }
-                            );
+                            endpoints.Map("/hello", context =>
+                            {
+                                return context.Response.WriteAsync("Hello, world!");
+                            });
 
                             endpoints.MapFallbackToFile(
                                 "/prefix/{*path:nonfile}",

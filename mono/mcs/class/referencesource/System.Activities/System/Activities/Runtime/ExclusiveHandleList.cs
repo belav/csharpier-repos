@@ -5,11 +5,11 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     class ExclusiveHandleList : HybridCollection<ExclusiveHandle>
@@ -39,8 +39,5 @@ namespace System.Activities.Runtime
 
             return false;
         }
-
     }
 }
-
-

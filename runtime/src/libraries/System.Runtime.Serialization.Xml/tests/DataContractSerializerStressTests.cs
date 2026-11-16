@@ -1,11 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using SerializationTypes;
 using System.IO;
 using System.Runtime.Serialization;
+using SerializationTypes;
 using Xunit;
-
 
 public static partial class DataContractSerializerTests
 {
@@ -43,10 +42,7 @@ public static partial class DataContractSerializerTests
             }
 
             MemoryStream ms = new MemoryStream();
-            FamilyForStress myFamily = new FamilyForStress
-            {
-                Members = members
-            };
+            FamilyForStress myFamily = new FamilyForStress { Members = members };
             dcs.WriteObject(ms, myFamily);
             ms.Position = 0;
             var newFamily = (FamilyForStress)dcs.ReadObject(ms);

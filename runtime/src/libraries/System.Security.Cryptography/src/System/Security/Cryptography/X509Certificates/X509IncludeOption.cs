@@ -8,6 +8,6 @@ namespace System.Security.Cryptography.X509Certificates
         None = 0,
         ExcludeRoot,
         EndCertOnly,
-        WholeChain
+        WholeChain,
     }
 }

@@ -7,7 +7,10 @@ namespace System.IO.Tests
     public sealed class File_GetSetAttributes_String : FileGetSetAttributes
     {
         protected override FileAttributes GetAttributes(string path) => File.GetAttributes(path);
-        protected override void SetAttributes(string path, FileAttributes attributes) => File.SetAttributes(path, attributes);
+
+        protected override void SetAttributes(string path, FileAttributes attributes) =>
+            File.SetAttributes(path, attributes);
+
         protected override bool CanBeReadOnly => true;
     }
 }

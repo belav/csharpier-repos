@@ -11,8 +11,8 @@ namespace System.Data.ProviderBase
     {
         private struct CollectionEntry
         {
-            private int _tag;              // information about the reference
-            private WeakReference _weak;   // the reference itself.
+            private int _tag; // information about the reference
+            private WeakReference _weak; // the reference itself.
 
             public void NewTarget(int tag, object target)
             {
@@ -38,36 +38,27 @@ namespace System.Data.ProviderBase
 
             public bool HasTarget
             {
-                get
-                {
-                    return ((_tag != 0) && (_weak.IsAlive));
-                }
+                get { return ((_tag != 0) && (_weak.IsAlive)); }
             }
 
             public int Tag
             {
-                get
-                {
-                    return _tag;
-                }
+                get { return _tag; }
             }
 
             public object? Target
             {
-                get
-                {
-                    return (_tag == 0 ? null : _weak.Target);
-                }
+                get { return (_tag == 0 ? null : _weak.Target); }
             }
         }
 
-        private const int LockPollTime = 100;   // Time to wait (in ms) between attempting to get the _itemLock
-        private const int DefaultCollectionSize = 20;   // Default size for the collection, and the amount to grow everytime the collection is full
-        private CollectionEntry[] _items;       // The collection of items we are keeping track of
-        private readonly object _itemLock;      // Used to synchronize access to the _items collection
-        private int _optimisticCount;           // (#ItemsAdded - #ItemsRemoved) - This estimates the number of items that we *should* have (but doesn't take into account item targets being GC'd)
-        private int _lastItemIndex;             // Location of the last item in _items
-        private volatile bool _isNotifying;     // Indicates that the collection is currently being notified (and, therefore, about to be cleared)
+        private const int LockPollTime = 100; // Time to wait (in ms) between attempting to get the _itemLock
+        private const int DefaultCollectionSize = 20; // Default size for the collection, and the amount to grow everytime the collection is full
+        private CollectionEntry[] _items; // The collection of items we are keeping track of
+        private readonly object _itemLock; // Used to synchronize access to the _items collection
+        private int _optimisticCount; // (#ItemsAdded - #ItemsRemoved) - This estimates the number of items that we *should* have (but doesn't take into account item targets being GC'd)
+        private int _lastItemIndex; // Location of the last item in _items
+        private volatile bool _isNotifying; // Indicates that the collection is currently being notified (and, therefore, about to be cleared)
 
         protected DbReferenceCollection()
         {
@@ -133,7 +124,8 @@ namespace System.Data.ProviderBase
             }
         }
 
-        internal T? FindItem<T>(int tag, Func<T, bool> filterMethod) where T : class
+        internal T? FindItem<T>(int tag, Func<T, bool> filterMethod)
+            where T : class
         {
             bool lockObtained = false;
             try
@@ -198,7 +190,10 @@ namespace System.Data.ProviderBase
                                     NotifyItem(message, _items[index].Tag, value);
                                     _items[index].RemoveTarget();
                                 }
-                                Debug.Assert(!_items[index].HasTarget, "Unexpected target after notifying");
+                                Debug.Assert(
+                                    !_items[index].HasTarget,
+                                    "Unexpected target after notifying"
+                                );
                             }
                             _optimisticCount = 0;
                         }

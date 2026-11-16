@@ -27,9 +27,8 @@ public class NewtonsoftJsonMvcBuilderExtensionsTest
             );
 
         // Assert
-        Assert.Single(
-            services,
-            d => d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>)
+        Assert.Single(services, d =>
+            d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>)
         );
     }
 }

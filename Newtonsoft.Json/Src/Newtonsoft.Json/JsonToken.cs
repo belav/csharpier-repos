@@ -122,6 +122,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Byte data.
         /// </summary>
-        Bytes = 17
+        Bytes = 17,
     }
 }

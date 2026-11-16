@@ -21,7 +21,9 @@ namespace System.Net
             }
             SetBuffer(newSize);
 
-            return RequestBuffer == IntPtr.Zero ? null : (Interop.HttpApi.HTTP_REQUEST*)RequestBuffer.ToPointer();
+            return RequestBuffer == IntPtr.Zero
+                ? null
+                : (Interop.HttpApi.HTTP_REQUEST*)RequestBuffer.ToPointer();
         }
 
         internal void Reset(int size)

@@ -9,7 +9,11 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Interop.Libraries.Advapi32, EntryPoint = "LsaLookupSids", SetLastError = true)]
+        [LibraryImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "LsaLookupSids",
+            SetLastError = true
+        )]
         internal static partial uint LsaLookupSids(
             SafeLsaPolicyHandle handle,
             int count,
@@ -22,13 +26,16 @@ internal static partial class Interop
 
 internal static partial class SafeLsaMemoryHandleExtensions
 {
-    public static unsafe void InitializeReferencedDomainsList(this SafeLsaMemoryHandle referencedDomains)
+    public static unsafe void InitializeReferencedDomainsList(
+        this SafeLsaMemoryHandle referencedDomains
+    )
     {
         // We don't know the real size of the referenced domains yet, so we need to set an initial
         // size based on the LSA_REFERENCED_DOMAIN_LIST structure, then resize it to include all of
         // the domains.
         referencedDomains.Initialize((uint)Marshal.SizeOf<Interop.LSA_REFERENCED_DOMAIN_LIST>());
-        Interop.LSA_REFERENCED_DOMAIN_LIST domainList = referencedDomains.Read<Interop.LSA_REFERENCED_DOMAIN_LIST>(0);
+        Interop.LSA_REFERENCED_DOMAIN_LIST domainList =
+            referencedDomains.Read<Interop.LSA_REFERENCED_DOMAIN_LIST>(0);
 
         byte* pRdl = null;
         try
@@ -40,7 +47,8 @@ internal static partial class SafeLsaMemoryHandleExtensions
             // referenced domain list structure, which is what we defaulted to.
             if (domainList.Domains != IntPtr.Zero)
             {
-                Interop.LSA_TRUST_INFORMATION* pTrustInformation = (Interop.LSA_TRUST_INFORMATION*)domainList.Domains;
+                Interop.LSA_TRUST_INFORMATION* pTrustInformation = (Interop.LSA_TRUST_INFORMATION*)
+                    domainList.Domains;
                 pTrustInformation += domainList.Entries;
 
                 long bufferSize = (byte*)pTrustInformation - pRdl;

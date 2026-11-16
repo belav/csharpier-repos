@@ -236,12 +236,12 @@ public partial class HubConnection : IAsyncDisposable
         ILoggerFactory loggerFactory
     )
     {
-        _connectionFactory =
-            connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
+        _connectionFactory = connectionFactory
+            ?? throw new ArgumentNullException(nameof(connectionFactory));
         _protocol = protocol ?? throw new ArgumentNullException(nameof(protocol));
         _endPoint = endPoint ?? throw new ArgumentNullException(nameof(endPoint));
-        _serviceProvider =
-            serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _serviceProvider = serviceProvider
+            ?? throw new ArgumentNullException(nameof(serviceProvider));
 
         _loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
         _logger = _loggerFactory.CreateLogger<HubConnection>();
@@ -2398,8 +2398,9 @@ public partial class HubConnection : IAsyncDisposable
             _hubConnection._logScope.ConnectionId = connection.ConnectionId;
 
             _logger = _hubConnection._logger;
-            _hasInherentKeepAlive =
-                connection.Features.Get<IConnectionInherentKeepAliveFeature>()?.HasInherentKeepAlive
+            _hasInherentKeepAlive = connection
+                .Features.Get<IConnectionInherentKeepAliveFeature>()
+                ?.HasInherentKeepAlive
                 ?? false;
 
 #pragma warning disable CA2252 // This API requires opting into preview features
@@ -2413,7 +2414,8 @@ public partial class HubConnection : IAsyncDisposable
                     hubConnection._protocol,
                     _hubConnection
                         ._serviceProvider.GetService<IOptions<HubConnectionOptions>>()
-                        ?.Value.StatefulReconnectBufferSize ?? DefaultStatefulReconnectBufferSize,
+                        ?.Value.StatefulReconnectBufferSize
+                        ?? DefaultStatefulReconnectBufferSize,
                     _logger
                 );
 

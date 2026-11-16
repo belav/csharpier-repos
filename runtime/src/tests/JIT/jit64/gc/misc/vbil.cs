@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 class C
 {
     public int x = 5;

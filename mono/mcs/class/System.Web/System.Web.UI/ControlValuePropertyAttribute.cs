@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,54 +30,60 @@
 using System;
 using System.ComponentModel;
 
-namespace System.Web.UI {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-	public sealed class ControlValuePropertyAttribute : Attribute
-	{
-		string propertyName;
-		object propertyValue;
-		Type propertyType;
+namespace System.Web.UI
+{
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public sealed class ControlValuePropertyAttribute : Attribute
+    {
+        string propertyName;
+        object propertyValue;
+        Type propertyType;
 
-		public ControlValuePropertyAttribute (string name) 
-		{
-			this.propertyName = name;
-		}
+        public ControlValuePropertyAttribute(string name)
+        {
+            this.propertyName = name;
+        }
 
-		public ControlValuePropertyAttribute (string name, object defaultValue) 
-		{
-			this.propertyName = name;
-			this.propertyValue = defaultValue;
-		}
+        public ControlValuePropertyAttribute(string name, object defaultValue)
+        {
+            this.propertyName = name;
+            this.propertyValue = defaultValue;
+        }
 
-		public ControlValuePropertyAttribute (string name, Type type, string defaultValue) 
-		{
-			this.propertyName = name;
-			this.propertyValue = defaultValue;
-			this.propertyType = type;
-		}
+        public ControlValuePropertyAttribute(string name, Type type, string defaultValue)
+        {
+            this.propertyName = name;
+            this.propertyValue = defaultValue;
+            this.propertyType = type;
+        }
 
-		public string Name {
-			get { return propertyName; }
-		}
+        public string Name
+        {
+            get { return propertyName; }
+        }
 
-		public object DefaultValue {
-			get { return propertyValue; }
-		}
-		
-		public override bool Equals (object obj)
-		{
-			if (obj != null && obj is ControlValuePropertyAttribute) {
-				ControlValuePropertyAttribute propAttrib = (ControlValuePropertyAttribute)obj;
-				return (this.propertyName == propAttrib.propertyName && 
-					this.propertyValue == propAttrib.propertyValue &&
-					this.propertyType == propAttrib.propertyType);
-			}
-			return false;
-		}
+        public object DefaultValue
+        {
+            get { return propertyValue; }
+        }
 
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode();
-		}
-	}
+        public override bool Equals(object obj)
+        {
+            if (obj != null && obj is ControlValuePropertyAttribute)
+            {
+                ControlValuePropertyAttribute propAttrib = (ControlValuePropertyAttribute)obj;
+                return (
+                    this.propertyName == propAttrib.propertyName
+                    && this.propertyValue == propAttrib.propertyValue
+                    && this.propertyType == propAttrib.propertyType
+                );
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+    }
 }

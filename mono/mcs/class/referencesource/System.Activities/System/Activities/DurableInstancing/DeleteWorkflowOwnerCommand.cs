@@ -15,22 +15,20 @@ namespace System.Activities.DurableInstancing
     {
         public DeleteWorkflowOwnerCommand()
             : base(InstancePersistence.ActivitiesCommandNamespace.GetName("DeleteWorkflowOwner"))
-        {
-        }
+        { }
 
         protected internal override bool IsTransactionEnlistmentOptional
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override void Validate(InstanceView view)
         {
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.OwnerRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.OwnerRequired)
+                );
             }
         }
     }

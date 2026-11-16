@@ -10,17 +10,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationPropertyInfo
     {
-        private static readonly ConditionalWeakTable<IPropertySymbol, CodeGenerationPropertyInfo> s_propertyToInfoMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            IPropertySymbol,
+            CodeGenerationPropertyInfo
+        > s_propertyToInfoMap = new();
 
         private readonly bool _isNew;
         private readonly bool _isUnsafe;
         private readonly SyntaxNode _initializer;
 
-        private CodeGenerationPropertyInfo(
-            bool isNew,
-            bool isUnsafe,
-            SyntaxNode initializer)
+        private CodeGenerationPropertyInfo(bool isNew, bool isUnsafe, SyntaxNode initializer)
         {
             _isNew = isNew;
             _isUnsafe = isUnsafe;
@@ -31,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IPropertySymbol property,
             bool isNew,
             bool isUnsafe,
-            SyntaxNode initializer)
+            SyntaxNode initializer
+        )
         {
             var info = new CodeGenerationPropertyInfo(isNew, isUnsafe, initializer);
             s_propertyToInfoMap.Add(property, info);
@@ -43,22 +43,20 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return info;
         }
 
-        public static SyntaxNode GetInitializer(CodeGenerationPropertyInfo info)
-            => info?._initializer;
+        public static SyntaxNode GetInitializer(CodeGenerationPropertyInfo info) =>
+            info?._initializer;
 
-        public static SyntaxNode GetInitializer(IPropertySymbol property)
-            => GetInitializer(GetInfo(property));
+        public static SyntaxNode GetInitializer(IPropertySymbol property) =>
+            GetInitializer(GetInfo(property));
 
-        public static bool GetIsNew(IPropertySymbol property)
-            => GetIsNew(GetInfo(property));
+        public static bool GetIsNew(IPropertySymbol property) => GetIsNew(GetInfo(property));
 
-        public static bool GetIsUnsafe(IPropertySymbol property)
-            => GetIsUnsafe(GetInfo(property));
+        public static bool GetIsUnsafe(IPropertySymbol property) => GetIsUnsafe(GetInfo(property));
 
-        private static bool GetIsNew(CodeGenerationPropertyInfo info)
-            => info != null && info._isNew;
+        private static bool GetIsNew(CodeGenerationPropertyInfo info) =>
+            info != null && info._isNew;
 
-        private static bool GetIsUnsafe(CodeGenerationPropertyInfo info)
-            => info != null && info._isUnsafe;
+        private static bool GetIsUnsafe(CodeGenerationPropertyInfo info) =>
+            info != null && info._isUnsafe;
     }
 }

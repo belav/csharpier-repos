@@ -4,8 +4,10 @@
 using System;
 using System.Runtime.Serialization.DataContracts;
 using System.Xml;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, System.Runtime.Serialization.DataContracts.DataContract>;
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 
 namespace System.Runtime.Serialization
 {
@@ -13,6 +15,7 @@ namespace System.Runtime.Serialization
     {
         internal DataContractDictionary[] dataContractDictionaries;
         private int _count;
+
         internal void Push(DataContractDictionary dataContractDictionary)
         {
             if (dataContractDictionaries == null)
@@ -21,7 +24,10 @@ namespace System.Runtime.Serialization
             }
             else if (_count == dataContractDictionaries.Length)
             {
-                Array.Resize<DataContractDictionary>(ref dataContractDictionaries, dataContractDictionaries.Length * 2);
+                Array.Resize<DataContractDictionary>(
+                    ref dataContractDictionaries,
+                    dataContractDictionaries.Length * 2
+                );
             }
 
             dataContractDictionaries[_count++] = dataContractDictionary;

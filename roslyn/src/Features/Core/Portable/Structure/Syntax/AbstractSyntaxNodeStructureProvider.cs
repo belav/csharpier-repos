@@ -8,14 +8,16 @@ using Microsoft.CodeAnalysis.Shared.Collections;
 
 namespace Microsoft.CodeAnalysis.Structure
 {
-    internal abstract class AbstractSyntaxNodeStructureProvider<TSyntaxNode> : AbstractSyntaxStructureProvider
+    internal abstract class AbstractSyntaxNodeStructureProvider<TSyntaxNode>
+        : AbstractSyntaxStructureProvider
         where TSyntaxNode : SyntaxNode
     {
         public sealed override void CollectBlockSpans(
             SyntaxTrivia trivia,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             throw new NotSupportedException();
         }
@@ -25,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Structure
             SyntaxNode node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (node is TSyntaxNode tSyntax)
             {
@@ -38,6 +41,7 @@ namespace Microsoft.CodeAnalysis.Structure
             TSyntaxNode node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

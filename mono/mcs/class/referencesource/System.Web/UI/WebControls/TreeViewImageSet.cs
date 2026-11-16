@@ -4,10 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
-    public enum TreeViewImageSet {
-
+namespace System.Web.UI.WebControls
+{
+    public enum TreeViewImageSet
+    {
         Custom = 0,
 
         XPFileExplorer = 1,
@@ -38,6 +38,6 @@ namespace System.Web.UI.WebControls {
 
         Events = 14,
 
-        Faq = 15
+        Faq = 15,
     }
 }

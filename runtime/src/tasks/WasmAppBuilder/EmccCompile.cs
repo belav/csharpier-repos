@@ -26,18 +26,18 @@ namespace Microsoft.WebAssembly.Build.Tasks
     {
         [NotNull]
         [Required]
-        public ITaskItem[]? SourceFiles            { get; set; }
+        public ITaskItem[]? SourceFiles { get; set; }
 
-        public ITaskItem[]? EnvironmentVariables   { get; set; }
-        public bool         DisableParallelCompile { get; set; }
-        public string       Arguments              { get; set; } = string.Empty;
-        public string?      WorkingDirectory       { get; set; }
-        public string       OutputMessageImportance{ get; set; } = "Low";
-        public string?      MessageToIndicateCompiling { get; set; }
-        public string       CompilerBinaryPath     { get; set; } = "emcc";
+        public ITaskItem[]? EnvironmentVariables { get; set; }
+        public bool DisableParallelCompile { get; set; }
+        public string Arguments { get; set; } = string.Empty;
+        public string? WorkingDirectory { get; set; }
+        public string OutputMessageImportance { get; set; } = "Low";
+        public string? MessageToIndicateCompiling { get; set; }
+        public string CompilerBinaryPath { get; set; } = "emcc";
 
         [Output]
-        public ITaskItem[]? OutputFiles            { get; private set; }
+        public ITaskItem[]? OutputFiles { get; private set; }
 
         private string? _tempPath;
         private int _totalFiles;
@@ -66,16 +66,26 @@ namespace Microsoft.WebAssembly.Build.Tasks
                 return false;
             }
 
-            ITaskItem? badItem = SourceFiles.FirstOrDefault(sf => string.IsNullOrEmpty(sf.GetMetadata("ObjectFile")));
+            ITaskItem? badItem = SourceFiles.FirstOrDefault(sf =>
+                string.IsNullOrEmpty(sf.GetMetadata("ObjectFile"))
+            );
             if (badItem != null)
             {
                 Log.LogError($"Source file {badItem.ItemSpec} is missing ObjectFile metadata.");
                 return false;
             }
 
-            if (!Enum.TryParse(OutputMessageImportance, ignoreCase: true, out MessageImportance messageImportance))
+            if (
+                !Enum.TryParse(
+                    OutputMessageImportance,
+                    ignoreCase: true,
+                    out MessageImportance messageImportance
+                )
+            )
             {
-                Log.LogError($"Invalid value for OutputMessageImportance={OutputMessageImportance}. Valid values: {string.Join(", ", Enum.GetNames(typeof(MessageImportance)))}");
+                Log.LogError(
+                    $"Invalid value for OutputMessageImportance={OutputMessageImportance}. Valid values: {string.Join(", ", Enum.GetNames(typeof(MessageImportance)))}"
+                );
                 return false;
             }
 
@@ -91,17 +101,23 @@ namespace Microsoft.WebAssembly.Build.Tasks
                     string objFile = srcItem.GetMetadata("ObjectFile");
                     string depMetadata = srcItem.GetMetadata("Dependencies");
                     string[] depFiles = string.IsNullOrEmpty(depMetadata)
-                                            ? Array.Empty<string>()
-                                            : depMetadata.Split(s_semicolon, StringSplitOptions.RemoveEmptyEntries);
+                        ? Array.Empty<string>()
+                        : depMetadata.Split(s_semicolon, StringSplitOptions.RemoveEmptyEntries);
 
                     if (!ShouldCompile(srcFile, objFile, depFiles, out string reason))
                     {
-                        Log.LogMessage(MessageImportance.Low, $"Skipping {srcFile} because {reason}.");
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            $"Skipping {srcFile} because {reason}."
+                        );
                         outputItems.Add(CreateOutputItemFor(srcFile, objFile));
                     }
                     else
                     {
-                        Log.LogMessage(MessageImportance.Low, $"Compiling {srcFile} because {reason}.");
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            $"Compiling {srcFile} because {reason}."
+                        );
                         filesToCompile.Add((srcFile, objFile));
                     }
                 }
@@ -115,7 +131,10 @@ namespace Microsoft.WebAssembly.Build.Tasks
                 }
 
                 if (_numCompiled > 0)
-                    Log.LogMessage(MessageImportance.High, $"[{_numCompiled}/{SourceFiles.Length}] skipped unchanged files");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        $"[{_numCompiled}/{SourceFiles.Length}] skipped unchanged files"
+                    );
 
                 if (!string.IsNullOrEmpty(MessageToIndicateCompiling))
                     Log.LogMessage(MessageImportance.High, MessageToIndicateCompiling);
@@ -130,7 +149,9 @@ namespace Microsoft.WebAssembly.Build.Tasks
                 _tempPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 Directory.CreateDirectory(_tempPath);
 
-                int allowedParallelism = DisableParallelCompile ? 1 : Math.Min(SourceFiles.Length, Environment.ProcessorCount);
+                int allowedParallelism = DisableParallelCompile
+                    ? 1
+                    : Math.Min(SourceFiles.Length, Environment.ProcessorCount);
                 if (BuildEngine is IBuildEngine9 be9)
                     allowedParallelism = be9.RequestCores(allowedParallelism);
 
@@ -161,22 +182,28 @@ namespace Microsoft.WebAssembly.Build.Tasks
                     Instead, we want to use work-stealing so jobs can be run by any partition.
                 */
                 ParallelLoopResult result = Parallel.ForEach(
-                                                Partitioner.Create(filesToCompile, EnumerablePartitionerOptions.NoBuffering),
-                                                new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },
-                                                (toCompile, state) =>
-                {
-                    if (!ProcessSourceFile(toCompile.Item1, toCompile.Item2))
-                        state.Stop();
-                });
+                    Partitioner.Create(filesToCompile, EnumerablePartitionerOptions.NoBuffering),
+                    new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },
+                    (toCompile, state) =>
+                    {
+                        if (!ProcessSourceFile(toCompile.Item1, toCompile.Item2))
+                            state.Stop();
+                    }
+                );
 
                 if (!result.IsCompleted && !Log.HasLoggedErrors)
-                    Log.LogError("Unknown failure occurred while compiling. Check logs to get more details.");
+                    Log.LogError(
+                        "Unknown failure occurred while compiling. Check logs to get more details."
+                    );
 
                 if (!Log.HasLoggedErrors)
                 {
                     int numUnchanged = _totalFiles - _numCompiled;
                     if (numUnchanged > 0)
-                        Log.LogMessage(MessageImportance.High, $"[{numUnchanged}/{_totalFiles}] unchanged.");
+                        Log.LogMessage(
+                            MessageImportance.High,
+                            $"[{numUnchanged}/{_totalFiles}] unchanged."
+                        );
                 }
             }
             finally
@@ -193,7 +220,8 @@ namespace Microsoft.WebAssembly.Build.Tasks
                 string tmpObjFile = Path.GetTempFileName();
                 try
                 {
-                    string command = $"{CompilerBinaryPath} {Arguments} -c -o \"{tmpObjFile}\" \"{srcFile}\"";
+                    string command =
+                        $"{CompilerBinaryPath} {Arguments} -c -o \"{tmpObjFile}\" \"{srcFile}\"";
                     var startTime = DateTime.Now;
 
                     // Log the command in a compact format which can be copy pasted
@@ -202,37 +230,48 @@ namespace Microsoft.WebAssembly.Build.Tasks
                         envStr.Append($"{key}={envVarsDict[key]} ");
                     Log.LogMessage(MessageImportance.Low, $"Exec: {envStr}{command}");
                     (int exitCode, string output) = Utils.RunShellCommand(
-                                                            Log,
-                                                            command,
-                                                            envVarsDict,
-                                                            workingDir: Environment.CurrentDirectory,
-                                                            logStdErrAsMessage: true,
-                                                            debugMessageImportance: messageImportance,
-                                                            label: Path.GetFileName(srcFile));
+                        Log,
+                        command,
+                        envVarsDict,
+                        workingDir: Environment.CurrentDirectory,
+                        logStdErrAsMessage: true,
+                        debugMessageImportance: messageImportance,
+                        label: Path.GetFileName(srcFile)
+                    );
 
                     var endTime = DateTime.Now;
                     var elapsedSecs = (endTime - startTime).TotalSeconds;
                     if (exitCode != 0)
                     {
-                        Log.LogError($"Failed to compile {srcFile} -> {objFile}{Environment.NewLine}{output} [took {elapsedSecs:F}s]");
+                        Log.LogError(
+                            $"Failed to compile {srcFile} -> {objFile}{Environment.NewLine}{output} [took {elapsedSecs:F}s]"
+                        );
                         return false;
                     }
 
                     if (!Utils.CopyIfDifferent(tmpObjFile, objFile, useHash: true))
-                        Log.LogMessage(MessageImportance.Low, $"Did not overwrite {objFile} as the contents are unchanged");
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            $"Did not overwrite {objFile} as the contents are unchanged"
+                        );
                     else
                         Log.LogMessage(MessageImportance.Low, $"Copied {tmpObjFile} to {objFile}");
 
                     outputItems.Add(CreateOutputItemFor(srcFile, objFile));
 
                     int count = Interlocked.Increment(ref _numCompiled);
-                    Log.LogMessage(MessageImportance.High, $"[{count}/{_totalFiles}] {Path.GetFileName(srcFile)} -> {Path.GetFileName(objFile)} [took {elapsedSecs:F}s]");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        $"[{count}/{_totalFiles}] {Path.GetFileName(srcFile)} -> {Path.GetFileName(objFile)} [took {elapsedSecs:F}s]"
+                    );
 
                     return !Log.HasLoggedErrors;
                 }
                 catch (Exception ex)
                 {
-                    Log.LogError($"Failed to compile {srcFile} -> {objFile}{Environment.NewLine}{ex.Message}");
+                    Log.LogError(
+                        $"Failed to compile {srcFile} -> {objFile}{Environment.NewLine}{ex.Message}"
+                    );
                     return false;
                 }
                 finally
@@ -249,7 +288,12 @@ namespace Microsoft.WebAssembly.Build.Tasks
             }
         }
 
-        private static bool ShouldCompile(string srcFile, string objFile, string[] depFiles, out string reason)
+        private static bool ShouldCompile(
+            string srcFile,
+            string objFile,
+            string[] depFiles,
+            out string reason
+        )
         {
             if (!File.Exists(srcFile))
                 throw new LogAsErrorException($"Could not find source file {srcFile}");
@@ -276,7 +320,8 @@ namespace Microsoft.WebAssembly.Build.Tasks
             {
                 if (!File.Exists(inFile))
                 {
-                    reason = $"the dependency file {inFile} needed for compiling {srcFile} to {outFile} could not be found.";
+                    reason =
+                        $"the dependency file {inFile} needed for compiling {srcFile} to {outFile} could not be found.";
                     return true;
                 }
 

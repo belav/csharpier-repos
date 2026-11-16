@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCollectionExpress
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionExpressionForCreateDiagnosticAnalyzer,
-    CSharpUseCollectionExpressionForCreateCodeFixProvider>;
+    CSharpUseCollectionExpressionForCreateCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionExpression)]
 public class UseCollectionExpressionForCreateTests
@@ -53,7 +54,7 @@ public class UseCollectionExpressionForCreateTests
             public System.Collections.Generic.IEnumerator<T> GetEnumerator() => default;
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => default;
         }
-        
+
         [System.Runtime.CompilerServices.CollectionBuilder(typeof(MyCollection), "Create")]
         interface IMyCollection<T> : System.Collections.Generic.IEnumerable<T>
         {
@@ -63,17 +64,19 @@ public class UseCollectionExpressionForCreateTests
     [Fact]
     public async Task TestNotInCSharp11()
     {
-
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Immutable;
+            TestCode =
+                """
+                    using System.Collections.Immutable;
 
-                class C
-                {
-                    MyCollection<int> i = MyCollection.Create(1, 2, 3);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.Create(1, 2, 3);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp11,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -84,18 +87,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -106,18 +115,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -128,24 +143,30 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    void M()
+            TestCode =
+                """
+                    class C
                     {
-                        var i = (MyCollection<int>)[|MyCollection.[|Create|]<int>(|]);
+                        void M()
+                        {
+                            var i = (MyCollection<int>)[|MyCollection.[|Create|]<int>(|]);
+                        }
                     }
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    void M()
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
                     {
-                        var i = (MyCollection<int>)[];
+                        void M()
+                        {
+                            var i = (MyCollection<int>)[];
+                        }
                     }
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -156,17 +177,20 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using X = MyCollection<int>;
+            TestCode =
+                """
+                    using X = MyCollection<int>;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var i = (X)MyCollection.Create<int>();
+                        void M()
+                        {
+                            var i = (X)MyCollection.Create<int>();
+                        }
                     }
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -177,18 +201,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -199,18 +229,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -221,18 +257,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -243,18 +285,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3, 4);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3, 4];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3, 4);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3, 4];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -265,18 +313,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3, 4, 5);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3, 4, 5];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1, 2, 3, 4, 5);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3, 4, 5];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -287,12 +341,15 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = MyCollection.Create(new int[5]);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.Create(new int[5]);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -303,18 +360,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]new int[] { });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]new int[] { });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -325,18 +388,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]new int[] { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]new int[] { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -347,18 +416,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]new[] { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]new[] { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -369,12 +444,15 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = MyCollection.Create<int>(stackalloc int[] { 1 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.Create<int>(stackalloc int[] { 1 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -385,12 +463,15 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = MyCollection.Create<int>(stackalloc[] { 1 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.Create<int>(stackalloc[] { 1 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -401,18 +482,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]stackalloc int[] { });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]stackalloc int[] { });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -423,18 +510,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]stackalloc int[] { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]stackalloc int[] { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -445,18 +538,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]stackalloc[] { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]stackalloc[] { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -467,12 +566,15 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = MyCollection.CreateRange<int>(null);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.CreateRange<int>(null);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -483,17 +585,20 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System;
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = MyCollection.CreateRange(GetValues());
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.CreateRange(GetValues());
 
-                    static IEnumerable<int> GetValues() => default;
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                        static IEnumerable<int> GetValues() => default;
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -504,12 +609,15 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = MyCollection.CreateRange(new int [5]);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.CreateRange(new int [5]);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -520,18 +628,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new int[] { });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new int[] { });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -542,18 +656,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new int[] { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new int[] { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -564,18 +684,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new[] { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new[] { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -586,14 +712,17 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = MyCollection.CreateRange(new List<int>(capacity: 0));
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.CreateRange(new List<int>(capacity: 0));
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -604,14 +733,17 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = MyCollection.CreateRange(new List<int>(capacity: 0) { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.CreateRange(new List<int>(capacity: 0) { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -622,22 +754,28 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int>());
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int>());
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -648,22 +786,28 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int> { });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int> { });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -674,22 +818,28 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int>() { });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    MyCollection<int> i = [];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int>() { });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        MyCollection<int> i = [];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -700,22 +850,28 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int> { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int> { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -726,22 +882,28 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int> { 1, 2, 3 });
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    MyCollection<int> i = [1, 2, 3];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|CreateRange|](|]new List<int> { 1, 2, 3 });
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        MyCollection<int> i = [1, 2, 3];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -752,14 +914,17 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    MyCollection<int> i = MyCollection.CreateRange<int>({|CS0144:new() { }|]);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        MyCollection<int> i = MyCollection.CreateRange<int>({|CS0144:new() { }|]);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -770,15 +935,18 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Collections.Generic;
+            TestCode =
+                """
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    // Will start working once we allow reference conversions.
-                    IMyCollection<int> i = {|CS0266:MyCollection.Create(1, 2, 3)|};
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                    class C
+                    {
+                        // Will start working once we allow reference conversions.
+                        IMyCollection<int> i = {|CS0266:MyCollection.Create(1, 2, 3)|};
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -789,18 +957,24 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = /*leading*/ [|MyCollection.[|Create|](|]1) /*trailing*/;
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = /*leading*/ [1] /*trailing*/;
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = /*leading*/ [|MyCollection.[|Create|](|]1) /*trailing*/;
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = /*leading*/ [1] /*trailing*/;
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -811,20 +985,26 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1 +
-                        2);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i = [1 +
-                        2];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1 +
+                            2);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [1 +
+                            2];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -835,27 +1015,33 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                class C
-                {
-                    MyCollection<int> i = [|MyCollection.[|Create|](|]1 +
-                        2,
-                        3 +
-                            4);
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                class C
-                {
-                    MyCollection<int> i =
-                    [
-                        1 +
+            TestCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i = [|MyCollection.[|Create|](|]1 +
                             2,
-                        3 +
-                            4,
-                    ];
-                }
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+                            3 +
+                                4);
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    class C
+                    {
+                        MyCollection<int> i =
+                        [
+                            1 +
+                                2,
+                            3 +
+                                4,
+                        ];
+                    }
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -917,7 +1103,11 @@ public class UseCollectionExpressionForCreateTests
         }.RunAsync();
     }
 
-    [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69507"), WorkItem("https://github.com/dotnet/roslyn/issues/69521")]
+    [
+        Fact,
+        WorkItem("https://github.com/dotnet/roslyn/issues/69507"),
+        WorkItem("https://github.com/dotnet/roslyn/issues/69521")
+    ]
     public async Task NotForImmutableListNet70()
     {
         await new VerifyCS.Test
@@ -978,18 +1168,21 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]);
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                MyCollection<int> i = [];
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]);
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    MyCollection<int> i = [];
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -998,26 +1191,29 @@ public class UseCollectionExpressionForCreateTests
     {
         await new VerifyCS.Test
         {
-            TestCode = """
-                MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]1 +
-                    2, 3 +
-                    4);
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
-            FixedCode = """
-                MyCollection<int> i =
-                [
-                    1 +
-                        2,
-                    3 +
-                        4,
-                ];
-                """ + s_collectionBuilderApi + s_basicCollectionApi,
+            TestCode =
+                """
+                    MyCollection<int> i = [|MyCollection.[|Create|]<int>(|]1 +
+                        2, 3 +
+                        4);
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
+            FixedCode =
+                """
+                    MyCollection<int> i =
+                    [
+                        1 +
+                            2,
+                        3 +
+                            4,
+                    ];
+                    """
+                + s_collectionBuilderApi
+                + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 

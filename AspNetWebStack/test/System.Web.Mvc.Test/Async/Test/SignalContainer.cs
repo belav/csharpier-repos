@@ -5,10 +5,12 @@ using System.Threading;
 
 namespace System.Web.Mvc.Async.Test
 {
-    public sealed class SignalContainer<T>: IDisposable
+    public sealed class SignalContainer<T> : IDisposable
     {
         private volatile object _item;
-        private readonly AutoResetEvent _waitHandle = new AutoResetEvent(false /* initialState */);
+        private readonly AutoResetEvent _waitHandle = new AutoResetEvent(
+            false /* initialState */
+        );
 
         public void Signal(T item)
         {

@@ -10,9 +10,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 {
     internal class NamespaceListItem : SymbolListItem<INamespaceSymbol>
     {
-        public NamespaceListItem(ProjectId projectId, INamespaceSymbol namespaceSymbol, string displayText, string fullNameText, string searchText)
-            : base(projectId, namespaceSymbol, displayText, fullNameText, searchText, isHidden: false)
-        {
-        }
+        public NamespaceListItem(
+            ProjectId projectId,
+            INamespaceSymbol namespaceSymbol,
+            string displayText,
+            string fullNameText,
+            string searchText
+        )
+            : base(
+                projectId,
+                namespaceSymbol,
+                displayText,
+                fullNameText,
+                searchText,
+                isHidden: false
+            ) { }
     }
 }

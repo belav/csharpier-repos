@@ -32,16 +32,14 @@ public sealed class ProjectionExpression : Expression, IPrintableExpression
     public SqlExpression Expression { get; }
 
     /// <inheritdoc />
-    public override Type Type
-        => Expression.Type;
+    public override Type Type => Expression.Type;
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => Update((SqlExpression)visitor.Visit(Expression));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        Update((SqlExpression)visitor.Visit(Expression));
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -49,35 +47,34 @@ public sealed class ProjectionExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="expression">The <see cref="Expression" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public ProjectionExpression Update(SqlExpression expression)
-        => expression != Expression
-            ? new ProjectionExpression(expression, Alias)
-            : this;
+    public ProjectionExpression Update(SqlExpression expression) =>
+        expression != Expression ? new ProjectionExpression(expression, Alias) : this;
 
     /// <inheritdoc />
     void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
     {
         expressionPrinter.Visit(Expression);
 
-        if (Alias != string.Empty
-            && !(Expression is ColumnExpression column
-                && column.Name == Alias))
+        if (
+            Alias != string.Empty
+            && !(Expression is ColumnExpression column && column.Name == Alias)
+        )
         {
             expressionPrinter.Append(" AS " + Alias);
         }
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is ProjectionExpression projectionExpression
-                && Equals(projectionExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is ProjectionExpression projectionExpression && Equals(projectionExpression)
+        );
 
-    private bool Equals(ProjectionExpression projectionExpression)
-        => Alias == projectionExpression.Alias && Expression.Equals(projectionExpression.Expression);
+    private bool Equals(ProjectionExpression projectionExpression) =>
+        Alias == projectionExpression.Alias && Expression.Equals(projectionExpression.Expression);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Alias, Expression);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Alias, Expression);
 }

@@ -8,12 +8,23 @@ namespace System.Web.Mvc
 {
     public static class NameValueCollectionExtensions
     {
-        public static void CopyTo(this NameValueCollection collection, IDictionary<string, object> destination)
+        public static void CopyTo(
+            this NameValueCollection collection,
+            IDictionary<string, object> destination
+        )
         {
-            CopyTo(collection, destination, false /* replaceEntries */);
+            CopyTo(
+                collection,
+                destination,
+                false /* replaceEntries */
+            );
         }
 
-        public static void CopyTo(this NameValueCollection collection, IDictionary<string, object> destination, bool replaceEntries)
+        public static void CopyTo(
+            this NameValueCollection collection,
+            IDictionary<string, object> destination,
+            bool replaceEntries
+        )
         {
             if (collection == null)
             {

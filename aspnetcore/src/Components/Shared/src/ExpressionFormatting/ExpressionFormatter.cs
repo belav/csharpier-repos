@@ -116,8 +116,9 @@ internal static class ExpressionFormatter
                     wasLastExpressionMemberAccess = true;
                     wasLastExpressionIndexer = false;
 
-                    var name =
-                        memberExpression.Member.GetCustomAttribute<DataMemberAttribute>()?.Name
+                    var name = memberExpression
+                        .Member.GetCustomAttribute<DataMemberAttribute>()
+                        ?.Name
                         ?? memberExpression.Member.Name;
                     builder.InsertFront(name);
 

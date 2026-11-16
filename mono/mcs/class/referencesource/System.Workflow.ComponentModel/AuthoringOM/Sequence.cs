@@ -3,39 +3,64 @@ namespace System.Workflow.ComponentModel
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     #endregion
 
     internal static class SequenceHelper
     {
-        private static DependencyProperty ActiveChildQualifiedNameProperty = DependencyProperty.RegisterAttached("ActiveChildQualifiedName", typeof(String), typeof(SequenceHelper));
-        private static DependencyProperty ActiveChildRemovedProperty = DependencyProperty.RegisterAttached("ActiveChildRemoved", typeof(bool), typeof(SequenceHelper), new PropertyMetadata(DependencyPropertyOptions.NonSerialized));
+        private static DependencyProperty ActiveChildQualifiedNameProperty =
+            DependencyProperty.RegisterAttached(
+                "ActiveChildQualifiedName",
+                typeof(String),
+                typeof(SequenceHelper)
+            );
+        private static DependencyProperty ActiveChildRemovedProperty =
+            DependencyProperty.RegisterAttached(
+                "ActiveChildRemoved",
+                typeof(bool),
+                typeof(SequenceHelper),
+                new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
+            );
 
-        public static ActivityExecutionStatus Execute(CompositeActivity activity, ActivityExecutionContext executionContext)
+        public static ActivityExecutionStatus Execute(
+            CompositeActivity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             if (activity.EnabledActivities.Count == 0)
                 return ActivityExecutionStatus.Closed;
             else
             {
-                activity.EnabledActivities[0].RegisterForStatusChange(Activity.ClosedEvent, (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity);
+                activity
+                    .EnabledActivities[0]
+                    .RegisterForStatusChange(
+                        Activity.ClosedEvent,
+                        (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
+                    );
                 executionContext.ExecuteActivity(activity.EnabledActivities[0]);
-                activity.SetValue(ActiveChildQualifiedNameProperty, activity.EnabledActivities[0].QualifiedName);
+                activity.SetValue(
+                    ActiveChildQualifiedNameProperty,
+                    activity.EnabledActivities[0].QualifiedName
+                );
                 return ActivityExecutionStatus.Executing;
             }
         }
 
-        public static ActivityExecutionStatus Cancel(CompositeActivity activity, ActivityExecutionContext executionContext)
+        public static ActivityExecutionStatus Cancel(
+            CompositeActivity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             for (int i = (activity.EnabledActivities.Count - 1); i >= 0; i--)
             {
@@ -47,8 +72,10 @@ namespace System.Workflow.ComponentModel
                     return activity.ExecutionStatus;
                 }
 
-                if (childActivity.ExecutionStatus == ActivityExecutionStatus.Canceling ||
-                    childActivity.ExecutionStatus == ActivityExecutionStatus.Faulting)
+                if (
+                    childActivity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || childActivity.ExecutionStatus == ActivityExecutionStatus.Faulting
+                )
                 {
                     return activity.ExecutionStatus;
                 }
@@ -62,21 +89,34 @@ namespace System.Workflow.ComponentModel
             return ActivityExecutionStatus.Closed;
         }
 
-        public static void OnEvent(CompositeActivity activity, Object sender, ActivityExecutionStatusChangedEventArgs e)
+        public static void OnEvent(
+            CompositeActivity activity,
+            Object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             ActivityExecutionContext context = sender as ActivityExecutionContext;
-            e.Activity.UnregisterForStatusChange(Activity.ClosedEvent, (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity);
+            e.Activity.UnregisterForStatusChange(
+                Activity.ClosedEvent,
+                (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
+            );
 
-            if (activity.ExecutionStatus == ActivityExecutionStatus.Canceling ||
-                activity.ExecutionStatus == ActivityExecutionStatus.Faulting ||
-                activity.ExecutionStatus == ActivityExecutionStatus.Executing && !TryScheduleNextChild(activity, context))
+            if (
+                activity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                || activity.ExecutionStatus == ActivityExecutionStatus.Faulting
+                || activity.ExecutionStatus == ActivityExecutionStatus.Executing
+                    && !TryScheduleNextChild(activity, context)
+            )
             {
                 activity.RemoveProperty(ActiveChildQualifiedNameProperty);
                 context.CloseActivity();
             }
         }
 
-        private static bool TryScheduleNextChild(CompositeActivity activity, ActivityExecutionContext executionContext)
+        private static bool TryScheduleNextChild(
+            CompositeActivity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             IList<Activity> children = activity.EnabledActivities;
 
@@ -95,30 +135,50 @@ namespace System.Workflow.ComponentModel
                 }
             }
 
-            children[indexOfNextActivity].RegisterForStatusChange(Activity.ClosedEvent, (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity);
+            children[indexOfNextActivity]
+                .RegisterForStatusChange(
+                    Activity.ClosedEvent,
+                    (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
+                );
             executionContext.ExecuteActivity(children[indexOfNextActivity]);
-            activity.SetValue(ActiveChildQualifiedNameProperty, children[indexOfNextActivity].QualifiedName);
+            activity.SetValue(
+                ActiveChildQualifiedNameProperty,
+                children[indexOfNextActivity].QualifiedName
+            );
             return true;
         }
 
-        public static void OnActivityChangeRemove(CompositeActivity activity, ActivityExecutionContext executionContext, Activity removedActivity)
+        public static void OnActivityChangeRemove(
+            CompositeActivity activity,
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        )
         {
-            String activeChildQualifiedName = activity.GetValue(ActiveChildQualifiedNameProperty) as String;
+            String activeChildQualifiedName =
+                activity.GetValue(ActiveChildQualifiedNameProperty) as String;
 
             if (removedActivity.QualifiedName.Equals(activeChildQualifiedName))
                 activity.SetValue(ActiveChildRemovedProperty, true);
         }
 
-        public static void OnWorkflowChangesCompleted(CompositeActivity activity, ActivityExecutionContext executionContext)
+        public static void OnWorkflowChangesCompleted(
+            CompositeActivity activity,
+            ActivityExecutionContext executionContext
+        )
         {
-            String activeChildQualifiedName = activity.GetValue(ActiveChildQualifiedNameProperty) as String;
-            bool activeChildRemovedInDynamicUpdate = (bool)activity.GetValue(ActiveChildRemovedProperty);
+            String activeChildQualifiedName =
+                activity.GetValue(ActiveChildQualifiedNameProperty) as String;
+            bool activeChildRemovedInDynamicUpdate = (bool)
+                activity.GetValue(ActiveChildRemovedProperty);
 
             if (activeChildQualifiedName != null && activeChildRemovedInDynamicUpdate)
-            {   //We have our active child removed.    
-                if (activity.ExecutionStatus == ActivityExecutionStatus.Canceling ||
-                activity.ExecutionStatus == ActivityExecutionStatus.Faulting ||
-                activity.ExecutionStatus == ActivityExecutionStatus.Executing && !TryScheduleNextChild(activity, executionContext))
+            { //We have our active child removed.
+                if (
+                    activity.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || activity.ExecutionStatus == ActivityExecutionStatus.Faulting
+                    || activity.ExecutionStatus == ActivityExecutionStatus.Executing
+                        && !TryScheduleNextChild(activity, executionContext)
+                )
                 {
                     activity.RemoveProperty(ActiveChildQualifiedNameProperty);
                     executionContext.CloseActivity();

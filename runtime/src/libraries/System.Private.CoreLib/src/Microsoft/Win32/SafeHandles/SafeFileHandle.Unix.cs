@@ -12,30 +12,35 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         private const UnixFileMode PermissionMask =
-            UnixFileMode.UserRead |
-            UnixFileMode.UserWrite |
-            UnixFileMode.UserExecute |
-            UnixFileMode.GroupRead |
-            UnixFileMode.GroupWrite |
-            UnixFileMode.GroupExecute |
-            UnixFileMode.OtherRead |
-            UnixFileMode.OtherWrite |
-            UnixFileMode.OtherExecute;
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.UserExecute
+            | UnixFileMode.GroupRead
+            | UnixFileMode.GroupWrite
+            | UnixFileMode.GroupExecute
+            | UnixFileMode.OtherRead
+            | UnixFileMode.OtherWrite
+            | UnixFileMode.OtherExecute;
 
         // If the file gets created a new, we'll select the permissions for it.  Most Unix utilities by default use 666 (read and
         // write for all), so we do the same (even though this doesn't match Windows, where by default it's possible to write out
         // a file and then execute it). No matter what we choose, it'll be subject to the umask applied by the system, such that the
         // actual permissions will typically be less than what we select here.
         internal const UnixFileMode DefaultCreateMode =
-            UnixFileMode.UserRead |
-            UnixFileMode.UserWrite |
-            UnixFileMode.GroupRead |
-            UnixFileMode.GroupWrite |
-            UnixFileMode.OtherRead |
-            UnixFileMode.OtherWrite;
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.GroupRead
+            | UnixFileMode.GroupWrite
+            | UnixFileMode.OtherRead
+            | UnixFileMode.OtherWrite;
 
-        internal static bool DisableFileLocking { get; } = OperatingSystem.IsBrowser() // #40065: Emscripten does not support file locking
-            || AppContextConfigHelper.GetBooleanConfig("System.IO.DisableFileLocking", "DOTNET_SYSTEM_IO_DISABLEFILELOCKING", defaultValue: false);
+        internal static bool DisableFileLocking { get; } =
+            OperatingSystem.IsBrowser() // #40065: Emscripten does not support file locking
+            || AppContextConfigHelper.GetBooleanConfig(
+                "System.IO.DisableFileLocking",
+                "DOTNET_SYSTEM_IO_DISABLEFILELOCKING",
+                defaultValue: false
+            );
 
         // not using bool? as it's not thread safe
         private volatile NullableBool _canSeek = NullableBool.Undefined;
@@ -43,9 +48,8 @@ namespace Microsoft.Win32.SafeHandles
         private bool _deleteOnClose;
         private bool _isLocked;
 
-        public SafeFileHandle() : this(ownsHandle: true)
-        {
-        }
+        public SafeFileHandle()
+            : this(ownsHandle: true) { }
 
         private SafeFileHandle(bool ownsHandle)
             : base(ownsHandle)
@@ -64,7 +68,9 @@ namespace Microsoft.Win32.SafeHandles
                 NullableBool supportsRandomAccess = _supportsRandomAccess;
                 if (supportsRandomAccess == NullableBool.Undefined)
                 {
-                    _supportsRandomAccess = supportsRandomAccess = GetCanSeek() ? NullableBool.True : NullableBool.False;
+                    _supportsRandomAccess = supportsRandomAccess = GetCanSeek()
+                        ? NullableBool.True
+                        : NullableBool.False;
                 }
 
                 return supportsRandomAccess == NullableBool.True;
@@ -79,7 +85,8 @@ namespace Microsoft.Win32.SafeHandles
 #pragma warning disable CA1822
         internal ThreadPoolBoundHandle? ThreadPoolBinding => null;
 
-        internal void EnsureThreadPoolBindingInitialized() { /* nop */ }
+        internal void EnsureThreadPoolBindingInitialized() { /* nop */
+        }
 
         internal bool TryGetCachedLength(out long cachedLength)
         {
@@ -88,8 +95,14 @@ namespace Microsoft.Win32.SafeHandles
         }
 #pragma warning restore CA1822
 
-        private static SafeFileHandle Open(string path, Interop.Sys.OpenFlags flags, int mode, bool failForSymlink, out bool wasSymlink,
-                                           Func<Interop.ErrorInfo, Interop.Sys.OpenFlags, string, Exception?>? createOpenException)
+        private static SafeFileHandle Open(
+            string path,
+            Interop.Sys.OpenFlags flags,
+            int mode,
+            bool failForSymlink,
+            out bool wasSymlink,
+            Func<Interop.ErrorInfo, Interop.Sys.OpenFlags, string, Exception?>? createOpenException
+        )
         {
             wasSymlink = false;
             Debug.Assert(path != null);
@@ -174,38 +187,138 @@ namespace Microsoft.Win32.SafeHandles
 
         // Specialized Open that returns the file length and permissions of the opened file.
         // This information is retrieved from the 'stat' syscall that must be performed to ensure the path is not a directory.
-        internal static SafeFileHandle OpenReadOnly(string fullPath, FileOptions options, out long fileLength, out UnixFileMode filePermissions)
+        internal static SafeFileHandle OpenReadOnly(
+            string fullPath,
+            FileOptions options,
+            out long fileLength,
+            out UnixFileMode filePermissions
+        )
         {
-            SafeFileHandle handle = Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read, options, preallocationSize: 0, DefaultCreateMode, out fileLength, out filePermissions, false, out _, null);
+            SafeFileHandle handle = Open(
+                fullPath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read,
+                options,
+                preallocationSize: 0,
+                DefaultCreateMode,
+                out fileLength,
+                out filePermissions,
+                false,
+                out _,
+                null
+            );
             Debug.Assert(fileLength >= 0);
             return handle;
         }
 
-        internal static SafeFileHandle Open(string fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, UnixFileMode? unixCreateMode = null,
-                                            Func<Interop.ErrorInfo, Interop.Sys.OpenFlags, string, Exception?>? createOpenException = null)
+        internal static SafeFileHandle Open(
+            string fullPath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode? unixCreateMode = null,
+            Func<
+                Interop.ErrorInfo,
+                Interop.Sys.OpenFlags,
+                string,
+                Exception?
+            >? createOpenException = null
+        )
         {
-            return Open(fullPath, mode, access, share, options, preallocationSize, unixCreateMode ?? DefaultCreateMode, out _, out _, false, out _, createOpenException);
+            return Open(
+                fullPath,
+                mode,
+                access,
+                share,
+                options,
+                preallocationSize,
+                unixCreateMode ?? DefaultCreateMode,
+                out _,
+                out _,
+                false,
+                out _,
+                createOpenException
+            );
         }
 
-        internal static SafeFileHandle? OpenNoFollowSymlink(string fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, out bool wasSymlink, UnixFileMode? unixCreateMode = null,
-                                            Func<Interop.ErrorInfo, Interop.Sys.OpenFlags, string, Exception?>? createOpenException = null)
+        internal static SafeFileHandle? OpenNoFollowSymlink(
+            string fullPath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            out bool wasSymlink,
+            UnixFileMode? unixCreateMode = null,
+            Func<
+                Interop.ErrorInfo,
+                Interop.Sys.OpenFlags,
+                string,
+                Exception?
+            >? createOpenException = null
+        )
         {
-            return Open(fullPath, mode, access, share, options, preallocationSize, unixCreateMode ?? DefaultCreateMode, out _, out _, true, out wasSymlink, createOpenException);
+            return Open(
+                fullPath,
+                mode,
+                access,
+                share,
+                options,
+                preallocationSize,
+                unixCreateMode ?? DefaultCreateMode,
+                out _,
+                out _,
+                true,
+                out wasSymlink,
+                createOpenException
+            );
         }
 
-        private static SafeFileHandle Open(string fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, UnixFileMode openPermissions,
-                                            out long fileLength, out UnixFileMode filePermissions, bool failForSymlink, out bool wasSymlink,
-                                            Func<Interop.ErrorInfo, Interop.Sys.OpenFlags, string, Exception?>? createOpenException = null)
+        private static SafeFileHandle Open(
+            string fullPath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode openPermissions,
+            out long fileLength,
+            out UnixFileMode filePermissions,
+            bool failForSymlink,
+            out bool wasSymlink,
+            Func<
+                Interop.ErrorInfo,
+                Interop.Sys.OpenFlags,
+                string,
+                Exception?
+            >? createOpenException = null
+        )
         {
             // Translate the arguments into arguments for an open call.
-            Interop.Sys.OpenFlags openFlags = PreOpenConfigurationFromOptions(mode, access, share, options, failForSymlink);
+            Interop.Sys.OpenFlags openFlags = PreOpenConfigurationFromOptions(
+                mode,
+                access,
+                share,
+                options,
+                failForSymlink
+            );
 
             SafeFileHandle? safeFileHandle = null;
             try
             {
                 while (true)
                 {
-                    safeFileHandle = Open(fullPath, openFlags, (int)openPermissions, failForSymlink, out wasSymlink, createOpenException);
+                    safeFileHandle = Open(
+                        fullPath,
+                        openFlags,
+                        (int)openPermissions,
+                        failForSymlink,
+                        out wasSymlink,
+                        createOpenException
+                    );
 
                     if (failForSymlink && wasSymlink)
                     {
@@ -216,7 +329,18 @@ namespace Microsoft.Win32.SafeHandles
 
                     // When Init return false, the path has changed to another file entry, and
                     // we need to re-open the path to reflect that.
-                    if (safeFileHandle.Init(fullPath, mode, access, share, options, preallocationSize, out fileLength, out filePermissions))
+                    if (
+                        safeFileHandle.Init(
+                            fullPath,
+                            mode,
+                            access,
+                            share,
+                            options,
+                            preallocationSize,
+                            out fileLength,
+                            out filePermissions
+                        )
+                    )
                     {
                         return safeFileHandle;
                     }
@@ -241,7 +365,13 @@ namespace Microsoft.Win32.SafeHandles
         /// <param name="options">The FileOptions provided to the stream's constructor</param>
         /// <param name="failForSymlink">Whether to cause ELOOP error when opening a symlink</param>
         /// <returns>The flags value to be passed to the open system call.</returns>
-        private static Interop.Sys.OpenFlags PreOpenConfigurationFromOptions(FileMode mode, FileAccess access, FileShare share, FileOptions options, bool failForSymlink)
+        private static Interop.Sys.OpenFlags PreOpenConfigurationFromOptions(
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            bool failForSymlink
+        )
         {
             // Translate FileMode.  Most of the values map cleanly to one or more options for open.
             Interop.Sys.OpenFlags flags = default;
@@ -318,8 +448,16 @@ namespace Microsoft.Win32.SafeHandles
             return flags;
         }
 
-        private bool Init(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize,
-                          out long fileLength, out UnixFileMode filePermissions)
+        private bool Init(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            out long fileLength,
+            out UnixFileMode filePermissions
+        )
         {
             Interop.Sys.FileStatus status = default;
             bool statusHasValue = false;
@@ -356,8 +494,18 @@ namespace Microsoft.Win32.SafeHandles
             // Lock the file if requested via FileShare.  This is only advisory locking. FileShare.None implies an exclusive
             // lock on the file and all other modes use a shared lock.  While this is not as granular as Windows, not mandatory,
             // and not atomic with file opening, it's better than nothing.
-            Interop.Sys.LockOperations lockOperation = (share == FileShare.None) ? Interop.Sys.LockOperations.LOCK_EX : Interop.Sys.LockOperations.LOCK_SH;
-            if (CanLockTheFile(lockOperation, access) && !(_isLocked = Interop.Sys.FLock(this, lockOperation | Interop.Sys.LockOperations.LOCK_NB) >= 0))
+            Interop.Sys.LockOperations lockOperation =
+                (share == FileShare.None)
+                    ? Interop.Sys.LockOperations.LOCK_EX
+                    : Interop.Sys.LockOperations.LOCK_SH;
+            if (
+                CanLockTheFile(lockOperation, access)
+                && !(
+                    _isLocked =
+                        Interop.Sys.FLock(this, lockOperation | Interop.Sys.LockOperations.LOCK_NB)
+                        >= 0
+                )
+            )
             {
                 // The only error we care about is EWOULDBLOCK, which indicates that the file is currently locked by someone
                 // else and we would block trying to access it.  Other errors, such as ENOTSUP (locking isn't supported) or
@@ -378,8 +526,12 @@ namespace Microsoft.Win32.SafeHandles
             // Since we've just obtained the lock, the file will already be removed/replaced.
             // We limit performing this check to cases where our file was opened with DeleteOnClose with
             // a mode of OpenOrCreate.
-            if (_isLocked && ((options & FileOptions.DeleteOnClose) != 0) &&
-                share == FileShare.None && mode == FileMode.OpenOrCreate)
+            if (
+                _isLocked
+                && ((options & FileOptions.DeleteOnClose) != 0)
+                && share == FileShare.None
+                && mode == FileMode.OpenOrCreate
+            )
             {
                 FStatCheckIO(path, ref status, ref statusHasValue);
 
@@ -412,13 +564,17 @@ namespace Microsoft.Win32.SafeHandles
             // and Sequential together doesn't make sense as they are two competing options on the same spectrum,
             // so if both are specified, we prefer RandomAccess (behavior on Windows is unspecified if both are provided).
             Interop.Sys.FileAdvice fadv =
-                (options & FileOptions.RandomAccess) != 0 ? Interop.Sys.FileAdvice.POSIX_FADV_RANDOM :
-                (options & FileOptions.SequentialScan) != 0 ? Interop.Sys.FileAdvice.POSIX_FADV_SEQUENTIAL :
-                0;
+                (options & FileOptions.RandomAccess) != 0 ? Interop.Sys.FileAdvice.POSIX_FADV_RANDOM
+                : (options & FileOptions.SequentialScan) != 0
+                    ? Interop.Sys.FileAdvice.POSIX_FADV_SEQUENTIAL
+                : 0;
             if (fadv != 0)
             {
-                FileStreamHelpers.CheckFileCall(Interop.Sys.PosixFAdvise(this, 0, 0, fadv), path,
-                    ignoreNotSupported: true); // just a hint.
+                FileStreamHelpers.CheckFileCall(
+                    Interop.Sys.PosixFAdvise(this, 0, 0, fadv),
+                    path,
+                    ignoreNotSupported: true
+                ); // just a hint.
             }
 
             if ((mode == FileMode.Create || mode == FileMode.Truncate) && !DisableFileLocking)
@@ -428,7 +584,10 @@ namespace Microsoft.Win32.SafeHandles
                 if (Interop.Sys.FTruncate(this, 0) < 0)
                 {
                     Interop.ErrorInfo errorInfo = Interop.Sys.GetLastErrorInfo();
-                    if (errorInfo.Error != Interop.Error.EBADF && errorInfo.Error != Interop.Error.EINVAL)
+                    if (
+                        errorInfo.Error != Interop.Error.EBADF
+                        && errorInfo.Error != Interop.Error.EINVAL
+                    )
                     {
                         // We know the file descriptor is valid and we know the size argument to FTruncate is correct,
                         // so if EBADF or EINVAL is returned, it means we're dealing with a special file that can't be
@@ -443,8 +602,10 @@ namespace Microsoft.Win32.SafeHandles
                 Interop.ErrorInfo errorInfo = Interop.Sys.GetLastErrorInfo();
 
                 // Only throw for errors that indicate there is not enough space.
-                if (errorInfo.Error == Interop.Error.EFBIG ||
-                    errorInfo.Error == Interop.Error.ENOSPC)
+                if (
+                    errorInfo.Error == Interop.Error.EFBIG
+                    || errorInfo.Error == Interop.Error.ENOSPC
+                )
                 {
                     Dispose();
 
@@ -452,10 +613,15 @@ namespace Microsoft.Win32.SafeHandles
                     Debug.Assert(mode == FileMode.Create || mode == FileMode.CreateNew);
                     Interop.Sys.Unlink(path!);
 
-                    throw new IOException(SR.Format(errorInfo.Error == Interop.Error.EFBIG
-                                                        ? SR.IO_FileTooLarge_Path_AllocationSize
-                                                        : SR.IO_DiskFull_Path_AllocationSize,
-                                            path, preallocationSize));
+                    throw new IOException(
+                        SR.Format(
+                            errorInfo.Error == Interop.Error.EFBIG
+                                ? SR.IO_FileTooLarge_Path_AllocationSize
+                                : SR.IO_DiskFull_Path_AllocationSize,
+                            path,
+                            preallocationSize
+                        )
+                    );
                 }
             }
 
@@ -464,7 +630,10 @@ namespace Microsoft.Win32.SafeHandles
 
         private bool CanLockTheFile(Interop.Sys.LockOperations lockOperation, FileAccess access)
         {
-            Debug.Assert(lockOperation == Interop.Sys.LockOperations.LOCK_EX || lockOperation == Interop.Sys.LockOperations.LOCK_SH);
+            Debug.Assert(
+                lockOperation == Interop.Sys.LockOperations.LOCK_EX
+                    || lockOperation == Interop.Sys.LockOperations.LOCK_SH
+            );
 
             if (DisableFileLocking)
             {
@@ -479,7 +648,12 @@ namespace Microsoft.Win32.SafeHandles
                 return true; // LOCK_SH is always OK when reading
             }
 
-            if (!Interop.Sys.TryGetFileSystemType(this, out Interop.Sys.UnixFileSystemTypes unixFileSystemType))
+            if (
+                !Interop.Sys.TryGetFileSystemType(
+                    this,
+                    out Interop.Sys.UnixFileSystemTypes unixFileSystemType
+                )
+            )
             {
                 return false; // assume we should not acquire the lock if we don't know the File System
             }
@@ -496,7 +670,11 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        private void FStatCheckIO(string path, ref Interop.Sys.FileStatus status, ref bool statusHasValue)
+        private void FStatCheckIO(
+            string path,
+            ref Interop.Sys.FileStatus status,
+            ref bool statusHasValue
+        )
         {
             if (!statusHasValue)
             {
@@ -518,7 +696,10 @@ namespace Microsoft.Win32.SafeHandles
             NullableBool canSeek = _canSeek;
             if (canSeek == NullableBool.Undefined)
             {
-                _canSeek = canSeek = Interop.Sys.LSeek(this, 0, Interop.Sys.SeekWhence.SEEK_CUR) >= 0 ? NullableBool.True : NullableBool.False;
+                _canSeek = canSeek =
+                    Interop.Sys.LSeek(this, 0, Interop.Sys.SeekWhence.SEEK_CUR) >= 0
+                        ? NullableBool.True
+                        : NullableBool.False;
             }
 
             return canSeek == NullableBool.True;
@@ -535,7 +716,7 @@ namespace Microsoft.Win32.SafeHandles
         {
             Undefined = 0,
             False = -1,
-            True = 1
+            True = 1,
         }
     }
 }

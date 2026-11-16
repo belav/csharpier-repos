@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Http
 {
     internal class DefaultHttpClientFactory : IHttpClientFactory, IHttpMessageHandlerFactory
     {
-        private static readonly TimerCallback _cleanupCallback = (s) => ((DefaultHttpClientFactory)s!).CleanupTimer_Tick();
+        private static readonly TimerCallback _cleanupCallback = (s) =>
+            ((DefaultHttpClientFactory)s!).CleanupTimer_Tick();
         private readonly IServiceProvider _services;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly IOptionsMonitor<HttpClientFactoryOptions> _optionsMonitor;
@@ -48,7 +49,10 @@ namespace Microsoft.Extensions.Http
         // for each name.
         //
         // internal for tests
-        internal readonly ConcurrentDictionary<string, Lazy<ActiveHandlerTrackingEntry>> _activeHandlers;
+        internal readonly ConcurrentDictionary<
+            string,
+            Lazy<ActiveHandlerTrackingEntry>
+        > _activeHandlers;
 
         // Collection of 'expired' but not yet disposed handlers.
         //
@@ -63,7 +67,8 @@ namespace Microsoft.Extensions.Http
             IServiceProvider services,
             IServiceScopeFactory scopeFactory,
             IOptionsMonitor<HttpClientFactoryOptions> optionsMonitor,
-            IEnumerable<IHttpMessageHandlerBuilderFilter> filters)
+            IEnumerable<IHttpMessageHandlerBuilderFilter> filters
+        )
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(scopeFactory);
@@ -76,13 +81,18 @@ namespace Microsoft.Extensions.Http
             _filters = filters.ToArray();
 
             // case-sensitive because named options is.
-            _activeHandlers = new ConcurrentDictionary<string, Lazy<ActiveHandlerTrackingEntry>>(StringComparer.Ordinal);
+            _activeHandlers = new ConcurrentDictionary<string, Lazy<ActiveHandlerTrackingEntry>>(
+                StringComparer.Ordinal
+            );
             _entryFactory = (name) =>
             {
-                return new Lazy<ActiveHandlerTrackingEntry>(() =>
-                {
-                    return CreateHandlerEntry(name);
-                }, LazyThreadSafetyMode.ExecutionAndPublication);
+                return new Lazy<ActiveHandlerTrackingEntry>(
+                    () =>
+                    {
+                        return CreateHandlerEntry(name);
+                    },
+                    LazyThreadSafetyMode.ExecutionAndPublication
+                );
             };
 
             _expiredHandlers = new ConcurrentQueue<ExpiredHandlerTrackingEntry>();
@@ -96,8 +106,12 @@ namespace Microsoft.Extensions.Http
             // Logger will be created during the first ExpiryTimer_Tick execution. Lazy guarantees thread safety
             // to prevent creation of unnecessary ILogger objects in case several handlers expired at the same time.
             _logger = new Lazy<ILogger>(
-                () => _services.GetRequiredService<ILoggerFactory>().CreateLogger<DefaultHttpClientFactory>(),
-                LazyThreadSafetyMode.ExecutionAndPublication);
+                () =>
+                    _services
+                        .GetRequiredService<ILoggerFactory>()
+                        .CreateLogger<DefaultHttpClientFactory>(),
+                LazyThreadSafetyMode.ExecutionAndPublication
+            );
         }
 
         public HttpClient CreateClient(string name)
@@ -142,7 +156,8 @@ namespace Microsoft.Extensions.Http
 
             try
             {
-                HttpMessageHandlerBuilder builder = services.GetRequiredService<HttpMessageHandlerBuilder>();
+                HttpMessageHandlerBuilder builder =
+                    services.GetRequiredService<HttpMessageHandlerBuilder>();
                 builder.Name = name;
 
                 // This is similar to the initialization pattern in:
@@ -165,7 +180,12 @@ namespace Microsoft.Extensions.Http
                 // Otherwise it would be possible that we start the timer here, immediately expire it (very short
                 // timer) and then dispose it without ever creating a client. That would be bad. It's unlikely
                 // this would happen, but we want to be sure.
-                return new ActiveHandlerTrackingEntry(name, handler, scope, options.HandlerLifetime);
+                return new ActiveHandlerTrackingEntry(
+                    name,
+                    handler,
+                    scope,
+                    options.HandlerLifetime
+                );
 
                 void Configure(HttpMessageHandlerBuilder b)
                 {
@@ -175,7 +195,9 @@ namespace Microsoft.Extensions.Http
                     }
 
                     // Logging is added separately in the end. But for now it should be still possible to override it via filters...
-                    foreach (Action<HttpMessageHandlerBuilder> action in options.LoggingBuilderActions)
+                    foreach (
+                        Action<HttpMessageHandlerBuilder> action in options.LoggingBuilderActions
+                    )
                     {
                         action(b);
                     }
@@ -196,9 +218,15 @@ namespace Microsoft.Extensions.Http
 
             // The timer callback should be the only one removing from the active collection. If we can't find
             // our entry in the collection, then this is a bug.
-            bool removed = _activeHandlers.TryRemove(active.Name, out Lazy<ActiveHandlerTrackingEntry>? found);
+            bool removed = _activeHandlers.TryRemove(
+                active.Name,
+                out Lazy<ActiveHandlerTrackingEntry>? found
+            );
             Debug.Assert(removed, "Entry not found. We should always be able to remove the entry");
-            Debug.Assert(object.ReferenceEquals(active, found!.Value), "Different entry found. The entry should not have been replaced");
+            Debug.Assert(
+                object.ReferenceEquals(active, found!.Value),
+                "Different entry found. The entry should not have been replaced"
+            );
 
             // At this point the handler is no longer 'active' and will not be handed out to any new clients.
             // However we haven't dropped our strong reference to the handler, so we can't yet determine if
@@ -225,7 +253,12 @@ namespace Microsoft.Extensions.Http
         {
             lock (_cleanupTimerLock)
             {
-                _cleanupTimer ??= NonCapturingTimer.Create(_cleanupCallback, this, DefaultCleanupInterval, Timeout.InfiniteTimeSpan);
+                _cleanupTimer ??= NonCapturingTimer.Create(
+                    _cleanupCallback,
+                    this,
+                    DefaultCleanupInterval,
+                    Timeout.InfiniteTimeSpan
+                );
             }
         }
 
@@ -276,7 +309,10 @@ namespace Microsoft.Extensions.Http
                 {
                     // Since we're the only one removing from _expired, TryDequeue must always succeed.
                     _expiredHandlers.TryDequeue(out ExpiredHandlerTrackingEntry? entry);
-                    Debug.Assert(entry != null, "Entry was null, we should always get an entry back from TryDequeue");
+                    Debug.Assert(
+                        entry != null,
+                        "Entry was null, we should always get an entry back from TryDequeue"
+                    );
 
                     if (entry.CanDispose)
                     {
@@ -299,7 +335,12 @@ namespace Microsoft.Extensions.Http
                     }
                 }
 
-                Log.CleanupCycleEnd(_logger, stopwatch.GetElapsedTime(), disposedCount, _expiredHandlers.Count);
+                Log.CleanupCycleEnd(
+                    _logger,
+                    stopwatch.GetElapsedTime(),
+                    disposedCount,
+                    _expiredHandlers.Count
+                );
             }
             finally
             {
@@ -317,32 +358,48 @@ namespace Microsoft.Extensions.Http
         {
             public static class EventIds
             {
-                public static readonly EventId CleanupCycleStart = new EventId(100, "CleanupCycleStart");
-                public static readonly EventId CleanupCycleEnd = new EventId(101, "CleanupCycleEnd");
-                public static readonly EventId CleanupItemFailed = new EventId(102, "CleanupItemFailed");
+                public static readonly EventId CleanupCycleStart = new EventId(
+                    100,
+                    "CleanupCycleStart"
+                );
+                public static readonly EventId CleanupCycleEnd = new EventId(
+                    101,
+                    "CleanupCycleEnd"
+                );
+                public static readonly EventId CleanupItemFailed = new EventId(
+                    102,
+                    "CleanupItemFailed"
+                );
                 public static readonly EventId HandlerExpired = new EventId(103, "HandlerExpired");
             }
 
-            private static readonly Action<ILogger, int, Exception?> _cleanupCycleStart = LoggerMessage.Define<int>(
-                LogLevel.Debug,
-                EventIds.CleanupCycleStart,
-                "Starting HttpMessageHandler cleanup cycle with {InitialCount} items");
+            private static readonly Action<ILogger, int, Exception?> _cleanupCycleStart =
+                LoggerMessage.Define<int>(
+                    LogLevel.Debug,
+                    EventIds.CleanupCycleStart,
+                    "Starting HttpMessageHandler cleanup cycle with {InitialCount} items"
+                );
 
-            private static readonly Action<ILogger, double, int, int, Exception?> _cleanupCycleEnd = LoggerMessage.Define<double, int, int>(
-                LogLevel.Debug,
-                EventIds.CleanupCycleEnd,
-                "Ending HttpMessageHandler cleanup cycle after {ElapsedMilliseconds}ms - processed: {DisposedCount} items - remaining: {RemainingItems} items");
+            private static readonly Action<ILogger, double, int, int, Exception?> _cleanupCycleEnd =
+                LoggerMessage.Define<double, int, int>(
+                    LogLevel.Debug,
+                    EventIds.CleanupCycleEnd,
+                    "Ending HttpMessageHandler cleanup cycle after {ElapsedMilliseconds}ms - processed: {DisposedCount} items - remaining: {RemainingItems} items"
+                );
 
-            private static readonly Action<ILogger, string, Exception> _cleanupItemFailed = LoggerMessage.Define<string>(
-                LogLevel.Error,
-                EventIds.CleanupItemFailed,
-                "HttpMessageHandler.Dispose() threw an unhandled exception for client: '{ClientName}'");
+            private static readonly Action<ILogger, string, Exception> _cleanupItemFailed =
+                LoggerMessage.Define<string>(
+                    LogLevel.Error,
+                    EventIds.CleanupItemFailed,
+                    "HttpMessageHandler.Dispose() threw an unhandled exception for client: '{ClientName}'"
+                );
 
-            private static readonly Action<ILogger, double, string, Exception?> _handlerExpired = LoggerMessage.Define<double, string>(
-                LogLevel.Debug,
-                EventIds.HandlerExpired,
-                "HttpMessageHandler expired after {HandlerLifetime}ms for client '{ClientName}'");
-
+            private static readonly Action<ILogger, double, string, Exception?> _handlerExpired =
+                LoggerMessage.Define<double, string>(
+                    LogLevel.Debug,
+                    EventIds.HandlerExpired,
+                    "HttpMessageHandler expired after {HandlerLifetime}ms for client '{ClientName}'"
+                );
 
             public static void CleanupCycleStart(Lazy<ILogger> loggerLazy, int initialCount)
             {
@@ -352,15 +409,30 @@ namespace Microsoft.Extensions.Http
                 }
             }
 
-            public static void CleanupCycleEnd(Lazy<ILogger> loggerLazy, TimeSpan duration, int disposedCount, int finalCount)
+            public static void CleanupCycleEnd(
+                Lazy<ILogger> loggerLazy,
+                TimeSpan duration,
+                int disposedCount,
+                int finalCount
+            )
             {
                 if (TryGetLogger(loggerLazy, out ILogger? logger))
                 {
-                    _cleanupCycleEnd(logger, duration.TotalMilliseconds, disposedCount, finalCount, null);
+                    _cleanupCycleEnd(
+                        logger,
+                        duration.TotalMilliseconds,
+                        disposedCount,
+                        finalCount,
+                        null
+                    );
                 }
             }
 
-            public static void CleanupItemFailed(Lazy<ILogger> loggerLazy, string clientName, Exception exception)
+            public static void CleanupItemFailed(
+                Lazy<ILogger> loggerLazy,
+                string clientName,
+                Exception exception
+            )
             {
                 if (TryGetLogger(loggerLazy, out ILogger? logger))
                 {
@@ -368,7 +440,11 @@ namespace Microsoft.Extensions.Http
                 }
             }
 
-            public static void HandlerExpired(Lazy<ILogger> loggerLazy, string clientName, TimeSpan lifetime)
+            public static void HandlerExpired(
+                Lazy<ILogger> loggerLazy,
+                string clientName,
+                TimeSpan lifetime
+            )
             {
                 if (TryGetLogger(loggerLazy, out ILogger? logger))
                 {
@@ -376,7 +452,10 @@ namespace Microsoft.Extensions.Http
                 }
             }
 
-            private static bool TryGetLogger(Lazy<ILogger> loggerLazy, [NotNullWhen(true)] out ILogger? logger)
+            private static bool TryGetLogger(
+                Lazy<ILogger> loggerLazy,
+                [NotNullWhen(true)] out ILogger? logger
+            )
             {
                 logger = null;
                 try

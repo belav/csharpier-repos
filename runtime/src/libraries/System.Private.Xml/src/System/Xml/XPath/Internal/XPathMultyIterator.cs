@@ -35,7 +35,7 @@ namespace MS.Internal.Xml.XPath
             {
                 Advance(i);
             }
-            for (int i = arr.Length - 2; firstNotEmpty <= i;)
+            for (int i = arr.Length - 2; firstNotEmpty <= i; )
             {
                 if (SiftItem(i))
                 {
@@ -60,7 +60,6 @@ namespace MS.Internal.Xml.XPath
             }
             return true;
         }
-
 
         // Invariant: a[i] < a[i+1] for i > item
         // returns flase is head of the list was moved & as a result consistancy of list depends on head consistancy.
@@ -130,7 +129,10 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override int CurrentPosition { get { return position; } }
+        public override int CurrentPosition
+        {
+            get { return position; }
+        }
 
         public override bool MoveNext()
         {

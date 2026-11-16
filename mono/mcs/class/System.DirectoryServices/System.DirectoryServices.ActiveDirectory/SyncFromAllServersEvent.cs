@@ -23,11 +23,11 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum SyncFromAllServersEvent
-	{
-		Error,
-		SyncStarted,
-		SyncCompleted,
-		Finished
-	}
+    public enum SyncFromAllServersEvent
+    {
+        Error,
+        SyncStarted,
+        SyncCompleted,
+        Finished,
+    }
 }

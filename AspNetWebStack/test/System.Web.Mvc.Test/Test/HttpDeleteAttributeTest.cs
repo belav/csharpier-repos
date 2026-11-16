@@ -10,13 +10,17 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void IsValidForRequestReturnsFalseIfHttpVerbIsNotPost()
         {
-            HttpVerbAttributeHelper.TestHttpVerbAttributeWithInvalidVerb<HttpDeleteAttribute>("POST");
+            HttpVerbAttributeHelper.TestHttpVerbAttributeWithInvalidVerb<HttpDeleteAttribute>(
+                "POST"
+            );
         }
 
         [Fact]
         public void IsValidForRequestReturnsTrueIfHttpVerbIsPost()
         {
-            HttpVerbAttributeHelper.TestHttpVerbAttributeWithValidVerb<HttpDeleteAttribute>("DELETE");
+            HttpVerbAttributeHelper.TestHttpVerbAttributeWithValidVerb<HttpDeleteAttribute>(
+                "DELETE"
+            );
         }
 
         [Fact]

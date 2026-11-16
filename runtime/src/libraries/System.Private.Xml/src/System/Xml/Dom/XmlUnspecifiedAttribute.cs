@@ -7,23 +7,25 @@ namespace System.Xml
     {
         private bool _fSpecified;
 
-
-        internal XmlUnspecifiedAttribute(string? prefix, string localName, string? namespaceURI, XmlDocument doc)
-        : base(prefix, localName, namespaceURI, doc)
-        {
-        }
+        internal XmlUnspecifiedAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            XmlDocument doc
+        )
+            : base(prefix, localName, namespaceURI, doc) { }
 
         public override bool Specified
         {
             get { return _fSpecified; }
         }
 
-
         public override XmlNode CloneNode(bool deep)
         {
             //CloneNode is deep for attributes irrespective of parameter
             XmlDocument doc = OwnerDocument;
-            XmlUnspecifiedAttribute attr = (XmlUnspecifiedAttribute)doc.CreateDefaultAttribute(Prefix, LocalName, NamespaceURI);
+            XmlUnspecifiedAttribute attr = (XmlUnspecifiedAttribute)
+                doc.CreateDefaultAttribute(Prefix, LocalName, NamespaceURI);
             attr.CopyChildren(doc, this, true);
             attr._fSpecified = true; //When clone, should return the specified attribute as default
             return attr;

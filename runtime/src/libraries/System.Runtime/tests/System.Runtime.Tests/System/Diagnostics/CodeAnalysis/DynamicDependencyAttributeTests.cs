@@ -43,7 +43,11 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData("Foo()", "System.String", "System.Runtime")]
         [InlineData(null, null, null)]
         [InlineData("", "", "")]
-        public void TestConstructorSignatureTypeNameAssemblyName(string memberSignature, string typeName, string assemblyName)
+        public void TestConstructorSignatureTypeNameAssemblyName(
+            string memberSignature,
+            string typeName,
+            string assemblyName
+        )
         {
             var dda = new DynamicDependencyAttribute(memberSignature, typeName, assemblyName);
 
@@ -59,7 +63,10 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData(DynamicallyAccessedMemberTypes.PublicMethods, typeof(string))]
         [InlineData(DynamicallyAccessedMemberTypes.None, null)]
         [InlineData(DynamicallyAccessedMemberTypes.All, typeof(void))]
-        public void TestConstructorMemberTypes(DynamicallyAccessedMemberTypes memberTypes, Type type)
+        public void TestConstructorMemberTypes(
+            DynamicallyAccessedMemberTypes memberTypes,
+            Type type
+        )
         {
             var dda = new DynamicDependencyAttribute(memberTypes, type);
 
@@ -72,10 +79,18 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         }
 
         [Theory]
-        [InlineData(DynamicallyAccessedMemberTypes.PublicMethods, "System.String", "System.Runtime")]
+        [InlineData(
+            DynamicallyAccessedMemberTypes.PublicMethods,
+            "System.String",
+            "System.Runtime"
+        )]
         [InlineData(DynamicallyAccessedMemberTypes.None, null, null)]
         [InlineData(DynamicallyAccessedMemberTypes.All, "", "")]
-        public void TestConstructorMemberTypesTypeNameAssemblyName(DynamicallyAccessedMemberTypes memberTypes, string typeName, string assemblyName)
+        public void TestConstructorMemberTypesTypeNameAssemblyName(
+            DynamicallyAccessedMemberTypes memberTypes,
+            string typeName,
+            string assemblyName
+        )
         {
             var dda = new DynamicDependencyAttribute(memberTypes, typeName, assemblyName);
 

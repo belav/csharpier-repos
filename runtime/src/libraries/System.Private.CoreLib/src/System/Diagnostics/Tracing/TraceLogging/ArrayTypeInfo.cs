@@ -16,7 +16,8 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string? name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);

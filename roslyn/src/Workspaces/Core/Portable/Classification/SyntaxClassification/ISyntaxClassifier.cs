@@ -25,11 +25,25 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         /// <summary>
         /// This method will be called for all nodes that match the types specified by the <see cref="SyntaxNodeTypes"/> property.
         /// </summary>
-        void AddClassifications(SyntaxNode node, TextSpan textSpan, SemanticModel semanticModel, ClassificationOptions options, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddClassifications(
+            SyntaxNode node,
+            TextSpan textSpan,
+            SemanticModel semanticModel,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// This method will be called for all tokens that match the kinds specified by the <see cref="SyntaxTokenKinds"/> property.
         /// </summary>
-        void AddClassifications(SyntaxToken token, TextSpan textSpan, SemanticModel semanticModel, ClassificationOptions options, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddClassifications(
+            SyntaxToken token,
+            TextSpan textSpan,
+            SemanticModel semanticModel,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
     }
 }

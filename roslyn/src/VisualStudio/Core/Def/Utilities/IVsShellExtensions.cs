@@ -28,18 +28,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 {
                     await joinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var shell = ServiceProvider.GlobalProvider.GetService<SVsShell, IVsShell>(joinableTaskFactory);
+                    var shell = ServiceProvider.GlobalProvider.GetService<SVsShell, IVsShell>(
+                        joinableTaskFactory
+                    );
                     return
-                        (shell != null) &&
-                        ErrorHandler.Succeeded(shell.GetProperty((int)__VSSPROPID.VSSPROPID_IsInCommandLineMode, out var result)) &&
-                        (bool)result ? 1 : -1;
+                        (shell != null)
+                        && ErrorHandler.Succeeded(
+                            shell.GetProperty(
+                                (int)__VSSPROPID.VSSPROPID_IsInCommandLineMode,
+                                out var result
+                            )
+                        )
+                        && (bool)result
+                        ? 1
+                        : -1;
                 });
             }
 
             return result == 1;
         }
 
-        public static bool TryGetPropertyValue(this IVsShell shell, __VSSPROPID id, out IntPtr value)
+        public static bool TryGetPropertyValue(
+            this IVsShell shell,
+            __VSSPROPID id,
+            out IntPtr value
+        )
         {
             var hresult = shell.GetProperty((int)id, out var objValue);
             if (ErrorHandler.Succeeded(hresult) && objValue != null)

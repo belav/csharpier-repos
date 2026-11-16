@@ -11,7 +11,10 @@ internal static partial class Interop
     private static void ThrowExceptionForIoErrno(ErrorInfo errorInfo, string? path, bool isDirError)
     {
         Debug.Assert(errorInfo.Error != Error.SUCCESS);
-        Debug.Assert(errorInfo.Error != Error.EINTR, "EINTR errors should be handled by the native shim and never bubble up to managed code");
+        Debug.Assert(
+            errorInfo.Error != Error.EINTR,
+            "EINTR errors should be handled by the native shim and never bubble up to managed code"
+        );
 
         throw Interop.GetExceptionForIoErrno(errorInfo, path, isDirError);
     }
@@ -91,7 +94,11 @@ internal static partial class Interop
     /// <returns>
     /// On success, returns the valid SafeFileHandle that was validated.
     /// </returns>
-    internal static TSafeHandle CheckIo<TSafeHandle>(TSafeHandle handle, string? path = null, bool isDirError = false)
+    internal static TSafeHandle CheckIo<TSafeHandle>(
+        TSafeHandle handle,
+        string? path = null,
+        bool isDirError = false
+    )
         where TSafeHandle : SafeHandle
     {
         if (handle.IsInvalid)
@@ -111,7 +118,11 @@ internal static partial class Interop
     /// <param name="path">The path with which this error is associated.  This may be null.</param>
     /// <param name="isDirError">true if error is caused by a directory issue.</param>
     /// <returns></returns>
-    internal static Exception GetExceptionForIoErrno(ErrorInfo errorInfo, string? path = null, bool isDirError = false)
+    internal static Exception GetExceptionForIoErrno(
+        ErrorInfo errorInfo,
+        string? path = null,
+        bool isDirError = false
+    )
     {
         // Translate the errno into a known set of exception types.  For cases where multiple errnos map
         // to the same exception type, include an inner exception with the details.
@@ -122,57 +133,77 @@ internal static partial class Interop
                 // when the parent folder does not exist.
                 if (!isDirError && (path is null || ParentDirectoryExists(path)))
                 {
-                    return !string.IsNullOrEmpty(path) ?
-                        new FileNotFoundException(SR.Format(SR.IO_FileNotFound_FileName, path), path) :
-                        new FileNotFoundException(SR.IO_FileNotFound);
+                    return !string.IsNullOrEmpty(path)
+                        ? new FileNotFoundException(
+                            SR.Format(SR.IO_FileNotFound_FileName, path),
+                            path
+                        )
+                        : new FileNotFoundException(SR.IO_FileNotFound);
                 }
                 goto case Error.ENOTDIR;
 
             case Error.ENOTDIR:
-                return !string.IsNullOrEmpty(path) ?
-                    new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, path)) :
-                    new DirectoryNotFoundException(SR.IO_PathNotFound_NoPathName);
+                return !string.IsNullOrEmpty(path)
+                    ? new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, path))
+                    : new DirectoryNotFoundException(SR.IO_PathNotFound_NoPathName);
 
             case Error.EACCES:
             case Error.EBADF:
             case Error.EPERM:
                 Exception inner = GetIOException(errorInfo);
-                return !string.IsNullOrEmpty(path) ?
-                    new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_IODenied_Path, path), inner) :
-                    new UnauthorizedAccessException(SR.UnauthorizedAccess_IODenied_NoPathName, inner);
+                return !string.IsNullOrEmpty(path)
+                    ? new UnauthorizedAccessException(
+                        SR.Format(SR.UnauthorizedAccess_IODenied_Path, path),
+                        inner
+                    )
+                    : new UnauthorizedAccessException(
+                        SR.UnauthorizedAccess_IODenied_NoPathName,
+                        inner
+                    );
 
             case Error.ENAMETOOLONG:
-                return !string.IsNullOrEmpty(path) ?
-                    new PathTooLongException(SR.Format(SR.IO_PathTooLong_Path, path)) :
-                    new PathTooLongException(SR.IO_PathTooLong);
+                return !string.IsNullOrEmpty(path)
+                    ? new PathTooLongException(SR.Format(SR.IO_PathTooLong_Path, path))
+                    : new PathTooLongException(SR.IO_PathTooLong);
 
             case Error.EWOULDBLOCK:
-                return !string.IsNullOrEmpty(path) ?
-                    new IOException(SR.Format(SR.IO_SharingViolation_File, path), errorInfo.RawErrno) :
-                    new IOException(SR.IO_SharingViolation_NoFileName, errorInfo.RawErrno);
+                return !string.IsNullOrEmpty(path)
+                    ? new IOException(
+                        SR.Format(SR.IO_SharingViolation_File, path),
+                        errorInfo.RawErrno
+                    )
+                    : new IOException(SR.IO_SharingViolation_NoFileName, errorInfo.RawErrno);
 
             case Error.ECANCELED:
                 return new OperationCanceledException();
 
             case Error.EFBIG:
-                return new ArgumentOutOfRangeException("value", SR.ArgumentOutOfRange_FileLengthTooBig);
+                return new ArgumentOutOfRangeException(
+                    "value",
+                    SR.ArgumentOutOfRange_FileLengthTooBig
+                );
 
             case Error.EEXIST:
                 if (!string.IsNullOrEmpty(path))
                 {
-                    return new IOException(SR.Format(SR.IO_FileExists_Name, path), errorInfo.RawErrno);
+                    return new IOException(
+                        SR.Format(SR.IO_FileExists_Name, path),
+                        errorInfo.RawErrno
+                    );
                 }
                 goto default;
 
             default:
                 return GetIOException(errorInfo, path);
 
-            static bool ParentDirectoryExists(string fullPath)
-            {
-                string? parentPath = Path.GetDirectoryName(Path.TrimEndingDirectorySeparator(fullPath));
+                static bool ParentDirectoryExists(string fullPath)
+                {
+                    string? parentPath = Path.GetDirectoryName(
+                        Path.TrimEndingDirectorySeparator(fullPath)
+                    );
 
-                return Directory.Exists(parentPath);
-            }
+                    return Directory.Exists(parentPath);
+                }
         }
     }
 
@@ -180,6 +211,8 @@ internal static partial class Interop
     {
         string msg = errorInfo.GetErrorMessage();
         return new IOException(
-            string.IsNullOrEmpty(path) ? msg : $"{msg} : '{path}'", errorInfo.RawErrno);
+            string.IsNullOrEmpty(path) ? msg : $"{msg} : '{path}'",
+            errorInfo.RawErrno
+        );
     }
 }

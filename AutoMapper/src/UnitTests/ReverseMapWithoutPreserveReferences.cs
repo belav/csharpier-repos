@@ -46,12 +46,13 @@ public class ReverseMapWithoutPreserveReferences : AutoMapperSpecBase
         public virtual ICollection<UserDto> Users { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<CategoryModel, CategoryDto>(MemberList.Destination).ReverseMap();
-        cfg.CreateMap<UserModel, UserDto>(MemberList.Destination).ReverseMap();
-        cfg.CreateMap<UserGroupModel, UserGroupDto>(MemberList.Destination).ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<CategoryModel, CategoryDto>(MemberList.Destination).ReverseMap();
+            cfg.CreateMap<UserModel, UserDto>(MemberList.Destination).ReverseMap();
+            cfg.CreateMap<UserGroupModel, UserGroupDto>(MemberList.Destination).ReverseMap();
+        });
 
     protected override void Because_of()
     {

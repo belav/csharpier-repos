@@ -17,14 +17,26 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentNullException(nameof(connection));
 
             if (!connection.existingConnection)
-                throw new InvalidOperationException(SR.Format(SR.ConnectionNotCommitted, connection.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.ConnectionNotCommitted, connection.Name)
+                );
 
-            string? dn = (string?)PropertyManager.GetPropertyValue(connection.context, connection.cachedDirectoryEntry, PropertyManager.DistinguishedName);
+            string? dn = (string?)
+                PropertyManager.GetPropertyValue(
+                    connection.context,
+                    connection.cachedDirectoryEntry,
+                    PropertyManager.DistinguishedName
+                );
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ReplicationConnection tmp = (ReplicationConnection)InnerList[i]!;
-                string? tmpDn = (string?)PropertyManager.GetPropertyValue(tmp.context, tmp.cachedDirectoryEntry, PropertyManager.DistinguishedName);
+                string? tmpDn = (string?)
+                    PropertyManager.GetPropertyValue(
+                        tmp.context,
+                        tmp.cachedDirectoryEntry,
+                        PropertyManager.DistinguishedName
+                    );
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -40,14 +52,26 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentNullException(nameof(connection));
 
             if (!connection.existingConnection)
-                throw new InvalidOperationException(SR.Format(SR.ConnectionNotCommitted, connection.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.ConnectionNotCommitted, connection.Name)
+                );
 
-            string? dn = (string?)PropertyManager.GetPropertyValue(connection.context, connection.cachedDirectoryEntry, PropertyManager.DistinguishedName);
+            string? dn = (string?)
+                PropertyManager.GetPropertyValue(
+                    connection.context,
+                    connection.cachedDirectoryEntry,
+                    PropertyManager.DistinguishedName
+                );
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ReplicationConnection tmp = (ReplicationConnection)InnerList[i]!;
-                string? tmpDn = (string?)PropertyManager.GetPropertyValue(tmp.context, tmp.cachedDirectoryEntry, PropertyManager.DistinguishedName);
+                string? tmpDn = (string?)
+                    PropertyManager.GetPropertyValue(
+                        tmp.context,
+                        tmp.cachedDirectoryEntry,
+                        PropertyManager.DistinguishedName
+                    );
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {

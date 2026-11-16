@@ -24,7 +24,7 @@ namespace System.Activities.Debugger
         StateManager stateManager;
 
         // Set to true to notify to Break on first instruction. This helps the F11 on startup experience.
-        // Since the islands are on a new thread, there may be no user code on the main thread and so 
+        // Since the islands are on a new thread, there may be no user code on the main thread and so
         // F11 doesn't work. Thus the new worker thread needs to fire some break event.
         // This gets reset after the 'startup breakpoint'.
         // The initial Properties can override this.
@@ -34,16 +34,16 @@ namespace System.Activities.Debugger
         Thread worker;
 
         // Signalled when the main thread wants to send an event to the worker thread.
-        // The main thread fills out the data first. 
+        // The main thread fills out the data first.
         AutoResetEvent eventSend;
 
-        // Signalled by the worker thread when it's finished handling the event and 
+        // Signalled by the worker thread when it's finished handling the event and
         // the main thread can resume.
         AutoResetEvent eventDone;
 
         EventCode eventCode;
 
-        // Parameter for enter message. 
+        // Parameter for enter message.
         VirtualStackFrame enterStackParameter;
 
         internal void Initialize(string threadName, StateManager manager)
@@ -106,7 +106,7 @@ namespace System.Activities.Debugger
                 switch (eventCode)
                 {
                     case EventCode.Enter:
-                        // Call Island for enterStackParameter     
+                        // Call Island for enterStackParameter
                         this.stateManager.InvokeWorker(this, enterStackParameter);
 
                         // resume from SendLeave()
@@ -131,13 +131,14 @@ namespace System.Activities.Debugger
             this.eventDone = new AutoResetEvent(false);
             this.worker = new Thread(new ThreadStart(WorkerThreadProc));
 
-            string name = string.IsNullOrEmpty(threadName) ? this.stateManager.ManagerProperties.AuxiliaryThreadName : threadName;
+            string name = string.IsNullOrEmpty(threadName)
+                ? this.stateManager.ManagerProperties.AuxiliaryThreadName
+                : threadName;
             if (name != null)
             {
                 this.worker.Name = name;
             }
             this.worker.Start();
-
         }
 
         internal void EnterState(VirtualStackFrame newFrame)
@@ -147,7 +148,7 @@ namespace System.Activities.Debugger
 
             this.eventSend.Set();
 
-            // Block until Island executes Nop, 
+            // Block until Island executes Nop,
             // giving BPs a chance to be hit.
             // Must block here if the island is stopped at a breakpoint.
             this.eventDone.WaitOne();
@@ -176,7 +177,7 @@ namespace System.Activities.Debugger
         {
             Enter,
             Leave,
-            Break
+            Break,
         };
     }
 }

@@ -6,8 +6,6 @@ namespace Roslyn.Utilities
 {
     internal partial class SpecializedCollections
     {
-        private static partial class Empty
-        {
-        }
+        private static partial class Empty { }
     }
 }

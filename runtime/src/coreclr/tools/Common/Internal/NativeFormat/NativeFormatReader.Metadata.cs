@@ -34,7 +34,8 @@ namespace Internal.NativeFormat
         public NativeParser GetLookbackParser(uint lookback)
         {
             // Adjust the lookback by the size of the TypeSignatureKind element and the minimum lookback size
-            uint adjustedLookback = lookback + NativePrimitiveDecoder.GetUnsignedEncodingSize(lookback << 4) + 2;
+            uint adjustedLookback =
+                lookback + NativePrimitiveDecoder.GetUnsignedEncodingSize(lookback << 4) + 2;
             return new NativeParser(_reader, _offset - adjustedLookback);
         }
 

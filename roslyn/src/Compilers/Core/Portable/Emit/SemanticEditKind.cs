@@ -29,6 +29,6 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <summary>
         /// Existing symbol is replaced by its new version.
         /// </summary>
-        Replace = 4
+        Replace = 4,
     }
 }

@@ -44,7 +44,8 @@ namespace System.Web.Mvc.Test
             ControllerDescriptor cd = GetControllerDescriptor();
 
             // Act
-            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])cd.GetCustomAttributes(typeof(ObsoleteAttribute), true);
+            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])
+                cd.GetCustomAttributes(typeof(ObsoleteAttribute), true);
 
             // Assert
             Assert.Empty(attrs);
@@ -58,7 +59,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { cd.GetCustomAttributes(null /* attributeType */, true); }, "attributeType");
+                delegate
+                {
+                    cd.GetCustomAttributes(
+                        null /* attributeType */
+                        ,
+                        true
+                    );
+                },
+                "attributeType"
+            );
         }
 
         [Fact]
@@ -66,12 +76,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object[] expected = new object[0];
-            Mock<ControllerDescriptor> mockDescriptor = new Mock<ControllerDescriptor>() { CallBase = true };
-            mockDescriptor.Setup(d => d.GetCustomAttributes(typeof(object), true)).Returns(expected);
+            Mock<ControllerDescriptor> mockDescriptor = new Mock<ControllerDescriptor>()
+            {
+                CallBase = true,
+            };
+            mockDescriptor
+                .Setup(d => d.GetCustomAttributes(typeof(object), true))
+                .Returns(expected);
             ControllerDescriptor cd = mockDescriptor.Object;
 
             // Act
-            object[] returned = cd.GetCustomAttributes(true /* inherit */);
+            object[] returned = cd.GetCustomAttributes(
+                true /* inherit */
+            );
 
             // Assert
             Assert.Same(expected, returned);
@@ -82,7 +99,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             var mockDescriptor = new Mock<ControllerDescriptor>() { CallBase = true };
-            mockDescriptor.Setup(d => d.GetCustomAttributes(typeof(FilterAttribute), true)).Returns(new object[] { new Mock<FilterAttribute>().Object }).Verifiable();
+            mockDescriptor
+                .Setup(d => d.GetCustomAttributes(typeof(FilterAttribute), true))
+                .Returns(new object[] { new Mock<FilterAttribute>().Object })
+                .Verifiable();
 
             // Act
             var result = mockDescriptor.Object.GetFilterAttributes(true).ToList();
@@ -113,7 +133,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { cd.IsDefined(null /* attributeType */, true); }, "attributeType");
+                delegate
+                {
+                    cd.IsDefined(
+                        null /* attributeType */
+                        ,
+                        true
+                    );
+                },
+                "attributeType"
+            );
         }
 
         private static ControllerDescriptor GetControllerDescriptor()
@@ -123,7 +152,10 @@ namespace System.Web.Mvc.Test
 
         private static ControllerDescriptor GetControllerDescriptor(Type controllerType)
         {
-            Mock<ControllerDescriptor> mockDescriptor = new Mock<ControllerDescriptor>() { CallBase = true };
+            Mock<ControllerDescriptor> mockDescriptor = new Mock<ControllerDescriptor>()
+            {
+                CallBase = true,
+            };
             mockDescriptor.Setup(d => d.ControllerType).Returns(controllerType);
             return mockDescriptor.Object;
         }

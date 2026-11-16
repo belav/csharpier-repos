@@ -30,28 +30,14 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         public Interop.WinHttp.WINHTTP_STATUS_CALLBACK Callback
         {
-            get
-            {
-                return _callback;
-            }
-
-            set
-            {
-                _callback = value;
-            }
+            get { return _callback; }
+            set { _callback = value; }
         }
 
         public IntPtr Context
         {
-            get
-            {
-                return _context;
-            }
-
-            set
-            {
-                _context = value;
-            }
+            get { return _context; }
+            set { _context = value; }
         }
 
         public bool DelayOperation(int delay)
@@ -80,25 +66,42 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             return true;
         }
 
-        public void InvokeCallback(uint internetStatus, Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult)
+        public void InvokeCallback(
+            uint internetStatus,
+            Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult
+        )
         {
             GCHandle pinnedAsyncResult = GCHandle.Alloc(asyncResult, GCHandleType.Pinned);
             IntPtr statusInformation = pinnedAsyncResult.AddrOfPinnedObject();
-            uint statusInformationLength = (uint)Marshal.SizeOf<Interop.WinHttp.WINHTTP_ASYNC_RESULT>();
+            uint statusInformationLength = (uint)
+                Marshal.SizeOf<Interop.WinHttp.WINHTTP_ASYNC_RESULT>();
 
             InvokeCallback(internetStatus, statusInformation, statusInformationLength);
 
             pinnedAsyncResult.Free();
         }
 
-        public void InvokeCallback(uint internetStatus, IntPtr statusInformation, uint statusInformationLength)
+        public void InvokeCallback(
+            uint internetStatus,
+            IntPtr statusInformation,
+            uint statusInformationLength
+        )
         {
-            _callback(DangerousGetHandle(), _context, internetStatus, statusInformation, statusInformationLength);
+            _callback(
+                DangerousGetHandle(),
+                _context,
+                internetStatus,
+                statusInformation,
+                statusInformationLength
+            );
         }
 
         protected override bool ReleaseHandle()
         {
-            Debug.WriteLine("FakeSafeWinHttpHandle.ReleaseHandle, handle=#{0}", handle.GetHashCode());
+            Debug.WriteLine(
+                "FakeSafeWinHttpHandle.ReleaseHandle, handle=#{0}",
+                handle.GetHashCode()
+            );
             return base.ReleaseHandle();
         }
     }

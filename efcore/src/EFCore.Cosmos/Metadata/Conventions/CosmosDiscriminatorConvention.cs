@@ -14,32 +14,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
 ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
 /// </remarks>
-public class CosmosDiscriminatorConvention :
-    DiscriminatorConvention,
-    IForeignKeyOwnershipChangedConvention,
-    IForeignKeyRemovedConvention,
-    IEntityTypeAddedConvention,
-    IEntityTypeAnnotationChangedConvention
+public class CosmosDiscriminatorConvention
+    : DiscriminatorConvention,
+        IForeignKeyOwnershipChangedConvention,
+        IForeignKeyRemovedConvention,
+        IEntityTypeAddedConvention,
+        IEntityTypeAnnotationChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="CosmosDiscriminatorConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosDiscriminatorConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc/>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => ProcessEntityType(entityTypeBuilder);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => ProcessEntityType(entityTypeBuilder);
 
     /// <inheritdoc/>
     public virtual void ProcessForeignKeyOwnershipChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<bool?> context)
+        IConventionContext<bool?> context
+    )
     {
         var entityType = relationshipBuilder.Metadata.DeclaringEntityType;
 
@@ -50,10 +49,10 @@ public class CosmosDiscriminatorConvention :
     public virtual void ProcessForeignKeyRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionForeignKey foreignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
-        if (entityTypeBuilder.Metadata.IsInModel
-            && foreignKey.IsOwnership)
+        if (entityTypeBuilder.Metadata.IsInModel && foreignKey.IsOwnership)
         {
             ProcessEntityType(entityTypeBuilder);
         }
@@ -65,10 +64,13 @@ public class CosmosDiscriminatorConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
-        if (name != CosmosAnnotationNames.ContainerName
-            || (annotation == null) == (oldAnnotation == null))
+        if (
+            name != CosmosAnnotationNames.ContainerName
+            || (annotation == null) == (oldAnnotation == null)
+        )
         {
             return;
         }
@@ -86,7 +88,8 @@ public class CosmosDiscriminatorConvention :
 
         if (entityType.IsDocumentRoot())
         {
-            entityTypeBuilder.HasDiscriminator(typeof(string))
+            entityTypeBuilder
+                .HasDiscriminator(typeof(string))
                 ?.HasValue(entityType, entityType.ShortName());
         }
         else
@@ -99,7 +102,8 @@ public class CosmosDiscriminatorConvention :
     public override void ProcessDiscriminatorPropertySet(
         IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        IConventionContext<string> context)
+        IConventionContext<string> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (entityType.IsDocumentRoot())
@@ -113,7 +117,8 @@ public class CosmosDiscriminatorConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         if (entityTypeBuilder.Metadata.BaseType != newBaseType)
         {
@@ -131,8 +136,7 @@ public class CosmosDiscriminatorConvention :
         else
         {
             var rootType = newBaseType.GetRootType();
-            if (!rootType.IsInModel
-                || !rootType.IsDocumentRoot())
+            if (!rootType.IsInModel || !rootType.IsDocumentRoot())
             {
                 return;
             }
@@ -140,7 +144,10 @@ public class CosmosDiscriminatorConvention :
             var discriminator = rootType.Builder.HasDiscriminator(typeof(string));
             if (discriminator != null)
             {
-                SetDefaultDiscriminatorValues(entityTypeBuilder.Metadata.GetDerivedTypesInclusive(), discriminator);
+                SetDefaultDiscriminatorValues(
+                    entityTypeBuilder.Metadata.GetDerivedTypesInclusive(),
+                    discriminator
+                );
             }
         }
     }
@@ -148,7 +155,8 @@ public class CosmosDiscriminatorConvention :
     /// <inheritdoc/>
     protected override void SetDefaultDiscriminatorValues(
         IEnumerable<IConventionEntityType> entityTypes,
-        IConventionDiscriminatorBuilder discriminatorBuilder)
+        IConventionDiscriminatorBuilder discriminatorBuilder
+    )
     {
         foreach (var entityType in entityTypes)
         {
@@ -160,7 +168,6 @@ public class CosmosDiscriminatorConvention :
     public override void ProcessEntityTypeRemoved(
         IConventionModelBuilder modelBuilder,
         IConventionEntityType entityType,
-        IConventionContext<IConventionEntityType> context)
-    {
-    }
+        IConventionContext<IConventionEntityType> context
+    ) { }
 }

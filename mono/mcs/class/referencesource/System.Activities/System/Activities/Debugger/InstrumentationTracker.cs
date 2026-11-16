@@ -4,8 +4,8 @@
 
 namespace System.Activities.Debugger
 {
-    using System.Collections.Generic;
     using System.Activities.Debugger.Symbol;
+    using System.Collections.Generic;
 
     // Keep track of instrumentation information.
     // - which subroot has source file but not yet instrumented.
@@ -85,7 +85,6 @@ namespace System.Activities.Debugger
         {
             return this.UninstrumentedSubRoots.ContainsKey(subRoot);
         }
-
 
         // Returns Activities that have the same source as the given subRoot.
         // This will return other instantiation of the same custom activity.

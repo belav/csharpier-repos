@@ -7,6 +7,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     internal enum RazorExcerptMode
     {
         SingleLine,
-        Tooltip
+        Tooltip,
     }
 }

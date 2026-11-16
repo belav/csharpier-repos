@@ -30,7 +30,9 @@ namespace System
                 sbyte privilegedProcess = s_privilegedProcess;
                 if (privilegedProcess == 0)
                 {
-                    s_privilegedProcess = privilegedProcess = IsPrivilegedProcessCore() ? (sbyte)1 : (sbyte)-1;
+                    s_privilegedProcess = privilegedProcess = IsPrivilegedProcessCore()
+                        ? (sbyte)1
+                        : (sbyte)-1;
                 }
                 return privilegedProcess > 0;
             }
@@ -46,7 +48,10 @@ namespace System
             return GetEnvironmentVariableCore(variable);
         }
 
-        public static string? GetEnvironmentVariable(string variable, EnvironmentVariableTarget target)
+        public static string? GetEnvironmentVariable(
+            string variable,
+            EnvironmentVariableTarget target
+        )
         {
             if (target == EnvironmentVariableTarget.Process)
                 return GetEnvironmentVariable(variable);
@@ -72,7 +77,11 @@ namespace System
             SetEnvironmentVariableCore(variable, value);
         }
 
-        public static void SetEnvironmentVariable(string variable, string? value, EnvironmentVariableTarget target)
+        public static void SetEnvironmentVariable(
+            string variable,
+            string? value,
+            EnvironmentVariableTarget target
+        )
         {
             if (target == EnvironmentVariableTarget.Process)
             {
@@ -93,13 +102,14 @@ namespace System
         {
             // s_commandLineArgs is expected to be initialize with application command line arguments
             // during startup. GetCommandLineArgsNative fallback is used for hosted libraries.
-            return s_commandLineArgs != null ?
-                (string[])s_commandLineArgs.Clone() :
-                GetCommandLineArgsNative();
+            return s_commandLineArgs != null
+                ? (string[])s_commandLineArgs.Clone()
+                : GetCommandLineArgsNative();
         }
 #endif
 
-        public static string CommandLine => PasteArguments.Paste(GetCommandLineArgs(), pasteFirstArgumentUsingArgV0Rules: true);
+        public static string CommandLine =>
+            PasteArguments.Paste(GetCommandLineArgs(), pasteFirstArgumentUsingArgV0Rules: true);
 
         public static string CurrentDirectory
         {
@@ -121,15 +131,24 @@ namespace System
             return ExpandEnvironmentVariablesCore(name);
         }
 
-        public static string GetFolderPath(SpecialFolder folder) => GetFolderPath(folder, SpecialFolderOption.None);
+        public static string GetFolderPath(SpecialFolder folder) =>
+            GetFolderPath(folder, SpecialFolderOption.None);
 
         public static string GetFolderPath(SpecialFolder folder, SpecialFolderOption option)
         {
             if (!Enum.IsDefined(folder))
-                throw new ArgumentOutOfRangeException(nameof(folder), folder, SR.Format(SR.Arg_EnumIllegalVal, folder));
+                throw new ArgumentOutOfRangeException(
+                    nameof(folder),
+                    folder,
+                    SR.Format(SR.Arg_EnumIllegalVal, folder)
+                );
 
             if (option != SpecialFolderOption.None && !Enum.IsDefined(option))
-                throw new ArgumentOutOfRangeException(nameof(option), option, SR.Format(SR.Arg_EnumIllegalVal, option));
+                throw new ArgumentOutOfRangeException(
+                    nameof(option),
+                    option,
+                    SR.Format(SR.Arg_EnumIllegalVal, option)
+                );
 
             return GetFolderPathCore(folder, option);
         }
@@ -180,7 +199,8 @@ namespace System
 
         public static bool Is64BitProcess => IntPtr.Size == 8;
 
-        public static bool Is64BitOperatingSystem => Is64BitProcess || Is64BitOperatingSystemWhen32BitProcess;
+        public static bool Is64BitOperatingSystem =>
+            Is64BitProcess || Is64BitOperatingSystemWhen32BitProcess;
 
         public static string NewLine => NewLineConst;
 
@@ -205,7 +225,9 @@ namespace System
         {
             get
             {
-                string? versionString = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                string? versionString = typeof(object)
+                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    ?.InformationalVersion;
 
                 ReadOnlySpan<char> versionSpan = versionString.AsSpan();
 
@@ -215,7 +237,9 @@ namespace System
                     versionSpan = versionSpan.Slice(0, separatorIndex);
 
                 // Return zeros rather then failing if the version string fails to parse
-                return Version.TryParse(versionSpan, out Version? version) ? version : new Version();
+                return Version.TryParse(versionSpan, out Version? version)
+                    ? version
+                    : new Version();
             }
         }
 
@@ -250,7 +274,11 @@ namespace System
             if (target == EnvironmentVariableTarget.User)
                 return false;
 
-            throw new ArgumentOutOfRangeException(nameof(target), target, SR.Format(SR.Arg_EnumIllegalVal, target));
+            throw new ArgumentOutOfRangeException(
+                nameof(target),
+                target,
+                SR.Format(SR.Arg_EnumIllegalVal, target)
+            );
         }
 
         private static void ValidateVariableAndValue(string variable, ref string? value)

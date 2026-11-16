@@ -20,31 +20,37 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpGenerateFromUsage()
-            : base(nameof(CSharpGenerateFromUsage))
-        {
-        }
+            : base(nameof(CSharpGenerateFromUsage)) { }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateLocal)]
         public async Task GenerateLocal()
         {
             await SetUpEditorAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         string s = $$xyz;
     }
-}", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Generate local 'xyz'", applyFix: true, cancellationToken: HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate local 'xyz'",
+                applyFix: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.EditorVerifier.TextContainsAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         string xyz = null;
         string s = xyz;
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

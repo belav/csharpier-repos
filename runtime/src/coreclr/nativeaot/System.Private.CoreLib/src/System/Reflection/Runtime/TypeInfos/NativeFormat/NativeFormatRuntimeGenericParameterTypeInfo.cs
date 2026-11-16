@@ -10,14 +10,18 @@ using System.Reflection.Runtime.CustomAttributes;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.MethodInfos;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal abstract partial class NativeFormatRuntimeGenericParameterTypeInfo : RuntimeGenericParameterTypeInfo
+    internal abstract partial class NativeFormatRuntimeGenericParameterTypeInfo
+        : RuntimeGenericParameterTypeInfo
     {
-        protected NativeFormatRuntimeGenericParameterTypeInfo(MetadataReader reader, GenericParameterHandle genericParameterHandle, GenericParameter genericParameter)
+        protected NativeFormatRuntimeGenericParameterTypeInfo(
+            MetadataReader reader,
+            GenericParameterHandle genericParameterHandle,
+            GenericParameter genericParameter
+        )
             : base(genericParameter.Number)
         {
             Reader = reader;
@@ -29,24 +33,21 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         {
             get
             {
-                return RuntimeCustomAttributeData.GetCustomAttributes(Reader, _genericParameter.CustomAttributes);
+                return RuntimeCustomAttributeData.GetCustomAttributes(
+                    Reader,
+                    _genericParameter.CustomAttributes
+                );
             }
         }
 
         public sealed override GenericParameterAttributes GenericParameterAttributes
         {
-            get
-            {
-                return _genericParameter.Flags;
-            }
+            get { return _genericParameter.Flags; }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         public sealed override int GetHashCode()
@@ -80,7 +81,9 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                     // a modifier for the "unmanaged" constraint. This doesn't conform to the
                     // ECMA-335 spec, but we need to deal with it. The modifier is not visible
                     // to reflection.
-                    constraints.Add(new QTypeDefRefOrSpec(reader, constraintHandle.SkipCustomModifiers(reader)));
+                    constraints.Add(
+                        new QTypeDefRefOrSpec(reader, constraintHandle.SkipCustomModifiers(reader))
+                    );
                 }
                 return constraints.ToArray();
             }

@@ -14,23 +14,41 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.MakeMemberStatic
 {
-    internal abstract class AbstractMakeMemberStaticCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractMakeMemberStaticCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
-        protected abstract bool TryGetMemberDeclaration(SyntaxNode node, [NotNullWhen(true)] out SyntaxNode? memberDeclaration);
+        protected abstract bool TryGetMemberDeclaration(
+            SyntaxNode node,
+            [NotNullWhen(true)] out SyntaxNode? memberDeclaration
+        );
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            if (context.Diagnostics.Length == 1 &&
-                TryGetMemberDeclaration(context.Diagnostics[0].Location.FindNode(context.CancellationToken), out _))
+            if (
+                context.Diagnostics.Length == 1
+                && TryGetMemberDeclaration(
+                    context.Diagnostics[0].Location.FindNode(context.CancellationToken),
+                    out _
+                )
+            )
             {
-                RegisterCodeFix(context, CodeFixesResources.Make_member_static, nameof(AbstractMakeMemberStaticCodeFixProvider));
+                RegisterCodeFix(
+                    context,
+                    CodeFixesResources.Make_member_static,
+                    nameof(AbstractMakeMemberStaticCodeFixProvider)
+                );
             }
 
             return Task.CompletedTask;
         }
 
-        protected sealed override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor,
-            CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected sealed override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             for (var i = 0; i < diagnostics.Length; i++)
             {
@@ -39,7 +57,10 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
                 if (TryGetMemberDeclaration(declaration, out var memberDeclaration))
                 {
                     var generator = SyntaxGenerator.GetGenerator(document);
-                    var newNode = generator.WithModifiers(memberDeclaration, generator.GetModifiers(declaration).WithIsStatic(true));
+                    var newNode = generator.WithModifiers(
+                        memberDeclaration,
+                        generator.GetModifiers(declaration).WithIsStatic(true)
+                    );
                     editor.ReplaceNode(declaration, newNode);
                 }
             }

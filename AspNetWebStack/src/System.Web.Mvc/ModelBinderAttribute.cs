@@ -17,8 +17,11 @@ namespace System.Web.Mvc
             }
             if (!typeof(IModelBinder).IsAssignableFrom(binderType))
             {
-                string message = String.Format(CultureInfo.CurrentCulture,
-                                               MvcResources.ModelBinderAttribute_TypeNotIModelBinder, binderType.FullName);
+                string message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ModelBinderAttribute_TypeNotIModelBinder,
+                    binderType.FullName
+                );
                 throw new ArgumentException(message, "binderType");
             }
 
@@ -39,8 +42,10 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.ModelBinderAttribute_ErrorCreatingModelBinder,
-                        BinderType.FullName),
-                    ex);
+                        BinderType.FullName
+                    ),
+                    ex
+                );
             }
         }
     }

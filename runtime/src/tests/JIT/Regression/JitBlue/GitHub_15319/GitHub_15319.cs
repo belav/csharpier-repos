@@ -13,33 +13,30 @@ public class P
     [Fact]
     public static int TestEntryPoint()
     {
-        var ar = new double[]
-        {
-            100
-        };
-        
+        var ar = new double[] { 100 };
+
         FillTo1(ref ar, 5);
         Console.WriteLine(string.Join(",", ar.Select(a => a.ToString()).ToArray()));
         return (int)ar[4];
     }
-    
+
     internal static void FillTo1(ref double[] dd, int N)
     {
         if (dd.Length >= N)
-        return;
-        
+            return;
+
         double[] Old = dd;
         double d = double.NaN;
         if (Old.Length > 0)
-        d = Old[0];
-        
+            d = Old[0];
+
         dd = new double[N];
-        
+
         for (int i = 0; i < Old.Length; i++)
         {
             dd[N - Old.Length + i] = Old[i];
         }
         for (int i = 0; i < N - Old.Length; i++)
-        dd[i] = d;
+            dd[i] = d;
     }
 }

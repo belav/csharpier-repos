@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
         internal readonly IInteractiveWindow Window;
         internal readonly TestInteractiveEvaluator Evaluator;
 
-        internal InteractiveWindowTestHost(IInteractiveWindowFactoryService interactiveWindowFactory)
+        internal InteractiveWindowTestHost(
+            IInteractiveWindowFactoryService interactiveWindowFactory
+        )
         {
             Evaluator = new TestInteractiveEvaluator();
             Window = interactiveWindowFactory.CreateWindow(Evaluator);

@@ -2,13 +2,11 @@
 
 public partial struct Bug
 {
-	[System.Runtime.InteropServices.FieldOffset(0)]               
-	public int Integer;
+    [System.Runtime.InteropServices.FieldOffset(0)]
+    public int Integer;
 }
 
 class C
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

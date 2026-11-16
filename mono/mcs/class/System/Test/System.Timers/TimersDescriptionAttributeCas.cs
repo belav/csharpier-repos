@@ -1,5 +1,5 @@
 //
-// TimersDescriptionAttributeCas.cs 
+// TimersDescriptionAttributeCas.cs
 //	- CAS unit tests for System.Timers.TimersDescriptionAttributeCas
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,46 +27,45 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Timers;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Timers {
+namespace MonoCasTests.System.Timers
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TimersDescriptionAttributeCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TimersDescriptionAttributeCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted()
+        {
+            TimersDescriptionAttribute tda = new TimersDescriptionAttribute("Mono");
+            // Note: see unit tests for why we're not expecting "Mono" as the value
+            Assert.AreEqual(tda.Description, tda.Description, "Description");
+            // this assert doesn't do anything (except removing warning) but we know,
+            // for CAS, that nothing protects the property getter
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("Mono");
-			// Note: see unit tests for why we're not expecting "Mono" as the value
-			Assert.AreEqual (tda.Description, tda.Description, "Description");
-			// this assert doesn't do anything (except removing warning) but we know,
-			// for CAS, that nothing protects the property getter
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (string) };
-			ConstructorInfo ci = typeof (TimersDescriptionAttribute).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(string)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { "Mono" }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Type[] types = new Type[1] { typeof(string) };
+            ConstructorInfo ci = typeof(TimersDescriptionAttribute).GetConstructor(types);
+            Assert.IsNotNull(ci, ".ctor(string)");
+            Assert.IsNotNull(ci.Invoke(new object[1] { "Mono" }), "invoke");
+        }
+    }
 }

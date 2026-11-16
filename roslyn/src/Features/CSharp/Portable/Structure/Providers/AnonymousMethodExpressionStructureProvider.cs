@@ -9,19 +9,23 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class AnonymousMethodExpressionStructureProvider : AbstractSyntaxNodeStructureProvider<AnonymousMethodExpressionSyntax>
+    internal class AnonymousMethodExpressionStructureProvider
+        : AbstractSyntaxNodeStructureProvider<AnonymousMethodExpressionSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             AnonymousMethodExpressionSyntax anonymousMethod,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // fault tolerance
-            if (anonymousMethod.Block.IsMissing ||
-                anonymousMethod.Block.OpenBraceToken.IsMissing ||
-                anonymousMethod.Block.CloseBraceToken.IsMissing)
+            if (
+                anonymousMethod.Block.IsMissing
+                || anonymousMethod.Block.OpenBraceToken.IsMissing
+                || anonymousMethod.Block.CloseBraceToken.IsMissing
+            )
             {
                 return;
             }
@@ -32,18 +36,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 return;
             }
 
-            var startToken = anonymousMethod.ParameterList != null
-                ? anonymousMethod.ParameterList.GetLastToken(includeZeroWidth: true)
-                : anonymousMethod.DelegateKeyword;
+            var startToken =
+                anonymousMethod.ParameterList != null
+                    ? anonymousMethod.ParameterList.GetLastToken(includeZeroWidth: true)
+                    : anonymousMethod.DelegateKeyword;
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                anonymousMethod,
-                startToken,
-                lastToken,
-                compressEmptyLines: false,
-                autoCollapse: false,
-                type: BlockTypes.Expression,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    anonymousMethod,
+                    startToken,
+                    lastToken,
+                    compressEmptyLines: false,
+                    autoCollapse: false,
+                    type: BlockTypes.Expression,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

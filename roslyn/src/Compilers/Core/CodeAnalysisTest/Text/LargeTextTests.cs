@@ -19,7 +19,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                using (StreamWriter sw = new StreamWriter(stream, encoding ?? Encoding.UTF8, bufferSize: 1024, leaveOpen: true))
+                using (
+                    StreamWriter sw = new StreamWriter(
+                        stream,
+                        encoding ?? Encoding.UTF8,
+                        bufferSize: 1024,
+                        leaveOpen: true
+                    )
+                )
                 {
                     sw.Write(s);
                 }
@@ -30,12 +37,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private static SourceText CreateSourceText(Stream stream, Encoding encoding = null)
         {
-            return LargeText.Decode(stream, encoding ?? Encoding.UTF8, SourceHashAlgorithm.Sha1, throwIfBinaryDetected: true, canBeEmbedded: false);
+            return LargeText.Decode(
+                stream,
+                encoding ?? Encoding.UTF8,
+                SourceHashAlgorithm.Sha1,
+                throwIfBinaryDetected: true,
+                canBeEmbedded: false
+            );
         }
 
-        private static SourceText CreateSourceText(TextReader reader, int length, Encoding encoding = null)
+        private static SourceText CreateSourceText(
+            TextReader reader,
+            int length,
+            Encoding encoding = null
+        )
         {
-            return LargeText.Decode(reader, length, encoding ?? Encoding.UTF8, SourceHashAlgorithm.Sha1);
+            return LargeText.Decode(
+                reader,
+                length,
+                encoding ?? Encoding.UTF8,
+                SourceHashAlgorithm.Sha1
+            );
         }
 
         private const string HelloWorld = "Hello, world!";
@@ -112,7 +134,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             using (MemoryStream stream = new MemoryStream())
             {
-                using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8, bufferSize: 1024, leaveOpen: true))
+                using (
+                    StreamWriter sw = new StreamWriter(
+                        stream,
+                        Encoding.UTF8,
+                        bufferSize: 1024,
+                        leaveOpen: true
+                    )
+                )
                 {
                     while (stream.Length < targetLength)
                     {
@@ -152,7 +181,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
 #endif
         }
 
-        private static void CheckLine(SourceText text, int lineNumber, int start, int length, int newlineLength, string lineText)
+        private static void CheckLine(
+            SourceText text,
+            int lineNumber,
+            int start,
+            int length,
+            int newlineLength,
+            string lineText
+        )
         {
             var textLine = text.Lines[lineNumber];
 
@@ -198,23 +234,51 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var newline = Environment.NewLine;
             var data = CreateSourceText("goo" + newline + " bar");
             Assert.Equal(2, data.Lines.Count);
-            CheckLine(data, lineNumber: 0, start: 0, length: 3, newlineLength: newline.Length, lineText: "goo");
-            CheckLine(data, lineNumber: 1, start: 3 + newline.Length, length: 4, newlineLength: 0, lineText: " bar");
+            CheckLine(
+                data,
+                lineNumber: 0,
+                start: 0,
+                length: 3,
+                newlineLength: newline.Length,
+                lineText: "goo"
+            );
+            CheckLine(
+                data,
+                lineNumber: 1,
+                start: 3 + newline.Length,
+                length: 4,
+                newlineLength: 0,
+                lineText: " bar"
+            );
         }
 
         [Fact]
         public void NewLines2()
         {
             var text =
-@"goo
+                @"goo
 bar
 baz";
             var data = CreateSourceText(text);
             Assert.Equal(3, data.Lines.Count);
             var newlineLength = Environment.NewLine.Length;
             CheckLine(data, lineNumber: 0, start: 0, length: 3, newlineLength, lineText: "goo");
-            CheckLine(data, lineNumber: 1, start: 3 + newlineLength, length: 3, newlineLength, lineText: "bar");
-            CheckLine(data, lineNumber: 2, start: 2 * (3 + newlineLength), length: 3, newlineLength: 0, lineText: "baz");
+            CheckLine(
+                data,
+                lineNumber: 1,
+                start: 3 + newlineLength,
+                length: 3,
+                newlineLength,
+                lineText: "bar"
+            );
+            CheckLine(
+                data,
+                lineNumber: 2,
+                start: 2 * (3 + newlineLength),
+                length: 3,
+                newlineLength: 0,
+                lineText: "baz"
+            );
         }
 
         [Fact]
@@ -309,7 +373,7 @@ baz";
         public void LinesGetText1()
         {
             var text =
-@"goo
+                @"goo
 bar baz";
             var data = CreateSourceText(text);
             Assert.Equal(2, data.Lines.Count);

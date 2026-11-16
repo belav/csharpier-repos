@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public  class MarshalByRefObjectTest : MarshalByRefObject
+    public class MarshalByRefObjectTest : MarshalByRefObject
     {
         [Fact]
         public static void MarshalByRefObjectTests()

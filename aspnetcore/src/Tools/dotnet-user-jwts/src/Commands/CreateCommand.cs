@@ -35,107 +35,104 @@ internal sealed class CreateCommand
 
     public static void Register(ProjectCommandLineApplication app, Program program)
     {
-        app.Command(
-            "create",
-            cmd =>
+        app.Command("create", cmd =>
+        {
+            cmd.Description = Resources.CreateCommand_Description;
+
+            var schemeNameOption = cmd.Option(
+                "--scheme",
+                Resources.CreateCommand_SchemeOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var nameOption = cmd.Option(
+                "-n|--name",
+                Resources.CreateCommand_NameOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var audienceOption = cmd.Option(
+                "--audience",
+                Resources.CreateCommand_AudienceOption_Description,
+                CommandOptionType.MultipleValue
+            );
+
+            var issuerOption = cmd.Option(
+                "--issuer",
+                Resources.CreateCommand_IssuerOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var scopesOption = cmd.Option(
+                "--scope",
+                Resources.CreateCommand_ScopeOption_Description,
+                CommandOptionType.MultipleValue
+            );
+
+            var rolesOption = cmd.Option(
+                "--role",
+                Resources.CreateCommand_RoleOption_Description,
+                CommandOptionType.MultipleValue
+            );
+
+            var claimsOption = cmd.Option(
+                "--claim",
+                Resources.CreateCommand_ClaimOption_Description,
+                CommandOptionType.MultipleValue
+            );
+
+            var notBeforeOption = cmd.Option(
+                "--not-before",
+                Resources.CreateCommand_NotBeforeOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var expiresOnOption = cmd.Option(
+                "--expires-on",
+                Resources.CreateCommand_ExpiresOnOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var validForOption = cmd.Option(
+                "--valid-for",
+                Resources.CreateCommand_ValidForOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            cmd.HelpOption("-h|--help");
+
+            cmd.OnExecute(() =>
             {
-                cmd.Description = Resources.CreateCommand_Description;
-
-                var schemeNameOption = cmd.Option(
-                    "--scheme",
-                    Resources.CreateCommand_SchemeOption_Description,
-                    CommandOptionType.SingleValue
+                var (options, isValid, optionsString) = ValidateArguments(
+                    cmd.Reporter,
+                    cmd.ProjectOption,
+                    schemeNameOption,
+                    nameOption,
+                    audienceOption,
+                    issuerOption,
+                    notBeforeOption,
+                    expiresOnOption,
+                    validForOption,
+                    rolesOption,
+                    scopesOption,
+                    claimsOption
                 );
 
-                var nameOption = cmd.Option(
-                    "-n|--name",
-                    Resources.CreateCommand_NameOption_Description,
-                    CommandOptionType.SingleValue
-                );
-
-                var audienceOption = cmd.Option(
-                    "--audience",
-                    Resources.CreateCommand_AudienceOption_Description,
-                    CommandOptionType.MultipleValue
-                );
-
-                var issuerOption = cmd.Option(
-                    "--issuer",
-                    Resources.CreateCommand_IssuerOption_Description,
-                    CommandOptionType.SingleValue
-                );
-
-                var scopesOption = cmd.Option(
-                    "--scope",
-                    Resources.CreateCommand_ScopeOption_Description,
-                    CommandOptionType.MultipleValue
-                );
-
-                var rolesOption = cmd.Option(
-                    "--role",
-                    Resources.CreateCommand_RoleOption_Description,
-                    CommandOptionType.MultipleValue
-                );
-
-                var claimsOption = cmd.Option(
-                    "--claim",
-                    Resources.CreateCommand_ClaimOption_Description,
-                    CommandOptionType.MultipleValue
-                );
-
-                var notBeforeOption = cmd.Option(
-                    "--not-before",
-                    Resources.CreateCommand_NotBeforeOption_Description,
-                    CommandOptionType.SingleValue
-                );
-
-                var expiresOnOption = cmd.Option(
-                    "--expires-on",
-                    Resources.CreateCommand_ExpiresOnOption_Description,
-                    CommandOptionType.SingleValue
-                );
-
-                var validForOption = cmd.Option(
-                    "--valid-for",
-                    Resources.CreateCommand_ValidForOption_Description,
-                    CommandOptionType.SingleValue
-                );
-
-                cmd.HelpOption("-h|--help");
-
-                cmd.OnExecute(() =>
+                if (!isValid)
                 {
-                    var (options, isValid, optionsString) = ValidateArguments(
-                        cmd.Reporter,
-                        cmd.ProjectOption,
-                        schemeNameOption,
-                        nameOption,
-                        audienceOption,
-                        issuerOption,
-                        notBeforeOption,
-                        expiresOnOption,
-                        validForOption,
-                        rolesOption,
-                        scopesOption,
-                        claimsOption
-                    );
+                    return 1;
+                }
 
-                    if (!isValid)
-                    {
-                        return 1;
-                    }
-
-                    return Execute(
-                        cmd.Reporter,
-                        cmd.ProjectOption.Value(),
-                        options,
-                        optionsString,
-                        cmd.OutputOption.Value(),
-                        program
-                    );
-                });
-            }
-        );
+                return Execute(
+                    cmd.Reporter,
+                    cmd.ProjectOption.Value(),
+                    options,
+                    optionsString,
+                    cmd.OutputOption.Value(),
+                    program
+                );
+            });
+        });
     }
 
     private static (JwtCreatorOptions, bool, string) ValidateArguments(

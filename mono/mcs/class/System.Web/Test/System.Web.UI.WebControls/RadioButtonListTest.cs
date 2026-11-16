@@ -29,462 +29,464 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.UI.WebControls;
-using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Specialized;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Web;
 using System.Web.UI;
-using System.Globalization;
-using MonoTests.SystemWeb.Framework;
+using System.Web.UI.WebControls;
 using MonoTests.stand_alone.WebHarness;
-using System.Drawing;
-using System.Collections;
+using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
+namespace MonoTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    public class RadioButtonListTest
+    {
+        #region help_classes
+        public class TestRadioButtonList : RadioButtonList
+        {
+            public StateBag StateBag
+            {
+                get { return base.ViewState; }
+            }
 
-namespace MonoTests.System.Web.UI.WebControls {
+            public string Render()
+            {
+                HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
+            }
+        }
 
-	[TestFixture]
-	public class RadioButtonListTest
-	{
-		#region help_classes
-		public class TestRadioButtonList : RadioButtonList {
-			public StateBag StateBag {
-				get { return base.ViewState; }
-			}
+        class PokerRadioButtonList : RadioButtonList
+        {
+            public StateBag StateBag
+            {
+                get { return base.ViewState; }
+            }
 
-			public string Render ()
-			{
-				HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-				base.Render (writer);
-				return writer.InnerWriter.ToString ();
-			}
-		}
+            public string Render()
+            {
+                HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
+            }
 
-		class PokerRadioButtonList : RadioButtonList
-		{
-			public StateBag StateBag
-			{
-				get { return base.ViewState; }
-			}
+            protected override Style GetItemStyle(ListItemType itemType, int repeatIndex)
+            {
+                Style s = new Style();
+                s.BackColor = Color.Red;
+                s.BorderStyle = BorderStyle.Solid;
+                WebTest.CurrentTest.UserData = "GetItemStyle";
+                return s;
+            }
 
-			public string Render ()
-			{
-				HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-				base.Render (writer);
-				return writer.InnerWriter.ToString ();
-			}
+            public new bool HasFooter
+            {
+                get { return base.HasFooter; }
+            }
 
-			protected override Style GetItemStyle (ListItemType itemType, int repeatIndex)
-			{
-				Style s = new Style ();
-				s.BackColor = Color.Red;
-				s.BorderStyle = BorderStyle.Solid;
-				WebTest.CurrentTest.UserData = "GetItemStyle";
-				return s;
-			}
+            public new bool HasHeader
+            {
+                get { return base.HasHeader; }
+            }
 
-			public new bool HasFooter
-			{
-				get
-				{
-					return base.HasFooter;
-				}
-			}
+            public new bool HasSeparators
+            {
+                get { return base.HasSeparators; }
+            }
 
-			public new bool HasHeader
-			{
-				get
-				{
-					return base.HasHeader;
-				}
-			}
+            public new int RepeatedItemCount
+            {
+                get { return base.RepeatedItemCount; }
+            }
 
-			public new bool HasSeparators
-			{
-				get
-				{
-					return base.HasSeparators;
-				}
-			}
+            protected override void RaisePostDataChangedEvent()
+            {
+                base.RaisePostDataChangedEvent();
+            }
 
-			public new int RepeatedItemCount
-			{
-				get
-				{
-					return base.RepeatedItemCount;
-				}
-			}
+            public void DoRaisePostDataChangedEvent()
+            {
+                base.RaisePostDataChangedEvent();
+            }
 
-			protected override void RaisePostDataChangedEvent ()
-			{
-				base.RaisePostDataChangedEvent ();
-			}
+            public new virtual void VerifyMultiSelect()
+            {
+                base.VerifyMultiSelect();
+            }
+        }
+        #endregion
 
-			public void DoRaisePostDataChangedEvent ()
-			{
-				base.RaisePostDataChangedEvent ();
-			}
+        [Test]
+        public void RadioButtonList_Constructor()
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            Assert.AreEqual(-1, r.CellPadding, "A1");
+            Assert.AreEqual(-1, r.CellSpacing, "A2");
+            Assert.AreEqual(0, r.RepeatColumns, "A3");
+            Assert.AreEqual(RepeatDirection.Vertical, r.RepeatDirection, "A4");
+            Assert.AreEqual(RepeatLayout.Table, r.RepeatLayout, "A5");
+            Assert.AreEqual(TextAlign.Right, r.TextAlign, "A6");
+            Assert.AreEqual(false, ((IRepeatInfoUser)r).HasFooter, "A7");
+            Assert.AreEqual(false, ((IRepeatInfoUser)r).HasHeader, "A8");
+            Assert.AreEqual(false, ((IRepeatInfoUser)r).HasSeparators, "A9");
+            Assert.AreEqual(0, ((IRepeatInfoUser)r).RepeatedItemCount, "A10");
+        }
 
-			public new virtual void VerifyMultiSelect()
-			{
-				base.VerifyMultiSelect();
-			}
-		}
-		#endregion
+        [Test]
+        public void CellPaddingProperties()
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            r.CellPadding = 5;
+            Assert.AreEqual(5, r.CellPadding, "setting");
 
-		[Test]
-		public void RadioButtonList_Constructor ()
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			Assert.AreEqual (-1, r.CellPadding, "A1");
-			Assert.AreEqual (-1, r.CellSpacing, "A2");
-			Assert.AreEqual (0, r.RepeatColumns, "A3");
-			Assert.AreEqual (RepeatDirection.Vertical, r.RepeatDirection, "A4");
-			Assert.AreEqual (RepeatLayout.Table, r.RepeatLayout, "A5");
-			Assert.AreEqual (TextAlign.Right, r.TextAlign, "A6");
-			Assert.AreEqual (false, ((IRepeatInfoUser)r).HasFooter, "A7");
-			Assert.AreEqual (false, ((IRepeatInfoUser)r).HasHeader, "A8");
-			Assert.AreEqual (false, ((IRepeatInfoUser)r).HasSeparators, "A9");
-			Assert.AreEqual (0, ((IRepeatInfoUser)r).RepeatedItemCount, "A10");
-		}
+            string s = r.Render();
+            // FIXME: missing some info to start rendering ?
+            Assert.AreEqual(String.Empty, s, "htmloutput");
+        }
 
-		[Test]
-		public void CellPaddingProperties ()
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			r.CellPadding = 5;
-			Assert.AreEqual (5, r.CellPadding, "setting");
+        [Test]
+        public void CellSpacingProperties()
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            r.CellSpacing = 5;
+            Assert.AreEqual(5, r.CellSpacing, "setting");
 
-			string s = r.Render ();	
-			// FIXME: missing some info to start rendering ?
-			Assert.AreEqual (String.Empty, s, "htmloutput");
-		}	
+            string s = r.Render();
+            // FIXME: missing some info to start rendering ?
+            Assert.AreEqual(String.Empty, s, "htmloutput");
+        }
 
-		[Test]
-		public void CellSpacingProperties ()
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			r.CellSpacing = 5;
-			Assert.AreEqual (5, r.CellSpacing, "setting");
+        [Test]
+        [Category("NunitWeb")]
+        public void Render()
+        {
+            string RenderedPageHtml = new WebTest(PageInvoker.CreateOnLoad(Render_Load)).Run();
+            string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml(RenderedPageHtml);
+            string OriginControlHtml =
+                "<table id=\"ctl01\">\r\n\t<tr>\r\n\t\t<td><input id=\"ctl01_0\" type=\"radio\" name=\"ctl01\" value=\"value1\" /><label for=\"ctl01_0\">text2</label></td>\r\n\t</tr>\r\n</table>";
+            HtmlDiff.AssertAreEqual(OriginControlHtml, RenderedControlHtml, "Render");
+        }
 
-			string s = r.Render ();	
-			// FIXME: missing some info to start rendering ?
-			Assert.AreEqual (String.Empty, s, "htmloutput");
-		}	
+        public static void Render_Load(Page p)
+        {
+            LiteralControl lcb = new LiteralControl(HtmlDiff.BEGIN_TAG);
+            LiteralControl lce = new LiteralControl(HtmlDiff.END_TAG);
+            TestRadioButtonList c = new TestRadioButtonList();
+            p.Form.Controls.Add(lcb);
+            p.Form.Controls.Add(c);
+            p.Form.Controls.Add(lce);
+            c.Items.Add(new ListItem("text2", "value1"));
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void Render ()
-		{
-			string RenderedPageHtml = new WebTest (PageInvoker.CreateOnLoad (Render_Load)).Run ();
-			string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml (RenderedPageHtml);
-			string OriginControlHtml = "<table id=\"ctl01\">\r\n\t<tr>\r\n\t\t<td><input id=\"ctl01_0\" type=\"radio\" name=\"ctl01\" value=\"value1\" /><label for=\"ctl01_0\">text2</label></td>\r\n\t</tr>\r\n</table>";
-			HtmlDiff.AssertAreEqual (OriginControlHtml, RenderedControlHtml, "Render");
-		}
+        // Exceptions
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void RepeatColumnsException()
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            r.RepeatColumns = -1;
+        }
 
-		public static void Render_Load (Page p)
-		{
-			LiteralControl lcb = new LiteralControl (HtmlDiff.BEGIN_TAG);
-			LiteralControl lce = new LiteralControl (HtmlDiff.END_TAG);
-			TestRadioButtonList c = new TestRadioButtonList ();
-			p.Form.Controls.Add (lcb);
-			p.Form.Controls.Add (c);
-			p.Form.Controls.Add (lce);
-			c.Items.Add (new ListItem ("text2", "value1"));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void RepeatDirectionException()
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            r.RepeatDirection = (RepeatDirection)4;
+        }
 
-		// Exceptions
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void RepeatColumnsException ()
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			r.RepeatColumns = -1;
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void RepeatLayoutException()
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            Array a = Enum.GetValues(typeof(RepeatLayout));
+            int max = (int)a.GetValue(a.Length - 1) + 1;
+            r.RepeatLayout = (RepeatLayout)max;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void RepeatDirectionException ()
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			r.RepeatDirection = (RepeatDirection) 4;
-		}
+        bool event_called;
 
+        void OnSelected(object sender, EventArgs args)
+        {
+            event_called = true;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void RepeatLayoutException ()
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			Array a = Enum.GetValues (typeof (RepeatLayout));
-			int max = (int) a.GetValue (a.Length - 1) + 1;
-			r.RepeatLayout = (RepeatLayout) max;
-		}
+        [Test]
+        public void LoadAndRaise1()
+        {
+            RadioButtonList rbl = new RadioButtonList();
+            rbl.Items.Add(new ListItem("Uno", "1"));
+            rbl.Items.Add(new ListItem("Dos", "2"));
+            rbl.Items.Add(new ListItem("Tres", "3"));
+            rbl.SelectedIndex = 2;
+            NameValueCollection nvc = new NameValueCollection();
+            nvc["XXX"] = "3";
 
-		bool event_called;
-		void OnSelected (object sender, EventArgs args)
-		{
-			event_called = true;
-		}
+            IPostBackDataHandler handler = (IPostBackDataHandler)rbl;
+            Assert.IsFalse(handler.LoadPostData("XXX", nvc), "#01");
+            rbl.SelectedIndexChanged += new EventHandler(OnSelected);
+            event_called = false;
+            handler.RaisePostDataChangedEvent();
+            Assert.IsTrue(event_called, "#02");
+            Assert.AreEqual("3", rbl.SelectedValue, "#03");
+        }
 
-		[Test]
-		public void LoadAndRaise1 ()
-		{
-			RadioButtonList rbl = new RadioButtonList ();
-			rbl.Items.Add (new ListItem ("Uno", "1"));
-			rbl.Items.Add (new ListItem ("Dos", "2"));
-			rbl.Items.Add (new ListItem ("Tres", "3"));
-			rbl.SelectedIndex = 2;
-			NameValueCollection nvc = new NameValueCollection ();
-			nvc ["XXX"] = "3";
+        [Test]
+        public void LoadAndRaise2()
+        {
+            RadioButtonList rbl = new RadioButtonList();
+            rbl.Items.Add(new ListItem("Uno", "1"));
+            rbl.Items.Add(new ListItem("Dos", "2"));
+            rbl.Items.Add(new ListItem("Tres", "3"));
+            rbl.SelectedIndex = 2;
+            NameValueCollection nvc = new NameValueCollection();
+            nvc["XXX"] = "2";
 
-			IPostBackDataHandler handler = (IPostBackDataHandler) rbl;
-			Assert.IsFalse (handler.LoadPostData ("XXX", nvc), "#01");
-			rbl.SelectedIndexChanged += new EventHandler (OnSelected);
-			event_called = false;
-			handler.RaisePostDataChangedEvent ();
-			Assert.IsTrue (event_called, "#02");
-			Assert.AreEqual ("3", rbl.SelectedValue, "#03");
-		}
+            IPostBackDataHandler handler = (IPostBackDataHandler)rbl;
+            Assert.AreEqual(true, handler.LoadPostData("XXX", nvc), "#01");
+            rbl.SelectedIndexChanged += new EventHandler(OnSelected);
+            event_called = false;
+            handler.RaisePostDataChangedEvent();
+            Assert.AreEqual(true, event_called, "#02");
+            Assert.AreEqual("2", rbl.SelectedValue, "#03");
+        }
 
-		[Test]
-		public void LoadAndRaise2 ()
-		{
-			RadioButtonList rbl = new RadioButtonList ();
-			rbl.Items.Add (new ListItem ("Uno", "1"));
-			rbl.Items.Add (new ListItem ("Dos", "2"));
-			rbl.Items.Add (new ListItem ("Tres", "3"));
-			rbl.SelectedIndex = 2;
-			NameValueCollection nvc = new NameValueCollection ();
-			nvc ["XXX"] = "2";
+        [Test]
+        public void LoadAndRaise3()
+        {
+            RadioButtonList rbl = new RadioButtonList();
+            rbl.Items.Add(new ListItem("Uno", "1"));
+            rbl.Items.Add(new ListItem("Dos", "2"));
+            rbl.Items.Add(new ListItem("Tres", "3"));
+            rbl.SelectedIndex = 2;
+            NameValueCollection nvc = new NameValueCollection();
+            nvc["XXX"] = "blah";
 
-			IPostBackDataHandler handler = (IPostBackDataHandler) rbl;
-			Assert.AreEqual (true, handler.LoadPostData ("XXX", nvc), "#01");
-			rbl.SelectedIndexChanged += new EventHandler (OnSelected);
-			event_called = false;
-			handler.RaisePostDataChangedEvent ();
-			Assert.AreEqual (true, event_called, "#02");
-			Assert.AreEqual ("2", rbl.SelectedValue, "#03");
-		}
+            IPostBackDataHandler handler = (IPostBackDataHandler)rbl;
+            Assert.AreEqual(false, handler.LoadPostData("XXX", nvc), "#01");
+        }
 
-		[Test]
-		public void LoadAndRaise3 ()
-		{
-			RadioButtonList rbl = new RadioButtonList ();
-			rbl.Items.Add (new ListItem ("Uno", "1"));
-			rbl.Items.Add (new ListItem ("Dos", "2"));
-			rbl.Items.Add (new ListItem ("Tres", "3"));
-			rbl.SelectedIndex = 2;
-			NameValueCollection nvc = new NameValueCollection ();
-			nvc ["XXX"] = "blah";
+        [Test]
+        [ExpectedException(typeof(HttpException))]
+        public void VerifyMultiSelectTest()
+        {
+            PokerRadioButtonList list = new PokerRadioButtonList();
+            list.VerifyMultiSelect();
+        }
 
-			IPostBackDataHandler handler = (IPostBackDataHandler) rbl;
-			Assert.AreEqual (false, handler.LoadPostData ("XXX", nvc), "#01");
-		}
+        [Test]
+        public void Defaults()
+        {
+            PokerRadioButtonList r = new PokerRadioButtonList();
+            Assert.AreEqual(0, r.RepeatedItemCount, "RepeatedItemCount");
+            Assert.AreEqual(false, r.HasFooter, "HasFooter");
+            Assert.AreEqual(false, r.HasHeader, "HasHeader");
+            Assert.AreEqual(false, r.HasSeparators, "HasSeparators");
+        }
 
-		
-		[Test]
-		[ExpectedException(typeof(HttpException))]
-		public void VerifyMultiSelectTest()
-	        {
-	            PokerRadioButtonList list = new PokerRadioButtonList();
-	            list.VerifyMultiSelect();
-	        }
+        [Test]
+        [Category("NunitWeb")]
+        public void GetItemStyle()
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(GetItemStyle_Load));
+            string html = t.Run();
+            string ctrl = HtmlDiff.GetControlFromPageHtml(html);
+            if (ctrl == string.Empty)
+                Assert.Fail("RadioButtonList not created fail");
+            Assert.AreEqual("GetItemStyle", (string)t.UserData, "GetItemStyle not done");
+            if (ctrl.IndexOf("<td style=\"background-color:Red;border-style:Solid;\">") == -1)
+                Assert.Fail("RadioButtonList style not rendered");
+        }
 
-		[Test]
-		public void Defaults ()
-		{
-			PokerRadioButtonList r = new PokerRadioButtonList ();
-			Assert.AreEqual (0, r.RepeatedItemCount, "RepeatedItemCount");
-			Assert.AreEqual (false, r.HasFooter, "HasFooter");
-			Assert.AreEqual (false, r.HasHeader, "HasHeader");
-			Assert.AreEqual (false, r.HasSeparators, "HasSeparators");
-		}
-		
-		[Test]
-		[Category ("NunitWeb")]
-		public void GetItemStyle ()
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnLoad (GetItemStyle_Load));
-			string html = t.Run ();
-			string ctrl = HtmlDiff.GetControlFromPageHtml (html);
-			if (ctrl == string.Empty)
-				Assert.Fail ("RadioButtonList not created fail");
-			Assert.AreEqual ("GetItemStyle", (string) t.UserData, "GetItemStyle not done");
-			if (ctrl.IndexOf ("<td style=\"background-color:Red;border-style:Solid;\">") == -1)
-				Assert.Fail ("RadioButtonList style not rendered");
-		}
+        public static void GetItemStyle_Load(Page p)
+        {
+            PokerRadioButtonList rbl = new PokerRadioButtonList();
+            rbl.Items.Add(new ListItem("Uno", "1"));
+            rbl.Items.Add(new ListItem("Dos", "2"));
+            rbl.Items.Add(new ListItem("Tres", "3"));
+            p.Form.Controls.Add(new LiteralControl(HtmlDiff.BEGIN_TAG));
+            p.Form.Controls.Add(rbl);
+            p.Form.Controls.Add(new LiteralControl(HtmlDiff.END_TAG));
+        }
 
-		public static void GetItemStyle_Load (Page p)
-		{
-			PokerRadioButtonList rbl = new PokerRadioButtonList ();
-			rbl.Items.Add (new ListItem ("Uno", "1"));
-			rbl.Items.Add (new ListItem ("Dos", "2"));
-			rbl.Items.Add (new ListItem ("Tres", "3"));
-			p.Form.Controls.Add (new LiteralControl (HtmlDiff.BEGIN_TAG));
-			p.Form.Controls.Add (rbl);
-			p.Form.Controls.Add (new LiteralControl (HtmlDiff.END_TAG));
-		}
+        [Test]
+        public void RaisePostDataChangedEvent()
+        {
+            PokerRadioButtonList r = new PokerRadioButtonList();
+            r.SelectedIndexChanged += new EventHandler(r_SelectedIndexChanged);
+            Assert.AreEqual(false, eventSelectedIndexChanged, "Before");
+            r.DoRaisePostDataChangedEvent();
+            Assert.AreEqual(true, eventSelectedIndexChanged, "After");
+        }
 
-		[Test]
-		public void  RaisePostDataChangedEvent ()
-		{
-			PokerRadioButtonList r = new PokerRadioButtonList ();
-			r.SelectedIndexChanged += new EventHandler (r_SelectedIndexChanged);
-			Assert.AreEqual (false, eventSelectedIndexChanged, "Before");
-			r.DoRaisePostDataChangedEvent ();
-			Assert.AreEqual (true, eventSelectedIndexChanged, "After");
-		}
+        bool eventSelectedIndexChanged;
 
-		bool eventSelectedIndexChanged;
-		void r_SelectedIndexChanged (object sender, EventArgs e)
-		{
-			eventSelectedIndexChanged = true;
-		}
+        void r_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            eventSelectedIndexChanged = true;
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void RaisePostDataChangedEvent_PostBack ()
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnInit (RaisePostDataChangedEvent_Init));
-			string html = t.Run ();
-			FormRequest fr = new FormRequest (t.Response, "form1");
-			fr.Controls.Add ("__EVENTTARGET");
-			fr.Controls.Add ("__EVENTARGUMENT");
-			fr.Controls.Add ("RadioButtonList1");
+        [Test]
+        [Category("NunitWeb")]
+        public void RaisePostDataChangedEvent_PostBack()
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnInit(RaisePostDataChangedEvent_Init));
+            string html = t.Run();
+            FormRequest fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("__EVENTTARGET");
+            fr.Controls.Add("__EVENTARGUMENT");
+            fr.Controls.Add("RadioButtonList1");
 
-			fr.Controls["__EVENTTARGET"].Value = "RadioButtonList1";
-			fr.Controls["__EVENTARGUMENT"].Value = "";
-			fr.Controls["RadioButtonList1"].Value = "test";
-			t.Request = fr;
-			t.Run ();
-			if (t.UserData == null)
-				Assert.Fail ("RaisePostDataChangedEvent Failed#1");
-			Assert.AreEqual ("SelectedIndexChanged", (string) t.UserData, "RaisePostDataChangedEvent Failed#2");
-		}
+            fr.Controls["__EVENTTARGET"].Value = "RadioButtonList1";
+            fr.Controls["__EVENTARGUMENT"].Value = "";
+            fr.Controls["RadioButtonList1"].Value = "test";
+            t.Request = fr;
+            t.Run();
+            if (t.UserData == null)
+                Assert.Fail("RaisePostDataChangedEvent Failed#1");
+            Assert.AreEqual(
+                "SelectedIndexChanged",
+                (string)t.UserData,
+                "RaisePostDataChangedEvent Failed#2"
+            );
+        }
 
-		public static void RaisePostDataChangedEvent_Init (Page p)
-		{
-			TestRadioButtonList r = new TestRadioButtonList ();
-			r.ID = "RadioButtonList1";
-			r.Items.Add (new ListItem ("test", "test"));
-			r.SelectedIndexChanged += new EventHandler (event_SelectedIndexChanged);
-			p.Form.Controls.Add (r);
-		}
+        public static void RaisePostDataChangedEvent_Init(Page p)
+        {
+            TestRadioButtonList r = new TestRadioButtonList();
+            r.ID = "RadioButtonList1";
+            r.Items.Add(new ListItem("test", "test"));
+            r.SelectedIndexChanged += new EventHandler(event_SelectedIndexChanged);
+            p.Form.Controls.Add(r);
+        }
 
-		public static void event_SelectedIndexChanged (object sender, EventArgs e)
-		{
-			WebTest.CurrentTest.UserData = "SelectedIndexChanged";	
-		}
+        public static void event_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WebTest.CurrentTest.UserData = "SelectedIndexChanged";
+        }
 
-		#region help_class
-		class Poker : RadioButtonList
-		{
-			protected override bool LoadPostData (string postDataKey, global::System.Collections.Specialized.NameValueCollection postCollection)
-			{
-				if (WebTest.CurrentTest.UserData == null) {
-					ArrayList list = new ArrayList ();
-					list.Add ("LoadPostData");
-					WebTest.CurrentTest.UserData = list;
-				}
-				else {
-					ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
-					if (list == null)
-						throw new NullReferenceException ();
-					list.Add ("LoadPostData");
-					WebTest.CurrentTest.UserData = list;
-				}
-				return base.LoadPostData (postDataKey, postCollection);
-			}
-			
-			protected internal override void OnLoad (EventArgs e)
-			{
-				if (WebTest.CurrentTest.UserData == null) {
-					ArrayList list = new ArrayList ();
-					list.Add ("ControlLoad");
-					WebTest.CurrentTest.UserData = list;
-				}
-				else {
-					ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
-					if (list == null)
-						throw new NullReferenceException ();
-					list.Add ("ControlLoad");
-					WebTest.CurrentTest.UserData = list;
-				}
-				base.OnLoad (e);
-			}
-		}
-		#endregion
+        #region help_class
+        class Poker : RadioButtonList
+        {
+            protected override bool LoadPostData(
+                string postDataKey,
+                global::System.Collections.Specialized.NameValueCollection postCollection
+            )
+            {
+                if (WebTest.CurrentTest.UserData == null)
+                {
+                    ArrayList list = new ArrayList();
+                    list.Add("LoadPostData");
+                    WebTest.CurrentTest.UserData = list;
+                }
+                else
+                {
+                    ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
+                    if (list == null)
+                        throw new NullReferenceException();
+                    list.Add("LoadPostData");
+                    WebTest.CurrentTest.UserData = list;
+                }
+                return base.LoadPostData(postDataKey, postCollection);
+            }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void LoadPostData ()  //Just flow and not implementation detail
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnLoad (LoadPostData_Load));
-			string html = t.Run ();
-			FormRequest fr = new FormRequest (t.Response, "form1");
-			fr.Controls.Add ("__EVENTTARGET");
-			fr.Controls.Add ("__EVENTARGUMENT");
-			fr.Controls.Add ("RadioButtonList1");
+            protected internal override void OnLoad(EventArgs e)
+            {
+                if (WebTest.CurrentTest.UserData == null)
+                {
+                    ArrayList list = new ArrayList();
+                    list.Add("ControlLoad");
+                    WebTest.CurrentTest.UserData = list;
+                }
+                else
+                {
+                    ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
+                    if (list == null)
+                        throw new NullReferenceException();
+                    list.Add("ControlLoad");
+                    WebTest.CurrentTest.UserData = list;
+                }
+                base.OnLoad(e);
+            }
+        }
+        #endregion
 
-			fr.Controls["__EVENTTARGET"].Value = "RadioButtonList1";
-			fr.Controls["__EVENTARGUMENT"].Value = "";
-			fr.Controls["RadioButtonList1"].Value = "test";
-			t.Request = fr;
-			t.Run ();
+        [Test]
+        [Category("NunitWeb")]
+        public void LoadPostData() //Just flow and not implementation detail
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(LoadPostData_Load));
+            string html = t.Run();
+            FormRequest fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("__EVENTTARGET");
+            fr.Controls.Add("__EVENTARGUMENT");
+            fr.Controls.Add("RadioButtonList1");
 
-			ArrayList eventlist = t.UserData as ArrayList;
-			if (eventlist == null)
-				Assert.Fail ("User data does not been created fail");
-			Assert.AreEqual ("ControlLoad", eventlist[0], "Live Cycle Flow #1");
-			Assert.AreEqual ("PageLoad", eventlist[1], "Live Cycle Flow #2");
-			Assert.AreEqual ("ControlLoad", eventlist[2], "Live Cycle Flow #3");
-			Assert.AreEqual ("LoadPostData", eventlist[3], "Live Cycle Flow #4");
+            fr.Controls["__EVENTTARGET"].Value = "RadioButtonList1";
+            fr.Controls["__EVENTARGUMENT"].Value = "";
+            fr.Controls["RadioButtonList1"].Value = "test";
+            t.Request = fr;
+            t.Run();
 
-		}
+            ArrayList eventlist = t.UserData as ArrayList;
+            if (eventlist == null)
+                Assert.Fail("User data does not been created fail");
+            Assert.AreEqual("ControlLoad", eventlist[0], "Live Cycle Flow #1");
+            Assert.AreEqual("PageLoad", eventlist[1], "Live Cycle Flow #2");
+            Assert.AreEqual("ControlLoad", eventlist[2], "Live Cycle Flow #3");
+            Assert.AreEqual("LoadPostData", eventlist[3], "Live Cycle Flow #4");
+        }
 
-		public static void LoadPostData_Load (Page p)
-		{
-			Poker b = new Poker ();
-			b.ID = "RadioButtonList1";
-			b.Items.Add (new ListItem ("test", "test"));
-			p.Form.Controls.Add (b);
-			if (p.IsPostBack) {
-				if (WebTest.CurrentTest.UserData == null) {
-					ArrayList list = new ArrayList ();
-					list.Add ("PageLoad");
-					WebTest.CurrentTest.UserData = list;
-				}
-				else {
-					ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
-					if (list == null)
-						throw new NullReferenceException ();
-					list.Add ("PageLoad");
-					WebTest.CurrentTest.UserData = list;
-				}
-			}
-		}
+        public static void LoadPostData_Load(Page p)
+        {
+            Poker b = new Poker();
+            b.ID = "RadioButtonList1";
+            b.Items.Add(new ListItem("test", "test"));
+            p.Form.Controls.Add(b);
+            if (p.IsPostBack)
+            {
+                if (WebTest.CurrentTest.UserData == null)
+                {
+                    ArrayList list = new ArrayList();
+                    list.Add("PageLoad");
+                    WebTest.CurrentTest.UserData = list;
+                }
+                else
+                {
+                    ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
+                    if (list == null)
+                        throw new NullReferenceException();
+                    list.Add("PageLoad");
+                    WebTest.CurrentTest.UserData = list;
+                }
+            }
+        }
 
-		[Test]
-		public void RepeatedItemCount ()
-		{
-			PokerRadioButtonList r = new PokerRadioButtonList ();
-			Assert.AreEqual (0, r.RepeatedItemCount, "RepeatedItemCount#1");
-			r.Items.Add (new ListItem ("Uno", "1"));
-			Assert.AreEqual (1, r.RepeatedItemCount, "RepeatedItemCount#2");
-			r.Items.Add (new ListItem ("Dos", "2"));
-			Assert.AreEqual (2, r.RepeatedItemCount, "RepeatedItemCount#3");
-			r.Items.Remove (r.Items[1]);
-			Assert.AreEqual (1, r.RepeatedItemCount, "RepeatedItemCount#4");
-		}
+        [Test]
+        public void RepeatedItemCount()
+        {
+            PokerRadioButtonList r = new PokerRadioButtonList();
+            Assert.AreEqual(0, r.RepeatedItemCount, "RepeatedItemCount#1");
+            r.Items.Add(new ListItem("Uno", "1"));
+            Assert.AreEqual(1, r.RepeatedItemCount, "RepeatedItemCount#2");
+            r.Items.Add(new ListItem("Dos", "2"));
+            Assert.AreEqual(2, r.RepeatedItemCount, "RepeatedItemCount#3");
+            r.Items.Remove(r.Items[1]);
+            Assert.AreEqual(1, r.RepeatedItemCount, "RepeatedItemCount#4");
+        }
 
-		[TestFixtureTearDown]
-		public void TearDown ()
-		{
-			WebTest.Unload ();
-		}
-	}
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            WebTest.Unload();
+        }
+    }
 }
-

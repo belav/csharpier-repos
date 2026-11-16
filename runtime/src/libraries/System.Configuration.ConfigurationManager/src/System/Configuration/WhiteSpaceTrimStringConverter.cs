@@ -8,7 +8,12 @@ namespace System.Configuration
 {
     public sealed class WhiteSpaceTrimStringConverter : ConfigurationConverterBase
     {
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
         {
             ValidateType(value, typeof(string));
 

@@ -27,25 +27,52 @@ internal static partial class Interop
             public byte lfQuality;
             public byte lfPitchAndFamily;
             private fixed char _lfFaceName[LF_FACESIZE];
-            public Span<char> lfFaceName => MemoryMarshal.CreateSpan(ref _lfFaceName[0], LF_FACESIZE);
+            public Span<char> lfFaceName =>
+                MemoryMarshal.CreateSpan(ref _lfFaceName[0], LF_FACESIZE);
 
             public override string ToString()
             {
-                return
-                    "lfHeight=" + lfHeight + ", " +
-                    "lfWidth=" + lfWidth + ", " +
-                    "lfEscapement=" + lfEscapement + ", " +
-                    "lfOrientation=" + lfOrientation + ", " +
-                    "lfWeight=" + lfWeight + ", " +
-                    "lfItalic=" + lfItalic + ", " +
-                    "lfUnderline=" + lfUnderline + ", " +
-                    "lfStrikeOut=" + lfStrikeOut + ", " +
-                    "lfCharSet=" + lfCharSet + ", " +
-                    "lfOutPrecision=" + lfOutPrecision + ", " +
-                    "lfClipPrecision=" + lfClipPrecision + ", " +
-                    "lfQuality=" + lfQuality + ", " +
-                    "lfPitchAndFamily=" + lfPitchAndFamily + ", " +
-                    "lfFaceName=" + lfFaceName.ToString();
+                return "lfHeight="
+                    + lfHeight
+                    + ", "
+                    + "lfWidth="
+                    + lfWidth
+                    + ", "
+                    + "lfEscapement="
+                    + lfEscapement
+                    + ", "
+                    + "lfOrientation="
+                    + lfOrientation
+                    + ", "
+                    + "lfWeight="
+                    + lfWeight
+                    + ", "
+                    + "lfItalic="
+                    + lfItalic
+                    + ", "
+                    + "lfUnderline="
+                    + lfUnderline
+                    + ", "
+                    + "lfStrikeOut="
+                    + lfStrikeOut
+                    + ", "
+                    + "lfCharSet="
+                    + lfCharSet
+                    + ", "
+                    + "lfOutPrecision="
+                    + lfOutPrecision
+                    + ", "
+                    + "lfClipPrecision="
+                    + lfClipPrecision
+                    + ", "
+                    + "lfQuality="
+                    + lfQuality
+                    + ", "
+                    + "lfPitchAndFamily="
+                    + lfPitchAndFamily
+                    + ", "
+                    + "lfFaceName="
+                    + lfFaceName.ToString();
             }
         }
     }

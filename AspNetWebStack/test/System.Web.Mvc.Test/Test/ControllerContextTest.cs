@@ -16,12 +16,20 @@ namespace System.Web.Mvc.Test
         public void ConstructorThrowsIfControllerIsNull()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             Controller controller = null;
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ControllerContext(requestContext, controller); }, "controller");
+                delegate
+                {
+                    new ControllerContext(requestContext, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -33,7 +41,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ControllerContext(requestContext, controller); }, "requestContext");
+                delegate
+                {
+                    new ControllerContext(requestContext, controller);
+                },
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -45,7 +58,11 @@ namespace System.Web.Mvc.Test
             Controller controller = new Mock<Controller>().Object;
 
             // Act
-            ControllerContext controllerContext = new ControllerContext(httpContext, routeData, controller);
+            ControllerContext controllerContext = new ControllerContext(
+                httpContext,
+                routeData,
+                controller
+            );
 
             // Assert
             Assert.Equal(httpContext, controllerContext.HttpContext);
@@ -62,7 +79,11 @@ namespace System.Web.Mvc.Test
             Controller controller = new Mock<Controller>().Object;
 
             // Act
-            ControllerContext controllerContext = new ControllerContext(httpContext, routeData, controller);
+            ControllerContext controllerContext = new ControllerContext(
+                httpContext,
+                routeData,
+                controller
+            );
 
             // Assert
             Assert.Equal(controller, controllerContext.Controller);
@@ -79,11 +100,16 @@ namespace System.Web.Mvc.Test
             Controller controller = new Mock<Controller>().Object;
             var displayMode = new DefaultDisplayMode("test");
 
-            ControllerContext innerControllerContext = new ControllerContext(requestContext, controller);
+            ControllerContext innerControllerContext = new ControllerContext(
+                requestContext,
+                controller
+            );
             innerControllerContext.DisplayMode = displayMode;
 
             // Act
-            ControllerContext outerControllerContext = new SubclassedControllerContext(innerControllerContext);
+            ControllerContext outerControllerContext = new SubclassedControllerContext(
+                innerControllerContext
+            );
 
             // Assert
             Assert.Equal(requestContext, outerControllerContext.RequestContext);
@@ -101,8 +127,16 @@ namespace System.Web.Mvc.Test
             Mock<HttpContextBase> httpContext = new Mock<HttpContextBase>();
             httpContext.Setup(c => c.Items).Returns(new Hashtable());
             Controller controller = new Mock<Controller>().Object;
-            ControllerContext controllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
-            ControllerContext controllerContextWithIdenticalContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
+            ControllerContext controllerContext = new ControllerContext(
+                httpContext.Object,
+                new RouteData(),
+                controller
+            );
+            ControllerContext controllerContextWithIdenticalContext = new ControllerContext(
+                httpContext.Object,
+                new RouteData(),
+                controller
+            );
 
             // Act
             controllerContext.DisplayMode = testDisplayMode;
@@ -117,7 +151,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new SubclassedControllerContext(null); }, "controllerContext");
+                delegate
+                {
+                    new SubclassedControllerContext(null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -284,15 +323,17 @@ namespace System.Web.Mvc.Test
 
         public static ControllerContext CreateEmptyContext()
         {
-            return new ControllerContext(new Mock<HttpContextBase>().Object, new RouteData(), new Mock<Controller>().Object);
+            return new ControllerContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData(),
+                new Mock<Controller>().Object
+            );
         }
 
         private class SubclassedControllerContext : ControllerContext
         {
             public SubclassedControllerContext(ControllerContext controllerContext)
-                : base(controllerContext)
-            {
-            }
+                : base(controllerContext) { }
         }
     }
 }

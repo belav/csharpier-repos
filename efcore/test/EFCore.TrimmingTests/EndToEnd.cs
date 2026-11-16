@@ -34,12 +34,15 @@ public class BlogContext : DbContext
 
     public DbSet<Blog> Blogs { get; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(ConnectionString);
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseSqlServer(ConnectionString);
 
     static BlogContext()
     {
-        var builder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection) { InitialCatalog = "TrimmingTests" };
+        var builder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection)
+        {
+            InitialCatalog = "TrimmingTests",
+        };
 
         ConnectionString = builder.ToString();
     }

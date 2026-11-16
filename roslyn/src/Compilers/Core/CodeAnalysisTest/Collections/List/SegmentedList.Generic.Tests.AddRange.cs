@@ -25,11 +25,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void AddRange(EnumerableType enumerableType, int listLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void AddRange(
+            EnumerableType enumerableType,
+            int listLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             SegmentedList<T> list = GenericListFactory(listLength);
             SegmentedList<T> listBeforeAdd = list.ToSegmentedList();
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, list, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                list,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             list.AddRange(enumerable);
 
             // Check that the first section of the List is unchanged

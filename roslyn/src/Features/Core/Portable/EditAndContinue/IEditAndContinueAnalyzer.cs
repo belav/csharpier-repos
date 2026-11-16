@@ -19,8 +19,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document document,
             ImmutableArray<LinePositionSpan> newActiveStatementSpans,
             AsyncLazy<EditAndContinueCapabilities> lazyCapabilities,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        ActiveStatementExceptionRegions GetExceptionRegions(SyntaxNode syntaxRoot, TextSpan unmappedActiveStatementSpan, bool isNonLeaf, CancellationToken cancellationToken);
+        ActiveStatementExceptionRegions GetExceptionRegions(
+            SyntaxNode syntaxRoot,
+            TextSpan unmappedActiveStatementSpan,
+            bool isNonLeaf,
+            CancellationToken cancellationToken
+        );
     }
 }

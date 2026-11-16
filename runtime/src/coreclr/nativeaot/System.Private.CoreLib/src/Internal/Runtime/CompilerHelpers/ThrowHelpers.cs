@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -78,14 +77,28 @@ namespace Internal.Runtime.CompilerHelpers
             throw TypeLoaderExceptionHelper.CreateBadImageFormatException(id);
         }
 
-        public static void ThrowTypeLoadException(ExceptionStringID id, string className, string typeName)
+        public static void ThrowTypeLoadException(
+            ExceptionStringID id,
+            string className,
+            string typeName
+        )
         {
             throw TypeLoaderExceptionHelper.CreateTypeLoadException(id, className, typeName);
         }
 
-        public static void ThrowTypeLoadExceptionWithArgument(ExceptionStringID id, string className, string typeName, string messageArg)
+        public static void ThrowTypeLoadExceptionWithArgument(
+            ExceptionStringID id,
+            string className,
+            string typeName,
+            string messageArg
+        )
         {
-            throw TypeLoaderExceptionHelper.CreateTypeLoadException(id, className, typeName, messageArg);
+            throw TypeLoaderExceptionHelper.CreateTypeLoadException(
+                id,
+                className,
+                typeName,
+                messageArg
+            );
         }
 
         public static void ThrowMissingMethodException(ExceptionStringID id, string methodName)
@@ -108,7 +121,10 @@ namespace Internal.Runtime.CompilerHelpers
             throw TypeLoaderExceptionHelper.CreateInvalidProgramException(id);
         }
 
-        public static void ThrowInvalidProgramExceptionWithArgument(ExceptionStringID id, string methodName)
+        public static void ThrowInvalidProgramExceptionWithArgument(
+            ExceptionStringID id,
+            string methodName
+        )
         {
             throw TypeLoaderExceptionHelper.CreateInvalidProgramException(id, methodName);
         }

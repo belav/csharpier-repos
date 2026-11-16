@@ -63,7 +63,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGT_01(int i1)
         {
             IValueSet<int> values = ForInt.Related(GreaterThan, i1);
-            Assert.Equal((i1 == int.MaxValue) ? "" : $"[{i1 + 1}..{int.MaxValue}]", values.ToString());
+            Assert.Equal(
+                (i1 == int.MaxValue) ? "" : $"[{i1 + 1}..{int.MaxValue}]",
+                values.ToString()
+            );
         }
 
         [Fact]
@@ -121,7 +124,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestLT_01(int i1)
         {
             IValueSet<int> values = ForInt.Related(LessThan, i1);
-            Assert.Equal((i1 == int.MinValue) ? "" : $"[{int.MinValue}..{i1 - 1}]", values.ToString());
+            Assert.Equal(
+                (i1 == int.MinValue) ? "" : $"[{int.MinValue}..{i1 - 1}]",
+                values.ToString()
+            );
         }
 
         [Fact]
@@ -171,10 +177,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue + 1, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                if (i1 > i2) (i1, i2) = (i2, i1);
-                IValueSet<int> values1 = ForInt.Related(GreaterThanOrEqual, i1).Intersect(ForInt.Related(LessThanOrEqual, i2));
+                if (i1 > i2)
+                    (i1, i2) = (i2, i1);
+                IValueSet<int> values1 = ForInt
+                    .Related(GreaterThanOrEqual, i1)
+                    .Intersect(ForInt.Related(LessThanOrEqual, i2));
                 Assert.Equal($"[{i1}..{i2}]", values1.ToString());
-                IValueSet<int> values2 = ForInt.Related(LessThanOrEqual, i2).Intersect(ForInt.Related(GreaterThanOrEqual, i1));
+                IValueSet<int> values2 = ForInt
+                    .Related(LessThanOrEqual, i2)
+                    .Intersect(ForInt.Related(GreaterThanOrEqual, i1));
                 Assert.Equal(values1, values2);
             }
         }
@@ -186,11 +197,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue + 1, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                if (i1 < i2) (i1, i2) = (i2, i1);
-                if (i1 == i2) continue;
-                IValueSet<int> values1 = ForInt.Related(GreaterThanOrEqual, i1).Intersect(ForInt.Related(LessThanOrEqual, i2));
+                if (i1 < i2)
+                    (i1, i2) = (i2, i1);
+                if (i1 == i2)
+                    continue;
+                IValueSet<int> values1 = ForInt
+                    .Related(GreaterThanOrEqual, i1)
+                    .Intersect(ForInt.Related(LessThanOrEqual, i2));
                 Assert.Equal($"", values1.ToString());
-                IValueSet<int> values2 = ForInt.Related(LessThanOrEqual, i2).Intersect(ForInt.Related(GreaterThanOrEqual, i1));
+                IValueSet<int> values2 = ForInt
+                    .Related(LessThanOrEqual, i2)
+                    .Intersect(ForInt.Related(GreaterThanOrEqual, i1));
                 Assert.Equal(values1, values2);
             }
         }
@@ -202,11 +219,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue + 1, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                if (i1 > i2) (i1, i2) = (i2, i1);
-                if ((i1 + 1) >= i2) continue;
-                IValueSet<int> values1 = ForInt.Related(LessThanOrEqual, i1).Union(ForInt.Related(GreaterThanOrEqual, i2));
+                if (i1 > i2)
+                    (i1, i2) = (i2, i1);
+                if ((i1 + 1) >= i2)
+                    continue;
+                IValueSet<int> values1 = ForInt
+                    .Related(LessThanOrEqual, i1)
+                    .Union(ForInt.Related(GreaterThanOrEqual, i2));
                 Assert.Equal($"[{int.MinValue}..{i1}],[{i2}..{int.MaxValue}]", values1.ToString());
-                IValueSet<int> values2 = ForInt.Related(GreaterThanOrEqual, i2).Union(ForInt.Related(LessThanOrEqual, i1));
+                IValueSet<int> values2 = ForInt
+                    .Related(GreaterThanOrEqual, i2)
+                    .Union(ForInt.Related(LessThanOrEqual, i1));
                 Assert.Equal(values1, values2);
             }
         }
@@ -218,10 +241,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue + 1, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                if (i1 < i2) (i1, i2) = (i2, i1);
-                IValueSet<int> values1 = ForInt.Related(LessThanOrEqual, i1).Union(ForInt.Related(GreaterThanOrEqual, i2));
+                if (i1 < i2)
+                    (i1, i2) = (i2, i1);
+                IValueSet<int> values1 = ForInt
+                    .Related(LessThanOrEqual, i1)
+                    .Union(ForInt.Related(GreaterThanOrEqual, i2));
                 Assert.Equal($"[{int.MinValue}..{int.MaxValue}]", values1.ToString());
-                IValueSet<int> values2 = ForInt.Related(GreaterThanOrEqual, i2).Union(ForInt.Related(LessThanOrEqual, i1));
+                IValueSet<int> values2 = ForInt
+                    .Related(GreaterThanOrEqual, i2)
+                    .Union(ForInt.Related(LessThanOrEqual, i1));
                 Assert.Equal(values1, values2);
             }
         }
@@ -233,9 +261,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue + 1, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                if (i1 > i2) (i1, i2) = (i2, i1);
-                if ((i1 + 1) >= i2) continue;
-                IValueSet<int> values1 = ForInt.Related(LessThanOrEqual, i1).Union(ForInt.Related(GreaterThanOrEqual, i2));
+                if (i1 > i2)
+                    (i1, i2) = (i2, i1);
+                if ((i1 + 1) >= i2)
+                    continue;
+                IValueSet<int> values1 = ForInt
+                    .Related(LessThanOrEqual, i1)
+                    .Union(ForInt.Related(GreaterThanOrEqual, i2));
                 Assert.Equal($"[{int.MinValue}..{i1}],[{i2}..{int.MaxValue}]", values1.ToString());
                 IValueSet<int> values2 = values1.Complement();
                 Assert.Equal(values1, values2.Complement());
@@ -250,15 +282,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                if (i1 > i2) (i1, i2) = (i2, i1);
-                IValueSet<int> values = ForInt.Related(GreaterThanOrEqual, i1).Intersect(ForInt.Related(LessThanOrEqual, i2));
+                if (i1 > i2)
+                    (i1, i2) = (i2, i1);
+                IValueSet<int> values = ForInt
+                    .Related(GreaterThanOrEqual, i1)
+                    .Intersect(ForInt.Related(LessThanOrEqual, i2));
                 Assert.Equal($"[{i1}..{i2}]", values.ToString());
                 test(int.MinValue);
-                if (i1 != int.MinValue) test(i1 - 1);
+                if (i1 != int.MinValue)
+                    test(i1 - 1);
                 test(i1);
                 test(i1 + 1);
                 test(int.MaxValue);
-                if (i2 != int.MinValue) test(i2 - 1);
+                if (i2 != int.MinValue)
+                    test(i2 - 1);
                 test(i2);
                 test(i2 + 1);
                 void test(int val)
@@ -279,7 +316,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 int i1 = Random.Next(int.MinValue, int.MaxValue);
                 int i2 = Random.Next(int.MinValue, int.MaxValue);
-                IValueSet<int> values = ForInt.Related(GreaterThanOrEqual, i1).Intersect(ForInt.Related(LessThanOrEqual, i2));
+                IValueSet<int> values = ForInt
+                    .Related(GreaterThanOrEqual, i1)
+                    .Intersect(ForInt.Related(LessThanOrEqual, i2));
                 Assert.Equal(values.ToString().Length == 0, values.IsEmpty);
             }
         }
@@ -291,9 +330,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 double d1 = Random.NextDouble() * 100 - 50;
                 double d2 = Random.NextDouble() * 100 - 50;
-                if (d1 > d2) (d1, d2) = (d2, d1);
-                IValueSet<double> values = ForDouble.Related(GreaterThanOrEqual, d1).Intersect(ForDouble.Related(LessThanOrEqual, d2));
-                Assert.Equal(FormattableString.Invariant($"[{d1:G17}..{d2:G17}]"), values.ToString());
+                if (d1 > d2)
+                    (d1, d2) = (d2, d1);
+                IValueSet<double> values = ForDouble
+                    .Related(GreaterThanOrEqual, d1)
+                    .Intersect(ForDouble.Related(LessThanOrEqual, d2));
+                Assert.Equal(
+                    FormattableString.Invariant($"[{d1:G17}..{d2:G17}]"),
+                    values.ToString()
+                );
             }
         }
 
@@ -313,9 +358,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             Assert.Equal("[-Inf..-Inf]", ForDouble.Related(LessThan, double.MinValue).ToString());
             var lt = ForDouble.Related(LessThan, 0.0);
-            Assert.Equal(FormattableString.Invariant($"[-Inf..{-double.Epsilon:G17}]"), lt.ToString());
+            Assert.Equal(
+                FormattableString.Invariant($"[-Inf..{-double.Epsilon:G17}]"),
+                lt.ToString()
+            );
             var gt = ForDouble.Related(GreaterThan, 0.0);
-            Assert.Equal(FormattableString.Invariant($"[{double.Epsilon:G17}..Inf]"), gt.ToString());
+            Assert.Equal(
+                FormattableString.Invariant($"[{double.Epsilon:G17}..Inf]"),
+                gt.ToString()
+            );
             var eq = ForDouble.Related(Equal, 0.0);
             Assert.Equal("[0..0]", eq.ToString());
             var none = lt.Complement().Intersect(gt.Complement()).Intersect(eq.Complement());
@@ -328,7 +379,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             Assert.Equal("[-Inf..-Inf]", ForFloat.Related(LessThan, float.MinValue).ToString());
             var lt = ForFloat.Related(LessThan, 0.0f);
-            Assert.Equal(FormattableString.Invariant($"[-Inf..{-float.Epsilon:G9}]"), lt.ToString());
+            Assert.Equal(
+                FormattableString.Invariant($"[-Inf..{-float.Epsilon:G9}]"),
+                lt.ToString()
+            );
             var gt = ForFloat.Related(GreaterThan, 0.0f);
             Assert.Equal(FormattableString.Invariant($"[{float.Epsilon:G9}..Inf]"), gt.ToString());
             var eq = ForFloat.Related(Equal, 0.0f);
@@ -345,10 +399,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("NaN", ForFloat.Related(Equal, float.NaN).ToString());
             Assert.True(ForDouble.Related(Equal, double.NaN).Any(Equal, double.NaN));
             Assert.True(ForFloat.Related(Equal, float.NaN).Any(Equal, float.NaN));
-            Assert.Equal("[Inf..Inf]", ForDouble.Related(Equal, double.PositiveInfinity).ToString());
+            Assert.Equal(
+                "[Inf..Inf]",
+                ForDouble.Related(Equal, double.PositiveInfinity).ToString()
+            );
             Assert.Equal("[Inf..Inf]", ForFloat.Related(Equal, float.PositiveInfinity).ToString());
-            Assert.Equal("[-Inf..-Inf]", ForDouble.Related(Equal, double.NegativeInfinity).ToString());
-            Assert.Equal("[-Inf..-Inf]", ForFloat.Related(Equal, float.NegativeInfinity).ToString());
+            Assert.Equal(
+                "[-Inf..-Inf]",
+                ForDouble.Related(Equal, double.NegativeInfinity).ToString()
+            );
+            Assert.Equal(
+                "[-Inf..-Inf]",
+                ForFloat.Related(Equal, float.NegativeInfinity).ToString()
+            );
         }
 
         [Fact]
@@ -476,14 +539,62 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNext_Cov_01()
         {
-            Assert.Equal("[10..100]", ForSByte.Related(GreaterThanOrEqual, 10).Intersect(ForSByte.Related(LessThanOrEqual, 100)).ToString());
-            Assert.Equal("[10..100]", ForShort.Related(GreaterThanOrEqual, 10).Intersect(ForShort.Related(LessThanOrEqual, 100)).ToString());
-            Assert.Equal("[10..100]", ForUInt.Related(GreaterThanOrEqual, 10).Intersect(ForUInt.Related(LessThanOrEqual, 100)).ToString());
-            Assert.Equal("[10..100]", ForULong.Related(GreaterThanOrEqual, 10).Intersect(ForULong.Related(LessThanOrEqual, 100)).ToString());
-            Assert.Equal("[10..100]", ForUShort.Related(GreaterThanOrEqual, 10).Intersect(ForUShort.Related(LessThanOrEqual, 100)).ToString());
-            Assert.Equal("[10..100]", ForFloat.Related(GreaterThanOrEqual, 10).Intersect(ForFloat.Related(LessThanOrEqual, 100)).ToString());
-            Assert.Equal("[-100..-10]", ForFloat.Related(GreaterThanOrEqual, -100).Intersect(ForFloat.Related(LessThanOrEqual, -10)).ToString());
-            Assert.Equal("[-10..10]", ForFloat.Related(GreaterThanOrEqual, -10).Intersect(ForFloat.Related(LessThanOrEqual, 10)).ToString());
+            Assert.Equal(
+                "[10..100]",
+                ForSByte
+                    .Related(GreaterThanOrEqual, 10)
+                    .Intersect(ForSByte.Related(LessThanOrEqual, 100))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[10..100]",
+                ForShort
+                    .Related(GreaterThanOrEqual, 10)
+                    .Intersect(ForShort.Related(LessThanOrEqual, 100))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[10..100]",
+                ForUInt
+                    .Related(GreaterThanOrEqual, 10)
+                    .Intersect(ForUInt.Related(LessThanOrEqual, 100))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[10..100]",
+                ForULong
+                    .Related(GreaterThanOrEqual, 10)
+                    .Intersect(ForULong.Related(LessThanOrEqual, 100))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[10..100]",
+                ForUShort
+                    .Related(GreaterThanOrEqual, 10)
+                    .Intersect(ForUShort.Related(LessThanOrEqual, 100))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[10..100]",
+                ForFloat
+                    .Related(GreaterThanOrEqual, 10)
+                    .Intersect(ForFloat.Related(LessThanOrEqual, 100))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[-100..-10]",
+                ForFloat
+                    .Related(GreaterThanOrEqual, -100)
+                    .Intersect(ForFloat.Related(LessThanOrEqual, -10))
+                    .ToString()
+            );
+            Assert.Equal(
+                "[-10..10]",
+                ForFloat
+                    .Related(GreaterThanOrEqual, -10)
+                    .Intersect(ForFloat.Related(LessThanOrEqual, 10))
+                    .ToString()
+            );
         }
 
         [Fact]
@@ -511,19 +622,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestDecimalRelations_01()
         {
-            Assert.Equal("[-79228162514264337593543950335..-0.0000000000000000000000000001]", ForDecimal.Related(LessThan, 0.0m).ToString());
-            Assert.Equal("[-79228162514264337593543950335..0.0000000000000000000000000000]", ForDecimal.Related(LessThanOrEqual, 0.0m).ToString());
-            Assert.Equal("[0.0000000000000000000000000001..79228162514264337593543950335]", ForDecimal.Related(GreaterThan, 0.0m).ToString());
-            Assert.Equal("[0.0000000000000000000000000000..79228162514264337593543950335]", ForDecimal.Related(GreaterThanOrEqual, 0.0m).ToString());
+            Assert.Equal(
+                "[-79228162514264337593543950335..-0.0000000000000000000000000001]",
+                ForDecimal.Related(LessThan, 0.0m).ToString()
+            );
+            Assert.Equal(
+                "[-79228162514264337593543950335..0.0000000000000000000000000000]",
+                ForDecimal.Related(LessThanOrEqual, 0.0m).ToString()
+            );
+            Assert.Equal(
+                "[0.0000000000000000000000000001..79228162514264337593543950335]",
+                ForDecimal.Related(GreaterThan, 0.0m).ToString()
+            );
+            Assert.Equal(
+                "[0.0000000000000000000000000000..79228162514264337593543950335]",
+                ForDecimal.Related(GreaterThanOrEqual, 0.0m).ToString()
+            );
         }
 
         [Fact]
         public void TestNintRelations_01()
         {
             Assert.Equal("Small,[-2147483648..9]", ForNint.Related(LessThan, 10).ToString());
-            Assert.Equal("Small,[-2147483648..10]", ForNint.Related(LessThanOrEqual, 10).ToString());
+            Assert.Equal(
+                "Small,[-2147483648..10]",
+                ForNint.Related(LessThanOrEqual, 10).ToString()
+            );
             Assert.Equal("[11..2147483647],Large", ForNint.Related(GreaterThan, 10).ToString());
-            Assert.Equal("[10..2147483647],Large", ForNint.Related(GreaterThanOrEqual, 10).ToString());
+            Assert.Equal(
+                "[10..2147483647],Large",
+                ForNint.Related(GreaterThanOrEqual, 10).ToString()
+            );
         }
 
         [Fact]
@@ -532,7 +661,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("[0..9]", ForNuint.Related(LessThan, 10).ToString());
             Assert.Equal("[0..10]", ForNuint.Related(LessThanOrEqual, 10).ToString());
             Assert.Equal("[11..4294967295],Large", ForNuint.Related(GreaterThan, 10).ToString());
-            Assert.Equal("[10..4294967295],Large", ForNuint.Related(GreaterThanOrEqual, 10).ToString());
+            Assert.Equal(
+                "[10..4294967295],Large",
+                ForNuint.Related(GreaterThanOrEqual, 10).ToString()
+            );
         }
 
         [Fact]
@@ -548,17 +680,53 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             for (byte scale = 0; scale < 29; scale++)
             {
-                var l = new decimal(unchecked((int)0x99999999), unchecked((int)0x99999999), 0x19999999, false, scale);
+                var l = new decimal(
+                    unchecked((int)0x99999999),
+                    unchecked((int)0x99999999),
+                    0x19999999,
+                    false,
+                    scale
+                );
                 check(l);
-                l = new decimal(unchecked((int)0x99999999), unchecked((int)0x99999999), 0x19999999, true, scale);
+                l = new decimal(
+                    unchecked((int)0x99999999),
+                    unchecked((int)0x99999999),
+                    0x19999999,
+                    true,
+                    scale
+                );
                 check(l);
-                l = new decimal(unchecked((int)0x99999998), unchecked((int)0x99999999), 0x19999999, false, scale);
+                l = new decimal(
+                    unchecked((int)0x99999998),
+                    unchecked((int)0x99999999),
+                    0x19999999,
+                    false,
+                    scale
+                );
                 check(l);
-                l = new decimal(unchecked((int)0x99999998), unchecked((int)0x99999999), 0x19999999, true, scale);
+                l = new decimal(
+                    unchecked((int)0x99999998),
+                    unchecked((int)0x99999999),
+                    0x19999999,
+                    true,
+                    scale
+                );
                 check(l);
-                l = new decimal(unchecked((int)0x9999999A), unchecked((int)0x99999999), 0x19999999, false, scale);
+                l = new decimal(
+                    unchecked((int)0x9999999A),
+                    unchecked((int)0x99999999),
+                    0x19999999,
+                    false,
+                    scale
+                );
                 check(l);
-                l = new decimal(unchecked((int)0x9999999A), unchecked((int)0x99999999), 0x19999999, true, scale);
+                l = new decimal(
+                    unchecked((int)0x9999999A),
+                    unchecked((int)0x99999999),
+                    0x19999999,
+                    true,
+                    scale
+                );
                 check(l);
             }
 
@@ -591,12 +759,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var Random = new Random(123445);
 
-            foreach (var fac in new IValueSetFactory[] {
-                ForByte, ForSByte, ForShort, ForUShort,
-                ForInt, ForUInt, ForLong, ForULong,
-                ForFloat, ForDouble, ForDecimal, ForNint,
-                ForNuint, ForChar, ForLength,
-                })
+            foreach (
+                var fac in new IValueSetFactory[]
+                {
+                    ForByte,
+                    ForSByte,
+                    ForShort,
+                    ForUShort,
+                    ForInt,
+                    ForUInt,
+                    ForLong,
+                    ForULong,
+                    ForFloat,
+                    ForDouble,
+                    ForDecimal,
+                    ForNint,
+                    ForNuint,
+                    ForChar,
+                    ForLength,
+                }
+            )
             {
                 for (int i = 0; i < 100; i++)
                 {
@@ -615,11 +797,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNumbers_Fuzz_02()
         {
-            foreach (var fac in new IValueSetFactory[] {
-                ForByte, ForSByte, ForShort, ForUShort,
-                ForInt, ForUInt, ForLong, ForULong,
-                ForDecimal, ForNint,
-                ForNuint, ForChar, ForLength })
+            foreach (
+                var fac in new IValueSetFactory[]
+                {
+                    ForByte,
+                    ForSByte,
+                    ForShort,
+                    ForUShort,
+                    ForInt,
+                    ForUInt,
+                    ForLong,
+                    ForULong,
+                    ForDecimal,
+                    ForNint,
+                    ForNuint,
+                    ForChar,
+                    ForLength,
+                }
+            )
             {
                 for (int i = 0; i < 100; i++)
                 {
@@ -854,23 +1049,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // For error recovery, do not throw exceptions on bad inputs.
             var ctors = new IValueSetFactory[]
             {
-                    ForByte,
-                    ForSByte,
-                    ForChar,
-                    ForShort,
-                    ForUShort,
-                    ForInt,
-                    ForUInt,
-                    ForLong,
-                    ForULong,
-                    ForBool,
-                    ForFloat,
-                    ForDouble,
-                    ForString,
-                    ForDecimal,
-                    ForNint,
-                    ForNuint,
-                    ForLength,
+                ForByte,
+                ForSByte,
+                ForChar,
+                ForShort,
+                ForUShort,
+                ForInt,
+                ForUInt,
+                ForLong,
+                ForULong,
+                ForBool,
+                ForFloat,
+                ForDouble,
+                ForString,
+                ForDecimal,
+                ForNint,
+                ForNuint,
+                ForLength,
             };
             ConstantValue badConstant = ConstantValue.Bad;
             foreach (IValueSetFactory fac in ctors)

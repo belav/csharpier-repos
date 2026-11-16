@@ -38,36 +38,55 @@ namespace System.Composition.Hosting.Core
             string origin,
             bool isShared,
             Func<IEnumerable<CompositionDependency>> dependencies,
-            Func<IEnumerable<CompositionDependency>, ExportDescriptor> getDescriptor)
+            Func<IEnumerable<CompositionDependency>, ExportDescriptor> getDescriptor
+        )
         {
             _contract = contract;
             _origin = origin;
             _isShared = isShared;
-            _dependencies = new Lazy<ReadOnlyCollection<CompositionDependency>>(() => new ReadOnlyCollection<CompositionDependency>(dependencies().ToList()), false);
-            _descriptor = new Lazy<ExportDescriptor>(() => getDescriptor(_dependencies.Value), false);
+            _dependencies = new Lazy<ReadOnlyCollection<CompositionDependency>>(
+                () => new ReadOnlyCollection<CompositionDependency>(dependencies().ToList()),
+                false
+            );
+            _descriptor = new Lazy<ExportDescriptor>(
+                () => getDescriptor(_dependencies.Value),
+                false
+            );
         }
 
         /// <summary>
         /// A description of where the export is being provided from (e.g. the part type).
         /// Used to provide friendly errors.
         /// </summary>
-        public string Origin { get { return _origin; } }
+        public string Origin
+        {
+            get { return _origin; }
+        }
 
         /// <summary>
         /// True if the export is shared within some context, otherwise false. Used in cycle
         /// checking.
         /// </summary>
-        public bool IsShared { get { return _isShared; } }
+        public bool IsShared
+        {
+            get { return _isShared; }
+        }
 
         /// <summary>
         /// The dependencies required in order to fulfill the promise.
         /// </summary>
-        public ReadOnlyCollection<CompositionDependency> Dependencies { get { return _dependencies.Value; } }
+        public ReadOnlyCollection<CompositionDependency> Dependencies
+        {
+            get { return _dependencies.Value; }
+        }
 
         /// <summary>
         /// The contract fulfilled by this promise.
         /// </summary>
-        public CompositionContract Contract { get { return _contract; } }
+        public CompositionContract Contract
+        {
+            get { return _contract; }
+        }
 
         /// <summary>
         /// Retrieve the promised export descriptor.

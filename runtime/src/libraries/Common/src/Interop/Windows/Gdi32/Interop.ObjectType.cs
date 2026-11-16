@@ -20,7 +20,7 @@ internal static partial class Interop
             OBJ_EXTPEN = 11,
             OBJ_ENHMETADC = 12,
             OBJ_ENHMETAFILE = 13,
-            OBJ_COLORSPACE = 14
+            OBJ_COLORSPACE = 14,
         }
     }
 }

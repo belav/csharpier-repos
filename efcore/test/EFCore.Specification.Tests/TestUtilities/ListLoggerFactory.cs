@@ -11,9 +11,7 @@ public class ListLoggerFactory : ILoggerFactory
     private bool _disposed;
 
     public ListLoggerFactory()
-        : this(_ => true)
-    {
-    }
+        : this(_ => true) { }
 
     public ListLoggerFactory(Func<string, bool> shouldLogCategory)
     {
@@ -21,30 +19,30 @@ public class ListLoggerFactory : ILoggerFactory
         Logger = new ListLogger();
     }
 
-    public List<(LogLevel Level, EventId Id, string Message, object State, Exception Exception)> Log
-        => Logger.LoggedEvents;
+    public List<(
+        LogLevel Level,
+        EventId Id,
+        string Message,
+        object State,
+        Exception Exception
+    )> Log => Logger.LoggedEvents;
 
     protected ListLogger Logger { get; set; }
 
-    public virtual void Clear()
-        => Logger.Clear();
+    public virtual void Clear() => Logger.Clear();
 
-    public CancellationToken CancelQuery()
-        => Logger.CancelOnNextLogEntry();
+    public CancellationToken CancelQuery() => Logger.CancelOnNextLogEntry();
 
-    public virtual IDisposable SuspendRecordingEvents()
-        => Logger.SuspendRecordingEvents();
+    public virtual IDisposable SuspendRecordingEvents() => Logger.SuspendRecordingEvents();
 
-    public void SetTestOutputHelper(ITestOutputHelper testOutputHelper)
-        => Logger.TestOutputHelper = testOutputHelper;
+    public void SetTestOutputHelper(ITestOutputHelper testOutputHelper) =>
+        Logger.TestOutputHelper = testOutputHelper;
 
     public virtual ILogger CreateLogger(string name)
     {
         CheckDisposed();
 
-        return !_shouldLogCategory(name)
-            ? NullLogger.Instance
-            : Logger;
+        return !_shouldLogCategory(name) ? NullLogger.Instance : Logger;
     }
 
     private void CheckDisposed()
@@ -55,14 +53,12 @@ public class ListLoggerFactory : ILoggerFactory
         }
     }
 
-    public void AddProvider(ILoggerProvider provider)
-        => CheckDisposed();
+    public void AddProvider(ILoggerProvider provider) => CheckDisposed();
 
-    public void Dispose()
-        => _disposed = true;
+    public void Dispose() => _disposed = true;
 
-    public static string NormalizeLineEndings(string expectedString)
-        => expectedString.Replace("\r", string.Empty).Replace("\n", Environment.NewLine);
+    public static string NormalizeLineEndings(string expectedString) =>
+        expectedString.Replace("\r", string.Empty).Replace("\n", Environment.NewLine);
 
     protected class ListLogger : ILogger
     {
@@ -72,8 +68,7 @@ public class ListLoggerFactory : ILoggerFactory
 
         public ITestOutputHelper TestOutputHelper { get; set; }
 
-        public List<(LogLevel, EventId, string, object, Exception)> LoggedEvents { get; }
-            = new();
+        public List<(LogLevel, EventId, string, object, Exception)> LoggedEvents { get; } = new();
 
         public CancellationToken CancelOnNextLogEntry()
         {
@@ -110,7 +105,8 @@ public class ListLoggerFactory : ILoggerFactory
             EventId eventId,
             TState state,
             Exception exception,
-            Func<TState, Exception, string> formatter)
+            Func<TState, Exception, string> formatter
+        )
         {
             lock (_sync) // Guard against tests with explicit concurrency
             {
@@ -124,7 +120,8 @@ public class ListLoggerFactory : ILoggerFactory
             EventId eventId,
             string message,
             TState state,
-            Exception exception)
+            Exception exception
+        )
         {
             if (message != null)
             {
@@ -143,14 +140,11 @@ public class ListLoggerFactory : ILoggerFactory
             }
         }
 
-        public bool IsEnabled(LogLevel logLevel)
-            => true;
+        public bool IsEnabled(LogLevel logLevel) => true;
 
-        public IDisposable BeginScope(object state)
-            => null;
+        public IDisposable BeginScope(object state) => null;
 
-        public IDisposable BeginScope<TState>(TState state)
-            => null;
+        public IDisposable BeginScope<TState>(TState state) => null;
 
         private class RecordingSuspensionHandle : IDisposable
         {
@@ -161,8 +155,7 @@ public class ListLoggerFactory : ILoggerFactory
                 _logger = logger;
             }
 
-            public void Dispose()
-                => _logger.IsRecordingSuspended = false;
+            public void Dispose() => _logger.IsRecordingSuspended = false;
         }
     }
 }

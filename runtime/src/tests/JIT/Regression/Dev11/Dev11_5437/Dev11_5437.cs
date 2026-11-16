@@ -16,6 +16,7 @@ public class Program
             throw new Exception("FAILED");
         }
     }
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -27,7 +28,8 @@ public class Program
             {
                 int c = 3 - d++;
                 f(c, d, e); //  c == 3-d+1 !
-                if (--i < 1) break;
+                if (--i < 1)
+                    break;
             }
         }
         Console.WriteLine("PASSED");

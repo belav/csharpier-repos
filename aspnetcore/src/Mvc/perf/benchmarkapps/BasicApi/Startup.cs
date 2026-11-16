@@ -123,22 +123,18 @@ namespace BasicApi
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(
-                    "pet-store-reader",
-                    builder =>
-                        builder
-                            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                            .RequireAuthenticatedUser()
-                            .RequireClaim("scope", "pet-store-reader")
+                options.AddPolicy("pet-store-reader", builder =>
+                    builder
+                        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                        .RequireAuthenticatedUser()
+                        .RequireClaim("scope", "pet-store-reader")
                 );
 
-                options.AddPolicy(
-                    "pet-store-writer",
-                    builder =>
-                        builder
-                            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                            .RequireAuthenticatedUser()
-                            .RequireClaim("scope", "pet-store-writer")
+                options.AddPolicy("pet-store-writer", builder =>
+                    builder
+                        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                        .RequireAuthenticatedUser()
+                        .RequireClaim("scope", "pet-store-writer")
                 );
             });
 

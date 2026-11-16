@@ -16,16 +16,15 @@ namespace System.ServiceModel.Configuration
     public partial class NetHttpBindingElement : HttpBindingBaseElement
     {
         public NetHttpBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public NetHttpBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
-        [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = NetHttpBindingDefaults.MessageEncoding)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MessageEncoding,
+            DefaultValue = NetHttpBindingDefaults.MessageEncoding
+        )]
         [ServiceModelEnumValidator(typeof(NetHttpMessageEncodingHelper))]
         public NetHttpMessageEncoding MessageEncoding
         {
@@ -36,7 +35,11 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ReliableSession)]
         public StandardBindingOptionalReliableSessionElement ReliableSession
         {
-            get { return (StandardBindingOptionalReliableSessionElement)base[ConfigurationStrings.ReliableSession]; }
+            get
+            {
+                return (StandardBindingOptionalReliableSessionElement)
+                    base[ConfigurationStrings.ReliableSession];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Security)]
@@ -45,12 +48,19 @@ namespace System.ServiceModel.Configuration
             get { return (BasicHttpSecurityElement)base[ConfigurationStrings.Security]; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.Configuration, "Configuration104", 
-                        Justification = "Don't need a validator for this strong typed element.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.Configuration,
+            "Configuration104",
+            Justification = "Don't need a validator for this strong typed element."
+        )]
         [ConfigurationProperty(ConfigurationStrings.WebSocketSettingsSectionName)]
         public NetHttpWebSocketTransportSettingsElement WebSocketSettings
         {
-            get { return (NetHttpWebSocketTransportSettingsElement)base[ConfigurationStrings.WebSocketSettingsSectionName]; }
+            get
+            {
+                return (NetHttpWebSocketTransportSettingsElement)
+                    base[ConfigurationStrings.WebSocketSettingsSectionName];
+            }
             set { base[ConfigurationStrings.WebSocketSettingsSectionName] = value; }
         }
 
@@ -63,7 +73,10 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(binding);
             NetHttpBinding netHttpBinding = (NetHttpBinding)binding;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, netHttpBinding.MessageEncoding);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MessageEncoding,
+                netHttpBinding.MessageEncoding
+            );
 
             this.WebSocketSettings.InitializeFrom(netHttpBinding.WebSocketSettings);
             this.ReliableSession.InitializeFrom(netHttpBinding.ReliableSession);

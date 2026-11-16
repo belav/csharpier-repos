@@ -3,10 +3,9 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.JitInterface;
-using Internal.TypeSystem;
 using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {
@@ -54,8 +53,10 @@ namespace ILCompiler
                 {
                     return false;
                 }
-                return runtimeDeterminedType1.RuntimeDeterminedDetailsType.Index == runtimeDeterminedType2.RuntimeDeterminedDetailsType.Index &&
-                    runtimeDeterminedType1.RuntimeDeterminedDetailsType.Kind == runtimeDeterminedType2.RuntimeDeterminedDetailsType.Kind;
+                return runtimeDeterminedType1.RuntimeDeterminedDetailsType.Index
+                        == runtimeDeterminedType2.RuntimeDeterminedDetailsType.Index
+                    && runtimeDeterminedType1.RuntimeDeterminedDetailsType.Kind
+                        == runtimeDeterminedType2.RuntimeDeterminedDetailsType.Kind;
             }
 
             ArrayType arrayType1 = type1 as ArrayType;
@@ -66,9 +67,9 @@ namespace ILCompiler
                 {
                     return false;
                 }
-                return arrayType1.Rank == arrayType2.Rank &&
-                    arrayType1.IsSzArray == arrayType2.IsSzArray &&
-                    Equals(arrayType1.ElementType, arrayType2.ElementType);
+                return arrayType1.Rank == arrayType2.Rank
+                    && arrayType1.IsSzArray == arrayType2.IsSzArray
+                    && Equals(arrayType1.ElementType, arrayType2.ElementType);
             }
 
             ByRefType byRefType1 = type1 as ByRefType;
@@ -82,8 +83,10 @@ namespace ILCompiler
                 return Equals(byRefType1.ParameterType, byRefType2.ParameterType);
             }
 
-            if (type1.GetTypeDefinition() != type2.GetTypeDefinition() ||
-                !Equals(type1.Instantiation, type2.Instantiation))
+            if (
+                type1.GetTypeDefinition() != type2.GetTypeDefinition()
+                || !Equals(type1.Instantiation, type2.Instantiation)
+            )
             {
                 return false;
             }
@@ -102,10 +105,12 @@ namespace ILCompiler
                 return false;
             }
 
-            if (!Equals(method1.OwningType, method2.OwningType) ||
-                method1.Signature.Length != method2.Signature.Length ||
-                !Equals(method1.Instantiation, method2.Instantiation) ||
-                !Equals(method1.Signature.ReturnType, method2.Signature.ReturnType))
+            if (
+                !Equals(method1.OwningType, method2.OwningType)
+                || method1.Signature.Length != method2.Signature.Length
+                || !Equals(method1.Instantiation, method2.Instantiation)
+                || !Equals(method1.Signature.ReturnType, method2.Signature.ReturnType)
+            )
             {
                 return false;
             }
@@ -119,7 +124,10 @@ namespace ILCompiler
             return true;
         }
 
-        public static bool Equals(MethodWithToken methodWithToken1, MethodWithToken methodWithToken2)
+        public static bool Equals(
+            MethodWithToken methodWithToken1,
+            MethodWithToken methodWithToken2
+        )
         {
             if (methodWithToken1 == methodWithToken2)
             {
@@ -141,9 +149,9 @@ namespace ILCompiler
             {
                 return field1 == null && field2 == null;
             }
-            return field1.Name == field2.Name &&
-                RuntimeDeterminedTypeHelper.Equals(field1.OwningType, field2.OwningType) &&
-                RuntimeDeterminedTypeHelper.Equals(field1.FieldType, field2.FieldType);
+            return field1.Name == field2.Name
+                && RuntimeDeterminedTypeHelper.Equals(field1.OwningType, field2.OwningType)
+                && RuntimeDeterminedTypeHelper.Equals(field1.FieldType, field2.FieldType);
         }
 
         public static bool Equals(FieldWithToken field1, FieldWithToken field2)
@@ -163,7 +171,6 @@ namespace ILCompiler
                 hashcode = unchecked(hashcode * 73 + GetHashCode(instantiation[typeArgIndex]));
             }
             return hashcode;
-
         }
 
         public static int GetHashCode(TypeDesc type)
@@ -174,8 +181,8 @@ namespace ILCompiler
             }
             if (type is RuntimeDeterminedType runtimeDeterminedType)
             {
-                return runtimeDeterminedType.RuntimeDeterminedDetailsType.Index ^
-                    ((int)runtimeDeterminedType.RuntimeDeterminedDetailsType.Kind << 30);
+                return runtimeDeterminedType.RuntimeDeterminedDetailsType.Index
+                    ^ ((int)runtimeDeterminedType.RuntimeDeterminedDetailsType.Kind << 30);
             }
             return type.GetTypeDefinition().GetHashCode() ^ GetHashCode(type.Instantiation);
         }
@@ -186,8 +193,14 @@ namespace ILCompiler
             {
                 return 0;
             }
-            return unchecked(GetHashCode(method.OwningType) + 97 * (
-                method.GetTypicalMethodDefinition().GetHashCode() + 31 * GetHashCode(method.Instantiation)));
+            return unchecked(
+                GetHashCode(method.OwningType)
+                + 97
+                    * (
+                        method.GetTypicalMethodDefinition().GetHashCode()
+                        + 31 * GetHashCode(method.Instantiation)
+                    )
+            );
         }
 
         public static int GetHashCode(MethodWithToken method)
@@ -196,7 +209,11 @@ namespace ILCompiler
             {
                 return 0;
             }
-            return unchecked(GetHashCode(method.Method) + 31 * GetHashCode(method.OwningType) + 97 * GetHashCode(method.ConstrainedType));
+            return unchecked(
+                GetHashCode(method.Method)
+                + 31 * GetHashCode(method.OwningType)
+                + 97 * GetHashCode(method.ConstrainedType)
+            );
         }
 
         public static int GetHashCode(FieldDesc field)
@@ -205,7 +222,11 @@ namespace ILCompiler
             {
                 return 0;
             }
-            return unchecked(GetHashCode(field.OwningType) + 97 * GetHashCode(field.FieldType) + 31 * field.Name.GetHashCode());
+            return unchecked(
+                GetHashCode(field.OwningType)
+                + 97 * GetHashCode(field.FieldType)
+                + 31 * field.Name.GetHashCode()
+            );
         }
 
         public static int GetHashCode(FieldWithToken field)

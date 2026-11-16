@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetAttributeWhenValueIsEmpty()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>"
+            );
 
             var expected = xmlDocument.DocumentElement.Attributes.Item(0);
             var attribute = xmlDocument.DocumentElement.GetAttributeNode("child1");
@@ -25,7 +27,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetAttributeWhenValueIsNotEmpty()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>"
+            );
 
             var expected = xmlDocument.DocumentElement.Attributes.Item(1);
             var attribute = xmlDocument.DocumentElement.GetAttributeNode("child2");

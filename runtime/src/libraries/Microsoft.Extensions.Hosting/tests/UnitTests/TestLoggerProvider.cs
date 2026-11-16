@@ -33,21 +33,27 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             public bool IsEnabled(LogLevel logLevel) => true;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception? exception,
+                Func<TState, Exception?, string> formatter
+            )
             {
-                _events.Enqueue(new LogEvent()
-                {
-                    LogLevel = logLevel,
-                    EventId = eventId,
-                    Message = formatter(state, exception)
-                });
+                _events.Enqueue(
+                    new LogEvent()
+                    {
+                        LogLevel = logLevel,
+                        EventId = eventId,
+                        Message = formatter(state, exception),
+                    }
+                );
             }
 
             private class Scope : IDisposable
             {
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
     }

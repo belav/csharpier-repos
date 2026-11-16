@@ -32,8 +32,8 @@ public class ObjectAdapter : IObjectAdapterWithTest
         IAdapterFactory adapterFactory
     )
     {
-        ContractResolver =
-            contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+        ContractResolver = contractResolver
+            ?? throw new ArgumentNullException(nameof(contractResolver));
         LogErrorAction = logErrorAction;
         AdapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
     }

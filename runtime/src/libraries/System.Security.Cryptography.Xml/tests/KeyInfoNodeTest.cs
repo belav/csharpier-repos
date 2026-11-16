@@ -13,10 +13,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     public class KeyInfoNodeTest
     {
-
         [Fact]
         public void NewKeyNode()
         {

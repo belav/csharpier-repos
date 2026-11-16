@@ -12,13 +12,19 @@ namespace System.Web.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(typeof(RouteCollectionExtensions), TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass);
+            Assert.Type.HasProperties(
+                typeof(RouteCollectionExtensions),
+                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass
+            );
         }
 
         [Fact]
         public void MapHttpRoute1ThrowsOnNullRouteCollection()
         {
-            Assert.ThrowsArgumentNull(() => RouteCollectionExtensions.MapHttpRoute(null, "", "", null), "routes");
+            Assert.ThrowsArgumentNull(
+                () => RouteCollectionExtensions.MapHttpRoute(null, "", "", null),
+                "routes"
+            );
         }
 
         [Fact]
@@ -60,7 +66,10 @@ namespace System.Web.Http
         [Fact]
         public void MapHttpRoute2ThrowsOnNullRouteCollection()
         {
-            Assert.ThrowsArgumentNull(() => RouteCollectionExtensions.MapHttpRoute(null, "", "", null, null), "routes");
+            Assert.ThrowsArgumentNull(
+                () => RouteCollectionExtensions.MapHttpRoute(null, "", "", null, null),
+                "routes"
+            );
         }
 
         [Fact]

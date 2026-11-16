@@ -52,14 +52,19 @@ internal sealed class DelegateCacheRewriter
         var cacheField = cacheContainer.GetOrAddCacheField(_factory, boundDelegateCreation);
 
         var boundCacheField = _factory.Field(receiver: null, cacheField);
-        var rewrittenNode = _factory.Coalesce(boundCacheField, _factory.AssignmentExpression(boundCacheField, boundDelegateCreation));
+        var rewrittenNode = _factory.Coalesce(
+            boundCacheField,
+            _factory.AssignmentExpression(boundCacheField, boundDelegateCreation)
+        );
 
         _factory.Syntax = oldSyntax;
 
         return rewrittenNode;
     }
 
-    private DelegateCacheContainer GetOrAddCacheContainer(BoundDelegateCreationExpression boundDelegateCreation)
+    private DelegateCacheContainer GetOrAddCacheContainer(
+        BoundDelegateCreationExpression boundDelegateCreation
+    )
     {
         Debug.Assert(_factory.ModuleBuilderOpt is { });
         Debug.Assert(_factory.CurrentFunction is { });
@@ -90,7 +95,13 @@ internal sealed class DelegateCacheRewriter
         //
         // In the above case, only one cached delegate is necessary, and it could be assigned to the container 'owned' by LF1.
 
-        if (!TryGetOwnerFunction(_factory.CurrentFunction, boundDelegateCreation, out var ownerFunction))
+        if (
+            !TryGetOwnerFunction(
+                _factory.CurrentFunction,
+                boundDelegateCreation,
+                out var ownerFunction
+            )
+        )
         {
             var typeCompilationState = _factory.CompilationState;
             container = typeCompilationState.ConcreteDelegateCacheContainer;
@@ -105,14 +116,22 @@ internal sealed class DelegateCacheRewriter
         }
         else
         {
-            var containers = _genericCacheContainers ??= new Dictionary<MethodSymbol, DelegateCacheContainer>(ReferenceEqualityComparer.Instance);
+            var containers = _genericCacheContainers ??= new Dictionary<
+                MethodSymbol,
+                DelegateCacheContainer
+            >(ReferenceEqualityComparer.Instance);
 
             if (containers.TryGetValue(ownerFunction, out container))
             {
                 return container;
             }
 
-            container = new DelegateCacheContainer(ownerFunction, _topLevelMethodOrdinal, containers.Count, generation);
+            container = new DelegateCacheContainer(
+                ownerFunction,
+                _topLevelMethodOrdinal,
+                containers.Count,
+                generation
+            );
             containers.Add(ownerFunction, container);
         }
 
@@ -121,7 +140,11 @@ internal sealed class DelegateCacheRewriter
         return container;
     }
 
-    private static bool TryGetOwnerFunction(MethodSymbol currentFunction, BoundDelegateCreationExpression boundDelegateCreation, [NotNullWhen(true)] out MethodSymbol? ownerFunction)
+    private static bool TryGetOwnerFunction(
+        MethodSymbol currentFunction,
+        BoundDelegateCreationExpression boundDelegateCreation,
+        [NotNullWhen(true)] out MethodSymbol? ownerFunction
+    )
     {
         var targetMethod = boundDelegateCreation.MethodOpt;
         Debug.Assert(targetMethod is { });
@@ -139,7 +162,11 @@ internal sealed class DelegateCacheRewriter
             //
             // Therefore, without too much analysis, we select the closest generic enclosing function as the cache container owner.
 
-            for (Symbol? enclosingSymbol = currentFunction; enclosingSymbol is MethodSymbol enclosingMethod; enclosingSymbol = enclosingSymbol.ContainingSymbol)
+            for (
+                Symbol? enclosingSymbol = currentFunction;
+                enclosingSymbol is MethodSymbol enclosingMethod;
+                enclosingSymbol = enclosingSymbol.ContainingSymbol
+            )
             {
                 if (enclosingMethod.Arity > 0)
                 {
@@ -163,7 +190,10 @@ internal sealed class DelegateCacheRewriter
         var usedTypeParameters = PooledHashSet<TypeParameterSymbol>.GetInstance();
         try
         {
-            if ((targetMethod.IsAbstract || targetMethod.IsVirtual) && boundDelegateCreation.Argument is BoundTypeExpression typeExpression)
+            if (
+                (targetMethod.IsAbstract || targetMethod.IsVirtual)
+                && boundDelegateCreation.Argument is BoundTypeExpression typeExpression
+            )
             {
                 FindTypeParameters(typeExpression.Type, usedTypeParameters);
             }
@@ -173,7 +203,11 @@ internal sealed class DelegateCacheRewriter
             FindTypeParameters(delegateType, usedTypeParameters);
             FindTypeParameters(targetMethod, usedTypeParameters);
 
-            for (Symbol? enclosingSymbol = currentFunction; enclosingSymbol is MethodSymbol enclosingMethod; enclosingSymbol = enclosingSymbol.ContainingSymbol)
+            for (
+                Symbol? enclosingSymbol = currentFunction;
+                enclosingSymbol is MethodSymbol enclosingMethod;
+                enclosingSymbol = enclosingSymbol.ContainingSymbol
+            )
             {
                 if (usedTypeParametersContains(usedTypeParameters, enclosingMethod.TypeParameters))
                 {
@@ -190,7 +224,10 @@ internal sealed class DelegateCacheRewriter
             usedTypeParameters.Free();
         }
 
-        static bool usedTypeParametersContains(HashSet<TypeParameterSymbol> used, ImmutableArray<TypeParameterSymbol> typeParameters)
+        static bool usedTypeParametersContains(
+            HashSet<TypeParameterSymbol> used,
+            ImmutableArray<TypeParameterSymbol> typeParameters
+        )
         {
             foreach (var typeParameter in typeParameters)
             {
@@ -204,8 +241,8 @@ internal sealed class DelegateCacheRewriter
         }
     }
 
-    private static void FindTypeParameters(TypeSymbol type, HashSet<TypeParameterSymbol> result)
-        => type.VisitType(s_typeParameterSymbolCollector, result, visitCustomModifiers: true);
+    private static void FindTypeParameters(TypeSymbol type, HashSet<TypeParameterSymbol> result) =>
+        type.VisitType(s_typeParameterSymbolCollector, result, visitCustomModifiers: true);
 
     private static void FindTypeParameters(MethodSymbol method, HashSet<TypeParameterSymbol> result)
     {
@@ -213,11 +250,22 @@ internal sealed class DelegateCacheRewriter
 
         foreach (var typeArgument in method.TypeArgumentsWithAnnotations)
         {
-            typeArgument.VisitType(type: null, typeWithAnnotationsPredicate: null, s_typeParameterSymbolCollector, result, visitCustomModifiers: true);
+            typeArgument.VisitType(
+                type: null,
+                typeWithAnnotationsPredicate: null,
+                s_typeParameterSymbolCollector,
+                result,
+                visitCustomModifiers: true
+            );
         }
     }
 
-    private static readonly Func<TypeSymbol, HashSet<TypeParameterSymbol>, bool, bool> s_typeParameterSymbolCollector = (typeSymbol, result, _) =>
+    private static readonly Func<
+        TypeSymbol,
+        HashSet<TypeParameterSymbol>,
+        bool,
+        bool
+    > s_typeParameterSymbolCollector = (typeSymbol, result, _) =>
     {
         if (typeSymbol is TypeParameterSymbol typeParameter)
         {

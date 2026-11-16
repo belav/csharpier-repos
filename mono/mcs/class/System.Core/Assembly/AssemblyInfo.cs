@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,45 +27,45 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
-using System.Security;
-using System.Security.Permissions;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 
 // General Information about the System.Core assembly
 
-[assembly: AssemblyTitle ("System.Core.dll")]
-[assembly: AssemblyDescription ("System.Core.dll")]
-[assembly: AssemblyDefaultAlias ("System.Core.dll")]
+[assembly: AssemblyTitle("System.Core.dll")]
+[assembly: AssemblyDescription("System.Core.dll")]
+[assembly: AssemblyDefaultAlias("System.Core.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
-[assembly: CLSCompliant (true)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: NeutralResourcesLanguage("en-US")]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 #if MOBILE
-	// attributes specific to FX 3.5
-	[assembly: AssemblyKeyFile ("../silverlight.pub")]
+// attributes specific to FX 3.5
+[assembly: AssemblyKeyFile("../silverlight.pub")]
 #else
-	// attributes specific to Silverlight 2.0
-	[assembly: AssemblyKeyFile ("../ecma.pub")]
+// attributes specific to Silverlight 2.0
+[assembly: AssemblyKeyFile("../ecma.pub")]
 
-	[assembly: AllowPartiallyTrustedCallers]
-	[assembly: DefaultDependency (LoadHint.Always)]
-	[assembly: SecurityCritical]
-	[assembly: StringFreezing]
+[assembly: AllowPartiallyTrustedCallers]
+[assembly: DefaultDependency(LoadHint.Always)]
+[assembly: SecurityCritical]
+[assembly: StringFreezing]
 #endif
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-[assembly: TypeForwardedTo (typeof (System.Threading.LazyThreadSafetyMode ))]
-[assembly: TypeForwardedTo (typeof (System.Lazy<>))]
+[assembly: TypeForwardedTo(typeof(System.Threading.LazyThreadSafetyMode))]
+[assembly: TypeForwardedTo(typeof(System.Lazy<>))]

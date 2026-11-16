@@ -26,7 +26,6 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-
 using Xunit;
 
 namespace System.Data.Tests
@@ -338,7 +337,11 @@ namespace System.Data.Tests
         {
             DataColumn parentColumn = _dataSet.Tables["ParentTable"].Columns["id"];
             DataColumn childColumn = _dataSet.Tables["ChildTable"].Columns["ParentID"];
-            DataRelation relation = new DataRelation("ParentChild_Relation1", parentColumn, childColumn);
+            DataRelation relation = new DataRelation(
+                "ParentChild_Relation1",
+                parentColumn,
+                childColumn
+            );
             _dataSet.Tables["ChildTable"].ParentRelations.Add(relation);
 
             DataColumn[] parentColumn1 = new DataColumn[2];
@@ -350,7 +353,11 @@ namespace System.Data.Tests
             childColumn1[0] = _dataSet.Tables["SecondChildTable"].Columns["ParentID"];
             childColumn1[1] = _dataSet.Tables["SecondChildTable"].Columns["DepartmentID"];
 
-            DataRelation secondRelation = new DataRelation("ParentChild_Relation2", parentColumn1, childColumn1);
+            DataRelation secondRelation = new DataRelation(
+                "ParentChild_Relation2",
+                parentColumn1,
+                childColumn1
+            );
             _dataSet.Tables["SecondChildTable"].ParentRelations.Add(secondRelation);
         }
 
@@ -358,7 +365,11 @@ namespace System.Data.Tests
         {
             DataColumn parentColumn = dt.Columns["id"];
             DataColumn childColumn = _dataSet.Tables["ChildTable"].Columns["ParentID"];
-            DataRelation relation = new DataRelation("ParentChild_Relation1", parentColumn, childColumn);
+            DataRelation relation = new DataRelation(
+                "ParentChild_Relation1",
+                parentColumn,
+                childColumn
+            );
             _dataSet.Tables["ChildTable"].ParentRelations.Add(relation);
 
             DataColumn[] parentColumn1 = new DataColumn[2];
@@ -370,7 +381,11 @@ namespace System.Data.Tests
             childColumn1[0] = _dataSet.Tables["SecondChildTable"].Columns["ParentID"];
             childColumn1[1] = _dataSet.Tables["SecondChildTable"].Columns["DepartmentID"];
 
-            DataRelation secondRelation = new DataRelation("ParentChild_Relation2", parentColumn1, childColumn1);
+            DataRelation secondRelation = new DataRelation(
+                "ParentChild_Relation2",
+                parentColumn1,
+                childColumn1
+            );
             _dataSet.Tables["SecondChildTable"].ParentRelations.Add(secondRelation);
         }
 
@@ -487,7 +502,7 @@ namespace System.Data.Tests
             DataTable table = new DataTable("ParentTable");
             //Read the Xml and the Schema into a table which does not belongs to any DataSet
             ReadXmlSerializable(_tempFile, table);
-            VerifyTableSchema(table, _parentTable1.TableName, null);//parentTable1.DataSet);
+            VerifyTableSchema(table, _parentTable1.TableName, null); //parentTable1.DataSet);
         }
 
         [Fact]
@@ -1070,7 +1085,11 @@ namespace System.Data.Tests
             ds.Tables.Add(child1);
             ds.Tables.Add(child2);
 
-            DataRelation relation = new DataRelation("Relation1", parent.Columns[0], child1.Columns[0]);
+            DataRelation relation = new DataRelation(
+                "Relation1",
+                parent.Columns[0],
+                child1.Columns[0]
+            );
             parent.ChildRelations.Add(relation);
 
             relation = new DataRelation("Relation2", child1.Columns[2], child2.Columns[0]);

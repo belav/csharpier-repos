@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -17,61 +17,58 @@
 ** Change the way how to register and unregister a managed server
 **
 =============================================================================*/
-namespace System.Runtime.InteropServices {
-    
+namespace System.Runtime.InteropServices
+{
     using System;
     using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
     using Microsoft.Win32;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     [Flags]
     public enum RegistrationClassContext
     {
-    
- 
-        InProcessServer                 = 0x1, 
-        InProcessHandler                = 0x2, 
-        LocalServer                     = 0x4, 
-        InProcessServer16               = 0x8,
-        RemoteServer                    = 0x10,
-        InProcessHandler16              = 0x20,
-        Reserved1                       = 0x40,
-        Reserved2                       = 0x80,
-        Reserved3                       = 0x100,
-        Reserved4                       = 0x200,
-        NoCodeDownload                  = 0x400,
-        Reserved5                       = 0x800,
-        NoCustomMarshal                 = 0x1000,
-        EnableCodeDownload              = 0x2000,
-        NoFailureLog                    = 0x4000,
-        DisableActivateAsActivator      = 0x8000,
-        EnableActivateAsActivator       = 0x10000,
-        FromDefaultContext              = 0x20000
+        InProcessServer = 0x1,
+        InProcessHandler = 0x2,
+        LocalServer = 0x4,
+        InProcessServer16 = 0x8,
+        RemoteServer = 0x10,
+        InProcessHandler16 = 0x20,
+        Reserved1 = 0x40,
+        Reserved2 = 0x80,
+        Reserved3 = 0x100,
+        Reserved4 = 0x200,
+        NoCodeDownload = 0x400,
+        Reserved5 = 0x800,
+        NoCustomMarshal = 0x1000,
+        EnableCodeDownload = 0x2000,
+        NoFailureLog = 0x4000,
+        DisableActivateAsActivator = 0x8000,
+        EnableActivateAsActivator = 0x10000,
+        FromDefaultContext = 0x20000,
     }
-
 
     [Flags]
     public enum RegistrationConnectionType
     {
-        SingleUse                = 0, 
-        MultipleUse              = 1, 
-        MultiSeparate            = 2, 
-        Suspended                = 4, 
-        Surrogate                = 8, 
+        SingleUse = 0,
+        MultipleUse = 1,
+        MultiSeparate = 2,
+        Suspended = 4,
+        Surrogate = 8,
     }
 
     [Guid("475E398F-8AFA-43a7-A3BE-F4EF8D6787C9")]
     [ClassInterface(ClassInterfaceType.None)]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class RegistrationServices : IRegistrationServices
     {
         #region Constants
@@ -81,19 +78,19 @@ namespace System.Runtime.InteropServices {
         private const String strManagedTypeThreadingModel = "Both";
         private const String strComponentCategorySubKey = "Component Categories";
         private const String strManagedCategoryDescription = ".NET Category";
-        private const String strImplementedCategoriesSubKey = "Implemented Categories";       
+        private const String strImplementedCategoriesSubKey = "Implemented Categories";
         private const String strMsCorEEFileName = "mscoree.dll";
-        private const String strRecordRootName = "Record";      
-        private const String strClsIdRootName = "CLSID";  
+        private const String strRecordRootName = "Record";
+        private const String strClsIdRootName = "CLSID";
         private const String strTlbRootName = "TypeLib";
         private static Guid s_ManagedCategoryGuid = new Guid(strManagedCategoryGuid);
 
         #endregion
 
-        
+
         #region IRegistrationServices
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         public virtual bool RegisterAssembly(Assembly assembly, AssemblyRegistrationFlags flags)
@@ -103,17 +100,23 @@ namespace System.Runtime.InteropServices {
                 throw new ArgumentNullException("assembly");
 
             if (assembly.ReflectionOnly)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_AsmLoadedForReflectionOnly"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_AsmLoadedForReflectionOnly")
+                );
             Contract.EndContractBlock();
 
             RuntimeAssembly rtAssembly = assembly as RuntimeAssembly;
             if (rtAssembly == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeAssembly")
+                );
 
             // Retrieve the assembly names.
             String strAsmName = assembly.FullName;
             if (strAsmName == null)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NoAsmName"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NoAsmName")
+                );
 
             // Retrieve the assembly codebase.
             String strAsmCodeBase = null;
@@ -121,7 +124,9 @@ namespace System.Runtime.InteropServices {
             {
                 strAsmCodeBase = rtAssembly.GetCodeBase(false);
                 if (strAsmCodeBase == null)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NoAsmCodeBase"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_NoAsmCodeBase")
+                    );
             }
 
             // Go through all the registerable types in the assembly and register them.
@@ -129,36 +134,61 @@ namespace System.Runtime.InteropServices {
             int NumTypes = aTypes.Length;
 
             String strAsmVersion = rtAssembly.GetVersion().ToString();
-            
+
             // Retrieve the runtime version used to build the assembly.
             String strRuntimeVersion = assembly.ImageRuntimeVersion;
 
             for (int cTypes = 0; cTypes < NumTypes; cTypes++)
             {
                 if (IsRegisteredAsValueType(aTypes[cTypes]))
-                    RegisterValueType(aTypes[cTypes], strAsmName, strAsmVersion, strAsmCodeBase, strRuntimeVersion);
+                    RegisterValueType(
+                        aTypes[cTypes],
+                        strAsmName,
+                        strAsmVersion,
+                        strAsmCodeBase,
+                        strRuntimeVersion
+                    );
                 else if (TypeRepresentsComType(aTypes[cTypes]))
-                    RegisterComImportedType(aTypes[cTypes], strAsmName, strAsmVersion, strAsmCodeBase, strRuntimeVersion);
+                    RegisterComImportedType(
+                        aTypes[cTypes],
+                        strAsmName,
+                        strAsmVersion,
+                        strAsmCodeBase,
+                        strRuntimeVersion
+                    );
                 else
-                    RegisterManagedType(aTypes[cTypes], strAsmName, strAsmVersion, strAsmCodeBase, strRuntimeVersion);
+                    RegisterManagedType(
+                        aTypes[cTypes],
+                        strAsmName,
+                        strAsmVersion,
+                        strAsmCodeBase,
+                        strRuntimeVersion
+                    );
 
                 CallUserDefinedRegistrationMethod(aTypes[cTypes], true);
             }
 
             // If this assembly has the PIA attribute, then register it as a PIA.
-            Object[] aPIAAttrs = assembly.GetCustomAttributes(typeof(PrimaryInteropAssemblyAttribute), false);
+            Object[] aPIAAttrs = assembly.GetCustomAttributes(
+                typeof(PrimaryInteropAssemblyAttribute),
+                false
+            );
             int NumPIAAttrs = aPIAAttrs.Length;
             for (int cPIAAttrs = 0; cPIAAttrs < NumPIAAttrs; cPIAAttrs++)
-                RegisterPrimaryInteropAssembly(rtAssembly, strAsmCodeBase, (PrimaryInteropAssemblyAttribute)aPIAAttrs[cPIAAttrs]);
+                RegisterPrimaryInteropAssembly(
+                    rtAssembly,
+                    strAsmCodeBase,
+                    (PrimaryInteropAssemblyAttribute)aPIAAttrs[cPIAAttrs]
+                );
 
             // Return value indicating if we actually registered any types.
             if (aTypes.Length > 0 || NumPIAAttrs > 0)
                 return true;
-            else 
+            else
                 return false;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual bool UnregisterAssembly(Assembly assembly)
         {
             // Validate the arguments.
@@ -166,12 +196,16 @@ namespace System.Runtime.InteropServices {
                 throw new ArgumentNullException("assembly");
 
             if (assembly.ReflectionOnly)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_AsmLoadedForReflectionOnly"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_AsmLoadedForReflectionOnly")
+                );
             Contract.EndContractBlock();
 
             RuntimeAssembly rtAssembly = assembly as RuntimeAssembly;
             if (rtAssembly == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeAssembly")
+                );
 
             bool bAllVersionsGone = true;
 
@@ -181,7 +215,7 @@ namespace System.Runtime.InteropServices {
 
             // Retrieve the assembly version
             String strAsmVersion = rtAssembly.GetVersion().ToString();
-            for (int cTypes = 0;cTypes < NumTypes;cTypes++)
+            for (int cTypes = 0; cTypes < NumTypes; cTypes++)
             {
                 CallUserDefinedRegistrationMethod(aTypes[cTypes], false);
 
@@ -203,22 +237,28 @@ namespace System.Runtime.InteropServices {
             }
 
             // If this assembly has the PIA attribute, then unregister it as a PIA.
-            Object[] aPIAAttrs = assembly.GetCustomAttributes(typeof(PrimaryInteropAssemblyAttribute),false);
+            Object[] aPIAAttrs = assembly.GetCustomAttributes(
+                typeof(PrimaryInteropAssemblyAttribute),
+                false
+            );
             int NumPIAAttrs = aPIAAttrs.Length;
             if (bAllVersionsGone)
             {
-                for (int cPIAAttrs = 0;cPIAAttrs < NumPIAAttrs;cPIAAttrs++)
-                    UnregisterPrimaryInteropAssembly(assembly, (PrimaryInteropAssemblyAttribute)aPIAAttrs[cPIAAttrs]);
+                for (int cPIAAttrs = 0; cPIAAttrs < NumPIAAttrs; cPIAAttrs++)
+                    UnregisterPrimaryInteropAssembly(
+                        assembly,
+                        (PrimaryInteropAssemblyAttribute)aPIAAttrs[cPIAAttrs]
+                    );
             }
 
             // Return value indicating if we actually un-registered any types.
             if (aTypes.Length > 0 || NumPIAAttrs > 0)
                 return true;
-            else 
+            else
                 return false;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual Type[] GetRegistrableTypesInAssembly(Assembly assembly)
         {
             // Validate the arguments.
@@ -227,7 +267,10 @@ namespace System.Runtime.InteropServices {
             Contract.EndContractBlock();
 
             if (!(assembly is RuntimeAssembly))
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"), "assembly");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeAssembly"),
+                    "assembly"
+                );
 
             // Retrieve the list of types in the assembly.
             Type[] aTypes = assembly.GetExportedTypes();
@@ -250,24 +293,30 @@ namespace System.Runtime.InteropServices {
             return RetArray;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual String GetProgIdForType(Type type)
         {
             return Marshal.GenerateProgIdForType(type);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual void RegisterTypeForComClients(Type type, ref Guid g)
         {
 #if FEATURE_COMINTEROP_MANAGED_ACTIVATION
-            if(type == null)
+            if (type == null)
                 throw new ArgumentNullException("type");
             Contract.EndContractBlock();
-            if((type as RuntimeType) == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeType"),"type");
-            if(!TypeRequiresRegistration(type))
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeMustBeComCreatable"),"type");
-            
+            if ((type as RuntimeType) == null)
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeType"),
+                    "type"
+                );
+            if (!TypeRequiresRegistration(type))
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_TypeMustBeComCreatable"),
+                    "type"
+                );
+
             // Call the native method to do CoRegisterClassObject
             RegisterTypeForComClientsNative(type, ref g);
 #else // FEATURE_COMINTEROP_MANAGED_ACTIVATION
@@ -280,13 +329,13 @@ namespace System.Runtime.InteropServices {
             return s_ManagedCategoryGuid;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual bool TypeRequiresRegistration(Type type)
         {
             return TypeRequiresRegistrationHelper(type);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public virtual bool TypeRepresentsComType(Type type)
         {
             // If the type is not a COM import, then it does not represent a COM type.
@@ -309,21 +358,31 @@ namespace System.Runtime.InteropServices {
 
         #endregion
 
-        
+
         #region Public methods not on IRegistrationServices
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ComVisible(false)]
-        public virtual int RegisterTypeForComClients(Type type, RegistrationClassContext classContext, RegistrationConnectionType flags)
+        public virtual int RegisterTypeForComClients(
+            Type type,
+            RegistrationClassContext classContext,
+            RegistrationConnectionType flags
+        )
         {
 #if FEATURE_COMINTEROP_MANAGED_ACTIVATION
             if (type == null)
                 throw new ArgumentNullException("type");
             Contract.EndContractBlock();
             if ((type as RuntimeType) == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeType"),"type");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeType"),
+                    "type"
+                );
             if (!TypeRequiresRegistration(type))
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeMustBeComCreatable"),"type");
-            
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_TypeMustBeComCreatable"),
+                    "type"
+                );
+
             // Call the native method to do CoRegisterClassObject
             return RegisterTypeForComClientsExNative(type, classContext, flags);
 #else // FEATURE_COMINTEROP_MANAGED_ACTIVATION
@@ -331,7 +390,7 @@ namespace System.Runtime.InteropServices {
 #endif // FEATURE_COMINTEROP_MANAGED_ACTIVATION
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ComVisible(false)]
         public virtual void UnregisterTypeForComClients(int cookie)
         {
@@ -344,7 +403,7 @@ namespace System.Runtime.InteropServices {
 
         #region Internal helpers
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         internal static bool TypeRequiresRegistrationHelper(Type type)
         {
             // If the type is not a class or a value class, then it does not get registered.
@@ -355,9 +414,17 @@ namespace System.Runtime.InteropServices {
             if (type.IsAbstract)
                 return false;
 
-            // If the does not have a public default constructor then is not creatable from COM so 
+            // If the does not have a public default constructor then is not creatable from COM so
             // it does not require registration unless it is a value class.
-            if (!type.IsValueType && type.GetConstructor(BindingFlags.Instance | BindingFlags.Public,null,new Type[0],null) == null)
+            if (
+                !type.IsValueType
+                && type.GetConstructor(
+                    BindingFlags.Instance | BindingFlags.Public,
+                    null,
+                    new Type[0],
+                    null
+                ) == null
+            )
                 return false;
 
             // All other conditions are met so check to see if the type is visible from COM.
@@ -369,13 +436,22 @@ namespace System.Runtime.InteropServices {
 
         #region Private helpers
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private void RegisterValueType(Type type, String strAsmName, String strAsmVersion, String strAsmCodeBase, String strRuntimeVersion)
+        private void RegisterValueType(
+            Type type,
+            String strAsmName,
+            String strAsmVersion,
+            String strAsmCodeBase,
+            String strRuntimeVersion
+        )
         {
             // Retrieve some information that will be used during the registration process.
-            String strRecordId = "{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";           
+            String strRecordId =
+                "{"
+                + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture)
+                + "}";
 
             // Create the HKEY_CLASS_ROOT\Record key.
             using (RegistryKey RecordRootKey = Registry.ClassesRoot.CreateSubKey(strRecordRootName))
@@ -385,7 +461,7 @@ namespace System.Runtime.InteropServices {
                 {
                     // Create the HKEY_CLASS_ROOT\Record\<RecordId>\<version> key.
                     using (RegistryKey RecordVersionKey = RecordKey.CreateSubKey(strAsmVersion))
-                    {                   
+                    {
                         // Set the class value.
                         RecordVersionKey.SetValue("Class", type.FullName);
 
@@ -403,19 +479,27 @@ namespace System.Runtime.InteropServices {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private void RegisterManagedType(Type type, String strAsmName, String strAsmVersion, String strAsmCodeBase, String strRuntimeVersion)
+        private void RegisterManagedType(
+            Type type,
+            String strAsmName,
+            String strAsmVersion,
+            String strAsmCodeBase,
+            String strRuntimeVersion
+        )
         {
             //
             // Retrieve some information that will be used during the registration process.
             //
 
             String strDocString = strDocStringPrefix + type.FullName;
-            String strClsId = "{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
+            String strClsId =
+                "{"
+                + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture)
+                + "}";
             String strProgId = GetProgIdForType(type);
-
 
             //
             // Write the actual type information in the registry.
@@ -438,7 +522,7 @@ namespace System.Runtime.InteropServices {
 
             // Create the HKEY_CLASS_ROOT\CLSID key.
             using (RegistryKey ClsIdRootKey = Registry.ClassesRoot.CreateSubKey(strClsIdRootName))
-            {           
+            {
                 // Create the HKEY_CLASS_ROOT\CLSID\<CLSID> key.
                 using (RegistryKey ClsIdKey = ClsIdRootKey.CreateSubKey(strClsId))
                 {
@@ -456,7 +540,9 @@ namespace System.Runtime.InteropServices {
                             InProcServerKey.SetValue("CodeBase", strAsmCodeBase);
 
                         // Create the HKEY_CLASS_ROOT\CLSID\<CLSID>\InprocServer32\<Version> subkey
-                        using (RegistryKey VersionSubKey = InProcServerKey.CreateSubKey(strAsmVersion))
+                        using (
+                            RegistryKey VersionSubKey = InProcServerKey.CreateSubKey(strAsmVersion)
+                        )
                         {
                             VersionSubKey.SetValue("Class", type.FullName);
                             VersionSubKey.SetValue("Assembly", strAsmName);
@@ -476,28 +562,44 @@ namespace System.Runtime.InteropServices {
                     }
 
                     // Create the HKEY_CLASS_ROOT\CLSID\<CLSID>\Implemented Categories\<Managed Category Guid> key.
-                    using (RegistryKey CategoryKey = ClsIdKey.CreateSubKey(strImplementedCategoriesSubKey))
+                    using (
+                        RegistryKey CategoryKey = ClsIdKey.CreateSubKey(
+                            strImplementedCategoriesSubKey
+                        )
+                    )
                     {
-                        using (RegistryKey ManagedCategoryKey = CategoryKey.CreateSubKey(strManagedCategoryGuid)) {}
+                        using (
+                            RegistryKey ManagedCategoryKey = CategoryKey.CreateSubKey(
+                                strManagedCategoryGuid
+                            )
+                        ) { }
                     }
                 }
             }
-
 
             //
             // Ensure that the managed category exists.
             //
 
             EnsureManagedCategoryExists();
-        } 
-        
-        [System.Security.SecurityCritical]  // auto-generated
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private void RegisterComImportedType(Type type, String strAsmName, String strAsmVersion, String strAsmCodeBase, String strRuntimeVersion)
+        private void RegisterComImportedType(
+            Type type,
+            String strAsmName,
+            String strAsmVersion,
+            String strAsmCodeBase,
+            String strRuntimeVersion
+        )
         {
             // Retrieve some information that will be used during the registration process.
-            String strClsId = "{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
+            String strClsId =
+                "{"
+                + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture)
+                + "}";
 
             // Create the HKEY_CLASS_ROOT\CLSID key.
             using (RegistryKey ClsIdRootKey = Registry.ClassesRoot.CreateSubKey(strClsIdRootName))
@@ -507,7 +609,7 @@ namespace System.Runtime.InteropServices {
                 {
                     // Create the HKEY_CLASS_ROOT\CLSID\<CLSID>\InProcServer32 key.
                     using (RegistryKey InProcServerKey = ClsIdKey.CreateSubKey("InprocServer32"))
-                    {              
+                    {
                         // Set the class value.
                         InProcServerKey.SetValue("Class", type.FullName);
 
@@ -522,7 +624,9 @@ namespace System.Runtime.InteropServices {
                             InProcServerKey.SetValue("CodeBase", strAsmCodeBase);
 
                         // Create the HKEY_CLASS_ROOT\CLSID\<CLSID>\InprocServer32\<Version> subkey
-                        using (RegistryKey VersionSubKey = InProcServerKey.CreateSubKey(strAsmVersion))
+                        using (
+                            RegistryKey VersionSubKey = InProcServerKey.CreateSubKey(strAsmVersion)
+                        )
                         {
                             VersionSubKey.SetValue("Class", type.FullName);
                             VersionSubKey.SetValue("Assembly", strAsmName);
@@ -535,7 +639,7 @@ namespace System.Runtime.InteropServices {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         private bool UnregisterValueType(Type type, String strAsmVersion)
@@ -543,29 +647,42 @@ namespace System.Runtime.InteropServices {
             bool bAllVersionsGone = true;
 
             // Try to open the HKEY_CLASS_ROOT\Record key.
-            String strRecordId = "{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
-            
-            using (RegistryKey RecordRootKey = Registry.ClassesRoot.OpenSubKey(strRecordRootName, true))
+            String strRecordId =
+                "{"
+                + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture)
+                + "}";
+
+            using (
+                RegistryKey RecordRootKey = Registry.ClassesRoot.OpenSubKey(strRecordRootName, true)
+            )
             {
                 if (RecordRootKey != null)
                 {
                     // Open the HKEY_CLASS_ROOT\Record\{RecordId} key.
-                    using (RegistryKey RecordKey = RecordRootKey.OpenSubKey(strRecordId,true))
+                    using (RegistryKey RecordKey = RecordRootKey.OpenSubKey(strRecordId, true))
                     {
                         if (RecordKey != null)
                         {
-                            using (RegistryKey VersionSubKey = RecordKey.OpenSubKey(strAsmVersion,true))
+                            using (
+                                RegistryKey VersionSubKey = RecordKey.OpenSubKey(
+                                    strAsmVersion,
+                                    true
+                                )
+                            )
                             {
                                 if (VersionSubKey != null)
                                 {
                                     // Delete the values we created.
-                                    VersionSubKey.DeleteValue("Assembly",false);
-                                    VersionSubKey.DeleteValue("Class",false);
-                                    VersionSubKey.DeleteValue("CodeBase",false);
-                                    VersionSubKey.DeleteValue("RuntimeVersion",false);
+                                    VersionSubKey.DeleteValue("Assembly", false);
+                                    VersionSubKey.DeleteValue("Class", false);
+                                    VersionSubKey.DeleteValue("CodeBase", false);
+                                    VersionSubKey.DeleteValue("RuntimeVersion", false);
 
                                     // delete the version sub key if no value or subkeys under it
-                                    if ((VersionSubKey.SubKeyCount == 0) && (VersionSubKey.ValueCount == 0))
+                                    if (
+                                        (VersionSubKey.SubKeyCount == 0)
+                                        && (VersionSubKey.ValueCount == 0)
+                                    )
                                         RecordKey.DeleteSubKey(strAsmVersion);
                                 }
                             }
@@ -594,26 +711,30 @@ namespace System.Runtime.InteropServices {
         // Return :
         //      true:   All versions are gone.
         //      false:  Some versions are still left in registry
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private bool UnregisterManagedType(Type type,String strAsmVersion)
+        private bool UnregisterManagedType(Type type, String strAsmVersion)
         {
             bool bAllVersionsGone = true;
-            
+
             //
             // Create the CLSID string.
             //
 
-            String strClsId = "{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
+            String strClsId =
+                "{"
+                + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture)
+                + "}";
             String strProgId = GetProgIdForType(type);
-
 
             //
             // Remove the entries under HKEY_CLASS_ROOT\CLSID key.
             //
 
-            using (RegistryKey ClsIdRootKey = Registry.ClassesRoot.OpenSubKey(strClsIdRootName, true))
+            using (
+                RegistryKey ClsIdRootKey = Registry.ClassesRoot.OpenSubKey(strClsIdRootName, true)
+            )
             {
                 if (ClsIdRootKey != null)
                 {
@@ -629,7 +750,12 @@ namespace System.Runtime.InteropServices {
                             // Remove the entries in the HKEY_CLASS_ROOT\CLSID\<CLSID>\InprocServer32 key.
                             //
 
-                            using (RegistryKey InProcServerKey = ClsIdKey.OpenSubKey("InprocServer32", true))
+                            using (
+                                RegistryKey InProcServerKey = ClsIdKey.OpenSubKey(
+                                    "InprocServer32",
+                                    true
+                                )
+                            )
                             {
                                 if (InProcServerKey != null)
                                 {
@@ -637,18 +763,26 @@ namespace System.Runtime.InteropServices {
                                     // Remove the entries in HKEY_CLASS_ROOT\CLSID\<CLSID>\InprocServer32\<Version>
                                     //
 
-                                    using (RegistryKey VersionSubKey = InProcServerKey.OpenSubKey(strAsmVersion, true))
+                                    using (
+                                        RegistryKey VersionSubKey = InProcServerKey.OpenSubKey(
+                                            strAsmVersion,
+                                            true
+                                        )
+                                    )
                                     {
                                         if (VersionSubKey != null)
                                         {
                                             // Delete the values we created
-                                            VersionSubKey.DeleteValue("Assembly",false);
-                                            VersionSubKey.DeleteValue("Class",false);
-                                            VersionSubKey.DeleteValue("RuntimeVersion",false);
-                                            VersionSubKey.DeleteValue("CodeBase",false);
+                                            VersionSubKey.DeleteValue("Assembly", false);
+                                            VersionSubKey.DeleteValue("Class", false);
+                                            VersionSubKey.DeleteValue("RuntimeVersion", false);
+                                            VersionSubKey.DeleteValue("CodeBase", false);
 
                                             // If there are no other values or subkeys then we can delete the VersionSubKey.
-                                            if ((VersionSubKey.SubKeyCount == 0) && (VersionSubKey.ValueCount == 0))
+                                            if (
+                                                (VersionSubKey.SubKeyCount == 0)
+                                                && (VersionSubKey.ValueCount == 0)
+                                            )
                                                 InProcServerKey.DeleteSubKey(strAsmVersion);
                                         }
                                     }
@@ -660,17 +794,20 @@ namespace System.Runtime.InteropServices {
                                     // If there are no versions left, then delete the threading model and default value.
                                     if (bAllVersionsGone)
                                     {
-                                        InProcServerKey.DeleteValue("",false);
-                                        InProcServerKey.DeleteValue("ThreadingModel",false);
+                                        InProcServerKey.DeleteValue("", false);
+                                        InProcServerKey.DeleteValue("ThreadingModel", false);
                                     }
 
-                                    InProcServerKey.DeleteValue("Assembly",false);
-                                    InProcServerKey.DeleteValue("Class",false);
-                                    InProcServerKey.DeleteValue("RuntimeVersion",false);
-                                    InProcServerKey.DeleteValue("CodeBase",false);
+                                    InProcServerKey.DeleteValue("Assembly", false);
+                                    InProcServerKey.DeleteValue("Class", false);
+                                    InProcServerKey.DeleteValue("RuntimeVersion", false);
+                                    InProcServerKey.DeleteValue("CodeBase", false);
 
                                     // If there are no other values or subkeys then we can delete the InProcServerKey.
-                                    if ((InProcServerKey.SubKeyCount == 0) && (InProcServerKey.ValueCount == 0))
+                                    if (
+                                        (InProcServerKey.SubKeyCount == 0)
+                                        && (InProcServerKey.ValueCount == 0)
+                                    )
                                         ClsIdKey.DeleteSubKey("InprocServer32");
                                 }
                             }
@@ -681,7 +818,7 @@ namespace System.Runtime.InteropServices {
                             if (bAllVersionsGone)
                             {
                                 // Delete the value we created.
-                                ClsIdKey.DeleteValue("",false);
+                                ClsIdKey.DeleteValue("", false);
 
                                 if (strProgId != String.Empty)
                                 {
@@ -689,41 +826,63 @@ namespace System.Runtime.InteropServices {
                                     // Remove the entries in the HKEY_CLASS_ROOT\CLSID\<CLSID>\ProgId key.
                                     //
 
-                                    using (RegistryKey ProgIdKey = ClsIdKey.OpenSubKey("ProgId", true))
+                                    using (
+                                        RegistryKey ProgIdKey = ClsIdKey.OpenSubKey("ProgId", true)
+                                    )
                                     {
                                         if (ProgIdKey != null)
                                         {
                                             // Delete the value we created.
-                                            ProgIdKey.DeleteValue("",false);
+                                            ProgIdKey.DeleteValue("", false);
 
                                             // If there are no other values or subkeys then we can delete the ProgIdSubKey.
-                                            if ((ProgIdKey.SubKeyCount == 0) && (ProgIdKey.ValueCount == 0))
+                                            if (
+                                                (ProgIdKey.SubKeyCount == 0)
+                                                && (ProgIdKey.ValueCount == 0)
+                                            )
                                                 ClsIdKey.DeleteSubKey("ProgId");
                                         }
                                     }
                                 }
-                
-            
+
                                 //
                                 // Remove entries in the  HKEY_CLASS_ROOT\CLSID\<CLSID>\Implemented Categories\<Managed Category Guid> key.
                                 //
-        
-                                using (RegistryKey CategoryKey = ClsIdKey.OpenSubKey(strImplementedCategoriesSubKey, true))
+
+                                using (
+                                    RegistryKey CategoryKey = ClsIdKey.OpenSubKey(
+                                        strImplementedCategoriesSubKey,
+                                        true
+                                    )
+                                )
                                 {
                                     if (CategoryKey != null)
                                     {
-                                        using (RegistryKey ManagedCategoryKey = CategoryKey.OpenSubKey(strManagedCategoryGuid, true))
+                                        using (
+                                            RegistryKey ManagedCategoryKey = CategoryKey.OpenSubKey(
+                                                strManagedCategoryGuid,
+                                                true
+                                            )
+                                        )
                                         {
                                             if (ManagedCategoryKey != null)
                                             {
                                                 // If there are no other values or subkeys then we can delete the ManagedCategoryKey.
-                                                if ((ManagedCategoryKey.SubKeyCount == 0) && (ManagedCategoryKey.ValueCount == 0))
-                                                    CategoryKey.DeleteSubKey(strManagedCategoryGuid);
+                                                if (
+                                                    (ManagedCategoryKey.SubKeyCount == 0)
+                                                    && (ManagedCategoryKey.ValueCount == 0)
+                                                )
+                                                    CategoryKey.DeleteSubKey(
+                                                        strManagedCategoryGuid
+                                                    );
                                             }
                                         }
 
                                         // If there are no other values or subkeys then we can delete the CategoryKey.
-                                        if ((CategoryKey.SubKeyCount == 0) && (CategoryKey.ValueCount == 0))
+                                        if (
+                                            (CategoryKey.SubKeyCount == 0)
+                                            && (CategoryKey.ValueCount == 0)
+                                        )
                                             ClsIdKey.DeleteSubKey(strImplementedCategoriesSubKey);
                                     }
                                 }
@@ -739,7 +898,6 @@ namespace System.Runtime.InteropServices {
                     if ((ClsIdRootKey.SubKeyCount == 0) && (ClsIdRootKey.ValueCount == 0))
                         Registry.ClassesRoot.DeleteSubKey(strClsIdRootName);
                 }
-            
 
                 //
                 // Remove the entries under HKEY_CLASS_ROOT\<wzProgId> key.
@@ -749,27 +907,39 @@ namespace System.Runtime.InteropServices {
                 {
                     if (strProgId != String.Empty)
                     {
-                        using (RegistryKey TypeNameKey = Registry.ClassesRoot.OpenSubKey(strProgId, true))
-                        {                            
+                        using (
+                            RegistryKey TypeNameKey = Registry.ClassesRoot.OpenSubKey(
+                                strProgId,
+                                true
+                            )
+                        )
+                        {
                             if (TypeNameKey != null)
                             {
                                 // Delete the values we created.
-                                TypeNameKey.DeleteValue("",false);
-
+                                TypeNameKey.DeleteValue("", false);
 
                                 //
                                 // Remove the entries in the HKEY_CLASS_ROOT\<wzProgId>\CLSID key.
                                 //
 
-                                using (RegistryKey ProgIdClsIdKey = TypeNameKey.OpenSubKey("CLSID", true))
+                                using (
+                                    RegistryKey ProgIdClsIdKey = TypeNameKey.OpenSubKey(
+                                        "CLSID",
+                                        true
+                                    )
+                                )
                                 {
                                     if (ProgIdClsIdKey != null)
                                     {
                                         // Delete the values we created.
-                                        ProgIdClsIdKey.DeleteValue("",false);
+                                        ProgIdClsIdKey.DeleteValue("", false);
 
                                         // If there are no other values or subkeys then we can delete the ProgIdClsIdKey.
-                                        if ((ProgIdClsIdKey.SubKeyCount == 0) && (ProgIdClsIdKey.ValueCount == 0))
+                                        if (
+                                            (ProgIdClsIdKey.SubKeyCount == 0)
+                                            && (ProgIdClsIdKey.ValueCount == 0)
+                                        )
                                             TypeNameKey.DeleteSubKey("CLSID");
                                     }
                                 }
@@ -790,17 +960,22 @@ namespace System.Runtime.InteropServices {
         // Return:
         //      true:      All version information are gone.
         //      false:     There are still some version left in registry
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         private bool UnregisterComImportedType(Type type, String strAsmVersion)
         {
             bool bAllVersionsGone = true;
-            
-            String strClsId = "{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
-        
+
+            String strClsId =
+                "{"
+                + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture)
+                + "}";
+
             // Try to open the HKEY_CLASS_ROOT\CLSID key.
-            using (RegistryKey ClsIdRootKey = Registry.ClassesRoot.OpenSubKey(strClsIdRootName, true))
+            using (
+                RegistryKey ClsIdRootKey = Registry.ClassesRoot.OpenSubKey(strClsIdRootName, true)
+            )
             {
                 if (ClsIdRootKey != null)
                 {
@@ -810,29 +985,42 @@ namespace System.Runtime.InteropServices {
                         if (ClsIdKey != null)
                         {
                             // Try to open the HKEY_CLASS_ROOT\CLSID\<CLSID>\InProcServer32 key.
-                            using (RegistryKey InProcServerKey = ClsIdKey.OpenSubKey("InprocServer32", true))
+                            using (
+                                RegistryKey InProcServerKey = ClsIdKey.OpenSubKey(
+                                    "InprocServer32",
+                                    true
+                                )
+                            )
                             {
                                 if (InProcServerKey != null)
                                 {
                                     // Delete the values we created.
-                                    InProcServerKey.DeleteValue("Assembly",false);
-                                    InProcServerKey.DeleteValue("Class",false);
-                                    InProcServerKey.DeleteValue("RuntimeVersion",false);
-                                    InProcServerKey.DeleteValue("CodeBase",false);
-                                
+                                    InProcServerKey.DeleteValue("Assembly", false);
+                                    InProcServerKey.DeleteValue("Class", false);
+                                    InProcServerKey.DeleteValue("RuntimeVersion", false);
+                                    InProcServerKey.DeleteValue("CodeBase", false);
+
                                     // Try to open the entries in HKEY_CLASS_ROOT\CLSID\<CLSID>\InProcServer32\<Version>
-                                    using (RegistryKey VersionSubKey = InProcServerKey.OpenSubKey(strAsmVersion,true))
+                                    using (
+                                        RegistryKey VersionSubKey = InProcServerKey.OpenSubKey(
+                                            strAsmVersion,
+                                            true
+                                        )
+                                    )
                                     {
                                         if (VersionSubKey != null)
                                         {
                                             // Delete the value we created
-                                            VersionSubKey.DeleteValue("Assembly",false);
-                                            VersionSubKey.DeleteValue("Class",false);
-                                            VersionSubKey.DeleteValue("RuntimeVersion",false);
-                                            VersionSubKey.DeleteValue("CodeBase",false);
+                                            VersionSubKey.DeleteValue("Assembly", false);
+                                            VersionSubKey.DeleteValue("Class", false);
+                                            VersionSubKey.DeleteValue("RuntimeVersion", false);
+                                            VersionSubKey.DeleteValue("CodeBase", false);
 
                                             // If there are no other values or subkeys then we can delete the VersionSubKey
-                                            if ((VersionSubKey.SubKeyCount == 0) && (VersionSubKey.ValueCount == 0))
+                                            if (
+                                                (VersionSubKey.SubKeyCount == 0)
+                                                && (VersionSubKey.ValueCount == 0)
+                                            )
                                                 InProcServerKey.DeleteSubKey(strAsmVersion);
                                         }
                                     }
@@ -842,37 +1030,55 @@ namespace System.Runtime.InteropServices {
                                         bAllVersionsGone = false;
 
                                     // If there are no other values or subkeys then we can delete the InProcServerKey.
-                                    if ((InProcServerKey.SubKeyCount == 0) && (InProcServerKey.ValueCount == 0))
+                                    if (
+                                        (InProcServerKey.SubKeyCount == 0)
+                                        && (InProcServerKey.ValueCount == 0)
+                                    )
                                         ClsIdKey.DeleteSubKey("InprocServer32");
                                 }
                             }
 
                             // If there are no other values or subkeys then we can delete the ClsIdKey.
                             if ((ClsIdKey.SubKeyCount == 0) && (ClsIdKey.ValueCount == 0))
-                                ClsIdRootKey.DeleteSubKey(strClsId);                            
-                        }                       
+                                ClsIdRootKey.DeleteSubKey(strClsId);
+                        }
                     }
 
                     // If there are no other values or subkeys then we can delete the CLSID key.
                     if ((ClsIdRootKey.SubKeyCount == 0) && (ClsIdRootKey.ValueCount == 0))
-                        Registry.ClassesRoot.DeleteSubKey(strClsIdRootName);                    
+                        Registry.ClassesRoot.DeleteSubKey(strClsIdRootName);
                 }
             }
 
             return bAllVersionsGone;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private void RegisterPrimaryInteropAssembly(RuntimeAssembly assembly, String strAsmCodeBase, PrimaryInteropAssemblyAttribute attr)
+        private void RegisterPrimaryInteropAssembly(
+            RuntimeAssembly assembly,
+            String strAsmCodeBase,
+            PrimaryInteropAssemblyAttribute attr
+        )
         {
             // Validate that the PIA has a strong name.
             if (assembly.GetPublicKey().Length == 0)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_PIAMustBeStrongNamed"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_PIAMustBeStrongNamed")
+                );
 
-            String strTlbId = "{" + Marshal.GetTypeLibGuidForAssembly(assembly).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
-            String strVersion = attr.MajorVersion.ToString("x", CultureInfo.InvariantCulture) + "." + attr.MinorVersion.ToString("x", CultureInfo.InvariantCulture);
+            String strTlbId =
+                "{"
+                + Marshal
+                    .GetTypeLibGuidForAssembly(assembly)
+                    .ToString()
+                    .ToUpper(CultureInfo.InvariantCulture)
+                + "}";
+            String strVersion =
+                attr.MajorVersion.ToString("x", CultureInfo.InvariantCulture)
+                + "."
+                + attr.MinorVersion.ToString("x", CultureInfo.InvariantCulture);
 
             // Create the HKEY_CLASS_ROOT\TypeLib key.
             using (RegistryKey TypeLibRootKey = Registry.ClassesRoot.CreateSubKey(strTlbRootName))
@@ -886,22 +1092,39 @@ namespace System.Runtime.InteropServices {
                         // Create the HKEY_CLASS_ROOT\TypeLib\<TLBID>\PrimaryInteropAssembly key.
                         VersionSubKey.SetValue("PrimaryInteropAssemblyName", assembly.FullName);
                         if (strAsmCodeBase != null)
-                            VersionSubKey.SetValue("PrimaryInteropAssemblyCodeBase", strAsmCodeBase);
+                            VersionSubKey.SetValue(
+                                "PrimaryInteropAssemblyCodeBase",
+                                strAsmCodeBase
+                            );
                     }
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private void UnregisterPrimaryInteropAssembly(Assembly assembly, PrimaryInteropAssemblyAttribute attr)
+        private void UnregisterPrimaryInteropAssembly(
+            Assembly assembly,
+            PrimaryInteropAssemblyAttribute attr
+        )
         {
-            String strTlbId = "{" + Marshal.GetTypeLibGuidForAssembly(assembly).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
-            String strVersion = attr.MajorVersion.ToString("x", CultureInfo.InvariantCulture) + "." + attr.MinorVersion.ToString("x", CultureInfo.InvariantCulture);
+            String strTlbId =
+                "{"
+                + Marshal
+                    .GetTypeLibGuidForAssembly(assembly)
+                    .ToString()
+                    .ToUpper(CultureInfo.InvariantCulture)
+                + "}";
+            String strVersion =
+                attr.MajorVersion.ToString("x", CultureInfo.InvariantCulture)
+                + "."
+                + attr.MinorVersion.ToString("x", CultureInfo.InvariantCulture);
 
             // Try to open the HKEY_CLASS_ROOT\TypeLib key.
-            using (RegistryKey TypeLibRootKey = Registry.ClassesRoot.OpenSubKey(strTlbRootName, true))
+            using (
+                RegistryKey TypeLibRootKey = Registry.ClassesRoot.OpenSubKey(strTlbRootName, true)
+            )
             {
                 if (TypeLibRootKey != null)
                 {
@@ -911,29 +1134,37 @@ namespace System.Runtime.InteropServices {
                         if (TypeLibKey != null)
                         {
                             // Try to open the HKEY_CLASS_ROOT\TypeLib<TLBID>\<Major.Minor> key.
-                            using (RegistryKey VersionSubKey = TypeLibKey.OpenSubKey(strVersion, true))
+                            using (
+                                RegistryKey VersionSubKey = TypeLibKey.OpenSubKey(strVersion, true)
+                            )
                             {
                                 if (VersionSubKey != null)
                                 {
                                     // Delete the values we created.
-                                    VersionSubKey.DeleteValue("PrimaryInteropAssemblyName",false);
-                                    VersionSubKey.DeleteValue("PrimaryInteropAssemblyCodeBase",false);
+                                    VersionSubKey.DeleteValue("PrimaryInteropAssemblyName", false);
+                                    VersionSubKey.DeleteValue(
+                                        "PrimaryInteropAssemblyCodeBase",
+                                        false
+                                    );
 
                                     // If there are no other values or subkeys then we can delete the VersionKey.
-                                    if ((VersionSubKey.SubKeyCount == 0) && (VersionSubKey.ValueCount == 0))
+                                    if (
+                                        (VersionSubKey.SubKeyCount == 0)
+                                        && (VersionSubKey.ValueCount == 0)
+                                    )
                                         TypeLibKey.DeleteSubKey(strVersion);
                                 }
                             }
 
                             // If there are no other values or subkeys then we can delete the TypeLibKey.
                             if ((TypeLibKey.SubKeyCount == 0) && (TypeLibKey.ValueCount == 0))
-                                TypeLibRootKey.DeleteSubKey(strTlbId);                            
+                                TypeLibRootKey.DeleteSubKey(strTlbId);
                         }
                     }
 
                     // If there are no other values or subkeys then we can delete the TypeLib key.
                     if ((TypeLibRootKey.SubKeyCount == 0) && (TypeLibRootKey.ValueCount == 0))
-                        Registry.ClassesRoot.DeleteSubKey(strTlbRootName);                    
+                        Registry.ClassesRoot.DeleteSubKey(strTlbRootName);
                 }
             }
         }
@@ -945,10 +1176,18 @@ namespace System.Runtime.InteropServices {
             if (!ManagedCategoryExists())
             {
                 // Create the HKEY_CLASS_ROOT\Component Category key.
-                using (RegistryKey ComponentCategoryKey = Registry.ClassesRoot.CreateSubKey(strComponentCategorySubKey))
+                using (
+                    RegistryKey ComponentCategoryKey = Registry.ClassesRoot.CreateSubKey(
+                        strComponentCategorySubKey
+                    )
+                )
                 {
                     // Create the HKEY_CLASS_ROOT\Component Category\<Managed Category Guid> key.
-                    using (RegistryKey ManagedCategoryKey = ComponentCategoryKey.CreateSubKey(strManagedCategoryGuid))
+                    using (
+                        RegistryKey ManagedCategoryKey = ComponentCategoryKey.CreateSubKey(
+                            strManagedCategoryGuid
+                        )
+                    )
                     {
                         ManagedCategoryKey.SetValue("0", strManagedCategoryDescription);
                     }
@@ -960,20 +1199,32 @@ namespace System.Runtime.InteropServices {
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         private static bool ManagedCategoryExists()
         {
-            using (RegistryKey componentCategoryKey = Registry.ClassesRoot.OpenSubKey(strComponentCategorySubKey, 
+            using (
+                RegistryKey componentCategoryKey = Registry.ClassesRoot.OpenSubKey(
+                    strComponentCategorySubKey,
 #if FEATURE_MACL
-                                                                                      RegistryKeyPermissionCheck.ReadSubTree))
+                    RegistryKeyPermissionCheck.ReadSubTree
+                )
+            )
 #else
-                                                                                      false))
+                    false
+                )
+            )
 #endif
             {
                 if (componentCategoryKey == null)
                     return false;
-                using (RegistryKey managedCategoryKey = componentCategoryKey.OpenSubKey(strManagedCategoryGuid,
+                using (
+                    RegistryKey managedCategoryKey = componentCategoryKey.OpenSubKey(
+                        strManagedCategoryGuid,
 #if FEATURE_MACL
-                                                                                        RegistryKeyPermissionCheck.ReadSubTree))
+                        RegistryKeyPermissionCheck.ReadSubTree
+                    )
+                )
 #else
-                                                                                        false))
+                        false
+                    )
+                )
 #endif
                 {
                     if (managedCategoryKey == null)
@@ -986,11 +1237,11 @@ namespace System.Runtime.InteropServices {
                         return false;
                 }
             }
-            
+
             return true;
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         private void CallUserDefinedRegistrationMethod(Type type, bool bRegister)
         {
             bool bFunctionCalled = false;
@@ -998,62 +1249,116 @@ namespace System.Runtime.InteropServices {
             // Retrieve the attribute type to use to determine if a function is the requested user defined
             // registration function.
             Type RegFuncAttrType = null;
-            if(bRegister)
+            if (bRegister)
                 RegFuncAttrType = typeof(ComRegisterFunctionAttribute);
-            else 
+            else
                 RegFuncAttrType = typeof(ComUnregisterFunctionAttribute);
 
-            for(Type currType = type; !bFunctionCalled && currType != null; currType = currType.BaseType)
+            for (
+                Type currType = type;
+                !bFunctionCalled && currType != null;
+                currType = currType.BaseType
+            )
             {
                 // Retrieve all the methods.
-                MethodInfo[] aMethods = currType.GetMethods(BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Static);
+                MethodInfo[] aMethods = currType.GetMethods(
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Static
+                );
                 int NumMethods = aMethods.Length;
 
                 // Go through all the methods and check for the ComRegisterMethod custom attribute.
-                for(int cMethods = 0;cMethods < NumMethods;cMethods++)
+                for (int cMethods = 0; cMethods < NumMethods; cMethods++)
                 {
                     MethodInfo CurrentMethod = aMethods[cMethods];
 
                     // Check to see if the method has the custom attribute.
-                    if(CurrentMethod.GetCustomAttributes(RegFuncAttrType, true).Length != 0)
+                    if (CurrentMethod.GetCustomAttributes(RegFuncAttrType, true).Length != 0)
                     {
                         // Check to see if the method is static before we call it.
-                        if(!CurrentMethod.IsStatic)
+                        if (!CurrentMethod.IsStatic)
                         {
-                            if(bRegister)
-                                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NonStaticComRegFunction",CurrentMethod.Name,currType.Name));
+                            if (bRegister)
+                                throw new InvalidOperationException(
+                                    Environment.GetResourceString(
+                                        "InvalidOperation_NonStaticComRegFunction",
+                                        CurrentMethod.Name,
+                                        currType.Name
+                                    )
+                                );
                             else
-                                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NonStaticComUnRegFunction",CurrentMethod.Name,currType.Name));
+                                throw new InvalidOperationException(
+                                    Environment.GetResourceString(
+                                        "InvalidOperation_NonStaticComUnRegFunction",
+                                        CurrentMethod.Name,
+                                        currType.Name
+                                    )
+                                );
                         }
 
                         // Finally check that the signature is string ret void.
                         ParameterInfo[] aParams = CurrentMethod.GetParameters();
-                        if (CurrentMethod.ReturnType != typeof(void) || 
-                            aParams == null ||
-                            aParams.Length != 1 || 
-                            (aParams[0].ParameterType != typeof(String) && aParams[0].ParameterType != typeof(Type)))
+                        if (
+                            CurrentMethod.ReturnType != typeof(void)
+                            || aParams == null
+                            || aParams.Length != 1
+                            || (
+                                aParams[0].ParameterType != typeof(String)
+                                && aParams[0].ParameterType != typeof(Type)
+                            )
+                        )
                         {
-                            if(bRegister)
-                                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_InvalidComRegFunctionSig",CurrentMethod.Name,currType.Name));
+                            if (bRegister)
+                                throw new InvalidOperationException(
+                                    Environment.GetResourceString(
+                                        "InvalidOperation_InvalidComRegFunctionSig",
+                                        CurrentMethod.Name,
+                                        currType.Name
+                                    )
+                                );
                             else
-                                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_InvalidComUnRegFunctionSig",CurrentMethod.Name,currType.Name));
+                                throw new InvalidOperationException(
+                                    Environment.GetResourceString(
+                                        "InvalidOperation_InvalidComUnRegFunctionSig",
+                                        CurrentMethod.Name,
+                                        currType.Name
+                                    )
+                                );
                         }
 
                         // There can only be one register and one unregister function per type.
-                        if(bFunctionCalled)
+                        if (bFunctionCalled)
                         {
-                            if(bRegister)
-                                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_MultipleComRegFunctions",currType.Name));
+                            if (bRegister)
+                                throw new InvalidOperationException(
+                                    Environment.GetResourceString(
+                                        "InvalidOperation_MultipleComRegFunctions",
+                                        currType.Name
+                                    )
+                                );
                             else
-                                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_MultipleComUnRegFunctions",currType.Name));
+                                throw new InvalidOperationException(
+                                    Environment.GetResourceString(
+                                        "InvalidOperation_MultipleComUnRegFunctions",
+                                        currType.Name
+                                    )
+                                );
                         }
 
                         // The function is valid so set up the arguments to call it.
                         Object[] objs = new Object[1];
-                        if(aParams[0].ParameterType == typeof(String))
+                        if (aParams[0].ParameterType == typeof(String))
                         {
                             // We are dealing with the string overload of the function.
-                            objs[0] = "HKEY_CLASSES_ROOT\\CLSID\\{" + Marshal.GenerateGuidForType(type).ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
+                            objs[0] =
+                                "HKEY_CLASSES_ROOT\\CLSID\\{"
+                                + Marshal
+                                    .GenerateGuidForType(type)
+                                    .ToString()
+                                    .ToUpper(CultureInfo.InvariantCulture)
+                                + "}";
                         }
                         else
                         {
@@ -1073,7 +1378,8 @@ namespace System.Runtime.InteropServices {
 
         private Type GetBaseComImportType(Type type)
         {
-            for (; type != null && !type.IsImport; type = type.BaseType);
+            for (; type != null && !type.IsImport; type = type.BaseType)
+                ;
             return type;
         }
 
@@ -1087,26 +1393,30 @@ namespace System.Runtime.InteropServices {
 
         #endregion
 
-    
+
         #region FCalls and DllImports
 
 #if FEATURE_COMINTEROP_MANAGED_ACTIVATION
-        // GUID versioning can be controlled by using the GuidAttribute or 
+        // GUID versioning can be controlled by using the GuidAttribute or
         // letting the runtime generate it based on type and assembly strong name.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void RegisterTypeForComClientsNative(Type type,ref Guid g);
-        
-        // GUID versioning can be controlled by using the GuidAttribute or 
+        private static extern void RegisterTypeForComClientsNative(Type type, ref Guid g);
+
+        // GUID versioning can be controlled by using the GuidAttribute or
         // letting the runtime generate it based on type and assembly strong name.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern int RegisterTypeForComClientsExNative(Type t, RegistrationClassContext clsContext, RegistrationConnectionType flags);
+        private static extern int RegisterTypeForComClientsExNative(
+            Type t,
+            RegistrationClassContext clsContext,
+            RegistrationConnectionType flags
+        );
 #endif // FEATURE_COMINTEROP_MANAGED_ACTIVATION
 
-        [DllImport(Win32Native.OLE32,CharSet=CharSet.Auto,PreserveSig=false)]
+        [DllImport(Win32Native.OLE32, CharSet = CharSet.Auto, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         private static extern void CoRevokeClassObject(int cookie);
         #endregion

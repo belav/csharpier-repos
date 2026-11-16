@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace System
 {
-	partial class Array
-	{
+    partial class Array
+    {
         // Private value type used by the Sort methods.
         private struct SorterObjectArray
         {
@@ -14,7 +14,8 @@ namespace System
 
             internal SorterObjectArray(Object[] keys, Object[] items, IComparer comparer)
             {
-                if (comparer == null) comparer = Comparer.Default;
+                if (comparer == null)
+                    comparer = Comparer.Default;
                 this.keys = keys;
                 this.items = items;
                 this.comparer = comparer;
@@ -65,7 +66,11 @@ namespace System
 
                 try
                 {
-                    IntroSort(left, length + left - 1, 2 * IntrospectiveSortUtilities.FloorLog2PlusOne(keys.Length));
+                    IntroSort(
+                        left,
+                        length + left - 1,
+                        2 * IntrospectiveSortUtilities.FloorLog2PlusOne(keys.Length)
+                    );
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -129,12 +134,15 @@ namespace System
 
                 Object pivot = keys[mid];
                 Swap(mid, hi - 1);
-                int left = lo, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+                int left = lo,
+                    right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
                 while (left < right)
                 {
-                    while (comparer.Compare(keys[++left], pivot) < 0) ;
-                    while (comparer.Compare(pivot, keys[--right]) < 0) ;
+                    while (comparer.Compare(keys[++left], pivot) < 0)
+                        ;
+                    while (comparer.Compare(pivot, keys[--right]) < 0)
+                        ;
 
                     if (left >= right)
                         break;
@@ -188,8 +196,10 @@ namespace System
 
             private void InsertionSort(int lo, int hi)
             {
-                int i, j;
-                Object t, ti;
+                int i,
+                    j;
+                Object t,
+                    ti;
                 for (i = lo; i < hi; i++)
                 {
                     j = i;
@@ -220,7 +230,8 @@ namespace System
 
             internal SorterGenericArray(Array keys, Array items, IComparer comparer)
             {
-                if (comparer == null) comparer = Comparer.Default;
+                if (comparer == null)
+                    comparer = Comparer.Default;
                 this.keys = keys;
                 this.items = items;
                 this.comparer = comparer;
@@ -271,7 +282,11 @@ namespace System
 
                 try
                 {
-                    IntroSort(left, length + left - 1, 2 * IntrospectiveSortUtilities.FloorLog2PlusOne(keys.Length));
+                    IntroSort(
+                        left,
+                        length + left - 1,
+                        2 * IntrospectiveSortUtilities.FloorLog2PlusOne(keys.Length)
+                    );
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -335,12 +350,15 @@ namespace System
 
                 Object pivot = keys.GetValue(mid);
                 Swap(mid, hi - 1);
-                int left = lo, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+                int left = lo,
+                    right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
                 while (left < right)
                 {
-                    while (comparer.Compare(keys.GetValue(++left), pivot) < 0) ;
-                    while (comparer.Compare(pivot, keys.GetValue(--right)) < 0) ;
+                    while (comparer.Compare(keys.GetValue(++left), pivot) < 0)
+                        ;
+                    while (comparer.Compare(pivot, keys.GetValue(--right)) < 0)
+                        ;
 
                     if (left >= right)
                         break;
@@ -376,7 +394,13 @@ namespace System
                 while (i <= n / 2)
                 {
                     child = 2 * i;
-                    if (child < n && comparer.Compare(keys.GetValue(lo + child - 1), keys.GetValue(lo + child)) < 0)
+                    if (
+                        child < n
+                        && comparer.Compare(
+                            keys.GetValue(lo + child - 1),
+                            keys.GetValue(lo + child)
+                        ) < 0
+                    )
                     {
                         child++;
                     }
@@ -396,8 +420,10 @@ namespace System
 
             private void InsertionSort(int lo, int hi)
             {
-                int i, j;
-                Object t, dt;
+                int i,
+                    j;
+                Object t,
+                    dt;
                 for (i = lo; i < hi; i++)
                 {
                     j = i;

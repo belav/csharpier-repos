@@ -14,15 +14,22 @@ namespace System.Reflection
             RuntimeType[] argumentTypes,
             out InvokerStrategy strategy,
             out InvokerArgFlags[] invokerFlags,
-            out bool needsByRefStrategy)
+            out bool needsByRefStrategy
+        )
         {
-            if (LocalAppContextSwitches.ForceInterpretedInvoke && !LocalAppContextSwitches.ForceEmitInvoke)
+            if (
+                LocalAppContextSwitches.ForceInterpretedInvoke
+                && !LocalAppContextSwitches.ForceEmitInvoke
+            )
             {
                 // Always use the native interpreted invoke.
                 // Useful for testing, to avoid startup overhead of emit, or for calling a ctor on already initialized object.
                 strategy = GetStrategyForUsingInterpreted();
             }
-            else if (LocalAppContextSwitches.ForceEmitInvoke && !LocalAppContextSwitches.ForceInterpretedInvoke)
+            else if (
+                LocalAppContextSwitches.ForceEmitInvoke
+                && !LocalAppContextSwitches.ForceInterpretedInvoke
+            )
             {
                 // Always use emit invoke (if IsDynamicCodeSupported == true); useful for testing.
                 strategy = GetStrategyForUsingEmit();
@@ -52,7 +59,8 @@ namespace System.Reflection
 
                 if (RuntimeTypeHandle.IsPointer(type))
                 {
-                    invokerFlags[i] |= InvokerArgFlags.IsValueType | InvokerArgFlags.IsValueType_ByRef_Or_Pointer;
+                    invokerFlags[i] |=
+                        InvokerArgFlags.IsValueType | InvokerArgFlags.IsValueType_ByRef_Or_Pointer;
                 }
                 else if (RuntimeTypeHandle.IsFunctionPointer(type))
                 {
@@ -60,7 +68,8 @@ namespace System.Reflection
                 }
                 else if (type.IsActualValueType)
                 {
-                    invokerFlags[i] |= InvokerArgFlags.IsValueType | InvokerArgFlags.IsValueType_ByRef_Or_Pointer;
+                    invokerFlags[i] |=
+                        InvokerArgFlags.IsValueType | InvokerArgFlags.IsValueType_ByRef_Or_Pointer;
 
                     if (type.IsNullableOfT)
                     {
@@ -73,13 +82,17 @@ namespace System.Reflection
         internal static InvokerStrategy GetStrategyForUsingInterpreted()
         {
             // This causes the default strategy, which is interpreted, to always be used.
-            return InvokerStrategy.StrategyDetermined_Obj4Args | InvokerStrategy.StrategyDetermined_ObjSpanArgs | InvokerStrategy.StrategyDetermined_RefArgs;
+            return InvokerStrategy.StrategyDetermined_Obj4Args
+                | InvokerStrategy.StrategyDetermined_ObjSpanArgs
+                | InvokerStrategy.StrategyDetermined_RefArgs;
         }
 
         private static InvokerStrategy GetStrategyForUsingEmit()
         {
             // This causes the emit strategy, if supported, to be used on the first call as well as subsequent calls.
-            return InvokerStrategy.HasBeenInvoked_Obj4Args | InvokerStrategy.HasBeenInvoked_ObjSpanArgs | InvokerStrategy.HasBeenInvoked_RefArgs;
+            return InvokerStrategy.HasBeenInvoked_Obj4Args
+                | InvokerStrategy.HasBeenInvoked_ObjSpanArgs
+                | InvokerStrategy.HasBeenInvoked_RefArgs;
         }
 
         /// <summary>
@@ -102,11 +115,11 @@ namespace System.Reflection
 
         internal static void DetermineStrategy_ObjSpanArgs(
             ref InvokerStrategy strategy,
-            ref InvokeFunc_ObjSpanArgs?
-            invokeFunc_ObjSpanArgs,
+            ref InvokeFunc_ObjSpanArgs? invokeFunc_ObjSpanArgs,
             MethodBase method,
             bool needsByRefStrategy,
-            bool backwardsCompat)
+            bool backwardsCompat
+        )
         {
             if (needsByRefStrategy)
             {
@@ -122,7 +135,10 @@ namespace System.Reflection
             {
                 if (RuntimeFeature.IsDynamicCodeSupported)
                 {
-                    invokeFunc_ObjSpanArgs = CreateInvokeDelegate_ObjSpanArgs(method, backwardsCompat);
+                    invokeFunc_ObjSpanArgs = CreateInvokeDelegate_ObjSpanArgs(
+                        method,
+                        backwardsCompat
+                    );
                 }
 
                 strategy |= InvokerStrategy.StrategyDetermined_ObjSpanArgs;
@@ -134,7 +150,8 @@ namespace System.Reflection
             ref InvokeFunc_Obj4Args? invokeFunc_Obj4Args,
             MethodBase method,
             bool needsByRefStrategy,
-            bool backwardsCompat)
+            bool backwardsCompat
+        )
         {
             if (needsByRefStrategy)
             {
@@ -161,7 +178,8 @@ namespace System.Reflection
             ref InvokerStrategy strategy,
             ref InvokeFunc_RefArgs? invokeFunc_RefArgs,
             MethodBase method,
-            bool backwardsCompat)
+            bool backwardsCompat
+        )
         {
             if ((strategy & InvokerStrategy.HasBeenInvoked_RefArgs) == 0)
             {

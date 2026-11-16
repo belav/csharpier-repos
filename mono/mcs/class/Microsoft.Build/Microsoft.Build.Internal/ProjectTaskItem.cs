@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,67 +26,78 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.IO;
 using System.Linq;
-using Microsoft.Build.Framework;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
-using System.IO;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Internal
 {
-	class ProjectTaskItem : ITaskItem
-	{
-		ProjectItemElement item;
-		string evaluated_include_part;
-		
-		public ProjectTaskItem (ProjectItemElement item, string evaluatedIncludePart)
-		{
-			this.item = item;
-			this.evaluated_include_part = WindowsCompatibilityExtensions.FindMatchingPath (evaluatedIncludePart);
-		}
-		#region ITaskItem implementation
-		System.Collections.IDictionary ITaskItem.CloneCustomMetadata ()
-		{
-			var ret = new System.Collections.Hashtable ();
-			foreach (var p in item.Metadata)
-				ret [p.Name] = p;
-			return ret;
-		}
-		void ITaskItem.CopyMetadataTo (ITaskItem destinationItem)
-		{
-			throw new NotImplementedException ();
-		}
-		string ITaskItem.GetMetadata (string metadataName)
-		{
-			var wk = ProjectCollection.GetWellKnownMetadata (metadataName, evaluated_include_part, Path.GetFullPath, null);
-			if (wk != null)
-				return wk;
-			var mde = item.Metadata.FirstOrDefault (m => m.Name == metadataName);
-			return mde != null ? mde.Value : string.Empty;
-		}
-		void ITaskItem.RemoveMetadata (string metadataName)
-		{
-			throw new NotImplementedException ();
-		}
-		void ITaskItem.SetMetadata (string metadataName, string metadataValue)
-		{
-			throw new NotImplementedException ();
-		}
-		string ITaskItem.ItemSpec {
-			get { return evaluated_include_part; }
-			set { throw new NotImplementedException (); }
-		}
-		int ITaskItem.MetadataCount {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		System.Collections.ICollection ITaskItem.MetadataNames {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		#endregion
-	}
-}
+    class ProjectTaskItem : ITaskItem
+    {
+        ProjectItemElement item;
+        string evaluated_include_part;
 
+        public ProjectTaskItem(ProjectItemElement item, string evaluatedIncludePart)
+        {
+            this.item = item;
+            this.evaluated_include_part = WindowsCompatibilityExtensions.FindMatchingPath(
+                evaluatedIncludePart
+            );
+        }
+
+        #region ITaskItem implementation
+        System.Collections.IDictionary ITaskItem.CloneCustomMetadata()
+        {
+            var ret = new System.Collections.Hashtable();
+            foreach (var p in item.Metadata)
+                ret[p.Name] = p;
+            return ret;
+        }
+
+        void ITaskItem.CopyMetadataTo(ITaskItem destinationItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        string ITaskItem.GetMetadata(string metadataName)
+        {
+            var wk = ProjectCollection.GetWellKnownMetadata(
+                metadataName,
+                evaluated_include_part,
+                Path.GetFullPath,
+                null
+            );
+            if (wk != null)
+                return wk;
+            var mde = item.Metadata.FirstOrDefault(m => m.Name == metadataName);
+            return mde != null ? mde.Value : string.Empty;
+        }
+
+        void ITaskItem.RemoveMetadata(string metadataName)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITaskItem.SetMetadata(string metadataName, string metadataValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        string ITaskItem.ItemSpec
+        {
+            get { return evaluated_include_part; }
+            set { throw new NotImplementedException(); }
+        }
+        int ITaskItem.MetadataCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+        System.Collections.ICollection ITaskItem.MetadataNames
+        {
+            get { throw new NotImplementedException(); }
+        }
+        #endregion
+    }
+}

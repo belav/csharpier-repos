@@ -92,8 +92,8 @@ namespace System.Web.Http.Description
         {
             get
             {
-                return (HttpMethod != null ? HttpMethod.Method : String.Empty) +
-                    (RelativePath ?? String.Empty);
+                return (HttpMethod != null ? HttpMethod.Method : String.Empty)
+                    + (RelativePath ?? String.Empty);
             }
         }
     }

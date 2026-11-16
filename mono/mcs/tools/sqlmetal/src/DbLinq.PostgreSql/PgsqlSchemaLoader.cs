@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -37,9 +37,18 @@ namespace DbLinq.PostgreSql
     partial class PgsqlSchemaLoader : SchemaLoader
     {
         private readonly Vendor.IVendor vendor = new PgsqlVendor();
-        public override Vendor.IVendor Vendor { get { return vendor; } set { } }
+        public override Vendor.IVendor Vendor
+        {
+            get { return vendor; }
+            set { }
+        }
 
-        protected override void LoadStoredProcedures(Database schema, SchemaName schemaName, IDbConnection conn, NameFormat nameFormat)
+        protected override void LoadStoredProcedures(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            NameFormat nameFormat
+        )
         {
             var procs = ReadProcedures(conn, schemaName.DbName);
 
@@ -74,13 +83,23 @@ namespace DbLinq.PostgreSql
             //4c. generate dbml objects
             foreach (DataStoredProcedure proc in procs)
             {
-                DbLinq.Schema.Dbml.Function dbml_fct = ParseFunction(proc, typeOidToName, nameFormat);
+                DbLinq.Schema.Dbml.Function dbml_fct = ParseFunction(
+                    proc,
+                    typeOidToName,
+                    nameFormat
+                );
                 if (!SkipProc(dbml_fct.Name))
                     schema.Functions.Add(dbml_fct);
             }
         }
 
-        protected override void LoadConstraints(Database schema, SchemaName schemaName, IDbConnection conn, NameFormat nameFormat, Names names)
+        protected override void LoadConstraints(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            NameFormat nameFormat,
+            Names names
+        )
         {
             //TableSorter.Sort(tables, constraints); //sort tables - parents first
 
@@ -90,49 +109,72 @@ namespace DbLinq.PostgreSql
             var foreignKeys = allKeys2.Where(k => k.ConstraintType == "FOREIGN KEY").ToList();
             var primaryKeys = allKeys2.Where(k => k.ConstraintType == "PRIMARY KEY").ToList();
 
-
             foreach (DataConstraint keyColRow in constraints)
             {
                 //find my table:
-                string constraintFullDbName = GetFullDbName(keyColRow.TableName, keyColRow.TableSchema);
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t => constraintFullDbName == t.Name);
+                string constraintFullDbName = GetFullDbName(
+                    keyColRow.TableName,
+                    keyColRow.TableSchema
+                );
+                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
+                    constraintFullDbName == t.Name
+                );
                 if (table == null)
                 {
-                    WriteErrorLine("ERROR L138: Table '" + keyColRow.TableName + "' not found for column " + keyColRow.ColumnName);
+                    WriteErrorLine(
+                        "ERROR L138: Table '"
+                            + keyColRow.TableName
+                            + "' not found for column "
+                            + keyColRow.ColumnName
+                    );
                     continue;
                 }
 
                 //todo: must understand better how PKEYs are encoded.
                 //In Sasha's DB, they don't end with "_pkey", you need to rely on ReadForeignConstraints().
                 //In Northwind, they do end with "_pkey".
-                bool isPrimaryKey = keyColRow.ConstraintName.EndsWith("_pkey")
+                bool isPrimaryKey =
+                    keyColRow.ConstraintName.EndsWith("_pkey")
                     || primaryKeys.Count(k => k.ConstraintName == keyColRow.ConstraintName) > 0;
 
                 if (isPrimaryKey)
                 {
                     //A) add primary key
-                    DbLinq.Schema.Dbml.Column primaryKeyCol = table.Type.Columns.First(c => c.Name == keyColRow.ColumnName);
+                    DbLinq.Schema.Dbml.Column primaryKeyCol = table.Type.Columns.First(c =>
+                        c.Name == keyColRow.ColumnName
+                    );
                     primaryKeyCol.IsPrimaryKey = true;
                 }
                 else
                 {
-                    DataForeignConstraint dataForeignConstraint = foreignKeys.FirstOrDefault(f => f.ConstraintName == keyColRow.ConstraintName);
+                    DataForeignConstraint dataForeignConstraint = foreignKeys.FirstOrDefault(f =>
+                        f.ConstraintName == keyColRow.ConstraintName
+                    );
 
                     if (dataForeignConstraint == null)
                     {
-                        string msg = "Missing data from 'constraint_column_usage' for foreign key " + keyColRow.ConstraintName;
+                        string msg =
+                            "Missing data from 'constraint_column_usage' for foreign key "
+                            + keyColRow.ConstraintName;
                         WriteErrorLine(msg);
                         //throw new ApplicationException(msg);
                         continue; //as per Andrus, do not throw. //putting together an Adnrus_DB test case.
                     }
 
-                    LoadForeignKey(schema, table, keyColRow.ColumnName, keyColRow.TableName, keyColRow.TableSchema,
-                                   dataForeignConstraint.ColumnName, dataForeignConstraint.ReferencedTableName,
-                                   dataForeignConstraint.ReferencedTableSchema,
-                                   keyColRow.ConstraintName, nameFormat, names);
-
+                    LoadForeignKey(
+                        schema,
+                        table,
+                        keyColRow.ColumnName,
+                        keyColRow.TableName,
+                        keyColRow.TableSchema,
+                        dataForeignConstraint.ColumnName,
+                        dataForeignConstraint.ReferencedTableName,
+                        dataForeignConstraint.ReferencedTableSchema,
+                        keyColRow.ConstraintName,
+                        nameFormat,
+                        names
+                    );
                 }
-
             }
         }
 
@@ -150,7 +192,11 @@ namespace DbLinq.PostgreSql
             return parts;
         }
 
-        Function ParseFunction(DataStoredProcedure pg_proc, Dictionary<long, string> typeOidToName, NameFormat nameFormat)
+        Function ParseFunction(
+            DataStoredProcedure pg_proc,
+            Dictionary<long, string> typeOidToName,
+            NameFormat nameFormat
+        )
         {
             var procedureName = CreateProcedureName(pg_proc.proname, null, nameFormat);
 
@@ -158,11 +204,18 @@ namespace DbLinq.PostgreSql
             dbml_func.Name = procedureName.DbName;
             dbml_func.Method = procedureName.MethodName;
 
-            if (pg_proc.formatted_prorettype != null && string.Compare(pg_proc.formatted_prorettype, "void") != 0)
+            if (
+                pg_proc.formatted_prorettype != null
+                && string.Compare(pg_proc.formatted_prorettype, "void") != 0
+            )
             {
                 var dbml_param = new Return();
                 dbml_param.DbType = pg_proc.formatted_prorettype;
-                dbml_param.Type = MapDbType(null, new DataType { SqlType = pg_proc.formatted_prorettype }).ToString();
+                dbml_param.Type = MapDbType(
+                        null,
+                        new DataType { SqlType = pg_proc.formatted_prorettype }
+                    )
+                    .ToString();
                 dbml_func.Return = dbml_param;
                 dbml_func.IsComposable = true;
             }
@@ -178,14 +231,22 @@ namespace DbLinq.PostgreSql
                 {
                     //proc was specified as 'FUNCTION doverlaps(IN date)' - names not specified
                     argNames = new string[argTypes1.Length];
-                    for (int i = 0; i < argNames.Length; i++) { argNames[i] = ((char)('a' + i)).ToString(); }
+                    for (int i = 0; i < argNames.Length; i++)
+                    {
+                        argNames[i] = ((char)('a' + i)).ToString();
+                    }
                 }
 
-                bool doLengthsMatch = (argTypes2.Count != argNames.Length
-                    || (argModes != null && argModes.Length != argNames.Length));
+                bool doLengthsMatch = (
+                    argTypes2.Count != argNames.Length
+                    || (argModes != null && argModes.Length != argNames.Length)
+                );
                 if (doLengthsMatch)
                 {
-                    WriteErrorLine("L238 Mistmatch between modesArr, typeArr and nameArr for func " + pg_proc.proname);
+                    WriteErrorLine(
+                        "L238 Mistmatch between modesArr, typeArr and nameArr for func "
+                            + pg_proc.proname
+                    );
                     return null;
                 }
 
@@ -195,7 +256,11 @@ namespace DbLinq.PostgreSql
                     long argTypeOid = argTypes2[i];
                     dbml_param.DbType = typeOidToName[argTypeOid];
                     dbml_param.Name = argNames[i];
-                    dbml_param.Type = MapDbType(argNames[i], new DataType { SqlType = dbml_param.DbType }).ToString();
+                    dbml_param.Type = MapDbType(
+                            argNames[i],
+                            new DataType { SqlType = dbml_param.DbType }
+                        )
+                        .ToString();
                     string inOut = argModes == null ? "i" : argModes[i];
                     dbml_param.Direction = ParseInOut(inOut);
                     dbml_func.Parameters.Add(dbml_param);
@@ -209,10 +274,14 @@ namespace DbLinq.PostgreSql
         {
             switch (inOut)
             {
-            case "i": return DbLinq.Schema.Dbml.ParameterDirection.In;
-            case "o": return DbLinq.Schema.Dbml.ParameterDirection.Out;
-            case "b": return DbLinq.Schema.Dbml.ParameterDirection.InOut;
-            default: return DbLinq.Schema.Dbml.ParameterDirection.InOut;
+                case "i":
+                    return DbLinq.Schema.Dbml.ParameterDirection.In;
+                case "o":
+                    return DbLinq.Schema.Dbml.ParameterDirection.Out;
+                case "b":
+                    return DbLinq.Schema.Dbml.ParameterDirection.InOut;
+                default:
+                    return DbLinq.Schema.Dbml.ParameterDirection.InOut;
             }
         }
 
@@ -221,7 +290,15 @@ namespace DbLinq.PostgreSql
         private bool SkipProc(string name)
         {
             //string[] prefixes = System.Configuration.ConfigurationManager.AppSettings["postgresqlSkipProcPrefixes"].Split(',');
-            string[] prefixes = { "pldbg", "gbtreekey", "gbt_", "pg_buffercache", "plpgsql_", "plpgsql_call_handler" };
+            string[] prefixes =
+            {
+                "pldbg",
+                "gbtreekey",
+                "gbt_",
+                "pg_buffercache",
+                "plpgsql_",
+                "plpgsql_call_handler",
+            };
 
             foreach (string s in prefixes)
             {
@@ -230,6 +307,5 @@ namespace DbLinq.PostgreSql
             }
             return false;
         }
-
     }
 }

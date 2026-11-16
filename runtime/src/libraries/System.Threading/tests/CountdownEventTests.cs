@@ -22,7 +22,11 @@ namespace System.Threading.Tests
         [InlineData(1, 1024, true)]
         [InlineData(128, 1024, true)]
         [InlineData(1024 * 1024, 1024, true)]
-        public static void RunCountdownEventTest0_StateTrans(int initCount, int increms, bool takeAllAtOnce)
+        public static void RunCountdownEventTest0_StateTrans(
+            int initCount,
+            int increms,
+            bool takeAllAtOnce
+        )
         {
             // Validates init, set, reset state transitions.
 
@@ -46,7 +50,10 @@ namespace System.Threading.Tests
             {
                 for (int i = 0; i < initCount + increms; i++)
                 {
-                    Assert.False(ev.IsSet, string.Format("  > error: latch is set after {0} signals", i));
+                    Assert.False(
+                        ev.IsSet,
+                        string.Format("  > error: latch is set after {0} signals", i)
+                    );
                     ev.Signal();
                 }
             }
@@ -113,10 +120,14 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => cde.Wait(TimeSpan.MaxValue));
             // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => cde.Wait(TimeSpan.FromDays(-1), new CancellationToken()));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cde.Wait(TimeSpan.FromDays(-1), new CancellationToken())
+            );
             // Failure Case: Wait(TimeSpan) didn't throw AORE when the totalmilliseconds < -1
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => cde.Wait(TimeSpan.MaxValue, new CancellationToken()));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cde.Wait(TimeSpan.MaxValue, new CancellationToken())
+            );
             // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
 
             cde.Dispose();

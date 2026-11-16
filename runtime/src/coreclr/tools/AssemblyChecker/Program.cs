@@ -1,11 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Text;
 
 namespace AssemblyChecker
 {
@@ -18,7 +18,8 @@ namespace AssemblyChecker
     /// </summary>
     public class Program
     {
-        private const string HelpText = @"
+        private const string HelpText =
+            @"
 Usage:
     <filePath>: Check if the file-path is a managed assembly.
     --is-debug <filePath>: Check if the file-path is a managed assembly that is built with debuggability.
@@ -27,7 +28,12 @@ Usage:
 
         static bool IsAssembly(string path)
         {
-            using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var fs = new FileStream(
+                path,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite
+            );
 
             // Try to read CLI metadata from the PE file.
             using var peReader = new PEReader(fs);
@@ -44,15 +50,21 @@ Usage:
 
         static bool IsDebug(string path)
         {
-            return
-                Assembly.LoadFrom(path)
+            return Assembly
+                .LoadFrom(path)
                 .GetCustomAttributes(typeof(DebuggableAttribute), false)
-                .OfType<DebuggableAttribute>().Any(x => x.IsJITOptimizerDisabled);
+                .OfType<DebuggableAttribute>()
+                .Any(x => x.IsJITOptimizerDisabled);
         }
 
         static bool IsExe(string path)
         {
-            using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var fs = new FileStream(
+                path,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite
+            );
 
             // Try to read CLI metadata from the PE file.
             using var peReader = new PEReader(fs);
@@ -91,21 +103,21 @@ Usage:
                 switch (args[0])
                 {
                     case "--is-debug":
-                        {
-                            return IsDebug(args[1]) ? 0 : 1;
-                        }
+                    {
+                        return IsDebug(args[1]) ? 0 : 1;
+                    }
 
                     case "--is-exe":
-                        {
-                            return IsExe(args[1]) ? 0 : 1;
-                        }
+                    {
+                        return IsExe(args[1]) ? 0 : 1;
+                    }
 
                     default:
-                        {
-                            Console.WriteLine(HelpText);
-                            Console.Error.WriteLine("\nInvalid option.");
-                            return 2;
-                        }
+                    {
+                        Console.WriteLine(HelpText);
+                        Console.Error.WriteLine("\nInvalid option.");
+                        return 2;
+                    }
                 }
             }
 

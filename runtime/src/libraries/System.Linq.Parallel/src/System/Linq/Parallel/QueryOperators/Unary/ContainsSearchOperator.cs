@@ -34,7 +34,11 @@ namespace System.Linq.Parallel
         //     comparer    - a comparison routine used to test equality.
         //
 
-        internal ContainsSearchOperator(IEnumerable<TInput> child, TInput searchValue, IEqualityComparer<TInput>? comparer)
+        internal ContainsSearchOperator(
+            IEnumerable<TInput> child,
+            TInput searchValue,
+            IEqualityComparer<TInput>? comparer
+        )
             : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
@@ -54,7 +58,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // could do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<bool> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<bool> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Any value of true means the element was found. We needn't consult all partitions
                 while (enumerator.MoveNext())
@@ -81,17 +90,31 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<bool> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<bool> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
-            PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+            PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Correct
+            );
 
             // Create a shared cancellation variable
             Shared<bool> resultFoundFlag = new Shared<bool>(false);
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new ContainsSearchOperatorEnumerator<TKey>(inputStream[i], _searchValue, _comparer, i, resultFoundFlag,
-                    settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new ContainsSearchOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    _searchValue,
+                    _comparer,
+                    i,
+                    resultFoundFlag,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -101,10 +124,14 @@ namespace System.Linq.Parallel
         // Returns an enumerable that represents the query executing sequentially.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "This method should never be called as it is an ending operator with LimitsParallelism=false")]
+        [ExcludeFromCodeCoverage(
+            Justification = "This method should never be called as it is an ending operator with LimitsParallelism=false"
+        )]
         internal override IEnumerable<bool> AsSequentialQuery(CancellationToken token)
         {
-            Debug.Fail("This method should never be called as it is an ending operator with LimitsParallelism=false.");
+            Debug.Fail(
+                "This method should never be called as it is an ending operator with LimitsParallelism=false."
+            );
             throw new NotSupportedException();
         }
 
@@ -124,7 +151,8 @@ namespace System.Linq.Parallel
         // requested.
         //
 
-        private sealed class ContainsSearchOperatorEnumerator<TKey> : QueryOperatorEnumerator<bool, int>
+        private sealed class ContainsSearchOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<bool, int>
         {
             private readonly QueryOperatorEnumerator<TInput, TKey> _source; // The source data.
             private readonly TInput _searchValue; // The value for which we are searching.
@@ -137,9 +165,14 @@ namespace System.Linq.Parallel
             // Instantiates a new any/all search operator.
             //
 
-            internal ContainsSearchOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source, TInput searchValue,
-                                                      IEqualityComparer<TInput> comparer, int partitionIndex, Shared<bool> resultFoundFlag,
-                CancellationToken cancellationToken)
+            internal ContainsSearchOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                TInput searchValue,
+                IEqualityComparer<TInput> comparer,
+                int partitionIndex,
+                Shared<bool> resultFoundFlag,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(comparer != null);
@@ -197,8 +230,7 @@ namespace System.Linq.Parallel
                             currentElement = true;
                             break;
                         }
-                    }
-                    while (_source.MoveNext(ref element!, ref keyUnused));
+                    } while (_source.MoveNext(ref element!, ref keyUnused));
 
                     return true;
                 }

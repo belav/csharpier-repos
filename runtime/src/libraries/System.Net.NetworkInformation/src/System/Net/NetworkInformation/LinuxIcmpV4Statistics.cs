@@ -13,56 +13,134 @@ namespace System.Net.NetworkInformation
             _table = StringParsingHelpers.ParseIcmpv4FromSnmpFile(NetworkFiles.SnmpV4StatsFile);
         }
 
-        public override long AddressMaskRepliesReceived { get { return _table.InAddrMaskReps; } }
+        public override long AddressMaskRepliesReceived
+        {
+            get { return _table.InAddrMaskReps; }
+        }
 
-        public override long AddressMaskRepliesSent { get { return _table.OutAddrMaskReps; } }
+        public override long AddressMaskRepliesSent
+        {
+            get { return _table.OutAddrMaskReps; }
+        }
 
-        public override long AddressMaskRequestsReceived { get { return _table.InAddrMasks; } }
+        public override long AddressMaskRequestsReceived
+        {
+            get { return _table.InAddrMasks; }
+        }
 
-        public override long AddressMaskRequestsSent { get { return _table.OutAddrMasks; } }
+        public override long AddressMaskRequestsSent
+        {
+            get { return _table.OutAddrMasks; }
+        }
 
-        public override long DestinationUnreachableMessagesReceived { get { return _table.InDestUnreachs; } }
+        public override long DestinationUnreachableMessagesReceived
+        {
+            get { return _table.InDestUnreachs; }
+        }
 
-        public override long DestinationUnreachableMessagesSent { get { return _table.OutDestUnreachs; } }
+        public override long DestinationUnreachableMessagesSent
+        {
+            get { return _table.OutDestUnreachs; }
+        }
 
-        public override long EchoRepliesReceived { get { return _table.InEchoReps; } }
+        public override long EchoRepliesReceived
+        {
+            get { return _table.InEchoReps; }
+        }
 
-        public override long EchoRepliesSent { get { return _table.OutEchoReps; } }
+        public override long EchoRepliesSent
+        {
+            get { return _table.OutEchoReps; }
+        }
 
-        public override long EchoRequestsReceived { get { return _table.InEchos; } }
+        public override long EchoRequestsReceived
+        {
+            get { return _table.InEchos; }
+        }
 
-        public override long EchoRequestsSent { get { return _table.OutEchos; } }
+        public override long EchoRequestsSent
+        {
+            get { return _table.OutEchos; }
+        }
 
-        public override long ErrorsReceived { get { return _table.InErrors; } }
+        public override long ErrorsReceived
+        {
+            get { return _table.InErrors; }
+        }
 
-        public override long ErrorsSent { get { return _table.OutErrors; } }
+        public override long ErrorsSent
+        {
+            get { return _table.OutErrors; }
+        }
 
-        public override long MessagesReceived { get { return _table.InMsgs; } }
+        public override long MessagesReceived
+        {
+            get { return _table.InMsgs; }
+        }
 
-        public override long MessagesSent { get { return _table.OutMsgs; } }
+        public override long MessagesSent
+        {
+            get { return _table.OutMsgs; }
+        }
 
-        public override long ParameterProblemsReceived { get { return _table.InParmProbs; } }
+        public override long ParameterProblemsReceived
+        {
+            get { return _table.InParmProbs; }
+        }
 
-        public override long ParameterProblemsSent { get { return _table.OutParmProbs; } }
+        public override long ParameterProblemsSent
+        {
+            get { return _table.OutParmProbs; }
+        }
 
-        public override long RedirectsReceived { get { return _table.InRedirects; } }
+        public override long RedirectsReceived
+        {
+            get { return _table.InRedirects; }
+        }
 
-        public override long RedirectsSent { get { return _table.OutRedirects; } }
+        public override long RedirectsSent
+        {
+            get { return _table.OutRedirects; }
+        }
 
-        public override long SourceQuenchesReceived { get { return _table.InSrcQuenchs; } }
+        public override long SourceQuenchesReceived
+        {
+            get { return _table.InSrcQuenchs; }
+        }
 
-        public override long SourceQuenchesSent { get { return _table.OutSrcQuenchs; } }
+        public override long SourceQuenchesSent
+        {
+            get { return _table.OutSrcQuenchs; }
+        }
 
-        public override long TimeExceededMessagesReceived { get { return _table.InTimeExcds; } }
+        public override long TimeExceededMessagesReceived
+        {
+            get { return _table.InTimeExcds; }
+        }
 
-        public override long TimeExceededMessagesSent { get { return _table.OutTimeExcds; } }
+        public override long TimeExceededMessagesSent
+        {
+            get { return _table.OutTimeExcds; }
+        }
 
-        public override long TimestampRepliesReceived { get { return _table.InTimeStampReps; } }
+        public override long TimestampRepliesReceived
+        {
+            get { return _table.InTimeStampReps; }
+        }
 
-        public override long TimestampRepliesSent { get { return _table.OutTimestampReps; } }
+        public override long TimestampRepliesSent
+        {
+            get { return _table.OutTimestampReps; }
+        }
 
-        public override long TimestampRequestsReceived { get { return _table.InTimestamps; } }
+        public override long TimestampRequestsReceived
+        {
+            get { return _table.InTimestamps; }
+        }
 
-        public override long TimestampRequestsSent { get { return _table.OutTimestamps; } }
+        public override long TimestampRequestsSent
+        {
+            get { return _table.OutTimestamps; }
+        }
     }
 }

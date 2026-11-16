@@ -18,10 +18,7 @@ namespace Microsoft.CodeAnalysis
         private AttributeUsageInfo _attributeUsageInfo = AttributeUsageInfo.Null;
         public AttributeUsageInfo AttributeUsageInfo
         {
-            get
-            {
-                return _attributeUsageInfo;
-            }
+            get { return _attributeUsageInfo; }
             set
             {
                 VerifySealed(expected: false);

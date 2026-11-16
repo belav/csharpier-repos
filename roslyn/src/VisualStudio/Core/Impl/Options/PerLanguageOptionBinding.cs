@@ -17,7 +17,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public PerLanguageOptionBinding(OptionStore optionStore, PerLanguageOption2<T> option, string languageName)
+        public PerLanguageOptionBinding(
+            OptionStore optionStore,
+            PerLanguageOption2<T> option,
+            string languageName
+        )
         {
             _optionStore = optionStore;
             _option = option;
@@ -34,15 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public T Value
         {
-            get
-            {
-                return _optionStore.GetOption<T>(_option, _languageName);
-            }
-
-            set
-            {
-                _optionStore.SetOption(_option, _languageName, value);
-            }
+            get { return _optionStore.GetOption<T>(_option, _languageName); }
+            set { _optionStore.SetOption(_option, _languageName, value); }
         }
     }
 }

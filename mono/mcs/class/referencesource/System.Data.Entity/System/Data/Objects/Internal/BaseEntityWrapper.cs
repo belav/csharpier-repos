@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections;
+using System.Data.Metadata.Edm;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Reflection;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Objects.Internal
 {
@@ -44,8 +44,14 @@ namespace System.Data.Objects.Internal
         /// <param name="relationshipManager">the RelationshipManager associated with this entity</param>
         protected BaseEntityWrapper(TEntity entity, RelationshipManager relationshipManager)
         {
-            Debug.Assert(!(entity is IEntityWrapper), "Object is an IEntityWrapper instance instead of the raw entity.");
-            Debug.Assert(entity != null, "Factory should ensure wrapped entity here is never null.");
+            Debug.Assert(
+                !(entity is IEntityWrapper),
+                "Object is an IEntityWrapper instance instead of the raw entity."
+            );
+            Debug.Assert(
+                entity != null,
+                "Factory should ensure wrapped entity here is never null."
+            );
             if (relationshipManager == null)
             {
                 throw EntityUtil.UnexpectedNullRelationshipManager();
@@ -66,10 +72,23 @@ namespace System.Data.Objects.Internal
         /// <param name="context">The context to which the entity should be attached</param>
         /// <param name="mergeOption">NoTracking for non-tracked entities, AppendOnly otherwise</param>
         /// <param name="identityType">The type of the entity ignoring any possible proxy type</param>
-        protected BaseEntityWrapper(TEntity entity, RelationshipManager relationshipManager, EntitySet entitySet, ObjectContext context, MergeOption mergeOption, Type identityType)
+        protected BaseEntityWrapper(
+            TEntity entity,
+            RelationshipManager relationshipManager,
+            EntitySet entitySet,
+            ObjectContext context,
+            MergeOption mergeOption,
+            Type identityType
+        )
         {
-            Debug.Assert(!(entity is IEntityWrapper), "Object is an IEntityWrapper instance instead of the raw entity.");
-            Debug.Assert(entity != null, "Factory should ensure wrapped entity here is never null.");
+            Debug.Assert(
+                !(entity is IEntityWrapper),
+                "Object is an IEntityWrapper instance instead of the raw entity."
+            );
+            Debug.Assert(
+                entity != null,
+                "Factory should ensure wrapped entity here is never null."
+            );
             if (relationshipManager == null)
             {
                 throw EntityUtil.UnexpectedNullRelationshipManager();
@@ -83,35 +102,32 @@ namespace System.Data.Objects.Internal
                 MergeOption = mergeOption;
                 RelationshipManager.AttachContextToRelatedEnds(context, entitySet, mergeOption);
             }
-            
         }
 
         // See IEntityWrapper documentation
         public RelationshipManager RelationshipManager
         {
-            get
-            {
-                return _relationshipManager;
-            }
+            get { return _relationshipManager; }
         }
 
         // See IEntityWrapper documentation
-        public ObjectContext Context
-        {
-            get;
-            set;
-        }
+        public ObjectContext Context { get; set; }
 
         // See IEntityWrapper documentation
         public MergeOption MergeOption
         {
             get
             {
-                return (_flags & WrapperFlags.NoTracking) != 0 ? MergeOption.NoTracking : MergeOption.AppendOnly;
+                return (_flags & WrapperFlags.NoTracking) != 0
+                    ? MergeOption.NoTracking
+                    : MergeOption.AppendOnly;
             }
             private set
             {
-                Debug.Assert(value == MergeOption.AppendOnly || value == MergeOption.NoTracking, "Merge option must be one of NoTracking or AppendOnly.");
+                Debug.Assert(
+                    value == MergeOption.AppendOnly || value == MergeOption.NoTracking,
+                    "Merge option must be one of NoTracking or AppendOnly."
+                );
                 if (value == MergeOption.NoTracking)
                 {
                     _flags |= WrapperFlags.NoTracking;
@@ -126,10 +142,7 @@ namespace System.Data.Objects.Internal
         // See IEntityWrapper documentation
         public bool InitializingProxyRelatedEnds
         {
-            get
-            {
-                return (_flags & WrapperFlags.InitializingRelatedEnds) != 0;
-            }
+            get { return (_flags & WrapperFlags.InitializingRelatedEnds) != 0; }
             set
             {
                 if (value)
@@ -144,7 +157,11 @@ namespace System.Data.Objects.Internal
         }
 
         // See IEntityWrapper documentation
-        public void AttachContext(ObjectContext context, EntitySet entitySet, MergeOption mergeOption)
+        public void AttachContext(
+            ObjectContext context,
+            EntitySet entitySet,
+            MergeOption mergeOption
+        )
         {
             Debug.Assert(null != context, "context");
             Context = context;
@@ -156,13 +173,18 @@ namespace System.Data.Objects.Internal
         }
 
         // See IEntityWrapper documentation
-        public void ResetContext(ObjectContext context, EntitySet entitySet, MergeOption mergeOption)
+        public void ResetContext(
+            ObjectContext context,
+            EntitySet entitySet,
+            MergeOption mergeOption
+        )
         {
             Debug.Assert(null != entitySet, "entitySet should not be null");
             Debug.Assert(null != context, "context");
-            Debug.Assert(MergeOption.NoTracking == mergeOption ||
-                         MergeOption.AppendOnly == mergeOption,
-                         "mergeOption");
+            Debug.Assert(
+                MergeOption.NoTracking == mergeOption || MergeOption.AppendOnly == mergeOption,
+                "mergeOption"
+            );
 
             if (!object.ReferenceEquals(Context, context))
             {
@@ -175,9 +197,12 @@ namespace System.Data.Objects.Internal
         // See IEntityWrapper documentation
         public void DetachContext()
         {
-            if (Context != null &&
-                Context.ObjectStateManager.TransactionManager.IsAttachTracking &&
-                Context.ObjectStateManager.TransactionManager.OriginalMergeOption == MergeOption.NoTracking)
+            if (
+                Context != null
+                && Context.ObjectStateManager.TransactionManager.IsAttachTracking
+                && Context.ObjectStateManager.TransactionManager.OriginalMergeOption
+                    == MergeOption.NoTracking
+            )
             {
                 // If AttachTo() failed while attaching graph retrieved with NoTracking option,
                 // we don't want to clear the Context property of the wrapped entity
@@ -192,11 +217,7 @@ namespace System.Data.Objects.Internal
         }
 
         // See IEntityWrapper documentation
-        public EntityEntry ObjectStateEntry
-        {
-            get;
-            set;
-        }
+        public EntityEntry ObjectStateEntry { get; set; }
 
         // See IEntityWrapper documentation
         public Type IdentityType
@@ -214,10 +235,7 @@ namespace System.Data.Objects.Internal
         // All these methods defined by IEntityWrapper
         public abstract void EnsureCollectionNotNull(RelatedEnd relatedEnd);
         public abstract EntityKey EntityKey { get; set; }
-        public abstract bool OwnsRelationshipManager
-        {
-            get;
-        }
+        public abstract bool OwnsRelationshipManager { get; }
         public abstract EntityKey GetEntityKeyFromEntity();
         public abstract void SetChangeTracker(IEntityChangeTracker changeTracker);
         public abstract void TakeSnapshot(EntityEntry entry);
@@ -229,7 +247,13 @@ namespace System.Data.Objects.Internal
         public abstract bool CollectionRemove(RelatedEnd relatedEnd, object value);
         public abstract object Entity { get; }
         public abstract TEntity TypedEntity { get; }
-        public abstract void SetCurrentValue(EntityEntry entry, StateManagerMemberMetadata member, int ordinal, object target, object value);
+        public abstract void SetCurrentValue(
+            EntityEntry entry,
+            StateManagerMemberMetadata member,
+            int ordinal,
+            object target,
+            object value
+        );
         public abstract void UpdateCurrentValueRecord(object value, EntityEntry entry);
         public abstract bool RequiresRelationshipChangeTracking { get; }
     }

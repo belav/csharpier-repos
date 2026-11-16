@@ -4,14 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
-
+namespace System.Web
+{
     // Represents the transition state of a WebSocket request.
     // Any state can be a terminal state, but if a state transition does take place it will go in the
     // order Inactive -> AcceptWebSocketRequestCalled -> TransitionStarted -> TransitionCompleted.
 
-    internal enum WebSocketTransitionState : byte {
-
+    internal enum WebSocketTransitionState : byte
+    {
         // This is not a WebSocket request, or if it is HttpContext.AcceptWebSocketRequest() hasn't yet been called.
         Inactive = 0,
 
@@ -27,7 +27,6 @@ namespace System.Web {
 
         // We have completed the transition, e.g. the handshake is completed and we have an active connection
         // with the client. The callback the developer passed to HttpContext.AcceptWebSocketRequest() is executing.
-        TransitionCompleted
-
+        TransitionCompleted,
     }
 }

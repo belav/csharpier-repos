@@ -10,10 +10,12 @@
  * Copyright (c) 2009 Microsoft Corporation
  */
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System.Diagnostics.CodeAnalysis;
 
-    public enum RequestValidationSource {
+    public enum RequestValidationSource
+    {
         QueryString,
         Form,
         Cookies,
@@ -21,7 +23,6 @@ namespace System.Web.Util {
         RawUrl,
         Path,
         PathInfo,
-        Headers
+        Headers,
     }
-
 }

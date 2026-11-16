@@ -26,7 +26,8 @@ namespace System.Reflection
             Func<Assembly?, string, bool, Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
+            ref StackCrawlMark stackMark
+        )
         {
             ArgumentNullException.ThrowIfNull(typeName);
 
@@ -45,7 +46,7 @@ namespace System.Reflection
                 _typeResolver = typeResolver,
                 _throwOnError = throwOnError,
                 _ignoreCase = ignoreCase,
-                _stackMark = Unsafe.AsPointer(ref stackMark)
+                _stackMark = Unsafe.AsPointer(ref stackMark),
             }.Parse();
         }
 
@@ -64,7 +65,9 @@ namespace System.Reflection
                 assembly = _assemblyResolver(name);
                 if (assembly is null && _throwOnError)
                 {
-                    throw new FileNotFoundException(SR.Format(SR.FileNotFound_ResolveAssembly, assemblyName));
+                    throw new FileNotFoundException(
+                        SR.Format(SR.FileNotFound_ResolveAssembly, assemblyName)
+                    );
                 }
             }
             else
@@ -92,13 +95,24 @@ namespace System.Reflection
             return assembly;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "TypeNameParser.GetType is marked as RequiresUnreferencedCode.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "TypeNameParser.GetType is marked as RequiresUnreferencedCode.")]
-        private Type? GetType(string typeName, ReadOnlySpan<string> nestedTypeNames, string? assemblyNameIfAny)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "TypeNameParser.GetType is marked as RequiresUnreferencedCode."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "TypeNameParser.GetType is marked as RequiresUnreferencedCode."
+        )]
+        private Type? GetType(
+            string typeName,
+            ReadOnlySpan<string> nestedTypeNames,
+            string? assemblyNameIfAny
+        )
         {
-            Assembly? assembly = (assemblyNameIfAny is not null) ? ResolveAssembly(assemblyNameIfAny) : null;
+            Assembly? assembly =
+                (assemblyNameIfAny is not null) ? ResolveAssembly(assemblyNameIfAny) : null;
 
             // Both the external type resolver and the default type resolvers expect escaped type names
             string escapedTypeName = EscapeTypeName(typeName);
@@ -114,9 +128,15 @@ namespace System.Reflection
                 {
                     if (_throwOnError)
                     {
-                        throw new TypeLoadException(assembly is null ?
-                            SR.Format(SR.TypeLoad_ResolveType, escapedTypeName) :
-                            SR.Format(SR.TypeLoad_ResolveTypeFromAssembly, escapedTypeName, assembly.FullName));
+                        throw new TypeLoadException(
+                            assembly is null
+                                ? SR.Format(SR.TypeLoad_ResolveType, escapedTypeName)
+                                : SR.Format(
+                                    SR.TypeLoad_ResolveTypeFromAssembly,
+                                    escapedTypeName,
+                                    assembly.FullName
+                                )
+                        );
                     }
                     return null;
                 }
@@ -127,7 +147,12 @@ namespace System.Reflection
                 {
                     ref StackCrawlMark stackMark = ref Unsafe.AsRef<StackCrawlMark>(_stackMark);
 
-                    type = RuntimeType.GetType(escapedTypeName, _throwOnError, _ignoreCase, ref stackMark);
+                    type = RuntimeType.GetType(
+                        escapedTypeName,
+                        _throwOnError,
+                        _ignoreCase,
+                        ref stackMark
+                    );
                 }
                 else
                 {
@@ -152,8 +177,13 @@ namespace System.Reflection
                 {
                     if (_throwOnError)
                     {
-                        throw new TypeLoadException(SR.Format(SR.TypeLoad_ResolveNestedType,
-                            nestedTypeNames[i], (i > 0) ? nestedTypeNames[i - 1] : typeName));
+                        throw new TypeLoadException(
+                            SR.Format(
+                                SR.TypeLoad_ResolveNestedType,
+                                nestedTypeNames[i],
+                                (i > 0) ? nestedTypeNames[i - 1] : typeName
+                            )
+                        );
                     }
                     return null;
                 }

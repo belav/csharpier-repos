@@ -30,8 +30,7 @@ public class OperationReporter : IOperationReporter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void WriteError(string message)
-        => _handler?.OnError(message);
+    public virtual void WriteError(string message) => _handler?.OnError(message);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,8 +38,7 @@ public class OperationReporter : IOperationReporter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void WriteWarning(string message)
-        => _handler?.OnWarning(message);
+    public virtual void WriteWarning(string message) => _handler?.OnWarning(message);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,8 +46,7 @@ public class OperationReporter : IOperationReporter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void WriteInformation(string message)
-        => _handler?.OnInformation(message);
+    public virtual void WriteInformation(string message) => _handler?.OnInformation(message);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -57,6 +54,5 @@ public class OperationReporter : IOperationReporter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void WriteVerbose(string message)
-        => _handler?.OnVerbose(message);
+    public virtual void WriteVerbose(string message) => _handler?.OnVerbose(message);
 }

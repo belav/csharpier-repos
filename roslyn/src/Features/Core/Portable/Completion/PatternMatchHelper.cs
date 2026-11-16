@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Completion
 {
     /// <summary>
-    /// This type is not thread safe due to the restriction of underlying PatternMatcher. 
+    /// This type is not thread safe due to the restriction of underlying PatternMatcher.
     /// Must be disposed after use.
     /// </summary>
     internal sealed class PatternMatchHelper(string pattern) : IDisposable
@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         private readonly object _gate = new();
-        private readonly Dictionary<(CultureInfo, bool includeMatchedSpans), PatternMatcher> _patternMatcherMap = new();
+        private readonly Dictionary<
+            (CultureInfo, bool includeMatchedSpans),
+            PatternMatcher
+        > _patternMatcherMap = new();
 
         public string Pattern { get; } = pattern;
 
@@ -54,7 +57,11 @@ namespace Microsoft.CodeAnalysis.Completion
             // for example, for Turkish with dotted and dotless i capitalization totally diferent from English.
             // Now we escaping from the second check for English languages.
             // Maybe we can escape as well for more similar languages in case if we meet performance issues.
-            if (culture.ThreeLetterWindowsLanguageName.Equals(EnUSCultureInfo.ThreeLetterWindowsLanguageName))
+            if (
+                culture.ThreeLetterWindowsLanguageName.Equals(
+                    EnUSCultureInfo.ThreeLetterWindowsLanguageName
+                )
+            )
             {
                 return match;
             }
@@ -75,7 +82,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 return match;
             }
 
-            return match.Value.CompareTo(enUSCultureMatch.Value) < 0 ? match.Value : enUSCultureMatch.Value;
+            return match.Value.CompareTo(enUSCultureMatch.Value) < 0
+                ? match.Value
+                : enUSCultureMatch.Value;
         }
 
         private PatternMatcher GetPatternMatcher(CultureInfo culture, bool includeMatchedSpans)
@@ -86,8 +95,11 @@ namespace Microsoft.CodeAnalysis.Completion
                 if (!_patternMatcherMap.TryGetValue(key, out var patternMatcher))
                 {
                     patternMatcher = PatternMatcher.CreatePatternMatcher(
-                        Pattern, culture, includeMatchedSpans,
-                        allowFuzzyMatching: false);
+                        Pattern,
+                        culture,
+                        includeMatchedSpans,
+                        allowFuzzyMatching: false
+                    );
                     _patternMatcherMap.Add(key, patternMatcher);
                 }
 
@@ -98,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Completion
         public MatchResult GetMatchResult(
             CompletionItem item,
             bool includeMatchSpans,
-            CultureInfo culture)
+            CultureInfo culture
+        )
         {
             var match = GetMatch(item.FilterText, includeMatchSpans, culture);
             string? matchedAdditionalFilterText = null;
@@ -107,8 +120,15 @@ namespace Microsoft.CodeAnalysis.Completion
             {
                 foreach (var additionalFilterText in item.AdditionalFilterTexts)
                 {
-                    var additionalMatch = GetMatch(additionalFilterText, includeMatchSpans, culture);
-                    if (additionalMatch.HasValue && additionalMatch.Value.CompareTo(match, ignoreCase: false) < 0)
+                    var additionalMatch = GetMatch(
+                        additionalFilterText,
+                        includeMatchSpans,
+                        culture
+                    );
+                    if (
+                        additionalMatch.HasValue
+                        && additionalMatch.Value.CompareTo(match, ignoreCase: false) < 0
+                    )
                     {
                         match = additionalMatch;
                         matchedAdditionalFilterText = additionalFilterText;
@@ -121,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 shouldBeConsideredMatchingFilterText: match is not null,
                 match,
                 index: -1,
-                matchedAdditionalFilterText);
+                matchedAdditionalFilterText
+            );
         }
 
         /// <summary>
@@ -129,8 +150,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// if and only if the completion item matches and should be included in the filtered completion
         /// results, or false if it should not be.
         /// </summary>
-        public bool MatchesPattern(CompletionItem item, CultureInfo culture)
-            => GetMatchResult(item, includeMatchSpans: false, culture).ShouldBeConsideredMatchingFilterText;
+        public bool MatchesPattern(CompletionItem item, CultureInfo culture) =>
+            GetMatchResult(
+                item,
+                includeMatchSpans: false,
+                culture
+            ).ShouldBeConsideredMatchingFilterText;
 
         public bool TryCreateMatchResult(
             CompletionItem item,
@@ -139,17 +164,19 @@ namespace Microsoft.CodeAnalysis.Completion
             int recentItemIndex,
             bool includeMatchSpans,
             int currentIndex,
-            out MatchResult matchResult)
+            out MatchResult matchResult
+        )
         {
-            // Get the match of the given completion item for the pattern provided so far. 
-            // A completion item is checked against the pattern by see if it's 
-            // CompletionItem.FilterText matches the item. That way, the pattern it checked 
+            // Get the match of the given completion item for the pattern provided so far.
+            // A completion item is checked against the pattern by see if it's
+            // CompletionItem.FilterText matches the item. That way, the pattern it checked
             // against terms like "IList" and not IList<>.
-            // Note that the check on filter text length is purely for efficiency, we should 
+            // Note that the check on filter text length is purely for efficiency, we should
             // get the same result with or without it.
-            var patternMatch = Pattern.Length > 0
-                ? GetMatch(item.FilterText, includeMatchSpans, CultureInfo.CurrentCulture)
-                : null;
+            var patternMatch =
+                Pattern.Length > 0
+                    ? GetMatch(item.FilterText, includeMatchSpans, CultureInfo.CurrentCulture)
+                    : null;
 
             string? matchedAdditionalFilterText = null;
             var shouldBeConsideredMatchingFilterText = ShouldBeConsideredMatchingFilterText(
@@ -158,23 +185,33 @@ namespace Microsoft.CodeAnalysis.Completion
                 initialTriggerKind,
                 filterReason,
                 recentItemIndex,
-                patternMatch);
+                patternMatch
+            );
 
             if (Pattern.Length > 0 && item.HasAdditionalFilterTexts)
             {
                 foreach (var additionalFilterText in item.AdditionalFilterTexts)
                 {
-                    var additionalMatch = GetMatch(additionalFilterText, includeMatchSpans, CultureInfo.CurrentCulture);
+                    var additionalMatch = GetMatch(
+                        additionalFilterText,
+                        includeMatchSpans,
+                        CultureInfo.CurrentCulture
+                    );
                     var additionalFlag = ShouldBeConsideredMatchingFilterText(
                         additionalFilterText,
                         item.Rules.MatchPriority,
                         initialTriggerKind,
                         filterReason,
                         recentItemIndex,
-                        additionalMatch);
+                        additionalMatch
+                    );
 
-                    if (!shouldBeConsideredMatchingFilterText ||
-                        additionalFlag && additionalMatch.HasValue && additionalMatch.Value.CompareTo(patternMatch, ignoreCase: false) < 0)
+                    if (
+                        !shouldBeConsideredMatchingFilterText
+                        || additionalFlag
+                            && additionalMatch.HasValue
+                            && additionalMatch.Value.CompareTo(patternMatch, ignoreCase: false) < 0
+                    )
                     {
                         matchedAdditionalFilterText = additionalFilterText;
                         shouldBeConsideredMatchingFilterText = additionalFlag;
@@ -183,11 +220,19 @@ namespace Microsoft.CodeAnalysis.Completion
                 }
             }
 
-            if (shouldBeConsideredMatchingFilterText || KeepAllItemsInTheList(initialTriggerKind, Pattern))
+            if (
+                shouldBeConsideredMatchingFilterText
+                || KeepAllItemsInTheList(initialTriggerKind, Pattern)
+            )
             {
                 matchResult = new MatchResult(
-                    item, shouldBeConsideredMatchingFilterText,
-                    patternMatch, currentIndex, matchedAdditionalFilterText, recentItemIndex);
+                    item,
+                    shouldBeConsideredMatchingFilterText,
+                    patternMatch,
+                    currentIndex,
+                    matchedAdditionalFilterText,
+                    recentItemIndex
+                );
 
                 return true;
             }
@@ -201,17 +246,20 @@ namespace Microsoft.CodeAnalysis.Completion
                 CompletionTriggerKind initialTriggerKind,
                 CompletionFilterReason filterReason,
                 int recentItemIndex,
-                PatternMatch? patternMatch)
+                PatternMatch? patternMatch
+            )
             {
                 // For the deletion we bake in the core logic for how matching should work.
-                // This way deletion feels the same across all languages that opt into deletion 
+                // This way deletion feels the same across all languages that opt into deletion
                 // as a completion trigger.
 
-                // Specifically, to avoid being too aggressive when matching an item during 
-                // completion, we require that the current filter text be a prefix of the 
+                // Specifically, to avoid being too aggressive when matching an item during
+                // completion, we require that the current filter text be a prefix of the
                 // item in the list.
-                if (filterReason == CompletionFilterReason.Deletion &&
-                    initialTriggerKind == CompletionTriggerKind.Deletion)
+                if (
+                    filterReason == CompletionFilterReason.Deletion
+                    && initialTriggerKind == CompletionTriggerKind.Deletion
+                )
                 {
                     return filterText.GetCaseInsensitivePrefixLength(Pattern) > 0;
                 }
@@ -236,11 +284,14 @@ namespace Microsoft.CodeAnalysis.Completion
             //
             //  2. They brought up completion with ctrl-j or through deletion.  In these
             //     cases we just always keep all the items in the list.
-            static bool KeepAllItemsInTheList(CompletionTriggerKind initialTriggerKind, string filterText)
+            static bool KeepAllItemsInTheList(
+                CompletionTriggerKind initialTriggerKind,
+                string filterText
+            )
             {
-                return filterText.Length <= 1 ||
-                    initialTriggerKind == CompletionTriggerKind.Invoke ||
-                    initialTriggerKind == CompletionTriggerKind.Deletion;
+                return filterText.Length <= 1
+                    || initialTriggerKind == CompletionTriggerKind.Invoke
+                    || initialTriggerKind == CompletionTriggerKind.Deletion;
             }
         }
 

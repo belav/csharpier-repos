@@ -95,9 +95,8 @@ public class TagHelperAttributeListTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            "index",
-            () => attributes[index]
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+            attributes[index]
         );
     }
 
@@ -114,13 +113,10 @@ public class TagHelperAttributeListTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            "index",
-            () =>
-            {
-                attributes[index] = new TagHelperAttribute("C", "CV");
-            }
-        );
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+        {
+            attributes[index] = new TagHelperAttribute("C", "CV");
+        });
     }
 
     [Theory]
@@ -228,13 +224,10 @@ public class TagHelperAttributeListTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            "index",
-            () =>
-            {
-                attributes[2] = new TagHelperAttribute("C", "CV");
-            }
-        );
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+        {
+            attributes[2] = new TagHelperAttribute("C", "CV");
+        });
     }
 
     [Fact]
@@ -352,9 +345,8 @@ public class TagHelperAttributeListTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            "index",
-            () => attributes.Insert(3, new TagHelperAttribute("c", "cb"))
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+            attributes.Insert(3, new TagHelperAttribute("c", "cb"))
         );
     }
 
@@ -704,9 +696,8 @@ public class TagHelperAttributeListTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            "index",
-            () => attributes.RemoveAt(3)
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+            attributes.RemoveAt(3)
         );
     }
 

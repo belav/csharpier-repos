@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -19,44 +19,46 @@ namespace System.Web.UI.WebControls.WebParts {
     /// Provides default rendering and part selection UI
     /// </devdoc>
     [
-    Bindable(false),
-    Designer("System.Web.UI.Design.WebControls.WebParts.CatalogPartDesigner, " + AssemblyRef.SystemDesign),
+        Bindable(false),
+        Designer(
+            "System.Web.UI.Design.WebControls.WebParts.CatalogPartDesigner, "
+                + AssemblyRef.SystemDesign
+        ),
     ]
-    public abstract class CatalogPart : Part {
-
+    public abstract class CatalogPart : Part
+    {
         private WebPartManager _webPartManager;
         private CatalogZoneBase _zone;
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public string DisplayTitle {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string DisplayTitle
+        {
+            get
+            {
                 string displayTitle = Title;
-                if (String.IsNullOrEmpty(displayTitle)) {
+                if (String.IsNullOrEmpty(displayTitle))
+                {
                     displayTitle = SR.GetString(SR.Part_Untitled);
                 }
                 return displayTitle;
             }
         }
 
-        protected WebPartManager WebPartManager {
-            get {
-                return _webPartManager;
-            }
+        protected WebPartManager WebPartManager
+        {
+            get { return _webPartManager; }
         }
 
-        protected CatalogZoneBase Zone {
-            get {
-                return _zone;
-            }
+        protected CatalogZoneBase Zone
+        {
+            get { return _zone; }
         }
 
         public abstract WebPartDescriptionCollection GetAvailableWebPartDescriptions();
 
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        protected override IDictionary GetDesignModeState() {
+        protected override IDictionary GetDesignModeState()
+        {
             IDictionary state = new HybridDictionary(1);
             state["Zone"] = Zone;
             return state;
@@ -64,29 +66,36 @@ namespace System.Web.UI.WebControls.WebParts {
 
         public abstract WebPart GetWebPart(WebPartDescription description);
 
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
-            if (Zone == null) {
+            if (Zone == null)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.CatalogPart_MustBeInZone, ID));
             }
         }
 
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        protected override void SetDesignModeState(IDictionary data) {
-            if (data != null) {
+        protected override void SetDesignModeState(IDictionary data)
+        {
+            if (data != null)
+            {
                 object o = data["Zone"];
-                if (o != null) {
+                if (o != null)
+                {
                     SetZone((CatalogZoneBase)o);
                 }
             }
         }
 
-        internal void SetWebPartManager(WebPartManager webPartManager) {
+        internal void SetWebPartManager(WebPartManager webPartManager)
+        {
             _webPartManager = webPartManager;
         }
 
-        internal void SetZone(CatalogZoneBase zone) {
+        internal void SetZone(CatalogZoneBase zone)
+        {
             _zone = zone;
         }
     }

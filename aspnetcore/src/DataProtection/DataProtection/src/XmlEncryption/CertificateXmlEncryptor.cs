@@ -143,8 +143,8 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         XmlElement elementToEncrypt
     )
     {
-        var cert =
-            _certFactory() ?? CryptoUtil.Fail<X509Certificate2>("Cert factory returned null.");
+        var cert = _certFactory()
+            ?? CryptoUtil.Fail<X509Certificate2>("Cert factory returned null.");
 
         _logger.EncryptingToX509CertificateWithThumbprint(cert.Thumbprint);
 

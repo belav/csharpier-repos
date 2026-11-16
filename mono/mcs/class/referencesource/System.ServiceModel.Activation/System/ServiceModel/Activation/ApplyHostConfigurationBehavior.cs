@@ -6,30 +6,37 @@ namespace System.ServiceModel.Activation
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
 
     //This is the behavior is intended to auto apply IIS/AspNet configuration to WCF post design time
     class ApplyHostConfigurationBehavior : IServiceBehavior
     {
-        internal ApplyHostConfigurationBehavior()
-        {
-        }
+        internal ApplyHostConfigurationBehavior() { }
 
         void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase service)
         {
-            if (service.Description.Endpoints != null && ServiceHostingEnvironment.MultipleSiteBindingsEnabled)
+            if (
+                service.Description.Endpoints != null
+                && ServiceHostingEnvironment.MultipleSiteBindingsEnabled
+            )
             {
                 FailActivationIfEndpointsHaveAbsoluteAddress(service);
             }
         }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase service, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase service,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase service)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase service
+        )
         {
             if (ServiceHostingEnvironment.MultipleSiteBindingsEnabled)
             {
@@ -41,7 +48,8 @@ namespace System.ServiceModel.Activation
         {
             for (int i = 0; i < service.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = service.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    service.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
                     if (IsSchemeHttpOrHttps(channelDispatcher.Listener.Uri.Scheme))
@@ -49,7 +57,8 @@ namespace System.ServiceModel.Activation
                         for (int j = 0; j < channelDispatcher.Endpoints.Count; j++)
                         {
                             EndpointDispatcher endpointDispatcher = channelDispatcher.Endpoints[j];
-                            EndpointAddressMessageFilter endpointAddressMessageFilter = endpointDispatcher.AddressFilter as EndpointAddressMessageFilter;
+                            EndpointAddressMessageFilter endpointAddressMessageFilter =
+                                endpointDispatcher.AddressFilter as EndpointAddressMessageFilter;
                             if (endpointAddressMessageFilter != null)
                             {
                                 endpointAddressMessageFilter.ComparePort = false;
@@ -72,7 +81,7 @@ namespace System.ServiceModel.Activation
                     }
                     else
                     {
-                        //If the listen URI is not null, we shouldn't care about address. Because there are 
+                        //If the listen URI is not null, we shouldn't care about address. Because there are
                         //customers who have following config (for load balancer scenarios) - Note ExtraFolder and https
                         //listen URI - http://localhost/App1/x.svc
                         //Address -    https://externalhost/ExtranFolder/App1/x.svc
@@ -81,7 +90,8 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-            ServiceDebugBehavior debugBehavior = service.Description.Behaviors.Find<ServiceDebugBehavior>();
+            ServiceDebugBehavior debugBehavior =
+                service.Description.Behaviors.Find<ServiceDebugBehavior>();
             if (debugBehavior != null)
             {
                 if (debugBehavior.HttpHelpPageEnabled)
@@ -94,7 +104,8 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-            ServiceMetadataBehavior metadataBehavior = service.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            ServiceMetadataBehavior metadataBehavior =
+                service.Description.Behaviors.Find<ServiceMetadataBehavior>();
             if (metadataBehavior != null)
             {
                 if (metadataBehavior.HttpGetEnabled)
@@ -112,16 +123,20 @@ namespace System.ServiceModel.Activation
         {
             if (uri != null && uri.IsAbsoluteUri)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_SharedEndpointRequiresRelativeEndpoint(uri.ToString())));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_SharedEndpointRequiresRelativeEndpoint(uri.ToString())
+                    )
+                );
             }
         }
 
         static bool IsSchemeHttpOrHttps(string scheme)
         {
-            return string.Compare(scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
-                   string.Compare(scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0;
+            return string.Compare(scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                || string.Compare(scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)
+                    == 0;
         }
     }
 }
-            
-

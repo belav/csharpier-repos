@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using Xunit;
-using System;
-using System.Threading.Tasks;
 using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.Scripting.Test
 {
@@ -21,12 +21,17 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             string output;
             string errorOutput;
             ScriptState<T> result = null;
-            RuntimeEnvironmentFactory.CaptureOutput(() =>
-            {
-                var task = script.RunAsync();
-                task.Wait();
-                result = task.Result;
-            }, expectedOutput.Length, out output, out errorOutput);
+            RuntimeEnvironmentFactory.CaptureOutput(
+                () =>
+                {
+                    var task = script.RunAsync();
+                    task.Wait();
+                    result = task.Result;
+                },
+                expectedOutput.Length,
+                out output,
+                out errorOutput
+            );
             Assert.Equal(expectedOutput, output.Trim());
             return result;
         }
@@ -36,48 +41,86 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             string output;
             string errorOutput;
             T result = default(T);
-            RuntimeEnvironmentFactory.CaptureOutput(() =>
-            {
-                var task = script.EvaluateAsync();
-                task.Wait();
-                result = task.Result;
-            }, expectedOutput.Length, out output, out errorOutput);
+            RuntimeEnvironmentFactory.CaptureOutput(
+                () =>
+                {
+                    var task = script.EvaluateAsync();
+                    task.Wait();
+                    result = task.Result;
+                },
+                expectedOutput.Length,
+                out output,
+                out errorOutput
+            );
             Assert.Equal(expectedOutput, output.Trim());
             return result;
         }
 
-        public static void ContinueRunScriptWithOutput<T>(Task<ScriptState<T>> scriptState, string code, string expectedOutput)
+        public static void ContinueRunScriptWithOutput<T>(
+            Task<ScriptState<T>> scriptState,
+            string code,
+            string expectedOutput
+        )
         {
             string output;
             string errorOutput;
-            RuntimeEnvironmentFactory.CaptureOutput(() =>
-            {
-                scriptState.ContinueWith(code).Wait();
-            }, expectedOutput.Length, out output, out errorOutput);
+            RuntimeEnvironmentFactory.CaptureOutput(
+                () =>
+                {
+                    scriptState.ContinueWith(code).Wait();
+                },
+                expectedOutput.Length,
+                out output,
+                out errorOutput
+            );
             Assert.Equal(expectedOutput, output.Trim());
         }
 
-        internal static void AssertCompilationError(Script script, params DiagnosticDescription[] expectedDiagnostics)
+        internal static void AssertCompilationError(
+            Script script,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
             AssertCompilationError(() => script.RunAsync().Wait(), expectedDiagnostics);
         }
 
-        internal static void AssertCompilationError(Task<ScriptState> state, string code, params DiagnosticDescription[] expectedDiagnostics)
+        internal static void AssertCompilationError(
+            Task<ScriptState> state,
+            string code,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
-            AssertCompilationError(() => state.Result.ContinueWithAsync(code).Wait(), expectedDiagnostics);
+            AssertCompilationError(
+                () => state.Result.ContinueWithAsync(code).Wait(),
+                expectedDiagnostics
+            );
         }
 
-        internal static void AssertCompilationError<T>(Task<ScriptState<T>> state, string code, params DiagnosticDescription[] expectedDiagnostics)
+        internal static void AssertCompilationError<T>(
+            Task<ScriptState<T>> state,
+            string code,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
-            AssertCompilationError(() => state.Result.ContinueWithAsync(code).Wait(), expectedDiagnostics);
+            AssertCompilationError(
+                () => state.Result.ContinueWithAsync(code).Wait(),
+                expectedDiagnostics
+            );
         }
 
-        internal static void AssertCompilationError(ScriptState state, string code, params DiagnosticDescription[] expectedDiagnostics)
+        internal static void AssertCompilationError(
+            ScriptState state,
+            string code,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
             AssertCompilationError(() => state.ContinueWithAsync(code).Wait(), expectedDiagnostics);
         }
 
-        internal static void AssertCompilationError(Action action, params DiagnosticDescription[] expectedDiagnostics)
+        internal static void AssertCompilationError(
+            Action action,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
             bool noException = false;
             try
@@ -88,7 +131,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             catch (CompilationErrorException e)
             {
                 e.Diagnostics.Verify(expectedDiagnostics);
-                e.Diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error && e.Message == d.ToString());
+                e.Diagnostics.Any(d =>
+                    d.Severity == DiagnosticSeverity.Error && e.Message == d.ToString()
+                );
             }
             catch (Exception e)
             {

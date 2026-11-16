@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // so simply recurse.
                         return conversion.Operand.NullableAlwaysHasValue();
                     case ConversionKind.ImplicitEnumeration:
-                        // The C# specification categorizes conversion from literal zero to nullable enum as 
-                        // an Implicit Enumeration Conversion. 
+                        // The C# specification categorizes conversion from literal zero to nullable enum as
+                        // an Implicit Enumeration Conversion.
                         return conversion.Operand.NullableAlwaysHasValue();
                 }
             }
@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // a nullable value type; obviously it never has a value.
                         return true;
                     case ConversionKind.DefaultLiteral:
-                        // Any default literal to a nullable value type never has a value. 
+                        // Any default literal to a nullable value type never has a value.
                         return true;
                     case ConversionKind.ImplicitNullable:
                     case ConversionKind.ExplicitNullable:
@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // UNDONE: We could be more sophisticated here. For example, most lifted operators that have 
+            // UNDONE: We could be more sophisticated here. For example, most lifted operators that have
             // UNDONE: a known-to-be-null operand are also known to be null.
 
             return false;
@@ -129,7 +129,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static bool IsNullableNonBoolean(this BoundExpression expr)
         {
             Debug.Assert(expr != null);
-            if (expr.Type.IsNullableType() && expr.Type.GetNullableUnderlyingType().SpecialType != SpecialType.System_Boolean)
+            if (
+                expr.Type.IsNullableType()
+                && expr.Type.GetNullableUnderlyingType().SpecialType != SpecialType.System_Boolean
+            )
                 return true;
             return false;
         }

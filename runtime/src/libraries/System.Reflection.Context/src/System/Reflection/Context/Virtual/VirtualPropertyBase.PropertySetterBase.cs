@@ -10,9 +10,7 @@ namespace System.Reflection.Context.Virtual
             private Type[]? _parameterTypes;
 
             protected PropertySetterBase(VirtualPropertyBase property)
-                : base(property)
-            {
-            }
+                : base(property) { }
 
             public sealed override string Name
             {
@@ -21,7 +19,12 @@ namespace System.Reflection.Context.Virtual
 
             public sealed override Type ReturnType
             {
-                get { return DeclaringProperty.ReflectionContext.MapType(IntrospectionExtensions.GetTypeInfo(typeof(void))); }
+                get
+                {
+                    return DeclaringProperty.ReflectionContext.MapType(
+                        IntrospectionExtensions.GetTypeInfo(typeof(void))
+                    );
+                }
             }
 
             protected override Type[] GetParameterTypes()

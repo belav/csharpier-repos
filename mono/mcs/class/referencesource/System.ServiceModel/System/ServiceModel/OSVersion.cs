@@ -22,7 +22,7 @@ namespace System.ServiceModel
         WinXP,
 
         /// <summary>
-        /// OS Version - Windows Server 2003 
+        /// OS Version - Windows Server 2003
         /// </summary>
         Win2003,
 
@@ -44,6 +44,6 @@ namespace System.ServiceModel
         /// <summary>
         /// OS Versions after Windows 8
         /// </summary>
-        PostWin8,        
+        PostWin8,
     }
 }

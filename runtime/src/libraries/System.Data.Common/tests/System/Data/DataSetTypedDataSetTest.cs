@@ -23,16 +23,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.ComponentModel;
-
 using System.Collections;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Tests;
 using System.Xml;
 using System.Xml.Schema;
-using System.IO;
-using System.Globalization;
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -40,7 +39,11 @@ namespace System.Data.Tests
     {
         private string _eventStatus = string.Empty;
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void TypedDataSet()
         {
             int i = 0;
@@ -51,8 +54,9 @@ namespace System.Data.Tests
             Assert.Equal(typeof(myTypedDataSet), ds.GetType());
 
             // fill dataset
-            ds.ReadXml(new StringReader(
-                @"<?xml version=""1.0"" standalone=""yes""?>
+            ds.ReadXml(
+                new StringReader(
+                    @"<?xml version=""1.0"" standalone=""yes""?>
                 <myTypedDataSet xmlns=""http://www.tempuri.org/myTypedDataSet.xsd"">
                   <Order_x0020_Details>
                     <OrderID>10250</OrderID>
@@ -614,7 +618,9 @@ namespace System.Data.Tests
                     <RequiredDate>1996-08-29T00:00:00.0000000+03:00</RequiredDate>
                     <ShippedDate>1996-08-02T00:00:00.0000000+03:00</ShippedDate>
                   </Orders>
-                </myTypedDataSet>"));
+                </myTypedDataSet>"
+                )
+            );
 
             // check DataSet named property "Orders"
             myTypedDataSet.OrdersDataTable tblOrders = null;
@@ -627,10 +633,21 @@ namespace System.Data.Tests
 
             //add new row AddTableNameRow, check row count");
             i = tblOrders.Rows.Count;
-            tblOrders.AddOrdersRow("SAVEA", 1, new DateTime(1998, 05, 01, 00, 00, 00, 000)
-                , new DateTime(1998, 05, 29, 00, 00, 00, 000)
-                , new DateTime(1998, 05, 04, 00, 00, 00, 000), 1, 30.0900m
-                , "Save-a-lot Markets", "187 Suffolk Ln.", "Boise", "ID", "83720", "USA");
+            tblOrders.AddOrdersRow(
+                "SAVEA",
+                1,
+                new DateTime(1998, 05, 01, 00, 00, 00, 000),
+                new DateTime(1998, 05, 29, 00, 00, 00, 000),
+                new DateTime(1998, 05, 04, 00, 00, 00, 000),
+                1,
+                30.0900m,
+                "Save-a-lot Markets",
+                "187 Suffolk Ln.",
+                "Boise",
+                "ID",
+                "83720",
+                "USA"
+            );
             Assert.Equal(i + 1, tblOrders.Rows.Count);
 
             //check the new row AutoIncrement field - AddTableNameRow
@@ -685,7 +702,6 @@ namespace System.Data.Tests
             // Table exposes a public property Count == table.Rows.Count
             Assert.Equal(tblOrders.Count, tblOrders.Rows.Count);
 
-
             // find function
             myTypedDataSet.OrdersRow dr = tblOrders[0];
             Assert.Equal(tblOrders.FindByOrderID(dr.OrderID), dr);
@@ -709,9 +725,13 @@ namespace System.Data.Tests
 
             //Check table events
             // add event handlers
-            ds.Orders.OrdersRowChanging += new myTypedDataSet.OrdersRowChangeEventHandler(T_Changing);
+            ds.Orders.OrdersRowChanging += new myTypedDataSet.OrdersRowChangeEventHandler(
+                T_Changing
+            );
             ds.Orders.OrdersRowChanged += new myTypedDataSet.OrdersRowChangeEventHandler(T_Changed);
-            ds.Orders.OrdersRowDeleting += new myTypedDataSet.OrdersRowChangeEventHandler(T_Deleting);
+            ds.Orders.OrdersRowDeleting += new myTypedDataSet.OrdersRowChangeEventHandler(
+                T_Deleting
+            );
             ds.Orders.OrdersRowDeleted += new myTypedDataSet.OrdersRowChangeEventHandler(T_Deleted);
 
             //RowChange event order
@@ -817,7 +837,8 @@ namespace System.Data.Tests
             public myTypedDataSet()
             {
                 InitClass();
-                CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(SchemaChanged);
+                CollectionChangeEventHandler schemaChangedHandler =
+                    new CollectionChangeEventHandler(SchemaChanged);
                 Tables.CollectionChanged += schemaChangedHandler;
                 Relations.CollectionChanged += schemaChangedHandler;
             }
@@ -851,7 +872,8 @@ namespace System.Data.Tests
                     InitClass();
                 }
                 GetSerializationData(info, context);
-                CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(SchemaChanged);
+                CollectionChangeEventHandler schemaChangedHandler =
+                    new CollectionChangeEventHandler(SchemaChanged);
                 Tables.CollectionChanged += schemaChangedHandler;
                 Relations.CollectionChanged += schemaChangedHandler;
             }
@@ -940,14 +962,21 @@ namespace System.Data.Tests
                 Orders = new OrdersDataTable();
                 Tables.Add(Orders);
                 ForeignKeyConstraint fkc;
-                fkc = new ForeignKeyConstraint("OrdersOrder_x0020_Details",
-                    new DataColumn[] { Orders.OrderIDColumn}, new DataColumn[] { OrderDetails.OrderIDColumn });
+                fkc = new ForeignKeyConstraint(
+                    "OrdersOrder_x0020_Details",
+                    new DataColumn[] { Orders.OrderIDColumn },
+                    new DataColumn[] { OrderDetails.OrderIDColumn }
+                );
                 OrderDetails.Constraints.Add(fkc);
                 fkc.AcceptRejectRule = AcceptRejectRule.None;
                 fkc.DeleteRule = Rule.Cascade;
                 fkc.UpdateRule = Rule.Cascade;
-                _relationOrdersOrder_x0020_Details = new DataRelation("OrdersOrder_x0020_Details",
-                    new DataColumn[] { Orders.OrderIDColumn }, new DataColumn[] { OrderDetails.OrderIDColumn }, false);
+                _relationOrdersOrder_x0020_Details = new DataRelation(
+                    "OrdersOrder_x0020_Details",
+                    new DataColumn[] { Orders.OrderIDColumn },
+                    new DataColumn[] { OrderDetails.OrderIDColumn },
+                    false
+                );
                 Relations.Add(_relationOrdersOrder_x0020_Details);
             }
 
@@ -969,20 +998,23 @@ namespace System.Data.Tests
                 }
             }
 
-            public delegate void OrderDetailsRowChangeEventHandler(object sender, OrderDetailsRowChangeEvent e);
+            public delegate void OrderDetailsRowChangeEventHandler(
+                object sender,
+                OrderDetailsRowChangeEvent e
+            );
 
             public delegate void OrdersRowChangeEventHandler(object sender, OrdersRowChangeEvent e);
 
             public class OrderDetailsDataTable : DataTable, IEnumerable
             {
-                internal OrderDetailsDataTable() :
-                    base("Order Details")
+                internal OrderDetailsDataTable()
+                    : base("Order Details")
                 {
                     InitClass();
                 }
 
-                internal OrderDetailsDataTable(DataTable table) :
-                    base(table.TableName)
+                internal OrderDetailsDataTable(DataTable table)
+                    : base(table.TableName)
                 {
                     if ((table.CaseSensitive != table.DataSet.CaseSensitive))
                     {
@@ -1004,10 +1036,7 @@ namespace System.Data.Tests
                 [Browsable(false)]
                 public int Count
                 {
-                    get
-                    {
-                        return Rows.Count;
-                    }
+                    get { return Rows.Count; }
                 }
 
                 internal DataColumn OrderIDColumn { get; private set; }
@@ -1022,10 +1051,7 @@ namespace System.Data.Tests
 
                 public OrderDetailsRow this[int index]
                 {
-                    get
-                    {
-                        return ((OrderDetailsRow)(Rows[index]));
-                    }
+                    get { return ((OrderDetailsRow)(Rows[index])); }
                 }
 
                 public event OrderDetailsRowChangeEventHandler OrderDetailsRowChanged;
@@ -1041,15 +1067,23 @@ namespace System.Data.Tests
                     Rows.Add(row);
                 }
 
-                public OrderDetailsRow AddOrder_DetailsRow(OrdersRow parentOrdersRowByOrdersOrder_x0020_Details, int ProductID, decimal UnitPrice, short Quantity, string Discount)
+                public OrderDetailsRow AddOrder_DetailsRow(
+                    OrdersRow parentOrdersRowByOrdersOrder_x0020_Details,
+                    int ProductID,
+                    decimal UnitPrice,
+                    short Quantity,
+                    string Discount
+                )
                 {
                     OrderDetailsRow rowOrderDetailsRow = ((OrderDetailsRow)(NewRow()));
-                    rowOrderDetailsRow.ItemArray = new object[] {
-                                                                     parentOrdersRowByOrdersOrder_x0020_Details[0],
-                                                                     ProductID,
-                                                                     UnitPrice,
-                                                                     Quantity,
-                                                                     Discount};
+                    rowOrderDetailsRow.ItemArray = new object[]
+                    {
+                        parentOrdersRowByOrdersOrder_x0020_Details[0],
+                        ProductID,
+                        UnitPrice,
+                        Quantity,
+                        Discount,
+                    };
                     Rows.Add(rowOrderDetailsRow);
                     return rowOrderDetailsRow;
                 }
@@ -1087,19 +1121,48 @@ namespace System.Data.Tests
 
                 private void InitClass()
                 {
-                    OrderIDColumn = new DataColumn("OrderID", typeof(int), null, MappingType.Element);
+                    OrderIDColumn = new DataColumn(
+                        "OrderID",
+                        typeof(int),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(OrderIDColumn);
-                    ProductIDColumn = new DataColumn("ProductID", typeof(int), null, MappingType.Element);
+                    ProductIDColumn = new DataColumn(
+                        "ProductID",
+                        typeof(int),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ProductIDColumn);
-                    UnitPriceColumn = new DataColumn("UnitPrice", typeof(decimal), null, MappingType.Element);
+                    UnitPriceColumn = new DataColumn(
+                        "UnitPrice",
+                        typeof(decimal),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(UnitPriceColumn);
-                    QuantityColumn = new DataColumn("Quantity", typeof(short), null, MappingType.Element);
+                    QuantityColumn = new DataColumn(
+                        "Quantity",
+                        typeof(short),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(QuantityColumn);
-                    DiscountColumn = new DataColumn("Discount", typeof(string), null, MappingType.Element);
+                    DiscountColumn = new DataColumn(
+                        "Discount",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(DiscountColumn);
-                    Constraints.Add(new UniqueConstraint("Constraint1", new DataColumn[] {
-                                                                                                  OrderIDColumn,
-                                                                                                  ProductIDColumn}, true));
+                    Constraints.Add(
+                        new UniqueConstraint(
+                            "Constraint1",
+                            new DataColumn[] { OrderIDColumn, ProductIDColumn },
+                            true
+                        )
+                    );
                     OrderIDColumn.AllowDBNull = false;
                     ProductIDColumn.AllowDBNull = false;
                     UnitPriceColumn.AllowDBNull = false;
@@ -1127,7 +1190,10 @@ namespace System.Data.Tests
                     base.OnRowChanged(e);
                     if ((OrderDetailsRowChanged != null))
                     {
-                        OrderDetailsRowChanged(this, new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action));
+                        OrderDetailsRowChanged(
+                            this,
+                            new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1136,7 +1202,10 @@ namespace System.Data.Tests
                     base.OnRowChanging(e);
                     if ((OrderDetailsRowChanging != null))
                     {
-                        OrderDetailsRowChanging(this, new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action));
+                        OrderDetailsRowChanging(
+                            this,
+                            new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1145,7 +1214,10 @@ namespace System.Data.Tests
                     base.OnRowDeleted(e);
                     if ((OrderDetailsRowDeleted != null))
                     {
-                        OrderDetailsRowDeleted(this, new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action));
+                        OrderDetailsRowDeleted(
+                            this,
+                            new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1154,7 +1226,10 @@ namespace System.Data.Tests
                     base.OnRowDeleting(e);
                     if ((OrderDetailsRowDeleting != null))
                     {
-                        OrderDetailsRowDeleting(this, new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action));
+                        OrderDetailsRowDeleting(
+                            this,
+                            new OrderDetailsRowChangeEvent(((OrderDetailsRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1168,58 +1243,34 @@ namespace System.Data.Tests
             {
                 private OrderDetailsDataTable _tableOrderDetails;
 
-                internal OrderDetailsRow(DataRowBuilder rb) :
-                    base(rb)
+                internal OrderDetailsRow(DataRowBuilder rb)
+                    : base(rb)
                 {
                     _tableOrderDetails = ((OrderDetailsDataTable)(Table));
                 }
 
                 public int OrderID
                 {
-                    get
-                    {
-                        return ((int)(this[_tableOrderDetails.OrderIDColumn]));
-                    }
-                    set
-                    {
-                        this[_tableOrderDetails.OrderIDColumn] = value;
-                    }
+                    get { return ((int)(this[_tableOrderDetails.OrderIDColumn])); }
+                    set { this[_tableOrderDetails.OrderIDColumn] = value; }
                 }
 
                 public int ProductID
                 {
-                    get
-                    {
-                        return ((int)(this[_tableOrderDetails.ProductIDColumn]));
-                    }
-                    set
-                    {
-                        this[_tableOrderDetails.ProductIDColumn] = value;
-                    }
+                    get { return ((int)(this[_tableOrderDetails.ProductIDColumn])); }
+                    set { this[_tableOrderDetails.ProductIDColumn] = value; }
                 }
 
                 public decimal UnitPrice
                 {
-                    get
-                    {
-                        return ((decimal)(this[_tableOrderDetails.UnitPriceColumn]));
-                    }
-                    set
-                    {
-                        this[_tableOrderDetails.UnitPriceColumn] = value;
-                    }
+                    get { return ((decimal)(this[_tableOrderDetails.UnitPriceColumn])); }
+                    set { this[_tableOrderDetails.UnitPriceColumn] = value; }
                 }
 
                 public short Quantity
                 {
-                    get
-                    {
-                        return ((short)(this[_tableOrderDetails.QuantityColumn]));
-                    }
-                    set
-                    {
-                        this[_tableOrderDetails.QuantityColumn] = value;
-                    }
+                    get { return ((short)(this[_tableOrderDetails.QuantityColumn])); }
+                    set { this[_tableOrderDetails.QuantityColumn] = value; }
                 }
 
                 public string Discount
@@ -1232,25 +1283,26 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrderDetails.DiscountColumn] = value;
-                    }
+                    set { this[_tableOrderDetails.DiscountColumn] = value; }
                 }
 
                 public OrdersRow OrdersRow
                 {
                     get
                     {
-                        return ((OrdersRow)(GetParentRow(Table.ParentRelations["OrdersOrder_x0020_Details"])));
+                        return (
+                            (OrdersRow)(
+                                GetParentRow(Table.ParentRelations["OrdersOrder_x0020_Details"])
+                            )
+                        );
                     }
-                    set
-                    {
-                        SetParentRow(value, Table.ParentRelations["OrdersOrder_x0020_Details"]);
-                    }
+                    set { SetParentRow(value, Table.ParentRelations["OrdersOrder_x0020_Details"]); }
                 }
 
                 public bool IsDiscountNull()
@@ -1279,14 +1331,14 @@ namespace System.Data.Tests
 
             public class OrdersDataTable : DataTable, IEnumerable
             {
-                internal OrdersDataTable() :
-                    base("Orders")
+                internal OrdersDataTable()
+                    : base("Orders")
                 {
                     InitClass();
                 }
 
-                internal OrdersDataTable(DataTable table) :
-                    base(table.TableName)
+                internal OrdersDataTable(DataTable table)
+                    : base(table.TableName)
                 {
                     if ((table.CaseSensitive != table.DataSet.CaseSensitive))
                     {
@@ -1308,10 +1360,7 @@ namespace System.Data.Tests
                 [Browsable(false)]
                 public int Count
                 {
-                    get
-                    {
-                        return Rows.Count;
-                    }
+                    get { return Rows.Count; }
                 }
 
                 internal DataColumn OrderIDColumn { get; private set; }
@@ -1344,10 +1393,7 @@ namespace System.Data.Tests
 
                 public OrdersRow this[int index]
                 {
-                    get
-                    {
-                        return ((OrdersRow)(Rows[index]));
-                    }
+                    get { return ((OrdersRow)(Rows[index])); }
                 }
 
                 public event OrdersRowChangeEventHandler OrdersRowChanged;
@@ -1363,32 +1409,47 @@ namespace System.Data.Tests
                     Rows.Add(row);
                 }
 
-                public OrdersRow AddOrdersRow(string CustomerID, int EmployeeID, DateTime OrderDate, DateTime RequiredDate, DateTime ShippedDate, int ShipVia, decimal Freight, string ShipName, string ShipAddress, string ShipCity, string ShipRegion, string ShipPostalCode, string ShipCountry)
+                public OrdersRow AddOrdersRow(
+                    string CustomerID,
+                    int EmployeeID,
+                    DateTime OrderDate,
+                    DateTime RequiredDate,
+                    DateTime ShippedDate,
+                    int ShipVia,
+                    decimal Freight,
+                    string ShipName,
+                    string ShipAddress,
+                    string ShipCity,
+                    string ShipRegion,
+                    string ShipPostalCode,
+                    string ShipCountry
+                )
                 {
                     OrdersRow rowOrdersRow = ((OrdersRow)(NewRow()));
-                    rowOrdersRow.ItemArray = new object[] {
-                                                              null,
-                                                              CustomerID,
-                                                              EmployeeID,
-                                                              OrderDate,
-                                                              RequiredDate,
-                                                              ShippedDate,
-                                                              ShipVia,
-                                                              Freight,
-                                                              ShipName,
-                                                              ShipAddress,
-                                                              ShipCity,
-                                                              ShipRegion,
-                                                              ShipPostalCode,
-                                                              ShipCountry};
+                    rowOrdersRow.ItemArray = new object[]
+                    {
+                        null,
+                        CustomerID,
+                        EmployeeID,
+                        OrderDate,
+                        RequiredDate,
+                        ShippedDate,
+                        ShipVia,
+                        Freight,
+                        ShipName,
+                        ShipAddress,
+                        ShipCity,
+                        ShipRegion,
+                        ShipPostalCode,
+                        ShipCountry,
+                    };
                     Rows.Add(rowOrdersRow);
                     return rowOrdersRow;
                 }
 
                 public OrdersRow FindByOrderID(int OrderID)
                 {
-                    return ((OrdersRow)(Rows.Find(new object[] {
-                                                                        OrderID})));
+                    return ((OrdersRow)(Rows.Find(new object[] { OrderID })));
                 }
 
                 public IEnumerator GetEnumerator()
@@ -1428,36 +1489,111 @@ namespace System.Data.Tests
 
                 private void InitClass()
                 {
-                    OrderIDColumn = new DataColumn("OrderID", typeof(int), null, MappingType.Element);
+                    OrderIDColumn = new DataColumn(
+                        "OrderID",
+                        typeof(int),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(OrderIDColumn);
-                    CustomerIDColumn = new DataColumn("CustomerID", typeof(string), null, MappingType.Element);
+                    CustomerIDColumn = new DataColumn(
+                        "CustomerID",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(CustomerIDColumn);
-                    EmployeeIDColumn = new DataColumn("EmployeeID", typeof(int), null, MappingType.Element);
+                    EmployeeIDColumn = new DataColumn(
+                        "EmployeeID",
+                        typeof(int),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(EmployeeIDColumn);
-                    OrderDateColumn = new DataColumn("OrderDate", typeof(DateTime), null, MappingType.Element);
+                    OrderDateColumn = new DataColumn(
+                        "OrderDate",
+                        typeof(DateTime),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(OrderDateColumn);
-                    RequiredDateColumn = new DataColumn("RequiredDate", typeof(DateTime), null, MappingType.Element);
+                    RequiredDateColumn = new DataColumn(
+                        "RequiredDate",
+                        typeof(DateTime),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(RequiredDateColumn);
-                    ShippedDateColumn = new DataColumn("ShippedDate", typeof(DateTime), null, MappingType.Element);
+                    ShippedDateColumn = new DataColumn(
+                        "ShippedDate",
+                        typeof(DateTime),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShippedDateColumn);
-                    ShipViaColumn = new DataColumn("ShipVia", typeof(int), null, MappingType.Element);
+                    ShipViaColumn = new DataColumn(
+                        "ShipVia",
+                        typeof(int),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipViaColumn);
-                    FreightColumn = new DataColumn("Freight", typeof(decimal), null, MappingType.Element);
+                    FreightColumn = new DataColumn(
+                        "Freight",
+                        typeof(decimal),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(FreightColumn);
-                    ShipNameColumn = new DataColumn("ShipName", typeof(string), null, MappingType.Element);
+                    ShipNameColumn = new DataColumn(
+                        "ShipName",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipNameColumn);
-                    ShipAddressColumn = new DataColumn("ShipAddress", typeof(string), null, MappingType.Element);
+                    ShipAddressColumn = new DataColumn(
+                        "ShipAddress",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipAddressColumn);
-                    ShipCityColumn = new DataColumn("ShipCity", typeof(string), null, MappingType.Element);
+                    ShipCityColumn = new DataColumn(
+                        "ShipCity",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipCityColumn);
-                    ShipRegionColumn = new DataColumn("ShipRegion", typeof(string), null, MappingType.Element);
+                    ShipRegionColumn = new DataColumn(
+                        "ShipRegion",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipRegionColumn);
-                    ShipPostalCodeColumn = new DataColumn("ShipPostalCode", typeof(string), null, MappingType.Element);
+                    ShipPostalCodeColumn = new DataColumn(
+                        "ShipPostalCode",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipPostalCodeColumn);
-                    ShipCountryColumn = new DataColumn("ShipCountry", typeof(string), null, MappingType.Element);
+                    ShipCountryColumn = new DataColumn(
+                        "ShipCountry",
+                        typeof(string),
+                        null,
+                        MappingType.Element
+                    );
                     Columns.Add(ShipCountryColumn);
-                    Constraints.Add(new UniqueConstraint("Constraint1", new DataColumn[] {
-                                                                                                  OrderIDColumn}, true));
+                    Constraints.Add(
+                        new UniqueConstraint(
+                            "Constraint1",
+                            new DataColumn[] { OrderIDColumn },
+                            true
+                        )
+                    );
                     OrderIDColumn.AutoIncrement = true;
                     OrderIDColumn.AllowDBNull = false;
                     OrderIDColumn.ReadOnly = true;
@@ -1484,7 +1620,10 @@ namespace System.Data.Tests
                     base.OnRowChanged(e);
                     if ((OrdersRowChanged != null))
                     {
-                        OrdersRowChanged(this, new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action));
+                        OrdersRowChanged(
+                            this,
+                            new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1493,7 +1632,10 @@ namespace System.Data.Tests
                     base.OnRowChanging(e);
                     if ((OrdersRowChanging != null))
                     {
-                        OrdersRowChanging(this, new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action));
+                        OrdersRowChanging(
+                            this,
+                            new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1502,7 +1644,10 @@ namespace System.Data.Tests
                     base.OnRowDeleted(e);
                     if ((OrdersRowDeleted != null))
                     {
-                        OrdersRowDeleted(this, new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action));
+                        OrdersRowDeleted(
+                            this,
+                            new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1511,7 +1656,10 @@ namespace System.Data.Tests
                     base.OnRowDeleting(e);
                     if ((OrdersRowDeleting != null))
                     {
-                        OrdersRowDeleting(this, new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action));
+                        OrdersRowDeleting(
+                            this,
+                            new OrdersRowChangeEvent(((OrdersRow)(e.Row)), e.Action)
+                        );
                     }
                 }
 
@@ -1525,22 +1673,16 @@ namespace System.Data.Tests
             {
                 private OrdersDataTable _tableOrders;
 
-                internal OrdersRow(DataRowBuilder rb) :
-                    base(rb)
+                internal OrdersRow(DataRowBuilder rb)
+                    : base(rb)
                 {
                     _tableOrders = ((OrdersDataTable)(Table));
                 }
 
                 public int OrderID
                 {
-                    get
-                    {
-                        return ((int)(this[_tableOrders.OrderIDColumn]));
-                    }
-                    set
-                    {
-                        this[_tableOrders.OrderIDColumn] = value;
-                    }
+                    get { return ((int)(this[_tableOrders.OrderIDColumn])); }
+                    set { this[_tableOrders.OrderIDColumn] = value; }
                 }
 
                 public string CustomerID
@@ -1553,13 +1695,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.CustomerIDColumn] = value;
-                    }
+                    set { this[_tableOrders.CustomerIDColumn] = value; }
                 }
 
                 public int EmployeeID
@@ -1572,13 +1714,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.EmployeeIDColumn] = value;
-                    }
+                    set { this[_tableOrders.EmployeeIDColumn] = value; }
                 }
 
                 public DateTime OrderDate
@@ -1591,13 +1733,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.OrderDateColumn] = value;
-                    }
+                    set { this[_tableOrders.OrderDateColumn] = value; }
                 }
 
                 public DateTime RequiredDate
@@ -1610,13 +1752,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.RequiredDateColumn] = value;
-                    }
+                    set { this[_tableOrders.RequiredDateColumn] = value; }
                 }
 
                 public DateTime ShippedDate
@@ -1629,13 +1771,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShippedDateColumn] = value;
-                    }
+                    set { this[_tableOrders.ShippedDateColumn] = value; }
                 }
 
                 public int ShipVia
@@ -1648,13 +1790,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipViaColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipViaColumn] = value; }
                 }
 
                 public decimal Freight
@@ -1667,13 +1809,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.FreightColumn] = value;
-                    }
+                    set { this[_tableOrders.FreightColumn] = value; }
                 }
 
                 public string ShipName
@@ -1686,13 +1828,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipNameColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipNameColumn] = value; }
                 }
 
                 public string ShipAddress
@@ -1705,13 +1847,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipAddressColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipAddressColumn] = value; }
                 }
 
                 public string ShipCity
@@ -1724,13 +1866,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipCityColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipCityColumn] = value; }
                 }
 
                 public string ShipRegion
@@ -1743,13 +1885,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipRegionColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipRegionColumn] = value; }
                 }
 
                 public string ShipPostalCode
@@ -1762,13 +1904,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipPostalCodeColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipPostalCodeColumn] = value; }
                 }
 
                 public string ShipCountry
@@ -1781,13 +1923,13 @@ namespace System.Data.Tests
                         }
                         catch (InvalidCastException e)
                         {
-                            throw new StrongTypingException("Cannot get value because it is DBNull.", e);
+                            throw new StrongTypingException(
+                                "Cannot get value because it is DBNull.",
+                                e
+                            );
                         }
                     }
-                    set
-                    {
-                        this[_tableOrders.ShipCountryColumn] = value;
-                    }
+                    set { this[_tableOrders.ShipCountryColumn] = value; }
                 }
 
                 public bool IsCustomerIDNull()
@@ -1922,7 +2064,11 @@ namespace System.Data.Tests
 
                 public OrderDetailsRow[] GetOrderDetailsRows()
                 {
-                    return ((OrderDetailsRow[])(GetChildRows(Table.ChildRelations["OrdersOrder_x0020_Details"])));
+                    return (
+                        (OrderDetailsRow[])(
+                            GetChildRows(Table.ChildRelations["OrdersOrder_x0020_Details"])
+                        )
+                    );
                 }
             }
 

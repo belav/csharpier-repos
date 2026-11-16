@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly int _ordinal;
         private readonly string _name;
 
-        public SynthesizedSimpleMethodTypeParameterSymbol(MethodSymbol container, int ordinal, string name)
+        public SynthesizedSimpleMethodTypeParameterSymbol(
+            MethodSymbol container,
+            int ordinal,
+            string name
+        )
         {
             _container = container;
             _ordinal = ordinal;
@@ -98,21 +102,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { throw ExceptionUtilities.Unreachable(); }
         }
 
-        internal override void EnsureAllConstraintsAreResolved()
-        {
-        }
+        internal override void EnsureAllConstraintsAreResolved() { }
 
-        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress)
+        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             return ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress)
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress)
+        internal override NamedTypeSymbol GetEffectiveBaseClass(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
@@ -123,4 +131,3 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 }
-

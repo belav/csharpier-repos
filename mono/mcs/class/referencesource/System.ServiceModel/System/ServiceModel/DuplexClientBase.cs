@@ -13,63 +13,73 @@ namespace System.ServiceModel
         // in ServiceContractGenerator.cs as well.
 
         protected DuplexClientBase(object callbackInstance)
-            : this(new InstanceContext(callbackInstance))
-        {
-        }
+            : this(new InstanceContext(callbackInstance)) { }
+
         protected DuplexClientBase(object callbackInstance, string endpointConfigurationName)
-            : this(new InstanceContext(callbackInstance), endpointConfigurationName)
-        {
-        }
-        protected DuplexClientBase(object callbackInstance, string endpointConfigurationName, string remoteAddress)
+            : this(new InstanceContext(callbackInstance), endpointConfigurationName) { }
+
+        protected DuplexClientBase(
+            object callbackInstance,
+            string endpointConfigurationName,
+            string remoteAddress
+        )
             : this(new InstanceContext(callbackInstance), endpointConfigurationName, remoteAddress)
-        {
-        }
-        protected DuplexClientBase(object callbackInstance, string endpointConfigurationName, EndpointAddress remoteAddress)
+        { }
+
+        protected DuplexClientBase(
+            object callbackInstance,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
             : this(new InstanceContext(callbackInstance), endpointConfigurationName, remoteAddress)
-        {
-        }
-        protected DuplexClientBase(object callbackInstance, Binding binding, EndpointAddress remoteAddress)
-            : this(new InstanceContext(callbackInstance), binding, remoteAddress)
-        {
-        }
+        { }
+
+        protected DuplexClientBase(
+            object callbackInstance,
+            Binding binding,
+            EndpointAddress remoteAddress
+        )
+            : this(new InstanceContext(callbackInstance), binding, remoteAddress) { }
 
         protected DuplexClientBase(object callbackInstance, ServiceEndpoint endpoint)
-            : this(new InstanceContext(callbackInstance), endpoint)
-        {
-        }
+            : this(new InstanceContext(callbackInstance), endpoint) { }
 
         protected DuplexClientBase(InstanceContext callbackInstance)
-            : base(callbackInstance)
-        {
-        }
-        protected DuplexClientBase(InstanceContext callbackInstance, string endpointConfigurationName)
-            : base(callbackInstance, endpointConfigurationName)
-        {
-        }
-        protected DuplexClientBase(InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress)
-            : base(callbackInstance, endpointConfigurationName, remoteAddress)
-        {
-        }
-        protected DuplexClientBase(InstanceContext callbackInstance, string endpointConfigurationName, EndpointAddress remoteAddress)
-            : base(callbackInstance, endpointConfigurationName, remoteAddress)
-        {
-        }
-        protected DuplexClientBase(InstanceContext callbackInstance, Binding binding, EndpointAddress remoteAddress)
-            : base(callbackInstance, binding, remoteAddress)
-        {
-        }
+            : base(callbackInstance) { }
+
+        protected DuplexClientBase(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName
+        )
+            : base(callbackInstance, endpointConfigurationName) { }
+
+        protected DuplexClientBase(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName,
+            string remoteAddress
+        )
+            : base(callbackInstance, endpointConfigurationName, remoteAddress) { }
+
+        protected DuplexClientBase(
+            InstanceContext callbackInstance,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
+            : base(callbackInstance, endpointConfigurationName, remoteAddress) { }
+
+        protected DuplexClientBase(
+            InstanceContext callbackInstance,
+            Binding binding,
+            EndpointAddress remoteAddress
+        )
+            : base(callbackInstance, binding, remoteAddress) { }
 
         protected DuplexClientBase(InstanceContext callbackInstance, ServiceEndpoint endpoint)
-            : base(callbackInstance, endpoint)
-        {
-        }
+            : base(callbackInstance, endpoint) { }
 
         public IDuplexContextChannel InnerDuplexChannel
         {
-            get
-            {
-                return (IDuplexContextChannel)InnerChannel;
-            }
+            get { return (IDuplexContextChannel)InnerChannel; }
         }
     }
 }

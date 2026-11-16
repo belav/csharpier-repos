@@ -5,38 +5,37 @@
 using System;
 using Xunit;
 
-
 public struct ValX1<T>
 {
     public T t;
+
     public ValX1(T t)
     {
         this.t = t;
     }
-
 }
+
 public class RefX1<T>
 {
     public T t;
+
     public RefX1(T t)
     {
         this.t = t;
     }
 }
 
-
 public class Gen<T>
 {
     public static int size = 10;
-
-
 
     public T[,] TArray;
 
     public void StoreTArray(T[] arr)
     {
         TArray = new T[size, size];
-        int i, j;
+        int i,
+            j;
 
         for (i = 0; (i < size); i++)
         {
@@ -50,7 +49,8 @@ public class Gen<T>
     public void LoadTArray(out T[] arr)
     {
         arr = new T[size * size];
-        int i, j;
+        int i,
+            j;
         for (i = 0; (i < size); i++)
         {
             for (j = 0; (j < size); j++)
@@ -62,7 +62,8 @@ public class Gen<T>
 
     public bool VerifyTArray(T[] arr)
     {
-        int i, j;
+        int i,
+            j;
         for (i = 0; (i < size); i++)
         {
             for (j = 0; (j < size); j++)
@@ -76,13 +77,13 @@ public class Gen<T>
         }
         return true;
     }
-
 }
 
 public class Test_class01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -91,7 +92,6 @@ public class Test_class01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     [Fact]
@@ -123,7 +123,6 @@ public class Test_class01
         GenDouble.LoadTArray(out DoubleArr_out);
         Eval(GenDouble.VerifyTArray(DoubleArr_out));
 
-
         string[] StringArr_in = new String[100];
         for (i = 0; (i < 10 * 10); i++)
         {
@@ -136,7 +135,6 @@ public class Test_class01
         GenString.LoadTArray(out StringArr_out);
         Eval(GenString.VerifyTArray(StringArr_out));
 
-
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -148,6 +146,4 @@ public class Test_class01
             return 1;
         }
     }
-
 }
-

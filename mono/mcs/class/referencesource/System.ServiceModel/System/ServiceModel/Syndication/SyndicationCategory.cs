@@ -4,16 +4,18 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Xml;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class SyndicationCategory : IExtensibleSyndicationObject
     {
         ExtensibleSyndicationObject extensions = new ExtensibleSyndicationObject();
@@ -22,14 +24,10 @@ namespace System.ServiceModel.Syndication
         string scheme;
 
         public SyndicationCategory()
-            : this((string) null)
-        {
-        }
+            : this((string)null) { }
 
         public SyndicationCategory(string name)
-            : this(name, null, null)
-        {
-        }
+            : this(name, null, null) { }
 
         public SyndicationCategory(string name, string scheme, string label)
         {
@@ -83,7 +81,12 @@ namespace System.ServiceModel.Syndication
             return new SyndicationCategory(this);
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -103,7 +106,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
@@ -113,5 +119,4 @@ namespace System.ServiceModel.Syndication
             this.extensions.LoadElementExtensions(buffer);
         }
     }
-
 }

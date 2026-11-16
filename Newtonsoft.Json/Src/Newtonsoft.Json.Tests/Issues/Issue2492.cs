@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Object()
         {
-            string jsontext = @"{ ""ABC"": //DEF
+            string jsontext =
+                @"{ ""ABC"": //DEF
 {}}";
 
             using var stringReader = new StringReader(jsontext);

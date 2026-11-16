@@ -6,9 +6,7 @@ namespace System.ServiceModel.Activities
 {
     public sealed class ReceiveSettings
     {
-        public ReceiveSettings()
-        {
-        }
+        public ReceiveSettings() { }
 
         public string Action { get; set; }
         public bool CanCreateInstance { get; set; }

@@ -17,12 +17,18 @@ using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-    using DomainBoolExpr    = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
-    using DomainTermExpr    = System.Data.Common.Utils.Boolean.TermExpr<System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
+    using DomainBoolExpr = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
+    using DomainTermExpr = System.Data.Common.Utils.Boolean.TermExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
 
     /// <summary>
     /// An abstract class that denotes the boolean expression: "var in values".
-    /// An object of this type can be complete or incomplete. 
+    /// An object of this type can be complete or incomplete.
     /// An incomplete object is one whose domain was not created with all possible values.
     /// Incomplete objects have a limited set of methods that can be called.
     /// </summary>
@@ -34,8 +40,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// "Partial" means that the <see cref="Domain"/> in this restriction is partial - hence the operations on the restriction are limited.
         /// </summary>
         protected MemberRestriction(MemberProjectedSlot slot, Constant value)
-            : this(slot, new Constant[] { value })
-        { }
+            : this(slot, new Constant[] { value }) { }
 
         /// <summary>
         /// Creates an incomplete member restriction with the meaning "<paramref name="slot"/> in <paramref name="values"/>".
@@ -54,15 +59,22 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             m_restrictedMemberSlot = slot;
             m_domain = domain;
             m_isComplete = true;
-            Debug.Assert(m_domain.Count != 0, "If you want a boolean that evaluates to false, " +
-                         "use the ConstantBool abstraction");
+            Debug.Assert(
+                m_domain.Count != 0,
+                "If you want a boolean that evaluates to false, "
+                    + "use the ConstantBool abstraction"
+            );
         }
 
         /// <summary>
         /// Creates a complete member restriction with the meaning "<paramref name="slot"/> in <paramref name="values"/>".
         /// </summary>
         /// <param name="possibleValues">all the values that the <paramref name="slot"/> can take</param>
-        protected MemberRestriction(MemberProjectedSlot slot, IEnumerable<Constant> values, IEnumerable<Constant> possibleValues)
+        protected MemberRestriction(
+            MemberProjectedSlot slot,
+            IEnumerable<Constant> values,
+            IEnumerable<Constant> possibleValues
+        )
             : this(slot, new Domain(values, possibleValues))
         {
             Debug.Assert(possibleValues != null);
@@ -111,7 +123,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             if (domainMap != null)
             {
                 // Look up the domain from the domainMap
-                IEnumerable<Constant> domain = domainMap.GetDomain(m_restrictedMemberSlot.MemberPath);
+                IEnumerable<Constant> domain = domainMap.GetDomain(
+                    m_restrictedMemberSlot.MemberPath
+                );
                 result = MakeTermExpression(this, domain, m_domain.Values);
             }
             else
@@ -124,12 +138,17 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Creates a complete member restriction based on the existing restriction with possible values for the domain being given by <paramref name="possibleValues"/>.
         /// </summary>
-        internal abstract MemberRestriction CreateCompleteMemberRestriction(IEnumerable<Constant> possibleValues);
+        internal abstract MemberRestriction CreateCompleteMemberRestriction(
+            IEnumerable<Constant> possibleValues
+        );
 
         /// <summary>
         /// See <see cref="BoolLiteral.GetRequiredSlots"/>.
         /// </summary>
-        internal override void GetRequiredSlots(MemberProjectionIndex projectedSlotMap, bool[] requiredSlots)
+        internal override void GetRequiredSlots(
+            MemberProjectionIndex projectedSlotMap,
+            bool[] requiredSlots
+        )
         {
             // Simply get the slot for the variable var in "var in values"
             MemberPath member = RestrictedMemberSlot.MemberPath;
@@ -138,11 +157,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// See <see cref="BoolLiteral.IsEqualTo"/>. Member restriction can be incomplete for this operation. 
+        /// See <see cref="BoolLiteral.IsEqualTo"/>. Member restriction can be incomplete for this operation.
         /// </summary>
         protected override bool IsEqualTo(BoolLiteral right)
         {
-            MemberRestriction rightRestriction= right as MemberRestriction;
+            MemberRestriction rightRestriction = right as MemberRestriction;
             if (rightRestriction == null)
             {
                 return false;
@@ -151,7 +170,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 return true;
             }
-            if (false == MemberProjectedSlot.EqualityComparer.Equals(m_restrictedMemberSlot, rightRestriction.m_restrictedMemberSlot))
+            if (
+                false
+                == MemberProjectedSlot.EqualityComparer.Equals(
+                    m_restrictedMemberSlot,
+                    rightRestriction.m_restrictedMemberSlot
+                )
+            )
             {
                 return false;
             }
@@ -160,7 +185,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Member restriction can be incomplete for this operation. 
+        /// Member restriction can be incomplete for this operation.
         /// </summary>
         public override int GetHashCode()
         {
@@ -170,7 +195,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// See <see cref="BoolLiteral.IsIdentifierEqualTo"/>. Member restriction can be incomplete for this operation. 
+        /// See <see cref="BoolLiteral.IsIdentifierEqualTo"/>. Member restriction can be incomplete for this operation.
         /// </summary>
         protected override bool IsIdentifierEqualTo(BoolLiteral right)
         {
@@ -183,11 +208,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 return true;
             }
-            return MemberProjectedSlot.EqualityComparer.Equals(m_restrictedMemberSlot, rightOneOfConst.m_restrictedMemberSlot);
+            return MemberProjectedSlot.EqualityComparer.Equals(
+                m_restrictedMemberSlot,
+                rightOneOfConst.m_restrictedMemberSlot
+            );
         }
 
         /// <summary>
-        /// See <see cref="BoolLiteral.GetIdentifierHash"/>. Member restriction can be incomplete for this operation. 
+        /// See <see cref="BoolLiteral.GetIdentifierHash"/>. Member restriction can be incomplete for this operation.
         /// </summary>
         protected override int GetIdentifierHash()
         {
@@ -201,8 +229,15 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// Converts this to a user-understandable string.
         /// </summary>
         /// <param name="invertOutput">indicates whether the text needs to say "x in .." or "x in NOT ..."  (i.e., the latter if <paramref name="invertOutput"/> is true)</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal void ToUserString(bool invertOutput, StringBuilder builder, MetadataWorkspace workspace)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
+        internal void ToUserString(
+            bool invertOutput,
+            StringBuilder builder,
+            MetadataWorkspace workspace
+        )
         {
             // If there is a negated cell constant, get the inversion of the domain
             NegatedConstant negatedConstant = null;
@@ -227,7 +262,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     if (!(constant is NegatedConstant))
                     {
-                        Debug.Assert(constants.Contains(constant), "Domain of negated constant does not have positive constant");
+                        Debug.Assert(
+                            constants.Contains(constant),
+                            "Domain of negated constant does not have positive constant"
+                        );
                         constants.Remove(constant);
                     }
                 }
@@ -249,30 +287,42 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 if (isNull)
                 {
-                    resourceName0 = isTypeConstant ? (Func<object, string>)Strings.ViewGen_OneOfConst_IsNonNullable : (Func<object, string>)Strings.ViewGen_OneOfConst_MustBeNonNullable;
+                    resourceName0 = isTypeConstant
+                        ? (Func<object, string>)Strings.ViewGen_OneOfConst_IsNonNullable
+                        : (Func<object, string>)Strings.ViewGen_OneOfConst_MustBeNonNullable;
                 }
                 else if (constants.Count == 1)
                 {
-                    resourceName1 = isTypeConstant ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsNotEqualTo : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustNotBeEqualTo;
+                    resourceName1 = isTypeConstant
+                        ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsNotEqualTo
+                        : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustNotBeEqualTo;
                 }
                 else
                 {
-                    resourceName1 = isTypeConstant ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsNotOneOf : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustNotBeOneOf;
+                    resourceName1 = isTypeConstant
+                        ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsNotOneOf
+                        : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustNotBeOneOf;
                 }
             }
             else
             {
                 if (isNull)
                 {
-                    resourceName0 = isTypeConstant ? (Func<object, string>)Strings.ViewGen_OneOfConst_MustBeNull : (Func<object, string>)Strings.ViewGen_OneOfConst_MustBeNull;
+                    resourceName0 = isTypeConstant
+                        ? (Func<object, string>)Strings.ViewGen_OneOfConst_MustBeNull
+                        : (Func<object, string>)Strings.ViewGen_OneOfConst_MustBeNull;
                 }
                 else if (constants.Count == 1)
                 {
-                    resourceName1 = isTypeConstant ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsEqualTo : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustBeEqualTo;
+                    resourceName1 = isTypeConstant
+                        ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsEqualTo
+                        : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustBeEqualTo;
                 }
                 else
                 {
-                    resourceName1 = isTypeConstant ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsOneOf : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustBeOneOf;
+                    resourceName1 = isTypeConstant
+                        ? (Func<object, object, string>)Strings.ViewGen_OneOfConst_IsOneOf
+                        : (Func<object, object, string>)Strings.ViewGen_OneOfConst_MustBeOneOf;
                 }
             }
 
@@ -280,8 +330,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             StringBuilder constantBuilder = new StringBuilder();
             Constant.ConstantsToUserString(constantBuilder, constants);
 
-            Debug.Assert((resourceName0 == null) != (resourceName1 == null),
-                         "Both resources must not have been set or be null");
+            Debug.Assert(
+                (resourceName0 == null) != (resourceName1 == null),
+                "Both resources must not have been set or be null"
+            );
             string variableName = m_restrictedMemberSlot.MemberPath.PathToString(false);
             if (isTypeConstant)
             {
@@ -306,8 +358,15 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Modifies builder to contain a message for inverting the typeConstants, i.e., NOT(p in Person) becomes p in Customer.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private void InvertOutputStringForTypeConstant(StringBuilder builder, Set<Constant> constants, MetadataWorkspace workspace)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
+        private void InvertOutputStringForTypeConstant(
+            StringBuilder builder,
+            Set<Constant> constants,
+            MetadataWorkspace workspace
+        )
         {
             // Get all the types that this type can take (i.e., all
             // subtypes - the types present in this
@@ -316,7 +375,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
             // Get all types
             EdmType memberType = RestrictedMemberSlot.MemberPath.EdmType;
-            foreach (EdmType type in MetadataHelper.GetTypeAndSubtypesOf(memberType, workspace, false))
+            foreach (
+                EdmType type in MetadataHelper.GetTypeAndSubtypesOf(memberType, workspace, false)
+            )
             {
                 allTypes.Add(type);
             }
@@ -344,12 +405,20 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             builder.Append(Strings.ViewGen_OneOfConst_IsOneOfTypes(typeBuilder.ToString()));
         }
 
-        internal override StringBuilder AsUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             return AsEsql(builder, blockAlias, skipIsNotNull);
         }
 
-        internal override StringBuilder AsNegatedUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsNegatedUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             builder.Append("NOT(");
             builder = AsUserString(builder, blockAlias, skipIsNotNull);

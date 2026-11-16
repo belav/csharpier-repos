@@ -5,16 +5,17 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Threading;
-using System.Security.Permissions;
-using System.Text;
 using System.Collections;
 using System.Globalization;
 using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
 
-namespace System.Diagnostics {
-    public class TraceEventCache {
-
+namespace System.Diagnostics
+{
+    public class TraceEventCache
+    {
         private static volatile int processId;
         private static volatile string processName;
 
@@ -22,12 +23,15 @@ namespace System.Diagnostics {
         private DateTime dateTime = DateTime.MinValue;
         private string stackTrace = null;
 
-        internal Guid ActivityId {
+        internal Guid ActivityId
+        {
             get { return Trace.CorrelationManager.ActivityId; }
         }
-        
-        public string Callstack {
-            get {
+
+        public string Callstack
+        {
+            get
+            {
                 if (stackTrace == null)
                     stackTrace = Environment.StackTrace;
 #if MONO_FEATURE_CAS
@@ -38,79 +42,89 @@ namespace System.Diagnostics {
             }
         }
 
-        public Stack LogicalOperationStack {
-            get {
+        public Stack LogicalOperationStack
+        {
+            get
+            {
 #if DISABLE_REMOTING
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
 #else
                 return Trace.CorrelationManager.LogicalOperationStack;
 #endif
             }
         }
 
-        public DateTime DateTime {
-            get {
+        public DateTime DateTime
+        {
+            get
+            {
                 if (dateTime == DateTime.MinValue)
                     dateTime = DateTime.UtcNow;
                 return dateTime;
             }
         }
 
-        public int ProcessId {
-            [ResourceExposure(ResourceScope.Process)]  // Returns the current process's pid
+        public int ProcessId
+        {
+            [ResourceExposure(ResourceScope.Process)] // Returns the current process's pid
             [ResourceConsumption(ResourceScope.Process)]
-            get {
-                return GetProcessId();
-            }
+            get { return GetProcessId(); }
         }
 
-        public string ThreadId {
-            get {
-                return GetThreadId().ToString(CultureInfo.InvariantCulture);
-            }
+        public string ThreadId
+        {
+            get { return GetThreadId().ToString(CultureInfo.InvariantCulture); }
         }
 
-        public long Timestamp {
-            get {
+        public long Timestamp
+        {
+            get
+            {
                 if (timeStamp == -1)
                     timeStamp = Stopwatch.GetTimestamp();
-                return timeStamp ;
+                return timeStamp;
             }
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void InitProcessInfo() {
+        private static void InitProcessInfo()
+        {
 #if MONO_FEATURE_CAS
             // Demand unmanaged code permission
             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
 #endif
-            if (processName == null) {
+            if (processName == null)
+            {
                 Process p = Process.GetCurrentProcess();
-                try {
+                try
+                {
                     processId = p.Id;
                     processName = p.ProcessName;
                 }
-                finally {
+                finally
+                {
                     p.Dispose();
                 }
             }
         }
 
         [ResourceExposure(ResourceScope.Process)]
-        internal static int GetProcessId() {
+        internal static int GetProcessId()
+        {
             InitProcessInfo();
             return processId;
         }
-        
-        internal static string GetProcessName() {
+
+        internal static string GetProcessName()
+        {
             InitProcessInfo();
             return processName;
         }
-        
-        internal static int GetThreadId() {
+
+        internal static int GetThreadId()
+        {
             return Thread.CurrentThread.ManagedThreadId;
         }
     }
 }
-

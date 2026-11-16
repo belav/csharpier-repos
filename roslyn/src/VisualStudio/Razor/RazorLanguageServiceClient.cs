@@ -27,11 +27,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
             _serviceName = new RemoteServiceName(serviceName);
         }
 
-        public async Task<Optional<T>> TryRunRemoteAsync<T>(string targetName, Solution? solution, IReadOnlyList<object?> arguments, object? callbackTarget, CancellationToken cancellationToken)
-            => await _client.RunRemoteAsync<T>(_serviceName, targetName, solution, arguments, callbackTarget, cancellationToken).ConfigureAwait(false);
+        public async Task<Optional<T>> TryRunRemoteAsync<T>(
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            object? callbackTarget,
+            CancellationToken cancellationToken
+        ) =>
+            await _client
+                .RunRemoteAsync<T>(
+                    _serviceName,
+                    targetName,
+                    solution,
+                    arguments,
+                    callbackTarget,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
         [Obsolete("Use TryRunRemoteAsync instead")]
-        public async Task<Session?> CreateSessionAsync(Solution solution, object? callbackTarget = null, CancellationToken cancellationToken = default)
+        public async Task<Session?> CreateSessionAsync(
+            Solution solution,
+            object? callbackTarget = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (solution == null)
             {
@@ -39,13 +58,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 return null;
             }
 
-            var connection = await _client.CreateConnectionAsync(_serviceName, callbackTarget: null, cancellationToken).ConfigureAwait(false);
+            var connection = await _client
+                .CreateConnectionAsync(_serviceName, callbackTarget: null, cancellationToken)
+                .ConfigureAwait(false);
 
             SessionWithSolution? session = null;
             try
             {
                 // transfer ownership of the connection to the session object:
-                session = await SessionWithSolution.CreateAsync(connection, solution, cancellationToken).ConfigureAwait(false);
+                session = await SessionWithSolution
+                    .CreateAsync(connection, solution, cancellationToken)
+                    .ConfigureAwait(false);
             }
             finally
             {
@@ -68,14 +91,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 _inner = inner;
             }
 
-            public Task InvokeAsync(string targetName, IReadOnlyList<object> arguments, CancellationToken cancellationToken)
+            public Task InvokeAsync(
+                string targetName,
+                IReadOnlyList<object> arguments,
+                CancellationToken cancellationToken
+            )
             {
-                return _inner.KeepAliveSession.RunRemoteAsync(targetName, solution: null, arguments, cancellationToken);
+                return _inner.KeepAliveSession.RunRemoteAsync(
+                    targetName,
+                    solution: null,
+                    arguments,
+                    cancellationToken
+                );
             }
 
-            public Task<T> InvokeAsync<T>(string targetName, IReadOnlyList<object> arguments, CancellationToken cancellationToken)
+            public Task<T> InvokeAsync<T>(
+                string targetName,
+                IReadOnlyList<object> arguments,
+                CancellationToken cancellationToken
+            )
             {
-                return _inner.KeepAliveSession.RunRemoteAsync<T>(targetName, solution: null, arguments, cancellationToken);
+                return _inner.KeepAliveSession.RunRemoteAsync<T>(
+                    targetName,
+                    solution: null,
+                    arguments,
+                    cancellationToken
+                );
             }
 
             public void Dispose()

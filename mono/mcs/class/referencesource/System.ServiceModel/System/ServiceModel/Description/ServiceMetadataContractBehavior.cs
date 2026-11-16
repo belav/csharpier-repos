@@ -12,9 +12,7 @@ namespace System.ServiceModel.Description
     {
         bool metadataGenerationDisabled = false;
 
-        public ServiceMetadataContractBehavior()
-        {
-        }
+        public ServiceMetadataContractBehavior() { }
 
         public ServiceMetadataContractBehavior(bool metadataGenerationDisabled)
             : this()
@@ -30,21 +28,28 @@ namespace System.ServiceModel.Description
 
         #region IContractBehavior Members
 
-        void IContractBehavior.Validate(ContractDescription description, ServiceEndpoint endpoint)
-        {
-        }
+        void IContractBehavior.Validate(
+            ContractDescription description,
+            ServiceEndpoint endpoint
+        ) { }
 
-        void IContractBehavior.ApplyDispatchBehavior(ContractDescription description, ServiceEndpoint endpoint, DispatchRuntime dispatch)
-        {
-        }
+        void IContractBehavior.ApplyDispatchBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            DispatchRuntime dispatch
+        ) { }
 
-        void IContractBehavior.AddBindingParameters(ContractDescription description, ServiceEndpoint endpoint, BindingParameterCollection parameters)
-        {
-        }
+        void IContractBehavior.AddBindingParameters(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IContractBehavior.ApplyClientBehavior(ContractDescription description, ServiceEndpoint endpoint, ClientRuntime proxy)
-        {
-        }
+        void IContractBehavior.ApplyClientBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            ClientRuntime proxy
+        ) { }
 
         #endregion
     }

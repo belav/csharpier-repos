@@ -19,13 +19,21 @@ namespace System.Net
 
         internal HttpListenerContext(HttpListenerSession session, RequestContextBase memoryBlob)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"httpListener {session.Listener} requestBlob={((IntPtr)memoryBlob.RequestBlob)}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"httpListener {session.Listener} requestBlob={((IntPtr)memoryBlob.RequestBlob)}"
+                );
             _listener = session.Listener;
             ListenerSession = session;
             Request = new HttpListenerRequest(this, memoryBlob);
             AuthenticationSchemes = _listener.AuthenticationSchemes;
             ExtendedProtectionPolicy = _listener.ExtendedProtectionPolicy;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"HttpListener: {_listener} HttpListenerRequest: {Request}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"HttpListener: {_listener} HttpListenerRequest: {Request}"
+                );
         }
 
         // Call this right after construction, and only once!  Not after it's been handed to a user.
@@ -33,7 +41,11 @@ namespace System.Net
         {
             _mutualAuthentication = mutualAuthentication;
             _user = principal;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"mutual: {mutualAuthentication ?? "<null>"}, Principal: {principal}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"mutual: {mutualAuthentication ?? "<null>"}, Principal: {principal}"
+                );
         }
 
         // This can be used to cache the results of HttpListener.ExtendedProtectionSelectorDelegate.
@@ -45,33 +57,51 @@ namespace System.Net
 
         internal SafeHandle RequestQueueHandle => ListenerSession.RequestQueueHandle;
 
-        internal ThreadPoolBoundHandle RequestQueueBoundHandle => ListenerSession.RequestQueueBoundHandle;
+        internal ThreadPoolBoundHandle RequestQueueBoundHandle =>
+            ListenerSession.RequestQueueBoundHandle;
 
         internal ulong RequestId => Request.RequestId;
 
-        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string? subProtocol,
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string? subProtocol,
             int receiveBufferSize,
-            TimeSpan keepAliveInterval)
+            TimeSpan keepAliveInterval
+        )
         {
-            HttpWebSocket.ValidateOptions(subProtocol, receiveBufferSize, HttpWebSocket.MinSendBufferSize, keepAliveInterval);
-
-            ArraySegment<byte> internalBuffer = WebSocketBuffer.CreateInternalBufferArraySegment(receiveBufferSize, HttpWebSocket.MinSendBufferSize, true);
-            return this.AcceptWebSocketAsync(subProtocol,
+            HttpWebSocket.ValidateOptions(
+                subProtocol,
                 receiveBufferSize,
-                keepAliveInterval,
-                internalBuffer);
-        }
+                HttpWebSocket.MinSendBufferSize,
+                keepAliveInterval
+            );
 
-        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string? subProtocol,
-            int receiveBufferSize,
-            TimeSpan keepAliveInterval,
-            ArraySegment<byte> internalBuffer)
-        {
-            return HttpWebSocket.AcceptWebSocketAsync(this,
+            ArraySegment<byte> internalBuffer = WebSocketBuffer.CreateInternalBufferArraySegment(
+                receiveBufferSize,
+                HttpWebSocket.MinSendBufferSize,
+                true
+            );
+            return this.AcceptWebSocketAsync(
                 subProtocol,
                 receiveBufferSize,
                 keepAliveInterval,
-                internalBuffer);
+                internalBuffer
+            );
+        }
+
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string? subProtocol,
+            int receiveBufferSize,
+            TimeSpan keepAliveInterval,
+            ArraySegment<byte> internalBuffer
+        )
+        {
+            return HttpWebSocket.AcceptWebSocketAsync(
+                this,
+                subProtocol,
+                receiveBufferSize,
+                keepAliveInterval,
+                internalBuffer
+            );
         }
 
         internal void Close()
@@ -91,9 +121,11 @@ namespace System.Net
                     IDisposable? user = _user == null ? null : _user.Identity as IDisposable;
 
                     // For unsafe connection ntlm auth we don't dispose this identity as yet since its cached
-                    if ((user != null) &&
-                        (_user!.Identity!.AuthenticationType != NegotiationInfoClass.NTLM) &&
-                        (!_listener!.UnsafeConnectionNtlmAuthentication))
+                    if (
+                        (user != null)
+                        && (_user!.Identity!.AuthenticationType != NegotiationInfoClass.NTLM)
+                        && (!_listener!.UnsafeConnectionNtlmAuthentication)
+                    )
                     {
                         user.Dispose();
                     }
@@ -116,7 +148,8 @@ namespace System.Net
 
         internal Interop.HttpApi.HTTP_VERB GetKnownMethod()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Visited {nameof(GetKnownMethod)}()");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Visited {nameof(GetKnownMethod)}()");
             return Interop.HttpApi.GetKnownVerb(Request.RequestBuffer, Request.OriginalBlobAddress);
         }
 
@@ -131,8 +164,11 @@ namespace System.Net
         // The request is being aborted, but large writes may be in progress. Cancel them.
         internal void ForceCancelRequest(SafeHandle requestQueueHandle, ulong requestId)
         {
-            uint statusCode = Interop.HttpApi.HttpCancelHttpRequest(requestQueueHandle, requestId,
-                IntPtr.Zero);
+            uint statusCode = Interop.HttpApi.HttpCancelHttpRequest(
+                requestQueueHandle,
+                requestId,
+                IntPtr.Zero
+            );
 
             // Either the connection has already dropped, or the last write is in progress.
             // The requestId becomes invalid as soon as the last Content-Length write starts.

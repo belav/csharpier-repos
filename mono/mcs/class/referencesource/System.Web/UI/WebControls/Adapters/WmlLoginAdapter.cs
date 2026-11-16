@@ -6,13 +6,19 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
-
-    public class WmlLoginAdapter : LoginAdapter {
-
+namespace System.Web.UI.WebControls.Adapters
+{
+    public class WmlLoginAdapter : LoginAdapter
+    {
         // Overridden to render the validator *before* the label, to ensure the validator
         // is presented on the correct screen.
-        protected override void RenderInput(HtmlTextWriter writer, Literal label, Control textBox, Control validator) {
+        protected override void RenderInput(
+            HtmlTextWriter writer,
+            Literal label,
+            Control textBox,
+            Control validator
+        )
+        {
             validator.RenderControl(writer);
 
             // In the Login control, many styles are applied to the table cell that contains
@@ -28,7 +34,6 @@ namespace System.Web.UI.WebControls.Adapters {
             // TextBoxStyle is applied directly to the TextBox in the Login control
             textBox.RenderControl(writer);
         }
-
     }
 }
 

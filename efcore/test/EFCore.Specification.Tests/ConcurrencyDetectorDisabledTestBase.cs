@@ -6,24 +6,22 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract class ConcurrencyDetectorDisabledTestBase<TFixture> : ConcurrencyDetectorTestBase<TFixture>
+public abstract class ConcurrencyDetectorDisabledTestBase<TFixture>
+    : ConcurrencyDetectorTestBase<TFixture>
     where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
 {
     protected ConcurrencyDetectorDisabledTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task SaveChanges(bool async)
     {
-        await ConcurrencyDetectorTest(
-            async c =>
-            {
-                c.Products.Add(new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" });
-                return async ? await c.SaveChangesAsync() : c.SaveChanges();
-            });
+        await ConcurrencyDetectorTest(async c =>
+        {
+            c.Products.Add(new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" });
+            return async ? await c.SaveChangesAsync() : c.SaveChanges();
+        });
 
         using var ctx = CreateContext();
         var newProduct = await ctx.Products.FindAsync(3);
@@ -32,7 +30,9 @@ public abstract class ConcurrencyDetectorDisabledTestBase<TFixture> : Concurrenc
         await ctx.SaveChangesAsync();
     }
 
-    protected override async Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test)
+    protected override async Task ConcurrencyDetectorTest(
+        Func<ConcurrencyDetectorDbContext, Task<object>> test
+    )
     {
         using var context = CreateContext();
 

@@ -62,6 +62,7 @@ namespace RabbitMQ.Client.Impl
     public class ShutdownContinuation
     {
         public readonly BlockingCell m_cell = new BlockingCell();
+
         public ShutdownContinuation() { }
 
         // You will note there are two practically identical overloads

@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
@@ -28,16 +27,24 @@ namespace ILCompiler.DependencyAnalysis
         public MethodAssociatedDataNode(IMethodNode methodNode)
         {
             Debug.Assert(!methodNode.Method.IsAbstract);
-            Debug.Assert(methodNode.Method.GetCanonMethodTarget(CanonicalFormKind.Specific) == methodNode.Method);
+            Debug.Assert(
+                methodNode.Method.GetCanonMethodTarget(CanonicalFormKind.Specific)
+                    == methodNode.Method
+            );
             _methodNode = methodNode;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
+
         public override bool StaticDependenciesAreComputed => true;
         public int Offset => 0;
-        public override bool IsShareable => _methodNode.Method is InstantiatedMethod || EETypeNode.IsTypeNodeShareable(_methodNode.Method.OwningType);
+        public override bool IsShareable =>
+            _methodNode.Method is InstantiatedMethod
+            || EETypeNode.IsTypeNodeShareable(_methodNode.Method.OwningType);
 
         public override int ClassCode => 1055183914;
 
@@ -48,14 +55,15 @@ namespace ILCompiler.DependencyAnalysis
 
         public virtual void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append("_associatedData_").Append(nameMangler.GetMangledMethodName(_methodNode.Method));
+            sb.Append("_associatedData_")
+                .Append(nameMangler.GetMangledMethodName(_methodNode.Method));
         }
 
         public static bool MethodHasAssociatedData(NodeFactory factory, IMethodNode methodNode)
         {
             // Instantiating unboxing stubs. We need to store their non-unboxing target pointer (looked up by runtime)
             ISpecialUnboxThunkNode unboxThunk = methodNode as ISpecialUnboxThunkNode;
-            if(unboxThunk != null && unboxThunk.IsSpecialUnboxingThunk)
+            if (unboxThunk != null && unboxThunk.IsSpecialUnboxingThunk)
                 return true;
 
             return false;
@@ -77,7 +85,10 @@ namespace ILCompiler.DependencyAnalysis
             if (unboxThunkNode != null && unboxThunkNode.IsSpecialUnboxingThunk)
             {
                 flags |= AssociatedDataFlags.HasUnboxingStubTarget;
-                objData.EmitReloc(unboxThunkNode.GetUnboxingThunkTarget(factory), RelocType.IMAGE_REL_BASED_RELPTR32);
+                objData.EmitReloc(
+                    unboxThunkNode.GetUnboxingThunkTarget(factory),
+                    RelocType.IMAGE_REL_BASED_RELPTR32
+                );
             }
 
             objData.EmitByte(flagsReservation, (byte)flags);

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlControl.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,53 +10,52 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Globalization;
     using System.IO;
-    using System.Web.Util;
-    using System.Web.UI;
-    using AttributeCollection = System.Web.UI.AttributeCollection;
     using System.Security.Permissions;
+    using System.Web.UI;
+    using System.Web.Util;
+    using AttributeCollection = System.Web.UI.AttributeCollection;
 
-/*
- * An abstract base class representing an intrinsic Html tag that
- * is not represented by both a begin and end tag, for example
- * INPUT or IMG.
- */
+    /*
+     * An abstract base class representing an intrinsic Html tag that
+     * is not represented by both a begin and end tag, for example
+     * INPUT or IMG.
+     */
 
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlControl'/>
-///       class defines the methods, properties, and events
-///       common to all HTML Server controls in the Web Forms page framework.
-///    </para>
-/// </devdoc>
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlControl'/>
+    ///       class defines the methods, properties, and events
+    ///       common to all HTML Server controls in the Web Forms page framework.
+    ///    </para>
+    /// </devdoc>
     [
-    Designer("System.Web.UI.Design.HtmlIntrinsicControlDesigner, " + AssemblyRef.SystemDesign),
-    ToolboxItem(false)
+        Designer("System.Web.UI.Design.HtmlIntrinsicControlDesigner, " + AssemblyRef.SystemDesign),
+        ToolboxItem(false)
     ]
-    abstract public class HtmlControl : Control, IAttributeAccessor {
-        internal string             _tagName;
+    public abstract class HtmlControl : Control, IAttributeAccessor
+    {
+        internal string _tagName;
         private AttributeCollection _attributes;
 
-
+        /// <devdoc>
+        /// </devdoc>
+        protected HtmlControl()
+            : this("span") { }
 
         /// <devdoc>
         /// </devdoc>
-        protected HtmlControl() : this("span") {
-        }
-
-
-        /// <devdoc>
-        /// </devdoc>
-        protected HtmlControl(string tag) {
+        protected HtmlControl(string tag)
+        {
             _tagName = tag;
         }
-
 
         /*
          *  Access to collection of Attributes.
@@ -69,18 +68,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        public AttributeCollection Attributes {
-            get {
+        public AttributeCollection Attributes
+        {
+            get
+            {
                 if (_attributes == null)
                     _attributes = new AttributeCollection(ViewState);
 
                 return _attributes;
             }
         }
-
 
         /*
          *  Access to collection of styles.
@@ -96,13 +96,12 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        public CssStyleCollection Style {
-            get {
-                return Attributes.CssStyle;
-            }
+        public CssStyleCollection Style
+        {
+            get { return Attributes.CssStyle; }
         }
 
         /*
@@ -116,12 +115,13 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public virtual  string TagName {
-            get { return _tagName;}
+        public virtual string TagName
+        {
+            get { return _tagName; }
         }
 
         /*
@@ -136,41 +136,40 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        TypeConverter(typeof(MinimizableAttributeTypeConverter))
+            WebCategory("Behavior"),
+            DefaultValue(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            TypeConverter(typeof(MinimizableAttributeTypeConverter))
         ]
-        public bool Disabled {
-            get {
+        public bool Disabled
+        {
+            get
+            {
                 string s = Attributes["disabled"];
-                return((s != null) ? (s.Equals("disabled")) : false);
+                return ((s != null) ? (s.Equals("disabled")) : false);
             }
-
-            set {
+            set
+            {
                 if (value)
                     Attributes["disabled"] = "disabled";
                 else
                     Attributes["disabled"] = null;
-
             }
         }
-
 
         /// <devdoc>
         /// </devdoc>
         /// <internalonly/>
-        protected override bool ViewStateIgnoresCase {
-            get {
-                return true;
-            }
+        protected override bool ViewStateIgnoresCase
+        {
+            get { return true; }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new EmptyControlCollection(this);
         }
 
@@ -181,7 +180,8 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void Render(HtmlTextWriter writer) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
             RenderBeginTag(writer);
         }
 
@@ -192,7 +192,8 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RenderAttributes(HtmlTextWriter writer) {
+        protected virtual void RenderAttributes(HtmlTextWriter writer)
+        {
             if (ID != null)
                 writer.WriteAttribute("id", ClientID);
 
@@ -206,7 +207,8 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RenderBeginTag(HtmlTextWriter writer) {
+        protected virtual void RenderBeginTag(HtmlTextWriter writer)
+        {
             writer.WriteBeginTag(TagName);
             RenderAttributes(writer);
             writer.Write(HtmlTextWriter.TagRightChar);
@@ -219,15 +221,16 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        string IAttributeAccessor.GetAttribute(string name) {
+        string IAttributeAccessor.GetAttribute(string name)
+        {
             return GetAttribute(name);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual string GetAttribute(string name) {
+        protected virtual string GetAttribute(string name)
+        {
             return Attributes[name];
         }
 
@@ -238,40 +241,44 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        void IAttributeAccessor.SetAttribute(string name, string value) {
+        void IAttributeAccessor.SetAttribute(string name, string value)
+        {
             SetAttribute(name, value);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void SetAttribute(string name, string value) {
+        protected virtual void SetAttribute(string name, string value)
+        {
             Attributes[name] = value;
         }
-        
-        internal void PreProcessRelativeReferenceAttribute(HtmlTextWriter writer,
-            string attribName) {
 
+        internal void PreProcessRelativeReferenceAttribute(HtmlTextWriter writer, string attribName)
+        {
             string url = Attributes[attribName];
 
             // Don't do anything if it's not specified
             if (String.IsNullOrEmpty(url))
                 return;
 
-            try { 
+            try
+            {
                 url = ResolveClientUrl(url);
-            } 
-            catch (Exception e) {
-                throw new HttpException(SR.GetString(SR.Property_Had_Malformed_Url, attribName, e.Message));
+            }
+            catch (Exception e)
+            {
+                throw new HttpException(
+                    SR.GetString(SR.Property_Had_Malformed_Url, attribName, e.Message)
+                );
             }
 
             writer.WriteAttribute(attribName, url);
             Attributes.Remove(attribName);
         }
 
-        internal static string MapStringAttributeToString(string s) {
-
+        internal static string MapStringAttributeToString(string s)
+        {
             // If it's an empty string, change it to null
             if (s != null && s.Length == 0)
                 return null;
@@ -280,8 +287,8 @@ namespace System.Web.UI.HtmlControls {
             return s;
         }
 
-        internal static string MapIntegerAttributeToString(int n) {
-
+        internal static string MapIntegerAttributeToString(int n)
+        {
             // If it's -1, change it to null
             if (n == -1)
                 return null;
@@ -291,4 +298,3 @@ namespace System.Web.UI.HtmlControls {
         }
     }
 }
-

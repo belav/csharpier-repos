@@ -47,39 +47,43 @@ public class SqlServerStringTypeMapping : StringTypeMapping
         bool fixedLength = false,
         SqlDbType? sqlDbType = null,
         StoreTypePostfix? storeTypePostfix = null,
-        bool useKeyComparison = false)
+        bool useKeyComparison = false
+    )
         : this(
             new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(
                     typeof(string),
                     comparer: useKeyComparison ? CaseInsensitiveValueComparer : null,
                     keyComparer: useKeyComparison ? CaseInsensitiveValueComparer : null,
-                    jsonValueReaderWriter: JsonStringReaderWriter.Instance),
+                    jsonValueReaderWriter: JsonStringReaderWriter.Instance
+                ),
                 storeType ?? GetDefaultStoreName(unicode, fixedLength),
                 storeTypePostfix ?? StoreTypePostfix.Size,
                 GetDbType(unicode, fixedLength),
                 unicode,
                 size,
-                fixedLength),
-            sqlDbType)
-    {
-    }
+                fixedLength
+            ),
+            sqlDbType
+        ) { }
 
-    private static string GetDefaultStoreName(bool unicode, bool fixedLength)
-        => unicode
-            ? fixedLength ? "nchar" : "nvarchar"
+    private static string GetDefaultStoreName(bool unicode, bool fixedLength) =>
+        unicode
+            ? fixedLength
+                ? "nchar"
+                : "nvarchar"
             : fixedLength
                 ? "char"
                 : "varchar";
 
-    private static DbType? GetDbType(bool unicode, bool fixedLength)
-        => unicode
-            ? (fixedLength
-                ? System.Data.DbType.StringFixedLength
-                : System.Data.DbType.String)
-            : (fixedLength
-                ? System.Data.DbType.AnsiStringFixedLength
-                : System.Data.DbType.AnsiString);
+    private static DbType? GetDbType(bool unicode, bool fixedLength) =>
+        unicode
+            ? (fixedLength ? System.Data.DbType.StringFixedLength : System.Data.DbType.String)
+            : (
+                fixedLength
+                    ? System.Data.DbType.AnsiStringFixedLength
+                    : System.Data.DbType.AnsiString
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -87,21 +91,30 @@ public class SqlServerStringTypeMapping : StringTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected SqlServerStringTypeMapping(RelationalTypeMappingParameters parameters, SqlDbType? sqlDbType)
+    protected SqlServerStringTypeMapping(
+        RelationalTypeMappingParameters parameters,
+        SqlDbType? sqlDbType
+    )
         : base(parameters)
     {
         if (parameters.Unicode)
         {
-            _maxSpecificSize = parameters.Size is > 0 and <= UnicodeMax ? parameters.Size.Value : UnicodeMax;
+            _maxSpecificSize = parameters.Size is > 0 and <= UnicodeMax
+                ? parameters.Size.Value
+                : UnicodeMax;
             _maxSize = UnicodeMax;
         }
         else
         {
-            _maxSpecificSize = parameters.Size is > 0 and <= AnsiMax ? parameters.Size.Value : AnsiMax;
+            _maxSpecificSize = parameters.Size is > 0 and <= AnsiMax
+                ? parameters.Size.Value
+                : AnsiMax;
             _maxSize = AnsiMax;
         }
 
-        _isUtf16 = parameters.Unicode && parameters.StoreType.StartsWith("n", StringComparison.OrdinalIgnoreCase);
+        _isUtf16 =
+            parameters.Unicode
+            && parameters.StoreType.StartsWith("n", StringComparison.OrdinalIgnoreCase);
         _sqlDbType = sqlDbType;
     }
 
@@ -123,7 +136,8 @@ public class SqlServerStringTypeMapping : StringTypeMapping
                 parameters.Size,
                 parameters.FixedLength,
                 parameters.Precision,
-                parameters.Scale);
+                parameters.Scale
+            );
         }
 
         return new SqlServerStringTypeMapping(parameters, _sqlDbType);
@@ -140,17 +154,15 @@ public class SqlServerStringTypeMapping : StringTypeMapping
         var value = parameter.Value;
         var length = (value as string)?.Length;
 
-        if (_sqlDbType.HasValue
-            && parameter is SqlParameter sqlParameter) // To avoid crashing wrapping providers
+        if (_sqlDbType.HasValue && parameter is SqlParameter sqlParameter) // To avoid crashing wrapping providers
         {
             sqlParameter.SqlDbType = _sqlDbType.Value;
         }
 
-        if ((value == null
-                || value == DBNull.Value)
-            || (IsFixedLength
-                && length == _maxSpecificSize
-                && Size.HasValue))
+        if (
+            (value == null || value == DBNull.Value)
+            || (IsFixedLength && length == _maxSpecificSize && Size.HasValue)
+        )
         {
             // A fixed-length parameter where the value matches the length can remain a fixed-length parameter
             // because SQLClient will not do any padding or truncating.
@@ -161,7 +173,9 @@ public class SqlServerStringTypeMapping : StringTypeMapping
             if (IsFixedLength)
             {
                 // Force the parameter type to be not fixed length to avoid SQLClient truncation and padding.
-                parameter.DbType = IsUnicode ? System.Data.DbType.String : System.Data.DbType.AnsiString;
+                parameter.DbType = IsUnicode
+                    ? System.Data.DbType.String
+                    : System.Data.DbType.AnsiString;
             }
 
             // For strings and byte arrays, set the max length to the size facet if specified, or
@@ -243,10 +257,7 @@ public class SqlServerStringTypeMapping : StringTypeMapping
                         builder.Append('n');
                     }
 
-                    builder
-                        .Append("char(")
-                        .Append(lineFeed ? "10" : "13")
-                        .Append(')');
+                    builder.Append("char(").Append(lineFeed ? "10" : "13").Append(')');
                 }
                 else if (apostrophe)
                 {

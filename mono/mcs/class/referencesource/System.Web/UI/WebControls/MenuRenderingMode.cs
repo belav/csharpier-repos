@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
     /// Specifies how a Menu Control should render.
     /// </devdoc>
-    public enum MenuRenderingMode {
+    public enum MenuRenderingMode
+    {
         Default,
         Table,
         List,

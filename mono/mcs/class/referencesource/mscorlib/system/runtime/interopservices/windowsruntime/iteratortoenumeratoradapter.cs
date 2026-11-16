@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -11,8 +11,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
@@ -26,14 +26,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not IterableToEnumerableAdapter objects. Rather, they are of type
     // IIterable<T>. No actual IterableToEnumerableAdapter object is ever instantiated. Thus, you will
-    // see a lot of expressions that cast "this" to "IIterable<T>". 
+    // see a lot of expressions that cast "this" to "IIterable<T>".
     internal sealed class IterableToEnumerableAdapter
     {
         private IterableToEnumerableAdapter()
         {
             Contract.Assert(false, "This class is never instantiated");
         }
-        
+
         // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of IEnumerable<T>.
         [SecurityCritical]
         internal IEnumerator<T> GetEnumerator_Stub<T>()
@@ -47,19 +47,21 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // IEnumerable<array>/IEnumerable<delegate> rather than IEnumerable<T> because T is assignable from Type/string/
         // Exception/array/delegate via co-variance.
         [SecurityCritical]
-        internal IEnumerator<T> GetEnumerator_Variance_Stub<T>() where T : class
+        internal IEnumerator<T> GetEnumerator_Variance_Stub<T>()
+            where T : class
         {
             bool fUseString;
             Delegate target = System.StubHelpers.StubHelpers.GetTargetForAmbiguousVariantCall(
                 this,
                 typeof(IEnumerable<T>).TypeHandle.Value,
-                out fUseString);
+                out fUseString
+            );
 
             if (target != null)
             {
                 return (JitHelpers.UnsafeCast<GetEnumerator_Delegate<T>>(target))();
             }
-            
+
             if (fUseString)
             {
                 return JitHelpers.UnsafeCast<IEnumerator<T>>(GetEnumerator_Stub<string>());
@@ -82,12 +84,28 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             private IBindableIterator iterator;
 
             public NonGenericToGenericIterator(IBindableIterator iterator)
-            { this.iterator = iterator; }
+            {
+                this.iterator = iterator;
+            }
 
-            public object Current  { get { return iterator.Current; } }
-            public bool HasCurrent { get { return iterator.HasCurrent; } }
-            public bool MoveNext() { return iterator.MoveNext(); }
-            public int GetMany(object[] items) { throw new NotSupportedException(); }
+            public object Current
+            {
+                get { return iterator.Current; }
+            }
+            public bool HasCurrent
+            {
+                get { return iterator.HasCurrent; }
+            }
+
+            public bool MoveNext()
+            {
+                return iterator.MoveNext();
+            }
+
+            public int GetMany(object[] items)
+            {
+                throw new NotSupportedException();
+            }
         }
 
         // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of IEnumerable.
@@ -95,16 +113,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal IEnumerator GetEnumerator_Stub()
         {
             IBindableIterable _this = JitHelpers.UnsafeCast<IBindableIterable>(this);
-            return new IteratorToEnumeratorAdapter<object>(new NonGenericToGenericIterator(_this.First()));
+            return new IteratorToEnumeratorAdapter<object>(
+                new NonGenericToGenericIterator(_this.First())
+            );
         }
     }
 
     // Adapter class which holds a Windows Runtime IIterator<T>, exposing it as a managed IEnumerator<T>
 
-
-    // There are a few implementation differences between the Iterator and IEnumerator which need to be 
-    // addressed. Iterator starts at index 0 while IEnumerator starts at index -1 as a result of which 
-    // the first call to IEnumerator.Current is correct only after calling MoveNext(). 
+    // There are a few implementation differences between the Iterator and IEnumerator which need to be
+    // addressed. Iterator starts at index 0 while IEnumerator starts at index -1 as a result of which
+    // the first call to IEnumerator.Current is correct only after calling MoveNext().
     // Also IEnumerator throws an exception when we call Current after reaching the end of collection.
     internal sealed class IteratorToEnumeratorAdapter<T> : IEnumerator<T>
     {
@@ -127,10 +146,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 // The enumerator has not been advanced to the first element yet.
                 if (!m_isInitialized)
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumNotStarted);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.InvalidOperation_EnumNotStarted
+                    );
                 // The enumerator has reached the end of the collection
                 if (!m_hadCurrent)
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumEnded);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.InvalidOperation_EnumEnded
+                    );
                 return m_current;
             }
         }
@@ -141,10 +164,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 // The enumerator has not been advanced to the first element yet.
                 if (!m_isInitialized)
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumNotStarted);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.InvalidOperation_EnumNotStarted
+                    );
                 // The enumerator has reached the end of the collection
                 if (!m_hadCurrent)
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumEnded);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.InvalidOperation_EnumEnded
+                    );
                 return m_current;
             }
         }
@@ -191,7 +218,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 // Translate E_CHANGED_STATE into an InvalidOperationException for an updated enumeration
                 if (Marshal.GetHRForException(e) == __HResults.E_CHANGED_STATE)
                 {
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumFailedVersion);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.InvalidOperation_EnumFailedVersion
+                    );
                 }
                 else
                 {
@@ -207,8 +236,6 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             throw new NotSupportedException();
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

@@ -20,9 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeStyleValueColumnDefinition()
-        {
-        }
+        public CodeStyleValueColumnDefinition() { }
 
         public override string Name => Value;
         public override string DisplayName => ServicesVSResources.Value;
@@ -31,7 +29,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
         public override bool IsFilterable => false;
         public override bool IsSortable => false;
 
-        public override bool TryCreateColumnContent(ITableEntryHandle entry, bool singleColumnView, out FrameworkElement? content)
+        public override bool TryCreateColumnContent(
+            ITableEntryHandle entry,
+            bool singleColumnView,
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Value, out CodeStyleSetting severity))
             {

@@ -308,14 +308,16 @@ namespace System.Text.Json.Nodes
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to explicitly convert.</param>
         /// <returns>A value converted from the <see cref="JsonNode"/> instance.</returns>
-        public static explicit operator DateTimeOffset(JsonNode value) => value.GetValue<DateTimeOffset>();
+        public static explicit operator DateTimeOffset(JsonNode value) =>
+            value.GetValue<DateTimeOffset>();
 
         /// <summary>
         ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to explicitly convert.</param>
         /// <returns>A value converted from the <see cref="JsonNode"/> instance.</returns>
-        public static explicit operator DateTimeOffset?(JsonNode? value) => value?.GetValue<DateTimeOffset>();
+        public static explicit operator DateTimeOffset?(JsonNode? value) =>
+            value?.GetValue<DateTimeOffset>();
 
         /// <summary>
         ///   Defines an explicit conversion of a given <see cref="decimal"/> to a <see cref="JsonNode"/>.

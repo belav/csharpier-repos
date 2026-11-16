@@ -75,9 +75,8 @@ public class CompilerFailedExceptionFactoryTest
         );
 
         // Assert
-        Assert.Collection(
-            exception.CompilationFailures,
-            failure => Assert.Equal(expected, failure.FailureSummary)
+        Assert.Collection(exception.CompilationFailures, failure =>
+            Assert.Equal(expected, failure.FailureSummary)
         );
     }
 
@@ -162,30 +161,24 @@ public class CompilerFailedExceptionFactoryTest
             failure =>
             {
                 Assert.Equal(viewPath, failure.SourceFilePath);
-                Assert.Collection(
-                    failure.Messages,
-                    message =>
-                    {
-                        Assert.Equal(
-                            @"A space or line break was encountered after the ""@"" character.  Only valid identifiers, keywords, comments, ""("" and ""{"" are valid at the start of a code block and they must occur immediately following ""@"" with no space in between.",
-                            message.Message
-                        );
-                    }
-                );
+                Assert.Collection(failure.Messages, message =>
+                {
+                    Assert.Equal(
+                        @"A space or line break was encountered after the ""@"" character.  Only valid identifiers, keywords, comments, ""("" and ""{"" are valid at the start of a code block and they must occur immediately following ""@"" with no space in between.",
+                        message.Message
+                    );
+                });
             },
             failure =>
             {
                 Assert.Equal(importsPath, failure.SourceFilePath);
-                Assert.Collection(
-                    failure.Messages,
-                    message =>
-                    {
-                        Assert.Equal(
-                            @"The explicit expression block is missing a closing "")"" character.  Make sure you have a matching "")"" character for all the ""("" characters within this block, and that none of the "")"" characters are being interpreted as markup.",
-                            message.Message
-                        );
-                    }
-                );
+                Assert.Collection(failure.Messages, message =>
+                {
+                    Assert.Equal(
+                        @"The explicit expression block is missing a closing "")"" character.  Make sure you have a matching "")"" character for all the ""("" characters within this block, and that none of the "")"" characters are being interpreted as markup.",
+                        message.Message
+                    );
+                });
             }
         );
     }
@@ -266,21 +259,18 @@ public class CompilerFailedExceptionFactoryTest
             {
                 Assert.Equal(viewImportsPath, failure.SourceFilePath);
                 Assert.Equal("Global Import Content", failure.SourceFileContent);
-                Assert.Collection(
-                    failure.Messages,
-                    message =>
-                    {
-                        Assert.Equal(
-                            diagnostics[3].GetMessage(CultureInfo.CurrentCulture),
-                            message.Message
-                        );
-                        Assert.Equal(viewImportsPath, message.SourceFilePath);
-                        Assert.Equal(4, message.StartLine);
-                        Assert.Equal(8, message.StartColumn);
-                        Assert.Equal(4, message.EndLine);
-                        Assert.Equal(12, message.EndColumn);
-                    }
-                );
+                Assert.Collection(failure.Messages, message =>
+                {
+                    Assert.Equal(
+                        diagnostics[3].GetMessage(CultureInfo.CurrentCulture),
+                        message.Message
+                    );
+                    Assert.Equal(viewImportsPath, message.SourceFilePath);
+                    Assert.Equal(4, message.StartLine);
+                    Assert.Equal(8, message.StartColumn);
+                    Assert.Equal(4, message.EndLine);
+                    Assert.Equal(12, message.EndColumn);
+                });
             }
         );
     }
@@ -365,18 +355,15 @@ public class CompilerFailedExceptionFactoryTest
             {
                 Assert.Equal(generatedCodeFileName, failure.SourceFilePath);
                 Assert.Equal("compilation-content", failure.SourceFileContent);
-                Assert.Collection(
-                    failure.Messages,
-                    message =>
-                    {
-                        Assert.Equal("message-2", message.Message);
-                        Assert.Equal(assemblyName, message.SourceFilePath);
-                        Assert.Equal(2, message.StartLine);
-                        Assert.Equal(3, message.StartColumn);
-                        Assert.Equal(4, message.EndLine);
-                        Assert.Equal(5, message.EndColumn);
-                    }
-                );
+                Assert.Collection(failure.Messages, message =>
+                {
+                    Assert.Equal("message-2", message.Message);
+                    Assert.Equal(assemblyName, message.SourceFilePath);
+                    Assert.Equal(2, message.StartLine);
+                    Assert.Equal(3, message.StartColumn);
+                    Assert.Equal(4, message.EndLine);
+                    Assert.Equal(5, message.EndColumn);
+                });
             }
         );
     }

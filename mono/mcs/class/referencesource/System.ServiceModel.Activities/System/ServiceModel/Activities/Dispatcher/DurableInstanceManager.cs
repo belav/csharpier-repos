@@ -12,17 +12,19 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.ServiceModel.Activation;
 
     sealed class DurableInstanceManager
     {
-        static AsyncCallback waitAndHandleStoreEventsCallback = Fx.ThunkCallback(new AsyncCallback(WaitAndHandleStoreEventsCallback));
+        static AsyncCallback waitAndHandleStoreEventsCallback = Fx.ThunkCallback(
+            new AsyncCallback(WaitAndHandleStoreEventsCallback)
+        );
 
         int state;
         InstanceStore store;
@@ -42,10 +44,18 @@ namespace System.ServiceModel.Activities.Dispatcher
             this.thisLock = new object();
 
             // This is for collision detection.  Will replace with the real service name prior to executing.
-            InstanceValue sentinel = new InstanceValue(XNamespace.Get("http://tempuri.org").GetName("Sentinel"));
+            InstanceValue sentinel = new InstanceValue(
+                XNamespace.Get("http://tempuri.org").GetName("Sentinel")
+            );
             this.instanceOwnerMetadata.Add(WorkflowNamespace.WorkflowHostType, sentinel);
             this.instanceMetadataChanges.Add(WorkflowNamespace.WorkflowHostType, sentinel);
-            this.instanceMetadataChanges.Add(PersistenceMetadataNamespace.InstanceType, new InstanceValue(WorkflowNamespace.WorkflowHostType, InstanceValueOptions.WriteOnly));
+            this.instanceMetadataChanges.Add(
+                PersistenceMetadataNamespace.InstanceType,
+                new InstanceValue(
+                    WorkflowNamespace.WorkflowHostType,
+                    InstanceValueOptions.WriteOnly
+                )
+            );
 
             this.Host = host;
         }
@@ -58,10 +68,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         public InstanceStore InstanceStore
         {
-            get
-            {
-                return this.store;
-            }
+            get { return this.store; }
             set
             {
                 ThrowIfDisposedOrImmutable(this.state);
@@ -69,7 +76,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        public void AddInstanceOwnerValues(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues)
+        public void AddInstanceOwnerValues(
+            IDictionary<XName, object> readWriteValues,
+            IDictionary<XName, object> writeOnlyValues
+        )
         {
             ThrowIfDisposedOrImmutable(this.state);
 
@@ -79,7 +89,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.instanceOwnerMetadata.ContainsKey(property.Key))
                     {
-                        throw FxTrace.Exception.Argument("readWriteValues", SR.ConflictingValueName(property.Key));
+                        throw FxTrace.Exception.Argument(
+                            "readWriteValues",
+                            SR.ConflictingValueName(property.Key)
+                        );
                     }
                     this.instanceOwnerMetadata.Add(property.Key, new InstanceValue(property.Value));
                 }
@@ -91,10 +104,18 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.instanceOwnerMetadata.ContainsKey(property.Key))
                     {
-                        throw FxTrace.Exception.Argument("writeOnlyValues", SR.ConflictingValueName(property.Key));
+                        throw FxTrace.Exception.Argument(
+                            "writeOnlyValues",
+                            SR.ConflictingValueName(property.Key)
+                        );
                     }
-                    this.instanceOwnerMetadata.Add(property.Key, new InstanceValue(property.Value,
-                        InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly));
+                    this.instanceOwnerMetadata.Add(
+                        property.Key,
+                        new InstanceValue(
+                            property.Value,
+                            InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly
+                        )
+                    );
                 }
             }
         }
@@ -109,9 +130,18 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.instanceMetadataChanges.ContainsKey(pair.Key))
                     {
-                        throw FxTrace.Exception.Argument("writeOnlyValues", SR.ConflictingValueName(pair.Key));
+                        throw FxTrace.Exception.Argument(
+                            "writeOnlyValues",
+                            SR.ConflictingValueName(pair.Key)
+                        );
                     }
-                    this.instanceMetadataChanges.Add(pair.Key, new InstanceValue(pair.Value, InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly));
+                    this.instanceMetadataChanges.Add(
+                        pair.Key,
+                        new InstanceValue(
+                            pair.Value,
+                            InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly
+                        )
+                    );
                 }
             }
         }
@@ -120,15 +150,21 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (state == States.Aborted)
             {
-                throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.ServiceHostExtensionAborted));
+                throw FxTrace.Exception.AsError(
+                    new CommunicationObjectAbortedException(SR.ServiceHostExtensionAborted)
+                );
             }
             if (state == States.Closed)
             {
-                throw FxTrace.Exception.AsError(new ObjectDisposedException(typeof(DurableInstanceManager).Name));
+                throw FxTrace.Exception.AsError(
+                    new ObjectDisposedException(typeof(DurableInstanceManager).Name)
+                );
             }
             if (state == States.Opened)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ServiceHostExtensionImmutable));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ServiceHostExtensionImmutable)
+                );
             }
         }
 
@@ -136,18 +172,23 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (state == States.Aborted)
             {
-                throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.ServiceHostExtensionAborted));
+                throw FxTrace.Exception.AsError(
+                    new CommunicationObjectAbortedException(SR.ServiceHostExtensionAborted)
+                );
             }
             if (state == States.Closed)
             {
-                throw FxTrace.Exception.AsError(new ObjectDisposedException(typeof(DurableInstanceManager).Name));
+                throw FxTrace.Exception.AsError(
+                    new ObjectDisposedException(typeof(DurableInstanceManager).Name)
+                );
             }
         }
 
         void InitializePersistenceProviderDirectory()
-        {   
+        {
             int maxInstances = ServiceThrottlingBehavior.DefaultMaxConcurrentInstances;
-            ServiceThrottlingBehavior serviceThrottlingBehavior = Host.Description.Behaviors.Find<ServiceThrottlingBehavior>();
+            ServiceThrottlingBehavior serviceThrottlingBehavior =
+                Host.Description.Behaviors.Find<ServiceThrottlingBehavior>();
             if (serviceThrottlingBehavior != null)
             {
                 maxInstances = serviceThrottlingBehavior.MaxConcurrentInstances;
@@ -155,11 +196,23 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (InstanceStore != null)
             {
-                PersistenceProviderDirectory = new PersistenceProviderDirectory(InstanceStore, this.owner, this.instanceMetadataChanges, this.workflowDefinitionProvider, Host, DurableConsistencyScope.Global, maxInstances);
+                PersistenceProviderDirectory = new PersistenceProviderDirectory(
+                    InstanceStore,
+                    this.owner,
+                    this.instanceMetadataChanges,
+                    this.workflowDefinitionProvider,
+                    Host,
+                    DurableConsistencyScope.Global,
+                    maxInstances
+                );
             }
             else
             {
-                PersistenceProviderDirectory = new PersistenceProviderDirectory(this.workflowDefinitionProvider, Host, maxInstances);
+                PersistenceProviderDirectory = new PersistenceProviderDirectory(
+                    this.workflowDefinitionProvider,
+                    Host,
+                    maxInstances
+                );
             }
 
             bool aborted;
@@ -210,9 +263,12 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 // The OCE, bubbled to this layer, is only from store.BeginWaitForEvents.
                 // This indicates handle is freed by 1) normal closing sequence 2) store
-                // is dead (eg. lock owner expired).  We will fault the host as well as 
+                // is dead (eg. lock owner expired).  We will fault the host as well as
                 // cease the loop.
-                if (thisPtr.Host.State == CommunicationState.Opening || thisPtr.Host.State == CommunicationState.Opened)
+                if (
+                    thisPtr.Host.State == CommunicationState.Opening
+                    || thisPtr.Host.State == CommunicationState.Opened
+                )
                 {
                     thisPtr.Host.Fault(exception);
                 }
@@ -239,13 +295,16 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         bool HandleException(Exception exception)
         {
-            if (exception is TimeoutException ||
-                exception is OperationCanceledException ||
-                exception is TransactionException ||
-                exception is CommunicationObjectAbortedException ||
+            if (
+                exception is TimeoutException
+                || exception is OperationCanceledException
+                || exception is TransactionException
+                || exception is CommunicationObjectAbortedException
+                ||
                 // When abort raised by WorkflowServiceInstance
-                exception is FaultException ||
-                exception is InstancePersistenceException)
+                exception is FaultException
+                || exception is InstancePersistenceException
+            )
             {
                 FxTrace.Exception.AsWarning(exception);
                 this.Host.FaultServiceHostIfNecessary(exception);
@@ -258,24 +317,58 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             foreach (IServiceBehavior behavior in Host.Description.Behaviors)
             {
-                if (behavior.GetType().FullName == "System.ServiceModel.Description.PersistenceProviderBehavior")
+                if (
+                    behavior.GetType().FullName
+                    == "System.ServiceModel.Description.PersistenceProviderBehavior"
+                )
                 {
-                    throw FxTrace.Exception.AsError(new CommunicationException(SR.UseInstanceStoreInsteadOfPersistenceProvider));
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationException(SR.UseInstanceStoreInsteadOfPersistenceProvider)
+                    );
                 }
             }
         }
 
-        internal IAsyncResult BeginGetInstance(InstanceKey instanceKey, ICollection<InstanceKey> additionalKeys, WorkflowGetInstanceContext parameters, TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginGetInstance(
+            InstanceKey instanceKey,
+            ICollection<InstanceKey> additionalKeys,
+            WorkflowGetInstanceContext parameters,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfClosedOrAborted(this.state);
-            return new GetInstanceAsyncResult(this, instanceKey, additionalKeys, parameters, timeout, callback, state);
+            return new GetInstanceAsyncResult(
+                this,
+                instanceKey,
+                additionalKeys,
+                parameters,
+                timeout,
+                callback,
+                state
+            );
         }
 
-        internal IAsyncResult BeginGetInstance(Guid instanceId, WorkflowGetInstanceContext parameters,
-            WorkflowIdentityKey updatedIdentity, TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginGetInstance(
+            Guid instanceId,
+            WorkflowGetInstanceContext parameters,
+            WorkflowIdentityKey updatedIdentity,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfClosedOrAborted(this.state);
-            return new GetInstanceAsyncResult(this, instanceId, parameters, updatedIdentity, timeout, callback, state);
+            return new GetInstanceAsyncResult(
+                this,
+                instanceId,
+                parameters,
+                updatedIdentity,
+                timeout,
+                callback,
+                state
+            );
         }
 
         internal WorkflowServiceInstance EndGetInstance(IAsyncResult result)
@@ -309,14 +402,23 @@ namespace System.ServiceModel.Activities.Dispatcher
         void SetDefaultOwnerMetadata()
         {
             // Replace the sentinal value with the real scoping name here.
-            this.instanceOwnerMetadata[WorkflowNamespace.WorkflowHostType] = new InstanceValue(Host.DurableInstancingOptions.ScopeName);
-            this.instanceMetadataChanges[WorkflowNamespace.WorkflowHostType] = new InstanceValue(Host.DurableInstancingOptions.ScopeName);
+            this.instanceOwnerMetadata[WorkflowNamespace.WorkflowHostType] = new InstanceValue(
+                Host.DurableInstancingOptions.ScopeName
+            );
+            this.instanceMetadataChanges[WorkflowNamespace.WorkflowHostType] = new InstanceValue(
+                Host.DurableInstancingOptions.ScopeName
+            );
 
-            this.workflowDefinitionProvider.GetDefinitionIdentityMetadata(this.instanceOwnerMetadata);
+            this.workflowDefinitionProvider.GetDefinitionIdentityMetadata(
+                this.instanceOwnerMetadata
+            );
 
             if (!this.instanceMetadataChanges.ContainsKey(WorkflowServiceNamespace.Service))
             {
-                this.instanceMetadataChanges[WorkflowServiceNamespace.Service] = new InstanceValue(Host.ServiceName, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+                this.instanceMetadataChanges[WorkflowServiceNamespace.Service] = new InstanceValue(
+                    Host.ServiceName,
+                    InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                );
             }
 
             // add instance metadata about all of our endpoints
@@ -327,49 +429,92 @@ namespace System.ServiceModel.Activities.Dispatcher
                     // treat the control endpoint as special
                     if (endpoint is WorkflowControlEndpoint)
                     {
-                        if (!this.instanceOwnerMetadata.ContainsKey(WorkflowServiceNamespace.ControlEndpoint))
+                        if (
+                            !this.instanceOwnerMetadata.ContainsKey(
+                                WorkflowServiceNamespace.ControlEndpoint
+                            )
+                        )
                         {
-                            this.instanceOwnerMetadata.Add(WorkflowServiceNamespace.ControlEndpoint, new InstanceValue(endpoint.ListenUri));
+                            this.instanceOwnerMetadata.Add(
+                                WorkflowServiceNamespace.ControlEndpoint,
+                                new InstanceValue(endpoint.ListenUri)
+                            );
                         }
                     }
                     else
                     {
-                        XName endpointName = WorkflowServiceNamespace.EndpointsPath.GetName(endpoint.Name);
+                        XName endpointName = WorkflowServiceNamespace.EndpointsPath.GetName(
+                            endpoint.Name
+                        );
                         if (!this.instanceOwnerMetadata.ContainsKey(endpointName))
                         {
-                            this.instanceOwnerMetadata.Add(endpointName, new InstanceValue(endpoint.ListenUri));
+                            this.instanceOwnerMetadata.Add(
+                                endpointName,
+                                new InstanceValue(endpoint.ListenUri)
+                            );
                         }
                     }
                 }
             }
 
             // as well as additional metadata if we're hosted
-            VirtualPathExtension virtualPathExtension = this.Host.Extensions.Find<VirtualPathExtension>();
-            if (virtualPathExtension != null && !this.instanceMetadataChanges.ContainsKey(PersistenceMetadataNamespace.ActivationType))
+            VirtualPathExtension virtualPathExtension =
+                this.Host.Extensions.Find<VirtualPathExtension>();
+            if (
+                virtualPathExtension != null
+                && !this.instanceMetadataChanges.ContainsKey(
+                    PersistenceMetadataNamespace.ActivationType
+                )
+            )
             {
                 // Example values for various web-host properties
                 // SiteName: "Default Website"
                 // RelativeApplicationPath/ApplicationVirtualPath: "/myApp1"
                 // Virtual Path: "~/ShoppingCartService/ShoppingCartService.xaml"
                 // Relative Service Path: "/myApp1/ShoppingCartService/ShoppingCartService.xaml"
-                this.instanceMetadataChanges.Add(PersistenceMetadataNamespace.ActivationType, new InstanceValue(PersistenceMetadataNamespace.ActivationTypes.WAS, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional));
+                this.instanceMetadataChanges.Add(
+                    PersistenceMetadataNamespace.ActivationType,
+                    new InstanceValue(
+                        PersistenceMetadataNamespace.ActivationTypes.WAS,
+                        InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                    )
+                );
 
-                string siteName = this.Host.OverrideSiteName ? this.Host.Description.Name : virtualPathExtension.SiteName;
-                
+                string siteName = this.Host.OverrideSiteName
+                    ? this.Host.Description.Name
+                    : virtualPathExtension.SiteName;
+
                 // The remaining properties will get overritten if the user set them manually.  To control activation, the user should also set ActivationType, even if just to WAS.
-                this.instanceMetadataChanges[WorkflowServiceNamespace.SiteName] = new InstanceValue(siteName, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
-                this.instanceMetadataChanges[WorkflowServiceNamespace.RelativeApplicationPath] = new InstanceValue(virtualPathExtension.ApplicationVirtualPath, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+                this.instanceMetadataChanges[WorkflowServiceNamespace.SiteName] = new InstanceValue(
+                    siteName,
+                    InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                );
+                this.instanceMetadataChanges[WorkflowServiceNamespace.RelativeApplicationPath] =
+                    new InstanceValue(
+                        virtualPathExtension.ApplicationVirtualPath,
+                        InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                    );
 
                 string virtualPath = virtualPathExtension.VirtualPath.Substring(1);
-                string relativePath = ("/" == virtualPathExtension.ApplicationVirtualPath) ? virtualPath : virtualPathExtension.ApplicationVirtualPath + virtualPath;
-                
-                this.instanceMetadataChanges[WorkflowServiceNamespace.RelativeServicePath] = new InstanceValue(relativePath, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+                string relativePath =
+                    ("/" == virtualPathExtension.ApplicationVirtualPath)
+                        ? virtualPath
+                        : virtualPathExtension.ApplicationVirtualPath + virtualPath;
+
+                this.instanceMetadataChanges[WorkflowServiceNamespace.RelativeServicePath] =
+                    new InstanceValue(
+                        relativePath,
+                        InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                    );
             }
         }
 
         public void Open(TimeSpan timeout)
         {
-            Fx.Assert(Host != null, "Extension should have been attached in WorkflowServiceHost constructor.");
+            Fx.Assert(
+                Host != null,
+                "Extension should have been attached in WorkflowServiceHost constructor."
+            );
 
             lock (this.thisLock)
             {
@@ -382,7 +527,6 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             SetDefaultOwnerMetadata();
 
-
             if (InstanceStore != null)
             {
                 using (new TransactionScope(TransactionScopeOption.Suppress))
@@ -392,13 +536,17 @@ namespace System.ServiceModel.Activities.Dispatcher
                     try
                     {
                         handle = InstanceStore.CreateInstanceHandle(null);
-                        this.owner = InstanceStore.Execute(handle, GetCreateOwnerCommand(), timeoutHelper.RemainingTime()).InstanceOwner;
+                        this.owner = InstanceStore
+                            .Execute(handle, GetCreateOwnerCommand(), timeoutHelper.RemainingTime())
+                            .InstanceOwner;
                         this.handle = handle;
                         handle = null;
                     }
                     catch (InstancePersistenceException exception)
                     {
-                        throw FxTrace.Exception.AsError(new CommunicationException(SR.UnableToOpenAndRegisterStore, exception));
+                        throw FxTrace.Exception.AsError(
+                            new CommunicationException(SR.UnableToOpenAndRegisterStore, exception)
+                        );
                     }
                     finally
                     {
@@ -415,16 +563,23 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void InitializeDefinitionProvider()
         {
-            WorkflowServiceBehavior workflowServiceBehavior = Host.Description.Behaviors.Find<WorkflowServiceBehavior>();
-            Fx.Assert(workflowServiceBehavior != null && workflowServiceBehavior.WorkflowDefinitionProvider != null,
-                "WorkflowServiceBehavior must be present on WorkflowServiceHost and WorkflowDefinitionProvider must be present on WorkflowServiceBehavior.");
+            WorkflowServiceBehavior workflowServiceBehavior =
+                Host.Description.Behaviors.Find<WorkflowServiceBehavior>();
+            Fx.Assert(
+                workflowServiceBehavior != null
+                    && workflowServiceBehavior.WorkflowDefinitionProvider != null,
+                "WorkflowServiceBehavior must be present on WorkflowServiceHost and WorkflowDefinitionProvider must be present on WorkflowServiceBehavior."
+            );
 
             this.workflowDefinitionProvider = workflowServiceBehavior.WorkflowDefinitionProvider;
         }
 
         public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            Fx.Assert(Host != null, "Extension should have been attached in WorkflowServiceHost constructor.");
+            Fx.Assert(
+                Host != null,
+                "Extension should have been attached in WorkflowServiceHost constructor."
+            );
 
             using (new TransactionScope(TransactionScopeOption.Suppress))
             {
@@ -467,7 +622,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             IDictionary<XName, InstanceValue> commandMetadata;
             if (this.instanceOwnerMetadata.ContainsKey(Workflow45Namespace.DefinitionIdentities))
             {
-                CreateWorkflowOwnerWithIdentityCommand withIdentity = new CreateWorkflowOwnerWithIdentityCommand();
+                CreateWorkflowOwnerWithIdentityCommand withIdentity =
+                    new CreateWorkflowOwnerWithIdentityCommand();
                 command = withIdentity;
                 commandMetadata = withIdentity.InstanceOwnerMetadata;
             }
@@ -497,13 +653,20 @@ namespace System.ServiceModel.Activities.Dispatcher
         class OpenInstanceStoreAsyncResult : AsyncResult
         {
             static AsyncCompletion handleEndExecute = new AsyncCompletion(HandleEndExecute);
-            static Action<AsyncResult, Exception> onFinally = new Action<AsyncResult, Exception>(OnFinally);
+            static Action<AsyncResult, Exception> onFinally = new Action<AsyncResult, Exception>(
+                OnFinally
+            );
 
             DurableInstanceManager instanceManager;
             TimeoutHelper timeoutHelper;
             InstanceHandle handle;
 
-            public OpenInstanceStoreAsyncResult(DurableInstanceManager instanceManager, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenInstanceStoreAsyncResult(
+                DurableInstanceManager instanceManager,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instanceManager = instanceManager;
@@ -534,9 +697,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                     else
                     {
                         this.handle = this.instanceManager.InstanceStore.CreateInstanceHandle(null);
-                        IAsyncResult executeResult = this.instanceManager.InstanceStore.BeginExecute(this.handle,
-                            this.instanceManager.GetCreateOwnerCommand(), this.timeoutHelper.RemainingTime(),
-                            this.PrepareAsyncCompletion(OpenInstanceStoreAsyncResult.handleEndExecute), this);
+                        IAsyncResult executeResult =
+                            this.instanceManager.InstanceStore.BeginExecute(
+                                this.handle,
+                                this.instanceManager.GetCreateOwnerCommand(),
+                                this.timeoutHelper.RemainingTime(),
+                                this.PrepareAsyncCompletion(
+                                    OpenInstanceStoreAsyncResult.handleEndExecute
+                                ),
+                                this
+                            );
                         completeSelf = SyncContinue(executeResult);
                     }
                 }
@@ -558,9 +728,12 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static bool HandleEndExecute(IAsyncResult result)
             {
-                OpenInstanceStoreAsyncResult thisPtr = (OpenInstanceStoreAsyncResult)result.AsyncState;
+                OpenInstanceStoreAsyncResult thisPtr = (OpenInstanceStoreAsyncResult)
+                    result.AsyncState;
 
-                thisPtr.instanceManager.owner = thisPtr.instanceManager.InstanceStore.EndExecute(result).InstanceOwner;
+                thisPtr.instanceManager.owner = thisPtr
+                    .instanceManager.InstanceStore.EndExecute(result)
+                    .InstanceOwner;
 
                 return thisPtr.CreateDirectory();
             }
@@ -573,7 +746,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (exception is InstancePersistenceException)
                         {
-                            throw FxTrace.Exception.AsError(new CommunicationException(SR.UnableToOpenAndRegisterStore, exception));
+                            throw FxTrace.Exception.AsError(
+                                new CommunicationException(
+                                    SR.UnableToOpenAndRegisterStore,
+                                    exception
+                                )
+                            );
                         }
                     }
                     finally
@@ -603,9 +781,14 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class CloseAsyncResult : AsyncResult
         {
-            static AsyncCallback handleEndReleaseInstanceWrapperCallback = Fx.ThunkCallback(new AsyncCallback(HandleEndReleaseInstanceWrapperCallback));
+            static AsyncCallback handleEndReleaseInstanceWrapperCallback = Fx.ThunkCallback(
+                new AsyncCallback(HandleEndReleaseInstanceWrapperCallback)
+            );
             static AsyncCompletion handleEndExecute = new AsyncCompletion(HandleEndExecute);
-            static Action<object, TimeoutException> handleWaitForStoreEvents = new Action<object, TimeoutException>(HandleWaitForStoreEvents);
+            static Action<object, TimeoutException> handleWaitForStoreEvents = new Action<
+                object,
+                TimeoutException
+            >(HandleWaitForStoreEvents);
             static int outstandingUnloadCapacity = 10;
 
             TimeoutHelper timeoutHelper;
@@ -618,7 +801,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             int completedUnloadCount;
             bool allReleaseInstancesCompletedSynchronously;
 
-            public CloseAsyncResult(DurableInstanceManager instanceManager, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                DurableInstanceManager instanceManager,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instanceManager = instanceManager;
@@ -626,12 +814,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.instanceQueueLock = new object();
                 this.allReleaseInstancesCompletedSynchronously = true;
 
-                if (this.instanceManager.state == States.Opened && this.instanceManager.handle != null)
+                if (
+                    this.instanceManager.state == States.Opened
+                    && this.instanceManager.handle != null
+                )
                 {
-                    // Note: since we change state before actual openning, this may 
-                    // get NullRef (---- already exists in other places) if Close 
-                    // is called on an unsuccessful or incompleted opened DIM.  
-                    // Assuming it is a non supported scenario.  
+                    // Note: since we change state before actual openning, this may
+                    // get NullRef (---- already exists in other places) if Close
+                    // is called on an unsuccessful or incompleted opened DIM.
+                    // Assuming it is a non supported scenario.
                     this.instanceManager.handle.Free();
                     if (WaitForStoreEventsLoop())
                     {
@@ -675,12 +866,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.instanceManager.AbortDirectory();
                     }
 
-                    // We cannot throw here if the DurableInstanceManager is already aborted since service host could 
+                    // We cannot throw here if the DurableInstanceManager is already aborted since service host could
                     // be aborted due to a timeout exception. Simply return here
                     return true;
                 }
 
-                IEnumerable<PersistenceContext> contexts = this.instanceManager.PersistenceProviderDirectory.GetContexts();
+                IEnumerable<PersistenceContext> contexts =
+                    this.instanceManager.PersistenceProviderDirectory.GetContexts();
                 this.instanceCount = contexts.Count<PersistenceContext>();
                 this.workflowServiceInstances = contexts.GetEnumerator();
                 // We only call StartProcess if we actually have instances to release.
@@ -700,8 +892,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool WaitForStoreEventsLoop()
             {
                 // Event never get initialized, meaning we have not started the WaitForStoreEvents loop
-                if (this.instanceManager.waitForStoreEventsLoop == null
-                    || this.instanceManager.waitForStoreEventsLoop.WaitAsync(handleWaitForStoreEvents, this, this.timeoutHelper.RemainingTime()))
+                if (
+                    this.instanceManager.waitForStoreEventsLoop == null
+                    || this.instanceManager.waitForStoreEventsLoop.WaitAsync(
+                        handleWaitForStoreEvents,
+                        this,
+                        this.timeoutHelper.RemainingTime()
+                    )
+                )
                 {
                     return PerformClose();
                 }
@@ -783,7 +981,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 false,
                                 this.timeoutHelper.RemainingTime(),
                                 CloseAsyncResult.handleEndReleaseInstanceWrapperCallback,
-                                this);
+                                this
+                            );
                         }
                         catch (Exception e)
                         {
@@ -800,7 +999,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     else
                     {
-                        if (Interlocked.Increment(ref this.completedUnloadCount) == this.instanceCount)
+                        if (
+                            Interlocked.Increment(ref this.completedUnloadCount)
+                            == this.instanceCount
+                        )
                         {
                             // We are done with the instances, so do post-processing. If that completes
                             // synchronously, we need to call Complete. We completed synchronously if all
@@ -821,7 +1023,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool PostProcess()
             {
                 //cleanup any buffered receives unassociated with workflowServiceInstances
-                BufferedReceiveManager bufferedReceiveManager = this.instanceManager.Host.Extensions.Find<BufferedReceiveManager>();
+                BufferedReceiveManager bufferedReceiveManager =
+                    this.instanceManager.Host.Extensions.Find<BufferedReceiveManager>();
                 if (bufferedReceiveManager != null)
                 {
                     bufferedReceiveManager.AbandonBufferedReceives();
@@ -831,12 +1034,18 @@ namespace System.ServiceModel.Activities.Dispatcher
                 if (this.instanceManager.InstanceStore != null)
                 {
                     IAsyncResult executeResult = null;
-                    this.handle = this.instanceManager.InstanceStore.CreateInstanceHandle(this.instanceManager.owner);
+                    this.handle = this.instanceManager.InstanceStore.CreateInstanceHandle(
+                        this.instanceManager.owner
+                    );
                     try
                     {
-                        executeResult = this.instanceManager.InstanceStore.BeginExecute(this.handle,
-                            new DeleteWorkflowOwnerCommand(), this.timeoutHelper.RemainingTime(),
-                            this.PrepareAsyncCompletion(CloseAsyncResult.handleEndExecute), this);
+                        executeResult = this.instanceManager.InstanceStore.BeginExecute(
+                            this.handle,
+                            new DeleteWorkflowOwnerCommand(),
+                            this.timeoutHelper.RemainingTime(),
+                            this.PrepareAsyncCompletion(CloseAsyncResult.handleEndExecute),
+                            this
+                        );
                         return (SyncContinue(executeResult));
                     }
                     // Ignore some exceptions because DeleteWorkflowOwner is best effort.
@@ -863,7 +1072,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             static void HandleEndReleaseInstance(IAsyncResult result)
             {
                 CloseAsyncResult thisPtr = (CloseAsyncResult)result.AsyncState;
-                thisPtr.allReleaseInstancesCompletedSynchronously = thisPtr.allReleaseInstancesCompletedSynchronously && result.CompletedSynchronously;
+                thisPtr.allReleaseInstancesCompletedSynchronously =
+                    thisPtr.allReleaseInstancesCompletedSynchronously
+                    && result.CompletedSynchronously;
                 try
                 {
                     WorkflowServiceInstance.EndReleaseInstanceForClose(result);
@@ -881,7 +1092,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     FxTrace.Exception.AsWarning(e);
                 }
 
-                if (Interlocked.Increment(ref thisPtr.completedUnloadCount) == thisPtr.instanceCount)
+                if (
+                    Interlocked.Increment(ref thisPtr.completedUnloadCount) == thisPtr.instanceCount
+                )
                 {
                     if (thisPtr.PostProcess())
                     {
@@ -920,7 +1133,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 try
                 {
-                    thisPtr.instanceManager.owner = thisPtr.instanceManager.InstanceStore.EndExecute(result).InstanceOwner;
+                    thisPtr.instanceManager.owner = thisPtr
+                        .instanceManager.InstanceStore.EndExecute(result)
+                        .InstanceOwner;
                 }
                 // Ignore some exceptions because DeleteWorkflowOwner is best effort.
                 catch (InstancePersistenceCommandException) { }
@@ -976,19 +1191,27 @@ namespace System.ServiceModel.Activities.Dispatcher
         // results in one of three outcomes, namely :
         // - the WorkflowServiceInstance is set to null
         // - the WorkflowServiceInstance is aborted
-        // - ReleaseReference is called on the WorkflowServiceInstance to ensure that unload happens 
+        // - ReleaseReference is called on the WorkflowServiceInstance to ensure that unload happens
         //   (ultimately resulting in the WorkflowServiceInstance being aborted)
         // This is to prevent leaking WorkflowServiceInstances since nothing else has a handle to the WorkflowServiceInstance in those
         // scenarios.
 
         class GetInstanceAsyncResult : TransactedAsyncResult
         {
-            static AsyncCompletion handleEndAcquireReference = new AsyncCompletion(HandleEndAcquireReference);
+            static AsyncCompletion handleEndAcquireReference = new AsyncCompletion(
+                HandleEndAcquireReference
+            );
             static AsyncCompletion handleEndLoad = new AsyncCompletion(HandleEndLoad);
-            static AsyncCompletion handleAssociateInfrastructureKeys = new AsyncCompletion(HandleAssociateInfrastructureKeys);
+            static AsyncCompletion handleAssociateInfrastructureKeys = new AsyncCompletion(
+                HandleAssociateInfrastructureKeys
+            );
             static AsyncCompletion handleCommit = new AsyncCompletion(HandleCommit);
-            static AsyncCompletion handleEndEnlistContext = new AsyncCompletion(HandleEndEnlistContext);
-            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
+            static AsyncCompletion handleEndEnlistContext = new AsyncCompletion(
+                HandleEndEnlistContext
+            );
+            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+                Finally
+            );
 
             DurableInstanceManager instanceManager;
             Guid instanceId;
@@ -1004,8 +1227,15 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool loadAny;
             WorkflowIdentityKey updatedIdentity;
 
-            public GetInstanceAsyncResult(DurableInstanceManager instanceManager, InstanceKey instanceKey, ICollection<InstanceKey> additionalKeys, WorkflowGetInstanceContext parameters,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            public GetInstanceAsyncResult(
+                DurableInstanceManager instanceManager,
+                InstanceKey instanceKey,
+                ICollection<InstanceKey> additionalKeys,
+                WorkflowGetInstanceContext parameters,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : this(instanceManager, parameters, timeout, callback, state)
             {
                 Fx.Assert(instanceKey != null, "Instance key must be set.");
@@ -1019,8 +1249,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            public GetInstanceAsyncResult(DurableInstanceManager instanceManager, Guid instanceId, WorkflowGetInstanceContext parameters, WorkflowIdentityKey updatedIdentity,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            public GetInstanceAsyncResult(
+                DurableInstanceManager instanceManager,
+                Guid instanceId,
+                WorkflowGetInstanceContext parameters,
+                WorkflowIdentityKey updatedIdentity,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : this(instanceManager, parameters, timeout, callback, state)
             {
                 this.instanceId = instanceId;
@@ -1032,8 +1269,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            GetInstanceAsyncResult(DurableInstanceManager instanceManager, WorkflowGetInstanceContext parameters,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            GetInstanceAsyncResult(
+                DurableInstanceManager instanceManager,
+                WorkflowGetInstanceContext parameters,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instanceManager = instanceManager;
@@ -1043,14 +1285,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.OnCompleting = onCompleting;
 
                 Transaction currentTransaction = Transaction.Current;
-                if (currentTransaction == null && this.instanceManager.Host.IsLoadTransactionRequired)
+                if (
+                    currentTransaction == null
+                    && this.instanceManager.Host.IsLoadTransactionRequired
+                )
                 {
                     this.committableTransaction = new CommittableTransaction(this.timeout);
                     currentTransaction = committableTransaction;
                 }
                 if (currentTransaction != null)
                 {
-                    this.transaction = currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                    this.transaction = currentTransaction.DependentClone(
+                        DependentCloneOption.BlockCommitUntilComplete
+                    );
                 }
             }
 
@@ -1069,7 +1316,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                     return AssociateKeys();
                 }
 
-                IAsyncResult nextResult = this.durableInstance.BeginTryAcquireReference(this.timeout, this.PrepareAsyncCompletion(handleEndAcquireReference), this);
+                IAsyncResult nextResult = this.durableInstance.BeginTryAcquireReference(
+                    this.timeout,
+                    this.PrepareAsyncCompletion(handleEndAcquireReference),
+                    this
+                );
                 return SyncContinue(nextResult);
             }
 
@@ -1103,7 +1354,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     try
                     {
-                        enlistResult = this.persistenceContext.BeginEnlist(this.timeout, PrepareAsyncCompletion(handleEndEnlistContext), this);
+                        enlistResult = this.persistenceContext.BeginEnlist(
+                            this.timeout,
+                            PrepareAsyncCompletion(handleEndEnlistContext),
+                            this
+                        );
                     }
                     catch (ObjectDisposedException)
                     {
@@ -1111,7 +1366,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     catch (CommunicationObjectAbortedException)
                     {
-                        throw FxTrace.Exception.AsError(new OperationCanceledException(SR.DefaultAbortReason));
+                        throw FxTrace.Exception.AsError(
+                            new OperationCanceledException(SR.DefaultAbortReason)
+                        );
                     }
                 }
 
@@ -1131,7 +1388,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 GetInstanceAsyncResult thisPtr = (GetInstanceAsyncResult)result.AsyncState;
 
-                // 
+                //
 
                 try
                 {
@@ -1149,7 +1406,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (CommunicationObjectAbortedException)
                 {
-                    throw FxTrace.Exception.AsError(new OperationCanceledException(SR.DefaultAbortReason));
+                    throw FxTrace.Exception.AsError(
+                        new OperationCanceledException(SR.DefaultAbortReason)
+                    );
                 }
 
                 return thisPtr.AssociateKeys();
@@ -1161,35 +1420,66 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (!this.loadAny && this.parameters.CanCreateInstance)
                 {
-                    Fx.Assert(this.updatedIdentity == null, "Update() can never create instance. Enable this path if we ever support updating via user-defined operation.");
+                    Fx.Assert(
+                        this.updatedIdentity == null,
+                        "Update() can never create instance. Enable this path if we ever support updating via user-defined operation."
+                    );
                     if (this.instanceKey != null && this.instanceKey.IsValid)
                     {
-                        nextResult = this.instanceManager.PersistenceProviderDirectory.BeginLoadOrCreate(
-                            this.instanceKey, Guid.Empty, this.additionalKeys, this.transaction,
-                            this.timeout, PrepareAsyncCompletion(handleEndLoad), this);
+                        nextResult =
+                            this.instanceManager.PersistenceProviderDirectory.BeginLoadOrCreate(
+                                this.instanceKey,
+                                Guid.Empty,
+                                this.additionalKeys,
+                                this.transaction,
+                                this.timeout,
+                                PrepareAsyncCompletion(handleEndLoad),
+                                this
+                            );
                     }
                     else
                     {
                         // Either invalid key (new instance) or lookup by instance ID.
-                        nextResult = this.instanceManager.PersistenceProviderDirectory.BeginLoadOrCreate(
-                            this.instanceId, this.additionalKeys, this.transaction,
-                            this.timeout, PrepareAsyncCompletion(handleEndLoad), this);
+                        nextResult =
+                            this.instanceManager.PersistenceProviderDirectory.BeginLoadOrCreate(
+                                this.instanceId,
+                                this.additionalKeys,
+                                this.transaction,
+                                this.timeout,
+                                PrepareAsyncCompletion(handleEndLoad),
+                                this
+                            );
                     }
                 }
                 else
                 {
                     if (this.instanceKey != null)
                     {
-                        Fx.Assert(this.updatedIdentity == null, "Update() always has the instance ID. Enable this path if we ever support updating via user-defined operation that relies on correlation.");
+                        Fx.Assert(
+                            this.updatedIdentity == null,
+                            "Update() always has the instance ID. Enable this path if we ever support updating via user-defined operation that relies on correlation."
+                        );
                         nextResult = this.instanceManager.PersistenceProviderDirectory.BeginLoad(
-                            this.instanceKey, this.additionalKeys, this.transaction,
-                            this.timeout, PrepareAsyncCompletion(handleEndLoad), this);
+                            this.instanceKey,
+                            this.additionalKeys,
+                            this.transaction,
+                            this.timeout,
+                            PrepareAsyncCompletion(handleEndLoad),
+                            this
+                        );
                     }
                     else
                     {
                         nextResult = this.instanceManager.PersistenceProviderDirectory.BeginLoad(
-                            this.instanceId, null, this.transaction, this.loadAny, this.updatedIdentity,
-                            this.timeout, PrepareAsyncCompletion(handleEndLoad), this);
+                            this.instanceId,
+                            null,
+                            this.transaction,
+                            this.loadAny,
+                            this.updatedIdentity,
+                            this.timeout,
+                            PrepareAsyncCompletion(handleEndLoad),
+                            this
+                        );
                     }
                 }
                 return SyncContinue(nextResult);
@@ -1202,8 +1492,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     IAsyncResult result;
                     try
                     {
-                        result = this.durableInstance.BeginAssociateInfrastructureKeys(this.additionalKeys, this.transaction, this.timeout,
-                                PrepareAsyncCompletion(handleAssociateInfrastructureKeys), this);
+                        result = this.durableInstance.BeginAssociateInfrastructureKeys(
+                            this.additionalKeys,
+                            this.transaction,
+                            this.timeout,
+                            PrepareAsyncCompletion(handleAssociateInfrastructureKeys),
+                            this
+                        );
                     }
                     catch (Exception exception)
                     {
@@ -1231,13 +1526,24 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool fromCache;
                 if (!thisPtr.loadAny && thisPtr.parameters.CanCreateInstance)
                 {
-                    thisPtr.persistenceContext = thisPtr.instanceManager.PersistenceProviderDirectory.EndLoadOrCreate(result, out fromCache);
+                    thisPtr.persistenceContext =
+                        thisPtr.instanceManager.PersistenceProviderDirectory.EndLoadOrCreate(
+                            result,
+                            out fromCache
+                        );
                 }
                 else
                 {
-                    thisPtr.persistenceContext = thisPtr.instanceManager.PersistenceProviderDirectory.EndLoad(result, out fromCache);
+                    thisPtr.persistenceContext =
+                        thisPtr.instanceManager.PersistenceProviderDirectory.EndLoad(
+                            result,
+                            out fromCache
+                        );
                 }
-                Fx.AssertAndThrow(previousPersistenceContext != thisPtr.persistenceContext, "PPD should not load same PersistenceContext for the same GetInstanceAsyncResult!");
+                Fx.AssertAndThrow(
+                    previousPersistenceContext != thisPtr.persistenceContext,
+                    "PPD should not load same PersistenceContext for the same GetInstanceAsyncResult!"
+                );
                 return thisPtr.TryAcquire(fromCache);
             }
 
@@ -1270,7 +1576,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 if (this.committableTransaction != null)
                 {
-                    IAsyncResult result = this.committableTransaction.BeginCommit(PrepareAsyncCompletion(handleCommit), this);
+                    IAsyncResult result = this.committableTransaction.BeginCommit(
+                        PrepareAsyncCompletion(handleCommit),
+                        this
+                    );
                     return SyncContinue(result);
                 }
                 else
@@ -1310,7 +1619,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
 
                 // Reference is acquired on an instance but we fail perform subsequent task before
-                // return an instance to the client (Tx Enlist timeout).  We are responsible to 
+                // return an instance to the client (Tx Enlist timeout).  We are responsible to
                 // release the reference.  We don't need to worry about Aborted or other State (has
                 // no effect on ref counting).
                 if (thisPtr.referenceAcquired && exception != null)
@@ -1322,16 +1631,20 @@ namespace System.ServiceModel.Activities.Dispatcher
         }
 
         // This async result waits for store events and handle them (currently only support HasRunnableWorkflowEvent).
-        // It is intended to always complete async to simplify caller usage. 
-        // 1) no code to handle sync completion. 
+        // It is intended to always complete async to simplify caller usage.
+        // 1) no code to handle sync completion.
         // 2) recursive call will be safe from StackOverflow.
         // For simplicity, we handle (load/run) each event one-by-one.
         // We ---- certain set of exception (see HandleException).  Other will crash the process.
         // InvalidOperation is also handled due to TryLoadRunnableWorkflowCommand could fail if ---- with other hosts.
         class WaitAndHandleStoreEventsAsyncResult : AsyncResult
         {
-            static Action<object> waitAndHandleStoreEvents = new Action<object>(WaitAndHandleStoreEvents);
-            static AsyncCompletion handleEndWaitForStoreEvents = new AsyncCompletion(HandleEndWaitForStoreEvents);
+            static Action<object> waitAndHandleStoreEvents = new Action<object>(
+                WaitAndHandleStoreEvents
+            );
+            static AsyncCompletion handleEndWaitForStoreEvents = new AsyncCompletion(
+                HandleEndWaitForStoreEvents
+            );
             static AsyncCompletion handleEndGetInstance = new AsyncCompletion(HandleEndGetInstance);
             static AsyncCompletion handleEndRunInstance = new AsyncCompletion(HandleEndRunInstance);
 
@@ -1339,7 +1652,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             IEnumerator<InstancePersistenceEvent> events;
             WorkflowServiceInstance currentInstance;
 
-            public WaitAndHandleStoreEventsAsyncResult(DurableInstanceManager instanceManager, AsyncCallback callback, object state)
+            public WaitAndHandleStoreEventsAsyncResult(
+                DurableInstanceManager instanceManager,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instanceManager = instanceManager;
@@ -1353,7 +1670,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static void WaitAndHandleStoreEvents(object state)
             {
-                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)state;
+                WaitAndHandleStoreEventsAsyncResult thisPtr =
+                    (WaitAndHandleStoreEventsAsyncResult)state;
 
                 bool completeSelf;
                 Exception completionException = null;
@@ -1381,15 +1699,22 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool WaitForStoreEvents()
             {
                 // Defense in depth with a predefined timeout
-                IAsyncResult result = this.instanceManager.InstanceStore.BeginWaitForEvents(this.instanceManager.handle, 
-                    TimeSpan.FromSeconds(600), PrepareAsyncCompletion(handleEndWaitForStoreEvents), this);
+                IAsyncResult result = this.instanceManager.InstanceStore.BeginWaitForEvents(
+                    this.instanceManager.handle,
+                    TimeSpan.FromSeconds(600),
+                    PrepareAsyncCompletion(handleEndWaitForStoreEvents),
+                    this
+                );
                 return SyncContinue(result);
             }
 
             static bool HandleEndWaitForStoreEvents(IAsyncResult result)
             {
-                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)result.AsyncState;
-                thisPtr.events = thisPtr.instanceManager.InstanceStore.EndWaitForEvents(result).GetEnumerator();
+                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)
+                    result.AsyncState;
+                thisPtr.events = thisPtr
+                    .instanceManager.InstanceStore.EndWaitForEvents(result)
+                    .GetEnumerator();
                 return thisPtr.HandleStoreEvents();
             }
 
@@ -1405,13 +1730,22 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     try
                     {
-                        IAsyncResult result = this.instanceManager.BeginGetInstance(Guid.Empty, null, null, this.instanceManager.Host.PersistTimeout,
-                            PrepareAsyncCompletion(handleEndGetInstance), this);
+                        IAsyncResult result = this.instanceManager.BeginGetInstance(
+                            Guid.Empty,
+                            null,
+                            null,
+                            this.instanceManager.Host.PersistTimeout,
+                            PrepareAsyncCompletion(handleEndGetInstance),
+                            this
+                        );
                         return SyncContinue(result);
                     }
                     catch (Exception exception)
                     {
-                        if (Fx.IsFatal(exception) || !this.instanceManager.HandleException(exception))
+                        if (
+                            Fx.IsFatal(exception)
+                            || !this.instanceManager.HandleException(exception)
+                        )
                         {
                             throw;
                         }
@@ -1419,7 +1753,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 else
                 {
-                    Fx.AssertAndThrow("Unknown InstancePersistenceEvent (" + currentEvent.Name + ")!");
+                    Fx.AssertAndThrow(
+                        "Unknown InstancePersistenceEvent (" + currentEvent.Name + ")!"
+                    );
                 }
 
                 return HandleStoreEvents();
@@ -1427,7 +1763,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static bool HandleEndGetInstance(IAsyncResult result)
             {
-                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)result.AsyncState;
+                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)
+                    result.AsyncState;
                 try
                 {
                     thisPtr.currentInstance = thisPtr.instanceManager.EndGetInstance(result);
@@ -1435,7 +1772,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (Exception exception)
                 {
-                    if (Fx.IsFatal(exception) || !thisPtr.instanceManager.HandleException(exception))
+                    if (
+                        Fx.IsFatal(exception) || !thisPtr.instanceManager.HandleException(exception)
+                    )
                     {
                         throw;
                     }
@@ -1447,7 +1786,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 try
                 {
-                    IAsyncResult result = this.currentInstance.BeginRun(null, TimeSpan.MaxValue, PrepareAsyncCompletion(handleEndRunInstance), this);
+                    IAsyncResult result = this.currentInstance.BeginRun(
+                        null,
+                        TimeSpan.MaxValue,
+                        PrepareAsyncCompletion(handleEndRunInstance),
+                        this
+                    );
                     return SyncContinue(result);
                 }
                 catch (Exception exception)
@@ -1471,14 +1815,17 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static bool HandleEndRunInstance(IAsyncResult result)
             {
-                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)result.AsyncState;
+                WaitAndHandleStoreEventsAsyncResult thisPtr = (WaitAndHandleStoreEventsAsyncResult)
+                    result.AsyncState;
                 try
                 {
                     thisPtr.currentInstance.EndRun(result);
                 }
                 catch (Exception exception)
                 {
-                    if (Fx.IsFatal(exception) || !thisPtr.instanceManager.HandleException(exception))
+                    if (
+                        Fx.IsFatal(exception) || !thisPtr.instanceManager.HandleException(exception)
+                    )
                     {
                         throw;
                     }

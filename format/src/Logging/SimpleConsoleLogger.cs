@@ -18,18 +18,23 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
         private readonly LogLevel _minimalLogLevel;
         private readonly LogLevel _minimalErrorLevel;
 
-        private static ImmutableDictionary<LogLevel, ConsoleColor> LogLevelColorMap => new Dictionary<LogLevel, ConsoleColor>
-        {
-            [LogLevel.Critical] = ConsoleColor.Red,
-            [LogLevel.Error] = ConsoleColor.Red,
-            [LogLevel.Warning] = ConsoleColor.Yellow,
-            [LogLevel.Information] = ConsoleColor.White,
-            [LogLevel.Debug] = ConsoleColor.Gray,
-            [LogLevel.Trace] = ConsoleColor.Gray,
-            [LogLevel.None] = ConsoleColor.White,
-        }.ToImmutableDictionary();
+        private static ImmutableDictionary<LogLevel, ConsoleColor> LogLevelColorMap =>
+            new Dictionary<LogLevel, ConsoleColor>
+            {
+                [LogLevel.Critical] = ConsoleColor.Red,
+                [LogLevel.Error] = ConsoleColor.Red,
+                [LogLevel.Warning] = ConsoleColor.Yellow,
+                [LogLevel.Information] = ConsoleColor.White,
+                [LogLevel.Debug] = ConsoleColor.Gray,
+                [LogLevel.Trace] = ConsoleColor.Gray,
+                [LogLevel.None] = ConsoleColor.White,
+            }.ToImmutableDictionary();
 
-        public SimpleConsoleLogger(IConsole console, LogLevel minimalLogLevel, LogLevel minimalErrorLevel)
+        public SimpleConsoleLogger(
+            IConsole console,
+            LogLevel minimalLogLevel,
+            LogLevel minimalErrorLevel
+        )
         {
             _terminal = console.GetTerminal();
             _console = console;
@@ -37,7 +42,13 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
             _minimalErrorLevel = minimalErrorLevel;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        )
         {
             if (!IsEnabled(logLevel))
             {
@@ -64,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Tools.Logging
             return (int)logLevel >= (int)_minimalLogLevel;
         }
 
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull
         {
             return NullScope.Instance;
         }

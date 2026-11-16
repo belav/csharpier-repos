@@ -16,16 +16,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicCodeDefinitionWindow()
-            : base(nameof(BasicCodeDefinitionWindow))
-        {
-        }
+            : base(nameof(BasicCodeDefinitionWindow)) { }
 
         [IdeTheory]
         [CombinatorialData]
         public async Task CodeDefinitionWindowOpensMetadataAsSource(bool enableDecompilation)
         {
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
-            globalOptions.SetGlobalOption(MetadataAsSourceOptionsStorage.NavigateToDecompiledSources, enableDecompilation);
+            var globalOptions =
+                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                    HangMitigatingCancellationToken
+                );
+            globalOptions.SetGlobalOption(
+                MetadataAsSourceOptionsStorage.NavigateToDecompiledSources,
+                enableDecompilation
+            );
 
             await TestServices.CodeDefinitionWindow.ShowAsync(HangMitigatingCancellationToken);
 
@@ -33,17 +37,30 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             // our regular file.
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
 
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 Public Class Test
     Dim field As $$Integer
 End Class
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
 
             // If we are enabling decompilation, we'll get C# code since we don't support decompiling into VB
             if (enableDecompilation)
-                Assert.Contains("public struct Int32", await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(HangMitigatingCancellationToken));
+                Assert.Contains(
+                    "public struct Int32",
+                    await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(
+                        HangMitigatingCancellationToken
+                    )
+                );
             else
-                Assert.Contains("Public Structure Int32", await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(HangMitigatingCancellationToken));
+                Assert.Contains(
+                    "Public Structure Int32",
+                    await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(
+                        HangMitigatingCancellationToken
+                    )
+                );
         }
     }
 }

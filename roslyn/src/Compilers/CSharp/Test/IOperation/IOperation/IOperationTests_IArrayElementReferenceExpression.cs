@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_SingleDimensionArray_ConstantIndex()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -27,7 +28,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[0]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -36,14 +38,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_SingleDimensionArray_NonConstantIndex()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, int x)
@@ -52,7 +59,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[x]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -61,14 +69,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_SingleDimensionArray_FunctionCallArrayReference()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F()
@@ -79,7 +92,8 @@ class C
     public string[] F2() => null;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'F2()[0]')
   Array reference: 
     IInvocationOperation ( System.String[] C.F2()) (OperationKind.Invocation, Type: System.String[]) (Syntax: 'F2()')
@@ -91,14 +105,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_MultiDimensionArray_ConstantIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[,] args)
@@ -107,7 +126,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[0, 1]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[,]) (Syntax: 'args')
@@ -117,14 +137,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_MultiDimensionArray_NonConstantIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[,] args, int x, int y)
@@ -133,7 +158,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[x, y]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[,]) (Syntax: 'args')
@@ -143,14 +169,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_MultiDimensionArray_InvocationInIndex()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[,] args)
@@ -162,7 +193,8 @@ class C
     public int F2() => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[x, F2()]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[,]) (Syntax: 'args')
@@ -175,14 +207,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_JaggedArray_ConstantIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[][] args)
@@ -191,7 +228,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[0][0]')
   Array reference: 
     IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String[]) (Syntax: 'args[0]')
@@ -204,14 +242,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_JaggedArray_NonConstantIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[][] args)
@@ -223,7 +266,8 @@ class C
     public int F2() => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[F2()][x]')
   Array reference: 
     IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String[]) (Syntax: 'args[F2()]')
@@ -239,14 +283,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_JaggedArrayOfMultidimensionalArrays()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[][,] args)
@@ -258,7 +307,8 @@ class C
     public int F2() => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[x][0, F2()]')
   Array reference: 
     IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String[,]) (Syntax: 'args[x]')
@@ -275,14 +325,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_ImplicitConversionInIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, byte b)
@@ -291,7 +346,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[b]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -303,14 +359,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_ExplicitConversionInIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, double d)
@@ -319,7 +380,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[(int)d]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -331,14 +393,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_ImplicitUserDefinedConversionInIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, C c)
@@ -352,7 +419,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[c]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -364,14 +432,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_ExplicitUserDefinedConversionInIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, C c)
@@ -385,7 +458,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[(int)c]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -397,14 +471,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReference_ExplicitUserDefinedConversionInArrayReference()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(C c, int x)
@@ -418,7 +497,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: '((string[])c)[x]')
   Array reference: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.String[] C.op_Explicit(C c)) (OperationKind.Conversion, Type: System.String[]) (Syntax: '(string[])c')
@@ -430,14 +510,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_NoConversionInIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, C c)
@@ -446,7 +531,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[c]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -456,20 +542,28 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
         Operand: 
           IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C' to 'int'
                 //         var a = /*<bind>*/args[c]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "c").WithArguments("C", "int").WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "c")
+                    .WithArguments("C", "int")
+                    .WithLocation(6, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_MissingExplicitCastInIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, C c)
@@ -483,7 +577,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[c]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -493,20 +588,28 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
         Operand: 
           IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'C' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //         var a = /*<bind>*/args[c]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c").WithArguments("C", "int").WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c")
+                    .WithArguments("C", "int")
+                    .WithLocation(6, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_NoArrayReference1()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F()
@@ -518,7 +621,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICollectionExpressionOperation (1 elements, ConstructMethod: null) (OperationKind.CollectionExpression, Type: ?, IsInvalid) (Syntax: '[0]')
   Elements(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0, IsInvalid) (Syntax: '0')
@@ -527,17 +631,23 @@ ICollectionExpressionOperation (1 elements, ConstructMethod: null) (OperationKin
             {
                 // (6,27): error CS9176: There is no target type for the collection expression.
                 //         var a = /*<bind>*/[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[0]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[0]")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<CollectionExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CollectionExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_NoArrayReference2()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F()
@@ -548,28 +658,37 @@ class C
     public string[] F2() => null;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?) (Syntax: '[0]')
   Children(2):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
       IConditionalAccessInstanceOperation (OperationKind.ConditionalAccessInstance, Type: ?, IsInvalid, IsImplicit) (Syntax: '.')";
-            var expectedDiagnostics = new DiagnosticDescription[] { 
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (6,17): error CS1525: Invalid expression term '.'
                 //         var a = .?/*<bind>*/[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".").WithArguments(".").WithLocation(6, 17),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".")
+                    .WithArguments(".")
+                    .WithLocation(6, 17),
                 // (6,18): error CS1001: Identifier expected
                 //         var a = .?/*<bind>*/[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "?").WithLocation(6, 18),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementBindingExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementBindingExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_NoIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -578,7 +697,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -586,20 +706,26 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
       IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
         Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_BadIndexing()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(C c)
@@ -610,26 +736,35 @@ class C
     public string[] F2() => null;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'c[0]')
   Children(2):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0, IsInvalid) (Syntax: '0')
       IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //         var a = /*<bind>*/c[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "c[0]").WithArguments("C").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "c[0]")
+                    .WithArguments("C")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_BadIndexCount()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -638,7 +773,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[0, 0]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[], IsInvalid) (Syntax: 'args')
@@ -646,20 +782,28 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0, IsInvalid) (Syntax: '0')
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0, IsInvalid) (Syntax: '0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0022: Wrong number of indices inside []; expected 1
                 //         var a = /*<bind>*/args[0, 0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadIndexCount, "args[0, 0]").WithArguments("1").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_BadIndexCount, "args[0, 0]")
+                    .WithArguments("1")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_ExtraElementAccessOperator()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -668,7 +812,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Char, IsInvalid) (Syntax: 'args[0][]')
   Children(2):
       IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[0]')
@@ -679,20 +824,26 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Char, IsInvalid) (Syntax:
       IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
         Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[0][]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 35)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 35),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_IndexErrorExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F()
@@ -701,27 +852,36 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'ErrorExpression[0]')
   Children(2):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'ErrorExpression')
         Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'ErrorExpression' does not exist in the current context
                 //         var a = /*<bind>*/ErrorExpression[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "ErrorExpression").WithArguments("ErrorExpression").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "ErrorExpression")
+                    .WithArguments("ErrorExpression")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_InvalidIndexerExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -730,7 +890,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[ErrorExpression]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -741,20 +902,28 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
           IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'ErrorExpression')
             Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'ErrorExpression' does not exist in the current context
                 //         var a = /*<bind>*/args[ErrorExpression]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "ErrorExpression").WithArguments("ErrorExpression").WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "ErrorExpression")
+                    .WithArguments("ErrorExpression")
+                    .WithLocation(6, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_SyntaxErrorInIndexer_MissingValue()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -763,7 +932,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[0,]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -772,20 +942,26 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
       IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
         Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[0,]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 34)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 34),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_SyntaxErrorInIndexer_MissingBracket()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -794,29 +970,38 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[/*</bind>*/')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[], IsInvalid) (Syntax: 'args')
   Indices(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1003: Syntax error, ']' expected
                 //         var a = /*<bind>*/args[/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments("]").WithLocation(6, 43),
                 // CS0022: Wrong number of indices inside []; expected 1
                 //         var a = /*<bind>*/args[/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadIndexCount, "args[/*</bind>*/").WithArguments("1").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_BadIndexCount, "args[/*</bind>*/")
+                    .WithArguments("1")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_SyntaxErrorInIndexer_MissingBracketAfterIndex()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -825,27 +1010,34 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[0/*</bind>*/')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
   Indices(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1003: Syntax error, ']' expected
                 //         var a = /*<bind>*/args[0/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments("]").WithLocation(6, 44)
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments("]").WithLocation(6, 44),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_SyntaxErrorInIndexer_DeeplyNestedParameterReference()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, int x, int y)
@@ -854,7 +1046,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'args[y][][][][x]')
   Children(2):
       IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'x')
@@ -876,7 +1069,8 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'args[y][
                         IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
                           Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[y][][][][x]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 35),
@@ -885,17 +1079,22 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'args[y][
                 Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 37),
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[y][][][][x]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 39)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 39),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_NamedArgumentForArray()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -904,27 +1103,35 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[name: 0]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[], IsInvalid) (Syntax: 'args')
   Indices(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0, IsInvalid) (Syntax: '0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1742: An array access may not have a named argument specifier
                 //         var a = /*<bind>*/args[name: 0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NamedArgumentForArray, "args[name: 0]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_NamedArgumentForArray, "args[name: 0]")
+                    .WithLocation(6, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceError_RefAndOutArguments()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[,] args, ref int x, out int y)
@@ -933,7 +1140,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String, IsInvalid) (Syntax: 'args[ref x, out y]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[,]) (Syntax: 'args')
@@ -941,26 +1149,38 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
       IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32, IsInvalid) (Syntax: 'x')
       IParameterReferenceOperation: y (OperationKind.ParameterReference, Type: System.Int32, IsInvalid) (Syntax: 'y')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1615: Argument 1 may not be passed with the 'ref' keyword
                 //         var a = /*<bind>*/args[ref x, out y]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x").WithArguments("1", "ref").WithLocation(6, 36),
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "x")
+                    .WithArguments("1", "ref")
+                    .WithLocation(6, 36),
                 // CS0269: Use of unassigned out parameter 'y'
                 //         var a = /*<bind>*/args[ref x, out y]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UseDefViolationOut, "y").WithArguments("y").WithLocation(6, 43),
+                Diagnostic(ErrorCode.ERR_UseDefViolationOut, "y")
+                    .WithArguments("y")
+                    .WithLocation(6, 43),
                 // CS0177: The out parameter 'y' must be assigned to before control leaves the current method
                 //     public void F(string[,] args, ref int x, out int y)
-                Diagnostic(ErrorCode.ERR_ParamUnassigned, "F").WithArguments("y").WithLocation(4, 17)
+                Diagnostic(ErrorCode.ERR_ParamUnassigned, "F")
+                    .WithArguments("y")
+                    .WithLocation(4, 17),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(22006, "https://github.com/dotnet/roslyn/issues/22006")]
         public void ArrayElementReferenceWarning_NegativeIndexExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args)
@@ -969,7 +1189,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[-1]')
   Array reference: 
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -978,20 +1199,26 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0251: Indexing an array with a negative index (array indices always start at zero)
                 //         var a = /*<bind>*/args[-1]/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_NegativeArrayIndex, "-1").WithLocation(6, 32)
+                Diagnostic(ErrorCode.WRN_NegativeArrayIndex, "-1").WithLocation(6, 32),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, int[,] a2, int i1, int i2, int i3, int result1, int result2)
@@ -1001,7 +1228,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1040,14 +1268,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ControlFlowInArrayReference()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, int[] a2, int i, int result)
@@ -1056,7 +1289,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1136,14 +1370,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ControlFlowInFirstIndex()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[,] a, int? i1, int i2, byte j, int result)
@@ -1152,7 +1391,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1244,14 +1484,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ControlFlowInSecondIndex()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[,] a, int? i1, int i2, int j, int result)
@@ -1260,7 +1505,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1352,14 +1598,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ControlFlowInMultipleIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[,] a, int? i1, int i2, int? j1, int j2, int result)
@@ -1368,7 +1619,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1498,14 +1750,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ControlFlowInArrayReferenceAndIndices()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[,] a1, int[,] a2, int? i1, int i2, int? j1, int j2, int result)
@@ -1514,7 +1771,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1679,14 +1937,19 @@ Block[B12] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ArrayElementReference_ImplicitIndexIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, System.Index x)
@@ -1696,7 +1959,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String) (Syntax: 'args[x]')
   Array reference:
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -1706,14 +1970,19 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitIndexIndexer_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, System.Index i1, int result1)
@@ -1722,7 +1991,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1748,14 +2018,19 @@ Block[B2] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitIndexIndexer_ControlFlowInInstance()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, int[] a2, System.Index i1, int result)
@@ -1764,7 +2039,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1835,14 +2111,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitIndexIndexer_ControlFlowInArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a, System.Index? i1, System.Index i2, int result)
@@ -1851,7 +2132,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1928,14 +2210,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitIndexIndexer_ControlFlowInInstanceAndArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, int[] a2, System.Index? i1, System.Index i2, int result)
@@ -1944,7 +2231,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2051,14 +2339,19 @@ Block[B9] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ArrayElementReference_ImplicitRangeIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string[] args, System.Range x)
@@ -2068,7 +2361,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: System.String[]) (Syntax: 'args[x]')
   Array reference:
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String[]) (Syntax: 'args')
@@ -2077,15 +2371,22 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilationWithIndexAndRange(new[] { source, TestSources.GetSubArray });
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            var comp = CreateCompilationWithIndexAndRange(
+                new[] { source, TestSources.GetSubArray }
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitRangeIndexer_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, System.Range i1, int[] result1)
@@ -2094,7 +2395,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2119,15 +2421,22 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilationWithIndexAndRange(new[] { source, TestSources.GetSubArray });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithIndexAndRange(
+                new[] { source, TestSources.GetSubArray }
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitRangeIndexer_ControlFlowInInstance()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, int[] a2, System.Range i1, int[] result)
@@ -2136,7 +2445,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2206,15 +2516,22 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilationWithIndexAndRange(new[] { source, TestSources.GetSubArray });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithIndexAndRange(
+                new[] { source, TestSources.GetSubArray }
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitRangeIndexer_ControlFlowInArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a, System.Range? i1, System.Range i2, int[] result)
@@ -2223,7 +2540,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2299,15 +2617,22 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilationWithIndexAndRange(new[] { source, TestSources.GetSubArray });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithIndexAndRange(
+                new[] { source, TestSources.GetSubArray }
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ArrayElementReference_ImplicitRangeIndexer_ControlFlowInInstanceAndArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int[] a1, int[] a2, System.Range? i1, System.Range i2, int[] result)
@@ -2316,7 +2641,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2422,8 +2748,14 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var comp = CreateCompilationWithIndexAndRange(new[] { source, TestSources.GetSubArray });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithIndexAndRange(
+                new[] { source, TestSources.GetSubArray }
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

@@ -1,45 +1,34 @@
 //------------------------------------------------------------------------------
 // <copyright file="IValidator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     /// <devdoc>
     ///    <para>Defines the contract that the validation controls must implement.</para>
     /// </devdoc>
-    public interface IValidator {    
-                
-
+    public interface IValidator
+    {
         /// <devdoc>
         ///    <para>Indicates whether the content entered in a control is valid.</para>
         /// </devdoc>
-        bool IsValid {
-            get;
-            set;
-        }
-        
+        bool IsValid { get; set; }
 
         /// <devdoc>
-        ///    <para>Indicates the error message text generated when the control's content is not 
+        ///    <para>Indicates the error message text generated when the control's content is not
         ///       valid.</para>
         /// </devdoc>
-        string ErrorMessage { 
-            get;
-            set;
-        }
-                
+        string ErrorMessage { get; set; }
 
         /// <devdoc>
-        ///    <para>Compares the entered content with the valid parameters provided by the 
+        ///    <para>Compares the entered content with the valid parameters provided by the
         ///       validation control.</para>
         /// </devdoc>
         void Validate();
-    }              
+    }
 }
-
-

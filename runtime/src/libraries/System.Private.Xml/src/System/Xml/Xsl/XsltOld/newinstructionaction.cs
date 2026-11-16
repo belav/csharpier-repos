@@ -32,8 +32,10 @@ namespace System.Xml.Xsl.XsltOld
             NavigatorInput input = compiler.Input;
             do
             {
-                if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl) &&
-                    Ref.Equal(input.LocalName, input.Atoms.Fallback))
+                if (
+                    Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)
+                    && Ref.Equal(input.LocalName, input.Atoms.Fallback)
+                )
                 {
                     _fallback = true;
                     if (compiler.Recurse())
@@ -42,8 +44,7 @@ namespace System.Xml.Xsl.XsltOld
                         compiler.ToParent();
                     }
                 }
-            }
-            while (compiler.Advance());
+            } while (compiler.Advance());
         }
 
         internal override void Execute(Processor processor, ActionFrame frame)
@@ -63,7 +64,8 @@ namespace System.Xml.Xsl.XsltOld
                         frame.State = ProcessingChildren;
                         break;
                     }
-                    else goto case ProcessingChildren;
+                    else
+                        goto case ProcessingChildren;
                 case ProcessingChildren:
                     frame.Finished();
                     break;

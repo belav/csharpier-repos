@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 using System.Text;
 using Microsoft.Test.ModuleCore;
 using Xunit;
@@ -52,7 +52,9 @@ namespace System.Xml.Linq.Tests
         public void DuplicateNamespaceDeclarationIsAllowed()
         {
             XElement element = XElement.Parse("<A xmlns:p='ns'/>");
-            Assert.Throws<InvalidOperationException>(() => element.Add(new XAttribute(XNamespace.Xmlns + "p", "ns")));
+            Assert.Throws<InvalidOperationException>(() =>
+                element.Add(new XAttribute(XNamespace.Xmlns + "p", "ns"))
+            );
         }
 
         [Fact]
@@ -98,7 +100,10 @@ namespace System.Xml.Linq.Tests
                     new XElement(
                         XName.Get("e3", "ns-default2"),
                         "e3 should be in ns-default2",
-                        new XElement(XName.Get("e4", "ns2"), "e4 should be in ns2"))));
+                        new XElement(XName.Get("e4", "ns2"), "e4 should be in ns2")
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -124,7 +129,8 @@ namespace System.Xml.Linq.Tests
             XElement xe = new XElement(
                 "root",
                 new XElement("A", new XElement("B", "data")),
-                new XProcessingInstruction("PI", "joke"));
+                new XProcessingInstruction("PI", "joke")
+            );
 
             using (XmlReader r = xe.CreateReader())
             {
@@ -142,9 +148,11 @@ namespace System.Xml.Linq.Tests
         {
             StringBuilder sb = new StringBuilder();
 
-            for (long l = 0; l < 6600; l++) sb.Append("<A>");
+            for (long l = 0; l < 6600; l++)
+                sb.Append("<A>");
             sb.Append("<A/>");
-            for (long l = 0; l < 6600; l++) sb.Append("</A>");
+            for (long l = 0; l < 6600; l++)
+                sb.Append("</A>");
             XElement e = XElement.Parse(sb.ToString());
         }
 
@@ -184,7 +192,9 @@ namespace System.Xml.Linq.Tests
                 new XElement(
                     "b",
                     new XAttribute(XNamespace.Xmlns.GetName("ns1"), "def"),
-                    new XElement("{def}c", new XAttribute(XNamespace.Xmlns.GetName("ns1"), "abc"))));
+                    new XElement("{def}c", new XAttribute(XNamespace.Xmlns.GetName("ns1"), "abc"))
+                )
+            );
         }
 
         [Theory]

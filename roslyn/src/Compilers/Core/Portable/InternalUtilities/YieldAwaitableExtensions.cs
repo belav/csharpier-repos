@@ -16,7 +16,10 @@ namespace Roslyn.Utilities
         /// <param name="awaitable">The awaitable provided by <see cref="Task.Yield"/>.</param>
         /// <param name="continueOnCapturedContext"><inheritdoc cref="Task.ConfigureAwait(bool)"/></param>
         /// <returns>An object used to await this yield.</returns>
-        public static ConfiguredYieldAwaitable ConfigureAwait(this YieldAwaitable awaitable, bool continueOnCapturedContext)
+        public static ConfiguredYieldAwaitable ConfigureAwait(
+            this YieldAwaitable awaitable,
+            bool continueOnCapturedContext
+        )
         {
             return new ConfiguredYieldAwaitable(awaitable, continueOnCapturedContext);
         }

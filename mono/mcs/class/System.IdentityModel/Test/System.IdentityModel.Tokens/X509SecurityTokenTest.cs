@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,62 +32,63 @@ using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class X509SecurityTokenTest
-	{
-		static readonly X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.pfx"), "mono");
-		static readonly X509Certificate2 cert2 = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test2.pfx"), "mono");
+    [TestFixture]
+    public class X509SecurityTokenTest
+    {
+        static readonly X509Certificate2 cert = new X509Certificate2(
+            TestResourceHelper.GetFullPathOfResource("Test/Resources/test.pfx"),
+            "mono"
+        );
+        static readonly X509Certificate2 cert2 = new X509Certificate2(
+            TestResourceHelper.GetFullPathOfResource("Test/Resources/test2.pfx"),
+            "mono"
+        );
 
-		[Test]
-		public void DefaultValues ()
-		{
-			UniqueId id = new UniqueId ();
-			X509SecurityToken t = new X509SecurityToken (cert, id.ToString ());
-			Assert.AreEqual (id.ToString (), t.Id, "#1");
-			Assert.AreEqual (cert, t.Certificate, "#2");
-			Assert.AreEqual (cert.NotBefore.ToUniversalTime (), t.ValidFrom, "#3");
-			Assert.AreEqual (cert.NotAfter.ToUniversalTime (), t.ValidTo, "#4");
-			Assert.AreEqual (1, t.SecurityKeys.Count, "#5");
-		}
+        [Test]
+        public void DefaultValues()
+        {
+            UniqueId id = new UniqueId();
+            X509SecurityToken t = new X509SecurityToken(cert, id.ToString());
+            Assert.AreEqual(id.ToString(), t.Id, "#1");
+            Assert.AreEqual(cert, t.Certificate, "#2");
+            Assert.AreEqual(cert.NotBefore.ToUniversalTime(), t.ValidFrom, "#3");
+            Assert.AreEqual(cert.NotAfter.ToUniversalTime(), t.ValidTo, "#4");
+            Assert.AreEqual(1, t.SecurityKeys.Count, "#5");
+        }
 
-		[Test]
-		public void MatchesKeyIdentifierClause ()
-		{
-			UniqueId id = new UniqueId ();
-			X509SecurityToken t = new X509SecurityToken (cert, id.ToString ());
-			LocalIdKeyIdentifierClause l =
-				new LocalIdKeyIdentifierClause (id.ToString ());
-			Assert.IsTrue (t.MatchesKeyIdentifierClause (l), "#1-1");
+        [Test]
+        public void MatchesKeyIdentifierClause()
+        {
+            UniqueId id = new UniqueId();
+            X509SecurityToken t = new X509SecurityToken(cert, id.ToString());
+            LocalIdKeyIdentifierClause l = new LocalIdKeyIdentifierClause(id.ToString());
+            Assert.IsTrue(t.MatchesKeyIdentifierClause(l), "#1-1");
 
-			l = new LocalIdKeyIdentifierClause ("#" + id.ToString ());
-			Assert.IsFalse (t.MatchesKeyIdentifierClause (l), "#1-2");
+            l = new LocalIdKeyIdentifierClause("#" + id.ToString());
+            Assert.IsFalse(t.MatchesKeyIdentifierClause(l), "#1-2");
 
-			X509ThumbprintKeyIdentifierClause h =
-				new X509ThumbprintKeyIdentifierClause (cert);
-			Assert.IsTrue (t.MatchesKeyIdentifierClause (h), "#2-1");
+            X509ThumbprintKeyIdentifierClause h = new X509ThumbprintKeyIdentifierClause(cert);
+            Assert.IsTrue(t.MatchesKeyIdentifierClause(h), "#2-1");
 
-			h = new X509ThumbprintKeyIdentifierClause (cert2);
-			Assert.IsFalse (t.MatchesKeyIdentifierClause (h), "#2-2");
+            h = new X509ThumbprintKeyIdentifierClause(cert2);
+            Assert.IsFalse(t.MatchesKeyIdentifierClause(h), "#2-2");
 
-			X509IssuerSerialKeyIdentifierClause i =
-				new X509IssuerSerialKeyIdentifierClause (cert);
-			Assert.IsTrue (t.MatchesKeyIdentifierClause (i), "#3-1");
+            X509IssuerSerialKeyIdentifierClause i = new X509IssuerSerialKeyIdentifierClause(cert);
+            Assert.IsTrue(t.MatchesKeyIdentifierClause(i), "#3-1");
 
-			i = new X509IssuerSerialKeyIdentifierClause (cert2);
-			Assert.IsFalse (t.MatchesKeyIdentifierClause (i), "#3-2");
+            i = new X509IssuerSerialKeyIdentifierClause(cert2);
+            Assert.IsFalse(t.MatchesKeyIdentifierClause(i), "#3-2");
 
-			X509RawDataKeyIdentifierClause s =
-				new X509RawDataKeyIdentifierClause (cert);
-			Assert.IsTrue (t.MatchesKeyIdentifierClause (s), "#4-1");
+            X509RawDataKeyIdentifierClause s = new X509RawDataKeyIdentifierClause(cert);
+            Assert.IsTrue(t.MatchesKeyIdentifierClause(s), "#4-1");
 
-			s = new X509RawDataKeyIdentifierClause (cert2);
-			Assert.IsFalse (t.MatchesKeyIdentifierClause (s), "#4-2");
-		}
-	}
+            s = new X509RawDataKeyIdentifierClause(cert2);
+            Assert.IsFalse(t.MatchesKeyIdentifierClause(s), "#4-2");
+        }
+    }
 }
 #endif

@@ -18,17 +18,22 @@ namespace System.Composition.Hosting.Core
         /// <summary>
         /// Constant value provided so that subclasses can avoid creating additional duplicate values.
         /// </summary>
-        protected static readonly IEnumerable<ExportDescriptorPromise> NoExportDescriptors = Enumerable.Empty<ExportDescriptorPromise>();
+        protected static readonly IEnumerable<ExportDescriptorPromise> NoExportDescriptors =
+            Enumerable.Empty<ExportDescriptorPromise>();
 
         /// <summary>
         /// Constant value provided so that subclasses can avoid creating additional duplicate values.
         /// </summary>
-        protected static readonly IDictionary<string, object> NoMetadata = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
+        protected static readonly IDictionary<string, object> NoMetadata = new ReadOnlyDictionary<
+            string,
+            object
+        >(new Dictionary<string, object>());
 
         /// <summary>
         /// Constant value provided so that subclasses can avoid creating additional duplicate values.
         /// </summary>
-        protected static readonly Func<IEnumerable<CompositionDependency>> NoDependencies = Enumerable.Empty<CompositionDependency>;
+        protected static readonly Func<IEnumerable<CompositionDependency>> NoDependencies =
+            Enumerable.Empty<CompositionDependency>;
 
         /// <summary>
         /// Promise export descriptors for the specified export key.
@@ -45,6 +50,7 @@ namespace System.Composition.Hosting.Core
         /// </remarks>
         public abstract IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
             CompositionContract contract,
-            DependencyAccessor descriptorAccessor);
+            DependencyAccessor descriptorAccessor
+        );
     }
 }

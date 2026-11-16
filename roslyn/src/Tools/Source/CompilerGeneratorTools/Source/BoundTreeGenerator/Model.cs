@@ -35,9 +35,7 @@ namespace BoundTreeGenerator
         public string HasValidate;
     }
 
-    public class PredefinedNode : TreeType
-    {
-    }
+    public class PredefinedNode : TreeType { }
 
     public class AbstractNode : TreeType
     {
@@ -115,7 +113,5 @@ namespace BoundTreeGenerator
         public string Value;
     }
 
-    public class ValueType : TreeType
-    {
-    }
+    public class ValueType : TreeType { }
 }

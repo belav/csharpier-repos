@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var synchronizationContext = SynchronizationContext.Current;
             try
             {
-                SynchronizationContext.SetSynchronizationContext(GetEffectiveSynchronizationContext());
+                SynchronizationContext.SetSynchronizationContext(
+                    GetEffectiveSynchronizationContext()
+                );
                 (JoinableTaskContext, SynchronizationContext) = CreateJoinableTaskContext();
                 ResetThreadAffinity(JoinableTaskContext.Factory);
             }
@@ -37,7 +39,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        private static (JoinableTaskContext joinableTaskContext, SynchronizationContext synchronizationContext) CreateJoinableTaskContext()
+        private static (
+            JoinableTaskContext joinableTaskContext,
+            SynchronizationContext synchronizationContext
+        ) CreateJoinableTaskContext()
         {
             Thread mainThread;
             SynchronizationContext synchronizationContext;
@@ -53,26 +58,25 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 // synchronization context of the current thread will behave in a manner consistent with main thread
                 // synchronization contexts, so we use DenyExecutionSynchronizationContext to track any attempted
                 // use of it.
-                var denyExecutionSynchronizationContext = new DenyExecutionSynchronizationContext(SynchronizationContext.Current);
+                var denyExecutionSynchronizationContext = new DenyExecutionSynchronizationContext(
+                    SynchronizationContext.Current
+                );
                 mainThread = denyExecutionSynchronizationContext.MainThread;
                 synchronizationContext = denyExecutionSynchronizationContext;
             }
 
 #pragma warning disable VSSDK005 // Use ThreadHelper.JoinableTaskContext singleton - N/A, used for test code
-            return (new JoinableTaskContext(mainThread, synchronizationContext), synchronizationContext);
+            return (
+                new JoinableTaskContext(mainThread, synchronizationContext),
+                synchronizationContext
+            );
 #pragma warning restore VSSDK005 // Use ThreadHelper.JoinableTaskContext singleton - N/A, used for test code
         }
 
         [Export]
-        private JoinableTaskContext JoinableTaskContext
-        {
-            get;
-        }
+        private JoinableTaskContext JoinableTaskContext { get; }
 
-        internal SynchronizationContext SynchronizationContext
-        {
-            get;
-        }
+        internal SynchronizationContext SynchronizationContext { get; }
 
         internal static SynchronizationContext? GetEffectiveSynchronizationContext()
         {
@@ -84,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     {
                         innerSynchronizationContext = SynchronizationContext.Current;
                     },
-                    null);
+                    null
+                );
 
                 return innerSynchronizationContext;
             }
@@ -95,24 +100,32 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         /// <summary>
-        /// Reset the thread affinity, in particular the designated foreground thread, to the active 
-        /// thread.  
+        /// Reset the thread affinity, in particular the designated foreground thread, to the active
+        /// thread.
         /// </summary>
         internal static void ResetThreadAffinity(JoinableTaskFactory joinableTaskFactory)
         {
             // HACK: When the platform team took over several of our components they created a copy
             // of ForegroundThreadAffinitizedObject.  This needs to be reset in the same way as our copy
-            // does.  Reflection is the only choice at the moment. 
+            // does.  Reflection is the only choice at the moment.
             var thread = joinableTaskFactory.Context.MainThread;
             var taskScheduler = new JoinableTaskFactoryTaskScheduler(joinableTaskFactory);
 
             foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies())
             {
-                var type = assembly.GetType("Microsoft.VisualStudio.Language.Intellisense.Implementation.ForegroundThreadAffinitizedObject", throwOnError: false);
+                var type = assembly.GetType(
+                    "Microsoft.VisualStudio.Language.Intellisense.Implementation.ForegroundThreadAffinitizedObject",
+                    throwOnError: false
+                );
                 if (type != null)
                 {
-                    type.GetField("foregroundThread", BindingFlags.Static | BindingFlags.NonPublic)!.SetValue(null, thread);
-                    type.GetField("ForegroundTaskScheduler", BindingFlags.Static | BindingFlags.NonPublic)!.SetValue(null, taskScheduler);
+                    type.GetField("foregroundThread", BindingFlags.Static | BindingFlags.NonPublic)!
+                        .SetValue(null, thread);
+                    type.GetField(
+                                "ForegroundTaskScheduler",
+                                BindingFlags.Static | BindingFlags.NonPublic
+                            )!
+                        .SetValue(null, taskScheduler);
 
                     break;
                 }
@@ -124,8 +137,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             private readonly JoinableTaskFactory _joinableTaskFactory;
 
-            public JoinableTaskFactoryTaskScheduler(JoinableTaskFactory joinableTaskFactory)
-                => _joinableTaskFactory = joinableTaskFactory;
+            public JoinableTaskFactoryTaskScheduler(JoinableTaskFactory joinableTaskFactory) =>
+                _joinableTaskFactory = joinableTaskFactory;
 
             public override int MaximumConcurrencyLevel => 1;
 

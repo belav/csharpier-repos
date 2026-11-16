@@ -10,7 +10,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtStart()
         {
-            ReadOnlySpan<int> span = new ReadOnlySpan<int>(new int[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<int> span = new ReadOnlySpan<int>(
+                new int[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(new int[] { 5, 1, 77 });
             int index = span.LastIndexOf(value);
             Assert.Equal(0, index);
@@ -19,7 +21,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMultipleMatch()
         {
-            ReadOnlySpan<int> span = new ReadOnlySpan<int>(new int[] { 1, 2, 3, 1, 2, 3, 1, 2, 3, 1 });
+            ReadOnlySpan<int> span = new ReadOnlySpan<int>(
+                new int[] { 1, 2, 3, 1, 2, 3, 1, 2, 3, 1 }
+            );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(new int[] { 2, 3 });
             int index = span.LastIndexOf(value);
             Assert.Equal(7, index);
@@ -28,7 +32,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceRestart()
         {
-            ReadOnlySpan<int> span = new ReadOnlySpan<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 8, 9, 77, 0, 1 });
+            ReadOnlySpan<int> span = new ReadOnlySpan<int>(
+                new int[]
+                {
+                    0,
+                    1,
+                    77,
+                    2,
+                    3,
+                    77,
+                    77,
+                    4,
+                    5,
+                    77,
+                    77,
+                    77,
+                    88,
+                    6,
+                    6,
+                    77,
+                    77,
+                    8,
+                    9,
+                    77,
+                    0,
+                    1,
+                }
+            );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(new int[] { 77, 77, 88 });
             int index = span.LastIndexOf(value);
             Assert.Equal(10, index);
@@ -37,7 +67,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNoMatch()
         {
-            ReadOnlySpan<int> span = new ReadOnlySpan<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<int> span = new ReadOnlySpan<int>(
+                new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(new int[] { 77, 77, 88, 99 });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -46,7 +78,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNotEvenAHeadMatch()
         {
-            ReadOnlySpan<int> span = new ReadOnlySpan<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<int> span = new ReadOnlySpan<int>(
+                new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(new int[] { 100, 77, 88, 99 });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -74,7 +108,9 @@ namespace System.SpanTests
         public static void LastIndexOfSequenceZeroLengthValue()
         {
             // A zero-length value is always "found" at the end of the span.
-            ReadOnlySpan<int> span = new ReadOnlySpan<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<int> span = new ReadOnlySpan<int>(
+                new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(Array.Empty<int>());
             int index = span.LastIndexOf(value);
             Assert.Equal(span.Length, index);
@@ -128,7 +164,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtStart_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "5", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[]
+                {
+                    "5",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "5", "1", "77" });
             int index = span.LastIndexOf(value);
             Assert.Equal(0, index);
@@ -137,7 +196,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMultipleMatch_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "1", "2", "3", "1", "2", "3", "1", "2", "3" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[] { "1", "2", "3", "1", "2", "3", "1", "2", "3" }
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "2", "3" });
             int index = span.LastIndexOf(value);
             Assert.Equal(7, index);
@@ -146,8 +207,36 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceRestart_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "8", "9", "77", "0", "1" });
-            ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "77", "77", "88" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "8",
+                    "9",
+                    "77",
+                    "0",
+                    "1",
+                }
+            );
+            ReadOnlySpan<string> value = new ReadOnlySpan<string>(
+                new string[] { "77", "77", "88" }
+            );
             int index = span.LastIndexOf(value);
             Assert.Equal(10, index);
         }
@@ -155,8 +244,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNoMatch_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
-            ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "77", "77", "88", "99" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
+            ReadOnlySpan<string> value = new ReadOnlySpan<string>(
+                new string[] { "77", "77", "88", "99" }
+            );
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
         }
@@ -164,8 +278,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNotEvenAHeadMatch_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
-            ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "100", "77", "88", "99" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
+            ReadOnlySpan<string> value = new ReadOnlySpan<string>(
+                new string[] { "100", "77", "88", "99" }
+            );
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
         }
@@ -173,7 +312,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtVeryEnd_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "2", "3", "4", "5" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" }
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "3", "4", "5" });
             int index = span.LastIndexOf(value);
             Assert.Equal(3, index);
@@ -182,7 +323,11 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceJustPastVeryEnd_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "2", "3", "4", "5" }, 0, 5);
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" },
+                0,
+                5
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "3", "4", "5" });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -192,7 +337,30 @@ namespace System.SpanTests
         public static void LastIndexOfSequenceZeroLengthValue_String()
         {
             // A zero-length value is always "found" at the end of the span.
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(Array.Empty<string>());
             int index = span.LastIndexOf(value);
             Assert.Equal(span.Length, index);
@@ -210,7 +378,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceLengthOneValue_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "2", "3", "4", "5" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" }
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "2" });
             int index = span.LastIndexOf(value);
             Assert.Equal(2, index);
@@ -219,7 +389,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceLengthOneValueAtVeryEnd_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "2", "3", "4", "5" });
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" }
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "5" });
             int index = span.LastIndexOf(value);
             Assert.Equal(5, index);
@@ -228,15 +400,26 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceLengthOneValueJustPasttVeryEnd_String()
         {
-            ReadOnlySpan<string> span = new ReadOnlySpan<string>(new string[] { "0", "1", "2", "3", "4", "5" }, 0, 5);
+            ReadOnlySpan<string> span = new ReadOnlySpan<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" },
+                0,
+                5
+            );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "5" });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.LastIndexOfNullSequenceData), MemberType = typeof(TestHelpers))]
-        public static void LastIndexOfNullSequence_String(string[] spanInput, string[] searchInput, int expected)
+        [MemberData(
+            nameof(TestHelpers.LastIndexOfNullSequenceData),
+            MemberType = typeof(TestHelpers)
+        )]
+        public static void LastIndexOfNullSequence_String(
+            string[] spanInput,
+            string[] searchInput,
+            int expected
+        )
         {
             ReadOnlySpan<string> theStrings = spanInput;
             Assert.Equal(expected, theStrings.LastIndexOf(searchInput));

@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     /// <code>
     ///     var temp = expr_a;
     ///     expr_a = expr_b;
@@ -23,26 +23,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
     /// </code>
     ///
     /// and converts it to:
-    /// 
+    ///
     /// <code>
     ///     (expr_b, expr_a) = (expr_a, expr_b);
     /// </code>
-    /// 
+    ///
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseTupleSwapDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseTupleSwapDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseTupleSwapDiagnosticId,
-                   EnforceOnBuildValues.UseTupleSwap,
-                   CSharpCodeStyleOptions.PreferTupleSwap,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Use_tuple_to_swap_values), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseTupleSwapDiagnosticId,
+                EnforceOnBuildValues.UseTupleSwap,
+                CSharpCodeStyleOptions.PreferTupleSwap,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_tuple_to_swap_values),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -55,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 
                 context.RegisterSyntaxNodeAction(
                     AnalyzeLocalDeclarationStatement,
-                    SyntaxKind.LocalDeclarationStatement);
+                    SyntaxKind.LocalDeclarationStatement
+                );
             });
         }
 
@@ -68,8 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 
             // `var expr_temp = expr_a`;
             var localDeclarationStatement = (LocalDeclarationStatementSyntax)syntaxContext.Node;
-            if (localDeclarationStatement.UsingKeyword != default ||
-                localDeclarationStatement.AwaitKeyword != default)
+            if (
+                localDeclarationStatement.UsingKeyword != default
+                || localDeclarationStatement.AwaitKeyword != default
+            )
             {
                 return;
             }
@@ -84,12 +90,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 
             // `expr_a = expr_b`;
             var firstAssignmentStatement = localDeclarationStatement.GetNextStatement();
-            if (!IsSimpleAssignment(firstAssignmentStatement, out var firstAssignmentExprA, out var firstAssignmentExprB))
+            if (
+                !IsSimpleAssignment(
+                    firstAssignmentStatement,
+                    out var firstAssignmentExprA,
+                    out var firstAssignmentExprB
+                )
+            )
                 return;
 
             // `expr_b = expr_temp;`
             var secondAssignmentStatement = firstAssignmentStatement.GetNextStatement();
-            if (!IsSimpleAssignment(secondAssignmentStatement, out var secondAssignmentExprB, out var secondAssignmentExprTemp))
+            if (
+                !IsSimpleAssignment(
+                    secondAssignmentStatement,
+                    out var secondAssignmentExprB,
+                    out var secondAssignmentExprTemp
+                )
+            )
                 return;
 
             if (!localDeclarationExprA.IsEquivalentTo(firstAssignmentExprA, topLevel: false))
@@ -98,44 +116,63 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
             if (!firstAssignmentExprB.IsEquivalentTo(secondAssignmentExprB, topLevel: false))
                 return;
 
-            if (secondAssignmentExprTemp is not IdentifierNameSyntax { Identifier: var secondAssignmentExprTempIdentifier })
+            if (
+                secondAssignmentExprTemp
+                is not IdentifierNameSyntax { Identifier: var secondAssignmentExprTempIdentifier }
+            )
                 return;
 
-            if (variableDeclarator.Identifier.ValueText != secondAssignmentExprTempIdentifier.ValueText)
+            if (
+                variableDeclarator.Identifier.ValueText
+                != secondAssignmentExprTempIdentifier.ValueText
+            )
                 return;
 
             // Can't swap ref-structs.
             var semanticModel = syntaxContext.SemanticModel;
-            var local = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(variableDeclarator, cancellationToken);
+            var local = (ILocalSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(variableDeclarator, cancellationToken);
             if (local.Type.IsRefLikeType || local.Type.RequiresUnsafeModifier())
                 return;
 
             var additionalLocations = ImmutableArray.Create(
                 localDeclarationStatement.GetLocation(),
                 firstAssignmentStatement.GetLocation(),
-                secondAssignmentStatement.GetLocation());
+                secondAssignmentStatement.GetLocation()
+            );
 
             // If the diagnostic is not hidden, then just place the user visible part
             // on the local being initialized with the lambda.
-            syntaxContext.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                localDeclarationStatement.GetFirstToken().GetLocation(),
-                styleOption.Notification,
-                additionalLocations,
-                properties: null));
+            syntaxContext.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    localDeclarationStatement.GetFirstToken().GetLocation(),
+                    styleOption.Notification,
+                    additionalLocations,
+                    properties: null
+                )
+            );
         }
 
         private static bool IsSimpleAssignment(
             [NotNullWhen(true)] StatementSyntax? assignmentStatement,
             [NotNullWhen(true)] out ExpressionSyntax? left,
-            [NotNullWhen(true)] out ExpressionSyntax? right)
+            [NotNullWhen(true)] out ExpressionSyntax? right
+        )
         {
             left = null;
             right = null;
             if (assignmentStatement == null)
                 return false;
 
-            if (assignmentStatement is not ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax(SyntaxKind.SimpleAssignmentExpression) assignment })
+            if (
+                assignmentStatement
+                is not ExpressionStatementSyntax
+                {
+                    Expression: AssignmentExpressionSyntax
+                    (SyntaxKind.SimpleAssignmentExpression) assignment
+                }
+            )
                 return false;
 
             left = assignment.Left.WalkDownParentheses();

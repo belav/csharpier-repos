@@ -10,11 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class AsKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public AsKeywordRecommender()
-            : base(SyntaxKind.AsKeyword)
-        {
-        }
+            : base(SyntaxKind.AsKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => !context.IsInNonUserCode && context.IsIsOrAsOrSwitchOrWithExpressionContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => !context.IsInNonUserCode && context.IsIsOrAsOrSwitchOrWithExpressionContext;
     }
 }

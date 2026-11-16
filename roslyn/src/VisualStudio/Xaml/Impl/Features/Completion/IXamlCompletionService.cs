@@ -13,7 +13,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
 {
     internal interface IXamlCompletionService : ILanguageService
     {
-        Task<XamlCompletionResult> GetCompletionsAsync(XamlCompletionContext completionContext, CancellationToken cancellationToken);
-        Task<ISymbol> GetSymbolAsync(XamlCompletionContext completionContext, string label, CancellationToken cancellationToken);
+        Task<XamlCompletionResult> GetCompletionsAsync(
+            XamlCompletionContext completionContext,
+            CancellationToken cancellationToken
+        );
+        Task<ISymbol> GetSymbolAsync(
+            XamlCompletionContext completionContext,
+            string label,
+            CancellationToken cancellationToken
+        );
     }
 }

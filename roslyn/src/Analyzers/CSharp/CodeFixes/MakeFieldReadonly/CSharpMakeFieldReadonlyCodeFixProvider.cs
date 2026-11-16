@@ -12,19 +12,29 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeFieldReadonly
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeFieldReadonly), Shared]
-    internal class CSharpMakeFieldReadonlyCodeFixProvider : AbstractMakeFieldReadonlyCodeFixProvider<VariableDeclaratorSyntax, FieldDeclarationSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeFieldReadonly
+        ),
+        Shared
+    ]
+    internal class CSharpMakeFieldReadonlyCodeFixProvider
+        : AbstractMakeFieldReadonlyCodeFixProvider<VariableDeclaratorSyntax, FieldDeclarationSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpMakeFieldReadonlyCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpMakeFieldReadonlyCodeFixProvider() { }
 
-        protected override SyntaxNode? GetInitializerNode(VariableDeclaratorSyntax declaration)
-            => declaration.Initializer?.Value;
+        protected override SyntaxNode? GetInitializerNode(VariableDeclaratorSyntax declaration) =>
+            declaration.Initializer?.Value;
 
-        protected override ImmutableList<VariableDeclaratorSyntax> GetVariableDeclarators(FieldDeclarationSyntax fieldDeclaration)
-            => fieldDeclaration.Declaration.Variables.ToImmutableListOrEmpty();
+        protected override ImmutableList<VariableDeclaratorSyntax> GetVariableDeclarators(
+            FieldDeclarationSyntax fieldDeclaration
+        ) => fieldDeclaration.Declaration.Variables.ToImmutableListOrEmpty();
     }
 }

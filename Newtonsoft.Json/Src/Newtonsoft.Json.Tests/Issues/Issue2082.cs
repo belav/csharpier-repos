@@ -46,21 +46,30 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            CamelCaseNamingStrategy namingStrategy = new CamelCaseNamingStrategy(processDictionaryKeys: true, overrideSpecifiedNames: false);
+            CamelCaseNamingStrategy namingStrategy = new CamelCaseNamingStrategy(
+                processDictionaryKeys: true,
+                overrideSpecifiedNames: false
+            );
 
             TestClass c = new TestClass { Value = TestEnum.UpperCaseName };
-            string json = JsonConvert.SerializeObject(c, new JsonSerializerSettings
-            {
-                ContractResolver = new DefaultContractResolver
+            string json = JsonConvert.SerializeObject(
+                c,
+                new JsonSerializerSettings
                 {
-                    NamingStrategy = namingStrategy
-                },
-                Converters = new[] { new StringEnumConverter { NamingStrategy = namingStrategy } }
-            });
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = namingStrategy,
+                    },
+                    Converters = new[]
+                    {
+                        new StringEnumConverter { NamingStrategy = namingStrategy },
+                    },
+                }
+            );
 
             Assert.AreEqual(@"{""value"":""UPPER_CASE_NAME""}", json);
         }
-        
+
         public class TestClass
         {
             public TestEnum Value { get; set; }
@@ -69,7 +78,7 @@ namespace Newtonsoft.Json.Tests.Issues
         public enum TestEnum
         {
             [EnumMember(Value = "UPPER_CASE_NAME")]
-            UpperCaseName
+            UpperCaseName,
         }
     }
 }

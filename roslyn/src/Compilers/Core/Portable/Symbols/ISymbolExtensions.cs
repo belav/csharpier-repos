@@ -49,7 +49,9 @@ namespace Microsoft.CodeAnalysis
             // add any inferences
             for (int i = 0, n = reducedFrom.TypeParameters.Length; i < n; i++)
             {
-                var inferredType = method.GetTypeInferredDuringReduction(reducedFrom.TypeParameters[i]);
+                var inferredType = method.GetTypeInferredDuringReduction(
+                    reducedFrom.TypeParameters[i]
+                );
                 if (inferredType != null)
                 {
                     typeArgs[i] = inferredType;
@@ -88,7 +90,10 @@ namespace Microsoft.CodeAnalysis
             return field.IsTupleElement() && !field.IsImplicitlyDeclared ? field.Name : null;
         }
 
-        internal static INamespaceSymbol? GetNestedNamespace(this INamespaceSymbol container, string name)
+        internal static INamespaceSymbol? GetNestedNamespace(
+            this INamespaceSymbol container,
+            string name
+        )
         {
             foreach (var sym in container.GetMembers(name))
             {
@@ -102,7 +107,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal static bool IsNetModule(this IAssemblySymbol assembly) =>
-            assembly is ISourceAssemblySymbol sourceAssembly && sourceAssembly.Compilation.Options.OutputKind.IsNetModule();
+            assembly is ISourceAssemblySymbol sourceAssembly
+            && sourceAssembly.Compilation.Options.OutputKind.IsNetModule();
 
         internal static bool IsInSource(this ISymbol symbol)
         {

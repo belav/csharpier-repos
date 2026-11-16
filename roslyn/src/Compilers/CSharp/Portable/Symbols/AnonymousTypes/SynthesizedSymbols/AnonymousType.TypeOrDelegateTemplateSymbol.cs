@@ -31,19 +31,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             /// <summary> Name to be used as metadata name during emit </summary>
             private NameAndIndex? _nameAndIndex;
 
-            /// <summary> Smallest location of the template, actually contains the smallest location 
+            /// <summary> Smallest location of the template, actually contains the smallest location
             /// of all the anonymous type instances created using this template during EMIT </summary>
             private Location _smallestLocation;
 
             /// <summary> Anonymous type manager owning this template </summary>
             internal readonly AnonymousTypeManager Manager;
 
-            internal AnonymousTypeOrDelegateTemplateSymbol(AnonymousTypeManager manager, Location location)
+            internal AnonymousTypeOrDelegateTemplateSymbol(
+                AnonymousTypeManager manager,
+                Location location
+            )
             {
                 this.Manager = manager;
                 _smallestLocation = location;
 
-                // Will be set when the type's metadata is ready to be emitted, 
+                // Will be set when the type's metadata is ready to be emitted,
                 // <anonymous-type>.Name will throw exception if requested
                 // before that moment.
                 _nameAndIndex = null;
@@ -51,13 +54,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal abstract string TypeDescriptorKey { get; }
 
-            protected sealed override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-                => throw ExceptionUtilities.Unreachable();
+            protected sealed override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+                throw ExceptionUtilities.Unreachable();
 
             /// <summary>
-            /// Smallest location of the template, actually contains the smallest location 
+            /// Smallest location of the template, actually contains the smallest location
             /// of all the anonymous type instances created using this template during EMIT;
-            /// 
+            ///
             /// NOTE: if this property is queried, smallest location must not be null.
             /// </summary>
             internal Location SmallestLocation
@@ -71,21 +74,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal NameAndIndex? NameAndIndex
             {
-                get
-                {
-                    return _nameAndIndex;
-                }
+                get { return _nameAndIndex; }
                 set
                 {
                     Debug.Assert(value != null);
                     var oldValue = Interlocked.CompareExchange(ref _nameAndIndex, value, null);
-                    Debug.Assert(oldValue == null ||
-                        ((oldValue.Name == value.Name) && (oldValue.Index == value.Index)));
+                    Debug.Assert(
+                        oldValue == null
+                            || ((oldValue.Name == value.Name) && (oldValue.Index == value.Index))
+                    );
                 }
             }
 
             /// <summary>
-            /// In emit phase every time a created anonymous type is referenced we try to store the lowest 
+            /// In emit phase every time a created anonymous type is referenced we try to store the lowest
             /// location of the template. It will be used for ordering templates and assigning emitted type names.
             /// </summary>
             internal void AdjustLocation(Location location)
@@ -94,17 +96,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 while (true)
                 {
-                    // Loop until we managed to set location OR we detected that we don't need to set it 
+                    // Loop until we managed to set location OR we detected that we don't need to set it
                     // in case 'location' in type descriptor is bigger that the one in smallestLocation
 
                     Location currentSmallestLocation = _smallestLocation;
-                    if (currentSmallestLocation != null && this.Manager.Compilation.CompareSourceLocations(currentSmallestLocation, location) < 0)
+                    if (
+                        currentSmallestLocation != null
+                        && this.Manager.Compilation.CompareSourceLocations(
+                            currentSmallestLocation,
+                            location
+                        ) < 0
+                    )
                     {
                         // The template's smallest location do not need to be changed
                         return;
                     }
 
-                    if (ReferenceEquals(Interlocked.CompareExchange(ref _smallestLocation, location, currentSmallestLocation), currentSmallestLocation))
+                    if (
+                        ReferenceEquals(
+                            Interlocked.CompareExchange(
+                                ref _smallestLocation,
+                                location,
+                                currentSmallestLocation
+                            ),
+                            currentSmallestLocation
+                        )
+                    )
                     {
                         // Changed successfully, proceed to updating the fields
                         return;
@@ -127,7 +144,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return this.GetMembersUnordered();
             }
 
-            internal sealed override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)
+            internal sealed override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(
+                string name
+            )
             {
                 return this.GetMembers(name);
             }
@@ -187,12 +206,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name)
+            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+                ReadOnlyMemory<char> name
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
+            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+                ReadOnlyMemory<char> name,
+                int arity
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
@@ -229,12 +253,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal abstract override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics { get; }
 
-            internal sealed override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+            internal sealed override NamedTypeSymbol GetDeclaredBaseType(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return this.Manager.System_Object;
             }
 
-            internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+            internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
@@ -312,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return AttributeUsageInfo.Null;
             }
 
-            internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+            internal sealed override NamedTypeSymbol AsNativeInteger() =>
+                throw ExceptionUtilities.Unreachable();
 
             internal sealed override NamedTypeSymbol? NativeIntegerUnderlyingType => null;
 
@@ -322,9 +351,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal sealed override bool HasPossibleWellKnownCloneMethod() => false;
 
-            internal sealed override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+            internal sealed override IEnumerable<(
+                MethodSymbol Body,
+                MethodSymbol Implemented
+            )> SynthesizedInterfaceMethodImpls()
             {
-                return SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+                return SpecializedCollections.EmptyEnumerable<(
+                    MethodSymbol Body,
+                    MethodSymbol Implemented
+                )>();
             }
 
             internal sealed override bool HasInlineArrayAttribute(out int length)
@@ -333,14 +368,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            internal sealed override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+            internal sealed override bool HasCollectionBuilderAttribute(
+                out TypeSymbol? builderType,
+                out string? methodName
+            )
             {
                 builderType = null;
                 methodName = null;
                 return false;
             }
 
-            internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
+            internal sealed override bool HasAsyncMethodBuilderAttribute(
+                out TypeSymbol? builderArgument
+            )
             {
                 builderArgument = null;
                 return false;

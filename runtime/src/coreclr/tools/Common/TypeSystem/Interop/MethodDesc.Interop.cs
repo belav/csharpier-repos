@@ -15,10 +15,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsPInvoke
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -46,12 +43,12 @@ namespace Internal.TypeSystem
         Out = 2,
         Optional = 16,
         HasDefault = 4096,
-        HasFieldMarshal = 8192
+        HasFieldMarshal = 8192,
     }
 
     public struct ParameterMetadata
     {
-        private  readonly ParameterMetadataAttributes _attributes;
+        private readonly ParameterMetadataAttributes _attributes;
         public readonly MarshalAsDescriptor MarshalAsDescriptor;
 
         /// <summary>
@@ -60,15 +57,56 @@ namespace Internal.TypeSystem
         /// </summary>
         public readonly int Index;
 
-        public bool In { get { return (_attributes & ParameterMetadataAttributes.In) == ParameterMetadataAttributes.In; } }
-        public bool Out { get { return (_attributes & ParameterMetadataAttributes.Out) == ParameterMetadataAttributes.Out; } }
-        public bool Return { get { return Index == 0;  } }
-        public bool Optional { get { return (_attributes & ParameterMetadataAttributes.Optional) == ParameterMetadataAttributes.Optional;  } }
-        public bool HasDefault { get { return (_attributes & ParameterMetadataAttributes.HasDefault) == ParameterMetadataAttributes.HasDefault; } }
-        public bool HasFieldMarshal { get { return (_attributes & ParameterMetadataAttributes.HasFieldMarshal) == ParameterMetadataAttributes.HasFieldMarshal; } }
+        public bool In
+        {
+            get
+            {
+                return (_attributes & ParameterMetadataAttributes.In)
+                    == ParameterMetadataAttributes.In;
+            }
+        }
+        public bool Out
+        {
+            get
+            {
+                return (_attributes & ParameterMetadataAttributes.Out)
+                    == ParameterMetadataAttributes.Out;
+            }
+        }
+        public bool Return
+        {
+            get { return Index == 0; }
+        }
+        public bool Optional
+        {
+            get
+            {
+                return (_attributes & ParameterMetadataAttributes.Optional)
+                    == ParameterMetadataAttributes.Optional;
+            }
+        }
+        public bool HasDefault
+        {
+            get
+            {
+                return (_attributes & ParameterMetadataAttributes.HasDefault)
+                    == ParameterMetadataAttributes.HasDefault;
+            }
+        }
+        public bool HasFieldMarshal
+        {
+            get
+            {
+                return (_attributes & ParameterMetadataAttributes.HasFieldMarshal)
+                    == ParameterMetadataAttributes.HasFieldMarshal;
+            }
+        }
 
-
-        public ParameterMetadata(int index, ParameterMetadataAttributes attributes, MarshalAsDescriptor marshalAsDescriptor)
+        public ParameterMetadata(
+            int index,
+            ParameterMetadataAttributes attributes,
+            MarshalAsDescriptor marshalAsDescriptor
+        )
         {
             Index = index;
             _attributes = attributes;
@@ -111,10 +149,7 @@ namespace Internal.TypeSystem
         private PInvokeAttributes _attributes;
         public PInvokeAttributes Attributes
         {
-            get
-            {
-                return _attributes;
-            }
+            get { return _attributes; }
         }
 
         public PInvokeFlags(PInvokeAttributes attributes)
@@ -131,10 +166,9 @@ namespace Internal.TypeSystem
                     PInvokeAttributes.CharSetAnsi => CharSet.Ansi,
                     PInvokeAttributes.CharSetUnicode => CharSet.Unicode,
                     PInvokeAttributes.CharSetAuto => CharSet.Auto,
-                    _ => CharSet.None
+                    _ => CharSet.None,
                 };
             }
-
             set
             {
                 // clear the charset bits;
@@ -147,7 +181,7 @@ namespace Internal.TypeSystem
                     CharSet.Unicode => PInvokeAttributes.CharSetUnicode,
                     CharSet.Auto => PInvokeAttributes.CharSetAuto,
                     (CharSet)0 => PInvokeAttributes.None,
-                    _ => throw new BadImageFormatException()
+                    _ => throw new BadImageFormatException(),
                 };
             }
         }
@@ -177,7 +211,6 @@ namespace Internal.TypeSystem
                 _attributes &= ~(PInvokeAttributes.CallingConventionMask);
                 switch (value)
                 {
-
                     case MethodSignatureFlags.UnmanagedCallingConventionStdCall:
                         _attributes |= PInvokeAttributes.CallingConventionStdCall;
                         break;
@@ -198,7 +231,8 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (_attributes & PInvokeAttributes.SetLastError) == PInvokeAttributes.SetLastError;
+                return (_attributes & PInvokeAttributes.SetLastError)
+                    == PInvokeAttributes.SetLastError;
             }
             set
             {
@@ -217,7 +251,8 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (_attributes & PInvokeAttributes.ExactSpelling) == PInvokeAttributes.ExactSpelling;
+                return (_attributes & PInvokeAttributes.ExactSpelling)
+                    == PInvokeAttributes.ExactSpelling;
             }
             set
             {
@@ -286,10 +321,7 @@ namespace Internal.TypeSystem
 
         public bool PreserveSig
         {
-            get
-            {
-                return (_attributes & PInvokeAttributes.PreserveSig) != 0;
-            }
+            get { return (_attributes & PInvokeAttributes.PreserveSig) != 0; }
             set
             {
                 if (value)

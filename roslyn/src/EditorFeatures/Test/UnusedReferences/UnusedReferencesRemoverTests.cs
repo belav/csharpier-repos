@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             var usedAssemblies = new[] { UsedAssemblyPath };
             var usedReference = AssemblyReference(UsedAssemblyPath);
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, usedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                usedReference
+            );
 
             Assert.Empty(unusedReferences);
         }
@@ -41,7 +45,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             var usedAssemblies = new[] { UsedAssemblyPath };
             var usedReference = PackageReference(UsedAssemblyPath);
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, usedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                usedReference
+            );
 
             Assert.Empty(unusedReferences);
         }
@@ -52,7 +60,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             var usedProjects = new[] { UsedAssemblyName };
             var usedReference = ProjectReference(UsedAssemblyName);
 
-            var unusedReferences = GetUnusedReferences(usedCompilationAssemblies: Empty, usedProjects, usedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedCompilationAssemblies: Empty,
+                usedProjects,
+                usedReference
+            );
 
             Assert.Empty(unusedReferences);
         }
@@ -63,7 +75,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             var usedAssemblies = new[] { UsedAssemblyPath };
             var unusedReference = PackageReference(UnusedAssemblyPath);
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, unusedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                unusedReference
+            );
 
             Assert.Contains(unusedReference, unusedReferences);
             Assert.Single(unusedReferences);
@@ -73,9 +89,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         public void GetUnusedReferences_TransitivelyUsedPackageReferences_AreNotReturned()
         {
             var usedAssemblies = new[] { UsedAssemblyPath };
-            var transitivelyUsedReference = PackageReference(UnusedAssemblyName, PackageReference(UsedAssemblyPath));
+            var transitivelyUsedReference = PackageReference(
+                UnusedAssemblyName,
+                PackageReference(UsedAssemblyPath)
+            );
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, transitivelyUsedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                transitivelyUsedReference
+            );
 
             Assert.Empty(unusedReferences);
         }
@@ -84,9 +107,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         public void GetUnusedReferences_TransitivelyUsedProjectReferences_AreNotReturned()
         {
             var usedAssemblies = new[] { UsedAssemblyPath };
-            var transitivelyUsedReference = ProjectReference(UnusedAssemblyName, PackageReference(UsedAssemblyPath));
+            var transitivelyUsedReference = ProjectReference(
+                UnusedAssemblyName,
+                PackageReference(UsedAssemblyPath)
+            );
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, transitivelyUsedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                transitivelyUsedReference
+            );
 
             Assert.Empty(unusedReferences);
         }
@@ -95,10 +125,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         public void GetUnusedReferences_WhenUsedAssemblyIsAvilableDirectlyAndTransitively_DirectReferencesAreReturned()
         {
             var usedAssemblies = new[] { UsedAssemblyPath };
-            var transitivelyUsedReference = ProjectReference(UnusedAssemblyPath, PackageReference(UsedAssemblyPath));
+            var transitivelyUsedReference = ProjectReference(
+                UnusedAssemblyPath,
+                PackageReference(UsedAssemblyPath)
+            );
             var directlyUsedReference = PackageReference(UsedAssemblyPath);
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, transitivelyUsedReference, directlyUsedReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                transitivelyUsedReference,
+                directlyUsedReference
+            );
 
             Assert.Contains(transitivelyUsedReference, unusedReferences);
             Assert.Single(unusedReferences);
@@ -113,9 +151,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
                 itemSpecification: "Analyzer",
                 treatAsUsed: false,
                 compilationAssemblies: ImmutableArray<string>.Empty,
-                dependencies: ImmutableArray<ReferenceInfo>.Empty);
+                dependencies: ImmutableArray<ReferenceInfo>.Empty
+            );
 
-            var unusedReferences = GetUnusedReferences(usedAssemblies, usedProjectAssemblyNames: Empty, analyzerReference);
+            var unusedReferences = GetUnusedReferences(
+                usedAssemblies,
+                usedProjectAssemblyNames: Empty,
+                analyzerReference
+            );
 
             Assert.Empty(unusedReferences);
         }
@@ -125,9 +168,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         [InlineData(UpdateAction.None, true)]
         [InlineData(UpdateAction.TreatAsUnused, false)]
         [InlineData(UpdateAction.TreatAsUsed, true)]
-        internal async Task ApplyReferenceUpdates_NoChangeUpdates_AreNotApplied(UpdateAction action, bool treatAsUsed)
+        internal async Task ApplyReferenceUpdates_NoChangeUpdates_AreNotApplied(
+            UpdateAction action,
+            bool treatAsUsed
+        )
         {
-            var noChangeUpdate = new ReferenceUpdate(action, PackageReference(UnusedAssemblyPath, treatAsUsed));
+            var noChangeUpdate = new ReferenceUpdate(
+                action,
+                PackageReference(UnusedAssemblyPath, treatAsUsed)
+            );
 
             var appliedUpdates = await ApplyReferenceUpdatesAsync(noChangeUpdate);
 
@@ -139,9 +188,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         [InlineData(UpdateAction.Remove, true)]
         [InlineData(UpdateAction.TreatAsUnused, true)]
         [InlineData(UpdateAction.TreatAsUsed, false)]
-        internal async Task ApplyReferenceUpdates_ChangeUpdates_AreApplied(UpdateAction action, bool treatAsUsed)
+        internal async Task ApplyReferenceUpdates_ChangeUpdates_AreApplied(
+            UpdateAction action,
+            bool treatAsUsed
+        )
         {
-            var changeUpdate = new ReferenceUpdate(action, PackageReference(UnusedAssemblyPath, treatAsUsed));
+            var changeUpdate = new ReferenceUpdate(
+                action,
+                PackageReference(UnusedAssemblyPath, treatAsUsed)
+            );
 
             var appliedUpdates = await ApplyReferenceUpdatesAsync(changeUpdate);
 
@@ -152,8 +207,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
         [Fact]
         public async Task ApplyReferenceUpdates_MixOfChangeAndNoChangeUpdates_ChangesAreApplied()
         {
-            var noChangeUpdate = new ReferenceUpdate(UpdateAction.None, PackageReference(UsedAssemblyPath));
-            var changeUpdate = new ReferenceUpdate(UpdateAction.Remove, PackageReference(UnusedAssemblyPath));
+            var noChangeUpdate = new ReferenceUpdate(
+                UpdateAction.None,
+                PackageReference(UsedAssemblyPath)
+            );
+            var changeUpdate = new ReferenceUpdate(
+                UpdateAction.Remove,
+                PackageReference(UnusedAssemblyPath)
+            );
 
             var appliedUpdates = await ApplyReferenceUpdatesAsync(noChangeUpdate, changeUpdate);
 
@@ -161,60 +222,101 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences
             Assert.Single(appliedUpdates);
         }
 
-        private static ImmutableArray<ReferenceInfo> GetUnusedReferences(string[] usedCompilationAssemblies, string[] usedProjectAssemblyNames, params ReferenceInfo[] references)
-            => UnusedReferencesRemover.GetUnusedReferences(new(usedCompilationAssemblies), new(usedProjectAssemblyNames), references.ToImmutableArray());
+        private static ImmutableArray<ReferenceInfo> GetUnusedReferences(
+            string[] usedCompilationAssemblies,
+            string[] usedProjectAssemblyNames,
+            params ReferenceInfo[] references
+        ) =>
+            UnusedReferencesRemover.GetUnusedReferences(
+                new(usedCompilationAssemblies),
+                new(usedProjectAssemblyNames),
+                references.ToImmutableArray()
+            );
 
-        private static async Task<ImmutableArray<ReferenceUpdate>> ApplyReferenceUpdatesAsync(params ReferenceUpdate[] referenceUpdates)
+        private static async Task<ImmutableArray<ReferenceUpdate>> ApplyReferenceUpdatesAsync(
+            params ReferenceUpdate[] referenceUpdates
+        )
         {
             var referenceCleanupService = new TestReferenceCleanupService();
 
-            await UnusedReferencesRemover.ApplyReferenceUpdatesAsync(
-                referenceCleanupService,
-                string.Empty,
-                referenceUpdates.ToImmutableArray(),
-                CancellationToken.None).ConfigureAwait(false);
+            await UnusedReferencesRemover
+                .ApplyReferenceUpdatesAsync(
+                    referenceCleanupService,
+                    string.Empty,
+                    referenceUpdates.ToImmutableArray(),
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
 
             return referenceCleanupService.AppliedUpdates.ToImmutableArray();
         }
 
-        private static ReferenceInfo ProjectReference(string assemblyPath, params ReferenceInfo[] dependencies)
-            => ProjectReference(assemblyPath, treatAsUsed: false, dependencies);
-        private static ReferenceInfo ProjectReference(string assemblyPath, bool treatAsUsed, params ReferenceInfo[] dependencies)
-            => new(ReferenceType.Project,
-                itemSpecification: Path.GetFileName(assemblyPath),
-                treatAsUsed,
-                compilationAssemblies: ImmutableArray.Create(assemblyPath),
-                dependencies.ToImmutableArray());
+        private static ReferenceInfo ProjectReference(
+            string assemblyPath,
+            params ReferenceInfo[] dependencies
+        ) => ProjectReference(assemblyPath, treatAsUsed: false, dependencies);
 
-        private static ReferenceInfo PackageReference(string assemblyPath, params ReferenceInfo[] dependencies)
-            => PackageReference(assemblyPath, treatAsUsed: false, dependencies);
-        private static ReferenceInfo PackageReference(string assemblyPath, bool treatAsUsed, params ReferenceInfo[] dependencies)
-            => new(ReferenceType.Package,
+        private static ReferenceInfo ProjectReference(
+            string assemblyPath,
+            bool treatAsUsed,
+            params ReferenceInfo[] dependencies
+        ) =>
+            new(
+                ReferenceType.Project,
                 itemSpecification: Path.GetFileName(assemblyPath),
                 treatAsUsed,
                 compilationAssemblies: ImmutableArray.Create(assemblyPath),
-                dependencies.ToImmutableArray());
+                dependencies.ToImmutableArray()
+            );
 
-        private static ReferenceInfo AssemblyReference(string assemblyPath)
-            => AssemblyReference(assemblyPath, treatAsUsed: false);
-        private static ReferenceInfo AssemblyReference(string assemblyPath, bool treatAsUsed)
-            => new(ReferenceType.Assembly,
+        private static ReferenceInfo PackageReference(
+            string assemblyPath,
+            params ReferenceInfo[] dependencies
+        ) => PackageReference(assemblyPath, treatAsUsed: false, dependencies);
+
+        private static ReferenceInfo PackageReference(
+            string assemblyPath,
+            bool treatAsUsed,
+            params ReferenceInfo[] dependencies
+        ) =>
+            new(
+                ReferenceType.Package,
                 itemSpecification: Path.GetFileName(assemblyPath),
                 treatAsUsed,
                 compilationAssemblies: ImmutableArray.Create(assemblyPath),
-                dependencies: ImmutableArray<ReferenceInfo>.Empty);
+                dependencies.ToImmutableArray()
+            );
+
+        private static ReferenceInfo AssemblyReference(string assemblyPath) =>
+            AssemblyReference(assemblyPath, treatAsUsed: false);
+
+        private static ReferenceInfo AssemblyReference(string assemblyPath, bool treatAsUsed) =>
+            new(
+                ReferenceType.Assembly,
+                itemSpecification: Path.GetFileName(assemblyPath),
+                treatAsUsed,
+                compilationAssemblies: ImmutableArray.Create(assemblyPath),
+                dependencies: ImmutableArray<ReferenceInfo>.Empty
+            );
 
         private class TestReferenceCleanupService : IReferenceCleanupService
         {
             private readonly List<ReferenceUpdate> _appliedUpdates = new();
             public IReadOnlyList<ReferenceUpdate> AppliedUpdates => _appliedUpdates;
 
-            public Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(string projectPath, CancellationToken cancellationToken)
+            public Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(
+                string projectPath,
+                CancellationToken cancellationToken
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task<bool> TryUpdateReferenceAsync(string projectPath, ReferenceUpdate referenceUpdate, CancellationToken cancellationToken)
+            public Task<bool> TryUpdateReferenceAsync(
+                string projectPath,
+                ReferenceUpdate referenceUpdate,
+                CancellationToken cancellationToken
+            )
             {
                 _appliedUpdates.Add(referenceUpdate);
                 return Task.FromResult(true);

@@ -42,6 +42,7 @@ namespace System
         Type Resolve(Type type);
         Text.StringBuilder Append(Text.StringBuilder sb);
     }
+
     internal sealed class IArraySpec : IModifierSpec
     {
         // dimensions == 1 and bound, or dimensions > 1 and !bound
@@ -67,11 +68,9 @@ namespace System
         {
             if (bound)
                 return sb.Append("[*]");
-            return sb.Append('[')
-                .Append(',', dimensions - 1)
-                .Append(']');
-
+            return sb.Append('[').Append(',', dimensions - 1).Append(']');
         }
+
         public override string ToString()
         {
             return Append(new Text.StringBuilder()).ToString();
@@ -79,18 +78,12 @@ namespace System
 
         public int Rank
         {
-            get
-            {
-                return dimensions;
-            }
+            get { return dimensions; }
         }
 
         public bool IsBound
         {
-            get
-            {
-                return bound;
-            }
+            get { return bound; }
         }
     }
 
@@ -119,7 +112,6 @@ namespace System
         {
             return Append(new Text.StringBuilder()).ToString();
         }
-
     }
 
     internal sealed class TypeSpec
@@ -182,6 +174,7 @@ namespace System
             WANT_ASSEMBLY = 0x1,
             NO_MODIFIERS = 0x2,
         }
+
 #if DEBUG
         public override string ToString()
         {
@@ -243,7 +236,8 @@ namespace System
             return sb;
         }
 
-        internal string DisplayFullName => display_fullname ??= GetDisplayFullName(DisplayNameFormat.Default);
+        internal string DisplayFullName =>
+            display_fullname ??= GetDisplayFullName(DisplayNameFormat.Default);
 
         internal static TypeSpec Parse(string typeName)
         {
@@ -379,7 +373,10 @@ namespace System
                     case '*':
                     case '[':
                         if (name[pos] != '[' && is_recurse)
-                            throw new ArgumentException(SR.Argument_GenericArgumentCannotBeByrefOrPointerType, "typeName");
+                            throw new ArgumentException(
+                                SR.Argument_GenericArgumentCannotBeByrefOrPointerType,
+                                "typeName"
+                            );
                         data.AddName(name.Substring(name_start, pos - name_start));
                         name_start = pos + 1;
                         in_modifiers = true;
@@ -401,18 +398,23 @@ namespace System
             {
                 for (; pos < name.Length; ++pos)
                 {
-
                     switch (name[pos])
                     {
                         case '&':
                             if (data.is_byref)
-                                throw new ArgumentException(SR.Format(SR.CannotCreateByRefOfByRef, data.TypeName), "typeName");
+                                throw new ArgumentException(
+                                    SR.Format(SR.CannotCreateByRefOfByRef, data.TypeName),
+                                    "typeName"
+                                );
 
                             data.is_byref = true;
                             break;
                         case '*':
                             if (data.is_byref)
-                                throw new ArgumentException(SR.Format(SR.CannotCreatePointerOfByRef, data.TypeName), "typeName");
+                                throw new ArgumentException(
+                                    SR.Format(SR.CannotCreatePointerOfByRef, data.TypeName),
+                                    "typeName"
+                                );
                             // take subsequent '*'s too
                             int pointer_level = 1;
                             while (pos + 1 < name.Length && name[pos + 1] == '*')
@@ -429,7 +431,9 @@ namespace System
                                 while (end < name.Length && name[end] != ']')
                                     ++end;
                                 if (end >= name.Length)
-                                    throw new ArgumentException(SR.Argument_UnmatchedSquareBracketWhileParsingGenericArgAssemblyName);
+                                    throw new ArgumentException(
+                                        SR.Argument_UnmatchedSquareBracketWhileParsingGenericArgAssemblyName
+                                    );
                                 data.assembly_name = name.Substring(pos + 1, end - pos - 1).Trim();
                                 p = end;
                                 return data;
@@ -447,17 +451,26 @@ namespace System
                             break;
                         case '[':
                             if (data.is_byref)
-                                throw new ArgumentException(SR.Argument_ByrefQualifierMustBeLastOneOfAType, "typeName");
+                                throw new ArgumentException(
+                                    SR.Argument_ByrefQualifierMustBeLastOneOfAType,
+                                    "typeName"
+                                );
                             ++pos;
                             if (pos >= name.Length)
-                                throw new ArgumentException(SR.Argument_InvalidArrayType, "typeName");
+                                throw new ArgumentException(
+                                    SR.Argument_InvalidArrayType,
+                                    "typeName"
+                                );
                             SkipSpace(name, ref pos);
 
                             if (name[pos] != ',' && name[pos] != '*' && name[pos] != ']')
-                            {//generic args
+                            { //generic args
                                 List<TypeSpec> args = new List<TypeSpec>();
                                 if (data.HasModifiers)
-                                    throw new ArgumentException(SR.Arg_GenericArgumentsAfterArrayOrPointerType, "typeName");
+                                    throw new ArgumentException(
+                                        SR.Arg_GenericArgumentsAfterArrayOrPointerType,
+                                        "typeName"
+                                    );
 
                                 while (pos < name.Length)
                                 {
@@ -472,7 +485,13 @@ namespace System
                                         if (name[pos] == ']')
                                             ++pos;
                                         else
-                                            throw new ArgumentException(SR.Format(SR.Argument_UnclosedAssemblyQualifiedTypeName, name[pos]), "typeName");
+                                            throw new ArgumentException(
+                                                SR.Format(
+                                                    SR.Argument_UnclosedAssemblyQualifiedTypeName,
+                                                    name[pos]
+                                                ),
+                                                "typeName"
+                                            );
                                         BoundCheck(pos, name);
                                     }
 
@@ -481,11 +500,19 @@ namespace System
                                     if (name[pos] == ',')
                                         ++pos; // skip ',' to the start of the next arg
                                     else
-                                        throw new ArgumentException(SR.Format(SR.Argument_InvalidGenericArgumentsSeparator, name[pos]), "typeName");
-
+                                        throw new ArgumentException(
+                                            SR.Format(
+                                                SR.Argument_InvalidGenericArgumentsSeparator,
+                                                name[pos]
+                                            ),
+                                            "typeName"
+                                        );
                                 }
                                 if (pos >= name.Length || name[pos] != ']')
-                                    throw new ArgumentException(SR.Argument_GenericParsingError, "typeName");
+                                    throw new ArgumentException(
+                                        SR.Argument_GenericParsingError,
+                                        "typeName"
+                                    );
                                 data.generic_params = args;
                             }
                             else
@@ -497,11 +524,20 @@ namespace System
                                     if (name[pos] == '*')
                                     {
                                         if (bound)
-                                            throw new ArgumentException(SR.Argument_MultiDimensionalArrayCannotBeBound, "typeName");
+                                            throw new ArgumentException(
+                                                SR.Argument_MultiDimensionalArrayCannotBeBound,
+                                                "typeName"
+                                            );
                                         bound = true;
                                     }
                                     else if (name[pos] != ',')
-                                        throw new ArgumentException(SR.Format(SR.Argument_InvalidCharInArraySpecification, name[pos]), "typeName");
+                                        throw new ArgumentException(
+                                            SR.Format(
+                                                SR.Argument_InvalidCharInArraySpecification,
+                                                name[pos]
+                                            ),
+                                            "typeName"
+                                        );
                                     else
                                         ++dimensions;
 
@@ -509,9 +545,15 @@ namespace System
                                     SkipSpace(name, ref pos);
                                 }
                                 if (pos >= name.Length || name[pos] != ']')
-                                    throw new ArgumentException(SR.Argument_ArrayParsingError, "typeName");
+                                    throw new ArgumentException(
+                                        SR.Argument_ArrayParsingError,
+                                        "typeName"
+                                    );
                                 if (dimensions > 1 && bound)
-                                    throw new ArgumentException(SR.Argument_MultiDimensionalArrayCannotBeBound, "typeName");
+                                    throw new ArgumentException(
+                                        SR.Argument_MultiDimensionalArrayCannotBeBound,
+                                        "typeName"
+                                    );
                                 data.AddModifier(new IArraySpec(dimensions, bound));
                             }
 
@@ -522,9 +564,15 @@ namespace System
                                 p = pos;
                                 return data;
                             }
-                            throw new ArgumentException(SR.Argument_UnmatchedSquareBracketWhileParsingGenericArgAssemblyName, "typeName");
+                            throw new ArgumentException(
+                                SR.Argument_UnmatchedSquareBracketWhileParsingGenericArgAssemblyName,
+                                "typeName"
+                            );
                         default:
-                            throw new ArgumentException(SR.Format(SR.Argument_BadTypeDef, name[pos], pos), "typeName");
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_BadTypeDef, name[pos], pos),
+                                "typeName"
+                            );
                     }
                 }
             }
@@ -570,6 +618,5 @@ namespace System
                 return TypeNames.FromDisplay(DisplayName + "+" + innerName.DisplayName);
             }
         }
-
     }
 }

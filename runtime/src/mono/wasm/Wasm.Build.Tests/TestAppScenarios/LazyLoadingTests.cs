@@ -16,9 +16,7 @@ namespace Wasm.Build.Tests.TestAppScenarios;
 public class LazyLoadingTests : AppTestBase
 {
     public LazyLoadingTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+        : base(output, buildContext) { }
 
     [Fact]
     public async Task LoadLazyAssemblyBeforeItIsNeeded()
@@ -26,8 +24,13 @@ public class LazyLoadingTests : AppTestBase
         CopyTestAsset("WasmBasicTestApp", "LazyLoadingTests");
         PublishProject("Debug");
 
-        var result = await RunSdkStyleApp(new(Configuration: "Debug", TestScenario: "LazyLoadingTest"));
-        Assert.True(result.TestOutput.Any(m => m.Contains("FirstName")), "The lazy loading test didn't emit expected message with JSON");
+        var result = await RunSdkStyleApp(
+            new(Configuration: "Debug", TestScenario: "LazyLoadingTest")
+        );
+        Assert.True(
+            result.TestOutput.Any(m => m.Contains("FirstName")),
+            "The lazy loading test didn't emit expected message with JSON"
+        );
     }
 
     [Fact]
@@ -36,12 +39,22 @@ public class LazyLoadingTests : AppTestBase
         CopyTestAsset("WasmBasicTestApp", "LazyLoadingTests");
         PublishProject("Debug");
 
-        var result = await RunSdkStyleApp(new(
-            Configuration: "Debug",
-            TestScenario: "LazyLoadingTest",
-            BrowserQueryString: new Dictionary<string, string> { ["loadRequiredAssembly"] = "false" },
-            ExpectedExitCode: 1
-        ));
-        Assert.True(result.ConsoleOutput.Any(m => m.Contains("Could not load file or assembly") && m.Contains("System.Text.Json")), "The lazy loading test didn't emit expected error message");
+        var result = await RunSdkStyleApp(
+            new(
+                Configuration: "Debug",
+                TestScenario: "LazyLoadingTest",
+                BrowserQueryString: new Dictionary<string, string>
+                {
+                    ["loadRequiredAssembly"] = "false",
+                },
+                ExpectedExitCode: 1
+            )
+        );
+        Assert.True(
+            result.ConsoleOutput.Any(m =>
+                m.Contains("Could not load file or assembly") && m.Contains("System.Text.Json")
+            ),
+            "The lazy loading test didn't emit expected error message"
+        );
     }
 }

@@ -21,22 +21,27 @@ public partial class QuicConnection
         /// The connection to which these options belong.
         /// </summary>
         private readonly QuicConnection _connection;
+
         /// <summary>
         /// Determines if the connection is outbound/client or inbound/server.
         /// </summary>
         private readonly bool _isClient;
+
         /// <summary>
         /// Host name send in SNI, set only for outbound/client connections. Configured via <see cref="SslClientAuthenticationOptions.TargetHost"/>.
         /// </summary>
         private readonly string _targetHost;
+
         /// <summary>
         /// Always <c>true</c> for outbound/client connections. Configured for inbound/server ones via <see cref="SslServerAuthenticationOptions.ClientCertificateRequired"/>.
         /// </summary>
         private readonly bool _certificateRequired;
+
         /// <summary>
         /// Configured via <see cref="SslServerAuthenticationOptions.CertificateRevocationCheckMode"/> or <see cref="SslClientAuthenticationOptions.CertificateRevocationCheckMode"/>.
         /// </summary>
         private readonly X509RevocationMode _revocationMode;
+
         /// <summary>
         /// Configured via <see cref="SslServerAuthenticationOptions.RemoteCertificateValidationCallback"/> or <see cref="SslClientAuthenticationOptions.RemoteCertificateValidationCallback"/>.
         /// </summary>
@@ -49,10 +54,15 @@ public partial class QuicConnection
 
         internal string TargetHost => _targetHost;
 
-        public SslConnectionOptions(QuicConnection connection, bool isClient,
-            string targetHost, bool certificateRequired, X509RevocationMode
-            revocationMode, RemoteCertificateValidationCallback? validationCallback,
-            X509ChainPolicy? certificateChainPolicy)
+        public SslConnectionOptions(
+            QuicConnection connection,
+            bool isClient,
+            string targetHost,
+            bool certificateRequired,
+            X509RevocationMode revocationMode,
+            RemoteCertificateValidationCallback? validationCallback,
+            X509ChainPolicy? certificateChainPolicy
+        )
         {
             _connection = connection;
             _isClient = isClient;
@@ -63,7 +73,11 @@ public partial class QuicConnection
             _certificateChainPolicy = certificateChainPolicy;
         }
 
-        public unsafe int ValidateCertificate(QUIC_BUFFER* certificatePtr, QUIC_BUFFER* chainPtr, out X509Certificate2? certificate)
+        public unsafe int ValidateCertificate(
+            QUIC_BUFFER* certificatePtr,
+            QUIC_BUFFER* chainPtr,
+            out X509Certificate2? certificate
+        )
         {
             SslPolicyErrors sslPolicyErrors = SslPolicyErrors.None;
             IntPtr certificateBuffer = 0;
@@ -93,7 +107,9 @@ public partial class QuicConnection
                     if (chain.ChainPolicy.ApplicationPolicy.Count == 0)
                     {
                         // Authenticate the remote party: (e.g. when operating in server mode, authenticate the client).
-                        chain.ChainPolicy.ApplicationPolicy.Add(_isClient ? s_serverAuthOid : s_clientAuthOid);
+                        chain.ChainPolicy.ApplicationPolicy.Add(
+                            _isClient ? s_serverAuthOid : s_clientAuthOid
+                        );
                     }
 
                     if (MsQuicApi.UsesSChannelBackend)
@@ -111,7 +127,8 @@ public partial class QuicConnection
 
                         if (chainPtr->Length > 0)
                         {
-                            X509Certificate2Collection additionalCertificates = new X509Certificate2Collection();
+                            X509Certificate2Collection additionalCertificates =
+                                new X509Certificate2Collection();
                             additionalCertificates.Import(chainPtr->Span);
                             chain.ChainPolicy.ExtraStore.AddRange(additionalCertificates);
                         }
@@ -120,8 +137,18 @@ public partial class QuicConnection
 
                 if (result is not null)
                 {
-                    bool checkCertName = !chain!.ChainPolicy!.VerificationFlags.HasFlag(X509VerificationFlags.IgnoreInvalidName);
-                    sslPolicyErrors |= CertificateValidation.BuildChainAndVerifyProperties(chain!, result, checkCertName, !_isClient, TargetHostNameHelper.NormalizeHostName(_targetHost), certificateBuffer, certificateLength);
+                    bool checkCertName = !chain!.ChainPolicy!.VerificationFlags.HasFlag(
+                        X509VerificationFlags.IgnoreInvalidName
+                    );
+                    sslPolicyErrors |= CertificateValidation.BuildChainAndVerifyProperties(
+                        chain!,
+                        result,
+                        checkCertName,
+                        !_isClient,
+                        TargetHostNameHelper.NormalizeHostName(_targetHost),
+                        certificateBuffer,
+                        certificateLength
+                    );
                 }
                 else if (_certificateRequired)
                 {
@@ -147,7 +174,9 @@ public partial class QuicConnection
                 {
                     if (_isClient)
                     {
-                        throw new AuthenticationException(SR.Format(SR.net_quic_cert_chain_validation, sslPolicyErrors));
+                        throw new AuthenticationException(
+                            SR.Format(SR.net_quic_cert_chain_validation, sslPolicyErrors)
+                        );
                     }
 
                     status = QUIC_STATUS_HANDSHAKE_FAILURE;
@@ -161,7 +190,12 @@ public partial class QuicConnection
                 result?.Dispose();
                 if (wrapException)
                 {
-                    throw new QuicException(QuicError.CallbackError, null, SR.net_quic_callback_error, ex);
+                    throw new QuicException(
+                        QuicError.CallbackError,
+                        null,
+                        SR.net_quic_callback_error,
+                        ex
+                    );
                 }
 
                 throw;

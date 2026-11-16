@@ -10,31 +10,46 @@ namespace System.ServiceModel.Discovery
     [Fx.Tag.XamlVisible(false)]
     public class DiscoveryEndpoint : ServiceEndpoint
     {
-        readonly DiscoveryOperationContextExtension discoveryOperationContextExtension;                
+        readonly DiscoveryOperationContextExtension discoveryOperationContextExtension;
 
         public DiscoveryEndpoint()
-            : this(DiscoveryVersion.DefaultDiscoveryVersion, ServiceDiscoveryMode.Managed)
-        {            
-        }
+            : this(DiscoveryVersion.DefaultDiscoveryVersion, ServiceDiscoveryMode.Managed) { }
 
         public DiscoveryEndpoint(Binding binding, EndpointAddress endpointAddress)
-            : this(DiscoveryVersion.DefaultDiscoveryVersion, ServiceDiscoveryMode.Managed, binding, endpointAddress)
-        {
-        }
+            : this(
+                DiscoveryVersion.DefaultDiscoveryVersion,
+                ServiceDiscoveryMode.Managed,
+                binding,
+                endpointAddress
+            ) { }
 
-        public DiscoveryEndpoint(DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode)
-            : this(discoveryVersion, discoveryMode, null, null)
-        {            
-        }
+        public DiscoveryEndpoint(
+            DiscoveryVersion discoveryVersion,
+            ServiceDiscoveryMode discoveryMode
+        )
+            : this(discoveryVersion, discoveryMode, null, null) { }
 
-        public DiscoveryEndpoint(DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode, Binding binding, EndpointAddress endpointAddress)
+        public DiscoveryEndpoint(
+            DiscoveryVersion discoveryVersion,
+            ServiceDiscoveryMode discoveryMode,
+            Binding binding,
+            EndpointAddress endpointAddress
+        )
             : base(GetDiscoveryContract(discoveryVersion, discoveryMode))
         {
             base.IsSystemEndpoint = true;
-                           
-            this.discoveryOperationContextExtension = new DiscoveryOperationContextExtension(TimeSpan.Zero, discoveryMode, discoveryVersion);
 
-            base.Behaviors.Add(new DiscoveryOperationContextExtensionInitializer(this.discoveryOperationContextExtension));
+            this.discoveryOperationContextExtension = new DiscoveryOperationContextExtension(
+                TimeSpan.Zero,
+                discoveryMode,
+                discoveryVersion
+            );
+
+            base.Behaviors.Add(
+                new DiscoveryOperationContextExtensionInitializer(
+                    this.discoveryOperationContextExtension
+                )
+            );
             base.Behaviors.Add(new DiscoveryEndpointValidator());
 
             base.Address = endpointAddress;
@@ -43,11 +58,7 @@ namespace System.ServiceModel.Discovery
 
         public TimeSpan MaxResponseDelay
         {
-            get
-            {
-                return this.discoveryOperationContextExtension.MaxResponseDelay;
-            }
-
+            get { return this.discoveryOperationContextExtension.MaxResponseDelay; }
             set
             {
                 TimeoutHelper.ThrowIfNegativeArgument(value, "value");
@@ -57,21 +68,18 @@ namespace System.ServiceModel.Discovery
 
         public DiscoveryVersion DiscoveryVersion
         {
-            get
-            {
-                return this.discoveryOperationContextExtension.DiscoveryVersion;
-            }
+            get { return this.discoveryOperationContextExtension.DiscoveryVersion; }
         }
 
         public ServiceDiscoveryMode DiscoveryMode
         {
-            get
-            {
-                return this.discoveryOperationContextExtension.DiscoveryMode;
-            }
+            get { return this.discoveryOperationContextExtension.DiscoveryMode; }
         }
 
-        static ContractDescription GetDiscoveryContract(DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode)
+        static ContractDescription GetDiscoveryContract(
+            DiscoveryVersion discoveryVersion,
+            ServiceDiscoveryMode discoveryMode
+        )
         {
             if (discoveryVersion == null)
             {

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,38 +28,45 @@
 
 using System;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class CallbackValidatorAttribute : ConfigurationValidatorAttribute
+    {
+        string callbackMethodName = "";
+        Type type = null;
+        ConfigurationValidatorBase instance;
 
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class CallbackValidatorAttribute : ConfigurationValidatorAttribute
-	{
-		string callbackMethodName = "";
-		Type type = null;
-		ConfigurationValidatorBase instance;
+        public CallbackValidatorAttribute() { }
 
-		public CallbackValidatorAttribute ()
-		{
-		}
+        public string CallbackMethodName
+        {
+            get { return callbackMethodName; }
+            set
+            {
+                callbackMethodName = value;
+                instance = null;
+            }
+        }
 
-		public string CallbackMethodName {
-			get { return callbackMethodName; }
-			set { callbackMethodName = value; instance = null; }
-		}
+        public Type Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                instance = null;
+            }
+        }
 
-		public Type Type {
-			get { return type; }
-			set { type = value; instance = null; }
-		}
-
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
+        public override ConfigurationValidatorBase ValidatorInstance
+        {
+            get {
 #if false
 				if (instance == null)
 					instance = new CallbackValidator (type);
 #endif
-				return instance;
-			}
-		}
-	}
+                return instance; }
+        }
+    }
 }
-

@@ -6,16 +6,15 @@ namespace System.ServiceModel.Transactions
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.IO;
     using System.Net;
+    using System.Runtime;
     using System.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.ComIntegration;
     using System.ServiceModel.Security;
     using System.Transactions;
-
     using Microsoft.Transactions.Wsat.Messaging;
     using Microsoft.Transactions.Wsat.Protocol;
     using Microsoft.Transactions.Wsat.Recovery;
@@ -23,16 +22,10 @@ namespace System.ServiceModel.Transactions
     class TransactionManagerConfigurationException : TransactionException
     {
         public TransactionManagerConfigurationException(string error, Exception e)
-            :
-            base(error, e)
-        {
-        }
+            : base(error, e) { }
 
         public TransactionManagerConfigurationException(string error)
-            :
-            base(error)
-        {
-        }
+            : base(error) { }
     }
 
     class WsatConfiguration
@@ -61,13 +54,26 @@ namespace System.ServiceModel.Transactions
         bool issuedTokensEnabled;
         TimeSpan maxTimeout;
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to BindingStrings are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to BindingStrings are safe."
+        )]
         static WsatConfiguration()
         {
-            DisabledRegistrationPath = string.Concat(BindingStrings.AddressPrefix, "/", BindingStrings.RegistrationCoordinatorSuffix(ProtocolVersion.Version10), BindingStrings.DisabledSuffix);
+            DisabledRegistrationPath = string.Concat(
+                BindingStrings.AddressPrefix,
+                "/",
+                BindingStrings.RegistrationCoordinatorSuffix(ProtocolVersion.Version10),
+                BindingStrings.DisabledSuffix
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to ProtocolInformationReader.IsV10Enabled and IsV11Enabled are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to ProtocolInformationReader.IsV10Enabled and IsV11Enabled are safe."
+        )]
         public WsatConfiguration()
         {
             // Get whereabouts
@@ -83,7 +89,11 @@ namespace System.ServiceModel.Transactions
             Initialize(whereabouts);
 
             // Read local registry flag
-            this.oleTxUpgradeEnabled = ReadFlag(WsatKey, OleTxUpgradeEnabledValue, OleTxUpgradeEnabledDefault);
+            this.oleTxUpgradeEnabled = ReadFlag(
+                WsatKey,
+                OleTxUpgradeEnabledValue,
+                OleTxUpgradeEnabledDefault
+            );
         }
 
         void Initialize(WhereaboutsReader whereabouts)
@@ -96,15 +106,23 @@ namespace System.ServiceModel.Transactions
             }
             catch (UriFormatException e)
             {
-                // UriBuilder.Uri can throw this if the URI is ultimately invalid 
+                // UriBuilder.Uri can throw this if the URI is ultimately invalid
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(SR.GetString(SR.WsatUriCreationFailed), e));
+                    new TransactionManagerConfigurationException(
+                        SR.GetString(SR.WsatUriCreationFailed),
+                        e
+                    )
+                );
             }
             catch (ArgumentOutOfRangeException e)
             {
                 // UriBuilder constructor can throw this if port < 0
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(SR.GetString(SR.WsatUriCreationFailed), e));
+                    new TransactionManagerConfigurationException(
+                        SR.GetString(SR.WsatUriCreationFailed),
+                        e
+                    )
+                );
             }
         }
 
@@ -140,7 +158,8 @@ namespace System.ServiceModel.Transactions
 
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion)));
+                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                    );
             }
         }
 
@@ -156,10 +175,10 @@ namespace System.ServiceModel.Transactions
 
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion)));
+                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                    );
             }
         }
-
 
         public EndpointAddress RemoteActivationService(ProtocolVersion protocolVersion)
         {
@@ -173,11 +192,15 @@ namespace System.ServiceModel.Transactions
 
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion)));
+                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                    );
             }
         }
 
-        public EndpointAddress CreateRegistrationService(AddressHeader refParam, ProtocolVersion protocolVersion)
+        public EndpointAddress CreateRegistrationService(
+            AddressHeader refParam,
+            ProtocolVersion protocolVersion
+        )
         {
             switch (protocolVersion)
             {
@@ -189,11 +212,15 @@ namespace System.ServiceModel.Transactions
 
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion)));
+                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                    );
             }
         }
 
-        public bool IsLocalRegistrationService(EndpointAddress endpoint, ProtocolVersion protocolVersion)
+        public bool IsLocalRegistrationService(
+            EndpointAddress endpoint,
+            ProtocolVersion protocolVersion
+        )
         {
             if (endpoint.Uri == null)
                 return false;
@@ -206,7 +233,8 @@ namespace System.ServiceModel.Transactions
                     return endpoint.Uri == this.registrationServiceAddress11;
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion)));
+                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                    );
             }
         }
 
@@ -228,12 +256,20 @@ namespace System.ServiceModel.Transactions
             catch (SerializationException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(SR.GetString(SR.WhereaboutsReadFailed), e));
+                    new TransactionManagerConfigurationException(
+                        SR.GetString(SR.WhereaboutsReadFailed),
+                        e
+                    )
+                );
             }
             // If GetWhereabouts throws TransactionException, let it propagate
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to the ProtocolInformationReader properties and to BindingStrings.RegistrationCoordinatorSuffix(..) are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to the ProtocolInformationReader properties and to BindingStrings.RegistrationCoordinatorSuffix(..) are safe."
+        )]
         void InitializeForUnmarshal(WhereaboutsReader whereabouts)
         {
             ProtocolInformationReader protocol = whereabouts.ProtocolInformation;
@@ -241,20 +277,24 @@ namespace System.ServiceModel.Transactions
             {
                 this.inboundEnabled = true;
 
-                bool isTmLocal = string.Compare(Environment.MachineName,
-                                                protocol.NodeName,
-                                                StringComparison.OrdinalIgnoreCase) == 0;
+                bool isTmLocal =
+                    string.Compare(
+                        Environment.MachineName,
+                        protocol.NodeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
 
                 string spnIdentity;
 
-                string activationCoordinatorSuffix10 =
-                    BindingStrings.ActivationCoordinatorSuffix(ProtocolVersion.Version10);
+                string activationCoordinatorSuffix10 = BindingStrings.ActivationCoordinatorSuffix(
+                    ProtocolVersion.Version10
+                );
 
-                string activationCoordinatorSuffix11 =
-                    BindingStrings.ActivationCoordinatorSuffix(ProtocolVersion.Version11);
+                string activationCoordinatorSuffix11 = BindingStrings.ActivationCoordinatorSuffix(
+                    ProtocolVersion.Version11
+                );
 
-                if (protocol.IsClustered ||
-                   (protocol.NetworkClientAccess && !isTmLocal))
+                if (protocol.IsClustered || (protocol.NetworkClientAccess && !isTmLocal))
                 {
                     if (protocol.IsClustered)
                     {
@@ -270,18 +310,22 @@ namespace System.ServiceModel.Transactions
 
                     if (protocol.IsV10Enabled)
                     {
-                        this.remoteActivationService10 = CreateActivationEndpointAddress(protocol,
-                                                                                         activationCoordinatorSuffix10,
-                                                                                         spnIdentity,
-                                                                                         true);
+                        this.remoteActivationService10 = CreateActivationEndpointAddress(
+                            protocol,
+                            activationCoordinatorSuffix10,
+                            spnIdentity,
+                            true
+                        );
                     }
 
                     if (protocol.IsV11Enabled)
                     {
-                        this.remoteActivationService11 = CreateActivationEndpointAddress(protocol,
-                                                                                         activationCoordinatorSuffix11,
-                                                                                         spnIdentity,
-                                                                                         true);
+                        this.remoteActivationService11 = CreateActivationEndpointAddress(
+                            protocol,
+                            activationCoordinatorSuffix11,
+                            spnIdentity,
+                            true
+                        );
                     }
                 }
 
@@ -293,28 +337,38 @@ namespace System.ServiceModel.Transactions
                     // for cluster scenarios with more than one service on a node.
                     if (protocol.IsV10Enabled)
                     {
-                        this.localActivationService10 = CreateActivationEndpointAddress(protocol,
-                                                                                        activationCoordinatorSuffix10,
-                                                                                        spnIdentity,
-                                                                                        false);
+                        this.localActivationService10 = CreateActivationEndpointAddress(
+                            protocol,
+                            activationCoordinatorSuffix10,
+                            spnIdentity,
+                            false
+                        );
                     }
 
                     if (protocol.IsV11Enabled)
                     {
-                        this.localActivationService11 = CreateActivationEndpointAddress(protocol,
-                                                                                        activationCoordinatorSuffix11,
-                                                                                        spnIdentity,
-                                                                                        false);
+                        this.localActivationService11 = CreateActivationEndpointAddress(
+                            protocol,
+                            activationCoordinatorSuffix11,
+                            spnIdentity,
+                            false
+                        );
                     }
                 }
             }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to the ProtocolInformationReader properties (HostName, HttpsPort, BasePath) are safe.")]
-        EndpointAddress CreateActivationEndpointAddress(ProtocolInformationReader protocol,
-                                              string suffix,
-                                              string spnIdentity,
-                                              bool isRemote)
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to the ProtocolInformationReader properties (HostName, HttpsPort, BasePath) are safe."
+        )]
+        EndpointAddress CreateActivationEndpointAddress(
+            ProtocolInformationReader protocol,
+            string suffix,
+            string spnIdentity,
+            bool isRemote
+        )
         {
             string uriScheme;
             string host;
@@ -349,7 +403,11 @@ namespace System.ServiceModel.Transactions
             }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to the ProtocolInformationReader properties and to BindingStrings.RegistrationCoordinatorSuffix(..) are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to the ProtocolInformationReader properties and to BindingStrings.RegistrationCoordinatorSuffix(..) are safe."
+        )]
         void InitializeForMarshal(WhereaboutsReader whereabouts)
         {
             ProtocolInformationReader protocol = whereabouts.ProtocolInformation;
@@ -358,22 +416,32 @@ namespace System.ServiceModel.Transactions
                 // We can marshal outgoing transactions using a valid address
                 if (protocol.IsV10Enabled)
                 {
-                    UriBuilder builder10 = new UriBuilder(Uri.UriSchemeHttps,
-                                                          protocol.HostName,
-                                                          protocol.HttpsPort,
-                                                          protocol.BasePath + "/" +
-                                                          BindingStrings.RegistrationCoordinatorSuffix(ProtocolVersion.Version10));
+                    UriBuilder builder10 = new UriBuilder(
+                        Uri.UriSchemeHttps,
+                        protocol.HostName,
+                        protocol.HttpsPort,
+                        protocol.BasePath
+                            + "/"
+                            + BindingStrings.RegistrationCoordinatorSuffix(
+                                ProtocolVersion.Version10
+                            )
+                    );
                     this.registrationServiceAddress10 = builder10.Uri;
                 }
 
-                // when we have a WSAT1.1 coordinator 
+                // when we have a WSAT1.1 coordinator
                 if (protocol.IsV11Enabled)
                 {
-                    UriBuilder builder11 = new UriBuilder(Uri.UriSchemeHttps,
-                                                          protocol.HostName,
-                                                          protocol.HttpsPort,
-                                                          protocol.BasePath + "/" +
-                                                          BindingStrings.RegistrationCoordinatorSuffix(ProtocolVersion.Version11));
+                    UriBuilder builder11 = new UriBuilder(
+                        Uri.UriSchemeHttps,
+                        protocol.HostName,
+                        protocol.HttpsPort,
+                        protocol.BasePath
+                            + "/"
+                            + BindingStrings.RegistrationCoordinatorSuffix(
+                                ProtocolVersion.Version11
+                            )
+                    );
 
                     this.registrationServiceAddress11 = builder11.Uri;
                 }
@@ -384,12 +452,14 @@ namespace System.ServiceModel.Transactions
             else
             {
                 // Generate an address that will not work
-                // We do this in order to generate coordination contexts that can be propagated 
+                // We do this in order to generate coordination contexts that can be propagated
                 // between processes on the same node even if WS-AT is disabled
-                UriBuilder builder = new UriBuilder(Uri.UriSchemeHttps,
-                                                    whereabouts.HostName,
-                                                    443,
-                                                    DisabledRegistrationPath);
+                UriBuilder builder = new UriBuilder(
+                    Uri.UriSchemeHttps,
+                    whereabouts.HostName,
+                    443,
+                    DisabledRegistrationPath
+                );
 
                 this.registrationServiceAddress10 = builder.Uri;
                 this.registrationServiceAddress11 = builder.Uri;
@@ -413,12 +483,20 @@ namespace System.ServiceModel.Transactions
             catch (SecurityException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(SR.GetString(SR.WsatRegistryValueReadError, value), e));
+                    new TransactionManagerConfigurationException(
+                        SR.GetString(SR.WsatRegistryValueReadError, value),
+                        e
+                    )
+                );
             }
             catch (IOException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(SR.GetString(SR.WsatRegistryValueReadError, value), e));
+                    new TransactionManagerConfigurationException(
+                        SR.GetString(SR.WsatRegistryValueReadError, value),
+                        e
+                    )
+                );
             }
         }
 

@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         public static readonly DefinitionHighlightTag Instance = new();
 
         private DefinitionHighlightTag()
-            : base(TagId)
-        {
-        }
+            : base(TagId) { }
     }
 }

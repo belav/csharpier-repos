@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 public struct AA
 {
     public static void f()
@@ -17,22 +18,16 @@ public struct AA
                     break;
                 else
                 {
-                    if (a)
-                    {
-                    }
+                    if (a) { }
                 }
             }
             a = false;
-            do
-            {
-            }
-            while (a);
+            do { } while (a);
 
             // stop the loop
             App.flag = false;
         }
     }
-
 }
 
 public class App
@@ -50,5 +45,6 @@ public class App
         }
         Console.WriteLine("Passed.");
     }
+
     public static bool flag = true;
 }

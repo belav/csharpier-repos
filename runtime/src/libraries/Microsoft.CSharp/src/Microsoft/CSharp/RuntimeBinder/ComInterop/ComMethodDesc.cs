@@ -52,10 +52,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         public bool IsPropertyGet
         {
-            get
-            {
-                return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYGET) != 0;
-            }
+            get { return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYGET) != 0; }
         }
 
         public bool IsDataMember
@@ -77,16 +74,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             get
             {
-                return (_invokeKind & (INVOKEKIND.INVOKE_PROPERTYPUT | INVOKEKIND.INVOKE_PROPERTYPUTREF)) != 0;
+                return (
+                        _invokeKind
+                        & (INVOKEKIND.INVOKE_PROPERTYPUT | INVOKEKIND.INVOKE_PROPERTYPUTREF)
+                    ) != 0;
             }
         }
 
         public bool IsPropertyPutRef
         {
-            get
-            {
-                return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYPUTREF) != 0;
-            }
+            get { return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYPUTREF) != 0; }
         }
 
         internal int ParamCount { get; }

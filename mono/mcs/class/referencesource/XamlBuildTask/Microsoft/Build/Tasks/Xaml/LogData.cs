@@ -9,16 +9,12 @@ namespace Microsoft.Build.Tasks.Xaml
     [Serializable]
     internal struct LogData
     {
-        public string Message
-        { get; set; }
+        public string Message { get; set; }
 
-        public string FileName
-        { get; set; }
+        public string FileName { get; set; }
 
-        public int LineNumber
-        { get; set; }
+        public int LineNumber { get; set; }
 
-        public int LinePosition
-        { get; set; }
+        public int LinePosition { get; set; }
     }
 }

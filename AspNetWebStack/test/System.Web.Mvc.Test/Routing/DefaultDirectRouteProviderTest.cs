@@ -23,16 +23,34 @@ namespace System.Web.Routing
             string areaPrefix = null;
             string controllerPrefix = null;
             IDirectRouteFactory factory = CreateStubRouteFactory(null);
-            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor("IgnoreController");
-            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(controllerDescriptor, "IgnoreAction");
-            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[] { actionDescriptor };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor(
+                "IgnoreController"
+            );
+            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(
+                controllerDescriptor,
+                "IgnoreAction"
+            );
+            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[]
+            {
+                actionDescriptor,
+            };
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => DefaultDirectRouteProvider.CreateRouteEntry(areaPrefix,
-                controllerPrefix, factory, actions, constraintResolver, targetIsAction: false),
-                "IDirectRouteFactory.CreateRoute must not return null.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DefaultDirectRouteProvider.CreateRouteEntry(
+                        areaPrefix,
+                        controllerPrefix,
+                        factory,
+                        actions,
+                        constraintResolver,
+                        targetIsAction: false
+                    ),
+                "IDirectRouteFactory.CreateRoute must not return null."
+            );
         }
 
         [Fact]
@@ -45,17 +63,37 @@ namespace System.Web.Routing
             Assert.Null(route.GetTargetActionDescriptors()); // Guard
             RouteEntry entry = new RouteEntry(name: null, route: route);
             IDirectRouteFactory factory = CreateStubRouteFactory(entry);
-            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor("IgnoreController");
-            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(controllerDescriptor, "IgnoreAction");
-            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[] { actionDescriptor };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor(
+                "IgnoreController"
+            );
+            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(
+                controllerDescriptor,
+                "IgnoreAction"
+            );
+            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[]
+            {
+                actionDescriptor,
+            };
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
-            string expectedMessage = "The route does not have any associated action descriptors. Routing requires " +
-                "that each direct route map to a non-empty set of actions.";
-            Assert.Throws<InvalidOperationException>(() => DefaultDirectRouteProvider.CreateRouteEntry(areaPrefix,
-                controllerPrefix, factory, actions, constraintResolver, targetIsAction: false), expectedMessage);
+            string expectedMessage =
+                "The route does not have any associated action descriptors. Routing requires "
+                + "that each direct route map to a non-empty set of actions.";
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DefaultDirectRouteProvider.CreateRouteEntry(
+                        areaPrefix,
+                        controllerPrefix,
+                        factory,
+                        actions,
+                        constraintResolver,
+                        targetIsAction: false
+                    ),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -72,17 +110,37 @@ namespace System.Web.Routing
             Assert.Empty(originalActions); // Guard
             RouteEntry entry = new RouteEntry(name: null, route: route);
             IDirectRouteFactory factory = CreateStubRouteFactory(entry);
-            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor("IgnoreController");
-            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(controllerDescriptor, "IgnoreAction");
-            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[] { actionDescriptor };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor(
+                "IgnoreController"
+            );
+            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(
+                controllerDescriptor,
+                "IgnoreAction"
+            );
+            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[]
+            {
+                actionDescriptor,
+            };
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
-            string expectedMessage = "The route does not have any associated action descriptors. Routing requires " +
-                "that each direct route map to a non-empty set of actions.";
-            Assert.Throws<InvalidOperationException>(() => DefaultDirectRouteProvider.CreateRouteEntry(areaPrefix,
-                controllerPrefix, factory, actions, constraintResolver, targetIsAction: false), expectedMessage);
+            string expectedMessage =
+                "The route does not have any associated action descriptors. Routing requires "
+                + "that each direct route map to a non-empty set of actions.";
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DefaultDirectRouteProvider.CreateRouteEntry(
+                        areaPrefix,
+                        controllerPrefix,
+                        factory,
+                        actions,
+                        constraintResolver,
+                        targetIsAction: false
+                    ),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -91,26 +149,51 @@ namespace System.Web.Routing
             // Arrange
             string areaPrefix = null;
             string controllerPrefix = null;
-            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor("IgnoreController");
-            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(controllerDescriptor, "IgnoreAction");
+            ControllerDescriptor controllerDescriptor = CreateStubControllerDescriptor(
+                "IgnoreController"
+            );
+            ActionDescriptor actionDescriptor = CreateStubActionDescriptor(
+                controllerDescriptor,
+                "IgnoreAction"
+            );
             Route route = new Route(url: null, routeHandler: null);
             route.DataTokens = new RouteValueDictionary();
-            route.DataTokens.Add(RouteDataTokenKeys.Actions, new ActionDescriptor[] { actionDescriptor });
+            route.DataTokens.Add(
+                RouteDataTokenKeys.Actions,
+                new ActionDescriptor[] { actionDescriptor }
+            );
             route.RouteHandler = new Mock<IRouteHandler>(MockBehavior.Strict).Object;
             ActionDescriptor[] originalActions = route.GetTargetActionDescriptors();
             RouteEntry entry = new RouteEntry(name: null, route: route);
             IDirectRouteFactory factory = CreateStubRouteFactory(entry);
-            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[] { actionDescriptor };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            IReadOnlyCollection<ActionDescriptor> actions = new ActionDescriptor[]
+            {
+                actionDescriptor,
+            };
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
             string expectedMessage = "Direct routing does not support per-route route handlers.";
-            Assert.Throws<InvalidOperationException>(() => DefaultDirectRouteProvider.CreateRouteEntry(areaPrefix,
-                controllerPrefix, factory, actions, constraintResolver, targetIsAction: false), expectedMessage);
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DefaultDirectRouteProvider.CreateRouteEntry(
+                        areaPrefix,
+                        controllerPrefix,
+                        factory,
+                        actions,
+                        constraintResolver,
+                        targetIsAction: false
+                    ),
+                expectedMessage
+            );
         }
 
-        private static ActionDescriptor CreateStubActionDescriptor(ControllerDescriptor controllerDescriptor, string actionName)
+        private static ActionDescriptor CreateStubActionDescriptor(
+            ControllerDescriptor controllerDescriptor,
+            string actionName
+        )
         {
             Mock<ActionDescriptor> mock = new Mock<ActionDescriptor>(MockBehavior.Strict);
             mock.SetupGet(d => d.ControllerDescriptor).Returns(controllerDescriptor);

@@ -17,8 +17,7 @@ namespace System.Activities.DurableInstancing
 
         public CreateWorkflowOwnerCommand()
             : base(InstancePersistence.ActivitiesCommandNamespace.GetName("CreateWorkflowOwner"))
-        {
-        }
+        { }
 
         public IDictionary<XName, InstanceValue> InstanceOwnerMetadata
         {
@@ -44,7 +43,9 @@ namespace System.Activities.DurableInstancing
         {
             if (view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.AlreadyBoundToOwner));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.AlreadyBoundToOwner)
+                );
             }
             InstancePersistence.ValidatePropertyBag(this.instanceOwnerMetadata);
         }

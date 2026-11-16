@@ -7,9 +7,7 @@ namespace System.ComponentModel.Design
 {
     public class DesignerVerbCollection : CollectionBase
     {
-        public DesignerVerbCollection()
-        {
-        }
+        public DesignerVerbCollection() { }
 
         public DesignerVerbCollection(DesignerVerb[] value) => AddRange(value);
 

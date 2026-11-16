@@ -5,22 +5,25 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Description;
     using System.Collections;
     using System.Configuration;
     using System.Globalization;
     using System.ServiceModel;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
 
-    [ConfigurationCollection(typeof(WsdlImporterElement), AddItemName = ConfigurationStrings.Extension)]
-    public sealed class WsdlImporterElementCollection : ServiceModelEnhancedConfigurationElementCollection<WsdlImporterElement>
+    [ConfigurationCollection(
+        typeof(WsdlImporterElement),
+        AddItemName = ConfigurationStrings.Extension
+    )]
+    public sealed class WsdlImporterElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<WsdlImporterElement>
     {
-        public WsdlImporterElementCollection() : base(ConfigurationStrings.Extension)
-        {
-        }
+        public WsdlImporterElementCollection()
+            : base(ConfigurationStrings.Extension) { }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             if (element == null)
             {
@@ -32,7 +35,9 @@ namespace System.ServiceModel.Configuration
 
         internal void SetDefaults()
         {
-            this.Add(new WsdlImporterElement(typeof(DataContractSerializerMessageContractImporter)));
+            this.Add(
+                new WsdlImporterElement(typeof(DataContractSerializerMessageContractImporter))
+            );
             this.Add(new WsdlImporterElement(typeof(XmlSerializerMessageContractImporter)));
             this.Add(new WsdlImporterElement(typeof(MessageEncodingBindingElementImporter)));
             this.Add(new WsdlImporterElement(typeof(TransportBindingElementImporter)));
@@ -41,5 +46,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

@@ -98,7 +98,12 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             public override bool CanConvert(Type objectType) => typeof(Id) == objectType;
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            )
             {
                 if (reader.TokenType == JsonToken.Integer)
                     return new Id((long)reader.Value);
@@ -108,7 +113,11 @@ namespace Newtonsoft.Json.Tests.Issues
                 return Guid.TryParse(str, out guid) ? new Id(guid) : new Id(str);
             }
 
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
                 if (value == null)
                 {
@@ -125,16 +134,31 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             internal object Value { get; set; }
 
-            public Id(string id) { Value = id; }
-            public Id(long id) { Value = id; }
-            public Id(Guid id) { Value = id; }
+            public Id(string id)
+            {
+                Value = id;
+            }
+
+            public Id(long id)
+            {
+                Value = id;
+            }
+
+            public Id(Guid id)
+            {
+                Value = id;
+            }
 
             public static implicit operator Id(string id) => new Id(id);
+
             public static implicit operator Id(long id) => new Id(id);
+
             public static implicit operator Id(Guid id) => new Id(id);
 
             public static implicit operator string(Id id) => (string)id.Value;
+
             public static implicit operator long(Id id) => (long)id.Value;
+
             public static implicit operator Guid(Id id) => (Guid)id.Value;
 
             public override string ToString()
@@ -144,15 +168,19 @@ namespace Newtonsoft.Json.Tests.Issues
 
             public bool Equals(Id other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (ReferenceEquals(null, other))
+                    return false;
+                if (ReferenceEquals(this, other))
+                    return true;
                 return Equals(Value, other.Value);
             }
 
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
+                if (ReferenceEquals(null, obj))
+                    return false;
+                if (ReferenceEquals(this, obj))
+                    return true;
                 return obj.GetType() == this.GetType() && Equals((Id)obj);
             }
 

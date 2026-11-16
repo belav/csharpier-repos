@@ -63,18 +63,12 @@ namespace System.Reflection
 
         public override Module Module
         {
-            get
-            {
-                return GetRuntimeModule();
-            }
+            get { return GetRuntimeModule(); }
         }
 
         internal BindingFlags BindingFlags
         {
-            get
-            {
-                return GetBindingFlags();
-            }
+            get { return GetBindingFlags(); }
         }
 
         internal RuntimeType GetDeclaringTypeInternal()
@@ -93,15 +87,16 @@ namespace System.Reflection
 
             MethodInfo method = info.add_method ?? info.remove_method ?? info.raise_method;
 
-            return RuntimeType.FilterPreCalculate(method != null && method.IsPublic, GetDeclaringTypeInternal() != ReflectedType, method != null && method.IsStatic);
+            return RuntimeType.FilterPreCalculate(
+                method != null && method.IsPublic,
+                GetDeclaringTypeInternal() != ReflectedType,
+                method != null && method.IsStatic
+            );
         }
 
         public override EventAttributes Attributes
         {
-            get
-            {
-                return GetEventInfo(this).attrs;
-            }
+            get { return GetEventInfo(this).attrs; }
         }
 
         public override MethodInfo? GetAddMethod(bool nonPublic)
@@ -153,26 +148,17 @@ namespace System.Reflection
 
         public override Type DeclaringType
         {
-            get
-            {
-                return GetEventInfo(this).declaring_type;
-            }
+            get { return GetEventInfo(this).declaring_type; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return GetEventInfo(this).reflected_type;
-            }
+            get { return GetEventInfo(this).reflected_type; }
         }
 
         public override string Name
         {
-            get
-            {
-                return GetEventInfo(this).name;
-            }
+            get { return GetEventInfo(this).name; }
         }
 
         public override string ToString()
@@ -202,27 +188,33 @@ namespace System.Reflection
 
         public override int MetadataToken
         {
-            get
-            {
-                return get_metadata_token(this);
-            }
+            get { return get_metadata_token(this); }
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeEventInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeEventInfo>(other);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern int get_metadata_token(RuntimeEventInfo monoEvent);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern EventInfo internal_from_handle_type(IntPtr event_handle, IntPtr type_handle);
+        private static extern EventInfo internal_from_handle_type(
+            IntPtr event_handle,
+            IntPtr type_handle
+        );
 
-        internal static EventInfo GetEventFromHandle(Mono.RuntimeEventHandle handle, RuntimeTypeHandle reflectedType)
+        internal static EventInfo GetEventFromHandle(
+            Mono.RuntimeEventHandle handle,
+            RuntimeTypeHandle reflectedType
+        )
         {
             if (handle.Value == IntPtr.Zero)
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             EventInfo ei = internal_from_handle_type(handle.Value, reflectedType.Value);
             if (ei == null)
-                throw new ArgumentException(SR.Argument_FieldPropertyEventAndTypeHandleIncompatibility);
+                throw new ArgumentException(
+                    SR.Argument_FieldPropertyEventAndTypeHandleIncompatibility
+                );
             return ei;
         }
     }

@@ -30,64 +30,69 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class BaseDataList_ctor_
-		: GHTDataListBase
-	{
-		private delegate void BuildDataListControl(BaseDataList ctl);
+    public class BaseDataList_ctor_ : GHTDataListBase
+    {
+        private delegate void BuildDataListControl(BaseDataList ctl);
 
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			HtmlForm form1 = (HtmlForm) this.FindControl("form1");
-			this.GHTTestBegin(form1);
-			this.Test(typeof(DataGrid), new BaseDataList_ctor_.BuildDataListControl(this.GHTBuildSampleDataGrid));
-			this.Test(typeof(DataList), new BaseDataList_ctor_.BuildDataListControl(this.GHTBuildSampleDataList));
-			this.GHTTestEnd();
-		}
-		private void Test(Type CtlType, BaseDataList_ctor_.BuildDataListControl CtlBuilder)
-		{
-			try
-			{
-				this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataBind1");
-				BaseDataList list1 = (BaseDataList) this.GHTElementClone(CtlType);
-				base.GHTActiveSubTest.Controls.Add(list1);
-				CtlBuilder(list1);
-				list1.DataSource = GHTDataListBase.GHTGetSampleDataSource();
-				list1.DataBind();
-				list1.Caption = "Caption Text";
-				list1.CaptionAlign = TableCaptionAlign.Right;
-				list1.UseAccessibleHeader = true;
-			}
-			catch (Exception exception2)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception2);
-			}
-		}
- 
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            HtmlForm form1 = (HtmlForm)this.FindControl("form1");
+            this.GHTTestBegin(form1);
+            this.Test(
+                typeof(DataGrid),
+                new BaseDataList_ctor_.BuildDataListControl(this.GHTBuildSampleDataGrid)
+            );
+            this.Test(
+                typeof(DataList),
+                new BaseDataList_ctor_.BuildDataListControl(this.GHTBuildSampleDataList)
+            );
+            this.GHTTestEnd();
+        }
+
+        private void Test(Type CtlType, BaseDataList_ctor_.BuildDataListControl CtlBuilder)
+        {
+            try
+            {
+                this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataBind1");
+                BaseDataList list1 = (BaseDataList)this.GHTElementClone(CtlType);
+                base.GHTActiveSubTest.Controls.Add(list1);
+                CtlBuilder(list1);
+                list1.DataSource = GHTDataListBase.GHTGetSampleDataSource();
+                list1.DataBind();
+                list1.Caption = "Caption Text";
+                list1.CaptionAlign = TableCaptionAlign.Right;
+                list1.UseAccessibleHeader = true;
+            }
+            catch (Exception exception2)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+            }
+        }
+    }
 }

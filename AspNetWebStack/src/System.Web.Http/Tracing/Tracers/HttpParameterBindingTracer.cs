@@ -20,11 +20,18 @@ namespace System.Web.Http.Tracing.Tracers
     /// Tracer to wrap an <see cref="HttpParameterBinding"/>.
     /// Its primary purpose is to monitor <see cref="ExecuteBindingAsync"/>.
     /// </summary>
-    internal class HttpParameterBindingTracer : HttpParameterBinding, IValueProviderParameterBinding, IDecorator<HttpParameterBinding>
+    internal class HttpParameterBindingTracer
+        : HttpParameterBinding,
+            IValueProviderParameterBinding,
+            IDecorator<HttpParameterBinding>
     {
         private const string ExecuteBindingAsyncMethodName = "ExecuteBindingAsync";
 
-        public HttpParameterBindingTracer(HttpParameterBinding innerBinding, ITraceWriter traceWriter) : base(innerBinding.Descriptor)
+        public HttpParameterBindingTracer(
+            HttpParameterBinding innerBinding,
+            ITraceWriter traceWriter
+        )
+            : base(innerBinding.Descriptor)
         {
             Contract.Assert(innerBinding != null);
             Contract.Assert(traceWriter != null);
@@ -44,30 +51,31 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override string ErrorMessage
         {
-            get
-            {
-                return InnerBinding.ErrorMessage;
-            }
+            get { return InnerBinding.ErrorMessage; }
         }
 
         public override bool WillReadBody
         {
-            get
-            {
-                return InnerBinding.WillReadBody;
-            }
+            get { return InnerBinding.WillReadBody; }
         }
 
         public IEnumerable<ValueProviderFactory> ValueProviderFactories
         {
             get
             {
-                IValueProviderParameterBinding valueProviderParameterBinding = InnerBinding as IValueProviderParameterBinding;
-                return valueProviderParameterBinding != null ? valueProviderParameterBinding.ValueProviderFactories : Enumerable.Empty<ValueProviderFactory>();
+                IValueProviderParameterBinding valueProviderParameterBinding =
+                    InnerBinding as IValueProviderParameterBinding;
+                return valueProviderParameterBinding != null
+                    ? valueProviderParameterBinding.ValueProviderFactories
+                    : Enumerable.Empty<ValueProviderFactory>();
             }
         }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             return TraceWriter.TraceBeginEndAsync(
                 actionContext.Request,
@@ -77,35 +85,48 @@ namespace System.Web.Http.Tracing.Tracers
                 ExecuteBindingAsyncMethodName,
                 beginTrace: (tr) =>
                 {
-                    tr.Message = Error.Format(SRResources.TraceBeginParameterBind,
-                                              InnerBinding.Descriptor.ParameterName);
+                    tr.Message = Error.Format(
+                        SRResources.TraceBeginParameterBind,
+                        InnerBinding.Descriptor.ParameterName
+                    );
                 },
-
-                execute: () => InnerBinding.ExecuteBindingAsync(metadataProvider, actionContext, cancellationToken),
-
+                execute: () =>
+                    InnerBinding.ExecuteBindingAsync(
+                        metadataProvider,
+                        actionContext,
+                        cancellationToken
+                    ),
                 endTrace: (tr) =>
                 {
                     string parameterName = InnerBinding.Descriptor.ParameterName;
 
                     // Model binding error for this parameter shows the error
-                    if (!actionContext.ModelState.IsValid && actionContext.ModelState.ContainsKey(parameterName))
+                    if (
+                        !actionContext.ModelState.IsValid
+                        && actionContext.ModelState.ContainsKey(parameterName)
+                    )
                     {
-                        tr.Message = Error.Format(SRResources.TraceModelStateInvalidMessage,
-                                                  FormattingUtilities.ModelStateToString(
-                                                       actionContext.ModelState));
+                        tr.Message = Error.Format(
+                            SRResources.TraceModelStateInvalidMessage,
+                            FormattingUtilities.ModelStateToString(actionContext.ModelState)
+                        );
                     }
                     else
                     {
                         tr.Message = actionContext.ActionArguments.ContainsKey(parameterName)
-                                         ? Error.Format(SRResources.TraceEndParameterBind, parameterName,
-                                                        FormattingUtilities.ValueToString(
-                                                             actionContext.ActionArguments[parameterName],
-                                                             CultureInfo.CurrentCulture))
-                                         : Error.Format(SRResources.TraceEndParameterBindNoBind,
-                                                        parameterName);
+                            ? Error.Format(
+                                SRResources.TraceEndParameterBind,
+                                parameterName,
+                                FormattingUtilities.ValueToString(
+                                    actionContext.ActionArguments[parameterName],
+                                    CultureInfo.CurrentCulture
+                                )
+                            )
+                            : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

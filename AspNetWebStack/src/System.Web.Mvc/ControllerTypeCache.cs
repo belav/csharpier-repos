@@ -32,7 +32,9 @@ namespace System.Web.Mvc
 
         internal IReadOnlyList<Type> GetControllerTypes()
         {
-            return new ReadOnlyCollection<Type>(_cache.Values.SelectMany(lookup => lookup.SelectMany(t => t)).ToList());
+            return new ReadOnlyCollection<Type>(
+                _cache.Values.SelectMany(lookup => lookup.SelectMany(t => t)).ToList()
+            );
         }
 
         public void EnsureInitialized(IBuildManager buildManager)
@@ -43,20 +45,33 @@ namespace System.Web.Mvc
                 {
                     if (_cache == null)
                     {
-                        List<Type> controllerTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(TypeCacheName, IsControllerType, buildManager);
+                        List<Type> controllerTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(
+                            TypeCacheName,
+                            IsControllerType,
+                            buildManager
+                        );
                         var groupedByName = controllerTypes.GroupBy(
                             t => t.Name.Substring(0, t.Name.Length - "Controller".Length),
-                            StringComparer.OrdinalIgnoreCase);
+                            StringComparer.OrdinalIgnoreCase
+                        );
                         _cache = groupedByName.ToDictionary(
                             g => g.Key,
-                            g => g.ToLookup(t => t.Namespace ?? String.Empty, StringComparer.OrdinalIgnoreCase),
-                            StringComparer.OrdinalIgnoreCase);
+                            g =>
+                                g.ToLookup(
+                                    t => t.Namespace ?? String.Empty,
+                                    StringComparer.OrdinalIgnoreCase
+                                ),
+                            StringComparer.OrdinalIgnoreCase
+                        );
                     }
                 }
             }
         }
 
-        public ICollection<Type> GetControllerTypes(string controllerName, HashSet<string> namespaces)
+        public ICollection<Type> GetControllerTypes(
+            string controllerName,
+            HashSet<string> namespaces
+        )
         {
             HashSet<Type> matchingTypes = new HashSet<Type>();
 
@@ -92,12 +107,11 @@ namespace System.Web.Mvc
 
         internal static bool IsControllerType(Type t)
         {
-            return
-                t != null &&
-                t.IsPublic &&
-                t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) &&
-                !t.IsAbstract &&
-                typeof(IController).IsAssignableFrom(t);
+            return t != null
+                && t.IsPublic
+                && t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
+                && !t.IsAbstract
+                && typeof(IController).IsAssignableFrom(t);
         }
 
         internal static bool IsNamespaceMatch(string requestedNamespace, string targetNamespace)
@@ -115,13 +129,25 @@ namespace System.Web.Mvc
             if (!requestedNamespace.EndsWith(".*", StringComparison.OrdinalIgnoreCase))
             {
                 // looking for exact namespace match
-                return String.Equals(requestedNamespace, targetNamespace, StringComparison.OrdinalIgnoreCase);
+                return String.Equals(
+                    requestedNamespace,
+                    targetNamespace,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
             else
             {
                 // looking for exact or sub-namespace match
-                requestedNamespace = requestedNamespace.Substring(0, requestedNamespace.Length - ".*".Length);
-                if (!targetNamespace.StartsWith(requestedNamespace, StringComparison.OrdinalIgnoreCase))
+                requestedNamespace = requestedNamespace.Substring(
+                    0,
+                    requestedNamespace.Length - ".*".Length
+                );
+                if (
+                    !targetNamespace.StartsWith(
+                        requestedNamespace,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return false;
                 }

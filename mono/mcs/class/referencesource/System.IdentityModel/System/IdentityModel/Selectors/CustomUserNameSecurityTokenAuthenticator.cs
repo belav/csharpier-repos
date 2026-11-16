@@ -22,10 +22,15 @@ namespace System.IdentityModel.Selectors
             this.validator = validator;
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(string userName, string password)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(
+            string userName,
+            string password
+        )
         {
             this.validator.Validate(userName, password);
-            return SecurityUtils.CreateAuthorizationPolicies(new UserNameClaimSet(userName, validator.GetType().Name));
+            return SecurityUtils.CreateAuthorizationPolicies(
+                new UserNameClaimSet(userName, validator.GetType().Name)
+            );
         }
 
         class UserNameClaimSet : DefaultClaimSet, IIdentityInfo

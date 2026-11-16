@@ -45,7 +45,13 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeInvalidDataTable()
         {
-            var ex = ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<DataSet>("{\"pending_count\":23,\"completed_count\":45}"), "Unexpected JSON token when reading DataTable. Expected StartArray, got Integer. Path 'pending_count', line 1, position 19.");
+            var ex = ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                    JsonConvert.DeserializeObject<DataSet>(
+                        "{\"pending_count\":23,\"completed_count\":45}"
+                    ),
+                "Unexpected JSON token when reading DataTable. Expected StartArray, got Integer. Path 'pending_count', line 1, position 19."
+            );
 
             Assert.AreEqual(1, ex.LineNumber);
             Assert.AreEqual(19, ex.LinePosition);
@@ -77,7 +83,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeObject(dataSet, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Table1"": [
     {
       ""id"": 0,
@@ -88,7 +95,9 @@ namespace Newtonsoft.Json.Tests.Converters
       ""item"": ""item 1""
     }
   ]
-}", json);
+}",
+                json
+            );
 
             DataSet deserializedDataSet = JsonConvert.DeserializeObject<DataSet>(json);
             Assert.IsNotNull(deserializedDataSet);
@@ -127,16 +136,16 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeNull()
         {
-            DataSetTestClass c1 = new DataSetTestClass
-            {
-                Set = null
-            };
+            DataSetTestClass c1 = new DataSetTestClass { Set = null };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Set"": null
-}", json);
+}",
+                json
+            );
 
             DataSetTestClass c2 = JsonConvert.DeserializeObject<DataSetTestClass>(json);
 
@@ -146,10 +155,11 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeNullRoot()
         {
-            string json = JsonConvert.SerializeObject(null, typeof(DataSet), new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                null,
+                typeof(DataSet),
+                new JsonSerializerSettings { Formatting = Formatting.Indented }
+            );
 
             StringAssert.AreEqual(@"null", json);
         }
@@ -157,7 +167,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeNullTable()
         {
-            string json = @"{
+            string json =
+                @"{
   ""TableName"": null
 }";
 
@@ -173,7 +184,11 @@ namespace Newtonsoft.Json.Tests.Converters
             ds.Tables.Add(CreateDataTable("FirstTable", 2));
             ds.Tables.Add(CreateDataTable("SecondTable", 1));
 
-            string json = JsonConvert.SerializeObject(ds, Formatting.Indented, new IsoDateTimeConverter());
+            string json = JsonConvert.SerializeObject(
+                ds,
+                Formatting.Indented,
+                new IsoDateTimeConverter()
+            );
             // {
             //   "FirstTable": [
             //     {
@@ -205,9 +220,13 @@ namespace Newtonsoft.Json.Tests.Converters
             //   ]
             // }
 
-            DataSet deserializedDs = JsonConvert.DeserializeObject<DataSet>(json, new IsoDateTimeConverter());
+            DataSet deserializedDs = JsonConvert.DeserializeObject<DataSet>(
+                json,
+                new IsoDateTimeConverter()
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""FirstTable"": [
     {
       ""StringCol"": ""Item Name"",
@@ -236,7 +255,9 @@ namespace Newtonsoft.Json.Tests.Converters
       ""DecimalCol"": 64.0021
     }
   ]
-}", json);
+}",
+                json
+            );
 
             Assert.IsNotNull(deserializedDs);
         }
@@ -244,7 +265,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeMultiTableDataSet()
         {
-            string json = @"{
+            string json =
+                @"{
   ""FirstTable"": [
     {
       ""StringCol"": ""Item Name"",
@@ -355,12 +377,17 @@ namespace Newtonsoft.Json.Tests.Converters
             ds.Tables.Add(CreateDataTable("FirstTable", 2));
             ds.Tables.Add(CreateDataTable("SecondTable", 1));
 
-            string json = JsonConvert.SerializeObject(ds, Formatting.Indented, new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            string json = JsonConvert.SerializeObject(
+                ds,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstTable"": [
     {
       ""stringCol"": ""Item Name"",
@@ -389,7 +416,9 @@ namespace Newtonsoft.Json.Tests.Converters
       ""decimalCol"": 64.0021
     }
   ]
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -405,12 +434,17 @@ namespace Newtonsoft.Json.Tests.Converters
                 Set = ds,
                 Middle = "Middle",
                 Table = CreateDataTable("LoneTable", 2),
-                After = "After"
+                After = "After",
             };
 
-            string json = JsonConvert.SerializeObject(c, Formatting.Indented, new IsoDateTimeConverter());
+            string json = JsonConvert.SerializeObject(
+                c,
+                Formatting.Indented,
+                new IsoDateTimeConverter()
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Before"": ""Before"",
   ""Set"": {
     ""FirstTable"": [
@@ -462,9 +496,14 @@ namespace Newtonsoft.Json.Tests.Converters
     }
   ],
   ""After"": ""After""
-}", json);
+}",
+                json
+            );
 
-            DataSetAndTableTestClass c2 = JsonConvert.DeserializeObject<DataSetAndTableTestClass>(json, new IsoDateTimeConverter());
+            DataSetAndTableTestClass c2 = JsonConvert.DeserializeObject<DataSetAndTableTestClass>(
+                json,
+                new IsoDateTimeConverter()
+            );
 
             Assert.AreEqual(c.Before, c2.Before);
             Assert.AreEqual(c.Set.Tables.Count, c2.Set.Tables.Count);
@@ -481,13 +520,16 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeObject(ds, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Customers"": [
     {
       ""CustomerID"": ""234""
     }
   ]
-}", json);
+}",
+                json
+            );
 
             CustomerDataSet ds1 = new CustomerDataSet();
             DataTable table = ds1.Tables["Customers"];
@@ -498,19 +540,23 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json1 = JsonConvert.SerializeObject(ds1, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Customers"": [
     {
       ""CustomerID"": ""234""
     }
   ]
-}", json1);
+}",
+                json1
+            );
         }
 
         [Test]
         public void DeserializedTypedDataSet()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Customers"": [
     {
       ""CustomerID"": ""234""
@@ -528,13 +574,24 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             var test = new MultipleDataTablesJsonTest
             {
-                TableWrapper1 = new DataTableWrapper { DataTableProperty = CreateDataTable(3, "Table1Col") },
-                TableWrapper2 = new DataTableWrapper { DataTableProperty = CreateDataTable(3, "Table2Col") }
+                TableWrapper1 = new DataTableWrapper
+                {
+                    DataTableProperty = CreateDataTable(3, "Table1Col"),
+                },
+                TableWrapper2 = new DataTableWrapper
+                {
+                    DataTableProperty = CreateDataTable(3, "Table2Col"),
+                },
             };
 
-            string json = JsonConvert.SerializeObject(test, Formatting.Indented, new LowercaseDataTableConverter());
+            string json = JsonConvert.SerializeObject(
+                test,
+                Formatting.Indented,
+                new LowercaseDataTableConverter()
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""TableWrapper1"": {
     ""DataTableProperty"": [
       {
@@ -557,7 +614,9 @@ namespace Newtonsoft.Json.Tests.Converters
     ""StringProperty"": null,
     ""IntProperty"": 0
   }
-}", json);
+}",
+                json
+            );
         }
 
         private static DataTable CreateDataTable(int cols, string colNamePrefix)
@@ -565,7 +624,9 @@ namespace Newtonsoft.Json.Tests.Converters
             var table = new DataTable();
             for (int i = 1; i <= cols; i++)
             {
-                table.Columns.Add(new DataColumn() { ColumnName = colNamePrefix + i, DefaultValue = i });
+                table.Columns.Add(
+                    new DataColumn() { ColumnName = colNamePrefix + i, DefaultValue = i }
+                );
             }
             table.Rows.Add(table.NewRow());
             return table;
@@ -586,9 +647,16 @@ namespace Newtonsoft.Json.Tests.Converters
 
         public class LowercaseDataTableConverter : DataTableConverter
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
-                var dataTableSerializer = new JsonSerializer { ContractResolver = new LowercaseContractResolver() };
+                var dataTableSerializer = new JsonSerializer
+                {
+                    ContractResolver = new LowercaseContractResolver(),
+                };
 
                 base.WriteJson(writer, value, dataTableSerializer);
             }

@@ -37,12 +37,14 @@ public class ValuesExpression : TableExpressionBase, IClonableTableExpressionBas
         string? alias,
         IReadOnlyList<RowValueExpression> rowValues,
         IReadOnlyList<string> columnNames,
-        IEnumerable<IAnnotation>? annotations = null)
+        IEnumerable<IAnnotation>? annotations = null
+    )
         : base(alias, annotations)
     {
         Check.DebugAssert(
             rowValues.All(rv => rv.Values.Count == columnNames.Count),
-            "All row values must have a value count matching the number of column names");
+            "All row values must have a value count matching the number of column names"
+        );
 
         RowValues = rowValues;
         ColumnNames = columnNames;
@@ -59,29 +61,30 @@ public class ValuesExpression : TableExpressionBase, IClonableTableExpressionBas
     }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => visitor.VisitAndConvert(RowValues) is var newRowValues
-            && ReferenceEquals(newRowValues, RowValues)
-                ? this
-                : new ValuesExpression(Alias, newRowValues, ColumnNames);
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        visitor.VisitAndConvert(RowValues) is var newRowValues
+        && ReferenceEquals(newRowValues, RowValues)
+            ? this
+            : new ValuesExpression(Alias, newRowValues, ColumnNames);
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
     ///     return this expression.
     /// </summary>
-    public virtual ValuesExpression Update(IReadOnlyList<RowValueExpression> rowValues)
-        => rowValues.Count == RowValues.Count && rowValues.Zip(RowValues, (x, y) => (x, y)).All(tup => tup.x == tup.y)
+    public virtual ValuesExpression Update(IReadOnlyList<RowValueExpression> rowValues) =>
+        rowValues.Count == RowValues.Count
+        && rowValues.Zip(RowValues, (x, y) => (x, y)).All(tup => tup.x == tup.y)
             ? this
             : new ValuesExpression(Alias, rowValues, ColumnNames);
 
     /// <inheritdoc />
-    protected override TableExpressionBase CreateWithAnnotations(IEnumerable<IAnnotation> annotations)
-        => new ValuesExpression(Alias, RowValues, ColumnNames, annotations);
+    protected override TableExpressionBase CreateWithAnnotations(
+        IEnumerable<IAnnotation> annotations
+    ) => new ValuesExpression(Alias, RowValues, ColumnNames, annotations);
 
     // TODO: Deep clone, see #30982
     /// <inheritdoc />
-    public virtual TableExpressionBase Clone()
-        => CreateWithAnnotations(GetAnnotations());
+    public virtual TableExpressionBase Clone() => CreateWithAnnotations(GetAnnotations());
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -103,8 +106,7 @@ public class ValuesExpression : TableExpressionBase, IClonableTableExpressionBas
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is ValuesExpression other && Equals(other);
+    public override bool Equals(object? obj) => obj is ValuesExpression other && Equals(other);
 
     private bool Equals(ValuesExpression? other)
     {

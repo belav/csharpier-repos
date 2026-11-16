@@ -1,32 +1,38 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
     using System.ComponentModel;
-    using System.Resources;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
     using System.Drawing.Design;
     using System.Drawing.Imaging;
     using System.Drawing.Printing;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
+    using System.IO;
+    using System.Resources;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Xml;
 
-    // IMPORTANT: 
-    //KEYBOARD: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\" and delete 
+    // IMPORTANT:
+    //KEYBOARD: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\" and delete
     // all of your *.vsk file, becuase VS always picks up keyboard bindings from that file, and also on deveenv.exe /.setup
-    // he does not clean that up. 
-    //MENUS: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\1033" and delete 
+    // he does not clean that up.
+    //MENUS: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\1033" and delete
     // all of your *.prf file, becuase VS always picks up menus from that file, and also on deveenv.exe /.setup
-    // he does not clean that up. 
+    // he does not clean that up.
     internal sealed class CommandSet : IDisposable
     {
-        internal static CommandID[] NavigationToolCommandIds = new CommandID[] { WorkflowMenuCommands.ZoomIn, WorkflowMenuCommands.ZoomOut, WorkflowMenuCommands.Pan, WorkflowMenuCommands.DefaultFilter };
+        internal static CommandID[] NavigationToolCommandIds = new CommandID[]
+        {
+            WorkflowMenuCommands.ZoomIn,
+            WorkflowMenuCommands.ZoomOut,
+            WorkflowMenuCommands.Pan,
+            WorkflowMenuCommands.DefaultFilter,
+        };
 
         private IServiceProvider serviceProvider;
         private IMenuCommandService menuCommandService;
@@ -48,93 +54,280 @@ namespace System.Workflow.ComponentModel.Design
             Debug.Assert(serviceProvider != null);
             this.serviceProvider = serviceProvider;
 
-            this.menuCommandService = (IMenuCommandService)this.serviceProvider.GetService(typeof(IMenuCommandService));
+            this.menuCommandService = (IMenuCommandService)
+                this.serviceProvider.GetService(typeof(IMenuCommandService));
             if (this.menuCommandService == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IMenuCommandService).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IMenuCommandService).FullName)
+                );
 
             this.workflowView = serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (this.workflowView == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(WorkflowView).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(WorkflowView).FullName)
+                );
 
-            this.selectionService = (ISelectionService)this.serviceProvider.GetService(typeof(ISelectionService));
+            this.selectionService = (ISelectionService)
+                this.serviceProvider.GetService(typeof(ISelectionService));
             if (this.selectionService == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ISelectionService).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(ISelectionService).FullName)
+                );
 
             this.commandSet = new List<CommandSetItem>();
-            this.commandSet.AddRange(new CommandSetItem[] {
-                        //Save commands
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnMenuSaveWorkflowAsImage), WorkflowMenuCommands.SaveAsImage), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnMenuCopyToClipboard), WorkflowMenuCommands.CopyToClipboard), 
-
-                        // Printing commands
-                        new CommandSetItem(new EventHandler(OnStatusPrint), new EventHandler(OnMenuPrint), WorkflowMenuCommands.Print), 
-                        new CommandSetItem(new EventHandler(OnStatusPageSetup), new EventHandler(OnMenuPageSetup), WorkflowMenuCommands.PageSetup), 
-
-                        // Editing commands
-                        new CommandSetItem(new EventHandler(OnStatusDelete), new EventHandler(OnMenuDelete), MenuCommands.Delete), 
-                        new CommandSetItem(new EventHandler(OnStatusCopy), new EventHandler(OnMenuCopy), MenuCommands.Copy), 
-                        new CommandSetItem(new EventHandler(OnStatusCut), new EventHandler(OnMenuCut), MenuCommands.Cut), 
-                        new CommandSetItem(new EventHandler(OnStatusPaste), new EventHandler(OnMenuPaste), MenuCommands.Paste, true),
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnMenuSelectAll), MenuCommands.SelectAll),
-
-                        // Properties
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnMenuDesignerProperties), WorkflowMenuCommands.DesignerProperties),
-
-                        // IMPORTANT: Microsoft does not handle this command, so VS.NET sends it to solution explorer
-                        // window, which enables this meu item on the for the current file node
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnViewCode), new CommandID(StandardCommands.Cut.Guid, 333)),
-
-                        // Keyboard commands
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyCancel), MenuCommands.KeyCancel), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyCancel), MenuCommands.KeyReverseCancel), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyMove), MenuCommands.KeyMoveUp), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyMove), MenuCommands.KeyMoveDown), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyMove), MenuCommands.KeyMoveLeft), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyMove), MenuCommands.KeyMoveRight),
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyMove), MenuCommands.KeySelectNext), 
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyMove), MenuCommands.KeySelectPrevious),
-                        new CommandSetItem(new EventHandler(OnStatusExpandCollapse), new EventHandler(OnExpandCollapse), WorkflowMenuCommands.Expand),
-                        new CommandSetItem(new EventHandler(OnStatusExpandCollapse), new EventHandler(OnExpandCollapse), WorkflowMenuCommands.Collapse),
-                        new CommandSetItem(new EventHandler(OnStatusEnable), new EventHandler(OnEnable), WorkflowMenuCommands.Disable, true),
-                        new CommandSetItem(new EventHandler(OnStatusEnable), new EventHandler(OnEnable), WorkflowMenuCommands.Enable, true),
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnCreateTheme), WorkflowMenuCommands.CreateTheme),
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnChangeTheme), WorkflowMenuCommands.ChangeTheme),
-                        new CommandSetItem(new EventHandler(OnStatusAnySelection), new EventHandler(OnKeyDefault), MenuCommands.KeyDefaultAction),
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyPageDnUp), WorkflowMenuCommands.PageUp),
-                        new CommandSetItem(new EventHandler(OnStatusAlways), new EventHandler(OnKeyPageDnUp), WorkflowMenuCommands.PageDown),
-
-                    });
-
+            this.commandSet.AddRange(
+                new CommandSetItem[]
+                {
+                    //Save commands
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnMenuSaveWorkflowAsImage),
+                        WorkflowMenuCommands.SaveAsImage
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnMenuCopyToClipboard),
+                        WorkflowMenuCommands.CopyToClipboard
+                    ),
+                    // Printing commands
+                    new CommandSetItem(
+                        new EventHandler(OnStatusPrint),
+                        new EventHandler(OnMenuPrint),
+                        WorkflowMenuCommands.Print
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusPageSetup),
+                        new EventHandler(OnMenuPageSetup),
+                        WorkflowMenuCommands.PageSetup
+                    ),
+                    // Editing commands
+                    new CommandSetItem(
+                        new EventHandler(OnStatusDelete),
+                        new EventHandler(OnMenuDelete),
+                        MenuCommands.Delete
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusCopy),
+                        new EventHandler(OnMenuCopy),
+                        MenuCommands.Copy
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusCut),
+                        new EventHandler(OnMenuCut),
+                        MenuCommands.Cut
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusPaste),
+                        new EventHandler(OnMenuPaste),
+                        MenuCommands.Paste,
+                        true
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnMenuSelectAll),
+                        MenuCommands.SelectAll
+                    ),
+                    // Properties
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnMenuDesignerProperties),
+                        WorkflowMenuCommands.DesignerProperties
+                    ),
+                    // IMPORTANT: Microsoft does not handle this command, so VS.NET sends it to solution explorer
+                    // window, which enables this meu item on the for the current file node
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnViewCode),
+                        new CommandID(StandardCommands.Cut.Guid, 333)
+                    ),
+                    // Keyboard commands
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyCancel),
+                        MenuCommands.KeyCancel
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyCancel),
+                        MenuCommands.KeyReverseCancel
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyMove),
+                        MenuCommands.KeyMoveUp
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyMove),
+                        MenuCommands.KeyMoveDown
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyMove),
+                        MenuCommands.KeyMoveLeft
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyMove),
+                        MenuCommands.KeyMoveRight
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyMove),
+                        MenuCommands.KeySelectNext
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyMove),
+                        MenuCommands.KeySelectPrevious
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusExpandCollapse),
+                        new EventHandler(OnExpandCollapse),
+                        WorkflowMenuCommands.Expand
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusExpandCollapse),
+                        new EventHandler(OnExpandCollapse),
+                        WorkflowMenuCommands.Collapse
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusEnable),
+                        new EventHandler(OnEnable),
+                        WorkflowMenuCommands.Disable,
+                        true
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusEnable),
+                        new EventHandler(OnEnable),
+                        WorkflowMenuCommands.Enable,
+                        true
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnCreateTheme),
+                        WorkflowMenuCommands.CreateTheme
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnChangeTheme),
+                        WorkflowMenuCommands.ChangeTheme
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAnySelection),
+                        new EventHandler(OnKeyDefault),
+                        MenuCommands.KeyDefaultAction
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyPageDnUp),
+                        WorkflowMenuCommands.PageUp
+                    ),
+                    new CommandSetItem(
+                        new EventHandler(OnStatusAlways),
+                        new EventHandler(OnKeyPageDnUp),
+                        WorkflowMenuCommands.PageDown
+                    ),
+                }
+            );
 
             //WorkflowView commands
-            this.zoomCommands = new CommandSetItem[] 
-                    {
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom400Mode, DR.GetString(DR.Zoom400Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom300Mode, DR.GetString(DR.Zoom300Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom200Mode, DR.GetString(DR.Zoom200Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom150Mode, DR.GetString(DR.Zoom150Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom100Mode, DR.GetString(DR.Zoom100Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom75Mode, DR.GetString(DR.Zoom75Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.Zoom50Mode, DR.GetString(DR.Zoom50Mode)),
-                        new CommandSetItem(new EventHandler(OnStatusZoom), new EventHandler(OnZoom), WorkflowMenuCommands.ShowAll, DR.GetString(DR.ZoomShowAll)),
-                    };
+            this.zoomCommands = new CommandSetItem[]
+            {
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom400Mode,
+                    DR.GetString(DR.Zoom400Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom300Mode,
+                    DR.GetString(DR.Zoom300Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom200Mode,
+                    DR.GetString(DR.Zoom200Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom150Mode,
+                    DR.GetString(DR.Zoom150Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom100Mode,
+                    DR.GetString(DR.Zoom100Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom75Mode,
+                    DR.GetString(DR.Zoom75Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.Zoom50Mode,
+                    DR.GetString(DR.Zoom50Mode)
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusZoom),
+                    new EventHandler(OnZoom),
+                    WorkflowMenuCommands.ShowAll,
+                    DR.GetString(DR.ZoomShowAll)
+                ),
+            };
             this.commandSet.AddRange(this.zoomCommands);
 
-            this.layoutCommands = new CommandSetItem[] 
-                    {
-                        new CommandSetItem(new EventHandler(OnStatusLayout), new EventHandler(OnPageLayout), WorkflowMenuCommands.DefaultPage), 
-                        new CommandSetItem(new EventHandler(OnStatusLayout), new EventHandler(OnPageLayout), WorkflowMenuCommands.PrintPreviewPage), 
-                        new CommandSetItem(new EventHandler(OnStatusLayout), new EventHandler(OnPageLayout), WorkflowMenuCommands.PrintPreview),
-                    };
+            this.layoutCommands = new CommandSetItem[]
+            {
+                new CommandSetItem(
+                    new EventHandler(OnStatusLayout),
+                    new EventHandler(OnPageLayout),
+                    WorkflowMenuCommands.DefaultPage
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusLayout),
+                    new EventHandler(OnPageLayout),
+                    WorkflowMenuCommands.PrintPreviewPage
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusLayout),
+                    new EventHandler(OnPageLayout),
+                    WorkflowMenuCommands.PrintPreview
+                ),
+            };
             this.commandSet.AddRange(this.layoutCommands);
 
-            this.navigationToolCommands = new CommandSetItem[] 
-                    {
-                        new CommandSetItem(new EventHandler(OnStatusMessageFilter), new EventHandler(OnMessageFilterChanged), NavigationToolCommandIds[0]), 
-                        new CommandSetItem(new EventHandler(OnStatusMessageFilter), new EventHandler(OnMessageFilterChanged), NavigationToolCommandIds[1]),
-                        new CommandSetItem(new EventHandler(OnStatusMessageFilter), new EventHandler(OnMessageFilterChanged), NavigationToolCommandIds[2]), 
-                        new CommandSetItem(new EventHandler(OnStatusMessageFilter), new EventHandler(OnMessageFilterChanged), NavigationToolCommandIds[3]),
-                    };
+            this.navigationToolCommands = new CommandSetItem[]
+            {
+                new CommandSetItem(
+                    new EventHandler(OnStatusMessageFilter),
+                    new EventHandler(OnMessageFilterChanged),
+                    NavigationToolCommandIds[0]
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusMessageFilter),
+                    new EventHandler(OnMessageFilterChanged),
+                    NavigationToolCommandIds[1]
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusMessageFilter),
+                    new EventHandler(OnMessageFilterChanged),
+                    NavigationToolCommandIds[2]
+                ),
+                new CommandSetItem(
+                    new EventHandler(OnStatusMessageFilter),
+                    new EventHandler(OnMessageFilterChanged),
+                    NavigationToolCommandIds[3]
+                ),
+            };
 
             this.commandSet.AddRange(this.navigationToolCommands);
 
@@ -145,24 +338,36 @@ namespace System.Workflow.ComponentModel.Design
                     this.menuCommandService.AddCommand(this.commandSet[i]);
             }
 
-            IComponentChangeService changeService = this.serviceProvider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            IComponentChangeService changeService =
+                this.serviceProvider.GetService(typeof(IComponentChangeService))
+                as IComponentChangeService;
             if (changeService != null)
-                changeService.ComponentChanged += new ComponentChangedEventHandler(OnComponentChanged);
+                changeService.ComponentChanged += new ComponentChangedEventHandler(
+                    OnComponentChanged
+                );
 
             // Now setup the default command GUID for this designer.  This GUID is also used in our toolbar
             // definition file to identify toolbars we own.  We store the GUID in a command ID here in the
             // dictionary of the root component.  Our host may pull this GUID out and use it.
-            IDictionaryService ds = this.serviceProvider.GetService(typeof(IDictionaryService)) as IDictionaryService;
+            IDictionaryService ds =
+                this.serviceProvider.GetService(typeof(IDictionaryService)) as IDictionaryService;
             if (ds != null)
-                ds.SetValue(typeof(CommandID), new CommandID(new Guid("5f1c3c8d-60f1-4b98-b85b-8679f97e8eac"), 0));
+                ds.SetValue(
+                    typeof(CommandID),
+                    new CommandID(new Guid("5f1c3c8d-60f1-4b98-b85b-8679f97e8eac"), 0)
+                );
         }
 
         #region IDisposable Members
         public void Dispose()
         {
-            IComponentChangeService changeService = this.serviceProvider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            IComponentChangeService changeService =
+                this.serviceProvider.GetService(typeof(IComponentChangeService))
+                as IComponentChangeService;
             if (changeService != null)
-                changeService.ComponentChanged -= new ComponentChangedEventHandler(OnComponentChanged);
+                changeService.ComponentChanged -= new ComponentChangedEventHandler(
+                    OnComponentChanged
+                );
 
             if (this.activeFilter != null)
             {
@@ -203,7 +408,12 @@ namespace System.Workflow.ComponentModel.Design
             foreach (MenuCommand menuCommand in this.layoutCommands)
             {
                 menuCommand.Enabled = enable;
-                menuCommand.Checked = this.workflowView.PrintPreviewMode ? (menuCommand.CommandID == WorkflowMenuCommands.PrintPreview || menuCommand.CommandID == WorkflowMenuCommands.PrintPreviewPage) : menuCommand.CommandID == WorkflowMenuCommands.DefaultPage;
+                menuCommand.Checked = this.workflowView.PrintPreviewMode
+                    ? (
+                        menuCommand.CommandID == WorkflowMenuCommands.PrintPreview
+                        || menuCommand.CommandID == WorkflowMenuCommands.PrintPreviewPage
+                    )
+                    : menuCommand.CommandID == WorkflowMenuCommands.DefaultPage;
             }
         }
 
@@ -239,13 +449,20 @@ namespace System.Workflow.ComponentModel.Design
         private int ConvertToZoomLevel(int commandId)
         {
             int zoomLevel = 100;
-            if (commandId == WorkflowMenuCommands.Zoom400Mode.ID) zoomLevel = 400;
-            else if (commandId == WorkflowMenuCommands.Zoom300Mode.ID) zoomLevel = 300;
-            else if (commandId == WorkflowMenuCommands.Zoom200Mode.ID) zoomLevel = 200;
-            else if (commandId == WorkflowMenuCommands.Zoom150Mode.ID) zoomLevel = 150;
-            else if (commandId == WorkflowMenuCommands.Zoom100Mode.ID) zoomLevel = 100;
-            else if (commandId == WorkflowMenuCommands.Zoom75Mode.ID) zoomLevel = 75;
-            else if (commandId == WorkflowMenuCommands.Zoom50Mode.ID) zoomLevel = 50;
+            if (commandId == WorkflowMenuCommands.Zoom400Mode.ID)
+                zoomLevel = 400;
+            else if (commandId == WorkflowMenuCommands.Zoom300Mode.ID)
+                zoomLevel = 300;
+            else if (commandId == WorkflowMenuCommands.Zoom200Mode.ID)
+                zoomLevel = 200;
+            else if (commandId == WorkflowMenuCommands.Zoom150Mode.ID)
+                zoomLevel = 150;
+            else if (commandId == WorkflowMenuCommands.Zoom100Mode.ID)
+                zoomLevel = 100;
+            else if (commandId == WorkflowMenuCommands.Zoom75Mode.ID)
+                zoomLevel = 75;
+            else if (commandId == WorkflowMenuCommands.Zoom50Mode.ID)
+                zoomLevel = 50;
 
             return zoomLevel;
         }
@@ -253,13 +470,20 @@ namespace System.Workflow.ComponentModel.Design
         private int ConvertToZoomCommand(int zoomLevel)
         {
             int commandID = 0; //do not select anything if the zoom level is not one of the standard ones
-            if (zoomLevel == 400) commandID = WorkflowMenuCommands.Zoom400Mode.ID;
-            else if (zoomLevel == 300) commandID = WorkflowMenuCommands.Zoom300Mode.ID;
-            else if (zoomLevel == 200) commandID = WorkflowMenuCommands.Zoom200Mode.ID;
-            else if (zoomLevel == 150) commandID = WorkflowMenuCommands.Zoom150Mode.ID;
-            else if (zoomLevel == 100) commandID = WorkflowMenuCommands.Zoom100Mode.ID;
-            else if (zoomLevel == 75) commandID = WorkflowMenuCommands.Zoom75Mode.ID;
-            else if (zoomLevel == 50) commandID = WorkflowMenuCommands.Zoom50Mode.ID;
+            if (zoomLevel == 400)
+                commandID = WorkflowMenuCommands.Zoom400Mode.ID;
+            else if (zoomLevel == 300)
+                commandID = WorkflowMenuCommands.Zoom300Mode.ID;
+            else if (zoomLevel == 200)
+                commandID = WorkflowMenuCommands.Zoom200Mode.ID;
+            else if (zoomLevel == 150)
+                commandID = WorkflowMenuCommands.Zoom150Mode.ID;
+            else if (zoomLevel == 100)
+                commandID = WorkflowMenuCommands.Zoom100Mode.ID;
+            else if (zoomLevel == 75)
+                commandID = WorkflowMenuCommands.Zoom75Mode.ID;
+            else if (zoomLevel == 50)
+                commandID = WorkflowMenuCommands.Zoom50Mode.ID;
 
             return commandID;
         }
@@ -286,8 +510,20 @@ namespace System.Workflow.ComponentModel.Design
             MenuCommand menuCommand = (MenuCommand)sender;
             if (menuCommand.CommandID.ID == WorkflowMenuCommands.ShowAll.ID)
             {
-                int newZoom = (int)(100.0f / this.workflowView.ActiveLayout.Scaling * Math.Min((float)this.workflowView.ViewPortSize.Width / (float)this.workflowView.ActiveLayout.Extent.Width, (float)this.workflowView.ViewPortSize.Height / (float)this.workflowView.ActiveLayout.Extent.Height));
-                this.workflowView.Zoom = Math.Min(Math.Max(newZoom, AmbientTheme.MinZoom), AmbientTheme.MaxZoom);
+                int newZoom = (int)(
+                    100.0f
+                    / this.workflowView.ActiveLayout.Scaling
+                    * Math.Min(
+                        (float)this.workflowView.ViewPortSize.Width
+                            / (float)this.workflowView.ActiveLayout.Extent.Width,
+                        (float)this.workflowView.ViewPortSize.Height
+                            / (float)this.workflowView.ActiveLayout.Extent.Height
+                    )
+                );
+                this.workflowView.Zoom = Math.Min(
+                    Math.Max(newZoom, AmbientTheme.MinZoom),
+                    AmbientTheme.MaxZoom
+                );
             }
             else
             {
@@ -305,7 +541,10 @@ namespace System.Workflow.ComponentModel.Design
         private void OnPageLayout(object sender, EventArgs e)
         {
             MenuCommand menuCommand = (MenuCommand)sender;
-            this.workflowView.PrintPreviewMode = (menuCommand.CommandID == WorkflowMenuCommands.PrintPreview) ? !this.workflowView.PrintPreviewMode : (menuCommand.CommandID == WorkflowMenuCommands.PrintPreviewPage);
+            this.workflowView.PrintPreviewMode =
+                (menuCommand.CommandID == WorkflowMenuCommands.PrintPreview)
+                    ? !this.workflowView.PrintPreviewMode
+                    : (menuCommand.CommandID == WorkflowMenuCommands.PrintPreviewPage);
             UpdatePageLayoutCommands(true);
         }
 
@@ -353,10 +592,13 @@ namespace System.Workflow.ComponentModel.Design
             MenuCommand cmd = (MenuCommand)sender;
             bool enable = false;
 
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost != null && !designerHost.Loading)
             {
-                ArrayList selectedComponents = new ArrayList(this.selectionService.GetSelectedComponents());
+                ArrayList selectedComponents = new ArrayList(
+                    this.selectionService.GetSelectedComponents()
+                );
                 enable = Helpers.AreAllActivities(selectedComponents);
 
                 if (enable)
@@ -365,8 +607,14 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         if (activity.Site != null)
                         {
-                            designerHost = activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
-                            if (designerHost != null && this.selectionService.GetComponentSelected(designerHost.RootComponent))
+                            designerHost =
+                                activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                            if (
+                                designerHost != null
+                                && this.selectionService.GetComponentSelected(
+                                    designerHost.RootComponent
+                                )
+                            )
                             {
                                 enable = false;
                                 break;
@@ -390,8 +638,13 @@ namespace System.Workflow.ComponentModel.Design
             cmd.Enabled = false;
 
             // check if we are cutting root component
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            if (designerHost != null && designerHost.RootComponent != null && this.selectionService.GetComponentSelected(designerHost.RootComponent))
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            if (
+                designerHost != null
+                && designerHost.RootComponent != null
+                && this.selectionService.GetComponentSelected(designerHost.RootComponent)
+            )
                 return;
 
             //Check that we are cutting all activities
@@ -402,11 +655,22 @@ namespace System.Workflow.ComponentModel.Design
 
             // check if we can delete these
             Activity[] topLevelActivities = Helpers.GetTopLevelActivities(components);
-            IDictionary commonParentActivities = Helpers.PairUpCommonParentActivities(topLevelActivities);
+            IDictionary commonParentActivities = Helpers.PairUpCommonParentActivities(
+                topLevelActivities
+            );
             foreach (DictionaryEntry entry in commonParentActivities)
             {
-                CompositeActivityDesigner compositeActivityDesigner = ActivityDesigner.GetDesigner(entry.Key as Activity) as CompositeActivityDesigner;
-                if (compositeActivityDesigner != null && !compositeActivityDesigner.CanRemoveActivities(new List<Activity>((Activity[])((ArrayList)entry.Value).ToArray(typeof(Activity))).AsReadOnly()))
+                CompositeActivityDesigner compositeActivityDesigner =
+                    ActivityDesigner.GetDesigner(entry.Key as Activity)
+                    as CompositeActivityDesigner;
+                if (
+                    compositeActivityDesigner != null
+                    && !compositeActivityDesigner.CanRemoveActivities(
+                        new List<Activity>(
+                            (Activity[])((ArrayList)entry.Value).ToArray(typeof(Activity))
+                        ).AsReadOnly()
+                    )
+                )
                 {
                     cmd.Enabled = false;
                     return;
@@ -423,7 +687,9 @@ namespace System.Workflow.ComponentModel.Design
 
             //Check if we are in writtable context
             object selectedObject = this.selectionService.PrimarySelection;
-            CompositeActivityDesigner compositeDesigner = ActivityDesigner.GetDesigner(selectedObject as Activity) as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                ActivityDesigner.GetDesigner(selectedObject as Activity)
+                as CompositeActivityDesigner;
             if (compositeDesigner == null)
                 compositeDesigner = ActivityDesigner.GetParentDesigner(selectedObject);
 
@@ -431,10 +697,19 @@ namespace System.Workflow.ComponentModel.Design
                 return;
 
             //Check if data object format is valid
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            IToolboxService ts = (IToolboxService)this.serviceProvider.GetService(typeof(IToolboxService));
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            IToolboxService ts = (IToolboxService)
+                this.serviceProvider.GetService(typeof(IToolboxService));
             IDataObject dataObj = Clipboard.GetDataObject();
-            if (dataObj == null || designerHost == null || (!dataObj.GetDataPresent(CF_DESIGNER) && (ts != null && !ts.IsSupported(dataObj, designerHost))))
+            if (
+                dataObj == null
+                || designerHost == null
+                || (
+                    !dataObj.GetDataPresent(CF_DESIGNER)
+                    && (ts != null && !ts.IsSupported(dataObj, designerHost))
+                )
+            )
                 return;
 
             //Get the drop target and check if it is valid
@@ -451,16 +726,24 @@ namespace System.Workflow.ComponentModel.Design
             {
                 Activity selectedActivity = selectedObject as Activity;
                 CompositeActivity parentActivity = selectedActivity.Parent;
-                CompositeActivityDesigner parentDesigner = ActivityDesigner.GetDesigner(parentActivity) as CompositeActivityDesigner;
+                CompositeActivityDesigner parentDesigner =
+                    ActivityDesigner.GetDesigner(parentActivity) as CompositeActivityDesigner;
                 if (parentDesigner != null)
-                    hitInfo = new ConnectorHitTestInfo(parentDesigner, HitTestLocations.Designer, parentActivity.Activities.IndexOf(selectedActivity) + 1);
+                    hitInfo = new ConnectorHitTestInfo(
+                        parentDesigner,
+                        HitTestLocations.Designer,
+                        parentActivity.Activities.IndexOf(selectedActivity) + 1
+                    );
             }
 
             //Deserialize activities
             ICollection components = null;
             try
             {
-                components = CompositeActivityDesigner.DeserializeActivitiesFromDataObject(this.serviceProvider, dataObj);
+                components = CompositeActivityDesigner.DeserializeActivitiesFromDataObject(
+                    this.serviceProvider,
+                    dataObj
+                );
             }
             catch (CheckoutException ex)
             {
@@ -468,7 +751,14 @@ namespace System.Workflow.ComponentModel.Design
                     throw ex;
             }
 
-            cmd.Enabled = (components != null && hitInfo != null && compositeDesigner.CanInsertActivities(hitInfo, new List<Activity>(Helpers.GetTopLevelActivities(components)).AsReadOnly()));
+            cmd.Enabled = (
+                components != null
+                && hitInfo != null
+                && compositeDesigner.CanInsertActivities(
+                    hitInfo,
+                    new List<Activity>(Helpers.GetTopLevelActivities(components)).AsReadOnly()
+                )
+            );
         }
 
         private void OnStatusAnySelection(object sender, EventArgs e)
@@ -476,9 +766,13 @@ namespace System.Workflow.ComponentModel.Design
             // any selection means that except the root component, if any of the activity is
             // selected then enable it
             MenuCommand cmd = (MenuCommand)sender;
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            cmd.Enabled = (designerHost != null && this.selectionService.GetSelectedComponents().Count > 0 &&
-                            !this.selectionService.GetComponentSelected(designerHost.RootComponent));
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            cmd.Enabled = (
+                designerHost != null
+                && this.selectionService.GetSelectedComponents().Count > 0
+                && !this.selectionService.GetComponentSelected(designerHost.RootComponent)
+            );
         }
 
         private void OnStatusAlways(object sender, EventArgs e)
@@ -497,17 +791,31 @@ namespace System.Workflow.ComponentModel.Design
                 Activity activity = obj as Activity;
                 if (activity != null)
                 {
-                    CompositeActivityDesigner compositeDesigner = ActivityDesigner.GetDesigner(activity) as CompositeActivityDesigner;
-                    if (compositeDesigner != null && compositeDesigner.CanExpandCollapse &&
-                        ((menuCommand.CommandID == WorkflowMenuCommands.Expand && !compositeDesigner.Expanded) ||
-                        (menuCommand.CommandID == WorkflowMenuCommands.Collapse && compositeDesigner.Expanded)))
+                    CompositeActivityDesigner compositeDesigner =
+                        ActivityDesigner.GetDesigner(activity) as CompositeActivityDesigner;
+                    if (
+                        compositeDesigner != null
+                        && compositeDesigner.CanExpandCollapse
+                        && (
+                            (
+                                menuCommand.CommandID == WorkflowMenuCommands.Expand
+                                && !compositeDesigner.Expanded
+                            )
+                            || (
+                                menuCommand.CommandID == WorkflowMenuCommands.Collapse
+                                && compositeDesigner.Expanded
+                            )
+                        )
+                    )
                     {
                         expandCollapseItems += 1;
                     }
                 }
             }
 
-            menuCommand.Visible = menuCommand.Enabled = (expandCollapseItems == this.selectionService.SelectionCount);
+            menuCommand.Visible = menuCommand.Enabled = (
+                expandCollapseItems == this.selectionService.SelectionCount
+            );
         }
 
         private void OnStatusEnable(object sender, EventArgs e)
@@ -516,16 +824,24 @@ namespace System.Workflow.ComponentModel.Design
 
             bool enabledPropertyValue = true;
             bool enabled = true;
-            ArrayList selectedObjects = new ArrayList(this.selectionService.GetSelectedComponents());
+            ArrayList selectedObjects = new ArrayList(
+                this.selectionService.GetSelectedComponents()
+            );
             for (int i = 0; i < selectedObjects.Count && enabled; i++)
             {
                 Activity activity = selectedObjects[i] as Activity;
                 if (activity != null)
                 {
                     ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
-                    if (activityDesigner == null || activityDesigner.IsLocked ||
-                        (i > 0 && enabledPropertyValue != activity.Enabled) ||
-                        (this.workflowView.RootDesigner != null && this.workflowView.RootDesigner.Activity == activity))
+                    if (
+                        activityDesigner == null
+                        || activityDesigner.IsLocked
+                        || (i > 0 && enabledPropertyValue != activity.Enabled)
+                        || (
+                            this.workflowView.RootDesigner != null
+                            && this.workflowView.RootDesigner.Activity == activity
+                        )
+                    )
                     {
                         enabled = false;
                     }
@@ -540,7 +856,16 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            menuCommand.Visible = menuCommand.Enabled = (enabled && ((menuCommand.CommandID == WorkflowMenuCommands.Enable && !enabledPropertyValue) || (menuCommand.CommandID == WorkflowMenuCommands.Disable && enabledPropertyValue)));
+            menuCommand.Visible = menuCommand.Enabled = (
+                enabled
+                && (
+                    (menuCommand.CommandID == WorkflowMenuCommands.Enable && !enabledPropertyValue)
+                    || (
+                        menuCommand.CommandID == WorkflowMenuCommands.Disable
+                        && enabledPropertyValue
+                    )
+                )
+            );
         }
 
         #endregion
@@ -554,13 +879,16 @@ namespace System.Workflow.ComponentModel.Design
         //sends specified key to the wf view, returns the .Handled flag
         private bool SendKeyDownCommand(Keys key)
         {
-            IDesignerHost host = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            IDesignerHost host =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (host != null)
             {
-                IRootDesigner rootDesigner = ActivityDesigner.GetDesigner(host.RootComponent as Activity) as IRootDesigner;
+                IRootDesigner rootDesigner =
+                    ActivityDesigner.GetDesigner(host.RootComponent as Activity) as IRootDesigner;
                 if (rootDesigner != null)
                 {
-                    WorkflowView view = rootDesigner.GetView(ViewTechnology.Default) as WorkflowView;
+                    WorkflowView view =
+                        rootDesigner.GetView(ViewTechnology.Default) as WorkflowView;
                     if (view != null)
                     {
                         //because the some key presses are not coming into the Microsoft OnKeyDown
@@ -597,7 +925,9 @@ namespace System.Workflow.ComponentModel.Design
             else if (menuCommand.CommandID.ID == MenuCommands.KeySelectNext.ID)
                 key = Keys.Tab;
             else if (menuCommand.CommandID.ID == MenuCommands.KeySelectPrevious.ID)
-            { key = Keys.Tab | Keys.Shift; }
+            {
+                key = Keys.Tab | Keys.Shift;
+            }
 
             SendKeyDownCommand(key);
         }
@@ -612,17 +942,24 @@ namespace System.Workflow.ComponentModel.Design
                 Activity activity = obj as Activity;
                 if (activity != null)
                 {
-                    CompositeActivityDesigner designer = ActivityDesigner.GetDesigner(activity) as CompositeActivityDesigner;
+                    CompositeActivityDesigner designer =
+                        ActivityDesigner.GetDesigner(activity) as CompositeActivityDesigner;
                     if (designer != null)
-                        designer.Expanded = (menuCommand.CommandID.ID == WorkflowMenuCommands.Expand.ID);
+                        designer.Expanded = (
+                            menuCommand.CommandID.ID == WorkflowMenuCommands.Expand.ID
+                        );
                 }
             }
 
-            MenuCommand expandCommand = this.menuCommandService.FindCommand(WorkflowMenuCommands.Expand);
+            MenuCommand expandCommand = this.menuCommandService.FindCommand(
+                WorkflowMenuCommands.Expand
+            );
             if (expandCommand != null)
                 OnStatusExpandCollapse(expandCommand, EventArgs.Empty);
 
-            MenuCommand collapseCommand = this.menuCommandService.FindCommand(WorkflowMenuCommands.Collapse);
+            MenuCommand collapseCommand = this.menuCommandService.FindCommand(
+                WorkflowMenuCommands.Collapse
+            );
             if (collapseCommand != null)
                 OnStatusExpandCollapse(collapseCommand, EventArgs.Empty);
         }
@@ -636,7 +973,8 @@ namespace System.Workflow.ComponentModel.Design
             IComponent selectedComponent = this.selectionService.PrimarySelection as IComponent;
             if (selectedComponent != null && selectedComponent.Site != null)
             {
-                IDesignerHost host = selectedComponent.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost host =
+                    selectedComponent.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 if (host != null)
                     trans = host.CreateTransaction(SR.GetString(SR.ChangingEnabled));
             }
@@ -651,7 +989,9 @@ namespace System.Workflow.ComponentModel.Design
                         ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
                         if (activityDesigner != null && !activityDesigner.IsLocked)
                         {
-                            PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(activity)["Enabled"];
+                            PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(
+                                activity
+                            )["Enabled"];
                             if (propertyDescriptor != null)
                                 propertyDescriptor.SetValue(activity, !activity.Enabled);
                         }
@@ -667,21 +1007,28 @@ namespace System.Workflow.ComponentModel.Design
                     ((IDisposable)trans).Dispose();
             }
 
-            MenuCommand commentCommand = this.menuCommandService.FindCommand(WorkflowMenuCommands.Disable);
+            MenuCommand commentCommand = this.menuCommandService.FindCommand(
+                WorkflowMenuCommands.Disable
+            );
             if (commentCommand != null)
                 OnStatusEnable(commentCommand, EventArgs.Empty);
 
-            MenuCommand uncommentCommand = this.menuCommandService.FindCommand(WorkflowMenuCommands.Enable);
+            MenuCommand uncommentCommand = this.menuCommandService.FindCommand(
+                WorkflowMenuCommands.Enable
+            );
             if (uncommentCommand != null)
                 OnStatusEnable(uncommentCommand, EventArgs.Empty);
         }
 
         private void OnCreateTheme(object sender, EventArgs e)
         {
-            ThemeConfigurationDialog themeConfigDialog = new ThemeConfigurationDialog(this.serviceProvider);
+            ThemeConfigurationDialog themeConfigDialog = new ThemeConfigurationDialog(
+                this.serviceProvider
+            );
             if (themeConfigDialog.ShowDialog() == DialogResult.OK)
             {
-                WorkflowTheme themeToApply = themeConfigDialog.ComposedTheme.Clone() as WorkflowTheme;
+                WorkflowTheme themeToApply =
+                    themeConfigDialog.ComposedTheme.Clone() as WorkflowTheme;
                 if (themeToApply != null)
                 {
                     WorkflowTheme.CurrentTheme = themeToApply;
@@ -692,7 +1039,8 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnChangeTheme(object sender, EventArgs e)
         {
-            IExtendedUIService extUIService = this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            IExtendedUIService extUIService =
+                this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (extUIService != null)
                 extUIService.ShowToolsOptions();
         }
@@ -705,16 +1053,21 @@ namespace System.Workflow.ComponentModel.Design
         private void OnKeyPageDnUp(object sender, EventArgs e)
         {
             MenuCommand menuCommand = (MenuCommand)sender;
-            SendKeyDownCommand((menuCommand.CommandID == WorkflowMenuCommands.PageUp) ? Keys.PageUp : Keys.PageDown);
+            SendKeyDownCommand(
+                (menuCommand.CommandID == WorkflowMenuCommands.PageUp) ? Keys.PageUp : Keys.PageDown
+            );
         }
 
         private void OnViewCode(object sender, EventArgs e)
         {
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
             IComponent rootComponent = (designerHost != null) ? designerHost.RootComponent : null;
             if (rootComponent != null)
             {
-                IMemberCreationService memberCreationService = rootComponent.Site.GetService(typeof(IMemberCreationService)) as IMemberCreationService;
+                IMemberCreationService memberCreationService =
+                    rootComponent.Site.GetService(typeof(IMemberCreationService))
+                    as IMemberCreationService;
                 if (memberCreationService != null)
                     memberCreationService.ShowCode();
             }
@@ -725,11 +1078,16 @@ namespace System.Workflow.ComponentModel.Design
             PrinterSettings.StringCollection printers = PrinterSettings.InstalledPrinters;
             if (printers.Count < 1)
             {
-                DesignerHelpers.ShowError(this.serviceProvider, DR.GetString(DR.ThereIsNoPrinterInstalledErrorMessage));
+                DesignerHelpers.ShowError(
+                    this.serviceProvider,
+                    DR.GetString(DR.ThereIsNoPrinterInstalledErrorMessage)
+                );
                 return;
             }
 
-            WorkflowPageSetupDialog pageSetupDialog = new WorkflowPageSetupDialog(this.serviceProvider);
+            WorkflowPageSetupDialog pageSetupDialog = new WorkflowPageSetupDialog(
+                this.serviceProvider
+            );
             if (DialogResult.OK == pageSetupDialog.ShowDialog())
                 this.workflowView.PerformLayout(false);
         }
@@ -737,13 +1095,27 @@ namespace System.Workflow.ComponentModel.Design
         private void OnMenuSaveWorkflowAsImage(object sender, EventArgs e)
         {
             List<SupportedImageFormats> supportedFormats = new List<SupportedImageFormats>();
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.BMPImageFormat), ImageFormat.Bmp));
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.JPEGImageFormat), ImageFormat.Jpeg));
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.PNGImageFormat), ImageFormat.Png));
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.TIFFImageFormat), ImageFormat.Tiff));
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.WMFImageFormat), ImageFormat.Wmf));
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.EXIFImageFormat), ImageFormat.Exif));
-            supportedFormats.Add(new SupportedImageFormats(DR.GetString(DR.EMFImageFormat), ImageFormat.Emf));
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.BMPImageFormat), ImageFormat.Bmp)
+            );
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.JPEGImageFormat), ImageFormat.Jpeg)
+            );
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.PNGImageFormat), ImageFormat.Png)
+            );
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.TIFFImageFormat), ImageFormat.Tiff)
+            );
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.WMFImageFormat), ImageFormat.Wmf)
+            );
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.EXIFImageFormat), ImageFormat.Exif)
+            );
+            supportedFormats.Add(
+                new SupportedImageFormats(DR.GetString(DR.EMFImageFormat), ImageFormat.Emf)
+            );
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = DR.GetString(DR.SaveWorkflowImageDialogTitle);
@@ -755,8 +1127,15 @@ namespace System.Workflow.ComponentModel.Design
 
             saveFileDialog.Filter = filter;
             saveFileDialog.FilterIndex = 0;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK && saveFileDialog.FilterIndex > 0 && saveFileDialog.FilterIndex <= supportedFormats.Count)
-                this.workflowView.SaveWorkflowImage(saveFileDialog.FileName, supportedFormats[saveFileDialog.FilterIndex - 1].Format);
+            if (
+                saveFileDialog.ShowDialog() == DialogResult.OK
+                && saveFileDialog.FilterIndex > 0
+                && saveFileDialog.FilterIndex <= supportedFormats.Count
+            )
+                this.workflowView.SaveWorkflowImage(
+                    saveFileDialog.FileName,
+                    supportedFormats[saveFileDialog.FilterIndex - 1].Format
+                );
         }
 
         private void OnMenuCopyToClipboard(object sender, EventArgs e)
@@ -770,7 +1149,10 @@ namespace System.Workflow.ComponentModel.Design
             PrinterSettings.StringCollection printers = PrinterSettings.InstalledPrinters;
             if (printers.Count < 1)
             {
-                DesignerHelpers.ShowError(this.serviceProvider, DR.GetString(DR.ThereIsNoPrinterInstalledErrorMessage));
+                DesignerHelpers.ShowError(
+                    this.serviceProvider,
+                    DR.GetString(DR.ThereIsNoPrinterInstalledErrorMessage)
+                );
                 return;
             }
 
@@ -824,14 +1206,21 @@ namespace System.Workflow.ComponentModel.Design
         private void OnMenuCut(object sender, EventArgs e)
         {
             //check if we are cutting root component
-            IDesignerHost designerHost = this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
-            if (designerHost != null && this.selectionService.GetComponentSelected(designerHost.RootComponent))
+            IDesignerHost designerHost =
+                this.serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            if (
+                designerHost != null
+                && this.selectionService.GetComponentSelected(designerHost.RootComponent)
+            )
                 return;
 
             //Check that we are cutting all activities
             //Check if we are in writable context
             ICollection components = this.selectionService.GetSelectedComponents();
-            if (!Helpers.AreAllActivities(components) || !DesignerHelpers.AreAssociatedDesignersMovable(components))
+            if (
+                !Helpers.AreAllActivities(components)
+                || !DesignerHelpers.AreAssociatedDesignersMovable(components)
+            )
                 return;
 
             // copy the selected component to clipboard
@@ -848,7 +1237,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 ArrayList componentList = new ArrayList(components);
                 if (componentList.Count > 0)
-                    description = SR.GetString(SR.CutSingleActivity, (componentList[0] as Activity).Name);
+                    description = SR.GetString(
+                        SR.CutSingleActivity,
+                        (componentList[0] as Activity).Name
+                    );
                 else
                     description = SR.GetString(SR.CutActivity);
             }
@@ -873,15 +1265,22 @@ namespace System.Workflow.ComponentModel.Design
                 return;
 
             // serialize all top level activities to the store
-            Activity[] topLevelActivities = Helpers.GetTopLevelActivities(this.selectionService.GetSelectedComponents());
-            IDataObject dataObject = CompositeActivityDesigner.SerializeActivitiesToDataObject(this.serviceProvider, topLevelActivities);
+            Activity[] topLevelActivities = Helpers.GetTopLevelActivities(
+                this.selectionService.GetSelectedComponents()
+            );
+            IDataObject dataObject = CompositeActivityDesigner.SerializeActivitiesToDataObject(
+                this.serviceProvider,
+                topLevelActivities
+            );
             Clipboard.SetDataObject(dataObject);
         }
 
         private void OnMenuPaste(object sender, EventArgs e)
         {
             object selectedObject = this.selectionService.PrimarySelection;
-            CompositeActivityDesigner compositeDesigner = ActivityDesigner.GetDesigner(selectedObject as Activity) as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                ActivityDesigner.GetDesigner(selectedObject as Activity)
+                as CompositeActivityDesigner;
             if (compositeDesigner == null)
                 compositeDesigner = ActivityDesigner.GetParentDesigner(selectedObject);
 
@@ -894,18 +1293,27 @@ namespace System.Workflow.ComponentModel.Design
 
             try
             {
-                components = CompositeActivityDesigner.DeserializeActivitiesFromDataObject(this.serviceProvider, dataObj, true);
+                components = CompositeActivityDesigner.DeserializeActivitiesFromDataObject(
+                    this.serviceProvider,
+                    dataObj,
+                    true
+                );
             }
             catch (Exception ex)
             {
                 if (ex != CheckoutException.Canceled)
-                    throw new Exception(DR.GetString(DR.ActivityInsertError) + "\n" + ex.Message, ex);
+                    throw new Exception(
+                        DR.GetString(DR.ActivityInsertError) + "\n" + ex.Message,
+                        ex
+                    );
             }
 
             if (components == null)
-                throw new InvalidOperationException(DR.GetString(DR.InvalidOperationBadClipboardFormat));
+                throw new InvalidOperationException(
+                    DR.GetString(DR.InvalidOperationBadClipboardFormat)
+                );
 
-            // get the drop target 
+            // get the drop target
             HitTestInfo hitInfo = null;
             if (selectedObject is HitTestInfo)
             {
@@ -919,46 +1327,73 @@ namespace System.Workflow.ComponentModel.Design
             {
                 Activity selectedActivity = selectedObject as Activity;
                 CompositeActivity parentActivity = selectedActivity.Parent;
-                CompositeActivityDesigner parentDesigner = ActivityDesigner.GetDesigner(parentActivity) as CompositeActivityDesigner;
+                CompositeActivityDesigner parentDesigner =
+                    ActivityDesigner.GetDesigner(parentActivity) as CompositeActivityDesigner;
                 if (parentDesigner != null)
-                    hitInfo = new ConnectorHitTestInfo(parentDesigner, HitTestLocations.Designer, parentActivity.Activities.IndexOf(selectedActivity) + 1);
+                    hitInfo = new ConnectorHitTestInfo(
+                        parentDesigner,
+                        HitTestLocations.Designer,
+                        parentActivity.Activities.IndexOf(selectedActivity) + 1
+                    );
             }
 
-            List<Activity> topLevelActivities = new List<Activity>(Helpers.GetTopLevelActivities(components));
+            List<Activity> topLevelActivities = new List<Activity>(
+                Helpers.GetTopLevelActivities(components)
+            );
 
             // check if we can insert or not
             // I know  I should have disabled the paste menu it-self, but doing status check for paste gives a big performance hit. I am working on it.
-            if (hitInfo == null || !compositeDesigner.CanInsertActivities(hitInfo, topLevelActivities.AsReadOnly()))
+            if (
+                hitInfo == null
+                || !compositeDesigner.CanInsertActivities(hitInfo, topLevelActivities.AsReadOnly())
+            )
                 throw new Exception(SR.GetString(SR.Error_NoPasteSupport));
 
             // Make sure the project has references to all inserted activities (in the case
             // where an activity is copied from another project
-            IExtendedUIService extendedUIService = this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            IExtendedUIService extendedUIService =
+                this.serviceProvider.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (extendedUIService != null)
             {
                 foreach (Activity pastedActivity in components)
-                    extendedUIService.AddAssemblyReference(pastedActivity.GetType().Assembly.GetName());
+                    extendedUIService.AddAssemblyReference(
+                        pastedActivity.GetType().Assembly.GetName()
+                    );
             }
 
-            CompositeActivityDesigner.InsertActivities(compositeDesigner, hitInfo, topLevelActivities.AsReadOnly(), SR.GetString(SR.PastingActivities));
+            CompositeActivityDesigner.InsertActivities(
+                compositeDesigner,
+                hitInfo,
+                topLevelActivities.AsReadOnly(),
+                SR.GetString(SR.PastingActivities)
+            );
             Stream componentStateStream = dataObj.GetData(CF_DESIGNERSTATE) as Stream;
             if (componentStateStream != null)
                 Helpers.DeserializeDesignersFromStream(components, componentStateStream);
 
             // set something on selections service
-            this.selectionService.SetSelectedComponents(topLevelActivities.ToArray(), SelectionTypes.Replace);
+            this.selectionService.SetSelectedComponents(
+                topLevelActivities.ToArray(),
+                SelectionTypes.Replace
+            );
             this.workflowView.EnsureVisible(this.selectionService.PrimarySelection);
         }
 
         private void OnMenuSelectAll(object sender, EventArgs e)
         {
-            ActivityDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(this.serviceProvider) as ActivityDesigner;
+            ActivityDesigner rootDesigner =
+                ActivityDesigner.GetSafeRootDesigner(this.serviceProvider) as ActivityDesigner;
             if (rootDesigner != null)
             {
                 List<Activity> activities = new List<Activity>();
                 if (rootDesigner.Activity is CompositeActivity)
-                    activities.AddRange(Helpers.GetNestedActivities(rootDesigner.Activity as CompositeActivity));
-                this.selectionService.SetSelectedComponents(activities.ToArray(), SelectionTypes.Replace);
+                    activities.AddRange(
+                        Helpers.GetNestedActivities(rootDesigner.Activity as CompositeActivity)
+                    );
+                this.selectionService.SetSelectedComponents(
+                    activities.ToArray(),
+                    SelectionTypes.Replace
+                );
             }
         }
 
@@ -995,13 +1430,23 @@ namespace System.Workflow.ComponentModel.Design
             this.statusHandler = statusHandler;
         }
 
-        public CommandSetItem(EventHandler statusHandler, EventHandler invokeHandler, CommandID id, string text)
+        public CommandSetItem(
+            EventHandler statusHandler,
+            EventHandler invokeHandler,
+            CommandID id,
+            string text
+        )
             : this(statusHandler, invokeHandler, id)
         {
             Properties["Text"] = text;
         }
 
-        public CommandSetItem(EventHandler statusHandler, EventHandler invokeHandler, CommandID id, bool immidiateStatusUpdate)
+        public CommandSetItem(
+            EventHandler statusHandler,
+            EventHandler invokeHandler,
+            CommandID id,
+            bool immidiateStatusUpdate
+        )
             : this(statusHandler, invokeHandler, id)
         {
             this.immidiateStatusUpdate = immidiateStatusUpdate;
@@ -1025,9 +1470,7 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     statusHandler(this, EventArgs.Empty);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
     }

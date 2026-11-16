@@ -24,33 +24,41 @@ namespace Microsoft.Extensions.Http.Tests.Logging
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
 
             serviceCollection
-            .AddHttpClient("test")
-            .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler());
+                .AddHttpClient("test")
+                .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler());
 
             var services = serviceCollection.BuildServiceProvider();
 
             var client = services.GetRequiredService<IHttpClientFactory>().CreateClient("test");
 
-
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://api.example.com/search?term=Western%20Australia");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://api.example.com/search?term=Western%20Australia"
+            );
 
             await client.SendAsync(request);
 
             // Assert
             var messages = sink.Writes.ToArray();
 
-            var message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestStart &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-            }));
+            var message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestStart
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
+            );
 
-            Assert.Equal("Sending HTTP request GET http://api.example.com/search?term=Western%20Australia", message.Message);
+            Assert.Equal(
+                "Sending HTTP request GET http://api.example.com/search?term=Western%20Australia",
+                message.Message
+            );
         }
 
         [Fact]
@@ -61,34 +69,45 @@ namespace Microsoft.Extensions.Http.Tests.Logging
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
 
             serviceCollection
-            .AddHttpClient("test")
-            .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler());
+                .AddHttpClient("test")
+                .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler());
 
             var services = serviceCollection.BuildServiceProvider();
 
             var client = services.GetRequiredService<IHttpClientFactory>().CreateClient("test");
 
-
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://api.example.com/search?term=Western%20Australia");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://api.example.com/search?term=Western%20Australia"
+            );
 
             await client.SendAsync(request);
 
             // Assert
             var messages = sink.Writes.ToArray();
 
-            var message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.PipelineStart &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-            }));
+            var message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.PipelineStart
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
+            );
 
-            Assert.Equal("Start processing HTTP request GET http://api.example.com/search?term=Western%20Australia", message.Message);
-            Assert.Equal("HTTP GET http://api.example.com/search?term=Western%20Australia", message.Scope.ToString());
+            Assert.Equal(
+                "Start processing HTTP request GET http://api.example.com/search?term=Western%20Australia",
+                message.Message
+            );
+            Assert.Equal(
+                "HTTP GET http://api.example.com/search?term=Western%20Australia",
+                message.Scope.ToString()
+            );
         }
 
 #if NET5_0_OR_GREATER
@@ -100,7 +119,9 @@ namespace Microsoft.Extensions.Http.Tests.Logging
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
 
             serviceCollection
                 .AddHttpClient("test")
@@ -110,23 +131,29 @@ namespace Microsoft.Extensions.Http.Tests.Logging
 
             var client = services.GetRequiredService<IHttpClientFactory>().CreateClient("test");
 
-
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://api.example.com/search?term=Western%20Australia");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://api.example.com/search?term=Western%20Australia"
+            );
 
             client.Send(request);
 
             // Assert
             var messages = sink.Writes.ToArray();
 
-            var message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestStart &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-            }));
+            var message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestStart
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
+            );
 
-            Assert.Equal("Sending HTTP request GET http://api.example.com/search?term=Western%20Australia", message.Message);
+            Assert.Equal(
+                "Sending HTTP request GET http://api.example.com/search?term=Western%20Australia",
+                message.Message
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
@@ -137,7 +164,9 @@ namespace Microsoft.Extensions.Http.Tests.Logging
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
 
             serviceCollection
                 .AddHttpClient("test")
@@ -147,24 +176,33 @@ namespace Microsoft.Extensions.Http.Tests.Logging
 
             var client = services.GetRequiredService<IHttpClientFactory>().CreateClient("test");
 
-
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://api.example.com/search?term=Western%20Australia");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://api.example.com/search?term=Western%20Australia"
+            );
 
             client.Send(request);
 
             // Assert
             var messages = sink.Writes.ToArray();
 
-            var message = Assert.Single(messages.Where(m =>
-            {
-                return
-                    m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.PipelineStart &&
-                    m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-            }));
+            var message = Assert.Single(
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.PipelineStart
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
+            );
 
-            Assert.Equal("Start processing HTTP request GET http://api.example.com/search?term=Western%20Australia", message.Message);
-            Assert.Equal("HTTP GET http://api.example.com/search?term=Western%20Australia", message.Scope.ToString());
+            Assert.Equal(
+                "Start processing HTTP request GET http://api.example.com/search?term=Western%20Australia",
+                message.Message
+            );
+            Assert.Equal(
+                "HTTP GET http://api.example.com/search?term=Western%20Australia",
+                message.Scope.ToString()
+            );
         }
 #endif
     }

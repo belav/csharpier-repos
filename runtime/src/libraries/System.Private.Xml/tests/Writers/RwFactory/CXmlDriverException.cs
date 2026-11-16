@@ -10,6 +10,7 @@ namespace System.Xml.RwFactoryWriterTests
     /// </summary>
     public class CXmlDriverException : CTestException
     {
-        internal CXmlDriverException(string msg) : base(msg) { }
+        internal CXmlDriverException(string msg)
+            : base(msg) { }
     }
 }

@@ -9,9 +9,12 @@ namespace System.ServiceModel
 
         static StringUtil()
         {
-            // StringComparer.InvariantCultureIgnoreCase.GetHashCode is a stable hash between 32 and 64 bits. 
+            // StringComparer.InvariantCultureIgnoreCase.GetHashCode is a stable hash between 32 and 64 bits.
             // Test the result of this GetHashCode against a known test vector to see if randomized hashing is enabled.
-            randomizedStringHashingEnabled = StringComparer.InvariantCultureIgnoreCase.GetHashCode("The quick brown fox jumps over the lazy dog.") != 0x703e662e;
+            randomizedStringHashingEnabled =
+                StringComparer.InvariantCultureIgnoreCase.GetHashCode(
+                    "The quick brown fox jumps over the lazy dog."
+                ) != 0x703e662e;
         }
 
         // This should be used instead of String.GetHashCode if the value should be
@@ -32,9 +35,9 @@ namespace System.ServiceModel
         [System.Security.SecuritySafeCritical]
         private static int GetStableHashCode(string str)
         {
-            unsafe 
+            unsafe
             {
-                fixed (char* src = str) 
+                fixed (char* src = str)
                 {
                     int hash1 = (5381 << 16) + 5381;
                     int hash2 = hash1;
@@ -47,7 +50,7 @@ namespace System.ServiceModel
                         hash1 = ((hash1 << 5) + hash1 + (hash1 >> 27)) ^ pint[0];
                         hash2 = ((hash2 << 5) + hash2 + (hash2 >> 27)) ^ pint[1];
                         pint += 2;
-                        len  -= 4;
+                        len -= 4;
                     }
 
                     if (len > 0)

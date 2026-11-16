@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Runtime.Serialization;
 using System;
+using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 {
@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
     internal readonly struct SourceLineUpdate
     {
         /// <summary>
-        /// Creates a SourceLineUpdate. 
+        /// Creates a SourceLineUpdate.
         /// </summary>
         /// <param name="oldLine">Line number before the update was made.</param>
         /// <param name="newLine">Line number after the update was made.</param>
@@ -26,9 +26,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// We expect that <paramref name="oldLine"/> and <paramref name="newLine"/> have the same value
         /// when the line delta is zero.
         /// </remarks>
-        public SourceLineUpdate(
-            int oldLine,
-            int newLine)
+        public SourceLineUpdate(int oldLine, int newLine)
         {
             if (oldLine < 0)
                 throw new ArgumentOutOfRangeException(nameof(oldLine));

@@ -7,15 +7,17 @@ namespace System.ServiceModel.Syndication
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class SyndicationItem : IExtensibleSyndicationObject
     {
         Collection<SyndicationPerson> authors;
@@ -34,21 +36,33 @@ namespace System.ServiceModel.Syndication
         TextSyndicationContent title;
 
         public SyndicationItem()
-            : this(null, null, null)
-        {
-        }
+            : this(null, null, null) { }
 
         public SyndicationItem(string title, string content, Uri itemAlternateLink)
-            : this(title, content, itemAlternateLink, null, DateTimeOffset.MinValue)
-        {
-        }
+            : this(title, content, itemAlternateLink, null, DateTimeOffset.MinValue) { }
 
-        public SyndicationItem(string title, string content, Uri itemAlternateLink, string id, DateTimeOffset lastUpdatedTime)
-            : this(title, (content != null) ? new TextSyndicationContent(content) : null, itemAlternateLink, id, lastUpdatedTime)
-        {
-        }
+        public SyndicationItem(
+            string title,
+            string content,
+            Uri itemAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
+            : this(
+                title,
+                (content != null) ? new TextSyndicationContent(content) : null,
+                itemAlternateLink,
+                id,
+                lastUpdatedTime
+            ) { }
 
-        public SyndicationItem(string title, SyndicationContent content, Uri itemAlternateLink, string id, DateTimeOffset lastUpdatedTime)
+        public SyndicationItem(
+            string title,
+            SyndicationContent content,
+            Uri itemAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
         {
             if (title != null)
             {
@@ -207,30 +221,45 @@ namespace System.ServiceModel.Syndication
         }
 
         public static TSyndicationItem Load<TSyndicationItem>(XmlReader reader)
-            where TSyndicationItem : SyndicationItem, new ()
+            where TSyndicationItem : SyndicationItem, new()
         {
             if (reader == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
-            Atom10ItemFormatter<TSyndicationItem> atomSerializer = new Atom10ItemFormatter<TSyndicationItem>();
+            Atom10ItemFormatter<TSyndicationItem> atomSerializer =
+                new Atom10ItemFormatter<TSyndicationItem>();
             if (atomSerializer.CanRead(reader))
             {
                 atomSerializer.ReadFrom(reader);
                 return atomSerializer.Item as TSyndicationItem;
             }
-            Rss20ItemFormatter<TSyndicationItem> rssSerializer = new Rss20ItemFormatter<TSyndicationItem>();
+            Rss20ItemFormatter<TSyndicationItem> rssSerializer =
+                new Rss20ItemFormatter<TSyndicationItem>();
             if (rssSerializer.CanRead(reader))
             {
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Item as TSyndicationItem;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new XmlException(
+                    SR.GetString(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
+                )
+            );
         }
 
-
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "0#permalink", Justification = "permalink is a term defined in the RSS format")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Permalink", Justification = "permalink is a term defined in the RSS format")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "0#permalink",
+            Justification = "permalink is a term defined in the RSS format"
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Permalink",
+            Justification = "permalink is a term defined in the RSS format"
+        )]
         public void AddPermalink(Uri permalink)
         {
             if (permalink == null)
@@ -286,12 +315,22 @@ namespace System.ServiceModel.Syndication
             return new SyndicationPerson();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
 
-        protected internal virtual bool TryParseContent(XmlReader reader, string contentType, string version, out SyndicationContent content)
+        protected internal virtual bool TryParseContent(
+            XmlReader reader,
+            string contentType,
+            string version,
+            out SyndicationContent content
+        )
         {
             content = null;
             return false;
@@ -312,7 +351,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
@@ -323,5 +365,3 @@ namespace System.ServiceModel.Syndication
         }
     }
 }
-
-

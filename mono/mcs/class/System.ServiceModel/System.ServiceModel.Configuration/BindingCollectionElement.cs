@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,41 +49,42 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public abstract class BindingCollectionElement
-		 : ConfigurationElement
-	{
-		string _name;
+    [MonoTODO]
+    public abstract class BindingCollectionElement : ConfigurationElement
+    {
+        string _name;
 
-		protected BindingCollectionElement () {
-		}
+        protected BindingCollectionElement() { }
 
-		// Properties
-		public string BindingName {
-			get {
-				if (_name != null)
-					return _name;
-				var extensions = ConfigUtil.ExtensionsSection.BindingExtensions;
-				_name = extensions.GetConfigurationElementName (GetType ());
-				if (_name == null)
-					throw new InvalidOperationException ();
-				return _name;
-			}
-		}
+        // Properties
+        public string BindingName
+        {
+            get
+            {
+                if (_name != null)
+                    return _name;
+                var extensions = ConfigUtil.ExtensionsSection.BindingExtensions;
+                _name = extensions.GetConfigurationElementName(GetType());
+                if (_name == null)
+                    throw new InvalidOperationException();
+                return _name;
+            }
+        }
 
-		public abstract Type BindingType { get; }
-		public abstract ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings { get; }
+        public abstract Type BindingType { get; }
+        public abstract ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings { get; }
 
-		public abstract bool ContainsKey (string name);
-		protected internal abstract Binding GetDefault ();
-		protected internal abstract bool TryAdd (string name, Binding binding, System.Configuration.Configuration config);
-
-	}
-
+        public abstract bool ContainsKey(string name);
+        protected internal abstract Binding GetDefault();
+        protected internal abstract bool TryAdd(
+            string name,
+            Binding binding,
+            System.Configuration.Configuration config
+        );
+    }
 }

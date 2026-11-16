@@ -7,48 +7,49 @@
 /* arrays to make millions(iObj) of small leaks to see if GC can handle so
 /*many leaks at same time. ByteObject's size is variable.
 /****************************************************************************/
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     public class MinLeakGen
     {
-        internal static ByteObject []Mv_Obj = new ByteObject[1024*5];
-        internal static ByteObject []Mv_Obj1 = new ByteObject[1024*5];
-        public static int Main(System.String [] Args)
+        internal static ByteObject[] Mv_Obj = new ByteObject[1024 * 5];
+        internal static ByteObject[] Mv_Obj1 = new ByteObject[1024 * 5];
+
+        public static int Main(System.String[] Args)
         {
             int iRep = 0;
             int iObj = 0; //the number of Mb will be allocated in MakeLeak();
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
-            switch( Args.Length )
+            switch (Args.Length)
             {
                 case 1:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 5;
                     }
-                break;
+                    break;
 
                 case 2:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 5;
                     }
-                    if (!Int32.TryParse( Args[1], out iObj ))
+                    if (!Int32.TryParse(Args[1], out iObj))
                     {
-                        iObj = 1024*5;
+                        iObj = 1024 * 5;
                     }
-                break;
+                    break;
 
                 default:
                     iRep = 5;
-                    iObj = 1024*5;
-                break;
-
+                    iObj = 1024 * 5;
+                    break;
             }
 
             MinLeakGen Mv_Leak = new MinLeakGen();
-            if(Mv_Leak.runTest(iRep, iObj ))
+            if (Mv_Leak.runTest(iRep, iObj))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -60,10 +61,9 @@ namespace DefaultNamespace {
             }
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
-            for(int i = 0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 MakeLeak(iObj);
             }
@@ -72,23 +72,23 @@ namespace DefaultNamespace {
 
         public void MakeLeak(int iObj)
         {
-            for(int i=0; i<iObj; i++)
+            for (int i = 0; i < iObj; i++)
             {
-                Mv_Obj[i] = new ByteObject(i/10+1);
-                Mv_Obj1[i] = new ByteObject(i/10+1);
+                Mv_Obj[i] = new ByteObject(i / 10 + 1);
+                Mv_Obj1[i] = new ByteObject(i / 10 + 1);
             }
-            for(int i=0; i<iObj; i++)
+            for (int i = 0; i < iObj; i++)
             {
                 Mv_Obj[i] = null;
                 Mv_Obj1[i] = null;
             }
         }
-
     }
 
     public class ByteObject
     {
         internal byte[] min;
+
         public ByteObject(int size)
         {
             min = new byte[size];

@@ -14,8 +14,8 @@ public static class AssemblyPartExtensions
     /// <inheritdoc />
     public static IEnumerable<string> GetReferencePaths(this AssemblyPart assemblyPart)
     {
-        var assembly =
-            assemblyPart?.Assembly ?? throw new ArgumentNullException(nameof(assemblyPart));
+        var assembly = assemblyPart?.Assembly
+            ?? throw new ArgumentNullException(nameof(assemblyPart));
 
         if (assembly.IsDynamic)
         {

@@ -6,34 +6,32 @@ namespace System.Activities.XamlIntegration
 {
     using System;
     using System.ComponentModel;
+    using System.Reflection;
     using System.Runtime;
     using System.Windows.Markup;
-    using System.Xml.Linq;
     using System.Xaml;
-    using System.Reflection;
+    using System.Xml.Linq;
 
     [MarkupExtensionReturnType(typeof(object))]
     public sealed class PropertyReferenceExtension<T> : MarkupExtension
     {
         public PropertyReferenceExtension()
-            : base()
-        {
-        }
+            : base() { }
 
-        public string PropertyName
-        {
-            get;
-            set;
-        }
+        public string PropertyName { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             if (!string.IsNullOrEmpty(this.PropertyName))
             {
-                object targetObject = ActivityWithResultConverter.GetRootTemplatedActivity(serviceProvider);
+                object targetObject = ActivityWithResultConverter.GetRootTemplatedActivity(
+                    serviceProvider
+                );
                 if (targetObject != null)
                 {
-                    PropertyDescriptor property = TypeDescriptor.GetProperties(targetObject)[PropertyName];
+                    PropertyDescriptor property = TypeDescriptor.GetProperties(targetObject)[
+                        PropertyName
+                    ];
 
                     if (property != null)
                     {
@@ -43,7 +41,8 @@ namespace System.Activities.XamlIntegration
             }
 
             throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.PropertyReferenceNotFound(this.PropertyName)));
+                new InvalidOperationException(SR.PropertyReferenceNotFound(this.PropertyName))
+            );
         }
     }
 }

@@ -10,9 +10,15 @@ namespace XUnitWrapperGenerator;
 
 internal static class SymbolExtensions
 {
-    public static IEnumerable<AttributeData> GetAttributesOnSelfAndContainingSymbols(this ISymbol symbol)
+    public static IEnumerable<AttributeData> GetAttributesOnSelfAndContainingSymbols(
+        this ISymbol symbol
+    )
     {
-        for (ISymbol? containing = symbol; containing is not null; containing = containing.ContainingSymbol)
+        for (
+            ISymbol? containing = symbol;
+            containing is not null;
+            containing = containing.ContainingSymbol
+        )
         {
             foreach (var attr in containing.GetAttributes())
             {

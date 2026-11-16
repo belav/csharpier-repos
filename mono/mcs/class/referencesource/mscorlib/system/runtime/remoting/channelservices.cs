@@ -1,8 +1,9 @@
 using System.Diagnostics.Contracts;
+
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //* File:    Channel.cs
 //*
@@ -12,117 +13,125 @@ using System.Diagnostics.Contracts;
 //*
 //* Date:    May 27, 1999
 //*
-namespace System.Runtime.Remoting.Channels {
+namespace System.Runtime.Remoting.Channels
+{
     using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
-    using System.Reflection;  
+    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;   
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Activation;
     using System.Runtime.Remoting.Messaging;
-    using System.Runtime.Remoting.Metadata; 
+    using System.Runtime.Remoting.Metadata;
     using System.Runtime.Remoting.Proxies;
     using System.Runtime.Versioning;
-    using System.Threading;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
- 
+    using System.Threading;
+
     // ChannelServices
-    
+
     [System.Runtime.InteropServices.StructLayout(LayoutKind.Sequential)]
-    internal struct Perf_Contexts {
+    internal struct Perf_Contexts
+    {
         internal volatile int cRemoteCalls;
         internal volatile int cChannels;
     };
-    
-[System.Runtime.InteropServices.ComVisible(true)]
+
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class ChannelServices
     {
         // This gets refreshed when a channel is registered/unregistered.
         private static volatile Object[] s_currentChannelData = null;
 
         [System.Security.SecuritySafeCritical] // static constructors should be safe to call
-        static ChannelServices()
-        { 
-        }
+        static ChannelServices() { }
 
         internal static Object[] CurrentChannelData
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
+            [System.Security.SecurityCritical] // auto-generated
+            get
             {
                 if (s_currentChannelData == null)
                     RefreshChannelData();
 
-                return s_currentChannelData; 
+                return s_currentChannelData;
             }
         } // CurrentChannelData
 
-
         // hide the default constructor
-        private ChannelServices()
-        {
-        }
+        private ChannelServices() { }
 
         // list of registered channels and a lock to take when adding or removing channels
         // Note that the channel list is read outside of the lock, which is why it's marked volatile.
         private static Object s_channelLock = new Object();
-        private static volatile RegisteredChannelList s_registeredChannels = new RegisteredChannelList();
-        
-    
-        // Private member variables        
+        private static volatile RegisteredChannelList s_registeredChannels =
+            new RegisteredChannelList();
+
+        // Private member variables
         // These have all been converted to getters and setters to get the effect of
         // per-AppDomain statics (note: statics are per-AppDomain now, so these members
         // could just be declared as statics on ChannelServices).
 
         private static long remoteCalls
-        { 
+        {
             get { return Thread.GetDomain().RemotingData.ChannelServicesData.remoteCalls; }
             set { Thread.GetDomain().RemotingData.ChannelServicesData.remoteCalls = value; }
         }
-        
+
         private static volatile IMessageSink xCtxChannel;
-        
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]      
+        [System.Security.SecurityCritical] // auto-generated
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ResourceExposure(ResourceScope.None)]
-        static unsafe extern Perf_Contexts* GetPrivateContextsPerfCounters();
-    
-        [SecurityCritical]
-        unsafe private static volatile Perf_Contexts *perf_Contexts = GetPrivateContextsPerfCounters(); 
-    
+        static extern unsafe Perf_Contexts* GetPrivateContextsPerfCounters();
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+        [SecurityCritical]
+        private static unsafe volatile Perf_Contexts* perf_Contexts =
+            GetPrivateContextsPerfCounters();
+
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
         public static void RegisterChannel(IChannel chnl, bool ensureSecurity)
         {
             RegisterChannelInternal(chnl, ensureSecurity);
         }
-        
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
-        [Obsolete("Use System.Runtime.Remoting.ChannelServices.RegisterChannel(IChannel chnl, bool ensureSecurity) instead.", false)]
+
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
+        [Obsolete(
+            "Use System.Runtime.Remoting.ChannelServices.RegisterChannel(IChannel chnl, bool ensureSecurity) instead.",
+            false
+        )]
         public static void RegisterChannel(IChannel chnl)
         {
-            RegisterChannelInternal(chnl, false/*ensureSecurity*/);
+            RegisterChannelInternal(
+                chnl,
+                false /*ensureSecurity*/
+            );
         }
 
-        
         static bool unloadHandlerRegistered = false;
-        [System.Security.SecurityCritical]  // auto-generated
-        unsafe internal static void RegisterChannelInternal(IChannel chnl, bool ensureSecurity)
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe void RegisterChannelInternal(IChannel chnl, bool ensureSecurity)
         {
             // Validate arguments
-            if(null == chnl)
+            if (null == chnl)
             {
                 throw new ArgumentNullException("chnl");
             }
             Contract.EndContractBlock();
-        
+
             bool fLocked = false;
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -131,11 +140,13 @@ namespace System.Runtime.Remoting.Channels {
                 String chnlName = chnl.ChannelName;
 
                 RegisteredChannelList regChnlList = s_registeredChannels;
-        
+
                 // Check to make sure that the channel has not been registered
-                if((chnlName == null) ||
-                   (chnlName.Length == 0) ||
-                   (-1 == regChnlList.FindChannelIndex(chnl.ChannelName)))
+                if (
+                    (chnlName == null)
+                    || (chnlName.Length == 0)
+                    || (-1 == regChnlList.FindChannelIndex(chnl.ChannelName))
+                )
                 {
                     if (ensureSecurity)
                     {
@@ -143,13 +154,17 @@ namespace System.Runtime.Remoting.Channels {
                         if (securableChannel != null)
                             securableChannel.IsSecured = ensureSecurity;
                         else
-                            throw new RemotingException(Environment.GetResourceString("Remoting_Channel_CannotBeSecured", chnl.ChannelName??chnl.ToString()));
-                            
+                            throw new RemotingException(
+                                Environment.GetResourceString(
+                                    "Remoting_Channel_CannotBeSecured",
+                                    chnl.ChannelName ?? chnl.ToString()
+                                )
+                            );
                     }
                     RegisteredChannel[] oldList = regChnlList.RegisteredChannels;
                     RegisteredChannel[] newList = null;
                     if (oldList == null)
-                    {                                            
+                    {
                         newList = new RegisteredChannel[1];
                     }
                     else
@@ -158,7 +173,7 @@ namespace System.Runtime.Remoting.Channels {
                     if (!unloadHandlerRegistered && !(chnl is CrossAppDomainChannel))
                     {
                         // Register a unload handler only once and if the channel being registered
-                        // is not the x-domain channel. x-domain channel does nothing inside its 
+                        // is not the x-domain channel. x-domain channel does nothing inside its
                         // StopListening implementation
                         AppDomain.CurrentDomain.DomainUnload += new EventHandler(UnloadHandler);
                         unloadHandlerRegistered = true;
@@ -167,7 +182,7 @@ namespace System.Runtime.Remoting.Channels {
                     // Add the interface to the array in priority order
                     int priority = chnl.ChannelPriority;
                     int current = 0;
-    
+
                     // Find the place in the array to insert
                     while (current < oldList.Length)
                     {
@@ -200,7 +215,8 @@ namespace System.Runtime.Remoting.Channels {
                         }
                     }
 
-                    if (perf_Contexts != null) {
+                    if (perf_Contexts != null)
+                    {
                         perf_Contexts->cChannels++;
                     }
 
@@ -208,7 +224,12 @@ namespace System.Runtime.Remoting.Channels {
                 }
                 else
                 {
-                    throw new RemotingException(Environment.GetResourceString("Remoting_ChannelNameAlreadyRegistered", chnl.ChannelName));
+                    throw new RemotingException(
+                        Environment.GetResourceString(
+                            "Remoting_ChannelNameAlreadyRegistered",
+                            chnl.ChannelName
+                        )
+                    );
                 }
 
                 RefreshChannelData();
@@ -221,16 +242,17 @@ namespace System.Runtime.Remoting.Channels {
                 }
             }
         } // RegisterChannelInternal
-    
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
-        unsafe public static void UnregisterChannel(IChannel chnl)
+
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
+        public static unsafe void UnregisterChannel(IChannel chnl)
         {
             // we allow null to be passed in, so we can use this api to trigger the
             //   refresh of the channel data <
 
-            
             bool fLocked = false;
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -239,17 +261,25 @@ namespace System.Runtime.Remoting.Channels {
                 if (chnl != null)
                 {
                     RegisteredChannelList regChnlList = s_registeredChannels;
-                
+
                     // Check to make sure that the channel has been registered
                     int matchingIdx = regChnlList.FindChannelIndex(chnl);
-                    if(-1 == matchingIdx)
+                    if (-1 == matchingIdx)
                     {
-                        throw new RemotingException(Environment.GetResourceString("Remoting_ChannelNotRegistered", chnl.ChannelName));
+                        throw new RemotingException(
+                            Environment.GetResourceString(
+                                "Remoting_ChannelNotRegistered",
+                                chnl.ChannelName
+                            )
+                        );
                     }
 
                     RegisteredChannel[] oldList = regChnlList.RegisteredChannels;
                     RegisteredChannel[] newList = null;
-                    Contract.Assert((oldList != null) && (oldList.Length != 0), "channel list should not be empty");
+                    Contract.Assert(
+                        (oldList != null) && (oldList.Length != 0),
+                        "channel list should not be empty"
+                    );
 
                     newList = new RegisteredChannel[oldList.Length - 1];
 
@@ -273,13 +303,14 @@ namespace System.Runtime.Remoting.Channels {
                             oldPos++;
                         }
                     }
-        
-                    if (perf_Contexts != null) {
+
+                    if (perf_Contexts != null)
+                    {
                         perf_Contexts->cChannels--;
                     }
 
                     s_registeredChannels = new RegisteredChannelList(newList);
-                } 
+                }
 
                 RefreshChannelData();
             } // lock (s_channelLock)
@@ -292,20 +323,19 @@ namespace System.Runtime.Remoting.Channels {
             }
         } // UnregisterChannel
 
-    
         public static IChannel[] RegisteredChannels
-        {       
-            [System.Security.SecurityCritical]  // auto-generated_required
-            get 
+        {
+            [System.Security.SecurityCritical] // auto-generated_required
+            get
             {
                 RegisteredChannelList regChnlList = s_registeredChannels;
                 int count = regChnlList.Count;
-            
+
                 if (0 == count)
                 {
                     return new IChannel[0];
                 }
-                else 
+                else
                 {
                     // we hide the CrossAppDomainChannel, so the number of visible
                     //   channels is one less than the number of registered channels.
@@ -326,9 +356,13 @@ namespace System.Runtime.Remoting.Channels {
                 }
             }
         } // RegisteredChannels
-        
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static IMessageSink CreateMessageSink(String url, Object data, out String objectURI) 
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static IMessageSink CreateMessageSink(
+            String url,
+            Object data,
+            out String objectURI
+        )
         {
             BCLDebug.Trace("REMOTE", "ChannelServices::CreateMessageSink for url " + url + "\n");
             IMessageSink msgSink = null;
@@ -336,44 +370,43 @@ namespace System.Runtime.Remoting.Channels {
 
             RegisteredChannelList regChnlList = s_registeredChannels;
             int count = regChnlList.Count;
-            
-            for(int i = 0; i < count; i++)
+
+            for (int i = 0; i < count; i++)
             {
-                if(regChnlList.IsSender(i))
+                if (regChnlList.IsSender(i))
                 {
                     IChannelSender chnl = (IChannelSender)regChnlList.GetChannel(i);
                     msgSink = chnl.CreateMessageSink(url, data, out objectURI);
-                    
-                    if(msgSink != null)
+
+                    if (msgSink != null)
                         break;
                 }
             }
-            
-            // If the object uri has not been set, set it to the url as 
+
+            // If the object uri has not been set, set it to the url as
             // default value
-            if(null == objectURI)
+            if (null == objectURI)
             {
                 objectURI = url;
             }
-            
+
             return msgSink;
         } // CreateMessageSink
-    
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal static IMessageSink CreateMessageSink(Object data)
         {
             String objectUri;
             return CreateMessageSink(null, data, out objectUri);
         } // CreateMessageSink
-    
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IChannel GetChannel(String name)
         {
             RegisteredChannelList regChnlList = s_registeredChannels;
-        
+
             int matchingIdx = regChnlList.FindChannelIndex(name);
-            if(0 <= matchingIdx)
+            if (0 <= matchingIdx)
             {
                 IChannel channel = regChnlList.GetChannel(matchingIdx);
                 if ((channel is CrossAppDomainChannel) || (channel is CrossContextChannel))
@@ -386,51 +419,52 @@ namespace System.Runtime.Remoting.Channels {
                 return null;
             }
         } // GetChannel
-        
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String[] GetUrlsForObject(MarshalByRefObject obj)
-        {        
-            if(null == obj)
+        {
+            if (null == obj)
             {
                 return null;
             }
 
             RegisteredChannelList regChnlList = s_registeredChannels;
             int count = regChnlList.Count;
-            
+
             Hashtable table = new Hashtable();
             bool fServer;
             Identity id = MarshalByRefObject.GetIdentity(obj, out fServer);
 
-            if(null != id) 
+            if (null != id)
             {
                 String uri = id.ObjURI;
 
                 if (null != uri)
                 {
-                    for(int i = 0; i < count; i++)
+                    for (int i = 0; i < count; i++)
                     {
-                        if(regChnlList.IsReceiver(i))
+                        if (regChnlList.IsReceiver(i))
                         {
                             try
                             {
-                                String[] urls = ((IChannelReceiver)regChnlList.GetChannel(i)).GetUrlsForUri(uri);
+                                String[] urls = (
+                                    (IChannelReceiver)regChnlList.GetChannel(i)
+                                ).GetUrlsForUri(uri);
                                 // Add the strings to the table
-                                for(int j = 0; j < urls.Length; j++)
+                                for (int j = 0; j < urls.Length; j++)
                                 {
                                     table.Add(urls[j], urls[j]);
                                 }
                             }
-                            catch(NotSupportedException )
+                            catch (NotSupportedException)
                             {
-                                // We do not count the channels that do not 
+                                // We do not count the channels that do not
                                 // support this method
                             }
                         }
                     }
                 }
-            }            
+            }
 
             // copy url's into string array
             ICollection keys = table.Keys;
@@ -443,9 +477,9 @@ namespace System.Runtime.Remoting.Channels {
             return urlList;
         }
 
-       // Find the channel message sink associated with a given proxy
+        // Find the channel message sink associated with a given proxy
         // <
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IMessageSink GetChannelSinkForProxy(Object obj)
         {
             IMessageSink sink = null;
@@ -456,19 +490,21 @@ namespace System.Runtime.Remoting.Channels {
                 if (null != remProxy)
                 {
                     Identity idObj = remProxy.IdentityObject;
-                    Contract.Assert(null != idObj,"null != idObj");
+                    Contract.Assert(null != idObj, "null != idObj");
                     sink = idObj.ChannelSink;
                 }
             }
 
             return sink;
         } // GetChannelSinkForProxy
-        
 
         //  Get the message sink dictionary of properties for a given proxy
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
         public static IDictionary GetChannelSinkProperties(Object obj)
         {
             IMessageSink sink = GetChannelSinkForProxy(obj);
@@ -479,21 +515,21 @@ namespace System.Runtime.Remoting.Channels {
                 //   aggregate dictionary
                 ArrayList dictionaries = new ArrayList();
 
-                do                
-                { 
+                do
+                {
                     IDictionary dict = chnlSink.Properties;
                     if (dict != null)
                         dictionaries.Add(dict);
-                
+
                     chnlSink = chnlSink.NextChannelSink;
                 } while (chnlSink != null);
-                
+
                 return new AggregateDictionary(dictionaries);
             }
             else
             {
                 IDictionary dict = sink as IDictionary;
-                if(null != dict)    
+                if (null != dict)
                 {
                     return dict;
                 }
@@ -504,18 +540,15 @@ namespace System.Runtime.Remoting.Channels {
             }
         } // GetChannelSinkProperties
 
-    
         internal static IMessageSink GetCrossContextChannelSink()
         {
-            if(null == xCtxChannel)
+            if (null == xCtxChannel)
             {
                 xCtxChannel = CrossContextChannel.MessageSink;
             }
-    
+
             return xCtxChannel;
         } // GetCrossContextChannelSink
-               
-    
 #if DEBUG
         // A few methods to count the number of calls made across appdomains,
         // processes and machines
@@ -524,23 +557,22 @@ namespace System.Runtime.Remoting.Channels {
             return remoteCalls;
         } // GetNumberOfRemoteCalls
 #endif //DEBUG
-    
-        [System.Security.SecurityCritical]  // auto-generated
-        unsafe internal static void IncrementRemoteCalls(long cCalls)
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe void IncrementRemoteCalls(long cCalls)
         {
             remoteCalls += cCalls;
             if (perf_Contexts != null)
-              perf_Contexts->cRemoteCalls += (int)cCalls;
+                perf_Contexts->cRemoteCalls += (int)cCalls;
         } // IncrementRemoteCalls
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal static void IncrementRemoteCalls()
         {
-            IncrementRemoteCalls( 1 );
+            IncrementRemoteCalls(1);
         } // IncrementRemoteCalls
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void RefreshChannelData()
         {
             bool fLocked = false;
@@ -559,7 +591,7 @@ namespace System.Runtime.Remoting.Channels {
             }
         } // RefreshChannelData
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Object[] CollectChannelDataFromChannels()
         {
             // Ensure that our native cross-context & cross-domain channels
@@ -567,7 +599,7 @@ namespace System.Runtime.Remoting.Channels {
             RemotingServices.RegisterWellKnownChannels();
 
             RegisteredChannelList regChnlList = s_registeredChannels;
-            int count = regChnlList.Count;            
+            int count = regChnlList.Count;
 
             // Compute the number of channels that implement IChannelReceiver
             int numChnls = regChnlList.ReceiverCount;
@@ -576,24 +608,30 @@ namespace System.Runtime.Remoting.Channels {
             Object[] data = new Object[numChnls];
 
             // we need to remove null entries
-            int nonNullDataCount = 0;                        
+            int nonNullDataCount = 0;
 
             // Set the channel data, names and mime types
             for (int i = 0, j = 0; i < count; i++)
             {
-
                 IChannel chnl = regChnlList.GetChannel(i);
 
                 if (null == chnl)
                 {
-                    throw new RemotingException(Environment.GetResourceString("Remoting_ChannelNotRegistered", ""));
+                    throw new RemotingException(
+                        Environment.GetResourceString("Remoting_ChannelNotRegistered", "")
+                    );
                 }
 
                 if (regChnlList.IsReceiver(i))
                 {
-                    BCLDebug.Trace("REMOTE", "Setting info for receiver " + j.ToString(CultureInfo.InvariantCulture) + "\n");
+                    BCLDebug.Trace(
+                        "REMOTE",
+                        "Setting info for receiver "
+                            + j.ToString(CultureInfo.InvariantCulture)
+                            + "\n"
+                    );
                     // Extract the data
-                    Object channelData = ((IChannelReceiver)chnl).ChannelData;                    
+                    Object channelData = ((IChannelReceiver)chnl).ChannelData;
                     data[j] = channelData;
                     if (channelData != null)
                         nonNullDataCount++;
@@ -617,7 +655,7 @@ namespace System.Runtime.Remoting.Channels {
 
                 data = nonNullData;
             }
-            
+
             return data;
         } // CollectChannelDataFromChannels
 
@@ -626,14 +664,14 @@ namespace System.Runtime.Remoting.Channels {
         {
             if (!mi.IsPublic || mi.IsStatic)
                 return false;
-     
+
             if (!mi.IsGenericMethod)
                 return true;
-     
+
             foreach (Type t in mi.GetGenericArguments())
                 if (!t.IsVisible)
                     return false;
-     
+
             return true;
         }
 
@@ -641,18 +679,19 @@ namespace System.Runtime.Remoting.Channels {
         //-----------------------  Dispatch Support   ------------------------
         //--------------------------------------------------------------------
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static ServerProcessing DispatchMessage(
             IServerChannelSinkStack sinkStack,
-            IMessage msg, 
-            out IMessage replyMsg)
+            IMessage msg,
+            out IMessage replyMsg
+        )
         {
             ServerProcessing processing = ServerProcessing.Complete;
             replyMsg = null;
-            
+
             try
-            {            
-                if(null == msg)
+            {
+                if (null == msg)
                 {
                     throw new ArgumentNullException("msg");
                 }
@@ -661,15 +700,14 @@ namespace System.Runtime.Remoting.Channels {
 
                 // we must switch to the target context of the object and call the context chains etc...
                 // Currenly XContextChannel does exactly so. So this method is just a wrapper..
-    
+
                 // <
 
-                
-                // Make sure that incoming calls are counted as a remote call. This way it 
+                // Make sure that incoming calls are counted as a remote call. This way it
                 // makes more sense on a server.
                 IncrementRemoteCalls();
-        
-                // Check if the object has been disconnected or if it is 
+
+                // Check if the object has been disconnected or if it is
                 // a well known object then we have to create it lazily.
                 ServerIdentity srvId = CheckDisconnectedOrCreateWellKnownObject(msg);
 
@@ -679,10 +717,9 @@ namespace System.Runtime.Remoting.Channels {
                 if (srvId.ServerType == typeof(System.AppDomain))
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_AppDomainsCantBeCalledRemotely"));
+                        Environment.GetResourceString("Remoting_AppDomainsCantBeCalledRemotely")
+                    );
                 }
-                
 
                 IMethodCallMessage mcm = msg as IMethodCallMessage;
 
@@ -694,8 +731,8 @@ namespace System.Runtime.Remoting.Channels {
                     if (!typeof(IMessageSink).IsAssignableFrom(srvId.ServerType))
                     {
                         throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_AppDomainsCantBeCalledRemotely"));
+                            Environment.GetResourceString("Remoting_AppDomainsCantBeCalledRemotely")
+                        );
                     }
 
                     processing = ServerProcessing.Complete;
@@ -704,25 +741,29 @@ namespace System.Runtime.Remoting.Channels {
                 else
                 {
                     // It's an IMethodCallMessage.
-                
-                    // Check if the method is one way. Dispatch one way calls in 
+
+                    // Check if the method is one way. Dispatch one way calls in
                     // an asynchronous manner
-                    MethodInfo method = (MethodInfo)mcm.MethodBase;                                  
-    
+                    MethodInfo method = (MethodInfo)mcm.MethodBase;
+
                     // X-process / X-machine calls should be to non-static
                     // public methods only! Non-public or static methods can't
                     // be called remotely.
-                    if (!IsMethodReallyPublic(method) && 
-                          !RemotingServices.IsMethodAllowedRemotely(method))
+                    if (
+                        !IsMethodReallyPublic(method)
+                        && !RemotingServices.IsMethodAllowedRemotely(method)
+                    )
                     {
                         throw new RemotingException(
                             Environment.GetResourceString(
-                                "Remoting_NonPublicOrStaticCantBeCalledRemotely"));
+                                "Remoting_NonPublicOrStaticCantBeCalledRemotely"
+                            )
+                        );
                     }
 
                     RemotingMethodCachedData cache = (RemotingMethodCachedData)
                         InternalRemotingServices.GetReflectionCachedData(method);
-                        
+
                     /*
                         
 
@@ -751,198 +792,202 @@ namespace System.Runtime.Remoting.Channels {
 
 
 
-*/                  
-                    if(RemotingServices.IsOneWay(method))                    
+*/
+                    if (RemotingServices.IsOneWay(method))
                     {
                         processing = ServerProcessing.OneWay;
                         ChannelServices.GetCrossContextChannelSink().AsyncProcessMessage(msg, null);
                     }
                     else
-                    {                    
+                    {
                         // regular processing
                         processing = ServerProcessing.Complete;
                         if (!srvId.ServerType.IsContextful)
                         {
-                            Object[] args = new Object[]{msg, srvId.ServerContext};
-                            replyMsg = (IMessage) CrossContextChannel.SyncProcessMessageCallback(args);                            
+                            Object[] args = new Object[] { msg, srvId.ServerContext };
+                            replyMsg = (IMessage)
+                                CrossContextChannel.SyncProcessMessageCallback(args);
                         }
-                        else 
-                            replyMsg = ChannelServices.GetCrossContextChannelSink().SyncProcessMessage(msg);
+                        else
+                            replyMsg = ChannelServices
+                                .GetCrossContextChannelSink()
+                                .SyncProcessMessage(msg);
                     }
                 } // end of case for IMethodCallMessage
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                if(processing != ServerProcessing.OneWay)
+                if (processing != ServerProcessing.OneWay)
                 {
                     try
-                    {                    
-                        IMethodCallMessage mcm = 
-                            (IMethodCallMessage) ((msg!=null)?msg:new ErrorMessage());
+                    {
+                        IMethodCallMessage mcm = (IMethodCallMessage)(
+                            (msg != null) ? msg : new ErrorMessage()
+                        );
                         replyMsg = (IMessage)new ReturnMessage(e, mcm);
                         if (msg != null)
                         {
                             ((ReturnMessage)replyMsg).SetLogicalCallContext(
-                                    (LogicalCallContext)
-                                        msg.Properties[Message.CallContextKey]);
+                                (LogicalCallContext)msg.Properties[Message.CallContextKey]
+                            );
                         }
                     }
-                    catch(Exception )
+                    catch (Exception)
                     {
                         // Fatal exception .. ignore
                     }
                 }
-            }               
+            }
 
             return processing;
         } // DispatchMessage
-        
-       // This method is used by the channel to dispatch the incoming messages
-       // to the server side chain(s) based on the URI embedded in the message.
-       // The URI uniquely identifies the receiving object.
-       // 
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        // This method is used by the channel to dispatch the incoming messages
+        // to the server side chain(s) based on the URI embedded in the message.
+        // The URI uniquely identifies the receiving object.
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IMessage SyncDispatchMessage(IMessage msg)
-        {            
+        {
             IMessage msgRet = null;
             bool fIsOneWay = false;
-            
+
             try
-            {            
-                if(null == msg)
+            {
+                if (null == msg)
                 {
                     throw new ArgumentNullException("msg");
                 }
 
-
-
                 // For ContextBoundObject's,
                 // we must switch to the target context of the object and call the context chains etc...
                 // Currenly XContextChannel does exactly so. So this method is just a wrapper..
-    
-                
-                // Make sure that incoming calls are counted as a remote call. This way it 
+
+                // Make sure that incoming calls are counted as a remote call. This way it
                 // makes more sense on a server.
                 IncrementRemoteCalls();
 
                 // <
                 if (!(msg is TransitionCall))
                 {
-                    // Check if the object has been disconnected or if it is 
+                    // Check if the object has been disconnected or if it is
                     // a well known object then we have to create it lazily.
                     CheckDisconnectedOrCreateWellKnownObject(msg);
 
                     MethodBase method = ((IMethodMessage)msg).MethodBase;
 
-                    // Check if the method is one way. Dispatch one way calls in 
-                    // an asynchronous manner                    
+                    // Check if the method is one way. Dispatch one way calls in
+                    // an asynchronous manner
                     fIsOneWay = RemotingServices.IsOneWay(method);
                 }
 
                 // <
                 IMessageSink nextSink = ChannelServices.GetCrossContextChannelSink();
-                
-                if(!fIsOneWay)
-                {                    
-                    msgRet = nextSink.SyncProcessMessage(msg);  
+
+                if (!fIsOneWay)
+                {
+                    msgRet = nextSink.SyncProcessMessage(msg);
                 }
                 else
                 {
                     nextSink.AsyncProcessMessage(msg, null);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                if(!fIsOneWay)
+                if (!fIsOneWay)
                 {
                     try
-                    {                    
-                        IMethodCallMessage mcm = 
-                            (IMethodCallMessage) ((msg!=null)?msg:new ErrorMessage());
+                    {
+                        IMethodCallMessage mcm = (IMethodCallMessage)(
+                            (msg != null) ? msg : new ErrorMessage()
+                        );
                         msgRet = (IMessage)new ReturnMessage(e, mcm);
-                        if (msg!=null)
+                        if (msg != null)
                         {
-                            ((ReturnMessage)msgRet).SetLogicalCallContext(
-                                mcm.LogicalCallContext);
+                            ((ReturnMessage)msgRet).SetLogicalCallContext(mcm.LogicalCallContext);
                         }
                     }
-                    catch(Exception )
+                    catch (Exception)
                     {
                         // Fatal exception .. ignore
                     }
                 }
-            }               
+            }
 
             return msgRet;
         }
 
-       // This method is used by the channel to dispatch the incoming messages
-       // to the server side chain(s) based on the URI embedded in the message.
-       // The URI uniquely identifies the receiving object.
-       // 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        // This method is used by the channel to dispatch the incoming messages
+        // to the server side chain(s) based on the URI embedded in the message.
+        // The URI uniquely identifies the receiving object.
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IMessageCtrl AsyncDispatchMessage(IMessage msg, IMessageSink replySink)
         {
             IMessageCtrl ctrl = null;
 
             try
             {
-                if(null == msg)
+                if (null == msg)
                 {
                     throw new ArgumentNullException("msg");
                 }
-            
+
                 // we must switch to the target context of the object and call the context chains etc...
                 // Currenly XContextChannel does exactly so. So this method is just a wrapper..
-    
-                // Make sure that incoming calls are counted as a remote call. This way it 
+
+                // Make sure that incoming calls are counted as a remote call. This way it
                 // makes more sense on a server.
                 IncrementRemoteCalls();
-                
+
                 if (!(msg is TransitionCall))
                 {
-                    // Check if the object has been disconnected or if it is 
+                    // Check if the object has been disconnected or if it is
                     // a well known object then we have to create it lazily.
-                    CheckDisconnectedOrCreateWellKnownObject(msg);    
+                    CheckDisconnectedOrCreateWellKnownObject(msg);
                 }
-    
+
                 // <
 
-                ctrl = ChannelServices.GetCrossContextChannelSink().AsyncProcessMessage(msg, replySink);
+                ctrl = ChannelServices
+                    .GetCrossContextChannelSink()
+                    .AsyncProcessMessage(msg, replySink);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                if(null != replySink)
+                if (null != replySink)
                 {
                     try
                     {
                         IMethodCallMessage mcm = (IMethodCallMessage)msg;
                         ReturnMessage retMsg = new ReturnMessage(e, (IMethodCallMessage)msg);
-                        if (msg!=null)
+                        if (msg != null)
                         {
                             retMsg.SetLogicalCallContext(mcm.LogicalCallContext);
                         }
                         replySink.SyncProcessMessage(retMsg);
                     }
-                    catch(Exception )
+                    catch (Exception)
                     {
                         // Fatal exception... ignore
-                    }                    
+                    }
                 }
             }
 
             return ctrl;
         } // AsyncDispatchMessage
 
-
         // Creates a channel sink chain (adds special dispatch sink to the end of the chain)
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IServerChannelSink CreateServerChannelSinkChain(
-            IServerChannelSinkProvider provider, IChannelReceiver channel)
+            IServerChannelSinkProvider provider,
+            IChannelReceiver channel
+        )
         {
             if (provider == null)
-                return new DispatchChannelSink();       
-            
+                return new DispatchChannelSink();
+
             // add dispatch provider to end (first find last provider)
             IServerChannelSinkProvider lastProvider = provider;
             while (lastProvider.Next != null)
@@ -952,24 +997,25 @@ namespace System.Runtime.Remoting.Channels {
             IServerChannelSink sinkChain = provider.CreateSink(channel);
 
             // remove dispatch provider from end
-            lastProvider.Next = null;            
+            lastProvider.Next = null;
 
             return sinkChain;
         } // CreateServerChannelSinkChain
-        
-        
 
-        // Check if the object has been disconnected or if it is 
+        // Check if the object has been disconnected or if it is
         // a well known object then we have to create it lazily.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static ServerIdentity CheckDisconnectedOrCreateWellKnownObject(IMessage msg)
         {
             ServerIdentity ident = InternalSink.GetServerIdentity(msg);
-            
-            BCLDebug.Trace("REMOTE", "Identity found = " + (ident == null ? "null" : "ServerIdentity"));
 
-            // If the identity is null, then we should check whether the 
-            // request if for a well known object. If yes, then we should 
+            BCLDebug.Trace(
+                "REMOTE",
+                "Identity found = " + (ident == null ? "null" : "ServerIdentity")
+            );
+
+            // If the identity is null, then we should check whether the
+            // request if for a well known object. If yes, then we should
             // create the well known object lazily and marshal it.
             if ((ident == null) || ident.IsRemoteDisconnected())
             {
@@ -982,39 +1028,42 @@ namespace System.Runtime.Remoting.Channels {
                     {
                         // The uri was a registered wellknown object.
                         ident = newIdent;
-                        BCLDebug.Trace("REMOTE", "Identity created = " + (ident == null ? "null" : "ServerIdentity"));
+                        BCLDebug.Trace(
+                            "REMOTE",
+                            "Identity created = " + (ident == null ? "null" : "ServerIdentity")
+                        );
                     }
-                }  
-
+                }
             }
-
 
             if ((ident == null) || (ident.IsRemoteDisconnected()))
             {
                 String uri = InternalSink.GetURI(msg);
-                throw new RemotingException(Environment.GetResourceString("Remoting_Disconnected",uri));                
+                throw new RemotingException(
+                    Environment.GetResourceString("Remoting_Disconnected", uri)
+                );
             }
             return ident;
         }
-        
+
         // Channel Services AppDomain Unload Event Handler
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void UnloadHandler(Object sender, EventArgs e)
         {
             StopListeningOnAllChannels();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void StopListeningOnAllChannels()
         {
             try
             {
                 RegisteredChannelList regChnlList = s_registeredChannels;
-                int count = regChnlList.Count;    
-            
-                for(int i = 0; i < count; i++)
+                int count = regChnlList.Count;
+
+                for (int i = 0; i < count; i++)
                 {
-                    if(regChnlList.IsReceiver(i))
+                    if (regChnlList.IsReceiver(i))
                     {
                         IChannelReceiver chnl = (IChannelReceiver)regChnlList.GetChannel(i);
                         chnl.StopListening(null);
@@ -1027,106 +1076,110 @@ namespace System.Runtime.Remoting.Channels {
             }
         }
 
-
-
-
         //
         // INTERNAL PROFILER NOTIFICATION SERVICES
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void NotifyProfiler(IMessage msg, RemotingProfilerEvent profilerEvent)
         {
             switch (profilerEvent)
             {
-            
-            case RemotingProfilerEvent.ClientSend:
-            {
-                if (RemotingServices.CORProfilerTrackRemoting())
+                case RemotingProfilerEvent.ClientSend:
                 {
-                    Guid g;
-
-                    RemotingServices.CORProfilerRemotingClientSendingMessage(out g, false);
-
-                    if (RemotingServices.CORProfilerTrackRemotingCookie())
-                        msg.Properties["CORProfilerCookie"] = g;
-                }
-                break;
-            } // case RemotingProfilerEvent.ClientSend
-
-            case RemotingProfilerEvent.ClientReceive:
-            {
-                if (RemotingServices.CORProfilerTrackRemoting())
-                {
-                    Guid g = Guid.Empty;
-
-                    if (RemotingServices.CORProfilerTrackRemotingCookie())
+                    if (RemotingServices.CORProfilerTrackRemoting())
                     {
-                        Object obj = msg.Properties["CORProfilerCookie"];
+                        Guid g;
 
-                        if (obj != null)
-                        {
-                            g = (Guid) obj;
-                        }
+                        RemotingServices.CORProfilerRemotingClientSendingMessage(out g, false);
+
+                        if (RemotingServices.CORProfilerTrackRemotingCookie())
+                            msg.Properties["CORProfilerCookie"] = g;
                     }
+                    break;
+                } // case RemotingProfilerEvent.ClientSend
 
-                    RemotingServices.CORProfilerRemotingClientReceivingReply(g, false);
-                }
-                break;
-            } // case RemotingProfilerEvent.ClientReceive
-            
+                case RemotingProfilerEvent.ClientReceive:
+                {
+                    if (RemotingServices.CORProfilerTrackRemoting())
+                    {
+                        Guid g = Guid.Empty;
+
+                        if (RemotingServices.CORProfilerTrackRemotingCookie())
+                        {
+                            Object obj = msg.Properties["CORProfilerCookie"];
+
+                            if (obj != null)
+                            {
+                                g = (Guid)obj;
+                            }
+                        }
+
+                        RemotingServices.CORProfilerRemotingClientReceivingReply(g, false);
+                    }
+                    break;
+                } // case RemotingProfilerEvent.ClientReceive
             } // switch (event)
-        } // NotifyProfiler        
-
-
+        } // NotifyProfiler
 
         // This is a helper used by UrlObjRef's.
         // Finds an http channel and returns first url for this object.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static String FindFirstHttpUrlForObject(String objectUri)
-        {                    
+        {
             if (objectUri == null)
-                return null;       
+                return null;
 
             RegisteredChannelList regChnlList = s_registeredChannels;
-            int count = regChnlList.Count;    
+            int count = regChnlList.Count;
 
             for (int i = 0; i < count; i++)
             {
-                if(regChnlList.IsReceiver(i))
-                {       
+                if (regChnlList.IsReceiver(i))
+                {
                     IChannelReceiver chnl = (IChannelReceiver)regChnlList.GetChannel(i);
                     String chnlType = chnl.GetType().FullName;
-                    if ((String.CompareOrdinal(chnlType, "System.Runtime.Remoting.Channels.Http.HttpChannel") == 0) ||
-                        (String.CompareOrdinal(chnlType, "System.Runtime.Remoting.Channels.Http.HttpServerChannel") == 0))
-                    {                                            
+                    if (
+                        (
+                            String.CompareOrdinal(
+                                chnlType,
+                                "System.Runtime.Remoting.Channels.Http.HttpChannel"
+                            ) == 0
+                        )
+                        || (
+                            String.CompareOrdinal(
+                                chnlType,
+                                "System.Runtime.Remoting.Channels.Http.HttpServerChannel"
+                            ) == 0
+                        )
+                    )
+                    {
                         String[] urls = chnl.GetUrlsForUri(objectUri);
                         if ((urls != null) && (urls.Length > 0))
                             return urls[0];
                     }
-                }                               
-            }      
+                }
+            }
 
             return null;
         } // FindFirstHttpUrlForObject
 
-
         //
         // DEBUG Helpers
-        //   Note: These methods should be included even in retail builds so that 
+        //   Note: These methods should be included even in retail builds so that
         //     they can be called from the debugger.
         //
 #if DEBUG
         internal static void DumpRegisteredChannels()
         {
-            // To use from cordbg: 
+            // To use from cordbg:
             //   f System.Runtime.Remoting.Channels.ChannelServices::DumpRegisteredChannels
 
             RegisteredChannelList regChnlList = s_registeredChannels;
-            int count = regChnlList.Count; 
-        
-            Console.Error.WriteLine("Registered Channels:");            
-        
+            int count = regChnlList.Count;
+
+            Console.Error.WriteLine("Registered Channels:");
+
             for (int i = 0; i < count; i++)
             {
                 IChannel chnl = regChnlList.GetChannel(i);
@@ -1134,65 +1187,56 @@ namespace System.Runtime.Remoting.Channels {
             }
         } // DumpRegisteredChannels
 #endif // DEBUG
-
-
     } // class ChannelServices
-
 
     // used by ChannelServices.NotifyProfiler
     [Serializable]
     internal enum RemotingProfilerEvent
     {
         ClientSend,
-        ClientReceive
+        ClientReceive,
     } // RemotingProfilerEvent
 
-    
-    
-    
     internal class RegisteredChannel
     {
         // private member variables
         private IChannel channel;
         private byte flags;
-        private const byte SENDER      = 0x1;
-        private const byte RECEIVER    = 0x2;
-    
+        private const byte SENDER = 0x1;
+        private const byte RECEIVER = 0x2;
+
         internal RegisteredChannel(IChannel chnl)
         {
             channel = chnl;
             flags = 0;
-            if(chnl is IChannelSender)
+            if (chnl is IChannelSender)
             {
                 flags |= SENDER;
             }
-            if(chnl is IChannelReceiver)
+            if (chnl is IChannelReceiver)
             {
                 flags |= RECEIVER;
             }
         }
-    
+
         internal virtual IChannel Channel
         {
             get { return channel; }
         }
-    
+
         internal virtual bool IsSender()
         {
             return ((flags & SENDER) != 0);
         }
-    
+
         internal virtual bool IsReceiver()
         {
             return ((flags & RECEIVER) != 0);
         }
-    }// class RegisteredChannel
-
-
+    } // class RegisteredChannel
 
     // This list should be considered immutable once created.
     //   <
-
 
     internal class RegisteredChannelList
     {
@@ -1215,7 +1259,7 @@ namespace System.Runtime.Remoting.Channels {
 
         internal int Count
         {
-            get 
+            get
             {
                 if (_channels == null)
                     return 0;
@@ -1225,7 +1269,7 @@ namespace System.Runtime.Remoting.Channels {
         } // Count
 
         internal IChannel GetChannel(int index)
-        {                
+        {
             return _channels[index].Channel;
         } // GetChannel
 
@@ -1237,70 +1281,71 @@ namespace System.Runtime.Remoting.Channels {
         internal bool IsReceiver(int index)
         {
             return _channels[index].IsReceiver();
-        } // IsReceiver        
+        } // IsReceiver
 
         internal int ReceiverCount
         {
-            get 
+            get
             {
                 if (_channels == null)
                     return 0;
-                
+
                 int total = 0;
                 for (int i = 0; i < _channels.Length; i++)
                 {
                     if (IsReceiver(i))
                         total++;
                 }
-                
+
                 return total;
             }
         } // ReceiverCount
-    
+
         internal int FindChannelIndex(IChannel channel)
         {
             Object chnlAsObject = (Object)channel;
-        
+
             for (int i = 0; i < _channels.Length; i++)
             {
                 if (chnlAsObject == (Object)GetChannel(i))
-                    return i;                    
+                    return i;
             }
 
             return -1;
         } // FindChannelIndex
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal int FindChannelIndex(String name)
-        {        
+        {
             for (int i = 0; i < _channels.Length; i++)
             {
-                if(String.Compare(name, GetChannel(i).ChannelName, StringComparison.OrdinalIgnoreCase) == 0)
-                    return i;                
+                if (
+                    String.Compare(
+                        name,
+                        GetChannel(i).ChannelName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                    return i;
             }
 
             return -1;
         } // FindChannelIndex
-        
-        
     } // class RegisteredChannelList
-    
-
-
 
     internal class ChannelServicesData
-    {        
+    {
         internal long remoteCalls = 0;
         internal CrossContextChannel xctxmessageSink = null;
         internal CrossAppDomainChannel xadmessageSink = null;
         internal bool fRegisterWellKnownChannels = false;
     }
 
-   //
-   // Terminator sink used for profiling so that we can intercept asynchronous
-   // replies on the server side.
-   //  
-    
+    //
+    // Terminator sink used for profiling so that we can intercept asynchronous
+    // replies on the server side.
+    //
+
     /* package scope */
     internal class ServerAsyncReplyTerminatorSink : IMessageSink
     {
@@ -1308,19 +1353,25 @@ namespace System.Runtime.Remoting.Channels {
 
         internal ServerAsyncReplyTerminatorSink(IMessageSink nextSink)
         {
-            Contract.Assert(nextSink != null,
-                            "null IMessageSink passed to ServerAsyncReplyTerminatorSink ctor.");
+            Contract.Assert(
+                nextSink != null,
+                "null IMessageSink passed to ServerAsyncReplyTerminatorSink ctor."
+            );
             _nextSink = nextSink;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public virtual IMessage SyncProcessMessage(IMessage replyMsg)
         {
             // If this class has been brought into the picture, then the following must be true.
-            Contract.Assert(RemotingServices.CORProfilerTrackRemoting(),
-                            "CORProfilerTrackRemoting returned false, but we're in AsyncProcessMessage!");
-            Contract.Assert(RemotingServices.CORProfilerTrackRemotingAsync(),
-                            "CORProfilerTrackRemoting returned false, but we're in AsyncProcessMessage!");
+            Contract.Assert(
+                RemotingServices.CORProfilerTrackRemoting(),
+                "CORProfilerTrackRemoting returned false, but we're in AsyncProcessMessage!"
+            );
+            Contract.Assert(
+                RemotingServices.CORProfilerTrackRemotingAsync(),
+                "CORProfilerTrackRemoting returned false, but we're in AsyncProcessMessage!"
+            );
 
             Guid g;
 
@@ -1334,8 +1385,8 @@ namespace System.Runtime.Remoting.Channels {
             // Now that we've done the intercepting, pass the message on to the regular chain
             return _nextSink.SyncProcessMessage(replyMsg);
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         public virtual IMessageCtrl AsyncProcessMessage(IMessage replyMsg, IMessageSink replySink)
         {
             // Since this class is only used for intercepting async replies, this function should
@@ -1344,14 +1395,11 @@ namespace System.Runtime.Remoting.Channels {
 
             return null;
         }
-    
+
         public IMessageSink NextSink
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return _nextSink;
-            }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _nextSink; }
         }
 
         // Do I need a finalize here?

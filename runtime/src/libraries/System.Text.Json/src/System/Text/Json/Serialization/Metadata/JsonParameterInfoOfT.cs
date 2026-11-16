@@ -15,16 +15,20 @@ namespace System.Text.Json.Serialization.Metadata
         public new JsonPropertyInfo<T> MatchingProperty { get; }
         public new T? DefaultValue { get; }
 
-        public JsonParameterInfo(JsonParameterInfoValues parameterInfoValues, JsonPropertyInfo<T> matchingPropertyInfo)
+        public JsonParameterInfo(
+            JsonParameterInfoValues parameterInfoValues,
+            JsonPropertyInfo<T> matchingPropertyInfo
+        )
             : base(parameterInfoValues, matchingPropertyInfo)
         {
             Debug.Assert(parameterInfoValues.ParameterType == typeof(T));
             Debug.Assert(matchingPropertyInfo.IsConfigured);
 
             MatchingProperty = matchingPropertyInfo;
-            DefaultValue = parameterInfoValues.HasDefaultValue && parameterInfoValues.DefaultValue is not null
-                ? (T)parameterInfoValues.DefaultValue
-                : default;
+            DefaultValue =
+                parameterInfoValues.HasDefaultValue && parameterInfoValues.DefaultValue is not null
+                    ? (T)parameterInfoValues.DefaultValue
+                    : default;
 
             base.DefaultValue = DefaultValue;
         }

@@ -14,7 +14,11 @@ namespace System.Text.RegularExpressions
     /// </summary>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(CollectionDebuggerProxy<Group>))]
-    public class GroupCollection : IList<Group>, IReadOnlyList<Group>, IList, IReadOnlyDictionary<string, Group>
+    public class GroupCollection
+        : IList<Group>,
+            IReadOnlyList<Group>,
+            IList,
+            IReadOnlyDictionary<string, Group>
     {
         private readonly Match _match;
         private readonly Hashtable? _captureMap;
@@ -37,9 +41,10 @@ namespace System.Text.RegularExpressions
 
         public Group this[int groupnum] => GetGroup(groupnum);
 
-        public Group this[string groupname] => _match._regex is null ?
-            Group.s_emptyGroup :
-            GetGroup(_match._regex.GroupNumberFromName(groupname));
+        public Group this[string groupname] =>
+            _match._regex is null
+                ? Group.s_emptyGroup
+                : GetGroup(_match._regex.GroupNumberFromName(groupname));
 
         /// <summary>Provides an enumerator in the same order as Item[].</summary>
         public IEnumerator GetEnumerator() => new Enumerator(this);
@@ -80,7 +85,12 @@ namespace System.Text.RegularExpressions
                 for (int i = 0; i < _groups.Length; i++)
                 {
                     string groupname = _match._regex!.GroupNameFromNumber(i + 1);
-                    _groups[i] = new Group(_match.Text, _match._matches[i + 1], _match._matchcount[i + 1], groupname);
+                    _groups[i] = new Group(
+                        _match.Text,
+                        _match._matches[i + 1],
+                        _match._matchcount[i + 1],
+                        groupname
+                    );
                 }
             }
 
@@ -156,8 +166,7 @@ namespace System.Text.RegularExpressions
         void ICollection<Group>.Clear() =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
-        bool ICollection<Group>.Contains(Group item) =>
-            ((IList<Group>)this).IndexOf(item) >= 0;
+        bool ICollection<Group>.Contains(Group item) => ((IList<Group>)this).IndexOf(item) >= 0;
 
         bool ICollection<Group>.Remove(Group item) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
@@ -165,8 +174,7 @@ namespace System.Text.RegularExpressions
         int IList.Add(object? value) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
-        void IList.Clear() =>
-            throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        void IList.Clear() => throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
         bool IList.Contains(object? value) =>
             value is Group other && ((ICollection<Group>)this).Contains(other);
@@ -191,8 +199,9 @@ namespace System.Text.RegularExpressions
             set => throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
         }
 
-        IEnumerator<KeyValuePair<string, Group>> IEnumerable<KeyValuePair<string, Group>>.GetEnumerator() =>
-            new Enumerator(this);
+        IEnumerator<KeyValuePair<string, Group>> IEnumerable<
+            KeyValuePair<string, Group>
+        >.GetEnumerator() => new Enumerator(this);
 
         public bool TryGetValue(string key, [NotNullWhen(true)] out Group? value)
         {
@@ -231,7 +240,9 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        private sealed class Enumerator : IEnumerator<Group>, IEnumerator<KeyValuePair<string, Group>>
+        private sealed class Enumerator
+            : IEnumerator<Group>,
+                IEnumerator<KeyValuePair<string, Group>>
         {
             private readonly GroupCollection _collection;
             private int _index;
@@ -281,7 +292,6 @@ namespace System.Text.RegularExpressions
 
                     Group value = _collection[_index];
                     return new KeyValuePair<string, Group>(value.Name, value);
-
                 }
             }
 

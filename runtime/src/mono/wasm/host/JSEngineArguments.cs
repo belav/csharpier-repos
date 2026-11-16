@@ -22,16 +22,28 @@ internal sealed class JSEngineArguments
     {
         CommonConfig = commonConfig;
 
-        if (CommonConfig.Host is not (WasmHost.JavaScriptCore or WasmHost.NodeJS or WasmHost.SpiderMonkey or WasmHost.V8))
-            throw new ArgumentException($"Internal error: host {CommonConfig.Host} not supported as a jsengine");
+        if (
+            CommonConfig.Host
+            is not (
+                WasmHost.JavaScriptCore
+                or WasmHost.NodeJS
+                or WasmHost.SpiderMonkey
+                or WasmHost.V8
+            )
+        )
+            throw new ArgumentException(
+                $"Internal error: host {CommonConfig.Host} not supported as a jsengine"
+            );
 
         ParseJsonProperties(CommonConfig.HostConfig.Properties);
     }
 
     private void ParseJsonProperties(Dictionary<string, JsonElement>? properties)
     {
-        if (properties?.TryGetValue("js-path", out JsonElement jsPathElement) == true &&
-            jsPathElement.GetString() is string parsedPath)
+        if (
+            properties?.TryGetValue("js-path", out JsonElement jsPathElement) == true
+            && jsPathElement.GetString() is string parsedPath
+        )
             JSPath = parsedPath;
     }
 

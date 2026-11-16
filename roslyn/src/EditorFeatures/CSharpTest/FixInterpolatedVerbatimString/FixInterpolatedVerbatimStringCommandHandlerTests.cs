@@ -30,30 +30,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
             var workspace = TestWorkspace.CreateCSharp(inputMarkup);
             var document = workspace.Documents.Single();
             var view = document.GetTextView();
-            view.SetSelection(document.SelectedSpans.Single().ToSnapshotSpan(view.TextBuffer.CurrentSnapshot));
+            view.SetSelection(
+                document.SelectedSpans.Single().ToSnapshotSpan(view.TextBuffer.CurrentSnapshot)
+            );
             return workspace;
         }
 
-        private static (string quoteCharSnapshotText, int quoteCharCaretPosition) TypeQuoteChar(TestWorkspace workspace)
+        private static (string quoteCharSnapshotText, int quoteCharCaretPosition) TypeQuoteChar(
+            TestWorkspace workspace
+        )
         {
             var view = workspace.Documents.Single().GetTextView();
-            var commandHandler = workspace.ExportProvider.GetCommandHandler<FixInterpolatedVerbatimStringCommandHandler>(nameof(FixInterpolatedVerbatimStringCommandHandler));
+            var commandHandler =
+                workspace.ExportProvider.GetCommandHandler<FixInterpolatedVerbatimStringCommandHandler>(
+                    nameof(FixInterpolatedVerbatimStringCommandHandler)
+                );
 
             string quoteCharSnapshotText = null;
             int quoteCharCaretPosition = default;
 
-            commandHandler.ExecuteCommand(new TypeCharCommandArgs(view, view.TextBuffer, '"'),
+            commandHandler.ExecuteCommand(
+                new TypeCharCommandArgs(view, view.TextBuffer, '"'),
                 () =>
                 {
-                    var editorOperations = workspace.GetService<IEditorOperationsFactoryService>().GetEditorOperations(view);
-                    editorOperations.InsertText("""
+                    var editorOperations = workspace
+                        .GetService<IEditorOperationsFactoryService>()
+                        .GetEditorOperations(view);
+                    editorOperations.InsertText(
+                        """
                         "
-                        """);
+                        """
+                    );
 
                     quoteCharSnapshotText = view.TextBuffer.CurrentSnapshot.GetText();
                     quoteCharCaretPosition = view.Caret.Position.BufferPosition.Position;
-
-                }, TestCommandExecutionContext.Create());
+                },
+                TestCommandExecutionContext.Create()
+            );
 
             return (quoteCharSnapshotText, quoteCharCaretPosition);
         }
@@ -64,12 +77,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
             var (quoteCharSnapshotText, quoteCharCaretPosition) = TypeQuoteChar(workspace);
             var view = workspace.Documents.Single().GetTextView();
 
-            MarkupTestFile.GetSpans(expectedOutputMarkup, out var expectedOutput, out var expectedSpans);
+            MarkupTestFile.GetSpans(
+                expectedOutputMarkup,
+                out var expectedOutput,
+                out var expectedSpans
+            );
 
             Assert.Equal(expectedOutput, view.TextBuffer.CurrentSnapshot.GetText());
             Assert.Equal(expectedSpans.Single().Start, view.Caret.Position.BufferPosition.Position);
 
-            var history = workspace.GetService<ITextUndoHistoryRegistry>().GetHistory(view.TextBuffer);
+            var history = workspace
+                .GetService<ITextUndoHistoryRegistry>()
+                .GetHistory(view.TextBuffer);
             history.Undo(count: 1);
 
             // Ensure that after undo, the ordering fix is undone but the quote remains inserted
@@ -90,7 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
             Assert.Equal(quoteCharSnapshotText, view.TextBuffer.CurrentSnapshot.GetText());
             Assert.Equal(quoteCharCaretPosition, view.Caret.Position.BufferPosition.Position);
 
-            var history = workspace.GetService<ITextUndoHistoryRegistry>().GetHistory(view.TextBuffer);
+            var history = workspace
+                .GetService<ITextUndoHistoryRegistry>()
+                .GetHistory(view.TextBuffer);
             history.Undo(count: 1);
 
             // Ensure that after undo, the quote is removed because the command made no changes
@@ -119,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = $@"[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -134,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = $@[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -149,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = @[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -164,20 +188,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = $[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
-        public void TestMissingInEmptyFileAfterAtSignDollarSign()
-            => TestHandled(@"@$[||]", @"$@""[||]");
+        public void TestMissingInEmptyFileAfterAtSignDollarSign() =>
+            TestHandled(@"@$[||]", @"$@""[||]");
 
         [WpfFact]
-        public void TestMissingInEmptyFileAfterDollarSign()
-            => TestNotHandled(@"$[||]");
+        public void TestMissingInEmptyFileAfterDollarSign() => TestNotHandled(@"$[||]");
 
         [WpfFact]
-        public void TestMissingInEmptyFile()
-            => TestNotHandled(@"[||]");
+        public void TestMissingInEmptyFile() => TestNotHandled(@"[||]");
 
         [WpfFact]
         public void TestAfterAtSignDollarSignEndOfFile()
@@ -196,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                     void M()
                     {
                         var v = $@"[||]
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -208,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 {
                     @$[||]
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -223,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = // @$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -238,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = /* @$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -253,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = "@$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -268,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = @"@$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -283,7 +312,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = $"@$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -298,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = $@"@$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -313,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                         var v = @$"@$[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -339,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                                 /* b */ $@"[||] // c
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

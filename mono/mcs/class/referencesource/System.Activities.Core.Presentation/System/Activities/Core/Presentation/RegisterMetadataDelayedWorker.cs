@@ -22,20 +22,26 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.delayedWorkItems == null)
                 {
-                    this.delayedWorkItems = new Dictionary<string, List<Action<AttributeTableBuilder>>>();
+                    this.delayedWorkItems =
+                        new Dictionary<string, List<Action<AttributeTableBuilder>>>();
                 }
 
                 return this.delayedWorkItems;
             }
         }
 
-        public void RegisterMetadataDelayed(string assemblyName, Action<AttributeTableBuilder> delayedWork)
+        public void RegisterMetadataDelayed(
+            string assemblyName,
+            Action<AttributeTableBuilder> delayedWork
+        )
         {
             Fx.Assert(assemblyName != null, "Checked by caller");
             Fx.Assert(delayedWork != null, "Checked by caller");
             if (this.onAssemblyLoadedEventHandler == null)
             {
-                this.onAssemblyLoadedEventHandler = new AssemblyLoadEventHandler(this.OnAssemblyLoaded);
+                this.onAssemblyLoadedEventHandler = new AssemblyLoadEventHandler(
+                    this.OnAssemblyLoaded
+                );
                 AppDomain.CurrentDomain.AssemblyLoad += this.onAssemblyLoadedEventHandler;
             }
 
@@ -73,15 +79,30 @@ namespace System.Activities.Core.Presentation
         private void CheckAndWork(Assembly loadedAssembly)
         {
             List<Action<AttributeTableBuilder>> currentDelayedWorkItems;
-            if (this.DelayedWorkItems.TryGetValue(loadedAssembly.GetName().Name, out currentDelayedWorkItems))
+            if (
+                this.DelayedWorkItems.TryGetValue(
+                    loadedAssembly.GetName().Name,
+                    out currentDelayedWorkItems
+                )
+            )
             {
-                Action delayedRegisterMetadataWork = new DelayedRegisterMetadataWorkContext(currentDelayedWorkItems).Work;
+                Action delayedRegisterMetadataWork = new DelayedRegisterMetadataWorkContext(
+                    currentDelayedWorkItems
+                ).Work;
 
                 // Retrieve the top level type descriptor from the stack
-                TypeDescriptionProvider currentTypeDescriptor = TypeDescriptor.GetProvider(typeof(object));
+                TypeDescriptionProvider currentTypeDescriptor = TypeDescriptor.GetProvider(
+                    typeof(object)
+                );
 
                 // Intercept any existing changes.
-                TypeDescriptor.AddProvider(new TypeDescriptionProviderInterceptor(currentTypeDescriptor, delayedRegisterMetadataWork), typeof(object));
+                TypeDescriptor.AddProvider(
+                    new TypeDescriptionProviderInterceptor(
+                        currentTypeDescriptor,
+                        delayedRegisterMetadataWork
+                    ),
+                    typeof(object)
+                );
             }
         }
 
@@ -89,7 +110,9 @@ namespace System.Activities.Core.Presentation
         {
             private List<Action<AttributeTableBuilder>> currentDelayedWorkItems;
 
-            public DelayedRegisterMetadataWorkContext(List<Action<AttributeTableBuilder>> currentDelayedWorkItems)
+            public DelayedRegisterMetadataWorkContext(
+                List<Action<AttributeTableBuilder>> currentDelayedWorkItems
+            )
             {
                 this.currentDelayedWorkItems = currentDelayedWorkItems;
             }
@@ -110,13 +133,21 @@ namespace System.Activities.Core.Presentation
         {
             private Action interceptingWork;
 
-            public TypeDescriptionProviderInterceptor(TypeDescriptionProvider parent, Action interceptingWork)
+            public TypeDescriptionProviderInterceptor(
+                TypeDescriptionProvider parent,
+                Action interceptingWork
+            )
                 : base(parent)
             {
                 this.interceptingWork = interceptingWork;
             }
 
-            public override object CreateInstance(IServiceProvider provider, Type objectType, Type[] argTypes, object[] args)
+            public override object CreateInstance(
+                IServiceProvider provider,
+                Type objectType,
+                Type[] argTypes,
+                object[] args
+            )
             {
                 this.PerformInterceptingWork();
                 return base.CreateInstance(provider, objectType, argTypes, args);
@@ -152,7 +183,10 @@ namespace System.Activities.Core.Presentation
                 return base.GetRuntimeType(reflectionType);
             }
 
-            public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+            public override ICustomTypeDescriptor GetTypeDescriptor(
+                Type objectType,
+                object instance
+            )
             {
                 this.PerformInterceptingWork();
                 return base.GetTypeDescriptor(objectType, instance);

@@ -12,10 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class EnumAndCompletionListTagCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class EnumAndCompletionListTagCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(EnumAndCompletionListTagCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(EnumAndCompletionListTagCompletionProvider);
 
         [Fact]
         public async Task NullableEnum()
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545678")]
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545678")]
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = false;
 
@@ -148,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/854099")]
@@ -189,7 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InYieldReturnInMethod(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Collections.Generic;
 
 class Program
@@ -212,7 +217,7 @@ class Program
         public async Task InYieldReturnInLocalFunction(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Collections.Generic;
 
 class Program
@@ -238,7 +243,7 @@ class Program
         public async Task InAsyncMethodReturnStatement(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -262,7 +267,7 @@ class Program
         public async Task InSimpleLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -284,7 +289,7 @@ class Program
         public async Task InParenthesizedLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -306,7 +311,7 @@ class Program
         public async Task NotInAnonymousMethodAfterParameterList(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -324,7 +329,7 @@ class Program
         public async Task NotInSimpleLambdaAfterAsync(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -342,7 +347,7 @@ class Program
         public async Task NotInParenthesizedLambdaAfterAsync(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -360,7 +365,7 @@ class Program
         public async Task NotInAnonymousMethodAfterAsync(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -378,7 +383,7 @@ class Program
         public async Task NotInSimpleLambdaBlock(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -396,7 +401,7 @@ class Program
         public async Task NotInParenthesizedLambdaBlock(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -414,7 +419,7 @@ class Program
         public async Task NotInAnonymousMethodBlock(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -432,7 +437,7 @@ class Program
         public async Task InExpressionTreeSimpleLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Linq.Expressions;
 
 class Program
@@ -455,7 +460,7 @@ class Program
         public async Task InExpressionTreeParenthesizedLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Linq.Expressions;
 
 class Program
@@ -475,8 +480,7 @@ class Program
         [Fact]
         public async Task NoCompletionListTag()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -499,8 +503,7 @@ class Program
         [Fact]
         public async Task CompletionList()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -524,8 +527,7 @@ class Program
         [Fact]
         public async Task CompletionListCrefToString()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -549,8 +551,7 @@ class Program
         [Fact]
         public async Task CompletionListEmptyCref()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -574,8 +575,7 @@ class Program
         [Fact]
         public async Task CompletionListInaccessibleType()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -601,8 +601,7 @@ class Program
         [Fact]
         public async Task CompletionListNotAType()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -628,8 +627,7 @@ class Program
         [Fact]
         public async Task CompletionListContainingMembers()
         {
-            var markup =
-                """
+            var markup = """
                 /// <completionlist cref="TypeContainer" />
                  public class SomeType
                  { }
@@ -658,7 +656,8 @@ class Program
         [InlineData("System.DateTime")]
         public async Task SuggestAlias(string fullTypeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using D = {fullTypeName}; 
 class Program
 {{
@@ -679,7 +678,8 @@ class Program
         [InlineData("System.DateTime")]
         public async Task SuggestAlias2(string fullTypeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 namespace N
 {{
 using D = {fullTypeName}; 
@@ -705,7 +705,8 @@ class Program
         [InlineData("System.DateTime")]
         public async Task SuggestAlias3(string fullTypeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 namespace N
 {{
 using D = {fullTypeName}; 
@@ -763,8 +764,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4310")]
         public async Task InExpressionBodiedProperty()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     Colors Colors => $$
@@ -794,8 +794,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4310")]
         public async Task InExpressionBodiedMethod()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     Colors GetColors() => $$
@@ -852,8 +851,7 @@ class Program
         [Fact]
         public async Task NotAfterDot()
         {
-            var markup =
-                """
+            var markup = """
                 namespace ConsoleApplication253
                 {
                     class Program
@@ -889,8 +887,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18359")]
         public async Task NotAfterDotWithTextTyped()
         {
-            var markup =
-                """
+            var markup = """
                 namespace ConsoleApplication253
                 {
                     class Program
@@ -926,8 +923,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5419")]
         public async Task TestInEnumInitializer1()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
 
                 [Flags]
@@ -947,8 +943,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5419")]
         public async Task TestInEnumInitializer2()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
 
                 [Flags]
@@ -968,8 +963,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5419")]
         public async Task TestInEnumInitializer3()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
 
                 [Flags]
@@ -989,8 +983,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5419")]
         public async Task TestInEnumInitializer4()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
 
                 [Flags]
@@ -1010,8 +1003,7 @@ class Program
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5419")]
         public async Task TestInEnumInitializer5()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
 
                 [Flags]
@@ -1031,8 +1023,7 @@ class Program
         [Fact]
         public async Task TestInEnumHasFlag()
         {
-            var markup =
-                """
+            var markup = """
                 using System.IO;
 
                 class C
@@ -1222,7 +1213,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1231,7 +1223,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -1268,7 +1261,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1277,7 +1271,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -1316,7 +1311,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = false;
 
@@ -1327,7 +1323,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = true;
 
@@ -1338,7 +1335,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = false;
 
@@ -1349,7 +1347,8 @@ class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -1386,10 +1385,26 @@ class Program
                 }
                 """;
 
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: false);
-            await VerifyItemIsAbsentAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: false);
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
+            await VerifyItemIsAbsentAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
         }
 
         [Fact]
@@ -1422,10 +1437,26 @@ class Program
                 }
                 """;
 
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: false);
-            await VerifyItemIsAbsentAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: false);
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
+            await VerifyItemIsAbsentAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
         }
 
         [Fact]
@@ -1473,7 +1504,8 @@ class Program
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInYieldReturn(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -1494,7 +1526,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInAsyncMethodReturnStatement(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Threading.Tasks;
 
@@ -1516,7 +1549,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInIndexedProperty(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 static class Module1
 {{
@@ -1546,7 +1580,8 @@ static class Module1
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestFullyQualified(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     public void M(System.{typeName} day)
@@ -1576,7 +1611,8 @@ class C
         [InlineData(nameof(DateTime))]
         public async Task TestTriggeredForNamedArgument(string typeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     public void M({typeName} day)
@@ -1599,9 +1635,17 @@ class C
 ";
 
             if (typeName == nameof(DayOfWeek))
-                await VerifyItemExistsAsync(markup, $"{typeName}.A", usePreviousCharAsTrigger: true);
+                await VerifyItemExistsAsync(
+                    markup,
+                    $"{typeName}.A",
+                    usePreviousCharAsTrigger: true
+                );
             else
-                await VerifyItemIsAbsentAsync(markup, $"{typeName}.A", usePreviousCharAsTrigger: true);
+                await VerifyItemIsAbsentAsync(
+                    markup,
+                    $"{typeName}.A",
+                    usePreviousCharAsTrigger: true
+                );
 
             await VerifyItemExistsAsync(markup, $"{typeName}.A", usePreviousCharAsTrigger: false);
         }
@@ -1611,7 +1655,8 @@ class C
         [InlineData(nameof(DateTime))]
         public async Task TestNotTriggeredAfterAssignmentEquals(string typeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     public void M({typeName} day)
@@ -1776,7 +1821,8 @@ class C
         [InlineData(nameof(DateTime))]
         public async Task EnumMember_NotAfterDot(string typeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 static class Module1
 {{
     public static void Main({typeName} x)
@@ -1796,7 +1842,8 @@ static class Module1
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInCollectionInitializer1(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -1820,7 +1867,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInCollectionInitializer2(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -1914,7 +1962,8 @@ class C
         [InlineData(nameof(TimeZoneInfo), nameof(TimeZoneInfo.Local))]
         public async Task TestNullableEnum(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 #nullable enable
 using System;
 class C
@@ -1936,7 +1985,8 @@ class C
         [InlineData(nameof(TimeZoneInfo), nameof(TimeZoneInfo.Local))]
         public async Task TestTypeAlias(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 #nullable enable
 using AT = System.{typeName};
 
@@ -1964,9 +2014,13 @@ public class Program
         [InlineData("Color.Green orWrittenWrong ", false)]
         [InlineData("not ")]
         [InlineData("not Re")]
-        public async Task TestPatterns_Is_ConstUnaryAndBinaryPattern(string isPattern, bool shouldOfferRed = true)
+        public async Task TestPatterns_Is_ConstUnaryAndBinaryPattern(
+            string isPattern,
+            bool shouldOfferRed = true
+        )
         {
-            var markup = @$"
+            var markup =
+                @$"
 class C
 {{
     public enum Color
@@ -2001,7 +2055,8 @@ class C
         [InlineData("not Re")]
         public async Task TestPatterns_Is_PropertyPattern(string partialWritten)
         {
-            var markup = @$"
+            var markup =
+                @$"
 public enum Color
 {{
     Red,
@@ -2024,7 +2079,8 @@ class C
         [Fact]
         public async Task TestPatterns_Is_PropertyPattern_NotAfterEnumDot()
         {
-            var markup = @$"
+            var markup =
+                @$"
 public enum Color
 {{
     Red,
@@ -2149,7 +2205,8 @@ class C
         [InlineData("private")]
         public async Task TestAccessibilityDifferentType(string modifier)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class Color
 {{
     {modifier} static readonly Color Red;
@@ -2187,7 +2244,8 @@ class C
         [InlineData("private")]
         public async Task TestAccessibilitySameType(string modifier)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class Color
 {{
     {modifier} static readonly Color Red;
@@ -2208,7 +2266,8 @@ public class Color
         [InlineData("record")]
         public async Task TestEnumLikeTypeKinds(string typeKeyword)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public {typeKeyword} Color
 {{
     public static readonly Color Red;

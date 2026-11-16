@@ -760,16 +760,13 @@ public class MiddlewareTests
 
                         app.UseEndpoints(endpoints =>
                         {
-                            endpoints.MapGet(
-                                "/foos",
-                                context => context.Response.WriteAsync("bad")
+                            endpoints.MapGet("/foos", context =>
+                                context.Response.WriteAsync("bad")
                             );
-                            endpoints.MapGet(
-                                "/foo",
-                                context =>
-                                    context.Response.WriteAsync(
-                                        $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
-                                    )
+                            endpoints.MapGet("/foo", context =>
+                                context.Response.WriteAsync(
+                                    $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
+                                )
                             );
                         });
                     });
@@ -987,16 +984,14 @@ public class MiddlewareTests
         {
             endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-            endpoints.MapGet(
-                "/g",
-                context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+            endpoints.MapGet("/g", context =>
+                context.Response.WriteAsync(
+                    context.Request.Scheme
+                        + "://"
+                        + context.Request.Host
+                        + context.Request.Path
+                        + context.Request.QueryString
+                )
             );
         });
 
@@ -1032,16 +1027,14 @@ public class MiddlewareTests
         {
             endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-            endpoints.MapGet(
-                "/g",
-                context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+            endpoints.MapGet("/g", context =>
+                context.Response.WriteAsync(
+                    context.Request.Scheme
+                        + "://"
+                        + context.Request.Host
+                        + context.Request.Path
+                        + context.Request.QueryString
+                )
             );
         });
 
@@ -1072,16 +1065,14 @@ public class MiddlewareTests
         {
             endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-            endpoints.MapGet(
-                "/g",
-                context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+            endpoints.MapGet("/g", context =>
+                context.Response.WriteAsync(
+                    context.Request.Scheme
+                        + "://"
+                        + context.Request.Host
+                        + context.Request.Path
+                        + context.Request.QueryString
+                )
             );
         });
 
@@ -1114,16 +1105,14 @@ public class MiddlewareTests
         {
             endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-            endpoints.MapGet(
-                "/g/h",
-                context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+            endpoints.MapGet("/g/h", context =>
+                context.Response.WriteAsync(
+                    context.Request.Scheme
+                        + "://"
+                        + context.Request.Host
+                        + context.Request.Path
+                        + context.Request.QueryString
+                )
             );
         });
 
@@ -1156,16 +1145,14 @@ public class MiddlewareTests
         {
             endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-            endpoints.MapGet(
-                "/g",
-                context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+            endpoints.MapGet("/g", context =>
+                context.Response.WriteAsync(
+                    context.Request.Scheme
+                        + "://"
+                        + context.Request.Host
+                        + context.Request.Path
+                        + context.Request.QueryString
+                )
             );
         });
 
@@ -1193,16 +1180,14 @@ public class MiddlewareTests
 
         app.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-        app.MapGet(
-            "/g",
-            context =>
-                context.Response.WriteAsync(
-                    context.Request.Scheme
-                        + "://"
-                        + context.Request.Host
-                        + context.Request.Path
-                        + context.Request.QueryString
-                )
+        app.MapGet("/g", context =>
+            context.Response.WriteAsync(
+                context.Request.Scheme
+                    + "://"
+                    + context.Request.Host
+                    + context.Request.Path
+                    + context.Request.QueryString
+            )
         );
 
         await app.StartAsync();

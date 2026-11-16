@@ -13,11 +13,13 @@ namespace Microsoft.CodeAnalysis.LanguageService
             ISymbol orderSymbol,
             ImmutableArray<INamedTypeSymbol> structuralTypes,
             SemanticModel semanticModel,
-            int position);
+            int position
+        );
 
         ImmutableArray<SymbolDisplayPart> GetAnonymousTypeParts(
             INamedTypeSymbol anonymousType,
             SemanticModel semanticModel,
-            int position);
+            int position
+        );
     }
 }

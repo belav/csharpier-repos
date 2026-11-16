@@ -13,20 +13,22 @@ internal class Program
 {
     static int Main(string[] args)
     {
-        List<(object left, object right, ExpressionType expressionType, bool expected)> testData = new()
-        {
-            (new Class1("left"), new Class1("right"), ExpressionType.Equal, true),
-            (new Class1("left"), new Class1("notright"), ExpressionType.Equal, false),
-            (new Class1("left"), new Class1("right"), ExpressionType.NotEqual, false),
-            (new Class1("left"), new Class1("notright"), ExpressionType.NotEqual, true),
+        List<(object left, object right, ExpressionType expressionType, bool expected)> testData =
+            new()
+            {
+                (new Class1("left"), new Class1("right"), ExpressionType.Equal, true),
+                (new Class1("left"), new Class1("notright"), ExpressionType.Equal, false),
+                (new Class1("left"), new Class1("right"), ExpressionType.NotEqual, false),
+                (new Class1("left"), new Class1("notright"), ExpressionType.NotEqual, true),
+                (new Class1("left"), new Class2("right"), ExpressionType.Equal, true),
+                (new Class1("left"), new Class2("notright"), ExpressionType.Equal, false),
+                (new Class1("left"), new Class2("right"), ExpressionType.NotEqual, false),
+                (new Class1("left"), new Class2("notright"), ExpressionType.NotEqual, true),
+            };
 
-            (new Class1("left"), new Class2("right"), ExpressionType.Equal, true),
-            (new Class1("left"), new Class2("notright"), ExpressionType.Equal, false),
-            (new Class1("left"), new Class2("right"), ExpressionType.NotEqual, false),
-            (new Class1("left"), new Class2("notright"), ExpressionType.NotEqual, true),
-        };
-
-        foreach ((object left, object right, ExpressionType expressionType, bool expected) in testData)
+        foreach (
+            (object left, object right, ExpressionType expressionType, bool expected) in testData
+        )
         {
             ParameterExpression leftParameter = Expression.Parameter(typeof(object));
             ParameterExpression rightParameter = Expression.Parameter(typeof(object));
@@ -45,16 +47,20 @@ internal class Program
 
             ParameterExpression result = Expression.Variable(typeof(bool));
 
-            Func<object, object, bool> func =
-                Expression.Lambda<Func<object, object, bool>>(
+            Func<object, object, bool> func = Expression
+                .Lambda<Func<object, object, bool>>(
                     Expression.Block(
                         new[] { result },
                         Expression.IfThenElse(
                             condition,
                             Expression.Assign(result, Expression.Constant(true)),
-                            Expression.Assign(result, Expression.Constant(false))),
-                        result),
-                    leftParameter, rightParameter)
+                            Expression.Assign(result, Expression.Constant(false))
+                        ),
+                        result
+                    ),
+                    leftParameter,
+                    rightParameter
+                )
                 .Compile();
 
             bool actual = func(left, right);
@@ -88,15 +94,18 @@ internal class Class1
     // use very unique rules to ensure these operators get invoked
     public static bool operator ==(Class1 left, Class1 right) =>
         left.Name == "left" && right.Name == "right";
+
     public static bool operator !=(Class1 left, Class1 right) =>
         !(left.Name == "left" && right.Name == "right");
 
     public static bool operator ==(Class1 left, Class2 right) =>
         left.Name == "left" && right.Name == "right";
+
     public static bool operator !=(Class1 left, Class2 right) =>
         !(left.Name == "left" && right.Name == "right");
 
     public static bool operator ==(Class1 left, Class3 right) => left.Name == right.Name;
+
     public static bool operator !=(Class1 left, Class3 right) => left.Name == right.Name;
 }
 

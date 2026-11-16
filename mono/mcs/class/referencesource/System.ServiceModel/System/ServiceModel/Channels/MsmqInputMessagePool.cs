@@ -10,7 +10,8 @@ namespace System.ServiceModel.Channels
     }
 
     sealed class MsmqInputMessagePool
-        : SynchronizedDisposablePool<MsmqInputMessage>, IMsmqMessagePool
+        : SynchronizedDisposablePool<MsmqInputMessage>,
+            IMsmqMessagePool
     {
         int maxPoolSize;
 

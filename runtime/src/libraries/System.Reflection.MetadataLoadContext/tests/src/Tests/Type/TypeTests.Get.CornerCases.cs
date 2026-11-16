@@ -70,7 +70,11 @@ namespace System.Reflection.Tests
         {
             Type t = typeof(TestClass).Project();
 
-            MemberInfo[] members = t.GetMember("My*", MemberTypes.Event, BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] members = t.GetMember(
+                "My*",
+                MemberTypes.Event,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Assert.Equal(1, members.Length);
             Assert.Equal("MyEvent", members[0].Name);
         }
@@ -80,7 +84,11 @@ namespace System.Reflection.Tests
         {
             Type t = typeof(TestClass).Project();
 
-            MemberInfo[] members = t.GetMember("My*", MemberTypes.Field, BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] members = t.GetMember(
+                "My*",
+                MemberTypes.Field,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Assert.Equal(1, members.Length);
             Assert.Equal("MyField", members[0].Name);
         }
@@ -90,7 +98,11 @@ namespace System.Reflection.Tests
         {
             Type t = typeof(TestClass).Project();
 
-            MemberInfo[] members = t.GetMember("My*", MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] members = t.GetMember(
+                "My*",
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Assert.Equal(1, members.Length);
             Assert.Equal("MyMethod", members[0].Name);
         }
@@ -100,7 +112,11 @@ namespace System.Reflection.Tests
         {
             Type t = typeof(TestClass).Project();
 
-            MemberInfo[] members = t.GetMember("My*", MemberTypes.NestedType, BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] members = t.GetMember(
+                "My*",
+                MemberTypes.NestedType,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Assert.Equal(1, members.Length);
             Assert.Equal("MyNestedType", members[0].Name);
         }
@@ -110,21 +126,31 @@ namespace System.Reflection.Tests
         {
             Type t = typeof(TestClass).Project();
 
-            MemberInfo[] members = t.GetMember("My*", MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] members = t.GetMember(
+                "My*",
+                MemberTypes.Property,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Assert.Equal(1, members.Length);
             Assert.Equal("MyProperty", members[0].Name);
         }
 
         private class TestClass
         {
-            public event Action MyEvent { add { } remove { } }
+            public event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
             public int MyField;
+
             public void MyMethod() { }
+
             public class MyNestedType { }
+
             public int MyProperty { get; }
         }
     }
-
 
     public static class TypeTests_HiddenEvents
     {
@@ -132,7 +158,12 @@ namespace System.Reflection.Tests
         public static void GetEventHidesEventsBySimpleNameCompare()
         {
             Type t = typeof(Derived).Project();
-            EventInfo[] es = t.GetEvents(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            EventInfo[] es = t.GetEvents(
+                BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.FlattenHierarchy
+            );
             Assert.Equal(4, es.Length);
             int count = 0;
             foreach (EventInfo e in es)
@@ -145,18 +176,50 @@ namespace System.Reflection.Tests
 
         private class Base
         {
-            public event Action MyEvent { add { } remove { } }
-            public static event Action MyStaticEvent { add { } remove { } }
-            public event Action MyEventInstanceStatic { add { } remove { } }
-            public static event Action MyEventStaticInstance { add { } remove { } }
+            public event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
+            public static event Action MyStaticEvent
+            {
+                add { }
+                remove { }
+            }
+            public event Action MyEventInstanceStatic
+            {
+                add { }
+                remove { }
+            }
+            public static event Action MyEventStaticInstance
+            {
+                add { }
+                remove { }
+            }
         }
 
         private class Derived : Base
         {
-            public new event Action<int> MyEvent { add { } remove { } }
-            public static new event Action<double> MyStaticEvent { add { } remove { } }
-            public static new event Action<float> MyEventInstanceStatic { add { } remove { } }
-            public new event Action<long> MyEventStaticInstance { add { } remove { } }
+            public new event Action<int> MyEvent
+            {
+                add { }
+                remove { }
+            }
+            public static new event Action<double> MyStaticEvent
+            {
+                add { }
+                remove { }
+            }
+            public static new event Action<float> MyEventInstanceStatic
+            {
+                add { }
+                remove { }
+            }
+            public new event Action<long> MyEventStaticInstance
+            {
+                add { }
+                remove { }
+            }
         }
     }
 
@@ -166,7 +229,12 @@ namespace System.Reflection.Tests
         public static void GetFieldDoesNotHideHiddenFields()
         {
             Type t = typeof(Derived).Project();
-            FieldInfo[] fs = t.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            FieldInfo[] fs = t.GetFields(
+                BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.FlattenHierarchy
+            );
             Assert.Equal(4, fs.Length);
             int count = 0;
             foreach (FieldInfo f in fs)
@@ -190,14 +258,18 @@ namespace System.Reflection.Tests
         }
     }
 
-
     public static class TypeTests_HiddenMethods
     {
         [Fact]
         public static void GetMethodDoesNotHideHiddenMethods()
         {
             Type t = typeof(Derived).Project();
-            MethodInfo[] ms = t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            MethodInfo[] ms = t.GetMethods(
+                BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.FlattenHierarchy
+            );
             int count = 0;
             foreach (MethodInfo m in ms)
             {
@@ -209,14 +281,28 @@ namespace System.Reflection.Tests
 
         private class Base
         {
-            public int MyMethod() { throw null!; }
-            public static int MyStaticMethod() { throw null!; }
+            public int MyMethod()
+            {
+                throw null!;
+            }
+
+            public static int MyStaticMethod()
+            {
+                throw null!;
+            }
         }
 
         private class Derived : Base
         {
-            public new int MyMethod() { throw null!; }
-            public static new int MyStaticMethod() { throw null!; }
+            public new int MyMethod()
+            {
+                throw null!;
+            }
+
+            public static new int MyStaticMethod()
+            {
+                throw null!;
+            }
         }
     }
 
@@ -226,7 +312,12 @@ namespace System.Reflection.Tests
         public static void GetPropertyHidesPropertiesByNameAndSigAndCallingConventionCompare()
         {
             Type t = typeof(Derived).Project();
-            PropertyInfo[] ps = t.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            PropertyInfo[] ps = t.GetProperties(
+                BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.FlattenHierarchy
+            );
             List<string> names = new List<string>();
             foreach (PropertyInfo p in ps)
             {
@@ -237,14 +328,20 @@ namespace System.Reflection.Tests
             }
 
             names.Sort();
-            string[] expected = { "Item", nameof(Base.MyInstanceThenStaticProp), nameof(Base.MyStaticThenInstanceProp), nameof(Base.MyStringThenDoubleProp) };
+            string[] expected =
+            {
+                "Item",
+                nameof(Base.MyInstanceThenStaticProp),
+                nameof(Base.MyStaticThenInstanceProp),
+                nameof(Base.MyStringThenDoubleProp),
+            };
             Assert.Equal<string>(expected, names.ToArray());
         }
 
         private abstract class Base
         {
-            public int MyProp { get; }  // will get hidden
-            public static int MyStaticProp { get; }  // will get hidden
+            public int MyProp { get; } // will get hidden
+            public static int MyStaticProp { get; } // will get hidden
             public int MyInstanceThenStaticProp { get; } // won't get hidden (calling convention mismatch)
             public static int MyStaticThenInstanceProp { get; } // won't get hidden (calling convention mismatch)
             public string MyStringThenDoubleProp { get; } // won't get hidden (signature mismatch on return type)
@@ -269,10 +366,14 @@ namespace System.Reflection.Tests
         {
             // Hiding members suppress results even if the hiding member itself is filtered out by the binding flags.
             Type derived = typeof(Derived).Project();
-            EventInfo[] events = derived.GetEvents(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            EventInfo[] events = derived.GetEvents(
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+            );
             Assert.Equal(0, events.Length);
 
-            PropertyInfo[] properties = derived.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            PropertyInfo[] properties = derived.GetProperties(
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+            );
             Assert.Equal(0, properties.Length);
         }
 
@@ -281,12 +382,22 @@ namespace System.Reflection.Tests
         {
             // Hiding members won't suppress results if the hiding member is filtered out due to being a private member in a base class.
             Type derived2 = typeof(Derived2).Project();
-            EventInfo[] events = derived2.GetEvents(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+            EventInfo[] events = derived2.GetEvents(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
             Assert.Equal(1, events.Length);
             Assert.Equal(typeof(Base).Project(), events[0].DeclaringType);
             Assert.Equal(nameof(Base.MyEvent), events[0].Name);
 
-            PropertyInfo[] properties = derived2.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+            PropertyInfo[] properties = derived2.GetProperties(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
             Assert.Equal(1, properties.Length);
             Assert.Equal(typeof(Base).Project(), properties[0].DeclaringType);
             Assert.Equal(nameof(Base.MyProp), properties[0].Name);
@@ -298,48 +409,69 @@ namespace System.Reflection.Tests
             // Hiding members suppress results even if the hiding member is filtered out due to being a static member in a base class (and BindingFlags.FlattenHierarchy not being specified.)
             //  (that check is actually just another bindingflags check.)
             Type staticDerived2 = typeof(StaticDerived2).Project();
-            EventInfo[] events = staticDerived2.GetEvents(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+            EventInfo[] events = staticDerived2.GetEvents(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
             Assert.Equal(0, events.Length);
         }
 
         private abstract class Base
         {
-            public event Action MyEvent { add { } remove { } }
+            public event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
             public int MyProp { get; }
         }
 
         private abstract class Derived : Base
         {
-            private new event Action MyEvent { add { } remove { } }
+            private new event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
             private new int MyProp { get; }
         }
 
-        private abstract class Derived2 : Derived
-        {
-        }
+        private abstract class Derived2 : Derived { }
 
         private class StaticBase
         {
-            public event Action MyEvent { add { } remove { } }
+            public event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
         }
 
         private class StaticDerived : StaticBase
         {
-            public static new event Action MyEvent { add { } remove { } }
+            public static new event Action MyEvent
+            {
+                add { }
+                remove { }
+            }
         }
 
-        private class StaticDerived2 : StaticDerived
-        {
-        }
+        private class StaticDerived2 : StaticDerived { }
     }
-
 
     public static class TypeTests_AmbiguityResolution_NoParameterBinding
     {
         [Fact]
         public static void EventsThrowAlways()
         {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.IgnoreCase;
             Type t = typeof(Derived).Project();
 
             Assert.Throws<AmbiguousMatchException>(() => t.GetEvent("myevent", bf));
@@ -348,7 +480,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void NestedTypesThrowAlways()
         {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.IgnoreCase;
             Type t = typeof(Derived).Project();
 
             Assert.Throws<AmbiguousMatchException>(() => t.GetNestedType("myinner", bf));
@@ -357,7 +494,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PropertiesThrowAlways()
         {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.IgnoreCase;
             Type t = typeof(Derived).Project();
 
             Assert.Throws<AmbiguousMatchException>(() => t.GetProperty("myprop", bf));
@@ -366,7 +508,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void FieldsThrowIfDeclaringTypeIsSame()
         {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.IgnoreCase;
             Type t = typeof(Derived).Project();
 
             // Fields return the most derived match.
@@ -380,7 +527,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void MethodsThrowIfDeclaringTypeIsSameAndSigIsDifferent()
         {
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.IgnoreCase;
             Type t = typeof(Derived).Project();
 
             // Methods return the most derived match, provided all their signatures are the same.
@@ -404,6 +556,7 @@ namespace System.Reflection.Tests
             public int myfield;
 
             public void mymethod1(int x) { }
+
             public static void mymethod2(int x, int y) { }
 
             public void mymethod4(int x) { }
@@ -414,7 +567,9 @@ namespace System.Reflection.Tests
             public event Action MyEvent;
 
             public class @myinner { }
+
             public class MyInner { }
+
             public int MyProp { get; }
 
             public int MyField;
@@ -423,9 +578,11 @@ namespace System.Reflection.Tests
             public int myfield2;
 
             public void MyMethod1(int x) { }
+
             public void MyMethod2(int x, int y) { }
 
             public static void mymethod3(int x, int y, double z) { }
+
             public void MyMethod3(int x, int y, double z) { }
 
             public void mymethod4(string x) { }

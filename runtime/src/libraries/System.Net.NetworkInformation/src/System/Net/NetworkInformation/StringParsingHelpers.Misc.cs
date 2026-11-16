@@ -36,12 +36,20 @@ namespace System.Net.NetworkInformation
             }
         }
 
-
         internal static StreamReader OpenStreamReader(string filePath)
         {
             try
             {
-                return new StreamReader(new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 0x1000, useAsync: false));
+                return new StreamReader(
+                    new FileStream(
+                        filePath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        bufferSize: 0x1000,
+                        useAsync: false
+                    )
+                );
             }
             catch (Exception e)
             {
@@ -49,7 +57,9 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        internal static NetworkInformationException CreateNetworkInformationException(Exception inner)
+        internal static NetworkInformationException CreateNetworkInformationException(
+            Exception inner
+        )
         {
             // Overload accepting message and inner exception is internal and thus inaccessible in
             // the unit test project
@@ -74,7 +84,10 @@ namespace System.Net.NetworkInformation
             var files = new DirectoryInfo(folderPath).GetFiles();
             foreach (var file in files)
             {
-                if (file.Name != NetworkFiles.AllNetworkInterfaceFileName && file.Name != NetworkFiles.DefaultNetworkInterfaceFileName)
+                if (
+                    file.Name != NetworkFiles.AllNetworkInterfaceFileName
+                    && file.Name != NetworkFiles.DefaultNetworkInterfaceFileName
+                )
                 {
                     interfacesCount++;
                 }
@@ -88,9 +101,20 @@ namespace System.Net.NetworkInformation
             // snmp6 does not include Default TTL info. Read it from snmp.
             string snmp4FileContents = ReadAllText(filePath);
             int firstIpHeader = snmp4FileContents.IndexOf("Ip:", StringComparison.Ordinal);
-            int secondIpHeader = snmp4FileContents.IndexOf("Ip:", firstIpHeader + 1, StringComparison.Ordinal);
-            int endOfSecondLine = snmp4FileContents.IndexOf(Environment.NewLine, secondIpHeader, StringComparison.Ordinal);
-            string ipData = snmp4FileContents.Substring(secondIpHeader, endOfSecondLine - secondIpHeader);
+            int secondIpHeader = snmp4FileContents.IndexOf(
+                "Ip:",
+                firstIpHeader + 1,
+                StringComparison.Ordinal
+            );
+            int endOfSecondLine = snmp4FileContents.IndexOf(
+                Environment.NewLine,
+                secondIpHeader,
+                StringComparison.Ordinal
+            );
+            string ipData = snmp4FileContents.Substring(
+                secondIpHeader,
+                endOfSecondLine - secondIpHeader
+            );
             StringParser parser = new StringParser(ipData, ' ');
             parser.MoveNextOrFail(); // Skip Ip:
             // According to RFC 1213, "1" indicates "acting as a gateway". "2" indicates "NOT acting as a gateway".

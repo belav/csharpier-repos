@@ -22,7 +22,7 @@ namespace System.Web.Http.Validation
             ModelValidationNode[] childNodes = new[]
             {
                 new ModelValidationNode(metadata, "someKey0"),
-                new ModelValidationNode(metadata, "someKey1")
+                new ModelValidationNode(metadata, "someKey1"),
             };
 
             // Act
@@ -38,7 +38,8 @@ namespace System.Web.Http.Validation
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new ModelValidationNode(null, "someKey"),
-                "modelMetadata");
+                "modelMetadata"
+            );
         }
 
         [Fact]
@@ -50,7 +51,8 @@ namespace System.Web.Http.Validation
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new ModelValidationNode(metadata, null),
-                "modelStateKey");
+                "modelStateKey"
+            );
         }
 
         [Fact]
@@ -83,12 +85,18 @@ namespace System.Web.Http.Validation
                 new ModelValidationNode(GetModelMetadata(), "key3"),
             };
 
-            ModelValidationNode parentNode1 = new ModelValidationNode(GetModelMetadata(), "parent1");
+            ModelValidationNode parentNode1 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent1"
+            );
             parentNode1.ChildNodes.Add(allChildNodes[0]);
             parentNode1.Validating += (sender, e) => log.Add("Validating parent1.");
             parentNode1.Validated += (sender, e) => log.Add("Validated parent1.");
 
-            ModelValidationNode parentNode2 = new ModelValidationNode(GetModelMetadata(), "parent2");
+            ModelValidationNode parentNode2 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent2"
+            );
             parentNode2.ChildNodes.Add(allChildNodes[1]);
             parentNode2.ChildNodes.Add(allChildNodes[2]);
             parentNode2.Validating += (sender, e) => log.Add("Validating parent2.");
@@ -99,7 +107,16 @@ namespace System.Web.Http.Validation
             parentNode1.Validate(ContextUtil.CreateActionContext());
 
             // Assert
-            Assert.Equal(new[] { "Validating parent1.", "Validating parent2.", "Validated parent1.", "Validated parent2." }, log.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    "Validating parent1.",
+                    "Validating parent2.",
+                    "Validated parent1.",
+                    "Validated parent2.",
+                },
+                log.ToArray()
+            );
             Assert.Equal(allChildNodes, parentNode1.ChildNodes.ToArray());
         }
 
@@ -116,17 +133,20 @@ namespace System.Web.Http.Validation
                 new ModelValidationNode(GetModelMetadata(), "key3"),
             };
 
-            ModelValidationNode[] expectedChildNodes = new[]
-            {
-                allChildNodes[0]
-            };
+            ModelValidationNode[] expectedChildNodes = new[] { allChildNodes[0] };
 
-            ModelValidationNode parentNode1 = new ModelValidationNode(GetModelMetadata(), "parent1");
+            ModelValidationNode parentNode1 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent1"
+            );
             parentNode1.ChildNodes.Add(allChildNodes[0]);
             parentNode1.Validating += (sender, e) => log.Add("Validating parent1.");
             parentNode1.Validated += (sender, e) => log.Add("Validated parent1.");
 
-            ModelValidationNode parentNode2 = new ModelValidationNode(GetModelMetadata(), "parent2");
+            ModelValidationNode parentNode2 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent2"
+            );
             parentNode2.ChildNodes.Add(allChildNodes[1]);
             parentNode2.ChildNodes.Add(allChildNodes[2]);
             parentNode2.Validating += (sender, e) => log.Add("Validating parent2.");
@@ -155,17 +175,32 @@ namespace System.Web.Http.Validation
             List<string> log = new List<string>();
             LoggingValidatableObject model = new LoggingValidatableObject(log);
             ModelMetadata modelMetadata = GetModelMetadata(model);
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(() => model, model.GetType(), "ValidStringProperty");
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
+                () => model,
+                model.GetType(),
+                "ValidStringProperty"
+            );
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
             node.Validating += (sender, e) => log.Add("In OnValidating()");
             node.Validated += (sender, e) => log.Add("In OnValidated()");
-            node.ChildNodes.Add(new ModelValidationNode(childMetadata, "theKey.ValidStringProperty"));
+            node.ChildNodes.Add(
+                new ModelValidationNode(childMetadata, "theKey.ValidStringProperty")
+            );
 
             // Act
             node.Validate(ContextUtil.CreateActionContext());
 
             // Assert
-            Assert.Equal(new[] { "In OnValidating()", "In LoggingValidatonAttribute.IsValid()", "In IValidatableObject.Validate()", "In OnValidated()" }, log.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    "In OnValidating()",
+                    "In LoggingValidatonAttribute.IsValid()",
+                    "In IValidatableObject.Validate()",
+                    "In OnValidated()",
+                },
+                log.ToArray()
+            );
         }
 
         [Fact]
@@ -177,9 +212,15 @@ namespace System.Web.Http.Validation
             List<string> log = new List<string>();
             LoggingValidatableObject model = new LoggingValidatableObject(log);
             ModelMetadata modelMetadata = GetModelMetadata(model);
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(() => model, model.GetType(), "InvalidStringProperty");
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
+                () => model,
+                model.GetType(),
+                "InvalidStringProperty"
+            );
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
-            node.ChildNodes.Add(new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty"));
+            node.ChildNodes.Add(
+                new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty")
+            );
             node.Validating += (sender, e) => log.Add("In OnValidating()");
             node.Validated += (sender, e) => log.Add("In OnValidated()");
             HttpActionContext context = ContextUtil.CreateActionContext();
@@ -188,8 +229,19 @@ namespace System.Web.Http.Validation
             node.Validate(context);
 
             // Assert
-            Assert.Equal(new[] { "In OnValidating()", "In IValidatableObject.Validate()", "In OnValidated()" }, log.ToArray());
-            Assert.Equal("Sample error message", context.ModelState["theKey.InvalidStringProperty"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                new[]
+                {
+                    "In OnValidating()",
+                    "In IValidatableObject.Validate()",
+                    "In OnValidated()",
+                },
+                log.ToArray()
+            );
+            Assert.Equal(
+                "Sample error message",
+                context.ModelState["theKey.InvalidStringProperty"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -223,7 +275,7 @@ namespace System.Web.Http.Validation
             ModelMetadata modelMetadata = GetModelMetadata(model);
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey")
             {
-                SuppressValidation = true
+                SuppressValidation = true,
             };
 
             node.Validating += (sender, e) => log.Add("In OnValidating()");
@@ -243,9 +295,7 @@ namespace System.Web.Http.Validation
             ModelValidationNode node = new ModelValidationNode(GetModelMetadata(), "someKey");
 
             // Act & assert
-            Assert.ThrowsArgumentNull(
-                () => node.Validate(null),
-                "actionContext");
+            Assert.ThrowsArgumentNull(() => node.Validate(null), "actionContext");
         }
 
         [Fact]
@@ -255,16 +305,20 @@ namespace System.Web.Http.Validation
             // Arrange
             ValidateAllPropertiesModel model = new ValidateAllPropertiesModel
             {
-                RequiredString = null /* error */,
-                RangedInt = 0 /* error */,
-                ValidString = "dog"
+                RequiredString =
+                    null /* error */
+                ,
+                RangedInt =
+                    0 /* error */
+                ,
+                ValidString = "dog",
             };
 
             ModelMetadata modelMetadata = GetModelMetadata(model);
             HttpActionContext context = ContextUtil.CreateActionContext();
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey")
             {
-                ValidateAllProperties = true
+                ValidateAllProperties = true,
             };
             context.ModelState.AddModelError("theKey.RequiredString.Dummy", "existing Error Text");
 
@@ -273,8 +327,14 @@ namespace System.Web.Http.Validation
 
             // Assert
             Assert.Null(context.ModelState["theKey.RequiredString"]);
-            Assert.Equal("existing Error Text", context.ModelState["theKey.RequiredString.Dummy"].Errors[0].ErrorMessage);
-            Assert.Equal("The field RangedInt must be between 10 and 30.", context.ModelState["theKey.RangedInt"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "existing Error Text",
+                context.ModelState["theKey.RequiredString.Dummy"].Errors[0].ErrorMessage
+            );
+            Assert.Equal(
+                "The field RangedInt must be between 10 and 30.",
+                context.ModelState["theKey.RangedInt"].Errors[0].ErrorMessage
+            );
             Assert.Null(context.ModelState["theKey.ValidString"]);
             Assert.Null(context.ModelState["theKey"]);
         }
@@ -286,7 +346,10 @@ namespace System.Web.Http.Validation
 
         private static ModelMetadata GetModelMetadata(object o)
         {
-            return new DataAnnotationsModelMetadataProvider().GetMetadataForType(() => o, o.GetType());
+            return new DataAnnotationsModelMetadataProvider().GetMetadataForType(
+                () => o,
+                o.GetType()
+            );
         }
 
         private sealed class LoggingValidatableObject : IValidatableObject
@@ -305,12 +368,18 @@ namespace System.Web.Http.Validation
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
                 _log.Add("In IValidatableObject.Validate()");
-                yield return new ValidationResult("Sample error message", new[] { "InvalidStringProperty" });
+                yield return new ValidationResult(
+                    "Sample error message",
+                    new[] { "InvalidStringProperty" }
+                );
             }
 
             private sealed class LoggingValidationAttribute : ValidationAttribute
             {
-                protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+                protected override ValidationResult IsValid(
+                    object value,
+                    ValidationContext validationContext
+                )
                 {
                     LoggingValidatableObject lvo = (LoggingValidatableObject)value;
                     lvo._log.Add("In LoggingValidatonAttribute.IsValid()");

@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="GridViewDeleteEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -17,44 +17,47 @@ namespace System.Web.UI.WebControls {
     /// <devdoc>
     /// <para>Provides data for some <see cref='System.Web.UI.WebControls.GridView'/> events.</para>
     /// </devdoc>
-    public class GridViewDeleteEventArgs : CancelEventArgs {
-
+    public class GridViewDeleteEventArgs : CancelEventArgs
+    {
         private int _rowIndex;
         private OrderedDictionary _keys;
         private OrderedDictionary _values;
 
-
-        public GridViewDeleteEventArgs(int rowIndex) : base(false) {
+        public GridViewDeleteEventArgs(int rowIndex)
+            : base(false)
+        {
             this._rowIndex = rowIndex;
         }
 
-
-        public int RowIndex {
-            get {
-                return _rowIndex;
-            }
+        public int RowIndex
+        {
+            get { return _rowIndex; }
         }
-
 
         /// <devdoc>
         /// <para>Gets a keyed list to populate with parameters that identify the row to delete.  This property is read-only.</para>
         /// </devdoc>
-        public IOrderedDictionary Keys {
-            get {
-                if (_keys == null) {
+        public IOrderedDictionary Keys
+        {
+            get
+            {
+                if (_keys == null)
+                {
                     _keys = new OrderedDictionary();
                 }
                 return _keys;
             }
         }
 
-
         /// <devdoc>
         /// <para>Gets a keyed list to populate with old row values.  This property is read-only.</para>
         /// </devdoc>
-        public IOrderedDictionary Values {
-            get {
-                if (_values == null) {
+        public IOrderedDictionary Values
+        {
+            get
+            {
+                if (_values == null)
+                {
                     _values = new OrderedDictionary();
                 }
                 return _values;
@@ -62,4 +65,3 @@ namespace System.Web.UI.WebControls {
         }
     }
 }
-

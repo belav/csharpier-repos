@@ -19,13 +19,17 @@ namespace System.Web.Razor.Test
         [Fact]
         public void GetServiceByExtensionReturnsEntryMatchingExtensionWithoutPreceedingDot()
         {
-            Assert.IsType<CSharpRazorCodeLanguage>(RazorCodeLanguage.GetLanguageByExtension("cshtml"));
+            Assert.IsType<CSharpRazorCodeLanguage>(
+                RazorCodeLanguage.GetLanguageByExtension("cshtml")
+            );
         }
 
         [Fact]
         public void GetServiceByExtensionReturnsEntryMatchingExtensionWithPreceedingDot()
         {
-            Assert.IsType<CSharpRazorCodeLanguage>(RazorCodeLanguage.GetLanguageByExtension(".cshtml"));
+            Assert.IsType<CSharpRazorCodeLanguage>(
+                RazorCodeLanguage.GetLanguageByExtension(".cshtml")
+            );
         }
 
         [Fact]

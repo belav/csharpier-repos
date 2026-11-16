@@ -15,10 +15,12 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
     public class RealWorldSolution
     {
         private const string UnformattedFolderFilePath = "temp/project-system/";
-        private const string UnformattedSolutionFilePath = UnformattedFolderFilePath + "ProjectSystem.sln";
+        private const string UnformattedSolutionFilePath =
+            UnformattedFolderFilePath + "ProjectSystem.sln";
 
         private static EmptyLogger EmptyLogger => new EmptyLogger();
-        private static SourceFileMatcher AllFileMatcher => SourceFileMatcher.CreateMatcher(Array.Empty<string>(), Array.Empty<string>());
+        private static SourceFileMatcher AllFileMatcher =>
+            SourceFileMatcher.CreateMatcher(Array.Empty<string>(), Array.Empty<string>());
 
         [IterationSetup]
         public void RealWorldSolutionIterationSetup()
@@ -30,7 +32,9 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
         [Benchmark(Description = "Formatting Solution")]
         public void FilesFormattedSolution()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(UnformattedSolutionFilePath);
+            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
+                UnformattedSolutionFilePath
+            );
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -46,14 +50,20 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
                 AllFileMatcher,
                 ReportPath: string.Empty,
                 IncludeGeneratedFiles: false,
-                BinaryLogPath: null);
-            _ = CodeFormatter.FormatWorkspaceAsync(options, EmptyLogger, default).GetAwaiter().GetResult();
+                BinaryLogPath: null
+            );
+            _ = CodeFormatter
+                .FormatWorkspaceAsync(options, EmptyLogger, default)
+                .GetAwaiter()
+                .GetResult();
         }
 
         [Benchmark(Description = "Formatting Folder", Baseline = true)]
         public void FilesFormattedFolder()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(UnformattedFolderFilePath);
+            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
+                UnformattedFolderFilePath
+            );
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -69,8 +79,12 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
                 AllFileMatcher,
                 ReportPath: string.Empty,
                 IncludeGeneratedFiles: false,
-                BinaryLogPath: null);
-            _ = CodeFormatter.FormatWorkspaceAsync(options, EmptyLogger, default).GetAwaiter().GetResult();
+                BinaryLogPath: null
+            );
+            _ = CodeFormatter
+                .FormatWorkspaceAsync(options, EmptyLogger, default)
+                .GetAwaiter()
+                .GetResult();
         }
 
         [IterationCleanup]
@@ -80,13 +94,15 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
         {
             public RealWorldConfig()
             {
-                var job = Job.Dry
-                    .WithWarmupCount(1)
+                var job = Job
+                    .Dry.WithWarmupCount(1)
                     .WithIterationCount(12)
                     .WithOutlierMode(Perfolizer.Mathematics.OutlierDetection.OutlierMode.RemoveAll);
-                Add(DefaultConfig.Instance
-                    .AddJob(job.AsDefault())
-                    .AddDiagnoser(MemoryDiagnoser.Default));
+                Add(
+                    DefaultConfig
+                        .Instance.AddJob(job.AsDefault())
+                        .AddDiagnoser(MemoryDiagnoser.Default)
+                );
             }
         }
     }

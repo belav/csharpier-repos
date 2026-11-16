@@ -8,19 +8,19 @@ namespace System.Web.WebPages.Scope
 {
     /// <summary>
     /// Custom comparer for the context dictionaries
-    /// The comparer treats strings as a special case, performing case insesitive comparison. 
-    /// This guaratees that we remain consistent throughout the chain of contexts since PageData dictionary 
+    /// The comparer treats strings as a special case, performing case insesitive comparison.
+    /// This guaratees that we remain consistent throughout the chain of contexts since PageData dictionary
     /// behaves in this manner.
     /// </summary>
     internal class ScopeStorageComparer : IEqualityComparer<object>
     {
         private static IEqualityComparer<object> _instance;
-        private readonly IEqualityComparer<object> _defaultComparer = EqualityComparer<object>.Default;
-        private readonly IEqualityComparer<string> _stringComparer = StringComparer.OrdinalIgnoreCase;
+        private readonly IEqualityComparer<object> _defaultComparer =
+            EqualityComparer<object>.Default;
+        private readonly IEqualityComparer<string> _stringComparer =
+            StringComparer.OrdinalIgnoreCase;
 
-        private ScopeStorageComparer()
-        {
-        }
+        private ScopeStorageComparer() { }
 
         public static IEqualityComparer<object> Instance
         {
@@ -34,8 +34,12 @@ namespace System.Web.WebPages.Scope
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "xString, yString",
-           Justification = "These names make most sense.")]
+        [SuppressMessage(
+            "StyleCop.CSharp.NamingRules",
+            "SA1305:FieldNamesMustNotUseHungarianNotation",
+            Target = "xString, yString",
+            Justification = "These names make most sense."
+        )]
         public new bool Equals(object x, object y)
         {
             string xString = x as string;

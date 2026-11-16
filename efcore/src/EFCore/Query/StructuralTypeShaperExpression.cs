@@ -20,12 +20,19 @@ namespace Microsoft.EntityFrameworkCore.Query;
 [DebuggerDisplay("{DebuggerDisplay(),nq}")]
 public class StructuralTypeShaperExpression : Expression, IPrintableExpression
 {
-    private static readonly MethodInfo CreateUnableToDiscriminateExceptionMethod
-        = typeof(StructuralTypeShaperExpression).GetTypeInfo().GetDeclaredMethod(nameof(CreateUnableToDiscriminateException))!;
+    private static readonly MethodInfo CreateUnableToDiscriminateExceptionMethod =
+        typeof(StructuralTypeShaperExpression)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(CreateUnableToDiscriminateException))!;
 
     [UsedImplicitly]
-    private static Exception CreateUnableToDiscriminateException(ITypeBase type, object discriminator)
-        => new InvalidOperationException(CoreStrings.UnableToDiscriminate(type.DisplayName(), discriminator.ToString()));
+    private static Exception CreateUnableToDiscriminateException(
+        ITypeBase type,
+        object discriminator
+    ) =>
+        new InvalidOperationException(
+            CoreStrings.UnableToDiscriminate(type.DisplayName(), discriminator.ToString())
+        );
 
     /// <summary>
     ///     Creates a new instance of the <see cref="StructuralTypeShaperExpression" /> class.
@@ -36,10 +43,9 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     public StructuralTypeShaperExpression(
         ITypeBase type,
         Expression valueBufferExpression,
-        bool nullable)
-        : this(type, valueBufferExpression, nullable, null)
-    {
-    }
+        bool nullable
+    )
+        : this(type, valueBufferExpression, nullable, null) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="StructuralTypeShaperExpression" /> class.
@@ -54,17 +60,23 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
         ITypeBase type,
         Expression valueBufferExpression,
         bool nullable,
-        LambdaExpression? materializationCondition)
+        LambdaExpression? materializationCondition
+    )
     {
         if (materializationCondition == null)
         {
             materializationCondition = GenerateMaterializationCondition(type, nullable);
         }
-        else if (materializationCondition.Parameters.Count != 1
-                 || materializationCondition.Parameters[0].Type != typeof(ValueBuffer)
-                 || materializationCondition.ReturnType != (type is IEntityType ? typeof(IEntityType) : typeof(IComplexType)))
+        else if (
+            materializationCondition.Parameters.Count != 1
+            || materializationCondition.Parameters[0].Type != typeof(ValueBuffer)
+            || materializationCondition.ReturnType
+                != (type is IEntityType ? typeof(IEntityType) : typeof(IComplexType))
+        )
         {
-            throw new InvalidOperationException(CoreStrings.QueryEntityMaterializationConditionWrongShape(type.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.QueryEntityMaterializationConditionWrongShape(type.DisplayName())
+            );
         }
 
         StructuralType = type;
@@ -82,14 +94,20 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     /// <returns>
     ///     An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type.
     /// </returns>
-    protected static Expression CreateUnableToDiscriminateExceptionExpression(ITypeBase type, Expression discriminatorValue)
-        => Block(
+    protected static Expression CreateUnableToDiscriminateExceptionExpression(
+        ITypeBase type,
+        Expression discriminatorValue
+    ) =>
+        Block(
             Throw(
                 Call(
                     CreateUnableToDiscriminateExceptionMethod,
                     Constant(type),
-                    Convert(discriminatorValue, typeof(object)))),
-            Constant(null, typeof(IEntityType)));
+                    Convert(discriminatorValue, typeof(object))
+                )
+            ),
+            Constant(null, typeof(IEntityType))
+        );
 
     /// <summary>
     ///     Creates an expression of <see cref="Func{ValueBuffer, ITypeBase}" /> to determine which type to materialize.
@@ -99,7 +117,10 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     /// <returns>
     ///     An expression of <see cref="Func{ValueBuffer, ITypeBase}" /> representing materialization condition for the type.
     /// </returns>
-    protected virtual LambdaExpression GenerateMaterializationCondition(ITypeBase type, bool nullable)
+    protected virtual LambdaExpression GenerateMaterializationCondition(
+        ITypeBase type,
+        bool nullable
+    )
     {
         var valueBufferParameter = Parameter(typeof(ValueBuffer));
 
@@ -114,16 +135,26 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
         var discriminatorProperty = entityType.FindDiscriminatorProperty();
         if (discriminatorProperty != null)
         {
-            var discriminatorValueVariable = Variable(discriminatorProperty.ClrType, "discriminator");
+            var discriminatorValueVariable = Variable(
+                discriminatorProperty.ClrType,
+                "discriminator"
+            );
             var expressions = new List<Expression>
             {
                 Assign(
                     discriminatorValueVariable,
                     valueBufferParameter.CreateValueBufferReadValueExpression(
-                        discriminatorProperty.ClrType, discriminatorProperty.GetIndex(), discriminatorProperty))
+                        discriminatorProperty.ClrType,
+                        discriminatorProperty.GetIndex(),
+                        discriminatorProperty
+                    )
+                ),
             };
 
-            var exception = CreateUnableToDiscriminateExceptionExpression(entityType, discriminatorValueVariable);
+            var exception = CreateUnableToDiscriminateExceptionExpression(
+                entityType,
+                discriminatorValueVariable
+            );
 
             var discriminatorComparer = discriminatorProperty.GetKeyValueComparer();
             if (discriminatorComparer.IsDefault())
@@ -131,8 +162,14 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
                 var switchCases = new SwitchCase[concreteEntityTypes.Length];
                 for (var i = 0; i < concreteEntityTypes.Length; i++)
                 {
-                    var discriminatorValue = Constant(concreteEntityTypes[i].GetDiscriminatorValue(), discriminatorProperty.ClrType);
-                    switchCases[i] = SwitchCase(Constant(concreteEntityTypes[i], typeof(IEntityType)), discriminatorValue);
+                    var discriminatorValue = Constant(
+                        concreteEntityTypes[i].GetDiscriminatorValue(),
+                        discriminatorProperty.ClrType
+                    );
+                    switchCases[i] = SwitchCase(
+                        Constant(concreteEntityTypes[i], typeof(IEntityType)),
+                        discriminatorValue
+                    );
                 }
 
                 expressions.Add(Switch(discriminatorValueVariable, exception, switchCases));
@@ -147,9 +184,12 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
                             discriminatorValueVariable,
                             Constant(
                                 concreteEntityTypes[i].GetDiscriminatorValue(),
-                                discriminatorProperty.ClrType)),
+                                discriminatorProperty.ClrType
+                            )
+                        ),
                         Constant(concreteEntityTypes[i], typeof(IEntityType)),
-                        conditions);
+                        conditions
+                    );
                 }
 
                 expressions.Add(conditions);
@@ -159,23 +199,33 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
         }
         else
         {
-            body = Constant(concreteEntityTypes.Length == 1 ? concreteEntityTypes[0] : entityType, typeof(IEntityType));
+            body = Constant(
+                concreteEntityTypes.Length == 1 ? concreteEntityTypes[0] : entityType,
+                typeof(IEntityType)
+            );
         }
 
-        if (entityType.FindPrimaryKey() == null
-            && nullable)
+        if (entityType.FindPrimaryKey() == null && nullable)
         {
             // If there's no nullable key and we're generating a nullable shaper, generate checks for any non-null property; if all are
             // null, return null for the entity instance.
             body = Condition(
-                entityType.GetProperties()
-                    .Select(
-                        p => NotEqual(
-                            valueBufferParameter.CreateValueBufferReadValueExpression(typeof(object), p.GetIndex(), p),
-                            Constant(null)))
+                entityType
+                    .GetProperties()
+                    .Select(p =>
+                        NotEqual(
+                            valueBufferParameter.CreateValueBufferReadValueExpression(
+                                typeof(object),
+                                p.GetIndex(),
+                                p
+                            ),
+                            Constant(null)
+                        )
+                    )
                     .Aggregate(OrElse),
                 body,
-                Default(typeof(IEntityType)));
+                Default(typeof(IEntityType))
+            );
         }
 
         return Lambda(body, valueBufferParameter);
@@ -214,9 +264,14 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="type">The new type to use.</param>
     /// <returns>This expression if the type was not changed, or a new expression with the updated type.</returns>
-    public virtual StructuralTypeShaperExpression WithType(ITypeBase type)
-        => type != StructuralType
-            ? new StructuralTypeShaperExpression(type, ValueBufferExpression, IsNullable, materializationCondition: null)
+    public virtual StructuralTypeShaperExpression WithType(ITypeBase type) =>
+        type != StructuralType
+            ? new StructuralTypeShaperExpression(
+                type,
+                ValueBufferExpression,
+                IsNullable,
+                materializationCondition: null
+            )
             : this;
 
     /// <summary>
@@ -224,10 +279,15 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="nullable">A value indicating if the shaper is nullable.</param>
     /// <returns>This expression if nullability not changed, or an expression with updated nullability.</returns>
-    public virtual StructuralTypeShaperExpression MakeNullable(bool nullable = true)
-        => IsNullable != nullable
+    public virtual StructuralTypeShaperExpression MakeNullable(bool nullable = true) =>
+        IsNullable != nullable
             // Marking nullable requires re-computation of materialization condition
-            ? new StructuralTypeShaperExpression(StructuralType, ValueBufferExpression, nullable, materializationCondition: null)
+            ? new StructuralTypeShaperExpression(
+                StructuralType,
+                ValueBufferExpression,
+                nullable,
+                materializationCondition: null
+            )
             : this;
 
     /// <summary>
@@ -236,18 +296,21 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="valueBufferExpression">The <see cref="ValueBufferExpression" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual StructuralTypeShaperExpression Update(Expression valueBufferExpression)
-        => valueBufferExpression != ValueBufferExpression
-            ? new StructuralTypeShaperExpression(StructuralType, valueBufferExpression, IsNullable, MaterializationCondition)
+    public virtual StructuralTypeShaperExpression Update(Expression valueBufferExpression) =>
+        valueBufferExpression != ValueBufferExpression
+            ? new StructuralTypeShaperExpression(
+                StructuralType,
+                valueBufferExpression,
+                IsNullable,
+                MaterializationCondition
+            )
             : this;
 
     /// <inheritdoc />
-    public override Type Type
-        => StructuralType.ClrType;
+    public override Type Type => StructuralType.ClrType;
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
@@ -274,6 +337,6 @@ public class StructuralTypeShaperExpression : Expression, IPrintableExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string DebuggerDisplay()
-        => $"{StructuralType.DisplayName()} ({(IsNullable ? "nullable" : "required")})";
+    public virtual string DebuggerDisplay() =>
+        $"{StructuralType.DisplayName()} ({(IsNullable ? "nullable" : "required")})";
 }

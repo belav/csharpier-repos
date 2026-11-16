@@ -40,8 +40,16 @@ namespace System.ServiceModel.Activation
         internal abstract ExtendedProtectionPolicy GetExtendedProtectionPolicy(string virtualPath);
         internal abstract bool IsWithinApp(string absoluteVirtualPath);
 
-        protected List<string> Protocols { get { return enabledProtocols; } set { enabledProtocols = value; } }
-        protected IDictionary<string, string[]> Bindings { get { return bindingsTable; } set { bindingsTable = value; } }
+        protected List<string> Protocols
+        {
+            get { return enabledProtocols; }
+            set { enabledProtocols = value; }
+        }
+        protected IDictionary<string, string[]> Bindings
+        {
+            get { return bindingsTable; }
+            set { bindingsTable = value; }
+        }
 
         internal bool GetAllowSslOnly(string virtualPath)
         {
@@ -65,12 +73,13 @@ namespace System.ServiceModel.Activation
 
         // build NCL ExtendedProtectionPolicy object
         // From NCL comments:
-        // The NoServiceNameCheck flag can always be ignored because it has no meaning in the .NET Framework 
+        // The NoServiceNameCheck flag can always be ignored because it has no meaning in the .NET Framework
         // where validation against an SPN list is always required when the scenario does not require a CBT.
         protected static ExtendedProtectionPolicy BuildExtendedProtectionPolicy(
-                    ExtendedProtectionTokenChecking tokenChecking,
-                    ExtendedProtectionFlags flags,
-                    List<string> spnList)
+            ExtendedProtectionTokenChecking tokenChecking,
+            ExtendedProtectionFlags flags,
+            List<string> spnList
+        )
         {
             PolicyEnforcement enforce;
             ProtectionScenario scenario;
@@ -90,17 +99,26 @@ namespace System.ServiceModel.Activation
             }
             else
             {
-                throw FxTrace.Exception.Argument("tokenChecking", SR.Hosting_UnrecognizedTokenCheckingValue);
+                throw FxTrace.Exception.Argument(
+                    "tokenChecking",
+                    SR.Hosting_UnrecognizedTokenCheckingValue
+                );
             }
 
             bool transportSelectedCondition1 = (flags == ExtendedProtectionFlags.None);
             bool transportSelectedCondition2 = (flags == ExtendedProtectionFlags.AllowDotlessSpn);
-            bool transportSelectedCondition3 = ((flags & ExtendedProtectionFlags.Proxy) != 0) && ((flags & ExtendedProtectionFlags.ProxyCohosting) != 0);
+            bool transportSelectedCondition3 =
+                ((flags & ExtendedProtectionFlags.Proxy) != 0)
+                && ((flags & ExtendedProtectionFlags.ProxyCohosting) != 0);
             bool trustedProxyCondition = (flags & ExtendedProtectionFlags.Proxy) != 0;
 
-            //only none or allowdotlessspn flag has been selected or both proxy and proxycohosting flags have been selected 
+            //only none or allowdotlessspn flag has been selected or both proxy and proxycohosting flags have been selected
             //set scenario to TransportSelected
-            if (transportSelectedCondition1 || transportSelectedCondition2 || transportSelectedCondition3)
+            if (
+                transportSelectedCondition1
+                || transportSelectedCondition2
+                || transportSelectedCondition3
+            )
             {
                 scenario = ProtectionScenario.TransportSelected;
             }
@@ -112,7 +130,10 @@ namespace System.ServiceModel.Activation
             // other nonsupported scenarios, throw NotSupportedException
             else
             {
-                throw FxTrace.Exception.Argument("flags", SR.Hosting_ExtendedProtectionFlagsNotSupport(flags));
+                throw FxTrace.Exception.Argument(
+                    "flags",
+                    SR.Hosting_ExtendedProtectionFlagsNotSupport(flags)
+                );
             }
 
             // dotless spn check if dotlessspn is not allowed
@@ -126,19 +147,29 @@ namespace System.ServiceModel.Activation
                         string[] parts = spn.Split(AboPathDelimiter);
                         if (parts.Length > 1)
                         {
-                            int position = parts[1].IndexOf(DotDelimiter, StringComparison.CurrentCultureIgnoreCase);
+                            int position = parts[1]
+                                .IndexOf(DotDelimiter, StringComparison.CurrentCultureIgnoreCase);
                             if (position == -1)
                             {
-                                throw FxTrace.Exception.Argument("spn", SR.Hosting_ExtendedProtectionDotlessSpnNotEnabled(spn));
+                                throw FxTrace.Exception.Argument(
+                                    "spn",
+                                    SR.Hosting_ExtendedProtectionDotlessSpnNotEnabled(spn)
+                                );
                             }
                             else if (position == 0 || position == parts[1].Length - 1)
                             {
-                                throw FxTrace.Exception.Argument("spn", SR.Hosting_ExtendedProtectionSpnFormatError(spn));
+                                throw FxTrace.Exception.Argument(
+                                    "spn",
+                                    SR.Hosting_ExtendedProtectionSpnFormatError(spn)
+                                );
                             }
                         }
                         else
                         {
-                            throw FxTrace.Exception.Argument("spn", SR.Hosting_ExtendedProtectionSpnFormatError(spn));
+                            throw FxTrace.Exception.Argument(
+                                "spn",
+                                SR.Hosting_ExtendedProtectionSpnFormatError(spn)
+                            );
                         }
                     }
                 }
@@ -160,25 +191,41 @@ namespace System.ServiceModel.Activation
         {
             if (!ServiceHostingEnvironment.IsSimpleApplicationHost)
             {
-                throw Fx.AssertAndThrowFatal("MetabaseSettingsCassini..ctor() Not a simple application host.");
+                throw Fx.AssertAndThrowFatal(
+                    "MetabaseSettingsCassini..ctor() Not a simple application host."
+                );
             }
 
             // The hostName is hard-coded to "localhost" for Cassini.
-            string binding = string.Format(CultureInfo.InvariantCulture, ":{0}:{1}", result.OriginalRequestUri.Port.ToString(NumberFormatInfo.InvariantInfo), MetabaseSettings.LocalMachine);
+            string binding = string.Format(
+                CultureInfo.InvariantCulture,
+                ":{0}:{1}",
+                result.OriginalRequestUri.Port.ToString(NumberFormatInfo.InvariantInfo),
+                MetabaseSettings.LocalMachine
+            );
             this.Bindings.Add(result.OriginalRequestUri.Scheme, new string[] { binding });
             this.Protocols.Add(result.OriginalRequestUri.Scheme);
         }
 
-        internal override string GetRealm(string virtualPath) { return string.Empty; }
-        internal override HttpAccessSslFlags GetAccessSslFlags(string virtualPath) { return HttpAccessSslFlags.None; }
+        internal override string GetRealm(string virtualPath)
+        {
+            return string.Empty;
+        }
+
+        internal override HttpAccessSslFlags GetAccessSslFlags(string virtualPath)
+        {
+            return HttpAccessSslFlags.None;
+        }
+
         internal override AuthenticationSchemes GetAuthenticationSchemes(string virtualPath)
         {
             // Special casing Cassini so that Ntlm is supported since the request always has the identity of the
             // logged on user.
             return AuthenticationSchemes.Anonymous | AuthenticationSchemes.Ntlm;
         }
+
         internal override ExtendedProtectionPolicy GetExtendedProtectionPolicy(string virtualPath)
-        {   //Alwasy return null since cassini does not support Https
+        { //Alwasy return null since cassini does not support Https
             return null;
         }
 
@@ -186,7 +233,6 @@ namespace System.ServiceModel.Activation
         {
             return true;
         }
-
     }
 
     abstract class MetabaseSettingsIis : MetabaseSettings
@@ -201,15 +247,24 @@ namespace System.ServiceModel.Activation
         {
             if (ServiceHostingEnvironment.IsSimpleApplicationHost)
             {
-                throw Fx.AssertAndThrowFatal("MetabaseSettingsIis..ctor() Is a simple application host.");
+                throw Fx.AssertAndThrowFatal(
+                    "MetabaseSettingsIis..ctor() Is a simple application host."
+                );
             }
 
-            transportSettingsTable = new Dictionary<string, HostedServiceTransportSettings>(StringComparer.OrdinalIgnoreCase);
+            transportSettingsTable = new Dictionary<string, HostedServiceTransportSettings>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
-        object ThisLock { get { return this; } }
+        object ThisLock
+        {
+            get { return this; }
+        }
 
-        protected abstract HostedServiceTransportSettings CreateTransportSettings(string relativeVirtualPath);
+        protected abstract HostedServiceTransportSettings CreateTransportSettings(
+            string relativeVirtualPath
+        );
 
         internal override string GetRealm(string virtualPath)
         {
@@ -226,7 +281,10 @@ namespace System.ServiceModel.Activation
         internal override AuthenticationSchemes GetAuthenticationSchemes(string virtualPath)
         {
             HostedServiceTransportSettings transportSettings = GetTransportSettings(virtualPath);
-            return RemapAuthenticationSchemes(transportSettings.AuthFlags, transportSettings.AuthProviders);
+            return RemapAuthenticationSchemes(
+                transportSettings.AuthFlags,
+                transportSettings.AuthProviders
+            );
         }
 
         internal override ExtendedProtectionPolicy GetExtendedProtectionPolicy(string virtualPath)
@@ -258,24 +316,39 @@ namespace System.ServiceModel.Activation
             {
                 for (int i = 0; i < providers.Length; i++)
                 {
-                    if (providers[i].StartsWith(NegotiateAuthProvider, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        providers[i]
+                            .StartsWith(NegotiateAuthProvider, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         retValue = retValue | AuthenticationSchemes.Negotiate;
                     }
-                    else if (string.Compare(providers[i], NtlmAuthProvider, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (
+                        string.Compare(
+                            providers[i],
+                            NtlmAuthProvider,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         retValue = retValue | AuthenticationSchemes.Ntlm;
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_NotSupportedAuthScheme(providers[i])));
+                        throw FxTrace.Exception.AsError(
+                            new NotSupportedException(
+                                SR.Hosting_NotSupportedAuthScheme(providers[i])
+                            )
+                        );
                     }
                 }
             }
 
             if ((flags & AuthFlags.AuthPassport) != 0)
             {
-                throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_NotSupportedAuthScheme("Passport")));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(SR.Hosting_NotSupportedAuthScheme("Passport"))
+                );
             }
             return retValue;
         }
@@ -285,7 +358,10 @@ namespace System.ServiceModel.Activation
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
             //Make sure we get relative virtual path.
-            string relativeVirtualPath = VirtualPathUtility.ToAppRelative(virtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath);
+            string relativeVirtualPath = VirtualPathUtility.ToAppRelative(
+                virtualPath,
+                HostingEnvironmentWrapper.ApplicationVirtualPath
+            );
 
             HostedServiceTransportSettings transportSettings;
 
@@ -293,7 +369,12 @@ namespace System.ServiceModel.Activation
             {
                 lock (ThisLock)
                 {
-                    if (!transportSettingsTable.TryGetValue(relativeVirtualPath, out transportSettings))
+                    if (
+                        !transportSettingsTable.TryGetValue(
+                            relativeVirtualPath,
+                            out transportSettings
+                        )
+                    )
                     {
                         transportSettings = CreateTransportSettings(relativeVirtualPath);
                         transportSettingsTable.Add(relativeVirtualPath, transportSettings);
@@ -311,8 +392,12 @@ namespace System.ServiceModel.Activation
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
             string matchedAppPath = this.FindLongestMatchingAppPath(absoluteVirtualPath);
-            string curAppPath = VirtualPathUtility.AppendTrailingSlash(HostingEnvironmentWrapper.ApplicationVirtualPath);
-            return (string.Compare(matchedAppPath, curAppPath, StringComparison.OrdinalIgnoreCase) == 0);
+            string curAppPath = VirtualPathUtility.AppendTrailingSlash(
+                HostingEnvironmentWrapper.ApplicationVirtualPath
+            );
+            return (
+                string.Compare(matchedAppPath, curAppPath, StringComparison.OrdinalIgnoreCase) == 0
+            );
         }
 
         string FindLongestMatchingAppPath(string absoluteVirtualPath)
@@ -331,8 +416,10 @@ namespace System.ServiceModel.Activation
             foreach (string appPath in appPaths)
             {
                 string childPath = VirtualPathUtility.AppendTrailingSlash(appPath);
-                if (absoluteVirtualPath.StartsWith(childPath, StringComparison.OrdinalIgnoreCase)
-                   && childPath.Length > matchLength)
+                if (
+                    absoluteVirtualPath.StartsWith(childPath, StringComparison.OrdinalIgnoreCase)
+                    && childPath.Length > matchLength
+                )
                 {
                     matchLength = childPath.Length;
                     longestMatchedAppPath = childPath;
@@ -350,18 +437,23 @@ namespace System.ServiceModel.Activation
             internal const string LMSegment = "/LM";
             internal const string RootSegment = "/Root";
             internal static char[] CommaSeparator = new char[] { ',' };
-            internal const string CBTRegistryHKLMPath = @"System\CurrentControlSet\Services\W3SVC\Parameters\ExtendedProtection";
+            internal const string CBTRegistryHKLMPath =
+                @"System\CurrentControlSet\Services\W3SVC\Parameters\ExtendedProtection";
             internal const string SpnAttributeName = "spns";
             internal const string ExtendedProtectionElementName = "extendedProtection";
             internal const string TokenCheckingAttributeName = "tokenChecking";
             internal const string FlagsAttributeName = "flags";
         }
 
-        [Fx.Tag.SecurityNote(Critical = "potentially protected data read from the IIS metabase under an elevation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "potentially protected data read from the IIS metabase under an elevation."
+        )]
         [SecurityCritical]
         string siteAboPath;
 
-        [Fx.Tag.SecurityNote(Critical = "potentially protected data read from the IIS metabase under an elevation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "potentially protected data read from the IIS metabase under an elevation."
+        )]
         [SecurityCritical]
         string appAboPath;
 
@@ -370,15 +462,19 @@ namespace System.ServiceModel.Activation
         [SecurityCritical]
         HostedServiceTransportSettings appTransportSettings;
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use."
+        )]
         [SecuritySafeCritical]
         internal MetabaseSettingsIis6()
             : base()
         {
             if (Iis7Helper.IsIis7)
             {
-                throw Fx.AssertAndThrowFatal("MetabaseSettingsIis6 constructor must not be called when running in IIS7");
+                throw Fx.AssertAndThrowFatal(
+                    "MetabaseSettingsIis6 constructor must not be called when running in IIS7"
+                );
             }
 
             SetApplicationInfo();
@@ -389,10 +485,14 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read)."
+        )]
         [SecuritySafeCritical]
-        protected override HostedServiceTransportSettings CreateTransportSettings(string relativeVirtualPath)
+        protected override HostedServiceTransportSettings CreateTransportSettings(
+            string relativeVirtualPath
+        )
         {
             HostedServiceTransportSettings transportSettings = new HostedServiceTransportSettings();
             using (MetabaseReader reader = new MetabaseReader())
@@ -410,12 +510,18 @@ namespace System.ServiceModel.Activation
             return transportSettings;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read)."
+        )]
         [SecuritySafeCritical]
         string GetRealm(MetabaseReader reader, string relativeVirtualPath)
         {
-            object propertyValue = FindPropertyUnderAppRoot(reader, MetabasePropertyType.Realm, relativeVirtualPath);
+            object propertyValue = FindPropertyUnderAppRoot(
+                reader,
+                MetabasePropertyType.Realm,
+                relativeVirtualPath
+            );
             if (propertyValue != null)
             {
                 return (string)propertyValue;
@@ -424,12 +530,18 @@ namespace System.ServiceModel.Activation
             return appTransportSettings.Realm;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read)."
+        )]
         [SecuritySafeCritical]
         HttpAccessSslFlags GetAccessSslFlags(MetabaseReader reader, string relativeVirtualPath)
         {
-            object propertyValue = FindPropertyUnderAppRoot(reader, MetabasePropertyType.AccessSslFlags, relativeVirtualPath);
+            object propertyValue = FindPropertyUnderAppRoot(
+                reader,
+                MetabasePropertyType.AccessSslFlags,
+                relativeVirtualPath
+            );
             if (propertyValue != null)
             {
                 return (HttpAccessSslFlags)(uint)propertyValue;
@@ -438,12 +550,18 @@ namespace System.ServiceModel.Activation
             return appTransportSettings.AccessSslFlags;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read)."
+        )]
         [SecuritySafeCritical]
         AuthFlags GetAuthFlags(MetabaseReader reader, string relativeVirtualPath)
         {
-            object propertyValue = FindPropertyUnderAppRoot(reader, MetabasePropertyType.AuthFlags, relativeVirtualPath);
+            object propertyValue = FindPropertyUnderAppRoot(
+                reader,
+                MetabasePropertyType.AuthFlags,
+                relativeVirtualPath
+            );
             if (propertyValue != null)
             {
                 return (AuthFlags)(uint)propertyValue;
@@ -452,16 +570,25 @@ namespace System.ServiceModel.Activation
             return appTransportSettings.AuthFlags;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use, returns sanitized values (safe for read)."
+        )]
         [SecuritySafeCritical]
         string[] GetAuthProviders(MetabaseReader reader, string relativeVirtualPath)
         {
-            object propertyValue = FindPropertyUnderAppRoot(reader, MetabasePropertyType.AuthProviders, relativeVirtualPath);
+            object propertyValue = FindPropertyUnderAppRoot(
+                reader,
+                MetabasePropertyType.AuthProviders,
+                relativeVirtualPath
+            );
             if (propertyValue != null)
             {
                 string providersString = (string)propertyValue;
-                string[] providers = providersString.Split(IISConstants.CommaSeparator, StringSplitOptions.RemoveEmptyEntries);
+                string[] providers = providersString.Split(
+                    IISConstants.CommaSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 if (providers != null && providers.Length > 0)
                 {
                     return providers;
@@ -471,26 +598,42 @@ namespace System.ServiceModel.Activation
             return appTransportSettings.AuthProviders;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Asserts registry access to get multiple values from the registry, caller should not leak value.",
-            Safe = "No value passed to critical method, discards after use, returns sanitized values (safe for readonly)")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts registry access to get multiple values from the registry, caller should not leak value.",
+            Safe = "No value passed to critical method, discards after use, returns sanitized values (safe for readonly)"
+        )]
         [SecuritySafeCritical]
-        [RegistryPermission(SecurityAction.Assert, Read = @"HKEY_LOCAL_MACHINE\" + IISConstants.CBTRegistryHKLMPath)]
+        [RegistryPermission(
+            SecurityAction.Assert,
+            Read = @"HKEY_LOCAL_MACHINE\" + IISConstants.CBTRegistryHKLMPath
+        )]
         ExtendedProtectionPolicy GetExtendedProtectionPolicy()
         {
             ExtendedProtectionPolicy extendedProtection = null;
-            using (RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(IISConstants.CBTRegistryHKLMPath))
+            using (
+                RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(
+                    IISConstants.CBTRegistryHKLMPath
+                )
+            )
             {
                 if (registryKey != null)
                 {
-                    object tokenCheckingObj = registryKey.GetValue(IISConstants.TokenCheckingAttributeName);
+                    object tokenCheckingObj = registryKey.GetValue(
+                        IISConstants.TokenCheckingAttributeName
+                    );
                     object flagsObj = registryKey.GetValue(IISConstants.FlagsAttributeName);
                     object spnsObj = registryKey.GetValue(IISConstants.SpnAttributeName);
                     //using the default one if the registry value is missing
-                    ExtendedProtectionTokenChecking tokenChecking = (tokenCheckingObj == null) ?
-                        ExtendedProtectionTokenChecking.None : (ExtendedProtectionTokenChecking)tokenCheckingObj;
-                    ExtendedProtectionFlags flags = flagsObj == null ?
-                        ExtendedProtectionFlags.None : (ExtendedProtectionFlags)flagsObj;
-                    List<string> spns = spnsObj == null ? null : new List<string>(spnsObj as string[]);
+                    ExtendedProtectionTokenChecking tokenChecking =
+                        (tokenCheckingObj == null)
+                            ? ExtendedProtectionTokenChecking.None
+                            : (ExtendedProtectionTokenChecking)tokenCheckingObj;
+                    ExtendedProtectionFlags flags =
+                        flagsObj == null
+                            ? ExtendedProtectionFlags.None
+                            : (ExtendedProtectionFlags)flagsObj;
+                    List<string> spns =
+                        spnsObj == null ? null : new List<string>(spnsObj as string[]);
                     extendedProtection = BuildExtendedProtectionPolicy(tokenChecking, flags, spns);
                 }
                 else
@@ -498,32 +641,53 @@ namespace System.ServiceModel.Activation
                     // this IIS6 does not support CBT, log a warning to tracing
                     if (DiagnosticUtility.ShouldTraceWarning)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.WebHostNoCBTSupport,
-                            SR.TraceCodeWebHostNoCBTSupport, this, (Exception)null);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Warning,
+                            TraceCode.WebHostNoCBTSupport,
+                            SR.TraceCodeWebHostNoCBTSupport,
+                            this,
+                            (Exception)null
+                        );
                     }
                 }
             }
             return extendedProtection;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use."
+        )]
         [SecuritySafeCritical]
         void SetApplicationInfo()
         {
             // find the first '/' after the /LM/W3SVC/<site>
             // and get the substring before that
             string applicationID = HostingEnvironmentWrapper.UnsafeApplicationID;
-            int index = applicationID.IndexOf(IISConstants.AboPathDelimiter, ServiceHostingEnvironment.ISAPIApplicationIdPrefix.Length);
-            siteAboPath = applicationID.Substring(IISConstants.LMSegment.Length, index - IISConstants.LMSegment.Length);
+            int index = applicationID.IndexOf(
+                IISConstants.AboPathDelimiter,
+                ServiceHostingEnvironment.ISAPIApplicationIdPrefix.Length
+            );
+            siteAboPath = applicationID.Substring(
+                IISConstants.LMSegment.Length,
+                index - IISConstants.LMSegment.Length
+            );
 
             if (HostingEnvironmentWrapper.ApplicationVirtualPath.Length > 1)
             {
-                appAboPath = string.Concat(siteAboPath, IISConstants.RootSegment, HostingEnvironmentWrapper.ApplicationVirtualPath);
+                appAboPath = string.Concat(
+                    siteAboPath,
+                    IISConstants.RootSegment,
+                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                );
             }
             else
             {
-                if (HostingEnvironmentWrapper.ApplicationVirtualPath.Length != 1 || HostingEnvironmentWrapper.ApplicationVirtualPath[0] != IISConstants.AboPathDelimiter)
+                if (
+                    HostingEnvironmentWrapper.ApplicationVirtualPath.Length != 1
+                    || HostingEnvironmentWrapper.ApplicationVirtualPath[0]
+                        != IISConstants.AboPathDelimiter
+                )
                 {
                     throw Fx.AssertAndThrowFatal("ApplicationVirtualPath must be '/'.");
                 }
@@ -531,8 +695,10 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use."
+        )]
         [SecuritySafeCritical]
         void PopulateSiteProperties(MetabaseReader reader)
         {
@@ -564,8 +730,10 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
-            Safe = "Only passes MetabaseReader instance to critical methods, discards after use.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase.",
+            Safe = "Only passes MetabaseReader instance to critical methods, discards after use."
+        )]
         [SecuritySafeCritical]
         void PopulateApplicationProperties(MetabaseReader reader)
         {
@@ -582,8 +750,13 @@ namespace System.ServiceModel.Activation
             while (foundCount < 4 && endAboPath.Length >= siteAboPath.Length)
             {
                 // Realm
-                if (!foundRealm && ((propertyValue = reader.GetData(endAboPath, MetabasePropertyType.Realm))
-                    != null))
+                if (
+                    !foundRealm
+                    && (
+                        (propertyValue = reader.GetData(endAboPath, MetabasePropertyType.Realm))
+                        != null
+                    )
+                )
                 {
                     appTransportSettings.Realm = (string)propertyValue;
                     foundRealm = true;
@@ -591,8 +764,13 @@ namespace System.ServiceModel.Activation
                 }
 
                 // AuthFlags
-                if (!foundAuthFlags && ((propertyValue = reader.GetData(endAboPath, MetabasePropertyType.AuthFlags))
-                    != null))
+                if (
+                    !foundAuthFlags
+                    && (
+                        (propertyValue = reader.GetData(endAboPath, MetabasePropertyType.AuthFlags))
+                        != null
+                    )
+                )
                 {
                     appTransportSettings.AuthFlags = (AuthFlags)(uint)propertyValue;
                     foundAuthFlags = true;
@@ -600,8 +778,17 @@ namespace System.ServiceModel.Activation
                 }
 
                 // AccessSslFlags
-                if (!foundAccessSslFlags && ((propertyValue = reader.GetData(endAboPath, MetabasePropertyType.AccessSslFlags))
-                    != null))
+                if (
+                    !foundAccessSslFlags
+                    && (
+                        (
+                            propertyValue = reader.GetData(
+                                endAboPath,
+                                MetabasePropertyType.AccessSslFlags
+                            )
+                        ) != null
+                    )
+                )
                 {
                     appTransportSettings.AccessSslFlags = (HttpAccessSslFlags)(uint)propertyValue;
                     foundAccessSslFlags = true;
@@ -609,11 +796,23 @@ namespace System.ServiceModel.Activation
                 }
 
                 // NTAuthProviders
-                if (!foundAuthProviders && ((propertyValue = reader.GetData(endAboPath, MetabasePropertyType.AuthProviders))
-                    != null))
+                if (
+                    !foundAuthProviders
+                    && (
+                        (
+                            propertyValue = reader.GetData(
+                                endAboPath,
+                                MetabasePropertyType.AuthProviders
+                            )
+                        ) != null
+                    )
+                )
                 {
                     string providersString = (string)propertyValue;
-                    appTransportSettings.AuthProviders = providersString.Split(IISConstants.CommaSeparator, StringSplitOptions.RemoveEmptyEntries);
+                    appTransportSettings.AuthProviders = providersString.Split(
+                        IISConstants.CommaSeparator,
+                        StringSplitOptions.RemoveEmptyEntries
+                    );
                     foundAuthProviders = true;
                     foundCount++;
                 }
@@ -623,25 +822,46 @@ namespace System.ServiceModel.Activation
                 endAboPath = endAboPath.Substring(0, index);
             }
 
-            if (appTransportSettings.AuthProviders == null || appTransportSettings.AuthProviders.Length == 0)
+            if (
+                appTransportSettings.AuthProviders == null
+                || appTransportSettings.AuthProviders.Length == 0
+            )
             {
                 appTransportSettings.AuthProviders = DefaultAuthProviders;
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase." +
-            "Caller must sanitize return value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase."
+                + "Caller must sanitize return value."
+        )]
         [SecurityCritical]
-        object FindPropertyUnderAppRoot(MetabaseReader reader, MetabasePropertyType propertyType, string relativeVirtualPath)
+        object FindPropertyUnderAppRoot(
+            MetabaseReader reader,
+            MetabasePropertyType propertyType,
+            string relativeVirtualPath
+        )
         {
             string matchedPath;
-            return FindPropertyUnderAppRoot(reader, propertyType, relativeVirtualPath, out matchedPath);
+            return FindPropertyUnderAppRoot(
+                reader,
+                propertyType,
+                relativeVirtualPath,
+                out matchedPath
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase." +
-            "Caller must sanitize return value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase."
+                + "Caller must sanitize return value."
+        )]
         [SecurityCritical]
-        object FindPropertyUnderAppRoot(MetabaseReader reader, MetabasePropertyType propertyType, string relativeVirtualPath, out string matchedPath)
+        object FindPropertyUnderAppRoot(
+            MetabaseReader reader,
+            MetabasePropertyType propertyType,
+            string relativeVirtualPath,
+            out string matchedPath
+        )
         {
             string endAboPath = appAboPath + relativeVirtualPath.Substring(1);
             int index = endAboPath.IndexOf(IISConstants.AboPathDelimiter, appAboPath.Length + 1);
@@ -656,13 +876,27 @@ namespace System.ServiceModel.Activation
                 startAboPath = endAboPath.Substring(0, index);
             }
 
-            return FindHierarchicalProperty(reader, propertyType, startAboPath, endAboPath, out matchedPath);
+            return FindHierarchicalProperty(
+                reader,
+                propertyType,
+                startAboPath,
+                endAboPath,
+                out matchedPath
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses MetabaseReader (critical class) to read data from metabase." +
-            "Caller must sanitize return value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses MetabaseReader (critical class) to read data from metabase."
+                + "Caller must sanitize return value."
+        )]
         [SecurityCritical]
-        object FindHierarchicalProperty(MetabaseReader reader, MetabasePropertyType propertyType, string startAboPath, string endAboPath, out string matchedPath)
+        object FindHierarchicalProperty(
+            MetabaseReader reader,
+            MetabasePropertyType propertyType,
+            string startAboPath,
+            string endAboPath,
+            out string matchedPath
+        )
         {
             matchedPath = null;
             while (endAboPath.Length >= startAboPath.Length)
@@ -719,7 +953,7 @@ namespace System.ServiceModel.Activation
         SslNegotiateCert = 0x00000020,
         SslRequireCert = 0x00000040,
         SslMapCert = 0x00000080,
-        Ssl128 = 0x00000100
+        Ssl128 = 0x00000100,
     }
 
     enum ExtendedProtectionTokenChecking

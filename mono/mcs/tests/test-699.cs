@@ -2,19 +2,17 @@
 
 public class D : C
 {
-	string _message = "";
+    string _message = "";
 
-	public D (string msg)
-	{
-		_message = msg;
-	}
+    public D(string msg)
+    {
+        _message = msg;
+    }
 
-	public string message
-	{
-		get { return _message; }
-	}
+    public string message
+    {
+        get { return _message; }
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

@@ -39,7 +39,7 @@ internal static partial class Interop
             ScrollBar = 0x00,
             Window = 0x05,
             WindowFrame = 0x06,
-            WindowText = 0x08
+            WindowText = 0x08,
         }
     }
 }

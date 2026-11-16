@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.PeerResolvers
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     [MessageContract(IsWrapped = false)]
     public class ResolveInfo
@@ -28,6 +28,7 @@ namespace System.ServiceModel.PeerResolvers
                 this.MeshId = meshId;
                 this.MaxAddresses = maxAddresses;
             }
+
             public ResolveInfoDC() { }
         }
 
@@ -65,4 +66,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

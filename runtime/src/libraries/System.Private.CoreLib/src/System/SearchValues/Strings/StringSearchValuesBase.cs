@@ -27,13 +27,19 @@ namespace System.Buffers
 
         internal override bool ContainsCore(string value)
         {
-            Debug.Assert(_uniqueValues is not null, "ContainsCore should be overridden if uniqueValues weren't provided.");
+            Debug.Assert(
+                _uniqueValues is not null,
+                "ContainsCore should be overridden if uniqueValues weren't provided."
+            );
             return _uniqueValues.Contains(value);
         }
 
         internal override string[] GetValues()
         {
-            Debug.Assert(_uniqueValues is not null, "GetValues should be overridden if uniqueValues weren't provided.");
+            Debug.Assert(
+                _uniqueValues is not null,
+                "GetValues should be overridden if uniqueValues weren't provided."
+            );
             string[] values = new string[_uniqueValues.Count];
             _uniqueValues.CopyTo(values);
             return values;

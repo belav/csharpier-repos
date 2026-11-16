@@ -6,13 +6,13 @@
 // <Description>
 // Section 4.1
 // If the result of a floating-point operation is too large
-// for the destination format, the result of the operation 
+// for the destination format, the result of the operation
 // becomes positive infinity or negative infinity.
 // </Description>
 
 // <Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 using System;
 using Xunit;
 
@@ -21,7 +21,6 @@ public class MyClass
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool failed = false;
         float f1 = float.MaxValue;
         float f2 = float.PositiveInfinity;

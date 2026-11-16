@@ -12,17 +12,18 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal class StackFrameMethodSymbolResolver : AbstractStackTraceSymbolResolver
     {
-        public override Task<IMethodSymbol?> TryGetBestMatchAsync(Project project,
+        public override Task<IMethodSymbol?> TryGetBestMatchAsync(
+            Project project,
             INamedTypeSymbol type,
             StackFrameSimpleNameNode methodNode,
             StackFrameParameterList methodArguments,
             StackFrameTypeArgumentList? methodTypeArguments,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var methodName = methodNode.ToString();
 
-            var candidateMethods = type
-                .GetMembers()
+            var candidateMethods = type.GetMembers()
                 .OfType<IMethodSymbol>()
                 .Where(m => m.Name == methodName)
                 .ToImmutableArray();

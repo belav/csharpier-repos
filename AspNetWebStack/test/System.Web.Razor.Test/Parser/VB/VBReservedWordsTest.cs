@@ -20,12 +20,14 @@ namespace System.Web.Razor.Test.Parser.VB
         [InlineData("nameSpace")]
         private void ReservedWords(string word)
         {
-            ParseBlockTest(word,
-                new DirectiveBlock(
-                    Factory.MetaCode(word).Accepts(AcceptedCharacters.None)),
+            ParseBlockTest(
+                word,
+                new DirectiveBlock(Factory.MetaCode(word).Accepts(AcceptedCharacters.None)),
                 new RazorError(
                     String.Format(RazorResources.ParseError_ReservedWord, word),
-                    SourceLocation.Zero));
+                    SourceLocation.Zero
+                )
+            );
         }
     }
 }

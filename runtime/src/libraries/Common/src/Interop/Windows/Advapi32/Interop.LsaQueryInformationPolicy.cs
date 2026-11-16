@@ -12,6 +12,7 @@ internal static partial class Interop
         internal static partial uint LsaQueryInformationPolicy(
             IntPtr policyHandle,
             int policyInformationClass,
-            ref IntPtr buffer);
+            ref IntPtr buffer
+        );
     }
 }

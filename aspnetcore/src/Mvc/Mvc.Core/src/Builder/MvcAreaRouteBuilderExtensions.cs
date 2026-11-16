@@ -157,8 +157,8 @@ public static class MvcAreaRouteBuilderExtensions
         defaultsDictionary["area"] = defaultsDictionary["area"] ?? areaName;
 
         var constraintsDictionary = new RouteValueDictionary(constraints);
-        constraintsDictionary["area"] =
-            constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
+        constraintsDictionary["area"] = constraintsDictionary["area"]
+            ?? new StringRouteConstraint(areaName);
 
         routeBuilder.MapRoute(
             name,

@@ -23,14 +23,15 @@ namespace System.ServiceModel.Channels
         SessionOpenNotification sessionOpenNotification;
 
         public ServerWebSocketTransportDuplexSessionChannel(
-                        HttpChannelListener channelListener, 
-                        EndpointAddress localAddress, 
-                        Uri localVia, 
-                        ConnectionBufferPool bufferPool, 
-                        HttpRequestContext httpRequestContext, 
-                        HttpPipeline httpPipeline, 
-                        HttpResponseMessage httpResponseMessage, 
-                        string subProtocol)
+            HttpChannelListener channelListener,
+            EndpointAddress localAddress,
+            Uri localVia,
+            ConnectionBufferPool bufferPool,
+            HttpRequestContext httpRequestContext,
+            HttpPipeline httpPipeline,
+            HttpResponseMessage httpResponseMessage,
+            string subProtocol
+        )
             : base(channelListener, localAddress, localVia, bufferPool)
         {
             this.httpRequestContext = httpRequestContext;
@@ -59,7 +60,14 @@ namespace System.ServiceModel.Channels
             return base.GetProperty<T>();
         }
 
-        internal void SetWebSocketInfo(WebSocketContext webSocketContext, RemoteEndpointMessageProperty remoteEndpointMessageProperty, SecurityMessageProperty handshakeSecurityMessageProperty, byte[] innerBuffer, bool shouldDisposeWebSocketAfterClosed, HttpRequestMessage requestMessage)
+        internal void SetWebSocketInfo(
+            WebSocketContext webSocketContext,
+            RemoteEndpointMessageProperty remoteEndpointMessageProperty,
+            SecurityMessageProperty handshakeSecurityMessageProperty,
+            byte[] innerBuffer,
+            bool shouldDisposeWebSocketAfterClosed,
+            HttpRequestMessage requestMessage
+        )
         {
             Fx.Assert(webSocketContext != null, "webSocketContext should not be null.");
             this.ShouldDisposeWebSocketAfterClosed = shouldDisposeWebSocketAfterClosed;
@@ -74,12 +82,13 @@ namespace System.ServiceModel.Channels
 
             bool inputUseStreaming = TransferModeHelper.IsRequestStreamed(this.TransferMode);
             this.webSocketMessageSource = new WebSocketMessageSource(
-                            this,
-                            this.webSocketContext,
-                            inputUseStreaming,
-                            remoteEndpointMessageProperty,
-                            this,
-                            requestMessage);
+                this,
+                this.webSocketContext,
+                inputUseStreaming,
+                remoteEndpointMessageProperty,
+                this,
+                requestMessage
+            );
 
             this.SetMessageSource(this.webSocketMessageSource);
         }
@@ -97,24 +106,38 @@ namespace System.ServiceModel.Channels
                 TD.WebSocketConnectionAcceptStart(this.httpRequestContext.EventTraceActivity);
             }
 
-            this.httpRequestContext.AcceptWebSocket(this.httpResponseMessage, this.subProtocol, timeout);
+            this.httpRequestContext.AcceptWebSocket(
+                this.httpResponseMessage,
+                this.subProtocol,
+                timeout
+            );
 
             if (TD.WebSocketConnectionAcceptedIsEnabled())
             {
                 TD.WebSocketConnectionAccepted(
                     this.httpRequestContext.EventTraceActivity,
-                    this.WebSocket != null ? this.WebSocket.GetHashCode() : -1);
+                    this.WebSocket != null ? this.WebSocket.GetHashCode() : -1
+                );
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (TD.WebSocketConnectionAcceptStartIsEnabled())
             {
                 TD.WebSocketConnectionAcceptStart(this.httpRequestContext.EventTraceActivity);
             }
 
-            return this.httpRequestContext.BeginAcceptWebSocket(this.httpResponseMessage, this.subProtocol, callback, state);
+            return this.httpRequestContext.BeginAcceptWebSocket(
+                this.httpResponseMessage,
+                this.subProtocol,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -125,7 +148,8 @@ namespace System.ServiceModel.Channels
             {
                 TD.WebSocketConnectionAccepted(
                     this.httpRequestContext.EventTraceActivity,
-                    this.WebSocket != null ? this.WebSocket.GetHashCode() : -1);
+                    this.WebSocket != null ? this.WebSocket.GetHashCode() : -1
+                );
             }
         }
 
@@ -133,7 +157,7 @@ namespace System.ServiceModel.Channels
         {
             base.OnOpened();
 
-            // We don't need the HttpPipeline any more once the HTTP handshake is finished. 
+            // We don't need the HttpPipeline any more once the HTTP handshake is finished.
             // Close it to release the CancellationTokenSource and other possible resources.
             this.httpPipeline.Close();
         }
@@ -142,22 +166,23 @@ namespace System.ServiceModel.Channels
         {
             readonly ServerWebSocketTransportDuplexSessionChannel channel;
 
-            public SessionOpenNotificationHelper(ServerWebSocketTransportDuplexSessionChannel channel)
+            public SessionOpenNotificationHelper(
+                ServerWebSocketTransportDuplexSessionChannel channel
+            )
             {
                 this.channel = channel;
             }
 
             public override bool IsEnabled
             {
-                get
-                {
-                    return this.channel.WebSocketSettings.CreateNotificationOnConnection;
-                }
+                get { return this.channel.WebSocketSettings.CreateNotificationOnConnection; }
             }
 
             public override void UpdateMessageProperties(MessageProperties inboundMessageProperties)
             {
-                this.channel.webSocketMessageSource.UpdateOpenNotificationMessageProperties(inboundMessageProperties);
+                this.channel.webSocketMessageSource.UpdateOpenNotificationMessageProperties(
+                    inboundMessageProperties
+                );
             }
         }
     }

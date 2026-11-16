@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -17,19 +17,26 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Security;
-    
+
     public static class WindowsRuntimeMetadata
     {
         // Wrapper for Win8 API RoResolveNamespace with default Windows SDK path as installed .winmd files in %WINDIR%\system32\WinMetadata.
         [System.Security.SecurityCritical]
-        public static IEnumerable<string> ResolveNamespace(string namespaceName, IEnumerable<string> packageGraphFilePaths)
+        public static IEnumerable<string> ResolveNamespace(
+            string namespaceName,
+            IEnumerable<string> packageGraphFilePaths
+        )
         {
             return ResolveNamespace(namespaceName, null, packageGraphFilePaths);
         }
 
         // Wrapper for Win8 API RoResolveNamespace.
         [System.Security.SecurityCritical]
-        public static IEnumerable<string> ResolveNamespace(string namespaceName, string windowsSdkFilePath, IEnumerable<string> packageGraphFilePaths)
+        public static IEnumerable<string> ResolveNamespace(
+            string namespaceName,
+            string windowsSdkFilePath,
+            IEnumerable<string> packageGraphFilePaths
+        )
         {
             if (namespaceName == null)
                 throw new ArgumentNullException("namespaceName");
@@ -40,7 +47,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 List<string> packageGraphFilePathsList = new List<string>(packageGraphFilePaths);
                 packageGraphFilePathsArray = new string[packageGraphFilePathsList.Count];
-                
+
                 int index = 0;
                 foreach (string packageGraphFilePath in packageGraphFilePathsList)
                 {
@@ -48,33 +55,39 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     index++;
                 }
             }
-            
+
             string[] retFileNames = null;
             nResolveNamespace(
-                namespaceName, 
-                windowsSdkFilePath, 
+                namespaceName,
+                windowsSdkFilePath,
                 packageGraphFilePathsArray,
-                ((packageGraphFilePathsArray == null) ? 0 : packageGraphFilePathsArray.Length), 
-                JitHelpers.GetObjectHandleOnStack(ref retFileNames));
-            
+                ((packageGraphFilePathsArray == null) ? 0 : packageGraphFilePathsArray.Length),
+                JitHelpers.GetObjectHandleOnStack(ref retFileNames)
+            );
+
             return retFileNames;
         }
-        
+
         [System.Security.SecurityCritical]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void nResolveNamespace(
-            string namespaceName, 
-            string windowsSdkFilePath, 
-            string[] packageGraphFilePaths, 
-            int cPackageGraphFilePaths, 
-            ObjectHandleOnStack retFileNames);
-        
+        private static extern void nResolveNamespace(
+            string namespaceName,
+            string windowsSdkFilePath,
+            string[] packageGraphFilePaths,
+            int cPackageGraphFilePaths,
+            ObjectHandleOnStack retFileNames
+        );
+
 #if FEATURE_REFLECTION_ONLY_LOAD
         [method: System.Security.SecurityCritical]
         public static event EventHandler<NamespaceResolveEventArgs> ReflectionOnlyNamespaceResolve;
 
-        internal static RuntimeAssembly[] OnReflectionOnlyNamespaceResolveEvent(AppDomain appDomain, RuntimeAssembly assembly, string namespaceName)
+        internal static RuntimeAssembly[] OnReflectionOnlyNamespaceResolveEvent(
+            AppDomain appDomain,
+            RuntimeAssembly assembly,
+            string namespaceName
+        )
         {
             EventHandler<NamespaceResolveEventArgs> eventHandler = ReflectionOnlyNamespaceResolve;
             if (eventHandler != null)
@@ -83,14 +96,19 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 int len = ds.Length;
                 for (int i = 0; i < len; i++)
                 {
-                    NamespaceResolveEventArgs eventArgs = new NamespaceResolveEventArgs(namespaceName, assembly);
-                    
+                    NamespaceResolveEventArgs eventArgs = new NamespaceResolveEventArgs(
+                        namespaceName,
+                        assembly
+                    );
+
                     ((EventHandler<NamespaceResolveEventArgs>)ds[i])(appDomain, eventArgs);
-                    
+
                     Collection<Assembly> assembliesCollection = eventArgs.ResolvedAssemblies;
                     if (assembliesCollection.Count > 0)
                     {
-                        RuntimeAssembly[] retAssemblies = new RuntimeAssembly[assembliesCollection.Count];
+                        RuntimeAssembly[] retAssemblies = new RuntimeAssembly[
+                            assembliesCollection.Count
+                        ];
                         int retIndex = 0;
                         foreach (Assembly asm in assembliesCollection)
                         {
@@ -101,7 +119,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     }
                 }
             }
-            
+
             return null;
         }
 #endif //FEATURE_REFLECTION_ONLY
@@ -109,7 +127,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [method: System.Security.SecurityCritical]
         public static event EventHandler<DesignerNamespaceResolveEventArgs> DesignerNamespaceResolve;
 
-        internal static string[] OnDesignerNamespaceResolveEvent(AppDomain appDomain, string namespaceName)
+        internal static string[] OnDesignerNamespaceResolveEvent(
+            AppDomain appDomain,
+            string namespaceName
+        )
         {
             EventHandler<DesignerNamespaceResolveEventArgs> eventHandler = DesignerNamespaceResolve;
             if (eventHandler != null)
@@ -118,7 +139,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 int len = ds.Length;
                 for (int i = 0; i < len; i++)
                 {
-                    DesignerNamespaceResolveEventArgs eventArgs = new DesignerNamespaceResolveEventArgs(namespaceName);
+                    DesignerNamespaceResolveEventArgs eventArgs =
+                        new DesignerNamespaceResolveEventArgs(namespaceName);
 
                     ((EventHandler<DesignerNamespaceResolveEventArgs>)ds[i])(appDomain, eventArgs);
 
@@ -130,8 +152,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         foreach (string assemblyFile in assemblyFilesCollection)
                         {
                             if (String.IsNullOrEmpty(assemblyFile))
-                            {   // DesignerNamespaceResolve event returned null or empty file name - that is not allowed
-                                throw new ArgumentException(Environment.GetResourceString("Arg_EmptyOrNullString"), "DesignerNamespaceResolveEventArgs.ResolvedAssemblyFiles");
+                            { // DesignerNamespaceResolve event returned null or empty file name - that is not allowed
+                                throw new ArgumentException(
+                                    Environment.GetResourceString("Arg_EmptyOrNullString"),
+                                    "DesignerNamespaceResolveEventArgs.ResolvedAssemblyFiles"
+                                );
                             }
                             retAssemblyFiles[retIndex] = assemblyFile;
                             retIndex++;
@@ -141,11 +166,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     }
                 }
             }
-            
+
             return null;
         }
     }
-    
+
 #if FEATURE_REFLECTION_ONLY_LOAD
     [ComVisible(false)]
     public class NamespaceResolveEventArgs : EventArgs
@@ -156,28 +181,19 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         public string NamespaceName
         {
-            get
-            {
-                return _NamespaceName;
-            }
+            get { return _NamespaceName; }
         }
 
         public Assembly RequestingAssembly
         {
-            get
-            {
-                return _RequestingAssembly;
-            }
+            get { return _RequestingAssembly; }
         }
 
         public Collection<Assembly> ResolvedAssemblies
         {
-            get
-            {
-                return _ResolvedAssemblies;
-            }
+            get { return _ResolvedAssemblies; }
         }
-        
+
         public NamespaceResolveEventArgs(string namespaceName, Assembly requestingAssembly)
         {
             _NamespaceName = namespaceName;
@@ -195,18 +211,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         public string NamespaceName
         {
-            get
-            {
-                return _NamespaceName;
-            }
+            get { return _NamespaceName; }
         }
 
         public Collection<string> ResolvedAssemblyFiles
         {
-            get
-            {
-                return _ResolvedAssemblyFiles;
-            }
+            get { return _ResolvedAssemblyFiles; }
         }
 
         public DesignerNamespaceResolveEventArgs(string namespaceName)

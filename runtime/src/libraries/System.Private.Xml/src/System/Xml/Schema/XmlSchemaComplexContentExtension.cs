@@ -20,18 +20,22 @@ namespace System.Xml.Schema
             set { _baseTypeName = value ?? XmlQualifiedName.Empty; }
         }
 
-        [XmlElement("group", typeof(XmlSchemaGroupRef)),
-         XmlElement("choice", typeof(XmlSchemaChoice)),
-         XmlElement("all", typeof(XmlSchemaAll)),
-         XmlElement("sequence", typeof(XmlSchemaSequence))]
+        [
+            XmlElement("group", typeof(XmlSchemaGroupRef)),
+            XmlElement("choice", typeof(XmlSchemaChoice)),
+            XmlElement("all", typeof(XmlSchemaAll)),
+            XmlElement("sequence", typeof(XmlSchemaSequence))
+        ]
         public XmlSchemaParticle? Particle
         {
             get { return _particle; }
             set { _particle = value; }
         }
 
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
         public XmlSchemaObjectCollection Attributes
         {
             get { return _attributes; }

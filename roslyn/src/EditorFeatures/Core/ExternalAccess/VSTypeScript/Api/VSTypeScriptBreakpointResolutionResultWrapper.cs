@@ -11,18 +11,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         internal readonly BreakpointResolutionResult UnderlyingObject;
 
-        private VSTypeScriptBreakpointResolutionResultWrapper(BreakpointResolutionResult result)
-            => UnderlyingObject = result;
+        private VSTypeScriptBreakpointResolutionResultWrapper(BreakpointResolutionResult result) =>
+            UnderlyingObject = result;
 
         public Document Document => UnderlyingObject.Document;
         public TextSpan TextSpan => UnderlyingObject.TextSpan;
         public string? LocationNameOpt => UnderlyingObject.LocationNameOpt;
         public bool IsLineBreakpoint => UnderlyingObject.IsLineBreakpoint;
 
-        public static VSTypeScriptBreakpointResolutionResultWrapper CreateSpanResult(Document document, TextSpan textSpan, string? locationNameOpt = null)
-            => new(BreakpointResolutionResult.CreateSpanResult(document, textSpan, locationNameOpt));
+        public static VSTypeScriptBreakpointResolutionResultWrapper CreateSpanResult(
+            Document document,
+            TextSpan textSpan,
+            string? locationNameOpt = null
+        ) => new(BreakpointResolutionResult.CreateSpanResult(document, textSpan, locationNameOpt));
 
-        public static VSTypeScriptBreakpointResolutionResultWrapper CreateLineResult(Document document, string? locationNameOpt = null)
-            => new(BreakpointResolutionResult.CreateLineResult(document, locationNameOpt));
+        public static VSTypeScriptBreakpointResolutionResultWrapper CreateLineResult(
+            Document document,
+            string? locationNameOpt = null
+        ) => new(BreakpointResolutionResult.CreateLineResult(document, locationNameOpt));
     }
 }

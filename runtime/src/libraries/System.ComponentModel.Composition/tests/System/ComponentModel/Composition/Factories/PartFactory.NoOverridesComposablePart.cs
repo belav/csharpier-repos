@@ -14,9 +14,7 @@ namespace System.ComponentModel.Composition.Factories
         // uses this to verify default behavior of the base class.
         private class NoOverridesComposablePart : ComposablePart
         {
-            public NoOverridesComposablePart()
-            {
-            }
+            public NoOverridesComposablePart() { }
 
             public override IEnumerable<ExportDefinition> ExportDefinitions
             {

@@ -19,7 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///         examples.
 ///     </para>
 /// </remarks>
-public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilder?>, IInfrastructure<IConventionNavigationBuilder?>
+public class NavigationBuilder
+    : IInfrastructure<IConventionSkipNavigationBuilder?>,
+        IInfrastructure<IConventionNavigationBuilder?>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,7 +40,8 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
 
         Check.DebugAssert(
             InternalNavigationBuilder != null || InternalSkipNavigationBuilder != null,
-            "Expected either a Navigation or SkipNavigation");
+            "Expected either a Navigation or SkipNavigation"
+        );
     }
 
     private InternalNavigationBuilder? InternalNavigationBuilder { get; set; }
@@ -64,11 +67,19 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
 
         if (InternalNavigationBuilder != null)
         {
-            InternalNavigationBuilder.HasAnnotation(annotation, value, ConfigurationSource.Explicit);
+            InternalNavigationBuilder.HasAnnotation(
+                annotation,
+                value,
+                ConfigurationSource.Explicit
+            );
         }
         else
         {
-            InternalSkipNavigationBuilder!.HasAnnotation(annotation, value, ConfigurationSource.Explicit);
+            InternalSkipNavigationBuilder!.HasAnnotation(
+                annotation,
+                value,
+                ConfigurationSource.Explicit
+            );
         }
 
         return this;
@@ -95,11 +106,17 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     {
         if (InternalNavigationBuilder != null)
         {
-            InternalNavigationBuilder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
+            InternalNavigationBuilder.UsePropertyAccessMode(
+                propertyAccessMode,
+                ConfigurationSource.Explicit
+            );
         }
         else
         {
-            InternalSkipNavigationBuilder!.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
+            InternalSkipNavigationBuilder!.UsePropertyAccessMode(
+                propertyAccessMode,
+                ConfigurationSource.Explicit
+            );
         }
 
         return this;
@@ -158,11 +175,17 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     {
         if (InternalNavigationBuilder != null)
         {
-            InternalNavigationBuilder.EnableLazyLoading(lazyLoadingEnabled, ConfigurationSource.Explicit);
+            InternalNavigationBuilder.EnableLazyLoading(
+                lazyLoadingEnabled,
+                ConfigurationSource.Explicit
+            );
         }
         else
         {
-            InternalSkipNavigationBuilder!.EnableLazyLoading(lazyLoadingEnabled, ConfigurationSource.Explicit);
+            InternalSkipNavigationBuilder!.EnableLazyLoading(
+                lazyLoadingEnabled,
+                ConfigurationSource.Explicit
+            );
         }
 
         return this;
@@ -177,14 +200,19 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     {
         if (InternalNavigationBuilder != null)
         {
-            InternalNavigationBuilder = InternalNavigationBuilder.IsRequired(required, ConfigurationSource.Explicit);
+            InternalNavigationBuilder = InternalNavigationBuilder.IsRequired(
+                required,
+                ConfigurationSource.Explicit
+            );
         }
         else
         {
             throw new InvalidOperationException(
                 CoreStrings.RequiredSkipNavigation(
                     InternalSkipNavigationBuilder!.Metadata.DeclaringEntityType.DisplayName(),
-                    InternalSkipNavigationBuilder.Metadata.Name));
+                    InternalSkipNavigationBuilder.Metadata.Name
+                )
+            );
         }
 
         return this;
@@ -193,14 +221,14 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     /// <summary>
     ///     The internal builder being used to configure the skip navigation.
     /// </summary>
-    IConventionSkipNavigationBuilder? IInfrastructure<IConventionSkipNavigationBuilder?>.Instance
-        => InternalSkipNavigationBuilder;
+    IConventionSkipNavigationBuilder? IInfrastructure<IConventionSkipNavigationBuilder?>.Instance =>
+        InternalSkipNavigationBuilder;
 
     /// <summary>
     ///     The internal builder being used to configure the navigation.
     /// </summary>
-    IConventionNavigationBuilder? IInfrastructure<IConventionNavigationBuilder?>.Instance
-        => InternalNavigationBuilder;
+    IConventionNavigationBuilder? IInfrastructure<IConventionNavigationBuilder?>.Instance =>
+        InternalNavigationBuilder;
 
     #region Hidden System.Object members
 
@@ -209,8 +237,7 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -219,8 +246,7 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -228,8 +254,7 @@ public class NavigationBuilder : IInfrastructure<IConventionSkipNavigationBuilde
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

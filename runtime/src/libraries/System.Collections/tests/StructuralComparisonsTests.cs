@@ -11,7 +11,10 @@ namespace System.Collections.Tests
         [Fact]
         public void StructuralComparer_ReturnsSameInstance()
         {
-            Assert.Same(StructuralComparisons.StructuralComparer, StructuralComparisons.StructuralComparer);
+            Assert.Same(
+                StructuralComparisons.StructuralComparer,
+                StructuralComparisons.StructuralComparer
+            );
         }
 
         public static IEnumerable<object[]> StructuralComparer_Compare_TestData()
@@ -21,8 +24,18 @@ namespace System.Collections.Tests
             yield return new object[] { "abc", null, 1 };
             yield return new object[] { "abc", "abc", 0 };
             // Invariant mode comparison of strings, ends up returning firstChar - secondChar when different, i.e 'd' - 'a'
-            yield return new object[] { "abc", "def", PlatformDetection.IsInvariantGlobalization ? -3 : -1 };
-            yield return new object[] { "def", "abc", PlatformDetection.IsInvariantGlobalization ? 3 : 1 };
+            yield return new object[]
+            {
+                "abc",
+                "def",
+                PlatformDetection.IsInvariantGlobalization ? -3 : -1,
+            };
+            yield return new object[]
+            {
+                "def",
+                "abc",
+                PlatformDetection.IsInvariantGlobalization ? 3 : 1,
+            };
             yield return new object[] { new StructuralObject(), "abc", 5 };
             yield return new object[] { new StructuralObject(), 123, -5 };
         }
@@ -37,7 +50,10 @@ namespace System.Collections.Tests
         [Fact]
         public void StructuralEqualityComparer_ReturnsSameInstance()
         {
-            Assert.Same(StructuralComparisons.StructuralEqualityComparer, StructuralComparisons.StructuralEqualityComparer);
+            Assert.Same(
+                StructuralComparisons.StructuralEqualityComparer,
+                StructuralComparisons.StructuralEqualityComparer
+            );
         }
 
         public static IEnumerable<object[]> StructuralEqualityComparer_Equals_TestData()
@@ -70,7 +86,10 @@ namespace System.Collections.Tests
         [MemberData(nameof(StructuralEqualityComparer_GetHashCode_TestData))]
         public void StructuralEqualityComparer_GetHashCode(object obj, int expected)
         {
-            Assert.Equal(expected, StructuralComparisons.StructuralEqualityComparer.GetHashCode(obj));
+            Assert.Equal(
+                expected,
+                StructuralComparisons.StructuralEqualityComparer.GetHashCode(obj)
+            );
         }
 
         private class StructuralObject : IStructuralEquatable, IStructuralComparable
@@ -78,6 +97,7 @@ namespace System.Collections.Tests
             public int CompareTo(object other, IComparer comparer) => other is string ? 5 : -5;
 
             public bool Equals(object other, IEqualityComparer comparer) => other is string;
+
             public int GetHashCode(IEqualityComparer comparer) => 5;
         }
     }

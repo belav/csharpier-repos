@@ -31,10 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
         [Fact]
         public void TestMap()
         {
-            var map = BidirectionalMap<string, int>.Empty
-                .Add("0", 0)
-                .Add("1", 1)
-                .Add("2", 2);
+            var map = BidirectionalMap<string, int>.Empty.Add("0", 0).Add("1", 1).Add("2", 2);
 
             Assert.Equal(3, map.Keys.Count());
             Assert.Equal(3, map.Values.Count());
@@ -63,10 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
         [Fact]
         public void TestRemoveKey()
         {
-            var map = BidirectionalMap<string, int>.Empty
-                .Add("0", 0)
-                .Add("1", 1)
-                .Add("2", 2);
+            var map = BidirectionalMap<string, int>.Empty.Add("0", 0).Add("1", 1).Add("2", 2);
 
             var map2 = map.RemoveKey("1");
 
@@ -90,10 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
         [Fact]
         public void TestRemoveValue()
         {
-            var map = BidirectionalMap<string, int>.Empty
-                .Add("0", 0)
-                .Add("1", 1)
-                .Add("2", 2);
+            var map = BidirectionalMap<string, int>.Empty.Add("0", 0).Add("1", 1).Add("2", 2);
 
             var map2 = map.RemoveValue(1);
 

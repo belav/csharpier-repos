@@ -31,7 +31,6 @@ class Gen<T>
     {
         return t;
     }
-
 }
 
 public class Test_class_instance01
@@ -139,6 +138,5 @@ public class Test_class_instance01
             Console.WriteLine("Test Passes");
         }
         return ret;
-
     }
 }

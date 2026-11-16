@@ -29,15 +29,8 @@ namespace System.Runtime.Serialization.Json
         /// </summary>
         public int MaxItemsInObjectGraph
         {
-            get
-            {
-                return this.maxItemsInObjectGraph;
-            }
-
-            set
-            {
-                this.maxItemsInObjectGraph = value;
-            }
+            get { return this.maxItemsInObjectGraph; }
+            set { this.maxItemsInObjectGraph = value; }
         }
 
         /// <summary>

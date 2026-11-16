@@ -32,7 +32,7 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Internal
         /// </summary>
-        Internal
+        Internal,
     }
 
     /// <summary>
@@ -56,10 +56,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public EdmItemError ValidationError
         {
-            get
-            {
-                return _validationError;
-            }
+            get { return _validationError; }
         }
     }
 
@@ -73,17 +70,11 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Gets or Sets whether the validator should skip readonly items
         /// </summary>
-        internal bool SkipReadOnlyItems        
+        internal bool SkipReadOnlyItems
         {
-            get
-            {
-                return _skipReadOnlyItems;
-            }
-            set
-            {
-                _skipReadOnlyItems = value;
-            }
-        }        
+            get { return _skipReadOnlyItems; }
+            set { _skipReadOnlyItems = value; }
+        }
 
         /// <summary>
         /// Validate a collection of items in a batch
@@ -91,7 +82,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="items">A collection of items to validate</param>
         /// <param name="ospaceErrors">List of validation errors that were previously collected by the caller. if it encounters
         /// more errors, it adds them to this list of errors</param>
-        public void Validate<T>(IEnumerable<T> items, List<EdmItemError> ospaceErrors) 
+        public void Validate<T>(IEnumerable<T> items, List<EdmItemError> ospaceErrors)
             where T : EdmType // O-Space only supports EdmType
         {
             EntityUtil.CheckArgumentNull(items, "items");
@@ -110,9 +101,7 @@ namespace System.Data.Metadata.Edm
         /// Event hook to perform preprocessing on the validation error before it gets added to a list of errors
         /// </summary>
         /// <param name="e">The event args for this event</param>
-        protected virtual void OnValidationError(ValidationErrorEventArgs e)
-        {
-        }
+        protected virtual void OnValidationError(ValidationErrorEventArgs e) { }
 
         /// <summary>
         /// Invoke the event hook Add an error to the list
@@ -145,12 +134,19 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The item to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void InternalValidate(MetadataItem item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void InternalValidate(
+            MetadataItem item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
-            Debug.Assert(item != null, "InternalValidate is called with a null item, the caller should check for null first");
+            Debug.Assert(
+                item != null,
+                "InternalValidate is called with a null item, the caller should check for null first"
+            );
 
             // If the item has already been validated or we need to skip readonly items, then skip
-            if ( (item.IsReadOnly && SkipReadOnlyItems) || validatedItems.Contains(item) )
+            if ((item.IsReadOnly && SkipReadOnlyItems) || validatedItems.Contains(item))
             {
                 return;
             }
@@ -162,7 +158,10 @@ namespace System.Data.Metadata.Edm
             // Check to make sure the item has an identity
             if (string.IsNullOrEmpty(item.Identity))
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_EmptyIdentity,item));
+                AddError(
+                    errors,
+                    new EdmItemError(System.Data.Entity.Strings.Validator_EmptyIdentity, item)
+                );
             }
 
             switch (item.BuiltInTypeKind)
@@ -207,7 +206,12 @@ namespace System.Data.Metadata.Edm
                 case BuiltInTypeKind.RelationshipType:
                 case BuiltInTypeKind.SimpleType:
                 case BuiltInTypeKind.StructuralType:
-                    Debug.Assert(false, "An instance with a built in type kind refering to the abstract type " + item.BuiltInTypeKind + " is encountered");
+                    Debug.Assert(
+                        false,
+                        "An instance with a built in type kind refering to the abstract type "
+                            + item.BuiltInTypeKind
+                            + " is encountered"
+                    );
                     break;
 
                 default:
@@ -229,19 +233,35 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The CollectionType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateCollectionType(CollectionType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateCollectionType(
+            CollectionType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateEdmType(item, errors, validatedItems);
 
             // Check that it doesn't have a base type
             if (item.BaseType != null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_CollectionTypesCannotHaveBaseType, item));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_CollectionTypesCannotHaveBaseType,
+                        item
+                    )
+                );
             }
 
             if (item.TypeUsage == null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_CollectionHasNoTypeUsage, item));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_CollectionHasNoTypeUsage,
+                        item
+                    )
+                );
             }
             else
             {
@@ -256,7 +276,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The ComplexType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateComplexType(ComplexType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateComplexType(
+            ComplexType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateStructuralType(item, errors, validatedItems);
         }
@@ -267,19 +291,31 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The EdmType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateEdmType(EdmType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateEdmType(
+            EdmType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateItem(item, errors, validatedItems);
 
             // Check that this type has a name and namespace
             if (string.IsNullOrEmpty(item.Name))
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_TypeHasNoName, item));
+                AddError(
+                    errors,
+                    new EdmItemError(System.Data.Entity.Strings.Validator_TypeHasNoName, item)
+                );
             }
-            if (null == item.NamespaceName ||
-                item.DataSpace != DataSpace.OSpace && string.Empty == item.NamespaceName)
+            if (
+                null == item.NamespaceName
+                || item.DataSpace != DataSpace.OSpace && string.Empty == item.NamespaceName
+            )
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_TypeHasNoNamespace, item));
+                AddError(
+                    errors,
+                    new EdmItemError(System.Data.Entity.Strings.Validator_TypeHasNoNamespace, item)
+                );
             }
 
             // We don't need to verify that the base type chain eventually gets to null because
@@ -297,7 +333,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The EntityType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateEntityType(EntityType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateEntityType(
+            EntityType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             // check the base EntityType has Keys
             if (item.BaseType == null)
@@ -305,7 +345,13 @@ namespace System.Data.Metadata.Edm
                 // Check that there is at least one key member
                 if (item.KeyMembers.Count < 1)
                 {
-                    AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_NoKeyMembers(item.FullName), item));
+                    AddError(
+                        errors,
+                        new EdmItemError(
+                            System.Data.Entity.Strings.Validator_NoKeyMembers(item.FullName),
+                            item
+                        )
+                    );
                 }
                 else
                 {
@@ -313,13 +359,22 @@ namespace System.Data.Metadata.Edm
                     {
                         if (keyProperty.Nullable)
                         {
-                            AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_NullableEntityKeyProperty(keyProperty.Name, item.FullName), keyProperty));
+                            AddError(
+                                errors,
+                                new EdmItemError(
+                                    System.Data.Entity.Strings.Validator_NullableEntityKeyProperty(
+                                        keyProperty.Name,
+                                        item.FullName
+                                    ),
+                                    keyProperty
+                                )
+                            );
                         }
                     }
                 }
             }
 
-            // Continue to process the entity to see if there are other errors. This allows the user to 
+            // Continue to process the entity to see if there are other errors. This allows the user to
             // fix as much as possible at the same time.
             ValidateStructuralType(item, errors, validatedItems);
         }
@@ -330,20 +385,30 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The Facet object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateFacet(Facet item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateFacet(
+            Facet item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateItem(item, errors, validatedItems);
 
             // Check that this facet has a name
             if (string.IsNullOrEmpty(item.Name))
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_FacetHasNoName, item));
+                AddError(
+                    errors,
+                    new EdmItemError(System.Data.Entity.Strings.Validator_FacetHasNoName, item)
+                );
             }
 
             // Validate the type
             if (item.FacetType == null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_FacetTypeIsNull, item));
+                AddError(
+                    errors,
+                    new EdmItemError(System.Data.Entity.Strings.Validator_FacetTypeIsNull, item)
+                );
             }
             else
             {
@@ -357,7 +422,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The MetadataItem object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateItem(MetadataItem item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateItem(
+            MetadataItem item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             // In here, we look at RawMetadataProperties because it dynamically add MetadataProperties when you access the
             // normal MetadataProperties property. This avoids needless validation and infinite recursion
@@ -376,19 +445,32 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The item object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateEdmMember(EdmMember item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateEdmMember(
+            EdmMember item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateItem(item, errors, validatedItems);
 
             // Check that this member has a name
             if (string.IsNullOrEmpty(item.Name))
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_MemberHasNoName, item));
+                AddError(
+                    errors,
+                    new EdmItemError(System.Data.Entity.Strings.Validator_MemberHasNoName, item)
+                );
             }
 
             if (item.DeclaringType == null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_MemberHasNullDeclaringType, item));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_MemberHasNullDeclaringType,
+                        item
+                    )
+                );
             }
             else
             {
@@ -397,7 +479,13 @@ namespace System.Data.Metadata.Edm
 
             if (item.TypeUsage == null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_MemberHasNullTypeUsage, item));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_MemberHasNullTypeUsage,
+                        item
+                    )
+                );
             }
             else
             {
@@ -411,7 +499,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The MetadataProperty object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateMetadataProperty(MetadataProperty item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateMetadataProperty(
+            MetadataProperty item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             // Validate only for user added item attributes, for system attributes, we can skip validation
             if (item.PropertyKind == PropertyKind.Extended)
@@ -421,12 +513,24 @@ namespace System.Data.Metadata.Edm
                 // Check that this member has a name
                 if (string.IsNullOrEmpty(item.Name))
                 {
-                    AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_MetadataPropertyHasNoName, item));
+                    AddError(
+                        errors,
+                        new EdmItemError(
+                            System.Data.Entity.Strings.Validator_MetadataPropertyHasNoName,
+                            item
+                        )
+                    );
                 }
 
                 if (item.TypeUsage == null)
                 {
-                    AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_ItemAttributeHasNullTypeUsage, item));
+                    AddError(
+                        errors,
+                        new EdmItemError(
+                            System.Data.Entity.Strings.Validator_ItemAttributeHasNullTypeUsage,
+                            item
+                        )
+                    );
                 }
                 else
                 {
@@ -441,7 +545,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The NavigationProperty object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateNavigationProperty(NavigationProperty item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateNavigationProperty(
+            NavigationProperty item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             // Continue to process the property to see if there are other errors. This allows the user to fix as much as possible at the same time.
             ValidateEdmMember(item, errors, validatedItems);
@@ -453,7 +561,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The GetPrimitiveType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidatePrimitiveType(PrimitiveType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidatePrimitiveType(
+            PrimitiveType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateSimpleType(item, errors, validatedItems);
         }
@@ -464,7 +576,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The EdmProperty object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateEdmProperty(EdmProperty item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateEdmProperty(
+            EdmProperty item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateEdmMember(item, errors, validatedItems);
         }
@@ -475,20 +591,36 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The RefType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateRefType(RefType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateRefType(
+            RefType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateEdmType(item, errors, validatedItems);
 
             // Check that it doesn't have a base type
             if (item.BaseType != null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_RefTypesCannotHaveBaseType, item));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_RefTypesCannotHaveBaseType,
+                        item
+                    )
+                );
             }
 
             // Just validate the element type, there is nothing on the collection itself to validate
             if (item.ElementType == null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_RefTypeHasNullEntityType, null));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_RefTypeHasNullEntityType,
+                        null
+                    )
+                );
             }
             else
             {
@@ -502,7 +634,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The SimpleType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateSimpleType(SimpleType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateSimpleType(
+            SimpleType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateEdmType(item, errors, validatedItems);
         }
@@ -513,7 +649,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The StructuralType object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateStructuralType(StructuralType item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateStructuralType(
+            StructuralType item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateEdmType(item, errors, validatedItems);
 
@@ -524,8 +664,14 @@ namespace System.Data.Metadata.Edm
                 // Check if the base type already has a member of the same name
                 EdmMember baseMember = null;
                 if (allMembers.TryGetValue(member.Name, out baseMember))
-                {                    
-                    AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_BaseTypeHasMemberOfSameName, item));
+                {
+                    AddError(
+                        errors,
+                        new EdmItemError(
+                            System.Data.Entity.Strings.Validator_BaseTypeHasMemberOfSameName,
+                            item
+                        )
+                    );
                 }
                 else
                 {
@@ -542,13 +688,23 @@ namespace System.Data.Metadata.Edm
         /// <param name="item">The TypeUsage object to validate</param>
         /// <param name="errors">An error collection for adding validation errors</param>
         /// <param name="validatedItems">A dictionary keeping track of items that have been validated</param>
-        private void ValidateTypeUsage(TypeUsage item, List<EdmItemError> errors, HashSet<MetadataItem> validatedItems)
+        private void ValidateTypeUsage(
+            TypeUsage item,
+            List<EdmItemError> errors,
+            HashSet<MetadataItem> validatedItems
+        )
         {
             ValidateItem(item, errors, validatedItems);
 
             if (item.EdmType == null)
             {
-                AddError(errors, new EdmItemError(System.Data.Entity.Strings.Validator_TypeUsageHasNullEdmType, item));
+                AddError(
+                    errors,
+                    new EdmItemError(
+                        System.Data.Entity.Strings.Validator_TypeUsageHasNullEdmType,
+                        item
+                    )
+                );
             }
             else
             {

@@ -3,8 +3,8 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Reflection;
+using System.Text;
 using Microsoft.Diagnostics.NETCore.Client;
 using Tracing.Tests.Common;
 
@@ -24,7 +24,6 @@ namespace Profiler.Tests
             if (value != null)
                 @this.Write(Encoding.Unicode.GetBytes(value + '\0'));
         }
-
     }
 
     public class DiagnosticsIPCWorkaround
@@ -34,19 +33,23 @@ namespace Profiler.Tests
         public DiagnosticsIPCWorkaround(int processId)
         {
             _processId = processId;
-
         }
 
         public void SetStartupProfiler(Guid profilerGuid, string profilerPath)
         {
-            MethodInfo startupProfiler = typeof(DiagnosticsClient).GetMethod("SetStartupProfiler", BindingFlags.Public);
+            MethodInfo startupProfiler = typeof(DiagnosticsClient).GetMethod(
+                "SetStartupProfiler",
+                BindingFlags.Public
+            );
             if (startupProfiler != null)
             {
-                throw new Exception("You updated DiagnosticsClient to a version that supports SetStartupProfiler, please remove this and use the real code.");
+                throw new Exception(
+                    "You updated DiagnosticsClient to a version that supports SetStartupProfiler, please remove this and use the real code."
+                );
             }
-            
+
             Console.WriteLine("Sending startup profiler message.");
-            
+
             using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))
             {
@@ -55,10 +58,13 @@ namespace Profiler.Tests
 
                 writer.Flush();
                 byte[] payload = stream.ToArray();
-                
+
                 var message = new IpcMessage(0x03, 0x02, payload);
                 Console.WriteLine($"Sent: {message.ToString()}");
-                IpcMessage response = IpcClient.SendMessage(ConnectionHelper.GetStandardTransport(_processId), message);
+                IpcMessage response = IpcClient.SendMessage(
+                    ConnectionHelper.GetStandardTransport(_processId),
+                    message
+                );
                 Console.WriteLine($"Received: {response.ToString()}");
             }
 
@@ -67,14 +73,21 @@ namespace Profiler.Tests
 
         public bool SetEnvironmentVariable(string name, string val)
         {
-            MethodInfo setEnvironmentVariable = typeof(DiagnosticsClient).GetMethod("SetEnvironmentVariable", BindingFlags.Public);
+            MethodInfo setEnvironmentVariable = typeof(DiagnosticsClient).GetMethod(
+                "SetEnvironmentVariable",
+                BindingFlags.Public
+            );
             if (setEnvironmentVariable != null)
             {
-                throw new Exception("You updated DiagnosticsClient to a version that supports SetEnvironmentVariable, please remove this and use the real code.");
+                throw new Exception(
+                    "You updated DiagnosticsClient to a version that supports SetEnvironmentVariable, please remove this and use the real code."
+                );
             }
 
-            Console.WriteLine($"Sending SetEnvironmentVariable message name={name} value={val ?? "NULL"}.");
-            
+            Console.WriteLine(
+                $"Sending SetEnvironmentVariable message name={name} value={val ?? "NULL"}."
+            );
+
             using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))
             {
@@ -83,10 +96,13 @@ namespace Profiler.Tests
 
                 writer.Flush();
                 byte[] payload = stream.ToArray();
-                
+
                 var message = new IpcMessage(0x04, 0x03, payload);
                 Console.WriteLine($"Sent: {message.ToString()}");
-                IpcMessage response = IpcClient.SendMessage(ConnectionHelper.GetStandardTransport(_processId), message);
+                IpcMessage response = IpcClient.SendMessage(
+                    ConnectionHelper.GetStandardTransport(_processId),
+                    message
+                );
                 Console.WriteLine($"Received: {response.ToString()}");
 
                 if (response.Header.CommandSet != 255 || response.Header.CommandId != 0)

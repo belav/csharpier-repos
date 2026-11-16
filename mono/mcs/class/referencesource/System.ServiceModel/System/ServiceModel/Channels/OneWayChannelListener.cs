@@ -7,22 +7,24 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
-    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     /// <summary>
     /// Wraps an IChannelListener<IReplyChannel> into an IChannelListener<IInputChannel>
     /// </summary>
-    class ReplyOneWayChannelListener
-        : LayeredChannelListener<IInputChannel>
+    class ReplyOneWayChannelListener : LayeredChannelListener<IInputChannel>
     {
         IChannelListener<IReplyChannel> innerChannelListener;
         bool packetRoutable;
 
-        public ReplyOneWayChannelListener(OneWayBindingElement bindingElement, BindingContext context)
+        public ReplyOneWayChannelListener(
+            OneWayBindingElement bindingElement,
+            BindingContext context
+        )
             : base(context.Binding, context.BuildInnerChannelListener<IReplyChannel>())
         {
             this.packetRoutable = bindingElement.PacketRoutable;
@@ -40,7 +42,11 @@ namespace System.ServiceModel.Channels
             return WrapInnerChannel(innerChannel);
         }
 
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelListener.BeginAcceptChannel(timeout, callback, state);
         }
@@ -56,7 +62,11 @@ namespace System.ServiceModel.Channels
             return this.innerChannelListener.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelListener.BeginWaitForChannel(timeout, callback, state);
         }
@@ -82,7 +92,10 @@ namespace System.ServiceModel.Channels
         {
             bool validateHeader;
 
-            public ReplyOneWayInputChannel(ReplyOneWayChannelListener listener, IReplyChannel innerChannel)
+            public ReplyOneWayInputChannel(
+                ReplyOneWayChannelListener listener,
+                IReplyChannel innerChannel
+            )
                 : base(listener, innerChannel)
             {
                 this.validateHeader = listener.packetRoutable;
@@ -106,7 +119,10 @@ namespace System.ServiceModel.Channels
                 {
                     // validate that the request message contains our expected header
                     result = context.RequestMessage;
-                    result.Properties.Add(RequestContextMessageProperty.Name, new RequestContextMessageProperty(context));
+                    result.Properties.Add(
+                        RequestContextMessageProperty.Name,
+                        new RequestContextMessageProperty(context)
+                    );
 
                     if (this.validateHeader)
                     {
@@ -167,7 +183,13 @@ namespace System.ServiceModel.Channels
 
             public IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
             {
-                return new ReceiveAsyncResult(this.InnerChannel, timeout, this.validateHeader, callback, state);
+                return new ReceiveAsyncResult(
+                    this.InnerChannel,
+                    timeout,
+                    this.validateHeader,
+                    callback,
+                    state
+                );
             }
 
             public Message EndReceive(IAsyncResult result)
@@ -191,9 +213,19 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginTryReceive(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new TryReceiveAsyncResult(this.InnerChannel, timeout, this.validateHeader, callback, state);
+                return new TryReceiveAsyncResult(
+                    this.InnerChannel,
+                    timeout,
+                    this.validateHeader,
+                    callback,
+                    state
+                );
             }
 
             public bool EndTryReceive(IAsyncResult result, out Message message)
@@ -206,7 +238,11 @@ namespace System.ServiceModel.Channels
                 return InnerChannel.WaitForRequest(timeout);
             }
 
-            public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginWaitForMessage(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return InnerChannel.BeginWaitForRequest(timeout, callback, state);
             }
@@ -220,11 +256,14 @@ namespace System.ServiceModel.Channels
             {
                 bool tryResult;
 
-                public TryReceiveAsyncResult(IReplyChannel innerChannel, TimeSpan timeout, bool validateHeader,
-                    AsyncCallback callback, object state)
-                    : base(innerChannel, timeout, validateHeader, callback, state)
-                {
-                }
+                public TryReceiveAsyncResult(
+                    IReplyChannel innerChannel,
+                    TimeSpan timeout,
+                    bool validateHeader,
+                    AsyncCallback callback,
+                    object state
+                )
+                    : base(innerChannel, timeout, validateHeader, callback, state) { }
 
                 public static bool End(IAsyncResult result, out Message message)
                 {
@@ -233,7 +272,11 @@ namespace System.ServiceModel.Channels
                     return thisPtr.tryResult;
                 }
 
-                protected override IAsyncResult OnBeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+                protected override IAsyncResult OnBeginReceiveRequest(
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     return InnerChannel.BeginTryReceiveRequest(timeout, callback, state);
                 }
@@ -248,11 +291,14 @@ namespace System.ServiceModel.Channels
 
             class ReceiveAsyncResult : ReceiveAsyncResultBase
             {
-                public ReceiveAsyncResult(IReplyChannel innerChannel, TimeSpan timeout, bool validateHeader,
-                    AsyncCallback callback, object state)
-                    : base(innerChannel, timeout, validateHeader, callback, state)
-                {
-                }
+                public ReceiveAsyncResult(
+                    IReplyChannel innerChannel,
+                    TimeSpan timeout,
+                    bool validateHeader,
+                    AsyncCallback callback,
+                    object state
+                )
+                    : base(innerChannel, timeout, validateHeader, callback, state) { }
 
                 public static Message End(IAsyncResult result)
                 {
@@ -260,7 +306,11 @@ namespace System.ServiceModel.Channels
                     return thisPtr.Message;
                 }
 
-                protected override IAsyncResult OnBeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+                protected override IAsyncResult OnBeginReceiveRequest(
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     return InnerChannel.BeginReceiveRequest(timeout, callback, state);
                 }
@@ -278,17 +328,28 @@ namespace System.ServiceModel.Channels
                 Message message;
                 TimeoutHelper timeoutHelper;
                 bool validateHeader;
-                static AsyncCallback onReceiveRequest = Fx.ThunkCallback(new AsyncCallback(OnReceiveRequest));
+                static AsyncCallback onReceiveRequest = Fx.ThunkCallback(
+                    new AsyncCallback(OnReceiveRequest)
+                );
                 static AsyncCallback onReply = Fx.ThunkCallback(new AsyncCallback(OnReply));
 
-                protected ReceiveAsyncResultBase(IReplyChannel innerChannel, TimeSpan timeout, bool validateHeader,
-                    AsyncCallback callback, object state)
+                protected ReceiveAsyncResultBase(
+                    IReplyChannel innerChannel,
+                    TimeSpan timeout,
+                    bool validateHeader,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.innerChannel = innerChannel;
                     this.timeoutHelper = new TimeoutHelper(timeout);
                     this.validateHeader = validateHeader;
-                    IAsyncResult result = this.OnBeginReceiveRequest(timeoutHelper.RemainingTime(), onReceiveRequest, this);
+                    IAsyncResult result = this.OnBeginReceiveRequest(
+                        timeoutHelper.RemainingTime(),
+                        onReceiveRequest,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return;
@@ -302,21 +363,19 @@ namespace System.ServiceModel.Channels
 
                 protected IReplyChannel InnerChannel
                 {
-                    get
-                    {
-                        return this.innerChannel;
-                    }
+                    get { return this.innerChannel; }
                 }
 
                 protected Message Message
                 {
-                    get
-                    {
-                        return this.message;
-                    }
+                    get { return this.message; }
                 }
 
-                protected abstract IAsyncResult OnBeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state);
+                protected abstract IAsyncResult OnBeginReceiveRequest(
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                );
                 protected abstract RequestContext OnEndReceiveRequest(IAsyncResult result);
 
                 bool HandleReplyComplete(IAsyncResult result)
@@ -363,7 +422,10 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         this.message = context.RequestMessage;
-                        this.message.Properties.Add(RequestContextMessageProperty.Name, new RequestContextMessageProperty(context));
+                        this.message.Properties.Add(
+                            RequestContextMessageProperty.Name,
+                            new RequestContextMessageProperty(context)
+                        );
 
                         if (validateHeader)
                         {
@@ -371,7 +433,12 @@ namespace System.ServiceModel.Channels
                         }
                         try
                         {
-                            replyResult = context.BeginReply(null, timeoutHelper.RemainingTime(), onReply, this);
+                            replyResult = context.BeginReply(
+                                null,
+                                timeoutHelper.RemainingTime(),
+                                onReply,
+                                this
+                            );
                             replySuccess = true;
                         }
                         catch (CommunicationException e)
@@ -484,13 +551,15 @@ namespace System.ServiceModel.Channels
     // <summary>
     // Wraps an IChannelListener<IDuplexChannel> into an IChannelListener<IInputChannel>
     // </summary>
-    class DuplexOneWayChannelListener
-        : LayeredChannelListener<IInputChannel>
+    class DuplexOneWayChannelListener : LayeredChannelListener<IInputChannel>
     {
         IChannelListener<IDuplexChannel> innerChannelListener;
         bool packetRoutable;
 
-        public DuplexOneWayChannelListener(OneWayBindingElement bindingElement, BindingContext context)
+        public DuplexOneWayChannelListener(
+            OneWayBindingElement bindingElement,
+            BindingContext context
+        )
             : base(context.Binding, context.BuildInnerChannelListener<IDuplexChannel>())
         {
             this.packetRoutable = bindingElement.PacketRoutable;
@@ -508,12 +577,20 @@ namespace System.ServiceModel.Channels
             return WrapInnerChannel(channel);
         }
 
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelListener.BeginAcceptChannel(timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelListener.BeginWaitForChannel(timeout, callback, state);
         }
@@ -550,7 +627,10 @@ namespace System.ServiceModel.Channels
         {
             bool validateHeader;
 
-            public DuplexOneWayInputChannel(DuplexOneWayChannelListener listener, IDuplexChannel innerChannel)
+            public DuplexOneWayInputChannel(
+                DuplexOneWayChannelListener listener,
+                IDuplexChannel innerChannel
+            )
                 : base(listener, innerChannel)
             {
                 this.validateHeader = listener.packetRoutable;
@@ -571,12 +651,20 @@ namespace System.ServiceModel.Channels
                 return this.InnerChannel.BeginReceive(timeout, callback, state);
             }
 
-            public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginTryReceive(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.InnerChannel.BeginTryReceive(timeout, callback, state);
             }
 
-            public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginWaitForMessage(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.InnerChannel.BeginWaitForMessage(timeout, callback, state);
             }
@@ -636,8 +724,7 @@ namespace System.ServiceModel.Channels
     /// <summary>
     /// Wraps an IChannelListener<IDuplexSessionChannel> into an IChannelListener<IInputChannel>
     /// </summary>
-    class DuplexSessionOneWayChannelListener
-        : DelegatingChannelListener<IInputChannel>
+    class DuplexSessionOneWayChannelListener : DelegatingChannelListener<IInputChannel>
     {
         IChannelListener<IDuplexSessionChannel> innerChannelListener;
         DuplexSessionOneWayInputChannelAcceptor inputChannelAcceptor;
@@ -646,7 +733,9 @@ namespace System.ServiceModel.Channels
         bool acceptPending;
         int activeChannels;
         TimeSpan idleTimeout;
-        static AsyncCallback onAcceptInnerChannel = Fx.ThunkCallback(new AsyncCallback(OnAcceptInnerChannel));
+        static AsyncCallback onAcceptInnerChannel = Fx.ThunkCallback(
+            new AsyncCallback(OnAcceptInnerChannel)
+        );
         AsyncCallback onOpenInnerChannel;
         EventHandler onInnerChannelClosed;
         Action onExceptionDequeued;
@@ -654,8 +743,15 @@ namespace System.ServiceModel.Channels
         bool ownsInnerListener;
         object acceptLock;
 
-        public DuplexSessionOneWayChannelListener(OneWayBindingElement bindingElement, BindingContext context)
-            : base(true, context.Binding, context.BuildInnerChannelListener<IDuplexSessionChannel>())
+        public DuplexSessionOneWayChannelListener(
+            OneWayBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(
+                true,
+                context.Binding,
+                context.BuildInnerChannelListener<IDuplexSessionChannel>()
+            )
         {
             this.acceptLock = new object();
             this.inputChannelAcceptor = new DuplexSessionOneWayInputChannelAcceptor(this);
@@ -680,7 +776,8 @@ namespace System.ServiceModel.Channels
 
         protected override void OnOpening()
         {
-            this.innerChannelListener = (IChannelListener<IDuplexSessionChannel>)this.InnerChannelListener;
+            this.innerChannelListener =
+                (IChannelListener<IDuplexSessionChannel>)this.InnerChannelListener;
             this.inputChannelAcceptor.TransferInnerChannelListener(this.innerChannelListener); // acceptor now owns the lifetime
             this.ownsInnerListener = false;
             base.OnOpening();
@@ -731,7 +828,11 @@ namespace System.ServiceModel.Channels
 
                         try
                         {
-                            result = this.innerChannelListener.BeginAcceptChannel(TimeSpan.MaxValue, onAcceptInnerChannel, this);
+                            result = this.innerChannelListener.BeginAcceptChannel(
+                                TimeSpan.MaxValue,
+                                onAcceptInnerChannel,
+                                this
+                            );
                         }
                         catch (CommunicationException e)
                         {
@@ -840,15 +941,21 @@ namespace System.ServiceModel.Channels
                     {
                         if (traceMaxInboundChannels)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Warning,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Warning,
                                 TraceCode.MaxAcceptedChannelsReached,
                                 SR.GetString(SR.TraceCodeMaxAcceptedChannelsReached),
-                                new StringTraceRecord("MaxAcceptedChannels", maxAcceptedChannels.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                new StringTraceRecord(
+                                    "MaxAcceptedChannels",
+                                    maxAcceptedChannels.ToString(
+                                        System.Globalization.CultureInfo.InvariantCulture
+                                    )
+                                ),
                                 this,
-                                null);
+                                null
+                            );
                         }
                     }
-
                 }
                 else
                 {
@@ -860,12 +967,18 @@ namespace System.ServiceModel.Channels
             else if (exceptionToEnqueue != null)
             {
                 // see what the state of the inner listener is. If it's still open, don't block the accept loop
-                bool canDispatchOnThisThread = (innerChannelListener.State != CommunicationState.Opened);
+                bool canDispatchOnThisThread = (
+                    innerChannelListener.State != CommunicationState.Opened
+                );
                 if (this.onExceptionDequeued == null)
                 {
                     this.onExceptionDequeued = new Action(OnExceptionDequeued);
                 }
-                this.inputChannelAcceptor.Enqueue(exceptionToEnqueue, this.onExceptionDequeued, canDispatchOnThisThread);
+                this.inputChannelAcceptor.Enqueue(
+                    exceptionToEnqueue,
+                    this.onExceptionDequeued,
+                    canDispatchOnThisThread
+                );
             }
             else
             {
@@ -894,7 +1007,8 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            DuplexSessionOneWayChannelListener thisPtr = (DuplexSessionOneWayChannelListener)result.AsyncState;
+            DuplexSessionOneWayChannelListener thisPtr = (DuplexSessionOneWayChannelListener)
+                result.AsyncState;
             thisPtr.AcceptLoop(result);
         }
 
@@ -1040,20 +1154,30 @@ namespace System.ServiceModel.Channels
             ChannelTracker<IDuplexSessionChannel, ChannelReceiver> receivers;
             IChannelListener<IDuplexSessionChannel> innerChannelListener;
 
-            public DuplexSessionOneWayInputChannelAcceptor(DuplexSessionOneWayChannelListener listener)
+            public DuplexSessionOneWayInputChannelAcceptor(
+                DuplexSessionOneWayChannelListener listener
+            )
                 : base(listener)
             {
                 this.receivers = new ChannelTracker<IDuplexSessionChannel, ChannelReceiver>();
             }
 
-            public void TransferInnerChannelListener(IChannelListener<IDuplexSessionChannel> innerChannelListener)
+            public void TransferInnerChannelListener(
+                IChannelListener<IDuplexSessionChannel> innerChannelListener
+            )
             {
-                Fx.Assert(this.innerChannelListener == null, "innerChannelListener must be null prior to transfer");
+                Fx.Assert(
+                    this.innerChannelListener == null,
+                    "innerChannelListener must be null prior to transfer"
+                );
                 bool abortListener = false;
                 lock (ThisLock)
                 {
                     this.innerChannelListener = innerChannelListener;
-                    if (this.State == CommunicationState.Closing || this.State == CommunicationState.Closed)
+                    if (
+                        this.State == CommunicationState.Closing
+                        || this.State == CommunicationState.Closed
+                    )
                     {
                         // abort happened before we completed the transfer
                         abortListener = true;
@@ -1066,7 +1190,10 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public void AcceptInnerChannel(DuplexSessionOneWayChannelListener listener, IDuplexSessionChannel channel)
+            public void AcceptInnerChannel(
+                DuplexSessionOneWayChannelListener listener,
+                IDuplexSessionChannel channel
+            )
             {
                 ChannelReceiver channelReceiver = new ChannelReceiver(listener, channel);
                 this.receivers.Add(channel, channelReceiver);
@@ -1091,9 +1218,21 @@ namespace System.ServiceModel.Channels
                 this.innerChannelListener.Open(timeoutHelper.RemainingTime());
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, this.receivers, this.innerChannelListener);
+                return new ChainedOpenAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginOpen,
+                    base.OnEndOpen,
+                    this.receivers,
+                    this.innerChannelListener
+                );
             }
 
             protected override void OnEndOpen(IAsyncResult result)
@@ -1125,7 +1264,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 List<ICommunicationObject> objectsToClose = new List<ICommunicationObject>();
                 if (!TransferReceivers())
@@ -1134,7 +1277,14 @@ namespace System.ServiceModel.Channels
                     objectsToClose.Add(this.innerChannelListener);
                 }
 
-                return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, objectsToClose);
+                return new ChainedCloseAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    objectsToClose
+                );
             }
 
             protected override void OnEndClose(IAsyncResult result)
@@ -1145,14 +1295,18 @@ namespace System.ServiceModel.Channels
             // used to decouple our channel and listener lifetimes
             bool TransferReceivers()
             {
-                DuplexSessionOneWayInputChannel singletonChannel = (DuplexSessionOneWayInputChannel)base.GetCurrentChannel();
+                DuplexSessionOneWayInputChannel singletonChannel = (DuplexSessionOneWayInputChannel)
+                    base.GetCurrentChannel();
                 if (singletonChannel == null)
                 {
                     return false;
                 }
                 else
                 {
-                    return singletonChannel.TransferReceivers(this.receivers, this.innerChannelListener);
+                    return singletonChannel.TransferReceivers(
+                        this.receivers,
+                        this.innerChannelListener
+                    );
                 }
             }
 
@@ -1161,13 +1315,16 @@ namespace System.ServiceModel.Channels
                 ChannelTracker<IDuplexSessionChannel, ChannelReceiver> receivers;
                 IChannelListener<IDuplexSessionChannel> innerChannelListener;
 
-                public DuplexSessionOneWayInputChannel(ChannelManagerBase channelManager, EndpointAddress localAddress)
-                    : base(channelManager, localAddress)
-                {
-                }
+                public DuplexSessionOneWayInputChannel(
+                    ChannelManagerBase channelManager,
+                    EndpointAddress localAddress
+                )
+                    : base(channelManager, localAddress) { }
 
-                public bool TransferReceivers(ChannelTracker<IDuplexSessionChannel, ChannelReceiver> receivers,
-                    IChannelListener<IDuplexSessionChannel> innerChannelListener)
+                public bool TransferReceivers(
+                    ChannelTracker<IDuplexSessionChannel, ChannelReceiver> receivers,
+                    IChannelListener<IDuplexSessionChannel> innerChannelListener
+                )
                 {
                     lock (ThisLock)
                     {
@@ -1186,14 +1343,21 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.receivers != null)
                     {
-                        Fx.Assert(this.innerChannelListener != null, "innerChannelListener and receiver should both be null or non-null");
+                        Fx.Assert(
+                            this.innerChannelListener != null,
+                            "innerChannelListener and receiver should both be null or non-null"
+                        );
                         this.receivers.Abort();
                         this.innerChannelListener.Abort();
                     }
                     base.OnAbort();
                 }
 
-                protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+                protected override IAsyncResult OnBeginClose(
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     List<ICommunicationObject> objectsToClose = new List<ICommunicationObject>();
                     if (this.receivers != null)
@@ -1202,7 +1366,14 @@ namespace System.ServiceModel.Channels
                         objectsToClose.Add(this.innerChannelListener);
                     }
 
-                    return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, objectsToClose);
+                    return new ChainedCloseAsyncResult(
+                        timeout,
+                        callback,
+                        state,
+                        base.OnBeginClose,
+                        base.OnEndClose,
+                        objectsToClose
+                    );
                 }
 
                 protected override void OnEndClose(IAsyncResult result)
@@ -1215,16 +1386,17 @@ namespace System.ServiceModel.Channels
                     TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                     if (this.receivers != null)
                     {
-                        Fx.Assert(this.innerChannelListener != null, "innerChannelListener and receiver should both be null or non-null");
+                        Fx.Assert(
+                            this.innerChannelListener != null,
+                            "innerChannelListener and receiver should both be null or non-null"
+                        );
                         this.receivers.Close(timeoutHelper.RemainingTime());
                         this.innerChannelListener.Close(timeoutHelper.RemainingTime());
                     }
                     base.OnClose(timeoutHelper.RemainingTime());
                 }
-
             }
         }
-
 
         // given an inner channel, pulls messages off of it and enqueues them into the upper channel
         class ChannelReceiver
@@ -1239,7 +1411,10 @@ namespace System.ServiceModel.Channels
             Action<object> onDispatchItemsLater;
             bool validateHeader;
 
-            public ChannelReceiver(DuplexSessionOneWayChannelListener parent, IDuplexSessionChannel channel)
+            public ChannelReceiver(
+                DuplexSessionOneWayChannelListener parent,
+                IDuplexSessionChannel channel
+            )
             {
                 this.channel = channel;
                 this.acceptor = parent.inputChannelAcceptor;
@@ -1396,7 +1571,10 @@ namespace System.ServiceModel.Channels
                 }
                 else if (exceptionToEnqueue != null)
                 {
-                    dispatchLater = this.acceptor.EnqueueWithoutDispatch(exceptionToEnqueue, this.onMessageDequeued);
+                    dispatchLater = this.acceptor.EnqueueWithoutDispatch(
+                        exceptionToEnqueue,
+                        this.onMessageDequeued
+                    );
                 }
 
                 return startLoop;
@@ -1455,7 +1633,7 @@ namespace System.ServiceModel.Channels
                 {
                     this.acceptor.Enqueue(exceptionToEnqueue, this.onMessageDequeued, false);
                 }
-                else // need to kickoff a new loop 
+                else // need to kickoff a new loop
                 {
                     if (this.channel.State == CommunicationState.Opened)
                     {

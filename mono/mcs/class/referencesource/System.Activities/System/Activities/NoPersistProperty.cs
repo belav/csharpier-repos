@@ -38,9 +38,7 @@ namespace System.Activities
             return this.refCount == 0;
         }
 
-        public void Register(RegistrationContext context)
-        {
-        }
+        public void Register(RegistrationContext context) { }
 
         public void Unregister(RegistrationContext context)
         {
@@ -56,5 +54,3 @@ namespace System.Activities
         }
     }
 }
-
-

@@ -8,8 +8,10 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     internal class NamespaceTable : IXamlNamespaceResolver
     {
-        Dictionary<string, NamespaceDeclaration> tempNamespaceList = new Dictionary<string, NamespaceDeclaration>();
-        Stack<Dictionary<string, NamespaceDeclaration>> namespaceStack = new Stack<Dictionary<string, NamespaceDeclaration>>();
+        Dictionary<string, NamespaceDeclaration> tempNamespaceList =
+            new Dictionary<string, NamespaceDeclaration>();
+        Stack<Dictionary<string, NamespaceDeclaration>> namespaceStack =
+            new Stack<Dictionary<string, NamespaceDeclaration>>();
         string localAssemblyName;
 
         public NamespaceTable(string localAssemblyName)
@@ -32,7 +34,9 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                 }
             }
-            foreach (Dictionary<string, NamespaceDeclaration> currentNamespaces in this.namespaceStack)
+            foreach (
+                Dictionary<string, NamespaceDeclaration> currentNamespaces in this.namespaceStack
+            )
             {
                 foreach (NamespaceDeclaration ns in currentNamespaces.Values)
                 {
@@ -49,9 +53,14 @@ namespace Microsoft.Build.Tasks.Xaml
         public string GetNamespace(string prefix)
         {
             NamespaceDeclaration @namespace = null;
-            foreach (Dictionary<string, NamespaceDeclaration> currentNamespaces in this.namespaceStack)
+            foreach (
+                Dictionary<string, NamespaceDeclaration> currentNamespaces in this.namespaceStack
+            )
             {
-                if (null != currentNamespaces && currentNamespaces.TryGetValue(prefix, out @namespace))
+                if (
+                    null != currentNamespaces
+                    && currentNamespaces.TryGetValue(prefix, out @namespace)
+                )
                 {
                     return @namespace.Namespace;
                 }
@@ -70,10 +79,16 @@ namespace Microsoft.Build.Tasks.Xaml
             switch (reader.NodeType)
             {
                 case XamlNodeType.NamespaceDeclaration:
-                    tempNamespaceList.Add(reader.Namespace.Prefix,
+                    tempNamespaceList.Add(
+                        reader.Namespace.Prefix,
                         new NamespaceDeclaration(
-                        XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(reader.Namespace.Namespace, this.localAssemblyName),
-                        reader.Namespace.Prefix));
+                            XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(
+                                reader.Namespace.Namespace,
+                                this.localAssemblyName
+                            ),
+                            reader.Namespace.Prefix
+                        )
+                    );
                     break;
                 case XamlNodeType.StartObject:
                 case XamlNodeType.StartMember:

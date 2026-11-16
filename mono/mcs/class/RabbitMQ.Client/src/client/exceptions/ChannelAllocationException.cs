@@ -69,7 +69,9 @@ namespace RabbitMQ.Client.Exceptions
         /// Indicates that there are no more free channels.
         /// </summary>
         public ChannelAllocationException()
-            : base("The connection cannot support any more channels. Consider creating a new connection") 
+            : base(
+                "The connection cannot support any more channels. Consider creating a new connection"
+            )
         {
             m_channel = -1;
         }
@@ -88,6 +90,9 @@ namespace RabbitMQ.Client.Exceptions
         ///return -1 in the case where "no more free channels" is
         ///being signalled, or a non-negative integer when "channel is
         ///in use" is being signalled.</summary>
-        public int Channel { get { return m_channel; } }
+        public int Channel
+        {
+            get { return m_channel; }
+        }
     }
 }

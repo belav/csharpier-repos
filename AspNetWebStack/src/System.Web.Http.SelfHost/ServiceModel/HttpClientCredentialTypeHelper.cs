@@ -9,7 +9,9 @@ namespace System.Web.Http.SelfHost.ServiceModel
 {
     internal static class HttpClientCredentialTypeHelper
     {
-        internal static AuthenticationSchemes MapToAuthenticationScheme(HttpClientCredentialType clientCredentialType)
+        internal static AuthenticationSchemes MapToAuthenticationScheme(
+            HttpClientCredentialType clientCredentialType
+        )
         {
             switch (clientCredentialType)
             {

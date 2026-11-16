@@ -6,17 +6,19 @@
 namespace System.Net
 {
     using System.Collections;
-    using System.IO;
-    using System.Threading;
     using System.Diagnostics;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
     using System.Globalization;
-    using Microsoft.Win32;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
+
     internal static class Logging
     {
         private static P2PTraceSource s_P2PTraceSource;
+
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="AppDomain.add_ProcessExit(System.EventHandler):System.Void" />
         // <SatisfiesLinkDemand Name="AppDomain.add_DomainUnload(System.EventHandler):System.Void" />
@@ -35,6 +37,7 @@ namespace System.Net
                 currentDomain.DomainUnload += new EventHandler(DomainUnloadEventHandler);
             }
         }
+
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Method: Close():Void" Ring="1" />
         // </SecurityKernel>
@@ -58,6 +61,7 @@ namespace System.Net
         {
             Close();
         }
+
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="TraceSource.Close():System.Void" />
         // </SecurityKernel>
@@ -66,22 +70,21 @@ namespace System.Net
         {
             s_P2PTraceSource.Close();
         }
+
         //private Logging() {}
         internal static P2PTraceSource P2PTraceSource
         {
-            get
-            {
-                return s_P2PTraceSource;
-            }
+            get { return s_P2PTraceSource; }
         }
 
         internal static void Enter(TraceSource source, string method)
         {
-            if(source.Switch.ShouldTrace(TraceEventType.Verbose))
+            if (source.Switch.ShouldTrace(TraceEventType.Verbose))
             {
                 source.TraceEvent(TraceEventType.Verbose, 0, "Entering --> " + method);
             }
         }
+
         internal static void Leave(TraceSource source, string message)
         {
             if (source.Switch.ShouldTrace(TraceEventType.Verbose))
@@ -101,11 +104,16 @@ namespace System.Net
         }
          * */
 
-        internal static void DumpData(TraceSource source, TraceEventType eventType, int maxDataSize, byte[] buffer, int offset, int length)
+        internal static void DumpData(
+            TraceSource source,
+            TraceEventType eventType,
+            int maxDataSize,
+            byte[] buffer,
+            int offset,
+            int length
+        )
         {
-            if (buffer == null ||
-                    buffer.Length == 0 ||
-                    offset > buffer.Length)
+            if (buffer == null || buffer.Length == 0 || offset > buffer.Length)
             {
                 return;
             }
@@ -125,7 +133,10 @@ namespace System.Net
                 sb.Append(String.Format(CultureInfo.CurrentCulture, "{0:X8} : ", offset));
                 for (int i = 0; i < n; ++i)
                 {
-                    sb.Append(String.Format(CultureInfo.CurrentCulture, "{0:X2}", buffer[offset + i]) + ((i == 7) ? '-' : ' '));
+                    sb.Append(
+                        String.Format(CultureInfo.CurrentCulture, "{0:X2}", buffer[offset + i])
+                            + ((i == 7) ? '-' : ' ')
+                    );
                 }
                 for (int i = n; i < 16; ++i)
                 {
@@ -134,17 +145,17 @@ namespace System.Net
                 sb.Append(": ");
                 for (int i = 0; i < n; ++i)
                 {
-                    sb.Append(((buffer[offset + i] < 0x20) || (buffer[offset + i] > 0x7e))
-                                ? '.'
-                                : (char)(buffer[offset + i]));
+                    sb.Append(
+                        ((buffer[offset + i] < 0x20) || (buffer[offset + i] > 0x7e))
+                            ? '.'
+                            : (char)(buffer[offset + i])
+                    );
                 }
                 source.TraceEvent(eventType, 0, sb.ToString());
                 offset += n;
                 length -= n;
             } while (length > 0);
-
         }
-
     }
 
     internal class P2PTraceSource : TraceSource
@@ -152,36 +163,46 @@ namespace System.Net
         private const string P2PTraceSourceName = "System.Net.PeerToPeer";
         private const int DefaultMaxDataSize = 1024;
         private const string AttributeNameMaxDataSize = "maxdatasize";
-        private static readonly string[] P2PTraceSourceSupportedAttributes = new string[] { AttributeNameMaxDataSize };
+        private static readonly string[] P2PTraceSourceSupportedAttributes = new string[]
+        {
+            AttributeNameMaxDataSize,
+        };
         private readonly int m_maxDataSize = DefaultMaxDataSize;
 
-        internal P2PTraceSource() :base(P2PTraceSourceName)
+        internal P2PTraceSource()
+            : base(P2PTraceSourceName)
         {
             if (Attributes.ContainsKey(AttributeNameMaxDataSize))
             {
-                try{
-                    m_maxDataSize = Int32.Parse(Attributes[AttributeNameMaxDataSize], NumberFormatInfo.InvariantInfo);
+                try
+                {
+                    m_maxDataSize = Int32.Parse(
+                        Attributes[AttributeNameMaxDataSize],
+                        NumberFormatInfo.InvariantInfo
+                    );
                 }
-                catch (Exception exception) {
-                    if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {
+                catch (Exception exception)
+                {
+                    if (
+                        exception is ThreadAbortException
+                        || exception is StackOverflowException
+                        || exception is OutOfMemoryException
+                    )
+                    {
                         throw;
                     }
                 }
             }
         }
-        protected  override string[] GetSupportedAttributes()
+
+        protected override string[] GetSupportedAttributes()
         {
             return P2PTraceSourceSupportedAttributes;
         }
 
         internal int MaxDataSize
         {
-            get
-            {
-                return m_maxDataSize;
-            }
+            get { return m_maxDataSize; }
         }
     }
- 
-
 }

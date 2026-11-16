@@ -8,8 +8,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class LabeledStatementSyntax
     {
-        public LabeledStatementSyntax Update(SyntaxToken identifier, SyntaxToken colonToken, StatementSyntax statement)
-            => Update(AttributeLists, identifier, colonToken, statement);
+        public LabeledStatementSyntax Update(
+            SyntaxToken identifier,
+            SyntaxToken colonToken,
+            StatementSyntax statement
+        ) => Update(AttributeLists, identifier, colonToken, statement);
     }
 }
 
@@ -17,8 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static LabeledStatementSyntax LabeledStatement(SyntaxToken identifier, SyntaxToken colonToken, StatementSyntax statement)
-            => LabeledStatement(attributeLists: default, identifier, colonToken, statement);
+        public static LabeledStatementSyntax LabeledStatement(
+            SyntaxToken identifier,
+            SyntaxToken colonToken,
+            StatementSyntax statement
+        ) => LabeledStatement(attributeLists: default, identifier, colonToken, statement);
     }
 }
-

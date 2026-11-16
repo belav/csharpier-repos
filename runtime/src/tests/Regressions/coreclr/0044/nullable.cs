@@ -5,31 +5,30 @@ using Xunit;
 
 public class Nullable
 {
+    public static bool BoxUnboxToNQ(object o)
+    {
+        return ((int)(ValueType)o == (int)55);
+    }
 
-	public static bool BoxUnboxToNQ(object o)
-	{
-		return ((int)(ValueType)o == (int)55);
-	}
+    public static bool Run()
+    {
+        int? i = 55;
 
-	public static bool Run()
-	{
-		int? i = 55;
-		
-		return BoxUnboxToNQ(i);
-	}
+        return BoxUnboxToNQ(i);
+    }
 
-	[Fact]
-	public static int TestEntryPoint()
-	{
-		if (Run())
-		{
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("FAIL");
-			return 0;
-		}
-	}
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        if (Run())
+        {
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("FAIL");
+            return 0;
+        }
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,39 +27,37 @@
 //
 using System;
 using System.Collections.Generic;
-#if !MOBILE && !XAMMAC_4_5
-using System.IdentityModel.Claims;
-#endif
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
-
+#if !MOBILE && !XAMMAC_4_5
+using System.IdentityModel.Claims;
+#endif
 
 namespace System.ServiceModel
 {
-	public class SpnEndpointIdentity : EndpointIdentity
-	{
+    public class SpnEndpointIdentity : EndpointIdentity
+    {
 #if !MOBILE && !XAMMAC_4_5
-		public SpnEndpointIdentity (Claim identity)
-		{
-			Initialize (identity);
-		}
+        public SpnEndpointIdentity(Claim identity)
+        {
+            Initialize(identity);
+        }
 
-		public SpnEndpointIdentity (string spnName)
-			: this (Claim.CreateSpnClaim (spnName))
-		{
-		}
+        public SpnEndpointIdentity(string spnName)
+            : this(Claim.CreateSpnClaim(spnName)) { }
 #else
-		public SpnEndpointIdentity (string spnName)
-		{
-			throw new NotImplementedException ();
-		}
+        public SpnEndpointIdentity(string spnName)
+        {
+            throw new NotImplementedException();
+        }
 #endif
 
-		[MonoTODO]
-		public static TimeSpan SpnLookupTime {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public static TimeSpan SpnLookupTime
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+    }
 }

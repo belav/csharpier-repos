@@ -1,35 +1,38 @@
 using System;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Threading;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Workflow.Runtime;
 using System.Globalization;
+using System.Threading;
+using System.Workflow.Runtime;
 
 namespace System.Workflow.Runtime.Hosting
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class DefaultWorkflowSchedulerService : WorkflowSchedulerService
     {
         // next two fields controlled by locking the timerQueue
-        private KeyedPriorityQueue<Guid, CallbackInfo, DateTime> timerQueue = new KeyedPriorityQueue<Guid, CallbackInfo, DateTime>();
+        private KeyedPriorityQueue<Guid, CallbackInfo, DateTime> timerQueue =
+            new KeyedPriorityQueue<Guid, CallbackInfo, DateTime>();
         private Timer callbackTimer;
 
         private TimerCallback timerCallback;
         private const string MAX_SIMULTANEOUS_WORKFLOWS_KEY = "maxSimultaneousWorkflows";
         private const int DEFAULT_MAX_SIMULTANEOUS_WORKFLOWS = 5;
         private static TimeSpan infinite = new TimeSpan(Timeout.Infinite);
-        private readonly int maxSimultaneousWorkflows;       // Maximum number of work items allowed in ThreadPool queue
+        private readonly int maxSimultaneousWorkflows; // Maximum number of work items allowed in ThreadPool queue
         private static TimeSpan fiveMinutes = new TimeSpan(0, 5, 0);
 
         // next three fields controlled by locking the waitingQueue
         private int numCurrentWorkers;
-        private Queue<WorkItem> waitingQueue;       // Queue for extra items waiting to be allowed into thread pool
+        private Queue<WorkItem> waitingQueue; // Queue for extra items waiting to be allowed into thread pool
         private volatile bool running = false;
 
-        private IList<PerformanceCounter> queueCounters;    // expose internal queue length
+        private IList<PerformanceCounter> queueCounters; // expose internal queue length
 
         private static int DefaultThreadCount
         {
@@ -42,16 +45,17 @@ namespace System.Workflow.Runtime.Hosting
         }
 
         public DefaultWorkflowSchedulerService()
-            : this(DefaultThreadCount)
-        {
-        }
-
+            : this(DefaultThreadCount) { }
 
         public DefaultWorkflowSchedulerService(int maxSimultaneousWorkflows)
             : base()
         {
             if (maxSimultaneousWorkflows < 1)
-                throw new ArgumentOutOfRangeException(MAX_SIMULTANEOUS_WORKFLOWS_KEY, maxSimultaneousWorkflows, String.Empty);
+                throw new ArgumentOutOfRangeException(
+                    MAX_SIMULTANEOUS_WORKFLOWS_KEY,
+                    maxSimultaneousWorkflows,
+                    String.Empty
+                );
             this.maxSimultaneousWorkflows = maxSimultaneousWorkflows;
             init();
         }
@@ -66,16 +70,39 @@ namespace System.Workflow.Runtime.Hosting
             foreach (string key in parameters.Keys)
             {
                 if (key == null)
-                    throw new ArgumentException(String.Format(Thread.CurrentThread.CurrentCulture, ExecutionStringManager.UnknownConfigurationParameter, "null"));
+                    throw new ArgumentException(
+                        String.Format(
+                            Thread.CurrentThread.CurrentCulture,
+                            ExecutionStringManager.UnknownConfigurationParameter,
+                            "null"
+                        )
+                    );
                 string p = parameters[key];
                 if (!key.Equals(MAX_SIMULTANEOUS_WORKFLOWS_KEY, StringComparison.OrdinalIgnoreCase))
-                    throw new ArgumentException(String.Format(Thread.CurrentThread.CurrentCulture, ExecutionStringManager.UnknownConfigurationParameter, key));
-                if (!int.TryParse(p, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.CurrentCulture, out maxSimultaneousWorkflows))
+                    throw new ArgumentException(
+                        String.Format(
+                            Thread.CurrentThread.CurrentCulture,
+                            ExecutionStringManager.UnknownConfigurationParameter,
+                            key
+                        )
+                    );
+                if (
+                    !int.TryParse(
+                        p,
+                        System.Globalization.NumberStyles.Integer,
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        out maxSimultaneousWorkflows
+                    )
+                )
                     throw new FormatException(MAX_SIMULTANEOUS_WORKFLOWS_KEY);
             }
 
             if (maxSimultaneousWorkflows < 1)
-                throw new ArgumentOutOfRangeException(MAX_SIMULTANEOUS_WORKFLOWS_KEY, maxSimultaneousWorkflows, String.Empty);
+                throw new ArgumentOutOfRangeException(
+                    MAX_SIMULTANEOUS_WORKFLOWS_KEY,
+                    maxSimultaneousWorkflows,
+                    String.Empty
+                );
 
             init();
         }
@@ -87,35 +114,69 @@ namespace System.Workflow.Runtime.Hosting
             waitingQueue = new Queue<WorkItem>();
         }
 
-
         public int MaxSimultaneousWorkflows
         {
             get { return maxSimultaneousWorkflows; }
         }
 
-        internal protected override void Schedule(WaitCallback callback, Guid workflowInstanceId)
+        protected internal override void Schedule(WaitCallback callback, Guid workflowInstanceId)
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Scheduling work for instance {0}", workflowInstanceId);
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Scheduling work for instance {0}",
+                workflowInstanceId
+            );
 
             if (callback == null)
                 throw new ArgumentNullException("callback");
             if (workflowInstanceId == Guid.Empty)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentUICulture, ExecutionStringManager.CantBeEmptyGuid, "workflowInstanceId"));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        ExecutionStringManager.CantBeEmptyGuid,
+                        "workflowInstanceId"
+                    )
+                );
 
             // Add the work item to our internal queue and signal the ProcessQueue thread
             EnqueueWorkItem(new WorkItem(callback, workflowInstanceId));
         }
 
-        internal protected override void Schedule(WaitCallback callback, Guid workflowInstanceId, DateTime whenUtc, Guid timerId)
+        protected internal override void Schedule(
+            WaitCallback callback,
+            Guid workflowInstanceId,
+            DateTime whenUtc,
+            Guid timerId
+        )
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Scheduling work for instance {0} on timer ID {1} in {2}", workflowInstanceId, timerId, (whenUtc - DateTime.UtcNow));
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Scheduling work for instance {0} on timer ID {1} in {2}",
+                workflowInstanceId,
+                timerId,
+                (whenUtc - DateTime.UtcNow)
+            );
 
             if (callback == null)
                 throw new ArgumentNullException("callback");
             if (timerId == Guid.Empty)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentUICulture, ExecutionStringManager.CantBeEmptyGuid, "timerId"));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        ExecutionStringManager.CantBeEmptyGuid,
+                        "timerId"
+                    )
+                );
             if (workflowInstanceId == Guid.Empty)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentUICulture, ExecutionStringManager.CantBeEmptyGuid, "workflowInstanceId"));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        ExecutionStringManager.CantBeEmptyGuid,
+                        "workflowInstanceId"
+                    )
+                );
 
             CallbackInfo ci = new CallbackInfo(this, callback, workflowInstanceId, whenUtc);
 
@@ -125,12 +186,24 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        internal protected override void Cancel(Guid timerId)
+        protected internal override void Cancel(Guid timerId)
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Cancelling work with timer ID {0}", timerId);
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Cancelling work with timer ID {0}",
+                timerId
+            );
 
             if (timerId == Guid.Empty)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentUICulture, ExecutionStringManager.CantBeEmptyGuid, "timerId"), "timerId");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        ExecutionStringManager.CantBeEmptyGuid,
+                        "timerId"
+                    ),
+                    "timerId"
+                );
 
             lock (timerQueue)
             {
@@ -138,7 +211,7 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        override protected void OnStarted()
+        protected override void OnStarted()
         {
             lock (timerQueue)
             {
@@ -161,7 +234,9 @@ namespace System.Workflow.Runtime.Hosting
             }
             if (queueCounters == null && this.Runtime.PerformanceCounterManager != null)
             {
-                queueCounters = this.Runtime.PerformanceCounterManager.CreateCounters(ExecutionStringManager.PerformanceCounterWorkflowsWaitingName);
+                queueCounters = this.Runtime.PerformanceCounterManager.CreateCounters(
+                    ExecutionStringManager.PerformanceCounterWorkflowsWaitingName
+                );
             }
         }
 
@@ -186,7 +261,10 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        private void OnFirstElementChanged(object source, KeyedPriorityQueueHeadChangedEventArgs<CallbackInfo> e)
+        private void OnFirstElementChanged(
+            object source,
+            KeyedPriorityQueueHeadChangedEventArgs<CallbackInfo> e
+        )
         {
             // timerQueue must have been locked by operation that caused this event to fire
 
@@ -219,7 +297,12 @@ namespace System.Workflow.Runtime.Hosting
                         {
                             if (ci.IsExpired)
                             {
-                                WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Timeout occured for timer for instance {0}", ci.State);
+                                WorkflowTrace.Host.TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Timeout occured for timer for instance {0}",
+                                    ci.State
+                                );
                                 timerQueue.Dequeue();
                                 fire = true;
                             }
@@ -234,17 +317,28 @@ namespace System.Workflow.Runtime.Hosting
                     ci.Callback(ci.State);
             }
             // Ignore cases where the workflow has been stolen out from under us
-            catch (WorkflowOwnershipException)
-            { }
+            catch (WorkflowOwnershipException) { }
             catch (ThreadAbortException e)
             {
-                WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "Timeout for instance, {0} threw exception {1}", ci == null ? null : ci.State, e.Message);
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "Timeout for instance, {0} threw exception {1}",
+                    ci == null ? null : ci.State,
+                    e.Message
+                );
                 RaiseServicesExceptionNotHandledEvent(e, (Guid)ci.State);
                 throw;
             }
             catch (Exception e)
             {
-                WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "Timeout for instance, {0} threw exception {1}", ci == null ? null : ci.State, e.Message);
+                WorkflowTrace.Host.TraceEvent(
+                    TraceEventType.Error,
+                    0,
+                    "Timeout for instance, {0} threw exception {1}",
+                    ci == null ? null : ci.State,
+                    e.Message
+                );
                 RaiseServicesExceptionNotHandledEvent(e, (Guid)ci.State);
             }
         }
@@ -280,7 +374,9 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        private void QueueWorkerProcess(object state /*unused*/)
+        private void QueueWorkerProcess(
+            object state /*unused*/
+        )
         {
             //Make sure activity ID comes out of Threadpool are initialized to null.
             Trace.CorrelationManager.ActivityId = Guid.Empty;
@@ -309,7 +405,6 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-
         internal class WorkItem
         {
             private WaitCallback callback;
@@ -330,7 +425,12 @@ namespace System.Workflow.Runtime.Hosting
             {
                 try
                 {
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Running workflow {0}", state);
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Running workflow {0}",
+                        state
+                    );
                     Callback(state);
                 }
                 catch (Exception e)
@@ -354,7 +454,12 @@ namespace System.Workflow.Runtime.Hosting
             DateTime when;
             WorkflowSchedulerService service;
 
-            public CallbackInfo(WorkflowSchedulerService service, WaitCallback callback, object state, DateTime when)
+            public CallbackInfo(
+                WorkflowSchedulerService service,
+                WaitCallback callback,
+                object state,
+                DateTime when
+            )
             {
                 this.service = service;
                 this.callback = callback;

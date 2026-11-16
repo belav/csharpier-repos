@@ -22,7 +22,8 @@ public class ViewBuilder : IInfrastructure<EntityTypeBuilder>
     {
         Check.DebugAssert(
             storeObject.StoreObjectType == StoreObjectType.View,
-            "StoreObjectType should be View, not " + storeObject.StoreObjectType);
+            "StoreObjectType should be View, not " + storeObject.StoreObjectType
+        );
 
         StoreObject = storeObject;
         EntityTypeBuilder = entityTypeBuilder;
@@ -31,14 +32,12 @@ public class ViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// <summary>
     ///     The specified view name.
     /// </summary>
-    public virtual string Name
-        => StoreObject.Name;
+    public virtual string Name => StoreObject.Name;
 
     /// <summary>
     ///     The specified view schema.
     /// </summary>
-    public virtual string? Schema
-        => StoreObject.Schema;
+    public virtual string? Schema => StoreObject.Schema;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -57,8 +56,8 @@ public class ViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// </summary>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder Property(string propertyName)
-        => new(StoreObject, EntityTypeBuilder.Property(propertyName));
+    public virtual ViewColumnBuilder Property(string propertyName) =>
+        new(StoreObject, EntityTypeBuilder.Property(propertyName));
 
     /// <summary>
     ///     Maps the property to a column on the current view and returns an object that can be used
@@ -67,11 +66,10 @@ public class ViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(string propertyName)
-        => new(StoreObject, EntityTypeBuilder.Property<TProperty>(propertyName));
+    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(string propertyName) =>
+        new(StoreObject, EntityTypeBuilder.Property<TProperty>(propertyName));
 
-    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance => EntityTypeBuilder;
 
     #region Hidden System.Object members
 
@@ -80,8 +78,7 @@ public class ViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -89,16 +86,14 @@ public class ViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

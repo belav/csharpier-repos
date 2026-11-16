@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography
@@ -13,7 +12,7 @@ namespace System.Security.Cryptography
     /// <summary>
     ///     Wrapper representing an arbitrary property of a CNG key or provider
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]  // The [StructLayout] is here to prevent a spurious ApiReviewer alert. We do not actually depend on the layout of this struct.
+    [StructLayout(LayoutKind.Sequential)] // The [StructLayout] is here to prevent a spurious ApiReviewer alert. We do not actually depend on the layout of this struct.
     public struct CngProperty : IEquatable<CngProperty>
     {
         public CngProperty(string name, byte[]? value, CngPropertyOptions options)

@@ -12,10 +12,13 @@ namespace System.Activities.DurableInstancing
 
     sealed class UnlockInstanceAsyncResult : SqlWorkflowInstanceStoreAsyncResult
     {
-        static string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[UnlockInstance]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[UnlockInstance]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
 
-        public UnlockInstanceAsyncResult
-            (
+        public UnlockInstanceAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -24,18 +27,40 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
-        {
-        }
+        )
+            : base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
+        { }
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
-            UnlockInstanceCommand unlockCommand = (UnlockInstanceCommand)(base.InstancePersistenceCommand);
+            UnlockInstanceCommand unlockCommand = (UnlockInstanceCommand)(
+                base.InstancePersistenceCommand
+            );
 
-            sqlCommand.Parameters.Add(new SqlParameter { ParameterName = "@instanceId", SqlDbType = SqlDbType.UniqueIdentifier, Value = unlockCommand.InstanceId });
-            sqlCommand.Parameters.Add(new SqlParameter { ParameterName = "@surrogateLockOwnerId", SqlDbType = SqlDbType.BigInt, Value = unlockCommand.SurrogateOwnerId });
-            sqlCommand.Parameters.Add(new SqlParameter { ParameterName = "@handleInstanceVersion", SqlDbType = SqlDbType.BigInt, Value = unlockCommand.InstanceVersion });
+            sqlCommand.Parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@instanceId",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = unlockCommand.InstanceId,
+                }
+            );
+            sqlCommand.Parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@surrogateLockOwnerId",
+                    SqlDbType = SqlDbType.BigInt,
+                    Value = unlockCommand.SurrogateOwnerId,
+                }
+            );
+            sqlCommand.Parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@handleInstanceVersion",
+                    SqlDbType = SqlDbType.BigInt,
+                    Value = unlockCommand.InstanceVersion,
+                }
+            );
         }
 
         protected override string GetSqlCommandText()
@@ -50,7 +75,10 @@ namespace System.Activities.DurableInstancing
 
         protected override Exception ProcessSqlResult(SqlDataReader reader)
         {
-            return StoreUtilities.CheckRemainingResultSetForErrors(base.InstancePersistenceCommand.Name, reader);
+            return StoreUtilities.CheckRemainingResultSetForErrors(
+                base.InstancePersistenceCommand.Name,
+                reader
+            );
         }
     }
 }

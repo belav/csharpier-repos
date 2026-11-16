@@ -12,7 +12,10 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    using TreeMap = ConcurrentDictionary<(SyntaxTree tree, int namespaceId), ImmutableDictionary<INamespaceOrTypeSymbol, IAliasSymbol>>;
+    using TreeMap = ConcurrentDictionary<
+        (SyntaxTree tree, int namespaceId),
+        ImmutableDictionary<INamespaceOrTypeSymbol, IAliasSymbol>
+    >;
 
     internal static class AliasSymbolCache
     {
@@ -28,13 +31,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SemanticModel semanticModel,
             int namespaceId,
             INamespaceOrTypeSymbol targetSymbol,
-            out IAliasSymbol? aliasSymbol)
+            out IAliasSymbol? aliasSymbol
+        )
         {
             semanticModel = semanticModel.GetOriginalSemanticModel();
 
             aliasSymbol = null;
-            if (!s_treeAliasMap.TryGetValue(semanticModel.Compilation, out var treeMap) ||
-                !treeMap.TryGetValue((semanticModel.SyntaxTree, namespaceId), out var symbolMap))
+            if (
+                !s_treeAliasMap.TryGetValue(semanticModel.Compilation, out var treeMap)
+                || !treeMap.TryGetValue((semanticModel.SyntaxTree, namespaceId), out var symbolMap)
+            )
             {
                 // maps aren't available.  Caller needs to call back into us to add aliases for this scope.
                 return false;
@@ -46,10 +52,17 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return true;
         }
 
-        public static void AddAliasSymbols(SemanticModel semanticModel, int namespaceId, IEnumerable<IAliasSymbol> aliasSymbols)
+        public static void AddAliasSymbols(
+            SemanticModel semanticModel,
+            int namespaceId,
+            IEnumerable<IAliasSymbol> aliasSymbols
+        )
         {
             // given semantic model must be the original semantic model for now
-            var treeMap = s_treeAliasMap.GetValue(semanticModel.Compilation, static _ => new TreeMap());
+            var treeMap = s_treeAliasMap.GetValue(
+                semanticModel.Compilation,
+                static _ => new TreeMap()
+            );
 
             // check again to see whether somebody has beaten us
             var key = (tree: semanticModel.SyntaxTree, namespaceId);

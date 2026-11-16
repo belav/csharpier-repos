@@ -19,14 +19,20 @@ namespace Microsoft.CodeAnalysis.Telemetry
     /// </summary>
     internal sealed class AggregatingTelemetryLogManager
     {
-        private static readonly TimeSpan s_batchedTelemetryCollectionPeriod = TimeSpan.FromMinutes(30);
+        private static readonly TimeSpan s_batchedTelemetryCollectionPeriod = TimeSpan.FromMinutes(
+            30
+        );
 
         private readonly TelemetrySession _session;
         private readonly AsyncBatchingWorkQueue _postTelemetryQueue;
 
-        private ImmutableDictionary<FunctionId, AggregatingTelemetryLog> _aggregatingLogs = ImmutableDictionary<FunctionId, AggregatingTelemetryLog>.Empty;
+        private ImmutableDictionary<FunctionId, AggregatingTelemetryLog> _aggregatingLogs =
+            ImmutableDictionary<FunctionId, AggregatingTelemetryLog>.Empty;
 
-        public AggregatingTelemetryLogManager(TelemetrySession session, IAsynchronousOperationListener asyncListener)
+        public AggregatingTelemetryLogManager(
+            TelemetrySession session,
+            IAsynchronousOperationListener asyncListener
+        )
         {
             _session = session;
 
@@ -34,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Telemetry
                 s_batchedTelemetryCollectionPeriod,
                 PostCollectedTelemetryAsync,
                 asyncListener,
-                CancellationToken.None);
+                CancellationToken.None
+            );
         }
 
         public ITelemetryLog? GetLog(FunctionId functionId, double[]? bucketBoundaries)
@@ -42,7 +49,16 @@ namespace Microsoft.CodeAnalysis.Telemetry
             if (!_session.IsOptedIn)
                 return null;
 
-            return ImmutableInterlocked.GetOrAdd(ref _aggregatingLogs, functionId, functionId => new AggregatingTelemetryLog(_session, functionId, bucketBoundaries, this));
+            return ImmutableInterlocked.GetOrAdd(
+                ref _aggregatingLogs,
+                functionId,
+                functionId => new AggregatingTelemetryLog(
+                    _session,
+                    functionId,
+                    bucketBoundaries,
+                    this
+                )
+            );
         }
 
         public void EnsureTelemetryWorkQueued()

@@ -30,7 +30,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
                 {
                     typeof(object).GetTypeInfo().Assembly.Location,
                     typeof(Enumerable).GetTypeInfo().Assembly.Location,
-                    typeof(System.CommandLine.ParseResult).GetTypeInfo().Assembly.Location
+                    typeof(System.CommandLine.ParseResult).GetTypeInfo().Assembly.Location,
                 }
             );
             _testAssembly = Assembly.Load(File.ReadAllBytes(_testAssemblyFilePath));
@@ -38,12 +38,13 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         }
 
         [Benchmark(Description = "--help")]
-        public Task SearchForStartingPointWhenGivenEntryPointClass_Help()
-            => System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
+        public Task SearchForStartingPointWhenGivenEntryPointClass_Help() =>
+            System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
                 _testAssembly,
                 new[] { "--help" },
                 null,
-                _testAssemblyXmlDocsFilePath);
+                _testAssemblyXmlDocsFilePath
+            );
 
         [GlobalCleanup]
         public void Cleanup()

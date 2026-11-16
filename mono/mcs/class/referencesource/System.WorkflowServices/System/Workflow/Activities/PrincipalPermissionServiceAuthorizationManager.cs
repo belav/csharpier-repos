@@ -3,16 +3,18 @@
 //----------------------------------------------------------------
 namespace System.Workflow.Activities
 {
-    using System.ServiceModel;
-    using System.Security.Permissions;
-    using System.Security;
     using System.Diagnostics.CodeAnalysis;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.ServiceModel;
 
     class PrincipalPermissionServiceAuthorizationManager : ServiceAuthorizationManager
     {
         private PrincipalPermission principalPermission;
 
-        public PrincipalPermissionServiceAuthorizationManager(PrincipalPermission principalPermission)
+        public PrincipalPermissionServiceAuthorizationManager(
+            PrincipalPermission principalPermission
+        )
         {
             this.principalPermission = principalPermission;
         }
@@ -26,9 +28,7 @@ namespace System.Workflow.Activities
                 principalPermission.Demand();
                 approved = true;
             }
-            catch (SecurityException)
-            {
-            }
+            catch (SecurityException) { }
 
             return approved;
         }

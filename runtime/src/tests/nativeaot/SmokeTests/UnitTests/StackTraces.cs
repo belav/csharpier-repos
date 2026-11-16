@@ -42,7 +42,10 @@ class StackTraces
 
             Verify(sb.ToString(), true);
 
-            if (GetSecretMethod(typeof(TestStackTraceHidden), nameof(HiddenMethodWithMetadata)) == null)
+            if (
+                GetSecretMethod(typeof(TestStackTraceHidden), nameof(HiddenMethodWithMetadata))
+                == null
+            )
                 throw new Exception();
 
             if (GetSecretMethod(typeof(TestStackTraceHidden), nameof(HiddenMethod)) != null)
@@ -52,8 +55,10 @@ class StackTraces
 
             static void Verify(string s, bool expected)
             {
-                if (s.Contains(nameof(HiddenMethod)) != expected
-                    || s.Contains(nameof(HiddenMethodWithMetadata)) != expected)
+                if (
+                    s.Contains(nameof(HiddenMethod)) != expected
+                    || s.Contains(nameof(HiddenMethodWithMetadata)) != expected
+                )
                     throw new Exception(s);
                 if (!s.Contains(nameof(Collector)))
                     throw new Exception(s);
@@ -75,5 +80,4 @@ class StackTraces
             throw new Exception();
         }
     }
-
 }

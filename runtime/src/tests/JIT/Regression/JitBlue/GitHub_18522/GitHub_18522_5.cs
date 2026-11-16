@@ -26,7 +26,9 @@ struct S1
     public S0 F2;
     public S0 F3;
     public int F4;
-    public S1(int f4): this()
+
+    public S1(int f4)
+        : this()
     {
         F4 = f4;
     }
@@ -35,7 +37,8 @@ struct S1
 public class GitHub_18522_5
 {
     static S1 s_6;
-    static S1[] s_13 = new S1[]{new S1(-1)};
+    static S1[] s_13 = new S1[] { new S1(-1) };
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -43,7 +46,7 @@ public class GitHub_18522_5
         // incorrectly typing the return type from M16, and so
         // inadvertently overwriting the F4 field of s_13[0] on return
         // from the call.
-        // 
+        //
         // Here we make sure we properly handle an inlined call that
         // resolves to a rejected inline candidate.
         s_13[0].F3 = W();
@@ -68,7 +71,7 @@ public class GitHub_18522_5
             }
         }
         s_6.F0 = x;
-        
+
         // Actual interesting part
         return s_6.F3;
     }

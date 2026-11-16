@@ -22,14 +22,13 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
-namespace System.Windows.Forms {
-
-	public enum TabAlignment {
-		Top,
-		Bottom,
-		Left,
-		Right
-	}
+namespace System.Windows.Forms
+{
+    public enum TabAlignment
+    {
+        Top,
+        Bottom,
+        Left,
+        Right,
+    }
 }
-

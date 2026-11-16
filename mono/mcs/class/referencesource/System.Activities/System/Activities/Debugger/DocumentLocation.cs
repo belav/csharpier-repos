@@ -22,9 +22,7 @@ namespace System.Activities.Debugger
         }
 
         internal DocumentLocation(int lineNumber, int linePosition)
-            : this(new OneBasedCounter(lineNumber), new OneBasedCounter(linePosition))
-        {
-        }
+            : this(new OneBasedCounter(lineNumber), new OneBasedCounter(linePosition)) { }
 
         internal OneBasedCounter LineNumber
         {
@@ -43,7 +41,8 @@ namespace System.Activities.Debugger
                 return false;
             }
 
-            return (this.lineNumber.Value == that.lineNumber.Value) && (this.linePosition.Value == that.linePosition.Value);
+            return (this.lineNumber.Value == that.lineNumber.Value)
+                && (this.linePosition.Value == that.linePosition.Value);
         }
 
         public override int GetHashCode()

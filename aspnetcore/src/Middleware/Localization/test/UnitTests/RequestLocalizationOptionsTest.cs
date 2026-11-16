@@ -62,13 +62,11 @@ public class RequestLocalizationOptionsTest : IDisposable
         var options = new RequestLocalizationOptions();
 
         // Assert
-        Assert.Collection(
-            options.SupportedCultures,
-            item => Assert.Equal(CultureInfo.CurrentCulture, item)
+        Assert.Collection(options.SupportedCultures, item =>
+            Assert.Equal(CultureInfo.CurrentCulture, item)
         );
-        Assert.Collection(
-            options.SupportedUICultures,
-            item => Assert.Equal(CultureInfo.CurrentUICulture, item)
+        Assert.Collection(options.SupportedUICultures, item =>
+            Assert.Equal(CultureInfo.CurrentUICulture, item)
         );
     }
 

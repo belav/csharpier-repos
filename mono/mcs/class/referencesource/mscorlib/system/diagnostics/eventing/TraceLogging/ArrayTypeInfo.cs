@@ -7,8 +7,7 @@ namespace Microsoft.Diagnostics.Tracing
 namespace System.Diagnostics.Tracing
 #endif
 {
-    internal sealed class ArrayTypeInfo<ElementType>
-        : TraceLoggingTypeInfo<ElementType[]>
+    internal sealed class ArrayTypeInfo<ElementType> : TraceLoggingTypeInfo<ElementType[]>
     {
         private readonly TraceLoggingTypeInfo<ElementType> elementInfo;
 
@@ -20,16 +19,15 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);
             collector.EndBufferedArray();
         }
 
-        public override void WriteData(
-            TraceLoggingDataCollector collector,
-            ref ElementType[] value)
+        public override void WriteData(TraceLoggingDataCollector collector, ref ElementType[] value)
         {
             var bookmark = collector.BeginBufferedArray();
 

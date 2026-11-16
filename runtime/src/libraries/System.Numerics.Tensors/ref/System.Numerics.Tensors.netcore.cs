@@ -8,7 +8,20 @@ namespace System.Numerics.Tensors
 {
     public static partial class TensorPrimitives
     {
-        public static void ConvertToHalf(System.ReadOnlySpan<float> source, System.Span<System.Half> destination) { throw null; }
-        public static void ConvertToSingle(System.ReadOnlySpan<System.Half> source, System.Span<float> destination) { throw null; }
+        public static void ConvertToHalf(
+            System.ReadOnlySpan<float> source,
+            System.Span<System.Half> destination
+        )
+        {
+            throw null;
+        }
+
+        public static void ConvertToSingle(
+            System.ReadOnlySpan<System.Half> source,
+            System.Span<float> destination
+        )
+        {
+            throw null;
+        }
     }
 }

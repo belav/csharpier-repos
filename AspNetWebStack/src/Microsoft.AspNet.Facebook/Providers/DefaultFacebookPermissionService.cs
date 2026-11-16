@@ -73,7 +73,8 @@ namespace Microsoft.AspNet.Facebook.Providers
             FacebookClient client = _config.ClientProvider.CreateClient();
             client.AccessToken = accessToken;
 
-            IList<IDictionary<string, string>> rawPermissionsStatus = client.GetCurrentUserPermissionsStatus();
+            IList<IDictionary<string, string>> rawPermissionsStatus =
+                client.GetCurrentUserPermissionsStatus();
             PermissionsStatus permissionsStatus = new PermissionsStatus(rawPermissionsStatus);
 
             return permissionsStatus;

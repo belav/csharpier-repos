@@ -23,21 +23,41 @@ namespace System.ComponentModel.Design.Tests
 #pragma warning restore 0067
 
         public void Activate() => throw new NotImplementedException();
-        public void AddService(Type serviceType, ServiceCreatorCallback callback) => throw new NotImplementedException();
-        public void AddService(Type serviceType, ServiceCreatorCallback callback, bool promote) => throw new NotImplementedException();
-        public void AddService(Type serviceType, object serviceInstance) => throw new NotImplementedException();
-        public void AddService(Type serviceType, object serviceInstance, bool promote) => throw new NotImplementedException();
 
-        public IComponent CreateComponent(Type componentClass) => throw new NotImplementedException();
-        public IComponent CreateComponent(Type componentClass, string name) => throw new NotImplementedException();
+        public void AddService(Type serviceType, ServiceCreatorCallback callback) =>
+            throw new NotImplementedException();
+
+        public void AddService(Type serviceType, ServiceCreatorCallback callback, bool promote) =>
+            throw new NotImplementedException();
+
+        public void AddService(Type serviceType, object serviceInstance) =>
+            throw new NotImplementedException();
+
+        public void AddService(Type serviceType, object serviceInstance, bool promote) =>
+            throw new NotImplementedException();
+
+        public IComponent CreateComponent(Type componentClass) =>
+            throw new NotImplementedException();
+
+        public IComponent CreateComponent(Type componentClass, string name) =>
+            throw new NotImplementedException();
+
         public DesignerTransaction CreateTransaction() => throw new NotImplementedException();
-        public DesignerTransaction CreateTransaction(string description) => throw new NotImplementedException();
+
+        public DesignerTransaction CreateTransaction(string description) =>
+            throw new NotImplementedException();
 
         public void DestroyComponent(IComponent component) => throw new NotImplementedException();
+
         public IDesigner GetDesigner(IComponent component) => throw new NotImplementedException();
+
         public object GetService(Type serviceType) => throw new NotImplementedException();
+
         public Type GetType(string typeName) => throw new NotImplementedException();
+
         public void RemoveService(Type serviceType) => throw new NotImplementedException();
-        public void RemoveService(Type serviceType, bool promote) => throw new NotImplementedException();
+
+        public void RemoveService(Type serviceType, bool promote) =>
+            throw new NotImplementedException();
     }
 }

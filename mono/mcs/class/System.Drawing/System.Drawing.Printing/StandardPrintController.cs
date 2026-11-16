@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,33 +36,34 @@ using System;
 
 namespace System.Drawing.Printing
 {
-	public class StandardPrintController : PrintController
-	{		
-		public StandardPrintController()
-		{
-		}
-		
-		public override void OnEndPage (PrintDocument document, PrintPageEventArgs e)
-		{
-			SysPrn.GlobalService.EndPage (e.GraphicsContext);
-		}
-		
-		public override void OnStartPrint (PrintDocument document, PrintEventArgs e)
-		{			
-			IntPtr dc = SysPrn.GlobalService.CreateGraphicsContext (document.PrinterSettings, document.DefaultPageSettings);
-			e.GraphicsContext = new GraphicsPrinter (null, dc);
-			SysPrn.GlobalService.StartDoc (e.GraphicsContext, document.DocumentName, string.Empty);			
-		}
-		
-		public override void OnEndPrint (PrintDocument document, PrintEventArgs e)
-		{			
-			SysPrn.GlobalService.EndDoc (e.GraphicsContext);
-		}
-		
-		public override Graphics OnStartPage (PrintDocument document, PrintPageEventArgs e)
-		{				
-			SysPrn.GlobalService.StartPage (e.GraphicsContext);
-			return e.Graphics;
-		}
-	}
+    public class StandardPrintController : PrintController
+    {
+        public StandardPrintController() { }
+
+        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            SysPrn.GlobalService.EndPage(e.GraphicsContext);
+        }
+
+        public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
+        {
+            IntPtr dc = SysPrn.GlobalService.CreateGraphicsContext(
+                document.PrinterSettings,
+                document.DefaultPageSettings
+            );
+            e.GraphicsContext = new GraphicsPrinter(null, dc);
+            SysPrn.GlobalService.StartDoc(e.GraphicsContext, document.DocumentName, string.Empty);
+        }
+
+        public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
+        {
+            SysPrn.GlobalService.EndDoc(e.GraphicsContext);
+        }
+
+        public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            SysPrn.GlobalService.StartPage(e.GraphicsContext);
+            return e.Graphics;
+        }
+    }
 }

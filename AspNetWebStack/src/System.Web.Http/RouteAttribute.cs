@@ -7,10 +7,14 @@ using System.Web.Http.Routing;
 namespace System.Web.Http
 {
     /// <summary>
-    /// Place on a controller or action to expose it directly via a route. 
+    /// Place on a controller or action to expose it directly via a route.
     /// When placed on a controller, it applies to actions that do not have any <see cref="RouteAttribute"/>s on them.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public sealed class RouteAttribute : Attribute, IDirectRouteFactory, IHttpRouteInfoProvider
     {
         /// <summary>
@@ -20,7 +24,7 @@ namespace System.Web.Http
         {
             Template = String.Empty;
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteAttribute" /> class.
         /// </summary>

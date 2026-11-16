@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,17 +21,15 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Data;
-
+using DbLinq.Data.Linq.Sql;
 #if MONO_STRICT
 using System.Data.Linq;
 #endif
-
-using DbLinq.Data.Linq.Sql;
 
 namespace DbLinq.Data.Linq.Database.Implementation
 {
@@ -44,6 +42,7 @@ namespace DbLinq.Data.Linq.Database.Implementation
     class TransactionalCommand : ITransactionalCommand
     {
         private readonly IDisposable _connection;
+
         /// <summary>
         /// Ambient transaction
         /// </summary>
@@ -59,12 +58,8 @@ namespace DbLinq.Data.Linq.Database.Implementation
         /// <value>The command.</value>
         public IDbCommand Command
         {
-            get
-            {
-                return _command;
-            }
+            get { return _command; }
         }
-
 
         /// <summary>
         /// Commits current transaction.
@@ -88,13 +83,17 @@ namespace DbLinq.Data.Linq.Database.Implementation
                 _transaction.Commit();
         }
 
-        public TransactionalCommand(string commandText, bool createTransaction, DataContext dataContext)
+        public TransactionalCommand(
+            string commandText,
+            bool createTransaction,
+            DataContext dataContext
+        )
         {
             // TODO: check if all this stuff is necessary
             // the OpenConnection() checks that the connection is already open
             // TODO: see if we can move this here (in theory the final DataContext shouldn't use)
             _connection = dataContext.DatabaseContext.OpenConnection();
-                
+
             _command = dataContext.DatabaseContext.CreateCommand();
             haveHigherTransaction = dataContext.Transaction != null;
             // the transaction is optional
@@ -107,6 +106,5 @@ namespace DbLinq.Data.Linq.Database.Implementation
                 _command.Transaction = dataContext.Transaction;
             Command.CommandText = commandText;
         }
-
     }
 }

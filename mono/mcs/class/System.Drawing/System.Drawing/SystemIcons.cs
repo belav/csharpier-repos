@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,83 +29,91 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Drawing {
+namespace System.Drawing
+{
+    // LAME: I don't see why the "old" (win 2.x) names were exposed in the fx :|
 
-	// LAME: I don't see why the "old" (win 2.x) names were exposed in the fx :|
+    public sealed class SystemIcons
+    {
+        static Icon[] icons;
+        private const int Application_Winlogo = 0;
+        private const int Asterisk_Information = 1;
+        private const int Error_Hand = 2;
+        private const int Exclamation_Warning = 3;
+        private const int Question_ = 4;
+        private const int Shield_ = 5;
 
-	public sealed class SystemIcons {
+        static SystemIcons()
+        {
+            // we minimize the # of icons to load since most of them are duplicates
+            icons = new Icon[6];
+            // we use an internal .ctor to ensure the SystemIcons can't de disposed
+            icons[Application_Winlogo] = new Icon("Mono.ico", true);
+            icons[Asterisk_Information] = new Icon("Information.ico", true);
+            icons[Error_Hand] = new Icon("Error.ico", true);
+            icons[Exclamation_Warning] = new Icon("Warning.ico", true);
+            icons[Question_] = new Icon("Question.ico", true);
+            icons[Shield_] = new Icon("Shield.ico", true);
+        }
 
-		static Icon[] icons;
-		private const int Application_Winlogo = 0;
-		private const int Asterisk_Information = 1;
-		private const int Error_Hand = 2;
-		private const int Exclamation_Warning = 3;
-		private const int Question_ = 4;
-		private const int Shield_ = 5;
+        private SystemIcons() { }
 
-		static SystemIcons ()
-		{
-			// we minimize the # of icons to load since most of them are duplicates
-			icons = new Icon [6];
-			// we use an internal .ctor to ensure the SystemIcons can't de disposed
-			icons [Application_Winlogo] = new Icon ("Mono.ico", true);
-			icons [Asterisk_Information] = new Icon ("Information.ico", true);
-			icons [Error_Hand] = new Icon ("Error.ico", true);
-			icons [Exclamation_Warning] = new Icon ("Warning.ico", true);
-			icons [Question_] = new Icon ("Question.ico", true);
-			icons [Shield_] = new Icon ("Shield.ico", true);
-		}
+        // note: same as WinLogo (for Mono)
+        public static Icon Application
+        {
+            get { return icons[Application_Winlogo]; }
+        }
 
-		private SystemIcons ()
-		{
-		}
+        // note: same as Information
+        public static Icon Asterisk
+        {
+            get { return icons[Asterisk_Information]; }
+        }
 
-		// note: same as WinLogo (for Mono)
-		public static Icon Application {
-			get { return icons [Application_Winlogo]; }
-		}
+        // note: same as Hand
+        public static Icon Error
+        {
+            get { return icons[Error_Hand]; }
+        }
 
-		// note: same as Information
-		public static Icon Asterisk {
-			get { return icons [Asterisk_Information]; }
-		}
+        // same as Warning
+        public static Icon Exclamation
+        {
+            get { return icons[Exclamation_Warning]; }
+        }
 
-		// note: same as Hand
-		public static Icon Error {
-			get { return icons [Error_Hand]; }
-		}
+        // note: same as Error
+        public static Icon Hand
+        {
+            get { return icons[Error_Hand]; }
+        }
 
-		// same as Warning
-		public static Icon Exclamation {
-			get { return icons [Exclamation_Warning]; }
-		}
+        // note: same as Asterisk
+        public static Icon Information
+        {
+            get { return icons[Asterisk_Information]; }
+        }
 
-		// note: same as Error
-		public static Icon Hand {
-			get { return icons [Error_Hand]; }
-		}
+        public static Icon Question
+        {
+            get { return icons[Question_]; }
+        }
 
-		// note: same as Asterisk
-		public static Icon Information {
-			get { return icons [Asterisk_Information]; }
-		}
+        // note: same as Exclamation
+        public static Icon Warning
+        {
+            get { return icons[Exclamation_Warning]; }
+        }
 
-		public static Icon Question {
-			get { return icons [Question_]; }
-		}
+        // note: same as Application (for Mono)
+        public static Icon WinLogo
+        {
+            get { return icons[Application_Winlogo]; }
+        }
 
-		// note: same as Exclamation
-		public static Icon Warning {
-			get { return icons [Exclamation_Warning]; }
-		}
-
-		// note: same as Application (for Mono)
-		public static Icon WinLogo {
-			get { return icons [Application_Winlogo]; }
-		}
-
-		public static Icon Shield {
-			get { return icons [Shield_]; }
-		}
-	}
+        public static Icon Shield
+        {
+            get { return icons[Shield_]; }
+        }
+    }
 }

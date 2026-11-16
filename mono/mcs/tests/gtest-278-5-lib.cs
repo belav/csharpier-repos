@@ -3,6 +3,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: TypeForwardedTo (typeof (C))]
-[assembly: TypeForwardedTo (typeof (D))]
-[assembly: TypeForwardedTo (typeof (G<int>))]
+[assembly: TypeForwardedTo(typeof(C))]
+[assembly: TypeForwardedTo(typeof(D))]
+[assembly: TypeForwardedTo(typeof(G<int>))]

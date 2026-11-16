@@ -16,24 +16,15 @@ namespace System.IdentityModel.Selectors
     public class ServiceBusyException : System.Exception
     {
         public ServiceBusyException()
-        : base()
-        {
-        }
+            : base() { }
 
-        public ServiceBusyException( string message )
-        : base( message )
-        {
-        }
+        public ServiceBusyException(string message)
+            : base(message) { }
 
-        public ServiceBusyException( string message, Exception innerException )
-        : base( message, innerException )
-        {
-        }
+        public ServiceBusyException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected ServiceBusyException( SerializationInfo info, StreamingContext context )
-        : base( info, context )
-        {
-        }
+        protected ServiceBusyException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
-
 }

@@ -13,6 +13,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
     internal interface IGenerateConversionService : ILanguageService
     {
-        Task<ImmutableArray<CodeAction>> GenerateConversionAsync(Document document, SyntaxNode node, CodeAndImportGenerationOptionsProvider fallbackOptions, CancellationToken cancellationToken);
+        Task<ImmutableArray<CodeAction>> GenerateConversionAsync(
+            Document document,
+            SyntaxNode node,
+            CodeAndImportGenerationOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        );
     }
 }

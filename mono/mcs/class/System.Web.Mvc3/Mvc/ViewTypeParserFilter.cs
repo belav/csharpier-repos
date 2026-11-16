@@ -1,30 +1,44 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Web.UI;
 
-    internal class ViewTypeParserFilter : PageParserFilter {
-
-        private static Dictionary<string, Type> _directiveBaseTypeMappings = new Dictionary<string, Type> {
-            { "page",    typeof(ViewPage)        },
+    internal class ViewTypeParserFilter : PageParserFilter
+    {
+        private static Dictionary<string, Type> _directiveBaseTypeMappings = new Dictionary<
+            string,
+            Type
+        >
+        {
+            { "page", typeof(ViewPage) },
             { "control", typeof(ViewUserControl) },
-            { "master",  typeof(ViewMasterPage)  },
+            { "master", typeof(ViewMasterPage) },
         };
 
         private string _inherits;
 
-        [SuppressMessage("Microsoft.Security", "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule", Justification = "System.Web.Mvc is SecurityTransparent and requires medium trust to run, so this downstream link demand is fine")]
-        public ViewTypeParserFilter() {
-        }
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule",
+            Justification = "System.Web.Mvc is SecurityTransparent and requires medium trust to run, so this downstream link demand is fine"
+        )]
+        public ViewTypeParserFilter() { }
 
-        [SuppressMessage("Microsoft.Security", "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule", Justification = "System.Web.Mvc is SecurityTransparent and requires medium trust to run, so this downstream link demand is fine")]
-        public override void PreprocessDirective(string directiveName, IDictionary attributes) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule",
+            Justification = "System.Web.Mvc is SecurityTransparent and requires medium trust to run, so this downstream link demand is fine"
+        )]
+        public override void PreprocessDirective(string directiveName, IDictionary attributes)
+        {
             base.PreprocessDirective(directiveName, attributes);
 
             Type baseType;
-            if (_directiveBaseTypeMappings.TryGetValue(directiveName, out baseType)) {
+            if (_directiveBaseTypeMappings.TryGetValue(directiveName, out baseType))
+            {
                 string inheritsAttribute = attributes["inherits"] as string;
 
                 // Since the ASP.NET page parser doesn't understand native generic syntax, we
@@ -39,19 +53,29 @@
                 // can work around this breaking behavior by using a non-generic inherits
                 // directive, or by using the CLR syntax for generic type names.
 
-                if (inheritsAttribute != null && inheritsAttribute.IndexOfAny(new[] { '<', '(' }) > 0) {
+                if (
+                    inheritsAttribute != null
+                    && inheritsAttribute.IndexOfAny(new[] { '<', '(' }) > 0
+                )
+                {
                     attributes["inherits"] = baseType.FullName;
                     _inherits = inheritsAttribute;
                 }
             }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule", Justification = "System.Web.Mvc is SecurityTransparent and requires medium trust to run, so this downstream link demand is fine")]
-        public override void ParseComplete(ControlBuilder rootBuilder) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule",
+            Justification = "System.Web.Mvc is SecurityTransparent and requires medium trust to run, so this downstream link demand is fine"
+        )]
+        public override void ParseComplete(ControlBuilder rootBuilder)
+        {
             base.ParseComplete(rootBuilder);
 
             IMvcControlBuilder builder = rootBuilder as IMvcControlBuilder;
-            if (builder != null) {
+            if (builder != null)
+            {
                 builder.Inherits = _inherits;
             }
         }
@@ -59,44 +83,47 @@
         // Everything else in this class is unrelated to our 'inherits' handling.
         // Since PageParserFilter blocks everything by default, we need to unblock it
 
-        public override bool AllowCode {
-            get {
-                return true;
-            }
+        public override bool AllowCode
+        {
+            get { return true; }
         }
 
-        public override bool AllowBaseType(Type baseType) {
+        public override bool AllowBaseType(Type baseType)
+        {
             return true;
         }
 
-        public override bool AllowControl(Type controlType, ControlBuilder builder) {
+        public override bool AllowControl(Type controlType, ControlBuilder builder)
+        {
             return true;
         }
 
-        public override bool AllowVirtualReference(string referenceVirtualPath, VirtualReferenceType referenceType) {
+        public override bool AllowVirtualReference(
+            string referenceVirtualPath,
+            VirtualReferenceType referenceType
+        )
+        {
             return true;
         }
 
-        public override bool AllowServerSideInclude(string includeVirtualPath) {
+        public override bool AllowServerSideInclude(string includeVirtualPath)
+        {
             return true;
         }
 
-        public override int NumberOfControlsAllowed {
-            get {
-                return -1;
-            }
+        public override int NumberOfControlsAllowed
+        {
+            get { return -1; }
         }
 
-        public override int NumberOfDirectDependenciesAllowed {
-            get {
-                return -1;
-            }
+        public override int NumberOfDirectDependenciesAllowed
+        {
+            get { return -1; }
         }
 
-        public override int TotalNumberOfDependenciesAllowed {
-            get {
-                return -1;
-            }
+        public override int TotalNumberOfDependenciesAllowed
+        {
+            get { return -1; }
         }
     }
 }

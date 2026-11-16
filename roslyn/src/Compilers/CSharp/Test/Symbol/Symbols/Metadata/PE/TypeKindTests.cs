@@ -29,48 +29,68 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         {
             var module0 = assembly.Modules[0];
 
-            var system = (from n in module0.GlobalNamespace.GetMembers()
-                          where n.Name.Equals("System")
-                          select n).Cast<NamespaceSymbol>().Single();
+            var system = (
+                from n in module0.GlobalNamespace.GetMembers()
+                where n.Name.Equals("System")
+                select n
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
-            var obj = (from t in system.GetTypeMembers()
-                       where t.Name.Equals("Object")
-                       select t).Single();
+            var obj = (
+                from t in system.GetTypeMembers()
+                where t.Name.Equals("Object")
+                select t
+            ).Single();
 
             Assert.Equal(TypeKind.Class, obj.TypeKind);
 
-            var @enum = (from t in system.GetTypeMembers()
-                         where t.Name.Equals("Enum")
-                         select t).Single();
+            var @enum = (
+                from t in system.GetTypeMembers()
+                where t.Name.Equals("Enum")
+                select t
+            ).Single();
 
             Assert.Equal(TypeKind.Class, @enum.TypeKind);
 
-            var int32 = (from t in system.GetTypeMembers()
-                         where t.Name.Equals("Int32")
-                         select t).Single();
+            var int32 = (
+                from t in system.GetTypeMembers()
+                where t.Name.Equals("Int32")
+                select t
+            ).Single();
 
             Assert.Equal(TypeKind.Struct, int32.TypeKind);
 
-            var func = (from t in system.GetTypeMembers()
-                        where t.Name.Equals("Func") && t.Arity == 1
-                        select t).Single();
+            var func = (
+                from t in system.GetTypeMembers()
+                where t.Name.Equals("Func") && t.Arity == 1
+                select t
+            ).Single();
 
             Assert.Equal(TypeKind.Delegate, func.TypeKind);
 
-            var collections = (from n in system.GetMembers()
-                               where n.Name.Equals("Collections")
-                               select n).Cast<NamespaceSymbol>().Single();
+            var collections = (
+                from n in system.GetMembers()
+                where n.Name.Equals("Collections")
+                select n
+            )
+                .Cast<NamespaceSymbol>()
+                .Single();
 
-            var ienumerable = (from t in collections.GetTypeMembers()
-                               where t.Name.Equals("IEnumerable")
-                               select t).Single();
+            var ienumerable = (
+                from t in collections.GetTypeMembers()
+                where t.Name.Equals("IEnumerable")
+                select t
+            ).Single();
 
             Assert.Equal(TypeKind.Interface, ienumerable.TypeKind);
             Assert.Null(ienumerable.BaseType());
 
-            var typeCode = (from t in system.GetTypeMembers()
-                            where t.Name.Equals("TypeCode")
-                            select t).Single();
+            var typeCode = (
+                from t in system.GetTypeMembers()
+                where t.Name.Equals("TypeCode")
+                select t
+            ).Single();
 
             Assert.Equal(TypeKind.Enum, typeCode.TypeKind);
 

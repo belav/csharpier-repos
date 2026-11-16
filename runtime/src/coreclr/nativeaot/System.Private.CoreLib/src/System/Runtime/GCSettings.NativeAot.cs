@@ -5,11 +5,9 @@ namespace System.Runtime
 {
     public static partial class GCSettings
     {
-        public static bool IsServerGC =>
-            RuntimeImports.RhIsServerGc();
+        public static bool IsServerGC => RuntimeImports.RhIsServerGc();
 
-        private static GCLatencyMode GetGCLatencyMode() =>
-            RuntimeImports.RhGetGcLatencyMode();
+        private static GCLatencyMode GetGCLatencyMode() => RuntimeImports.RhGetGcLatencyMode();
 
         private static SetLatencyModeStatus SetGCLatencyMode(GCLatencyMode value) =>
             (SetLatencyModeStatus)RuntimeImports.RhSetGcLatencyMode(value);

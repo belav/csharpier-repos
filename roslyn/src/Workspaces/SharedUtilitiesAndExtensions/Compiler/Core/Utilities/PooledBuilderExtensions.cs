@@ -11,7 +11,9 @@ namespace Roslyn.Utilities
 {
     internal static class PooledBuilderExtensions
     {
-        public static Dictionary<K, V> ToDictionaryAndFree<K, V>(this PooledDictionary<K, V> builders)
+        public static Dictionary<K, V> ToDictionaryAndFree<K, V>(
+            this PooledDictionary<K, V> builders
+        )
             where K : notnull
         {
             var dictionary = new Dictionary<K, V>(builders.Count);
@@ -25,7 +27,9 @@ namespace Roslyn.Utilities
             return dictionary;
         }
 
-        public static Dictionary<K, ImmutableArray<V>> ToMultiDictionaryAndFree<K, V>(this PooledDictionary<K, ArrayBuilder<V>> builders)
+        public static Dictionary<K, ImmutableArray<V>> ToMultiDictionaryAndFree<K, V>(
+            this PooledDictionary<K, ArrayBuilder<V>> builders
+        )
             where K : notnull
         {
             var dictionary = new Dictionary<K, ImmutableArray<V>>(builders.Count);
@@ -39,7 +43,10 @@ namespace Roslyn.Utilities
             return dictionary;
         }
 
-        public static ImmutableDictionary<K, ImmutableArray<V>> ToImmutableMultiDictionaryAndFree<K, V>(this PooledDictionary<K, ArrayBuilder<V>> builders)
+        public static ImmutableDictionary<K, ImmutableArray<V>> ToImmutableMultiDictionaryAndFree<
+            K,
+            V
+        >(this PooledDictionary<K, ArrayBuilder<V>> builders)
             where K : notnull
         {
             var result = ImmutableDictionary.CreateBuilder<K, ImmutableArray<V>>();
@@ -62,7 +69,9 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static ImmutableArray<T> ToFlattenedImmutableArrayAndFree<T>(this ArrayBuilder<ArrayBuilder<T>> builders)
+        public static ImmutableArray<T> ToFlattenedImmutableArrayAndFree<T>(
+            this ArrayBuilder<ArrayBuilder<T>> builders
+        )
         {
             try
             {

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseRangeOperatorDiagnosticAnalyzer,
-        CSharpUseRangeOperatorCodeFixProvider>;
+        CSharpUseRangeOperatorCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
     public class UseRangeOperatorTests
@@ -23,8 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestNotInCSharp7()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestWithMissingReference()
         {
-            var source =
-                """
+            var source = """
                 class {|#0:C|}
                 {
                     {|#1:void|} Goo({|#2:string|} s)
@@ -64,17 +63,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(1,7): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(0).WithArguments("System.Object"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(0)
+                        .WithArguments("System.Object"),
                     // /0/Test0.cs(1,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-                    DiagnosticResult.CompilerError("CS1729").WithLocation(0).WithArguments("object", "0"),
+                    DiagnosticResult
+                        .CompilerError("CS1729")
+                        .WithLocation(0)
+                        .WithArguments("object", "0"),
                     // /0/Test0.cs(3,5): error CS0518: Predefined type 'System.Void' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(1).WithArguments("System.Void"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(1)
+                        .WithArguments("System.Void"),
                     // /0/Test0.cs(3,14): error CS0518: Predefined type 'System.String' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(2).WithArguments("System.String"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(2)
+                        .WithArguments("System.String"),
                     // /0/Test0.cs(5,29): error CS0518: Predefined type 'System.Int32' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(3).WithArguments("System.Int32"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(3)
+                        .WithArguments("System.Int32"),
                     // /0/Test0.cs(5,43): error CS0518: Predefined type 'System.Int32' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(4).WithArguments("System.Int32"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(4)
+                        .WithArguments("System.Int32"),
                 },
                 FixedCode = source,
             }.RunAsync();
@@ -83,8 +100,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36909")]
         public async Task TestNotWithoutSystemRange()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -106,8 +122,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestNotWithInaccessibleSystemRange()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -127,11 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     {
                         ["AdditionalProject"] =
                         {
-                            Sources =
-                            {
-                                "namespace System { internal struct Range { } }"
-                            }
-                        }
+                            Sources = { "namespace System { internal struct Range { } }" },
+                        },
                     },
                     AdditionalProjectReferences = { "AdditionalProject" },
                 },
@@ -143,8 +155,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestSimple()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -153,8 +164,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -175,8 +185,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
         public async Task TestMultipleDefinitions()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -185,8 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -197,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                 """;
 
             // Adding a dependency with internal definitions of Index and Range should not break the feature
-            var source1 = "namespace System { internal struct Index { } internal struct Range { } }";
+            var source1 =
+                "namespace System { internal struct Index { } internal struct Range { } }";
 
             await new VerifyCS.Test
             {
@@ -222,8 +231,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestComplexSubstraction()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s, int bar, int baz)
@@ -232,8 +240,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s, int bar, int baz)
@@ -254,8 +261,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestSubstringOneArgument()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -264,8 +270,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -286,8 +291,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestSliceOneArgument()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -297,8 +301,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 class C
                 {
@@ -320,8 +323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestExpressionOneArgument()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s, int bar)
@@ -330,8 +332,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s, int bar)
@@ -352,8 +353,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestConstantSubtraction1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -362,8 +362,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -384,8 +383,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestNotWithoutSubtraction()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -407,8 +405,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestNonStringType()
         {
-            var source =
-                """
+            var source = """
                 struct S { public S Slice(int start, int length) => default; public int Length { get; } public S this[System.Range r] { get => default; } }
                 class C
                 {
@@ -418,8 +415,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 struct S { public S Slice(int start, int length) => default; public int Length { get; } public S this[System.Range r] { get => default; } }
                 class C
                 {
@@ -441,8 +437,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestNonStringTypeWithoutRangeIndexer()
         {
-            var source =
-                """
+            var source = """
                 struct S { public S Slice(int start, int length) => default; public int Length { get; } }
                 class C
                 {
@@ -452,8 +447,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 struct S { public S Slice(int start, int length) => default; public int Length { get; } }
                 class C
                 {
@@ -475,8 +469,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestNonStringType_Assignment()
         {
-            var source =
-                """
+            var source = """
                 struct S { public ref S Slice(int start, int length) => throw null; public int Length { get; } public ref S this[System.Range r] { get => throw null; } }
                 class C
                 {
@@ -486,8 +479,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 struct S { public ref S Slice(int start, int length) => throw null; public int Length { get; } public ref S this[System.Range r] { get => throw null; } }
                 class C
                 {
@@ -508,8 +500,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestMethodToMethod()
         {
-            var source =
-                """
+            var source = """
                 struct S { public int Slice(int start, int length) => 0; public int Length { get; } public int Slice(System.Range r) => 0; }
                 class C
                 {
@@ -519,8 +510,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 struct S { public int Slice(int start, int length) => 0; public int Length { get; } public int Slice(System.Range r) => 0; }
                 class C
                 {
@@ -542,10 +532,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestFixAllInvocationToElementAccess1()
         {
-            // Note: once the IOp tree has support for range operators, this should 
+            // Note: once the IOp tree has support for range operators, this should
             // simplify even further.
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s, string t)
@@ -554,8 +543,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s, string t)
@@ -576,10 +564,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestFixAllInvocationToElementAccess2()
         {
-            // Note: once the IOp tree has support for range operators, this should 
+            // Note: once the IOp tree has support for range operators, this should
             // simplify even further.
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s, string t)
@@ -588,8 +575,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s, string t)
@@ -610,8 +596,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestWithTypeWithActualSliceMethod1()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -621,8 +606,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 class C
                 {
@@ -644,8 +628,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestWithTypeWithActualSliceMethod2()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -655,8 +638,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 class C
                 {
@@ -678,8 +660,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43202")]
         public async Task TestWritableType()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 struct S { 
                     public ref S Slice(int start, int length) => throw null; 
@@ -703,11 +684,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                 FixedCode = source,
             }.RunAsync();
         }
+
         [Fact]
         public async Task TestReturnByRef()
         {
-            var source =
-                """
+            var source = """
                 struct S { public ref S Slice(int start, int length) => throw null; public int Length { get; } public S this[System.Range r] { get => throw null; } }
                 class C
                 {
@@ -717,8 +698,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 struct S { public ref S Slice(int start, int length) => throw null; public int Length { get; } public S this[System.Range r] { get => throw null; } }
                 class C
                 {
@@ -739,8 +719,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43202")]
         public async Task TestIntWritableType()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 struct S { 
                     public ref S Slice(int start, int length) => throw null;
@@ -756,8 +735,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 struct S { 
                     public ref S Slice(int start, int length) => throw null;
@@ -785,8 +763,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43202")]
         public async Task TestReadWriteProperty()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 struct S { 
                     public ref S Slice(int start, int length) => throw null;
@@ -802,8 +779,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 struct S { 
                     public ref S Slice(int start, int length) => throw null;
@@ -830,8 +806,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestWithTypeWithActualSliceMethod3()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 class C
                 {
@@ -841,8 +816,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 using System;
                 class C
                 {
@@ -863,8 +837,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36997")]
         public async Task TestExpressionWithAddOperatorArgument()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s, int bar)
@@ -873,8 +846,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s, int bar)
@@ -895,8 +867,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact]
         public async Task TestExpressionWithElementAccessShouldNotAddParentheses()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s, int[] bar)
@@ -905,8 +876,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s, int[] bar)
@@ -927,8 +897,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47183")]
         public async Task TestExpressionWithNullConditionalAccess()
         {
-            var source =
-                """
+            var source = """
                 #nullable enable
                 public class Test
                 {
@@ -936,8 +905,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                         => arg?.Substring([|42|]);
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 #nullable enable
                 public class Test
                 {
@@ -956,16 +924,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47183")]
         public async Task TestExpressionWithNullConditionalAccessWithPropertyAccess()
         {
-            var source =
-                """
+            var source = """
                 public class Test
                 {
                     public int? M(string arg)
                         => arg?.Substring([|42|]).Length;
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 public class Test
                 {
                     public int? M(string arg)
@@ -981,25 +947,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/47183")]
-        [InlineData(
-            "c.Prop.Substring([|42|])",
-            "c.Prop[42..]")]
-        [InlineData(
-            "c.Prop.Substring([|1, c.Prop.Length - 2|])",
-            "c.Prop[1..^1]")]
-        [InlineData(
-            "c?.Prop.Substring([|42|])",
-            "c?.Prop[42..]")]
-        [InlineData(
-            "c.Prop?.Substring([|42|])",
-            "c.Prop?[42..]")]
-        [InlineData(
-            "c?.Prop?.Substring([|42|])",
-            "c?.Prop?[42..]")]
-        public async Task TestExpressionWithNullConditionalAccessVariations(string subStringCode, string rangeCode)
+        [InlineData("c.Prop.Substring([|42|])", "c.Prop[42..]")]
+        [InlineData("c.Prop.Substring([|1, c.Prop.Length - 2|])", "c.Prop[1..^1]")]
+        [InlineData("c?.Prop.Substring([|42|])", "c?.Prop[42..]")]
+        [InlineData("c.Prop?.Substring([|42|])", "c.Prop?[42..]")]
+        [InlineData("c?.Prop?.Substring([|42|])", "c?.Prop?[42..]")]
+        public async Task TestExpressionWithNullConditionalAccessVariations(
+            string subStringCode,
+            string rangeCode
+        )
         {
             var source =
-@$"
+                @$"
 public class C
 {{
     public string Prop {{ get; set; }}
@@ -1010,7 +969,7 @@ public class Test
         => {subStringCode};
 }}";
             var fixedSource =
-@$"
+                @$"
 public class C
 {{
     public string Prop {{ get; set; }}
@@ -1031,8 +990,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38055")]
         public async Task TestStringMethod()
         {
-            var source =
-                """
+            var source = """
                 namespace System
                 {
                     public class Object {}
@@ -1059,8 +1017,7 @@ public class Test
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 namespace System
                 {
                     public class Object {}
@@ -1099,8 +1056,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38055")]
         public async Task TestSliceOnThis()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     public int Length => 0;
@@ -1109,8 +1065,7 @@ public class Test
                     public C Foo(int x) => Slice([|1, x - 1|]);
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     public int Length => 0;
@@ -1131,8 +1086,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56269")]
         public async Task TestStartingFromZero()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -1141,8 +1095,7 @@ public class Test
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -1163,8 +1116,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56269")]
         public async Task TestStartingFromAribtraryPosition()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -1173,8 +1125,7 @@ public class Test
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -1195,8 +1146,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56269")]
         public async Task TestStartingFromZeroToArbitraryEnd()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -1205,8 +1155,7 @@ public class Test
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -1227,8 +1176,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56269")]
         public async Task TestStartingFromZeroGoingToLength()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -1237,8 +1185,7 @@ public class Test
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -1259,8 +1206,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40438")]
         public async Task TestStartingFromZeroGoingToLengthMinus1()
         {
-            var source =
-                """
+            var source = """
                 class C
                 {
                     void Goo(string s)
@@ -1269,8 +1215,7 @@ public class Test
                     }
                 }
                 """;
-            var fixedSource =
-                """
+            var fixedSource = """
                 class C
                 {
                     void Goo(string s)
@@ -1291,8 +1236,7 @@ public class Test
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49347")]
         public async Task TestNotInExpressionTree()
         {
-            var source =
-                """
+            var source = """
                 using System;
                 using System.Linq.Expressions;
 
@@ -1319,36 +1263,34 @@ public class Test
             await new VerifyCS.Test
             {
                 ReferenceAssemblies = ReferenceAssemblies.NetCore.NetCoreApp31,
-                TestCode =
-                """
-                using System;
-                using System.Linq.Expressions;
+                TestCode = """
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
-                        long length = 2;
-                        var sliced = buffer.Slice([|0, unchecked((int)length)|]); // or checked((int)length)
+                        void M()
+                        {
+                            Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
+                            long length = 2;
+                            var sliced = buffer.Slice([|0, unchecked((int)length)|]); // or checked((int)length)
+                        }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-                using System.Linq.Expressions;
+                    """,
+                FixedCode = """
+                    using System;
+                    using System.Linq.Expressions;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
-                        long length = 2;
-                        var sliced = buffer[..unchecked((int)length)]; // or checked((int)length)
+                        void M()
+                        {
+                            Span<byte> buffer = new byte[]{ (byte)'h', (byte)'i', 0 };
+                            long length = 2;
+                            var sliced = buffer[..unchecked((int)length)]; // or checked((int)length)
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
     }

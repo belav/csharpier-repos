@@ -29,7 +29,11 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             IHttpRouteData routeData = new Mock<IHttpRouteData>().Object;
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = new HttpControllerContext(config, routeData, request);
+            HttpControllerContext controllerContext = new HttpControllerContext(
+                config,
+                routeData,
+                request
+            );
 
             Assert.Same(config, controllerContext.Configuration);
             Assert.Same(request, controllerContext.Request);
@@ -42,24 +46,42 @@ namespace System.Web.Http
         public void Constructor_Throws_IfConfigurationIsNull()
         {
             Assert.ThrowsArgumentNull(
-                () => new HttpControllerContext(null, new Mock<IHttpRouteData>().Object, new HttpRequestMessage()),
-                "configuration");
+                () =>
+                    new HttpControllerContext(
+                        null,
+                        new Mock<IHttpRouteData>().Object,
+                        new HttpRequestMessage()
+                    ),
+                "configuration"
+            );
         }
 
         [Fact]
         public void Constructor_Throws_IfRouteDataIsNull()
         {
             Assert.ThrowsArgumentNull(
-                () => new HttpControllerContext(new HttpConfiguration(), null, new HttpRequestMessage()),
-                "routeData");
+                () =>
+                    new HttpControllerContext(
+                        new HttpConfiguration(),
+                        null,
+                        new HttpRequestMessage()
+                    ),
+                "routeData"
+            );
         }
 
         [Fact]
         public void Constructor_Throws_IfRequestIsNull()
         {
             Assert.ThrowsArgumentNull(
-                () => new HttpControllerContext(new HttpConfiguration(), new Mock<IHttpRouteData>().Object, null),
-                "request");
+                () =>
+                    new HttpControllerContext(
+                        new HttpConfiguration(),
+                        new Mock<IHttpRouteData>().Object,
+                        null
+                    ),
+                "request"
+            );
         }
 
         [Fact]
@@ -70,7 +92,8 @@ namespace System.Web.Http
                 propertyGetter: cc => cc.Configuration,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: new HttpConfiguration());
+                roundTripTestValue: new HttpConfiguration()
+            );
         }
 
         [Fact]
@@ -81,7 +104,8 @@ namespace System.Web.Http
                 propertyGetter: cc => cc.Controller,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: new Mock<IHttpController>().Object);
+                roundTripTestValue: new Mock<IHttpController>().Object
+            );
         }
 
         [Fact]
@@ -92,7 +116,8 @@ namespace System.Web.Http
                 propertyGetter: cc => cc.ControllerDescriptor,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: new HttpControllerDescriptor());
+                roundTripTestValue: new HttpControllerDescriptor()
+            );
         }
 
         [Fact]
@@ -103,8 +128,8 @@ namespace System.Web.Http
                 propertyGetter: cc => cc.RouteData,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: new Mock<IHttpRouteData>().Object);
+                roundTripTestValue: new Mock<IHttpRouteData>().Object
+            );
         }
-
     }
 }

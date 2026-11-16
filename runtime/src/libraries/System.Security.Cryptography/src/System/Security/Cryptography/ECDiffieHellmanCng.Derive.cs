@@ -44,15 +44,20 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
 
             if (otherPartyPublicKey.AlgorithmGroup != CngAlgorithmGroup.ECDiffieHellman)
-                throw new ArgumentException(SR.Cryptography_ArgECDHRequiresECDHKey, nameof(otherPartyPublicKey));
+                throw new ArgumentException(
+                    SR.Cryptography_ArgECDHRequiresECDHKey,
+                    nameof(otherPartyPublicKey)
+                );
             if (otherPartyPublicKey.KeySize != KeySize)
-                throw new ArgumentException(SR.Cryptography_ArgECDHKeySizeMismatch, nameof(otherPartyPublicKey));
+                throw new ArgumentException(
+                    SR.Cryptography_ArgECDHKeySizeMismatch,
+                    nameof(otherPartyPublicKey)
+                );
 
             // Setting the flag to UseSecretAsHmacKey even when the KDF isn't HMAC, because that's what .NET Framework does.
-            Interop.NCrypt.SecretAgreementFlags flags =
-                UseSecretAgreementAsHmacKey
-                    ? Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey
-                    : Interop.NCrypt.SecretAgreementFlags.None;
+            Interop.NCrypt.SecretAgreementFlags flags = UseSecretAgreementAsHmacKey
+                ? Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey
+                : Interop.NCrypt.SecretAgreementFlags.None;
 
             using (SafeNCryptSecretHandle handle = DeriveSecretAgreementHandle(otherPartyPublicKey))
             {
@@ -64,7 +69,8 @@ namespace System.Security.Cryptography
                             HashAlgorithm.Algorithm,
                             _secretPrepend,
                             _secretAppend,
-                            flags);
+                            flags
+                        );
                     case ECDiffieHellmanKeyDerivationFunction.Hmac:
                         return Interop.NCrypt.DeriveKeyMaterialHmac(
                             handle,
@@ -72,18 +78,17 @@ namespace System.Security.Cryptography
                             _hmacKey,
                             _secretPrepend,
                             _secretAppend,
-                            flags);
+                            flags
+                        );
                     case ECDiffieHellmanKeyDerivationFunction.Tls:
                         if (_label == null || _seed == null)
                         {
-                            throw new InvalidOperationException(SR.Cryptography_TlsRequiresLabelAndSeed);
+                            throw new InvalidOperationException(
+                                SR.Cryptography_TlsRequiresLabelAndSeed
+                            );
                         }
 
-                        return Interop.NCrypt.DeriveKeyMaterialTls(
-                            handle,
-                            _label,
-                            _seed,
-                            flags);
+                        return Interop.NCrypt.DeriveKeyMaterialTls(handle, _label, _seed, flags);
                     default:
                         Debug.Fail($"Unknown KDF ({KeyDerivationFunction})");
                         // Match .NET Framework behavior
@@ -95,7 +100,9 @@ namespace System.Security.Cryptography
         /// <summary>
         ///     Get a handle to the secret agreement generated between two parties
         /// </summary>
-        public SafeNCryptSecretHandle DeriveSecretAgreementHandle(ECDiffieHellmanPublicKey otherPartyPublicKey)
+        public SafeNCryptSecretHandle DeriveSecretAgreementHandle(
+            ECDiffieHellmanPublicKey otherPartyPublicKey
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
 
@@ -129,9 +136,15 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
 
             if (otherPartyPublicKey.AlgorithmGroup != CngAlgorithmGroup.ECDiffieHellman)
-                throw new ArgumentException(SR.Cryptography_ArgECDHRequiresECDHKey, nameof(otherPartyPublicKey));
+                throw new ArgumentException(
+                    SR.Cryptography_ArgECDHRequiresECDHKey,
+                    nameof(otherPartyPublicKey)
+                );
             if (otherPartyPublicKey.KeySize != KeySize)
-                throw new ArgumentException(SR.Cryptography_ArgECDHKeySizeMismatch, nameof(otherPartyPublicKey));
+                throw new ArgumentException(
+                    SR.Cryptography_ArgECDHKeySizeMismatch,
+                    nameof(otherPartyPublicKey)
+                );
 
             // This looks strange, but the Handle property returns a duplicate so we need to dispose of it when we're done
             using (SafeNCryptKeyHandle localHandle = Key.Handle)

@@ -10,16 +10,17 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ImplementAbstractClass
 {
-    internal abstract class AbstractImplementAbstractClassCodeFixProvider<TClassNode> : CodeFixProvider
+    internal abstract class AbstractImplementAbstractClassCodeFixProvider<TClassNode>
+        : CodeFixProvider
         where TClassNode : SyntaxNode
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; }
 
-        public sealed override FixAllProvider GetFixAllProvider()
-            => WellKnownFixAllProviders.BatchFixer;
+        public sealed override FixAllProvider GetFixAllProvider() =>
+            WellKnownFixAllProviders.BatchFixer;
 
-        protected AbstractImplementAbstractClassCodeFixProvider(string diagnosticId)
-            => FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
+        protected AbstractImplementAbstractClassCodeFixProvider(string diagnosticId) =>
+            FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
 
         protected abstract SyntaxToken GetClassIdentifier(TClassNode classNode);
 
@@ -28,7 +29,9 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var token = root.FindToken(context.Span.Start);
             if (!token.Span.IntersectsWith(context.Span))
@@ -38,37 +41,71 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             if (classNode == null)
                 return;
 
-            var data = await ImplementAbstractClassData.TryGetDataAsync(
-                document, classNode, GetClassIdentifier(classNode), context.Options.GetImplementTypeGenerationOptions(document.Project.Services), cancellationToken).ConfigureAwait(false);
+            var data = await ImplementAbstractClassData
+                .TryGetDataAsync(
+                    document,
+                    classNode,
+                    GetClassIdentifier(classNode),
+                    context.Options.GetImplementTypeGenerationOptions(document.Project.Services),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (data == null)
                 return;
 
             var abstractClassType = data.AbstractClassType;
-            var id = GetCodeActionId(abstractClassType.ContainingAssembly.Name, abstractClassType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+            var id = GetCodeActionId(
+                abstractClassType.ContainingAssembly.Name,
+                abstractClassType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+            );
             context.RegisterCodeFix(
                 CodeAction.Create(
                     FeaturesResources.Implement_abstract_class,
-                    c => data.ImplementAbstractClassAsync(throughMember: null, canDelegateAllMembers: null, c),
-                    id),
-                context.Diagnostics);
+                    c =>
+                        data.ImplementAbstractClassAsync(
+                            throughMember: null,
+                            canDelegateAllMembers: null,
+                            c
+                        ),
+                    id
+                ),
+                context.Diagnostics
+            );
 
-            foreach (var (through, canDelegateAllMembers) in data.GetDelegatableMembers(cancellationToken))
+            foreach (
+                var (through, canDelegateAllMembers) in data.GetDelegatableMembers(
+                    cancellationToken
+                )
+            )
             {
                 id = GetCodeActionId(
                     abstractClassType.ContainingAssembly.Name,
                     abstractClassType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                    through.Name);
+                    through.Name
+                );
 
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         string.Format(FeaturesResources.Implement_through_0, through.Name),
                         c => data.ImplementAbstractClassAsync(through, canDelegateAllMembers, c),
-                        id),
-                    context.Diagnostics);
+                        id
+                    ),
+                    context.Diagnostics
+                );
             }
         }
 
-        private static string GetCodeActionId(string assemblyName, string abstractTypeFullyQualifiedName, string through = "")
-            => FeaturesResources.Implement_abstract_class + ";" + assemblyName + ";" + abstractTypeFullyQualifiedName + ";" + through;
+        private static string GetCodeActionId(
+            string assemblyName,
+            string abstractTypeFullyQualifiedName,
+            string through = ""
+        ) =>
+            FeaturesResources.Implement_abstract_class
+            + ";"
+            + assemblyName
+            + ";"
+            + abstractTypeFullyQualifiedName
+            + ";"
+            + through;
     }
 }

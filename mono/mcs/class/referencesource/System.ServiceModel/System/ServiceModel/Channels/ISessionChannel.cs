@@ -5,7 +5,8 @@ namespace System.ServiceModel.Channels
 {
     using System;
 
-    public interface ISessionChannel<TSession> where TSession : ISession
+    public interface ISessionChannel<TSession>
+        where TSession : ISession
     {
         TSession Session { get; }
     }

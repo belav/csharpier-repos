@@ -11,15 +11,17 @@ namespace System.Workflow.Activities.Design
     {
         int suffixGenerator;
 
-        protected abstract string GeneratedNameFormatResource
-        { get; }
+        protected abstract string GeneratedNameFormatResource { get; }
 
         public T CreateWithUniqueName()
         {
             string generatedName;
             do
             {
-                generatedName = SR2.GetString(this.GeneratedNameFormatResource, ++this.suffixGenerator);
+                generatedName = SR2.GetString(
+                    this.GeneratedNameFormatResource,
+                    ++this.suffixGenerator
+                );
             } while (this.Find(generatedName) != null);
 
             return this.CreateObject(generatedName);

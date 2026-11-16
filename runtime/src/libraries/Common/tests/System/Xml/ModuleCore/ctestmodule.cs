@@ -37,9 +37,7 @@ namespace OLEDB.Test.ModuleCore
 
         //Constructors
         public CTestModule()
-            : this(null, "Microsoft", 1)
-        {
-        }
+            : this(null, "Microsoft", 1) { }
 
         public CTestModule(string desc)
             : this(desc, "Microsoft", 1)
@@ -64,9 +62,7 @@ namespace OLEDB.Test.ModuleCore
             DetermineFilters();
         }
 
-        static CTestModule()
-        {
-        }
+        static CTestModule() { }
 
         //Accessors
         public new virtual TestModule Attribute
@@ -104,6 +100,7 @@ namespace OLEDB.Test.ModuleCore
             get { return Attribute.Modified; }
             set { Attribute.Modified = value; }
         }
+
         public override int Init(object o)
         {
             //Delegate
@@ -175,7 +172,6 @@ namespace OLEDB.Test.ModuleCore
             {
                 DetermineTestCases();
             }
-
             catch (Exception e)
             {
                 //Make this easier to debug
@@ -183,12 +179,10 @@ namespace OLEDB.Test.ModuleCore
                 Common.Assert(false, e.ToString());
                 throw e;
             }
-
         }
 
         public virtual void DetermineTestCases()
         {
-
             //Default - no sort
             //int idPrev = Int32.MinValue;
             bool bSort = false;
@@ -201,16 +195,13 @@ namespace OLEDB.Test.ModuleCore
             //So we have added the support of specifying an id=x, as an attribute so you can have
             //then sorted and displayed however your see fit.
             if (bSort)
-                Children.Sort(/*Default sort is based upon IComparable of each item*/);
+                Children.Sort( /*Default sort is based upon IComparable of each item*/
+                );
         }
 
-        protected virtual void DetermineIncludes()
-        {
-        }
+        protected virtual void DetermineIncludes() { }
 
-        protected virtual void DetermineFilters()
-        {
-        }
+        protected virtual void DetermineFilters() { }
 
         protected virtual string FilterScope(string xpath)
         {
@@ -255,7 +246,11 @@ namespace OLEDB.Test.ModuleCore
                     {
                         if (CModInfo.IsTestCaseSelected(tc.Name))
                         {
-                            Console.WriteLine("TestCase:{0} - {1}", tc.Attribute.Name, tc.Attribute.Desc);
+                            Console.WriteLine(
+                                "TestCase:{0} - {1}",
+                                tc.Attribute.Name,
+                                tc.Attribute.Desc
+                            );
                             tc.Init();
                             tc.Execute();
                         }

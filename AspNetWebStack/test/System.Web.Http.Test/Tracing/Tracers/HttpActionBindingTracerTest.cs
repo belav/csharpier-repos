@@ -26,19 +26,35 @@ namespace System.Web.Http.Tracing.Tracers
         {
             _mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
             _mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
-            _mockActionDescriptor.Setup(a => a.GetParameters()).Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
+            _mockActionDescriptor
+                .Setup(a => a.GetParameters())
+                .Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
 
             _mockParameterDescriptor = new Mock<HttpParameterDescriptor>() { CallBase = true };
-            _mockParameterBinding = new Mock<HttpParameterBinding>(_mockParameterDescriptor.Object) { CallBase = true };
-            _actionBinding = new HttpActionBinding(_mockActionDescriptor.Object, new HttpParameterBinding[] { _mockParameterBinding.Object });
+            _mockParameterBinding = new Mock<HttpParameterBinding>(_mockParameterDescriptor.Object)
+            {
+                CallBase = true,
+            };
+            _actionBinding = new HttpActionBinding(
+                _mockActionDescriptor.Object,
+                new HttpParameterBinding[] { _mockParameterBinding.Object }
+            );
 
-            _controllerDescriptor = new HttpControllerDescriptor(new HttpConfiguration(), "controller", typeof(ApiController));
+            _controllerDescriptor = new HttpControllerDescriptor(
+                new HttpConfiguration(),
+                "controller",
+                typeof(ApiController)
+            );
 
-            _controllerContext = ContextUtil.CreateControllerContext(request: new HttpRequestMessage());
+            _controllerContext = ContextUtil.CreateControllerContext(
+                request: new HttpRequestMessage()
+            );
             _controllerContext.ControllerDescriptor = _controllerDescriptor;
 
-            _actionContext = ContextUtil.CreateActionContext(_controllerContext, actionDescriptor: _mockActionDescriptor.Object);
-
+            _actionContext = ContextUtil.CreateActionContext(
+                _controllerContext,
+                actionDescriptor: _mockActionDescriptor.Object
+            );
         }
 
         [Fact]
@@ -47,7 +63,10 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             HttpActionBinding binding = new Mock<HttpActionBinding>() { CallBase = true }.Object;
             binding.ActionDescriptor = _mockActionDescriptor.Object;
-            HttpActionBindingTracer tracer = new HttpActionBindingTracer(binding, new TestTraceWriter());
+            HttpActionBindingTracer tracer = new HttpActionBindingTracer(
+                binding,
+                new TestTraceWriter()
+            );
 
             // Assert
             Assert.Same(binding.ActionDescriptor, tracer.ActionDescriptor);
@@ -60,7 +79,10 @@ namespace System.Web.Http.Tracing.Tracers
             HttpActionBinding binding = new Mock<HttpActionBinding>() { CallBase = true }.Object;
             HttpParameterBinding[] parameterBindings = new HttpParameterBinding[0];
             binding.ParameterBindings = parameterBindings;
-            HttpActionBindingTracer tracer = new HttpActionBindingTracer(binding, new TestTraceWriter());
+            HttpActionBindingTracer tracer = new HttpActionBindingTracer(
+                binding,
+                new TestTraceWriter()
+            );
 
             // Assert
             Assert.Same(parameterBindings, tracer.ParameterBindings);
@@ -72,23 +94,51 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             bool wasInvoked = false;
             Mock<HttpActionBinding> mockBinder = new Mock<HttpActionBinding>() { CallBase = true };
-            mockBinder.Setup(b => b.ExecuteBindingAsync(It.IsAny<HttpActionContext>(), It.IsAny<CancellationToken>()))
-                .Callback(() => wasInvoked = true).Returns(TaskHelpers.Completed());
+            mockBinder
+                .Setup(b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
+                .Callback(() => wasInvoked = true)
+                .Returns(TaskHelpers.Completed());
 
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpActionBindingTracer tracer = new HttpActionBindingTracer(mockBinder.Object, traceWriter);
+            HttpActionBindingTracer tracer = new HttpActionBindingTracer(
+                mockBinder.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_actionContext.Request, TraceCategories.ModelBindingCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(_actionContext.Request, TraceCategories.ModelBindingCategory, TraceLevel.Info) { Kind = TraceKind.End }
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ModelBindingCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ModelBindingCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
             await tracer.ExecuteBindingAsync(_actionContext, CancellationToken.None);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.True(wasInvoked);
         }
 
@@ -100,16 +150,39 @@ namespace System.Web.Http.Tracing.Tracers
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             tcs.TrySetException(exception);
             Mock<HttpActionBinding> mockBinder = new Mock<HttpActionBinding>() { CallBase = true };
-            mockBinder.Setup(b => b.ExecuteBindingAsync(It.IsAny<HttpActionContext>(), It.IsAny<CancellationToken>()))
+            mockBinder
+                .Setup(b =>
+                    b.ExecuteBindingAsync(
+                        It.IsAny<HttpActionContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(tcs.Task);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpActionBindingTracer tracer = new HttpActionBindingTracer(mockBinder.Object, traceWriter);
+            HttpActionBindingTracer tracer = new HttpActionBindingTracer(
+                mockBinder.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_actionContext.Request, TraceCategories.ModelBindingCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(_actionContext.Request, TraceCategories.ModelBindingCategory, TraceLevel.Error) { Kind = TraceKind.End }
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ModelBindingCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ModelBindingCategory,
+                    TraceLevel.Error
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
@@ -117,7 +190,11 @@ namespace System.Web.Http.Tracing.Tracers
 
             // Assert
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => task);
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Same(exception, thrown);
             Assert.Same(exception, traceWriter.Traces[1].Exception);
         }
@@ -127,7 +204,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpActionBinding expectedInner = new HttpActionBinding();
-            HttpActionBindingTracer productUnderTest = new HttpActionBindingTracer(expectedInner, new TestTraceWriter());
+            HttpActionBindingTracer productUnderTest = new HttpActionBindingTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             HttpActionBinding actualInner = productUnderTest.Inner;
@@ -141,10 +221,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpActionBinding expectedInner = new HttpActionBinding();
-            HttpActionBindingTracer productUnderTest = new HttpActionBindingTracer(expectedInner, new TestTraceWriter());
+            HttpActionBindingTracer productUnderTest = new HttpActionBindingTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
-            HttpActionBinding actualInner = Decorator.GetInner(productUnderTest as HttpActionBinding);
+            HttpActionBinding actualInner = Decorator.GetInner(
+                productUnderTest as HttpActionBinding
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

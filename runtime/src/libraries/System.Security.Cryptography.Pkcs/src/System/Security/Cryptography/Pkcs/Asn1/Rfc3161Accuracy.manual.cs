@@ -48,8 +48,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         }
 
         internal long TotalMicros =>
-            1_000_000L * Seconds.GetValueOrDefault() +
-            1000L * Millis.GetValueOrDefault() +
-            Micros.GetValueOrDefault();
+            1_000_000L * Seconds.GetValueOrDefault()
+            + 1000L * Millis.GetValueOrDefault()
+            + Micros.GetValueOrDefault();
     }
 }

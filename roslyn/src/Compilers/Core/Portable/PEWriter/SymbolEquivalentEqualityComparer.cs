@@ -14,13 +14,14 @@ namespace Microsoft.Cci
     /// Allows for the comparison of two <see cref="IReference"/> instances or two <see cref="INamespace"/>
     /// instances based on underlying symbols, if any.
     /// </summary>
-    internal sealed class SymbolEquivalentEqualityComparer : IEqualityComparer<IReference?>, IEqualityComparer<INamespace?>
+    internal sealed class SymbolEquivalentEqualityComparer
+        : IEqualityComparer<IReference?>,
+            IEqualityComparer<INamespace?>
     {
-        public static readonly SymbolEquivalentEqualityComparer Instance = new SymbolEquivalentEqualityComparer();
+        public static readonly SymbolEquivalentEqualityComparer Instance =
+            new SymbolEquivalentEqualityComparer();
 
-        private SymbolEquivalentEqualityComparer()
-        {
-        }
+        private SymbolEquivalentEqualityComparer() { }
 
         public bool Equals(IReference? x, IReference? y)
         {

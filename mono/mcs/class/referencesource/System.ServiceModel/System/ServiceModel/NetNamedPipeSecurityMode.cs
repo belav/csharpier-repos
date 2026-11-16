@@ -6,18 +6,15 @@ namespace System.ServiceModel
     public enum NetNamedPipeSecurityMode
     {
         None,
-        Transport
+        Transport,
     }
 
     static class NetNamedPipeSecurityModeHelper
     {
         internal static bool IsDefined(NetNamedPipeSecurityMode value)
         {
-            return
-                value == NetNamedPipeSecurityMode.Transport ||
-                value == NetNamedPipeSecurityMode.None;
+            return value == NetNamedPipeSecurityMode.Transport
+                || value == NetNamedPipeSecurityMode.None;
         }
     }
 }
-
-

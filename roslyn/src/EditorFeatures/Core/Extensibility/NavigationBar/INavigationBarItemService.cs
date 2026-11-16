@@ -18,13 +18,19 @@ namespace Microsoft.CodeAnalysis.Editor
             bool workspaceSupportsDocumentChanges,
             bool forceFrozenPartialSemanticsForCrossProcessOperations,
             ITextVersion textVersion,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
         bool ShowItemGrayedIfNear(NavigationBarItem item);
 
         /// <summary>
         /// Returns <see langword="true"/> if navigation (or generation) happened.  <see langword="false"/> otherwise.
         /// </summary>
         Task<bool> TryNavigateToItemAsync(
-            Document document, NavigationBarItem item, ITextView view, ITextVersion textVersion, CancellationToken cancellationToken);
+            Document document,
+            NavigationBarItem item,
+            ITextView view,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        );
     }
 }

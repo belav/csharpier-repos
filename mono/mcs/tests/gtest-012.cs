@@ -3,26 +3,23 @@
 
 class Stack<S>
 {
-	public void Hello (S s)
-	{ }		
+    public void Hello(S s) { }
 }
 
 class Test<T> : Stack<T>
 {
-	public void Foo (T t)
-	{ }
+    public void Foo(T t) { }
 }
 
 class X
 {
-	Test<int> test;
+    Test<int> test;
 
-	void Test ()
-	{
-		test.Foo (4);
-		test.Hello (3);
-	}
+    void Test()
+    {
+        test.Foo(4);
+        test.Hello(3);
+    }
 
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

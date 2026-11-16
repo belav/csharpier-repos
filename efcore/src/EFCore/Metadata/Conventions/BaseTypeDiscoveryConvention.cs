@@ -12,9 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class BaseTypeDiscoveryConvention :
-    IEntityTypeAddedConvention,
-    IForeignKeyRemovedConvention
+public class BaseTypeDiscoveryConvention : IEntityTypeAddedConvention, IForeignKeyRemovedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="BaseTypeDiscoveryConvention" />.
@@ -33,27 +31,28 @@ public class BaseTypeDiscoveryConvention :
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
-        if (entityType.HasSharedClrType
-            || entityType.IsOwned())
+        if (entityType.HasSharedClrType || entityType.IsOwned())
         {
             return;
         }
 
         Check.DebugAssert(
             entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership) == null,
-            "Ownerships present on non-owned entity type");
+            "Ownerships present on non-owned entity type"
+        );
         ProcessEntityType(entityTypeBuilder);
     }
 
-    private static void ProcessEntityType(
-        IConventionEntityTypeBuilder entityTypeBuilder)
+    private static void ProcessEntityType(IConventionEntityTypeBuilder entityTypeBuilder)
     {
         var entityType = entityTypeBuilder.Metadata;
         var model = entityType.Model;
-        var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)model[CoreAnnotationNames.DerivedTypes];
+        var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)
+            model[CoreAnnotationNames.DerivedTypes];
         if (derivedTypesMap == null)
         {
             derivedTypesMap = new Dictionary<Type, List<IConventionEntityType>>();
@@ -92,9 +91,7 @@ public class BaseTypeDiscoveryConvention :
         }
 
         IConventionEntityType? baseEntityType = null;
-        while (baseEntityType == null
-               && baseType != typeof(object)
-               && baseType != null)
+        while (baseEntityType == null && baseType != typeof(object) && baseType != null)
         {
             baseEntityType = model.FindEntityType(baseType);
             if (baseEntityType == null)
@@ -110,8 +107,7 @@ public class BaseTypeDiscoveryConvention :
             return;
         }
 
-        if (!baseEntityType.HasSharedClrType
-            && !baseEntityType.IsOwned())
+        if (!baseEntityType.HasSharedClrType && !baseEntityType.IsOwned())
         {
             entityTypeBuilder.HasBaseType(baseEntityType);
         }
@@ -121,11 +117,14 @@ public class BaseTypeDiscoveryConvention :
     public virtual void ProcessForeignKeyRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionForeignKey foreignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
-        if (entityTypeBuilder.Metadata.IsInModel
+        if (
+            entityTypeBuilder.Metadata.IsInModel
             && foreignKey.IsOwnership
-            && !entityTypeBuilder.Metadata.IsOwned())
+            && !entityTypeBuilder.Metadata.IsOwned()
+        )
         {
             ProcessEntityType(entityTypeBuilder);
         }

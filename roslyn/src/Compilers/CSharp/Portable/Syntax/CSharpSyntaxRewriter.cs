@@ -69,8 +69,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var trailingTrivia = node.GetTrailingTriviaCore();
 
             // Trivia is either null or a non-empty list (there's no such thing as an empty green list)
-            Debug.Assert(leadingTrivia == null || !leadingTrivia.IsList || leadingTrivia.SlotCount > 0);
-            Debug.Assert(trailingTrivia == null || !trailingTrivia.IsList || trailingTrivia.SlotCount > 0);
+            Debug.Assert(
+                leadingTrivia == null || !leadingTrivia.IsList || leadingTrivia.SlotCount > 0
+            );
+            Debug.Assert(
+                trailingTrivia == null || !trailingTrivia.IsList || trailingTrivia.SlotCount > 0
+            );
 
             if (leadingTrivia != null)
             {
@@ -84,14 +88,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // PERF: Expand token.TrailingTrivia when node is not null and leadingTrivia is not null.
                     // Also avoid node.Width because it makes a virtual call to GetText. Instead use node.FullWidth - trailingTrivia.FullWidth.
                     var index = leadingTrivia.IsList ? leadingTrivia.SlotCount : 1;
-                    var trailing = this.VisitList(new SyntaxTriviaList(token, trailingTrivia, token.Position + node.FullWidth - trailingTrivia.FullWidth, index));
+                    var trailing = this.VisitList(
+                        new SyntaxTriviaList(
+                            token,
+                            trailingTrivia,
+                            token.Position + node.FullWidth - trailingTrivia.FullWidth,
+                            index
+                        )
+                    );
 
                     if (leading.Node != leadingTrivia)
                     {
                         token = token.WithLeadingTrivia(leading);
                     }
 
-                    return trailing.Node != trailingTrivia ? token.WithTrailingTrivia(trailing) : token;
+                    return trailing.Node != trailingTrivia
+                        ? token.WithTrailingTrivia(trailing)
+                        : token;
                 }
                 else
                 {
@@ -104,7 +117,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Trailing trivia only
                 // PERF: Expand token.TrailingTrivia when node is not null and leading is null.
                 // Also avoid node.Width because it makes a virtual call to GetText. Instead use node.FullWidth - trailingTrivia.FullWidth.
-                var trailing = this.VisitList(new SyntaxTriviaList(token, trailingTrivia, token.Position + node.FullWidth - trailingTrivia.FullWidth, index: 0));
+                var trailing = this.VisitList(
+                    new SyntaxTriviaList(
+                        token,
+                        trailingTrivia,
+                        token.Position + node.FullWidth - trailingTrivia.FullWidth,
+                        index: 0
+                    )
+                );
                 return trailing.Node != trailingTrivia ? token.WithTrailingTrivia(trailing) : token;
             }
             else
@@ -136,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return trivia;
         }
 
-        public virtual SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list) where TNode : SyntaxNode
+        public virtual SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list)
+            where TNode : SyntaxNode
         {
             SyntaxListBuilder<TNode> alternate = default;
             for (int i = 0, n = list.Count; i < n; i++)
@@ -163,12 +184,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return list;
         }
 
-        public virtual TNode? VisitListElement<TNode>(TNode? node) where TNode : SyntaxNode
+        public virtual TNode? VisitListElement<TNode>(TNode? node)
+            where TNode : SyntaxNode
         {
             return (TNode?)this.Visit(node);
         }
 
-        public virtual SeparatedSyntaxList<TNode> VisitList<TNode>(SeparatedSyntaxList<TNode> list) where TNode : SyntaxNode
+        public virtual SeparatedSyntaxList<TNode> VisitList<TNode>(SeparatedSyntaxList<TNode> list)
+            where TNode : SyntaxNode
         {
             var count = list.Count;
             var sepCount = list.SeparatorCount;
@@ -201,7 +224,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (visitedSeparator.RawKind == 0)
                         {
-                            throw new InvalidOperationException(CodeAnalysisResources.SeparatorIsExpected);
+                            throw new InvalidOperationException(
+                                CodeAnalysisResources.SeparatorIsExpected
+                            );
                         }
                         alternate.AddSeparator(visitedSeparator);
                     }
@@ -209,7 +234,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (visitedNode == null)
                         {
-                            throw new InvalidOperationException(CodeAnalysisResources.ElementIsExpected);
+                            throw new InvalidOperationException(
+                                CodeAnalysisResources.ElementIsExpected
+                            );
                         }
                     }
                 }

@@ -5,21 +5,22 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System;
+    using System.Collections;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections;
+    using System.Threading;
     using System.Xml;
-    
+
     class ExceptionUtility
     {
-        const string ExceptionStackAsStringKey = "System.ServiceModel.Diagnostics.ExceptionUtility.ExceptionStackAsString";
+        const string ExceptionStackAsStringKey =
+            "System.ServiceModel.Diagnostics.ExceptionUtility.ExceptionStackAsString";
 
         // This field should be only used for debug build.
         internal static ExceptionUtility mainInstance;
@@ -35,8 +36,15 @@ namespace System.ServiceModel.Diagnostics
         [ThreadStatic]
         static bool useStaticActivityId;
 
-        [Obsolete("For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead")]
-        internal ExceptionUtility(string name, string eventSourceName, object diagnosticTrace, object exceptionTrace)
+        [Obsolete(
+            "For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead"
+        )]
+        internal ExceptionUtility(
+            string name,
+            string eventSourceName,
+            object diagnosticTrace,
+            object exceptionTrace
+        )
         {
             this.diagnosticTrace = (LegacyDiagnosticTrace)diagnosticTrace;
             this.exceptionTrace = (ExceptionTrace)exceptionTrace;
@@ -44,7 +52,9 @@ namespace System.ServiceModel.Diagnostics
             this.eventSourceName = eventSourceName;
         }
 
-        [Obsolete("For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead")]
+        [Obsolete(
+            "For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead"
+        )]
         [MethodImpl(MethodImplOptions.NoInlining)]
 #pragma warning disable 56500
         internal void TraceFailFast(string message)
@@ -53,7 +63,10 @@ namespace System.ServiceModel.Diagnostics
             try
             {
 #pragma warning disable 618
-                logger = new System.Runtime.Diagnostics.EventLogger(this.eventSourceName, this.diagnosticTrace);
+                logger = new System.Runtime.Diagnostics.EventLogger(
+                    this.eventSourceName,
+                    this.diagnosticTrace
+                );
 #pragma warning restore 618
             }
             finally
@@ -64,13 +77,18 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        // Fail-- Event Log entry will be generated. 
+        // Fail-- Event Log entry will be generated.
         // To force a Watson on a dev machine, do the following:
-        // 1. Set \HKLM\SOFTWARE\Microsoft\PCHealth\ErrorReporting ForceQueueMode = 0 
+        // 1. Set \HKLM\SOFTWARE\Microsoft\PCHealth\ErrorReporting ForceQueueMode = 0
         // 2. In the command environment, set COMPLUS_DbgJitDebugLaunchSetting=0
-        [Obsolete("For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead")]
+        [Obsolete(
+            "For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead"
+        )]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static void TraceFailFast(string message, System.Runtime.Diagnostics.EventLogger logger)
+        internal static void TraceFailFast(
+            string message,
+            System.Runtime.Diagnostics.EventLogger logger
+        )
         {
             try
             {
@@ -87,11 +105,13 @@ namespace System.ServiceModel.Diagnostics
                     }
                     finally
                     {
-                        logger.LogEvent(TraceEventType.Critical,
+                        logger.LogEvent(
+                            TraceEventType.Critical,
                             (ushort)EventLogCategory.FailFast,
                             (uint)EventLogEventId.FailFast,
                             message,
-                            stackTrace);
+                            stackTrace
+                        );
                     }
                 }
             }
@@ -99,32 +119,57 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (logger != null)
                 {
-                    logger.LogEvent(TraceEventType.Critical,
+                    logger.LogEvent(
+                        TraceEventType.Critical,
                         (ushort)EventLogCategory.FailFast,
                         (uint)EventLogEventId.FailFastException,
-                        e.ToString());
+                        e.ToString()
+                    );
                 }
                 throw;
             }
         }
 #pragma warning restore 56500
 
-        [Obsolete("For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead")]
+        [Obsolete(
+            "For SMDiagnostics.dll use only. Call DiagnosticUtility.ExceptionUtility instead"
+        )]
         internal void TraceFailFastException(Exception exception)
         {
             TraceFailFast(exception == null ? null : exception.ToString());
         }
 
-        internal Exception ThrowHelper(Exception exception, TraceEventType eventType, TraceRecord extendedData)
+        internal Exception ThrowHelper(
+            Exception exception,
+            TraceEventType eventType,
+            TraceRecord extendedData
+        )
         {
 #pragma warning disable 618
-            bool shouldTrace = (this.diagnosticTrace != null && this.diagnosticTrace.ShouldTrace(eventType));
+            bool shouldTrace = (
+                this.diagnosticTrace != null && this.diagnosticTrace.ShouldTrace(eventType)
+            );
 #pragma warning restore 618
             if (shouldTrace)
             {
-                using (ExceptionUtility.useStaticActivityId ? Activity.CreateActivity(ExceptionUtility.activityId) : null)
+                using (
+                    ExceptionUtility.useStaticActivityId
+                        ? Activity.CreateActivity(ExceptionUtility.activityId)
+                        : null
+                )
                 {
-                    this.diagnosticTrace.TraceEvent(eventType, DiagnosticsTraceCode.ThrowingException, LegacyDiagnosticTrace.GenerateMsdnTraceCode("System.ServiceModel.Diagnostics", "ThrowingException"), TraceSR.GetString(TraceSR.ThrowingException), extendedData, exception, null);
+                    this.diagnosticTrace.TraceEvent(
+                        eventType,
+                        DiagnosticsTraceCode.ThrowingException,
+                        LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                            "System.ServiceModel.Diagnostics",
+                            "ThrowingException"
+                        ),
+                        TraceSR.GetString(TraceSR.ThrowingException),
+                        extendedData,
+                        exception,
+                        null
+                    );
                 }
 
                 IDictionary data = exception.Data;
@@ -137,7 +182,16 @@ namespace System.ServiceModel.Diagnostics
                         string stack = exception.StackTrace;
                         if (!string.IsNullOrEmpty(stack))
                         {
-                            stackString = string.Concat(stackString, stackString.Length == 0 ? "" : Environment.NewLine, "throw", Environment.NewLine, stack, Environment.NewLine, "catch", Environment.NewLine);
+                            stackString = string.Concat(
+                                stackString,
+                                stackString.Length == 0 ? "" : Environment.NewLine,
+                                "throw",
+                                Environment.NewLine,
+                                stack,
+                                Environment.NewLine,
+                                "catch",
+                                Environment.NewLine
+                            );
                             data[ExceptionStackAsStringKey] = stackString;
                         }
                     }
@@ -162,22 +216,28 @@ namespace System.ServiceModel.Diagnostics
 
         internal ArgumentException ThrowHelperArgument(string paramName, string message)
         {
-            return (ArgumentException)this.ThrowHelperError(new ArgumentException(message, paramName));
+            return (ArgumentException)
+                this.ThrowHelperError(new ArgumentException(message, paramName));
         }
 
         internal ArgumentNullException ThrowHelperArgumentNull(string paramName)
         {
-            return (ArgumentNullException)this.ThrowHelperError(new ArgumentNullException(paramName));
+            return (ArgumentNullException)
+                this.ThrowHelperError(new ArgumentNullException(paramName));
         }
 
         internal ArgumentNullException ThrowHelperArgumentNull(string paramName, string message)
         {
-            return (ArgumentNullException)this.ThrowHelperError(new ArgumentNullException(paramName, message));
+            return (ArgumentNullException)
+                this.ThrowHelperError(new ArgumentNullException(paramName, message));
         }
 
         internal ArgumentException ThrowHelperArgumentNullOrEmptyString(string arg)
         {
-            return (ArgumentException)this.ThrowHelperError(new ArgumentException(TraceSR.GetString(TraceSR.StringNullOrEmpty), arg));
+            return (ArgumentException)
+                this.ThrowHelperError(
+                    new ArgumentException(TraceSR.GetString(TraceSR.StringNullOrEmpty), arg)
+                );
         }
 
         internal Exception ThrowHelperFatal(string message, Exception innerException)
@@ -187,7 +247,9 @@ namespace System.ServiceModel.Diagnostics
 
         internal Exception ThrowHelperInternal(bool fatal)
         {
-            return fatal ? Fx.AssertAndThrowFatal("Fatal InternalException should never be thrown.") : Fx.AssertAndThrow("InternalException should never be thrown.");
+            return fatal
+                ? Fx.AssertAndThrowFatal("Fatal InternalException should never be thrown.")
+                : Fx.AssertAndThrow("InternalException should never be thrown.");
         }
 
         internal Exception ThrowHelperInvalidOperation(string message)
@@ -202,7 +264,10 @@ namespace System.ServiceModel.Diagnostics
 
         internal Exception ThrowHelperCallback(Exception innerException)
         {
-            return this.ThrowHelperCallback(TraceSR.GetString(TraceSR.GenericCallbackException), innerException);
+            return this.ThrowHelperCallback(
+                TraceSR.GetString(TraceSR.GenericCallbackException),
+                innerException
+            );
         }
 
         internal Exception ThrowHelperCritical(Exception exception)
@@ -228,23 +293,43 @@ namespace System.ServiceModel.Diagnostics
         internal Exception ThrowHelperXml(XmlReader reader, string message, Exception inner)
         {
             IXmlLineInfo lineInfo = reader as IXmlLineInfo;
-            return this.ThrowHelperError(new XmlException(
-                message,
-                inner,
-                (null != lineInfo) ? lineInfo.LineNumber : 0,
-                (null != lineInfo) ? lineInfo.LinePosition : 0));
+            return this.ThrowHelperError(
+                new XmlException(
+                    message,
+                    inner,
+                    (null != lineInfo) ? lineInfo.LineNumber : 0,
+                    (null != lineInfo) ? lineInfo.LinePosition : 0
+                )
+            );
         }
 
         internal void DiagnosticTraceHandledException(Exception exception, TraceEventType eventType)
         {
 #pragma warning disable 618
-            bool shouldTrace = (this.diagnosticTrace != null && this.diagnosticTrace.ShouldTrace(eventType));
+            bool shouldTrace = (
+                this.diagnosticTrace != null && this.diagnosticTrace.ShouldTrace(eventType)
+            );
 #pragma warning restore 618
             if (shouldTrace)
             {
-                using (ExceptionUtility.useStaticActivityId ? Activity.CreateActivity(ExceptionUtility.activityId) : null)
+                using (
+                    ExceptionUtility.useStaticActivityId
+                        ? Activity.CreateActivity(ExceptionUtility.activityId)
+                        : null
+                )
                 {
-                    this.diagnosticTrace.TraceEvent(eventType, DiagnosticsTraceCode.TraceHandledException, LegacyDiagnosticTrace.GenerateMsdnTraceCode("System.ServiceModel.Diagnostics", "TraceHandledException"), TraceSR.GetString(TraceSR.TraceHandledException), null, exception, null);
+                    this.diagnosticTrace.TraceEvent(
+                        eventType,
+                        DiagnosticsTraceCode.TraceHandledException,
+                        LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                            "System.ServiceModel.Diagnostics",
+                            "TraceHandledException"
+                        ),
+                        TraceSR.GetString(TraceSR.TraceHandledException),
+                        null,
+                        exception,
+                        null
+                    );
                 }
             }
         }
@@ -267,7 +352,8 @@ namespace System.ServiceModel.Diagnostics
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal static bool IsInfrastructureException(Exception exception)
         {
-            return exception != null && (exception is ThreadAbortException || exception is AppDomainUnloadedException);
+            return exception != null
+                && (exception is ThreadAbortException || exception is AppDomainUnloadedException);
         }
     }
 }

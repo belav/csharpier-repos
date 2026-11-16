@@ -152,8 +152,10 @@ internal static class RouteStringSyntaxDetector
                 if (container.Parent.Parent?.IsKind(SyntaxKind.VariableDeclarator) ?? false)
                 {
                     var variableDeclarator = container.Parent.Parent;
-                    var symbol =
-                        semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken)
+                    var symbol = semanticModel.GetDeclaredSymbol(
+                        variableDeclarator,
+                        cancellationToken
+                    )
                         ?? semanticModel.GetDeclaredSymbol(
                             GetIdentifierOfVariableDeclarator(variableDeclarator)
                                 .GetRequiredParent(),

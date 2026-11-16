@@ -13,7 +13,12 @@ namespace System.Data.Common
         private readonly DataRow _dataRow;
         private UpdateStatus _status;
 
-        public RowUpdatingEventArgs(DataRow dataRow, IDbCommand? command, StatementType statementType, DataTableMapping tableMapping)
+        public RowUpdatingEventArgs(
+            DataRow dataRow,
+            IDbCommand? command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
         {
             ADP.CheckArgumentNull(dataRow, nameof(dataRow));
             ADP.CheckArgumentNull(tableMapping, nameof(tableMapping));
@@ -25,7 +30,10 @@ namespace System.Data.Common
                 case StatementType.Delete:
                     break;
                 case StatementType.Batch:
-                    throw ADP.NotSupportedStatementType(statementType, nameof(RowUpdatingEventArgs));
+                    throw ADP.NotSupportedStatementType(
+                        statementType,
+                        nameof(RowUpdatingEventArgs)
+                    );
                 default:
                     throw ADP.InvalidStatementType(statementType);
             }

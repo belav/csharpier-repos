@@ -32,7 +32,8 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
         RuntimeEntityType entityType,
         string name,
         string? schema,
-        bool rowsAffectedReturned)
+        bool rowsAffectedReturned
+    )
     {
         EntityType = entityType;
         _name = name;
@@ -58,7 +59,8 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
         ParameterDirection direction,
         bool forRowsAffected,
         string? propertyName,
-        bool? forOriginalValue)
+        bool? forOriginalValue
+    )
     {
         var parameter = new RuntimeStoredProcedureParameter(
             this,
@@ -66,7 +68,8 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
             direction,
             forRowsAffected,
             propertyName,
-            forOriginalValue);
+            forOriginalValue
+        );
         _parameters.Add(parameter);
         return parameter;
     }
@@ -80,13 +83,15 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     public virtual RuntimeStoredProcedureResultColumn AddResultColumn(
         string name,
         bool forRowsAffected,
-        string? propertyName)
+        string? propertyName
+    )
     {
         var resultColumn = new RuntimeStoredProcedureResultColumn(
             this,
             name,
             forRowsAffected,
-            propertyName);
+            propertyName
+        );
         _resultColumns.Add(resultColumn);
         return resultColumn;
     }
@@ -97,8 +102,8 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoredProcedure)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoredProcedure)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,10 +112,11 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoredProcedure)this).ToDebugString(),
-            () => ((IStoredProcedure)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IStoredProcedure)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
     IReadOnlyEntityType IReadOnlyStoredProcedure.EntityType
@@ -169,35 +175,40 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     }
 
     /// <inheritdoc />
-    IReadOnlyStoredProcedureParameter? IReadOnlyStoredProcedure.FindParameter(string propertyName)
-        => _parameters.FirstOrDefault(
-            (IReadOnlyStoredProcedureParameter p)
-                => p.ForOriginalValue == false && p.PropertyName == propertyName);
+    IReadOnlyStoredProcedureParameter? IReadOnlyStoredProcedure.FindParameter(
+        string propertyName
+    ) =>
+        _parameters.FirstOrDefault(
+            (IReadOnlyStoredProcedureParameter p) =>
+                p.ForOriginalValue == false && p.PropertyName == propertyName
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IStoredProcedureParameter? IStoredProcedure.FindParameter(string propertyName)
-        => (IStoredProcedureParameter?)((IReadOnlyStoredProcedure)this).FindParameter(propertyName);
+    IStoredProcedureParameter? IStoredProcedure.FindParameter(string propertyName) =>
+        (IStoredProcedureParameter?)((IReadOnlyStoredProcedure)this).FindParameter(propertyName);
 
     /// <inheritdoc />
-    IReadOnlyStoredProcedureParameter? IReadOnlyStoredProcedure.FindOriginalValueParameter(string propertyName)
-        => _parameters.FirstOrDefault(
-            (IReadOnlyStoredProcedureParameter p)
-                => p.ForOriginalValue == true && p.PropertyName == propertyName);
+    IReadOnlyStoredProcedureParameter? IReadOnlyStoredProcedure.FindOriginalValueParameter(
+        string propertyName
+    ) =>
+        _parameters.FirstOrDefault(
+            (IReadOnlyStoredProcedureParameter p) =>
+                p.ForOriginalValue == true && p.PropertyName == propertyName
+        );
 
     /// <inheritdoc />
-    IStoredProcedureParameter? IStoredProcedure.FindOriginalValueParameter(string propertyName)
-        => (IStoredProcedureParameter?)((IReadOnlyStoredProcedure)this).FindOriginalValueParameter(propertyName);
+    IStoredProcedureParameter? IStoredProcedure.FindOriginalValueParameter(string propertyName) =>
+        (IStoredProcedureParameter?)
+            ((IReadOnlyStoredProcedure)this).FindOriginalValueParameter(propertyName);
 
     /// <inheritdoc />
-    IReadOnlyStoredProcedureParameter? IReadOnlyStoredProcedure.FindRowsAffectedParameter()
-        => _parameters.FirstOrDefault(
-            (IStoredProcedureParameter p)
-                => p.ForRowsAffected);
+    IReadOnlyStoredProcedureParameter? IReadOnlyStoredProcedure.FindRowsAffectedParameter() =>
+        _parameters.FirstOrDefault((IStoredProcedureParameter p) => p.ForRowsAffected);
 
     /// <inheritdoc />
-    IStoredProcedureParameter? IStoredProcedure.FindRowsAffectedParameter()
-        => (IStoredProcedureParameter?)((IReadOnlyStoredProcedure)this).FindRowsAffectedParameter();
+    IStoredProcedureParameter? IStoredProcedure.FindRowsAffectedParameter() =>
+        (IStoredProcedureParameter?)((IReadOnlyStoredProcedure)this).FindRowsAffectedParameter();
 
     /// <inheritdoc />
     IReadOnlyList<IReadOnlyStoredProcedureResultColumn> IReadOnlyStoredProcedure.ResultColumns
@@ -214,24 +225,28 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     }
 
     /// <inheritdoc />
-    IReadOnlyStoredProcedureResultColumn? IReadOnlyStoredProcedure.FindResultColumn(string propertyName)
-        => _resultColumns.FirstOrDefault(
-            (IReadOnlyStoredProcedureResultColumn c)
-                => c.PropertyName == propertyName);
+    IReadOnlyStoredProcedureResultColumn? IReadOnlyStoredProcedure.FindResultColumn(
+        string propertyName
+    ) =>
+        _resultColumns.FirstOrDefault(
+            (IReadOnlyStoredProcedureResultColumn c) => c.PropertyName == propertyName
+        );
 
     /// <inheritdoc />
-    IStoredProcedureResultColumn? IStoredProcedure.FindResultColumn(string propertyName)
-        => (IStoredProcedureResultColumn?)((IReadOnlyStoredProcedure)this).FindResultColumn(propertyName);
+    IStoredProcedureResultColumn? IStoredProcedure.FindResultColumn(string propertyName) =>
+        (IStoredProcedureResultColumn?)
+            ((IReadOnlyStoredProcedure)this).FindResultColumn(propertyName);
 
     /// <inheritdoc />
-    IReadOnlyStoredProcedureResultColumn? IReadOnlyStoredProcedure.FindRowsAffectedResultColumn()
-        => _resultColumns.FirstOrDefault(
-            (IReadOnlyStoredProcedureResultColumn c)
-                => c.ForRowsAffected);
+    IReadOnlyStoredProcedureResultColumn? IReadOnlyStoredProcedure.FindRowsAffectedResultColumn() =>
+        _resultColumns.FirstOrDefault(
+            (IReadOnlyStoredProcedureResultColumn c) => c.ForRowsAffected
+        );
 
     /// <inheritdoc />
-    IStoredProcedureResultColumn? IStoredProcedure.FindRowsAffectedResultColumn()
-        => (IStoredProcedureResultColumn?)((IReadOnlyStoredProcedure)this).FindRowsAffectedResultColumn();
+    IStoredProcedureResultColumn? IStoredProcedure.FindRowsAffectedResultColumn() =>
+        (IStoredProcedureResultColumn?)
+            ((IReadOnlyStoredProcedure)this).FindRowsAffectedResultColumn();
 
     /// <inheritdoc />
     IStoreStoredProcedure IStoredProcedure.StoreStoredProcedure

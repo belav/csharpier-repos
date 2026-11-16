@@ -1,6 +1,4 @@
 ﻿namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
 {
-    public class SimpleTypeModelDescription : ModelDescription
-    {
-    }
+    public class SimpleTypeModelDescription : ModelDescription { }
 }

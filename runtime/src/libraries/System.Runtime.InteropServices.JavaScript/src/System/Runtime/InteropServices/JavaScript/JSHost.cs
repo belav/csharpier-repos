@@ -51,7 +51,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A proxy for the JavaScript object that contains the module's exports.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Task<JSObject> ImportAsync(string moduleName, string moduleUrl, CancellationToken cancellationToken = default)
+        public static Task<JSObject> ImportAsync(
+            string moduleName,
+            string moduleUrl,
+            CancellationToken cancellationToken = default
+        )
         {
 #if FEATURE_WASM_THREADS
             JSSynchronizationContext.AssertWebWorkerContext();
@@ -65,7 +69,9 @@ namespace System.Runtime.InteropServices.JavaScript
             get
             {
 #if FEATURE_WASM_THREADS
-                return JSSynchronizationContext.CurrentJSSynchronizationContext ?? JSSynchronizationContext.MainJSSynchronizationContext ?? null;
+                return JSSynchronizationContext.CurrentJSSynchronizationContext
+                    ?? JSSynchronizationContext.MainJSSynchronizationContext
+                    ?? null;
 #else
                 return null;
 #endif

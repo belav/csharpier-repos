@@ -12,25 +12,40 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 
-namespace System.ComponentModel.DataAnnotations {
-    internal static class AppSettings {
+namespace System.ComponentModel.DataAnnotations
+{
+    internal static class AppSettings
+    {
 #if MONO
         internal static readonly bool DisableRegEx = false;
 #else
         private static volatile bool _settingsInitialized = false;
         private static object _appSettingsLock = new object();
-        private static void EnsureSettingsLoaded() {
-            if (!_settingsInitialized) {
-                lock (_appSettingsLock) {
-                    if (!_settingsInitialized) {
+
+        private static void EnsureSettingsLoaded()
+        {
+            if (!_settingsInitialized)
+            {
+                lock (_appSettingsLock)
+                {
+                    if (!_settingsInitialized)
+                    {
                         NameValueCollection settings = null;
 
-                        try {
+                        try
+                        {
                             settings = ConfigurationManager.AppSettings;
                         }
                         catch (ConfigurationErrorsException) { }
-                        finally {
-                            if (settings == null || !Boolean.TryParse(settings["dataAnnotations:dataTypeAttribute:disableRegEx"], out _disableRegEx))
+                        finally
+                        {
+                            if (
+                                settings == null
+                                || !Boolean.TryParse(
+                                    settings["dataAnnotations:dataTypeAttribute:disableRegEx"],
+                                    out _disableRegEx
+                                )
+                            )
                                 _disableRegEx = false;
 
                             _settingsInitialized = true;
@@ -41,8 +56,10 @@ namespace System.ComponentModel.DataAnnotations {
         }
 
         private static bool _disableRegEx;
-        internal static bool DisableRegEx {
-            get {
+        internal static bool DisableRegEx
+        {
+            get
+            {
                 EnsureSettingsLoaded();
                 return _disableRegEx;
             }

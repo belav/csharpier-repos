@@ -31,8 +31,7 @@ internal class RazorComponentEndpointDataSourceFactory
         [DynamicallyAccessedMembers(Component)] TRootComponent
     >(IEndpointRouteBuilder endpoints)
     {
-        var builder =
-            ComponentApplicationBuilder.GetBuilder<TRootComponent>()
+        var builder = ComponentApplicationBuilder.GetBuilder<TRootComponent>()
             ?? DefaultRazorComponentApplication<TRootComponent>.Instance.GetBuilder();
 
         return new RazorComponentEndpointDataSource<TRootComponent>(

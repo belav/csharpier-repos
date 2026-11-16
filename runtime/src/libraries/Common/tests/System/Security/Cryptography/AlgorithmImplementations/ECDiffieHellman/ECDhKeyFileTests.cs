@@ -11,6 +11,7 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
     public class ECDhKeyFileTests : ECKeyFileTests<ECDiffieHellman>
     {
         protected override ECDiffieHellman CreateKey() => ECDiffieHellmanFactory.Create();
+
         protected override void Exercise(ECDiffieHellman key) => key.Exercise();
 
         protected override Func<ECDiffieHellman, byte[]> PublicKeyWriteArrayFunc { get; } =

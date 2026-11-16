@@ -263,7 +263,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void MemoryCtorEndOfPacketTrue_Success()
         {
-            SendPacketsElement element = new SendPacketsElement(new ReadOnlyMemory<byte>(new byte[10], 2, 8), true);
+            SendPacketsElement element = new SendPacketsElement(
+                new ReadOnlyMemory<byte>(new byte[10], 2, 8),
+                true
+            );
             Assert.NotNull(element.MemoryBuffer);
             Assert.Equal(8, element.MemoryBuffer.Value.Length);
             Assert.Null(element.Buffer);
@@ -277,7 +280,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void memoryCtorEndOfPacketFalse_Success()
         {
-            SendPacketsElement element = new SendPacketsElement(new ReadOnlyMemory<byte>(new byte[10], 6, 4), false);
+            SendPacketsElement element = new SendPacketsElement(
+                new ReadOnlyMemory<byte>(new byte[10], 6, 4),
+                false
+            );
             Assert.NotNull(element.MemoryBuffer);
             Assert.Equal(4, element.MemoryBuffer.Value.Length);
             Assert.Null(element.Buffer);
@@ -292,7 +298,9 @@ namespace System.Net.Sockets.Tests
         public void MemoryCtorZeroCount_Success()
         {
             // Elements with empty Buffers are ignored on Send
-            SendPacketsElement element = new SendPacketsElement(new ReadOnlyMemory<byte>(new byte[0], 0, 0));
+            SendPacketsElement element = new SendPacketsElement(
+                new ReadOnlyMemory<byte>(new byte[0], 0, 0)
+            );
             Assert.NotNull(element.MemoryBuffer);
             Assert.Equal(0, element.MemoryBuffer.Value.Length);
             Assert.Null(element.Buffer);
@@ -596,9 +604,9 @@ namespace System.Net.Sockets.Tests
             Assert.Equal("SomeFileName", element.FilePath);
         }
 
-#endregion File
+        #endregion File
 
-#region FileStream
+        #region FileStream
 
         [Fact]
         public void FileStreamCtorNull_Throws()
@@ -620,7 +628,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorNormal_Success()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose | FileOptions.Asynchronous))
+            using (
+                var stream = File.Create(
+                    Path.GetTempFileName(),
+                    4096,
+                    FileOptions.DeleteOnClose | FileOptions.Asynchronous
+                )
+            )
             {
                 SendPacketsElement element = new SendPacketsElement(stream);
                 Assert.Null(element.FilePath);
@@ -637,7 +651,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorZeroCountLength_Success()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose | FileOptions.Asynchronous))
+            using (
+                var stream = File.Create(
+                    Path.GetTempFileName(),
+                    4096,
+                    FileOptions.DeleteOnClose | FileOptions.Asynchronous
+                )
+            )
             {
                 SendPacketsElement element = new SendPacketsElement(stream, 0, 0); // Send whole file
                 Assert.Null(element.FilePath);
@@ -664,7 +684,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorNegOffset_ArgumentOutOfRangeException()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose | FileOptions.Asynchronous))
+            using (
+                var stream = File.Create(
+                    Path.GetTempFileName(),
+                    4096,
+                    FileOptions.DeleteOnClose | FileOptions.Asynchronous
+                )
+            )
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                 {
@@ -688,7 +714,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorNegCount_ArgumentOutOfRangeException()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose | FileOptions.Asynchronous))
+            using (
+                var stream = File.Create(
+                    Path.GetTempFileName(),
+                    4096,
+                    FileOptions.DeleteOnClose | FileOptions.Asynchronous
+                )
+            )
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                 {
@@ -712,7 +744,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorSynchronous_ArgumentException()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose))
+            using (
+                var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose)
+            )
             {
                 Assert.Throws<ArgumentException>(() =>
                 {
@@ -726,7 +760,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorEndOfBufferTrue_Success()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose | FileOptions.Asynchronous))
+            using (
+                var stream = File.Create(
+                    Path.GetTempFileName(),
+                    4096,
+                    FileOptions.DeleteOnClose | FileOptions.Asynchronous
+                )
+            )
             {
                 var element = new SendPacketsElement(stream, 2, 8, true);
                 Assert.Null(element.FilePath);
@@ -766,7 +806,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorEndOfBufferFalse_Success()
         {
-            using (var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose | FileOptions.Asynchronous))
+            using (
+                var stream = File.Create(
+                    Path.GetTempFileName(),
+                    4096,
+                    FileOptions.DeleteOnClose | FileOptions.Asynchronous
+                )
+            )
             {
                 SendPacketsElement element = new SendPacketsElement(stream, 6, 4, false);
                 Assert.Null(element.FilePath);
@@ -803,6 +849,6 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-#endregion FileStream
+        #endregion FileStream
     }
 }

@@ -31,6 +31,9 @@ public class Runtime_56743_0
 
     struct S
     {
-        public int A, B, C, D;
+        public int A,
+            B,
+            C,
+            D;
     }
 }

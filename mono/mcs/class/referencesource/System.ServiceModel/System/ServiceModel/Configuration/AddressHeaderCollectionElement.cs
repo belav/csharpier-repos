@@ -6,16 +6,14 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Runtime;
+    using System.Security;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using System.Security;
-    using System.Runtime;
 
     public sealed partial class AddressHeaderCollectionElement : ServiceModelConfigurationElement
     {
-        public AddressHeaderCollectionElement()
-        {
-        }
+        public AddressHeaderCollectionElement() { }
 
         internal void Copy(AddressHeaderCollectionElement source)
         {
@@ -36,7 +34,8 @@ namespace System.ServiceModel.Configuration
         {
             get
             {
-                AddressHeaderCollection retVal = (AddressHeaderCollection)base[ConfigurationStrings.Headers];
+                AddressHeaderCollection retVal = (AddressHeaderCollection)
+                    base[ConfigurationStrings.Headers];
                 if (null == retVal)
                 {
                     retVal = AddressHeaderCollection.EmptyHeaderCollection;
@@ -53,8 +52,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent.",
-            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses the critical helper SetIsPresent.",
+            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed)."
+        )]
         [SecuritySafeCritical]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -64,11 +65,15 @@ namespace System.ServiceModel.Configuration
 
         private void DeserializeElementCore(XmlReader reader)
         {
-            this.Headers = AddressHeaderCollection.ReadServiceParameters(XmlDictionaryReader.CreateDictionaryReader(reader));
+            this.Headers = AddressHeaderCollection.ReadServiceParameters(
+                XmlDictionaryReader.CreateDictionaryReader(reader)
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent which elevates in order to set a property.",
-            Safe = "Only passes 'this', does not let caller influence parameter.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses the critical helper SetIsPresent which elevates in order to set a property.",
+            Safe = "Only passes 'this', does not let caller influence parameter."
+        )]
         [SecurityCritical]
         void SetIsPresent()
         {
@@ -93,6 +98,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

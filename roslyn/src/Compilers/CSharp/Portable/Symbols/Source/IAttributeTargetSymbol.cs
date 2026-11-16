@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         AttributeLocation DefaultAttributeLocation { get; }
 
-        // TODO (tomat): 
+        // TODO (tomat):
         // Add DecodeWellKnownAttribute, etc.
     }
 }

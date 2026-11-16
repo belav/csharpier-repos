@@ -4,20 +4,24 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel;
-    using System.Globalization;
-    using System.ServiceModel.Security;
-    using System.Text;
     using System.ComponentModel;
+    using System.Configuration;
+    using System.Globalization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
+    using System.Text;
 
-    public partial class MexTcpBindingCollectionElement : MexBindingBindingCollectionElement<CustomBinding, MexTcpBindingElement>
+    public partial class MexTcpBindingCollectionElement
+        : MexBindingBindingCollectionElement<CustomBinding, MexTcpBindingElement>
     {
         internal static MexTcpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (MexTcpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.MexTcpBindingCollectionElementName);
+            return (MexTcpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.MexTcpBindingCollectionElementName
+                );
         }
 
         protected internal override Binding GetDefault()

@@ -40,7 +40,12 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             writer.WriteValue(Convert.ToBase64String(guid.ToByteArray()));
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             string encodedData = (string)reader.Value;
             byte[] data = Convert.FromBase64String(encodedData);

@@ -40,8 +40,8 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument
     public JsonPatchDocument(List<Operation<TModel>> operations, IContractResolver contractResolver)
     {
         Operations = operations ?? throw new ArgumentNullException(nameof(operations));
-        ContractResolver =
-            contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+        ContractResolver = contractResolver
+            ?? throw new ArgumentNullException(nameof(contractResolver));
     }
 
     /// <summary>

@@ -37,11 +37,12 @@ namespace System.Net
 {
     internal sealed class HttpEndPointManager
     {
-        private static readonly Dictionary<IPAddress, Dictionary<int, HttpEndPointListener>> s_ipEndPoints = new Dictionary<IPAddress, Dictionary<int, HttpEndPointListener>>();
+        private static readonly Dictionary<
+            IPAddress,
+            Dictionary<int, HttpEndPointListener>
+        > s_ipEndPoints = new Dictionary<IPAddress, Dictionary<int, HttpEndPointListener>>();
 
-        private HttpEndPointManager()
-        {
-        }
+        private HttpEndPointManager() { }
 
         public static void AddListener(HttpListener listener)
         {
@@ -88,26 +89,47 @@ namespace System.Net
                 int port;
                 if (!int.TryParse(portString, out port) || port is <= 0 or >= 65536)
                 {
-                    throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.net_invalid_port);
+                    throw new HttpListenerException(
+                        (int)HttpStatusCode.BadRequest,
+                        SR.net_invalid_port
+                    );
                 }
             }
 
             ListenerPrefix lp = new ListenerPrefix(p);
-            if (lp.Host != "*" && lp.Host != "+" && Uri.CheckHostName(lp.Host) == UriHostNameType.Unknown)
-                throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.net_listener_host);
+            if (
+                lp.Host != "*"
+                && lp.Host != "+"
+                && Uri.CheckHostName(lp.Host) == UriHostNameType.Unknown
+            )
+                throw new HttpListenerException(
+                    (int)HttpStatusCode.BadRequest,
+                    SR.net_listener_host
+                );
 
             if (lp.Path!.Contains('%'))
-                throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.net_invalid_path);
+                throw new HttpListenerException(
+                    (int)HttpStatusCode.BadRequest,
+                    SR.net_invalid_path
+                );
 
             if (lp.Path.Contains("//"))
-                throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.net_invalid_path);
+                throw new HttpListenerException(
+                    (int)HttpStatusCode.BadRequest,
+                    SR.net_invalid_path
+                );
 
             // listens on all the interfaces if host name cannot be parsed by IPAddress.
             HttpEndPointListener epl = GetEPListener(lp.Host!, lp.Port, listener, lp.Secure);
             epl.AddPrefix(lp, listener);
         }
 
-        private static HttpEndPointListener GetEPListener(string host, int port, HttpListener listener, bool secure)
+        private static HttpEndPointListener GetEPListener(
+            string host,
+            int port,
+            HttpListener listener,
+            bool secure
+        )
         {
             IPAddress addr;
             if (host == "*" || host == "+")
@@ -124,13 +146,19 @@ namespace System.Net
                 catch
                 {
                     // Throw same error code as windows, request is not supported.
-                    throw new HttpListenerException(NotSupportedErrorCode, SR.net_listener_not_supported);
+                    throw new HttpListenerException(
+                        NotSupportedErrorCode,
+                        SR.net_listener_not_supported
+                    );
                 }
 
                 if (IPAddress.Any.Equals(addr))
                 {
                     // Don't support listening to 0.0.0.0, match windows behavior.
-                    throw new HttpListenerException(NotSupportedErrorCode, SR.net_listener_not_supported);
+                    throw new HttpListenerException(
+                        NotSupportedErrorCode,
+                        SR.net_listener_not_supported
+                    );
                 }
             }
 

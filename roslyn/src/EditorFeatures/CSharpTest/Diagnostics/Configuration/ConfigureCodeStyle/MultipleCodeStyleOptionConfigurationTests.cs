@@ -20,14 +20,19 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureCodeStyle
 {
-    public abstract partial class MultipleCodeStyleOptionConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class MultipleCodeStyleOptionConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected abstract int OptionIndex { get; }
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        )
         {
             Assert.Single(actions);
-            var nestedActionForOptionIndex = ((AbstractConfigurationActionWithNestedActions)actions[0]).NestedCodeActions[OptionIndex];
+            var nestedActionForOptionIndex = (
+                (AbstractConfigurationActionWithNestedActions)actions[0]
+            ).NestedCodeActions[OptionIndex];
             return base.MassageActions(ImmutableArray.Create(nestedActionForOptionIndex));
         }
 
@@ -35,15 +40,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             /*
                 csharp_style_var_elsewhere
                 csharp_style_var_for_built_in_types
-                csharp_style_var_when_type_is_apparent                
+                csharp_style_var_when_type_is_apparent
              */
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CSharpUseExplicitTypeDiagnosticAnalyzer(), new ConfigureCodeStyleOptionCodeFixProvider());
+                new CSharpUseExplicitTypeDiagnosticAnalyzer(),
+                new ConfigureCodeStyleOptionCodeFixProvider()
+            );
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
@@ -343,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
-        public class VarForBuiltInTypes_FalseConfigurationTests : MultipleCodeStyleOptionConfigurationTests
+        public class VarForBuiltInTypes_FalseConfigurationTests
+            : MultipleCodeStyleOptionConfigurationTests
         {
             protected override int OptionIndex => 1;
 

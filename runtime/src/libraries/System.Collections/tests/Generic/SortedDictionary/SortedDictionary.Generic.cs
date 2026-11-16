@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public class SortedDictionary_Generic_Tests_string_string : SortedDictionary_Generic_Tests<string, string>
+    public class SortedDictionary_Generic_Tests_string_string
+        : SortedDictionary_Generic_Tests<string, string>
     {
         protected override KeyValuePair<string, string> CreateT(int seed)
         {
@@ -30,7 +31,11 @@ namespace System.Collections.Tests
 
     public class SortedDictionary_Generic_Tests_int_int : SortedDictionary_Generic_Tests<int, int>
     {
-        protected override bool DefaultValueAllowed { get { return true; } }
+        protected override bool DefaultValueAllowed
+        {
+            get { return true; }
+        }
+
         protected override KeyValuePair<int, int> CreateT(int seed)
         {
             Random rand = new Random(seed);
@@ -50,12 +55,16 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class SortedDictionary_Generic_Tests_EquatableBackwardsOrder_int : SortedDictionary_Generic_Tests<EquatableBackwardsOrder, int>
+    public class SortedDictionary_Generic_Tests_EquatableBackwardsOrder_int
+        : SortedDictionary_Generic_Tests<EquatableBackwardsOrder, int>
     {
         protected override KeyValuePair<EquatableBackwardsOrder, int> CreateT(int seed)
         {
             Random rand = new Random(seed);
-            return new KeyValuePair<EquatableBackwardsOrder, int>(new EquatableBackwardsOrder(rand.Next()), rand.Next());
+            return new KeyValuePair<EquatableBackwardsOrder, int>(
+                new EquatableBackwardsOrder(rand.Next()),
+                rand.Next()
+            );
         }
 
         protected override EquatableBackwardsOrder CreateTKey(int seed)

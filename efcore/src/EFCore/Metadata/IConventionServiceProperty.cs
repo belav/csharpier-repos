@@ -35,7 +35,10 @@ public interface IConventionServiceProperty : IReadOnlyServiceProperty, IConvent
     /// <param name="parameterBinding">The parameter binding.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured binding.</returns>
-    ServiceParameterBinding? SetParameterBinding(ServiceParameterBinding? parameterBinding, bool fromDataAnnotation = false);
+    ServiceParameterBinding? SetParameterBinding(
+        ServiceParameterBinding? parameterBinding,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyServiceProperty.ParameterBinding" />.

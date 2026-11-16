@@ -11,22 +11,41 @@ namespace System.Management.Tests
     public class ManagementClassTests
     {
         [ConditionalTheory(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [InlineData(false, false)]
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Get_CodeTypeDeclaration_For_Win32_LogicalDisk(bool includeSystemClassInClassDef, bool systemPropertyClass)
+        public void Get_CodeTypeDeclaration_For_Win32_LogicalDisk(
+            bool includeSystemClassInClassDef,
+            bool systemPropertyClass
+        )
         {
             using (var managementClass = new ManagementClass(null, "Win32_LogicalDisk", null))
             {
-                CodeTypeDeclaration classDom = managementClass.GetStronglyTypedClassCode(includeSystemClassInClassDef, systemPropertyClass);
-                Assert.Equal(systemPropertyClass ? "ManagementSystemProperties" : "LogicalDisk", classDom.Name);
+                CodeTypeDeclaration classDom = managementClass.GetStronglyTypedClassCode(
+                    includeSystemClassInClassDef,
+                    systemPropertyClass
+                );
+                Assert.Equal(
+                    systemPropertyClass ? "ManagementSystemProperties" : "LogicalDisk",
+                    classDom.Name
+                );
             }
         }
 
         [ConditionalTheory(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [InlineData(CodeLanguage.CSharp)]
         [InlineData(CodeLanguage.VB)]
         public void Get_SourceFile_For_Win32_Processor(CodeLanguage lang)
@@ -36,7 +55,13 @@ namespace System.Management.Tests
             try
             {
                 using (var managementClass = new ManagementClass(null, "Win32_Processor", null))
-                    Assert.True(managementClass.GetStronglyTypedClassCode(lang, tempFilePath, "Wmi.Test.CoreFx"));
+                    Assert.True(
+                        managementClass.GetStronglyTypedClassCode(
+                            lang,
+                            tempFilePath,
+                            "Wmi.Test.CoreFx"
+                        )
+                    );
 
                 passed = true;
             }
@@ -48,7 +73,12 @@ namespace System.Management.Tests
         }
 
         [ConditionalTheory(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [InlineData(CodeLanguage.JScript)]
         [InlineData(CodeLanguage.Mcpp)]
         [InlineData(CodeLanguage.VJSharp)]
@@ -63,7 +93,9 @@ namespace System.Management.Tests
 
             try
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => managementClass.GetStronglyTypedClassCode(lang, tempFilePath, "Wmi.Test.CoreFx"));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    managementClass.GetStronglyTypedClassCode(lang, tempFilePath, "Wmi.Test.CoreFx")
+                );
             }
             finally
             {
@@ -76,7 +108,12 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void ClassMembers_For_Win32_LogicalDisk()
         {
             var managementClass = new ManagementClass(new ManagementPath("Win32_LogicalDisk"));
@@ -97,12 +134,22 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void EnumerateInstances_For_Win32_LogicalDisk()
         {
-            using (var managementClass = new ManagementClass(new ManagementPath("Win32_LogicalDisk")))
+            using (
+                var managementClass = new ManagementClass(new ManagementPath("Win32_LogicalDisk"))
+            )
             using (ManagementObjectCollection instances = managementClass.GetInstances())
-            using (ManagementObjectCollection.ManagementObjectEnumerator instancesEnumerator = instances.GetEnumerator())
+            using (
+                ManagementObjectCollection.ManagementObjectEnumerator instancesEnumerator =
+                    instances.GetEnumerator()
+            )
             {
                 while (instancesEnumerator.MoveNext())
                 {
@@ -116,7 +163,12 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsElevatedAndSupportsWmi))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Create_Delete_Namespace()
         {
             using (var rootNamespace = new ManagementClass("root:__namespace"))
@@ -126,13 +178,17 @@ namespace System.Management.Tests
                 newNamespace["Name"] = NewNamespace;
                 newNamespace.Put();
 
-                ManagementObject targetNamespace = new ManagementObject($"root:__namespace.Name='{NewNamespace}'");
+                ManagementObject targetNamespace = new ManagementObject(
+                    $"root:__namespace.Name='{NewNamespace}'"
+                );
                 Assert.Equal(NewNamespace, targetNamespace["Name"]);
 
                 // If any of the steps below fail it is likely that the new namespace was not deleted, likely it will have to
                 // be deleted via a tool like wbemtest.
                 targetNamespace.Delete();
-                ManagementException managementException = Assert.Throws<ManagementException>(() => targetNamespace.Get());
+                ManagementException managementException = Assert.Throws<ManagementException>(() =>
+                    targetNamespace.Get()
+                );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
             }
         }

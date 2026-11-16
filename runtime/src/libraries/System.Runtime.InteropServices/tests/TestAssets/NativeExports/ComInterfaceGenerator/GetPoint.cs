@@ -29,11 +29,19 @@ namespace NativeExports.ComInterfaceGenerator
 
         private sealed class MyComWrapper : ComWrappers
         {
-            protected override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+            protected override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 if (obj is ImplementingObject)
                 {
-                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ImplementingObject), sizeof(ComInterfaceEntry));
+                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(ImplementingObject),
+                            sizeof(ComInterfaceEntry)
+                        );
                     comInterfaceEntry->IID = typeof(IPointProvider).GUID;
                     comInterfaceEntry->Vtable = (nint)ImplementingObject.ABI.VTable;
                     count = 1;
@@ -43,8 +51,13 @@ namespace NativeExports.ComInterfaceGenerator
                 return null;
             }
 
-            protected override object? CreateObject(nint externalComObject, CreateObjectFlags flags) => throw new NotImplementedException();
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+            protected override object? CreateObject(
+                nint externalComObject,
+                CreateObjectFlags flags
+            ) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
         }
 
         private sealed class ImplementingObject : IPointProvider
@@ -52,6 +65,7 @@ namespace NativeExports.ComInterfaceGenerator
             private Point _point;
 
             public Point GetPoint() => _point;
+
             public SharedTypes.ComInterfaces.HResult SetPoint(Point point)
             {
                 _point = point;
@@ -68,13 +82,28 @@ namespace NativeExports.ComInterfaceGenerator
                     {
                         if (s_vtable != null)
                             return s_vtable;
-                        void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ImplementingObject), sizeof(void*) * 5);
-                        GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                        void** vtable = (void**)
+                            RuntimeHelpers.AllocateTypeAssociatedMemory(
+                                typeof(ImplementingObject),
+                                sizeof(void*) * 5
+                            );
+                        GetIUnknownImpl(
+                            out var fpQueryInterface,
+                            out var fpAddReference,
+                            out var fpRelease
+                        );
                         vtable[0] = (void*)fpQueryInterface;
                         vtable[1] = (void*)fpAddReference;
                         vtable[2] = (void*)fpRelease;
-                        vtable[3] = (delegate* unmanaged[MemberFunction]<ComInterfaceDispatch*, Point>)&ImplementingObject.ABI.GetPoint;
-                        vtable[4] = (delegate* unmanaged[MemberFunction]<ComInterfaceDispatch*, Point, int>)&ImplementingObject.ABI.SetPoint;
+                        vtable[3] = (delegate* unmanaged[MemberFunction]<
+                            ComInterfaceDispatch*,
+                            Point>)
+                            &ImplementingObject.ABI.GetPoint;
+                        vtable[4] = (delegate* unmanaged[MemberFunction]<
+                            ComInterfaceDispatch*,
+                            Point,
+                            int>)
+                            &ImplementingObject.ABI.SetPoint;
                         s_vtable = vtable;
                         return s_vtable;
                     }
@@ -83,7 +112,6 @@ namespace NativeExports.ComInterfaceGenerator
                 [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
                 private static Point GetPoint(ComInterfaceDispatch* @this)
                 {
-
                     try
                     {
                         return ComInterfaceDispatch.GetInstance<IPointProvider>(@this).GetPoint();
@@ -98,7 +126,6 @@ namespace NativeExports.ComInterfaceGenerator
                 [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvMemberFunction) })]
                 private static int SetPoint(ComInterfaceDispatch* @this, Point point)
                 {
-
                     try
                     {
                         ComInterfaceDispatch.GetInstance<IPointProvider>(@this).SetPoint(point);

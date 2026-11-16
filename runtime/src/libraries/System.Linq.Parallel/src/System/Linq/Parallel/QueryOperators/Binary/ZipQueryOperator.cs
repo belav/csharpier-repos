@@ -43,18 +43,21 @@ namespace System.Linq.Parallel
         //
 
         internal ZipQueryOperator(
-            ParallelQuery<TLeftInput> leftChildSource, ParallelQuery<TRightInput> rightChildSource,
-            Func<TLeftInput, TRightInput, TOutput> resultSelector)
+            ParallelQuery<TLeftInput> leftChildSource,
+            ParallelQuery<TRightInput> rightChildSource,
+            Func<TLeftInput, TRightInput, TOutput> resultSelector
+        )
             : this(
                 QueryOperator<TLeftInput>.AsQueryOperator(leftChildSource),
                 QueryOperator<TRightInput>.AsQueryOperator(rightChildSource),
-                resultSelector)
-        {
-        }
+                resultSelector
+            ) { }
 
         private ZipQueryOperator(
-            QueryOperator<TLeftInput> left, QueryOperator<TRightInput> right,
-            Func<TLeftInput, TRightInput, TOutput> resultSelector)
+            QueryOperator<TLeftInput> left,
+            QueryOperator<TRightInput> right,
+            Func<TLeftInput, TRightInput, TOutput> resultSelector
+        )
             : base(left.SpecifiedQuerySettings.Merge(right.SpecifiedQuerySettings))
         {
             Debug.Assert(resultSelector != null, "operator cannot be null");
@@ -83,34 +86,61 @@ namespace System.Linq.Parallel
         {
             // We just open our child operators, left and then right.
             QueryResults<TLeftInput> leftChildResults = _leftChild.Open(settings, preferStriping);
-            QueryResults<TRightInput> rightChildResults = _rightChild.Open(settings, preferStriping);
+            QueryResults<TRightInput> rightChildResults = _rightChild.Open(
+                settings,
+                preferStriping
+            );
 
             Debug.Assert(settings.DegreeOfParallelism != null);
             int partitionCount = settings.DegreeOfParallelism.Value;
             Debug.Assert(settings.TaskScheduler != null);
             if (_prematureMergeLeft)
             {
-                PartitionedStreamMerger<TLeftInput> merger = new PartitionedStreamMerger<TLeftInput>(
-                    false, ParallelMergeOptions.FullyBuffered, settings.TaskScheduler, _leftChild.OutputOrdered,
-                    settings.CancellationState, settings.QueryId);
+                PartitionedStreamMerger<TLeftInput> merger =
+                    new PartitionedStreamMerger<TLeftInput>(
+                        false,
+                        ParallelMergeOptions.FullyBuffered,
+                        settings.TaskScheduler,
+                        _leftChild.OutputOrdered,
+                        settings.CancellationState,
+                        settings.QueryId
+                    );
                 leftChildResults.GivePartitionedStream(merger);
                 Debug.Assert(merger.MergeExecutor != null);
                 leftChildResults = new ListQueryResults<TLeftInput>(
-                    merger.MergeExecutor.GetResultsAsArray()!, partitionCount, preferStriping);
+                    merger.MergeExecutor.GetResultsAsArray()!,
+                    partitionCount,
+                    preferStriping
+                );
             }
 
             if (_prematureMergeRight)
             {
-                PartitionedStreamMerger<TRightInput> merger = new PartitionedStreamMerger<TRightInput>(
-                    false, ParallelMergeOptions.FullyBuffered, settings.TaskScheduler, _rightChild.OutputOrdered,
-                    settings.CancellationState, settings.QueryId);
+                PartitionedStreamMerger<TRightInput> merger =
+                    new PartitionedStreamMerger<TRightInput>(
+                        false,
+                        ParallelMergeOptions.FullyBuffered,
+                        settings.TaskScheduler,
+                        _rightChild.OutputOrdered,
+                        settings.CancellationState,
+                        settings.QueryId
+                    );
                 rightChildResults.GivePartitionedStream(merger);
                 Debug.Assert(merger.MergeExecutor != null);
                 rightChildResults = new ListQueryResults<TRightInput>(
-                    merger.MergeExecutor.GetResultsAsArray()!, partitionCount, preferStriping);
+                    merger.MergeExecutor.GetResultsAsArray()!,
+                    partitionCount,
+                    preferStriping
+                );
             }
 
-            return new ZipQueryOperatorResults(leftChildResults, rightChildResults, _resultSelector, partitionCount, preferStriping);
+            return new ZipQueryOperatorResults(
+                leftChildResults,
+                rightChildResults,
+                _resultSelector,
+                partitionCount,
+                preferStriping
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -119,8 +149,16 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TOutput> AsSequentialQuery(CancellationToken token)
         {
-            using (IEnumerator<TLeftInput> leftEnumerator = _leftChild.AsSequentialQuery(token).GetEnumerator())
-            using (IEnumerator<TRightInput> rightEnumerator = _rightChild.AsSequentialQuery(token).GetEnumerator())
+            using (
+                IEnumerator<TLeftInput> leftEnumerator = _leftChild
+                    .AsSequentialQuery(token)
+                    .GetEnumerator()
+            )
+            using (
+                IEnumerator<TRightInput> rightEnumerator = _rightChild
+                    .AsSequentialQuery(token)
+                    .GetEnumerator()
+            )
             {
                 while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
                 {
@@ -135,10 +173,7 @@ namespace System.Linq.Parallel
 
         internal override OrdinalIndexState OrdinalIndexState
         {
-            get
-            {
-                return OrdinalIndexState.Indexable;
-            }
+            get { return OrdinalIndexState.Indexable; }
         }
 
         //---------------------------------------------------------------------------------------
@@ -148,10 +183,7 @@ namespace System.Linq.Parallel
 
         internal override bool LimitsParallelism
         {
-            get
-            {
-                return _limitsParallelism;
-            }
+            get { return _limitsParallelism; }
         }
 
         //---------------------------------------------------------------------------------------
@@ -169,8 +201,12 @@ namespace System.Linq.Parallel
             private readonly bool _preferStriping;
 
             internal ZipQueryOperatorResults(
-                QueryResults<TLeftInput> leftChildResults, QueryResults<TRightInput> rightChildResults,
-                Func<TLeftInput, TRightInput, TOutput> resultSelector, int partitionCount, bool preferStriping)
+                QueryResults<TLeftInput> leftChildResults,
+                QueryResults<TRightInput> rightChildResults,
+                Func<TLeftInput, TRightInput, TOutput> resultSelector,
+                int partitionCount,
+                bool preferStriping
+            )
             {
                 _leftChildResults = leftChildResults;
                 _rightChildResults = rightChildResults;
@@ -196,12 +232,18 @@ namespace System.Linq.Parallel
 
             internal override TOutput GetElement(int index)
             {
-                return _resultSelector(_leftChildResults.GetElement(index), _rightChildResults.GetElement(index));
+                return _resultSelector(
+                    _leftChildResults.GetElement(index),
+                    _rightChildResults.GetElement(index)
+                );
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TOutput> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TOutput> recipient
+            )
             {
-                PartitionedStream<TOutput, int> partitionedStream = ExchangeUtilities.PartitionDataSource(this, _partitionCount, _preferStriping);
+                PartitionedStream<TOutput, int> partitionedStream =
+                    ExchangeUtilities.PartitionDataSource(this, _partitionCount, _preferStriping);
                 recipient.Receive(partitionedStream);
             }
         }

@@ -1,30 +1,30 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventLogLink
 **
-** Purpose: 
-** This public class describes the metadata for a specific Log 
-** Reference defined by a Provider. An instance of this class is obtained from 
+** Purpose:
+** This public class describes the metadata for a specific Log
+** Reference defined by a Provider. An instance of this class is obtained from
 ** a ProviderMetadata object.
 **
 ============================================================*/
 using System.Collections.Generic;
 
-
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
     /// Describes the metadata for a specific Log Reference defined
-    /// by a Provider. An instance of this class is obtained from 
+    /// by a Provider. An instance of this class is obtained from
     /// a ProviderMetadata object.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class EventLogLink {
+    public sealed class EventLogLink
+    {
         private string channelName;
         private bool isImported;
         private string displayName;
@@ -34,13 +34,20 @@ namespace System.Diagnostics.Eventing.Reader {
         ProviderMetadata pmReference;
         object syncObject;
 
-        internal EventLogLink(uint channelId, ProviderMetadata pmReference) {
+        internal EventLogLink(uint channelId, ProviderMetadata pmReference)
+        {
             this.channelId = channelId;
             this.pmReference = pmReference;
             this.syncObject = new object();
         }
 
-        internal EventLogLink(string channelName, bool isImported, string displayName, uint channelId) {
+        internal EventLogLink(
+            string channelName,
+            bool isImported,
+            string displayName,
+            uint channelId
+        )
+        {
             this.channelName = channelName;
             this.isImported = isImported;
             this.displayName = displayName;
@@ -50,11 +57,15 @@ namespace System.Diagnostics.Eventing.Reader {
             this.syncObject = new object();
         }
 
-        private void PrepareData() {
-            if (dataReady == true) return;
+        private void PrepareData()
+        {
+            if (dataReady == true)
+                return;
 
-            lock (syncObject) {
-                if (dataReady == true) return;
+            lock (syncObject)
+            {
+                if (dataReady == true)
+                    return;
 
                 IEnumerable<EventLogLink> result = pmReference.LogLinks;
 
@@ -63,8 +74,10 @@ namespace System.Diagnostics.Eventing.Reader {
                 this.displayName = null;
                 this.dataReady = true;
 
-                foreach (EventLogLink ch in result) {
-                    if (ch.ChannelId == this.channelId) {
+                foreach (EventLogLink ch in result)
+                {
+                    if (ch.ChannelId == this.channelId)
+                    {
                         this.channelName = ch.LogName;
                         this.isImported = ch.IsImported;
                         this.displayName = ch.DisplayName;
@@ -77,33 +90,36 @@ namespace System.Diagnostics.Eventing.Reader {
             }
         }
 
-
-        public string LogName {
-            get {
+        public string LogName
+        {
+            get
+            {
                 this.PrepareData();
                 return this.channelName;
             }
         }
 
-        public bool IsImported {
-            get {
+        public bool IsImported
+        {
+            get
+            {
                 this.PrepareData();
                 return this.isImported;
             }
         }
 
-        public string DisplayName {
-            get {
+        public string DisplayName
+        {
+            get
+            {
                 this.PrepareData();
                 return this.displayName;
             }
         }
 
-        internal uint ChannelId {
-            get {
-                return channelId;
-            }
+        internal uint ChannelId
+        {
+            get { return channelId; }
         }
     }
-
 }

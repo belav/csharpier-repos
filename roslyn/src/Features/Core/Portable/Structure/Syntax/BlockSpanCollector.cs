@@ -12,15 +12,28 @@ namespace Microsoft.CodeAnalysis.Structure
     internal sealed class BlockSpanCollector
     {
         private readonly BlockStructureOptions _options;
-        private readonly ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> _nodeProviderMap;
-        private readonly ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> _triviaProviderMap;
+        private readonly ImmutableDictionary<
+            Type,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > _nodeProviderMap;
+        private readonly ImmutableDictionary<
+            int,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > _triviaProviderMap;
         private readonly CancellationToken _cancellationToken;
 
         private BlockSpanCollector(
             BlockStructureOptions options,
-            ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> nodeOutlinerMap,
-            ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> triviaOutlinerMap,
-            CancellationToken cancellationToken)
+            ImmutableDictionary<
+                Type,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > nodeOutlinerMap,
+            ImmutableDictionary<
+                int,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > triviaOutlinerMap,
+            CancellationToken cancellationToken
+        )
         {
             _options = options;
             _nodeProviderMap = nodeOutlinerMap;
@@ -31,12 +44,24 @@ namespace Microsoft.CodeAnalysis.Structure
         public static void CollectBlockSpans(
             SyntaxNode syntaxRoot,
             BlockStructureOptions options,
-            ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> nodeOutlinerMap,
-            ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> triviaOutlinerMap,
+            ImmutableDictionary<
+                Type,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > nodeOutlinerMap,
+            ImmutableDictionary<
+                int,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            > triviaOutlinerMap,
             ref TemporaryArray<BlockSpan> spans,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var collector = new BlockSpanCollector(options, nodeOutlinerMap, triviaOutlinerMap, cancellationToken);
+            var collector = new BlockSpanCollector(
+                options,
+                nodeOutlinerMap,
+                triviaOutlinerMap,
+                cancellationToken
+            );
             collector.Collect(syntaxRoot, ref spans);
         }
 
@@ -45,7 +70,9 @@ namespace Microsoft.CodeAnalysis.Structure
             _cancellationToken.ThrowIfCancellationRequested();
 
             SyntaxToken previousToken = default;
-            foreach (var nodeOrToken in root.DescendantNodesAndTokensAndSelf(descendIntoTrivia: true))
+            foreach (
+                var nodeOrToken in root.DescendantNodesAndTokensAndSelf(descendIntoTrivia: true)
+            )
             {
                 if (nodeOrToken.IsNode)
                 {
@@ -59,7 +86,11 @@ namespace Microsoft.CodeAnalysis.Structure
             }
         }
 
-        private void GetBlockSpans(SyntaxToken previousToken, SyntaxNode node, ref TemporaryArray<BlockSpan> spans)
+        private void GetBlockSpans(
+            SyntaxToken previousToken,
+            SyntaxNode node,
+            ref TemporaryArray<BlockSpan> spans
+        )
         {
             if (_nodeProviderMap.TryGetValue(node.GetType(), out var providers))
             {
@@ -67,7 +98,13 @@ namespace Microsoft.CodeAnalysis.Structure
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
 
-                    provider.CollectBlockSpans(previousToken, node, ref spans, _options, _cancellationToken);
+                    provider.CollectBlockSpans(
+                        previousToken,
+                        node,
+                        ref spans,
+                        _options,
+                        _cancellationToken
+                    );
                 }
             }
         }
@@ -78,7 +115,10 @@ namespace Microsoft.CodeAnalysis.Structure
             GetOutliningSpans(token.TrailingTrivia, ref spans);
         }
 
-        private void GetOutliningSpans(SyntaxTriviaList triviaList, ref TemporaryArray<BlockSpan> spans)
+        private void GetOutliningSpans(
+            SyntaxTriviaList triviaList,
+            ref TemporaryArray<BlockSpan> spans
+        )
         {
             foreach (var trivia in triviaList)
             {

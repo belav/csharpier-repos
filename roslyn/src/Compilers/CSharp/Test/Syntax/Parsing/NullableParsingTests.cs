@@ -13,10 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class NullableParsingTests : ParsingTests
     {
-        public NullableParsingTests(ITestOutputHelper output) :
-            base(output)
-        {
-        }
+        public NullableParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [WorkItem(23272, "https://github.com/dotnet/roslyn/issues/23272")]
         [Fact]
@@ -24,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // Note: the typo `privat` is necessary for https://github.com/dotnet/roslyn/issues/23272.
             UsingTree(
-@"class C
+                @"class C
 {
     privat C[]? F;
 }",
@@ -39,10 +37,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "F").WithLocation(3, 17),
                 // (3,18): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     privat C[]? F;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(3, 18),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(3, 18),
                 // (3,18): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     privat C[]? F;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(3, 18));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(3, 18)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -132,19 +135,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NullableArray_Cast_02()
         {
-            UsingExpression("(object[]??)null",
+            UsingExpression(
+                "(object[]??)null",
                 // (1,1): error CS1073: Unexpected token 'null'
                 // (object[]??)null
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(object[]??)").WithArguments("null").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(object[]??)")
+                    .WithArguments("null")
+                    .WithLocation(1, 1),
                 // (1,2): error CS1525: Invalid expression term 'object'
                 // (object[]??)null
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "object").WithArguments("object").WithLocation(1, 2),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "object")
+                    .WithArguments("object")
+                    .WithLocation(1, 2),
                 // (1,9): error CS0443: Syntax error; value expected
                 // (object[]??)null
                 Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 9),
                 // (1,12): error CS1525: Invalid expression term ')'
                 // (object[]??)null
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(1, 12)
+            );
             N(SyntaxKind.ParenthesizedExpression);
             {
                 N(SyntaxKind.OpenParenToken);
@@ -184,16 +195,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NullableArray_Cast_03()
         {
-            UsingExpression("(object[?])null",
+            UsingExpression(
+                "(object[?])null",
                 // (1,1): error CS1073: Unexpected token 'null'
                 // (object[?])null
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(object[?])").WithArguments("null").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(object[?])")
+                    .WithArguments("null")
+                    .WithLocation(1, 1),
                 // (1,2): error CS1525: Invalid expression term 'object'
                 // (object[?])null
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "object").WithArguments("object").WithLocation(1, 2),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "object")
+                    .WithArguments("object")
+                    .WithLocation(1, 2),
                 // (1,9): error CS1001: Identifier expected
                 // (object[?])null
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "?").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "?").WithLocation(1, 9)
+            );
             N(SyntaxKind.ParenthesizedExpression);
             {
                 N(SyntaxKind.OpenParenToken);
@@ -550,16 +567,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NullCoalescingOperator_NullableType_Invalid()
         {
-            UsingExpression("x as T??? y",
+            UsingExpression(
+                "x as T??? y",
                 // (1,9): error CS1525: Invalid expression term '?'
                 // x as T??? y
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?").WithArguments("?").WithLocation(1, 9),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
+                    .WithArguments("?")
+                    .WithLocation(1, 9),
                 // (1,12): error CS1003: Syntax error, ':' expected
                 // x as T??? y
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // x as T??? y
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.ConditionalExpression);
             {
                 N(SyntaxKind.CoalesceExpression);
@@ -681,13 +702,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DeclarationPattern_NullableType()
         {
-            UsingStatement("switch (e) { case T? t: break; }",
+            UsingStatement(
+                "switch (e) { case T? t: break; }",
                 // (1,25): error CS1525: Invalid expression term 'break'
                 // switch (e) { case T? t: break; }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "break").WithArguments("break").WithLocation(1, 25),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "break")
+                    .WithArguments("break")
+                    .WithLocation(1, 25),
                 // (1,25): error CS1003: Syntax error, ':' expected
                 // switch (e) { case T? t: break; }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "break").WithArguments(":").WithLocation(1, 25));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "break")
+                    .WithArguments(":")
+                    .WithLocation(1, 25)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -738,16 +765,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "switch (e) { case T[] t: break; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular8).VerifyDiagnostics(
-                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                // switch (e) { case T[] t: break; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "switch (e) { case T[] t: break; }").WithArguments("top-level statements", "9.0").WithLocation(1, 1),
-                // (1,9): error CS0103: The name 'e' does not exist in the current context
-                // switch (e) { case T[] t: break; }
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "e").WithArguments("e").WithLocation(1, 9),
-                // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
-                // switch (e) { case T[] t: break; }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "T").WithArguments("T").WithLocation(1, 19));
+            CreateCompilation(test, parseOptions: TestOptions.Regular8)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // switch (e) { case T[] t: break; }
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion8,
+                            "switch (e) { case T[] t: break; }"
+                        )
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(1, 1),
+                    // (1,9): error CS0103: The name 'e' does not exist in the current context
+                    // switch (e) { case T[] t: break; }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "e")
+                        .WithArguments("e")
+                        .WithLocation(1, 9),
+                    // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
+                    // switch (e) { case T[] t: break; }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "T")
+                        .WithArguments("T")
+                        .WithLocation(1, 19)
+                );
 
             UsingStatement(test, options: TestOptions.Regular8);
             N(SyntaxKind.SwitchStatement);
@@ -806,36 +844,54 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var test = "switch (e) { case T[]? t: break; }";
 
-            CreateCompilation(test, parseOptions: TestOptions.Regular8).VerifyDiagnostics(
-                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "switch (e) { case T[]? t: break; }").WithArguments("top-level statements", "9.0").WithLocation(1, 1),
-                // (1,9): error CS0103: The name 'e' does not exist in the current context
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "e").WithArguments("e").WithLocation(1, 9),
-                // (1,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "T[]").WithArguments("type pattern", "9.0").WithLocation(1, 19),
-                // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "T").WithArguments("T").WithLocation(1, 19),
-                // (1,22): error CS1003: Syntax error, ':' expected
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "?").WithArguments(":").WithLocation(1, 22),
-                // (1,22): error CS1513: } expected
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "?").WithLocation(1, 22),
-                // (1,24): warning CS0164: This label has not been referenced
-                // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "t").WithLocation(1, 24));
+            CreateCompilation(test, parseOptions: TestOptions.Regular8)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion8,
+                            "switch (e) { case T[]? t: break; }"
+                        )
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(1, 1),
+                    // (1,9): error CS0103: The name 'e' does not exist in the current context
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "e")
+                        .WithArguments("e")
+                        .WithLocation(1, 9),
+                    // (1,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "T[]")
+                        .WithArguments("type pattern", "9.0")
+                        .WithLocation(1, 19),
+                    // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "T")
+                        .WithArguments("T")
+                        .WithLocation(1, 19),
+                    // (1,22): error CS1003: Syntax error, ':' expected
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "?")
+                        .WithArguments(":")
+                        .WithLocation(1, 22),
+                    // (1,22): error CS1513: } expected
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "?").WithLocation(1, 22),
+                    // (1,24): warning CS0164: This label has not been referenced
+                    // switch (e) { case T[]? t: break; }
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "t").WithLocation(1, 24)
+                );
 
-            UsingStatement(test, options: TestOptions.Regular8,
+            UsingStatement(
+                test,
+                options: TestOptions.Regular8,
                 // (1,22): error CS1003: Syntax error, ':' expected
                 // switch (e) { case T[]? t: break; }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "?").WithArguments(":").WithLocation(1, 22),
                 // (1,22): error CS1513: } expected
                 // switch (e) { case T[]? t: break; }
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "?").WithLocation(1, 22));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "?").WithLocation(1, 22)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -1320,10 +1376,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableArray_PartialMember()
         {
             UsingTree(
-@"class C
+                @"class C
 {
     partial A[]? F();
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1372,7 +1429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CreateNullableArray_01()
         {
-            UsingExpression("new object[,][]?",
+            UsingExpression(
+                "new object[,][]?",
                 // (1,17): error CS1733: Expected expression
                 // new object[,][]?
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 17),
@@ -1382,7 +1440,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (1,17): error CS1733: Expected expression
                 // new object[,][]?
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 17)
-                );
+            );
             N(SyntaxKind.ConditionalExpression);
             {
                 N(SyntaxKind.ArrayCreationExpression);

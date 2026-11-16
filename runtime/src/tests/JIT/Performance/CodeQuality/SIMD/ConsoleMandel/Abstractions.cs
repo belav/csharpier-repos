@@ -16,7 +16,8 @@ namespace Algorithms
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public ComplexFloat(float real, float imaginary)
         {
-            Real = real; Imaginary = imaginary;
+            Real = real;
+            Imaginary = imaginary;
         }
 
         public float Real;
@@ -59,7 +60,10 @@ namespace Algorithms
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static Complex square(this Complex val)
         {
-            return new Complex(val.Real * val.Real - val.Imaginary * val.Imaginary, 2.0 * val.Real * val.Imaginary);
+            return new Complex(
+                val.Real * val.Real - val.Imaginary * val.Imaginary,
+                2.0 * val.Real * val.Imaginary
+            );
         }
     }
 
@@ -69,7 +73,8 @@ namespace Algorithms
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public ComplexVecFloat(Vector<float> real, Vector<float> imaginary)
         {
-            Real = real; Imaginary = imaginary;
+            Real = real;
+            Imaginary = imaginary;
         }
 
         public Vector<float> Real;
@@ -78,7 +83,10 @@ namespace Algorithms
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public ComplexVecFloat square()
         {
-            return new ComplexVecFloat(Real * Real - Imaginary * Imaginary, Real * Imaginary + Real * Imaginary);
+            return new ComplexVecFloat(
+                Real * Real - Imaginary * Imaginary,
+                Real * Imaginary + Real * Imaginary
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
@@ -105,7 +113,8 @@ namespace Algorithms
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public ComplexVecDouble(Vector<double> real, Vector<double> imaginary)
         {
-            Real = real; Imaginary = imaginary;
+            Real = real;
+            Imaginary = imaginary;
         }
 
         public Vector<double> Real;
@@ -114,7 +123,10 @@ namespace Algorithms
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public ComplexVecDouble square()
         {
-            return new ComplexVecDouble(Real * Real - Imaginary * Imaginary, Real * Imaginary + Real * Imaginary);
+            return new ComplexVecDouble(
+                Real * Real - Imaginary * Imaginary,
+                Real * Imaginary + Real * Imaginary
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]

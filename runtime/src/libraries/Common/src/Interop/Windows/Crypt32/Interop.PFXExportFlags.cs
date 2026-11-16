@@ -10,10 +10,10 @@ internal static partial class Interop
         [Flags]
         internal enum PFXExportFlags : int
         {
-            REPORT_NO_PRIVATE_KEY                 = 0x00000001,
+            REPORT_NO_PRIVATE_KEY = 0x00000001,
             REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY = 0x00000002,
-            EXPORT_PRIVATE_KEYS                   = 0x00000004,
-            None                                  = 0x00000000,
+            EXPORT_PRIVATE_KEYS = 0x00000004,
+            None = 0x00000000,
         }
     }
 }

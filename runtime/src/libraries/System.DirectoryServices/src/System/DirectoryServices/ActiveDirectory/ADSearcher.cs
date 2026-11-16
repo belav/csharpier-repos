@@ -10,7 +10,12 @@ namespace System.DirectoryServices.ActiveDirectory
         private readonly DirectorySearcher _searcher;
         private static readonly TimeSpan s_defaultTimeSpan = new TimeSpan(0, 120, 0);
 
-        public ADSearcher(DirectoryEntry searchRoot, string filter, string[] propertiesToLoad, SearchScope scope)
+        public ADSearcher(
+            DirectoryEntry searchRoot,
+            string filter,
+            string[] propertiesToLoad,
+            SearchScope scope
+        )
         {
             _searcher = new DirectorySearcher(searchRoot, filter, propertiesToLoad, scope);
 
@@ -26,7 +31,14 @@ namespace System.DirectoryServices.ActiveDirectory
             _searcher.PageSize = 512;
         }
 
-        public ADSearcher(DirectoryEntry searchRoot, string? filter, string[] propertiesToLoad, SearchScope scope, bool pagedSearch, bool cacheResults)
+        public ADSearcher(
+            DirectoryEntry searchRoot,
+            string? filter,
+            string[] propertiesToLoad,
+            SearchScope scope,
+            bool pagedSearch,
+            bool cacheResults
+        )
         {
             _searcher = new DirectorySearcher(searchRoot, filter, propertiesToLoad, scope);
             // set proper time out

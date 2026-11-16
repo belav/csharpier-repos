@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,8 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.IO;
@@ -35,76 +33,77 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HttpWriterTest
+    {
+        private HttpWriter writer;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpWriterTest {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            HttpContext context = new HttpContext(null);
+            writer = (HttpWriter)context.Response.Output;
+        }
 
-		private HttpWriter writer;
+        [Test]
+        public void NullWrites()
+        {
+            object null_object = null;
+            string null_string = null;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			HttpContext context = new HttpContext (null);
-			writer = (HttpWriter) context.Response.Output;
-		}
+            writer.Write(null_string);
+            writer.Write(null_object);
 
-		[Test]
-		public void NullWrites ()
-		{
-			object null_object = null;
-			string null_string = null;
-			
-			writer.Write (null_string);
-			writer.Write (null_object);
+            writer.WriteString(null, 0, 0);
+        }
 
-			writer.WriteString (null, 0, 0);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void NullBufferException()
+        {
+            writer.Write(null, 0, 0);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void NullBufferException ()
-		{
-			writer.Write (null, 0, 0);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void WriteInvalidArg1()
+        {
+            char[] x = new char[] { 'a' };
+            writer.Write(x, -1, 0);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void WriteInvalidArg1 ()
-		{
-			char [] x = new char [] { 'a' };
-			writer.Write (x, -1, 0);
-		}
-		
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void WriteInvalidArg2 ()
-		{
-			char [] x = new char [] { 'a' };
-			writer.Write (x, 0, -1);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void WriteInvalidArg2()
+        {
+            char[] x = new char[] { 'a' };
+            writer.Write(x, 0, -1);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void WriteStringInvalidArg1 ()
-		{
-			writer.WriteString ("hello", 0, -1);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void WriteStringInvalidArg1()
+        {
+            writer.WriteString("hello", 0, -1);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void WriteStringInvalidArg2 ()
-		{
-			writer.WriteString ("hello", -1, 0);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void WriteStringInvalidArg2()
+        {
+            writer.WriteString("hello", -1, 0);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void WriteStringInvalidArg3 ()
-		{
-			writer.WriteString ("hello", 0, 10);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void WriteStringInvalidArg3()
+        {
+            writer.WriteString("hello", 0, 10);
+        }
+    }
 }

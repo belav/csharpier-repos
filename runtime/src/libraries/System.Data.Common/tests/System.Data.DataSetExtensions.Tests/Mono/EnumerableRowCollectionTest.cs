@@ -55,9 +55,10 @@ namespace MonoTests.System.Data
             table.Columns.Add ("Score", typeof (int));
             ds.WriteXml ("Test/System.Data/testdataset1.xsd", XmlWriteMode.WriteSchema);
             */
-            var q = from line in table.AsEnumerable()
-                    where line.Field<int>("Score") > 80
-                    select line;
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") > 80
+                select line;
             bool iterated = false;
             foreach (var line in q)
             {
@@ -69,19 +70,23 @@ namespace MonoTests.System.Data
         }
 
         [Fact]
-        public void QueryWhereSelect ()
+        public void QueryWhereSelect()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (_testDataSet);
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") > 80
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(_testDataSet);
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") > 80
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score"),
+                };
             bool iterated = false;
-            foreach (var ql in q) {
+            foreach (var ql in q)
+            {
                 if (iterated)
                     Assert.Fail("should match only one raw");
                 Assert.Equal(100, ql.StudentScore);
@@ -90,21 +95,26 @@ namespace MonoTests.System.Data
         }
 
         [Fact]
-        public void QueryWhereSelectOrderBy ()
+        public void QueryWhereSelectOrderBy()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (_testDataSet);
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<int> ("ID")
-                select new {
-                        StudentID = line.Field<int> ("ID"),
-                        StudentName = line.Field<string> ("Name"),
-                        StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(_testDataSet);
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<int>("ID")
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score"),
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
                     case -1:
                         Assert.Equal(1, ql.StudentID);
                         break;
@@ -120,21 +130,26 @@ namespace MonoTests.System.Data
         }
 
         [Fact]
-        public void QueryWhereSelectOrderByDescending ()
+        public void QueryWhereSelectOrderByDescending()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (_testDataSet);
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<int> ("ID") descending
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(_testDataSet);
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<int>("ID") descending
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score"),
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
                     case -1:
                         Assert.Equal(4, ql.StudentID);
                         break;
@@ -150,60 +165,70 @@ namespace MonoTests.System.Data
         }
 
         [Fact]
-        public void ThenBy ()
+        public void ThenBy()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (_testDataSet);
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<bool> ("Gender"), line.Field<int> ("ID")
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(_testDataSet);
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<bool>("Gender"), line.Field<int>("ID")
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score"),
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-            switch (prevID) {
-                case -1:
-                    Assert.Equal(1, ql.StudentID);
-                    break;
-                case 1:
-                    Assert.Equal(4, ql.StudentID);
-                    break;
-                default:
-                    Assert.Fail("should match only one raw");
-                    break;
-            }
-            prevID = ql.StudentID;
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
+                    case -1:
+                        Assert.Equal(1, ql.StudentID);
+                        break;
+                    case 1:
+                        Assert.Equal(4, ql.StudentID);
+                        break;
+                    default:
+                        Assert.Fail("should match only one raw");
+                        break;
+                }
+                prevID = ql.StudentID;
             }
         }
 
         [Fact]
-        public void ThenByDescending ()
+        public void ThenByDescending()
         {
-            var ds = new DataSet ();
-            ds.ReadXml (_testDataSet);
-            var table = ds.Tables [0];
-            var q = from line in table.AsEnumerable ()
-                where line.Field<int> ("Score") >= 80
-                orderby line.Field<bool> ("Gender"), line.Field<int> ("ID") descending
-                select new {
-                    StudentID = line.Field<int> ("ID"),
-                    StudentName = line.Field<string> ("Name"),
-                    StudentScore = line.Field<int> ("Score") };
+            var ds = new DataSet();
+            ds.ReadXml(_testDataSet);
+            var table = ds.Tables[0];
+            var q =
+                from line in table.AsEnumerable()
+                where line.Field<int>("Score") >= 80
+                orderby line.Field<bool>("Gender"), line.Field<int>("ID") descending
+                select new
+                {
+                    StudentID = line.Field<int>("ID"),
+                    StudentName = line.Field<string>("Name"),
+                    StudentScore = line.Field<int>("Score"),
+                };
             int prevID = -1;
-            foreach (var ql in q) {
-                switch (prevID) {
-                case -1:
-                    Assert.Equal(4, ql.StudentID);
-                    break;
-                case 4:
-                    Assert.Equal(1, ql.StudentID);
-                    break;
-                default:
-                    Assert.Fail("should match only one raw");
-                    break;
+            foreach (var ql in q)
+            {
+                switch (prevID)
+                {
+                    case -1:
+                        Assert.Equal(4, ql.StudentID);
+                        break;
+                    case 4:
+                        Assert.Equal(1, ql.StudentID);
+                        break;
+                    default:
+                        Assert.Fail("should match only one raw");
+                        break;
                 }
                 prevID = ql.StudentID;
             }

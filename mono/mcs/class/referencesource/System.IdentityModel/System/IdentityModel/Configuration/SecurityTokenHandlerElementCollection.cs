@@ -6,23 +6,25 @@ namespace System.IdentityModel.Configuration
 {
     using System.Configuration;
     using System.IdentityModel.Tokens;
-    
+
 #pragma warning disable 1591
-    [ConfigurationCollection( typeof( CustomTypeElement ), CollectionType = ConfigurationElementCollectionType.BasicMap )]
-    public sealed partial class SecurityTokenHandlerElementCollection : ConfigurationElementCollection
+    [ConfigurationCollection(
+        typeof(CustomTypeElement),
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed partial class SecurityTokenHandlerElementCollection
+        : ConfigurationElementCollection
     {
-        public SecurityTokenHandlerElementCollection()
-        {
-        }
+        public SecurityTokenHandlerElementCollection() { }
 
         protected override ConfigurationElement CreateNewElement()
         {
             return new CustomTypeElement();
         }
 
-        protected override object GetElementKey( ConfigurationElement element )
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ( (CustomTypeElement)element ).Type;
+            return ((CustomTypeElement)element).Type;
         }
 
         protected override void Init()
@@ -30,18 +32,20 @@ namespace System.IdentityModel.Configuration
             //
             // Keep this list synchronized with SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection
             //
-            BaseAdd( new CustomTypeElement( typeof( SamlSecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( Saml2SecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( WindowsUserNameSecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( X509SecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( KerberosSecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( RsaSecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( SessionSecurityTokenHandler ) ) );
-            BaseAdd( new CustomTypeElement( typeof( EncryptedSecurityTokenHandler ) ) );
-            
+            BaseAdd(new CustomTypeElement(typeof(SamlSecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(Saml2SecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(WindowsUserNameSecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(X509SecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(KerberosSecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(RsaSecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(SessionSecurityTokenHandler)));
+            BaseAdd(new CustomTypeElement(typeof(EncryptedSecurityTokenHandler)));
         }
 
-        [ConfigurationProperty( ConfigurationStrings.Name, Options = ConfigurationPropertyOptions.IsKey )]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -49,10 +53,17 @@ namespace System.IdentityModel.Configuration
             set { this[ConfigurationStrings.Name] = value; }
         }
 
-        [ConfigurationProperty( ConfigurationStrings.SecurityTokenHandlerConfiguration, IsRequired = false )]
+        [ConfigurationProperty(
+            ConfigurationStrings.SecurityTokenHandlerConfiguration,
+            IsRequired = false
+        )]
         public SecurityTokenHandlerConfigurationElement SecurityTokenHandlerConfiguration
         {
-            get { return (SecurityTokenHandlerConfigurationElement)this[ConfigurationStrings.SecurityTokenHandlerConfiguration]; }
+            get
+            {
+                return (SecurityTokenHandlerConfigurationElement)
+                    this[ConfigurationStrings.SecurityTokenHandlerConfiguration];
+            }
             set { this[ConfigurationStrings.SecurityTokenHandlerConfiguration] = value; }
         }
 
@@ -63,9 +74,14 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return ( ( ElementInformation.Properties[ConfigurationStrings.Name].ValueOrigin != PropertyValueOrigin.Default ) ||
-                         SecurityTokenHandlerConfiguration.IsConfigured ||
-                         Count > 0 );
+                return (
+                    (
+                        ElementInformation.Properties[ConfigurationStrings.Name].ValueOrigin
+                        != PropertyValueOrigin.Default
+                    )
+                    || SecurityTokenHandlerConfiguration.IsConfigured
+                    || Count > 0
+                );
             }
         }
     }

@@ -25,7 +25,12 @@ namespace System.Web.Http.Routing
 
             HttpActionDescriptor[] directRouteActions = null;
             HttpActionDescriptor[] possibleDirectRouteActions;
-            if (dataTokens.TryGetValue<HttpActionDescriptor[]>(RouteDataTokenKeys.Actions, out possibleDirectRouteActions))
+            if (
+                dataTokens.TryGetValue<HttpActionDescriptor[]>(
+                    RouteDataTokenKeys.Actions,
+                    out possibleDirectRouteActions
+                )
+            )
             {
                 if (possibleDirectRouteActions != null && possibleDirectRouteActions.Length > 0)
                 {
@@ -48,19 +53,26 @@ namespace System.Web.Http.Routing
             decimal precedence = 0M;
             decimal possiblePrecedence;
 
-            if (dataTokens.TryGetValue<decimal>(RouteDataTokenKeys.Precedence, out possiblePrecedence))
+            if (
+                dataTokens.TryGetValue<decimal>(
+                    RouteDataTokenKeys.Precedence,
+                    out possiblePrecedence
+                )
+            )
             {
                 precedence = possiblePrecedence;
             }
 
             foreach (HttpActionDescriptor actionDescriptor in directRouteActions)
             {
-                candidates.Add(new CandidateAction
-                {
-                    ActionDescriptor = actionDescriptor,
-                    Order = order,
-                    Precedence = precedence
-                });
+                candidates.Add(
+                    new CandidateAction
+                    {
+                        ActionDescriptor = actionDescriptor,
+                        Order = order,
+                        Precedence = precedence,
+                    }
+                );
             }
 
             return candidates.ToArray();
@@ -78,7 +90,12 @@ namespace System.Web.Http.Routing
 
             HttpActionDescriptor[] actions;
 
-            if (!dataTokens.TryGetValue<HttpActionDescriptor[]>(RouteDataTokenKeys.Actions, out actions))
+            if (
+                !dataTokens.TryGetValue<HttpActionDescriptor[]>(
+                    RouteDataTokenKeys.Actions,
+                    out actions
+                )
+            )
             {
                 return null;
             }
@@ -98,7 +115,12 @@ namespace System.Web.Http.Routing
 
             HttpControllerDescriptor controller;
 
-            if (!dataTokens.TryGetValue<HttpControllerDescriptor>(RouteDataTokenKeys.Controller, out controller))
+            if (
+                !dataTokens.TryGetValue<HttpControllerDescriptor>(
+                    RouteDataTokenKeys.Controller,
+                    out controller
+                )
+            )
             {
                 return null;
             }

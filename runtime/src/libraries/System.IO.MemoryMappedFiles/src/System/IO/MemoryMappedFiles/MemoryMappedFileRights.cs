@@ -16,14 +16,22 @@ namespace System.IO.MemoryMappedFiles
         ReadPermissions = 0x020000,
         ChangePermissions = 0x040000,
         TakeOwnership = 0x080000,
+
         //Synchronize                = Not supported by memory mapped files
 
         ReadWrite = Read | Write,
         ReadExecute = Read | Execute,
         ReadWriteExecute = Read | Write | Execute,
 
-        FullControl = CopyOnWrite | Read | Write | Execute | Delete |
-                                       ReadPermissions | ChangePermissions | TakeOwnership,
+        FullControl =
+            CopyOnWrite
+            | Read
+            | Write
+            | Execute
+            | Delete
+            | ReadPermissions
+            | ChangePermissions
+            | TakeOwnership,
 
         AccessSystemSecurity = 0x01000000, // Allow changes to SACL
     }

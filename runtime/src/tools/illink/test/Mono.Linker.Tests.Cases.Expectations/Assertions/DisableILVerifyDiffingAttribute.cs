@@ -11,7 +11,5 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions;
 /// The original motivation for this is to make it easier to write a test that mostly verifies that the test frameworks ability to check il is working
 /// correctly.
 /// </summary>
-[AttributeUsage (AttributeTargets.Class)]
-public class DisableILVerifyDiffingAttribute : BaseExpectedLinkedBehaviorAttribute
-{
-}
+[AttributeUsage(AttributeTargets.Class)]
+public class DisableILVerifyDiffingAttribute : BaseExpectedLinkedBehaviorAttribute { }

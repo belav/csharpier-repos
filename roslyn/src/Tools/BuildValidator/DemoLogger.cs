@@ -39,8 +39,13 @@ namespace BuildValidator
 
         public bool IsEnabled(LogLevel logLevel) => true;
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-            => LogCore(formatter(state, exception));
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        ) => LogCore(formatter(state, exception));
 
         private void LogCore(string? message)
         {
@@ -53,25 +58,25 @@ namespace BuildValidator
     {
         public ILogger CreateLogger(string categoryName) => new DemoLogger();
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     internal sealed class EmptyLogger : ILogger, IDisposable
     {
         public static EmptyLogger Instance { get; } = new EmptyLogger();
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public IDisposable BeginScope<TState>(TState state) => this;
 
         public bool IsEnabled(LogLevel logLevel) => false;
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-        {
-        }
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        ) { }
     }
 }

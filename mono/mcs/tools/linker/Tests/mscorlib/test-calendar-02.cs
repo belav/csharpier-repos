@@ -4,14 +4,14 @@ using System.Globalization;
 
 public class C
 {
-	public static unsafe int Main ()
-	{
-		var ci = CultureInfo.GetCultureInfo ("ps");
+    public static unsafe int Main()
+    {
+        var ci = CultureInfo.GetCultureInfo("ps");
 
-		// Should return System.Globalization.HijriCalendar without linker
-		if (ci.Calendar.ToString () != "System.Globalization.GregorianCalendar")
-			return 1;
+        // Should return System.Globalization.HijriCalendar without linker
+        if (ci.Calendar.ToString() != "System.Globalization.GregorianCalendar")
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

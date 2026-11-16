@@ -56,7 +56,7 @@ namespace System.ServiceModel.Discovery.Version11
 
         [Fx.Tag.InheritThrows(From = "ReadFrom", FromDeclaringType = typeof(ResolveCriteria))]
         public void ReadXml(XmlReader reader)
-        {            
+        {
             this.resolveCriteria.ReadFrom(DiscoveryVersion.WSDiscovery11, reader);
         }
 

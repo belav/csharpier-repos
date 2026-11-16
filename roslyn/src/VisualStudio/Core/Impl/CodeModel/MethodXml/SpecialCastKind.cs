@@ -9,6 +9,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
     internal enum SpecialCastKind
     {
         DirectCast,
-        TryCast
+        TryCast,
     }
 }

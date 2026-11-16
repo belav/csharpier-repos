@@ -10,7 +10,9 @@ try
         return 1;
     }
     int shouldThrow = compareInfo.Compare("A\u0300", "\u00C0", CompareOptions.IgnoreNonSpace);
-    Console.WriteLine($"Did not throw as expected but returned {shouldThrow} as a result. Using CompareOptions.IgnoreNonSpace option alone should be unavailable in HybridGlobalization mode.");
+    Console.WriteLine(
+        $"Did not throw as expected but returned {shouldThrow} as a result. Using CompareOptions.IgnoreNonSpace option alone should be unavailable in HybridGlobalization mode."
+    );
 }
 catch (PlatformNotSupportedException pnse)
 {

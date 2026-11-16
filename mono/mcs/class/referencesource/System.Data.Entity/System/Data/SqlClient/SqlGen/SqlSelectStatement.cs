@@ -9,8 +9,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common.CommandTrees;
+using System.Diagnostics;
 
 namespace System.Data.SqlClient.SqlGen
 {
@@ -50,32 +50,20 @@ namespace System.Data.SqlClient.SqlGen
     /// </summary>
     internal sealed class SqlSelectStatement : ISqlFragment
     {
-       
         /// <summary>
         /// Whether the columns ouput by this sql statement were renamed from what given in the command tree.
         /// </summary>
-        internal bool OutputColumnsRenamed
-        {
-            get;
-            set;
-        }
-        
+        internal bool OutputColumnsRenamed { get; set; }
+
         /// <summary>
         /// A dictionary of output columns
         /// </summary>
-        internal Dictionary<string, Symbol> OutputColumns
-        {
-            get;
-            set;
-        }
+        internal Dictionary<string, Symbol> OutputColumns { get; set; }
 
-        internal List<Symbol> AllJoinExtents
-        {
-            get;
+        internal List<Symbol> AllJoinExtents { get;
             // We have a setter as well, even though this is a list,
             // since we use this field only in special cases.
-            set;
-        }
+            set; }
 
         private List<Symbol> fromExtents;
         internal List<Symbol> FromExtents
@@ -114,7 +102,6 @@ namespace System.Data.SqlClient.SqlGen
         {
             get { return from; }
         }
-
 
         private SqlBuilder where;
         internal SqlBuilder Where
@@ -155,18 +142,19 @@ namespace System.Data.SqlClient.SqlGen
             }
         }
 
-        //indicates whether it is the top most select statement, 
+        //indicates whether it is the top most select statement,
         // if not Order By should be omitted unless there is a corresponding TOP
-        internal bool IsTopMost
-        {
-            get;
-            set;
-        }
+        internal bool IsTopMost { get; set; }
 
         #region Internal Constructor
         internal SqlSelectStatement()
         {
-            this.select = new SqlSelectClauseBuilder(delegate() { return this.IsTopMost; });
+            this.select = new SqlSelectClauseBuilder(
+                delegate()
+                {
+                    return this.IsTopMost;
+                }
+            );
         }
         #endregion
 
@@ -203,17 +191,23 @@ namespace System.Data.SqlClient.SqlGen
                     {
                         foreach (Symbol symbol in joinSymbol.FlattenedExtentList)
                         {
-                            if (null == outerExtentAliases) { outerExtentAliases = new List<string>(); }
+                            if (null == outerExtentAliases)
+                            {
+                                outerExtentAliases = new List<string>();
+                            }
                             outerExtentAliases.Add(symbol.NewName);
                         }
                     }
                     else
                     {
-                        if (null == outerExtentAliases) { outerExtentAliases = new List<string>(); }
+                        if (null == outerExtentAliases)
+                        {
+                            outerExtentAliases = new List<string>();
+                        }
                         outerExtentAliases.Add(outerExtent.NewName);
                     }
                 }
-            }        
+            }
 
             // An then rename each of the FromExtents we have
             // If AllJoinExtents is non-null - it has precedence.
@@ -230,9 +224,10 @@ namespace System.Data.SqlClient.SqlGen
                         do
                         {
                             ++i;
-                            newName = fromAlias.Name + i.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                        }
-                        while (sqlGenerator.AllExtentNames.ContainsKey(newName));
+                            newName =
+                                fromAlias.Name
+                                + i.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        } while (sqlGenerator.AllExtentNames.ContainsKey(newName));
                         sqlGenerator.AllExtentNames[fromAlias.Name] = i;
                         fromAlias.NewName = newName;
 
@@ -243,7 +238,10 @@ namespace System.Data.SqlClient.SqlGen
 
                     // Add the current alias to the list, so that the extents
                     // that follow do not collide with me.
-                    if (null == outerExtentAliases) { outerExtentAliases = new List<string>(); }
+                    if (null == outerExtentAliases)
+                    {
+                        outerExtentAliases = new List<string>();
+                    }
                     outerExtentAliases.Add(fromAlias.NewName);
                 }
             }
@@ -272,7 +270,11 @@ namespace System.Data.SqlClient.SqlGen
                 this.GroupBy.WriteSql(writer, sqlGenerator);
             }
 
-            if ((null != this.orderBy) && !this.OrderBy.IsEmpty && (this.IsTopMost || this.Select.Top != null))
+            if (
+                (null != this.orderBy)
+                && !this.OrderBy.IsEmpty
+                && (this.IsTopMost || this.Select.Top != null)
+            )
             {
                 writer.WriteLine();
                 writer.Write("ORDER BY ");

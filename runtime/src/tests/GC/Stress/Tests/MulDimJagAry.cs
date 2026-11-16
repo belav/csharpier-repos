@@ -1,9 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
-
 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
@@ -16,7 +14,6 @@ namespace DefaultNamespace
     /* Coverage: int[][], Object[][], Object[][][], Variant[][][],
     /*           take Mul_Dimention array as function argument.
     /*************************************************************/
-
 
     internal class MulDimJagAry
     {
@@ -118,7 +115,6 @@ namespace DefaultNamespace
                 //}
             }
 
-
             Object[][][] vJag;
             for (int j = 0; j < iRep; j++)
             {
@@ -131,7 +127,6 @@ namespace DefaultNamespace
                 //    Console.WriteLine( "HeapSize after GC: "+ GC.GetTotalMemory(false) );
                 //}
             }
-
 
             return 100;
         }

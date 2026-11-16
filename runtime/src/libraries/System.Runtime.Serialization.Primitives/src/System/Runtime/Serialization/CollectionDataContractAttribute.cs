@@ -3,7 +3,11 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Struct,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class CollectionDataContractAttribute : Attribute
     {
         private string? _name;
@@ -19,9 +23,7 @@ namespace System.Runtime.Serialization
         private bool _isKeyNameSetExplicitly;
         private bool _isValueNameSetExplicitly;
 
-        public CollectionDataContractAttribute()
-        {
-        }
+        public CollectionDataContractAttribute() { }
 
         public string? Namespace
         {

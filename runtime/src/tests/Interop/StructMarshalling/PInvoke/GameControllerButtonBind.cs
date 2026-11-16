@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
 public unsafe partial struct GameControllerButtonBind
 {
-    public GameControllerButtonBind
-    (
+    public GameControllerButtonBind(
         GameControllerBindType? bindType = null,
         GameControllerButtonBindValue? value = null
-    ) : this()
+    )
+        : this()
     {
         if (bindType is not null)
         {

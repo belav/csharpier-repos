@@ -17,10 +17,17 @@ namespace System.Activities.XamlIntegration
     {
         IList<Location> locations;
         IList<LocationReference> locationReferences;
-        ExpressionTreeRewriter visitor;        
+        ExpressionTreeRewriter visitor;
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors, Justification = "Derived classes are always generated code")]
-        protected CompiledDataContext(IList<LocationReference> locationReferences, ActivityContext activityContext)
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "Derived classes are always generated code"
+        )]
+        protected CompiledDataContext(
+            IList<LocationReference> locationReferences,
+            ActivityContext activityContext
+        )
         {
             this.locationReferences = locationReferences;
 
@@ -52,13 +59,9 @@ namespace System.Activities.XamlIntegration
             this.locations[index].Value = value;
         }
 
-        protected virtual void GetValueTypeValues()
-        {
-        }
-        
-        protected virtual void SetValueTypeValues()
-        {
-        }
+        protected virtual void GetValueTypeValues() { }
+
+        protected virtual void SetValueTypeValues() { }
 
         protected Expression RewriteExpressionTree(Expression originalExpression)
         {
@@ -66,23 +69,49 @@ namespace System.Activities.XamlIntegration
 
             if (lambdaExpression == null)
             {
-                throw FxTrace.Exception.Argument("originalExpression", SR.LambdaExpressionTypeRequired);
+                throw FxTrace.Exception.Argument(
+                    "originalExpression",
+                    SR.LambdaExpressionTypeRequired
+                );
             }
 
             if (lambdaExpression.ReturnType == null || lambdaExpression.ReturnType == typeof(void))
             {
-                throw FxTrace.Exception.Argument("originalExpression", SR.LambdaExpressionReturnTypeInvalid);
+                throw FxTrace.Exception.Argument(
+                    "originalExpression",
+                    SR.LambdaExpressionReturnTypeInvalid
+                );
             }
-            
-            return this.visitor.Visit(Expression.Lambda(
-                typeof(Func<,>).MakeGenericType(typeof(ActivityContext), lambdaExpression.ReturnType),
-                lambdaExpression.Body, 
-                new ParameterExpression[] { ExpressionUtilities.RuntimeContextParameter }));
+
+            return this.visitor.Visit(
+                Expression.Lambda(
+                    typeof(Func<,>).MakeGenericType(
+                        typeof(ActivityContext),
+                        lambdaExpression.ReturnType
+                    ),
+                    lambdaExpression.Body,
+                    new ParameterExpression[] { ExpressionUtilities.RuntimeContextParameter }
+                )
+            );
         }
-                
-        public Location<T> GetLocation<T>(Func<T> getMethod, Action<T> setMethod, int expressionId, Activity compiledRootActivity, ActivityContext activityContext)
+
+        public Location<T> GetLocation<T>(
+            Func<T> getMethod,
+            Action<T> setMethod,
+            int expressionId,
+            Activity compiledRootActivity,
+            ActivityContext activityContext
+        )
         {
-            return new CompiledLocation<T>(getMethod, setMethod, this.locationReferences, this.locations, expressionId, compiledRootActivity, activityContext);
+            return new CompiledLocation<T>(
+                getMethod,
+                setMethod,
+                this.locationReferences,
+                this.locations,
+                expressionId,
+                compiledRootActivity,
+                activityContext
+            );
         }
 
         public Location<T> GetLocation<T>(Func<T> getMethod, Action<T> setMethod)
@@ -90,26 +119,45 @@ namespace System.Activities.XamlIntegration
             return new CompiledLocation<T>(getMethod, setMethod);
         }
 
-        protected static object GetDataContextActivities(Activity compiledRoot, bool forImplementation)
+        protected static object GetDataContextActivities(
+            Activity compiledRoot,
+            bool forImplementation
+        )
         {
             CompiledDataContextActivityVistor vistor = new CompiledDataContextActivityVistor();
             vistor.Visit(compiledRoot, forImplementation);
-            CompiledDataContextActivitiesCache cache = new CompiledDataContextActivitiesCache(vistor.DataContextActivities);
+            CompiledDataContextActivitiesCache cache = new CompiledDataContextActivitiesCache(
+                vistor.DataContextActivities
+            );
             return cache;
         }
 
-        protected static CompiledDataContext[] GetCompiledDataContextCache(object dataContextActivities, ActivityContext activityContext, Activity compiledRoot, bool forImplementation, int compiledDataContextCount)
+        protected static CompiledDataContext[] GetCompiledDataContextCache(
+            object dataContextActivities,
+            ActivityContext activityContext,
+            Activity compiledRoot,
+            bool forImplementation,
+            int compiledDataContextCount
+        )
         {
-            ActivityInstance cacheInstance = GetDataContextInstance((CompiledDataContextActivitiesCache)dataContextActivities, activityContext, compiledRoot);
+            ActivityInstance cacheInstance = GetDataContextInstance(
+                (CompiledDataContextActivitiesCache)dataContextActivities,
+                activityContext,
+                compiledRoot
+            );
 
             HybridDictionary<Activity, CompiledDataContext[]> cache = null;
             if (forImplementation)
             {
-                cache = (HybridDictionary<Activity, CompiledDataContext[]>)cacheInstance.CompiledDataContextsForImplementation;
+                cache =
+                    (HybridDictionary<Activity, CompiledDataContext[]>)
+                        cacheInstance.CompiledDataContextsForImplementation;
             }
             else
             {
-                cache = (HybridDictionary<Activity, CompiledDataContext[]>)cacheInstance.CompiledDataContexts;
+                cache =
+                    (HybridDictionary<Activity, CompiledDataContext[]>)
+                        cacheInstance.CompiledDataContexts;
             }
 
             if (cache == null)
@@ -136,7 +184,11 @@ namespace System.Activities.XamlIntegration
             return result;
         }
 
-        static ActivityInstance GetDataContextInstance(CompiledDataContextActivitiesCache dataContextActivities, ActivityContext activityContext, Activity compiledRoot)
+        static ActivityInstance GetDataContextInstance(
+            CompiledDataContextActivitiesCache dataContextActivities,
+            ActivityContext activityContext,
+            Activity compiledRoot
+        )
         {
             ActivityInstance dataContextInstance = null;
 
@@ -167,16 +219,23 @@ namespace System.Activities.XamlIntegration
 
                 currentInstance = currentInstance.Parent;
             }
-            
+
             if (dataContextInstance == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CompiledExpressionsNoCompiledRoot(activityContext.Activity.Id)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CompiledExpressionsNoCompiledRoot(activityContext.Activity.Id)
+                    )
+                );
             }
 
             return dataContextInstance;
         }
 
-        IList<Location> ConvertReferences(IList<LocationReference> locationReferences, ActivityContext activityContext)
+        IList<Location> ConvertReferences(
+            IList<LocationReference> locationReferences,
+            ActivityContext activityContext
+        )
         {
             IList<Location> temp = new List<Location>(locationReferences.Count);
 
@@ -259,15 +318,14 @@ namespace System.Activities.XamlIntegration
 
             public CompiledDataContextActivityVistor()
             {
-                this.dataContextActivities = new HashSet<Activity>(new ReferenceComparer<Activity>());
+                this.dataContextActivities = new HashSet<Activity>(
+                    new ReferenceComparer<Activity>()
+                );
             }
 
             public HashSet<Activity> DataContextActivities
             {
-                get
-                {
-                    return this.dataContextActivities;
-                }
+                get { return this.dataContextActivities; }
             }
 
             protected override void VisitRoot(Activity activity, out bool exit)
@@ -275,7 +333,7 @@ namespace System.Activities.XamlIntegration
                 this.dataContextActivities.Add(activity);
                 base.VisitRoot(activity, out exit);
             }
-            
+
             protected override void VisitVariableScope(Activity activity, out bool exit)
             {
                 if (!this.dataContextActivities.Contains(activity))
@@ -294,7 +352,10 @@ namespace System.Activities.XamlIntegration
                 base.VisitDelegate(activityDelegate, out exit);
             }
 
-            protected override void VisitVariableScopeArgument(RuntimeArgument runtimeArgument, out bool exit)
+            protected override void VisitVariableScopeArgument(
+                RuntimeArgument runtimeArgument,
+                out bool exit
+            )
             {
                 this.inVariableScopeArgument = true;
                 base.VisitVariableScopeArgument(runtimeArgument, out exit);
@@ -323,5 +384,5 @@ namespace System.Activities.XamlIntegration
                 return target.GetHashCode();
             }
         }
-    }    
+    }
 }

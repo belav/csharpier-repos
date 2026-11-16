@@ -1,14 +1,8 @@
-class Stack<T> : X
-{
-}
+class Stack<T> : X { }
 
-class Test
-{
-}
+class Test { }
 
 class X
 {
-	public static void Main()
-	{
-	}
+    public static void Main() { }
 }

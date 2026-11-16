@@ -19,45 +19,42 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
     {
         public static void Register(CommandLineApplication app)
         {
-            app.Command(
-                "server",
-                cmd =>
+            app.Command("server", cmd =>
+            {
+                var logLevelOption = cmd.Option(
+                    "--log <LOG_LEVEL>",
+                    "The LogLevel to use.",
+                    CommandOptionType.SingleValue
+                );
+                var azureSignalRConnectionString = cmd.Option(
+                    "--azure-signalr-connectionstring <CONNECTION_STRING>",
+                    "Azure SignalR Connection string to use",
+                    CommandOptionType.SingleValue
+                );
+
+                cmd.OnExecute(() =>
                 {
-                    var logLevelOption = cmd.Option(
-                        "--log <LOG_LEVEL>",
-                        "The LogLevel to use.",
-                        CommandOptionType.SingleValue
-                    );
-                    var azureSignalRConnectionString = cmd.Option(
-                        "--azure-signalr-connectionstring <CONNECTION_STRING>",
-                        "Azure SignalR Connection string to use",
-                        CommandOptionType.SingleValue
-                    );
+                    LogLevel logLevel = Defaults.LogLevel;
 
-                    cmd.OnExecute(() =>
+                    if (
+                        logLevelOption.HasValue()
+                        && !Enum.TryParse(logLevelOption.Value(), out logLevel)
+                    )
                     {
-                        LogLevel logLevel = Defaults.LogLevel;
+                        return InvalidArg(logLevelOption);
+                    }
 
-                        if (
-                            logLevelOption.HasValue()
-                            && !Enum.TryParse(logLevelOption.Value(), out logLevel)
-                        )
-                        {
-                            return InvalidArg(logLevelOption);
-                        }
+                    if (
+                        azureSignalRConnectionString.HasValue()
+                        && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
+                    )
+                    {
+                        return InvalidArg(azureSignalRConnectionString);
+                    }
 
-                        if (
-                            azureSignalRConnectionString.HasValue()
-                            && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
-                        )
-                        {
-                            return InvalidArg(azureSignalRConnectionString);
-                        }
-
-                        return Execute(logLevel, azureSignalRConnectionString.Value());
-                    });
-                }
-            );
+                    return Execute(logLevel, azureSignalRConnectionString.Value());
+                });
+            });
         }
 
         private static int Execute(LogLevel logLevel, string azureSignalRConnectionString)

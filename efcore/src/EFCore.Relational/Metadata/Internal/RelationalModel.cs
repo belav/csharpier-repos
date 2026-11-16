@@ -35,8 +35,7 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => _isReadOnly;
+    public override bool IsReadOnly => _isReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,8 +75,10 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Dictionary<(string, string?, IReadOnlyList<string>), StoreFunction> Functions { get; }
-        = new(NamedListComparer.Instance);
+    public virtual Dictionary<
+        (string, string?, IReadOnlyList<string>),
+        StoreFunction
+    > Functions { get; } = new(NamedListComparer.Instance);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,36 +86,31 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Dictionary<(string, string?), StoreStoredProcedure> StoredProcedures { get; }
-        = new();
+    public virtual Dictionary<(string, string?), StoreStoredProcedure> StoredProcedures { get; } =
+        new();
 
     /// <inheritdoc />
-    public virtual ITable? FindTable(string name, string? schema)
-        => Tables.TryGetValue((name, schema), out var table)
-            ? table
-            : null;
+    public virtual ITable? FindTable(string name, string? schema) =>
+        Tables.TryGetValue((name, schema), out var table) ? table : null;
 
     /// <inheritdoc />
-    public virtual IView? FindView(string name, string? schema)
-        => Views.TryGetValue((name, schema), out var view)
-            ? view
-            : null;
+    public virtual IView? FindView(string name, string? schema) =>
+        Views.TryGetValue((name, schema), out var view) ? view : null;
 
     /// <inheritdoc />
-    public virtual ISqlQuery? FindQuery(string name)
-        => Queries.TryGetValue(name, out var query)
-            ? query
-            : null;
+    public virtual ISqlQuery? FindQuery(string name) =>
+        Queries.TryGetValue(name, out var query) ? query : null;
 
     /// <inheritdoc />
-    public virtual IStoreFunction? FindFunction(string name, string? schema, IReadOnlyList<string> parameters)
-        => Functions.TryGetValue((name, schema, parameters), out var function)
-            ? function
-            : null;
+    public virtual IStoreFunction? FindFunction(
+        string name,
+        string? schema,
+        IReadOnlyList<string> parameters
+    ) => Functions.TryGetValue((name, schema, parameters), out var function) ? function : null;
 
     /// <inheritdoc />
-    public virtual IStoreStoredProcedure? FindStoredProcedure(string name, string? schema)
-        => StoredProcedures.TryGetValue((name, schema), out var storedProcedure)
+    public virtual IStoreStoredProcedure? FindStoredProcedure(string name, string? schema) =>
+        StoredProcedures.TryGetValue((name, schema), out var storedProcedure)
             ? storedProcedure
             : null;
 
@@ -128,15 +124,13 @@ public class RelationalModel : Annotatable, IRelationalModel
         IModel model,
         IRelationalAnnotationProvider relationalAnnotationProvider,
         IRelationalTypeMappingSource relationalTypeMappingSource,
-        bool designTime)
+        bool designTime
+    )
     {
         model.AddRuntimeAnnotation(
             RelationalAnnotationNames.RelationalModel,
-            Create(
-                model,
-                relationalAnnotationProvider,
-                relationalTypeMappingSource,
-                designTime));
+            Create(model, relationalAnnotationProvider, relationalTypeMappingSource, designTime)
+        );
         return model;
     }
 
@@ -150,7 +144,8 @@ public class RelationalModel : Annotatable, IRelationalModel
         IModel model,
         IRelationalAnnotationProvider relationalAnnotationProvider,
         IRelationalTypeMappingSource relationalTypeMappingSource,
-        bool designTime)
+        bool designTime
+    )
     {
         var databaseModel = new RelationalModel(model);
 
@@ -186,7 +181,9 @@ public class RelationalModel : Annotatable, IRelationalModel
 
                 foreach (var constraint in table.UniqueConstraints.Values)
                 {
-                    constraint.AddAnnotations(relationalAnnotationProvider.For(constraint, designTime));
+                    constraint.AddAnnotations(
+                        relationalAnnotationProvider.For(constraint, designTime)
+                    );
                 }
 
                 foreach (var index in table.Indexes.Values)
@@ -204,7 +201,9 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 foreach (var constraint in table.ForeignKeyConstraints)
                 {
-                    constraint.AddAnnotations(relationalAnnotationProvider.For(constraint, designTime));
+                    constraint.AddAnnotations(
+                        relationalAnnotationProvider.For(constraint, designTime)
+                    );
                 }
 
                 table.AddAnnotations(relationalAnnotationProvider.For(table, designTime));
@@ -219,7 +218,9 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 foreach (ViewColumn viewColumn in view.Columns.Values)
                 {
-                    viewColumn.AddAnnotations(relationalAnnotationProvider.For(viewColumn, designTime));
+                    viewColumn.AddAnnotations(
+                        relationalAnnotationProvider.For(viewColumn, designTime)
+                    );
                 }
 
                 view.AddAnnotations(relationalAnnotationProvider.For(view, designTime));
@@ -232,7 +233,9 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 foreach (SqlQueryColumn queryColumn in query.Columns.Values)
                 {
-                    queryColumn.AddAnnotations(relationalAnnotationProvider.For(queryColumn, designTime));
+                    queryColumn.AddAnnotations(
+                        relationalAnnotationProvider.For(queryColumn, designTime)
+                    );
                 }
 
                 query.AddAnnotations(relationalAnnotationProvider.For(query, designTime));
@@ -242,33 +245,51 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 foreach (var parameter in function.Parameters)
                 {
-                    parameter.AddAnnotations(relationalAnnotationProvider.For(parameter, designTime));
+                    parameter.AddAnnotations(
+                        relationalAnnotationProvider.For(parameter, designTime)
+                    );
                 }
 
                 foreach (FunctionColumn functionColumn in function.Columns.Values)
                 {
-                    functionColumn.AddAnnotations(relationalAnnotationProvider.For(functionColumn, designTime));
+                    functionColumn.AddAnnotations(
+                        relationalAnnotationProvider.For(functionColumn, designTime)
+                    );
                 }
 
                 function.AddAnnotations(relationalAnnotationProvider.For(function, designTime));
             }
 
-            foreach (StoreStoredProcedure storedProcedure in ((IRelationalModel)databaseModel).StoredProcedures)
+            foreach (
+                StoreStoredProcedure storedProcedure in (
+                    (IRelationalModel)databaseModel
+                ).StoredProcedures
+            )
             {
                 foreach (StoreStoredProcedureParameter parameter in storedProcedure.Parameters)
                 {
-                    parameter.AddAnnotations(relationalAnnotationProvider.For(parameter, designTime));
+                    parameter.AddAnnotations(
+                        relationalAnnotationProvider.For(parameter, designTime)
+                    );
                 }
 
-                foreach (StoreStoredProcedureResultColumn resultColumn in storedProcedure.ResultColumns)
+                foreach (
+                    StoreStoredProcedureResultColumn resultColumn in storedProcedure.ResultColumns
+                )
                 {
-                    resultColumn.AddAnnotations(relationalAnnotationProvider.For(resultColumn, designTime));
+                    resultColumn.AddAnnotations(
+                        relationalAnnotationProvider.For(resultColumn, designTime)
+                    );
                 }
 
-                storedProcedure.AddAnnotations(relationalAnnotationProvider.For(storedProcedure, designTime));
+                storedProcedure.AddAnnotations(
+                    relationalAnnotationProvider.For(storedProcedure, designTime)
+                );
             }
 
-            databaseModel.AddAnnotations(relationalAnnotationProvider.For(databaseModel, designTime));
+            databaseModel.AddAnnotations(
+                relationalAnnotationProvider.For(databaseModel, designTime)
+            );
         }
 
         return databaseModel.MakeReadOnly();
@@ -290,10 +311,15 @@ public class RelationalModel : Annotatable, IRelationalModel
     private static void AddDefaultMappings(
         RelationalModel databaseModel,
         IEntityType entityType,
-        IRelationalTypeMappingSource relationalTypeMappingSource)
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
         var mappedType = entityType;
-        Check.DebugAssert(entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultMappings) == null, "not null");
+        Check.DebugAssert(
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultMappings)
+                == null,
+            "not null"
+        );
         var tableMappings = new List<TableMappingBase<ColumnMappingBase>>();
         entityType.AddRuntimeAnnotation(RelationalAnnotationNames.DefaultMappings, tableMappings);
 
@@ -309,32 +335,48 @@ public class RelationalModel : Annotatable, IRelationalModel
             }
 
             var tableMapping = new TableMappingBase<ColumnMappingBase>(
-                entityType, defaultTable, includesDerivedTypes: !isTpc && mappedType == entityType);
+                entityType,
+                defaultTable,
+                includesDerivedTypes: !isTpc && mappedType == entityType
+            );
             var containerColumnName = mappedType.GetContainerColumnName();
             if (!string.IsNullOrEmpty(containerColumnName))
             {
                 CreateContainerColumn(
-                    defaultTable, containerColumnName, mappedType, relationalTypeMappingSource,
-                    static (c, t, m) => new JsonColumnBase(c, m.StoreType, t, m));
+                    defaultTable,
+                    containerColumnName,
+                    mappedType,
+                    relationalTypeMappingSource,
+                    static (c, t, m) => new JsonColumnBase(c, m.StoreType, t, m)
+                );
             }
             else
             {
                 foreach (var property in entityType.GetProperties())
                 {
-                    var columnName = property.IsPrimaryKey() || isTpc || isTph || property.DeclaringType == mappedType
-                        ? property.GetColumnName()
-                        : null;
+                    var columnName =
+                        property.IsPrimaryKey()
+                        || isTpc
+                        || isTph
+                        || property.DeclaringType == mappedType
+                            ? property.GetColumnName()
+                            : null;
                     if (columnName == null)
                     {
                         continue;
                     }
 
-                    var column = (ColumnBase<ColumnMappingBase>?)defaultTable.FindColumn(columnName);
+                    var column = (ColumnBase<ColumnMappingBase>?)
+                        defaultTable.FindColumn(columnName);
                     if (column == null)
                     {
-                        column = new ColumnBase<ColumnMappingBase>(columnName, property.GetColumnType(), defaultTable)
+                        column = new ColumnBase<ColumnMappingBase>(
+                            columnName,
+                            property.GetColumnType(),
+                            defaultTable
+                        )
                         {
-                            IsNullable = property.IsColumnNullable()
+                            IsNullable = property.IsColumnNullable(),
                         };
                         defaultTable.Columns.Add(columnName, column);
                     }
@@ -347,8 +389,7 @@ public class RelationalModel : Annotatable, IRelationalModel
                 }
             }
 
-            if (((ITableMappingBase)tableMapping).ColumnMappings.Any()
-                || tableMappings.Count == 0)
+            if (((ITableMappingBase)tableMapping).ColumnMappings.Any() || tableMappings.Count == 0)
             {
                 tableMappings.Add(tableMapping);
                 defaultTable.EntityTypeMappings.Add(tableMapping);
@@ -368,7 +409,8 @@ public class RelationalModel : Annotatable, IRelationalModel
     private static void AddTables(
         RelationalModel databaseModel,
         IEntityType entityType,
-        IRelationalTypeMappingSource relationalTypeMappingSource)
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
         if (entityType.GetTableName() == null)
         {
@@ -377,7 +419,10 @@ public class RelationalModel : Annotatable, IRelationalModel
 
         var mappedType = entityType;
 
-        Check.DebugAssert(entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings) == null, "not null");
+        Check.DebugAssert(
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings) == null,
+            "not null"
+        );
         var tableMappings = new List<TableMapping>();
         entityType.SetRuntimeAnnotation(RelationalAnnotationNames.TableMappings, tableMappings);
 
@@ -409,7 +454,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                     databaseModel,
                     tableMappings,
                     includesDerivedTypes: !isTpc && mappedType == entityType,
-                    isSplitEntityTypePrincipal: false);
+                    isSplitEntityTypePrincipal: false
+                );
             }
 
             CreateTableMapping(
@@ -420,7 +466,12 @@ public class RelationalModel : Annotatable, IRelationalModel
                 databaseModel,
                 tableMappings,
                 includesDerivedTypes: !isTpc && mappedType == entityType,
-                isSplitEntityTypePrincipal: mappedType.GetMappingFragments(StoreObjectType.Table).Any() ? true : null);
+                isSplitEntityTypePrincipal: mappedType
+                    .GetMappingFragments(StoreObjectType.Table)
+                    .Any()
+                    ? true
+                    : null
+            );
 
             if (isTpc || mappingStrategy == RelationalAnnotationNames.TphMappingStrategy)
             {
@@ -441,26 +492,32 @@ public class RelationalModel : Annotatable, IRelationalModel
         RelationalModel databaseModel,
         List<TableMapping> tableMappings,
         bool includesDerivedTypes,
-        bool? isSplitEntityTypePrincipal = null)
+        bool? isSplitEntityTypePrincipal = null
+    )
     {
-        if (!databaseModel.Tables.TryGetValue((mappedTable.Name, mappedTable.Schema), out var table))
+        if (
+            !databaseModel.Tables.TryGetValue((mappedTable.Name, mappedTable.Schema), out var table)
+        )
         {
             table = new Table(mappedTable.Name, mappedTable.Schema, databaseModel);
-            databaseModel.Tables.Add(
-                (mappedTable.Name, mappedTable.Schema), table);
+            databaseModel.Tables.Add((mappedTable.Name, mappedTable.Schema), table);
         }
 
         var tableMapping = new TableMapping(typeBase, table, includesDerivedTypes)
         {
-            IsSplitEntityTypePrincipal = isSplitEntityTypePrincipal
+            IsSplitEntityTypePrincipal = isSplitEntityTypePrincipal,
         };
 
         var containerColumnName = mappedType.GetContainerColumnName();
         if (!string.IsNullOrEmpty(containerColumnName))
         {
             CreateContainerColumn(
-                table, containerColumnName, (IEntityType)mappedType, relationalTypeMappingSource,
-                static (c, t, m) => new JsonColumn(c, m.StoreType, (Table)t, m));
+                table,
+                containerColumnName,
+                (IEntityType)mappedType,
+                relationalTypeMappingSource,
+                static (c, t, m) => new JsonColumn(c, m.StoreType, (Table)t, m)
+            );
         }
         else
         {
@@ -477,7 +534,7 @@ public class RelationalModel : Annotatable, IRelationalModel
                 {
                     column = new Column(columnName, property.GetColumnType(mappedTable), table)
                     {
-                        IsNullable = property.IsColumnNullable(mappedTable)
+                        IsNullable = property.IsColumnNullable(mappedTable),
                     };
 
                     table.Columns.Add(columnName, column);
@@ -494,7 +551,10 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 var complexType = complexProperty.ComplexType;
                 var complexTableMappings = new List<TableMapping>();
-                complexType.SetRuntimeAnnotation(RelationalAnnotationNames.TableMappings, complexTableMappings);
+                complexType.SetRuntimeAnnotation(
+                    RelationalAnnotationNames.TableMappings,
+                    complexTableMappings
+                );
 
                 CreateTableMapping(
                     relationalTypeMappingSource,
@@ -504,12 +564,14 @@ public class RelationalModel : Annotatable, IRelationalModel
                     databaseModel,
                     complexTableMappings,
                     includesDerivedTypes: true,
-                    isSplitEntityTypePrincipal: isSplitEntityTypePrincipal == true ? false : isSplitEntityTypePrincipal);
+                    isSplitEntityTypePrincipal: isSplitEntityTypePrincipal == true
+                        ? false
+                        : isSplitEntityTypePrincipal
+                );
             }
         }
 
-        if (((ITableMappingBase)tableMapping).ColumnMappings.Any()
-            || tableMappings.Count == 0)
+        if (((ITableMappingBase)tableMapping).ColumnMappings.Any() || tableMappings.Count == 0)
         {
             tableMappings.Add(tableMapping);
             if (typeBase is IEntityType)
@@ -528,15 +590,21 @@ public class RelationalModel : Annotatable, IRelationalModel
         string containerColumnName,
         IEntityType mappedType,
         IRelationalTypeMappingSource relationalTypeMappingSource,
-        Func<string, TableBase, RelationalTypeMapping, ColumnBase<TColumnMappingBase>> createColumn)
+        Func<string, TableBase, RelationalTypeMapping, ColumnBase<TColumnMappingBase>> createColumn
+    )
         where TColumnMappingBase : class, IColumnMappingBase
     {
         var ownership = mappedType.GetForeignKeys().Single(fk => fk.IsOwnership);
         if (!ownership.PrincipalEntityType.IsMappedToJson())
         {
-            Check.DebugAssert(tableBase.FindColumn(containerColumnName) == null, $"Table does not have column '{containerColumnName}'.");
+            Check.DebugAssert(
+                tableBase.FindColumn(containerColumnName) == null,
+                $"Table does not have column '{containerColumnName}'."
+            );
 
-            var jsonColumnTypeMapping = relationalTypeMappingSource.FindMapping(typeof(JsonElement))!;
+            var jsonColumnTypeMapping = relationalTypeMappingSource.FindMapping(
+                typeof(JsonElement)
+            )!;
             var jsonColumn = createColumn(containerColumnName, tableBase, jsonColumnTypeMapping);
             tableBase.Columns.Add(containerColumnName, jsonColumn);
             jsonColumn.IsNullable = !ownership.IsRequiredDependent || !ownership.IsUnique;
@@ -552,7 +620,8 @@ public class RelationalModel : Annotatable, IRelationalModel
     private static void AddViews(
         RelationalModel databaseModel,
         IEntityType entityType,
-        IRelationalTypeMappingSource relationalTypeMappingSource)
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
         if (entityType.GetViewName() == null)
         {
@@ -561,7 +630,10 @@ public class RelationalModel : Annotatable, IRelationalModel
 
         var mappedType = entityType;
 
-        Check.DebugAssert(entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings) == null, "not null");
+        Check.DebugAssert(
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings) == null,
+            "not null"
+        );
         var viewMappings = new List<ViewMapping>();
         entityType.SetRuntimeAnnotation(RelationalAnnotationNames.ViewMappings, viewMappings);
 
@@ -593,7 +665,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                     databaseModel,
                     viewMappings,
                     includesDerivedTypes: !isTpc && mappedType == entityType,
-                    isSplitEntityTypePrincipal: false);
+                    isSplitEntityTypePrincipal: false
+                );
             }
 
             CreateViewMapping(
@@ -604,7 +677,12 @@ public class RelationalModel : Annotatable, IRelationalModel
                 databaseModel,
                 viewMappings,
                 includesDerivedTypes: !isTpc && mappedType == entityType,
-                isSplitEntityTypePrincipal: mappedType.GetMappingFragments(StoreObjectType.View).Any() ? true : null);
+                isSplitEntityTypePrincipal: mappedType
+                    .GetMappingFragments(StoreObjectType.View)
+                    .Any()
+                    ? true
+                    : null
+            );
 
             if (isTpc || mappingStrategy == RelationalAnnotationNames.TphMappingStrategy)
             {
@@ -625,26 +703,30 @@ public class RelationalModel : Annotatable, IRelationalModel
         RelationalModel databaseModel,
         List<ViewMapping> viewMappings,
         bool includesDerivedTypes,
-        bool? isSplitEntityTypePrincipal = null)
+        bool? isSplitEntityTypePrincipal = null
+    )
     {
         if (!databaseModel.Views.TryGetValue((mappedView.Name, mappedView.Schema), out var view))
         {
             view = new View(mappedView.Name, mappedView.Schema, databaseModel);
-            databaseModel.Views.Add(
-                (mappedView.Name, mappedView.Schema), view);
+            databaseModel.Views.Add((mappedView.Name, mappedView.Schema), view);
         }
 
         var viewMapping = new ViewMapping(entityType, view, includesDerivedTypes)
         {
-            IsSplitEntityTypePrincipal = isSplitEntityTypePrincipal
+            IsSplitEntityTypePrincipal = isSplitEntityTypePrincipal,
         };
 
         var containerColumnName = mappedType.GetContainerColumnName();
         if (!string.IsNullOrEmpty(containerColumnName))
         {
             CreateContainerColumn(
-                view, containerColumnName, mappedType, relationalTypeMappingSource,
-                static (c, t, m) => new JsonViewColumn(c, m.StoreType, (View)t, m));
+                view,
+                containerColumnName,
+                mappedType,
+                relationalTypeMappingSource,
+                static (c, t, m) => new JsonViewColumn(c, m.StoreType, (View)t, m)
+            );
         }
         else
         {
@@ -661,7 +743,7 @@ public class RelationalModel : Annotatable, IRelationalModel
                 {
                     column = new ViewColumn(columnName, property.GetColumnType(mappedView), view)
                     {
-                        IsNullable = property.IsColumnNullable(mappedView)
+                        IsNullable = property.IsColumnNullable(mappedView),
                     };
                     view.Columns.Add(columnName, column);
                 }
@@ -674,8 +756,7 @@ public class RelationalModel : Annotatable, IRelationalModel
             }
         }
 
-        if (((ITableMappingBase)viewMapping).ColumnMappings.Any()
-            || viewMappings.Count == 0)
+        if (((ITableMappingBase)viewMapping).ColumnMappings.Any() || viewMappings.Count == 0)
         {
             viewMappings.Add(viewMapping);
             view.EntityTypeMappings.Add(viewMapping);
@@ -695,10 +776,11 @@ public class RelationalModel : Annotatable, IRelationalModel
         while (definingType != null)
         {
             var definingTypeSqlQuery = definingType.GetSqlQuery();
-            if (definingTypeSqlQuery == null
+            if (
+                definingTypeSqlQuery == null
                 || definingType.BaseType == null
-                || (definingTypeSqlQuery == entityTypeSqlQuery
-                    && definingType != entityType))
+                || (definingTypeSqlQuery == entityTypeSqlQuery && definingType != entityType)
+            )
             {
                 break;
             }
@@ -706,15 +788,19 @@ public class RelationalModel : Annotatable, IRelationalModel
             definingType = definingType.BaseType;
         }
 
-        Check.DebugAssert(definingType is not null, $"Could not find defining type for {entityType}");
+        Check.DebugAssert(
+            definingType is not null,
+            $"Could not find defining type for {entityType}"
+        );
 
         var mappedType = entityType;
         while (mappedType != null)
         {
             var mappedTypeSqlQuery = mappedType.GetSqlQuery();
-            if (mappedTypeSqlQuery == null
-                || (mappedTypeSqlQuery == entityTypeSqlQuery
-                    && mappedType != entityType))
+            if (
+                mappedTypeSqlQuery == null
+                || (mappedTypeSqlQuery == entityTypeSqlQuery && mappedType != entityType)
+            )
             {
                 break;
             }
@@ -726,7 +812,10 @@ public class RelationalModel : Annotatable, IRelationalModel
                 databaseModel.Queries.Add(mappedQuery.Name, sqlQuery);
             }
 
-            var queryMapping = new SqlQueryMapping(entityType, sqlQuery, includesDerivedTypes: true) { IsDefaultSqlQueryMapping = true };
+            var queryMapping = new SqlQueryMapping(entityType, sqlQuery, includesDerivedTypes: true)
+            {
+                IsDefaultSqlQueryMapping = true,
+            };
 
             foreach (var property in mappedType.GetProperties())
             {
@@ -739,9 +828,13 @@ public class RelationalModel : Annotatable, IRelationalModel
                 var column = sqlQuery.FindColumn(columnName);
                 if (column == null)
                 {
-                    column = new SqlQueryColumn(columnName, property.GetColumnType(mappedQuery), sqlQuery)
+                    column = new SqlQueryColumn(
+                        columnName,
+                        property.GetColumnType(mappedQuery),
+                        sqlQuery
+                    )
                     {
-                        IsNullable = property.IsColumnNullable(mappedQuery)
+                        IsNullable = property.IsColumnNullable(mappedQuery),
                     };
                     sqlQuery.Columns.Add(columnName, column);
                 }
@@ -755,15 +848,19 @@ public class RelationalModel : Annotatable, IRelationalModel
 
             mappedType = mappedType.BaseType;
 
-            queryMappings = entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.SqlQueryMappings) as List<SqlQueryMapping>;
+            queryMappings =
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.SqlQueryMappings)
+                as List<SqlQueryMapping>;
             if (queryMappings == null)
             {
                 queryMappings = new List<SqlQueryMapping>();
-                entityType.AddRuntimeAnnotation(RelationalAnnotationNames.SqlQueryMappings, queryMappings);
+                entityType.AddRuntimeAnnotation(
+                    RelationalAnnotationNames.SqlQueryMappings,
+                    queryMappings
+                );
             }
 
-            if (((ITableMappingBase)queryMapping).ColumnMappings.Any()
-                || queryMappings.Count == 0)
+            if (((ITableMappingBase)queryMapping).ColumnMappings.Any() || queryMappings.Count == 0)
             {
                 queryMappings.Add(queryMapping);
                 sqlQuery.EntityTypeMappings.Add(queryMapping);
@@ -787,31 +884,46 @@ public class RelationalModel : Annotatable, IRelationalModel
         while (mappedType != null)
         {
             var mappedFunctionName = mappedType.GetFunctionName();
-            if (mappedFunctionName == null
-                || (mappedFunctionName == functionName
-                    && mappedType != entityType))
+            if (
+                mappedFunctionName == null
+                || (mappedFunctionName == functionName && mappedType != entityType)
+            )
             {
                 break;
             }
 
             var dbFunction = (IRuntimeDbFunction)model.FindDbFunction(mappedFunctionName)!;
-            var functionMapping = CreateFunctionMapping(entityType, mappedType, dbFunction, databaseModel, @default: true);
+            var functionMapping = CreateFunctionMapping(
+                entityType,
+                mappedType,
+                dbFunction,
+                databaseModel,
+                @default: true
+            );
 
             mappedType = mappedType.BaseType;
 
             functionMappings =
-                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings) as List<FunctionMapping>;
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings)
+                as List<FunctionMapping>;
             if (functionMappings == null)
             {
                 functionMappings = new List<FunctionMapping>();
-                entityType.AddRuntimeAnnotation(RelationalAnnotationNames.FunctionMappings, functionMappings);
+                entityType.AddRuntimeAnnotation(
+                    RelationalAnnotationNames.FunctionMappings,
+                    functionMappings
+                );
             }
 
-            if (((ITableMappingBase)functionMapping).ColumnMappings.Any()
-                || functionMappings.Count == 0)
+            if (
+                ((ITableMappingBase)functionMapping).ColumnMappings.Any()
+                || functionMappings.Count == 0
+            )
             {
                 functionMappings.Add(functionMapping);
-                ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(functionMapping);
+                ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(
+                    functionMapping
+                );
             }
         }
 
@@ -837,13 +949,24 @@ public class RelationalModel : Annotatable, IRelationalModel
                 continue;
             }
 
-            var functionMapping = CreateFunctionMapping(entityType, entityType, function, relationalModel, @default: false);
+            var functionMapping = CreateFunctionMapping(
+                entityType,
+                entityType,
+                function,
+                relationalModel,
+                @default: false
+            );
 
-            if (entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings)
-                is not List<FunctionMapping> functionMappings)
+            if (
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings)
+                is not List<FunctionMapping> functionMappings
+            )
             {
                 functionMappings = new List<FunctionMapping>();
-                entityType.AddRuntimeAnnotation(RelationalAnnotationNames.FunctionMappings, functionMappings);
+                entityType.AddRuntimeAnnotation(
+                    RelationalAnnotationNames.FunctionMappings,
+                    functionMappings
+                );
             }
 
             functionMappings.Add(functionMapping);
@@ -856,14 +979,20 @@ public class RelationalModel : Annotatable, IRelationalModel
         IEntityType mappedType,
         IRuntimeDbFunction dbFunction,
         RelationalModel model,
-        bool @default)
+        bool @default
+    )
     {
         var storeFunction = GetOrCreateStoreFunction(dbFunction, model);
 
         var mappedFunction = StoreObjectIdentifier.DbFunction(dbFunction.Name);
-        var functionMapping = new FunctionMapping(entityType, storeFunction, dbFunction, includesDerivedTypes: true)
+        var functionMapping = new FunctionMapping(
+            entityType,
+            storeFunction,
+            dbFunction,
+            includesDerivedTypes: true
+        )
         {
-            IsDefaultFunctionMapping = @default
+            IsDefaultFunctionMapping = @default,
         };
 
         foreach (var property in mappedType.GetProperties())
@@ -877,9 +1006,13 @@ public class RelationalModel : Annotatable, IRelationalModel
             var column = storeFunction.FindColumn(columnName);
             if (column == null)
             {
-                column = new FunctionColumn(columnName, property.GetColumnType(mappedFunction), storeFunction)
+                column = new FunctionColumn(
+                    columnName,
+                    property.GetColumnType(mappedFunction),
+                    storeFunction
+                )
                 {
-                    IsNullable = property.IsColumnNullable(mappedFunction)
+                    IsNullable = property.IsColumnNullable(mappedFunction),
                 };
                 storeFunction.Columns.Add(columnName, column);
             }
@@ -894,18 +1027,24 @@ public class RelationalModel : Annotatable, IRelationalModel
         return functionMapping;
     }
 
-    private static StoreFunction GetOrCreateStoreFunction(IRuntimeDbFunction dbFunction, RelationalModel databaseModel)
+    private static StoreFunction GetOrCreateStoreFunction(
+        IRuntimeDbFunction dbFunction,
+        RelationalModel databaseModel
+    )
     {
         var storeFunction = (StoreFunction?)dbFunction.StoreFunction;
         if (storeFunction == null)
         {
             var parameterTypes = dbFunction.Parameters.Select(p => p.StoreType).ToArray();
-            storeFunction = (StoreFunction?)databaseModel.FindFunction(dbFunction.Name, dbFunction.Schema, parameterTypes);
+            storeFunction = (StoreFunction?)
+                databaseModel.FindFunction(dbFunction.Name, dbFunction.Schema, parameterTypes);
             if (storeFunction == null)
             {
                 storeFunction = new StoreFunction(dbFunction, databaseModel);
                 databaseModel.Functions.Add(
-                    (storeFunction.Name, storeFunction.Schema, parameterTypes), storeFunction);
+                    (storeFunction.Name, storeFunction.Schema, parameterTypes),
+                    storeFunction
+                );
             }
             else
             {
@@ -919,20 +1058,33 @@ public class RelationalModel : Annotatable, IRelationalModel
     private static void AddStoredProcedures(
         RelationalModel databaseModel,
         IEntityType entityType,
-        IRelationalTypeMappingSource relationalTypeMappingSource)
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
         var mappedType = entityType;
 
         Check.DebugAssert(
-            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.InsertStoredProcedureMappings) == null, "not null");
+            entityType.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.InsertStoredProcedureMappings
+            ) == null,
+            "not null"
+        );
         var insertStoredProcedureMappings = new List<StoredProcedureMapping>();
 
         Check.DebugAssert(
-            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.DeleteStoredProcedureMappings) == null, "not null");
+            entityType.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.DeleteStoredProcedureMappings
+            ) == null,
+            "not null"
+        );
         var deleteStoredProcedureMappings = new List<StoredProcedureMapping>();
 
         Check.DebugAssert(
-            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.UpdateStoredProcedureMappings) == null, "not null");
+            entityType.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.UpdateStoredProcedureMappings
+            ) == null,
+            "not null"
+        );
         var updateStoredProcedureMappings = new List<StoredProcedureMapping>();
 
         var mappingStrategy = entityType.GetMappingStrategy();
@@ -943,18 +1095,23 @@ public class RelationalModel : Annotatable, IRelationalModel
         {
             var includesDerivedTypes = !isTpc && mappedType == entityType;
 
-            var tableMappings = entityType.GetTableMappings().Where(
-                m => m.Table.Name == mappedType.GetTableName()
+            var tableMappings = entityType
+                .GetTableMappings()
+                .Where(m =>
+                    m.Table.Name == mappedType.GetTableName()
                     && m.Table.Schema == mappedType.GetSchema()
                     && m.IsSplitEntityTypePrincipal != false
-                    && m.IncludesDerivedTypes == includesDerivedTypes);
+                    && m.IncludesDerivedTypes == includesDerivedTypes
+                );
             var tableMapping = (TableMapping?)tableMappings.FirstOrDefault();
 
-            Check.DebugAssert(tableMapping == null || tableMappings.Count() == 1, "Expected table mapping to be unique");
+            Check.DebugAssert(
+                tableMapping == null || tableMappings.Count() == 1,
+                "Expected table mapping to be unique"
+            );
 
             var insertSproc = (IRuntimeStoredProcedure?)mappedType.GetInsertStoredProcedure();
-            if (insertSproc != null
-                && insertStoredProcedureMappings != null)
+            if (insertSproc != null && insertStoredProcedureMappings != null)
             {
                 var insertProcedureMapping = CreateStoredProcedureMapping(
                     entityType,
@@ -964,13 +1121,15 @@ public class RelationalModel : Annotatable, IRelationalModel
                     databaseModel,
                     insertStoredProcedureMappings,
                     includesDerivedTypes,
-                    relationalTypeMappingSource);
+                    relationalTypeMappingSource
+                );
 
                 if (tableMapping != null)
                 {
                     Check.DebugAssert(
                         tableMapping.InsertStoredProcedureMapping == null,
-                        "Expected sproc mapping to be unique");
+                        "Expected sproc mapping to be unique"
+                    );
                     tableMapping.InsertStoredProcedureMapping = insertProcedureMapping;
                 }
             }
@@ -980,8 +1139,7 @@ public class RelationalModel : Annotatable, IRelationalModel
             }
 
             var deleteSproc = (IRuntimeStoredProcedure?)mappedType.GetDeleteStoredProcedure();
-            if (deleteSproc != null
-                && deleteStoredProcedureMappings != null)
+            if (deleteSproc != null && deleteStoredProcedureMappings != null)
             {
                 var deleteProcedureMapping = CreateStoredProcedureMapping(
                     entityType,
@@ -991,13 +1149,15 @@ public class RelationalModel : Annotatable, IRelationalModel
                     databaseModel,
                     deleteStoredProcedureMappings,
                     includesDerivedTypes,
-                    relationalTypeMappingSource);
+                    relationalTypeMappingSource
+                );
 
                 if (tableMapping != null)
                 {
                     Check.DebugAssert(
                         tableMapping.DeleteStoredProcedureMapping == null,
-                        "Expected sproc mapping to be unique");
+                        "Expected sproc mapping to be unique"
+                    );
                     tableMapping.DeleteStoredProcedureMapping = deleteProcedureMapping;
                 }
             }
@@ -1007,8 +1167,7 @@ public class RelationalModel : Annotatable, IRelationalModel
             }
 
             var updateSproc = (IRuntimeStoredProcedure?)mappedType.GetUpdateStoredProcedure();
-            if (updateSproc != null
-                && updateStoredProcedureMappings != null)
+            if (updateSproc != null && updateStoredProcedureMappings != null)
             {
                 var updateProcedureMapping = CreateStoredProcedureMapping(
                     entityType,
@@ -1018,13 +1177,15 @@ public class RelationalModel : Annotatable, IRelationalModel
                     databaseModel,
                     updateStoredProcedureMappings,
                     includesDerivedTypes,
-                    relationalTypeMappingSource);
+                    relationalTypeMappingSource
+                );
 
                 if (tableMapping != null)
                 {
                     Check.DebugAssert(
                         tableMapping.UpdateStoredProcedureMapping == null,
-                        "Expected sproc mapping to be unique");
+                        "Expected sproc mapping to be unique"
+                    );
                     tableMapping.UpdateStoredProcedureMapping = updateProcedureMapping;
                 }
             }
@@ -1044,19 +1205,28 @@ public class RelationalModel : Annotatable, IRelationalModel
         if (insertStoredProcedureMappings?.Count > 0)
         {
             insertStoredProcedureMappings.Reverse();
-            entityType.SetRuntimeAnnotation(RelationalAnnotationNames.InsertStoredProcedureMappings, insertStoredProcedureMappings);
+            entityType.SetRuntimeAnnotation(
+                RelationalAnnotationNames.InsertStoredProcedureMappings,
+                insertStoredProcedureMappings
+            );
         }
 
         if (deleteStoredProcedureMappings?.Count > 0)
         {
             deleteStoredProcedureMappings.Reverse();
-            entityType.SetRuntimeAnnotation(RelationalAnnotationNames.DeleteStoredProcedureMappings, deleteStoredProcedureMappings);
+            entityType.SetRuntimeAnnotation(
+                RelationalAnnotationNames.DeleteStoredProcedureMappings,
+                deleteStoredProcedureMappings
+            );
         }
 
         if (updateStoredProcedureMappings?.Count > 0)
         {
             updateStoredProcedureMappings.Reverse();
-            entityType.SetRuntimeAnnotation(RelationalAnnotationNames.UpdateStoredProcedureMappings, updateStoredProcedureMappings);
+            entityType.SetRuntimeAnnotation(
+                RelationalAnnotationNames.UpdateStoredProcedureMappings,
+                updateStoredProcedureMappings
+            );
         }
     }
 
@@ -1068,13 +1238,23 @@ public class RelationalModel : Annotatable, IRelationalModel
         RelationalModel model,
         List<StoredProcedureMapping> storedProcedureMappings,
         bool includesDerivedTypes,
-        IRelationalTypeMappingSource relationalTypeMappingSource)
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
-        var storeStoredProcedure = GetOrCreateStoreStoredProcedure(storedProcedure, model, relationalTypeMappingSource);
+        var storeStoredProcedure = GetOrCreateStoreStoredProcedure(
+            storedProcedure,
+            model,
+            relationalTypeMappingSource
+        );
 
         var identifier = storedProcedure.GetStoreIdentifier();
         var storedProcedureMapping = new StoredProcedureMapping(
-            entityType, storeStoredProcedure, storedProcedure, tableMapping, includesDerivedTypes);
+            entityType,
+            storeStoredProcedure,
+            storedProcedure,
+            tableMapping,
+            includesDerivedTypes
+        );
 
         foreach (var parameter in storedProcedure.Parameters)
         {
@@ -1085,7 +1265,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                     null,
                     storeStoredProcedure,
                     identifier,
-                    relationalTypeMappingSource);
+                    relationalTypeMappingSource
+                );
 
                 continue;
             }
@@ -1095,7 +1276,8 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 Check.DebugAssert(
                     entityType.GetMappingStrategy() == RelationalAnnotationNames.TphMappingStrategy,
-                    "Expected TPH for " + entityType.DisplayName());
+                    "Expected TPH for " + entityType.DisplayName()
+                );
 
                 foreach (var derivedType in entityType.GetRootType().GetDerivedTypes())
                 {
@@ -1107,7 +1289,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                             derivedProperty,
                             storeStoredProcedure,
                             identifier,
-                            relationalTypeMappingSource);
+                            relationalTypeMappingSource
+                        );
                         break;
                     }
                 }
@@ -1120,9 +1303,15 @@ public class RelationalModel : Annotatable, IRelationalModel
                 property,
                 storeStoredProcedure,
                 identifier,
-                relationalTypeMappingSource);
+                relationalTypeMappingSource
+            );
 
-            CreateStoredProcedureParameterMapping(storeParameter, parameter, property, storedProcedureMapping);
+            CreateStoredProcedureParameterMapping(
+                storeParameter,
+                parameter,
+                property,
+                storedProcedureMapping
+            );
         }
 
         foreach (var resultColumn in storedProcedure.ResultColumns)
@@ -1134,7 +1323,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                     null,
                     storeStoredProcedure,
                     identifier,
-                    relationalTypeMappingSource);
+                    relationalTypeMappingSource
+                );
 
                 continue;
             }
@@ -1144,7 +1334,8 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 Check.DebugAssert(
                     entityType.GetMappingStrategy() == RelationalAnnotationNames.TphMappingStrategy,
-                    "Expected TPH for " + entityType.DisplayName());
+                    "Expected TPH for " + entityType.DisplayName()
+                );
 
                 foreach (var derivedType in entityType.GetRootType().GetDerivedTypes())
                 {
@@ -1156,7 +1347,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                             derivedProperty,
                             storeStoredProcedure,
                             identifier,
-                            relationalTypeMappingSource);
+                            relationalTypeMappingSource
+                        );
 
                         break;
                     }
@@ -1170,9 +1362,15 @@ public class RelationalModel : Annotatable, IRelationalModel
                 property,
                 storeStoredProcedure,
                 identifier,
-                relationalTypeMappingSource);
+                relationalTypeMappingSource
+            );
 
-            CreateStoredProcedureResultColumnMapping(column, resultColumn, property, storedProcedureMapping);
+            CreateStoredProcedureResultColumnMapping(
+                column,
+                resultColumn,
+                property,
+                storedProcedureMapping
+            );
         }
 
         storedProcedureMappings.Add(storedProcedureMapping);
@@ -1183,15 +1381,21 @@ public class RelationalModel : Annotatable, IRelationalModel
         static StoreStoredProcedure GetOrCreateStoreStoredProcedure(
             IRuntimeStoredProcedure storedProcedure,
             RelationalModel databaseModel,
-            IRelationalTypeMappingSource relationalTypeMappingSource)
+            IRelationalTypeMappingSource relationalTypeMappingSource
+        )
         {
             var storeStoredProcedure = (StoreStoredProcedure?)storedProcedure.StoreStoredProcedure;
             if (storeStoredProcedure == null)
             {
-                storeStoredProcedure = (StoreStoredProcedure?)databaseModel.FindStoredProcedure(storedProcedure.Name, storedProcedure.Schema);
+                storeStoredProcedure = (StoreStoredProcedure?)
+                    databaseModel.FindStoredProcedure(storedProcedure.Name, storedProcedure.Schema);
                 if (storeStoredProcedure == null)
                 {
-                    storeStoredProcedure = new StoreStoredProcedure(storedProcedure.Name, storedProcedure.Schema, databaseModel);
+                    storeStoredProcedure = new StoreStoredProcedure(
+                        storedProcedure.Name,
+                        storedProcedure.Schema,
+                        databaseModel
+                    );
                     if (storedProcedure.IsRowsAffectedReturned)
                     {
                         var typeMapping = relationalTypeMappingSource.FindMapping(typeof(int))!;
@@ -1199,11 +1403,14 @@ public class RelationalModel : Annotatable, IRelationalModel
                             "",
                             typeMapping.StoreType,
                             storeStoredProcedure,
-                            typeMapping);
+                            typeMapping
+                        );
                     }
 
                     databaseModel.StoredProcedures.Add(
-                        (storeStoredProcedure.Name, storeStoredProcedure.Schema), storeStoredProcedure);
+                        (storeStoredProcedure.Name, storeStoredProcedure.Schema),
+                        storeStoredProcedure
+                    );
                 }
 
                 storeStoredProcedure.StoredProcedures.Add(storedProcedure);
@@ -1218,10 +1425,12 @@ public class RelationalModel : Annotatable, IRelationalModel
             IProperty? property,
             StoreStoredProcedure storeStoredProcedure,
             StoreObjectIdentifier identifier,
-            IRelationalTypeMappingSource relationalTypeMappingSource)
+            IRelationalTypeMappingSource relationalTypeMappingSource
+        )
         {
             var name = parameter.Name;
-            var storeParameter = (StoreStoredProcedureParameter?)storeStoredProcedure.FindParameter(name);
+            var storeParameter = (StoreStoredProcedureParameter?)
+                storeStoredProcedure.FindParameter(name);
             if (storeParameter == null)
             {
                 var position = storeStoredProcedure.Parameters.Count;
@@ -1234,7 +1443,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                         position,
                         storeStoredProcedure,
                         parameter.Direction,
-                        typeMapping);
+                        typeMapping
+                    );
                 }
                 else
                 {
@@ -1243,7 +1453,11 @@ public class RelationalModel : Annotatable, IRelationalModel
                         property.GetColumnType(identifier),
                         position,
                         storeStoredProcedure,
-                        parameter.Direction) { IsNullable = property.IsColumnNullable(identifier) };
+                        parameter.Direction
+                    )
+                    {
+                        IsNullable = property.IsColumnNullable(identifier),
+                    };
                 }
 
                 storeStoredProcedure.AddParameter(storeParameter);
@@ -1262,10 +1476,12 @@ public class RelationalModel : Annotatable, IRelationalModel
             IProperty? property,
             StoreStoredProcedure storeStoredProcedure,
             StoreObjectIdentifier identifier,
-            IRelationalTypeMappingSource relationalTypeMappingSource)
+            IRelationalTypeMappingSource relationalTypeMappingSource
+        )
         {
             var name = resultColumn.Name;
-            var column = (StoreStoredProcedureResultColumn?)storeStoredProcedure.FindResultColumn(name);
+            var column = (StoreStoredProcedureResultColumn?)
+                storeStoredProcedure.FindResultColumn(name);
             if (column == null)
             {
                 var position = storeStoredProcedure.ResultColumns.Count;
@@ -1277,7 +1493,8 @@ public class RelationalModel : Annotatable, IRelationalModel
                         typeMapping.StoreType,
                         position,
                         storeStoredProcedure,
-                        typeMapping);
+                        typeMapping
+                    );
                 }
                 else
                 {
@@ -1285,7 +1502,11 @@ public class RelationalModel : Annotatable, IRelationalModel
                         name,
                         property.GetColumnType(identifier),
                         position,
-                        storeStoredProcedure) { IsNullable = property.IsColumnNullable(identifier) };
+                        storeStoredProcedure
+                    )
+                    {
+                        IsNullable = property.IsColumnNullable(identifier),
+                    };
                 }
 
                 storeStoredProcedure.AddResultColumn(column);
@@ -1305,8 +1526,10 @@ public class RelationalModel : Annotatable, IRelationalModel
         var storeObject = StoreObjectIdentifier.Table(table.Name, table.Schema);
         foreach (var entityTypeMapping in ((ITable)table).EntityTypeMappings)
         {
-            if (!entityTypeMapping.IncludesDerivedTypes
-                && entityTypeMapping.TypeBase.GetTableMappings().Any(m => m.IncludesDerivedTypes))
+            if (
+                !entityTypeMapping.IncludesDerivedTypes
+                && entityTypeMapping.TypeBase.GetTableMappings().Any(m => m.IncludesDerivedTypes)
+            )
             {
                 continue;
             }
@@ -1419,8 +1642,14 @@ public class RelationalModel : Annotatable, IRelationalModel
                     continue;
                 }
 
-                Check.DebugAssert(trigger.GetTableName() == table.Name, "Mismatch in trigger table name");
-                Check.DebugAssert(trigger.GetTableSchema() == table.Schema, "Mismatch in trigger table schema");
+                Check.DebugAssert(
+                    trigger.GetTableName() == table.Name,
+                    "Mismatch in trigger table name"
+                );
+                Check.DebugAssert(
+                    trigger.GetTableSchema() == table.Schema,
+                    "Mismatch in trigger table schema"
+                );
 
                 if (!table.Triggers.ContainsKey(name))
                 {
@@ -1447,8 +1676,10 @@ public class RelationalModel : Annotatable, IRelationalModel
             var primaryKey = entityType.FindPrimaryKey();
             if (primaryKey == null)
             {
-                if (mainMapping == null
-                    || entityTypeMapping.TypeBase.IsAssignableFrom(mainMapping.TypeBase))
+                if (
+                    mainMapping == null
+                    || entityTypeMapping.TypeBase.IsAssignableFrom(mainMapping.TypeBase)
+                )
                 {
                     mainMapping = entityTypeMapping;
                 }
@@ -1464,20 +1695,32 @@ public class RelationalModel : Annotatable, IRelationalModel
             foreach (var foreignKey in foreignKeys)
             {
                 // for JSON mapped entities we can have row internal FKs for collection navigations
-                if ((foreignKey.IsUnique || entityType.IsMappedToJson())
+                if (
+                    (foreignKey.IsUnique || entityType.IsMappedToJson())
                     && foreignKey.PrincipalKey.IsPrimaryKey()
-                    && !foreignKey.DeclaringEntityType.IsAssignableFrom(foreignKey.PrincipalEntityType)
-                    && !foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
-                    && ((ITableBase)table).EntityTypeMappings.Any(m => m.TypeBase == foreignKey.PrincipalEntityType))
+                    && !foreignKey.DeclaringEntityType.IsAssignableFrom(
+                        foreignKey.PrincipalEntityType
+                    )
+                    && !foreignKey.PrincipalEntityType.IsAssignableFrom(
+                        foreignKey.DeclaringEntityType
+                    )
+                    && ((ITableBase)table).EntityTypeMappings.Any(m =>
+                        m.TypeBase == foreignKey.PrincipalEntityType
+                    )
+                )
                 {
                     isMainMapping = false;
                     table.AddRowInternalForeignKey(entityType, foreignKey);
                 }
             }
 
-            if (isMainMapping
-                && (mainMapping == null
-                    || entityTypeMapping.TypeBase.IsAssignableFrom(mainMapping.TypeBase)))
+            if (
+                isMainMapping
+                && (
+                    mainMapping == null
+                    || entityTypeMapping.TypeBase.IsAssignableFrom(mainMapping.TypeBase)
+                )
+            )
             {
                 mainMapping = entityTypeMapping;
             }
@@ -1485,7 +1728,8 @@ public class RelationalModel : Annotatable, IRelationalModel
 
         Check.DebugAssert(
             mainMapping is not null,
-            $"{nameof(mainMapping)} is neither a {nameof(TableMapping)} nor a {nameof(ViewMapping)}");
+            $"{nameof(mainMapping)} is neither a {nameof(TableMapping)} nor a {nameof(ViewMapping)}"
+        );
 
         if (table.EntityTypeMappings.Count > 1)
         {
@@ -1505,8 +1749,10 @@ public class RelationalModel : Annotatable, IRelationalModel
             while (entityTypesToVisit.Count > 0)
             {
                 var (typeBase, optional) = entityTypesToVisit.Dequeue();
-                if (optionalTypes.TryGetValue(typeBase, out var previouslyOptional)
-                    && (!previouslyOptional || optional))
+                if (
+                    optionalTypes.TryGetValue(typeBase, out var previouslyOptional)
+                    && (!previouslyOptional || optional)
+                )
                 {
                     continue;
                 }
@@ -1516,26 +1762,43 @@ public class RelationalModel : Annotatable, IRelationalModel
                 if (typeBase is IComplexType complexType)
                 {
                     var complexProperty = complexType.ComplexProperty;
-                    entityTypesToVisit.Enqueue((complexProperty.DeclaringType, optional || complexProperty.IsNullable));
+                    entityTypesToVisit.Enqueue(
+                        (complexProperty.DeclaringType, optional || complexProperty.IsNullable)
+                    );
                     continue;
                 }
 
                 var entityType = (IEntityType)typeBase;
-                if (referencingInternalForeignKeyMap.TryGetValue(entityType, out var referencingInternalForeignKeys))
+                if (
+                    referencingInternalForeignKeyMap.TryGetValue(
+                        entityType,
+                        out var referencingInternalForeignKeys
+                    )
+                )
                 {
                     foreach (var referencingForeignKey in referencingInternalForeignKeys)
                     {
                         entityTypesToVisit.Enqueue(
-                            (referencingForeignKey.DeclaringEntityType, optional || !referencingForeignKey.IsRequiredDependent));
+                            (
+                                referencingForeignKey.DeclaringEntityType,
+                                optional || !referencingForeignKey.IsRequiredDependent
+                            )
+                        );
                     }
                 }
 
-                if (table.EntityTypeMappings.Single(etm => etm.TypeBase == typeBase).IncludesDerivedTypes)
+                if (
+                    table
+                        .EntityTypeMappings.Single(etm => etm.TypeBase == typeBase)
+                        .IncludesDerivedTypes
+                )
                 {
                     foreach (var directlyDerivedEntityType in entityType.GetDerivedTypes())
                     {
-                        if (mappedEntityTypes.Contains(directlyDerivedEntityType)
-                            && !optionalTypes.ContainsKey(directlyDerivedEntityType))
+                        if (
+                            mappedEntityTypes.Contains(directlyDerivedEntityType)
+                            && !optionalTypes.ContainsKey(directlyDerivedEntityType)
+                        )
                         {
                             entityTypesToVisit.Enqueue((directlyDerivedEntityType, optional));
                         }
@@ -1552,8 +1815,10 @@ public class RelationalModel : Annotatable, IRelationalModel
         var storeObject = StoreObjectIdentifier.Table(table.Name, table.Schema);
         foreach (var entityTypeMapping in ((ITable)table).EntityTypeMappings)
         {
-            if (!entityTypeMapping.IncludesDerivedTypes
-                && entityTypeMapping.TypeBase.GetTableMappings().Any(m => m.IncludesDerivedTypes))
+            if (
+                !entityTypeMapping.IncludesDerivedTypes
+                && entityTypeMapping.TypeBase.GetTableMappings().Any(m => m.IncludesDerivedTypes)
+            )
             {
                 continue;
             }
@@ -1561,17 +1826,26 @@ public class RelationalModel : Annotatable, IRelationalModel
             var entityType = (IEntityType)entityTypeMapping.TypeBase;
             foreach (var foreignKey in entityType.GetForeignKeys())
             {
-                foreach (var principalMapping in foreignKey.PrincipalEntityType.GetTableMappings().Reverse())
+                foreach (
+                    var principalMapping in foreignKey
+                        .PrincipalEntityType.GetTableMappings()
+                        .Reverse()
+                )
                 {
                     var principalTable = (Table)principalMapping.Table;
-                    var principalStoreObject = StoreObjectIdentifier.Table(principalTable.Name, principalTable.Schema);
+                    var principalStoreObject = StoreObjectIdentifier.Table(
+                        principalTable.Name,
+                        principalTable.Schema
+                    );
                     var name = foreignKey.GetConstraintName(storeObject, principalStoreObject);
                     if (name == null)
                     {
                         continue;
                     }
 
-                    var constraint = table.ForeignKeyConstraints.FirstOrDefault(fk => fk.Name == name);
+                    var constraint = table.ForeignKeyConstraints.FirstOrDefault(fk =>
+                        fk.Name == name
+                    );
                     if (constraint != null)
                     {
                         GetOrCreateForeignKeyConstraints(foreignKey).Add(constraint);
@@ -1583,7 +1857,10 @@ public class RelationalModel : Annotatable, IRelationalModel
                     var principalColumns = new Column[foreignKey.Properties.Count];
                     for (var i = 0; i < principalColumns.Length; i++)
                     {
-                        if (principalTable.FindColumn(foreignKey.PrincipalKey.Properties[i]) is Column principalColumn)
+                        if (
+                            principalTable.FindColumn(foreignKey.PrincipalKey.Properties[i])
+                            is Column principalColumn
+                        )
                         {
                             principalColumns[i] = principalColumn;
                         }
@@ -1614,34 +1891,48 @@ public class RelationalModel : Annotatable, IRelationalModel
                         }
                     }
 
-                    if (columns == null
-                        || columns.SequenceEqual(principalColumns))
+                    if (columns == null || columns.SequenceEqual(principalColumns))
                     {
                         Check.DebugAssert(false, "Should not get here if name is not null");
                         break;
                     }
 
-                    if (entityTypeMapping.IncludesDerivedTypes
+                    if (
+                        entityTypeMapping.IncludesDerivedTypes
                         && foreignKey.DeclaringEntityType != entityType
                         && entityType.FindPrimaryKey() is IKey primaryKey
-                        && foreignKey.Properties.SequenceEqual(primaryKey.Properties))
+                        && foreignKey.Properties.SequenceEqual(primaryKey.Properties)
+                    )
                     {
                         Check.DebugAssert(false, "Should not get here if name is not null");
                         break;
                     }
 
-                    var principalUniqueConstraintName = foreignKey.PrincipalKey.GetName(principalStoreObject);
+                    var principalUniqueConstraintName = foreignKey.PrincipalKey.GetName(
+                        principalStoreObject
+                    );
                     if (principalUniqueConstraintName == null)
                     {
                         continue;
                     }
 
-                    var principalUniqueConstraint = principalTable.FindUniqueConstraint(principalUniqueConstraintName)!;
+                    var principalUniqueConstraint = principalTable.FindUniqueConstraint(
+                        principalUniqueConstraintName
+                    )!;
 
-                    Check.DebugAssert(principalUniqueConstraint != null, "Invalid unique constraint " + principalUniqueConstraintName);
+                    Check.DebugAssert(
+                        principalUniqueConstraint != null,
+                        "Invalid unique constraint " + principalUniqueConstraintName
+                    );
 
                     constraint = new ForeignKeyConstraint(
-                        name, table, principalTable, columns, principalUniqueConstraint, ToReferentialAction(foreignKey.DeleteBehavior));
+                        name,
+                        table,
+                        principalTable,
+                        columns,
+                        principalUniqueConstraint,
+                        ToReferentialAction(foreignKey.DeleteBehavior)
+                    );
                     constraint.MappedForeignKeys.Add(foreignKey);
 
                     GetOrCreateForeignKeyConstraints(foreignKey).Add(constraint);
@@ -1662,17 +1953,23 @@ public class RelationalModel : Annotatable, IRelationalModel
     public static void CreateColumnMapping(
         ColumnBase<ColumnMappingBase> column,
         IProperty property,
-        TableMappingBase<ColumnMappingBase> tableMapping)
+        TableMappingBase<ColumnMappingBase> tableMapping
+    )
     {
         var columnMapping = new ColumnMappingBase(property, column, tableMapping);
         tableMapping.AddColumnMapping(columnMapping);
         column.AddPropertyMapping(columnMapping);
 
-        if (property.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultColumnMappings)
-            is not SortedSet<ColumnMappingBase> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultColumnMappings)
+            is not SortedSet<ColumnMappingBase> columnMappings
+        )
         {
             columnMappings = new SortedSet<ColumnMappingBase>(ColumnMappingBaseComparer.Instance);
-            property.AddRuntimeAnnotation(RelationalAnnotationNames.DefaultColumnMappings, columnMappings);
+            property.AddRuntimeAnnotation(
+                RelationalAnnotationNames.DefaultColumnMappings,
+                columnMappings
+            );
         }
 
         columnMappings.Add(columnMapping);
@@ -1684,17 +1981,26 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void CreateColumnMapping(Column column, IProperty property, TableMapping tableMapping)
+    public static void CreateColumnMapping(
+        Column column,
+        IProperty property,
+        TableMapping tableMapping
+    )
     {
         var columnMapping = new ColumnMapping(property, column, tableMapping);
         tableMapping.AddColumnMapping(columnMapping);
         column.AddPropertyMapping(columnMapping);
 
-        if (property.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableColumnMappings)
-            is not SortedSet<ColumnMapping> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableColumnMappings)
+            is not SortedSet<ColumnMapping> columnMappings
+        )
         {
             columnMappings = new SortedSet<ColumnMapping>(ColumnMappingBaseComparer.Instance);
-            property.AddRuntimeAnnotation(RelationalAnnotationNames.TableColumnMappings, columnMappings);
+            property.AddRuntimeAnnotation(
+                RelationalAnnotationNames.TableColumnMappings,
+                columnMappings
+            );
         }
 
         columnMappings.Add(columnMapping);
@@ -1706,17 +2012,26 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void CreateViewColumnMapping(ViewColumn column, IProperty property, ViewMapping viewMapping)
+    public static void CreateViewColumnMapping(
+        ViewColumn column,
+        IProperty property,
+        ViewMapping viewMapping
+    )
     {
         var columnMapping = new ViewColumnMapping(property, column, viewMapping);
         viewMapping.AddColumnMapping(columnMapping);
         column.AddPropertyMapping(columnMapping);
 
-        if (property.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewColumnMappings)
-            is not SortedSet<ViewColumnMapping> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewColumnMappings)
+            is not SortedSet<ViewColumnMapping> columnMappings
+        )
         {
             columnMappings = new SortedSet<ViewColumnMapping>(ColumnMappingBaseComparer.Instance);
-            property.AddRuntimeAnnotation(RelationalAnnotationNames.ViewColumnMappings, columnMappings);
+            property.AddRuntimeAnnotation(
+                RelationalAnnotationNames.ViewColumnMappings,
+                columnMappings
+            );
         }
 
         columnMappings.Add(columnMapping);
@@ -1728,17 +2043,28 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void CreateSqlQueryColumnMapping(SqlQueryColumn column, IProperty property, SqlQueryMapping queryMapping)
+    public static void CreateSqlQueryColumnMapping(
+        SqlQueryColumn column,
+        IProperty property,
+        SqlQueryMapping queryMapping
+    )
     {
         var columnMapping = new SqlQueryColumnMapping(property, column, queryMapping);
         queryMapping.AddColumnMapping(columnMapping);
         column.AddPropertyMapping(columnMapping);
 
-        if (property.FindRuntimeAnnotationValue(RelationalAnnotationNames.SqlQueryColumnMappings)
-            is not SortedSet<SqlQueryColumnMapping> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(RelationalAnnotationNames.SqlQueryColumnMappings)
+            is not SortedSet<SqlQueryColumnMapping> columnMappings
+        )
         {
-            columnMappings = new SortedSet<SqlQueryColumnMapping>(ColumnMappingBaseComparer.Instance);
-            property.AddRuntimeAnnotation(RelationalAnnotationNames.SqlQueryColumnMappings, columnMappings);
+            columnMappings = new SortedSet<SqlQueryColumnMapping>(
+                ColumnMappingBaseComparer.Instance
+            );
+            property.AddRuntimeAnnotation(
+                RelationalAnnotationNames.SqlQueryColumnMappings,
+                columnMappings
+            );
         }
 
         columnMappings.Add(columnMapping);
@@ -1750,17 +2076,28 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void CreateFunctionColumnMapping(FunctionColumn column, IProperty property, FunctionMapping functionMapping)
+    public static void CreateFunctionColumnMapping(
+        FunctionColumn column,
+        IProperty property,
+        FunctionMapping functionMapping
+    )
     {
         var columnMapping = new FunctionColumnMapping(property, column, functionMapping);
         functionMapping.AddColumnMapping(columnMapping);
         column.AddPropertyMapping(columnMapping);
 
-        if (property.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionColumnMappings)
-            is not SortedSet<FunctionColumnMapping> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionColumnMappings)
+            is not SortedSet<FunctionColumnMapping> columnMappings
+        )
         {
-            columnMappings = new SortedSet<FunctionColumnMapping>(ColumnMappingBaseComparer.Instance);
-            property.AddRuntimeAnnotation(RelationalAnnotationNames.FunctionColumnMappings, columnMappings);
+            columnMappings = new SortedSet<FunctionColumnMapping>(
+                ColumnMappingBaseComparer.Instance
+            );
+            property.AddRuntimeAnnotation(
+                RelationalAnnotationNames.FunctionColumnMappings,
+                columnMappings
+            );
         }
 
         columnMappings.Add(columnMapping);
@@ -1776,29 +2113,42 @@ public class RelationalModel : Annotatable, IRelationalModel
         StoreStoredProcedureParameter storeParameter,
         IStoredProcedureParameter parameter,
         IProperty property,
-        StoredProcedureMapping storedProcedureMapping)
+        StoredProcedureMapping storedProcedureMapping
+    )
     {
-        var columnMapping = new StoredProcedureParameterMapping(property, parameter, storeParameter, storedProcedureMapping);
+        var columnMapping = new StoredProcedureParameterMapping(
+            property,
+            parameter,
+            storeParameter,
+            storedProcedureMapping
+        );
         storedProcedureMapping.AddParameterMapping(columnMapping);
         storeParameter.AddPropertyMapping(columnMapping);
 
-        var parameterMappingAnnotationName = storedProcedureMapping.StoredProcedureIdentifier.StoreObjectType switch
+        var parameterMappingAnnotationName = storedProcedureMapping
+            .StoredProcedureIdentifier
+            .StoreObjectType switch
         {
-            StoreObjectType.InsertStoredProcedure
-                => RelationalAnnotationNames.InsertStoredProcedureParameterMappings,
-            StoreObjectType.DeleteStoredProcedure
-                => RelationalAnnotationNames.DeleteStoredProcedureParameterMappings,
-            StoreObjectType.UpdateStoredProcedure
-                => RelationalAnnotationNames.UpdateStoredProcedureParameterMappings,
+            StoreObjectType.InsertStoredProcedure =>
+                RelationalAnnotationNames.InsertStoredProcedureParameterMappings,
+            StoreObjectType.DeleteStoredProcedure =>
+                RelationalAnnotationNames.DeleteStoredProcedureParameterMappings,
+            StoreObjectType.UpdateStoredProcedure =>
+                RelationalAnnotationNames.UpdateStoredProcedureParameterMappings,
             _ => throw new Exception(
                 "Unexpected stored procedure type: "
-                + storedProcedureMapping.StoredProcedureIdentifier.StoreObjectType)
+                    + storedProcedureMapping.StoredProcedureIdentifier.StoreObjectType
+            ),
         };
 
-        if (property.FindRuntimeAnnotationValue(parameterMappingAnnotationName)
-            is not SortedSet<StoredProcedureParameterMapping> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(parameterMappingAnnotationName)
+            is not SortedSet<StoredProcedureParameterMapping> columnMappings
+        )
         {
-            columnMappings = new SortedSet<StoredProcedureParameterMapping>(ColumnMappingBaseComparer.Instance);
+            columnMappings = new SortedSet<StoredProcedureParameterMapping>(
+                ColumnMappingBaseComparer.Instance
+            );
             property.AddRuntimeAnnotation(parameterMappingAnnotationName, columnMappings);
         }
 
@@ -1815,27 +2165,40 @@ public class RelationalModel : Annotatable, IRelationalModel
         StoreStoredProcedureResultColumn storeResultColumn,
         IStoredProcedureResultColumn resultColumn,
         IProperty property,
-        StoredProcedureMapping storedProcedureMapping)
+        StoredProcedureMapping storedProcedureMapping
+    )
     {
-        var columnMapping = new StoredProcedureResultColumnMapping(property, resultColumn, storeResultColumn, storedProcedureMapping);
+        var columnMapping = new StoredProcedureResultColumnMapping(
+            property,
+            resultColumn,
+            storeResultColumn,
+            storedProcedureMapping
+        );
         storedProcedureMapping.AddColumnMapping(columnMapping);
         storeResultColumn.AddPropertyMapping(columnMapping);
 
-        var columnMappingAnnotationName = storedProcedureMapping.StoredProcedureIdentifier.StoreObjectType switch
+        var columnMappingAnnotationName = storedProcedureMapping
+            .StoredProcedureIdentifier
+            .StoreObjectType switch
         {
-            StoreObjectType.InsertStoredProcedure
-                => RelationalAnnotationNames.InsertStoredProcedureResultColumnMappings,
-            StoreObjectType.UpdateStoredProcedure
-                => RelationalAnnotationNames.UpdateStoredProcedureResultColumnMappings,
+            StoreObjectType.InsertStoredProcedure =>
+                RelationalAnnotationNames.InsertStoredProcedureResultColumnMappings,
+            StoreObjectType.UpdateStoredProcedure =>
+                RelationalAnnotationNames.UpdateStoredProcedureResultColumnMappings,
             _ => throw new Exception(
                 "Unexpected stored procedure type: "
-                + storedProcedureMapping.StoredProcedureIdentifier.StoreObjectType)
+                    + storedProcedureMapping.StoredProcedureIdentifier.StoreObjectType
+            ),
         };
 
-        if (property.FindRuntimeAnnotationValue(columnMappingAnnotationName)
-            is not SortedSet<StoredProcedureResultColumnMapping> columnMappings)
+        if (
+            property.FindRuntimeAnnotationValue(columnMappingAnnotationName)
+            is not SortedSet<StoredProcedureResultColumnMapping> columnMappings
+        )
         {
-            columnMappings = new SortedSet<StoredProcedureResultColumnMapping>(ColumnMappingBaseComparer.Instance);
+            columnMappings = new SortedSet<StoredProcedureResultColumnMapping>(
+                ColumnMappingBaseComparer.Instance
+            );
             property.AddRuntimeAnnotation(columnMappingAnnotationName, columnMappings);
         }
 
@@ -1850,11 +2213,16 @@ public class RelationalModel : Annotatable, IRelationalModel
     /// </summary>
     public static SortedSet<UniqueConstraint> GetOrCreateUniqueConstraints(IKey key)
     {
-        if (key.FindRuntimeAnnotationValue(RelationalAnnotationNames.UniqueConstraintMappings)
-            is not SortedSet<UniqueConstraint> uniqueConstraints)
+        if (
+            key.FindRuntimeAnnotationValue(RelationalAnnotationNames.UniqueConstraintMappings)
+            is not SortedSet<UniqueConstraint> uniqueConstraints
+        )
         {
             uniqueConstraints = new SortedSet<UniqueConstraint>(UniqueConstraintComparer.Instance);
-            key.AddRuntimeAnnotation(RelationalAnnotationNames.UniqueConstraintMappings, uniqueConstraints);
+            key.AddRuntimeAnnotation(
+                RelationalAnnotationNames.UniqueConstraintMappings,
+                uniqueConstraints
+            );
         }
 
         return uniqueConstraints;
@@ -1868,8 +2236,10 @@ public class RelationalModel : Annotatable, IRelationalModel
     /// </summary>
     public static SortedSet<TableIndex> GetOrCreateTableIndexes(IIndex index)
     {
-        if (index.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableIndexMappings)
-            is not SortedSet<TableIndex> tableIndexes)
+        if (
+            index.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableIndexMappings)
+            is not SortedSet<TableIndex> tableIndexes
+        )
         {
             tableIndexes = new SortedSet<TableIndex>(TableIndexComparer.Instance);
             index.AddRuntimeAnnotation(RelationalAnnotationNames.TableIndexMappings, tableIndexes);
@@ -1884,13 +2254,22 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static SortedSet<ForeignKeyConstraint> GetOrCreateForeignKeyConstraints(IForeignKey foreignKey)
+    public static SortedSet<ForeignKeyConstraint> GetOrCreateForeignKeyConstraints(
+        IForeignKey foreignKey
+    )
     {
-        if (foreignKey.FindRuntimeAnnotationValue(RelationalAnnotationNames.ForeignKeyMappings)
-            is not SortedSet<ForeignKeyConstraint> foreignKeyConstraints)
+        if (
+            foreignKey.FindRuntimeAnnotationValue(RelationalAnnotationNames.ForeignKeyMappings)
+            is not SortedSet<ForeignKeyConstraint> foreignKeyConstraints
+        )
         {
-            foreignKeyConstraints = new SortedSet<ForeignKeyConstraint>(ForeignKeyConstraintComparer.Instance);
-            foreignKey.AddRuntimeAnnotation(RelationalAnnotationNames.ForeignKeyMappings, foreignKeyConstraints);
+            foreignKeyConstraints = new SortedSet<ForeignKeyConstraint>(
+                ForeignKeyConstraintComparer.Instance
+            );
+            foreignKey.AddRuntimeAnnotation(
+                RelationalAnnotationNames.ForeignKeyMappings,
+                foreignKeyConstraints
+            );
         }
 
         return foreignKeyConstraints;
@@ -1905,11 +2284,14 @@ public class RelationalModel : Annotatable, IRelationalModel
     public static IKey GetKey(
         IModel model,
         string declaringEntityTypeName,
-        IReadOnlyList<string> properties)
+        IReadOnlyList<string> properties
+    )
     {
         var declaringEntityType = model.FindEntityType(declaringEntityTypeName)!;
 
-        return declaringEntityType.FindKey(properties.Select(p => declaringEntityType.FindProperty(p)!).ToArray())!;
+        return declaringEntityType.FindKey(
+            properties.Select(p => declaringEntityType.FindProperty(p)!).ToArray()
+        )!;
     }
 
     /// <summary>
@@ -1918,10 +2300,7 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IIndex GetIndex(
-        IModel model,
-        string declaringEntityTypeName,
-        string indexName)
+    public static IIndex GetIndex(IModel model, string declaringEntityTypeName, string indexName)
     {
         var declaringEntityType = model.FindEntityType(declaringEntityTypeName)!;
 
@@ -1937,11 +2316,14 @@ public class RelationalModel : Annotatable, IRelationalModel
     public static IIndex GetIndex(
         IModel model,
         string declaringEntityTypeName,
-        IReadOnlyList<string> properties)
+        IReadOnlyList<string> properties
+    )
     {
         var declaringEntityType = model.FindEntityType(declaringEntityTypeName)!;
 
-        return declaringEntityType.FindIndex(properties.Select(p => declaringEntityType.FindProperty(p)!).ToArray())!;
+        return declaringEntityType.FindIndex(
+            properties.Select(p => declaringEntityType.FindProperty(p)!).ToArray()
+        )!;
     }
 
     /// <summary>
@@ -1955,15 +2337,19 @@ public class RelationalModel : Annotatable, IRelationalModel
         string declaringEntityTypeName,
         IReadOnlyList<string> properties,
         string principalEntityTypeName,
-        IReadOnlyList<string> principalProperties)
+        IReadOnlyList<string> principalProperties
+    )
     {
         var declaringEntityType = model.FindEntityType(declaringEntityTypeName)!;
         var principalEntityType = model.FindEntityType(principalEntityTypeName)!;
 
         return declaringEntityType.FindForeignKey(
             properties.Select(p => declaringEntityType.FindProperty(p)!).ToArray(),
-            principalEntityType.FindKey(principalProperties.Select(p => principalEntityType.FindProperty(p)!).ToArray())!,
-            principalEntityType)!;
+            principalEntityType.FindKey(
+                principalProperties.Select(p => principalEntityType.FindProperty(p)!).ToArray()
+            )!,
+            principalEntityType
+        )!;
     }
 
     /// <summary>
@@ -1972,15 +2358,17 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static ReferentialAction ToReferentialAction(DeleteBehavior deleteBehavior)
-        => deleteBehavior switch
+    public static ReferentialAction ToReferentialAction(DeleteBehavior deleteBehavior) =>
+        deleteBehavior switch
         {
             DeleteBehavior.SetNull => ReferentialAction.SetNull,
             DeleteBehavior.Cascade => ReferentialAction.Cascade,
-            DeleteBehavior.NoAction or DeleteBehavior.ClientSetNull or DeleteBehavior.ClientCascade or DeleteBehavior.ClientNoAction =>
-                ReferentialAction.NoAction,
+            DeleteBehavior.NoAction
+            or DeleteBehavior.ClientSetNull
+            or DeleteBehavior.ClientCascade
+            or DeleteBehavior.ClientNoAction => ReferentialAction.NoAction,
             DeleteBehavior.Restrict => ReferentialAction.Restrict,
-            _ => throw new NotSupportedException(deleteBehavior.ToString())
+            _ => throw new NotSupportedException(deleteBehavior.ToString()),
         };
 
     /// <summary>
@@ -1989,10 +2377,11 @@ public class RelationalModel : Annotatable, IRelationalModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IRelationalModel)this).ToDebugString(),
-            () => ((IRelationalModel)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IRelationalModel)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     IEnumerable<ITable> IRelationalModel.Tables
     {

@@ -15,18 +15,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IEnumerable<X509Extension> endEntityExtensions = null,
             IEnumerable<X509Extension> intermediateExtensions = null,
             IEnumerable<X509Extension> rootExtensions = null,
-            [CallerMemberName] string testName = null)
+            [CallerMemberName] string testName = null
+        )
         {
             using (RSA rootKey = RSA.Create())
             using (RSA intermediateKey = RSA.Create())
             using (RSA endEntityKey = RSA.Create())
             {
-                ReadOnlySpan<RSA> keys = new[]
-                {
-                    rootKey,
-                    intermediateKey,
-                    endEntityKey,
-                };
+                ReadOnlySpan<RSA> keys = new[] { rootKey, intermediateKey, endEntityKey };
 
                 Span<X509Certificate2> certs = new X509Certificate2[keys.Length];
                 MakeTestChain(
@@ -35,14 +31,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     endEntityExtensions,
                     intermediateExtensions,
                     rootExtensions,
-                    testName);
+                    testName
+                );
 
                 endEntityCert = certs[0];
                 intermediateCert = certs[1];
                 rootCert = certs[2];
             }
         }
-
 
         internal static void MakeTestChain4(
             out X509Certificate2 endEntityCert,
@@ -52,7 +48,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IEnumerable<X509Extension> endEntityExtensions = null,
             IEnumerable<X509Extension> intermediateExtensions = null,
             IEnumerable<X509Extension> rootExtensions = null,
-            [CallerMemberName] string testName = null)
+            [CallerMemberName] string testName = null
+        )
         {
             using (RSA rootKey = RSA.Create())
             using (RSA intermediateKey = RSA.Create())
@@ -73,7 +70,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     endEntityExtensions,
                     intermediateExtensions,
                     rootExtensions,
-                    testName);
+                    testName
+                );
 
                 endEntityCert = certs[0];
                 intermediateCert1 = certs[1];
@@ -88,38 +86,45 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IEnumerable<X509Extension> endEntityExtensions,
             IEnumerable<X509Extension> intermediateExtensions,
             IEnumerable<X509Extension> rootExtensions,
-            string testName)
+            string testName
+        )
         {
             if (keys.Length < 2)
                 throw new ArgumentException(nameof(keys));
             if (keys.Length != certs.Length)
                 throw new ArgumentException(nameof(certs));
 
-            rootExtensions ??= new X509Extension[] {
+            rootExtensions ??= new X509Extension[]
+            {
                 new X509BasicConstraintsExtension(true, false, 0, true),
                 new X509KeyUsageExtension(
-                    X509KeyUsageFlags.CrlSign |
-                        X509KeyUsageFlags.KeyCertSign |
-                        X509KeyUsageFlags.DigitalSignature,
-                    false)
+                    X509KeyUsageFlags.CrlSign
+                        | X509KeyUsageFlags.KeyCertSign
+                        | X509KeyUsageFlags.DigitalSignature,
+                    false
+                ),
             };
 
-            intermediateExtensions ??= new X509Extension[] {
+            intermediateExtensions ??= new X509Extension[]
+            {
                 new X509BasicConstraintsExtension(true, false, 0, true),
                 new X509KeyUsageExtension(
-                    X509KeyUsageFlags.CrlSign |
-                        X509KeyUsageFlags.KeyCertSign |
-                        X509KeyUsageFlags.DigitalSignature,
-                    false)
+                    X509KeyUsageFlags.CrlSign
+                        | X509KeyUsageFlags.KeyCertSign
+                        | X509KeyUsageFlags.DigitalSignature,
+                    false
+                ),
             };
 
-            endEntityExtensions ??= new X509Extension[] {
+            endEntityExtensions ??= new X509Extension[]
+            {
                 new X509BasicConstraintsExtension(false, false, 0, true),
                 new X509KeyUsageExtension(
-                X509KeyUsageFlags.DigitalSignature |
-                    X509KeyUsageFlags.NonRepudiation |
-                    X509KeyUsageFlags.KeyEncipherment,
-                false)
+                    X509KeyUsageFlags.DigitalSignature
+                        | X509KeyUsageFlags.NonRepudiation
+                        | X509KeyUsageFlags.KeyEncipherment,
+                    false
+                ),
             };
 
             TimeSpan notBeforeInterval = TimeSpan.FromDays(30);
@@ -137,14 +142,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 $"CN=Test Root, O=\"{testName}\"",
                 keys[rootIndex],
                 hashAlgorithm,
-                signaturePadding);
+                signaturePadding
+            );
 
             foreach (X509Extension extension in rootExtensions)
             {
                 rootReq.CertificateExtensions.Add(extension);
             }
 
-            X509SignatureGenerator lastGenerator = X509SignatureGenerator.CreateForRSA(keys[rootIndex], RSASignaturePadding.Pkcs1);
+            X509SignatureGenerator lastGenerator = X509SignatureGenerator.CreateForRSA(
+                keys[rootIndex],
+                RSASignaturePadding.Pkcs1
+            );
             X500DistinguishedName lastSubject = rootReq.SubjectName;
 
             certs[rootIndex] = rootReq.Create(
@@ -152,7 +161,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 lastGenerator,
                 eeStart - (notBeforeInterval * rootIndex),
                 eeEnd + (notAfterInterval * rootIndex),
-                CreateSerial());
+                CreateSerial()
+            );
 
             int presentationNumber = 0;
 
@@ -164,7 +174,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     $"CN=Intermediate Layer {presentationNumber}, O=\"{testName}\"",
                     keys[i],
                     hashAlgorithm,
-                    signaturePadding);
+                    signaturePadding
+                );
 
                 foreach (X509Extension extension in intermediateExtensions)
                 {
@@ -176,17 +187,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     lastGenerator,
                     eeStart - (notBeforeInterval * i),
                     eeEnd + (notAfterInterval * i),
-                    CreateSerial());
+                    CreateSerial()
+                );
 
                 lastSubject = intermediateReq.SubjectName;
-                lastGenerator = X509SignatureGenerator.CreateForRSA(keys[i], RSASignaturePadding.Pkcs1);
+                lastGenerator = X509SignatureGenerator.CreateForRSA(
+                    keys[i],
+                    RSASignaturePadding.Pkcs1
+                );
             }
 
             CertificateRequest eeReq = new CertificateRequest(
                 $"CN=End-Entity, O=\"{testName}\"",
                 keys[0],
                 hashAlgorithm,
-                signaturePadding);
+                signaturePadding
+            );
 
             foreach (X509Extension extension in endEntityExtensions)
             {

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -13,9 +13,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {
@@ -31,7 +31,7 @@ namespace System.Linq.Parallel
     ///     This class implements ParallelQuery so that any parallel query operator
     ///     can bind to the parallel query provider overloads. This allows us to string
     ///     together operators w/out the user always specifying AsParallel, e.g.
-    ///     Select(Where(..., ...), ...), and so forth. 
+    ///     Select(Where(..., ...), ...), and so forth.
     /// </summary>
     /// <typeparam name="TOutput"></typeparam>
     internal abstract class QueryOperator<TOutput> : ParallelQuery<TOutput>
@@ -39,12 +39,10 @@ namespace System.Linq.Parallel
         protected bool m_outputOrdered;
 
         internal QueryOperator(QuerySettings settings)
-            :this(false, settings)
-        {
-        }
+            : this(false, settings) { }
 
         internal QueryOperator(bool isOrdered, QuerySettings settings)
-            :base(settings)
+            : base(settings)
         {
             m_outputOrdered = isOrdered;
         }
@@ -92,7 +90,6 @@ namespace System.Linq.Parallel
 
         public override IEnumerator<TOutput> GetEnumerator()
         {
-
             // Buffering is unspecified and  order preservation is not suppressed.
             return GetEnumerator(null, false);
         }
@@ -113,12 +110,19 @@ namespace System.Linq.Parallel
             get { return m_outputOrdered; }
         }
 
-        internal virtual IEnumerator<TOutput> GetEnumerator(ParallelMergeOptions? mergeOptions, bool suppressOrderPreservation)
+        internal virtual IEnumerator<TOutput> GetEnumerator(
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrderPreservation
+        )
         {
             // Return a dummy enumerator that will call back GetOpenedEnumerator() on 'this' QueryOperator
             // the first time the user calls MoveNext(). We do this to prevent executing the query if user
             // never calls MoveNext().
-            return new QueryOpeningEnumerator<TOutput>(this, mergeOptions, suppressOrderPreservation);
+            return new QueryOpeningEnumerator<TOutput>(
+                this,
+                mergeOptions,
+                suppressOrderPreservation
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -126,14 +130,25 @@ namespace System.Linq.Parallel
         // The enumerator will be "opened", which means that PLINQ will start executing the query
         // immediately, even before the user calls MoveNext() for the first time.
         //
-        internal IEnumerator<TOutput> GetOpenedEnumerator(ParallelMergeOptions? mergeOptions, bool suppressOrder, bool forEffect, 
-            QuerySettings querySettings)
+        internal IEnumerator<TOutput> GetOpenedEnumerator(
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrder,
+            bool forEffect,
+            QuerySettings querySettings
+        )
         {
             // If the top-level enumerator forces a premature merge, run the query sequentially.
-            if (querySettings.ExecutionMode.Value == ParallelExecutionMode.Default && LimitsParallelism)
+            if (
+                querySettings.ExecutionMode.Value == ParallelExecutionMode.Default
+                && LimitsParallelism
+            )
             {
-                IEnumerable<TOutput> opSequential = AsSequentialQuery(querySettings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(opSequential, querySettings.CancellationState).GetEnumerator();
+                IEnumerable<TOutput> opSequential = AsSequentialQuery(
+                    querySettings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(opSequential, querySettings.CancellationState)
+                    .GetEnumerator();
             }
 
             QueryResults<TOutput> queryResults = GetQueryResults(querySettings);
@@ -148,23 +163,33 @@ namespace System.Linq.Parallel
             // Top-level pre-emptive cancellation test.
             // This handles situations where cancellation has occured before execution commences
             // The handling for in-execution occurs in QueryTaskGroupState.QueryEnd()
-            
-            if(querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
+
+            if (querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
             {
-                if (querySettings.CancellationState.ExternalCancellationToken.IsCancellationRequested)
-                    throw new OperationCanceledException(querySettings.CancellationState.ExternalCancellationToken);
+                if (
+                    querySettings
+                        .CancellationState
+                        .ExternalCancellationToken
+                        .IsCancellationRequested
+                )
+                    throw new OperationCanceledException(
+                        querySettings.CancellationState.ExternalCancellationToken
+                    );
                 else
                     throw new OperationCanceledException();
             }
-                
+
             bool orderedMerge = OutputOrdered && !suppressOrder;
 
-            PartitionedStreamMerger<TOutput> merger = new PartitionedStreamMerger<TOutput>(forEffect, mergeOptions.GetValueOrDefault(),
-                                                                                           querySettings.TaskScheduler,
-                                                                                           orderedMerge,
-                                                                                           querySettings.CancellationState,
-                                                                                           querySettings.QueryId);
-            
+            PartitionedStreamMerger<TOutput> merger = new PartitionedStreamMerger<TOutput>(
+                forEffect,
+                mergeOptions.GetValueOrDefault(),
+                querySettings.TaskScheduler,
+                orderedMerge,
+                querySettings.CancellationState,
+                querySettings.QueryId
+            );
+
             queryResults.GivePartitionedStream(merger); // hook up the data flow between the operator-executors, starting from the merger.
 
             if (forEffect)
@@ -175,12 +200,14 @@ namespace System.Linq.Parallel
             return merger.MergeExecutor.GetEnumerator();
         }
 
-        
         // This method is called only once on the 'head operator' which is the last specified operator in the query
         // This method then recursively uses Open() to prepare itself and the other enumerators.
         private QueryResults<TOutput> GetQueryResults(QuerySettings querySettings)
         {
-            TraceHelpers.TraceInfo("[timing]: {0}: starting execution - QueryOperator<>::GetQueryResults", DateTime.Now.Ticks);
+            TraceHelpers.TraceInfo(
+                "[timing]: {0}: starting execution - QueryOperator<>::GetQueryResults",
+                DateTime.Now.Ticks
+            );
 
             // All mandatory query settings must be specified
             Contract.Assert(querySettings.TaskScheduler != null);
@@ -197,19 +224,31 @@ namespace System.Linq.Parallel
 
         internal TOutput[] ExecuteAndGetResultsAsArray()
         {
-            QuerySettings querySettings =
-                SpecifiedQuerySettings
+            QuerySettings querySettings = SpecifiedQuerySettings
                 .WithPerExecutionSettings()
                 .WithDefaults();
 
             QueryLifecycle.LogicalQueryExecutionBegin(querySettings.QueryId);
             try
             {
-                if (querySettings.ExecutionMode.Value == ParallelExecutionMode.Default && LimitsParallelism)
+                if (
+                    querySettings.ExecutionMode.Value == ParallelExecutionMode.Default
+                    && LimitsParallelism
+                )
                 {
-                    IEnumerable<TOutput> opSequential = AsSequentialQuery(querySettings.CancellationState.ExternalCancellationToken);
-                    IEnumerable<TOutput> opSequentialWithCancelChecks = CancellableEnumerable.Wrap(opSequential, querySettings.CancellationState.ExternalCancellationToken);
-                    return ExceptionAggregator.WrapEnumerable(opSequentialWithCancelChecks, querySettings.CancellationState).ToArray();
+                    IEnumerable<TOutput> opSequential = AsSequentialQuery(
+                        querySettings.CancellationState.ExternalCancellationToken
+                    );
+                    IEnumerable<TOutput> opSequentialWithCancelChecks = CancellableEnumerable.Wrap(
+                        opSequential,
+                        querySettings.CancellationState.ExternalCancellationToken
+                    );
+                    return ExceptionAggregator
+                        .WrapEnumerable(
+                            opSequentialWithCancelChecks,
+                            querySettings.CancellationState
+                        )
+                        .ToArray();
                 }
 
                 QueryResults<TOutput> results = GetQueryResults(querySettings);
@@ -217,9 +256,12 @@ namespace System.Linq.Parallel
                 if (results.IsIndexible && OutputOrdered)
                 {
                     // The special array-based merge performs better if the output is ordered, because
-                    // it does not have to pay for ordering. In the unordered case, we it appears that 
+                    // it does not have to pay for ordering. In the unordered case, we it appears that
                     // the stop-and-go merge performs a little better.
-                    ArrayMergeHelper<TOutput> merger = new ArrayMergeHelper<TOutput>(SpecifiedQuerySettings, results);
+                    ArrayMergeHelper<TOutput> merger = new ArrayMergeHelper<TOutput>(
+                        SpecifiedQuerySettings,
+                        results
+                    );
                     merger.Execute();
                     TOutput[] output = merger.GetResultsAsArray();
                     querySettings.CleanStateAtQueryEnd();
@@ -227,12 +269,17 @@ namespace System.Linq.Parallel
                 }
                 else
                 {
-                    PartitionedStreamMerger<TOutput> merger =
-                        new PartitionedStreamMerger<TOutput>(false, ParallelMergeOptions.FullyBuffered, querySettings.TaskScheduler,
-                            OutputOrdered, querySettings.CancellationState, querySettings.QueryId);
+                    PartitionedStreamMerger<TOutput> merger = new PartitionedStreamMerger<TOutput>(
+                        false,
+                        ParallelMergeOptions.FullyBuffered,
+                        querySettings.TaskScheduler,
+                        OutputOrdered,
+                        querySettings.CancellationState,
+                        querySettings.QueryId
+                    );
                     results.GivePartitionedStream(merger);
                     TOutput[] output = merger.MergeExecutor.GetResultsAsArray();
-                    querySettings.CleanStateAtQueryEnd(); 
+                    querySettings.CleanStateAtQueryEnd();
                     return output;
                 }
             }
@@ -252,11 +299,10 @@ namespace System.Linq.Parallel
 
         internal abstract IEnumerable<TOutput> AsSequentialQuery(CancellationToken token);
 
-
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge.
         //
-       
+
         internal abstract bool LimitsParallelism { get; }
 
         //---------------------------------------------------------------------------------------
@@ -275,18 +321,26 @@ namespace System.Linq.Parallel
             int partitionCount,
             bool outputOrdered,
             bool useStriping,
-            QuerySettings settings)
+            QuerySettings settings
+        )
         {
             TaskScheduler taskScheduler = settings.TaskScheduler;
 
-            
-
             MergeExecutor<TOutput> executor = MergeExecutor<TOutput>.Execute<TKey>(
-                openedChild, false, ParallelMergeOptions.FullyBuffered, taskScheduler, outputOrdered,
-                settings.CancellationState, settings.QueryId);
-            return new ListQueryResults<TOutput>(executor.GetResultsAsArray(), partitionCount, useStriping);
+                openedChild,
+                false,
+                ParallelMergeOptions.FullyBuffered,
+                taskScheduler,
+                outputOrdered,
+                settings.CancellationState,
+                settings.QueryId
+            );
+            return new ListQueryResults<TOutput>(
+                executor.GetResultsAsArray(),
+                partitionCount,
+                useStriping
+            );
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns a QueryOperator<T> for any IEnumerable<T> data source. This will just do a
@@ -310,7 +364,8 @@ namespace System.Linq.Parallel
 
             if (sourceAsOperator == null)
             {
-                OrderedParallelQuery<TOutput> orderedQuery = source as OrderedParallelQuery<TOutput>;
+                OrderedParallelQuery<TOutput> orderedQuery =
+                    source as OrderedParallelQuery<TOutput>;
                 if (orderedQuery != null)
                 {
                     // We have to handle OrderedParallelQuery<T> specially. In all other cases,

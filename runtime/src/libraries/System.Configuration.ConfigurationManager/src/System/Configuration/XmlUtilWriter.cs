@@ -92,7 +92,8 @@ namespace System.Configuration
                     UpdatePosition(ch);
                 }
             }
-            else Writer.Write(s);
+            else
+                Writer.Write(s);
 
             return s.Length;
         }
@@ -102,7 +103,8 @@ namespace System.Configuration
         internal int Write(char ch)
         {
             Writer.Write(ch);
-            if (TrackPosition) UpdatePosition(ch);
+            if (TrackPosition)
+                UpdatePosition(ch);
             return 1;
         }
 
@@ -143,10 +145,12 @@ namespace System.Configuration
                             entityRef = "amp";
                             break;
                         case '\'':
-                            if (inAttribute && (quoteChar == ch)) entityRef = "apos";
+                            if (inAttribute && (quoteChar == ch))
+                                entityRef = "apos";
                             break;
                         case '"':
-                            if (inAttribute && (quoteChar == ch)) entityRef = "quot";
+                            if (inAttribute && (quoteChar == ch))
+                                entityRef = "quot";
                             break;
                         case '\n':
                         case '\r':
@@ -155,11 +159,14 @@ namespace System.Configuration
                     }
                 }
 
-                if (appendCharEntity) charactersWritten += AppendCharEntity(ch);
+                if (appendCharEntity)
+                    charactersWritten += AppendCharEntity(ch);
                 else
                 {
-                    if (entityRef != null) charactersWritten += AppendEntityRef(entityRef);
-                    else charactersWritten += Write(ch);
+                    if (entityRef != null)
+                        charactersWritten += AppendEntityRef(entityRef);
+                    else
+                        charactersWritten += Write(ch);
                 }
             }
 
@@ -219,29 +226,46 @@ namespace System.Configuration
             // In !DOCTYPE, quote is '\0' for second public attribute.
             // Protect ourselves from writing invalid XML by always
             // supplying a valid quote char.
-            if ((quote != '"') && (quote != '\'')) quote = '"';
+            if ((quote != '"') && (quote != '\''))
+                quote = '"';
 
             charactersWritten += Write(quote);
             while (reader.ReadAttributeValue())
                 if (reader.NodeType == XmlNodeType.Text)
                     charactersWritten += AppendEscapeXmlString(reader.Value, true, quote);
-                else charactersWritten += AppendEntityRef(reader.Name);
+                else
+                    charactersWritten += AppendEntityRef(reader.Name);
 
             charactersWritten += Write(quote);
             return charactersWritten;
         }
 
         // Append whitespace, ensuring there is at least one space.
-        internal int AppendRequiredWhiteSpace(int fromLineNumber, int fromLinePosition, int toLineNumber,
-            int toLinePosition)
+        internal int AppendRequiredWhiteSpace(
+            int fromLineNumber,
+            int fromLinePosition,
+            int toLineNumber,
+            int toLinePosition
+        )
         {
-            int charactersWritten = AppendWhiteSpace(fromLineNumber, fromLinePosition, toLineNumber, toLinePosition);
-            if (charactersWritten == 0) charactersWritten += AppendSpace();
+            int charactersWritten = AppendWhiteSpace(
+                fromLineNumber,
+                fromLinePosition,
+                toLineNumber,
+                toLinePosition
+            );
+            if (charactersWritten == 0)
+                charactersWritten += AppendSpace();
 
             return charactersWritten;
         }
 
-        internal int AppendWhiteSpace(int fromLineNumber, int fromLinePosition, int toLineNumber, int toLinePosition)
+        internal int AppendWhiteSpace(
+            int fromLineNumber,
+            int fromLinePosition,
+            int toLineNumber,
+            int toLinePosition
+        )
         {
             int charactersWritten = 0;
             while (fromLineNumber++ < toLineNumber)
@@ -262,7 +286,8 @@ namespace System.Configuration
         internal int AppendIndent(int linePosition, int indent, int depth, bool newLine)
         {
             int charactersWritten = 0;
-            if (newLine) charactersWritten += AppendNewLine();
+            if (newLine)
+                charactersWritten += AppendNewLine();
 
             int c = linePosition - 1 + indent * depth;
             charactersWritten += AppendSpaces(c);
@@ -273,10 +298,12 @@ namespace System.Configuration
         // current line position of the writer.
         internal int AppendSpacesToLinePosition(int linePosition)
         {
-            if (linePosition <= 0) return 0;
+            if (linePosition <= 0)
+                return 0;
 
             int delta = linePosition - LinePosition;
-            if ((delta < 0) && IsLastLineBlank) SeekToLineStart();
+            if ((delta < 0) && IsLastLineBlank)
+                SeekToLineStart();
 
             return AppendSpaces(linePosition - LinePosition);
         }

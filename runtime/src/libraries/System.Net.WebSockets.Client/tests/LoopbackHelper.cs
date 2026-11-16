@@ -11,7 +11,10 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public static class LoopbackHelper
     {
-        public static async Task<Dictionary<string, string>> WebSocketHandshakeAsync(LoopbackServer.Connection connection, string? extensions = null)
+        public static async Task<Dictionary<string, string>> WebSocketHandshakeAsync(
+            LoopbackServer.Connection connection,
+            string? extensions = null
+        )
         {
             string serverResponse = null;
             List<string> headers = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
@@ -19,7 +22,10 @@ namespace System.Net.WebSockets.Client.Tests
             var results = new Dictionary<string, string>();
             foreach (string header in headers)
             {
-                string[] tokens = header.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] tokens = header.Split(
+                    new char[] { ':' },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 if (tokens.Length == 2)
                 {
                     results.Add(tokens[0].Trim(), tokens[1].Trim());
@@ -28,14 +34,21 @@ namespace System.Net.WebSockets.Client.Tests
                     if (headerName == "Sec-WebSocket-Key")
                     {
                         string headerValue = tokens[1].Trim();
-                        string responseSecurityAcceptValue = ComputeWebSocketHandshakeSecurityAcceptValue(headerValue);
+                        string responseSecurityAcceptValue =
+                            ComputeWebSocketHandshakeSecurityAcceptValue(headerValue);
                         serverResponse =
-                            "HTTP/1.1 101 Switching Protocols\r\n" +
-                            "Content-Length: 0\r\n" +
-                            "Upgrade: websocket\r\n" +
-                            "Connection: Upgrade\r\n" +
-                            (extensions is null ? null : $"Sec-WebSocket-Extensions: {extensions}\r\n") +
-                            "Sec-WebSocket-Accept: " + responseSecurityAcceptValue + "\r\n\r\n";
+                            "HTTP/1.1 101 Switching Protocols\r\n"
+                            + "Content-Length: 0\r\n"
+                            + "Upgrade: websocket\r\n"
+                            + "Connection: Upgrade\r\n"
+                            + (
+                                extensions is null
+                                    ? null
+                                    : $"Sec-WebSocket-Extensions: {extensions}\r\n"
+                            )
+                            + "Sec-WebSocket-Accept: "
+                            + responseSecurityAcceptValue
+                            + "\r\n\r\n";
                     }
                 }
             }

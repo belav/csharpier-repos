@@ -30,7 +30,10 @@ namespace System.Diagnostics
         /// <summary>
         /// Overriding base class implementation just to give us a chance to initialize.
         /// </summary>
-        public override IDisposable Subscribe(IObserver<KeyValuePair<string, object>> observer, Predicate<string> isEnabled)
+        public override IDisposable Subscribe(
+            IObserver<KeyValuePair<string, object>> observer,
+            Predicate<string> isEnabled
+        )
         {
             IDisposable result = base.Subscribe(observer, isEnabled);
             Initialize();
@@ -40,7 +43,10 @@ namespace System.Diagnostics
         /// <summary>
         /// Overriding base class implementation just to give us a chance to initialize.
         /// </summary>
-        public override IDisposable Subscribe(IObserver<KeyValuePair<string, object>> observer, Func<string, object, object, bool> isEnabled)
+        public override IDisposable Subscribe(
+            IObserver<KeyValuePair<string, object>> observer,
+            Func<string, object, object, bool> isEnabled
+        )
         {
             IDisposable result = base.Subscribe(observer, isEnabled);
             Initialize();
@@ -94,104 +100,89 @@ namespace System.Diagnostics
             protected Hashtable _table;
             public override int Count
             {
-                get
-                {
-                    return this._table.Count;
-                }
+                get { return this._table.Count; }
             }
             public override bool IsReadOnly
             {
-                get
-                {
-                    return this._table.IsReadOnly;
-                }
+                get { return this._table.IsReadOnly; }
             }
             public override bool IsFixedSize
             {
-                get
-                {
-                    return this._table.IsFixedSize;
-                }
+                get { return this._table.IsFixedSize; }
             }
             public override bool IsSynchronized
             {
-                get
-                {
-                    return this._table.IsSynchronized;
-                }
+                get { return this._table.IsSynchronized; }
             }
             public override object this[object key]
             {
-                get
-                {
-                    return this._table[key];
-                }
-                set
-                {
-                    this._table[key] = value;
-                }
+                get { return this._table[key]; }
+                set { this._table[key] = value; }
             }
             public override object SyncRoot
             {
-                get
-                {
-                    return this._table.SyncRoot;
-                }
+                get { return this._table.SyncRoot; }
             }
             public override ICollection Keys
             {
-                get
-                {
-                    return this._table.Keys;
-                }
+                get { return this._table.Keys; }
             }
             public override ICollection Values
             {
-                get
-                {
-                    return this._table.Values;
-                }
+                get { return this._table.Values; }
             }
-            internal HashtableWrapper(Hashtable table) : base()
+
+            internal HashtableWrapper(Hashtable table)
+                : base()
             {
                 this._table = table;
             }
+
             public override void Add(object key, object value)
             {
                 this._table.Add(key, value);
             }
+
             public override void Clear()
             {
                 this._table.Clear();
             }
+
             public override bool Contains(object key)
             {
                 return this._table.Contains(key);
             }
+
             public override bool ContainsKey(object key)
             {
                 return this._table.ContainsKey(key);
             }
+
             public override bool ContainsValue(object key)
             {
                 return this._table.ContainsValue(key);
             }
+
             public override void CopyTo(Array array, int arrayIndex)
             {
                 this._table.CopyTo(array, arrayIndex);
             }
+
             public override object Clone()
             {
                 return new HashtableWrapper((Hashtable)this._table.Clone());
             }
+
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this._table.GetEnumerator();
             }
+
             public override IDictionaryEnumerator GetEnumerator()
             {
                 return this._table.GetEnumerator();
             }
+
             public override void Remove(object key)
             {
                 this._table.Remove(key);
@@ -205,16 +196,12 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class ServicePointHashtable : HashtableWrapper
         {
-            public ServicePointHashtable(Hashtable table) : base(table)
-            {
-            }
+            public ServicePointHashtable(Hashtable table)
+                : base(table) { }
 
             public override object this[object key]
             {
-                get
-                {
-                    return base[key];
-                }
+                get { return base[key]; }
                 set
                 {
                     WeakReference weakRef = value as WeakReference;
@@ -226,8 +213,11 @@ namespace System.Diagnostics
                             // Replace the ConnectionGroup hashtable inside this ServicePoint object,
                             // which allows us to intercept each new ConnectionGroup object added under
                             // this ServicePoint.
-                            Hashtable originalTable = s_connectionGroupListField.GetValue(servicePoint) as Hashtable;
-                            ConnectionGroupHashtable newTable = new ConnectionGroupHashtable(originalTable ?? new Hashtable());
+                            Hashtable originalTable =
+                                s_connectionGroupListField.GetValue(servicePoint) as Hashtable;
+                            ConnectionGroupHashtable newTable = new ConnectionGroupHashtable(
+                                originalTable ?? new Hashtable()
+                            );
 
                             s_connectionGroupListField.SetValue(servicePoint, newTable);
                         }
@@ -245,16 +235,12 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class ConnectionGroupHashtable : HashtableWrapper
         {
-            public ConnectionGroupHashtable(Hashtable table) : base(table)
-            {
-            }
+            public ConnectionGroupHashtable(Hashtable table)
+                : base(table) { }
 
             public override object this[object key]
             {
-                get
-                {
-                    return base[key];
-                }
+                get { return base[key]; }
                 set
                 {
                     if (s_connectionGroupType.IsInstanceOfType(value))
@@ -262,8 +248,11 @@ namespace System.Diagnostics
                         // Replace the Connection arraylist inside this ConnectionGroup object,
                         // which allows us to intercept each new Connection object added under
                         // this ConnectionGroup.
-                        ArrayList originalArrayList = s_connectionListField.GetValue(value) as ArrayList;
-                        ConnectionArrayList newArrayList = new ConnectionArrayList(originalArrayList ?? new ArrayList());
+                        ArrayList originalArrayList =
+                            s_connectionListField.GetValue(value) as ArrayList;
+                        ConnectionArrayList newArrayList = new ConnectionArrayList(
+                            originalArrayList ?? new ArrayList()
+                        );
 
                         s_connectionListField.SetValue(value, newArrayList);
                     }
@@ -284,193 +273,201 @@ namespace System.Diagnostics
 
             public override int Capacity
             {
-                get
-                {
-                    return this._list.Capacity;
-                }
-                set
-                {
-                    this._list.Capacity = value;
-                }
+                get { return this._list.Capacity; }
+                set { this._list.Capacity = value; }
             }
             public override int Count
             {
-                get
-                {
-                    return this._list.Count;
-                }
+                get { return this._list.Count; }
             }
             public override bool IsReadOnly
             {
-                get
-                {
-                    return this._list.IsReadOnly;
-                }
+                get { return this._list.IsReadOnly; }
             }
             public override bool IsFixedSize
             {
-                get
-                {
-                    return this._list.IsFixedSize;
-                }
+                get { return this._list.IsFixedSize; }
             }
             public override bool IsSynchronized
             {
-                get
-                {
-                    return this._list.IsSynchronized;
-                }
+                get { return this._list.IsSynchronized; }
             }
             public override object this[int index]
             {
-                get
-                {
-                    return this._list[index];
-                }
-                set
-                {
-                    this._list[index] = value;
-                }
+                get { return this._list[index]; }
+                set { this._list[index] = value; }
             }
             public override object SyncRoot
             {
-                get
-                {
-                    return this._list.SyncRoot;
-                }
+                get { return this._list.SyncRoot; }
             }
-            internal ArrayListWrapper(ArrayList list) : base()
+
+            internal ArrayListWrapper(ArrayList list)
+                : base()
             {
                 this._list = list;
             }
+
             public override int Add(object value)
             {
                 return this._list.Add(value);
             }
+
             public override void AddRange(ICollection c)
             {
                 this._list.AddRange(c);
             }
+
             public override int BinarySearch(object value)
             {
                 return this._list.BinarySearch(value);
             }
+
             public override int BinarySearch(object value, IComparer comparer)
             {
                 return this._list.BinarySearch(value, comparer);
             }
+
             public override int BinarySearch(int index, int count, object value, IComparer comparer)
             {
                 return this._list.BinarySearch(index, count, value, comparer);
             }
+
             public override void Clear()
             {
                 this._list.Clear();
             }
+
             public override object Clone()
             {
                 return new ArrayListWrapper((ArrayList)this._list.Clone());
             }
+
             public override bool Contains(object item)
             {
                 return this._list.Contains(item);
             }
+
             public override void CopyTo(Array array)
             {
                 this._list.CopyTo(array);
             }
+
             public override void CopyTo(Array array, int index)
             {
                 this._list.CopyTo(array, index);
             }
+
             public override void CopyTo(int index, Array array, int arrayIndex, int count)
             {
                 this._list.CopyTo(index, array, arrayIndex, count);
             }
+
             public override IEnumerator GetEnumerator()
             {
                 return this._list.GetEnumerator();
             }
+
             public override IEnumerator GetEnumerator(int index, int count)
             {
                 return this._list.GetEnumerator(index, count);
             }
+
             public override int IndexOf(object value)
             {
                 return this._list.IndexOf(value);
             }
+
             public override int IndexOf(object value, int startIndex)
             {
                 return this._list.IndexOf(value, startIndex);
             }
+
             public override int IndexOf(object value, int startIndex, int count)
             {
                 return this._list.IndexOf(value, startIndex, count);
             }
+
             public override void Insert(int index, object value)
             {
                 this._list.Insert(index, value);
             }
+
             public override void InsertRange(int index, ICollection c)
             {
                 this._list.InsertRange(index, c);
             }
+
             public override int LastIndexOf(object value)
             {
                 return this._list.LastIndexOf(value);
             }
+
             public override int LastIndexOf(object value, int startIndex)
             {
                 return this._list.LastIndexOf(value, startIndex);
             }
+
             public override int LastIndexOf(object value, int startIndex, int count)
             {
                 return this._list.LastIndexOf(value, startIndex, count);
             }
+
             public override void Remove(object value)
             {
                 this._list.Remove(value);
             }
+
             public override void RemoveAt(int index)
             {
                 this._list.RemoveAt(index);
             }
+
             public override void RemoveRange(int index, int count)
             {
                 this._list.RemoveRange(index, count);
             }
+
             public override void Reverse(int index, int count)
             {
                 this._list.Reverse(index, count);
             }
+
             public override void SetRange(int index, ICollection c)
             {
                 this._list.SetRange(index, c);
             }
+
             public override ArrayList GetRange(int index, int count)
             {
                 return this._list.GetRange(index, count);
             }
+
             public override void Sort()
             {
                 this._list.Sort();
             }
+
             public override void Sort(IComparer comparer)
             {
                 this._list.Sort(comparer);
             }
+
             public override void Sort(int index, int count, IComparer comparer)
             {
                 this._list.Sort(index, count, comparer);
             }
+
             public override object[] ToArray()
             {
                 return this._list.ToArray();
             }
+
             public override Array ToArray(Type type)
             {
                 return this._list.ToArray(type);
             }
+
             public override void TrimToSize()
             {
                 this._list.TrimToSize();
@@ -484,9 +481,8 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class ConnectionArrayList : ArrayListWrapper
         {
-            public ConnectionArrayList(ArrayList list) : base(list)
-            {
-            }
+            public ConnectionArrayList(ArrayList list)
+                : base(list) { }
 
             public override int Add(object value)
             {
@@ -496,7 +492,9 @@ namespace System.Diagnostics
                     // which allows us to intercept each new HttpWebRequest object added under
                     // this Connection.
                     ArrayList originalArrayList = s_writeListField.GetValue(value) as ArrayList;
-                    HttpWebRequestArrayList newArrayList = new HttpWebRequestArrayList(originalArrayList ?? new ArrayList());
+                    HttpWebRequestArrayList newArrayList = new HttpWebRequestArrayList(
+                        originalArrayList ?? new ArrayList()
+                    );
 
                     s_writeListField.SetValue(value, newArrayList);
                 }
@@ -514,9 +512,8 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class HttpWebRequestArrayList : ArrayListWrapper
         {
-            public HttpWebRequestArrayList(ArrayList list) : base(list)
-            {
-            }
+            public HttpWebRequestArrayList(ArrayList list)
+                : base(list) { }
 
             public override int Add(object value)
             {
@@ -549,7 +546,10 @@ namespace System.Diagnostics
                         // or the internal HTTP reponse representation having status, content and headers
 
                         var coreResponse = s_coreResponseAccessor(request);
-                        if (coreResponse != null && s_coreResponseDataType.IsInstanceOfType(coreResponse))
+                        if (
+                            coreResponse != null
+                            && s_coreResponseDataType.IsInstanceOfType(coreResponse)
+                        )
                         {
                             HttpStatusCode status = s_coreStatusCodeAccessor(coreResponse);
                             WebHeaderCollection headers = s_coreHeadersAccessor(coreResponse);
@@ -577,9 +577,8 @@ namespace System.Diagnostics
         /// <summary>
         /// Private constructor. This class implements a singleton pattern and only this class is allowed to create an instance.
         /// </summary>
-        private HttpHandlerDiagnosticListener() : base(DiagnosticListenerName)
-        {
-        }
+        private HttpHandlerDiagnosticListener()
+            : base(DiagnosticListenerName) { }
 
         private void RaiseRequestEvent(HttpWebRequest request)
         {
@@ -631,7 +630,10 @@ namespace System.Diagnostics
                 if (request.Headers.Get(CorrelationContextHeaderName) == null)
                 {
                     // we expect baggage to be empty or contain a few items
-                    using (IEnumerator<KeyValuePair<string, string>> e = activity.Baggage.GetEnumerator())
+                    using (
+                        IEnumerator<KeyValuePair<string, string>> e =
+                            activity.Baggage.GetEnumerator()
+                    )
                     {
                         if (e.MoveNext())
                         {
@@ -639,9 +641,12 @@ namespace System.Diagnostics
                             do
                             {
                                 KeyValuePair<string, string> item = e.Current;
-                                baggage.Append(WebUtility.UrlEncode(item.Key)).Append('=').Append(WebUtility.UrlEncode(item.Value)).Append(',');
-                            }
-                            while (e.MoveNext());
+                                baggage
+                                    .Append(WebUtility.UrlEncode(item.Key))
+                                    .Append('=')
+                                    .Append(WebUtility.UrlEncode(item.Value))
+                                    .Append(',');
+                            } while (e.MoveNext());
                             baggage.Remove(baggage.Length - 1, 1);
                             request.Headers.Add(CorrelationContextHeaderName, baggage.ToString());
                         }
@@ -658,7 +663,9 @@ namespace System.Diagnostics
             // Response event could be received several times for the same request in case it was redirected
             // IsLastResponse checks if response is the last one (no more redirects will happen)
             // based on response StatusCode and number or redirects done so far
-            bool wasRequestInstrumented = request.Headers.Get(TraceParentHeaderName) != null || request.Headers.Get(RequestIdHeaderName) != null;
+            bool wasRequestInstrumented =
+                request.Headers.Get(TraceParentHeaderName) != null
+                || request.Headers.Get(RequestIdHeaderName) != null;
             if (wasRequestInstrumented && IsLastResponse(request, response.StatusCode))
             {
                 // only send Stop if request was instrumented
@@ -666,14 +673,29 @@ namespace System.Diagnostics
             }
         }
 
-        private void RaiseResponseEvent(HttpWebRequest request, HttpStatusCode statusCode, WebHeaderCollection headers)
+        private void RaiseResponseEvent(
+            HttpWebRequest request,
+            HttpStatusCode statusCode,
+            WebHeaderCollection headers
+        )
         {
             // Response event could be received several times for the same request in case it was redirected
             // IsLastResponse checks if response is the last one (no more redirects will happen)
             // based on response StatusCode and number or redirects done so far
-            if (request.Headers.Get(RequestIdHeaderName) != null && IsLastResponse(request, statusCode))
+            if (
+                request.Headers.Get(RequestIdHeaderName) != null
+                && IsLastResponse(request, statusCode)
+            )
             {
-                this.Write(RequestStopExName, new { Request = request, StatusCode = statusCode, Headers = headers });
+                this.Write(
+                    RequestStopExName,
+                    new
+                    {
+                        Request = request,
+                        StatusCode = statusCode,
+                        Headers = headers,
+                    }
+                );
             }
         }
 
@@ -681,12 +703,19 @@ namespace System.Diagnostics
         {
             if (request.AllowAutoRedirect)
             {
-                if (statusCode == HttpStatusCode.Ambiguous ||  // 300
-                    statusCode == HttpStatusCode.Moved ||  // 301
-                    statusCode == HttpStatusCode.Redirect ||  // 302
-                    statusCode == HttpStatusCode.RedirectMethod ||  // 303
-                    statusCode == HttpStatusCode.RedirectKeepVerb ||  // 307
-                    (int)statusCode == 308) // 308 Permanent Redirect is not in .NET Framework yet, and so has to be specified this way.
+                if (
+                    statusCode == HttpStatusCode.Ambiguous
+                    || // 300
+                    statusCode == HttpStatusCode.Moved
+                    || // 301
+                    statusCode == HttpStatusCode.Redirect
+                    || // 302
+                    statusCode == HttpStatusCode.RedirectMethod
+                    || // 303
+                    statusCode == HttpStatusCode.RedirectKeepVerb
+                    || // 307
+                    (int)statusCode == 308
+                ) // 308 Permanent Redirect is not in .NET Framework yet, and so has to be specified this way.
                 {
                     return s_autoRedirectsAccessor(request) >= request.MaximumAutomaticRedirections;
                 }
@@ -701,33 +730,61 @@ namespace System.Diagnostics
 
             // First step: Get all the reflection objects we will ever need.
             Assembly systemNetHttpAssembly = typeof(ServicePoint).Assembly;
-            s_connectionGroupListField = typeof(ServicePoint).GetField("m_ConnectionGroupList", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_connectionGroupListField = typeof(ServicePoint).GetField(
+                "m_ConnectionGroupList",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             s_connectionGroupType = systemNetHttpAssembly?.GetType("System.Net.ConnectionGroup");
-            s_connectionListField = s_connectionGroupType?.GetField("m_ConnectionList", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_connectionListField = s_connectionGroupType?.GetField(
+                "m_ConnectionList",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             s_connectionType = systemNetHttpAssembly?.GetType("System.Net.Connection");
-            s_writeListField = s_connectionType?.GetField("m_WriteList", BindingFlags.Instance | BindingFlags.NonPublic);
+            s_writeListField = s_connectionType?.GetField(
+                "m_WriteList",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
 
-            s_httpResponseAccessor = CreateFieldGetter<HttpWebRequest, HttpWebResponse>("_HttpResponse", BindingFlags.NonPublic | BindingFlags.Instance);
-            s_autoRedirectsAccessor = CreateFieldGetter<HttpWebRequest, int>("_AutoRedirects", BindingFlags.NonPublic | BindingFlags.Instance);
-            s_coreResponseAccessor = CreateFieldGetter<HttpWebRequest, object>("_CoreResponse", BindingFlags.NonPublic | BindingFlags.Instance);
+            s_httpResponseAccessor = CreateFieldGetter<HttpWebRequest, HttpWebResponse>(
+                "_HttpResponse",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            s_autoRedirectsAccessor = CreateFieldGetter<HttpWebRequest, int>(
+                "_AutoRedirects",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            s_coreResponseAccessor = CreateFieldGetter<HttpWebRequest, object>(
+                "_CoreResponse",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
             s_coreResponseDataType = systemNetHttpAssembly?.GetType("System.Net.CoreResponseData");
             if (s_coreResponseDataType != null)
             {
-                s_coreStatusCodeAccessor = CreateFieldGetter<HttpStatusCode>(s_coreResponseDataType, "m_StatusCode", BindingFlags.Public | BindingFlags.Instance);
-                s_coreHeadersAccessor = CreateFieldGetter<WebHeaderCollection>(s_coreResponseDataType, "m_ResponseHeaders", BindingFlags.Public | BindingFlags.Instance);
+                s_coreStatusCodeAccessor = CreateFieldGetter<HttpStatusCode>(
+                    s_coreResponseDataType,
+                    "m_StatusCode",
+                    BindingFlags.Public | BindingFlags.Instance
+                );
+                s_coreHeadersAccessor = CreateFieldGetter<WebHeaderCollection>(
+                    s_coreResponseDataType,
+                    "m_ResponseHeaders",
+                    BindingFlags.Public | BindingFlags.Instance
+                );
             }
             // Double checking to make sure we have all the pieces initialized
-            if (s_connectionGroupListField == null ||
-                s_connectionGroupType == null ||
-                s_connectionListField == null ||
-                s_connectionType == null ||
-                s_writeListField == null ||
-                s_httpResponseAccessor == null ||
-                s_autoRedirectsAccessor == null ||
-                s_coreResponseDataType == null ||
-                s_coreStatusCodeAccessor == null ||
-                s_coreHeadersAccessor == null)
+            if (
+                s_connectionGroupListField == null
+                || s_connectionGroupType == null
+                || s_connectionListField == null
+                || s_connectionType == null
+                || s_writeListField == null
+                || s_httpResponseAccessor == null
+                || s_autoRedirectsAccessor == null
+                || s_coreResponseDataType == null
+                || s_coreStatusCodeAccessor == null
+                || s_coreHeadersAccessor == null
+            )
             {
                 // If anything went wrong here, just return false. There is nothing we can do.
                 throw new InvalidOperationException(SR.UnableToInitialize);
@@ -736,7 +793,10 @@ namespace System.Diagnostics
 
         private static void PerformInjection()
         {
-            FieldInfo servicePointTableField = typeof(ServicePointManager).GetField("s_ServicePointTable", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo servicePointTableField = typeof(ServicePointManager).GetField(
+                "s_ServicePointTable",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             if (servicePointTableField == null)
             {
                 // If anything went wrong here, just return false. There is nothing we can do.
@@ -744,47 +804,68 @@ namespace System.Diagnostics
             }
 
             Hashtable originalTable = servicePointTableField.GetValue(null) as Hashtable;
-            ServicePointHashtable newTable = new ServicePointHashtable(originalTable ?? new Hashtable());
+            ServicePointHashtable newTable = new ServicePointHashtable(
+                originalTable ?? new Hashtable()
+            );
 
             servicePointTableField.SetValue(null, newTable);
         }
 
-        private static Func<TClass, TField> CreateFieldGetter<TClass, TField>(string fieldName, BindingFlags flags) where TClass : class
+        private static Func<TClass, TField> CreateFieldGetter<TClass, TField>(
+            string fieldName,
+            BindingFlags flags
+        )
+            where TClass : class
         {
             FieldInfo field = typeof(TClass).GetField(fieldName, flags);
             if (field != null)
             {
                 string methodName = field.ReflectedType.FullName + ".get_" + field.Name;
-                DynamicMethod getterMethod = new DynamicMethod(methodName, typeof(TField), new[] { typeof(TClass) }, true);
+                DynamicMethod getterMethod = new DynamicMethod(
+                    methodName,
+                    typeof(TField),
+                    new[] { typeof(TClass) },
+                    true
+                );
                 ILGenerator generator = getterMethod.GetILGenerator();
                 generator.Emit(OpCodes.Ldarg_0);
                 generator.Emit(OpCodes.Ldfld, field);
                 generator.Emit(OpCodes.Ret);
-                return (Func<TClass, TField>)getterMethod.CreateDelegate(typeof(Func<TClass, TField>));
+                return (Func<TClass, TField>)
+                    getterMethod.CreateDelegate(typeof(Func<TClass, TField>));
             }
 
             return null;
         }
 
-
         /// <summary>
         /// Creates getter for a field defined in private or internal type
         /// repesented with classType variable
         /// </summary>
-        private static Func<object, TField> CreateFieldGetter<TField>(Type classType, string fieldName, BindingFlags flags)
+        private static Func<object, TField> CreateFieldGetter<TField>(
+            Type classType,
+            string fieldName,
+            BindingFlags flags
+        )
         {
             FieldInfo field = classType.GetField(fieldName, flags);
             if (field != null)
             {
                 string methodName = classType.FullName + ".get_" + field.Name;
-                DynamicMethod getterMethod = new DynamicMethod(methodName, typeof(TField), new[] { typeof(object) }, true);
+                DynamicMethod getterMethod = new DynamicMethod(
+                    methodName,
+                    typeof(TField),
+                    new[] { typeof(object) },
+                    true
+                );
                 ILGenerator generator = getterMethod.GetILGenerator();
                 generator.Emit(OpCodes.Ldarg_0);
                 generator.Emit(OpCodes.Castclass, classType);
                 generator.Emit(OpCodes.Ldfld, field);
                 generator.Emit(OpCodes.Ret);
 
-                return (Func<object, TField>)getterMethod.CreateDelegate(typeof(Func<object, TField>));
+                return (Func<object, TField>)
+                    getterMethod.CreateDelegate(typeof(Func<object, TField>));
             }
 
             return null;
@@ -792,7 +873,8 @@ namespace System.Diagnostics
 
         #endregion
 
-        internal static HttpHandlerDiagnosticListener s_instance = new HttpHandlerDiagnosticListener();
+        internal static HttpHandlerDiagnosticListener s_instance =
+            new HttpHandlerDiagnosticListener();
 
         #region private fields
         private const string DiagnosticListenerName = "System.Net.Http.Desktop";

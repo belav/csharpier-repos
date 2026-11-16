@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Operators;
 public class OperatorsContext : DbContext
 {
     public OperatorsContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -18,6 +16,9 @@ public class OperatorsContext : DbContext
         modelBuilder.Entity<OperatorEntityLong>().Property(x => x.Id).ValueGeneratedNever();
         modelBuilder.Entity<OperatorEntityBool>().Property(x => x.Id).ValueGeneratedNever();
         modelBuilder.Entity<OperatorEntityNullableBool>().Property(x => x.Id).ValueGeneratedNever();
-        modelBuilder.Entity<OperatorEntityDateTimeOffset>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder
+            .Entity<OperatorEntityDateTimeOffset>()
+            .Property(x => x.Id)
+            .ValueGeneratedNever();
     }
 }

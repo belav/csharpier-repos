@@ -2,10 +2,10 @@
 #region Using directives
 
 using System;
-using System.Workflow.Runtime;
 using System.Collections.Generic;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
+using System.Workflow.Runtime;
 
 #endregion
 
@@ -17,7 +17,9 @@ namespace System.Workflow.Runtime.DebugEngine
 
     #region interface IInstanceTable
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IInstanceTable
     {
         Activity GetActivity(string instanceId, string activityName);
@@ -33,14 +35,8 @@ namespace System.Workflow.Runtime.DebugEngine
 
         public Activity RootActivity
         {
-            get
-            {
-                return this.rootActivity;
-            }
-            set
-            {
-                this.rootActivity = value;
-            }
+            get { return this.rootActivity; }
+            set { this.rootActivity = value; }
         }
 
         public InstanceData(Activity rootActivity)
@@ -74,8 +70,7 @@ namespace System.Workflow.Runtime.DebugEngine
     internal sealed class InstanceTable : BreakSafeBase<InstanceMap>, IInstanceTable
     {
         public InstanceTable(int controllerManagedThreadId)
-            : base(controllerManagedThreadId)
-        { }
+            : base(controllerManagedThreadId) { }
 
         // Controller invoked.
         public void AddInstance(Guid instanceId, Activity rootActivity)
@@ -149,7 +144,6 @@ namespace System.Workflow.Runtime.DebugEngine
             try
             {
                 Lock();
-
 
                 Activity rootActivity = GetReaderData()[new Guid(instanceId)].RootActivity;
                 return DebuggerHelpers.ParseActivity(rootActivity, activityQualifiedName);

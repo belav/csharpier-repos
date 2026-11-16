@@ -38,22 +38,16 @@ public class Startup
         services.AddSingleton<IUserIdProvider, HeaderUserIdProvider>();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(
-                JwtBearerDefaults.AuthenticationScheme,
-                policy =>
-                {
-                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                }
-            );
-            options.AddPolicy(
-                NegotiateDefaults.AuthenticationScheme,
-                policy =>
-                {
-                    policy.AddAuthenticationSchemes(NegotiateDefaults.AuthenticationScheme);
-                    policy.RequireClaim(ClaimTypes.Name);
-                }
-            );
+            options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+            {
+                policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireClaim(ClaimTypes.NameIdentifier);
+            });
+            options.AddPolicy(NegotiateDefaults.AuthenticationScheme, policy =>
+            {
+                policy.AddAuthenticationSchemes(NegotiateDefaults.AuthenticationScheme);
+                policy.RequireClaim(ClaimTypes.Name);
+            });
         });
 
         services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
@@ -117,52 +111,38 @@ public class Startup
                     new AuthorizeAttribute(NegotiateDefaults.AuthenticationScheme)
                 );
 
-            endpoints.MapHub<TestHub>(
-                "/default-nowebsockets",
-                options =>
-                    options.Transports =
-                        HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents
+            endpoints.MapHub<TestHub>("/default-nowebsockets", options =>
+                options.Transports =
+                    HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents
             );
 
-            endpoints.MapHub<TestHub>(
-                "/negotiateProtocolVersion12",
-                options =>
-                {
-                    options.MinimumProtocolVersion = 12;
-                }
-            );
+            endpoints.MapHub<TestHub>("/negotiateProtocolVersion12", options =>
+            {
+                options.MinimumProtocolVersion = 12;
+            });
 
-            endpoints.MapHub<TestHub>(
-                "/negotiateProtocolVersionNegative",
-                options =>
-                {
-                    options.MinimumProtocolVersion = -1;
-                }
-            );
+            endpoints.MapHub<TestHub>("/negotiateProtocolVersionNegative", options =>
+            {
+                options.MinimumProtocolVersion = -1;
+            });
 
-            endpoints.MapGet(
-                "/generateJwtToken/{name?}",
-                (HttpContext context, string name) =>
-                {
-                    return context.Response.WriteAsync(GenerateJwtToken(name ?? "testuser"));
-                }
-            );
+            endpoints.MapGet("/generateJwtToken/{name?}", (HttpContext context, string name) =>
+            {
+                return context.Response.WriteAsync(GenerateJwtToken(name ?? "testuser"));
+            });
 
-            endpoints.Map(
-                "/redirect/{*anything}",
-                context =>
-                {
-                    return context.Response.WriteAsync(
-                        JsonConvert.SerializeObject(
-                            new
-                            {
-                                url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
-                                accessToken = GenerateJwtToken(),
-                            }
-                        )
-                    );
-                }
-            );
+            endpoints.Map("/redirect/{*anything}", context =>
+            {
+                return context.Response.WriteAsync(
+                    JsonConvert.SerializeObject(
+                        new
+                        {
+                            url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
+                            accessToken = GenerateJwtToken(),
+                        }
+                    )
+                );
+            });
         });
     }
 

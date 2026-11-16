@@ -11,16 +11,20 @@ namespace System.Linq.Tests
         {
             public bool Equals(string x, string y)
             {
-                if (ReferenceEquals(x, y)) return true;
-                if (x == null | y == null) return false;
+                if (ReferenceEquals(x, y))
+                    return true;
+                if (x == null | y == null)
+                    return false;
                 int length = x.Length;
-                if (length != y.Length) return false;
+                if (length != y.Length)
+                    return false;
                 using (var en = x.OrderBy(i => i).GetEnumerator())
                 {
                     foreach (char c in y.OrderBy(i => i))
                     {
                         en.MoveNext();
-                        if (c != en.Current) return false;
+                        if (c != en.Current)
+                            return false;
                     }
                 }
                 return true;
@@ -28,7 +32,8 @@ namespace System.Linq.Tests
 
             public int GetHashCode(string obj)
             {
-                if (obj == null) return 0;
+                if (obj == null)
+                    return 0;
                 int hash = obj.Length;
                 foreach (char c in obj)
                     hash ^= (int)c;

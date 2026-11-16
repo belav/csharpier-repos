@@ -33,27 +33,43 @@ namespace System.Web.WebPages
 
         // REVIEW: See what this is actually calling that's needed
         // Configure output caching for the request
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "We are not removing optional parameters from helpers")]
-        public static void OutputCache(this HttpResponseBase response,
-                                       int numberOfSeconds,
-                                       bool sliding = false,
-                                       IEnumerable<string> varyByParams = null,
-                                       IEnumerable<string> varyByHeaders = null,
-                                       IEnumerable<string> varyByContentEncodings = null,
-                                       HttpCacheability cacheability = HttpCacheability.Public)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "We are not removing optional parameters from helpers"
+        )]
+        public static void OutputCache(
+            this HttpResponseBase response,
+            int numberOfSeconds,
+            bool sliding = false,
+            IEnumerable<string> varyByParams = null,
+            IEnumerable<string> varyByHeaders = null,
+            IEnumerable<string> varyByContentEncodings = null,
+            HttpCacheability cacheability = HttpCacheability.Public
+        )
         {
-            OutputCache(new HttpContextWrapper(HttpContext.Current), response.Cache, numberOfSeconds, sliding, varyByParams, varyByHeaders, varyByContentEncodings,
-                        cacheability);
+            OutputCache(
+                new HttpContextWrapper(HttpContext.Current),
+                response.Cache,
+                numberOfSeconds,
+                sliding,
+                varyByParams,
+                varyByHeaders,
+                varyByContentEncodings,
+                cacheability
+            );
         }
 
-        internal static void OutputCache(HttpContextBase httpContext,
-                                         HttpCachePolicyBase cache,
-                                         int numberOfSeconds,
-                                         bool sliding,
-                                         IEnumerable<string> varyByParams,
-                                         IEnumerable<string> varyByHeaders,
-                                         IEnumerable<string> varyByContentEncodings,
-                                         HttpCacheability cacheability)
+        internal static void OutputCache(
+            HttpContextBase httpContext,
+            HttpCachePolicyBase cache,
+            int numberOfSeconds,
+            bool sliding,
+            IEnumerable<string> varyByParams,
+            IEnumerable<string> varyByHeaders,
+            IEnumerable<string> varyByContentEncodings,
+            HttpCacheability cacheability
+        )
         {
             cache.SetCacheability(cacheability);
             cache.SetExpires(httpContext.Timestamp.AddSeconds(numberOfSeconds));

@@ -36,10 +36,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             public ComposablePart Part
             {
-                get
-                {
-                    return this._part;
-                }
+                get { return this._part; }
             }
 
             public ImportState State
@@ -71,12 +68,20 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (this._importedContractNames == null)
                 {
-                    this._importedContractNames = this.Part.ImportDefinitions.Select(import => import.ContractName ?? ImportDefinition.EmptyContractName).Distinct().ToArray();
+                    this._importedContractNames = this
+                        .Part.ImportDefinitions.Select(import =>
+                            import.ContractName ?? ImportDefinition.EmptyContractName
+                        )
+                        .Distinct()
+                        .ToArray();
                 }
                 return this._importedContractNames;
             }
 
-            public CompositionResult TrySetImport(ImportDefinition import, IEnumerable<Export> exports)
+            public CompositionResult TrySetImport(
+                ImportDefinition import,
+                IEnumerable<Export> exports
+            )
             {
                 try
                 {
@@ -85,20 +90,24 @@ namespace System.ComponentModel.Composition.Hosting
                     return CompositionResult.SucceededResult;
                 }
                 catch (CompositionException ex)
-                {   // Pulling on one of the exports failed
-
+                { // Pulling on one of the exports failed
                     return new CompositionResult(
-                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex));
+                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex)
+                    );
                 }
                 catch (ComposablePartException ex)
-                {   // Type mismatch between export and import
-
+                { // Type mismatch between export and import
                     return new CompositionResult(
-                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex));
+                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex)
+                    );
                 }
             }
 
-            public void SetSavedImport(ImportDefinition import, Export[] exports, AtomicComposition atomicComposition)
+            public void SetSavedImport(
+                ImportDefinition import,
+                Export[] exports,
+                AtomicComposition atomicComposition
+            )
             {
                 if (atomicComposition != null)
                 {
@@ -107,7 +116,8 @@ namespace System.ComponentModel.Composition.Hosting
                     // Add a revert action to revert the stored exports
                     // in the case that this atomicComposition gets rolled back.
                     atomicComposition.AddRevertAction(() =>
-                        this.SetSavedImport(import, savedExports, null));
+                        this.SetSavedImport(import, savedExports, null)
+                    );
                 }
 
                 if (this._importCache == null)
@@ -143,13 +153,15 @@ namespace System.ComponentModel.Composition.Hosting
                     return CompositionResult.SucceededResult;
                 }
                 catch (ComposablePartException ex)
-                {   // Type failed to be constructed, imports could not be set, etc
-                    return new CompositionResult(
-                        ErrorBuilder.CreatePartCannotActivate(this.Part, ex));
+                { // Type failed to be constructed, imports could not be set, etc
+                    return new CompositionResult(ErrorBuilder.CreatePartCannotActivate(this.Part, ex));
                 }
             }
 
-            public void UpdateDisposableDependencies(ImportDefinition import, IEnumerable<Export> exports)
+            public void UpdateDisposableDependencies(
+                ImportDefinition import,
+                IEnumerable<Export> exports
+            )
             {
                 // Determine if there are any new disposable exports, optimizing for the most
                 // likely case, which is that there aren't any
@@ -165,8 +177,10 @@ namespace System.ComponentModel.Composition.Hosting
 
                 // Dispose any existing references previously set on this import
                 List<IDisposable> oldDisposableExports = null;
-                if (this._importedDisposableExports != null &&
-                    this._importedDisposableExports.TryGetValue(import, out oldDisposableExports))
+                if (
+                    this._importedDisposableExports != null
+                    && this._importedDisposableExports.TryGetValue(import, out oldDisposableExports)
+                )
                 {
                     oldDisposableExports.ForEach(disposable => disposable.Dispose());
 
@@ -188,7 +202,8 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     if (this._importedDisposableExports == null)
                     {
-                        this._importedDisposableExports = new Dictionary<ImportDefinition, List<IDisposable>>();
+                        this._importedDisposableExports =
+                            new Dictionary<ImportDefinition, List<IDisposable>>();
                     }
                     this._importedDisposableExports[import] = disposableExports;
                 }
@@ -198,8 +213,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._importedDisposableExports != null)
                 {
-                    IEnumerable<IDisposable> dependencies = this._importedDisposableExports.Values
-                        .SelectMany(exports => exports);
+                    IEnumerable<IDisposable> dependencies =
+                        this._importedDisposableExports.Values.SelectMany(exports => exports);
 
                     this._importedDisposableExports = null;
 

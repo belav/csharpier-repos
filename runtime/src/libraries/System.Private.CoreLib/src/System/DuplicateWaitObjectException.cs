@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when an object appears more than once in an array of synchronization objects.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class DuplicateWaitObjectException : ArgumentException
     {
         // Creates a new DuplicateWaitObjectException with its message
@@ -40,10 +42,13 @@ namespace System
             HResult = HResults.COR_E_DUPLICATEWAITOBJECT;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected DuplicateWaitObjectException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected DuplicateWaitObjectException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

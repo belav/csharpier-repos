@@ -19,7 +19,8 @@ namespace System.IO.Pipes.Tests
         [DllImport("libc", SetLastError = true)]
         internal static extern unsafe uint geteuid();
 
-        public static bool IsRemoteExecutorSupportedAndPrivilegedProcess => RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;
+        public static bool IsRemoteExecutorSupportedAndPrivilegedProcess =>
+            RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;
 
         [ConditionalFact(nameof(IsRemoteExecutorSupportedAndPrivilegedProcess))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/0")]
@@ -27,7 +28,9 @@ namespace System.IO.Pipes.Tests
         {
             string pipeName = Path.GetRandomFileName();
             uint pairID = (uint)(Math.Abs(new Random(5125123).Next()));
-            RemoteExecutor.Invoke(new Action<string, string>(ServerConnectAsId), pipeName, pairID.ToString()).Dispose();
+            RemoteExecutor
+                .Invoke(new Action<string, string>(ServerConnectAsId), pipeName, pairID.ToString())
+                .Dispose();
         }
 
         private static void ServerConnectAsId(string pipeName, string pairIDString)
@@ -35,7 +38,13 @@ namespace System.IO.Pipes.Tests
             uint pairID = uint.Parse(pairIDString);
             Assert.NotEqual(-1, seteuid(pairID));
             using (var outbound = new NamedPipeServerStream(pipeName, PipeDirection.Out))
-            using (var handle = RemoteExecutor.Invoke(new Action<string, string>(ClientConnectAsID), pipeName, pairIDString))
+            using (
+                var handle = RemoteExecutor.Invoke(
+                    new Action<string, string>(ClientConnectAsID),
+                    pipeName,
+                    pairIDString
+                )
+            )
             {
                 // Connect as the unprivileged user, but RunAsClient as the superuser
                 outbound.WaitForConnection();
@@ -43,7 +52,8 @@ namespace System.IO.Pipes.Tests
 
                 bool ran = false;
                 uint ranAs = 0;
-                outbound.RunAsClient(() => {
+                outbound.RunAsClient(() =>
+                {
                     ran = true;
                     ranAs = geteuid();
                 });

@@ -2,20 +2,28 @@
 // <copyright file="XmlChoiceIdentifierAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
-    using System.Xml.Schema;
     using System.Reflection;
+    using System.Xml.Schema;
 
     /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple=false)]
-    public class XmlChoiceIdentifierAttribute : System.Attribute {
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = false
+    )]
+    public class XmlChoiceIdentifierAttribute : System.Attribute
+    {
         string name;
         MemberInfo memberInfo;
 
@@ -23,14 +31,14 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlChoiceIdentifierAttribute() {
-        }
-        
+        public XmlChoiceIdentifierAttribute() { }
+
         /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute.XmlChoiceIdentifierAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlChoiceIdentifierAttribute(string name) {
+        public XmlChoiceIdentifierAttribute(string name)
+        {
             this.name = name;
         }
 
@@ -38,12 +46,14 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string MemberName {
+        public string MemberName
+        {
             get { return name == null ? string.Empty : name; }
             set { name = value; }
         }
 
-        internal MemberInfo MemberInfo {
+        internal MemberInfo MemberInfo
+        {
             get { return memberInfo; }
             set { memberInfo = value; }
         }

@@ -16,12 +16,12 @@ namespace System.ServiceModel.Channels
         ReliableMessagingVersion reliableMessagingVersion;
 
         CreateSequenceResponse()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
-        public CreateSequenceResponse(AddressingVersion addressingVersion,
-            ReliableMessagingVersion reliableMessagingVersion)
+        public CreateSequenceResponse(
+            AddressingVersion addressingVersion,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
             : base(true)
         {
             this.addressingVersion = addressingVersion;
@@ -30,54 +30,33 @@ namespace System.ServiceModel.Channels
 
         public EndpointAddress AcceptAcksTo
         {
-            get
-            {
-                return this.acceptAcksTo;
-            }
-            set
-            {
-                this.acceptAcksTo = value;
-            }
+            get { return this.acceptAcksTo; }
+            set { this.acceptAcksTo = value; }
         }
 
         public Nullable<TimeSpan> Expires
         {
-            get
-            {
-                return this.expires;
-            }
-            set
-            {
-                this.expires = value;
-            }
+            get { return this.expires; }
+            set { this.expires = value; }
         }
 
         public UniqueId Identifier
         {
-            get
-            {
-                return this.identifier;
-            }
-            set
-            {
-                this.identifier = value;
-            }
+            get { return this.identifier; }
+            set { this.identifier = value; }
         }
 
         public bool Ordered
         {
-            get
-            {
-                return this.ordered;
-            }
-            set
-            {
-                this.ordered = value;
-            }
+            get { return this.ordered; }
+            set { this.ordered = value; }
         }
 
-        public static CreateSequenceResponseInfo Create(AddressingVersion addressingVersion,
-            ReliableMessagingVersion reliableMessagingVersion, XmlDictionaryReader reader)
+        public static CreateSequenceResponseInfo Create(
+            AddressingVersion addressingVersion,
+            ReliableMessagingVersion reliableMessagingVersion,
+            XmlDictionaryReader reader
+        )
         {
             if (reader == null)
             {
@@ -105,12 +84,18 @@ namespace System.ServiceModel.Channels
                 {
                     string incompleteSequenceBehavior = reader.ReadElementContentAsString();
 
-                    if ((incompleteSequenceBehavior != Wsrm11Strings.DiscardEntireSequence)
+                    if (
+                        (incompleteSequenceBehavior != Wsrm11Strings.DiscardEntireSequence)
                         && (incompleteSequenceBehavior != Wsrm11Strings.DiscardFollowingFirstGap)
-                        && (incompleteSequenceBehavior != Wsrm11Strings.NoDiscard))
+                        && (incompleteSequenceBehavior != Wsrm11Strings.NoDiscard)
+                    )
                     {
-                        string reason = SR.GetString(SR.CSResponseWithInvalidIncompleteSequenceBehavior);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(reason));
+                        string reason = SR.GetString(
+                            SR.CSResponseWithInvalidIncompleteSequenceBehavior
+                        );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(reason)
+                        );
                     }
 
                     // Otherwise ignore the value.
@@ -120,8 +105,12 @@ namespace System.ServiceModel.Channels
             if (reader.IsStartElement(wsrmFeb2005Dictionary.Accept, wsrmNs))
             {
                 reader.ReadStartElement();
-                createSequenceResponse.AcceptAcksTo = EndpointAddress.ReadFrom(addressingVersion, reader,
-                    wsrmFeb2005Dictionary.AcksTo, wsrmNs);
+                createSequenceResponse.AcceptAcksTo = EndpointAddress.ReadFrom(
+                    addressingVersion,
+                    reader,
+                    wsrmFeb2005Dictionary.AcksTo,
+                    wsrmNs
+                );
                 while (reader.IsStartElement())
                 {
                     reader.Skip();
@@ -161,14 +150,22 @@ namespace System.ServiceModel.Channels
                 Wsrm11Dictionary wsrm11Dictionary = DXD.Wsrm11Dictionary;
                 writer.WriteStartElement(wsrm11Dictionary.IncompleteSequenceBehavior, wsrmNs);
                 writer.WriteValue(
-                    this.ordered ? wsrm11Dictionary.DiscardFollowingFirstGap : wsrm11Dictionary.NoDiscard);
+                    this.ordered
+                        ? wsrm11Dictionary.DiscardFollowingFirstGap
+                        : wsrm11Dictionary.NoDiscard
+                );
                 writer.WriteEndElement();
             }
 
             if (this.acceptAcksTo != null)
             {
                 writer.WriteStartElement(wsrmFeb2005Dictionary.Accept, wsrmNs);
-                this.acceptAcksTo.WriteTo(this.addressingVersion, writer, wsrmFeb2005Dictionary.AcksTo, wsrmNs);
+                this.acceptAcksTo.WriteTo(
+                    this.addressingVersion,
+                    writer,
+                    wsrmFeb2005Dictionary.AcksTo,
+                    wsrmNs
+                );
                 writer.WriteEndElement();
             }
 

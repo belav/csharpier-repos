@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,39 +26,42 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("0b9341f3-95d4-4fa4-adcd-e119e0db2889")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMViewCSS : nsIDOMAbstractView
+    {
+        #region nsIDOMAbstractView
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDocument([MarshalAs(UnmanagedType.Interface)] out nsIDOMDocumentView ret);
 
-	[Guid ("0b9341f3-95d4-4fa4-adcd-e119e0db2889")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMViewCSS : nsIDOMAbstractView {
-#region nsIDOMAbstractView
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentView ret);
+        #endregion
 
-#endregion
+        #region nsIDOMViewCSS
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getComputedStyle(
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMElement elt,
+            /*DOMString*/HandleRef pseudoElt,
+            [MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSStyleDeclaration ret
+        );
 
-#region nsIDOMViewCSS
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getComputedStyle (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMElement elt,
-				   /*DOMString*/ HandleRef pseudoElt,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSStyleDeclaration ret);
+        #endregion
+    }
 
-#endregion
-	}
-
-
-	internal class nsDOMViewCSS {
-		public static nsIDOMViewCSS GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMViewCSS obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMViewCSS).GUID, obj);
-			return o as nsIDOMViewCSS;
-		}
-	}
+    internal class nsDOMViewCSS
+    {
+        public static nsIDOMViewCSS GetProxy(Mono.WebBrowser.IWebBrowser control, nsIDOMViewCSS obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMViewCSS).GUID, obj);
+            return o as nsIDOMViewCSS;
+        }
+    }
 }

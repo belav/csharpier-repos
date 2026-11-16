@@ -277,15 +277,12 @@ public class RouteValueDictionaryTests
 
         // Assert
         Assert.NotNull(dict._propertyStorage);
-        Assert.Collection(
-            dict.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("IsPublic", kvp.Key);
-                var value = Assert.IsType<bool>(kvp.Value);
-                Assert.True(value);
-            }
-        );
+        Assert.Collection(dict.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("IsPublic", kvp.Key);
+            var value = Assert.IsType<bool>(kvp.Value);
+            Assert.True(value);
+        });
     }
 
     [Fact]
@@ -359,14 +356,11 @@ public class RouteValueDictionaryTests
         // Assert
         Assert.NotNull(dict._propertyStorage);
         AssertEmptyArrayStorage(dict);
-        Assert.Collection(
-            dict.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("DerivedProperty", kvp.Key);
-                Assert.Equal(5, kvp.Value);
-            }
-        );
+        Assert.Collection(dict.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("DerivedProperty", kvp.Key);
+            Assert.Equal(5, kvp.Value);
+        });
     }
 
     [Fact]
@@ -633,14 +627,11 @@ public class RouteValueDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -680,14 +671,11 @@ public class RouteValueDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -701,14 +689,11 @@ public class RouteValueDictionaryTests
         dict["kEy"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("kEy", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("kEy", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -748,14 +733,11 @@ public class RouteValueDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -769,14 +751,11 @@ public class RouteValueDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -915,14 +894,11 @@ public class RouteValueDictionaryTests
         dict.Add("key", "value");
 
         // Assert
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1013,14 +989,11 @@ public class RouteValueDictionaryTests
         ExceptionAssert.ThrowsArgument(() => dict.Add("key", "value2"), "key", message);
 
         // Assert
-        Assert.Collection(
-            dict.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1037,14 +1010,11 @@ public class RouteValueDictionaryTests
         ExceptionAssert.ThrowsArgument(() => dict.Add("kEy", "value2"), "key", message);
 
         // Assert
-        Assert.Collection(
-            dict.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1214,9 +1184,8 @@ public class RouteValueDictionaryTests
         Assert.True(result);
         Assert.NotNull(dict._propertyStorage);
         AssertEmptyArrayStorage(dict);
-        Assert.Collection(
-            dict,
-            kvp => Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
+        Assert.Collection(dict, kvp =>
+            Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
         );
     }
 
@@ -1235,9 +1204,8 @@ public class RouteValueDictionaryTests
         Assert.True(result);
         Assert.NotNull(dict._propertyStorage);
         AssertEmptyArrayStorage(dict);
-        Assert.Collection(
-            dict,
-            kvp => Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
+        Assert.Collection(dict, kvp =>
+            Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
         );
     }
 
@@ -1256,9 +1224,8 @@ public class RouteValueDictionaryTests
         Assert.False(result);
         Assert.NotNull(dict._propertyStorage);
         AssertEmptyArrayStorage(dict);
-        Assert.Collection(
-            dict,
-            kvp => Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
+        Assert.Collection(dict, kvp =>
+            Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
         );
     }
 
@@ -1278,9 +1245,8 @@ public class RouteValueDictionaryTests
         Assert.False(result);
         Assert.NotNull(dict._propertyStorage);
         AssertEmptyArrayStorage(dict);
-        Assert.Collection(
-            dict,
-            kvp => Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
+        Assert.Collection(dict, kvp =>
+            Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
         );
     }
 
@@ -1467,14 +1433,11 @@ public class RouteValueDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1492,14 +1455,11 @@ public class RouteValueDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1555,14 +1515,11 @@ public class RouteValueDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1607,14 +1564,11 @@ public class RouteValueDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1704,14 +1658,11 @@ public class RouteValueDictionaryTests
         // Assert
         Assert.False(result);
         Assert.Null(removedValue);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1761,14 +1712,11 @@ public class RouteValueDictionaryTests
         // Assert
         Assert.False(result);
         Assert.Null(removedValue);
-        Assert.Collection(
-            dict,
-            kvp =>
-            {
-                Assert.Equal("key", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(dict, kvp =>
+        {
+            Assert.Equal("key", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -1928,9 +1876,8 @@ public class RouteValueDictionaryTests
         Assert.False(result);
         AssertEmptyArrayStorage(dict);
         Assert.NotNull(dict._propertyStorage);
-        Assert.Collection(
-            dict,
-            kvp => Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
+        Assert.Collection(dict, kvp =>
+            Assert.Equal(new KeyValuePair<string, object?>("key", "value"), kvp)
         );
     }
 

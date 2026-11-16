@@ -269,8 +269,8 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         headers.SetReadOnly();
 
-        Assert.Throws<InvalidOperationException>(
-            () => ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" })
+        Assert.Throws<InvalidOperationException>(() =>
+            ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" })
         );
     }
 
@@ -323,8 +323,8 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         var dictionary = (IDictionary<string, StringValues>)headers;
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => dictionary.Add("Content-Length", new[] { contentLength })
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.Add("Content-Length", new[] { contentLength })
         );
         Assert.Equal(
             CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
@@ -339,8 +339,8 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         var dictionary = (IDictionary<string, StringValues>)headers;
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => ((IHeaderDictionary)headers)["Content-Length"] = contentLength
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            ((IHeaderDictionary)headers)["Content-Length"] = contentLength
         );
         Assert.Equal(
             CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
@@ -354,8 +354,8 @@ public class HttpResponseHeadersTests
     {
         var headers = new HttpResponseHeaders();
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => headers.HeaderContentLength = contentLength
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            headers.HeaderContentLength = contentLength
         );
         Assert.Equal(
             CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),

@@ -3,20 +3,20 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
 using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 using NamedArgumentMemberKind = Internal.Metadata.NativeFormat.NamedArgumentMemberKind;
 
 namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        private List<CustomAttribute> HandleCustomAttributes(Cts.Ecma.EcmaModule module, Ecma.CustomAttributeHandleCollection attributes)
+        private List<CustomAttribute> HandleCustomAttributes(
+            Cts.Ecma.EcmaModule module,
+            Ecma.CustomAttributeHandleCollection attributes
+        )
         {
             List<CustomAttribute> customAttributes = new List<CustomAttribute>(attributes.Count);
 
@@ -42,7 +42,10 @@ namespace ILCompiler.Metadata
             return customAttributes;
         }
 
-        private CustomAttribute HandleCustomAttribute(Cts.MethodDesc constructor, Ecma.CustomAttributeValue<Cts.TypeDesc> decodedValue)
+        private CustomAttribute HandleCustomAttribute(
+            Cts.MethodDesc constructor,
+            Ecma.CustomAttributeValue<Cts.TypeDesc> decodedValue
+        )
         {
             CustomAttribute result = new CustomAttribute
             {
@@ -52,7 +55,10 @@ namespace ILCompiler.Metadata
             result.FixedArguments.Capacity = decodedValue.FixedArguments.Length;
             foreach (var decodedArgument in decodedValue.FixedArguments)
             {
-                var fixedArgument = HandleCustomAttributeConstantValue(decodedArgument.Type, decodedArgument.Value);
+                var fixedArgument = HandleCustomAttributeConstantValue(
+                    decodedArgument.Type,
+                    decodedArgument.Value
+                );
                 result.FixedArguments.Add(fixedArgument);
             }
 
@@ -61,11 +67,16 @@ namespace ILCompiler.Metadata
             {
                 var namedArgument = new NamedArgument
                 {
-                    Flags = decodedArgument.Kind == Ecma.CustomAttributeNamedArgumentKind.Field ?
-                        NamedArgumentMemberKind.Field : NamedArgumentMemberKind.Property,
+                    Flags =
+                        decodedArgument.Kind == Ecma.CustomAttributeNamedArgumentKind.Field
+                            ? NamedArgumentMemberKind.Field
+                            : NamedArgumentMemberKind.Property,
                     Name = HandleString(decodedArgument.Name),
                     Type = HandleType(decodedArgument.Type),
-                    Value = HandleCustomAttributeConstantValue(decodedArgument.Type, decodedArgument.Value)
+                    Value = HandleCustomAttributeConstantValue(
+                        decodedArgument.Type,
+                        decodedArgument.Value
+                    ),
                 };
                 result.NamedArguments.Add(namedArgument);
             }
@@ -117,19 +128,24 @@ namespace ILCompiler.Metadata
             {
                 return HandleCustomAttributeConstantArray(
                     (Cts.ArrayType)type,
-                    (ImmutableArray<Ecma.CustomAttributeTypedArgument<Cts.TypeDesc>>)value);
+                    (ImmutableArray<Ecma.CustomAttributeTypedArgument<Cts.TypeDesc>>)value
+                );
             }
 
             Debug.Assert(value is Cts.TypeDesc);
-            Debug.Assert(type is Cts.MetadataType
-                && ((Cts.MetadataType)type).Name == "Type"
-                && ((Cts.MetadataType)type).Namespace == "System");
+            Debug.Assert(
+                type is Cts.MetadataType
+                    && ((Cts.MetadataType)type).Name == "Type"
+                    && ((Cts.MetadataType)type).Namespace == "System"
+            );
 
             return HandleType((Cts.TypeDesc)value);
         }
 
         private MetadataRecord HandleCustomAttributeConstantArray(
-            Cts.ArrayType type, ImmutableArray<Ecma.CustomAttributeTypedArgument<Cts.TypeDesc>> value)
+            Cts.ArrayType type,
+            ImmutableArray<Ecma.CustomAttributeTypedArgument<Cts.TypeDesc>> value
+        )
         {
             Cts.TypeDesc elementType = type.ElementType;
 
@@ -139,36 +155,75 @@ namespace ILCompiler.Metadata
                 return new ConstantEnumArray
                 {
                     ElementType = HandleType(elementType),
-                    Value = HandleCustomAttributeConstantArray(context.GetArrayType(elementType.UnderlyingType), value),
+                    Value = HandleCustomAttributeConstantArray(
+                        context.GetArrayType(elementType.UnderlyingType),
+                        value
+                    ),
                 };
             }
 
             switch (elementType.Category)
             {
                 case Cts.TypeFlags.Boolean:
-                    return new ConstantBooleanArray { Value = GetCustomAttributeConstantArrayElements<bool>(value) };
+                    return new ConstantBooleanArray
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<bool>(value),
+                    };
                 case Cts.TypeFlags.Byte:
-                    return new ConstantByteArray { Value = GetCustomAttributeConstantArrayElements<byte>(value) };
+                    return new ConstantByteArray
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<byte>(value),
+                    };
                 case Cts.TypeFlags.Char:
-                    return new ConstantCharArray { Value = GetCustomAttributeConstantArrayElements<char>(value) };
+                    return new ConstantCharArray
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<char>(value),
+                    };
                 case Cts.TypeFlags.Double:
-                    return new ConstantDoubleArray { Value = GetCustomAttributeConstantArrayElements<double>(value) };
+                    return new ConstantDoubleArray
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<double>(value),
+                    };
                 case Cts.TypeFlags.Int16:
-                    return new ConstantInt16Array { Value = GetCustomAttributeConstantArrayElements<short>(value) };
+                    return new ConstantInt16Array
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<short>(value),
+                    };
                 case Cts.TypeFlags.Int32:
-                    return new ConstantInt32Array { Value = GetCustomAttributeConstantArrayElements<int>(value) };
+                    return new ConstantInt32Array
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<int>(value),
+                    };
                 case Cts.TypeFlags.Int64:
-                    return new ConstantInt64Array { Value = GetCustomAttributeConstantArrayElements<long>(value) };
+                    return new ConstantInt64Array
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<long>(value),
+                    };
                 case Cts.TypeFlags.SByte:
-                    return new ConstantSByteArray { Value = GetCustomAttributeConstantArrayElements<sbyte>(value) };
+                    return new ConstantSByteArray
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<sbyte>(value),
+                    };
                 case Cts.TypeFlags.Single:
-                    return new ConstantSingleArray { Value = GetCustomAttributeConstantArrayElements<float>(value) };
+                    return new ConstantSingleArray
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<float>(value),
+                    };
                 case Cts.TypeFlags.UInt16:
-                    return new ConstantUInt16Array { Value = GetCustomAttributeConstantArrayElements<ushort>(value) };
+                    return new ConstantUInt16Array
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<ushort>(value),
+                    };
                 case Cts.TypeFlags.UInt32:
-                    return new ConstantUInt32Array { Value = GetCustomAttributeConstantArrayElements<uint>(value) };
+                    return new ConstantUInt32Array
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<uint>(value),
+                    };
                 case Cts.TypeFlags.UInt64:
-                    return new ConstantUInt64Array { Value = GetCustomAttributeConstantArrayElements<ulong>(value) };
+                    return new ConstantUInt64Array
+                    {
+                        Value = GetCustomAttributeConstantArrayElements<ulong>(value),
+                    };
             }
 
             if (elementType.IsString)
@@ -177,8 +232,10 @@ namespace ILCompiler.Metadata
                 record.Value.Capacity = value.Length;
                 foreach (var element in value)
                 {
-                    MetadataRecord elementRecord = element.Value == null ?
-                        (MetadataRecord)new ConstantReferenceValue() : HandleString((string)element.Value);
+                    MetadataRecord elementRecord =
+                        element.Value == null
+                            ? (MetadataRecord)new ConstantReferenceValue()
+                            : HandleString((string)element.Value);
                     record.Value.Add(elementRecord);
                 }
                 return record;
@@ -188,13 +245,16 @@ namespace ILCompiler.Metadata
             result.Value.Capacity = value.Length;
             for (int i = 0; i < value.Length; i++)
             {
-                MetadataRecord elementRecord = HandleCustomAttributeConstantValue(value[i].Type, value[i].Value);
+                MetadataRecord elementRecord = HandleCustomAttributeConstantValue(
+                    value[i].Type,
+                    value[i].Value
+                );
                 if (value[i].Type.IsEnum)
                 {
                     elementRecord = new ConstantBoxedEnumValue
                     {
                         Value = elementRecord,
-                        Type = HandleType(value[i].Type)
+                        Type = HandleType(value[i].Type),
                     };
                 }
                 result.Value.Add(elementRecord);
@@ -203,7 +263,9 @@ namespace ILCompiler.Metadata
             return result;
         }
 
-        private static TValue[] GetCustomAttributeConstantArrayElements<TValue>(ImmutableArray<Ecma.CustomAttributeTypedArgument<Cts.TypeDesc>> value)
+        private static TValue[] GetCustomAttributeConstantArrayElements<TValue>(
+            ImmutableArray<Ecma.CustomAttributeTypedArgument<Cts.TypeDesc>> value
+        )
         {
             TValue[] result = new TValue[value.Length];
             for (int i = 0; i < value.Length; i++)
@@ -213,5 +275,4 @@ namespace ILCompiler.Metadata
             return result;
         }
     }
-
 }

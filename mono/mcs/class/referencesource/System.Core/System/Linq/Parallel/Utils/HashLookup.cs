@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -29,9 +29,8 @@ namespace System.Linq.Parallel
         int freeList;
         IEqualityComparer<TKey> comparer;
 
-        internal HashLookup() : this(null)
-        {
-        }
+        internal HashLookup()
+            : this(null) { }
 
         internal HashLookup(IEqualityComparer<TKey> comparer)
         {
@@ -64,18 +63,21 @@ namespace System.Linq.Parallel
 
         private int GetKeyHashCode(TKey key)
         {
-            return 0x7fffffff &
-                (comparer == null ?
-                    (key == null ? 0 : key.GetHashCode()) :
-                    comparer.GetHashCode(key));
+            return 0x7fffffff
+                & (
+                    comparer == null
+                        ? (key == null ? 0 : key.GetHashCode())
+                        : comparer.GetHashCode(key)
+                );
         }
 
         private bool AreKeysEqual(TKey key1, TKey key2)
         {
-            return
-                (comparer == null ?
-                    ((key1 == null && key2 == null) || (key1 != null && key1.Equals(key2))) :
-                    comparer.Equals(key1, key2));
+            return (
+                comparer == null
+                    ? ((key1 == null && key2 == null) || (key1 != null && key1.Equals(key2)))
+                    : comparer.Equals(key1, key2)
+            );
         }
 
         // If value is in set, remove it and return true; otherwise return false
@@ -138,7 +140,8 @@ namespace System.Linq.Parallel
                 }
                 else
                 {
-                    if (count == slots.Length) Resize();
+                    if (count == slots.Length)
+                        Resize();
                     index = count;
                     count++;
                 }

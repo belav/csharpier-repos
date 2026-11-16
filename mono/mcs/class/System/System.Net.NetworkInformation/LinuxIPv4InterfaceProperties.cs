@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,45 +29,50 @@
 //
 using System.IO;
 
-namespace System.Net.NetworkInformation {
-	sealed class LinuxIPv4InterfaceProperties : UnixIPv4InterfaceProperties
-	{
-		public LinuxIPv4InterfaceProperties (LinuxNetworkInterface iface)
-			: base (iface)
-		{
-		}
+namespace System.Net.NetworkInformation
+{
+    sealed class LinuxIPv4InterfaceProperties : UnixIPv4InterfaceProperties
+    {
+        public LinuxIPv4InterfaceProperties(LinuxNetworkInterface iface)
+            : base(iface) { }
 
-		public override bool IsForwardingEnabled {
-			get {
-				string iface_path = "/proc/sys/net/ipv4/conf/" + iface.Name + "/forwarding";
+        public override bool IsForwardingEnabled
+        {
+            get
+            {
+                string iface_path = "/proc/sys/net/ipv4/conf/" + iface.Name + "/forwarding";
 
-				if (File.Exists (iface_path)) {
-					string val = LinuxNetworkInterface.ReadLine (iface_path);
+                if (File.Exists(iface_path))
+                {
+                    string val = LinuxNetworkInterface.ReadLine(iface_path);
 
-					return val != "0";
-				}
+                    return val != "0";
+                }
 
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		public override int Mtu {
-			get {
-				string iface_path = (iface as LinuxNetworkInterface).IfacePath + "mtu";
-				int ret = 0;
+        public override int Mtu
+        {
+            get
+            {
+                string iface_path = (iface as LinuxNetworkInterface).IfacePath + "mtu";
+                int ret = 0;
 
-				if (File.Exists (iface_path)) {
-					string val = LinuxNetworkInterface.ReadLine (iface_path);
+                if (File.Exists(iface_path))
+                {
+                    string val = LinuxNetworkInterface.ReadLine(iface_path);
 
-					try {
-						ret = Int32.Parse (val);
-					} catch {
-					}
-				}
+                    try
+                    {
+                        ret = Int32.Parse(val);
+                    }
+                    catch { }
+                }
 
-				return ret;
-
-			}
-		}
-	}
+                return ret;
+            }
+        }
+    }
 }

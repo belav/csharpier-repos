@@ -5,7 +5,6 @@ using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Debug = System.Diagnostics.Debug;
 
 // Rewrite of src\coreclr\vm\frozenobjectheap.cpp in C#
@@ -21,10 +20,12 @@ namespace Internal.Runtime
 
         // Default size to reserve for a frozen segment
         private const nuint FOH_SEGMENT_DEFAULT_SIZE = 4 * 1024 * 1024;
+
         // Size to commit on demand in that reserved space
         private const nuint FOH_COMMIT_SIZE = 64 * 1024;
 
-        public T? TryAllocateObject<T>() where T : class
+        public T? TryAllocateObject<T>()
+            where T : class
         {
             MethodTable* pMT = MethodTable.Of<T>();
             return Unsafe.As<T?>(TryAllocateObject(pMT, pMT->BaseSize));
@@ -62,7 +63,10 @@ namespace Internal.Runtime
                     return null;
                 }
 
-                obj = m_CurrentSegment == null ? null : m_CurrentSegment.TryAllocateObject(type, objectSize);
+                obj =
+                    m_CurrentSegment == null
+                        ? null
+                        : m_CurrentSegment.TryAllocateObject(type, objectSize);
                 // obj is nullptr if the current segment is full or hasn't been allocated yet
                 if (obj == null)
                 {
@@ -150,7 +154,12 @@ namespace Internal.Runtime
 
                 m_pCurrent = m_pStart + sizeof(ObjHeader);
 
-                m_SegmentHandle = RuntimeImports.RhRegisterFrozenSegment(m_pStart, (nuint)m_pCurrent - (nuint)m_pStart, FOH_COMMIT_SIZE, m_Size);
+                m_SegmentHandle = RuntimeImports.RhRegisterFrozenSegment(
+                    m_pStart,
+                    (nuint)m_pCurrent - (nuint)m_pStart,
+                    FOH_COMMIT_SIZE,
+                    m_Size
+                );
                 if (m_SegmentHandle == IntPtr.Zero)
                 {
                     ClrVirtualFree(alloc, m_Size);
@@ -198,7 +207,11 @@ namespace Internal.Runtime
 
                 m_pCurrent += objectSize;
 
-                RuntimeImports.RhUpdateFrozenSegment(m_SegmentHandle, m_pCurrent, m_pStart + m_SizeCommitted);
+                RuntimeImports.RhUpdateFrozenSegment(
+                    m_SegmentHandle,
+                    m_pCurrent,
+                    m_pStart + m_SizeCommitted
+                );
 
                 return obj;
             }
@@ -207,6 +220,7 @@ namespace Internal.Runtime
         private struct HalfBakedObject
         {
             private MethodTable* _methodTable;
+
             public void SetMethodTable(MethodTable* methodTable) => _methodTable = methodTable;
         }
     }

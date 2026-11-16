@@ -14,7 +14,10 @@ namespace System.Net.Http.Json.Functional.Tests
 {
     public class JsonContentTests_Sync : JsonContentTestsBase
     {
-        protected override Task<HttpResponseMessage> SendAsync(HttpClient client, HttpRequestMessage request) => Task.Run(() => client.Send(request));
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpClient client,
+            HttpRequestMessage request
+        ) => Task.Run(() => client.Send(request));
 
         [Fact]
         public void JsonContent_CopyTo_Succeeds()

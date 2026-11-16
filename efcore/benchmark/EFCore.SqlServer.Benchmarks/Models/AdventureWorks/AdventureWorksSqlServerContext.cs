@@ -12,6 +12,6 @@ public class AdventureWorksSqlServerContext : AdventureWorksContextBase
         _connectionString = connectionString;
     }
 
-    protected override void ConfigureProvider(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(_connectionString);
+    protected override void ConfigureProvider(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseSqlServer(_connectionString);
 }

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public class BB
     {
         static void Method1() { }
+
         [Fact]
         public static void TestEntryPoint()
         {

@@ -64,12 +64,20 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<ArgumentException>(
-                () => { var x = dvdd["foo", "bar"]; },
-                "DynamicViewDataDictionary only supports single indexers.");
+                () =>
+                {
+                    var x = dvdd["foo", "bar"];
+                },
+                "DynamicViewDataDictionary only supports single indexers."
+            );
 
             Assert.Throws<ArgumentException>(
-                () => { var x = dvdd[42]; },
-                "DynamicViewDataDictionary only supports string-based indexers.");
+                () =>
+                {
+                    var x = dvdd[42];
+                },
+                "DynamicViewDataDictionary only supports string-based indexers."
+            );
         }
 
         [Fact]

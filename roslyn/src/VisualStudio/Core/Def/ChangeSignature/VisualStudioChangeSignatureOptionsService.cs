@@ -13,7 +13,9 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
     [ExportWorkspaceService(typeof(IChangeSignatureOptionsService), ServiceLayer.Host), Shared]
-    internal class VisualStudioChangeSignatureOptionsService : ForegroundThreadAffinitizedObject, IChangeSignatureOptionsService
+    internal class VisualStudioChangeSignatureOptionsService
+        : ForegroundThreadAffinitizedObject,
+            IChangeSignatureOptionsService
     {
         private readonly IClassificationFormatMap _classificationFormatMap;
         private readonly ClassificationTypeMap _classificationTypeMap;
@@ -23,9 +25,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         public VisualStudioChangeSignatureOptionsService(
             IClassificationFormatMapService classificationFormatMapService,
             ClassificationTypeMap classificationTypeMap,
-            IThreadingContext threadingContext) : base(threadingContext)
+            IThreadingContext threadingContext
+        )
+            : base(threadingContext)
         {
-            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap("tooltip");
+            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap(
+                "tooltip"
+            );
             _classificationTypeMap = classificationTypeMap;
         }
 
@@ -33,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             Document document,
             int positionForTypeBinding,
             ISymbol symbol,
-            ParameterConfiguration parameters)
+            ParameterConfiguration parameters
+        )
         {
             this.AssertIsForeground();
 
@@ -43,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 document,
                 positionForTypeBinding,
                 _classificationFormatMap,
-                _classificationTypeMap);
+                _classificationTypeMap
+            );
 
             ChangeSignatureLogger.LogChangeSignatureDialogLaunched();
 
@@ -54,10 +62,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             {
                 ChangeSignatureLogger.LogChangeSignatureDialogCommitted();
 
-                var signatureChange = new SignatureChange(parameters, viewModel.GetParameterConfiguration());
+                var signatureChange = new SignatureChange(
+                    parameters,
+                    viewModel.GetParameterConfiguration()
+                );
                 signatureChange.LogTelemetry();
 
-                return new ChangeSignatureOptionsResult(signatureChange, previewChanges: viewModel.PreviewChanges);
+                return new ChangeSignatureOptionsResult(
+                    signatureChange,
+                    previewChanges: viewModel.PreviewChanges
+                );
             }
 
             return null;

@@ -3,13 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindAggregateOperatorsQueryInMemoryTest : NorthwindAggregateOperatorsQueryTestBase<
-    NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+public class NorthwindAggregateOperatorsQueryInMemoryTest
+    : NorthwindAggregateOperatorsQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
 {
     public NorthwindAggregateOperatorsQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
 #pragma warning restore IDE0060 // Remove unused parameter
         : base(fixture)
     {
@@ -17,43 +18,60 @@ public class NorthwindAggregateOperatorsQueryInMemoryTest : NorthwindAggregateOp
     }
 
     // InMemory can throw server side exception
-    public override async Task Average_no_data_subquery(bool async)
-        => Assert.Equal(
+    public override async Task Average_no_data_subquery(bool async) =>
+        Assert.Equal(
             "Sequence contains no elements",
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Average_no_data_subquery(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Average_no_data_subquery(async)
+                )
+            ).Message
+        );
 
-    public override async Task Max_no_data_subquery(bool async)
-        => Assert.Equal(
+    public override async Task Max_no_data_subquery(bool async) =>
+        Assert.Equal(
             "Sequence contains no elements",
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Max_no_data_subquery(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Max_no_data_subquery(async)
+                )
+            ).Message
+        );
 
-    public override async Task Min_no_data_subquery(bool async)
-        => Assert.Equal(
+    public override async Task Min_no_data_subquery(bool async) =>
+        Assert.Equal(
             "Sequence contains no elements",
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Min_no_data_subquery(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Min_no_data_subquery(async)
+                )
+            ).Message
+        );
 
-    public override async Task Average_on_nav_subquery_in_projection(bool async)
-        => Assert.Equal(
+    public override async Task Average_on_nav_subquery_in_projection(bool async) =>
+        Assert.Equal(
             "Sequence contains no elements",
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Average_on_nav_subquery_in_projection(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Average_on_nav_subquery_in_projection(async)
+                )
+            ).Message
+        );
 
-    public override Task Collection_Last_member_access_in_projection_translated(bool async)
-        => Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Collection_Last_member_access_in_projection_translated(async));
+    public override Task Collection_Last_member_access_in_projection_translated(bool async) =>
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Collection_Last_member_access_in_projection_translated(async)
+        );
 
     // Issue #31776
-    public override async Task Contains_with_local_enumerable_inline(bool async)
-        => await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await base.Contains_with_local_enumerable_inline(async));
+    public override async Task Contains_with_local_enumerable_inline(bool async) =>
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await base.Contains_with_local_enumerable_inline(async)
+        );
 
     // Issue #31776
-    public override async Task Contains_with_local_enumerable_inline_closure_mix(bool async)
-        => await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await base.Contains_with_local_enumerable_inline_closure_mix(async));
+    public override async Task Contains_with_local_enumerable_inline_closure_mix(bool async) =>
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await base.Contains_with_local_enumerable_inline_closure_mix(async)
+        );
 }

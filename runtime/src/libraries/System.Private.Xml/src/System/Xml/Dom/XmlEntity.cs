@@ -14,7 +14,14 @@ namespace System.Xml
         private XmlLinkedNode? _lastChild;
         private bool _childrenFoliating;
 
-        internal XmlEntity(string name, string? publicId, string? systemId, string? notationName, XmlDocument doc) : base(doc)
+        internal XmlEntity(
+            string name,
+            string? publicId,
+            string? systemId,
+            string? notationName,
+            XmlDocument doc
+        )
+            : base(doc)
         {
             _name = doc.NameTable.Add(name);
             _publicId = publicId;
@@ -38,10 +45,9 @@ namespace System.Xml
         {
             get
             {
-                return true;        // Make entities readonly
+                return true; // Make entities readonly
             }
         }
-
 
         // Gets the name of the node.
         public override string Name
@@ -60,10 +66,7 @@ namespace System.Xml
         public override string InnerText
         {
             get { return base.InnerText; }
-            set
-            {
-                throw new InvalidOperationException(SR.Xdom_Ent_Innertext);
-            }
+            set { throw new InvalidOperationException(SR.Xdom_Ent_Innertext); }
         }
 
         internal override bool IsContainer
@@ -89,14 +92,16 @@ namespace System.Xml
 
         internal override bool IsValidChildType(XmlNodeType type)
         {
-            return (type == XmlNodeType.Text ||
-                   type == XmlNodeType.Element ||
-                   type == XmlNodeType.ProcessingInstruction ||
-                   type == XmlNodeType.Comment ||
-                   type == XmlNodeType.CDATA ||
-                   type == XmlNodeType.Whitespace ||
-                   type == XmlNodeType.SignificantWhitespace ||
-                   type == XmlNodeType.EntityReference);
+            return (
+                type == XmlNodeType.Text
+                || type == XmlNodeType.Element
+                || type == XmlNodeType.ProcessingInstruction
+                || type == XmlNodeType.Comment
+                || type == XmlNodeType.CDATA
+                || type == XmlNodeType.Whitespace
+                || type == XmlNodeType.SignificantWhitespace
+                || type == XmlNodeType.EntityReference
+            );
         }
 
         // Gets the type of the node.
@@ -137,14 +142,10 @@ namespace System.Xml
         }
 
         // Saves the node to the specified XmlWriter.
-        public override void WriteTo(XmlWriter w)
-        {
-        }
+        public override void WriteTo(XmlWriter w) { }
 
         // Saves all the children of the node to the specified XmlWriter.
-        public override void WriteContentTo(XmlWriter w)
-        {
-        }
+        public override void WriteContentTo(XmlWriter w) { }
 
         public override string BaseURI
         {

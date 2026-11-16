@@ -3,7 +3,12 @@ using Xunit;
 
 public class Test
 {
-    enum State : sbyte { OK = 0, BUG = -1 }
+    enum State : sbyte
+    {
+        OK = 0,
+        BUG = -1,
+    }
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -11,7 +16,7 @@ public class Test
         var s = new State[1, 1];
         s[0, 0] = State.BUG;
         State a = s[0, 0];
-        if(a == s[0, 0])
+        if (a == s[0, 0])
         {
             TestLibrary.TestFramework.EndTestCase();
             TestLibrary.TestFramework.LogInformation("PASS");
@@ -24,5 +29,4 @@ public class Test
             return 0;
         }
     }
-
 }

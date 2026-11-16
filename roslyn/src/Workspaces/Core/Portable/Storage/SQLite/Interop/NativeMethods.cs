@@ -10,10 +10,19 @@ using SQLitePCL;
 
 namespace Microsoft.CodeAnalysis.SQLite.Interop
 {
-    [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Name chosen to match SQLitePCL.raw")]
+    [SuppressMessage(
+        "Style",
+        "IDE1006:Naming Styles",
+        Justification = "Name chosen to match SQLitePCL.raw"
+    )]
     internal static class NativeMethods
     {
-        public static SafeSqliteHandle sqlite3_open_v2(string filename, int flags, string? vfs, out Result result)
+        public static SafeSqliteHandle sqlite3_open_v2(
+            string filename,
+            int flags,
+            string? vfs,
+            out Result result
+        )
         {
             result = (Result)raw.sqlite3_open_v2(filename, out var wrapper, flags, vfs);
             if (result != Result.OK)
@@ -34,7 +43,11 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             }
         }
 
-        public static SafeSqliteStatementHandle sqlite3_prepare_v2(SafeSqliteHandle db, string sql, out Result result)
+        public static SafeSqliteStatementHandle sqlite3_prepare_v2(
+            SafeSqliteHandle db,
+            string sql,
+            out Result result
+        )
         {
             using var _ = db.Lease();
 
@@ -57,11 +70,28 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             }
         }
 
-        public static SafeSqliteBlobHandle sqlite3_blob_open(SafeSqliteHandle db, utf8z sdb, utf8z table, utf8z col, long rowid, int flags, out Result result)
+        public static SafeSqliteBlobHandle sqlite3_blob_open(
+            SafeSqliteHandle db,
+            utf8z sdb,
+            utf8z table,
+            utf8z col,
+            long rowid,
+            int flags,
+            out Result result
+        )
         {
             using var _ = db.Lease();
 
-            result = (Result)raw.sqlite3_blob_open(db.DangerousGetWrapper(), sdb, table, col, rowid, flags, out var wrapper);
+            result = (Result)
+                raw.sqlite3_blob_open(
+                    db.DangerousGetWrapper(),
+                    sdb,
+                    table,
+                    col,
+                    rowid,
+                    flags,
+                    out var wrapper
+                );
             if (result != (int)Result.OK)
             {
                 wrapper = null;
@@ -115,7 +145,11 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             return raw.sqlite3_blob_bytes(blob.DangerousGetWrapper());
         }
 
-        public static Result sqlite3_blob_read(SafeSqliteBlobHandle blob, Span<byte> bytes, int offset)
+        public static Result sqlite3_blob_read(
+            SafeSqliteBlobHandle blob,
+            Span<byte> bytes,
+            int offset
+        )
         {
             using var _ = blob.Lease();
             return (Result)raw.sqlite3_blob_read(blob.DangerousGetWrapper(), bytes, offset);
@@ -133,7 +167,11 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             return (Result)raw.sqlite3_step(stmt.DangerousGetWrapper());
         }
 
-        public static Result sqlite3_bind_text(SafeSqliteStatementHandle stmt, int index, string val)
+        public static Result sqlite3_bind_text(
+            SafeSqliteStatementHandle stmt,
+            int index,
+            string val
+        )
         {
             using var _ = stmt.Lease();
             return (Result)raw.sqlite3_bind_text(stmt.DangerousGetWrapper(), index, val);
@@ -143,7 +181,11 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
         /// <paramref name="val"><see cref="Encoding.UTF8"/> encoded bytes of a text value.  Span
         /// should not be NUL-terminated.</paramref>
         /// </summary>
-        public static Result sqlite3_bind_text(SafeSqliteStatementHandle stmt, int index, ReadOnlySpan<byte> val)
+        public static Result sqlite3_bind_text(
+            SafeSqliteStatementHandle stmt,
+            int index,
+            ReadOnlySpan<byte> val
+        )
         {
             using var _ = stmt.Lease();
             return (Result)raw.sqlite3_bind_text(stmt.DangerousGetWrapper(), index, val);
@@ -155,7 +197,11 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
             return (Result)raw.sqlite3_bind_int64(stmt.DangerousGetWrapper(), index, val);
         }
 
-        public static Result sqlite3_bind_blob(SafeSqliteStatementHandle stmt, int index, ReadOnlySpan<byte> bytes)
+        public static Result sqlite3_bind_blob(
+            SafeSqliteStatementHandle stmt,
+            int index,
+            ReadOnlySpan<byte> bytes
+        )
         {
             using var _ = stmt.Lease();
             return (Result)raw.sqlite3_bind_blob(stmt.DangerousGetWrapper(), index, bytes);

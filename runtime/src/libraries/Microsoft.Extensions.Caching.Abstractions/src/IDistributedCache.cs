@@ -42,7 +42,12 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// <param name="options">The cache options for the value.</param>
         /// <param name="token">Optional. The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken));
+        Task SetAsync(
+            string key,
+            byte[] value,
+            DistributedCacheEntryOptions options,
+            CancellationToken token = default(CancellationToken)
+        );
 
         /// <summary>
         /// Refreshes a value in the cache based on its key, resetting its sliding expiration timeout (if any).

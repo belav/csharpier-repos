@@ -19,12 +19,19 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
         /// <param name="configuration">The <see cref="IConfiguration" /> to add.</param>
         /// <returns>The builder.</returns>
-        public static ILoggingBuilder AddConfiguration(this ILoggingBuilder builder, IConfiguration configuration)
+        public static ILoggingBuilder AddConfiguration(
+            this ILoggingBuilder builder,
+            IConfiguration configuration
+        )
         {
             builder.AddConfiguration();
 
-            builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>>(new LoggerFilterConfigureOptions(configuration));
-            builder.Services.AddSingleton<IOptionsChangeTokenSource<LoggerFilterOptions>>(new ConfigurationChangeTokenSource<LoggerFilterOptions>(configuration));
+            builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>>(
+                new LoggerFilterConfigureOptions(configuration)
+            );
+            builder.Services.AddSingleton<IOptionsChangeTokenSource<LoggerFilterOptions>>(
+                new ConfigurationChangeTokenSource<LoggerFilterOptions>(configuration)
+            );
 
             builder.Services.AddSingleton(new LoggingConfiguration(configuration));
 

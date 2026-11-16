@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.SoapOperationBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,46 +32,53 @@ using System.ComponentModel;
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("operation", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (OperationBinding))]
-	public class SoapOperationBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "operation",
+        "http://schemas.xmlsoap.org/wsdl/soap/",
+        typeof(OperationBinding)
+    )]
+    public class SoapOperationBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        string soapAction;
+        SoapBindingStyle style;
 
-		string soapAction;
-		SoapBindingStyle style;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-	
-		public SoapOperationBinding ()
-		{
-			soapAction = String.Empty;
-			style = SoapBindingStyle.Default;
-		}
-		
-		#endregion // Constructors
+        public SoapOperationBinding()
+        {
+            soapAction = String.Empty;
+            style = SoapBindingStyle.Default;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[XmlAttribute ("soapAction")]
-		public string SoapAction {
-			get { return soapAction; }
-			set { soapAction = value; }
-		}
+        #region Properties
 
-		// LAMESPEC: .NET Documentation says that the default value for this property is
-		// SoapBindingStyle.Document (see constructor), but reflection shows that this 
-		// attribute value is SoapBindingStyle.Default
+        [XmlAttribute("soapAction")]
+        public string SoapAction
+        {
+            get { return soapAction; }
+            set { soapAction = value; }
+        }
 
-		[DefaultValue (SoapBindingStyle.Default)]
-		[XmlAttribute ("style")]
-		public SoapBindingStyle Style {
-			get { return style; }
-			set { style = value; }
-		}
+        // LAMESPEC: .NET Documentation says that the default value for this property is
+        // SoapBindingStyle.Document (see constructor), but reflection shows that this
+        // attribute value is SoapBindingStyle.Default
 
-		#endregion // Properties
-	}
+        [DefaultValue(SoapBindingStyle.Default)]
+        [XmlAttribute("style")]
+        public SoapBindingStyle Style
+        {
+            get { return style; }
+            set { style = value; }
+        }
+
+        #endregion // Properties
+    }
 }

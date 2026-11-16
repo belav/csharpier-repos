@@ -8,7 +8,7 @@ public class NullableIntToNullableEnum : AutoMapperSpecBase
     {
         One = 1,
         Two = 2,
-        Three = 3
+        Three = 3,
     }
 
     public class Source
@@ -21,10 +21,11 @@ public class NullableIntToNullableEnum : AutoMapperSpecBase
         public Values? Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {

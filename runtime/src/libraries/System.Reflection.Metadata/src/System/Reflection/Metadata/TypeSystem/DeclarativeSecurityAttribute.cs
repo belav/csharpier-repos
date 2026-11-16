@@ -24,26 +24,17 @@ namespace System.Reflection.Metadata
 
         public DeclarativeSecurityAction Action
         {
-            get
-            {
-                return _reader.DeclSecurityTable.GetAction(_rowId);
-            }
+            get { return _reader.DeclSecurityTable.GetAction(_rowId); }
         }
 
         public EntityHandle Parent
         {
-            get
-            {
-                return _reader.DeclSecurityTable.GetParent(_rowId);
-            }
+            get { return _reader.DeclSecurityTable.GetParent(_rowId); }
         }
 
         public BlobHandle PermissionSet
         {
-            get
-            {
-                return _reader.DeclSecurityTable.GetPermissionSet(_rowId);
-            }
+            get { return _reader.DeclSecurityTable.GetPermissionSet(_rowId); }
         }
     }
 }

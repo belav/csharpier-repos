@@ -23,9 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStylesLocationColumnDefinition()
-        {
-        }
+        public NamingStylesLocationColumnDefinition() { }
 
         public override string Name => Location;
         public override string DisplayName => ServicesVSResources.Location;
@@ -34,7 +32,12 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public override bool IsFilterable => true;
         public override bool IsSortable => true;
 
-        public override bool TryCreateStringContent(ITableEntryHandle entry, bool truncatedText, bool singleColumnView, out string? content)
+        public override bool TryCreateStringContent(
+            ITableEntryHandle entry,
+            bool truncatedText,
+            bool singleColumnView,
+            out string? content
+        )
         {
             if (!entry.TryGetValue(Type, out NamingStyleSetting setting))
             {
@@ -45,8 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
             content = GetLocationString(setting.Location);
             return true;
 
-            static string GetLocationString(SettingLocation? location)
-                => location?.LocationKind switch
+            static string GetLocationString(SettingLocation? location) =>
+                location?.LocationKind switch
                 {
                     LocationKind.EditorConfig or LocationKind.GlobalConfig => location.Path!,
                     _ => ServicesVSResources.Visual_Studio_Settings,
@@ -56,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public override bool TryCreateColumnContent(
             ITableEntryHandle entry,
             bool singleColumnView,
-            out FrameworkElement? content)
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Location, out NamingStyleSetting setting))
             {

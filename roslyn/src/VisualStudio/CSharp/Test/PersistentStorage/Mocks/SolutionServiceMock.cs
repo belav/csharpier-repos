@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
 {
     internal class SolutionServiceMock : ISolutionService
     {
-        private readonly BroadcastObservable<OpenCodeContainersState> openContainerObservable = new BroadcastObservable<OpenCodeContainersState>(new OpenCodeContainersState());
+        private readonly BroadcastObservable<OpenCodeContainersState> openContainerObservable =
+            new BroadcastObservable<OpenCodeContainersState>(new OpenCodeContainersState());
 
         public event EventHandler<ProjectsLoadedEventArgs>? ProjectsLoaded;
 
@@ -30,38 +31,79 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
         internal Uri? SolutionFilePath
         {
             get => this.openContainerObservable.Value.SolutionFilePath;
-            set => this.openContainerObservable.Value = this.openContainerObservable.Value with { SolutionFilePath = value };
+            set =>
+                this.openContainerObservable.Value = this.openContainerObservable.Value with
+                {
+                    SolutionFilePath = value,
+                };
         }
 
-        public ValueTask<bool[]> AreProjectsLoadedAsync(Guid[] projectIds, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<bool[]> AreProjectsLoadedAsync(
+            Guid[] projectIds,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public Task<IDisposable> SubscribeToOpenCodeContainersStateAsync(IObserver<OpenCodeContainersState> observer, CancellationToken cancellationToken)
+        public Task<IDisposable> SubscribeToOpenCodeContainersStateAsync(
+            IObserver<OpenCodeContainersState> observer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             return Task.FromResult(this.openContainerObservable.Subscribe(observer));
         }
 
-        public Task<OpenCodeContainersState> GetOpenCodeContainersStateAsync(CancellationToken cancellationToken) => Task.FromResult(this.openContainerObservable.Value);
+        public Task<OpenCodeContainersState> GetOpenCodeContainersStateAsync(
+            CancellationToken cancellationToken
+        ) => Task.FromResult(this.openContainerObservable.Value);
 
-        public Task CloseSolutionAndFolderAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task CloseSolutionAndFolderAsync(CancellationToken cancellationToken) =>
+            throw new NotImplementedException();
 
-        public ValueTask<IReadOnlyList<string?>> GetPropertyValuesAsync(IReadOnlyList<int> propertyIds, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<IReadOnlyList<string?>> GetPropertyValuesAsync(
+            IReadOnlyList<int> propertyIds,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public ValueTask<IReadOnlyList<string?>> GetSolutionTelemetryContextPropertyValuesAsync(IReadOnlyList<string> propertyNames, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<IReadOnlyList<string?>> GetSolutionTelemetryContextPropertyValuesAsync(
+            IReadOnlyList<string> propertyNames,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public ValueTask<bool> LoadProjectsAsync(Guid[] projectIds, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<bool> LoadProjectsAsync(
+            Guid[] projectIds,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public ValueTask<ProjectLoadResult> LoadProjectsWithResultAsync(Guid[] projectIds, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<ProjectLoadResult> LoadProjectsWithResultAsync(
+            Guid[] projectIds,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public ValueTask<bool> RemoveProjectsAsync(IReadOnlyList<Guid> projectIds, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<bool> RemoveProjectsAsync(
+            IReadOnlyList<Guid> projectIds,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public Task RequestProjectEventsAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task RequestProjectEventsAsync(CancellationToken cancellationToken) =>
+            throw new NotImplementedException();
 
-        public Task SaveSolutionFilterFileAsync(string filterFileDirectory, string filterFileName, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task SaveSolutionFilterFileAsync(
+            string filterFileDirectory,
+            string filterFileName,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        public ValueTask<bool> UnloadProjectsAsync(Guid[] projectIds, ProjectUnloadReason unloadReason, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public ValueTask<bool> UnloadProjectsAsync(
+            Guid[] projectIds,
+            ProjectUnloadReason unloadReason,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        internal void SimulateFolderChange(IReadOnlyList<Uri> folderPaths) => this.openContainerObservable.Value = this.openContainerObservable.Value with { OpenFolderPaths = folderPaths };
+        internal void SimulateFolderChange(IReadOnlyList<Uri> folderPaths) =>
+            this.openContainerObservable.Value = this.openContainerObservable.Value with
+            {
+                OpenFolderPaths = folderPaths,
+            };
 
         private class BroadcastObservable<T> : IObservable<T>
         {
@@ -82,22 +124,28 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             public IDisposable Subscribe(IObserver<T> observer)
             {
                 var actionBlock = new ActionBlock<T>(observer.OnNext);
-                actionBlock.Completion.ContinueWith(
-                    static (t, s) =>
-                    {
-                        var observer = (IObserver<T>)s!;
-                        if (t.Exception is object)
+                actionBlock
+                    .Completion.ContinueWith(
+                        static (t, s) =>
                         {
-                            observer.OnError(t.Exception);
-                        }
-                        else
-                        {
-                            observer.OnCompleted();
-                        }
-                    },
-                    observer,
-                    TaskScheduler.Default).Forget();
-                return this.sourceBlock.LinkTo(actionBlock, new DataflowLinkOptions { PropagateCompletion = true });
+                            var observer = (IObserver<T>)s!;
+                            if (t.Exception is object)
+                            {
+                                observer.OnError(t.Exception);
+                            }
+                            else
+                            {
+                                observer.OnCompleted();
+                            }
+                        },
+                        observer,
+                        TaskScheduler.Default
+                    )
+                    .Forget();
+                return this.sourceBlock.LinkTo(
+                    actionBlock,
+                    new DataflowLinkOptions { PropagateCompletion = true }
+                );
             }
         }
     }

@@ -45,10 +45,7 @@ namespace System.Reflection.Internal
 
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
+            get { return _position; }
             set
             {
                 if (value < 0 || value >= _array.Length)
@@ -60,9 +57,7 @@ namespace System.Reflection.Internal
             }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

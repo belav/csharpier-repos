@@ -55,11 +55,25 @@ namespace System.ServiceModel.Activities.Presentation
         /// <param name="referencedAssemblies">The list of referenced assembly names.</param>
         /// <param name="editingContext">The editing context.</param>
         /// <returns>The contract type selected by user or null if user cancels.</returns>
-        public static Type SelectContractType(AssemblyName localAssemblyName, IList<AssemblyName> referencedAssemblies, EditingContext editingContext)
+        public static Type SelectContractType(
+            AssemblyName localAssemblyName,
+            IList<AssemblyName> referencedAssemblies,
+            EditingContext editingContext
+        )
         {
-            AssemblyContextControlItem assemblyContextControlItem = new AssemblyContextControlItem { LocalAssemblyName = localAssemblyName, ReferencedAssemblyNames = referencedAssemblies };
-            TypeBrowser typeBrowser = new TypeBrowser(assemblyContextControlItem, editingContext, FilterFunction);
-            bool? dialogResult = typeBrowser.ShowDialog(/* owner = */ null);
+            AssemblyContextControlItem assemblyContextControlItem = new AssemblyContextControlItem
+            {
+                LocalAssemblyName = localAssemblyName,
+                ReferencedAssemblyNames = referencedAssemblies,
+            };
+            TypeBrowser typeBrowser = new TypeBrowser(
+                assemblyContextControlItem,
+                editingContext,
+                FilterFunction
+            );
+            bool? dialogResult = typeBrowser.ShowDialog( /* owner = */
+                null
+            );
             if (dialogResult.HasValue && dialogResult.Value)
             {
                 return typeBrowser.ConcreteType;
@@ -75,7 +89,9 @@ namespace System.ServiceModel.Activities.Presentation
         /// </summary>
         /// <param name="contractType">The contract type</param>
         /// <returns>The list of all activity templates, each represent an operation.</returns>
-        public static IEnumerable<ActivityTemplateFactoryBuilder> GenerateActivityTemplates(Type contractType)
+        public static IEnumerable<ActivityTemplateFactoryBuilder> GenerateActivityTemplates(
+            Type contractType
+        )
         {
             if (contractType == null)
             {
@@ -91,15 +107,23 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 if (e.InnerException != null)
                 {
-                    throw new InvalidOperationException(e.Message + Environment.NewLine + Environment.NewLine + e.InnerException.GetType().ToString() + Environment.NewLine + e.InnerException.Message, e);
+                    throw new InvalidOperationException(
+                        e.Message
+                            + Environment.NewLine
+                            + Environment.NewLine
+                            + e.InnerException.GetType().ToString()
+                            + Environment.NewLine
+                            + e.InnerException.Message,
+                        e
+                    );
                 }
                 else
                 {
                     throw;
                 }
             }
-            
-            // 
+
+            //
             if (contract.Operations != null)
             {
                 foreach (OperationDescription operation in contract.Operations)
@@ -110,8 +134,9 @@ namespace System.ServiceModel.Activities.Presentation
                         generatedActivity,
                         new Dictionary<string, object>
                         {
-                             { ContractTypeViewStateKey, contractType },
-                        });
+                            { ContractTypeViewStateKey, contractType },
+                        }
+                    );
                     yield return new ActivityTemplateFactoryBuilder
                     {
                         Name = contractType.Name + "." + generatedActivity.DisplayName,
@@ -134,11 +159,19 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 using (StringWriter textWriter = new StringWriter(CultureInfo.InvariantCulture))
                 {
-                    using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, new XmlWriterSettings { Indent = true }))
+                    using (
+                        XmlWriter xmlWriter = XmlWriter.Create(
+                            textWriter,
+                            new XmlWriterSettings { Indent = true }
+                        )
+                    )
                     {
                         using (XamlWriter xamlWriter = new XamlXmlWriter(xmlWriter, xsc))
                         {
-                            using (ActivityTemplateFactoryBuilderWriter builderWriter = new ActivityTemplateFactoryBuilderWriter(xamlWriter, xsc))
+                            using (
+                                ActivityTemplateFactoryBuilderWriter builderWriter =
+                                    new ActivityTemplateFactoryBuilderWriter(xamlWriter, xsc)
+                            )
                             {
                                 XamlServices.Transform(reader, builderWriter);
                             }
@@ -164,8 +197,16 @@ namespace System.ServiceModel.Activities.Presentation
             if (reply != null)
             {
                 reply.DisplayName = receive.OperationName + SendReplySuffix;
-                Variable<CorrelationHandle> handle = new Variable<CorrelationHandle> { Name = "__handle" };
-                receive.CorrelationInitializers.Add(new RequestReplyCorrelationInitializer { CorrelationHandle = new InArgument<CorrelationHandle>(handle) });
+                Variable<CorrelationHandle> handle = new Variable<CorrelationHandle>
+                {
+                    Name = "__handle",
+                };
+                receive.CorrelationInitializers.Add(
+                    new RequestReplyCorrelationInitializer
+                    {
+                        CorrelationHandle = new InArgument<CorrelationHandle>(handle),
+                    }
+                );
                 reply.Request = receive;
 
                 Activity replyActivity = reply;
@@ -175,15 +216,15 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     if (replySelector == null)
                     {
-                        replySelector = new Switch<string>
-                        {
-                            Default = reply
-                        };
+                        replySelector = new Switch<string> { Default = reply };
                         replyActivity = replySelector;
                     }
 
                     faultReply.Request = receive;
-                    string faultName = faultReply.DisplayName.Substring(0, faultReply.DisplayName.Length - SendFaultReply.Length);
+                    string faultName = faultReply.DisplayName.Substring(
+                        0,
+                        faultReply.DisplayName.Length - SendFaultReply.Length
+                    );
                     faultReply.DisplayName = receive.OperationName + SendFaultReplySuffix;
                     replySelector.Cases.Add(faultName, faultReply);
                 }

@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis
     internal enum DeterministicKeyOptions
     {
         /// <summary>
-        /// The default is to include all inputs to the compilation which impact the output of the 
+        /// The default is to include all inputs to the compilation which impact the output of the
         /// compilation: binaries or diagnostics.
         /// </summary>
         Default = 0b0,
@@ -19,9 +19,9 @@ namespace Microsoft.CodeAnalysis
         /// Ignore all file paths, but still include file names, in the deterministic key.
         /// </summary>
         /// <remarks>
-        /// This is useful for scenarios where the consumer is interested in the content of the 
+        /// This is useful for scenarios where the consumer is interested in the content of the
         /// <see cref="Compilation"/> being the same but aren't concerned precisely with the file
-        /// path of the content. A typical example of this type of consumer is one that operates 
+        /// path of the content. A typical example of this type of consumer is one that operates
         /// in CI where the path changes frequently.
         /// </remarks>
         IgnorePaths = 0b0001,
@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// Compiler output is not guaranteed to be deterministically equivalent between versions
-        /// but very often is for wide ranges of versions. This option is useful for consumers 
-        /// who are comfortable ignoring the versions when looking at compiler output. 
+        /// but very often is for wide ranges of versions. This option is useful for consumers
+        /// who are comfortable ignoring the versions when looking at compiler output.
         /// </remarks>
         IgnoreToolVersions = 0b0010,
     }

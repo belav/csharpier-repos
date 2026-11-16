@@ -25,7 +25,8 @@ namespace System.Web.Http.Internal
             }
 
             // if the compiler did not bake in a default value, check the [DefaultValue] attribute
-            DefaultValueAttribute[] attrs = (DefaultValueAttribute[])parameterInfo.GetCustomAttributes(typeof(DefaultValueAttribute), false);
+            DefaultValueAttribute[] attrs = (DefaultValueAttribute[])
+                parameterInfo.GetCustomAttributes(typeof(DefaultValueAttribute), false);
             if (attrs == null || attrs.Length == 0)
             {
                 value = default(object);

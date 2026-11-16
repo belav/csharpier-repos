@@ -32,13 +32,21 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 },
                 null,
                 timeoutMilliseconds ?? -1,
-                executeOnlyOnce: true);
+                executeOnlyOnce: true
+            );
             return tcs.Task;
         }
 
-        public static async Task WaitOneAsync(this WaitHandle handle, int? timeoutMilliseconds = null) => await handle.ToTask(timeoutMilliseconds);
+        public static async Task WaitOneAsync(
+            this WaitHandle handle,
+            int? timeoutMilliseconds = null
+        ) => await handle.ToTask(timeoutMilliseconds);
 
-        public static async ValueTask<T> TakeAsync<T>(this BlockingCollection<T> collection, TimeSpan? pollTimeSpan = null, CancellationToken cancellationToken = default)
+        public static async ValueTask<T> TakeAsync<T>(
+            this BlockingCollection<T> collection,
+            TimeSpan? pollTimeSpan = null,
+            CancellationToken cancellationToken = default
+        )
         {
             var delay = pollTimeSpan ?? TimeSpan.FromSeconds(.25);
             do

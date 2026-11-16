@@ -17,7 +17,10 @@ namespace Microsoft.Web.Mvc.Test
             page.ViewData.Model = new { foo = "Hello world!" };
 
             // Act & Assert
-            Assert.Equal("Microsoft.Web.Mvc.DynamicReflectionObject", page.Model.GetType().FullName);
+            Assert.Equal(
+                "Microsoft.Web.Mvc.DynamicReflectionObject",
+                page.Model.GetType().FullName
+            );
         }
 
         [Fact]
@@ -38,7 +41,10 @@ namespace Microsoft.Web.Mvc.Test
             DynamicViewPage page = new DynamicViewPage();
 
             // Act & Assert
-            Assert.Equal("Microsoft.Web.Mvc.DynamicViewDataDictionary", page.ViewData.GetType().FullName);
+            Assert.Equal(
+                "Microsoft.Web.Mvc.DynamicViewDataDictionary",
+                page.ViewData.GetType().FullName
+            );
         }
 
         // DynamicViewPage<T>
@@ -50,7 +56,10 @@ namespace Microsoft.Web.Mvc.Test
             DynamicViewPage<object> page = new DynamicViewPage<object>();
 
             // Act & Assert
-            Assert.Equal("Microsoft.Web.Mvc.DynamicViewDataDictionary", page.ViewData.GetType().FullName);
+            Assert.Equal(
+                "Microsoft.Web.Mvc.DynamicViewDataDictionary",
+                page.ViewData.GetType().FullName
+            );
         }
     }
 }

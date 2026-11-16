@@ -58,14 +58,14 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
-
 using RabbitMQ.Util;
 
 namespace RabbitMQ.Client.Impl
 {
     public class SocketFrameHandler_0_9 : IFrameHandler
     {
-        public const int WSAEWOULDBLOCK = 10035; 
+        public const int WSAEWOULDBLOCK = 10035;
+
         // ^^ System.Net.Sockets.SocketError doesn't exist in .NET 1.1
 
         public AmqpTcpEndpoint m_endpoint;
@@ -78,14 +78,18 @@ namespace RabbitMQ.Client.Impl
             m_endpoint = endpoint;
             m_socket = new TcpClient();
             m_socket.Connect(endpoint.HostName, endpoint.Port);
-            // disable Nagle's algorithm, for more consistently low latency 
+            // disable Nagle's algorithm, for more consistently low latency
             m_socket.NoDelay = true;
 
             Stream netstream = m_socket.GetStream();
-            if (endpoint.Ssl.Enabled) {
-                try {
+            if (endpoint.Ssl.Enabled)
+            {
+                try
+                {
                     netstream = SslHelper.TcpUpgrade(netstream, endpoint.Ssl);
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     Close();
                     throw;
                 }
@@ -96,22 +100,13 @@ namespace RabbitMQ.Client.Impl
 
         public AmqpTcpEndpoint Endpoint
         {
-            get
-            {
-                return m_endpoint;
-            }
+            get { return m_endpoint; }
         }
 
         public int Timeout
         {
-            get
-            {
-                return m_socket.ReceiveTimeout;
-            }
-            set
-            {
-                m_socket.ReceiveTimeout = value;
-            }
+            get { return m_socket.ReceiveTimeout; }
+            set { m_socket.ReceiveTimeout = value; }
         }
 
         public void SendHeader()

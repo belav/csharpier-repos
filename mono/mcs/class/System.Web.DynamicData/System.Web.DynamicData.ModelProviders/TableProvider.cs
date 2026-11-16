@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,35 +38,41 @@ using System.Web.UI;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public abstract class TableProvider
-	{
-		protected TableProvider (DataModelProvider model)
-		{
-			DataModel = model;
-		}
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public abstract class TableProvider
+    {
+        protected TableProvider(DataModelProvider model)
+        {
+            DataModel = model;
+        }
 
-		public abstract ReadOnlyCollection<ColumnProvider> Columns { get; }
+        public abstract ReadOnlyCollection<ColumnProvider> Columns { get; }
 
-		public DataModelProvider DataModel { get; private set; }
-		public virtual Type EntityType { get; protected set; }
-		public virtual string Name { get; protected set; }
+        public DataModelProvider DataModel { get; private set; }
+        public virtual Type EntityType { get; protected set; }
+        public virtual string Name { get; protected set; }
 
-		public virtual object EvaluateForeignKey (object row, string foreignKeyName)
-		{
-			return DataBinder.GetPropertyValue (row, foreignKeyName);
-		}
+        public virtual object EvaluateForeignKey(object row, string foreignKeyName)
+        {
+            return DataBinder.GetPropertyValue(row, foreignKeyName);
+        }
 
-		public abstract IQueryable GetQuery (object context);
+        public abstract IQueryable GetQuery(object context);
 
-		public override string ToString ()
-		{
-			string name = Name;
-			if (String.IsNullOrEmpty (name))
-				return base.ToString ();
+        public override string ToString()
+        {
+            string name = Name;
+            if (String.IsNullOrEmpty(name))
+                return base.ToString();
 
-			return name;
-		}
-	}
+            return name;
+        }
+    }
 }

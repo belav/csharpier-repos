@@ -5,7 +5,7 @@
 //   Duco Fijma (duco@lorentz.xs4all.nl)
 //
 //   (c) 2002 Duco Fijma
-// 
+//
 
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,27 +34,26 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.SymbolStore
 {
-	[ComVisible (true)]
-	public interface ISymbolMethod {
-		ISymbolScope RootScope {get; }
-		int SequencePointCount {get; }
-		SymbolToken Token {get; }
+    [ComVisible(true)]
+    public interface ISymbolMethod
+    {
+        ISymbolScope RootScope { get; }
+        int SequencePointCount { get; }
+        SymbolToken Token { get; }
 
-		ISymbolNamespace GetNamespace ();
-		int GetOffset (ISymbolDocument document, int line, int column);
-		ISymbolVariable[] GetParameters ();
-		int[] GetRanges (ISymbolDocument document, int line, int column);
-		ISymbolScope GetScope (int offset);
-		void GetSequencePoints (
-			int[] offsets,
-			ISymbolDocument[] documents,
-			int[] lines,
-			int[] columns,
-			int[] endLines,
-			int[] endColumns);
-		bool GetSourceStartEnd (
-			ISymbolDocument[] docs,
-			int[] lines,
-			int[] columns); 
-	}
+        ISymbolNamespace GetNamespace();
+        int GetOffset(ISymbolDocument document, int line, int column);
+        ISymbolVariable[] GetParameters();
+        int[] GetRanges(ISymbolDocument document, int line, int column);
+        ISymbolScope GetScope(int offset);
+        void GetSequencePoints(
+            int[] offsets,
+            ISymbolDocument[] documents,
+            int[] lines,
+            int[] columns,
+            int[] endLines,
+            int[] endColumns
+        );
+        bool GetSourceStartEnd(ISymbolDocument[] docs, int[] lines, int[] columns);
+    }
 }

@@ -29,10 +29,7 @@ namespace System.ServiceModel.Channels
 
         public bool IsEmpty
         {
-            get 
-            {
-                return this.message.IsEmpty;
-            }
+            get { return this.message.IsEmpty; }
         }
 
         public void WriteToStream(Stream stream)
@@ -59,7 +56,13 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                return mtomMessageEncoder.BeginWriteMessage(this.message, stream, this.mtomBoundary, callback, state);
+                return mtomMessageEncoder.BeginWriteMessage(
+                    this.message,
+                    stream,
+                    this.mtomBoundary,
+                    callback,
+                    state
+                );
             }
         }
 
@@ -70,8 +73,11 @@ namespace System.ServiceModel.Channels
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                SR.GetString(SR.WebSocketOpaqueStreamContentNotSupportError)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR.GetString(SR.WebSocketOpaqueStreamContentNotSupportError)
+                )
+            );
         }
 
         protected override bool TryComputeLength(out long length)

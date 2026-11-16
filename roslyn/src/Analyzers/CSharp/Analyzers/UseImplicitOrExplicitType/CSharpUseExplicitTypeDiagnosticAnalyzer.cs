@@ -8,22 +8,29 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpUseExplicitTypeDiagnosticAnalyzer : CSharpTypeStyleDiagnosticAnalyzerBase
+    internal sealed class CSharpUseExplicitTypeDiagnosticAnalyzer
+        : CSharpTypeStyleDiagnosticAnalyzerBase
     {
-        private static readonly LocalizableString s_Title =
-            new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_explicit_type), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources));
+        private static readonly LocalizableString s_Title = new LocalizableResourceString(
+            nameof(CSharpAnalyzersResources.Use_explicit_type),
+            CSharpAnalyzersResources.ResourceManager,
+            typeof(CSharpAnalyzersResources)
+        );
 
-        private static readonly LocalizableString s_Message =
-            new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_explicit_type_instead_of_var), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources));
+        private static readonly LocalizableString s_Message = new LocalizableResourceString(
+            nameof(CSharpAnalyzersResources.Use_explicit_type_instead_of_var),
+            CSharpAnalyzersResources.ResourceManager,
+            typeof(CSharpAnalyzersResources)
+        );
 
         protected override CSharpTypeStyleHelper Helper => CSharpUseExplicitTypeHelper.Instance;
 
         public CSharpUseExplicitTypeDiagnosticAnalyzer()
-            : base(diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                   enforceOnBuild: EnforceOnBuildValues.UseExplicitType,
-                   title: s_Title,
-                   message: s_Message)
-        {
-        }
+            : base(
+                diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
+                enforceOnBuild: EnforceOnBuildValues.UseExplicitType,
+                title: s_Title,
+                message: s_Message
+            ) { }
     }
 }

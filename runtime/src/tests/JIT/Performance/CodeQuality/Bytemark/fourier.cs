@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -39,7 +39,7 @@ public class Fourier : FourierStruct
         return "FOURIER";
     }
 
-    /* 
+    /*
     ** Perform the transcendental/trigonometric portion of the
     ** benchmark.  This benchmark calculates the first n
     ** fourier coefficients of the function (x+1)^x defined
@@ -47,10 +47,10 @@ public class Fourier : FourierStruct
     */
     public override double Run()
     {
-        double[] abase;         /* Base of A[] coefficients array */
-        double[] bbase;         /* Base of B[] coefficients array */
-        long accumtime;         /* Accumulated time in ticks */
-        double iterations;      /* # of iterations */
+        double[] abase; /* Base of A[] coefficients array */
+        double[] bbase; /* Base of B[] coefficients array */
+        long accumtime; /* Accumulated time in ticks */
+        double iterations; /* # of iterations */
 
         /*
         ** See if we need to do self-adjustment code.
@@ -67,7 +67,8 @@ public class Fourier : FourierStruct
                 ** less than or equal to the permitted minimum, re-allocate
                 ** larger arrays and try again.
                 */
-                if (DoFPUTransIteration(abase, bbase, this.arraysize) > global.min_ticks) break;
+                if (DoFPUTransIteration(abase, bbase, this.arraysize) > global.min_ticks)
+                    break;
                 this.arraysize += 50;
             }
         }
@@ -105,9 +106,9 @@ public class Fourier : FourierStruct
     */
     private static long DoFPUTransIteration(double[] abase, double[] bbase, int arraysize)
     {
-        double omega;   /* Fundamental frequency */
-        int i;      /* Index */
-        long elapsed;   /* Elapsed time */
+        double omega; /* Fundamental frequency */
+        int i; /* Index */
+        long elapsed; /* Elapsed time */
 
         elapsed = ByteMark.StartStopwatch();
 
@@ -155,11 +156,17 @@ public class Fourier : FourierStruct
     **   2 for sine terms.
     ** Returns the value.
     */
-    private static double TrapezoidIntegrate(double x0, double x1, int nsteps, double omegan, int select)
+    private static double TrapezoidIntegrate(
+        double x0,
+        double x1,
+        int nsteps,
+        double omegan,
+        int select
+    )
     {
-        double x;       /* Independent variable */
-        double dx;      /* Stepsize */
-        double rvalue;          /* Return value */
+        double x; /* Independent variable */
+        double dx; /* Stepsize */
+        double rvalue; /* Return value */
 
         /*
         ** Initialize independent variable
@@ -181,7 +188,7 @@ public class Fourier : FourierStruct
         */
         if (nsteps != 1)
         {
-            --nsteps;               /* Already done 1 step */
+            --nsteps; /* Already done 1 step */
             while (--nsteps != 0)
             {
                 x += dx;
@@ -211,9 +218,12 @@ public class Fourier : FourierStruct
         */
         switch (select)
         {
-            case 0: return Math.Pow(x + (double)1.0, x);
-            case 1: return Math.Pow(x + (double)1.0, x) * Math.Cos(omegan * x);
-            case 2: return Math.Pow(x + (double)1.0, x) * Math.Sin(omegan * x);
+            case 0:
+                return Math.Pow(x + (double)1.0, x);
+            case 1:
+                return Math.Pow(x + (double)1.0, x) * Math.Cos(omegan * x);
+            case 2:
+                return Math.Pow(x + (double)1.0, x) * Math.Sin(omegan * x);
         }
 
         /*

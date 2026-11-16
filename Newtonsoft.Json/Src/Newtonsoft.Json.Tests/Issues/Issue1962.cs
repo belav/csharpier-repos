@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Default()
         {
-            string json = @"// comment
+            string json =
+                @"// comment
 [ 1, 2, 42 ]";
             JToken token = JToken.Parse(json);
 
@@ -52,12 +53,13 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_LoadComments()
         {
-            string json = @"// comment
+            string json =
+                @"// comment
 [ 1, 2, 42 ]";
-            JToken token = JToken.Parse(json, new JsonLoadSettings
-            {
-                CommentHandling = CommentHandling.Load
-            });
+            JToken token = JToken.Parse(
+                json,
+                new JsonLoadSettings { CommentHandling = CommentHandling.Load }
+            );
 
             Assert.AreEqual(JTokenType.Comment, token.Type);
             Assert.AreEqual(" comment", ((JValue)token).Value);
@@ -69,12 +71,13 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_IgnoreComments()
         {
-            string json = @"// comment
+            string json =
+                @"// comment
 [ 1, 2, 42 ]";
-            JToken token = JToken.Parse(json, new JsonLoadSettings
-            {
-                CommentHandling = CommentHandling.Ignore
-            });
+            JToken token = JToken.Parse(
+                json,
+                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
+            );
 
             Assert.AreEqual(JTokenType.Array, token.Type);
             Assert.AreEqual(3, token.Count());

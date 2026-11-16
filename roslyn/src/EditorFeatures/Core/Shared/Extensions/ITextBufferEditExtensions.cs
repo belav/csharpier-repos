@@ -24,7 +24,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 return edit.Apply();
             }
-            catch (Exception e) when (ErrorReporting.FatalError.ReportAndCatch(e, ErrorReporting.ErrorSeverity.Critical))
+            catch (Exception e)
+                when (ErrorReporting.FatalError.ReportAndCatch(
+                        e,
+                        ErrorReporting.ErrorSeverity.Critical
+                    )
+                )
             {
                 s_lastException = e;
 

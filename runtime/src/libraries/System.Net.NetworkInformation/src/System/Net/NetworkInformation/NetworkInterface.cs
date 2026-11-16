@@ -29,33 +29,45 @@ namespace System.Net.NetworkInformation
         [UnsupportedOSPlatform("solaris")]
         public static int IPv6LoopbackInterfaceIndex
         {
-            get
-            {
-                return NetworkInterfacePal.IPv6LoopbackInterfaceIndex;
-            }
+            get { return NetworkInterfacePal.IPv6LoopbackInterfaceIndex; }
         }
 
         [UnsupportedOSPlatform("illumos")]
         [UnsupportedOSPlatform("solaris")]
         public static int LoopbackInterfaceIndex
         {
-            get
-            {
-                return NetworkInterfacePal.LoopbackInterfaceIndex;
-            }
+            get { return NetworkInterfacePal.LoopbackInterfaceIndex; }
         }
 
-        public virtual string Id { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual string Id
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets the name of the network interface.
         /// </summary>
-        public virtual string Name { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual string Name
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets the description of the network interface
         /// </summary>
-        public virtual string Description { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual string Description
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets the IP properties for this network interface.
@@ -91,22 +103,46 @@ namespace System.Net.NetworkInformation
         /// <summary>
         /// Gets the current operational state of the network connection.
         /// </summary>
-        public virtual OperationalStatus OperationalStatus { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual OperationalStatus OperationalStatus
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets the speed of the interface in bits per second as reported by the interface.
         /// </summary>
-        public virtual long Speed { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual long Speed
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets a bool value that indicates whether the network interface is set to only receive data packets.
         /// </summary>
-        public virtual bool IsReceiveOnly { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual bool IsReceiveOnly
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets a bool value that indicates whether this network interface is enabled to receive multicast packets.
         /// </summary>
-        public virtual bool SupportsMulticast { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual bool SupportsMulticast
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         /// <summary>
         /// Gets the physical address of this network interface
@@ -120,7 +156,13 @@ namespace System.Net.NetworkInformation
         /// <summary>
         /// Gets the interface type.
         /// </summary>
-        public virtual NetworkInterfaceType NetworkInterfaceType { get { throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException); } }
+        public virtual NetworkInterfaceType NetworkInterfaceType
+        {
+            get
+            {
+                throw NotImplemented.ByDesignWithMessage(SR.net_PropertyNotImplementedException);
+            }
+        }
 
         public virtual bool Supports(NetworkInterfaceComponent networkInterfaceComponent)
         {

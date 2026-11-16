@@ -13,7 +13,7 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
         PUSH = 0x01,
         KILL = 0x02,
         LIVE = 0x03,
-        DEAD = 0x04
+        DEAD = 0x04,
     }
 
     public class CalleeSavedRegister : BaseGcTransition
@@ -62,7 +62,14 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public GcTransitionRegister() { }
 
-        public GcTransitionRegister(int codeOffset, Registers reg, Action isLive, bool isThis = false, bool iptr = false, int pushCountOrPopSize = -1)
+        public GcTransitionRegister(
+            int codeOffset,
+            Registers reg,
+            Action isLive,
+            bool isThis = false,
+            bool iptr = false,
+            int pushCountOrPopSize = -1
+        )
             : base(codeOffset)
         {
             Register = reg;
@@ -110,7 +117,16 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public GcTransitionPointer() { }
 
-        public GcTransitionPointer(int codeOffset, uint argOffs, uint argCnt, Action act, bool isEbpFrame, bool isThis = false, bool iptr = false, bool isPtr = true)
+        public GcTransitionPointer(
+            int codeOffset,
+            uint argOffs,
+            uint argCnt,
+            Action act,
+            bool isEbpFrame,
+            bool isThis = false,
+            bool iptr = false,
+            bool isPtr = true
+        )
             : base(codeOffset)
         {
             _isEbpFrame = isEbpFrame;

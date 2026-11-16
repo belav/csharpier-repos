@@ -37,7 +37,6 @@ public class Equality
             return false;
         }
 
-
         if (gc == gc2)
         {
             Console.WriteLine("== GCHandle 1 failed");
@@ -62,7 +61,6 @@ public class Equality
             return false;
         }
 
-
         if (!(gc != gc2))
         {
             Console.WriteLine("!= GCHandle 1 failed");
@@ -78,11 +76,9 @@ public class Equality
         return true;
     }
 
-
     public static int Main()
     {
         Equality e = new Equality();
-
 
         if (e.RunTest())
         {

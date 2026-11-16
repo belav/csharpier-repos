@@ -8,19 +8,31 @@ public class Test35000
 {
     public class TestData0
     {
-        public virtual object MyMethod(int a, int b, int c, int d, int e, int f, int g, int h) { return null; }
+        public virtual object MyMethod(int a, int b, int c, int d, int e, int f, int g, int h)
+        {
+            return null;
+        }
     }
 
     public class TestData1 : TestData0
     {
-        public override object MyMethod(int a, int b, int c, int d, int e, int f, int g, int h) { return null; }
+        public override object MyMethod(int a, int b, int c, int d, int e, int f, int g, int h)
+        {
+            return null;
+        }
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
         var method = typeof(TestData0).GetMethod(nameof(TestData0.MyMethod));
-        var func = (Func<TestData0, int, int, int, int, int, int, int, int, object>)Delegate.CreateDelegate(typeof(Func<TestData0, int, int, int, int, int, int, int, int, object>), null, method);
+        var func =
+            (Func<TestData0, int, int, int, int, int, int, int, int, object>)
+                Delegate.CreateDelegate(
+                    typeof(Func<TestData0, int, int, int, int, int, int, int, int, object>),
+                    null,
+                    method
+                );
 
         TestData0 data = new TestData0();
         TestData0 data1 = new TestData1();

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 ITextView textView,
                 INavigableLocation location,
                 SnapshotSpan symbolSpan,
-                IBackgroundWorkIndicatorFactory indicatorFactory)
+                IBackgroundWorkIndicatorFactory indicatorFactory
+            )
             {
                 Contract.ThrowIfNull(location);
 
@@ -41,8 +42,10 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
 
             public SnapshotSpan SymbolSpan { get; }
 
-            public IEnumerable<INavigableRelationship> Relationships
-                => SpecializedCollections.SingletonEnumerable(PredefinedNavigableRelationships.Definition);
+            public IEnumerable<INavigableRelationship> Relationships =>
+                SpecializedCollections.SingletonEnumerable(
+                    PredefinedNavigableRelationships.Definition
+                );
 
             public void Navigate(INavigableRelationship relationship)
             {
@@ -56,12 +59,19 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 // we're about to navigate.  so disable cancellation on focus-lost in our indicator so we don't end up
                 // causing ourselves to self-cancel.
                 using var backgroundIndicator = _indicatorFactory.Create(
-                    _textView, SymbolSpan,
+                    _textView,
+                    SymbolSpan,
                     EditorFeaturesResources.Navigating_to_definition,
-                    cancelOnFocusLost: false);
+                    cancelOnFocusLost: false
+                );
 
-                await _location.TryNavigateToAsync(
-                    _service._threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), backgroundIndicator.UserCancellationToken).ConfigureAwait(false);
+                await _location
+                    .TryNavigateToAsync(
+                        _service._threadingContext,
+                        new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                        backgroundIndicator.UserCancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

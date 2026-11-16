@@ -31,10 +31,8 @@ public class NullableEqualityComparer<T> : IEqualityComparer<T?>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool Equals(T? x, T? y)
-        => x is null
-            ? y is null
-            : y.HasValue && _underlyingComparer.Equals(x.Value, y.Value);
+    public virtual bool Equals(T? x, T? y) =>
+        x is null ? y is null : y.HasValue && _underlyingComparer.Equals(x.Value, y.Value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,6 +40,6 @@ public class NullableEqualityComparer<T> : IEqualityComparer<T?>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int GetHashCode(T? obj)
-        => obj is null ? 0 : _underlyingComparer.GetHashCode(obj.Value);
+    public virtual int GetHashCode(T? obj) =>
+        obj is null ? 0 : _underlyingComparer.GetHashCode(obj.Value);
 }

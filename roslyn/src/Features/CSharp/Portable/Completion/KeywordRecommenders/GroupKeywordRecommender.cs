@@ -11,18 +11,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class GroupKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public GroupKeywordRecommender()
-            : base(SyntaxKind.GroupKeyword)
-        {
-        }
+            : base(SyntaxKind.GroupKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var token = context.TargetToken;
 
             // var q = from x in y
             //         |
-            if (!token.IntersectsWith(position) &&
-                token.IsLastTokenOfQueryClause())
+            if (!token.IntersectsWith(position) && token.IsLastTokenOfQueryClause())
             {
                 return true;
             }

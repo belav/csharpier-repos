@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public interface IConventionNavigationBuilder : IConventionPropertyBaseBuilder<IConventionNavigationBuilder>
+public interface IConventionNavigationBuilder
+    : IConventionPropertyBaseBuilder<IConventionNavigationBuilder>
 {
     /// <summary>
     ///     Gets the navigation being configured.
@@ -51,7 +52,10 @@ public interface IConventionNavigationBuilder : IConventionPropertyBaseBuilder<I
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionNavigationBuilder? EnableLazyLoading(bool? lazyLoadingEnabled, bool fromDataAnnotation = false);
+    IConventionNavigationBuilder? EnableLazyLoading(
+        bool? lazyLoadingEnabled,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether this navigation can be configured to enable lazy-loading

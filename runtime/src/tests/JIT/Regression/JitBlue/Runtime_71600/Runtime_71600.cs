@@ -14,7 +14,9 @@ public struct S0
 {
     public long F0;
     public long F1;
-    public S0(long f1): this()
+
+    public S0(long f1)
+        : this()
     {
         F1 = f1;
     }
@@ -25,9 +27,9 @@ public struct S1
     public uint F1;
     public ushort F2;
     public S0 F4;
-    public S1(ulong f5): this()
-    {
-    }
+
+    public S1(ulong f5)
+        : this() { }
 
     public long M82(ref short[] arg0)
     {
@@ -42,10 +44,11 @@ public class Runtime_71600
     public static uint s_13;
     public static short[] s_28;
     public static S0[] s_39;
+
     [Fact]
     public static int TestEntryPoint()
     {
-        S0[] vr2 = new S0[]{new S0(-1)};
+        S0[] vr2 = new S0[] { new S0(-1) };
         s_39 = vr2;
         S1 vr3 = default(S1);
         return M80(vr3) == 0 ? 100 : -1;

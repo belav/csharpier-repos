@@ -19,26 +19,29 @@ namespace Microsoft.VisualBasic.Activities
     public static class VisualBasicDesignerHelper
     {
         static Type VisualBasicExpressionFactoryType = typeof(VisualBasicExpressionFactory<>);
-        static VisualBasicNameShadowingConstraint nameShadowingConstraint = new VisualBasicNameShadowingConstraint();
+        static VisualBasicNameShadowingConstraint nameShadowingConstraint =
+            new VisualBasicNameShadowingConstraint();
 
-        // Returns the additional constraint for visual basic which enforces variable name shadowing for 
-        // projects targeting 4.0 for backward compatibility. 
+        // Returns the additional constraint for visual basic which enforces variable name shadowing for
+        // projects targeting 4.0 for backward compatibility.
         public static Constraint NameShadowingConstraint
         {
-            get
-            {
-                return nameShadowingConstraint;
-            }
+            get { return nameShadowingConstraint; }
         }
 
         // Recompile the VBValue passed in, with its current LocationReferenceEnvironment context
         // in a weakly-typed manner (the argument VBValue's type argument is ignored)
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "Design has been approved")]
-        public static Activity RecompileVisualBasicValue(ActivityWithResult visualBasicValue,            
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Design has been approved"
+        )]
+        public static Activity RecompileVisualBasicValue(
+            ActivityWithResult visualBasicValue,
             out Type returnType,
             out SourceExpressionException compileError,
-            out VisualBasicSettings vbSettings)
+            out VisualBasicSettings vbSettings
+        )
         {
             ITextExpression textExpression = visualBasicValue as ITextExpression;
             if (textExpression == null || textExpression.Language != VisualBasicHelper.Language)
@@ -61,17 +64,23 @@ namespace Microsoft.VisualBasic.Activities
                 environment,
                 out returnType,
                 out compileError,
-                out vbSettings);
+                out vbSettings
+            );
         }
 
         // Recompile the VBReference passed in, with its current LocationReferenceEnvironment context
         // in a weakly-typed manner (the argument VBReference's type argument is ignored)
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "Design has been approved")]
-        public static Activity RecompileVisualBasicReference(ActivityWithResult visualBasicReference,
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Design has been approved"
+        )]
+        public static Activity RecompileVisualBasicReference(
+            ActivityWithResult visualBasicReference,
             out Type returnType,
             out SourceExpressionException compileError,
-            out VisualBasicSettings vbSettings)
+            out VisualBasicSettings vbSettings
+        )
         {
             ITextExpression textExpression = visualBasicReference as ITextExpression;
             if (textExpression == null || textExpression.Language != VisualBasicHelper.Language)
@@ -94,17 +103,26 @@ namespace Microsoft.VisualBasic.Activities
                 environment,
                 out returnType,
                 out compileError,
-                out vbSettings);
+                out vbSettings
+            );
         }
-        
+
         // create a pre-compiled VBValueExpression, and also provides expressin type back to the caller.
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "Design has been approved")]
-        public static Activity CreatePrecompiledVisualBasicValue(Type targetType, string expressionText, IEnumerable<string> namespaces, IEnumerable<string> referencedAssemblies,
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Design has been approved"
+        )]
+        public static Activity CreatePrecompiledVisualBasicValue(
+            Type targetType,
+            string expressionText,
+            IEnumerable<string> namespaces,
+            IEnumerable<string> referencedAssemblies,
             LocationReferenceEnvironment environment,
             out Type returnType,
             out SourceExpressionException compileError,
-            out VisualBasicSettings vbSettings)
+            out VisualBasicSettings vbSettings
+        )
         {
             LambdaExpression lambda = null;
             HashSet<string> namespacesSet = new HashSet<string>();
@@ -119,7 +137,7 @@ namespace Microsoft.VisualBasic.Activities
                     if (ns != null)
                     {
                         namespacesSet.Add(ns);
-                    }                    
+                    }
                 }
             }
 
@@ -130,11 +148,15 @@ namespace Microsoft.VisualBasic.Activities
                     if (assm != null)
                     {
                         assembliesSet.Add(new AssemblyName(assm));
-                    }                    
+                    }
                 }
             }
 
-            VisualBasicHelper vbhelper = new VisualBasicHelper(expressionText, assembliesSet, namespacesSet);
+            VisualBasicHelper vbhelper = new VisualBasicHelper(
+                expressionText,
+                assembliesSet,
+                namespacesSet
+            );
             if (targetType == null)
             {
                 try
@@ -154,11 +176,17 @@ namespace Microsoft.VisualBasic.Activities
             }
             else
             {
-                MethodInfo genericCompileMethod = typeof(VisualBasicHelper).GetMethod("Compile", new Type[] { typeof(LocationReferenceEnvironment) });
-                genericCompileMethod = genericCompileMethod.MakeGenericMethod(new Type[] { targetType });
+                MethodInfo genericCompileMethod = typeof(VisualBasicHelper).GetMethod(
+                    "Compile",
+                    new Type[] { typeof(LocationReferenceEnvironment) }
+                );
+                genericCompileMethod = genericCompileMethod.MakeGenericMethod(
+                    new Type[] { targetType }
+                );
                 try
                 {
-                    lambda = (LambdaExpression)genericCompileMethod.Invoke(vbhelper, new object[] { environment });
+                    lambda = (LambdaExpression)
+                        genericCompileMethod.Invoke(vbhelper, new object[] { environment });
                     returnType = targetType;
                 }
                 catch (TargetInvocationException e)
@@ -173,7 +201,7 @@ namespace Microsoft.VisualBasic.Activities
                     {
                         throw FxTrace.Exception.AsError(e.InnerException);
                     }
-                }                
+                }
             }
 
             vbSettings = new VisualBasicSettings();
@@ -189,25 +217,38 @@ namespace Microsoft.VisualBasic.Activities
                         continue;
                     }
                     string assemblyName = VisualBasicHelper.GetFastAssemblyName(tassembly).Name;
-                    VisualBasicImportReference importReference = new VisualBasicImportReference { Assembly = assemblyName, Import = type.Namespace };                    
+                    VisualBasicImportReference importReference = new VisualBasicImportReference
+                    {
+                        Assembly = assemblyName,
+                        Import = type.Namespace,
+                    };
                     vbSettings.ImportReferences.Add(importReference);
                 }
-            }            
+            }
 
             Type concreteHelperType = VisualBasicExpressionFactoryType.MakeGenericType(targetType);
-            VisualBasicExpressionFactory expressionFactory = (VisualBasicExpressionFactory)Activator.CreateInstance(concreteHelperType);
+            VisualBasicExpressionFactory expressionFactory = (VisualBasicExpressionFactory)
+                Activator.CreateInstance(concreteHelperType);
 
             return expressionFactory.CreateVisualBasicValue(expressionText);
         }
 
         // create a pre-compiled VBValueExpression, and also provides expressin type back to the caller.
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "Design has been approved")]
-        public static Activity CreatePrecompiledVisualBasicReference(Type targetType, string expressionText, IEnumerable<string> namespaces, IEnumerable<string> referencedAssemblies,
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Design has been approved"
+        )]
+        public static Activity CreatePrecompiledVisualBasicReference(
+            Type targetType,
+            string expressionText,
+            IEnumerable<string> namespaces,
+            IEnumerable<string> referencedAssemblies,
             LocationReferenceEnvironment environment,
             out Type returnType,
             out SourceExpressionException compileError,
-            out VisualBasicSettings vbSettings)
+            out VisualBasicSettings vbSettings
+        )
         {
             LambdaExpression lambda = null;
             HashSet<string> namespacesSet = new HashSet<string>();
@@ -222,7 +263,7 @@ namespace Microsoft.VisualBasic.Activities
                     if (ns != null)
                     {
                         namespacesSet.Add(ns);
-                    }                    
+                    }
                 }
             }
 
@@ -233,11 +274,15 @@ namespace Microsoft.VisualBasic.Activities
                     if (assm != null)
                     {
                         assembliesSet.Add(new AssemblyName(assm));
-                    }                    
+                    }
                 }
             }
-            
-            VisualBasicHelper vbhelper = new VisualBasicHelper(expressionText, assembliesSet, namespacesSet);
+
+            VisualBasicHelper vbhelper = new VisualBasicHelper(
+                expressionText,
+                assembliesSet,
+                namespacesSet
+            );
             if (targetType == null)
             {
                 try
@@ -247,7 +292,13 @@ namespace Microsoft.VisualBasic.Activities
                     {
                         // inspect the expressionTree to see if it is a valid location expression(L-value)
                         string extraErrorMessage;
-                        if (!ExpressionUtilities.IsLocation(lambda, targetType, out extraErrorMessage))
+                        if (
+                            !ExpressionUtilities.IsLocation(
+                                lambda,
+                                targetType,
+                                out extraErrorMessage
+                            )
+                        )
                         {
                             string errorMessage = SR.InvalidLValueExpression;
                             if (extraErrorMessage != null)
@@ -255,7 +306,10 @@ namespace Microsoft.VisualBasic.Activities
                                 errorMessage += ":" + extraErrorMessage;
                             }
                             throw FxTrace.Exception.AsError(
-                                new SourceExpressionException(SR.CompilerErrorSpecificExpression(expressionText, errorMessage)));
+                                new SourceExpressionException(
+                                    SR.CompilerErrorSpecificExpression(expressionText, errorMessage)
+                                )
+                            );
                         }
                         returnType = lambda.ReturnType;
                     }
@@ -269,11 +323,17 @@ namespace Microsoft.VisualBasic.Activities
             }
             else
             {
-                MethodInfo genericCompileMethod = typeof(VisualBasicHelper).GetMethod("Compile", new Type[] { typeof(LocationReferenceEnvironment) });
-                genericCompileMethod = genericCompileMethod.MakeGenericMethod(new Type[] { targetType });
+                MethodInfo genericCompileMethod = typeof(VisualBasicHelper).GetMethod(
+                    "Compile",
+                    new Type[] { typeof(LocationReferenceEnvironment) }
+                );
+                genericCompileMethod = genericCompileMethod.MakeGenericMethod(
+                    new Type[] { targetType }
+                );
                 try
                 {
-                    lambda = (LambdaExpression)genericCompileMethod.Invoke(vbhelper, new object[] { environment });
+                    lambda = (LambdaExpression)
+                        genericCompileMethod.Invoke(vbhelper, new object[] { environment });
                     // inspect the expressionTree to see if it is a valid location expression(L-value)
                     string extraErrorMessage = null;
                     if (!ExpressionUtilities.IsLocation(lambda, targetType, out extraErrorMessage))
@@ -284,7 +344,10 @@ namespace Microsoft.VisualBasic.Activities
                             errorMessage += ":" + extraErrorMessage;
                         }
                         throw FxTrace.Exception.AsError(
-                            new SourceExpressionException(SR.CompilerErrorSpecificExpression(expressionText, errorMessage)));
+                            new SourceExpressionException(
+                                SR.CompilerErrorSpecificExpression(expressionText, errorMessage)
+                            )
+                        );
                     }
                     returnType = targetType;
                 }
@@ -321,19 +384,27 @@ namespace Microsoft.VisualBasic.Activities
                         continue;
                     }
                     string assemblyName = VisualBasicHelper.GetFastAssemblyName(tassembly).Name;
-                    VisualBasicImportReference importReference = new VisualBasicImportReference { Assembly = assemblyName, Import = type.Namespace };
+                    VisualBasicImportReference importReference = new VisualBasicImportReference
+                    {
+                        Assembly = assemblyName,
+                        Import = type.Namespace,
+                    };
                     vbSettings.ImportReferences.Add(importReference);
                 }
             }
 
             Type concreteHelperType = VisualBasicExpressionFactoryType.MakeGenericType(targetType);
-            VisualBasicExpressionFactory expressionFactory = (VisualBasicExpressionFactory)Activator.CreateInstance(concreteHelperType);
+            VisualBasicExpressionFactory expressionFactory = (VisualBasicExpressionFactory)
+                Activator.CreateInstance(concreteHelperType);
 
             return expressionFactory.CreateVisualBasicReference(expressionText);
-        }       
-        
+        }
 
-        static void EnsureTypeReferenced(Type type, bool isDirectReference, HashSet<Type> typeReferences)
+        static void EnsureTypeReferenced(
+            Type type,
+            bool isDirectReference,
+            HashSet<Type> typeReferences
+        )
         {
             if (type == null)
             {
@@ -358,7 +429,11 @@ namespace Microsoft.VisualBasic.Activities
             }
         }
 
-        static void EnsureTypeReferencedRecurse(Type type, bool isDirectReference, HashSet<Type> typeReferences)
+        static void EnsureTypeReferencedRecurse(
+            Type type,
+            bool isDirectReference,
+            HashSet<Type> typeReferences
+        )
         {
             if (typeReferences.Contains(type))
             {
@@ -366,7 +441,10 @@ namespace Microsoft.VisualBasic.Activities
             }
 
             // don't add base types/interfaces if they're in the default set (or we'll get superfluous xmlns references)
-            if (isDirectReference || !VisualBasicHelper.DefaultReferencedAssemblies.Contains(type.Assembly))
+            if (
+                isDirectReference
+                || !VisualBasicHelper.DefaultReferencedAssemblies.Contains(type.Assembly)
+            )
             {
                 typeReferences.Add(type);
             }
@@ -465,8 +543,14 @@ namespace Microsoft.VisualBasic.Activities
                     FindTypeReferences(listInit.NewExpression, typeReferences);
                     for (int i = 0; i < listInit.Initializers.Count; i++)
                     {
-                        ReadOnlyCollection<Expression> arguments = listInit.Initializers[i].Arguments;
-                        for (int argumentIndex = 0; argumentIndex < arguments.Count; argumentIndex++)
+                        ReadOnlyCollection<Expression> arguments = listInit
+                            .Initializers[i]
+                            .Arguments;
+                        for (
+                            int argumentIndex = 0;
+                            argumentIndex < arguments.Count;
+                            argumentIndex++
+                        )
                         {
                             FindTypeReferences(arguments[argumentIndex], typeReferences);
                         }
@@ -482,7 +566,11 @@ namespace Microsoft.VisualBasic.Activities
                     MemberExpression memberExpression = (MemberExpression)expression;
                     if (memberExpression.Expression == null)
                     {
-                        EnsureTypeReferenced(memberExpression.Member.DeclaringType, true, typeReferences);
+                        EnsureTypeReferenced(
+                            memberExpression.Member.DeclaringType,
+                            true,
+                            typeReferences
+                        );
                     }
                     else
                     {
@@ -532,7 +620,11 @@ namespace Microsoft.VisualBasic.Activities
                         EnsureTypeReferenced(method.DeclaringType, true, typeReferences);
                     }
 
-                    if (method.IsGenericMethod && !method.IsGenericMethodDefinition && !method.ContainsGenericParameters)
+                    if (
+                        method.IsGenericMethod
+                        && !method.IsGenericMethodDefinition
+                        && !method.ContainsGenericParameters
+                    )
                     {
                         // closed generic method
                         Type[] typeArgs = method.GetGenericArguments();
@@ -570,7 +662,11 @@ namespace Microsoft.VisualBasic.Activities
 
                 case ExpressionType.NewArrayBounds:
                     NewArrayExpression newArrayBounds = (NewArrayExpression)expression;
-                    EnsureTypeReferenced(newArrayBounds.Type.GetElementType(), true, typeReferences);
+                    EnsureTypeReferenced(
+                        newArrayBounds.Type.GetElementType(),
+                        true,
+                        typeReferences
+                    );
                     ReadOnlyCollection<Expression> boundExpressions = newArrayBounds.Expressions;
                     for (int i = 0; i < boundExpressions.Count; i++)
                     {
@@ -582,7 +678,11 @@ namespace Microsoft.VisualBasic.Activities
                     NewExpression newExpression = (NewExpression)expression;
                     if (newExpression.Constructor != null)
                     {
-                        EnsureTypeReferenced(newExpression.Constructor.DeclaringType, true, typeReferences);
+                        EnsureTypeReferenced(
+                            newExpression.Constructor.DeclaringType,
+                            true,
+                            typeReferences
+                        );
                     }
                     else
                     {
@@ -684,10 +784,19 @@ namespace Microsoft.VisualBasic.Activities
             }
         }
 
-        static void GetAllImportReferences(Activity activity, out IList<string> namespaces, out IList<string> assemblies)
+        static void GetAllImportReferences(
+            Activity activity,
+            out IList<string> namespaces,
+            out IList<string> assemblies
+        )
         {
             IList<AssemblyReference> referencedAssemblies;
-            VisualBasicHelper.GetAllImportReferences(activity, true, out namespaces, out referencedAssemblies);
+            VisualBasicHelper.GetAllImportReferences(
+                activity,
+                true,
+                out namespaces,
+                out referencedAssemblies
+            );
 
             assemblies = new List<string>();
             foreach (AssemblyReference reference in referencedAssemblies)
@@ -714,18 +823,12 @@ namespace Microsoft.VisualBasic.Activities
         {
             public override Activity CreateVisualBasicReference(string expressionText)
             {
-                return new VisualBasicReference<T>()
-                {
-                    ExpressionText = expressionText
-                };
+                return new VisualBasicReference<T>() { ExpressionText = expressionText };
             }
 
             public override Activity CreateVisualBasicValue(string expressionText)
             {
-                return new VisualBasicValue<T>()
-                {
-                    ExpressionText = expressionText
-                };
+                return new VisualBasicValue<T>() { ExpressionText = expressionText };
             }
         }
     }

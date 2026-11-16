@@ -1,22 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="ValidationCompareOperator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
-    ///    <para>Specifies the validation comparison operators to be used by 
+    ///    <para>Specifies the validation comparison operators to be used by
     ///       the <see cref='System.Web.UI.WebControls.CompareValidator'/>
     ///       control.</para>
     /// </devdoc>
-    public enum ValidationCompareOperator {
-
+    public enum ValidationCompareOperator
+    {
         /// <devdoc>
         ///    <para>The Equal comparison operator.</para>
         /// </devdoc>
@@ -48,10 +47,9 @@ namespace System.Web.UI.WebControls {
         LessThanEqual = 5,
 
         /// <devdoc>
-        ///    <para>The DataTypeCheck comparison operator. Specifies that only data 
+        ///    <para>The DataTypeCheck comparison operator. Specifies that only data
         ///       type validity is to be performed.</para>
         /// </devdoc>
         DataTypeCheck = 6,
-    }    
+    }
 }
-

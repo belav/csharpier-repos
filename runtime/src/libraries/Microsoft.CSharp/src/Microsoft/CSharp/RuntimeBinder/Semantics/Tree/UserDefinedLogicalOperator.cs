@@ -17,7 +17,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             OperatorCall = operatorCall;
             Expr leftChild = ((ExprList)operatorCall.OptionalArguments).OptionalElement;
             // In the EE case, we don't create WRAPEXPRs.
-            FirstOperandToExamine = leftChild is ExprWrap wrap ? wrap.OptionalExpression : leftChild;
+            FirstOperandToExamine = leftChild is ExprWrap wrap
+                ? wrap.OptionalExpression
+                : leftChild;
             Debug.Assert(FirstOperandToExamine != null);
         }
 

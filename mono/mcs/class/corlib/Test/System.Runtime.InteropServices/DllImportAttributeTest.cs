@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,102 +27,93 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.InteropServices {
-
-	/// <summary>
-	/// Summary description for DllImportAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class DllImportAttributeTest
-	{
+namespace MonoTests.System.Runtime.InteropServices
+{
+    /// <summary>
+    /// Summary description for DllImportAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class DllImportAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		DllImportAttribute attr;
-		
-		public DllImportAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName();
+        DllImportAttribute attr;
 
-			dynAsmName.Name = "TestAssembly";
+        public DllImportAttributeTest()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAsmName.Name = "TestAssembly";
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (DllImportAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "libc.dylib" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as DllImportAttribute;
-		}
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
-		[Test]
-		public void DllImportTest ()
-		{
-			Assert.AreEqual (
-				attr.Value,
-				"libc.dylib", "#1");
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof(DllImportAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(new Type[] { typeof(string) });
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[1] { "libc.dylib" }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as DllImportAttribute;
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (DllImportAttribute), "#1"
-				);
-		}
+        [Test]
+        public void DllImportTest()
+        {
+            Assert.AreEqual(attr.Value, "libc.dylib", "#1");
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void TypeIdTest()
+        {
+            Assert.AreEqual(attr.TypeId, typeof(DllImportAttribute), "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new DllImportAttribute ("libcups.dylib")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue()
+        {
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(attr.Match(new DllImportAttribute("libcups.dylib")), false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new DllImportAttribute ("some text");
-			Assert.AreEqual ("some text", a.Value);
-		}
 
-		[Test]
-		public void FieldsTest ()
-		{
-			var a = new DllImportAttribute ("libc.dylib");
+        [Test]
+        public void CtorTest()
+        {
+            var a = new DllImportAttribute("some text");
+            Assert.AreEqual("some text", a.Value);
+        }
 
-			Assert.Null (a.EntryPoint);
-			Assert.AreEqual ((CharSet)0, a.CharSet);
-			Assert.False (a.SetLastError);
-			Assert.False (a.ExactSpelling);
-			Assert.AreEqual ((CallingConvention)0, a.CallingConvention);
-			Assert.False (a.BestFitMapping);
-			Assert.False (a.PreserveSig);
-			Assert.False (a.ThrowOnUnmappableChar);
-		}
-	}
+        [Test]
+        public void FieldsTest()
+        {
+            var a = new DllImportAttribute("libc.dylib");
+
+            Assert.Null(a.EntryPoint);
+            Assert.AreEqual((CharSet)0, a.CharSet);
+            Assert.False(a.SetLastError);
+            Assert.False(a.ExactSpelling);
+            Assert.AreEqual((CallingConvention)0, a.CallingConvention);
+            Assert.False(a.BestFitMapping);
+            Assert.False(a.PreserveSig);
+            Assert.False(a.ThrowOnUnmappableChar);
+        }
+    }
 }
-

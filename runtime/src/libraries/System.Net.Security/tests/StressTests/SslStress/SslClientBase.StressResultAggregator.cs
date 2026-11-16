@@ -16,15 +16,23 @@ namespace SslStress
         private class StressResultAggregator
         {
             private long _totalConnections = 0;
-            private readonly long[] _successes, _failures, _cancellations;
+            private readonly long[] _successes,
+                _failures,
+                _cancellations;
             private readonly ErrorAggregator _errors = new ErrorAggregator();
             private readonly StreamCounter[] _currentCounters;
             private readonly StreamCounter[] _aggregateCounters;
 
             public StressResultAggregator(int workerCount)
             {
-                _currentCounters = Enumerable.Range(0, workerCount).Select(_ => new StreamCounter()).ToArray();
-                _aggregateCounters = Enumerable.Range(0, workerCount).Select(_ => new StreamCounter()).ToArray();
+                _currentCounters = Enumerable
+                    .Range(0, workerCount)
+                    .Select(_ => new StreamCounter())
+                    .ToArray();
+                _aggregateCounters = Enumerable
+                    .Range(0, workerCount)
+                    .Select(_ => new StreamCounter())
+                    .ToArray();
                 _successes = new long[workerCount];
                 _failures = new long[workerCount];
                 _cancellations = new long[workerCount];
@@ -80,7 +88,9 @@ namespace SslStress
                 // generate a coherent view of counter state
                 lock (_aggregateCounters)
                 {
-                    var view = new (StreamCounter total, StreamCounter current)[_aggregateCounters.Length];
+                    var view = new (StreamCounter total, StreamCounter current)[
+                        _aggregateCounters.Length
+                    ];
                     for (int i = 0; i < _aggregateCounters.Length; i++)
                     {
                         StreamCounter current = _currentCounters[i].Clone();

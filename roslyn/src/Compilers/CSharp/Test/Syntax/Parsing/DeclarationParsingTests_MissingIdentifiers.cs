@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Class01()
         {
-            const string source =
-                """
+            const string source = """
                 public static class
                 {
                     public static int StaticProperty { get; set; }
@@ -37,14 +36,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,20): error CS1001: Identifier expected
                 // public static class
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 20),
                 // (9,18): error CS1001: Identifier expected
                 //     public class { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(9, 18)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -149,8 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Class02()
         {
-            const string source =
-                """
+            const string source = """
                 public class : 
                 {
                     public int Property { get; set; }
@@ -163,12 +162,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,14): error CS1001: Identifier expected
-                // public class : 
+                // public class :
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 14),
                 // (1,15): error CS1031: Type expected
-                // public class : 
+                // public class :
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 15),
                 // (6,18): error CS1001: Identifier expected
                 //     public class : object { }
@@ -176,7 +176,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (7,18): error CS1001: Identifier expected
                 //     public class : List<int>;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(7, 18)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -315,8 +315,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Class03()
         {
-            const string source =
-                """
+            const string source = """
                 public class : Base<T>
                     where T : List<T>
                 {
@@ -330,14 +329,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,14): error CS1001: Identifier expected
                 // public class : Base<T>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 14),
                 // (7,18): error CS1001: Identifier expected
                 //     public class <U> : Base<U>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(7, 18)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -525,8 +525,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Class04()
         {
-            const string source =
-                """
+            const string source = """
                 public partial class : Base<T>
                     where T : List<T>
                 {
@@ -544,7 +543,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,22): error CS1001: Identifier expected
                 // public partial class : Base<T>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 22),
@@ -557,7 +557,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (14,18): error CS1001: Identifier expected
                 //     partial class;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(14, 18)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -781,8 +781,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Class05()
         {
-            const string source =
-                """
+            const string source = """
                 public partial class (string name)
                     : Base<T>(name)
                     where T : List<T>
@@ -801,15 +800,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     public int Property { get; set; }
                     public void Method1() { }
-                
+
                     public class <U> : Base<U>
                         where U : List<U>;
-                
+
                     public void Method2() { }
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,22): error CS1001: Identifier expected
                 // public partial class (string name)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 22),
@@ -822,7 +822,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (20,18): error CS1001: Identifier expected
                 //     public class <U> : Base<U>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(20, 18)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1247,12 +1247,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Interface01()
         {
-            const string source =
-                """
+            const string source = """
                 public interface
                 {
                     public abstract int X { get; }
-                
+
                     public interface : { }
                     public interface { }
 
@@ -1261,7 +1260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,17): error CS1001: Identifier expected
                 // public interface
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 17),
@@ -1274,7 +1274,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (6,22): error CS1001: Identifier expected
                 //     public interface { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(6, 22)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1371,8 +1371,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Interface02()
         {
-            const string source =
-                """
+            const string source = """
                 public interface : 
                 {
                     public int Property { get; set; }
@@ -1385,12 +1384,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,18): error CS1001: Identifier expected
-                // public interface : 
+                // public interface :
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 18),
                 // (1,19): error CS1031: Type expected
-                // public interface : 
+                // public interface :
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 19),
                 // (6,22): error CS1001: Identifier expected
                 //     public interface : IEnumerable<int> { }
@@ -1398,7 +1398,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (7,22): error CS1001: Identifier expected
                 //     public interface : IList<int>;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(7, 22)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1546,8 +1546,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Interface03()
         {
-            const string source =
-                """
+            const string source = """
                 public interface : IBase<T>
                     where T : List<T>
                 {
@@ -1561,14 +1560,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,18): error CS1001: Identifier expected
                 // public interface : IBase<T>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 18),
                 // (7,22): error CS1001: Identifier expected
                 //     public interface <U> : IBase<U>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(7, 22)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1756,8 +1756,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Enum01()
         {
-            const string source =
-                """
+            const string source = """
                 public enum
                 {
                     A,
@@ -1768,11 +1767,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,12): error CS1001: Identifier expected
                 // public enum
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 12)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1849,8 +1849,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Enum02()
         {
-            const string source =
-                """
+            const string source = """
                 public enum : uint
                 {
                     A,
@@ -1861,11 +1860,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,13): error CS1001: Identifier expected
                 // public enum : uint
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 13)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1953,8 +1953,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Struct01()
         {
-            const string source =
-                """
+            const string source = """
                 public static struct
                 {
                     public static int StaticProperty { get; set; }
@@ -1969,14 +1968,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,21): error CS1001: Identifier expected
                 // public static struct
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 21),
                 // (9,19): error CS1001: Identifier expected
                 //     public struct { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(9, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2081,8 +2081,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Struct02()
         {
-            const string source =
-                """
+            const string source = """
                 public struct : 
                 {
                     public int Property { get; set; }
@@ -2095,12 +2094,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,15): error CS1001: Identifier expected
-                // public struct : 
+                // public struct :
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 15),
                 // (1,16): error CS1031: Type expected
-                // public struct : 
+                // public struct :
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 16),
                 // (6,19): error CS1001: Identifier expected
                 //     public struct : IStruct { }
@@ -2108,7 +2108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (7,19): error CS1001: Identifier expected
                 //     public struct : IStruct<int>;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(7, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2247,8 +2247,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Struct03()
         {
-            const string source =
-                """
+            const string source = """
                 public struct : IStruct<T>
                     where T : List<T>
                 {
@@ -2262,14 +2261,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,15): error CS1001: Identifier expected
                 // public struct : IStruct<T>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 15),
                 // (7,19): error CS1001: Identifier expected
                 //     public struct <U> : IStruct<U>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(7, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2457,30 +2457,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Struct04()
         {
-            const string source =
-                """
+            const string source = """
                 public struct (string length)
                     : IStruct<T>
                     where T : List<T>
                 {
                     public int Property { get; set; }
                     public void Method1() { }
-                
+
                     public struct <U> : IStruct<U>
                         where T : List<U>;
-                
+
                     public void Method2() { }
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,15): error CS1001: Identifier expected
                 // public struct (string length)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 15),
                 // (8,19): error CS1001: Identifier expected
                 //     public struct <U> : IStruct<U>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(8, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2681,30 +2681,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_Struct05()
         {
-            const string source =
-                """
+            const string source = """
                 public struct <T>(string length)
                     : IStruct<T>
                     where T : List<T>
                 {
                     public int Property { get; set; }
                     public void Method1() { }
-                
+
                     public struct <U> : IStruct<U>
                         where T : List<U>;
-                
+
                     public void Method2() { }
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,15): error CS1001: Identifier expected
                 // public struct <T>(string length)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(1, 15),
                 // (8,19): error CS1001: Identifier expected
                 //     public struct <U> : IStruct<U>
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "<").WithLocation(8, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2914,8 +2914,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_RecordClass01()
         {
-            const string source =
-                """
+            const string source = """
                 public partial record class ()
                     where T : List<T>
                 {
@@ -2934,7 +2933,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,29): error CS1001: Identifier expected
                 // public partial record class ()
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 29),
@@ -2950,7 +2950,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (15,18): error CS1001: Identifier expected
                 //     partial class;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(15, 18)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -3170,8 +3170,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_RecordClass02()
         {
-            const string source =
-                """
+            const string source = """
                 public record class (ImmutableArray<T> Array)
                     : BaseRecord<T>(Array)
                     where T : List<T>
@@ -3194,7 +3193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,21): error CS1001: Identifier expected
                 // public record class (ImmutableArray<T> Array)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 21),
@@ -3219,7 +3219,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (19,15): error CS1001: Identifier expected
                 //     file class;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(19, 15)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -3570,8 +3570,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_RecordStruct01()
         {
-            const string source =
-                """
+            const string source = """
                 public partial record struct ()
                     where T : List<T>
                 {
@@ -3590,7 +3589,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,30): error CS1001: Identifier expected
                 // public partial record struct ()
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 30),
@@ -3606,7 +3606,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (15,19): error CS1001: Identifier expected
                 //     partial struct;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(15, 19)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -3826,8 +3826,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeMissingIdentifier_RecordStruct02()
         {
-            const string source =
-                """
+            const string source = """
                 public record struct (ImmutableArray<T> Array)
                     : IStruct<T>
                     where T : List<T>
@@ -3850,7 +3849,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
 
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (1,22): error CS1001: Identifier expected
                 // public record struct (ImmutableArray<T> Array)
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 22),
@@ -3875,7 +3875,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (19,16): error CS1001: Identifier expected
                 //     file struct;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(19, 16)
-                );
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.RecordStructDeclaration);

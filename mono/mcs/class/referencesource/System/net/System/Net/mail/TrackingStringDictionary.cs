@@ -15,9 +15,8 @@ namespace System.Net
         bool isChanged;
         bool isReadOnly;
 
-        internal TrackingStringDictionary() : this(false)
-        {
-        }
+        internal TrackingStringDictionary()
+            : this(false) { }
 
         internal TrackingStringDictionary(bool isReadOnly)
         {
@@ -26,14 +25,8 @@ namespace System.Net
 
         internal bool IsChanged
         {
-            get
-            {
-                return this.isChanged;
-            }
-            set
-            {
-                this.isChanged = value;
-            }
+            get { return this.isChanged; }
+            set { this.isChanged = value; }
         }
 
         public override void Add(string key, string value)
@@ -41,7 +34,7 @@ namespace System.Net
             if (this.isReadOnly)
                 throw new InvalidOperationException(SR.GetString(SR.MailCollectionIsReadOnly));
 
-            base.Add (key, value);
+            base.Add(key, value);
             this.isChanged = true;
         }
 
@@ -50,7 +43,7 @@ namespace System.Net
             if (this.isReadOnly)
                 throw new InvalidOperationException(SR.GetString(SR.MailCollectionIsReadOnly));
 
-            base.Clear ();
+            base.Clear();
             this.isChanged = true;
         }
 
@@ -59,16 +52,13 @@ namespace System.Net
             if (this.isReadOnly)
                 throw new InvalidOperationException(SR.GetString(SR.MailCollectionIsReadOnly));
 
-            base.Remove (key);
+            base.Remove(key);
             this.isChanged = true;
         }
 
         public override string this[string key]
         {
-            get
-            {
-                return base[key];
-            }
+            get { return base[key]; }
             set
             {
                 if (this.isReadOnly)

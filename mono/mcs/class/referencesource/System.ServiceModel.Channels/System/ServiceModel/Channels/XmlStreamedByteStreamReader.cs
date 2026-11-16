@@ -13,21 +13,28 @@ namespace System.ServiceModel.Channels
     abstract class XmlStreamedByteStreamReader : XmlByteStreamReader
     {
         protected XmlStreamedByteStreamReader(XmlDictionaryReaderQuotas quotas)
-            : base(quotas)
-        {
-        }
+            : base(quotas) { }
 
-        public static XmlStreamedByteStreamReader Create(Stream stream, XmlDictionaryReaderQuotas quotas)
+        public static XmlStreamedByteStreamReader Create(
+            Stream stream,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return new StreamXmlStreamedByteStreamReader(stream, quotas);
         }
 
-        public static XmlStreamedByteStreamReader Create(HttpRequestMessage httpRequestMessage, XmlDictionaryReaderQuotas quotas)
+        public static XmlStreamedByteStreamReader Create(
+            HttpRequestMessage httpRequestMessage,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return new HttpRequestMessageStreamedBodyReader(httpRequestMessage, quotas);
         }
 
-        public static XmlStreamedByteStreamReader Create(HttpResponseMessage httpResponseMessage, XmlDictionaryReaderQuotas quotas)
+        public static XmlStreamedByteStreamReader Create(
+            HttpResponseMessage httpResponseMessage,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return new HttpResponseMessageStreamedBodyReader(httpResponseMessage, quotas);
         }
@@ -60,14 +67,18 @@ namespace System.ServiceModel.Channels
         protected override byte[] OnToByteArray()
         {
             throw FxTrace.Exception.AsError(
-                  new InvalidOperationException(SR.GetByteArrayFromStreamContentNotAllowed));
+                new InvalidOperationException(SR.GetByteArrayFromStreamContentNotAllowed)
+            );
         }
 
         protected override Stream OnToStream()
         {
             Stream result = this.GetStream();
 
-            Fx.Assert(result != null, "The inner stream is null. Please check if the reader is closed or the ToStream method was already called before.");
+            Fx.Assert(
+                result != null,
+                "The inner stream is null. Please check if the reader is closed or the ToStream method was already called before."
+            );
 
             this.ReleaseStream();
             return result;
@@ -99,7 +110,10 @@ namespace System.ServiceModel.Channels
         {
             private Stream stream;
 
-            public StreamXmlStreamedByteStreamReader(Stream stream, XmlDictionaryReaderQuotas quotas)
+            public StreamXmlStreamedByteStreamReader(
+                Stream stream,
+                XmlDictionaryReaderQuotas quotas
+            )
                 : base(quotas)
             {
                 Fx.Assert(stream != null, "The 'stream' parameter should not be null.");
@@ -122,10 +136,16 @@ namespace System.ServiceModel.Channels
         {
             private HttpRequestMessage httpRequestMessage;
 
-            public HttpRequestMessageStreamedBodyReader(HttpRequestMessage httpRequestMessage, XmlDictionaryReaderQuotas quotas)
+            public HttpRequestMessageStreamedBodyReader(
+                HttpRequestMessage httpRequestMessage,
+                XmlDictionaryReaderQuotas quotas
+            )
                 : base(quotas)
             {
-                Fx.Assert(httpRequestMessage != null, "The 'httpRequestMessage' parameter should not be null.");
+                Fx.Assert(
+                    httpRequestMessage != null,
+                    "The 'httpRequestMessage' parameter should not be null."
+                );
 
                 this.httpRequestMessage = httpRequestMessage;
             }
@@ -156,10 +176,16 @@ namespace System.ServiceModel.Channels
         {
             private HttpResponseMessage httpResponseMessage;
 
-            public HttpResponseMessageStreamedBodyReader(HttpResponseMessage httpResponseMessage, XmlDictionaryReaderQuotas quotas)
+            public HttpResponseMessageStreamedBodyReader(
+                HttpResponseMessage httpResponseMessage,
+                XmlDictionaryReaderQuotas quotas
+            )
                 : base(quotas)
             {
-                Fx.Assert(httpResponseMessage != null, "The 'httpResponseMessage' parameter should not be null.");
+                Fx.Assert(
+                    httpResponseMessage != null,
+                    "The 'httpResponseMessage' parameter should not be null."
+                );
 
                 this.httpResponseMessage = httpResponseMessage;
             }

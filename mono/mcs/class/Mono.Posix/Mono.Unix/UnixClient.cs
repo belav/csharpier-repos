@@ -33,198 +33,235 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-namespace Mono.Unix {
+namespace Mono.Unix
+{
+    public class UnixClient : MarshalByRefObject, IDisposable
+    {
+        NetworkStream stream;
+        Socket client;
+        bool disposed;
 
-	public class UnixClient : MarshalByRefObject, IDisposable {
-		NetworkStream stream;
-		Socket client;
-		bool disposed;
+        public UnixClient()
+        {
+            if (client != null)
+            {
+                client.Close();
+                client = null;
+            }
 
-		public UnixClient ()
-		{
-			if (client != null) {
-				client.Close ();
-				client = null;
-			}
+            client = new Socket(AddressFamily.Unix, SocketType.Stream, 0);
+        }
 
-			client = new Socket (AddressFamily.Unix, SocketType.Stream, 0);
-		}
+        public UnixClient(string path)
+            : this()
+        {
+            if (path == null)
+                throw new ArgumentNullException("ep");
 
-		public UnixClient (string path) : this ()
-		{
-			if (path == null)
-				throw new ArgumentNullException ("ep");
+            Connect(path);
+        }
 
-			Connect (path);
-		}
+        public UnixClient(UnixEndPoint ep)
+            : this()
+        {
+            if (ep == null)
+                throw new ArgumentNullException("ep");
 
-		public UnixClient (UnixEndPoint ep) : this ()
-		{
-			if (ep == null)
-				throw new ArgumentNullException ("ep");
+            Connect(ep);
+        }
 
-			Connect (ep);
-		}
+        // UnixListener uses this when accepting a connection.
+        internal UnixClient(Socket sock)
+        {
+            Client = sock;
+        }
 
-		// UnixListener uses this when accepting a connection.
-		internal UnixClient (Socket sock)
-		{
-			Client = sock;
-		}
+        public Socket Client
+        {
+            get { return client; }
+            set
+            {
+                client = value;
+                stream = null;
+            }
+        }
 
-		public
-		Socket Client {
-			get { return client; }
-			set {
-				client = value;
-				stream = null;
-			}
-		}
+        public PeerCred PeerCredential
+        {
+            get
+            {
+                CheckDisposed();
+                return new PeerCred(client);
+            }
+        }
 
-		public PeerCred PeerCredential {
-			get {
-				CheckDisposed ();
-				return new PeerCred (client);
-			}
-		}
-        
-		public LingerOption LingerState {
-			get {
-				CheckDisposed ();
-				return (LingerOption) client.GetSocketOption (SocketOptionLevel.Socket,
-									      SocketOptionName.Linger);
-			}
+        public LingerOption LingerState
+        {
+            get
+            {
+                CheckDisposed();
+                return (LingerOption)
+                    client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger);
+            }
+            set
+            {
+                CheckDisposed();
+                client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger, value);
+            }
+        }
 
-			set {
-				CheckDisposed ();
-				client.SetSocketOption (SocketOptionLevel.Socket,
-							SocketOptionName.Linger, value);
-			}
-		}
+        public int ReceiveBufferSize
+        {
+            get
+            {
+                CheckDisposed();
+                return (int)
+                    client.GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveBuffer
+                    );
+            }
+            set
+            {
+                CheckDisposed();
+                client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveBuffer,
+                    value
+                );
+            }
+        }
 
-		public int ReceiveBufferSize {
-			get {
-				CheckDisposed ();
-				return (int) client.GetSocketOption (SocketOptionLevel.Socket,
-								     SocketOptionName.ReceiveBuffer);
-			}
+        public int ReceiveTimeout
+        {
+            get
+            {
+                CheckDisposed();
+                return (int)
+                    client.GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveTimeout
+                    );
+            }
+            set
+            {
+                CheckDisposed();
+                client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveTimeout,
+                    value
+                );
+            }
+        }
 
-			set {
-				CheckDisposed ();
-				client.SetSocketOption (SocketOptionLevel.Socket,
-							SocketOptionName.ReceiveBuffer, value);
-			}
-		}
-            
-		public int ReceiveTimeout {
-			get {
-				CheckDisposed ();
-				return (int) client.GetSocketOption (SocketOptionLevel.Socket,
-								     SocketOptionName.ReceiveTimeout);
-			}
+        public int SendBufferSize
+        {
+            get
+            {
+                CheckDisposed();
+                return (int)
+                    client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer);
+            }
+            set
+            {
+                CheckDisposed();
+                client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendBuffer,
+                    value
+                );
+            }
+        }
 
-			set {
-				CheckDisposed ();
-				client.SetSocketOption (SocketOptionLevel.Socket,
-							SocketOptionName.ReceiveTimeout, value);
-			}
-		}
-        
-		public int SendBufferSize {
-			get {
-				CheckDisposed ();
-				return (int) client.GetSocketOption (SocketOptionLevel.Socket,
-								     SocketOptionName.SendBuffer);
-			}
+        public int SendTimeout
+        {
+            get
+            {
+                CheckDisposed();
+                return (int)
+                    client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout);
+            }
+            set
+            {
+                CheckDisposed();
+                client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendTimeout,
+                    value
+                );
+            }
+        }
 
-			set {
-				CheckDisposed ();
-				client.SetSocketOption (SocketOptionLevel.Socket,
-							SocketOptionName.SendBuffer, value);
-			}
-		}
-        
-		public int SendTimeout {
-			get {
-				CheckDisposed ();
-				return (int) client.GetSocketOption (SocketOptionLevel.Socket,
-								     SocketOptionName.SendTimeout);
-			}
+        public void Close()
+        {
+            CheckDisposed();
+            Dispose();
+        }
 
-			set {
-				CheckDisposed ();
-				client.SetSocketOption (SocketOptionLevel.Socket,
-							SocketOptionName.SendTimeout, value);
-			}
-		}
-        
-		public void Close ()
-		{
-			CheckDisposed ();
-			Dispose ();
-		}
-        
-		public void Connect (UnixEndPoint remoteEndPoint)
-		{
-			CheckDisposed ();
-			client.Connect (remoteEndPoint);
-			stream = new NetworkStream (client, true);
-		}
-        
-		public void Connect (string path)
-		{
-			CheckDisposed ();
-			Connect (new UnixEndPoint (path));
-		}
-        
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Connect(UnixEndPoint remoteEndPoint)
+        {
+            CheckDisposed();
+            client.Connect(remoteEndPoint);
+            stream = new NetworkStream(client, true);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (disposed)
-				return;
+        public void Connect(string path)
+        {
+            CheckDisposed();
+            Connect(new UnixEndPoint(path));
+        }
 
-			if (disposing) {
-				// release managed resources
-				NetworkStream s = stream;
-				stream = null;
-				if (s != null) {
-					// This closes the socket as well, as the NetworkStream
-					// owns the socket.
-					s.Close();
-					s = null;
-				} else if (client != null){
-					client.Close ();
-				}
-				client = null;
-			}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-			disposed = true;
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
 
-		public NetworkStream GetStream ()
-		{
-			CheckDisposed ();
-			if (stream == null)
-				stream = new NetworkStream (client, true);
+            if (disposing)
+            {
+                // release managed resources
+                NetworkStream s = stream;
+                stream = null;
+                if (s != null)
+                {
+                    // This closes the socket as well, as the NetworkStream
+                    // owns the socket.
+                    s.Close();
+                    s = null;
+                }
+                else if (client != null)
+                {
+                    client.Close();
+                }
+                client = null;
+            }
 
-			return stream;
-		}
-        
-		void CheckDisposed ()
-		{
-			if (disposed)
-				throw new ObjectDisposedException (GetType().FullName);
-		}        
+            disposed = true;
+        }
 
-		~UnixClient ()
-		{
-			Dispose (false);
-		}
-	}
+        public NetworkStream GetStream()
+        {
+            CheckDisposed();
+            if (stream == null)
+                stream = new NetworkStream(client, true);
+
+            return stream;
+        }
+
+        void CheckDisposed()
+        {
+            if (disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+        }
+
+        ~UnixClient()
+        {
+            Dispose(false);
+        }
+    }
 }
-

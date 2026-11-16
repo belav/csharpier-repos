@@ -24,7 +24,8 @@ namespace System.Text.Json
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
         public static byte[] SerializeToUtf8Bytes<TValue>(
             TValue value,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return WriteBytes(value, jsonTypeInfo);
@@ -52,7 +53,8 @@ namespace System.Text.Json
         public static byte[] SerializeToUtf8Bytes(
             object? value,
             Type inputType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             ValidateInputType(value, inputType);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, inputType);
@@ -68,7 +70,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static byte[] SerializeToUtf8Bytes<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static byte[] SerializeToUtf8Bytes<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -123,7 +128,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static byte[] SerializeToUtf8Bytes(object? value, Type inputType, JsonSerializerContext context)
+        public static byte[] SerializeToUtf8Bytes(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context is null)
             {
@@ -139,7 +148,10 @@ namespace System.Text.Json
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {
@@ -156,7 +168,10 @@ namespace System.Text.Json
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {

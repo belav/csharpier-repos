@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -32,290 +32,349 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	public class BuildPropertyGroup : IEnumerable {
-	
-		bool			read_only;
-		ImportedProject		importedProject;
-		XmlElement		propertyGroup;
-		GroupingCollection	parentCollection;
-		Project			parentProject;
-		List <BuildProperty>	properties;
-		Dictionary <string, BuildProperty>	propertiesByName;
-		bool evaluated;
-		bool isDynamic;
+namespace Microsoft.Build.BuildEngine
+{
+    public class BuildPropertyGroup : IEnumerable
+    {
+        bool read_only;
+        ImportedProject importedProject;
+        XmlElement propertyGroup;
+        GroupingCollection parentCollection;
+        Project parentProject;
+        List<BuildProperty> properties;
+        Dictionary<string, BuildProperty> propertiesByName;
+        bool evaluated;
+        bool isDynamic;
 
-		public BuildPropertyGroup ()
-			: this (null, null, null, false)
-		{
-		}
+        public BuildPropertyGroup()
+            : this(null, null, null, false) { }
 
-		internal BuildPropertyGroup (XmlElement xmlElement, Project project, ImportedProject importedProject, bool readOnly)
-			: this (xmlElement, project, importedProject, readOnly, false)
-		{
-		}
+        internal BuildPropertyGroup(
+            XmlElement xmlElement,
+            Project project,
+            ImportedProject importedProject,
+            bool readOnly
+        )
+            : this(xmlElement, project, importedProject, readOnly, false) { }
 
-		internal BuildPropertyGroup (XmlElement xmlElement, Project project, ImportedProject importedProject, bool readOnly, bool isDynamic)
-		{
-			this.importedProject = importedProject;
-			this.parentCollection = null;
-			this.parentProject = project;
-			this.propertyGroup = xmlElement;
-			this.read_only = readOnly;
-			this.isDynamic = isDynamic;
+        internal BuildPropertyGroup(
+            XmlElement xmlElement,
+            Project project,
+            ImportedProject importedProject,
+            bool readOnly,
+            bool isDynamic
+        )
+        {
+            this.importedProject = importedProject;
+            this.parentCollection = null;
+            this.parentProject = project;
+            this.propertyGroup = xmlElement;
+            this.read_only = readOnly;
+            this.isDynamic = isDynamic;
 
-			if (FromXml) {
-				this.properties = new List <BuildProperty> ();
-				foreach (XmlNode xn in propertyGroup.ChildNodes) {
-					if (!(xn is XmlElement))
-						continue;
-					
-					XmlElement xe = (XmlElement) xn;
-					BuildProperty bp = new BuildProperty (parentProject, xe);
-					AddProperty (bp);
-				} 
-			} else
-				this.propertiesByName = new Dictionary <string, BuildProperty> (StringComparer.OrdinalIgnoreCase);
+            if (FromXml)
+            {
+                this.properties = new List<BuildProperty>();
+                foreach (XmlNode xn in propertyGroup.ChildNodes)
+                {
+                    if (!(xn is XmlElement))
+                        continue;
 
-			DefinedInFileName = importedProject != null ? importedProject.FullFileName :
-						(project != null ? project.FullFileName : null);
-		}
+                    XmlElement xe = (XmlElement)xn;
+                    BuildProperty bp = new BuildProperty(parentProject, xe);
+                    AddProperty(bp);
+                }
+            }
+            else
+                this.propertiesByName = new Dictionary<string, BuildProperty>(
+                    StringComparer.OrdinalIgnoreCase
+                );
 
-		public BuildProperty AddNewProperty (string propertyName,
-						     string propertyValue)
-		{
-			return AddNewProperty (propertyName, propertyValue, false);
-		}
-		
-		public BuildProperty AddNewProperty (string propertyName,
-						     string propertyValue,
-						     bool treatPropertyValueAsLiteral)
-		{
-			if (!FromXml)
-				throw new InvalidOperationException ("This method is only valid for persisted property groups.");
+            DefinedInFileName =
+                importedProject != null
+                    ? importedProject.FullFileName
+                    : (project != null ? project.FullFileName : null);
+        }
 
-			if (treatPropertyValueAsLiteral)
-				propertyValue = Utilities.Escape (propertyValue);
+        public BuildProperty AddNewProperty(string propertyName, string propertyValue)
+        {
+            return AddNewProperty(propertyName, propertyValue, false);
+        }
 
-			XmlElement element = propertyGroup.OwnerDocument.CreateElement (propertyName, Project.XmlNamespace);
-			propertyGroup.AppendChild (element);
+        public BuildProperty AddNewProperty(
+            string propertyName,
+            string propertyValue,
+            bool treatPropertyValueAsLiteral
+        )
+        {
+            if (!FromXml)
+                throw new InvalidOperationException(
+                    "This method is only valid for persisted property groups."
+                );
 
-			BuildProperty property = new BuildProperty (parentProject, element);
-			property.Value = propertyValue;
-			AddProperty (property);
+            if (treatPropertyValueAsLiteral)
+                propertyValue = Utilities.Escape(propertyValue);
 
-			parentProject.MarkProjectAsDirty ();
-			parentProject.NeedToReevaluate ();
+            XmlElement element = propertyGroup.OwnerDocument.CreateElement(
+                propertyName,
+                Project.XmlNamespace
+            );
+            propertyGroup.AppendChild(element);
 
-			return property;
-		}
+            BuildProperty property = new BuildProperty(parentProject, element);
+            property.Value = propertyValue;
+            AddProperty(property);
 
-		internal void AddProperty (BuildProperty property)
-		{
-			if (FromXml)
-				properties.Add (property);
-			else {
-				if (propertiesByName.ContainsKey (property.Name)) {
-					BuildProperty existing = propertiesByName [property.Name];
-					if (property.PropertyType <= existing.PropertyType) {
-						propertiesByName.Remove (property.Name);
-						propertiesByName.Add (property.Name, property);
-					}
-				} else
-					propertiesByName.Add (property.Name, property);
-			}
-		}
-		
-		public void Clear ()
-		{
-			if (FromXml) {
-				propertyGroup.RemoveAll ();
-				properties = new List <BuildProperty> ();
-			} else
-				propertiesByName = new Dictionary <string, BuildProperty> ();
-		}
+            parentProject.MarkProjectAsDirty();
+            parentProject.NeedToReevaluate();
 
-		[MonoTODO]
-		public BuildPropertyGroup Clone (bool deepClone)
-		{
-			BuildPropertyGroup bpg = new BuildPropertyGroup (propertyGroup, parentProject, importedProject, read_only);
-			if (FromXml) {
-				foreach (BuildProperty bp in properties) {
-					if (deepClone)
-						bpg.AddProperty (bp.Clone (true));
-					else
-						bpg.AddNewProperty (bp.Name, bp.FinalValue);
-				}
-			} else {
-				foreach (BuildProperty bp in propertiesByName.Values) {
-					if (deepClone)
-						bpg.AddProperty (bp.Clone (true));
-					else
-						bpg.AddNewProperty (bp.Name, bp.FinalValue);
-				}
-			}
+            return property;
+        }
 
-			return bpg;
-		}
+        internal void AddProperty(BuildProperty property)
+        {
+            if (FromXml)
+                properties.Add(property);
+            else
+            {
+                if (propertiesByName.ContainsKey(property.Name))
+                {
+                    BuildProperty existing = propertiesByName[property.Name];
+                    if (property.PropertyType <= existing.PropertyType)
+                    {
+                        propertiesByName.Remove(property.Name);
+                        propertiesByName.Add(property.Name, property);
+                    }
+                }
+                else
+                    propertiesByName.Add(property.Name, property);
+            }
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			if (FromXml)
-				foreach (BuildProperty bp in properties)
-					yield return bp;
-			else 
-				foreach (KeyValuePair <string, BuildProperty> kvp in propertiesByName)
-					yield return kvp.Value;
-		}
+        public void Clear()
+        {
+            if (FromXml)
+            {
+                propertyGroup.RemoveAll();
+                properties = new List<BuildProperty>();
+            }
+            else
+                propertiesByName = new Dictionary<string, BuildProperty>();
+        }
 
-		public void RemoveProperty (BuildProperty property)
-		{
-			if (property == null)
-				throw new ArgumentNullException ("property");
+        [MonoTODO]
+        public BuildPropertyGroup Clone(bool deepClone)
+        {
+            BuildPropertyGroup bpg = new BuildPropertyGroup(
+                propertyGroup,
+                parentProject,
+                importedProject,
+                read_only
+            );
+            if (FromXml)
+            {
+                foreach (BuildProperty bp in properties)
+                {
+                    if (deepClone)
+                        bpg.AddProperty(bp.Clone(true));
+                    else
+                        bpg.AddNewProperty(bp.Name, bp.FinalValue);
+                }
+            }
+            else
+            {
+                foreach (BuildProperty bp in propertiesByName.Values)
+                {
+                    if (deepClone)
+                        bpg.AddProperty(bp.Clone(true));
+                    else
+                        bpg.AddNewProperty(bp.Name, bp.FinalValue);
+                }
+            }
 
-			if (FromXml) {
-				if (!property.FromXml)
-					throw new InvalidOperationException ("The specified property does not belong to the current property group.");
+            return bpg;
+        }
 
-				property.XmlElement.ParentNode.RemoveChild (property.XmlElement);
-				properties.Remove (property);
-			} else
-				propertiesByName.Remove (property.Name);
-		}
+        public IEnumerator GetEnumerator()
+        {
+            if (FromXml)
+                foreach (BuildProperty bp in properties)
+                    yield return bp;
+            else
+                foreach (KeyValuePair<string, BuildProperty> kvp in propertiesByName)
+                    yield return kvp.Value;
+        }
 
-		public void RemoveProperty (string propertyName)
-		{
-			if (FromXml) {
-				foreach (BuildProperty bp in properties)
-					if (bp.Name == propertyName) {
-						RemoveProperty (bp);
-						break;
-					}
-			} else
-				propertiesByName.Remove (propertyName);
-		}
+        public void RemoveProperty(BuildProperty property)
+        {
+            if (property == null)
+                throw new ArgumentNullException("property");
 
-		public void SetProperty (string propertyName,
-					 string propertyValue)
-		{
-			SetProperty (propertyName, propertyValue, false);
-		}
-		
-		public void SetProperty (string propertyName,
-					 string propertyValue,
-					 bool treatPropertyValueAsLiteral)
-		{
-			if (read_only)
-				return;
-			if (FromXml)
-				throw new InvalidOperationException (
-					"This method is only valid for virtual property groups, not <PropertyGroup> elements.");
+            if (FromXml)
+            {
+                if (!property.FromXml)
+                    throw new InvalidOperationException(
+                        "The specified property does not belong to the current property group."
+                    );
 
-			if (treatPropertyValueAsLiteral)
-				propertyValue = Utilities.Escape (propertyValue);
+                property.XmlElement.ParentNode.RemoveChild(property.XmlElement);
+                properties.Remove(property);
+            }
+            else
+                propertiesByName.Remove(property.Name);
+        }
 
-			if (propertiesByName.ContainsKey (propertyName))
-				propertiesByName.Remove (propertyName);
+        public void RemoveProperty(string propertyName)
+        {
+            if (FromXml)
+            {
+                foreach (BuildProperty bp in properties)
+                    if (bp.Name == propertyName)
+                    {
+                        RemoveProperty(bp);
+                        break;
+                    }
+            }
+            else
+                propertiesByName.Remove(propertyName);
+        }
 
-			BuildProperty bp = new BuildProperty (propertyName, propertyValue);
-			if (Char.IsDigit (propertyName [0]))
-				throw new ArgumentException (String.Format (
-					"The name \"{0}\" contains an invalid character \"{1}\".", propertyName, propertyName [0]));
+        public void SetProperty(string propertyName, string propertyValue)
+        {
+            SetProperty(propertyName, propertyValue, false);
+        }
 
-			AddProperty (bp);
+        public void SetProperty(
+            string propertyName,
+            string propertyValue,
+            bool treatPropertyValueAsLiteral
+        )
+        {
+            if (read_only)
+                return;
+            if (FromXml)
+                throw new InvalidOperationException(
+                    "This method is only valid for virtual property groups, not <PropertyGroup> elements."
+                );
 
-			if (IsGlobal)
-				parentProject.NeedToReevaluate ();
-		}
-		
-		internal void Evaluate ()
-		{
-			if (!isDynamic && evaluated)
-				return;
+            if (treatPropertyValueAsLiteral)
+                propertyValue = Utilities.Escape(propertyValue);
 
-			foreach (BuildProperty bp in properties)
-				if (ConditionParser.ParseAndEvaluate (bp.Condition, parentProject))
-					bp.Evaluate ();
+            if (propertiesByName.ContainsKey(propertyName))
+                propertiesByName.Remove(propertyName);
 
-			evaluated = true;
-		}
-		
-		public string Condition {
-			get {
-				if (!FromXml)
-					return String.Empty;
-				return propertyGroup.GetAttribute ("Condition");
-			}
-			set {
-				if (!FromXml)
-					throw new InvalidOperationException (
-					"Cannot set a condition on an object not represented by an XML element in the project file.");
-				propertyGroup.SetAttribute ("Condition", value);
-			}
-		}
+            BuildProperty bp = new BuildProperty(propertyName, propertyValue);
+            if (Char.IsDigit(propertyName[0]))
+                throw new ArgumentException(
+                    String.Format(
+                        "The name \"{0}\" contains an invalid character \"{1}\".",
+                        propertyName,
+                        propertyName[0]
+                    )
+                );
 
-		public int Count {
-			get {
-				if (FromXml)
-					return properties.Count;
-				else
-					return propertiesByName.Count;
-			}
-		}
+            AddProperty(bp);
 
-		public bool IsImported {
-			get {
-				return importedProject != null;
-			}
-		}
+            if (IsGlobal)
+                parentProject.NeedToReevaluate();
+        }
 
-		internal bool FromXml {
-			get {
-				return propertyGroup != null;
-			}
-		}
+        internal void Evaluate()
+        {
+            if (!isDynamic && evaluated)
+                return;
 
-		bool IsGlobal {
-			get {
-				return parentProject != null && propertyGroup == null;
-			}
-		}
+            foreach (BuildProperty bp in properties)
+                if (ConditionParser.ParseAndEvaluate(bp.Condition, parentProject))
+                    bp.Evaluate();
 
-		public BuildProperty this [string propertyName] {
-			get {
-				if (FromXml)
-					throw new InvalidOperationException ("Properties in persisted property groups cannot be accessed by name.");
-				
-				if (propertiesByName.ContainsKey (propertyName))
-					return propertiesByName [propertyName];
-				else
-					return null;
-			}
-			set {
-				propertiesByName [propertyName] = value;
-			}
-		}
+            evaluated = true;
+        }
 
-		internal string DefinedInFileName { get; private set; }
+        public string Condition
+        {
+            get
+            {
+                if (!FromXml)
+                    return String.Empty;
+                return propertyGroup.GetAttribute("Condition");
+            }
+            set
+            {
+                if (!FromXml)
+                    throw new InvalidOperationException(
+                        "Cannot set a condition on an object not represented by an XML element in the project file."
+                    );
+                propertyGroup.SetAttribute("Condition", value);
+            }
+        }
 
-		internal GroupingCollection GroupingCollection {
-			get { return parentCollection; }
-			set { parentCollection = value; }
-		}
+        public int Count
+        {
+            get
+            {
+                if (FromXml)
+                    return properties.Count;
+                else
+                    return propertiesByName.Count;
+            }
+        }
 
-		internal XmlElement XmlElement {
-			get { return propertyGroup; }
-		}
+        public bool IsImported
+        {
+            get { return importedProject != null; }
+        }
 
-		internal IEnumerable<string> GetAttributes ()
-		{
-			foreach (XmlAttribute attrib in XmlElement.Attributes)
-				yield return attrib.Value;
+        internal bool FromXml
+        {
+            get { return propertyGroup != null; }
+        }
 
-			foreach (BuildProperty bp in properties) {
-				foreach (string attr in bp.GetAttributes ())
-					yield return attr;
-			}
-		}
-	}
+        bool IsGlobal
+        {
+            get { return parentProject != null && propertyGroup == null; }
+        }
+
+        public BuildProperty this[string propertyName]
+        {
+            get
+            {
+                if (FromXml)
+                    throw new InvalidOperationException(
+                        "Properties in persisted property groups cannot be accessed by name."
+                    );
+
+                if (propertiesByName.ContainsKey(propertyName))
+                    return propertiesByName[propertyName];
+                else
+                    return null;
+            }
+            set { propertiesByName[propertyName] = value; }
+        }
+
+        internal string DefinedInFileName { get; private set; }
+
+        internal GroupingCollection GroupingCollection
+        {
+            get { return parentCollection; }
+            set { parentCollection = value; }
+        }
+
+        internal XmlElement XmlElement
+        {
+            get { return propertyGroup; }
+        }
+
+        internal IEnumerable<string> GetAttributes()
+        {
+            foreach (XmlAttribute attrib in XmlElement.Attributes)
+                yield return attrib.Value;
+
+            foreach (BuildProperty bp in properties)
+            {
+                foreach (string attr in bp.GetAttributes())
+                    yield return attr;
+            }
+        }
+    }
 }

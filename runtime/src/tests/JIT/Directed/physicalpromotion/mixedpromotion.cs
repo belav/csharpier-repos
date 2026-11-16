@@ -2,15 +2,25 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-using System.Runtime.CompilerServices;
 using System;
-using Xunit;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 public class PhysicalPromotion
 {
     private static S s_static = new S { A = 0xdeadbeef, B = 0xcafebabe };
-    private static S2 s_static2 = new S2 { A = 0x12, B = 0x34, C = 0x56, D = 0x78, E = 0x9A, F = 0xBC, G = 0xDE, H = 0xF0 };
+    private static S2 s_static2 = new S2
+    {
+        A = 0x12,
+        B = 0x34,
+        C = 0x56,
+        D = 0x78,
+        E = 0x9A,
+        F = 0xBC,
+        G = 0xDE,
+        H = 0xF0,
+    };
 
     [Fact]
     public static void FromPhysicalToOld()
@@ -91,9 +101,7 @@ public class PhysicalPromotion
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume<T>(T val)
-    {
-    }
+    private static void Consume<T>(T val) { }
 
     private struct S
     {
@@ -103,7 +111,14 @@ public class PhysicalPromotion
 
     private struct S2
     {
-        public byte A, B, C, D, E, F, G, H;
+        public byte A,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
+            H;
     }
 
     private struct SWithInner

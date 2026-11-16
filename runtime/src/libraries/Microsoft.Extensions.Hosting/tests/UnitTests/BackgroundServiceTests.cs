@@ -45,7 +45,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             tcs.TrySetException(new Exception("fail!"));
             var service = new MyBackgroundService(tcs.Task);
 
-            var exception = await Assert.ThrowsAsync<Exception>(() => service.StartAsync(CancellationToken.None));
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                service.StartAsync(CancellationToken.None)
+            );
 
             Assert.Equal("fail!", exception.Message);
         }

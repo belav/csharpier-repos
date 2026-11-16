@@ -210,7 +210,11 @@ namespace Dynamic
 
             public EventTestHandler Handler => _handler;
 
-            public override bool TryInvoke(System.Dynamic.InvokeBinder binder, object[] args, out object result)
+            public override bool TryInvoke(
+                System.Dynamic.InvokeBinder binder,
+                object[] args,
+                out object result
+            )
             {
                 result = null;
                 if (args.Length != 1 || !(args[0] is int))
@@ -223,6 +227,7 @@ namespace Dynamic
 
         private delegate void OnEventDelegate(int id);
         private delegate void OnEventMessageDelegate(string message);
+
         private class EventTestHandler
         {
             private const int InvalidId = -1;

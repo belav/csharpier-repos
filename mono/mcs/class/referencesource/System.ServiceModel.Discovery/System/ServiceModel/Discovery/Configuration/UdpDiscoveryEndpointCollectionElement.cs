@@ -7,7 +7,6 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Discovery;
 
-    public class UdpDiscoveryEndpointCollectionElement : StandardEndpointCollectionElement<UdpDiscoveryEndpoint, UdpDiscoveryEndpointElement>
-    {
-    }
+    public class UdpDiscoveryEndpointCollectionElement
+        : StandardEndpointCollectionElement<UdpDiscoveryEndpoint, UdpDiscoveryEndpointElement> { }
 }

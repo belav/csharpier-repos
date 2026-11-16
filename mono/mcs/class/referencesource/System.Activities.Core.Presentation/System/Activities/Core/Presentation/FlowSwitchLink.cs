@@ -15,8 +15,22 @@ namespace System.Activities.Core.Presentation
 
     abstract class FlowSwitchLink<T> : DependencyObject, IFlowSwitchLink
     {
-        static DependencyProperty caseProperty = DependencyProperty.Register("Case", typeof(T), typeof(FlowSwitchLink<T>), new FrameworkPropertyMetadata(new PropertyChangedCallback(FlowSwitchLink<T>.OnCasePropertyChanged)));
-        static DependencyProperty isDefaultCaseProperty = DependencyProperty.Register("IsDefault", typeof(bool), typeof(FlowSwitchLink<T>), new FrameworkPropertyMetadata(new PropertyChangedCallback(FlowSwitchLink<T>.OnIsDefaultCasePropertyChanged)));
+        static DependencyProperty caseProperty = DependencyProperty.Register(
+            "Case",
+            typeof(T),
+            typeof(FlowSwitchLink<T>),
+            new FrameworkPropertyMetadata(
+                new PropertyChangedCallback(FlowSwitchLink<T>.OnCasePropertyChanged)
+            )
+        );
+        static DependencyProperty isDefaultCaseProperty = DependencyProperty.Register(
+            "IsDefault",
+            typeof(bool),
+            typeof(FlowSwitchLink<T>),
+            new FrameworkPropertyMetadata(
+                new PropertyChangedCallback(FlowSwitchLink<T>.OnIsDefaultCasePropertyChanged)
+            )
+        );
 
         private FlowSwitch<T> parentFlowSwitch;
         protected bool internalChange = false;
@@ -42,8 +56,7 @@ namespace System.Activities.Core.Presentation
         }
 
         [BrowsableAttribute(false)]
-        public ModelItem ModelItem
-        { get; set; }
+        public ModelItem ModelItem { get; set; }
 
         public CaseKeyValidationCallbackDelegate ValidateCaseKey
         {
@@ -51,10 +64,12 @@ namespace System.Activities.Core.Presentation
             {
                 return (object obj, out string reason) =>
                 {
-                    return GenericFlowSwitchHelper.ValidateCaseKey(obj,
+                    return GenericFlowSwitchHelper.ValidateCaseKey(
+                        obj,
                         this.flowSwitchModelItem.Properties["Cases"],
                         typeof(T),
-                        out reason);
+                        out reason
+                    );
                 };
             }
         }
@@ -62,26 +77,14 @@ namespace System.Activities.Core.Presentation
         [BrowsableAttribute(false)]
         public FlowNode ParentFlowSwitch
         {
-            get
-            {
-                return this.parentFlowSwitch;
-            }
-            set
-            {
-                this.parentFlowSwitch = value as FlowSwitch<T>;
-            }
+            get { return this.parentFlowSwitch; }
+            set { this.parentFlowSwitch = value as FlowSwitch<T>; }
         }
 
         public bool IsDefaultCase
         {
-            get
-            {
-                return (bool)GetValue(FlowSwitchLink<T>.isDefaultCaseProperty);
-            }
-            set
-            {
-                SetValue(FlowSwitchLink<T>.isDefaultCaseProperty, value);
-            }
+            get { return (bool)GetValue(FlowSwitchLink<T>.isDefaultCaseProperty); }
+            set { SetValue(FlowSwitchLink<T>.isDefaultCaseProperty, value); }
         }
 
         [Browsable(false)]
@@ -97,52 +100,31 @@ namespace System.Activities.Core.Presentation
         [Browsable(false)]
         public object CaseObject
         {
-            get
-            {
-                return GetValue(FlowSwitchLink<T>.caseProperty);
-            }
-            set
-            {
-                SetValue(FlowSwitchLink<T>.caseProperty, value);
-            }
+            get { return GetValue(FlowSwitchLink<T>.caseProperty); }
+            set { SetValue(FlowSwitchLink<T>.caseProperty, value); }
         }
-        
+
         [BrowsableAttribute(false)]
         public T Case
         {
-            get
-            {
-                return (T)GetValue(FlowSwitchLink<T>.caseProperty);
-            }
-            set
-            {
-                SetValue(FlowSwitchLink<T>.caseProperty, value);
-            }
+            get { return (T)GetValue(FlowSwitchLink<T>.caseProperty); }
+            set { SetValue(FlowSwitchLink<T>.caseProperty, value); }
         }
 
         DependencyProperty CaseProperty
         {
-            get
-            {
-                return caseProperty;
-            }
+            get { return caseProperty; }
         }
 
         DependencyProperty IsDefaultCaseProperty
         {
-            get
-            {
-                return isDefaultCaseProperty;
-            }
+            get { return isDefaultCaseProperty; }
         }
 
         [Browsable(false)]
         public Type GenericType
         {
-            get
-            {
-                return typeof(T);
-            }
+            get { return typeof(T); }
         }
 
         bool ContainsKey(object key)
@@ -163,12 +145,26 @@ namespace System.Activities.Core.Presentation
                 {
                     if (object.Equals(this.flowSwitchModelItem.Properties["Default"].Value, null))
                     {
-                        using (EditingScope es = (EditingScope)this.flowSwitchModelItem.BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc))
+                        using (
+                            EditingScope es = (EditingScope)
+                                this.flowSwitchModelItem.BeginEdit(
+                                    SR.FlowSwitchCaseRenameEditingScopeDesc
+                                )
+                        )
                         {
-                            ModelItem flowNodeMI = GenericFlowSwitchHelper.GetCaseModelItem(this.flowSwitchModelItem.Properties["Cases"], this.CaseObject);
-                            GenericFlowSwitchHelper.RemoveCase(this.flowSwitchModelItem.Properties["Cases"], this.CaseObject);
+                            ModelItem flowNodeMI = GenericFlowSwitchHelper.GetCaseModelItem(
+                                this.flowSwitchModelItem.Properties["Cases"],
+                                this.CaseObject
+                            );
+                            GenericFlowSwitchHelper.RemoveCase(
+                                this.flowSwitchModelItem.Properties["Cases"],
+                                this.CaseObject
+                            );
                             this.flowSwitchModelItem.Properties["Default"].SetValue(flowNodeMI);
-                            this.UpdateViewState(this.CaseName + CaseViewStateKeyAppendString, DefaultConnectorViewStateKey);
+                            this.UpdateViewState(
+                                this.CaseName + CaseViewStateKeyAppendString,
+                                DefaultConnectorViewStateKey
+                            );
                             this.internalChange = true;
                             es.Complete();
                         }
@@ -177,34 +173,57 @@ namespace System.Activities.Core.Presentation
                     {
                         this.internalDefaultCaseChange = true;
                         this.IsDefaultCase = oldValue;
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DefaultCaseExists));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.DefaultCaseExists)
+                        );
                     }
                 }
                 else
                 {
                     if (oldValue)
                     {
-                        using (EditingScope es = (EditingScope)this.flowSwitchModelItem.BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc))
+                        using (
+                            EditingScope es = (EditingScope)
+                                this.flowSwitchModelItem.BeginEdit(
+                                    SR.FlowSwitchCaseRenameEditingScopeDesc
+                                )
+                        )
                         {
-                            ModelItem defaultCase = this.flowSwitchModelItem.Properties["Default"].Value;
+                            ModelItem defaultCase = this.flowSwitchModelItem
+                                .Properties["Default"]
+                                .Value;
                             object uniqueCase = null;
                             string errorMessage = string.Empty;
                             Type typeArgument = typeof(T);
                             if (GenericFlowSwitchHelper.CanBeGeneratedUniquely(typeArgument))
                             {
-                                string caseName = GenericFlowSwitchHelper.GetCaseName(this.flowSwitchModelItem.Properties["Cases"], typeArgument, out errorMessage);
+                                string caseName = GenericFlowSwitchHelper.GetCaseName(
+                                    this.flowSwitchModelItem.Properties["Cases"],
+                                    typeArgument,
+                                    out errorMessage
+                                );
                                 if (!string.IsNullOrEmpty(errorMessage))
                                 {
                                     this.internalDefaultCaseChange = true;
                                     this.IsDefaultCase = oldValue;
-                                    throw FxTrace.Exception.AsError(new InvalidOperationException(errorMessage));
+                                    throw FxTrace.Exception.AsError(
+                                        new InvalidOperationException(errorMessage)
+                                    );
                                 }
-                                uniqueCase = GenericFlowSwitchHelper.GetObject(caseName, typeArgument);
-
+                                uniqueCase = GenericFlowSwitchHelper.GetObject(
+                                    caseName,
+                                    typeArgument
+                                );
                             }
                             else
                             {
-                                FlowSwitchCaseEditorDialog editor = new FlowSwitchCaseEditorDialog(this.flowSwitchModelItem, ((WorkflowViewElement)this.flowSwitchModelItem.View).Context, this.flowSwitchModelItem.View, SR.ChangeCaseValue, this.flowSwitchModelItem.ItemType.GetGenericArguments()[0]);
+                                FlowSwitchCaseEditorDialog editor = new FlowSwitchCaseEditorDialog(
+                                    this.flowSwitchModelItem,
+                                    ((WorkflowViewElement)this.flowSwitchModelItem.View).Context,
+                                    this.flowSwitchModelItem.View,
+                                    SR.ChangeCaseValue,
+                                    this.flowSwitchModelItem.ItemType.GetGenericArguments()[0]
+                                );
                                 editor.WindowSizeToContent = SizeToContent.WidthAndHeight;
 
                                 if (!editor.ShowOkCancel())
@@ -214,29 +233,55 @@ namespace System.Activities.Core.Presentation
                                     return;
                                 }
                                 uniqueCase = editor.Case;
-                                if (GenericFlowSwitchHelper.ContainsCaseKey(this.flowSwitchModelItem.Properties["Cases"], uniqueCase))
+                                if (
+                                    GenericFlowSwitchHelper.ContainsCaseKey(
+                                        this.flowSwitchModelItem.Properties["Cases"],
+                                        uniqueCase
+                                    )
+                                )
                                 {
                                     this.internalDefaultCaseChange = true;
                                     this.IsDefaultCase = oldValue;
-                                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidFlowSwitchCaseMessage));
+                                    throw FxTrace.Exception.AsError(
+                                        new InvalidOperationException(
+                                            SR.InvalidFlowSwitchCaseMessage
+                                        )
+                                    );
                                 }
                             }
 
                             this.flowSwitchModelItem.Properties["Default"].SetValue(null);
-                            this.flowSwitchModelItem.Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName].SetValue(FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue);
-                            
+                            this.flowSwitchModelItem.Properties[
+                                    FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                                ]
+                                .SetValue(
+                                    FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue
+                                );
+
                             this.internalChange = true;
                             if (typeof(string) != typeof(T))
                             {
                                 this.ModelItem.Properties["Case"].SetValue(uniqueCase);
-                                GenericFlowSwitchHelper.AddCase(this.flowSwitchModelItem.Properties["Cases"], uniqueCase, defaultCase.GetCurrentValue());
+                                GenericFlowSwitchHelper.AddCase(
+                                    this.flowSwitchModelItem.Properties["Cases"],
+                                    uniqueCase,
+                                    defaultCase.GetCurrentValue()
+                                );
                             }
                             else
                             {
                                 this.ModelItem.Properties["Case"].SetValue(uniqueCase);
-                                GenericFlowSwitchHelper.AddCase(this.flowSwitchModelItem.Properties["Cases"], uniqueCase, defaultCase.GetCurrentValue());
+                                GenericFlowSwitchHelper.AddCase(
+                                    this.flowSwitchModelItem.Properties["Cases"],
+                                    uniqueCase,
+                                    defaultCase.GetCurrentValue()
+                                );
                             }
-                            this.UpdateViewState(DefaultConnectorViewStateKey, GenericFlowSwitchHelper.GetString(uniqueCase, typeof(T)) + CaseViewStateKeyAppendString);
+                            this.UpdateViewState(
+                                DefaultConnectorViewStateKey,
+                                GenericFlowSwitchHelper.GetString(uniqueCase, typeof(T))
+                                    + CaseViewStateKeyAppendString
+                            );
                             es.Complete();
                             this.internalChange = false;
                         }
@@ -257,7 +302,9 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                isUndoRedoInProgress = designer.Context.Services.GetService<UndoEngine>().IsUndoRedoInProgress;
+                isUndoRedoInProgress = designer
+                    .Context.Services.GetService<UndoEngine>()
+                    .IsUndoRedoInProgress;
             }
             return isUndoRedoInProgress;
         }
@@ -279,17 +326,38 @@ namespace System.Activities.Core.Presentation
                 string oldViewStateKey = string.Empty;
                 if (!this.ContainsKey(newValue))
                 {
-                    using (EditingScope es = (EditingScope)this.flowSwitchModelItem.BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc))
+                    using (
+                        EditingScope es = (EditingScope)
+                            this.flowSwitchModelItem.BeginEdit(
+                                SR.FlowSwitchCaseRenameEditingScopeDesc
+                            )
+                    )
                     {
                         ModelItem flowElementMI = null;
 
-                        flowElementMI = GenericFlowSwitchHelper.GetCaseModelItem(this.flowSwitchModelItem.Properties["Cases"], oldValue);
-                        GenericFlowSwitchHelper.RemoveCase(this.flowSwitchModelItem.Properties["Cases"], oldValue);
-                        oldViewStateKey = GenericFlowSwitchHelper.GetString(oldValue, typeof(T)) + CaseViewStateKeyAppendString;
+                        flowElementMI = GenericFlowSwitchHelper.GetCaseModelItem(
+                            this.flowSwitchModelItem.Properties["Cases"],
+                            oldValue
+                        );
+                        GenericFlowSwitchHelper.RemoveCase(
+                            this.flowSwitchModelItem.Properties["Cases"],
+                            oldValue
+                        );
+                        oldViewStateKey =
+                            GenericFlowSwitchHelper.GetString(oldValue, typeof(T))
+                            + CaseViewStateKeyAppendString;
                         //Add the new value
-                        GenericFlowSwitchHelper.AddCase(this.flowSwitchModelItem.Properties["Cases"], newValue, flowElementMI.GetCurrentValue());
+                        GenericFlowSwitchHelper.AddCase(
+                            this.flowSwitchModelItem.Properties["Cases"],
+                            newValue,
+                            flowElementMI.GetCurrentValue()
+                        );
                         //Update the viewstate for the flowswitch.
-                        this.UpdateViewState(oldViewStateKey, GenericFlowSwitchHelper.GetString(newValue, typeof(T)) + CaseViewStateKeyAppendString);
+                        this.UpdateViewState(
+                            oldViewStateKey,
+                            GenericFlowSwitchHelper.GetString(newValue, typeof(T))
+                                + CaseViewStateKeyAppendString
+                        );
                         //Making sure the value for Case is always trimmed.
                         this.internalChange = true;
                         this.ModelItem.Properties["Case"].SetValue(newValue);
@@ -300,7 +368,9 @@ namespace System.Activities.Core.Presentation
                 {
                     this.internalChange = true;
                     this.CaseObject = oldValue;
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidFlowSwitchCaseMessage));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.InvalidFlowSwitchCaseMessage)
+                    );
                 }
             }
             this.internalChange = false;
@@ -309,25 +379,43 @@ namespace System.Activities.Core.Presentation
         void UpdateViewState(string oldValue, string newValue)
         {
             EditingContext context = this.flowSwitchModelItem.GetEditingContext();
-            ViewStateService viewStateService = (ViewStateService)context.Services.GetService(typeof(ViewStateService));
+            ViewStateService viewStateService = (ViewStateService)
+                context.Services.GetService(typeof(ViewStateService));
             if (viewStateService != null)
             {
-                object viewState = viewStateService.RetrieveViewState(this.flowSwitchModelItem, oldValue);
+                object viewState = viewStateService.RetrieveViewState(
+                    this.flowSwitchModelItem,
+                    oldValue
+                );
                 if (viewState != null)
                 {
-                    viewStateService.StoreViewStateWithUndo(this.flowSwitchModelItem, oldValue, null);
-                    viewStateService.StoreViewStateWithUndo(this.flowSwitchModelItem, newValue, viewState);
+                    viewStateService.StoreViewStateWithUndo(
+                        this.flowSwitchModelItem,
+                        oldValue,
+                        null
+                    );
+                    viewStateService.StoreViewStateWithUndo(
+                        this.flowSwitchModelItem,
+                        newValue,
+                        viewState
+                    );
                 }
             }
         }
 
-        static void OnCasePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        static void OnCasePropertyChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             FlowSwitchLink<T> link = (FlowSwitchLink<T>)dependencyObject;
             link.OnCasePropertyChanged(e);
         }
 
-        static void OnIsDefaultCasePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        static void OnIsDefaultCasePropertyChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             FlowSwitchLink<T> link = (FlowSwitchLink<T>)dependencyObject;
             link.OnIsDefaultPropertyChanged(e);
@@ -339,10 +427,20 @@ namespace System.Activities.Core.Presentation
             {
                 Converter = new FlowSwitchLinkMultiValueConverter(),
                 ConverterParameter = this.CaseProperty.PropertyType,
-                Bindings = 
+                Bindings =
                 {
-                    new Binding { Source = this, Mode = BindingMode.OneWay, Path = new PropertyPath(this.CaseProperty) },
-                    new Binding { Source = this, Mode = BindingMode.OneWay, Path = new PropertyPath(this.IsDefaultCaseProperty) },
+                    new Binding
+                    {
+                        Source = this,
+                        Mode = BindingMode.OneWay,
+                        Path = new PropertyPath(this.CaseProperty),
+                    },
+                    new Binding
+                    {
+                        Source = this,
+                        Mode = BindingMode.OneWay,
+                        Path = new PropertyPath(this.IsDefaultCaseProperty),
+                    },
                 },
             };
         }
@@ -350,13 +448,27 @@ namespace System.Activities.Core.Presentation
 
     class FlowSwitchDefaultLink<T> : FlowSwitchLink<T>, IFlowSwitchDefaultLink
     {
-        static DependencyProperty defaultCaseDisplayNameProperty = DependencyProperty.Register(FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName, typeof(string), typeof(FlowSwitchDefaultLink<T>), new FrameworkPropertyMetadata(new PropertyChangedCallback(FlowSwitchDefaultLink<T>.OnDefaultCaseDisplayNamePropertyChanged)));
+        static DependencyProperty defaultCaseDisplayNameProperty = DependencyProperty.Register(
+            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName,
+            typeof(string),
+            typeof(FlowSwitchDefaultLink<T>),
+            new FrameworkPropertyMetadata(
+                new PropertyChangedCallback(
+                    FlowSwitchDefaultLink<T>.OnDefaultCaseDisplayNamePropertyChanged
+                )
+            )
+        );
 
         public FlowSwitchDefaultLink(ModelItem flowSwitchMI, T caseValue, bool isDefault)
             : base(flowSwitchMI, caseValue, isDefault)
         {
             this.internalChange = true;
-            this.DefaultCaseDisplayName = (string)this.flowSwitchModelItem.Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName].Value.GetCurrentValue();
+            this.DefaultCaseDisplayName = (string)
+                this
+                    .flowSwitchModelItem.Properties[
+                        FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                    ]
+                    .Value.GetCurrentValue();
             this.internalChange = false;
         }
 
@@ -366,18 +478,12 @@ namespace System.Activities.Core.Presentation
             {
                 return (string)GetValue(FlowSwitchDefaultLink<T>.defaultCaseDisplayNameProperty);
             }
-            set
-            {
-                SetValue(FlowSwitchDefaultLink<T>.defaultCaseDisplayNameProperty, value);
-            }
+            set { SetValue(FlowSwitchDefaultLink<T>.defaultCaseDisplayNameProperty, value); }
         }
 
         DependencyProperty DefaultCaseDisplayNameProperty
         {
-            get
-            {
-                return defaultCaseDisplayNameProperty;
-            }
+            get { return defaultCaseDisplayNameProperty; }
         }
 
         void OnDefaultCaseDisplayNamePropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -387,16 +493,26 @@ namespace System.Activities.Core.Presentation
             {
                 string newValue = (string)e.NewValue;
                 this.internalChange = true;
-                using (ModelEditingScope scope = this.flowSwitchModelItem.BeginEdit(SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc))
+                using (
+                    ModelEditingScope scope = this.flowSwitchModelItem.BeginEdit(
+                        SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc
+                    )
+                )
                 {
-                    this.flowSwitchModelItem.Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName].SetValue(newValue);
+                    this.flowSwitchModelItem.Properties[
+                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                        ]
+                        .SetValue(newValue);
                     scope.Complete();
                 }
                 this.internalChange = false;
             }
         }
 
-        static void OnDefaultCaseDisplayNamePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        static void OnDefaultCaseDisplayNamePropertyChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             FlowSwitchDefaultLink<T> link = (FlowSwitchDefaultLink<T>)dependencyObject;
             link.OnDefaultCaseDisplayNamePropertyChanged(e);
@@ -405,7 +521,14 @@ namespace System.Activities.Core.Presentation
         public override MultiBinding CreateConnectorLabelTextBinding()
         {
             MultiBinding result = base.CreateConnectorLabelTextBinding();
-            result.Bindings.Add(new Binding { Source = this, Mode = BindingMode.OneWay, Path = new PropertyPath(this.DefaultCaseDisplayNameProperty) });
+            result.Bindings.Add(
+                new Binding
+                {
+                    Source = this,
+                    Mode = BindingMode.OneWay,
+                    Path = new PropertyPath(this.DefaultCaseDisplayNameProperty),
+                }
+            );
             return result;
         }
     }
@@ -413,9 +536,7 @@ namespace System.Activities.Core.Presentation
     class FlowSwitchCaseLink<T> : FlowSwitchLink<T>
     {
         public FlowSwitchCaseLink(ModelItem flowSwitchMI, T caseValue, bool isDefault)
-            : base(flowSwitchMI, caseValue, isDefault)
-        {
-        }
+            : base(flowSwitchMI, caseValue, isDefault) { }
 
         [BrowsableAttribute(true)]
         public new T Case

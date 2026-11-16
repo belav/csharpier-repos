@@ -21,20 +21,25 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
     [ExportLanguageService(typeof(IDecompilationService), LanguageNames.CSharp), Shared]
     internal class CSharpDecompilationService : IDecompilationService
     {
-        private static readonly FileVersionInfo s_decompilerVersion = FileVersionInfo.GetVersionInfo(typeof(CSharpDecompiler).Assembly.Location);
+        private static readonly FileVersionInfo s_decompilerVersion =
+            FileVersionInfo.GetVersionInfo(typeof(CSharpDecompiler).Assembly.Location);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDecompilationService()
-        {
-        }
+        public CSharpDecompilationService() { }
 
         public FileVersionInfo GetDecompilerVersion()
         {
             return s_decompilerVersion;
         }
 
-        public Document? PerformDecompilation(Document document, string fullName, Compilation compilation, MetadataReference? metadataReference, string? assemblyLocation)
+        public Document? PerformDecompilation(
+            Document document,
+            string fullName,
+            Compilation compilation,
+            MetadataReference? metadataReference,
+            string? assemblyLocation
+        )
         {
             var logger = new StringBuilder();
             var resolver = new AssemblyResolver(compilation, logger);
@@ -72,7 +77,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
             text += logger.ToString();
             text += "#endif" + Environment.NewLine;
 
-            return document.WithText(SourceText.From(text, encoding: null, checksumAlgorithm: SourceHashAlgorithms.Default));
+            return document.WithText(
+                SourceText.From(
+                    text,
+                    encoding: null,
+                    checksumAlgorithm: SourceHashAlgorithms.Default
+                )
+            );
         }
     }
 }

@@ -17,7 +17,9 @@ namespace System.Net.NetworkInformation.Tests
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings(file, fileName);
 
-            string suffix = StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(File.ReadAllText(fileName));
+            string suffix = StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(
+                File.ReadAllText(fileName)
+            );
             Assert.Equal("fake.suffix.net", suffix);
         }
 
@@ -29,7 +31,9 @@ namespace System.Net.NetworkInformation.Tests
             string fileName = GetTestFilePath();
             FileUtil.NormalizeLineEndings(file, fileName);
 
-            List<IPAddress> dnsAddresses = StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(File.ReadAllText(fileName));
+            List<IPAddress> dnsAddresses = StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(
+                File.ReadAllText(fileName)
+            );
             Assert.Equal(1, dnsAddresses.Count);
             Assert.Equal(IPAddress.Parse("127.0.1.1"), dnsAddresses[0]);
         }

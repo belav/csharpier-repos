@@ -17,7 +17,8 @@ namespace System.Diagnostics
             InstanceId = instanceId;
         }
 
-        public EventInstance(long instanceId, int categoryId, EventLogEntryType entryType) : this(instanceId, categoryId)
+        public EventInstance(long instanceId, int categoryId, EventLogEntryType entryType)
+            : this(instanceId, categoryId)
         {
             EntryType = entryType;
         }
@@ -40,7 +41,11 @@ namespace System.Diagnostics
             set
             {
                 if (!Enum.IsDefined(typeof(EventLogEntryType), value))
-                    throw new InvalidEnumArgumentException(nameof(EntryType), (int)value, typeof(EventLogEntryType));
+                    throw new InvalidEnumArgumentException(
+                        nameof(EntryType),
+                        (int)value,
+                        typeof(EventLogEntryType)
+                    );
 
                 _entryType = value;
             }

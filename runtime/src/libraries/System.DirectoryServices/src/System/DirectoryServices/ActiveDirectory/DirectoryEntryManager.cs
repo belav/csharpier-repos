@@ -31,8 +31,10 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 for (int i = 0; i < Components.GetLength(0); i++)
                 {
-                    if ((Utils.Compare(Components[i].Name, dn.Components[i].Name) != 0)
-                        || (Utils.Compare(Components[i].Value, dn.Components[i].Value) != 0))
+                    if (
+                        (Utils.Compare(Components[i].Name, dn.Components[i].Name) != 0)
+                        || (Utils.Compare(Components[i].Value, dn.Components[i].Value) != 0)
+                    )
                     {
                         result = false;
                         break;
@@ -59,7 +61,10 @@ namespace System.DirectoryServices.ActiveDirectory
             int hashCode = 0;
             for (int i = 0; i < Components.GetLength(0); i++)
             {
-                hashCode = hashCode + Components[i].Name!.ToUpperInvariant().GetHashCode() + Components[i].Value!.ToUpperInvariant().GetHashCode();
+                hashCode =
+                    hashCode
+                    + Components[i].Name!.ToUpperInvariant().GetHashCode()
+                    + Components[i].Value!.ToUpperInvariant().GetHashCode();
             }
             return hashCode;
         }
@@ -108,8 +113,10 @@ namespace System.DirectoryServices.ActiveDirectory
             // check if it's not RootDSE
             object dn = distinguishedName;
 
-            if ((!string.Equals(distinguishedName, "rootdse", StringComparison.OrdinalIgnoreCase))
-            && (!string.Equals(distinguishedName, "schema", StringComparison.OrdinalIgnoreCase)))
+            if (
+                (!string.Equals(distinguishedName, "rootdse", StringComparison.OrdinalIgnoreCase))
+                && (!string.Equals(distinguishedName, "schema", StringComparison.OrdinalIgnoreCase))
+            )
             {
                 dn = new DistinguishedName(distinguishedName);
             }
@@ -159,7 +166,12 @@ namespace System.DirectoryServices.ActiveDirectory
             _pathCracker.Set(dn, NativeComInterfaces.ADS_SETTYPE_DN);
             string escapedDN = _pathCracker.Retrieve(NativeComInterfaces.ADS_FORMAT_X500_DN);
 
-            return Bind(_bindingPrefix + escapedDN, _context.UserName, _context.Password, _context.useServerBind());
+            return Bind(
+                _bindingPrefix + escapedDN,
+                _context.UserName,
+                _context.Password,
+                _context.useServerBind()
+            );
         }
 
         internal string ExpandWellKnownDN(WellKnownDN dn)
@@ -169,63 +181,93 @@ namespace System.DirectoryServices.ActiveDirectory
             switch (dn)
             {
                 case WellKnownDN.RootDSE:
-                    {
-                        distinguishedName = "RootDSE";
-                        break;
-                    }
+                {
+                    distinguishedName = "RootDSE";
+                    break;
+                }
                 case WellKnownDN.RootDomainNamingContext:
-                    {
-                        DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
+                {
+                    DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
 
-                        distinguishedName = (string)PropertyManager.GetPropertyValue(_context, rootDSE, PropertyManager.RootDomainNamingContext)!;
-                        break;
-                    }
+                    distinguishedName = (string)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            rootDSE,
+                            PropertyManager.RootDomainNamingContext
+                        )!;
+                    break;
+                }
                 case WellKnownDN.DefaultNamingContext:
-                    {
-                        DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
-                        distinguishedName = (string)PropertyManager.GetPropertyValue(_context, rootDSE, PropertyManager.DefaultNamingContext)!;
-                        break;
-                    }
+                {
+                    DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
+                    distinguishedName = (string)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            rootDSE,
+                            PropertyManager.DefaultNamingContext
+                        )!;
+                    break;
+                }
                 case WellKnownDN.SchemaNamingContext:
-                    {
-                        DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
-                        distinguishedName = (string)PropertyManager.GetPropertyValue(_context, rootDSE, PropertyManager.SchemaNamingContext)!;
-                        break;
-                    }
+                {
+                    DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
+                    distinguishedName = (string)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            rootDSE,
+                            PropertyManager.SchemaNamingContext
+                        )!;
+                    break;
+                }
                 case WellKnownDN.ConfigurationNamingContext:
-                    {
-                        DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
-                        distinguishedName = (string)PropertyManager.GetPropertyValue(_context, rootDSE, PropertyManager.ConfigurationNamingContext)!;
-                        break;
-                    }
+                {
+                    DirectoryEntry rootDSE = GetCachedDirectoryEntry("RootDSE");
+                    distinguishedName = (string)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            rootDSE,
+                            PropertyManager.ConfigurationNamingContext
+                        )!;
+                    break;
+                }
                 case WellKnownDN.PartitionsContainer:
-                    {
-                        distinguishedName = "CN=Partitions," + ExpandWellKnownDN(WellKnownDN.ConfigurationNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=Partitions,"
+                        + ExpandWellKnownDN(WellKnownDN.ConfigurationNamingContext);
+                    break;
+                }
                 case WellKnownDN.SitesContainer:
-                    {
-                        distinguishedName = "CN=Sites," + ExpandWellKnownDN(WellKnownDN.ConfigurationNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=Sites," + ExpandWellKnownDN(WellKnownDN.ConfigurationNamingContext);
+                    break;
+                }
                 case WellKnownDN.SystemContainer:
-                    {
-                        distinguishedName = "CN=System," + ExpandWellKnownDN(WellKnownDN.DefaultNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=System," + ExpandWellKnownDN(WellKnownDN.DefaultNamingContext);
+                    break;
+                }
                 case WellKnownDN.RidManager:
-                    {
-                        distinguishedName = "CN=RID Manager$," + ExpandWellKnownDN(WellKnownDN.SystemContainer);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=RID Manager$," + ExpandWellKnownDN(WellKnownDN.SystemContainer);
+                    break;
+                }
                 case WellKnownDN.Infrastructure:
-                    {
-                        distinguishedName = "CN=Infrastructure," + ExpandWellKnownDN(WellKnownDN.DefaultNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=Infrastructure," + ExpandWellKnownDN(WellKnownDN.DefaultNamingContext);
+                    break;
+                }
                 default:
                     // should not happen
-                    throw new InvalidEnumArgumentException(nameof(dn), (int)dn, typeof(WellKnownDN));
+                    throw new InvalidEnumArgumentException(
+                        nameof(dn),
+                        (int)dn,
+                        typeof(WellKnownDN)
+                    );
             }
             return distinguishedName;
         }
@@ -239,20 +281,34 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             string tempBindingPrefix = "LDAP://" + context.GetServerName() + "/";
 
-            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)new NativeComInterfaces.Pathname();
+            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)
+                new NativeComInterfaces.Pathname();
             pathCracker.EscapedMode = NativeComInterfaces.ADS_ESCAPEDMODE_ON;
             pathCracker.Set(dn, NativeComInterfaces.ADS_SETTYPE_DN);
             string escapedDN = pathCracker.Retrieve(NativeComInterfaces.ADS_FORMAT_X500_DN);
 
-            return Bind(tempBindingPrefix + escapedDN, context.UserName, context.Password, context.useServerBind());
+            return Bind(
+                tempBindingPrefix + escapedDN,
+                context.UserName,
+                context.Password,
+                context.useServerBind()
+            );
         }
 
-        internal static DirectoryEntry GetDirectoryEntryInternal(DirectoryContext context, string path)
+        internal static DirectoryEntry GetDirectoryEntryInternal(
+            DirectoryContext context,
+            string path
+        )
         {
             return Bind(path, context.UserName, context.Password, context.useServerBind());
         }
 
-        internal static DirectoryEntry Bind(string ldapPath, string? username, string? password, bool useServerBind)
+        internal static DirectoryEntry Bind(
+            string ldapPath,
+            string? username,
+            string? password,
+            bool useServerBind
+        )
         {
             DirectoryEntry? de = null;
             AuthenticationTypes authType = Utils.DefaultAuthType;
@@ -277,91 +333,124 @@ namespace System.DirectoryServices.ActiveDirectory
             switch (dn)
             {
                 case WellKnownDN.RootDSE:
-                    {
-                        distinguishedName = "RootDSE";
-                        break;
-                    }
+                {
+                    distinguishedName = "RootDSE";
+                    break;
+                }
                 case WellKnownDN.RootDomainNamingContext:
-                    {
-                        DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
+                {
+                    DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
 
-                        try
-                        {
-                            distinguishedName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.RootDomainNamingContext)!;
-                        }
-                        finally
-                        {
-                            rootDSE.Dispose();
-                        }
-                        break;
+                    try
+                    {
+                        distinguishedName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.RootDomainNamingContext
+                            )!;
                     }
+                    finally
+                    {
+                        rootDSE.Dispose();
+                    }
+                    break;
+                }
                 case WellKnownDN.DefaultNamingContext:
+                {
+                    DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
+                    try
                     {
-                        DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
-                        try
-                        {
-                            distinguishedName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.DefaultNamingContext)!;
-                        }
-                        finally
-                        {
-                            rootDSE.Dispose();
-                        }
-                        break;
+                        distinguishedName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.DefaultNamingContext
+                            )!;
                     }
+                    finally
+                    {
+                        rootDSE.Dispose();
+                    }
+                    break;
+                }
                 case WellKnownDN.SchemaNamingContext:
+                {
+                    DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
+                    try
                     {
-                        DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
-                        try
-                        {
-                            distinguishedName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.SchemaNamingContext)!;
-                        }
-                        finally
-                        {
-                            rootDSE.Dispose();
-                        }
-                        break;
+                        distinguishedName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.SchemaNamingContext
+                            )!;
                     }
+                    finally
+                    {
+                        rootDSE.Dispose();
+                    }
+                    break;
+                }
                 case WellKnownDN.ConfigurationNamingContext:
+                {
+                    DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
+                    try
                     {
-                        DirectoryEntry rootDSE = GetDirectoryEntry(context, "RootDSE");
-                        try
-                        {
-                            distinguishedName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.ConfigurationNamingContext)!;
-                        }
-                        finally
-                        {
-                            rootDSE.Dispose();
-                        }
-                        break;
+                        distinguishedName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.ConfigurationNamingContext
+                            )!;
                     }
+                    finally
+                    {
+                        rootDSE.Dispose();
+                    }
+                    break;
+                }
                 case WellKnownDN.PartitionsContainer:
-                    {
-                        distinguishedName = "CN=Partitions," + ExpandWellKnownDN(context, WellKnownDN.ConfigurationNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=Partitions,"
+                        + ExpandWellKnownDN(context, WellKnownDN.ConfigurationNamingContext);
+                    break;
+                }
                 case WellKnownDN.SitesContainer:
-                    {
-                        distinguishedName = "CN=Sites," + ExpandWellKnownDN(context, WellKnownDN.ConfigurationNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=Sites,"
+                        + ExpandWellKnownDN(context, WellKnownDN.ConfigurationNamingContext);
+                    break;
+                }
                 case WellKnownDN.SystemContainer:
-                    {
-                        distinguishedName = "CN=System," + ExpandWellKnownDN(context, WellKnownDN.DefaultNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=System," + ExpandWellKnownDN(context, WellKnownDN.DefaultNamingContext);
+                    break;
+                }
                 case WellKnownDN.RidManager:
-                    {
-                        distinguishedName = "CN=RID Manager$," + ExpandWellKnownDN(context, WellKnownDN.SystemContainer);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=RID Manager$,"
+                        + ExpandWellKnownDN(context, WellKnownDN.SystemContainer);
+                    break;
+                }
                 case WellKnownDN.Infrastructure:
-                    {
-                        distinguishedName = "CN=Infrastructure," + ExpandWellKnownDN(context, WellKnownDN.DefaultNamingContext);
-                        break;
-                    }
+                {
+                    distinguishedName =
+                        "CN=Infrastructure,"
+                        + ExpandWellKnownDN(context, WellKnownDN.DefaultNamingContext);
+                    break;
+                }
                 default:
                     // should not happen
-                    throw new InvalidEnumArgumentException(nameof(dn), (int)dn, typeof(WellKnownDN));
+                    throw new InvalidEnumArgumentException(
+                        nameof(dn),
+                        (int)dn,
+                        typeof(WellKnownDN)
+                    );
             }
             return distinguishedName;
         }

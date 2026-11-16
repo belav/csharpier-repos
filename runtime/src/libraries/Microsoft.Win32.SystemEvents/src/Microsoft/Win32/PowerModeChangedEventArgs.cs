@@ -25,10 +25,7 @@ namespace Microsoft.Win32
         /// </devdoc>
         public PowerModes Mode
         {
-            get
-            {
-                return _mode;
-            }
+            get { return _mode; }
         }
     }
 }

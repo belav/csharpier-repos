@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             ImmutableArray<IUnifiedSuggestedAction> actions,
             object? title,
             CodeActionPriority priority,
-            TextSpan? applicableToSpan)
+            TextSpan? applicableToSpan
+        )
         {
             OriginalSolution = originalSolution;
             CategoryName = categoryName;

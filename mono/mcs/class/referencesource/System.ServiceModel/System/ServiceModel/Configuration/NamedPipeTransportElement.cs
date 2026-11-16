@@ -9,9 +9,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class NamedPipeTransportElement : ConnectionOrientedTransportElement
     {
-        public NamedPipeTransportElement()
-        {
-        }
+        public NamedPipeTransportElement() { }
 
         public override Type BindingElementType
         {
@@ -21,7 +19,8 @@ namespace System.ServiceModel.Configuration
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
-            NamedPipeTransportBindingElement binding = (NamedPipeTransportBindingElement)bindingElement;
+            NamedPipeTransportBindingElement binding =
+                (NamedPipeTransportBindingElement)bindingElement;
 #pragma warning suppress 56506 //Microsoft; base.ApplyConfiguration above checks for bindingElement being null
             this.ConnectionPoolSettings.ApplyConfiguration(binding.ConnectionPoolSettings);
             this.PipeSettings.ApplyConfiguration(binding.PipeSettings);
@@ -31,7 +30,8 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
 #pragma warning suppress 56506 // Microsoft, base.CopyFrom() validates the argument
-            NamedPipeTransportBindingElement binding = (NamedPipeTransportBindingElement)bindingElement;
+            NamedPipeTransportBindingElement binding =
+                (NamedPipeTransportBindingElement)bindingElement;
             this.ConnectionPoolSettings.InitializeFrom(binding.ConnectionPoolSettings);
             this.PipeSettings.InitializeFrom(binding.PipeSettings);
         }
@@ -53,7 +53,11 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ConnectionPoolSettings)]
         public NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings
         {
-            get { return (NamedPipeConnectionPoolSettingsElement)base[ConfigurationStrings.ConnectionPoolSettings]; }
+            get
+            {
+                return (NamedPipeConnectionPoolSettingsElement)
+                    base[ConfigurationStrings.ConnectionPoolSettings];
+            }
             set { base[ConfigurationStrings.ConnectionPoolSettings] = value; }
         }
 
@@ -65,6 +69,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

@@ -4,87 +4,84 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Basic
 {
-	public class UnusedFieldsOfStructsAreKept
-	{
-		public static void Main ()
-		{
-			A a = new A ();
-			PreventCompilerOptimization (a);
-			R r = new R ();
-		}
+    public class UnusedFieldsOfStructsAreKept
+    {
+        public static void Main()
+        {
+            A a = new A();
+            PreventCompilerOptimization(a);
+            R r = new R();
+        }
 
-		[Kept]
-		static void PreventCompilerOptimization (A a)
-		{
-		}
+        [Kept]
+        static void PreventCompilerOptimization(A a) { }
 
-		[Kept]
-		struct A
-		{
-			[Kept]
-			private int UnusedField1;
-			[Kept]
-			private int UnusedField2;
+        [Kept]
+        struct A
+        {
+            [Kept]
+            private int UnusedField1;
 
-			public void UnusedMethod ()
-			{
-			}
-		}
+            [Kept]
+            private int UnusedField2;
 
-		[KeptAttributeAttribute (typeof (IsByRefLikeAttribute))]
-		[KeptAttributeAttribute (typeof (CompilerFeatureRequiredAttribute))]
-		[KeptAttributeAttribute (typeof (ObsoleteAttribute))]
-		ref struct R
-		{
-			[Kept]
-			public ref int UnusedRefField;
+            public void UnusedMethod() { }
+        }
 
-			[Kept]
-			public ref ReferencedType UnusedClass;
+        [KeptAttributeAttribute(typeof(IsByRefLikeAttribute))]
+        [KeptAttributeAttribute(typeof(CompilerFeatureRequiredAttribute))]
+        [KeptAttributeAttribute(typeof(ObsoleteAttribute))]
+        ref struct R
+        {
+            [Kept]
+            public ref int UnusedRefField;
 
-			[Kept]
-			public ref ReferencedStruct UnusedStruct;
+            [Kept]
+            public ref ReferencedType UnusedClass;
 
-			[Kept]
-			public ReferencedRefStruct UnusedRefStruct;
+            [Kept]
+            public ref ReferencedStruct UnusedStruct;
 
-			[Kept]
-			int UnusedField;
+            [Kept]
+            public ReferencedRefStruct UnusedRefStruct;
 
-			[Kept]
-			int UsedField;
-		}
+            [Kept]
+            int UnusedField;
 
-		[Kept]
-		struct ReferencedStruct
-		{
-			[Kept]
-			int UnusedField;
+            [Kept]
+            int UsedField;
+        }
 
-			[Kept]
-			int UnusedField2;
-		}
+        [Kept]
+        struct ReferencedStruct
+        {
+            [Kept]
+            int UnusedField;
 
-		[Kept]
-		[KeptAttributeAttribute (typeof (IsByRefLikeAttribute))]
-		[KeptAttributeAttribute (typeof (CompilerFeatureRequiredAttribute))]
-		[KeptAttributeAttribute (typeof (ObsoleteAttribute))]
-		ref struct ReferencedRefStruct
-		{
-			[Kept]
-			public ref int UnusedRefField;
+            [Kept]
+            int UnusedField2;
+        }
 
-			[Kept]
-			public ref ReferencedType UnusedClass;
+        [Kept]
+        [KeptAttributeAttribute(typeof(IsByRefLikeAttribute))]
+        [KeptAttributeAttribute(typeof(CompilerFeatureRequiredAttribute))]
+        [KeptAttributeAttribute(typeof(ObsoleteAttribute))]
+        ref struct ReferencedRefStruct
+        {
+            [Kept]
+            public ref int UnusedRefField;
 
-			[Kept]
-			int UnusedField;
-		}
+            [Kept]
+            public ref ReferencedType UnusedClass;
 
-		[Kept]
-		class ReferencedType
-		{
-			int field;
-		}
-	}
+            [Kept]
+            int UnusedField;
+        }
+
+        [Kept]
+        class ReferencedType
+        {
+            int field;
+        }
+    }
 }

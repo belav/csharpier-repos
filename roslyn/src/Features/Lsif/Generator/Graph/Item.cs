@@ -13,14 +13,26 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         public Id<LsifDocument> Shard { get; }
         public string? Property { get; }
 
-        public Item(Id<Vertex> outVertex, Id<Range> range, Id<LsifDocument> document, IdFactory idFactory, string? property = null)
+        public Item(
+            Id<Vertex> outVertex,
+            Id<Range> range,
+            Id<LsifDocument> document,
+            IdFactory idFactory,
+            string? property = null
+        )
             : base(label: "item", outVertex, [range.As<Range, Vertex>()], idFactory)
         {
             Shard = document;
             Property = property;
         }
 
-        public Item(Id<Vertex> outVertex, Id<Moniker> moniker, Id<LsifDocument> document, IdFactory idFactory, string? property = null)
+        public Item(
+            Id<Vertex> outVertex,
+            Id<Moniker> moniker,
+            Id<LsifDocument> document,
+            IdFactory idFactory,
+            string? property = null
+        )
             : base(label: "item", outVertex, [moniker.As<Moniker, Vertex>()], idFactory)
         {
             Shard = document;

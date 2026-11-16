@@ -7,6 +7,6 @@ namespace System.ComponentModel
     {
         Always,
         Never,
-        Advanced
+        Advanced,
     }
 }

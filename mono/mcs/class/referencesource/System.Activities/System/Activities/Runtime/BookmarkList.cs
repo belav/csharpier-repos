@@ -5,19 +5,17 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     class BookmarkList : HybridCollection<Bookmark>
     {
         public BookmarkList()
-            : base()
-        {
-        }
+            : base() { }
 
         internal bool Contains(Bookmark bookmark)
         {
@@ -47,8 +45,5 @@ namespace System.Activities.Runtime
             singleItem = base.SingleItem;
             multipleItems = base.MultipleItems;
         }
-
     }
-
 }
-

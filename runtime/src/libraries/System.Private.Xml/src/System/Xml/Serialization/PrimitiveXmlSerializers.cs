@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Serialization
 {
-    internal sealed class XmlSerializationPrimitiveWriter : System.Xml.Serialization.XmlSerializationWriter
+    internal sealed class XmlSerializationPrimitiveWriter
+        : System.Xml.Serialization.XmlSerializationWriter
     {
         internal void Write_string(object? o)
         {
@@ -83,7 +84,11 @@ namespace System.Xml.Serialization
                 WriteEmptyTag(@"double", @"");
                 return;
             }
-            WriteElementStringRaw(@"double", @"", System.Xml.XmlConvert.ToString((double)((double)o)));
+            WriteElementStringRaw(
+                @"double",
+                @"",
+                System.Xml.XmlConvert.ToString((double)((double)o))
+            );
         }
 
         internal void Write_decimal(object? o)
@@ -130,7 +135,11 @@ namespace System.Xml.Serialization
                 WriteEmptyTag(@"unsignedByte", @"");
                 return;
             }
-            WriteElementStringRaw(@"unsignedByte", @"", System.Xml.XmlConvert.ToString((byte)((byte)o)));
+            WriteElementStringRaw(
+                @"unsignedByte",
+                @"",
+                System.Xml.XmlConvert.ToString((byte)((byte)o))
+            );
         }
 
         internal void Write_byte(object? o)
@@ -152,7 +161,11 @@ namespace System.Xml.Serialization
                 WriteEmptyTag(@"unsignedShort", @"");
                 return;
             }
-            WriteElementStringRaw(@"unsignedShort", @"", System.Xml.XmlConvert.ToString((ushort)((ushort)o)));
+            WriteElementStringRaw(
+                @"unsignedShort",
+                @"",
+                System.Xml.XmlConvert.ToString((ushort)((ushort)o))
+            );
         }
 
         internal void Write_unsignedInt(object? o)
@@ -163,7 +176,11 @@ namespace System.Xml.Serialization
                 WriteEmptyTag(@"unsignedInt", @"");
                 return;
             }
-            WriteElementStringRaw(@"unsignedInt", @"", System.Xml.XmlConvert.ToString((uint)((uint)o)));
+            WriteElementStringRaw(
+                @"unsignedInt",
+                @"",
+                System.Xml.XmlConvert.ToString((uint)((uint)o))
+            );
         }
 
         internal void Write_unsignedLong(object? o)
@@ -174,7 +191,11 @@ namespace System.Xml.Serialization
                 WriteEmptyTag(@"unsignedLong", @"");
                 return;
             }
-            WriteElementStringRaw(@"unsignedLong", @"", System.Xml.XmlConvert.ToString((ulong)((ulong)o)));
+            WriteElementStringRaw(
+                @"unsignedLong",
+                @"",
+                System.Xml.XmlConvert.ToString((ulong)((ulong)o))
+            );
         }
 
         internal void Write_base64Binary(object? o)
@@ -234,16 +255,19 @@ namespace System.Xml.Serialization
                 return;
             }
             TopLevelElement();
-            WriteNullableQualifiedNameLiteral(@"QName", @"", ((global::System.Xml.XmlQualifiedName)o));
+            WriteNullableQualifiedNameLiteral(
+                @"QName",
+                @"",
+                ((global::System.Xml.XmlQualifiedName)o)
+            );
         }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        protected override void InitCallbacks()
-        {
-        }
+        protected override void InitCallbacks() { }
     }
 
-    internal sealed class XmlSerializationPrimitiveReader : System.Xml.Serialization.XmlSerializationReader
+    internal sealed class XmlSerializationPrimitiveReader
+        : System.Xml.Serialization.XmlSerializationReader
     {
         internal object? Read_string()
         {
@@ -251,7 +275,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id1_string && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id1_string
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     if (ReadNull())
                     {
@@ -280,7 +309,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id3_int && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id3_int
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToInt32(Reader.ReadElementString());
@@ -304,7 +338,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id4_boolean && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id4_boolean
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToBoolean(Reader.ReadElementString());
@@ -328,7 +367,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id5_short && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id5_short
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToInt16(Reader.ReadElementString());
@@ -352,7 +396,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id6_long && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id6_long
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToInt64(Reader.ReadElementString());
@@ -376,7 +425,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id7_float && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id7_float
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToSingle(Reader.ReadElementString());
@@ -400,7 +454,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id8_double && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id8_double
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToDouble(Reader.ReadElementString());
@@ -424,7 +483,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id9_decimal && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id9_decimal
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToDecimal(Reader.ReadElementString());
@@ -448,7 +512,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id10_dateTime && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id10_dateTime
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = ToDateTime(Reader.ReadElementString());
@@ -472,7 +541,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id20_dateTimeOffset && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id20_dateTimeOffset
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     if (Reader.IsEmptyElement)
                     {
@@ -502,7 +576,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id11_unsignedByte && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id11_unsignedByte
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToByte(Reader.ReadElementString());
@@ -526,7 +605,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id12_byte && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id12_byte
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToSByte(Reader.ReadElementString());
@@ -550,7 +634,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id13_unsignedShort && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id13_unsignedShort
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToUInt16(Reader.ReadElementString());
@@ -574,7 +663,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id14_unsignedInt && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id14_unsignedInt
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToUInt32(Reader.ReadElementString());
@@ -598,7 +692,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id15_unsignedLong && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id15_unsignedLong
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToUInt64(Reader.ReadElementString());
@@ -622,7 +721,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id16_base64Binary && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id16_base64Binary
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     if (ReadNull())
                     {
@@ -651,7 +755,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id17_guid && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id17_guid
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = System.Xml.XmlConvert.ToGuid(Reader.ReadElementString());
@@ -675,7 +784,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id19_TimeSpan && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id19_TimeSpan
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     if (Reader.IsEmptyElement)
                     {
@@ -705,7 +819,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id18_char && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id18_char
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     {
                         o = ToChar(Reader.ReadElementString());
@@ -729,7 +848,12 @@ namespace System.Xml.Serialization
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (((object)Reader.LocalName == (object)_id1_QName && (object)Reader.NamespaceURI == (object)_id2_Item))
+                if (
+                    (
+                        (object)Reader.LocalName == (object)_id1_QName
+                        && (object)Reader.NamespaceURI == (object)_id2_Item
+                    )
+                )
                 {
                     if (ReadNull())
                     {
@@ -753,9 +877,7 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        protected override void InitCallbacks()
-        {
-        }
+        protected override void InitCallbacks() { }
 
         private string _id4_boolean = null!;
         private string _id14_unsignedInt = null!;

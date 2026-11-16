@@ -9,7 +9,6 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation.View.OutlineView;
     using System.Activities.Statements;
     using System.ComponentModel;
-    
 
     /// <summary>
     /// Interaction logic for PickBranchDesigner.xaml

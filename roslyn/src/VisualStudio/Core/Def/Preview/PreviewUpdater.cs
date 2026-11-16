@@ -41,9 +41,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             // Picking a different span: no text change; update span anyway.
             _tagger.Span = spanSource.GetSpan();
-            var spanInBuffer = new SnapshotSpan(_textView.TextBuffer.CurrentSnapshot, new Span(_tagger.Span.Start, 0));
+            var spanInBuffer = new SnapshotSpan(
+                _textView.TextBuffer.CurrentSnapshot,
+                new Span(_tagger.Span.Start, 0)
+            );
             _textView.ViewScroller.EnsureSpanVisible(spanInBuffer, EnsureSpanVisibleOptions.None);
-
         }
 
         private void UpdateBuffer(TextDocument document)
@@ -55,9 +57,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             if (document.Id == _currentDocumentId)
             {
-                Contract.ThrowIfNull(_previewWorkspace, "We shouldn't have a current document if we don't have a workspace.");
-                var existingDocument = _previewWorkspace.CurrentSolution.GetRequiredTextDocument(_currentDocumentId);
-                if (existingDocument.GetTextSynchronously(CancellationToken.None).ContentEquals(document.GetTextSynchronously(CancellationToken.None)))
+                Contract.ThrowIfNull(
+                    _previewWorkspace,
+                    "We shouldn't have a current document if we don't have a workspace."
+                );
+                var existingDocument = _previewWorkspace.CurrentSolution.GetRequiredTextDocument(
+                    _currentDocumentId
+                );
+                if (
+                    existingDocument
+                        .GetTextSynchronously(CancellationToken.None)
+                        .ContentEquals(document.GetTextSynchronously(CancellationToken.None))
+                )
                 {
                     // The contents of the buffer matches what we'd update it to, so no reason to change.
                     return;
@@ -66,9 +77,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             if (_currentDocumentId != null)
             {
-                Contract.ThrowIfNull(_previewWorkspace, "We shouldn't have a current document if we don't have a workspace.");
-                var currentDocument = _previewWorkspace.CurrentSolution.GetRequiredTextDocument(_currentDocumentId);
-                var currentDocumentText = currentDocument.GetTextSynchronously(CancellationToken.None);
+                Contract.ThrowIfNull(
+                    _previewWorkspace,
+                    "We shouldn't have a current document if we don't have a workspace."
+                );
+                var currentDocument = _previewWorkspace.CurrentSolution.GetRequiredTextDocument(
+                    _currentDocumentId
+                );
+                var currentDocumentText = currentDocument.GetTextSynchronously(
+                    CancellationToken.None
+                );
                 _previewWorkspace.CloseDocument(currentDocument, currentDocumentText);
             }
 
@@ -81,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         private void ApplyDocumentToBuffer(TextDocument document, out SourceTextContainer container)
         {
-            var contentTypeService = document.Project.Services.GetRequiredService<IContentTypeLanguageService>();
+            var contentTypeService =
+                document.Project.Services.GetRequiredService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
 
             _textView.TextBuffer.ChangeContentType(contentType, null);
@@ -90,7 +109,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             using (var edit = _textView.TextBuffer.CreateEdit())
             {
-                edit.Replace(new Span(0, _textView.TextBuffer.CurrentSnapshot.Length), documentText);
+                edit.Replace(
+                    new Span(0, _textView.TextBuffer.CurrentSnapshot.Length),
+                    documentText
+                );
                 edit.ApplyAndLogExceptions();
             }
 

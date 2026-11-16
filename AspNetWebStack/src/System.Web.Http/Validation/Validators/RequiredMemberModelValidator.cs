@@ -13,16 +13,17 @@ namespace System.Web.Http.Validation.Validators
     public class RequiredMemberModelValidator : ModelValidator
     {
         public RequiredMemberModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-            : base(validatorProviders)
-        {
-        }
+            : base(validatorProviders) { }
 
         public override bool IsRequired
         {
             get { return true; }
         }
 
-        public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
+        public override IEnumerable<ModelValidationResult> Validate(
+            ModelMetadata metadata,
+            object container
+        )
         {
             return Enumerable.Empty<ModelValidationResult>();
         }

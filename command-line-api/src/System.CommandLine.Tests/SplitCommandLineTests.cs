@@ -50,7 +50,8 @@ namespace System.CommandLine.Tests
         [InlineData("/", ':')]
         public void It_does_not_split_double_quote_delimited_values_when_a_non_whitespace_argument_delimiter_is_used(
             string prefix,
-            char delimiter)
+            char delimiter
+        )
         {
             var optionAndArgument = $@"{prefix}the-option{delimiter}""c:\temp files\""";
 
@@ -79,8 +80,9 @@ namespace System.CommandLine.Tests
                 _output.WriteLine("         " + token);
             }
 
-            tokenized.Should()
-                     .BeEquivalentSequenceTo("move", "--from", source, "--to", destination);
+            tokenized
+                .Should()
+                .BeEquivalentSequenceTo("move", "--from", source, "--to", destination);
         }
     }
 }

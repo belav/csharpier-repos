@@ -46,7 +46,11 @@ namespace System.Net.Http
         /// <param name="failedProxyCache">The cache of failed proxy requests to employ.</param>
         /// <param name="proxyConfig">The WinHTTP proxy config to parse.</param>
         /// <param name="secure">If true, return proxies suitable for use with a secure connection. If false, return proxies suitable for an insecure connection.</param>
-        public static MultiProxy Parse(FailedProxyCache failedProxyCache, string? proxyConfig, bool secure)
+        public static MultiProxy Parse(
+            FailedProxyCache failedProxyCache,
+            string? proxyConfig,
+            bool secure
+        )
         {
             Debug.Assert(failedProxyCache != null);
 
@@ -75,13 +79,17 @@ namespace System.Net.Http
         /// <param name="failedProxyCache">The cache of failed proxy requests to employ.</param>
         /// <param name="proxyConfig">The WinHTTP proxy config to parse.</param>
         /// <param name="secure">If true, return proxies suitable for use with a secure connection. If false, return proxies suitable for an insecure connection.</param>
-        public static MultiProxy CreateLazy(FailedProxyCache failedProxyCache, string proxyConfig, bool secure)
+        public static MultiProxy CreateLazy(
+            FailedProxyCache failedProxyCache,
+            string proxyConfig,
+            bool secure
+        )
         {
             Debug.Assert(failedProxyCache != null);
 
-            return string.IsNullOrEmpty(proxyConfig) == false ?
-                new MultiProxy(failedProxyCache, proxyConfig, secure) :
-                MultiProxy.Empty;
+            return string.IsNullOrEmpty(proxyConfig) == false
+                ? new MultiProxy(failedProxyCache, proxyConfig, secure)
+                : MultiProxy.Empty;
         }
 
         /// <summary>
@@ -127,8 +135,7 @@ namespace System.Net.Http
                     oldestFailedProxyUri = uri;
                     oldestFailedProxyTicks = renewTicks;
                 }
-            }
-            while (ReadNextHelper(out uri, out isFinalProxy));
+            } while (ReadNextHelper(out uri, out isFinalProxy));
 
             // All the proxies in the config have failed; in this case, return the proxy that is closest to renewal.
             if (_currentUri == null)
@@ -152,7 +159,10 @@ namespace System.Net.Http
         /// </summary>
         private bool ReadNextHelper([NotNullWhen(true)] out Uri? uri, out bool isFinalProxy)
         {
-            Debug.Assert(_uris != null || _proxyConfig != null, $"{nameof(ReadNext)} must not be called on a default-initialized {nameof(MultiProxy)}.");
+            Debug.Assert(
+                _uris != null || _proxyConfig != null,
+                $"{nameof(ReadNext)} must not be called on a default-initialized {nameof(MultiProxy)}."
+            );
 
             if (_uris != null)
             {
@@ -171,7 +181,12 @@ namespace System.Net.Http
             Debug.Assert(_proxyConfig != null);
             if (_currentIndex < _proxyConfig.Length)
             {
-                bool hasProxy = TryParseProxyConfigPart(_proxyConfig.AsSpan(_currentIndex), _secure, out uri!, out int charactersConsumed);
+                bool hasProxy = TryParseProxyConfigPart(
+                    _proxyConfig.AsSpan(_currentIndex),
+                    _secure,
+                    out uri!,
+                    out int charactersConsumed
+                );
 
                 _currentIndex += charactersConsumed;
                 Debug.Assert(_currentIndex <= _proxyConfig.Length);
@@ -193,7 +208,12 @@ namespace System.Net.Http
         /// The strings are a semicolon or whitespace separated list, with each entry in the following format:
         /// ([&lt;scheme&gt;=][&lt;scheme&gt;"://"]&lt;server&gt;[":"&lt;port&gt;])
         /// </remarks>
-        private static bool TryParseProxyConfigPart(ReadOnlySpan<char> proxyString, bool secure, [NotNullWhen(true)] out Uri? uri, out int charactersConsumed)
+        private static bool TryParseProxyConfigPart(
+            ReadOnlySpan<char> proxyString,
+            bool secure,
+            [NotNullWhen(true)] out Uri? uri,
+            out int charactersConsumed
+        )
         {
             const int SECURE_FLAG = 1;
             const int INSECURE_FLAG = 2;
@@ -252,7 +272,14 @@ namespace System.Net.Http
                 }
 
                 // Return URI if it's a match to what we want.
-                if ((proxyType & wantedFlag) != 0 && Uri.TryCreate(string.Concat("http://", proxyString.Slice(0, iter)), UriKind.Absolute, out uri))
+                if (
+                    (proxyType & wantedFlag) != 0
+                    && Uri.TryCreate(
+                        string.Concat("http://", proxyString.Slice(0, iter)),
+                        UriKind.Absolute,
+                        out uri
+                    )
+                )
                 {
                     charactersConsumed = originalLength - proxyString.Length + iter;
                     Debug.Assert(charactersConsumed > 0);

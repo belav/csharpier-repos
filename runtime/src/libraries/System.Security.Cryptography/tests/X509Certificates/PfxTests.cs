@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.XUnitExtensions;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using Test.Cryptography;
 using Microsoft.DotNet.RemoteExecutor;
+using Microsoft.DotNet.XUnitExtensions;
+using Test.Cryptography;
 using Xunit;
-using System.Linq;
 
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
@@ -22,7 +22,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         // We don't know for sure this is a correct Windows version when this support was added but
         // we know for a fact lower versions don't support it.
-        public static bool Pkcs12PBES2Supported => !PlatformDetection.IsWindows || PlatformDetection.IsWindows10Version1703OrGreater;
+        public static bool Pkcs12PBES2Supported =>
+            !PlatformDetection.IsWindows || PlatformDetection.IsWindows10Version1703OrGreater;
 
         public static IEnumerable<object[]> BrainpoolCurvesPfx
         {
@@ -37,9 +38,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void TestConstructor(X509KeyStorageFlags keyStorageFlags)
         {
-            using (var c = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                var c = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             {
-                byte[] expectedThumbprint = "71cb4e2b02738ad44f8b382c93bd17ba665f9914".HexToByteArray();
+                byte[] expectedThumbprint =
+                    "71cb4e2b02738ad44f8b382c93bd17ba665f9914".HexToByteArray();
 
                 string subject = c.Subject;
                 Assert.Equal("CN=MyName", subject);
@@ -55,7 +63,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (SecureString password = TestData.CreatePfxDataPasswordSecureString())
             using (var c = new X509Certificate2(TestData.PfxData, password, keyStorageFlags))
             {
-                byte[] expectedThumbprint = "71cb4e2b02738ad44f8b382c93bd17ba665f9914".HexToByteArray();
+                byte[] expectedThumbprint =
+                    "71cb4e2b02738ad44f8b382c93bd17ba665f9914".HexToByteArray();
 
                 string subject = c.Subject;
                 Assert.Equal("CN=MyName", subject);
@@ -68,7 +77,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void EnsurePrivateKeyPreferred(X509KeyStorageFlags keyStorageFlags)
         {
-            using (var cert = new X509Certificate2(TestData.ChainPfxBytes, TestData.ChainPfxPassword, keyStorageFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.ChainPfxBytes,
+                    TestData.ChainPfxPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 // While checking cert.HasPrivateKey first is most matching of the test description, asserting
                 // on the certificate's simple name will provide a more diagnosable failure.
@@ -82,29 +97,36 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void TestRawData(X509KeyStorageFlags keyStorageFlags)
         {
             byte[] expectedRawData = (
-                "308201e530820152a0030201020210d5b5bc1c458a558845" +
-                "bff51cb4dff31c300906052b0e03021d05003011310f300d" +
-                "060355040313064d794e616d65301e170d31303034303130" +
-                "38303030305a170d3131303430313038303030305a301131" +
-                "0f300d060355040313064d794e616d6530819f300d06092a" +
-                "864886f70d010101050003818d0030818902818100b11e30" +
-                "ea87424a371e30227e933ce6be0e65ff1c189d0d888ec8ff" +
-                "13aa7b42b68056128322b21f2b6976609b62b6bc4cf2e55f" +
-                "f5ae64e9b68c78a3c2dacc916a1bc7322dd353b32898675c" +
-                "fb5b298b176d978b1f12313e3d865bc53465a11cca106870" +
-                "a4b5d50a2c410938240e92b64902baea23eb093d9599e9e3" +
-                "72e48336730203010001a346304430420603551d01043b30" +
-                "39801024859ebf125e76af3f0d7979b4ac7a96a113301131" +
-                "0f300d060355040313064d794e616d658210d5b5bc1c458a" +
-                "558845bff51cb4dff31c300906052b0e03021d0500038181" +
-                "009bf6e2cf830ed485b86d6b9e8dffdcd65efc7ec145cb93" +
-                "48923710666791fcfa3ab59d689ffd7234b7872611c5c23e" +
-                "5e0714531abadb5de492d2c736e1c929e648a65cc9eb63cd" +
-                "84e57b5909dd5ddf5dbbba4a6498b9ca225b6e368b94913b" +
-                "fc24de6b2bd9a26b192b957304b89531e902ffc91b54b237" +
-                "bb228be8afcda26476").HexToByteArray();
+                "308201e530820152a0030201020210d5b5bc1c458a558845"
+                + "bff51cb4dff31c300906052b0e03021d05003011310f300d"
+                + "060355040313064d794e616d65301e170d31303034303130"
+                + "38303030305a170d3131303430313038303030305a301131"
+                + "0f300d060355040313064d794e616d6530819f300d06092a"
+                + "864886f70d010101050003818d0030818902818100b11e30"
+                + "ea87424a371e30227e933ce6be0e65ff1c189d0d888ec8ff"
+                + "13aa7b42b68056128322b21f2b6976609b62b6bc4cf2e55f"
+                + "f5ae64e9b68c78a3c2dacc916a1bc7322dd353b32898675c"
+                + "fb5b298b176d978b1f12313e3d865bc53465a11cca106870"
+                + "a4b5d50a2c410938240e92b64902baea23eb093d9599e9e3"
+                + "72e48336730203010001a346304430420603551d01043b30"
+                + "39801024859ebf125e76af3f0d7979b4ac7a96a113301131"
+                + "0f300d060355040313064d794e616d658210d5b5bc1c458a"
+                + "558845bff51cb4dff31c300906052b0e03021d0500038181"
+                + "009bf6e2cf830ed485b86d6b9e8dffdcd65efc7ec145cb93"
+                + "48923710666791fcfa3ab59d689ffd7234b7872611c5c23e"
+                + "5e0714531abadb5de492d2c736e1c929e648a65cc9eb63cd"
+                + "84e57b5909dd5ddf5dbbba4a6498b9ca225b6e368b94913b"
+                + "fc24de6b2bd9a26b192b957304b89531e902ffc91b54b237"
+                + "bb228be8afcda26476"
+            ).HexToByteArray();
 
-            using (var c = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                var c = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 byte[] rawData = c.RawData;
                 Assert.Equal(expectedRawData, rawData);
@@ -115,7 +137,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void TestPrivateKey(X509KeyStorageFlags keyStorageFlags)
         {
-            using (var c = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                var c = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 bool hasPrivateKey = c.HasPrivateKey;
                 Assert.True(hasPrivateKey);
@@ -130,7 +158,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void TestPrivateKeyProperty()
         {
-            using (var c = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                var c = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 bool hasPrivateKey = c.HasPrivateKey;
                 Assert.True(hasPrivateKey);
@@ -156,10 +190,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+            "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS"
+        )]
         public static void ExportWithPrivateKey(X509KeyStorageFlags keyStorageFlags)
         {
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable | keyStorageFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable | keyStorageFlags
+                )
+            )
             {
                 const string password = "Placeholder";
 
@@ -178,7 +221,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ReadECDsaPrivateKey_WindowsPfx(X509KeyStorageFlags keyStorageFlags)
         {
             // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
-            using (var cert = new X509Certificate2(TestData.ECDsaP256_DigitalSignature_Pfx_Windows, "Test", keyStorageFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.ECDsaP256_DigitalSignature_Pfx_Windows,
+                    "Test",
+                    keyStorageFlags
+                )
+            )
             {
                 using (ECDsa ecdsa = cert.GetECDsaPrivateKey())
                 {
@@ -191,7 +240,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ECDsaPrivateKeyProperty_WindowsPfx()
         {
             // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
-            using (var cert = new X509Certificate2(TestData.ECDsaP256_DigitalSignature_Pfx_Windows, "Test", Cert.EphemeralIfPossible))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.ECDsaP256_DigitalSignature_Pfx_Windows,
+                    "Test",
+                    Cert.EphemeralIfPossible
+                )
+            )
             using (var pubOnly = new X509Certificate2(cert.RawData))
             {
                 Assert.True(cert.HasPrivateKey, "cert.HasPrivateKey");
@@ -216,7 +271,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ReadECDHPrivateKey_WindowsPfx(X509KeyStorageFlags keyStorageFlags)
         {
             // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
-            using (var cert = new X509Certificate2(TestData.EcDhP256_KeyAgree_Pfx_Windows, "test", keyStorageFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.EcDhP256_KeyAgree_Pfx_Windows,
+                    "test",
+                    keyStorageFlags
+                )
+            )
             {
                 using (ECDiffieHellman ecdh = cert.GetECDiffieHellmanPrivateKey())
                 {
@@ -229,7 +290,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ECDHPrivateKeyProperty_WindowsPfx()
         {
             // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
-            using (var cert = new X509Certificate2(TestData.EcDhP256_KeyAgree_Pfx_Windows, "test", Cert.EphemeralIfPossible))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.EcDhP256_KeyAgree_Pfx_Windows,
+                    "test",
+                    Cert.EphemeralIfPossible
+                )
+            )
             using (var pubOnly = new X509Certificate2(cert.RawData))
             {
                 Assert.True(cert.HasPrivateKey, "cert.HasPrivateKey");
@@ -254,7 +321,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [SkipOnPlatform(PlatformSupport.MobileAppleCrypto, "DSA is not available")]
         public static void DsaPrivateKeyProperty()
         {
-            using (var cert = new X509Certificate2(TestData.Dsa1024Pfx, TestData.Dsa1024PfxPassword, Cert.EphemeralIfPossible))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.Dsa1024Pfx,
+                    TestData.Dsa1024PfxPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 AsymmetricAlgorithm alg = cert.PrivateKey;
                 Assert.NotNull(alg);
@@ -265,11 +338,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 byte[] data = { 1, 2, 3, 4, 5 };
                 byte[] sig = dsa.SignData(data, HashAlgorithmName.SHA1);
 
-                Assert.True(dsa.VerifyData(data, sig, HashAlgorithmName.SHA1), "Key verifies signature");
+                Assert.True(
+                    dsa.VerifyData(data, sig, HashAlgorithmName.SHA1),
+                    "Key verifies signature"
+                );
 
                 data[0] ^= 0xFF;
 
-                Assert.False(dsa.VerifyData(data, sig, HashAlgorithmName.SHA1), "Key verifies tampered data signature");
+                Assert.False(
+                    dsa.VerifyData(data, sig, HashAlgorithmName.SHA1),
+                    "Key verifies tampered data signature"
+                );
             }
         }
 
@@ -314,7 +393,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             catch (CryptographicException)
             {
                 // Windows 7, Windows 8, CentOS, macOS can fail. Verify known good platforms don't fail.
-                Assert.False(PlatformDetection.IsWindows && PlatformDetection.WindowsVersion >= 10, "Is Windows 10");
+                Assert.False(
+                    PlatformDetection.IsWindows && PlatformDetection.WindowsVersion >= 10,
+                    "Is Windows 10"
+                );
                 Assert.False(PlatformDetection.IsUbuntu, "Is Ubuntu");
             }
         }
@@ -324,7 +406,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ReadECDsaPrivateKey_OpenSslPfx(X509KeyStorageFlags keyStorageFlags)
         {
             // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
-            using (var cert = new X509Certificate2(TestData.ECDsaP256_DigitalSignature_Pfx_OpenSsl, "Test", keyStorageFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.ECDsaP256_DigitalSignature_Pfx_OpenSsl,
+                    "Test",
+                    keyStorageFlags
+                )
+            )
             using (ECDsa ecdsa = cert.GetECDsaPrivateKey())
             {
                 Assert.NotNull(ecdsa);
@@ -353,29 +441,49 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             byte[] data = { 1, 2, 3, 4, 5 };
 
-            using (var cert = new X509Certificate2(TestData.Dsa1024Pfx, TestData.Dsa1024PfxPassword, Cert.EphemeralIfPossible))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.Dsa1024Pfx,
+                    TestData.Dsa1024PfxPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             using (DSA privKey = cert.GetDSAPrivateKey())
             using (DSA pubKey = cert.GetDSAPublicKey())
             {
                 // Stick to FIPS 186-2 (DSS-SHA1)
                 byte[] signature = privKey.SignData(data, HashAlgorithmName.SHA1);
 
-                Assert.True(pubKey.VerifyData(data, signature, HashAlgorithmName.SHA1), "pubKey verifies signed data");
+                Assert.True(
+                    pubKey.VerifyData(data, signature, HashAlgorithmName.SHA1),
+                    "pubKey verifies signed data"
+                );
 
                 data[0] ^= 0xFF;
-                Assert.False(pubKey.VerifyData(data, signature, HashAlgorithmName.SHA1), "pubKey verifies tampered data");
+                Assert.False(
+                    pubKey.VerifyData(data, signature, HashAlgorithmName.SHA1),
+                    "pubKey verifies tampered data"
+                );
 
                 // And verify that the public key isn't accidentally a private key.
-                Assert.ThrowsAny<CryptographicException>(() => pubKey.SignData(data, HashAlgorithmName.SHA1));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    pubKey.SignData(data, HashAlgorithmName.SHA1)
+                );
             }
         }
 
 #if !NO_EPHEMERALKEYSET_AVAILABLE
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public static void EphemeralImport_HasNoKeyName()
         {
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.EphemeralKeySet))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.EphemeralKeySet
+                )
+            )
             using (RSA rsa = cert.GetRSAPrivateKey())
             {
                 Assert.NotNull(rsa);
@@ -394,10 +502,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public static void CollectionEphemeralImport_HasNoKeyName()
         {
-            using (var importedCollection = Cert.Import(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.EphemeralKeySet))
+            using (
+                var importedCollection = Cert.Import(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.EphemeralKeySet
+                )
+            )
             {
                 X509Certificate2 cert = importedCollection.Collection[0];
 
@@ -420,10 +534,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public static void PerphemeralImport_HasKeyName()
         {
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.DefaultKeySet))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            )
             using (RSA rsa = cert.GetRSAPrivateKey())
             {
                 Assert.NotNull(rsa);
@@ -443,10 +563,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 #endif
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public static void CollectionPerphemeralImport_HasKeyName()
         {
-            using (var importedCollection = Cert.Import(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.DefaultKeySet))
+            using (
+                var importedCollection = Cert.Import(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            )
             {
                 X509Certificate2 cert = importedCollection.Collection[0];
 
@@ -469,22 +595,40 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [ConditionalTheory]
-        [MemberData(memberName: nameof(PfxIterationCountTests.GetCertsWith_IterationCountNotExceedingDefaultLimit_AndNullOrEmptyPassword_MemberData), MemberType = typeof(PfxIterationCountTests))]
-        public static void TestIterationCounter(string name, bool usesPbes2, byte[] blob, int iterationCount, bool usesRC2)
+        [MemberData(
+            memberName: nameof(
+                PfxIterationCountTests.GetCertsWith_IterationCountNotExceedingDefaultLimit_AndNullOrEmptyPassword_MemberData
+            ),
+            MemberType = typeof(PfxIterationCountTests)
+        )]
+        public static void TestIterationCounter(
+            string name,
+            bool usesPbes2,
+            byte[] blob,
+            int iterationCount,
+            bool usesRC2
+        )
         {
             _ = iterationCount;
 
-            MethodInfo method = typeof(X509Certificate).GetMethod("GetIterationCount", BindingFlags.Static | BindingFlags.NonPublic);
+            MethodInfo method = typeof(X509Certificate).GetMethod(
+                "GetIterationCount",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             GetIterationCountDelegate target = method.CreateDelegate<GetIterationCountDelegate>();
 
             if (usesPbes2 && !Pkcs12PBES2Supported)
             {
-                throw new SkipTestException(name + " uses PBES2, which is not supported on this version.");
+                throw new SkipTestException(
+                    name + " uses PBES2, which is not supported on this version."
+                );
             }
 
             if (usesRC2 && !PlatformSupport.IsRC2Supported)
             {
-                throw new SkipTestException(name + " uses RC2, which is not supported on this platform.");
+                throw new SkipTestException(
+                    name + " uses RC2, which is not supported on this platform."
+                );
             }
 
             try
@@ -495,11 +639,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             }
             catch (Exception e)
             {
-                throw new Exception($"There's an error on certificate {name}, see inner exception for details", e);
+                throw new Exception(
+                    $"There's an error on certificate {name}, see inner exception for details",
+                    e
+                );
             }
         }
 
-        internal static bool IsPkcs12IterationCountAllowed(long iterationCount, long allowedIterations)
+        internal static bool IsPkcs12IterationCountAllowed(
+            long iterationCount,
+            long allowedIterations
+        )
         {
             if (allowedIterations == UnlimitedIterations)
             {
@@ -561,6 +711,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             return newC;
         }
 
-        internal delegate ulong GetIterationCountDelegate(ReadOnlySpan<byte> pkcs12, out int bytesConsumed);
+        internal delegate ulong GetIterationCountDelegate(
+            ReadOnlySpan<byte> pkcs12,
+            out int bytesConsumed
+        );
     }
 }

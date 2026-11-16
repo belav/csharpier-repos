@@ -15,17 +15,18 @@ namespace System.Workflow.Activities
 
     [Serializable]
     [DesignerSerializer(typeof(CollectionMarkupSerializer), typeof(WorkflowMarkupSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class OperationParameterInfoCollection : List<OperationParameterInfo>,
-        IList<OperationParameterInfo>,
-        IList
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class OperationParameterInfoCollection
+        : List<OperationParameterInfo>,
+            IList<OperationParameterInfo>,
+            IList
     {
         [SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields")]
         OperationInfoBase owner = null;
 
-        public OperationParameterInfoCollection()
-        {
-        }
+        public OperationParameterInfoCollection() { }
 
         public OperationParameterInfoCollection(OperationInfoBase owner)
         {
@@ -39,26 +40,17 @@ namespace System.Workflow.Activities
 
         public new int Count
         {
-            get
-            {
-                return ((ICollection<OperationParameterInfo>) this).Count;
-            }
+            get { return ((ICollection<OperationParameterInfo>)this).Count; }
         }
 
         int ICollection<OperationParameterInfo>.Count
         {
-            get
-            {
-                return base.Count;
-            }
+            get { return base.Count; }
         }
 
         bool ICollection<OperationParameterInfo>.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
         bool ICollection.IsSynchronized
         {
@@ -72,30 +64,18 @@ namespace System.Workflow.Activities
 
         bool IList.IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool IList.IsReadOnly
         {
-            get
-            {
-                return ((IList<OperationParameterInfo>) this).IsReadOnly;
-            }
+            get { return ((IList<OperationParameterInfo>)this).IsReadOnly; }
         }
 
         public new OperationParameterInfo this[int index]
         {
-            get
-            {
-                return ((IList<OperationParameterInfo>) this)[index];
-            }
-            set
-            {
-                ((IList<OperationParameterInfo>) this)[index] = value;
-            }
+            get { return ((IList<OperationParameterInfo>)this)[index]; }
+            set { ((IList<OperationParameterInfo>)this)[index] = value; }
         }
 
         public OperationParameterInfo this[string key]
@@ -120,10 +100,7 @@ namespace System.Workflow.Activities
 
         OperationParameterInfo IList<OperationParameterInfo>.this[int index]
         {
-            get
-            {
-                return base[index];
-            }
+            get { return base[index]; }
             set
             {
                 if (value == null)
@@ -136,41 +113,41 @@ namespace System.Workflow.Activities
         }
         object IList.this[int index]
         {
-            get
-            {
-                return ((IList<OperationParameterInfo>) this)[index];
-            }
-
+            get { return ((IList<OperationParameterInfo>)this)[index]; }
             set
             {
                 if (!(value is OperationParameterInfo))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                         "value",
-                        SR2.GetString(SR2.Error_InvalidListItem, typeof(OperationParameterInfo).FullName));
+                        SR2.GetString(
+                            SR2.Error_InvalidListItem,
+                            typeof(OperationParameterInfo).FullName
+                        )
+                    );
                 }
-                ((IList<OperationParameterInfo>) this)[index] = (OperationParameterInfo) value;
+                ((IList<OperationParameterInfo>)this)[index] = (OperationParameterInfo)value;
             }
         }
 
         public new void Add(OperationParameterInfo item)
         {
-            ((IList<OperationParameterInfo>) this).Add(item);
+            ((IList<OperationParameterInfo>)this).Add(item);
         }
 
         public new void Clear()
         {
-            ((IList<OperationParameterInfo>) this).Clear();
+            ((IList<OperationParameterInfo>)this).Clear();
         }
 
         public new bool Contains(OperationParameterInfo item)
         {
-            return ((IList<OperationParameterInfo>) this).Contains(item);
+            return ((IList<OperationParameterInfo>)this).Contains(item);
         }
 
         public new IEnumerator<OperationParameterInfo> GetEnumerator()
         {
-            return ((IList<OperationParameterInfo>) this).GetEnumerator();
+            return ((IList<OperationParameterInfo>)this).GetEnumerator();
         }
 
         void ICollection<OperationParameterInfo>.Add(OperationParameterInfo item)
@@ -192,7 +169,11 @@ namespace System.Workflow.Activities
         {
             return base.Contains(item);
         }
-        void ICollection<OperationParameterInfo>.CopyTo(OperationParameterInfo[] array, int arrayIndex)
+
+        void ICollection<OperationParameterInfo>.CopyTo(
+            OperationParameterInfo[] array,
+            int arrayIndex
+        )
         {
             base.CopyTo(array, arrayIndex);
         }
@@ -226,7 +207,6 @@ namespace System.Workflow.Activities
             return false;
         }
 
-
         IEnumerator<OperationParameterInfo> IEnumerable<OperationParameterInfo>.GetEnumerator()
         {
             return base.GetEnumerator();
@@ -234,7 +214,7 @@ namespace System.Workflow.Activities
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)((IList<OperationParameterInfo>) this).GetEnumerator();
+            return (IEnumerator)((IList<OperationParameterInfo>)this).GetEnumerator();
         }
 
         int IList.Add(object value)
@@ -243,15 +223,19 @@ namespace System.Workflow.Activities
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "value",
-                    SR2.GetString(SR2.Error_InvalidListItem, typeof(OperationParameterInfo).FullName));
+                    SR2.GetString(
+                        SR2.Error_InvalidListItem,
+                        typeof(OperationParameterInfo).FullName
+                    )
+                );
             }
-            ((IList<OperationParameterInfo>) this).Add((OperationParameterInfo) value);
+            ((IList<OperationParameterInfo>)this).Add((OperationParameterInfo)value);
             return this.Count - 1;
         }
 
         void IList.Clear()
         {
-            ((IList<OperationParameterInfo>) this).Clear();
+            ((IList<OperationParameterInfo>)this).Clear();
         }
 
         bool IList.Contains(object value)
@@ -260,10 +244,15 @@ namespace System.Workflow.Activities
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "value",
-                    SR2.GetString(SR2.Error_InvalidListItem, typeof(OperationParameterInfo).FullName));
+                    SR2.GetString(
+                        SR2.Error_InvalidListItem,
+                        typeof(OperationParameterInfo).FullName
+                    )
+                );
             }
-            return (((IList<OperationParameterInfo>) this).Contains((OperationParameterInfo) value));
+            return (((IList<OperationParameterInfo>)this).Contains((OperationParameterInfo)value));
         }
+
         int IList<OperationParameterInfo>.IndexOf(OperationParameterInfo item)
         {
             return base.IndexOf(item);
@@ -275,16 +264,22 @@ namespace System.Workflow.Activities
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "value",
-                    SR2.GetString(SR2.Error_InvalidListItem, typeof(OperationParameterInfo).FullName));
+                    SR2.GetString(
+                        SR2.Error_InvalidListItem,
+                        typeof(OperationParameterInfo).FullName
+                    )
+                );
             }
-            return ((IList<OperationParameterInfo>) this).IndexOf((OperationParameterInfo) value);
+            return ((IList<OperationParameterInfo>)this).IndexOf((OperationParameterInfo)value);
         }
 
         void IList<OperationParameterInfo>.Insert(int index, OperationParameterInfo item)
         {
             if (index < 0 || index > base.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
             if (item == null)
             {
@@ -300,9 +295,13 @@ namespace System.Workflow.Activities
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "value",
-                    SR2.GetString(SR2.Error_InvalidListItem, typeof(OperationParameterInfo).FullName));
+                    SR2.GetString(
+                        SR2.Error_InvalidListItem,
+                        typeof(OperationParameterInfo).FullName
+                    )
+                );
             }
-            ((IList<OperationParameterInfo>) this).Insert(index, (OperationParameterInfo) value);
+            ((IList<OperationParameterInfo>)this).Insert(index, (OperationParameterInfo)value);
         }
 
         void IList.Remove(object value)
@@ -311,16 +310,22 @@ namespace System.Workflow.Activities
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "value",
-                    SR2.GetString(SR2.Error_InvalidListItem, typeof(OperationParameterInfo).FullName));
+                    SR2.GetString(
+                        SR2.Error_InvalidListItem,
+                        typeof(OperationParameterInfo).FullName
+                    )
+                );
             }
-            ((IList<OperationParameterInfo>) this).Remove((OperationParameterInfo) value);
+            ((IList<OperationParameterInfo>)this).Remove((OperationParameterInfo)value);
         }
 
         void IList<OperationParameterInfo>.RemoveAt(int index)
         {
             if (index < 0 || index >= base.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
 
             base.RemoveAt(index);
@@ -328,22 +333,22 @@ namespace System.Workflow.Activities
 
         public new int IndexOf(OperationParameterInfo item)
         {
-            return ((IList<OperationParameterInfo>) this).IndexOf(item);
+            return ((IList<OperationParameterInfo>)this).IndexOf(item);
         }
 
         public new void Insert(int index, OperationParameterInfo item)
         {
-            ((IList<OperationParameterInfo>) this).Insert(index, item);
+            ((IList<OperationParameterInfo>)this).Insert(index, item);
         }
 
         public new bool Remove(OperationParameterInfo item)
         {
-            return ((IList<OperationParameterInfo>) this).Remove(item);
+            return ((IList<OperationParameterInfo>)this).Remove(item);
         }
 
         public new void RemoveAt(int index)
         {
-            ((IList<OperationParameterInfo>) this).RemoveAt(index);
+            ((IList<OperationParameterInfo>)this).RemoveAt(index);
         }
     }
 }

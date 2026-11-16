@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,36 +26,38 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("a6cf90c0-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMCSSRuleList
+    {
+        #region nsIDOMCSSRuleList
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength(out uint ret);
 
-	[Guid ("a6cf90c0-15b3-11d2-932e-00805f8add32")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMCSSRuleList {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int item(uint index, [MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSRule ret);
 
-#region nsIDOMCSSRuleList
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getLength ( out uint ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int item (
-				   uint index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
-
-#endregion
-	}
-
-
-	internal class nsDOMCSSRuleList {
-		public static nsIDOMCSSRuleList GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSRuleList obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSRuleList).GUID, obj);
-			return o as nsIDOMCSSRuleList;
-		}
-	}
+    internal class nsDOMCSSRuleList
+    {
+        public static nsIDOMCSSRuleList GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMCSSRuleList obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMCSSRuleList).GUID, obj);
+            return o as nsIDOMCSSRuleList;
+        }
+    }
 }

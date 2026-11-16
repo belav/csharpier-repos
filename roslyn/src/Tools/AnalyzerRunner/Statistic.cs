@@ -26,7 +26,8 @@ namespace AnalyzerRunner
             return new Statistic(
                 statistic1.NumberofNodes + statistic2.NumberofNodes,
                 statistic1.NumberOfTokens + statistic2.NumberOfTokens,
-                statistic1.NumberOfTrivia + statistic2.NumberOfTrivia);
+                statistic1.NumberOfTrivia + statistic2.NumberOfTrivia
+            );
         }
     }
 }

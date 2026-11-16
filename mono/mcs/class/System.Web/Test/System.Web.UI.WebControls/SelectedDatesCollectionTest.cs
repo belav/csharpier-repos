@@ -28,93 +28,85 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.UI.WebControls;
-using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Globalization;
 using System.Web;
 using System.Web.UI;
-using System.Globalization;
-	
+using System.Web.UI.WebControls;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]
-	public class SelectedDatesCollectionTest {
+    [TestFixture]
+    public class SelectedDatesCollectionTest
+    {
+        [Test]
+        public void SelectedDatesCollectionTest_DefaultValues()
+        {
+            ArrayList list = new ArrayList();
+            SelectedDatesCollection s = new SelectedDatesCollection(list);
 
+            Assert.AreEqual(0, s.Count, "A1");
+            Assert.AreEqual(false, s.IsReadOnly, "A2");
+            Assert.AreEqual(false, s.IsSynchronized, "A3");
+            Assert.AreEqual(s, s.SyncRoot, "A4");
+        }
 
-		[Test]
-		public void SelectedDatesCollectionTest_DefaultValues ()
-		{
-			ArrayList list = new ArrayList ();
-			SelectedDatesCollection s = new SelectedDatesCollection (list);			
+        //
+        // Methods
+        //
+        [Test]
+        public void AddMethod()
+        {
+            ArrayList list = new ArrayList();
+            SelectedDatesCollection s = new SelectedDatesCollection(list);
 
-			Assert.AreEqual (0, s.Count, "A1");
-			Assert.AreEqual (false, s.IsReadOnly, "A2");
-			Assert.AreEqual (false, s.IsSynchronized, "A3");
-			Assert.AreEqual (s, s.SyncRoot, "A4");
-		}
+            s.Add(DateTime.Today);
+            Assert.AreEqual(true, s.Contains(DateTime.Today), "A1");
+            Assert.AreEqual(1, s.Count, "A2");
 
+            s.Add(DateTime.Today); // Duplicates are not inserted
+            Assert.AreEqual(1, s.Count, "A2");
+        }
 
-		//
-		// Methods
-		//
-		[Test]
-		public void AddMethod ()
-		{
-			ArrayList list = new ArrayList ();
-			SelectedDatesCollection s = new SelectedDatesCollection (list);			
-			
-			s.Add (DateTime.Today);
-			Assert.AreEqual (true, s.Contains (DateTime.Today), "A1");
-			Assert.AreEqual (1, s.Count, "A2");
-			
-			s.Add (DateTime.Today);	// Duplicates are not inserted
-			Assert.AreEqual (1, s.Count, "A2");
-		}
+        //
+        // Methods
+        //
+        [Test]
+        public void ClearMethod()
+        {
+            ArrayList list = new ArrayList();
+            SelectedDatesCollection s = new SelectedDatesCollection(list);
 
-		//
-		// Methods
-		//
-		[Test]
-		public void ClearMethod ()
-		{
-			ArrayList list = new ArrayList ();
-			SelectedDatesCollection s = new SelectedDatesCollection (list);			
-			
-			s.Add (DateTime.Today);
-			s.Clear ();
-			Assert.AreEqual (0, s.Count, "A1");
-		}
+            s.Add(DateTime.Today);
+            s.Clear();
+            Assert.AreEqual(0, s.Count, "A1");
+        }
 
+        [Test]
+        public void SelectRangeMethod()
+        {
+            ArrayList list = new ArrayList();
+            SelectedDatesCollection s = new SelectedDatesCollection(list);
 
-		[Test]
-		public void SelectRangeMethod ()
-		{
-			ArrayList list = new ArrayList ();
-			SelectedDatesCollection s = new SelectedDatesCollection (list);			
-			
-			s.Add (DateTime.Today);
-			s.Add (DateTime.Today);
-			// Internally clears the list
-			s.SelectRange (new DateTime (2000, 1, 1), new DateTime (2001, 1, 1));
+            s.Add(DateTime.Today);
+            s.Add(DateTime.Today);
+            // Internally clears the list
+            s.SelectRange(new DateTime(2000, 1, 1), new DateTime(2001, 1, 1));
 
-			Assert.AreEqual (367, s.Count, "A1");
-		}
+            Assert.AreEqual(367, s.Count, "A1");
+        }
 
-		[Test]
-		public void RemoveMethod ()
-		{
-			ArrayList list = new ArrayList ();
-			SelectedDatesCollection s = new SelectedDatesCollection (list);			
-			
-			s.Add (DateTime.Today);
-			s.Remove (DateTime.Today);
-			Assert.AreEqual (0, s.Count, "A1");
-		}
+        [Test]
+        public void RemoveMethod()
+        {
+            ArrayList list = new ArrayList();
+            SelectedDatesCollection s = new SelectedDatesCollection(list);
 
-	}
+            s.Add(DateTime.Today);
+            s.Remove(DateTime.Today);
+            Assert.AreEqual(0, s.Count, "A1");
+        }
+    }
 }
-
-
-

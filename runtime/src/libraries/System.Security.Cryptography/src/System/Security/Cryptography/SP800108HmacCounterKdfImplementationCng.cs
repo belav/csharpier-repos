@@ -7,7 +7,10 @@ namespace System.Security.Cryptography
 {
     internal sealed partial class SP800108HmacCounterKdfImplementationCng
     {
-        internal unsafe SP800108HmacCounterKdfImplementationCng(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm)
+        internal unsafe SP800108HmacCounterKdfImplementationCng(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
 
@@ -39,7 +42,10 @@ namespace System.Security.Cryptography
             {
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    _keyHandle = CreateSymmetricKey(pSymmetricKeyMaterial, symmetricKeyMaterialLength);
+                    _keyHandle = CreateSymmetricKey(
+                        pSymmetricKeyMaterial,
+                        symmetricKeyMaterialLength
+                    );
                 }
             }
             finally
@@ -50,8 +56,16 @@ namespace System.Security.Cryptography
             _hashAlgorithm = hashAlgorithm;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "Weak algorithms are used as instructed by the caller")]
-        private static int HashOneShot(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> data, Span<byte> destination)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "Weak algorithms are used as instructed by the caller"
+        )]
+        private static int HashOneShot(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> data,
+            Span<byte> destination
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
 
@@ -66,11 +80,17 @@ namespace System.Security.Cryptography
                 case HashAlgorithmNames.SHA512:
                     return SHA512.HashData(data, destination);
                 case HashAlgorithmNames.SHA3_256:
-                    return SHA3_256.IsSupported ? SHA3_256.HashData(data, destination) : throw new PlatformNotSupportedException();
+                    return SHA3_256.IsSupported
+                        ? SHA3_256.HashData(data, destination)
+                        : throw new PlatformNotSupportedException();
                 case HashAlgorithmNames.SHA3_384:
-                    return SHA3_384.IsSupported ? SHA3_384.HashData(data, destination) : throw new PlatformNotSupportedException();
+                    return SHA3_384.IsSupported
+                        ? SHA3_384.HashData(data, destination)
+                        : throw new PlatformNotSupportedException();
                 case HashAlgorithmNames.SHA3_512:
-                    return SHA3_512.IsSupported ? SHA3_512.HashData(data, destination) : throw new PlatformNotSupportedException();
+                    return SHA3_512.IsSupported
+                        ? SHA3_512.HashData(data, destination)
+                        : throw new PlatformNotSupportedException();
                 default:
                     Debug.Fail($"Unexpected hash algorithm '{hashAlgorithm.Name}'");
                     throw new CryptographicException();

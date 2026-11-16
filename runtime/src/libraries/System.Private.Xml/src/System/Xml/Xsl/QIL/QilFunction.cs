@@ -22,7 +22,9 @@ namespace System.Xml.Xsl.Qil
     /// </remarks>
     internal sealed class QilFunction : QilReference
     {
-        private QilNode _arguments, _definition, _sideEffects;
+        private QilNode _arguments,
+            _definition,
+            _sideEffects;
 
         //-----------------------------------------------
         // Constructor
@@ -31,7 +33,13 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a node
         /// </summary>
-        public QilFunction(QilNodeType nodeType, QilNode arguments, QilNode definition, QilNode sideEffects, XmlQueryType resultType)
+        public QilFunction(
+            QilNodeType nodeType,
+            QilNode arguments,
+            QilNode definition,
+            QilNode sideEffects,
+            XmlQueryType resultType
+        )
             : base(nodeType)
         {
             _arguments = arguments;
@@ -39,7 +47,6 @@ namespace System.Xml.Xsl.Qil
             _sideEffects = sideEffects;
             this.xmlType = resultType;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
@@ -66,14 +73,20 @@ namespace System.Xml.Xsl.Qil
             {
                 switch (index)
                 {
-                    case 0: _arguments = value; break;
-                    case 1: _definition = value; break;
-                    case 2: _sideEffects = value; break;
-                    default: throw new IndexOutOfRangeException();
+                    case 0:
+                        _arguments = value;
+                        break;
+                    case 1:
+                        _definition = value;
+                        break;
+                    case 2:
+                        _sideEffects = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
         }
-
 
         //-----------------------------------------------
         // QilFunction methods

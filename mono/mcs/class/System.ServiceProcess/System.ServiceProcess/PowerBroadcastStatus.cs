@@ -3,7 +3,7 @@
 //
 // Author: Cesar Octavio Lopez Nataren (cesar@ciencias.unam.mx)
 //
-// (C) 2002, Cesar Octavio Lopez Nataren 
+// (C) 2002, Cesar Octavio Lopez Nataren
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,16 +28,16 @@
 
 namespace System.ServiceProcess
 {
-	public enum PowerBroadcastStatus
-	{
-		QuerySuspend = 0,
-		QuerySuspendFailed = 2,
-		Suspend = 4,
-		ResumeCritical = 6,
-		ResumeSuspend = 7,
-		BatteryLow = 9,
-		PowerStatusChange = 10,
-		OemEvent = 11,
-		ResumeAutomatic = 18
-	}
+    public enum PowerBroadcastStatus
+    {
+        QuerySuspend = 0,
+        QuerySuspendFailed = 2,
+        Suspend = 4,
+        ResumeCritical = 6,
+        ResumeSuspend = 7,
+        BatteryLow = 9,
+        PowerStatusChange = 10,
+        OemEvent = 11,
+        ResumeAutomatic = 18,
+    }
 }

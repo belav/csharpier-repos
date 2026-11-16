@@ -17,8 +17,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     Gets the base type of this entity type. Returns <see langword="null" /> if this is not a derived type in an inheritance
     ///     hierarchy.
     /// </summary>
-    new IRuntimeEntityType? BaseType
-        => (IRuntimeEntityType?)((IEntityType)this).BaseType;
+    new IRuntimeEntityType? BaseType => (IRuntimeEntityType?)((IEntityType)this).BaseType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,8 +41,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int OriginalValueCount
-        => Counts.OriginalValueCount;
+    int OriginalValueCount => Counts.OriginalValueCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,8 +49,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int PropertyCount
-        => Counts.PropertyCount;
+    int PropertyCount => Counts.PropertyCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,8 +57,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int ShadowPropertyCount
-        => Counts.ShadowCount;
+    int ShadowPropertyCount => Counts.ShadowCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,8 +65,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int StoreGeneratedCount
-        => Counts.StoreGeneratedCount;
+    int StoreGeneratedCount => Counts.StoreGeneratedCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -78,8 +73,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int RelationshipPropertyCount
-        => Counts.RelationshipCount;
+    int RelationshipPropertyCount => Counts.RelationshipCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -87,8 +81,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int NavigationCount
-        => Counts.NavigationCount;
+    int NavigationCount => Counts.NavigationCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -96,8 +89,7 @@ public interface IRuntimeEntityType : IEntityType, IRuntimeTypeBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int ComplexPropertyCount
-        => Counts.ComplexPropertyCount;
+    int ComplexPropertyCount => Counts.ComplexPropertyCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

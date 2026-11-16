@@ -7,9 +7,7 @@ namespace System.Reflection.Emit
 {
     public abstract class MethodBuilder : MethodInfo
     {
-        protected MethodBuilder()
-        {
-        }
+        protected MethodBuilder() { }
 
         public bool InitLocals
         {
@@ -29,22 +27,30 @@ namespace System.Reflection.Emit
             return DefineGenericParametersCore(names);
         }
 
-        protected abstract GenericTypeParameterBuilder[] DefineGenericParametersCore(params string[] names);
+        protected abstract GenericTypeParameterBuilder[] DefineGenericParametersCore(
+            params string[] names
+        );
 
-        public ParameterBuilder DefineParameter(int position, ParameterAttributes attributes, string? strParamName)
+        public ParameterBuilder DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string? strParamName
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(position);
 
             return DefineParameterCore(position, attributes, strParamName);
         }
 
-        protected abstract ParameterBuilder DefineParameterCore(int position, ParameterAttributes attributes, string? strParamName);
+        protected abstract ParameterBuilder DefineParameterCore(
+            int position,
+            ParameterAttributes attributes,
+            string? strParamName
+        );
 
-        public ILGenerator GetILGenerator()
-            => GetILGenerator(64);
+        public ILGenerator GetILGenerator() => GetILGenerator(64);
 
-        public ILGenerator GetILGenerator(int size)
-            => GetILGeneratorCore(size);
+        public ILGenerator GetILGenerator(int size) => GetILGeneratorCore(size);
 
         protected abstract ILGenerator GetILGeneratorCore(int size);
 
@@ -61,7 +67,10 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        protected abstract void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute);
+        protected abstract void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        );
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
@@ -70,22 +79,41 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(customBuilder.Ctor, customBuilder.Data);
         }
 
-        public void SetImplementationFlags(MethodImplAttributes attributes) => SetImplementationFlagsCore(attributes);
+        public void SetImplementationFlags(MethodImplAttributes attributes) =>
+            SetImplementationFlagsCore(attributes);
 
         protected abstract void SetImplementationFlagsCore(MethodImplAttributes attributes);
 
-        public void SetParameters(params Type[] parameterTypes)
-            => SetSignature(null, null, null, parameterTypes, null, null);
+        public void SetParameters(params Type[] parameterTypes) =>
+            SetSignature(null, null, null, parameterTypes, null, null);
 
-        public void SetReturnType(Type? returnType)
-            => SetSignature(returnType, null, null, null, null, null);
+        public void SetReturnType(Type? returnType) =>
+            SetSignature(returnType, null, null, null, null, null);
 
-        public void SetSignature(Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers,
-            Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers)
-            => SetSignatureCore(returnType, returnTypeRequiredCustomModifiers, returnTypeOptionalCustomModifiers,
-                parameterTypes, parameterTypeRequiredCustomModifiers, parameterTypeOptionalCustomModifiers);
+        public void SetSignature(
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        ) =>
+            SetSignatureCore(
+                returnType,
+                returnTypeRequiredCustomModifiers,
+                returnTypeOptionalCustomModifiers,
+                parameterTypes,
+                parameterTypeRequiredCustomModifiers,
+                parameterTypeOptionalCustomModifiers
+            );
 
-        protected abstract void SetSignatureCore(Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers,
-            Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers);
+        protected abstract void SetSignatureCore(
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        );
     }
 }

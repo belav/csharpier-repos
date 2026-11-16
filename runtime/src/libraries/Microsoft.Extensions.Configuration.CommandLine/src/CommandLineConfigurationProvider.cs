@@ -18,7 +18,10 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         /// </summary>
         /// <param name="args">The command line args.</param>
         /// <param name="switchMappings">The switch mappings.</param>
-        public CommandLineConfigurationProvider(IEnumerable<string> args, IDictionary<string, string>? switchMappings = null)
+        public CommandLineConfigurationProvider(
+            IEnumerable<string> args,
+            IDictionary<string, string>? switchMappings = null
+        )
         {
             ThrowHelper.ThrowIfNull(args);
 
@@ -41,7 +44,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         public override void Load()
         {
             var data = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
-            string key, value;
+            string key,
+                value;
 
             using (IEnumerator<string> enumerator = Args.GetEnumerator())
             {
@@ -78,7 +82,10 @@ namespace Microsoft.Extensions.Configuration.CommandLine
                         }
 
                         // If the switch is a key in given switch mappings, interpret it
-                        if (_switchMappings != null && _switchMappings.TryGetValue(currentArg, out string? mappedKey))
+                        if (
+                            _switchMappings != null
+                            && _switchMappings.TryGetValue(currentArg, out string? mappedKey)
+                        )
                         {
                             key = mappedKey;
                         }
@@ -106,14 +113,19 @@ namespace Microsoft.Extensions.Configuration.CommandLine
                         string keySegment = currentArg.Substring(0, separator);
 
                         // If the switch is a key in given switch mappings, interpret it
-                        if (_switchMappings != null && _switchMappings.TryGetValue(keySegment, out string? mappedKeySegment))
+                        if (
+                            _switchMappings != null
+                            && _switchMappings.TryGetValue(keySegment, out string? mappedKeySegment)
+                        )
                         {
                             key = mappedKeySegment;
                         }
                         // If the switch starts with a single "-" and it isn't in given mappings , it is an invalid usage
                         else if (keyStartIndex == 1)
                         {
-                            throw new FormatException(SR.Format(SR.Error_ShortSwitchNotDefined, currentArg));
+                            throw new FormatException(
+                                SR.Format(SR.Error_ShortSwitchNotDefined, currentArg)
+                            );
                         }
                         // Otherwise, use the switch name directly as a key
                         else
@@ -132,12 +144,17 @@ namespace Microsoft.Extensions.Configuration.CommandLine
             Data = data;
         }
 
-        private static Dictionary<string, string> GetValidatedSwitchMappingsCopy(IDictionary<string, string> switchMappings)
+        private static Dictionary<string, string> GetValidatedSwitchMappingsCopy(
+            IDictionary<string, string> switchMappings
+        )
         {
             // The dictionary passed in might be constructed with a case-sensitive comparer
             // However, the keys in configuration providers are all case-insensitive
             // So we check whether the given switch mappings contain duplicated keys with case-insensitive comparer
-            var switchMappingsCopy = new Dictionary<string, string>(switchMappings.Count, StringComparer.OrdinalIgnoreCase);
+            var switchMappingsCopy = new Dictionary<string, string>(
+                switchMappings.Count,
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (KeyValuePair<string, string> mapping in switchMappings)
             {
                 // Only keys start with "--" or "-" are acceptable
@@ -145,14 +162,16 @@ namespace Microsoft.Extensions.Configuration.CommandLine
                 {
                     throw new ArgumentException(
                         SR.Format(SR.Error_InvalidSwitchMapping, mapping.Key),
-                        nameof(switchMappings));
+                        nameof(switchMappings)
+                    );
                 }
 
                 if (switchMappingsCopy.ContainsKey(mapping.Key))
                 {
                     throw new ArgumentException(
                         SR.Format(SR.Error_DuplicatedKeyInSwitchMappings, mapping.Key),
-                        nameof(switchMappings));
+                        nameof(switchMappings)
+                    );
                 }
 
                 switchMappingsCopy.Add(mapping.Key, mapping.Value);

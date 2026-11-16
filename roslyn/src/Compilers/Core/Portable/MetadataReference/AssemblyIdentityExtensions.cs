@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis
         // Windows.*[.winmd]
         internal static bool IsWindowsComponent(this AssemblyIdentity identity)
         {
-            return (identity.ContentType == AssemblyContentType.WindowsRuntime) &&
-                identity.Name.StartsWith("windows.", StringComparison.OrdinalIgnoreCase);
+            return (identity.ContentType == AssemblyContentType.WindowsRuntime)
+                && identity.Name.StartsWith("windows.", StringComparison.OrdinalIgnoreCase);
         }
 
         internal const string WindowsRuntimeIdentitySimpleName = "windows";
@@ -23,8 +23,12 @@ namespace Microsoft.CodeAnalysis
         // Windows[.winmd]
         internal static bool IsWindowsRuntime(this AssemblyIdentity identity)
         {
-            return (identity.ContentType == AssemblyContentType.WindowsRuntime) &&
-                string.Equals(identity.Name, WindowsRuntimeIdentitySimpleName, StringComparison.OrdinalIgnoreCase);
+            return (identity.ContentType == AssemblyContentType.WindowsRuntime)
+                && string.Equals(
+                    identity.Name,
+                    WindowsRuntimeIdentitySimpleName,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿namespace System.Web.Mvc {
-    public enum InputType {
+﻿namespace System.Web.Mvc
+{
+    public enum InputType
+    {
         CheckBox,
         Hidden,
         Password,
         Radio,
-        Text
+        Text,
     }
 }

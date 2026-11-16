@@ -1,23 +1,23 @@
-﻿    //------------------------------------------------------------
+﻿//------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
 namespace System.Activities.Core.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Internal.PropertyEditing;
+    using System.Activities.Presentation.Model;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Linq;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Documents;
     using System.Windows.Media;
     using System.Windows.Shapes;
-    using System.Activities.Statements;
-    using System.Activities.Presentation.Model;
-    using System.Linq;
-    using System.Runtime;
-    using System.Globalization;
-    using System.Activities.Presentation;
-    using System.Activities.Presentation.FreeFormEditing;
-    using System.Activities.Presentation.Internal.PropertyEditing;
 
     partial class FlowchartDesigner
     {
@@ -45,7 +45,7 @@ namespace System.Activities.Core.Presentation
         /// <summary>
         /// Priority order of finding the connection point:
         /// 1. Unoccupied (free) connection point closest to the object
-        /// 2. Existing incoming/outgoing connection point, depending on the 
+        /// 2. Existing incoming/outgoing connection point, depending on the
         /// Fallback: Connection point closest to the object)
         /// </summary>
         /// <param name="srcConnPoints"></param>
@@ -53,10 +53,11 @@ namespace System.Activities.Core.Presentation
         /// <param name="srcConnPoint"></param>
         /// <param name="destConnPoint"></param>
         internal void FindBestMatchConnectionPointPair(
-            List<ConnectionPoint> srcConnPoints, 
-            List<ConnectionPoint> destConnPoints, 
-            out ConnectionPoint srcConnPoint, 
-            out ConnectionPoint destConnPoint)
+            List<ConnectionPoint> srcConnPoints,
+            List<ConnectionPoint> destConnPoints,
+            out ConnectionPoint srcConnPoint,
+            out ConnectionPoint destConnPoint
+        )
         {
             double minDist = double.PositiveInfinity;
             double dist;
@@ -64,12 +65,22 @@ namespace System.Activities.Core.Presentation
             srcConnPoint = null;
             destConnPoint = null;
 
-            List<ConnectionPoint> candidateSrcConnPoints = FindCandidatePointsForLink(srcConnPoints, ConnectionPointKind.Incoming);
-            List<ConnectionPoint> candidateDestConnPoints = FindCandidatePointsForLink(destConnPoints, ConnectionPointKind.Outgoing);
+            List<ConnectionPoint> candidateSrcConnPoints = FindCandidatePointsForLink(
+                srcConnPoints,
+                ConnectionPointKind.Incoming
+            );
+            List<ConnectionPoint> candidateDestConnPoints = FindCandidatePointsForLink(
+                destConnPoints,
+                ConnectionPointKind.Outgoing
+            );
 
             foreach (ConnectionPoint connPoint in candidateSrcConnPoints)
             {
-                tempConnPoint = FindClosestConnectionPoint(connPoint, candidateDestConnPoints, out dist);
+                tempConnPoint = FindClosestConnectionPoint(
+                    connPoint,
+                    candidateDestConnPoints,
+                    out dist
+                );
                 if (dist < minDist)
                 {
                     minDist = dist;
@@ -82,12 +93,15 @@ namespace System.Activities.Core.Presentation
             Fx.Assert(destConnPoint != null, "No ConnectionPoint found");
         }
 
-        private static List<ConnectionPoint> FindCandidatePointsForLink(List<ConnectionPoint> destConnPoints, ConnectionPointKind excludePointType)
+        private static List<ConnectionPoint> FindCandidatePointsForLink(
+            List<ConnectionPoint> destConnPoints,
+            ConnectionPointKind excludePointType
+        )
         {
             List<ConnectionPoint> candidateDestConnPoints;
             IEnumerable<ConnectionPoint> freeDestConnPoints = destConnPoints.Where(p =>
-                    p.PointType != excludePointType &&
-                    !p.AttachedConnectors.Any());
+                p.PointType != excludePointType && !p.AttachedConnectors.Any()
+            );
 
             if (freeDestConnPoints.Any())
             {
@@ -95,12 +109,16 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                IEnumerable<ConnectionPoint> availablePoints =
-                    destConnPoints.Where(
-                        p => p.PointType != excludePointType &&
-                        p.AttachedConnectors.Any(connector => FreeFormPanel.GetDestinationConnectionPoint(connector).Equals(p)));
+                IEnumerable<ConnectionPoint> availablePoints = destConnPoints.Where(p =>
+                    p.PointType != excludePointType
+                    && p.AttachedConnectors.Any(connector =>
+                        FreeFormPanel.GetDestinationConnectionPoint(connector).Equals(p)
+                    )
+                );
 
-                candidateDestConnPoints = availablePoints.Any() ? availablePoints.ToList() : destConnPoints;
+                candidateDestConnPoints = availablePoints.Any()
+                    ? availablePoints.ToList()
+                    : destConnPoints;
             }
 
             return candidateDestConnPoints;
@@ -116,10 +134,17 @@ namespace System.Activities.Core.Presentation
         /// <param name="dest"></param>
         /// <param name="errorMessage"></param>
         /// <returns></returns>
-        ConnectionPoint FindBestMatchDestConnectionPoint(ConnectionPoint sourceConnectionPoint, UIElement dest, out string errorMessage)
+        ConnectionPoint FindBestMatchDestConnectionPoint(
+            ConnectionPoint sourceConnectionPoint,
+            UIElement dest,
+            out string errorMessage
+        )
         {
             List<ConnectionPoint> destConnPoints = FlowchartDesigner.GetConnectionPoints(dest);
-            Fx.Assert(null != destConnPoints && destConnPoints.Any(), "A flownode designer object should have one connection point.");
+            Fx.Assert(
+                null != destConnPoints && destConnPoints.Any(),
+                "A flownode designer object should have one connection point."
+            );
 
             errorMessage = string.Empty;
 
@@ -128,37 +153,68 @@ namespace System.Activities.Core.Presentation
                 errorMessage = SR.FCInvalidLink;
                 return null;
             }
-            
+
             ConnectionPoint destConnectionPoint;
             double minDist;
-            List<ConnectionPoint> candidateDestConnPoints = FindCandidatePointsForLink(destConnPoints, ConnectionPointKind.Outgoing);
-            destConnectionPoint = FindClosestConnectionPoint(sourceConnectionPoint, candidateDestConnPoints, out minDist);
+            List<ConnectionPoint> candidateDestConnPoints = FindCandidatePointsForLink(
+                destConnPoints,
+                ConnectionPointKind.Outgoing
+            );
+            destConnectionPoint = FindClosestConnectionPoint(
+                sourceConnectionPoint,
+                candidateDestConnPoints,
+                out minDist
+            );
 
             return destConnectionPoint;
         }
 
-        internal ConnectionPoint FindClosestConnectionPoint(ConnectionPoint srcConnPoint, List<ConnectionPoint> destConnPoints, out double minDist)
+        internal ConnectionPoint FindClosestConnectionPoint(
+            ConnectionPoint srcConnPoint,
+            List<ConnectionPoint> destConnPoints,
+            out double minDist
+        )
         {
             return FindClosestConnectionPoint(srcConnPoint.Location, destConnPoints, out minDist);
         }
 
-        internal ConnectionPoint FindClosestConnectionPoint(Point srcConnPointLocation, List<ConnectionPoint> destConnPoints, out double minDist)
+        internal ConnectionPoint FindClosestConnectionPoint(
+            Point srcConnPointLocation,
+            List<ConnectionPoint> destConnPoints,
+            out double minDist
+        )
         {
-            return ConnectionPoint.GetClosestConnectionPoint(destConnPoints, srcConnPointLocation, out minDist);
+            return ConnectionPoint.GetClosestConnectionPoint(
+                destConnPoints,
+                srcConnPointLocation,
+                out minDist
+            );
         }
 
-        ConnectionPoint FindClosestConnectionPointNotOfType(ConnectionPoint srcConnectionPoint, List<ConnectionPoint> targetConnectionPoints, ConnectionPointKind illegalConnectionPointKind)
+        ConnectionPoint FindClosestConnectionPointNotOfType(
+            ConnectionPoint srcConnectionPoint,
+            List<ConnectionPoint> targetConnectionPoints,
+            ConnectionPointKind illegalConnectionPointKind
+        )
         {
             double minDist;
             List<ConnectionPoint> filteredConnectionPoints = new List<ConnectionPoint>();
             foreach (ConnectionPoint connPoint in targetConnectionPoints)
             {
-                if (connPoint != null && connPoint.PointType != illegalConnectionPointKind && !connPoint.Equals(srcConnectionPoint))
+                if (
+                    connPoint != null
+                    && connPoint.PointType != illegalConnectionPointKind
+                    && !connPoint.Equals(srcConnectionPoint)
+                )
                 {
                     filteredConnectionPoints.Add(connPoint);
                 }
             }
-            return FindClosestConnectionPoint(srcConnectionPoint, filteredConnectionPoints, out minDist);
+            return FindClosestConnectionPoint(
+                srcConnectionPoint,
+                filteredConnectionPoints,
+                out minDist
+            );
         }
 
         void RemoveAdorner(UIElement adornedElement, Type adornerType)
@@ -202,7 +258,9 @@ namespace System.Activities.Core.Presentation
         ConnectionPoint ConnectionPointHitTest(UIElement element, Point hitPoint)
         {
             List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>();
-            List<ConnectionPoint> defaultConnectionPoints = FlowchartDesigner.GetConnectionPoints(element);
+            List<ConnectionPoint> defaultConnectionPoints = FlowchartDesigner.GetConnectionPoints(
+                element
+            );
             connectionPoints.InsertRange(0, defaultConnectionPoints);
             connectionPoints.Add(FlowchartDesigner.GetTrueConnectionPoint(element));
             connectionPoints.Add(FlowchartDesigner.GetFalseConnectionPoint(element));
@@ -239,7 +297,11 @@ namespace System.Activities.Core.Presentation
             {
                 if (connPoint != null)
                 {
-                    outGoingConnectors.AddRange(connPoint.AttachedConnectors.Where(p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint)));
+                    outGoingConnectors.AddRange(
+                        connPoint.AttachedConnectors.Where(p =>
+                            FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint)
+                        )
+                    );
                 }
             }
             return outGoingConnectors;
@@ -253,7 +315,11 @@ namespace System.Activities.Core.Presentation
             {
                 if (connPoint != null)
                 {
-                    inComingConnectors.AddRange(connPoint.AttachedConnectors.Where(p => FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)));
+                    inComingConnectors.AddRange(
+                        connPoint.AttachedConnectors.Where(p =>
+                            FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
+                        )
+                    );
                 }
             }
             return inComingConnectors;
@@ -278,9 +344,14 @@ namespace System.Activities.Core.Presentation
         }
 
         //This snaps the center of the element to grid.
-        //This is called only when dropping an item 
+        //This is called only when dropping an item
         //Whereever, shapeAnchorPoint is valid, it is made co-incident with the drop location.
-        Point SnapVisualToGrid(UIElement element, Point location, Point shapeAnchorPoint, bool isAnchorPointValid)
+        Point SnapVisualToGrid(
+            UIElement element,
+            Point location,
+            Point shapeAnchorPoint,
+            bool isAnchorPointValid
+        )
         {
             Fx.Assert(element != null, "Input UIElement is null");
             element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -294,11 +365,14 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                //The else part also takes care of the ActivityDesigner case, 
+                //The else part also takes care of the ActivityDesigner case,
                 //where the drag handle is outside the shape.
                 location.X -= shapeAnchorPoint.X;
                 location.Y -= shapeAnchorPoint.Y;
-                oldCenter = new Point(location.X + element.DesiredSize.Width / 2, location.Y + element.DesiredSize.Height / 2);
+                oldCenter = new Point(
+                    location.X + element.DesiredSize.Width / 2,
+                    location.Y + element.DesiredSize.Height / 2
+                );
             }
 
             Point newCenter = SnapPointToGrid(oldCenter);
@@ -307,32 +381,46 @@ namespace System.Activities.Core.Presentation
 
             if (location.X < 0)
             {
-                double correction = FreeFormPanel.GridSize - ((location.X * (-1)) % FreeFormPanel.GridSize);
+                double correction =
+                    FreeFormPanel.GridSize - ((location.X * (-1)) % FreeFormPanel.GridSize);
                 location.X = (correction == FreeFormPanel.GridSize) ? 0 : correction;
             }
             if (location.Y < 0)
             {
-                double correction = FreeFormPanel.GridSize - ((location.Y * (-1)) % FreeFormPanel.GridSize);
+                double correction =
+                    FreeFormPanel.GridSize - ((location.Y * (-1)) % FreeFormPanel.GridSize);
                 location.Y = (correction == FreeFormPanel.GridSize) ? 0 : correction;
             }
             return location;
         }
 
-
         // This creates a link from modelItems[i] to modelItems[i+1] - foreach i between 0 and modelItems.Count-2;
         void CreateLinks(List<ModelItem> modelItems)
         {
             Fx.Assert(modelItems.Count > 1, "Link creation requires more than one ModelItem");
-            modelItems.ForEach(p => { Fx.Assert(this.modelElement.ContainsKey(p), "View should be in the flowchart"); });
+            modelItems.ForEach(p =>
+            {
+                Fx.Assert(this.modelElement.ContainsKey(p), "View should be in the flowchart");
+            });
             ModelItem[] modelItemsArray = modelItems.ToArray();
             string errorMessage = string.Empty;
             for (int i = 0; i < modelItemsArray.Length - 1; i++)
             {
                 string error = string.Empty;
-                CreateLinkGesture(this.modelElement[modelItemsArray[i]], this.modelElement[modelItemsArray[i + 1]], out error, null);
+                CreateLinkGesture(
+                    this.modelElement[modelItemsArray[i]],
+                    this.modelElement[modelItemsArray[i + 1]],
+                    out error,
+                    null
+                );
                 if (!string.Empty.Equals(error))
                 {
-                    errorMessage += string.Format(CultureInfo.CurrentUICulture, "Link{0}:{1}\n", i + 1, error);
+                    errorMessage += string.Format(
+                        CultureInfo.CurrentUICulture,
+                        "Link{0}:{1}\n",
+                        i + 1,
+                        error
+                    );
                 }
             }
             if (!string.Empty.Equals(errorMessage))
@@ -343,7 +431,8 @@ namespace System.Activities.Core.Presentation
 
         // This is a utility function to pack all the elements in an array that match a particular predicate
         // to the end of the array, while maintaining the rest of the system unchanged.
-        public static bool Pack<T>(T[] toPack, Func<T, bool> isPacked) where T : class
+        public static bool Pack<T>(T[] toPack, Func<T, bool> isPacked)
+            where T : class
         {
             if (toPack == null)
             {
@@ -406,6 +495,5 @@ namespace System.Activities.Core.Presentation
             }
             return needRearrange;
         }
-
     }
 }

@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return RewriteExpressionStatement(node) ?? BoundStatementList.Synthesized(node.Syntax);
         }
 
-        private BoundStatement? RewriteExpressionStatement(BoundExpressionStatement node, bool suppressInstrumentation = false)
+        private BoundStatement? RewriteExpressionStatement(
+            BoundExpressionStatement node,
+            bool suppressInstrumentation = false
+        )
         {
             var loweredExpression = VisitUnusedExpression(node.Expression);
 
@@ -52,10 +55,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.AssignmentOperator:
                     // Avoid extra temporary by indicating the expression value is not used.
-                    return VisitAssignmentOperator((BoundAssignmentOperator)expression, used: false);
+                    return VisitAssignmentOperator(
+                        (BoundAssignmentOperator)expression,
+                        used: false
+                    );
 
                 case BoundKind.CompoundAssignmentOperator:
-                    return VisitCompoundAssignmentOperator((BoundCompoundAssignmentOperator)expression, used: false);
+                    return VisitCompoundAssignmentOperator(
+                        (BoundCompoundAssignmentOperator)expression,
+                        used: false
+                    );
 
                 case BoundKind.Call:
                     if (_allowOmissionOfConditionalCalls)
@@ -70,10 +79,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.DynamicInvocation:
                     // TODO (tomat): circumvents logic in VisitExpression...
-                    return VisitDynamicInvocation((BoundDynamicInvocation)expression, resultDiscarded: true);
+                    return VisitDynamicInvocation(
+                        (BoundDynamicInvocation)expression,
+                        resultDiscarded: true
+                    );
 
                 case BoundKind.ConditionalAccess:
-                    return RewriteConditionalAccess((BoundConditionalAccess)expression, used: false);
+                    return RewriteConditionalAccess(
+                        (BoundConditionalAccess)expression,
+                        used: false
+                    );
             }
             return VisitExpression(expression);
         }

@@ -9,6 +9,13 @@ internal static partial class Interop
     internal static partial class Ole32
     {
         [LibraryImport(Libraries.Ole32)]
-        internal static partial int CoGetStandardMarshal(ref Guid riid, IntPtr pv, int dwDestContext, IntPtr pvDestContext, int mshlflags, out IntPtr ppMarshal);
+        internal static partial int CoGetStandardMarshal(
+            ref Guid riid,
+            IntPtr pv,
+            int dwDestContext,
+            IntPtr pvDestContext,
+            int mshlflags,
+            out IntPtr ppMarshal
+        );
     }
 }

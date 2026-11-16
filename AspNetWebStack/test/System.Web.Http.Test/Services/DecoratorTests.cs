@@ -19,7 +19,8 @@ namespace System.Web.Http.Services
             IBaseInterface dummyBase = dummyObjectWrapper as IBaseInterface;
 
             // Act
-            DummyAggregatedClass innerObject = Decorator.GetInner(dummyBase) as DummyAggregatedClass;
+            DummyAggregatedClass innerObject =
+                Decorator.GetInner(dummyBase) as DummyAggregatedClass;
 
             // Assert
             Assert.Same(dummyInnerObject, innerObject);
@@ -31,11 +32,14 @@ namespace System.Web.Http.Services
             // Arrange
             DummyAggregatedClass dummyInnerObject = new DummyAggregatedClass();
             DummyObjectWrapper dummyObjectWrapper = new DummyObjectWrapper(dummyInnerObject);
-            DummyDoubleLayerWrapper dummyDoubleLayerWrapper = new DummyDoubleLayerWrapper(dummyObjectWrapper);
+            DummyDoubleLayerWrapper dummyDoubleLayerWrapper = new DummyDoubleLayerWrapper(
+                dummyObjectWrapper
+            );
             IBaseInterface dummyBase = dummyDoubleLayerWrapper as IBaseInterface;
 
             // Act
-            DummyAggregatedClass innerObject = Decorator.GetInner(dummyBase) as DummyAggregatedClass;
+            DummyAggregatedClass innerObject =
+                Decorator.GetInner(dummyBase) as DummyAggregatedClass;
 
             // Assert
             Assert.Same(dummyInnerObject, innerObject);
@@ -49,7 +53,8 @@ namespace System.Web.Http.Services
             IBaseInterface dummyBase = dummyInnerObject as IBaseInterface;
 
             // Act
-            DummyAggregatedClass innerObject = Decorator.GetInner(dummyBase) as DummyAggregatedClass;
+            DummyAggregatedClass innerObject =
+                Decorator.GetInner(dummyBase) as DummyAggregatedClass;
 
             // Assert
             Assert.Same(dummyInnerObject, innerObject);

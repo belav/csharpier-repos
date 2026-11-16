@@ -95,15 +95,11 @@ public class HttpUtilitiesTest
     [InlineData("HTTP/1.1\r", "HTTP/1.1")]
     public void KnownVersionsAreInterned(string input, string expected)
     {
-        TestKnownStringsInterning(
-            input,
-            expected,
-            span =>
-            {
-                HttpUtilities.GetKnownVersion(span, out var version, out var _);
-                return HttpUtilities.VersionToString(version);
-            }
-        );
+        TestKnownStringsInterning(input, expected, span =>
+        {
+            HttpUtilities.GetKnownVersion(span, out var version, out var _);
+            return HttpUtilities.VersionToString(version);
+        });
     }
 
     [Theory]
@@ -111,15 +107,11 @@ public class HttpUtilitiesTest
     [InlineData("http://host/", "http://")]
     public void KnownSchemesAreInterned(string input, string expected)
     {
-        TestKnownStringsInterning(
-            input,
-            expected,
-            span =>
-            {
-                HttpUtilities.GetKnownHttpScheme(span, out var scheme);
-                return HttpUtilities.SchemeToString(scheme);
-            }
-        );
+        TestKnownStringsInterning(input, expected, span =>
+        {
+            HttpUtilities.GetKnownHttpScheme(span, out var scheme);
+            return HttpUtilities.SchemeToString(scheme);
+        });
     }
 
     [Theory]
@@ -134,15 +126,11 @@ public class HttpUtilitiesTest
     [InlineData("TRACE / HTTP/1.1", "TRACE")]
     public void KnownMethodsAreInterned(string input, string expected)
     {
-        TestKnownStringsInterning(
-            input,
-            expected,
-            span =>
-            {
-                HttpUtilities.GetKnownMethod(span, out var method, out var length);
-                return HttpUtilities.MethodToString(method);
-            }
-        );
+        TestKnownStringsInterning(input, expected, span =>
+        {
+            HttpUtilities.GetKnownMethod(span, out var method, out var length);
+            return HttpUtilities.MethodToString(method);
+        });
     }
 
     private void TestKnownStringsInterning(
@@ -275,14 +263,13 @@ public class HttpUtilitiesTest
     private void ExceptionThrownForCRLF(Func<string, Encoding> selector)
     {
         byte[] encodedBytes = { 0x01, 0x0A, 0x0D };
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                HttpUtilities.GetRequestHeaderString(
-                    encodedBytes.AsSpan(),
-                    HeaderNames.Accept,
-                    selector,
-                    checkForNewlineChars: true
-                )
+        Assert.Throws<InvalidOperationException>(() =>
+            HttpUtilities.GetRequestHeaderString(
+                encodedBytes.AsSpan(),
+                HeaderNames.Accept,
+                selector,
+                checkForNewlineChars: true
+            )
         );
     }
 

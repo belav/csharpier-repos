@@ -23,8 +23,8 @@ internal static class ErrorPageModelBuilder
     )
     {
         var systemRuntimeAssembly = typeof(System.ComponentModel.DefaultValueAttribute).Assembly;
-        var assemblyVersion =
-            new AssemblyName(systemRuntimeAssembly.FullName!).Version?.ToString() ?? string.Empty;
+        var assemblyVersion = new AssemblyName(systemRuntimeAssembly.FullName!).Version?.ToString()
+            ?? string.Empty;
         var clrVersion = assemblyVersion;
         var currentAssembly = typeof(ErrorPage).Assembly;
         var currentAssemblyVesion = currentAssembly

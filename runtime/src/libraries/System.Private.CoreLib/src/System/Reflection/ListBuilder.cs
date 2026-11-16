@@ -7,7 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection
 {
     // Helper to build arrays. Special cased to avoid allocations for arrays of one element.
-    internal struct ListBuilder<T> where T : class
+    internal struct ListBuilder<T>
+        where T : class
     {
         private T[]? _items;
         private T _item;

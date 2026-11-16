@@ -9,6 +9,7 @@ namespace System.ServiceModel.Dispatcher
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Net;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
@@ -16,14 +17,13 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Web;
-    using System.Net;
 
     public class WebHttpDispatchOperationSelector : IDispatchOperationSelector
     {
         public const string HttpOperationSelectorUriMatchedPropertyName = "UriMatched";
         internal const string HttpOperationSelectorDataPropertyName = "HttpOperationSelectorData";
 
-        // 
+        //
         public const string HttpOperationNamePropertyName = "HttpOperationName";
         internal const string redirectOperationName = ""; // always unhandled invoker
         internal const string RedirectPropertyName = "WebHttpRedirect";
@@ -44,8 +44,9 @@ namespace System.ServiceModel.Dispatcher
             }
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.EndpointAddressCannotBeNull)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR2.GetString(SR2.EndpointAddressCannotBeNull))
+                );
             }
 #pragma warning disable 56506 // Microsoft, endpoint.Address.Uri is never null
             Uri baseUri = endpoint.Address.Uri;
@@ -56,7 +57,10 @@ namespace System.ServiceModel.Dispatcher
             WebHttpBehavior webHttpBehavior = endpoint.Behaviors.Find<WebHttpBehavior>();
             if (webHttpBehavior != null && webHttpBehavior.HelpEnabled)
             {
-                this.helpUriTable = new UriTemplateTable(endpoint.ListenUri, HelpPage.GetOperationTemplatePairs());
+                this.helpUriTable = new UriTemplateTable(
+                    endpoint.ListenUri,
+                    HelpPage.GetOperationTemplatePairs()
+                );
             }
 
             Dictionary<WCFKey, string> alreadyHaves = new Dictionary<WCFKey, string>();
@@ -71,16 +75,25 @@ namespace System.ServiceModel.Dispatcher
                     string method = WebHttpBehavior.GetWebMethod(od);
                     string path = UriTemplateClientFormatter.GetUTStringOrDefault(od);
 
-                    // 
+                    //
 
-                    if (UriTemplateHelpers.IsWildcardPath(path) && (method == WebHttpBehavior.WildcardMethod))
+                    if (
+                        UriTemplateHelpers.IsWildcardPath(path)
+                        && (method == WebHttpBehavior.WildcardMethod)
+                    )
                     {
                         if (this.catchAllOperationName != "")
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                                 new InvalidOperationException(
-                                SR2.GetString(SR2.MultipleOperationsInContractWithPathMethod,
-                                endpoint.Contract.Name, path, method)));
+                                    SR2.GetString(
+                                        SR2.MultipleOperationsInContractWithPathMethod,
+                                        endpoint.Contract.Name,
+                                        path,
+                                        method
+                                    )
+                                )
+                            );
                         }
                         this.catchAllOperationName = od.Name;
                     }
@@ -90,8 +103,14 @@ namespace System.ServiceModel.Dispatcher
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                             new InvalidOperationException(
-                            SR2.GetString(SR2.MultipleOperationsInContractWithPathMethod,
-                            endpoint.Contract.Name, path, method)));
+                                SR2.GetString(
+                                    SR2.MultipleOperationsInContractWithPathMethod,
+                                    endpoint.Contract.Name,
+                                    path,
+                                    method
+                                )
+                            )
+                        );
                     }
                     alreadyHaves.Add(wcfKey, od.Name);
 
@@ -102,7 +121,9 @@ namespace System.ServiceModel.Dispatcher
                         methodSpecificTables.Add(method, methodSpecificTable);
                     }
 
-                    methodSpecificTable.KeyValuePairs.Add(new KeyValuePair<UriTemplate, object>(ut, od.Name));
+                    methodSpecificTable.KeyValuePairs.Add(
+                        new KeyValuePair<UriTemplate, object>(ut, od.Name)
+                    );
                     this.templates.Add(od.Name, ut);
                 }
             }
@@ -116,19 +137,24 @@ namespace System.ServiceModel.Dispatcher
                 // freeze all the tables because they should not be modified after this point
                 foreach (UriTemplateTable table in this.methodSpecificTables.Values)
                 {
-                    table.MakeReadOnly(true /* allowDuplicateEquivalentUriTemplates */);
+                    table.MakeReadOnly(
+                        true /* allowDuplicateEquivalentUriTemplates */
+                    );
                 }
 
-                if (!methodSpecificTables.TryGetValue(WebHttpBehavior.WildcardMethod, out wildcardTable))
+                if (
+                    !methodSpecificTables.TryGetValue(
+                        WebHttpBehavior.WildcardMethod,
+                        out wildcardTable
+                    )
+                )
                 {
                     wildcardTable = null;
                 }
             }
         }
 
-        protected WebHttpDispatchOperationSelector()
-        {
-        }
+        protected WebHttpDispatchOperationSelector() { }
 
         public virtual UriTemplate GetUriTemplate(string operationName)
         {
@@ -147,7 +173,12 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#", Justification = "This method is defined by the IDispatchOperationSelector interface")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1045:DoNotPassTypesByReference",
+            MessageId = "0#",
+            Justification = "This method is defined by the IDispatchOperationSelector interface"
+        )]
         public string SelectOperation(ref Message message)
         {
             if (message == null)
@@ -165,15 +196,33 @@ namespace System.ServiceModel.Dispatcher
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
 #pragma warning disable 56506 // Microsoft, Message.Headers is never null
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.WebRequestMatchesOperation, SR2.GetString(SR2.TraceCodeWebRequestMatchesOperation, message.Headers.To, result));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.WebRequestMatchesOperation,
+                        SR2.GetString(
+                            SR2.TraceCodeWebRequestMatchesOperation,
+                            message.Headers.To,
+                            result
+                        )
+                    );
 #pragma warning restore 56506
                 }
             }
             return result;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#", Justification = "This method is like that defined by the IDispatchOperationSelector interface")]
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "This API needs to return multiple things")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1045:DoNotPassTypesByReference",
+            MessageId = "0#",
+            Justification = "This method is like that defined by the IDispatchOperationSelector interface"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            MessageId = "1#",
+            Justification = "This API needs to return multiple things"
+        )]
         protected virtual string SelectOperation(ref Message message, out bool uriMatched)
         {
             if (message == null)
@@ -191,7 +240,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 return this.catchAllOperationName;
             }
-            HttpRequestMessageProperty prop = message.Properties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
+            HttpRequestMessageProperty prop =
+                message.Properties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
             if (prop == null)
             {
                 return this.catchAllOperationName;
@@ -217,14 +267,22 @@ namespace System.ServiceModel.Dispatcher
                     {
                         return HelpOperationInvoker.OperationName;
                     }
-                    message.Properties.Add(WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
-                        new WebHttpDispatchOperationSelectorData() { AllowedMethods = new List<string>() { WebHttpBehavior.GET } });
+                    message.Properties.Add(
+                        WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
+                        new WebHttpDispatchOperationSelectorData()
+                        {
+                            AllowedMethods = new List<string>() { WebHttpBehavior.GET },
+                        }
+                    );
                     return this.catchAllOperationName;
                 }
             }
 
             UriTemplateTable methodSpecificTable;
-            bool methodMatchesExactly = methodSpecificTables.TryGetValue(method, out methodSpecificTable);
+            bool methodMatchesExactly = methodSpecificTables.TryGetValue(
+                method,
+                out methodSpecificTable
+            );
             if (methodMatchesExactly)
             {
                 string operationName;
@@ -251,7 +309,7 @@ namespace System.ServiceModel.Dispatcher
             }
 
             // the {method, uri} pair does not match anything the service supports.
-            // we know at this point that we'll return some kind of error code, but we 
+            // we know at this point that we'll return some kind of error code, but we
             // should go through all methods for the uri to see if any method is supported
             // so that that information could be returned to the user as well
 
@@ -271,7 +329,7 @@ namespace System.ServiceModel.Dispatcher
                         allowedMethods = new List<string>();
                     }
 
-                    // 
+                    //
 
                     if (!allowedMethods.Contains(pair.Key))
                     {
@@ -283,13 +341,21 @@ namespace System.ServiceModel.Dispatcher
             if (allowedMethods != null)
             {
                 uriMatched = true;
-                message.Properties.Add(WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
-                    new WebHttpDispatchOperationSelectorData() { AllowedMethods = allowedMethods });
+                message.Properties.Add(
+                    WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
+                    new WebHttpDispatchOperationSelectorData() { AllowedMethods = allowedMethods }
+                );
             }
             return catchAllOperationName;
         }
 
-        bool CanUriMatch(UriTemplateTable methodSpecificTable, Uri to, HttpRequestMessageProperty prop, Message message, out string operationName)
+        bool CanUriMatch(
+            UriTemplateTable methodSpecificTable,
+            Uri to,
+            HttpRequestMessageProperty prop,
+            Message message,
+            out string operationName
+        )
         {
             operationName = null;
             UriTemplateMatch result = methodSpecificTable.MatchSingle(to);
@@ -304,13 +370,24 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 
-        void AddUriTemplateMatch(UriTemplateMatch match, HttpRequestMessageProperty requestProp, Message message)
+        void AddUriTemplateMatch(
+            UriTemplateMatch match,
+            HttpRequestMessageProperty requestProp,
+            Message message
+        )
         {
             match.SetBaseUri(match.BaseUri, requestProp);
-            message.Properties.Add(IncomingWebRequestContext.UriTemplateMatchResultsPropertyName, match);
+            message.Properties.Add(
+                IncomingWebRequestContext.UriTemplateMatchResultsPropertyName,
+                match
+            );
         }
 
-        bool ShouldRedirectToUriWithSlashAtTheEnd(UriTemplateTable methodSpecificTable, Message message, Uri to)
+        bool ShouldRedirectToUriWithSlashAtTheEnd(
+            UriTemplateTable methodSpecificTable,
+            Message message,
+            Uri to
+        )
         {
             UriBuilder ub = new UriBuilder(to);
             if (ub.Path.EndsWith("/", StringComparison.Ordinal))
@@ -322,7 +399,10 @@ namespace System.ServiceModel.Dispatcher
             Uri originalPlusSlash = ub.Uri;
 
             bool result = false;
-            if (methodSpecificTable != null && methodSpecificTable.MatchSingle(originalPlusSlash) != null)
+            if (
+                methodSpecificTable != null
+                && methodSpecificTable.MatchSingle(originalPlusSlash) != null
+            )
             {
                 // as an optimization, we check the table that matched the request's method
                 // first, as it is more probable that a hit happens there
@@ -331,14 +411,17 @@ namespace System.ServiceModel.Dispatcher
             else
             {
                 // back-compat:
-                // we will redirect as long as there is any method 
+                // we will redirect as long as there is any method
                 // - not necessary the one the user is looking for -
                 // that matches the uri with a slash at the end
 
                 foreach (KeyValuePair<string, UriTemplateTable> pair in methodSpecificTables)
                 {
                     UriTemplateTable table = pair.Value;
-                    if (table != methodSpecificTable && table.MatchSingle(originalPlusSlash) != null)
+                    if (
+                        table != methodSpecificTable
+                        && table.MatchSingle(originalPlusSlash) != null
+                    )
                     {
                         result = true;
                         break;
@@ -359,7 +442,9 @@ namespace System.ServiceModel.Dispatcher
         {
             HttpRequestMessageProperty requestProperty;
             string hostName = null;
-            if (message.Properties.TryGetValue(HttpRequestMessageProperty.Name, out requestProperty))
+            if (
+                message.Properties.TryGetValue(HttpRequestMessageProperty.Name, out requestProperty)
+            )
             {
                 hostName = requestProperty.Headers[HttpRequestHeader.Host];
                 if (!string.IsNullOrEmpty(hostName))
@@ -367,7 +452,8 @@ namespace System.ServiceModel.Dispatcher
                     return hostName;
                 }
             }
-            IAspNetMessageProperty aspNetMessageProperty = AspNetEnvironment.Current.GetHostingProperty(message);
+            IAspNetMessageProperty aspNetMessageProperty =
+                AspNetEnvironment.Current.GetHostingProperty(message);
             if (aspNetMessageProperty != null)
             {
                 hostName = aspNetMessageProperty.OriginalRequestUri.Authority;
@@ -380,11 +466,13 @@ namespace System.ServiceModel.Dispatcher
         {
             string method;
             UriTemplate uriTemplate;
+
             public WCFKey(UriTemplate uriTemplate, string method)
             {
                 this.uriTemplate = uriTemplate;
                 this.method = method;
             }
+
             public override bool Equals(object obj)
             {
                 WCFKey other = obj as WCFKey;
@@ -392,8 +480,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     return false;
                 }
-                return this.uriTemplate.IsEquivalentTo(other.uriTemplate) && this.method == other.method;
+                return this.uriTemplate.IsEquivalentTo(other.uriTemplate)
+                    && this.method == other.method;
             }
+
             public override int GetHashCode()
             {
                 return UriTemplateEquivalenceComparer.Instance.GetHashCode(this.uriTemplate);
@@ -401,4 +491,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

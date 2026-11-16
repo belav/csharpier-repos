@@ -7,9 +7,11 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
 
-    sealed class StrictModeSecurityHeaderElementInferenceEngine : SecurityHeaderElementInferenceEngine
+    sealed class StrictModeSecurityHeaderElementInferenceEngine
+        : SecurityHeaderElementInferenceEngine
     {
-        static StrictModeSecurityHeaderElementInferenceEngine instance = new StrictModeSecurityHeaderElementInferenceEngine();
+        static StrictModeSecurityHeaderElementInferenceEngine instance =
+            new StrictModeSecurityHeaderElementInferenceEngine();
 
         StrictModeSecurityHeaderElementInferenceEngine() { }
 
@@ -18,12 +20,18 @@ namespace System.ServiceModel.Security
             get { return instance; }
         }
 
-        public override void ExecuteProcessingPasses(ReceiveSecurityHeader securityHeader, XmlDictionaryReader reader)
+        public override void ExecuteProcessingPasses(
+            ReceiveSecurityHeader securityHeader,
+            XmlDictionaryReader reader
+        )
         {
             securityHeader.ExecuteFullPass(reader);
         }
 
-        public override void MarkElements(ReceiveSecurityHeaderElementManager elementManager, bool messageSecurityMode)
+        public override void MarkElements(
+            ReceiveSecurityHeaderElementManager elementManager,
+            bool messageSecurityMode
+        )
         {
             bool primarySignatureFound = false;
             for (int position = 0; position < elementManager.Count; position++)
@@ -34,11 +42,17 @@ namespace System.ServiceModel.Security
                 {
                     if (!messageSecurityMode || primarySignatureFound)
                     {
-                        elementManager.SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Endorsing);
+                        elementManager.SetBindingMode(
+                            position,
+                            ReceiveSecurityHeaderBindingModes.Endorsing
+                        );
                     }
                     else
                     {
-                        elementManager.SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Primary);
+                        elementManager.SetBindingMode(
+                            position,
+                            ReceiveSecurityHeaderBindingModes.Primary
+                        );
                         primarySignatureFound = true;
                     }
                 }

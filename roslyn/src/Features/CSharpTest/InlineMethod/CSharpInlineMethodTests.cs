@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineMethod)]
     public class CSharpInlineMethodTests
     {
-        private class TestVerifier : CSharpCodeRefactoringVerifier<CSharpInlineMethodRefactoringProvider>.Test
+        private class TestVerifier
+            : CSharpCodeRefactoringVerifier<CSharpInlineMethodRefactoringProvider>.Test
         {
             private const string Marker = "##";
 
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string expectedMarkUpForFile1,
                 string expectedMarkUpForFile2,
                 List<DiagnosticResult> diagnosticResults = null,
-                bool keepInlinedMethod = true)
+                bool keepInlinedMethod = true
+            )
             {
                 diagnosticResults ??= new List<DiagnosticResult>();
                 var test = new TestVerifier
@@ -39,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         {
                             ("File1", initialMarkUpForFile1),
                             ("File2", initialMarkUpForFile2),
-                        }
+                        },
                     },
                     FixedState =
                     {
@@ -47,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         {
                             ("File1", expectedMarkUpForFile1),
                             ("File2", expectedMarkUpForFile2),
-                        }
+                        },
                     },
                     CodeActionValidationMode = CodeActionValidationMode.None,
                     LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
@@ -60,20 +62,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string initialMarkUp,
                 string expectedMarkUp,
                 List<DiagnosticResult> diagnosticResults = null,
-                bool keepInlinedMethod = true)
+                bool keepInlinedMethod = true
+            )
             {
                 diagnosticResults ??= new List<DiagnosticResult>();
                 var test = new TestVerifier
                 {
                     CodeActionIndex = keepInlinedMethod ? 1 : 0,
-                    TestState =
-                    {
-                        Sources = { initialMarkUp }
-                    },
-                    FixedState =
-                    {
-                        Sources = { expectedMarkUp },
-                    },
+                    TestState = { Sources = { initialMarkUp } },
+                    FixedState = { Sources = { expectedMarkUp } },
                     CodeActionValidationMode = CodeActionValidationMode.None,
                     LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
                 };
@@ -87,75 +84,102 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 string expectedMarkUpForCaller,
                 string expectedMarkUpForCallee,
                 List<DiagnosticResult> diagnosticResultsWhenKeepInlinedMethod = null,
-                List<DiagnosticResult> diagnosticResultsWhenRemoveInlinedMethod = null)
+                List<DiagnosticResult> diagnosticResultsWhenRemoveInlinedMethod = null
+            )
             {
                 var firstMarkerIndex = expectedMarkUpForCallee.IndexOf(Marker);
                 var secondMarkerIndex = expectedMarkUpForCallee.LastIndexOf(Marker);
-                if (firstMarkerIndex == -1 || secondMarkerIndex == -1 || firstMarkerIndex == secondMarkerIndex)
+                if (
+                    firstMarkerIndex == -1
+                    || secondMarkerIndex == -1
+                    || firstMarkerIndex == secondMarkerIndex
+                )
                 {
                     Assert.True(false, "Can't find proper marks that contains inlined method.");
                 }
 
                 var firstPartitionBeforeMarkUp = expectedMarkUpForCallee[..firstMarkerIndex];
-                var inlinedMethod = expectedMarkUpForCallee.Substring(firstMarkerIndex + 2, secondMarkerIndex - firstMarkerIndex - 2);
+                var inlinedMethod = expectedMarkUpForCallee.Substring(
+                    firstMarkerIndex + 2,
+                    secondMarkerIndex - firstMarkerIndex - 2
+                );
                 var lastPartitionAfterMarkup = expectedMarkUpForCallee[(secondMarkerIndex + 2)..];
 
                 await TestInRegularScriptsInDifferentFilesAsync(
-                    initialMarkUpForCaller,
-                    initialMarkUpForCallee,
-                    expectedMarkUpForCaller,
-                    string.Concat(firstPartitionBeforeMarkUp, inlinedMethod, lastPartitionAfterMarkup),
-                    diagnosticResultsWhenKeepInlinedMethod,
-                    keepInlinedMethod: true).ConfigureAwait(false);
+                        initialMarkUpForCaller,
+                        initialMarkUpForCallee,
+                        expectedMarkUpForCaller,
+                        string.Concat(
+                            firstPartitionBeforeMarkUp,
+                            inlinedMethod,
+                            lastPartitionAfterMarkup
+                        ),
+                        diagnosticResultsWhenKeepInlinedMethod,
+                        keepInlinedMethod: true
+                    )
+                    .ConfigureAwait(false);
 
                 await TestInRegularScriptsInDifferentFilesAsync(
-                    initialMarkUpForCaller,
-                    initialMarkUpForCallee,
-                    expectedMarkUpForCaller,
-                    string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
-                    diagnosticResultsWhenRemoveInlinedMethod,
-                    keepInlinedMethod: false).ConfigureAwait(false);
+                        initialMarkUpForCaller,
+                        initialMarkUpForCallee,
+                        expectedMarkUpForCaller,
+                        string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
+                        diagnosticResultsWhenRemoveInlinedMethod,
+                        keepInlinedMethod: false
+                    )
+                    .ConfigureAwait(false);
             }
 
             public static async Task TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 string initialMarkUp,
                 string expectedMarkUp,
                 List<DiagnosticResult> diagnosticResultsWhenKeepInlinedMethod = null,
-                List<DiagnosticResult> diagnosticResultsWhenRemoveInlinedMethod = null)
+                List<DiagnosticResult> diagnosticResultsWhenRemoveInlinedMethod = null
+            )
             {
                 var firstMarkerIndex = expectedMarkUp.IndexOf(Marker);
                 var secondMarkerIndex = expectedMarkUp.LastIndexOf(Marker);
-                if (firstMarkerIndex == -1 || secondMarkerIndex == -1 || firstMarkerIndex == secondMarkerIndex)
+                if (
+                    firstMarkerIndex == -1
+                    || secondMarkerIndex == -1
+                    || firstMarkerIndex == secondMarkerIndex
+                )
                 {
                     Assert.True(false, "Can't find proper marks that contains inlined method.");
                 }
 
                 var firstPartitionBeforeMarkUp = expectedMarkUp[..firstMarkerIndex];
-                var inlinedMethod = expectedMarkUp.Substring(firstMarkerIndex + 2, secondMarkerIndex - firstMarkerIndex - 2);
+                var inlinedMethod = expectedMarkUp.Substring(
+                    firstMarkerIndex + 2,
+                    secondMarkerIndex - firstMarkerIndex - 2
+                );
                 var lastPartitionAfterMarkup = expectedMarkUp[(secondMarkerIndex + 2)..];
 
                 await TestInRegularAndScriptInTheSameFileAsync(
-                    initialMarkUp,
-                    string.Concat(
-                        firstPartitionBeforeMarkUp,
-                        inlinedMethod,
-                        lastPartitionAfterMarkup),
-                    diagnosticResultsWhenKeepInlinedMethod,
-                    keepInlinedMethod: true).ConfigureAwait(false);
+                        initialMarkUp,
+                        string.Concat(
+                            firstPartitionBeforeMarkUp,
+                            inlinedMethod,
+                            lastPartitionAfterMarkup
+                        ),
+                        diagnosticResultsWhenKeepInlinedMethod,
+                        keepInlinedMethod: true
+                    )
+                    .ConfigureAwait(false);
 
                 await TestInRegularAndScriptInTheSameFileAsync(
-                    initialMarkUp,
-                    string.Concat(
-                        firstPartitionBeforeMarkUp,
-                        lastPartitionAfterMarkup),
-                    diagnosticResultsWhenRemoveInlinedMethod,
-                    keepInlinedMethod: false).ConfigureAwait(false);
+                        initialMarkUp,
+                        string.Concat(firstPartitionBeforeMarkUp, lastPartitionAfterMarkup),
+                        diagnosticResultsWhenRemoveInlinedMethod,
+                        keepInlinedMethod: false
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
         [Fact]
-        public Task TestInlineInvocationExpressionForExpressionStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineInvocationExpressionForExpressionStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Collections.Generic;
                 public class TestClass
@@ -187,11 +211,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return set.Add(i);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithSingleStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithSingleStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -219,11 +244,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(i + j);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithSingleStatementAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithSingleStatementAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -259,11 +285,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(i + j);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestExtractArrowExpressionBody()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestExtractArrowExpressionBody() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private void Caller(int i, int j)
@@ -286,11 +314,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private void Callee(int i, int j)
                         => System.Console.WriteLine(i + j);
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestExtractArrowExpressionBodyAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestExtractArrowExpressionBodyAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -322,11 +351,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private void Callee(int i, int j)
                         => System.Console.WriteLine(i + j);##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestExtractExpressionBody()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestExtractExpressionBody() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -348,11 +378,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private static int Callee(int i, int j)
                         => i + j;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestDefaultValueReplacementForExpressionStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestDefaultValueReplacementForExpressionStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -380,11 +411,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(y ? i : (c ?? "Hello").Length);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestDefaultValueReplacementForExpressionStatementAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestDefaultValueReplacementForExpressionStatementAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -420,11 +452,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(y ? i : (c ?? "Hello").Length);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestDefaultValueReplacementForArrowExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestDefaultValueReplacementForArrowExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public enum A
                 {
@@ -458,11 +491,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private void Callee(int i = default, string c = default, bool y = false, A a = default) =>
                         System.Console.WriteLine((y ? i : (c ?? "Hello").Length) + (int)a);
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithLiteralValue()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithLiteralValue() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System;
                 public enum A
@@ -508,11 +542,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private void Callee(int i, char c, bool x, string y, A a) =>
                         System.Console.WriteLine(i + (int)c + (int)a + (x ? 1 : y.Length));
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithLiteralValueAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithLiteralValueAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -544,11 +579,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private void Callee(int i, char c, bool x, string y) =>
                         System.Console.WriteLine(i + (int)c + (x ? 1 : y.Length));##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithIdentifierReplacement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithIdentifierReplacement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -576,11 +612,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(i + j + (k ?? ""));
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithIdentifierReplacementAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithIdentifierReplacementAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -607,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(10 + m + ("Hello" ?? ""));
                     }
                 }
-                """, """
+                """,
+                """
                 public partial class TestClass
                 {##
                     private void Callee(int i, int j = 100, string k = null)
@@ -615,11 +653,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(i + j + (k ?? ""));
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithNoMethodExtraction()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithNoMethodExtraction() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -657,11 +696,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return r * r * 3.14f;
                     }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithNoMethodExtractionAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithNoMethodExtractionAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -707,11 +747,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("This is s1" + s1 + "This is S2" + s2);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayWithArrayImplicitInitializerExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineParamsArrayWithArrayImplicitInitializerExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private void Caller()
@@ -724,8 +766,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 }
-                """
-,
+                """,
                 """
                 public class TestClass
                 {
@@ -739,11 +780,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayWithArrayImplicitInitializerExpressionAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineParamsArrayWithArrayImplicitInitializerExpressionAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -779,11 +821,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayWithArrayInitializerExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineParamsArrayWithArrayInitializerExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private void Caller()
@@ -796,8 +840,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 }
-                """
-,
+                """,
                 """
                 public class TestClass
                 {
@@ -811,11 +854,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayWithArrayInitializerExpressionAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineParamsArrayWithArrayInitializerExpressionAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -851,11 +895,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayWithOneElement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineParamsArrayWithOneElement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private void Caller()
@@ -868,8 +914,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 }
-                """
-,
+                """,
                 """
                 public class TestClass
                 {
@@ -883,11 +928,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayWithOneElementAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineParamsArrayWithOneElementAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -923,11 +969,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineParamsArrayMethodWithIdentifier()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineParamsArrayMethodWithIdentifier() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private void Caller()
@@ -956,42 +1004,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 ##}
-                """);
-        [Fact]
-        public Task TestInlineMethodWithNoElementInParamsArray()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
-                    """
-                    public class TestClass
-                    {
-                        private void Caller()
-                        {
-                            Cal[||]lee();
-                        }
+                """
+            );
 
-                        private void Callee(params int[] x)
-                        {
-                            System.Console.WriteLine(x.Length);
-                        }
+        [Fact]
+        public Task TestInlineMethodWithNoElementInParamsArray() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
+                public class TestClass
+                {
+                    private void Caller()
+                    {
+                        Cal[||]lee();
                     }
-                    """,
-                    """
-                    public class TestClass
+
+                    private void Callee(params int[] x)
                     {
-                        private void Caller()
-                        {
-                            System.Console.WriteLine((new int[] { }).Length);
-                        }
-                    ##
-                        private void Callee(params int[] x)
-                        {
-                            System.Console.WriteLine(x.Length);
-                        }
-                    ##}
-                    """);
+                        System.Console.WriteLine(x.Length);
+                    }
+                }
+                """,
+                """
+                public class TestClass
+                {
+                    private void Caller()
+                    {
+                        System.Console.WriteLine((new int[] { }).Length);
+                    }
+                ##
+                    private void Callee(params int[] x)
+                    {
+                        System.Console.WriteLine(x.Length);
+                    }
+                ##}
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithParamsArray()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithParamsArray() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -1019,11 +1070,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(x.Length);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithVariableDeclaration1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithVariableDeclaration1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -1051,11 +1103,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         z = 10;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithVariableDeclaration1AcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithVariableDeclaration1AcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -1091,11 +1144,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         z = 10;
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithVariableDeclaration2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithVariableDeclaration2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -1126,11 +1180,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         z = x = y = 10;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithVariableDeclaration2AcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithVariableDeclaration2AcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -1169,11 +1224,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         z = x = y = 10;
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithVariableDeclaration3()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithVariableDeclaration3() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -1212,11 +1268,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         z = 100;
                     }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithVariableDeclaration3AcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithVariableDeclaration3AcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -1263,11 +1320,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         DoSometing(out z);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineCalleeSelf()
-            => TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
+        public Task TestInlineCalleeSelf() =>
+            TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -1295,10 +1353,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return 1 + 2 + j;
                     }
                 }
-                """);
+                """
+            );
+
         [Fact]
-        public Task TestInlineMethodWithConditionalExpression()
-            => TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
+        public Task TestInlineMethodWithConditionalExpression() =>
+            TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -1326,11 +1386,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineExpressionWithoutAssignedToVariable()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineExpressionWithoutAssignedToVariable() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public void Caller(int j)
@@ -1343,7 +1405,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public void Caller(int j)
@@ -1356,11 +1419,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineExpressionWithoutAssignedToVariableAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineExpressionWithoutAssignedToVariableAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -1396,11 +1460,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithNullCoalescingExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineMethodWithNullCoalescingExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public void Caller(int? i)
@@ -1413,7 +1479,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public void Caller(int? i)
@@ -1426,11 +1493,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineSimpleLambdaExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineSimpleLambdaExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public System.Func<int, int, int> Caller()
@@ -1440,7 +1509,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private System.Func<int, int, int> Callee() => (i, j) => i + j;
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public System.Func<int, int, int> Caller()
@@ -1450,11 +1520,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private System.Func<int, int, int> Callee() => (i, j) => i + j;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineSimpleLambdaExpressionAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineSimpleLambdaExpressionAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -1484,11 +1555,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 {##
                     private System.Func<int, int, int> Callee() => (i, j) => i + j;##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithGenericsArguments()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithGenericsArguments() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System;
                 public class TestClass
@@ -1518,11 +1590,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(typeof(T).Name.Length + i.Length + typeof(U).Name.Length);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithGenericsArgumentsAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestInlineMethodWithGenericsArgumentsAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 public partial class TestClass
                 {
@@ -1558,11 +1631,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine(typeof(T).Name.Length + i.Length + typeof(U).Name.Length);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInMethod1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpressionInMethod1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 using System;
@@ -1596,11 +1670,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return await Task.FromResult(i + j);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInMethodAcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestAwaitExpressionInMethodAcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 using System.Threading.Tasks;
                 public partial class TestClass
@@ -1642,11 +1717,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return await Task.FromResult(i + j);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInMethod2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpressionInMethod2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 using System;
@@ -1680,11 +1756,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return async () => await Task.Delay(100);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInMethod2AcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestAwaitExpressionInMethod2AcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 using System.Threading.Tasks;
                 using System;
@@ -1730,11 +1807,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return async () => await Task.Delay(100);
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpresssion1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpresssion1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 public class TestClass
@@ -1764,11 +1842,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         await Task.CompletedTask;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpresssion2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpresssion2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 public class TestClass
@@ -1792,11 +1871,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private async Task Callee() => await Task.CompletedTask;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpresssion3()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpresssion3() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 public class TestClass
@@ -1820,11 +1900,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private async Task<int> Callee() => await Task.FromResult(1);
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpresssion4()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpresssion4() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 public class TestClass
@@ -1858,11 +1939,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private async Task<int> SomeCalculation() => await Task.FromResult(10);
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInMethod4AcrossFile()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+        public Task TestAwaitExpressionInMethod4AcrossFile() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
                 """
                 using System.Threading.Tasks;
                 public partial class TestClass
@@ -1906,7 +1988,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return await Task.FromResult(await SomeCalculation());
                     }##
                 }
-                """);
+                """
+            );
 
         [Fact]
         public Task TestAwaitExpresssion5()
@@ -1914,50 +1997,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
             var diagnostic = new List<DiagnosticResult>()
             {
                 // Await can't be used in non-async method.
-                DiagnosticResult.CompilerError("CS4032").WithSpan(6, 33, 6, 56).WithArguments("int")
+                DiagnosticResult
+                    .CompilerError("CS4032")
+                    .WithSpan(6, 33, 6, 56)
+                    .WithArguments("int"),
             };
             return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
-                           """
-                           using System.Threading.Tasks;
-                           public class TestClass
-                           {
-                               public int Caller()
-                               {
-                                   var x = Cal[||]lee();
-                                   return 1;
-                               }
+                """
+                using System.Threading.Tasks;
+                public class TestClass
+                {
+                    public int Caller()
+                    {
+                        var x = Cal[||]lee();
+                        return 1;
+                    }
 
-                               private async Task<int> Callee()
-                               {
-                                   return await Task.FromResult(await SomeCalculation());
-                               }
+                    private async Task<int> Callee()
+                    {
+                        return await Task.FromResult(await SomeCalculation());
+                    }
 
-                               private async Task<int> SomeCalculation() => await Task.FromResult(10);
-                           }
-                           """,
-                           """
-                           using System.Threading.Tasks;
-                           public class TestClass
-                           {
-                               public int Caller()
-                               {
-                                   var x = Task.FromResult(await SomeCalculation());
-                                   return 1;
-                               }
-                           ##
-                               private async Task<int> Callee()
-                               {
-                                   return await Task.FromResult(await SomeCalculation());
-                               }
-                           ##
-                               private async Task<int> SomeCalculation() => await Task.FromResult(10);
-                           }
-                           """, diagnosticResultsWhenKeepInlinedMethod: diagnostic, diagnosticResultsWhenRemoveInlinedMethod: diagnostic);
+                    private async Task<int> SomeCalculation() => await Task.FromResult(10);
+                }
+                """,
+                """
+                using System.Threading.Tasks;
+                public class TestClass
+                {
+                    public int Caller()
+                    {
+                        var x = Task.FromResult(await SomeCalculation());
+                        return 1;
+                    }
+                ##
+                    private async Task<int> Callee()
+                    {
+                        return await Task.FromResult(await SomeCalculation());
+                    }
+                ##
+                    private async Task<int> SomeCalculation() => await Task.FromResult(10);
+                }
+                """,
+                diagnosticResultsWhenKeepInlinedMethod: diagnostic,
+                diagnosticResultsWhenRemoveInlinedMethod: diagnostic
+            );
         }
 
         [Fact]
-        public Task TestAwaitExpresssion6()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpresssion6() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 public class TestClass
@@ -1987,11 +2076,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return await Task.FromResult(100);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInLambda()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpressionInLambda() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System;
                 using System.Threading.Tasks;
@@ -2031,11 +2121,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return await Task.FromResult(10);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestAwaitExpressionInLocalMethod()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestAwaitExpressionInLocalMethod() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System.Threading.Tasks;
                 public class TestClass
@@ -2073,10 +2164,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return await Task.FromResult(i + j);
                     }
                 ##}
-                """);
+                """
+            );
+
         [Fact]
-        public Task TestInlineMethodForLambda1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodForLambda1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System;
                 public class TestClass
@@ -2102,11 +2195,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private Func<int, int> Callee()
                         => i => 1;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodForLambda2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodForLambda2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 using System;
                 using System.Threading.Tasks;
@@ -2134,11 +2228,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                     private Func<Task> Callee()
                         => async () => await Task.CompletedTask;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineWithinDoStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineWithinDoStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2174,11 +2269,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineWithinForStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineWithinForStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2214,11 +2310,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineWithinIfStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineWithinIfStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2254,11 +2351,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineWithinLockStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineWithinLockStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2294,11 +2392,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineWithinReturnStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineWithinReturnStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2330,11 +2429,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithinThrowStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithinThrowStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2366,11 +2466,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineWithinWhileStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineWithinWhileStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2404,29 +2505,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithinTryStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
-            """
-            public class TestClass
-            {
-                private void Calller()
+        public Task TestInlineMethodWithinTryStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
+                public class TestClass
                 {
-                    try
+                    private void Calller()
                     {
+                        try
+                        {
+                        }
+                        catch (System.Exception e) when (Ca[||]llee(e, SomeInt()))
+                        {
+                        }
                     }
-                    catch (System.Exception e) when (Ca[||]llee(e, SomeInt()))
-                    {
-                    }
+
+                    private bool Callee(System.Exception e, int i) => i == 1;
+
+                    private int SomeInt() => 10;
                 }
-
-                private bool Callee(System.Exception e, int i) => i == 1;
-
-                private int SomeInt() => 10;
-            }
-            """,
+                """,
                 """
                 public class TestClass
                 {
@@ -2444,11 +2546,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineMethodWithinYieldReturnStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineMethodWithinYieldReturnStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass2
                 {
@@ -2478,11 +2581,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int SomeInt() => 10;
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineExtensionMethod1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineExtensionMethod1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 static class Program
                 {
@@ -2512,11 +2616,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineExtensionMethod2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineExtensionMethod2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 static class Program
                 {
@@ -2544,11 +2649,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineExtensionMethod3()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestInlineExtensionMethod3() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 static class Program
                 {
@@ -2580,11 +2686,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestIsExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestIsExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2612,11 +2719,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i == j;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestUnaryPlusOperator()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestUnaryPlusOperator() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2644,11 +2752,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return 1 + 2;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestLogicalNotExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestLogicalNotExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2676,11 +2785,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i == j;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestCastExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestCastExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2708,11 +2818,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i + j;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestIsPatternExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestIsPatternExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2744,11 +2855,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return 1 | 2;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestCoalesceExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestCoalesceExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2776,11 +2888,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return c ?? 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestCoalesceExpressionAsRightValue()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestCoalesceExpressionAsRightValue() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2808,11 +2921,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return c2 ?? "Hello";
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestSimpleMemberAccessExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestSimpleMemberAccessExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2834,11 +2948,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private string Callee() => "H" + "L";
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestSwitchExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestSwitchExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private void Calller()
@@ -2869,11 +2985,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int Callee() => 1 + 2;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestSuppressNullableWarningExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestSuppressNullableWarningExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 #nullable enable
                 public class TestClass
                 {
@@ -2896,11 +3014,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private object Callee(int x) => x = 1;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestSimpleAssignmentExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestSimpleAssignmentExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private int Calller(int x)
@@ -2921,13 +3041,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int Callee(int x) => x = 1;
                 ##}
-                """);
+                """
+            );
 
         [Theory]
         [InlineData("++")]
         [InlineData("--")]
-        public Task TestPreExpression(string op)
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestPreExpression(string op) =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -2957,11 +3078,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return (op)i;
                     }
                 ##}
-                """.Replace("(op)", op));
+                """.Replace("(op)", op)
+            );
 
         [Fact]
-        public Task TestAwaitExpressionWithFireAndForgot()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestAwaitExpressionWithFireAndForgot() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System.Threading.Tasks;
                 public class TestClass
                 {
@@ -2988,13 +3111,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         await Task.Delay(100);
                     }
                 ##}
-                """);
+                """
+            );
 
         [Theory]
         [InlineData("++")]
         [InlineData("--")]
-        public Task TestPostExpression(string op)
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestPostExpression(string op) =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -3024,11 +3148,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return i(op);
                     }
                 ##}
-                """.Replace("(op)", op));
+                """.Replace("(op)", op)
+            );
 
         [Fact]
-        public Task TestConditionalInvocationExpression1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+        public Task TestConditionalInvocationExpression1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
                 public class TestClass
                 {
@@ -3050,11 +3175,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private char[] Callee() => ("Hello" + "World")?.ToCharArray();
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineLambdaInsideInvocation()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineLambdaInsideInvocation() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3068,7 +3195,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return () => 1;
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3082,11 +3210,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return () => 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineLambda1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineLambda1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
                 public class TestClass
@@ -3101,7 +3231,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return async () => await Task.CompletedTask;
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
                 public class TestClass
@@ -3116,11 +3247,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return async () => await Task.CompletedTask;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineLambda2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineLambda2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
                 public class TestClass
@@ -3135,7 +3268,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return async () => { return await Task.FromResult(100); };
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
                 public class TestClass
@@ -3150,11 +3284,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return async () => { return await Task.FromResult(100); };
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineTypeCast()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineTypeCast() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public void Caller()
@@ -3167,7 +3303,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return 1;
                     }
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public void Caller()
@@ -3180,11 +3317,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return 1;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestNestedConditionalInvocationExpression1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestNestedConditionalInvocationExpression1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class LinkedList
                 {
                     public LinkedList Next { get; }
@@ -3203,7 +3342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return l?.Next?.Next?.Next?.Next?.ToString();
                     }
                 }
-                """, """
+                """,
+                """
                 public class LinkedList
                 {
                     public LinkedList Next { get; }
@@ -3222,11 +3362,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return l?.Next?.Next?.Next?.Next?.ToString();
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestNestedConditionalInvocationExpression2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestNestedConditionalInvocationExpression2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class LinkedList
                 {
                     public LinkedList Next { get; }
@@ -3245,7 +3387,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return l?.ToString();
                     }
                 }
-                """, """
+                """,
+                """
                 public class LinkedList
                 {
                     public LinkedList Next { get; }
@@ -3264,11 +3407,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return l?.ToString();
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestNestedConditionalInvocationExpression3()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestNestedConditionalInvocationExpression3() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class LinkedList
                 {
                     public LinkedList Next { get; }
@@ -3287,7 +3432,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return l?.Next.ToString();
                     }
                 }
-                """, """
+                """,
+                """
                 public class LinkedList
                 {
                     public LinkedList Next { get; }
@@ -3306,11 +3452,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return l?.Next.ToString();
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestThrowStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestThrowStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3324,7 +3472,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         throw new Exception();
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3338,11 +3487,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         throw new Exception();
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestThrowExpressionToThrowStatement()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestThrowExpressionToThrowStatement() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3353,7 +3504,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private string Callee() => throw new Exception();
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3364,11 +3516,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private string Callee() => throw new Exception();
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestThrowExpression1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestThrowExpression1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3379,7 +3533,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private string Callee() => throw new Exception();
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3390,11 +3545,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private string Callee() => throw new Exception();
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestThrowExpression2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestThrowExpression2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3402,7 +3559,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private string Callee() => throw new Exception();
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3410,11 +3568,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private string Callee() => throw new Exception();
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestThrowStatementToThrowExpression()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestThrowStatementToThrowExpression() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3428,7 +3588,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         throw new Exception();
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3442,11 +3603,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         throw new Exception();
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestWriteSingleParameter()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestWriteSingleParameter() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public void Caller(bool a)
@@ -3459,7 +3622,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return c = 1000;
                     }
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public void Caller(bool a)
@@ -3473,11 +3637,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return c = 1000;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestReadMultipleTimesForParameter()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestReadMultipleTimesForParameter() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public void Caller(bool a)
@@ -3490,7 +3656,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return a ? c + 1000 : c + 10000;
                     }
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public void Caller(bool a)
@@ -3504,11 +3671,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return a ? c + 1000 : c + 10000;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineInArrowFunction1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineInArrowFunction1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public int Caller(bool a) => Ca[||]llee(SomeInt(), a);
@@ -3520,7 +3689,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return a ? c + 1000 : c + 10000;
                     }
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public int Caller(bool a) => a ? SomeInt() + 1000 : SomeInt() + 10000;
@@ -3532,7 +3702,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         return a ? c + 1000 : c + 10000;
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
         public Task TestInlineInArrowFunction2()
@@ -3540,28 +3711,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
             var diagnostic = new List<DiagnosticResult>()
             {
                 // User is inlining method in arrow function, there is no place to put the declaration of 'i'
-                DiagnosticResult.CompilerError("CS0103").WithSpan(3, 29, 3, 30).WithArguments("i")
+                DiagnosticResult.CompilerError("CS0103").WithSpan(3, 29, 3, 30).WithArguments("i"),
             };
-            return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+            return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     public void Caller() => Ca[||]llee(out var j);
 
                     private void Callee(out int i) => i = 1;
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     public void Caller() => i = 1;
                 ##
                     private void Callee(out int i) => i = 1;
                 ##}
-                """, diagnostic, diagnostic);
+                """,
+                diagnostic,
+                diagnostic
+            );
         }
 
         [Fact]
-        public Task TestInlineInArrowProperty1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineInArrowProperty1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private const int i = 10;
@@ -3569,7 +3746,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private int Callee() => i + 1;
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     private const int i = 10;
@@ -3577,11 +3755,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int Callee() => i + 1;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineInArrowProperty2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineInArrowProperty2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 public class TestClass
                 {
                     private const int i = 10;
@@ -3589,7 +3769,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private int Callee() => i + 1;
                 }
-                """, """
+                """,
+                """
                 public class TestClass
                 {
                     private const int i = 10;
@@ -3597,7 +3778,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private int Callee() => i + 1;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
         public Task TestInlineInArrowLambda1()
@@ -3605,9 +3787,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
             var diagnostic = new List<DiagnosticResult>()
             {
                 // User is inlining method in arrow function, there is no place to put the declaration of 'i'
-                DiagnosticResult.CompilerError("CS0103").WithSpan(6, 26, 6, 27).WithArguments("i")
+                DiagnosticResult.CompilerError("CS0103").WithSpan(6, 26, 6, 27).WithArguments("i"),
             };
-            return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+            return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3618,7 +3801,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private void Callee(out int i) => i = 1;
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3629,12 +3813,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private void Callee(out int i) => i = 1;
                 ##}
-                """, diagnostic, diagnostic);
+                """,
+                diagnostic,
+                diagnostic
+            );
         }
 
         [Fact]
-        public Task TestInlineInArrowLambda2()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineInArrowLambda2() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3645,7 +3833,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private void Callee(out int i) => i = 1;
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3656,11 +3845,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private void Callee(out int i) => i = 1;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestInlineInLocalFunction()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync("""
+        public Task TestInlineInLocalFunction() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
+                """
                 using System;
                 public class TestClass
                 {
@@ -3671,7 +3862,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
 
                     private void Callee(out int i) => i = 1;
                 }
-                """, """
+                """,
+                """
                 using System;
                 public class TestClass
                 {
@@ -3682,20 +3874,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 ##
                     private void Callee(out int i) => i = 1;
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestForPartialMethod1()
-            => TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
-            """
-            public partial class TestClass
-            {
-                void Caller()
+        public Task TestForPartialMethod1() =>
+            TestVerifier.TestBothKeepAndRemoveInlinedMethodInDifferentFileAsync(
+                """
+                public partial class TestClass
                 {
-                    Call[||]ee();
+                    void Caller()
+                    {
+                        Call[||]ee();
+                    }
                 }
-            }
-            """,
+                """,
                 """
                 public partial class TestClass
                 {
@@ -3715,7 +3908,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("10");
                     }
                 }
-                """, """
+                """,
+                """
                 public partial class TestClass
                 {
                     partial void Callee();
@@ -3725,20 +3919,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("10");
                     }
                 ##}
-                """);
+                """
+            );
 
         [Fact]
-        public Task TestForExtendedPartialMethod1()
-            => TestVerifier.TestInRegularScriptsInDifferentFilesAsync(
-            """
-            public partial class TestClass
-            {
-                void Caller()
+        public Task TestForExtendedPartialMethod1() =>
+            TestVerifier.TestInRegularScriptsInDifferentFilesAsync(
+                """
+                public partial class TestClass
                 {
-                    Call[||]ee();
+                    void Caller()
+                    {
+                        Call[||]ee();
+                    }
                 }
-            }
-            """,
+                """,
                 """
                 public partial class TestClass
                 {
@@ -3758,7 +3953,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("10");
                     }
                 }
-                """, """
+                """,
+                """
                 public partial class TestClass
                 {
                     private partial void Callee();
@@ -3768,30 +3964,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("10");
                     }
                 }
-                """, keepInlinedMethod: true);
+                """,
+                keepInlinedMethod: true
+            );
 
         [Fact]
-        public Task TestForPartialMethod2()
-            => TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
-            """
-            public partial class TestClass
-            {
-                partial void Caller()
+        public Task TestForPartialMethod2() =>
+            TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
+                """
+                public partial class TestClass
                 {
-                    Call[||]ee();
+                    partial void Caller()
+                    {
+                        Call[||]ee();
+                    }
                 }
-            }
-            public partial class TestClass
-            {
-                partial void Caller();
-                partial void Callee();
+                public partial class TestClass
+                {
+                    partial void Caller();
+                    partial void Callee();
 
-                partial void Callee()
-                {
-                    System.Console.WriteLine("10");
+                    partial void Callee()
+                    {
+                        System.Console.WriteLine("10");
+                    }
                 }
-            }
-            """,
+                """,
                 """
                 public partial class TestClass
                 {
@@ -3810,30 +4008,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("10");
                     }
                 }
-                """, keepInlinedMethod: true);
+                """,
+                keepInlinedMethod: true
+            );
 
         [Fact]
-        public Task TestForExtendedPartialMethod2()
-            => TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
-            """
-            public partial class TestClass
-            {
-                private partial void Caller()
+        public Task TestForExtendedPartialMethod2() =>
+            TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
+                """
+                public partial class TestClass
                 {
-                    Call[||]ee();
+                    private partial void Caller()
+                    {
+                        Call[||]ee();
+                    }
                 }
-            }
-            public partial class TestClass
-            {
-                private partial void Caller();
-                private partial void Callee();
+                public partial class TestClass
+                {
+                    private partial void Caller();
+                    private partial void Callee();
 
-                private partial void Callee()
-                {
-                    System.Console.WriteLine("10");
+                    private partial void Callee()
+                    {
+                        System.Console.WriteLine("10");
+                    }
                 }
-            }
-            """,
+                """,
                 """
                 public partial class TestClass
                 {
@@ -3852,6 +4052,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         System.Console.WriteLine("10");
                     }
                 }
-                """, keepInlinedMethod: true);
+                """,
+                keepInlinedMethod: true
+            );
     }
 }

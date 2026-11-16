@@ -120,7 +120,11 @@ namespace System.ComponentModel
 
             public object? GetService(Type service)
             {
-                return ((service == typeof(ISite)) ? this : ((NestedContainer)Container).GetService(service));
+                return (
+                    (service == typeof(ISite))
+                        ? this
+                        : ((NestedContainer)Container).GetService(service)
+                );
             }
 
             // Indicates whether the component is in design mode.
@@ -161,7 +165,9 @@ namespace System.ComponentModel
             public string? Name
             {
                 get => _name;
-                [RequiresUnreferencedCode("The Type of components in the container cannot be statically discovered to validate the name.")]
+                [RequiresUnreferencedCode(
+                    "The Type of components in the container cannot be statically discovered to validate the name."
+                )]
                 set
                 {
                     if (value == null || _name == null || !value.Equals(_name))

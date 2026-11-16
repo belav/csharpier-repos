@@ -11,34 +11,20 @@ namespace System.ServiceModel.Activities.Tracking
     public class ReceiveMessageRecord : CustomTrackingRecord
     {
         public ReceiveMessageRecord(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         protected ReceiveMessageRecord(ReceiveMessageRecord record)
-            : base(record)
-        {            
-        }
+            : base(record) { }
 
         public Guid E2EActivityId
         {
-            get
-            {
-                return (Guid)this.Data[MessagingActivityHelper.E2EActivityId];
-            }
-
-            internal set
-            {
-                this.Data[MessagingActivityHelper.E2EActivityId] = value;
-            }
+            get { return (Guid)this.Data[MessagingActivityHelper.E2EActivityId]; }
+            internal set { this.Data[MessagingActivityHelper.E2EActivityId] = value; }
         }
 
         public Guid MessageId
         {
-            get
-            {
-                return (Guid)this.Data[MessagingActivityHelper.MessageId];
-            }
+            get { return (Guid)this.Data[MessagingActivityHelper.MessageId]; }
         }
 
         protected override TrackingRecord Clone()

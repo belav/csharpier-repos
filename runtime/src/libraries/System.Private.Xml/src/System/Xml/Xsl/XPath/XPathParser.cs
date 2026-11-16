@@ -54,7 +54,10 @@ namespace System.Xml.Xsl.XPath
                 _scanner = null;
 #endif
             }
-            Debug.Assert(_posInfo.Count == 0, "PushPosInfo() and PopPosInfo() calls have been unbalanced");
+            Debug.Assert(
+                _posInfo.Count == 0,
+                "PushPosInfo() and PopPosInfo() calls have been unbalanced"
+            );
             return result!;
         }
 
@@ -66,12 +69,12 @@ namespace System.Xml.Xsl.XPath
         internal static bool IsStep(LexKind lexKind)
         {
             return (
-                lexKind == LexKind.Dot ||
-                lexKind == LexKind.DotDot ||
-                lexKind == LexKind.At ||
-                lexKind == LexKind.Axis ||
-                lexKind == LexKind.Star ||
-                lexKind == LexKind.Name   // NodeTest is also Name
+                lexKind == LexKind.Dot
+                || lexKind == LexKind.DotDot
+                || lexKind == LexKind.At
+                || lexKind == LexKind.Axis
+                || lexKind == LexKind.Star
+                || lexKind == LexKind.Name // NodeTest is also Name
             );
         }
 
@@ -114,6 +117,7 @@ namespace System.Xml.Xsl.XPath
         //Max depth to avoid StackOverflow
         private const int MaxParseRelativePathDepth = 1024;
         private int _parseRelativePath;
+
         private Node ParseRelativeLocationPath()
         {
             if (++_parseRelativePath > MaxParseRelativePathDepth)
@@ -132,7 +136,8 @@ namespace System.Xml.Xsl.XPath
             else if (_scanner.Kind == LexKind.SlashSlash)
             {
                 _scanner.NextLex();
-                opnd = _builder!.JoinStep(opnd,
+                opnd = _builder!.JoinStep(
+                    opnd,
                     _builder.JoinStep(
                         _builder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
                         ParseRelativeLocationPath()
@@ -150,7 +155,7 @@ namespace System.Xml.Xsl.XPath
         {
             Node opnd;
             if (LexKind.Dot == _scanner!.Kind)
-            {                  // '.'
+            { // '.'
                 _scanner.NextLex();
                 opnd = _builder!.Axis(XPathAxis.Self, XPathNodeType.All, null, null);
                 if (LexKind.LBracket == _scanner.Kind)
@@ -159,7 +164,7 @@ namespace System.Xml.Xsl.XPath
                 }
             }
             else if (LexKind.DotDot == _scanner.Kind)
-            {        // '..'
+            { // '..'
                 _scanner.NextLex();
                 opnd = _builder!.Axis(XPathAxis.Parent, XPathNodeType.All, null, null);
                 if (LexKind.LBracket == _scanner.Kind)
@@ -168,16 +173,16 @@ namespace System.Xml.Xsl.XPath
                 }
             }
             else
-            {                                            // (AxisName '::' | '@')? NodeTest Predicate*
+            { // (AxisName '::' | '@')? NodeTest Predicate*
                 XPathAxis axis;
                 switch (_scanner.Kind)
                 {
-                    case LexKind.Axis:                              // AxisName '::'
+                    case LexKind.Axis: // AxisName '::'
                         axis = _scanner.Axis;
                         _scanner.NextLex();
                         _scanner.NextLex();
                         break;
-                    case LexKind.At:                                // '@'
+                    case LexKind.At: // '@'
                         axis = XPathAxis.Attribute;
                         _scanner.NextLex();
                         break;
@@ -203,8 +208,10 @@ namespace System.Xml.Xsl.XPath
         private static bool IsReverseAxis(XPathAxis axis)
         {
             return (
-                axis == XPathAxis.Ancestor || axis == XPathAxis.Preceding ||
-                axis == XPathAxis.AncestorOrSelf || axis == XPathAxis.PrecedingSibling
+                axis == XPathAxis.Ancestor
+                || axis == XPathAxis.Preceding
+                || axis == XPathAxis.AncestorOrSelf
+                || axis == XPathAxis.PrecedingSibling
             );
         }
 
@@ -215,7 +222,8 @@ namespace System.Xml.Xsl.XPath
         private Node ParseNodeTest(XPathAxis axis)
         {
             XPathNodeType nodeType;
-            string? nodePrefix, nodeName;
+            string? nodePrefix,
+                nodeName;
 
             int startChar = _scanner!.LexStart;
             InternalParseNodeTest(_scanner, axis, out nodeType, out nodePrefix, out nodeName);
@@ -227,24 +235,32 @@ namespace System.Xml.Xsl.XPath
 
         private static bool IsNodeType(XPathScanner scanner)
         {
-            return scanner.Prefix.Length == 0 && (
-                scanner.Name == "node" ||
-                scanner.Name == "text" ||
-                scanner.Name == "processing-instruction" ||
-                scanner.Name == "comment"
-            );
+            return scanner.Prefix.Length == 0
+                && (
+                    scanner.Name == "node"
+                    || scanner.Name == "text"
+                    || scanner.Name == "processing-instruction"
+                    || scanner.Name == "comment"
+                );
         }
 
         private static XPathNodeType PrincipalNodeType(XPathAxis axis)
         {
             return (
-                axis == XPathAxis.Attribute ? XPathNodeType.Attribute :
-                axis == XPathAxis.Namespace ? XPathNodeType.Namespace :
-                /*else*/                      XPathNodeType.Element
+                axis == XPathAxis.Attribute ? XPathNodeType.Attribute
+                : axis == XPathAxis.Namespace ? XPathNodeType.Namespace
+                :
+                /*else*/XPathNodeType.Element
             );
         }
 
-        internal static void InternalParseNodeTest(XPathScanner scanner, XPathAxis axis, out XPathNodeType nodeType, out string? nodePrefix, out string? nodeName)
+        internal static void InternalParseNodeTest(
+            XPathScanner scanner,
+            XPathAxis axis,
+            out XPathNodeType nodeType,
+            out string? nodePrefix,
+            out string? nodeName
+        )
         {
             switch (scanner.Kind)
             {
@@ -255,9 +271,15 @@ namespace System.Xml.Xsl.XPath
                         nodeName = null;
                         switch (scanner.Name)
                         {
-                            case "comment": nodeType = XPathNodeType.Comment; break;
-                            case "text": nodeType = XPathNodeType.Text; break;
-                            case "node": nodeType = XPathNodeType.All; break;
+                            case "comment":
+                                nodeType = XPathNodeType.Comment;
+                                break;
+                            case "text":
+                                nodeType = XPathNodeType.Text;
+                                break;
+                            case "node":
+                                nodeType = XPathNodeType.All;
+                                break;
                             default:
                                 Debug.Assert(scanner.Name == "processing-instruction");
                                 nodeType = XPathNodeType.ProcessingInstruction;
@@ -270,7 +292,7 @@ namespace System.Xml.Xsl.XPath
                         if (nodeType == XPathNodeType.ProcessingInstruction)
                         {
                             if (scanner.Kind != LexKind.RParens)
-                            {  // 'processing-instruction' '(' Literal ')'
+                            { // 'processing-instruction' '(' Literal ')'
                                 scanner.CheckToken(LexKind.String);
                                 // It is not needed to set nodePrefix here, but for our current implementation
                                 // comparing whole QNames is faster than comparing just local names
@@ -334,7 +356,9 @@ namespace System.Xml.Xsl.XPath
         */
         private Node ParseExpr()
         {
-            return ParseSubExpr(/*callerPrec:*/0);
+            return ParseSubExpr( /*callerPrec:*/
+                0
+            );
         }
 
         //Max depth to avoid StackOverflow
@@ -342,6 +366,7 @@ namespace System.Xml.Xsl.XPath
         //and also ParseSubExpr->ParseUnionExpr->ParsePathExpr->...->ParseExpr->ParseSubExpr
         private const int MaxParseSubExprDepth = 1024;
         private int _parseSubExprDepth;
+
         private Node ParseSubExpr(int callerPrec)
         {
             if (++_parseSubExprDepth > MaxParseSubExprDepth)
@@ -357,22 +382,22 @@ namespace System.Xml.Xsl.XPath
 
             ReadOnlySpan<byte> xpathOperatorPrecedence =
             [
-                /*Unknown    */ 0,
-                /*Or         */ 1,
-                /*And        */ 2,
-                /*Eq         */ 3,
-                /*Ne         */ 3,
-                /*Lt         */ 4,
-                /*Le         */ 4,
-                /*Gt         */ 4,
-                /*Ge         */ 4,
-                /*Plus       */ 5,
-                /*Minus      */ 5,
-                /*Multiply   */ 6,
-                /*Divide     */ 6,
-                /*Modulo     */ 6,
-                /*UnaryMinus */ 7,
-                /*Union      */ 8,  // Not used
+                /*Unknown    */0,
+                /*Or         */1,
+                /*And        */2,
+                /*Eq         */3,
+                /*Ne         */3,
+                /*Lt         */4,
+                /*Le         */4,
+                /*Gt         */4,
+                /*Ge         */4,
+                /*Plus       */5,
+                /*Minus      */5,
+                /*Multiply   */6,
+                /*Divide     */6,
+                /*Modulo     */6,
+                /*UnaryMinus */7,
+                /*Union      */8, // Not used
             ];
 
             // Check for unary operators
@@ -391,7 +416,10 @@ namespace System.Xml.Xsl.XPath
             // Process binary operators
             while (true)
             {
-                op = (_scanner.Kind <= LexKind.LastOperator) ? (XPathOperator)_scanner.Kind : XPathOperator.Unknown;
+                op =
+                    (_scanner.Kind <= LexKind.LastOperator)
+                        ? (XPathOperator)_scanner.Kind
+                        : XPathOperator.Unknown;
                 byte opPrec = xpathOperatorPrecedence[(int)op];
                 if (opPrec <= callerPrec)
                 {
@@ -400,7 +428,13 @@ namespace System.Xml.Xsl.XPath
 
                 // Operator's precedence is greater than the one of our caller, so process it here
                 _scanner.NextLex();
-                opnd = _builder!.Operator(op, opnd, ParseSubExpr(/*callerPrec:*/opPrec));
+                opnd = _builder!.Operator(
+                    op,
+                    opnd,
+                    ParseSubExpr( /*callerPrec:*/
+                        opPrec
+                    )
+                );
             }
             --_parseSubExprDepth;
             return opnd;
@@ -456,9 +490,15 @@ namespace System.Xml.Xsl.XPath
                 {
                     _scanner.NextLex();
                     PushPosInfo(startChar, endChar);
-                    opnd = _builder!.JoinStep(opnd,
+                    opnd = _builder!.JoinStep(
+                        opnd,
                         _builder.JoinStep(
-                            _builder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
+                            _builder.Axis(
+                                XPathAxis.DescendantOrSelf,
+                                XPathNodeType.All,
+                                null,
+                                null
+                            ),
                             ParseRelativeLocationPath()
                         )
                     );
@@ -484,7 +524,11 @@ namespace System.Xml.Xsl.XPath
             while (_scanner.Kind == LexKind.LBracket)
             {
                 PushPosInfo(startChar, endChar);
-                opnd = _builder!.Predicate(opnd, ParsePredicate(), /*reverseStep:*/false);
+                opnd = _builder!.Predicate(
+                    opnd,
+                    ParsePredicate(), /*reverseStep:*/
+                    false
+                );
                 PopPosInfo();
             }
             return opnd;
@@ -493,11 +537,11 @@ namespace System.Xml.Xsl.XPath
         private bool IsPrimaryExpr()
         {
             return (
-                _scanner!.Kind == LexKind.String ||
-                _scanner.Kind == LexKind.Number ||
-                _scanner.Kind == LexKind.Dollar ||
-                _scanner.Kind == LexKind.LParens ||
-                _scanner.Kind == LexKind.Name && _scanner.CanBeFunction && !IsNodeType(_scanner)
+                _scanner!.Kind == LexKind.String
+                || _scanner.Kind == LexKind.Number
+                || _scanner.Kind == LexKind.Dollar
+                || _scanner.Kind == LexKind.LParens
+                || _scanner.Kind == LexKind.Name && _scanner.CanBeFunction && !IsNodeType(_scanner)
             );
         }
 
@@ -534,7 +578,9 @@ namespace System.Xml.Xsl.XPath
                     break;
                 default:
                     Debug.Assert(
-                        _scanner.Kind == LexKind.Name && _scanner.CanBeFunction && !IsNodeType(_scanner),
+                        _scanner.Kind == LexKind.Name
+                            && _scanner.CanBeFunction
+                            && !IsNodeType(_scanner),
                         "IsPrimaryExpr() returned true, but the lexeme is not recognized"
                     );
                     opnd = ParseFunctionCall();
@@ -566,11 +612,11 @@ namespace System.Xml.Xsl.XPath
                         _scanner.CheckToken(LexKind.RParens);
                         break;
                     }
-                    _scanner.NextLex();  // move off the ','
+                    _scanner.NextLex(); // move off the ','
                 }
             }
 
-            _scanner.NextLex();          // move off the ')'
+            _scanner.NextLex(); // move off the ')'
             PushPosInfo(startChar, _scanner.PrevLexEnd);
             Node result = _builder!.Function(prefix, name, argList);
             PopPosInfo();

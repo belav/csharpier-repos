@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,21 +31,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprNop : Expr {
+namespace Mono.CodeContracts.Rewrite.Ast
+{
+    class ExprNop : Expr
+    {
+        public ExprNop(MethodInfo methodInfo)
+            : base(methodInfo) { }
 
-		public ExprNop (MethodInfo methodInfo)
-			: base (methodInfo)
-		{
-		}
+        public override ExprType ExprType
+        {
+            get { return ExprType.Nop; }
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.Nop; }
-		}
-
-		public override Mono.Cecil.TypeReference ReturnType {
-			get { return base.MethodInfo.TypeVoid; }
-		}
-
-	}
+        public override Mono.Cecil.TypeReference ReturnType
+        {
+            get { return base.MethodInfo.TypeVoid; }
+        }
+    }
 }

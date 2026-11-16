@@ -91,13 +91,18 @@ namespace System.Web.Helpers.Test
             // Act and Assert
             Action action = () =>
             {
-                IDictionary<string, string> configValue = ServerInfo.LegacyCAS(AppDomain.CurrentDomain);
+                IDictionary<string, string> configValue = ServerInfo.LegacyCAS(
+                    AppDomain.CurrentDomain
+                );
 
                 Assert.NotNull(configValue);
                 Assert.Equal(0, configValue.Count);
             };
 
-            AppDomainUtils.RunInSeparateAppDomain(GetAppDomainSetup(legacyCasEnabled: false), action);
+            AppDomainUtils.RunInSeparateAppDomain(
+                GetAppDomainSetup(legacyCasEnabled: false),
+                action
+            );
         }
 
         [Fact]
@@ -107,14 +112,22 @@ namespace System.Web.Helpers.Test
             Action action = () =>
             {
                 // Act and Assert
-                IDictionary<string, string> configValue = ServerInfo.LegacyCAS(AppDomain.CurrentDomain);
+                IDictionary<string, string> configValue = ServerInfo.LegacyCAS(
+                    AppDomain.CurrentDomain
+                );
 
                 // Assert
                 Assert.True(configValue.ContainsKey("Legacy Code Access Security"));
-                Assert.Equal("Legacy Code Access Security has been detected on your system. Microsoft WebPage features require the ASP.NET 4 Code Access Security model. For information about how to resolve this, contact your server administrator.", configValue["Legacy Code Access Security"]);
+                Assert.Equal(
+                    "Legacy Code Access Security has been detected on your system. Microsoft WebPage features require the ASP.NET 4 Code Access Security model. For information about how to resolve this, contact your server administrator.",
+                    configValue["Legacy Code Access Security"]
+                );
             };
 
-            AppDomainUtils.RunInSeparateAppDomain(GetAppDomainSetup(legacyCasEnabled: true), action);
+            AppDomainUtils.RunInSeparateAppDomain(
+                GetAppDomainSetup(legacyCasEnabled: true),
+                action
+            );
         }
 
         //[Fact]

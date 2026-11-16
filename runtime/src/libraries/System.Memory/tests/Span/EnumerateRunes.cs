@@ -12,8 +12,12 @@ namespace System.SpanTests
         [Fact]
         public static void EnumerateRunesEmpty()
         {
-            Assert.False(MemoryExtensions.EnumerateRunes(ReadOnlySpan<char>.Empty).GetEnumerator().MoveNext());
-            Assert.False(MemoryExtensions.EnumerateRunes(Span<char>.Empty).GetEnumerator().MoveNext());
+            Assert.False(
+                MemoryExtensions.EnumerateRunes(ReadOnlySpan<char>.Empty).GetEnumerator().MoveNext()
+            );
+            Assert.False(
+                MemoryExtensions.EnumerateRunes(Span<char>.Empty).GetEnumerator().MoveNext()
+            );
         }
 
         [Theory]
@@ -24,7 +28,10 @@ namespace System.SpanTests
         [InlineData(new char[] { 'x', '\uDF54', 'y' }, new int[] { 'x', 0xFFFD, 'y' })] // standalone low surrogate
         [InlineData(new char[] { 'x', '\uD86D' }, new int[] { 'x', 0xFFFD })] // standalone high surrogate at end of string
         [InlineData(new char[] { 'x', '\uDF54' }, new int[] { 'x', 0xFFFD })] // standalone low surrogate at end of string
-        [InlineData(new char[] { 'x', '\uD86D', '\uD86D', 'y' }, new int[] { 'x', 0xFFFD, 0xFFFD, 'y' })] // two high surrogates should be two replacement chars
+        [InlineData(
+            new char[] { 'x', '\uD86D', '\uD86D', 'y' },
+            new int[] { 'x', 0xFFFD, 0xFFFD, 'y' }
+        )] // two high surrogates should be two replacement chars
         [InlineData(new char[] { 'x', '\uFFFD', 'y' }, new int[] { 'x', 0xFFFD, 'y' })] // literal U+FFFD
         public static void EnumerateRunes_Battery(char[] chars, int[] expected)
         {

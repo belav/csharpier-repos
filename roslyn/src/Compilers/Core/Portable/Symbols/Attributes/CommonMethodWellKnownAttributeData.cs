@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Information decoded from well-known custom attributes applied on a method.
     /// </summary>
-    internal class CommonMethodWellKnownAttributeData : WellKnownAttributeData, ISecurityAttributeTarget
+    internal class CommonMethodWellKnownAttributeData
+        : WellKnownAttributeData,
+            ISecurityAttributeTarget
     {
         public CommonMethodWellKnownAttributeData(bool preserveSigFirstWriteWins)
         {
@@ -19,28 +21,26 @@ namespace Microsoft.CodeAnalysis
         }
 
         public CommonMethodWellKnownAttributeData()
-            : this(false)
-        {
-        }
+            : this(false) { }
 
         #region DllImportAttribute, MethodImplAttribute, PreserveSigAttribute
 
         // PreserveSig flag can be set by multiple attributes (DllImport, MethodImpl and PreserveSig).
-        // True if the value of PreserveSig flag is determined by the first attribute that sets it (VB). 
+        // True if the value of PreserveSig flag is determined by the first attribute that sets it (VB).
         // Otherwise it's the last attribute's value (C#).
         private readonly bool _preserveSigFirstWriteWins;
 
         // data from DllImportAttribute
         private DllImportData? _platformInvokeInfo;
         private bool _dllImportPreserveSig;
-        private int _dllImportIndex;               // -1 .. not specified
+        private int _dllImportIndex; // -1 .. not specified
 
         // data from MethodImplAttribute
-        private int _methodImplIndex;              // -1 .. not specified
-        private MethodImplAttributes _attributes;  // includes preserveSig
+        private int _methodImplIndex; // -1 .. not specified
+        private MethodImplAttributes _attributes; // includes preserveSig
 
         // data from PreserveSigAttribute
-        private int _preserveSigIndex;             // -1 .. not specified
+        private int _preserveSigIndex; // -1 .. not specified
 
         // used by PreserveSigAttribute
         public void SetPreserveSignature(int attributeIndex)
@@ -62,7 +62,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         // used by DllImportAttribute
-        public void SetDllImport(int attributeIndex, string? moduleName, string? entryPointName, MethodImportAttributes flags, bool preserveSig)
+        public void SetDllImport(
+            int attributeIndex,
+            string? moduleName,
+            string? entryPointName,
+            MethodImportAttributes flags,
+            bool preserveSig
+        )
         {
             VerifySealed(expected: false);
             Debug.Assert(attributeIndex >= 0);
@@ -99,8 +105,14 @@ namespace Microsoft.CodeAnalysis
                     {
                         // VB:
                         // only DllImport(PreserveSig := false) can unset preserveSig if it is the first attribute applied.
-                        if ((_preserveSigIndex == -1 || _dllImportIndex < _preserveSigIndex) &&
-                            (_methodImplIndex == -1 || (_attributes & MethodImplAttributes.PreserveSig) == 0 || _dllImportIndex < _methodImplIndex))
+                        if (
+                            (_preserveSigIndex == -1 || _dllImportIndex < _preserveSigIndex)
+                            && (
+                                _methodImplIndex == -1
+                                || (_attributes & MethodImplAttributes.PreserveSig) == 0
+                                || _dllImportIndex < _methodImplIndex
+                            )
+                        )
                         {
                             result &= ~MethodImplAttributes.PreserveSig;
                         }
@@ -109,7 +121,13 @@ namespace Microsoft.CodeAnalysis
                     {
                         // C#:
                         // Last setter of PreserveSig flag wins. It is false only if the last one was DllImport(PreserveSig = false)
-                        if (_dllImportIndex > _preserveSigIndex && (_dllImportIndex > _methodImplIndex || (_attributes & MethodImplAttributes.PreserveSig) == 0))
+                        if (
+                            _dllImportIndex > _preserveSigIndex
+                            && (
+                                _dllImportIndex > _methodImplIndex
+                                || (_attributes & MethodImplAttributes.PreserveSig) == 0
+                            )
+                        )
                         {
                             result &= ~MethodImplAttributes.PreserveSig;
                         }
@@ -196,7 +214,8 @@ namespace Microsoft.CodeAnalysis
             get
             {
                 VerifySealed(expected: true);
-                return _lazySecurityAttributeData != null || this.HasSuppressUnmanagedCodeSecurityAttribute;
+                return _lazySecurityAttributeData != null
+                    || this.HasSuppressUnmanagedCodeSecurityAttribute;
             }
         }
 

@@ -5,21 +5,19 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MaterializationInterceptionInMemoryTest :
-    MaterializationInterceptionTestBase<MaterializationInterceptionInMemoryTest.InMemoryLibraryContext>,
-    IClassFixture<MaterializationInterceptionInMemoryTest.MaterializationInterceptionInMemoryFixture>
+public class MaterializationInterceptionInMemoryTest
+    : MaterializationInterceptionTestBase<MaterializationInterceptionInMemoryTest.InMemoryLibraryContext>,
+        IClassFixture<MaterializationInterceptionInMemoryTest.MaterializationInterceptionInMemoryFixture>
 {
-    public MaterializationInterceptionInMemoryTest(MaterializationInterceptionInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+    public MaterializationInterceptionInMemoryTest(
+        MaterializationInterceptionInMemoryFixture fixture
+    )
+        : base(fixture) { }
 
     public class InMemoryLibraryContext : LibraryContext
     {
         public InMemoryLibraryContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,23 +27,28 @@ public class MaterializationInterceptionInMemoryTest :
         }
     }
 
-    public override LibraryContext CreateContext(IEnumerable<ISingletonInterceptor> interceptors, bool inject)
-        => new InMemoryLibraryContext(Fixture.CreateOptions(interceptors, inject));
+    public override LibraryContext CreateContext(
+        IEnumerable<ISingletonInterceptor> interceptors,
+        bool inject
+    ) => new InMemoryLibraryContext(Fixture.CreateOptions(interceptors, inject));
 
     public class MaterializationInterceptionInMemoryFixture : SingletonInterceptorsFixtureBase
     {
-        protected override string StoreName
-            => "MaterializationInterception";
+        protected override string StoreName => "MaterializationInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkInMemoryDatabase(), injectedInterceptors);
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkInMemoryDatabase(),
+                injectedInterceptors
+            );
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
     }
 }

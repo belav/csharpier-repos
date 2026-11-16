@@ -7,7 +7,6 @@
 using System;
 using System.IO;
 using System.Linq;
-
 using static Roslyn.Test.Performance.Utilities.TestUtilities;
 
 namespace Roslyn.Test.Performance.Utilities
@@ -16,7 +15,13 @@ namespace Roslyn.Test.Performance.Utilities
     {
         private const string s_sasEnvironmentVar = "BV_UPLOAD_SAS_TOKEN";
         private static readonly string s_scriptDirectory = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory, "..", "..", "tools", "Microsoft.BenchView.JSONFormat", "tools");
+            AppDomain.CurrentDomain.BaseDirectory,
+            "..",
+            "..",
+            "tools",
+            "Microsoft.BenchView.JSONFormat",
+            "tools"
+        );
         private static readonly string s_outputDirectory = GetCPCDirectoryPath();
         private static readonly string[] s_validSubmissionTypes = ["rolling", "private", "local"];
 
@@ -25,10 +30,7 @@ namespace Roslyn.Test.Performance.Utilities
 
         public static string[] ValidSubmissionTypes
         {
-            get
-            {
-                return s_validSubmissionTypes;
-            }
+            get { return s_validSubmissionTypes; }
         }
 
         public static bool IsValidSubmissionType(string submissionType)
@@ -89,7 +91,12 @@ namespace Roslyn.Test.Performance.Utilities
 
             if (result)
             {
-                var submissionJson = CreateSubmissionJson(s_submissionType, submissionName, s_branch, Path.Combine(s_outputDirectory, "measurement.json"));
+                var submissionJson = CreateSubmissionJson(
+                    s_submissionType,
+                    submissionName,
+                    s_branch,
+                    Path.Combine(s_outputDirectory, "measurement.json")
+                );
                 System.Console.Write(System.IO.File.ReadAllText(submissionJson));
                 Log("Uploading json to Azure blob storage");
                 var uploadPy = Path.Combine(s_scriptDirectory, "upload.py");
@@ -114,13 +121,21 @@ namespace Roslyn.Test.Performance.Utilities
 
             var measurementPy = Path.Combine(s_scriptDirectory, "measurement.py");
             var measurementJson = Path.Combine(s_outputDirectory, "measurement.json");
-            ShellOutVital("py", $"\"{measurementPy}\" rps \"{source}\" --better desc -o \"{measurementJson}\"");
+            ShellOutVital(
+                "py",
+                $"\"{measurementPy}\" rps \"{source}\" --better desc -o \"{measurementJson}\""
+            );
 
             return true;
         }
 
-        /// Takes a measurement.json in BenchView's format and generates a submission.json, ready for upload 
-        private static string CreateSubmissionJson(string submissionType, string submissionName, string branch, string measurementJsonPath)
+        /// Takes a measurement.json in BenchView's format and generates a submission.json, ready for upload
+        private static string CreateSubmissionJson(
+            string submissionType,
+            string submissionName,
+            string branch,
+            string measurementJsonPath
+        )
         {
             RuntimeSettings.Logger.Log("Creating BenchView submission json");
 
@@ -129,7 +144,10 @@ namespace Roslyn.Test.Performance.Utilities
             var machinedataPy = Path.Combine(s_scriptDirectory, "machinedata.py");
             var submissionPy = Path.Combine(s_scriptDirectory, "submission.py");
 
-            var submissionMetadataJson = Path.Combine(s_outputDirectory, "submission-metadata.json");
+            var submissionMetadataJson = Path.Combine(
+                s_outputDirectory,
+                "submission-metadata.json"
+            );
             var buildJson = Path.Combine(s_outputDirectory, "build.json");
             var machinedataJson = Path.Combine(s_outputDirectory, "machinedata.json");
 
@@ -142,12 +160,20 @@ namespace Roslyn.Test.Performance.Utilities
                 }
                 else
                 {
-                    throw new Exception($"submissionName was not provided, but submission type is {submissionType}");
+                    throw new Exception(
+                        $"submissionName was not provided, but submission type is {submissionType}"
+                    );
                 }
             }
 
-            ShellOutVital("py", $"\"{submissionMetadataPy}\" --name \"{submissionName}\" --user-email dotnet-bot@microsoft.com -o \"{submissionMetadataJson}\"");
-            ShellOutVital("py", $"\"{buildPy}\" git --type {submissionType} --branch \"{branch}\" -o \"{buildJson}\"");
+            ShellOutVital(
+                "py",
+                $"\"{submissionMetadataPy}\" --name \"{submissionName}\" --user-email dotnet-bot@microsoft.com -o \"{submissionMetadataJson}\""
+            );
+            ShellOutVital(
+                "py",
+                $"\"{buildPy}\" git --type {submissionType} --branch \"{branch}\" -o \"{buildJson}\""
+            );
             ShellOutVital("py", $"\"{machinedataPy}\" -o \"{machinedataJson}\"");
 
             string submissionJson = Path.Combine(s_outputDirectory, "submission.json");
@@ -158,7 +184,8 @@ namespace Roslyn.Test.Performance.Utilities
             string configuration = "Release";
 #endif
 
-            string arguments = $@"
+            string arguments =
+                $@"
 ""{submissionPy}""
  {measurementJsonPath}
  --metadata ""{submissionMetadataJson}""

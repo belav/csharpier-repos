@@ -22,7 +22,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
     internal class ViewCellSlot : ProjectedSlot
     {
         #region Constructor
-        // effects: 
+        // effects:
         /// <summary>
         /// Creates a view cell slot that corresponds to <paramref name="slotNum"/> in some cell. The <paramref name="cSlot"/> and <paramref name="sSlot"/> represent the
         /// slots in the left and right queries of the view cell.
@@ -68,16 +68,16 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                 return false;
             }
 
-            return m_slotNum == rightSlot.m_slotNum &&
-                MemberProjectedSlot.EqualityComparer.Equals(m_cSlot, rightSlot.m_cSlot) &&
-                MemberProjectedSlot.EqualityComparer.Equals(m_sSlot, rightSlot.m_sSlot);
+            return m_slotNum == rightSlot.m_slotNum
+                && MemberProjectedSlot.EqualityComparer.Equals(m_cSlot, rightSlot.m_cSlot)
+                && MemberProjectedSlot.EqualityComparer.Equals(m_sSlot, rightSlot.m_sSlot);
         }
 
         protected override int GetHash()
         {
-            return MemberProjectedSlot.EqualityComparer.GetHashCode(m_cSlot) ^
-                   MemberProjectedSlot.EqualityComparer.GetHashCode(m_sSlot) ^
-                   m_slotNum;
+            return MemberProjectedSlot.EqualityComparer.GetHashCode(m_cSlot)
+                ^ MemberProjectedSlot.EqualityComparer.GetHashCode(m_sSlot)
+                ^ m_slotNum;
         }
 
         /// <summary>
@@ -118,7 +118,12 @@ namespace System.Data.Mapping.ViewGeneration.Validation
         /// <summary>
         /// Not supported in this class.
         /// </summary>
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias,
+            int indentLevel
+        )
         {
             Debug.Fail("Should not be called.");
             return null; // To keep the compiler happy

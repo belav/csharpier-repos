@@ -26,12 +26,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.Runtime;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json.Serialization;
-using System.Runtime.Serialization;
-using System.Diagnostics;
-using System.Runtime;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -45,25 +45,35 @@ namespace Newtonsoft.Json
     /// </summary>
     public class JsonSerializerSettings
     {
-        internal const ReferenceLoopHandling DefaultReferenceLoopHandling = ReferenceLoopHandling.Error;
-        internal const MissingMemberHandling DefaultMissingMemberHandling = MissingMemberHandling.Ignore;
+        internal const ReferenceLoopHandling DefaultReferenceLoopHandling =
+            ReferenceLoopHandling.Error;
+        internal const MissingMemberHandling DefaultMissingMemberHandling =
+            MissingMemberHandling.Ignore;
         internal const NullValueHandling DefaultNullValueHandling = NullValueHandling.Include;
-        internal const DefaultValueHandling DefaultDefaultValueHandling = DefaultValueHandling.Include;
-        internal const ObjectCreationHandling DefaultObjectCreationHandling = ObjectCreationHandling.Auto;
-        internal const PreserveReferencesHandling DefaultPreserveReferencesHandling = PreserveReferencesHandling.None;
+        internal const DefaultValueHandling DefaultDefaultValueHandling =
+            DefaultValueHandling.Include;
+        internal const ObjectCreationHandling DefaultObjectCreationHandling =
+            ObjectCreationHandling.Auto;
+        internal const PreserveReferencesHandling DefaultPreserveReferencesHandling =
+            PreserveReferencesHandling.None;
         internal const ConstructorHandling DefaultConstructorHandling = ConstructorHandling.Default;
         internal const TypeNameHandling DefaultTypeNameHandling = TypeNameHandling.None;
-        internal const MetadataPropertyHandling DefaultMetadataPropertyHandling = MetadataPropertyHandling.Default;
+        internal const MetadataPropertyHandling DefaultMetadataPropertyHandling =
+            MetadataPropertyHandling.Default;
         internal static readonly StreamingContext DefaultContext;
 
         internal const Formatting DefaultFormatting = Formatting.None;
-        internal const DateFormatHandling DefaultDateFormatHandling = DateFormatHandling.IsoDateFormat;
-        internal const DateTimeZoneHandling DefaultDateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
+        internal const DateFormatHandling DefaultDateFormatHandling =
+            DateFormatHandling.IsoDateFormat;
+        internal const DateTimeZoneHandling DefaultDateTimeZoneHandling =
+            DateTimeZoneHandling.RoundtripKind;
         internal const DateParseHandling DefaultDateParseHandling = DateParseHandling.DateTime;
         internal const FloatParseHandling DefaultFloatParseHandling = FloatParseHandling.Double;
         internal const FloatFormatHandling DefaultFloatFormatHandling = FloatFormatHandling.String;
-        internal const StringEscapeHandling DefaultStringEscapeHandling = StringEscapeHandling.Default;
-        internal const TypeNameAssemblyFormatHandling DefaultTypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple;
+        internal const StringEscapeHandling DefaultStringEscapeHandling =
+            StringEscapeHandling.Default;
+        internal const TypeNameAssemblyFormatHandling DefaultTypeNameAssemblyFormatHandling =
+            TypeNameAssemblyFormatHandling.Simple;
         internal static readonly CultureInfo DefaultCulture;
         internal const bool DefaultCheckAdditionalContent = false;
         internal const string DefaultDateFormatString = @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
@@ -198,7 +208,9 @@ namespace Newtonsoft.Json
         /// The default value is <see cref="FormatterAssemblyStyle.Simple" />.
         /// </summary>
         /// <value>The type name assembly format.</value>
-        [Obsolete("TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
+        [Obsolete(
+            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead."
+        )]
         public FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => (FormatterAssemblyStyle)TypeNameAssemblyFormatHandling;
@@ -244,15 +256,16 @@ namespace Newtonsoft.Json
         /// Gets or sets the <see cref="IReferenceResolver"/> used by the serializer when resolving references.
         /// </summary>
         /// <value>The reference resolver.</value>
-        [Obsolete("ReferenceResolver property is obsolete. Use the ReferenceResolverProvider property to set the IReferenceResolver: settings.ReferenceResolverProvider = () => resolver")]
+        [Obsolete(
+            "ReferenceResolver property is obsolete. Use the ReferenceResolverProvider property to set the IReferenceResolver: settings.ReferenceResolverProvider = () => resolver"
+        )]
         public IReferenceResolver? ReferenceResolver
         {
             get => ReferenceResolverProvider?.Invoke();
             set
             {
-                ReferenceResolverProvider = (value != null)
-                    ? () => value
-                    : (Func<IReferenceResolver?>?)null;
+                ReferenceResolverProvider =
+                    (value != null) ? () => value : (Func<IReferenceResolver?>?)null;
             }
         }
 
@@ -287,9 +300,12 @@ namespace Newtonsoft.Json
                     return adapter.SerializationBinder;
                 }
 
-                throw new InvalidOperationException("Cannot get SerializationBinder because an ISerializationBinder was previously set.");
+                throw new InvalidOperationException(
+                    "Cannot get SerializationBinder because an ISerializationBinder was previously set."
+                );
             }
-            set => SerializationBinder = value == null ? null : new SerializationBinderAdapter(value);
+            set =>
+                SerializationBinder = value == null ? null : new SerializationBinderAdapter(value);
         }
 
         /// <summary>

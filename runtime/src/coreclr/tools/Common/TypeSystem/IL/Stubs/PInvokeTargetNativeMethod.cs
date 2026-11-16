@@ -17,10 +17,7 @@ namespace Internal.IL.Stubs
 
         public MethodDesc Target
         {
-            get
-            {
-                return _declMethod;
-            }
+            get { return _declMethod; }
         }
 
         public PInvokeTargetNativeMethod(MethodDesc declMethod, MethodSignature signature)
@@ -31,34 +28,22 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _declMethod.Context;
-            }
+            get { return _declMethod.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _declMethod.OwningType;
-            }
+            get { return _declMethod.OwningType; }
         }
 
         public override MethodSignature Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _declMethod.Name;
-            }
+            get { return _declMethod.Name; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -68,10 +53,7 @@ namespace Internal.IL.Stubs
 
         public override bool IsPInvoke
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsNoInlining

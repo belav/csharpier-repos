@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapRpcMethodAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,80 +30,87 @@
 
 using System.Web.Services.Description;
 
-namespace System.Web.Services.Protocols {
-	[AttributeUsage (AttributeTargets.Method, Inherited = true)]
-	public sealed class SoapRpcMethodAttribute : Attribute {
+namespace System.Web.Services.Protocols
+{
+    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    public sealed class SoapRpcMethodAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        string action;
+        string binding;
+        bool oneWay;
+        string requestElementName;
+        string requestNamespace;
+        string responseElementName;
+        string responseNamespace;
 
-		string action;
-		string binding;
-		bool oneWay;
-		string requestElementName;
-		string requestNamespace;
-		string responseElementName;
-		string responseNamespace;
-		
-		SoapBindingUse use;
-		#endregion // Fields
+        SoapBindingUse use;
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SoapRpcMethodAttribute ()
-		{
-		}
+        public SoapRpcMethodAttribute() { }
 
-		public SoapRpcMethodAttribute (string action)
-			: this ()
-		{
-			this.action = action;
-		}
+        public SoapRpcMethodAttribute(string action)
+            : this()
+        {
+            this.action = action;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public string Action {
-			get { return action != null ? action : ""; }
-			set { action = value; }
-		}
+        public string Action
+        {
+            get { return action != null ? action : ""; }
+            set { action = value; }
+        }
 
-		public string Binding {
-			get { return binding; }
-			set { binding = value; }
-		}
+        public string Binding
+        {
+            get { return binding; }
+            set { binding = value; }
+        }
 
-		public bool OneWay {
-			get { return oneWay; }
-			set { oneWay = value; }
-		}
+        public bool OneWay
+        {
+            get { return oneWay; }
+            set { oneWay = value; }
+        }
 
-		public string RequestElementName {
-			get { return requestElementName != null ? requestElementName : ""; }
-			set { requestElementName = value; }
-		}
+        public string RequestElementName
+        {
+            get { return requestElementName != null ? requestElementName : ""; }
+            set { requestElementName = value; }
+        }
 
-		public string RequestNamespace {
-			get { return requestNamespace != null ? requestNamespace : ""; }
-			set { requestNamespace = value; }
-		}
+        public string RequestNamespace
+        {
+            get { return requestNamespace != null ? requestNamespace : ""; }
+            set { requestNamespace = value; }
+        }
 
-		public string ResponseElementName {
-			get { return responseElementName != null ? responseElementName : ""; }
-			set { responseElementName = value; }
-		}
+        public string ResponseElementName
+        {
+            get { return responseElementName != null ? responseElementName : ""; }
+            set { responseElementName = value; }
+        }
 
-		public string ResponseNamespace {
-			get { return responseNamespace != null ? responseNamespace : ""; }
-			set { responseNamespace = value; }
-		}
-		
-		[System.Runtime.InteropServices.ComVisible(false)]
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        public string ResponseNamespace
+        {
+            get { return responseNamespace != null ? responseNamespace : ""; }
+            set { responseNamespace = value; }
+        }
 
-		#endregion // Properties
-	}
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public SoapBindingUse Use
+        {
+            get { return use; }
+            set { use = value; }
+        }
+
+        #endregion // Properties
+    }
 }

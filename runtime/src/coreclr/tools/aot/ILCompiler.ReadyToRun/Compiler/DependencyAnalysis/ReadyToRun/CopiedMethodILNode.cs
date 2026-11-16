@@ -3,10 +3,8 @@
 
 using System;
 using System.Reflection.Metadata;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
@@ -22,7 +20,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _method = (EcmaMethod)method.GetTypicalMethodDefinition();
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -30,7 +29,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public int Offset => 0;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append("ILMethod_");
@@ -45,14 +46,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     data: Array.Empty<byte>(),
                     relocs: Array.Empty<Relocation>(),
                     alignment: 1,
-                    definedSymbols: new ISymbolDefinitionNode[] { this });
+                    definedSymbols: new ISymbolDefinitionNode[] { this }
+                );
             }
 
-            var rva = _method.MetadataReader.GetMethodDefinition(_method.Handle).RelativeVirtualAddress;
+            var rva = _method
+                .MetadataReader.GetMethodDefinition(_method.Handle)
+                .RelativeVirtualAddress;
             var reader = _method.Module.PEReader.GetSectionData(rva).GetReader();
             int size = MethodBodyBlock.Create(reader).Size;
-            
-            return new ObjectData(reader.ReadBytes(size), Array.Empty<Relocation>(), 4, new ISymbolDefinitionNode[] { this });
+
+            return new ObjectData(
+                reader.ReadBytes(size),
+                Array.Empty<Relocation>(),
+                4,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int ClassCode => 541651465;

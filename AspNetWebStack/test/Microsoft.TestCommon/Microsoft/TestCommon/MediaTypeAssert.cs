@@ -10,9 +10,16 @@ namespace Microsoft.TestCommon
     {
         private static readonly MediaTypeAssert singleton = new MediaTypeAssert();
 
-        public static MediaTypeAssert Singleton { get { return singleton; } }
+        public static MediaTypeAssert Singleton
+        {
+            get { return singleton; }
+        }
 
-        public void AreEqual(MediaTypeHeaderValue expected, MediaTypeHeaderValue actual, string errorMessage)
+        public void AreEqual(
+            MediaTypeHeaderValue expected,
+            MediaTypeHeaderValue actual,
+            string errorMessage
+        )
         {
             if (expected != null || actual != null)
             {
@@ -27,7 +34,10 @@ namespace Microsoft.TestCommon
             {
                 MediaTypeHeaderValue actualMediaType = new MediaTypeHeaderValue(actual);
                 Assert.NotNull(expected);
-                Assert.Equal(0, new MediaTypeHeaderValueComparer().Compare(expected, actualMediaType));
+                Assert.Equal(
+                    0,
+                    new MediaTypeHeaderValueComparer().Compare(expected, actualMediaType)
+                );
             }
         }
 
@@ -38,7 +48,10 @@ namespace Microsoft.TestCommon
                 Assert.NotNull(expected);
                 MediaTypeHeaderValue expectedMediaType = new MediaTypeHeaderValue(expected);
                 MediaTypeHeaderValue actualMediaType = new MediaTypeHeaderValue(actual);
-                Assert.Equal(0, new MediaTypeHeaderValueComparer().Compare(expectedMediaType, actualMediaType));
+                Assert.Equal(
+                    0,
+                    new MediaTypeHeaderValueComparer().Compare(expectedMediaType, actualMediaType)
+                );
             }
         }
 
@@ -48,7 +61,10 @@ namespace Microsoft.TestCommon
             {
                 Assert.NotNull(expected);
                 MediaTypeHeaderValue expectedMediaType = new MediaTypeHeaderValue(expected);
-                Assert.Equal(0, new MediaTypeHeaderValueComparer().Compare(expectedMediaType, actual));
+                Assert.Equal(
+                    0,
+                    new MediaTypeHeaderValueComparer().Compare(expectedMediaType, actual)
+                );
             }
         }
     }

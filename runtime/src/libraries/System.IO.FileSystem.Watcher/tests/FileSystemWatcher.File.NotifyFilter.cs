@@ -13,9 +13,21 @@ namespace System.IO.Tests
 {
     public partial class File_NotifyFilter_Tests : FileSystemWatcherTest
     {
-        [LibraryImport("advapi32.dll", EntryPoint = "SetNamedSecurityInfoW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-        private static partial uint SetSecurityInfoByHandle(string name, uint objectType, uint securityInformation,
-            IntPtr owner, IntPtr group, IntPtr dacl, IntPtr sacl);
+        [LibraryImport(
+            "advapi32.dll",
+            EntryPoint = "SetNamedSecurityInfoW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        private static partial uint SetSecurityInfoByHandle(
+            string name,
+            uint objectType,
+            uint securityInformation,
+            IntPtr owner,
+            IntPtr group,
+            IntPtr dacl,
+            IntPtr sacl
+        );
 
         private const uint ERROR_SUCCESS = 0;
         private const uint DACL_SECURITY_INFORMATION = 0x00000004;
@@ -31,7 +43,8 @@ namespace System.IO.Tests
                 watcher.NotifyFilter = filter;
                 var attributes = File.GetAttributes(file);
 
-                Action action = () => File.SetAttributes(file, attributes | FileAttributes.ReadOnly);
+                Action action = () =>
+                    File.SetAttributes(file, attributes | FileAttributes.ReadOnly);
                 Action cleanup = () => File.SetAttributes(file, attributes);
 
                 WatcherChangeTypes expected = 0;
@@ -52,25 +65,35 @@ namespace System.IO.Tests
         [MemberData(nameof(FilterTypes))]
         public void FileSystemWatcher_File_NotifyFilter_CreationTime(NotifyFilters filter)
         {
-            FileSystemWatcherTest.Execute(() =>
-            {
-                string file = CreateTestFile(TestDirectory, "file");
-                using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
+            FileSystemWatcherTest.Execute(
+                () =>
                 {
-                    watcher.NotifyFilter = filter;
-                    Action action = () => File.SetCreationTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
+                    string file = CreateTestFile(TestDirectory, "file");
+                    using (
+                        var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file))
+                    )
+                    {
+                        watcher.NotifyFilter = filter;
+                        Action action = () =>
+                            File.SetCreationTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
 
-                    WatcherChangeTypes expected = 0;
-                    if (filter == NotifyFilters.CreationTime)
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsLinux() && ((filter & LinuxFiltersForAttribute) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0))
-                        expected |= WatcherChangeTypes.Changed;
+                        WatcherChangeTypes expected = 0;
+                        if (filter == NotifyFilters.CreationTime)
+                            expected |= WatcherChangeTypes.Changed;
+                        else if (
+                            OperatingSystem.IsLinux() && ((filter & LinuxFiltersForAttribute) > 0)
+                        )
+                            expected |= WatcherChangeTypes.Changed;
+                        else if (OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0))
+                            expected |= WatcherChangeTypes.Changed;
 
-                    ExpectEvent(watcher, expected, action, expectedPath: file);
-                }
-            }, maxAttempts: DefaultAttemptsForExpectedEvent, backoffFunc: (iteration) => RetryDelayMilliseconds, retryWhen: e => e is XunitException);
+                        ExpectEvent(watcher, expected, action, expectedPath: file);
+                    }
+                },
+                maxAttempts: DefaultAttemptsForExpectedEvent,
+                backoffFunc: (iteration) => RetryDelayMilliseconds,
+                retryWhen: e => e is XunitException
+            );
         }
 
         [Theory]
@@ -103,7 +126,8 @@ namespace System.IO.Tests
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
             {
                 watcher.NotifyFilter = filter;
-                Action action = () => File.SetLastAccessTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    File.SetLastAccessTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = 0;
                 if (filter == NotifyFilters.LastAccess)
@@ -124,7 +148,8 @@ namespace System.IO.Tests
             using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
             {
                 watcher.NotifyFilter = filter;
-                Action action = () => File.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    File.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = 0;
                 if (filter == NotifyFilters.LastWrite)
@@ -166,33 +191,53 @@ namespace System.IO.Tests
         [MemberData(nameof(FilterTypes))]
         public void FileSystemWatcher_File_NotifyFilter_Size_TwoFilters(NotifyFilters filter)
         {
-            Assert.All(FilterTypes(), (filter2Arr =>
-            {
-                string file = CreateTestFile(TestDirectory, "file");
-                using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
-                {
-                    filter |= (NotifyFilters)filter2Arr[0];
-                    watcher.NotifyFilter = filter;
-                    Action action = () => File.AppendAllText(file, "longText!");
-                    Action cleanup = () => File.AppendAllText(file, "short");
+            Assert.All(
+                FilterTypes(),
+                (
+                    filter2Arr =>
+                    {
+                        string file = CreateTestFile(TestDirectory, "file");
+                        using (
+                            var watcher = new FileSystemWatcher(
+                                TestDirectory,
+                                Path.GetFileName(file)
+                            )
+                        )
+                        {
+                            filter |= (NotifyFilters)filter2Arr[0];
+                            watcher.NotifyFilter = filter;
+                            Action action = () => File.AppendAllText(file, "longText!");
+                            Action cleanup = () => File.AppendAllText(file, "short");
 
-                    WatcherChangeTypes expected = 0;
-                    if (((filter & NotifyFilters.Size) > 0) || ((filter & NotifyFilters.LastWrite) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsLinux() && ((filter & LinuxFiltersForModify) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0))
-                        expected |= WatcherChangeTypes.Changed;
-                    else if (PlatformDetection.IsWindows7 && ((filter & NotifyFilters.Attributes) > 0)) // win7 FSW Size change passes the Attribute filter
-                        expected |= WatcherChangeTypes.Changed;
-                    ExpectEvent(watcher, expected, action, expectedPath: file);
-                }
-            }));
+                            WatcherChangeTypes expected = 0;
+                            if (
+                                ((filter & NotifyFilters.Size) > 0)
+                                || ((filter & NotifyFilters.LastWrite) > 0)
+                            )
+                                expected |= WatcherChangeTypes.Changed;
+                            else if (
+                                OperatingSystem.IsLinux() && ((filter & LinuxFiltersForModify) > 0)
+                            )
+                                expected |= WatcherChangeTypes.Changed;
+                            else if (
+                                OperatingSystem.IsMacOS() && ((filter & OSXFiltersForModify) > 0)
+                            )
+                                expected |= WatcherChangeTypes.Changed;
+                            else if (
+                                PlatformDetection.IsWindows7
+                                && ((filter & NotifyFilters.Attributes) > 0)
+                            ) // win7 FSW Size change passes the Attribute filter
+                                expected |= WatcherChangeTypes.Changed;
+                            ExpectEvent(watcher, expected, action, expectedPath: file);
+                        }
+                    }
+                )
+            );
         }
 
         [Theory]
         [MemberData(nameof(FilterTypes))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to set security info
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to set security info
         public void FileSystemWatcher_File_NotifyFilter_Security(NotifyFilters filter)
         {
             string file = CreateTestFile(TestDirectory, "file");
@@ -202,13 +247,15 @@ namespace System.IO.Tests
                 Action action = () =>
                 {
                     // ACL support is not yet available, so pinvoke directly.
-                    uint result = SetSecurityInfoByHandle(file,
+                    uint result = SetSecurityInfoByHandle(
+                        file,
                         SE_FILE_OBJECT,
                         DACL_SECURITY_INFORMATION, // Only setting the DACL
                         owner: IntPtr.Zero,
                         group: IntPtr.Zero,
                         dacl: IntPtr.Zero, // full access to everyone
-                        sacl: IntPtr.Zero);
+                        sacl: IntPtr.Zero
+                    );
                     Assert.Equal(ERROR_SUCCESS, result);
                 };
                 Action cleanup = () =>
@@ -239,7 +286,8 @@ namespace System.IO.Tests
                 NotifyFilters filter = NotifyFilters.LastWrite | NotifyFilters.FileName;
                 watcher.NotifyFilter = filter;
 
-                Action action = () => Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, WatcherChangeTypes.Changed, action, expectedPath: dir);
             }

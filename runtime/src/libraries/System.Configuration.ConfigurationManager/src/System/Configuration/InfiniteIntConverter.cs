@@ -9,11 +9,18 @@ namespace System.Configuration
 {
     public sealed class InfiniteIntConverter : ConfigurationConverterBase
     {
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
         {
             ValidateType(value, typeof(int));
 
-            return (int)value == int.MaxValue ? "Infinite" : ((int)value).ToString(CultureInfo.InvariantCulture);
+            return (int)value == int.MaxValue
+                ? "Infinite"
+                : ((int)value).ToString(CultureInfo.InvariantCulture);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Program
 {
     interface IFrobber
@@ -11,12 +12,11 @@ public class Program
 
     class Frobber : IFrobber
     {
-        public void Frob()
-        {
-        }
+        public void Frob() { }
     }
 
-    class Foo<T> where T : IFrobber
+    class Foo<T>
+        where T : IFrobber
     {
         public static void FrobAll(T[,] arr)
         {
@@ -31,6 +31,11 @@ public class Program
     [Fact]
     public static void TestEntryPoint()
     {
-        Foo<IFrobber>.FrobAll(new Frobber[,] { { new Frobber() } });
+        Foo<IFrobber>.FrobAll(
+            new Frobber[,]
+            {
+                { new Frobber() },
+            }
+        );
     }
 }

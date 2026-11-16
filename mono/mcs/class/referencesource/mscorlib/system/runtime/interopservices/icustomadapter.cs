@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -14,12 +14,14 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
+namespace System.Runtime.InteropServices
+{
     using System;
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface ICustomAdapter
-    {        
-        [return:MarshalAs(UnmanagedType.IUnknown)] Object GetUnderlyingObject();
+    {
+        [return: MarshalAs(UnmanagedType.IUnknown)]
+        Object GetUnderlyingObject();
     }
 }

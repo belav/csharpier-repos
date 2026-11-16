@@ -42,7 +42,8 @@ public class CommandErrorEventData : CommandEndEventData, IErrorEventData
         bool logParameterValues,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
         : base(
             eventDefinition,
             messageGenerator,
@@ -56,7 +57,8 @@ public class CommandErrorEventData : CommandEndEventData, IErrorEventData
             logParameterValues,
             startTime,
             duration,
-            commandSource)
+            commandSource
+        )
     {
         Exception = exception;
     }

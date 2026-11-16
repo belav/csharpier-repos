@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,105 +28,107 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace System
 {
-	[Serializable]
-	[ComVisible (true)]
-	public class WeakReference : ISerializable
-	{
-		//Fields
-		private bool isLongReference;
-		private GCHandle gcHandle;
+    [Serializable]
+    [ComVisible(true)]
+    public class WeakReference : ISerializable
+    {
+        //Fields
+        private bool isLongReference;
+        private GCHandle gcHandle;
 
-		// Helper method for constructors
-		//Should not be called from any other method.
-		private void AllocateHandle (Object target)
-		{
-			if (isLongReference) {
-				gcHandle = GCHandle.Alloc (target, GCHandleType.WeakTrackResurrection);
-			}
-			else {
-				gcHandle = GCHandle.Alloc (target, GCHandleType.Weak);
-			}
-		}
+        // Helper method for constructors
+        //Should not be called from any other method.
+        private void AllocateHandle(Object target)
+        {
+            if (isLongReference)
+            {
+                gcHandle = GCHandle.Alloc(target, GCHandleType.WeakTrackResurrection);
+            }
+            else
+            {
+                gcHandle = GCHandle.Alloc(target, GCHandleType.Weak);
+            }
+        }
 
-		//Constructors
+        //Constructors
 #if MOBILE
-		protected WeakReference ()
-		{
-		}
+        protected WeakReference() { }
 #endif
-		public WeakReference (object target)
-			: this (target, false)
-		{
-		}
 
-		public WeakReference (object target, bool trackResurrection)
-		{
-			isLongReference = trackResurrection;
-			AllocateHandle (target);
-		}
+        public WeakReference(object target)
+            : this(target, false) { }
 
-		protected WeakReference (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
+        public WeakReference(object target, bool trackResurrection)
+        {
+            isLongReference = trackResurrection;
+            AllocateHandle(target);
+        }
 
-			isLongReference = info.GetBoolean ("TrackResurrection");
-			Object target = info.GetValue ("TrackedObject", typeof (System.Object));
+        protected WeakReference(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
 
-			AllocateHandle (target);
-		}
+            isLongReference = info.GetBoolean("TrackResurrection");
+            Object target = info.GetValue("TrackedObject", typeof(System.Object));
 
-		// Properties
-		public virtual bool IsAlive {
-			get {
-				//Target property takes care of the exception
-				return (Target != null);
-			}
-		}
+            AllocateHandle(target);
+        }
 
-		public virtual object Target {
-			get {
-				// This shouldn't throw an exception after finalization
-				// http://blogs.msdn.com/b/yunjin/archive/2005/08/31/458231.aspx
-				if (!gcHandle.IsAllocated)
-					return null;
-				return gcHandle.Target;
-			}
-			set
-			{
-				gcHandle.Target = value;
-			}
-		}
+        // Properties
+        public virtual bool IsAlive
+        {
+            get
+            {
+                //Target property takes care of the exception
+                return (Target != null);
+            }
+        }
 
-		public virtual bool TrackResurrection {
-			get {
-				return isLongReference;
-			}
-		}
+        public virtual object Target
+        {
+            get
+            {
+                // This shouldn't throw an exception after finalization
+                // http://blogs.msdn.com/b/yunjin/archive/2005/08/31/458231.aspx
+                if (!gcHandle.IsAllocated)
+                    return null;
+                return gcHandle.Target;
+            }
+            set { gcHandle.Target = value; }
+        }
 
-		//Methods
-		~WeakReference ()
-		{
-			gcHandle.Free ();
-		}
+        public virtual bool TrackResurrection
+        {
+            get { return isLongReference; }
+        }
 
-		public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
+        //Methods
+        ~WeakReference()
+        {
+            gcHandle.Free();
+        }
 
-			info.AddValue ("TrackResurrection", TrackResurrection);
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
 
-			try {
-				info.AddValue ("TrackedObject", Target);
-			} catch (Exception) {
-				info.AddValue ("TrackedObject", null);
-			}
-		}
-	}
+            info.AddValue("TrackResurrection", TrackResurrection);
+
+            try
+            {
+                info.AddValue("TrackedObject", Target);
+            }
+            catch (Exception)
+            {
+                info.AddValue("TrackedObject", null);
+            }
+        }
+    }
 }

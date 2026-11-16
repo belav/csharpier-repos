@@ -25,9 +25,7 @@ namespace System.ServiceModel.Channels
 
         static MessagePartSpecification bodyOnly;
 
-        public ReliableSessionBindingElement()
-        {
-        }
+        public ReliableSessionBindingElement() { }
 
         internal ReliableSessionBindingElement(ReliableSessionBindingElement elementToBeCloned)
             : base(elementToBeCloned)
@@ -52,22 +50,29 @@ namespace System.ServiceModel.Channels
         [DefaultValue(typeof(TimeSpan), ReliableSessionDefaults.AcknowledgementIntervalString)]
         public TimeSpan AcknowledgementInterval
         {
-            get
-            {
-                return this.acknowledgementInterval;
-            }
+            get { return this.acknowledgementInterval; }
             set
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.acknowledgementInterval = value;
@@ -77,35 +82,36 @@ namespace System.ServiceModel.Channels
         [DefaultValue(ReliableSessionDefaults.FlowControlEnabled)]
         public bool FlowControlEnabled
         {
-            get
-            {
-                return this.flowControlEnabled;
-            }
-            set
-            {
-                this.flowControlEnabled = value;
-            }
+            get { return this.flowControlEnabled; }
+            set { this.flowControlEnabled = value; }
         }
 
         [DefaultValue(typeof(TimeSpan), ReliableSessionDefaults.InactivityTimeoutString)]
         public TimeSpan InactivityTimeout
         {
-            get
-            {
-                return this.inactivityTimeout;
-            }
+            get { return this.inactivityTimeout; }
             set
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.inactivityTimeout = value;
@@ -115,15 +121,17 @@ namespace System.ServiceModel.Channels
         [DefaultValue(ReliableSessionDefaults.MaxPendingChannels)]
         public int MaxPendingChannels
         {
-            get
-            {
-                return this.maxPendingChannels;
-            }
+            get { return this.maxPendingChannels; }
             set
             {
                 if (value <= 0 || value > 16384)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, 16384)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeInRange, 0, 16384)
+                        )
+                    );
                 this.maxPendingChannels = value;
             }
         }
@@ -131,15 +139,17 @@ namespace System.ServiceModel.Channels
         [DefaultValue(ReliableSessionDefaults.MaxRetryCount)]
         public int MaxRetryCount
         {
-            get
-            {
-                return this.maxRetryCount;
-            }
+            get { return this.maxRetryCount; }
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 this.maxRetryCount = value;
             }
         }
@@ -147,15 +157,17 @@ namespace System.ServiceModel.Channels
         [DefaultValue(ReliableSessionDefaults.MaxTransferWindowSize)]
         public int MaxTransferWindowSize
         {
-            get
-            {
-                return this.maxTransferWindowSize;
-            }
+            get { return this.maxTransferWindowSize; }
             set
             {
                 if (value <= 0 || value > 4096)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, 4096)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeInRange, 0, 4096)
+                        )
+                    );
                 this.maxTransferWindowSize = value;
             }
         }
@@ -163,23 +175,17 @@ namespace System.ServiceModel.Channels
         [DefaultValue(ReliableSessionDefaults.Ordered)]
         public bool Ordered
         {
-            get
-            {
-                return this.ordered;
-            }
-            set
-            {
-                this.ordered = value;
-            }
+            get { return this.ordered; }
+            set { this.ordered = value; }
         }
 
-        [DefaultValue(typeof(ReliableMessagingVersion), ReliableSessionDefaults.ReliableMessagingVersionString)]
+        [DefaultValue(
+            typeof(ReliableMessagingVersion),
+            ReliableSessionDefaults.ReliableMessagingVersionString
+        )]
         public ReliableMessagingVersion ReliableMessagingVersion
         {
-            get
-            {
-                return this.reliableMessagingVersion;
-            }
+            get { return this.reliableMessagingVersion; }
             set
             {
                 if (value == null)
@@ -189,7 +195,9 @@ namespace System.ServiceModel.Channels
 
                 if (!ReliableMessagingVersion.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.reliableMessagingVersion = value;
@@ -225,12 +233,20 @@ namespace System.ServiceModel.Channels
             if (typeof(T) == typeof(ChannelProtectionRequirements))
             {
                 ChannelProtectionRequirements myRequirements = this.GetProtectionRequirements();
-                myRequirements.Add(context.GetInnerProperty<ChannelProtectionRequirements>() ?? new ChannelProtectionRequirements());
+                myRequirements.Add(
+                    context.GetInnerProperty<ChannelProtectionRequirements>()
+                        ?? new ChannelProtectionRequirements()
+                );
                 return (T)(object)myRequirements;
             }
             else if (typeof(T) == typeof(IBindingDeliveryCapabilities))
             {
-                return (T)(object)new BindingDeliveryCapabilitiesHelper(this, context.GetInnerProperty<IBindingDeliveryCapabilities>());
+                return (T)
+                    (object)
+                        new BindingDeliveryCapabilitiesHelper(
+                            this,
+                            context.GetInnerProperty<IBindingDeliveryCapabilities>()
+                        );
             }
             else
             {
@@ -242,59 +258,156 @@ namespace System.ServiceModel.Channels
         {
             // Listing headers that must be signed.
             ChannelProtectionRequirements result = new ChannelProtectionRequirements();
-            MessagePartSpecification signedReliabilityMessageParts = WsrmIndex.GetSignedReliabilityMessageParts(
-                this.reliableMessagingVersion);
+            MessagePartSpecification signedReliabilityMessageParts =
+                WsrmIndex.GetSignedReliabilityMessageParts(this.reliableMessagingVersion);
             result.IncomingSignatureParts.AddParts(signedReliabilityMessageParts);
             result.OutgoingSignatureParts.AddParts(signedReliabilityMessageParts);
 
-            if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
-                // Adding RM protocol message actions so that each RM protocol message's body will be 
+                // Adding RM protocol message actions so that each RM protocol message's body will be
                 // signed and encrypted.
                 // From the Client to the Service
                 ScopedMessagePartSpecification signaturePart = result.IncomingSignatureParts;
                 ScopedMessagePartSpecification encryptionPart = result.IncomingEncryptionParts;
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.AckRequestedAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.CreateSequenceAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.SequenceAcknowledgementAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.LastMessageAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.TerminateSequenceAction);
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.AckRequestedAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.CreateSequenceAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.SequenceAcknowledgementAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.LastMessageAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.TerminateSequenceAction
+                );
 
                 // From the Service to the Client
                 signaturePart = result.OutgoingSignatureParts;
                 encryptionPart = result.OutgoingEncryptionParts;
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.CreateSequenceResponseAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.SequenceAcknowledgementAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.LastMessageAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, WsrmFeb2005Strings.TerminateSequenceAction);
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.CreateSequenceResponseAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.SequenceAcknowledgementAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.LastMessageAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    WsrmFeb2005Strings.TerminateSequenceAction
+                );
             }
-            else if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+            else if (
+                this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11
+            )
             {
-                // Adding RM protocol message actions so that each RM protocol message's body will be 
+                // Adding RM protocol message actions so that each RM protocol message's body will be
                 // signed and encrypted.
                 // From the Client to the Service
                 ScopedMessagePartSpecification signaturePart = result.IncomingSignatureParts;
                 ScopedMessagePartSpecification encryptionPart = result.IncomingEncryptionParts;
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.AckRequestedAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.CloseSequenceAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.CloseSequenceResponseAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.CreateSequenceAction);
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.AckRequestedAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.CloseSequenceAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.CloseSequenceResponseAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.CreateSequenceAction
+                );
                 ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.FaultAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.SequenceAcknowledgementAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.TerminateSequenceAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.TerminateSequenceResponseAction);
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.SequenceAcknowledgementAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.TerminateSequenceAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.TerminateSequenceResponseAction
+                );
 
                 // From the Service to the Client
                 signaturePart = result.OutgoingSignatureParts;
                 encryptionPart = result.OutgoingEncryptionParts;
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.AckRequestedAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.CloseSequenceAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.CloseSequenceResponseAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.CreateSequenceResponseAction);
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.AckRequestedAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.CloseSequenceAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.CloseSequenceResponseAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.CreateSequenceResponseAction
+                );
                 ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.FaultAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.SequenceAcknowledgementAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.TerminateSequenceAction);
-                ProtectProtocolMessage(signaturePart, encryptionPart, Wsrm11Strings.TerminateSequenceResponseAction);
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.SequenceAcknowledgementAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.TerminateSequenceAction
+                );
+                ProtectProtocolMessage(
+                    signaturePart,
+                    encryptionPart,
+                    Wsrm11Strings.TerminateSequenceResponseAction
+                );
             }
             else
             {
@@ -304,7 +417,9 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -312,67 +427,105 @@ namespace System.ServiceModel.Channels
             this.VerifyTransportMode(context);
             this.SetSecuritySettings(context);
 
-            InternalDuplexBindingElement.AddDuplexFactorySupport(context, ref this.internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexFactorySupport(
+                context,
+                ref this.internalDuplexBindingElement
+            );
 
             if (typeof(TChannel) == typeof(IOutputSessionChannel))
             {
                 if (context.CanBuildInnerChannelFactory<IRequestSessionChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IRequestSessionChannel>(
-                        this, context.BuildInnerChannelFactory<IRequestSessionChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IRequestSessionChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IRequestSessionChannel>(),
+                                context.Binding
+                            );
                 }
                 else if (context.CanBuildInnerChannelFactory<IRequestChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IRequestChannel>(
-                        this, context.BuildInnerChannelFactory<IRequestChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IRequestChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IRequestChannel>(),
+                                context.Binding
+                            );
                 }
                 else if (context.CanBuildInnerChannelFactory<IDuplexSessionChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IDuplexSessionChannel>(
-                        this, context.BuildInnerChannelFactory<IDuplexSessionChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IDuplexSessionChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IDuplexSessionChannel>(),
+                                context.Binding
+                            );
                 }
                 else if (context.CanBuildInnerChannelFactory<IDuplexChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IDuplexChannel>(
-                        this, context.BuildInnerChannelFactory<IDuplexChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IDuplexChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IDuplexChannel>(),
+                                context.Binding
+                            );
                 }
             }
             else if (typeof(TChannel) == typeof(IDuplexSessionChannel))
             {
                 if (context.CanBuildInnerChannelFactory<IDuplexSessionChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IDuplexSessionChannel>(
-                        this, context.BuildInnerChannelFactory<IDuplexSessionChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IDuplexSessionChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IDuplexSessionChannel>(),
+                                context.Binding
+                            );
                 }
                 else if (context.CanBuildInnerChannelFactory<IDuplexChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IDuplexChannel>(
-                        this, context.BuildInnerChannelFactory<IDuplexChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IDuplexChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IDuplexChannel>(),
+                                context.Binding
+                            );
                 }
             }
             else if (typeof(TChannel) == typeof(IRequestSessionChannel))
             {
                 if (context.CanBuildInnerChannelFactory<IRequestSessionChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IRequestSessionChannel>(
-                        this, context.BuildInnerChannelFactory<IRequestSessionChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IRequestSessionChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IRequestSessionChannel>(),
+                                context.Binding
+                            );
                 }
                 else if (context.CanBuildInnerChannelFactory<IRequestChannel>())
                 {
-                    return (IChannelFactory<TChannel>)(object)
-                        new ReliableChannelFactory<TChannel, IRequestChannel>(
-                        this, context.BuildInnerChannelFactory<IRequestChannel>(), context.Binding);
+                    return (IChannelFactory<TChannel>)
+                        (object)
+                            new ReliableChannelFactory<TChannel, IRequestChannel>(
+                                this,
+                                context.BuildInnerChannelFactory<IRequestChannel>(),
+                                context.Binding
+                            );
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                "TChannel",
+                SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+            );
         }
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
@@ -380,7 +533,10 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
-            InternalDuplexBindingElement.AddDuplexFactorySupport(context, ref this.internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexFactorySupport(
+                context,
+                ref this.internalDuplexBindingElement
+            );
 
             if (typeof(TChannel) == typeof(IOutputSessionChannel))
             {
@@ -403,7 +559,9 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -412,9 +570,14 @@ namespace System.ServiceModel.Channels
             this.SetSecuritySettings(context);
 
 #pragma warning suppress 56506 // BindingContext guarantees BindingParameters is never null.
-            IMessageFilterTable<EndpointAddress> table = context.BindingParameters.Find<IMessageFilterTable<EndpointAddress>>();
+            IMessageFilterTable<EndpointAddress> table = context.BindingParameters.Find<
+                IMessageFilterTable<EndpointAddress>
+            >();
 
-            InternalDuplexBindingElement.AddDuplexListenerSupport(context, ref this.internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexListenerSupport(
+                context,
+                ref this.internalDuplexBindingElement
+            );
 
             if (typeof(TChannel) == typeof(IInputSessionChannel))
             {
@@ -482,7 +645,10 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                "TChannel",
+                SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+            );
         }
 
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
@@ -490,7 +656,10 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
-            InternalDuplexBindingElement.AddDuplexListenerSupport(context, ref this.internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexListenerSupport(
+                context,
+                ref this.internalDuplexBindingElement
+            );
 
             if (typeof(TChannel) == typeof(IInputSessionChannel))
             {
@@ -543,7 +712,8 @@ namespace System.ServiceModel.Channels
         static void ProtectProtocolMessage(
             ScopedMessagePartSpecification signaturePart,
             ScopedMessagePartSpecification encryptionPart,
-            string action)
+            string action
+        )
         {
             signaturePart.AddParts(BodyOnly, action);
             encryptionPart.AddParts(MessagePartSpecification.NoParts, action);
@@ -552,7 +722,8 @@ namespace System.ServiceModel.Channels
 
         void SetSecuritySettings(BindingContext context)
         {
-            SecurityBindingElement element = context.RemainingBindingElements.Find<SecurityBindingElement>();
+            SecurityBindingElement element =
+                context.RemainingBindingElements.Find<SecurityBindingElement>();
 
             if (element != null)
             {
@@ -562,17 +733,21 @@ namespace System.ServiceModel.Channels
 
         void VerifyTransportMode(BindingContext context)
         {
-            TransportBindingElement transportElement = context.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transportElement =
+                context.RemainingBindingElements.Find<TransportBindingElement>();
 
             // Verify ManualAdderssing is turned off.
             if ((transportElement != null) && (transportElement.ManualAddressing))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported)));
+                    new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported))
+                );
             }
 
-            ConnectionOrientedTransportBindingElement connectionElement = transportElement as ConnectionOrientedTransportBindingElement;
-            HttpTransportBindingElement httpElement = transportElement as HttpTransportBindingElement;
+            ConnectionOrientedTransportBindingElement connectionElement =
+                transportElement as ConnectionOrientedTransportBindingElement;
+            HttpTransportBindingElement httpElement =
+                transportElement as HttpTransportBindingElement;
 
             // Verify TransportMode is Buffered.
             TransferMode transportTransferMode;
@@ -594,12 +769,21 @@ namespace System.ServiceModel.Channels
             if (transportTransferMode != TransferMode.Buffered)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.TransferModeNotSupported,
-                    transportTransferMode, this.GetType().Name)));
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.TransferModeNotSupported,
+                            transportTransferMode,
+                            this.GetType().Name
+                        )
+                    )
+                );
             }
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -610,12 +794,16 @@ namespace System.ServiceModel.Channels
             if (context.BindingElements != null)
             {
                 BindingElementCollection bindingElements = context.BindingElements;
-                ReliableSessionBindingElement settings = bindingElements.Find<ReliableSessionBindingElement>();
+                ReliableSessionBindingElement settings =
+                    bindingElements.Find<ReliableSessionBindingElement>();
 
                 if (settings != null)
                 {
                     // ReliableSession assertion
-                    XmlElement assertion = settings.CreateReliabilityAssertion(exporter.PolicyVersion, bindingElements);
+                    XmlElement assertion = settings.CreateReliabilityAssertion(
+                        exporter.PolicyVersion,
+                        bindingElements
+                    );
                     context.GetBindingAssertions().Add(assertion);
                 }
             }
@@ -630,7 +818,10 @@ namespace System.ServiceModel.Channels
             return doc.CreateElement(policyPrefix, policy, policyNs);
         }
 
-        XmlElement CreateReliabilityAssertion(PolicyVersion policyVersion, BindingElementCollection bindingElements)
+        XmlElement CreateReliabilityAssertion(
+            PolicyVersion policyVersion,
+            BindingElementCollection bindingElements
+        )
         {
             XmlDocument doc = new XmlDocument();
             XmlElement child = null;
@@ -639,10 +830,15 @@ namespace System.ServiceModel.Channels
             string assertionPrefix;
             string assertionNs;
 
-            if (this.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
-                reliableSessionPrefix = ReliableSessionPolicyStrings.ReliableSessionFebruary2005Prefix;
-                reliableSessionNs = ReliableSessionPolicyStrings.ReliableSessionFebruary2005Namespace;
+                reliableSessionPrefix =
+                    ReliableSessionPolicyStrings.ReliableSessionFebruary2005Prefix;
+                reliableSessionNs =
+                    ReliableSessionPolicyStrings.ReliableSessionFebruary2005Namespace;
                 assertionPrefix = reliableSessionPrefix;
                 assertionNs = reliableSessionNs;
             }
@@ -655,7 +851,11 @@ namespace System.ServiceModel.Channels
             }
 
             // ReliableSession assertion
-            XmlElement assertion = doc.CreateElement(reliableSessionPrefix, ReliableSessionPolicyStrings.ReliableSessionName, reliableSessionNs);
+            XmlElement assertion = doc.CreateElement(
+                reliableSessionPrefix,
+                ReliableSessionPolicyStrings.ReliableSessionName,
+                reliableSessionNs
+            );
 
             if (this.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
             {
@@ -665,24 +865,40 @@ namespace System.ServiceModel.Channels
                 // SequenceSTR
                 if (IsSecureConversationEnabled(bindingElements))
                 {
-                    XmlElement sequenceSTR = doc.CreateElement(reliableSessionPrefix, ReliableSessionPolicyStrings.SequenceSTR, reliableSessionNs);
+                    XmlElement sequenceSTR = doc.CreateElement(
+                        reliableSessionPrefix,
+                        ReliableSessionPolicyStrings.SequenceSTR,
+                        reliableSessionNs
+                    );
                     policy.AppendChild(sequenceSTR);
                 }
 
                 // DeliveryAssurance
-                XmlElement deliveryAssurance = doc.CreateElement(reliableSessionPrefix, ReliableSessionPolicyStrings.DeliveryAssurance, reliableSessionNs);
+                XmlElement deliveryAssurance = doc.CreateElement(
+                    reliableSessionPrefix,
+                    ReliableSessionPolicyStrings.DeliveryAssurance,
+                    reliableSessionNs
+                );
 
                 // Policy
                 XmlElement nestedPolicy = CreatePolicyElement(policyVersion, doc);
 
                 // ExactlyOnce
-                XmlElement exactlyOnce = doc.CreateElement(reliableSessionPrefix, ReliableSessionPolicyStrings.ExactlyOnce, reliableSessionNs);
+                XmlElement exactlyOnce = doc.CreateElement(
+                    reliableSessionPrefix,
+                    ReliableSessionPolicyStrings.ExactlyOnce,
+                    reliableSessionNs
+                );
                 nestedPolicy.AppendChild(exactlyOnce);
 
                 if (this.ordered)
                 {
                     // InOrder
-                    XmlElement inOrder = doc.CreateElement(reliableSessionPrefix, ReliableSessionPolicyStrings.InOrder, reliableSessionNs);
+                    XmlElement inOrder = doc.CreateElement(
+                        reliableSessionPrefix,
+                        ReliableSessionPolicyStrings.InOrder,
+                        reliableSessionNs
+                    );
                     nestedPolicy.AppendChild(inOrder);
                 }
 
@@ -692,12 +908,20 @@ namespace System.ServiceModel.Channels
             }
 
             // Nested InactivityTimeout assertion
-            child = doc.CreateElement(assertionPrefix, ReliableSessionPolicyStrings.InactivityTimeout, assertionNs);
+            child = doc.CreateElement(
+                assertionPrefix,
+                ReliableSessionPolicyStrings.InactivityTimeout,
+                assertionNs
+            );
             WriteMillisecondsAttribute(child, this.InactivityTimeout);
             assertion.AppendChild(child);
 
             // Nested AcknowledgementInterval assertion
-            child = doc.CreateElement(assertionPrefix, ReliableSessionPolicyStrings.AcknowledgementInterval, assertionNs);
+            child = doc.CreateElement(
+                assertionPrefix,
+                ReliableSessionPolicyStrings.AcknowledgementInterval,
+                assertionNs
+            );
             WriteMillisecondsAttribute(child, this.AcknowledgementInterval);
             assertion.AppendChild(child);
 
@@ -712,12 +936,14 @@ namespace System.ServiceModel.Channels
             {
                 if (!foundRM)
                 {
-                    ReliableSessionBindingElement bindingElement = bindingElements[i] as ReliableSessionBindingElement;
+                    ReliableSessionBindingElement bindingElement =
+                        bindingElements[i] as ReliableSessionBindingElement;
                     foundRM = (bindingElement != null);
                 }
                 else
                 {
-                    SecurityBindingElement securityBindingElement = bindingElements[i] as SecurityBindingElement;
+                    SecurityBindingElement securityBindingElement =
+                        bindingElements[i] as SecurityBindingElement;
 
                     if (securityBindingElement != null)
                     {
@@ -725,8 +951,16 @@ namespace System.ServiceModel.Channels
 
                         // The difference in bool (requireCancellation) does not affect whether the binding is valid,
                         // but the method does match on the value so we need to pass both true and false.
-                        return SecurityBindingElement.IsSecureConversationBinding(securityBindingElement, true, out bootstrapSecurity)
-                            || SecurityBindingElement.IsSecureConversationBinding(securityBindingElement, false, out bootstrapSecurity);
+                        return SecurityBindingElement.IsSecureConversationBinding(
+                                securityBindingElement,
+                                true,
+                                out bootstrapSecurity
+                            )
+                            || SecurityBindingElement.IsSecureConversationBinding(
+                                securityBindingElement,
+                                false,
+                                out bootstrapSecurity
+                            );
                     }
 
                     break;
@@ -739,7 +973,10 @@ namespace System.ServiceModel.Channels
         static void WriteMillisecondsAttribute(XmlElement childElement, TimeSpan timeSpan)
         {
             UInt64 milliseconds = Convert.ToUInt64(timeSpan.TotalMilliseconds);
-            childElement.SetAttribute(ReliableSessionPolicyStrings.Milliseconds, XmlConvert.ToString(milliseconds));
+            childElement.SetAttribute(
+                ReliableSessionPolicyStrings.Milliseconds,
+                XmlConvert.ToString(milliseconds)
+            );
         }
 
         class BindingDeliveryCapabilitiesHelper : IBindingDeliveryCapabilities
@@ -747,11 +984,15 @@ namespace System.ServiceModel.Channels
             ReliableSessionBindingElement element;
             IBindingDeliveryCapabilities inner;
 
-            internal BindingDeliveryCapabilitiesHelper(ReliableSessionBindingElement element, IBindingDeliveryCapabilities inner)
+            internal BindingDeliveryCapabilitiesHelper(
+                ReliableSessionBindingElement element,
+                IBindingDeliveryCapabilities inner
+            )
             {
                 this.element = element;
                 this.inner = inner;
             }
+
             bool IBindingDeliveryCapabilities.AssuresOrderedDelivery
             {
                 get { return element.Ordered; }

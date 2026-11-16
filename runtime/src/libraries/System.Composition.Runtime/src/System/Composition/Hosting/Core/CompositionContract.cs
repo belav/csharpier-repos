@@ -22,9 +22,7 @@ namespace System.Composition.Hosting.Core
         /// </summary>
         /// <param name="contractType">The type shared between the exporter and importer.</param>
         public CompositionContract(Type contractType)
-            : this(contractType, null)
-        {
-        }
+            : this(contractType, null) { }
 
         /// <summary>
         /// Construct a <see cref="CompositionContract"/>.
@@ -32,9 +30,7 @@ namespace System.Composition.Hosting.Core
         /// <param name="contractType">The type shared between the exporter and importer.</param>
         /// <param name="contractName">Optionally, a name that discriminates this contract from others with the same type.</param>
         public CompositionContract(Type contractType, string contractName)
-            : this(contractType, contractName, null)
-        {
-        }
+            : this(contractType, contractName, null) { }
 
         /// <summary>
         /// Construct a <see cref="CompositionContract"/>.
@@ -42,10 +38,16 @@ namespace System.Composition.Hosting.Core
         /// <param name="contractType">The type shared between the exporter and importer.</param>
         /// <param name="contractName">Optionally, a name that discriminates this contract from others with the same type.</param>
         /// <param name="metadataConstraints">Optionally, a non-empty collection of named constraints that apply to the contract.</param>
-        public CompositionContract(Type contractType, string contractName, IDictionary<string, object> metadataConstraints)
+        public CompositionContract(
+            Type contractType,
+            string contractName,
+            IDictionary<string, object> metadataConstraints
+        )
         {
-            if (contractType == null) throw new ArgumentNullException(nameof(contractType));
-            if (metadataConstraints?.Count == 0) throw new ArgumentOutOfRangeException(nameof(metadataConstraints));
+            if (contractType == null)
+                throw new ArgumentNullException(nameof(contractType));
+            if (metadataConstraints?.Count == 0)
+                throw new ArgumentOutOfRangeException(nameof(metadataConstraints));
 
             _contractType = contractType;
             _contractName = contractName;
@@ -66,7 +68,8 @@ namespace System.Composition.Hosting.Core
         /// Constraints applied to the contract. Instead of using this collection
         /// directly it is advisable to use the <see cref="TryUnwrapMetadataConstraint"/> method.
         /// </summary>
-        public IEnumerable<KeyValuePair<string, object>> MetadataConstraints => _metadataConstraints;
+        public IEnumerable<KeyValuePair<string, object>> MetadataConstraints =>
+            _metadataConstraints;
 
         /// <summary>
         /// Determines equality between two contracts.
@@ -76,10 +79,14 @@ namespace System.Composition.Hosting.Core
         public override bool Equals(object obj)
         {
             var contract = obj as CompositionContract;
-            return contract != null &&
-                contract._contractType.Equals(_contractType) &&
-                (_contractName == null ? contract._contractName == null : _contractName.Equals(contract._contractName)) &&
-                ConstraintEqual(_metadataConstraints, contract._metadataConstraints);
+            return contract != null
+                && contract._contractType.Equals(_contractType)
+                && (
+                    _contractName == null
+                        ? contract._contractName == null
+                        : _contractName.Equals(contract._contractName)
+                )
+                && ConstraintEqual(_metadataConstraints, contract._metadataConstraints);
         }
 
         /// <summary>
@@ -108,9 +115,15 @@ namespace System.Composition.Hosting.Core
                 result += " " + Formatters.Format(_contractName);
 
             if (_metadataConstraints != null)
-                result += string.Format(" {{ {0} }}",
-                    string.Join(SR.Formatter_ListSeparatorWithSpace,
-                        _metadataConstraints.Select(kv => $"{kv.Key} = {Formatters.Format(kv.Value)}")));
+                result += string.Format(
+                    " {{ {0} }}",
+                    string.Join(
+                        SR.Formatter_ListSeparatorWithSpace,
+                        _metadataConstraints.Select(kv =>
+                            $"{kv.Key} = {Formatters.Format(kv.Value)}"
+                        )
+                    )
+                );
 
             return result;
         }
@@ -124,7 +137,8 @@ namespace System.Composition.Hosting.Core
         /// new contract type.</returns>
         public CompositionContract ChangeType(Type newContractType)
         {
-            if (newContractType == null) throw new ArgumentNullException(nameof(newContractType));
+            if (newContractType == null)
+                throw new ArgumentNullException(nameof(newContractType));
             return new CompositionContract(newContractType, _contractName, _metadataConstraints);
         }
 
@@ -138,7 +152,11 @@ namespace System.Composition.Hosting.Core
         /// <param name="constraintValue">The value if it is present and of the correct type, otherwise null.</param>
         /// <param name="remainingContract">The contract with the constraint removed if present, otherwise null.</param>
         /// <returns>True if the constraint is present and of the correct type, otherwise false.</returns>
-        public bool TryUnwrapMetadataConstraint<T>(string constraintName, out T constraintValue, out CompositionContract remainingContract)
+        public bool TryUnwrapMetadataConstraint<T>(
+            string constraintName,
+            out T constraintValue,
+            out CompositionContract remainingContract
+        )
         {
             if (constraintName is null)
             {
@@ -166,13 +184,20 @@ namespace System.Composition.Hosting.Core
             {
                 var remainingConstraints = new Dictionary<string, object>(_metadataConstraints);
                 remainingConstraints.Remove(constraintName);
-                remainingContract = new CompositionContract(_contractType, _contractName, remainingConstraints);
+                remainingContract = new CompositionContract(
+                    _contractType,
+                    _contractName,
+                    remainingConstraints
+                );
             }
 
             return true;
         }
 
-        internal static bool ConstraintEqual(IDictionary<string, object> first, IDictionary<string, object> second)
+        internal static bool ConstraintEqual(
+            IDictionary<string, object> first,
+            IDictionary<string, object> second
+        )
         {
             if (first == second)
                 return true;
@@ -198,10 +223,19 @@ namespace System.Composition.Hosting.Core
                 }
                 else
                 {
-                    if (firstItem.Value is IEnumerable firstEnumerable && !(firstEnumerable is string))
+                    if (
+                        firstItem.Value is IEnumerable firstEnumerable
+                        && !(firstEnumerable is string)
+                    )
                     {
                         var secondEnumerable = secondValue as IEnumerable;
-                        if (secondEnumerable == null || !Enumerable.SequenceEqual(firstEnumerable.Cast<object>(), secondEnumerable.Cast<object>()))
+                        if (
+                            secondEnumerable == null
+                            || !Enumerable.SequenceEqual(
+                                firstEnumerable.Cast<object>(),
+                                secondEnumerable.Cast<object>()
+                            )
+                        )
                             return false;
                     }
                     else if (!firstItem.Value.Equals(secondValue))

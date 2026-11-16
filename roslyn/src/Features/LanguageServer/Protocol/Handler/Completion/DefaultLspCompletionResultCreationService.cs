@@ -15,8 +15,12 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
 {
-    [ExportWorkspaceService(typeof(ILspCompletionResultCreationService), ServiceLayer.Default), Shared]
-    internal sealed class DefaultLspCompletionResultCreationService : AbstractLspCompletionResultCreationService
+    [
+        ExportWorkspaceService(typeof(ILspCompletionResultCreationService), ServiceLayer.Default),
+        Shared
+    ]
+    internal sealed class DefaultLspCompletionResultCreationService
+        : AbstractLspCompletionResultCreationService
     {
         /// <summary>
         /// Command name implemented by the client and invoked when an item with complex edit is committed.
@@ -25,11 +29,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultLspCompletionResultCreationService()
-        {
-        }
+        public DefaultLspCompletionResultCreationService() { }
 
-        protected override async Task<LSP.CompletionItem> CreateItemAndPopulateTextEditAsync(Document document,
+        protected override async Task<LSP.CompletionItem> CreateItemAndPopulateTextEditAsync(
+            Document document,
             SourceText documentText,
             bool snippetsSupported,
             bool itemDefaultsSupported,
@@ -37,7 +40,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             string typedText,
             CompletionItem item,
             CompletionService completionService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var lspItem = new LSP.CompletionItem() { Label = item.GetEntireDisplayText() };
 
@@ -46,20 +50,31 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 //await completionService.GetChangeAsync(document, item, cancellationToken: cancellationToken).ConfigureAwait(false);
                 // For unimported item, we use display text (type or method name) as the text edit text, and rely on resolve handler to add missing import as additional edit.
                 // For other complex edit item, we return a no-op edit and rely on resolve handler to compute the actual change and provide the command to apply it.
-                var completionChangeNewText = item.Flags.IsExpanded() ? item.DisplayText : typedText;
-                PopulateTextEdit(lspItem, completionChangeSpan: defaultSpan, completionChangeNewText, documentText, itemDefaultsSupported, defaultSpan: defaultSpan);
+                var completionChangeNewText = item.Flags.IsExpanded()
+                    ? item.DisplayText
+                    : typedText;
+                PopulateTextEdit(
+                    lspItem,
+                    completionChangeSpan: defaultSpan,
+                    completionChangeNewText,
+                    documentText,
+                    itemDefaultsSupported,
+                    defaultSpan: defaultSpan
+                );
             }
             else
             {
                 await GetChangeAndPopulateSimpleTextEditAsync(
-                    document,
-                    documentText,
-                    itemDefaultsSupported,
-                    defaultSpan,
-                    item,
-                    lspItem,
-                    completionService,
-                    cancellationToken).ConfigureAwait(false);
+                        document,
+                        documentText,
+                        itemDefaultsSupported,
+                        defaultSpan,
+                        item,
+                        lspItem,
+                        completionService,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return lspItem;
@@ -74,25 +89,52 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             CompletionService completionService,
             CompletionOptions completionOptions,
             SymbolDescriptionOptions symbolDescriptionOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var description = await completionService.GetDescriptionAsync(document, roslynItem, completionOptions, symbolDescriptionOptions, cancellationToken).ConfigureAwait(false)!;
+            var description = await completionService
+                .GetDescriptionAsync(
+                    document,
+                    roslynItem,
+                    completionOptions,
+                    symbolDescriptionOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)!;
             if (description != null)
             {
-                lspItem.Documentation = ProtocolConversions.GetDocumentationMarkupContent(description.TaggedParts, document, capabilityHelper.SupportsMarkdownDocumentation);
+                lspItem.Documentation = ProtocolConversions.GetDocumentationMarkupContent(
+                    description.TaggedParts,
+                    document,
+                    capabilityHelper.SupportsMarkdownDocumentation
+                );
             }
 
             if (roslynItem.IsComplexTextEdit)
             {
                 if (roslynItem.Flags.IsExpanded())
                 {
-                    var additionalEdits = await GenerateAdditionalTextEditForImportCompletionAsync(roslynItem, document, completionService, cancellationToken).ConfigureAwait(false);
+                    var additionalEdits = await GenerateAdditionalTextEditForImportCompletionAsync(
+                            roslynItem,
+                            document,
+                            completionService,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     lspItem.AdditionalTextEdits = additionalEdits;
                 }
                 else
                 {
-                    var (textEdit, isSnippetString, newPosition) = await GenerateComplexTextEditAsync(
-                        document, completionService, roslynItem, capabilityHelper.SupportSnippets, insertNewPositionPlaceholder: false, cancellationToken).ConfigureAwait(false);
+                    var (textEdit, isSnippetString, newPosition) =
+                        await GenerateComplexTextEditAsync(
+                                document,
+                                completionService,
+                                roslynItem,
+                                capabilityHelper.SupportSnippets,
+                                insertNewPositionPlaceholder: false,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                     var lspOffset = newPosition is null ? -1 : newPosition.Value;
 
@@ -100,7 +142,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                     {
                         CommandIdentifier = CompleteComplexEditCommand,
                         Title = nameof(CompleteComplexEditCommand),
-                        Arguments = [textDocumentIdentifier.Uri, textEdit, isSnippetString, lspOffset]
+                        Arguments =
+                        [
+                            textDocumentIdentifier.Uri,
+                            textEdit,
+                            isSnippetString,
+                            lspOffset,
+                        ],
                     };
                 }
             }

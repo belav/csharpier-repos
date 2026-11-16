@@ -27,90 +27,92 @@
 //
 
 using System;
-using NUnit.Framework;
-using System.Net.Http;
 using System.IO;
+using System.Net.Http;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http
 {
-	[TestFixture]
-	public class StringContentTest
-	{
-		[Test]
-		public void Ctor_Invalid ()
-		{
-			try {
-				new StringContent (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentNullException) {
-			}
+    [TestFixture]
+    public class StringContentTest
+    {
+        [Test]
+        public void Ctor_Invalid()
+        {
+            try
+            {
+                new StringContent(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException) { }
 
-			try {
-				new StringContent ("", null, "aaa");
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
-		}
+            try
+            {
+                new StringContent("", null, "aaa");
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
+        }
 
-		[Test]
-		public void Ctor ()
-		{
-			using (var m = new StringContent ("abcd")) {
-			}
+        [Test]
+        public void Ctor()
+        {
+            using (var m = new StringContent("abcd")) { }
 
-			var s = new StringContent ("aaa", null, "multipart/*");
-			Assert.AreEqual ("Content-Type: multipart/*; charset=utf-8\r\n", s.Headers.ToString ());
+            var s = new StringContent("aaa", null, "multipart/*");
+            Assert.AreEqual("Content-Type: multipart/*; charset=utf-8\r\n", s.Headers.ToString());
 #if !MOBILE
-			s = new StringContent ("aaa", Encoding.GetEncoding (852), "multipart/*");
-			Assert.AreEqual ("Content-Type: multipart/*; charset=ibm852\r\n", s.Headers.ToString ());
+            s = new StringContent("aaa", Encoding.GetEncoding(852), "multipart/*");
+            Assert.AreEqual("Content-Type: multipart/*; charset=ibm852\r\n", s.Headers.ToString());
 #endif
-		}
+        }
 
-		[Test]
-		public void CopyToAsync_Invalid ()
-		{
-			var sc = new StringContent ("");
-			try {
-				sc.CopyToAsync (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentNullException) {
-			}
-		}
+        [Test]
+        public void CopyToAsync_Invalid()
+        {
+            var sc = new StringContent("");
+            try
+            {
+                sc.CopyToAsync(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException) { }
+        }
 
-		[Test]
-		public void CopyToAsync ()
-		{
-			var sc = new StringContent ("gt");
+        [Test]
+        public void CopyToAsync()
+        {
+            var sc = new StringContent("gt");
 
-			var dest = new MemoryStream ();
-			var task = sc.CopyToAsync (dest);
-			task.Wait ();
-			Assert.AreEqual (2, dest.Length, "#1");
-		}
+            var dest = new MemoryStream();
+            var task = sc.CopyToAsync(dest);
+            task.Wait();
+            Assert.AreEqual(2, dest.Length, "#1");
+        }
 
-		[Test]
-		public void LoadIntoBuffer ()
-		{
-			var sc = new StringContent ("b");
-			sc.LoadIntoBufferAsync (400).Wait ();
-		}
+        [Test]
+        public void LoadIntoBuffer()
+        {
+            var sc = new StringContent("b");
+            sc.LoadIntoBufferAsync(400).Wait();
+        }
 
-		[Test]
-		public void ReadAsByteArrayAsync ()
-		{
-			var sc = new StringContent ("h");
-			var res = sc.ReadAsByteArrayAsync ().Result;
-			Assert.AreEqual (1, res.Length, "#1");
-			Assert.AreEqual (104, res[0], "#2");
-		}
+        [Test]
+        public void ReadAsByteArrayAsync()
+        {
+            var sc = new StringContent("h");
+            var res = sc.ReadAsByteArrayAsync().Result;
+            Assert.AreEqual(1, res.Length, "#1");
+            Assert.AreEqual(104, res[0], "#2");
+        }
 
-		[Test]
-		public void ReadAsStringAsync ()
-		{
-			var sc = new StringContent ("abž");
-			var res = sc.ReadAsStringAsync ().Result;
-			Assert.AreEqual ("abž", res, "#1");
-		}
-	}
+        [Test]
+        public void ReadAsStringAsync()
+        {
+            var sc = new StringContent("abï¿½");
+            var res = sc.ReadAsStringAsync().Result;
+            Assert.AreEqual("abï¿½", res, "#1");
+        }
+    }
 }

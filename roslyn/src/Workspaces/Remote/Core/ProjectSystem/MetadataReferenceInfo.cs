@@ -11,10 +11,14 @@ namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 internal readonly record struct MetadataReferenceInfo(
     [property: DataMember(Order = 0)] string FilePath,
     [property: DataMember(Order = 1)] string? Aliases,
-    [property: DataMember(Order = 2)] bool EmbedInteropTypes)
+    [property: DataMember(Order = 2)] bool EmbedInteropTypes
+)
 {
     public MetadataReferenceProperties CreateProperties()
     {
-        return new MetadataReferenceProperties(aliases: Aliases != null ? ImmutableArray.Create(Aliases) : default, embedInteropTypes: EmbedInteropTypes);
+        return new MetadataReferenceProperties(
+            aliases: Aliases != null ? ImmutableArray.Create(Aliases) : default,
+            embedInteropTypes: EmbedInteropTypes
+        );
     }
 }

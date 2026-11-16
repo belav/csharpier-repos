@@ -30,119 +30,96 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public sealed class HttpContentHeaders : HttpHeaders
-	{
-		readonly HttpContent content;
+    public sealed class HttpContentHeaders : HttpHeaders
+    {
+        readonly HttpContent content;
 
-		internal HttpContentHeaders (HttpContent content)
-			: base (HttpHeaderKind.Content)
-		{
-			this.content = content;
-		}
-		
-		public ICollection<string> Allow {
-			get {
-				return GetValues<string> ("Allow");
-			}
-		}
+        internal HttpContentHeaders(HttpContent content)
+            : base(HttpHeaderKind.Content)
+        {
+            this.content = content;
+        }
 
-		public ICollection<string> ContentEncoding {
-			get {
-				return GetValues<string> ("Content-Encoding");
-			}
-		}
-		
-		public ContentDispositionHeaderValue ContentDisposition {
-			get {
-				return GetValue<ContentDispositionHeaderValue> ("Content-Disposition");
-			}
-			set {
-				AddOrRemove ("Content-Disposition", value);
-			}
-		}
+        public ICollection<string> Allow
+        {
+            get { return GetValues<string>("Allow"); }
+        }
 
-		public ICollection<string> ContentLanguage {
-			get {
-				return GetValues<string> ("Content-Language");
-			}
-		}
+        public ICollection<string> ContentEncoding
+        {
+            get { return GetValues<string>("Content-Encoding"); }
+        }
 
-		public long? ContentLength {
-			get {
-				long? v = GetValue<long?> ("Content-Length");
-				if (v != null)
-					return v;
+        public ContentDispositionHeaderValue ContentDisposition
+        {
+            get { return GetValue<ContentDispositionHeaderValue>("Content-Disposition"); }
+            set { AddOrRemove("Content-Disposition", value); }
+        }
 
-				v = content.LoadedBufferLength;
-				if (v != null)
-					return v;
+        public ICollection<string> ContentLanguage
+        {
+            get { return GetValues<string>("Content-Language"); }
+        }
 
-				long l;
-				if (content.TryComputeLength (out l)) {
-					// .net compatibility reading value actually set header property value
-					SetValue ("Content-Length", l);
-					return l;
-				}
+        public long? ContentLength
+        {
+            get
+            {
+                long? v = GetValue<long?>("Content-Length");
+                if (v != null)
+                    return v;
 
-				return null;
-			}
-			set {
-				AddOrRemove ("Content-Length", value);
-			}
-		}
+                v = content.LoadedBufferLength;
+                if (v != null)
+                    return v;
 
-		public Uri ContentLocation {
-			get {
-				return GetValue<Uri> ("Content-Location");
-			}
-			set {
-				AddOrRemove ("Content-Location", value);
-			}
-		}
+                long l;
+                if (content.TryComputeLength(out l))
+                {
+                    // .net compatibility reading value actually set header property value
+                    SetValue("Content-Length", l);
+                    return l;
+                }
 
-		public byte[] ContentMD5 {
-			get {
-				return GetValue<byte[]> ("Content-MD5");
-			}
-			set {
-				AddOrRemove ("Content-MD5", value, Parser.MD5.ToString);
-			}
-		}
+                return null;
+            }
+            set { AddOrRemove("Content-Length", value); }
+        }
 
-		public ContentRangeHeaderValue ContentRange {
-			get {
-				return GetValue<ContentRangeHeaderValue> ("Content-Range");
-			}
-			set {
-				AddOrRemove ("Content-Range", value);
-			}
-		}
+        public Uri ContentLocation
+        {
+            get { return GetValue<Uri>("Content-Location"); }
+            set { AddOrRemove("Content-Location", value); }
+        }
 
-		public MediaTypeHeaderValue ContentType {
-			get {
-				return GetValue<MediaTypeHeaderValue> ("Content-Type");
-			}
-			set {
-				AddOrRemove ("Content-Type", value);
-			}
-		}
+        public byte[] ContentMD5
+        {
+            get { return GetValue<byte[]>("Content-MD5"); }
+            set { AddOrRemove("Content-MD5", value, Parser.MD5.ToString); }
+        }
 
-		public DateTimeOffset? Expires {
-			get {
-				return GetValue<DateTimeOffset?> ("Expires");
-			}
-			set {
-				AddOrRemove ("Expires", value, Parser.DateTime.ToString);
-			}
-		}
+        public ContentRangeHeaderValue ContentRange
+        {
+            get { return GetValue<ContentRangeHeaderValue>("Content-Range"); }
+            set { AddOrRemove("Content-Range", value); }
+        }
 
-		public DateTimeOffset? LastModified {
-			get {
-				return GetValue<DateTimeOffset?> ("Last-Modified");
-			}
-			set {
-				AddOrRemove ("Last-Modified", value, Parser.DateTime.ToString);
-			}
-		}
-	}
+        public MediaTypeHeaderValue ContentType
+        {
+            get { return GetValue<MediaTypeHeaderValue>("Content-Type"); }
+            set { AddOrRemove("Content-Type", value); }
+        }
+
+        public DateTimeOffset? Expires
+        {
+            get { return GetValue<DateTimeOffset?>("Expires"); }
+            set { AddOrRemove("Expires", value, Parser.DateTime.ToString); }
+        }
+
+        public DateTimeOffset? LastModified
+        {
+            get { return GetValue<DateTimeOffset?>("Last-Modified"); }
+            set { AddOrRemove("Last-Modified", value, Parser.DateTime.ToString); }
+        }
+    }
 }

@@ -166,8 +166,8 @@ public class KestrelServerOptions
     {
         get => _requestHeaderEncodingSelector;
         set =>
-            _requestHeaderEncodingSelector =
-                value ?? throw new ArgumentNullException(nameof(value));
+            _requestHeaderEncodingSelector = value
+                ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>
@@ -178,8 +178,8 @@ public class KestrelServerOptions
     {
         get => _responseHeaderEncodingSelector;
         set =>
-            _responseHeaderEncodingSelector =
-                value ?? throw new ArgumentNullException(nameof(value));
+            _responseHeaderEncodingSelector = value
+                ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>
@@ -277,8 +277,8 @@ public class KestrelServerOptions
     /// </summary>
     public void ConfigureEndpointDefaults(Action<ListenOptions> configureOptions)
     {
-        EndpointDefaults =
-            configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+        EndpointDefaults = configureOptions
+            ?? throw new ArgumentNullException(nameof(configureOptions));
     }
 
     internal void ApplyEndpointDefaults(ListenOptions listenOptions)
@@ -294,8 +294,8 @@ public class KestrelServerOptions
     /// </summary>
     public void ConfigureHttpsDefaults(Action<HttpsConnectionAdapterOptions> configureOptions)
     {
-        HttpsDefaults =
-            configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+        HttpsDefaults = configureOptions
+            ?? throw new ArgumentNullException(nameof(configureOptions));
     }
 
     internal void ApplyHttpsDefaults(HttpsConnectionAdapterOptions httpsOptions)

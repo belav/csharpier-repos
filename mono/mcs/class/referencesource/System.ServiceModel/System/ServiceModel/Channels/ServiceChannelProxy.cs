@@ -19,8 +19,10 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Dispatcher;
     using System.Threading.Tasks;
 
-    [Fx.Tag.SecurityNote(Critical = "Accesses a variety of LinkDemanded classes/methods (especially RealProxy)." +
-        "Caller should protect access to the ServiceChannelProxy instance after construction.")]
+    [Fx.Tag.SecurityNote(
+        Critical = "Accesses a variety of LinkDemanded classes/methods (especially RealProxy)."
+            + "Caller should protect access to the ServiceChannelProxy instance after construction."
+    )]
 #pragma warning disable 618 // have not moved to the v4 security model yet
     [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
@@ -34,11 +36,18 @@ namespace System.ServiceModel.Channels
         ImmutableClientRuntime proxyRuntime;
         MethodDataCache methodDataCache;
 
-        internal ServiceChannelProxy(Type interfaceType, Type proxiedType, MessageDirection direction, ServiceChannel serviceChannel)
+        internal ServiceChannelProxy(
+            Type interfaceType,
+            Type proxiedType,
+            MessageDirection direction,
+            ServiceChannel serviceChannel
+        )
             : base(proxiedType)
         {
             if (!MessageDirectionHelper.IsDefined(direction))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("direction"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("direction")
+                );
 
             this.interfaceType = interfaceType;
             this.proxiedType = proxiedType;
@@ -50,7 +59,9 @@ namespace System.ServiceModel.Channels
         }
 
         //Workaround is to set the activityid in remoting call's LogicalCallContext
-        static LogicalCallContext SetActivityIdInLogicalCallContext(LogicalCallContext logicalCallContext)
+        static LogicalCallContext SetActivityIdInLogicalCallContext(
+            LogicalCallContext logicalCallContext
+        )
         {
             if (TraceUtility.ActivityTracing)
             {
@@ -60,11 +71,21 @@ namespace System.ServiceModel.Channels
             return logicalCallContext;
         }
 
-        IMethodReturnMessage CreateReturnMessage(object ret, object[] returnArgs, IMethodCallMessage methodCall)
+        IMethodReturnMessage CreateReturnMessage(
+            object ret,
+            object[] returnArgs,
+            IMethodCallMessage methodCall
+        )
         {
             if (returnArgs != null)
             {
-                return CreateReturnMessage(ret, returnArgs, returnArgs.Length, SetActivityIdInLogicalCallContext(methodCall.LogicalCallContext), methodCall);
+                return CreateReturnMessage(
+                    ret,
+                    returnArgs,
+                    returnArgs.Length,
+                    SetActivityIdInLogicalCallContext(methodCall.LogicalCallContext),
+                    methodCall
+                );
             }
             else
             {
@@ -72,7 +93,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        IMethodReturnMessage CreateReturnMessage(object ret, object[] outArgs, int outArgsCount, LogicalCallContext callCtx, IMethodCallMessage mcm)
+        IMethodReturnMessage CreateReturnMessage(
+            object ret,
+            object[] outArgs,
+            int outArgsCount,
+            LogicalCallContext callCtx,
+            IMethodCallMessage mcm
+        )
         {
             return new ReturnMessage(ret, outArgs, outArgsCount, callCtx, mcm);
         }
@@ -116,14 +143,26 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                ProxyOperationRuntime operation = this.proxyRuntime.GetOperation(method, methodCall.Args, out canCacheMessageData);
+                ProxyOperationRuntime operation = this.proxyRuntime.GetOperation(
+                    method,
+                    methodCall.Args,
+                    out canCacheMessageData
+                );
 
                 if (operation == null)
                 {
                     if (this.serviceChannel.Factory != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SFxMethodNotSupported1, method.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SFxMethodNotSupported1, method.Name)
+                            )
+                        );
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SFxMethodNotSupportedOnCallback1, method.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SFxMethodNotSupportedOnCallback1, method.Name)
+                            )
+                        );
                 }
 
                 MethodType methodType;
@@ -168,7 +207,9 @@ namespace System.ServiceModel.Channels
                 IMethodCallMessage methodCall = message as IMethodCallMessage;
 
                 if (methodCall == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxExpectedIMethodCallMessage)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.SFxExpectedIMethodCallMessage))
+                    );
 
                 MethodData methodData = GetMethodData(methodCall);
 
@@ -190,7 +231,14 @@ namespace System.ServiceModel.Channels
                         return InvokeObject(methodCall);
                     default:
                         Fx.Assert("Invalid proxy method type");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, "Invalid proxy method type")));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "Invalid proxy method type"
+                                )
+                            )
+                        );
                 }
             }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -206,13 +254,35 @@ namespace System.ServiceModel.Channels
 
         static class TaskCreator
         {
-            static readonly Func<ServiceChannel, ProxyOperationRuntime, object[], AsyncCallback, object, IAsyncResult> beginCallDelegate = ServiceChannel.BeginCall;
+            static readonly Func<
+                ServiceChannel,
+                ProxyOperationRuntime,
+                object[],
+                AsyncCallback,
+                object,
+                IAsyncResult
+            > beginCallDelegate = ServiceChannel.BeginCall;
             static readonly Hashtable createGenericTaskDelegateCache = new Hashtable(); // using Hashtable because it allows for lock-free reads
-            static readonly MethodInfo createGenericTaskMI = typeof(TaskCreator).GetMethod("CreateGenericTask", new Type[] { typeof(ServiceChannel), typeof(ProxyOperationRuntime), typeof(object[]) });
+            static readonly MethodInfo createGenericTaskMI = typeof(TaskCreator).GetMethod(
+                "CreateGenericTask",
+                new Type[]
+                {
+                    typeof(ServiceChannel),
+                    typeof(ProxyOperationRuntime),
+                    typeof(object[]),
+                }
+            );
 
-            static Func<ServiceChannel, ProxyOperationRuntime, object[], Task> GetOrCreateTaskDelegate(Type taskResultType)
+            static Func<
+                ServiceChannel,
+                ProxyOperationRuntime,
+                object[],
+                Task
+            > GetOrCreateTaskDelegate(Type taskResultType)
             {
-                Func<ServiceChannel, ProxyOperationRuntime, object[], Task> createTaskDelegate = createGenericTaskDelegateCache[taskResultType] as Func<ServiceChannel, ProxyOperationRuntime, object[], Task>;
+                Func<ServiceChannel, ProxyOperationRuntime, object[], Task> createTaskDelegate =
+                    createGenericTaskDelegateCache[taskResultType]
+                    as Func<ServiceChannel, ProxyOperationRuntime, object[], Task>;
                 if (createTaskDelegate != null)
                 {
                     return createTaskDelegate;
@@ -220,21 +290,31 @@ namespace System.ServiceModel.Channels
 
                 lock (createGenericTaskDelegateCache)
                 {
-                    createTaskDelegate = createGenericTaskDelegateCache[taskResultType] as Func<ServiceChannel, ProxyOperationRuntime, object[], Task>;
+                    createTaskDelegate =
+                        createGenericTaskDelegateCache[taskResultType]
+                        as Func<ServiceChannel, ProxyOperationRuntime, object[], Task>;
                     if (createTaskDelegate != null)
                     {
                         return createTaskDelegate;
                     }
-                    
+
                     MethodInfo methodInfo = createGenericTaskMI.MakeGenericMethod(taskResultType);
-                    createTaskDelegate = Delegate.CreateDelegate(typeof(Func<ServiceChannel, ProxyOperationRuntime, object[], Task>), methodInfo) as Func<ServiceChannel, ProxyOperationRuntime, object[], Task>;
+                    createTaskDelegate =
+                        Delegate.CreateDelegate(
+                            typeof(Func<ServiceChannel, ProxyOperationRuntime, object[], Task>),
+                            methodInfo
+                        ) as Func<ServiceChannel, ProxyOperationRuntime, object[], Task>;
                     createGenericTaskDelegateCache[taskResultType] = createTaskDelegate;
                 }
 
                 return createTaskDelegate;
             }
 
-            public static Task CreateTask(ServiceChannel channel, IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+            public static Task CreateTask(
+                ServiceChannel channel,
+                IMethodCallMessage methodCall,
+                ProxyOperationRuntime operation
+            )
             {
                 if (operation.TaskTResult == ServiceReflector.VoidType)
                 {
@@ -243,13 +323,22 @@ namespace System.ServiceModel.Channels
                 return TaskCreator.CreateGenericTask(channel, operation, methodCall.InArgs);
             }
 
-            static Task CreateGenericTask(ServiceChannel channel, ProxyOperationRuntime operation, object[] inputParameters)
+            static Task CreateGenericTask(
+                ServiceChannel channel,
+                ProxyOperationRuntime operation,
+                object[] inputParameters
+            )
             {
-                Func<ServiceChannel, ProxyOperationRuntime, object[], Task> createTaskDelegate = GetOrCreateTaskDelegate(operation.TaskTResult);
+                Func<ServiceChannel, ProxyOperationRuntime, object[], Task> createTaskDelegate =
+                    GetOrCreateTaskDelegate(operation.TaskTResult);
                 return createTaskDelegate(channel, operation, inputParameters);
             }
 
-            static Task CreateTask(ServiceChannel channel, ProxyOperationRuntime operation, object[] inputParameters)
+            static Task CreateTask(
+                ServiceChannel channel,
+                ProxyOperationRuntime operation,
+                object[] inputParameters
+            )
             {
                 Action<IAsyncResult> endCallDelegate = (asyncResult) =>
                 {
@@ -258,7 +347,11 @@ namespace System.ServiceModel.Channels
                     OperationContext.Current = asyncResult.AsyncState as OperationContext;
                     try
                     {
-                        channel.EndCall(operation.Action, ProxyOperationRuntime.EmptyArray, asyncResult);
+                        channel.EndCall(
+                            operation.Action,
+                            ProxyOperationRuntime.EmptyArray,
+                            asyncResult
+                        );
                     }
                     finally
                     {
@@ -266,10 +359,21 @@ namespace System.ServiceModel.Channels
                     }
                 };
 
-                return Task.Factory.FromAsync(beginCallDelegate, endCallDelegate, channel, operation, inputParameters, OperationContext.Current);
+                return Task.Factory.FromAsync(
+                    beginCallDelegate,
+                    endCallDelegate,
+                    channel,
+                    operation,
+                    inputParameters,
+                    OperationContext.Current
+                );
             }
 
-            public static Task<T> CreateGenericTask<T>(ServiceChannel channel, ProxyOperationRuntime operation, object[] inputParameters)
+            public static Task<T> CreateGenericTask<T>(
+                ServiceChannel channel,
+                ProxyOperationRuntime operation,
+                object[] inputParameters
+            )
             {
                 Func<IAsyncResult, T> endCallDelegate = (asyncResult) =>
                 {
@@ -277,7 +381,12 @@ namespace System.ServiceModel.Channels
                     OperationContext.Current = asyncResult.AsyncState as OperationContext;
                     try
                     {
-                        return (T)channel.EndCall(operation.Action, ProxyOperationRuntime.EmptyArray, asyncResult);
+                        return (T)
+                            channel.EndCall(
+                                operation.Action,
+                                ProxyOperationRuntime.EmptyArray,
+                                asyncResult
+                            );
                     }
                     finally
                     {
@@ -285,7 +394,14 @@ namespace System.ServiceModel.Channels
                     }
                 };
 
-                return Task<T>.Factory.FromAsync<ServiceChannel, ProxyOperationRuntime, object[]>(beginCallDelegate, endCallDelegate, channel, operation, inputParameters, OperationContext.Current);
+                return Task<T>.Factory.FromAsync<ServiceChannel, ProxyOperationRuntime, object[]>(
+                    beginCallDelegate,
+                    endCallDelegate,
+                    channel,
+                    operation,
+                    inputParameters,
+                    OperationContext.Current
+                );
             }
         }
 
@@ -301,20 +417,32 @@ namespace System.ServiceModel.Channels
             ActivityType activityType = ActivityType.Unknown;
             if (DiagnosticUtility.ShouldUseActivity)
             {
-                if (ServiceModelActivity.Current == null ||
-                    ServiceModelActivity.Current.ActivityType != ActivityType.Close)
+                if (
+                    ServiceModelActivity.Current == null
+                    || ServiceModelActivity.Current.ActivityType != ActivityType.Close
+                )
                 {
                     MethodData methodData = this.GetMethodData(methodCall);
-                    if (methodData.MethodBase.DeclaringType == typeof(System.ServiceModel.ICommunicationObject)
-                        && methodData.MethodBase.Name.Equals("Close", StringComparison.Ordinal))
+                    if (
+                        methodData.MethodBase.DeclaringType
+                            == typeof(System.ServiceModel.ICommunicationObject)
+                        && methodData.MethodBase.Name.Equals("Close", StringComparison.Ordinal)
+                    )
                     {
-                        activityName = SR.GetString(SR.ActivityClose, this.serviceChannel.GetType().FullName);
+                        activityName = SR.GetString(
+                            SR.ActivityClose,
+                            this.serviceChannel.GetType().FullName
+                        );
                         activityType = ActivityType.Close;
                     }
                 }
             }
 
-            using (ServiceModelActivity activity = string.IsNullOrEmpty(activityName) ? null : ServiceModelActivity.CreateBoundedActivity())
+            using (
+                ServiceModelActivity activity = string.IsNullOrEmpty(activityName)
+                    ? null
+                    : ServiceModelActivity.CreateBoundedActivity()
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
@@ -326,7 +454,13 @@ namespace System.ServiceModel.Channels
 
         IMethodReturnMessage InvokeGetType(IMethodCallMessage methodCall)
         {
-            return CreateReturnMessage(proxiedType, null, 0, SetActivityIdInLogicalCallContext(methodCall.LogicalCallContext), methodCall);
+            return CreateReturnMessage(
+                proxiedType,
+                null,
+                0,
+                SetActivityIdInLogicalCallContext(methodCall.LogicalCallContext),
+                methodCall
+            );
         }
 
         IMethodReturnMessage InvokeObject(IMethodCallMessage methodCall)
@@ -334,16 +468,29 @@ namespace System.ServiceModel.Channels
             return RemotingServices.ExecuteMessage(this.objectWrapper, methodCall);
         }
 
-        IMethodReturnMessage InvokeBeginService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+        IMethodReturnMessage InvokeBeginService(
+            IMethodCallMessage methodCall,
+            ProxyOperationRuntime operation
+        )
         {
             AsyncCallback callback;
             object asyncState;
             object[] ins = operation.MapAsyncBeginInputs(methodCall, out callback, out asyncState);
-            object ret = this.serviceChannel.BeginCall(operation.Action, operation.IsOneWay, operation, ins, callback, asyncState);
+            object ret = this.serviceChannel.BeginCall(
+                operation.Action,
+                operation.IsOneWay,
+                operation,
+                ins,
+                callback,
+                asyncState
+            );
             return CreateReturnMessage(ret, null, methodCall);
         }
 
-        IMethodReturnMessage InvokeEndService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+        IMethodReturnMessage InvokeEndService(
+            IMethodCallMessage methodCall,
+            ProxyOperationRuntime operation
+        )
         {
             IAsyncResult result;
             object[] outs;
@@ -353,11 +500,20 @@ namespace System.ServiceModel.Channels
             return CreateReturnMessage(ret, returnArgs, methodCall);
         }
 
-        IMethodReturnMessage InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+        IMethodReturnMessage InvokeService(
+            IMethodCallMessage methodCall,
+            ProxyOperationRuntime operation
+        )
         {
             object[] outs;
             object[] ins = operation.MapSyncInputs(methodCall, out outs);
-            object ret = this.serviceChannel.Call(operation.Action, operation.IsOneWay, operation, ins, outs);
+            object ret = this.serviceChannel.Call(
+                operation.Action,
+                operation.IsOneWay,
+                operation,
+                ins,
+                outs
+            );
             object[] returnArgs = operation.MapSyncOutputs(methodCall, outs, ref ret);
             return CreateReturnMessage(ret, returnArgs, methodCall);
         }
@@ -377,11 +533,7 @@ namespace System.ServiceModel.Channels
                 return CreateReturnMessage(e.InnerException, methodCall);
             }
 
-            return CreateReturnMessage(returnValue,
-                                       args,
-                                       args.Length,
-                                       null,
-                                       methodCall);
+            return CreateReturnMessage(returnValue, args, args.Length, null, methodCall);
         }
 
         bool IRemotingTypeInfo.CanCastTo(Type toType, object o)
@@ -477,7 +629,7 @@ namespace System.ServiceModel.Channels
             Channel,
             Object,
             GetType,
-            TaskService
+            TaskService,
         }
 
         struct MethodData
@@ -487,11 +639,13 @@ namespace System.ServiceModel.Channels
             ProxyOperationRuntime operation;
 
             public MethodData(MethodBase methodBase, MethodType methodType)
-                : this(methodBase, methodType, null)
-            {
-            }
+                : this(methodBase, methodType, null) { }
 
-            public MethodData(MethodBase methodBase, MethodType methodType, ProxyOperationRuntime operation)
+            public MethodData(
+                MethodBase methodBase,
+                MethodType methodType,
+                ProxyOperationRuntime operation
+            )
             {
                 this.methodBase = methodBase;
                 this.methodType = methodType;
@@ -626,22 +780,30 @@ namespace System.ServiceModel.Channels
 
             public object GetArg(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
 
             public string GetArgName(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
 
             public object GetOutArg(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
 
             public string GetOutArgName(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
 
             class PropertyDictionary : IDictionary
@@ -747,9 +909,7 @@ namespace System.ServiceModel.Channels
                 {
                     static EmptyEnumerator instance = new EmptyEnumerator();
 
-                    EmptyEnumerator()
-                    {
-                    }
+                    EmptyEnumerator() { }
 
                     public static EmptyEnumerator Instance
                     {
@@ -766,20 +926,22 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
+                            );
                         }
                     }
 
-                    public void Reset()
-                    {
-                    }
+                    public void Reset() { }
 
                     public Object Key
                     {
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
+                            );
                         }
                     }
 
@@ -788,7 +950,9 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
+                            );
                         }
                     }
 
@@ -797,7 +961,9 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
+                            );
                         }
                     }
                 }

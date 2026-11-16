@@ -23,7 +23,14 @@ namespace System.Text.Tests
             return _encoder.GetByteCount(chars, index, count, flush);
         }
 
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, bool flush)
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            bool flush
+        )
         {
             return _encoder.GetBytes(chars, charIndex, charCount, bytes, byteIndex, flush);
         }
@@ -65,10 +72,32 @@ namespace System.Text.Tests
             int charsUsed;
             int bytesUsed;
             bool completed;
-            encoder.Convert(chars, 0, chars.Length, bytes, 0, bytes.Length, false, out charsUsed, out bytesUsed, out completed);
+            encoder.Convert(
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                out charsUsed,
+                out bytesUsed,
+                out completed
+            );
 
             // set flush to true and try again
-            encoder.Convert(chars, 0, chars.Length, bytes, 0, bytes.Length, true, out charsUsed, out bytesUsed, out completed);
+            encoder.Convert(
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                out charsUsed,
+                out bytesUsed,
+                out completed
+            );
         }
 
         // Call Convert to convert a ASCII character array encoders
@@ -79,9 +108,45 @@ namespace System.Text.Tests
             char[] chars = "TestLibrary.TestFramework.BeginScenario".ToCharArray();
             byte[] bytes = new byte[chars.Length * multiplier];
 
-            VerificationHelper(encoder, chars, 0, chars.Length, bytes, 0, bytes.Length, false, chars.Length, chars.Length * multiplier, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, chars.Length, bytes, 0, bytes.Length, true, chars.Length, chars.Length * multiplier, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 0, bytes, 0, 0, true, 0, 0, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                chars.Length,
+                chars.Length * multiplier,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                chars.Length,
+                chars.Length * multiplier,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                0,
+                bytes,
+                0,
+                0,
+                true,
+                0,
+                0,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert a ASCII character array with user implemented encoder
@@ -92,8 +157,32 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length];
             Encoder encoder = new EncoderConvert2Encoder();
 
-            VerificationHelper(encoder, chars, 0, chars.Length, bytes, 0, bytes.Length, false, chars.Length, chars.Length, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, chars.Length, bytes, 0, bytes.Length, true, chars.Length, chars.Length, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                chars.Length,
+                chars.Length,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                chars.Length,
+                chars.Length,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a ASCII character array with UTF8 encoder
@@ -104,16 +193,112 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length];
             Encoder encoder = Encoding.UTF8.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 1, true, 1, 1, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
 
             // Verify maxBytes is large than character count
-            VerificationHelper(encoder, chars, 0, chars.Length - 1, bytes, 0, bytes.Length, false, chars.Length - 1, chars.Length - 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, chars.Length - 1, bytes, 0, bytes.Length, true, chars.Length - 1, chars.Length - 1, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length - 1,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                chars.Length - 1,
+                chars.Length - 1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                chars.Length - 1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                chars.Length - 1,
+                chars.Length - 1,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a ASCII character array with Unicode encoder
@@ -124,15 +309,111 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.Unicode.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 2, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 2, true, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 2, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 2, true, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 2, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 2, true, 1, 2, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                2,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                2,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                2,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                2,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                2,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                2,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, bytes.Length, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, bytes.Length, true, 1, 2, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert a Unicode character array with Unicode encoder
@@ -143,8 +424,32 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.Unicode.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, chars.Length, bytes, 0, bytes.Length, false, chars.Length, bytes.Length, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, chars.Length, bytes, 0, bytes.Length, true, chars.Length, bytes.Length, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                chars.Length,
+                bytes.Length,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                chars.Length,
+                bytes.Length,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a Unicode character array with Unicode encoder
@@ -155,15 +460,111 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.Unicode.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 2, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 2, true, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 2, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 2, true, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 2, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 2, true, 1, 2, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                2,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                2,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                2,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                2,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                2,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                2,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, bytes.Length, false, 1, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, bytes.Length, true, 1, 2, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                1,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                1,
+                2,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a ASCII character array with ASCII encoder
@@ -174,16 +575,112 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length];
             Encoder encoder = Encoding.ASCII.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 1, 1, true, 1, 1, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                1,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
 
             // Verify maxBytes is large than character count
-            VerificationHelper(encoder, chars, 0, chars.Length - 1, bytes, 0, bytes.Length, false, chars.Length - 1, chars.Length - 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, chars.Length - 1, bytes, 0, bytes.Length, true, chars.Length - 1, chars.Length - 1, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                chars.Length - 1,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                chars.Length - 1,
+                chars.Length - 1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                chars.Length - 1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                chars.Length - 1,
+                chars.Length - 1,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a Unicode character array with ASCII encoder
@@ -194,17 +691,137 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.ASCII.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 2, bytes, 0, 2, false, 2, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 4, false, 4, 4, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 4, true, 4, 4, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 2, 2, bytes, 0, 2, true, 2, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 3, false, 3, 3, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 5, true, 3, 3, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                2,
+                bytes,
+                0,
+                2,
+                false,
+                2,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                4,
+                false,
+                4,
+                4,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                4,
+                true,
+                4,
+                4,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                2,
+                2,
+                bytes,
+                0,
+                2,
+                true,
+                2,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                3,
+                false,
+                3,
+                3,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                5,
+                true,
+                3,
+                3,
+                expectedCompleted: true
+            );
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, bytes.Length, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, bytes.Length, true, 1, 1, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a Unicode character array with UTF8 encoder
@@ -215,16 +832,124 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.UTF8.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 3, true, 1, 3, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 2, bytes, 0, 7, false, 2, 4, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 6, false, 4, 6, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 6, true, 4, 6, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 2, 2, bytes, 0, 2, true, 2, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 3, false, 1, 3, expectedCompleted: false);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 5, true, 3, 5, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                3,
+                true,
+                1,
+                3,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                2,
+                bytes,
+                0,
+                7,
+                false,
+                2,
+                4,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                6,
+                false,
+                4,
+                6,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                6,
+                true,
+                4,
+                6,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                2,
+                2,
+                bytes,
+                0,
+                2,
+                true,
+                2,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                3,
+                false,
+                1,
+                3,
+                expectedCompleted: false
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                5,
+                true,
+                3,
+                5,
+                expectedCompleted: true
+            );
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, bytes.Length, false, 1, 0, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, bytes.Length, true, 1, 4, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                1,
+                0,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                1,
+                4,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a ASCII+Unicode character array with ASCII encoder
@@ -235,18 +960,150 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.ASCII.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 1, false, 3, 1, expectedCompleted: false);
-            VerificationHelper(encoder, chars, 3, 1, bytes, 0, 2, false, 0, 2, expectedCompleted: false);
-            VerificationHelper(encoder, chars, 3, 1, bytes, 0, 2, false, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 5, bytes, 0, 5, false, 5, 5, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 4, true, 4, 4, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 2, 2, bytes, 0, 2, true, 2, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 5, false, 3, 3, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 3, true, 3, 3, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                1,
+                false,
+                3,
+                1,
+                expectedCompleted: false
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                3,
+                1,
+                bytes,
+                0,
+                2,
+                false,
+                0,
+                2,
+                expectedCompleted: false
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                3,
+                1,
+                bytes,
+                0,
+                2,
+                false,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                5,
+                bytes,
+                0,
+                5,
+                false,
+                5,
+                5,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                4,
+                true,
+                4,
+                4,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                2,
+                2,
+                bytes,
+                0,
+                2,
+                true,
+                2,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                5,
+                false,
+                3,
+                3,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                3,
+                true,
+                3,
+                3,
+                expectedCompleted: true
+            );
 
-            VerificationHelper(encoder, chars, 0, 2, bytes, 0, bytes.Length, false, 2, 2, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, bytes.Length, true, 1, 1, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                2,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                2,
+                2,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
         }
 
         // Call Convert to convert partial of a ASCII+Unicode character array with UTF8 encoder
@@ -257,30 +1114,195 @@ namespace System.Text.Tests
             byte[] bytes = new byte[chars.Length * 2];
             Encoder encoder = Encoding.UTF8.GetEncoder();
 
-            VerificationHelper(encoder, chars, 0, 1, bytes, 0, 1, true, 1, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 2, bytes, 0, 1, false, 2, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 2, 1, bytes, 0, 5, false, 1, 4, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 2, bytes, 0, 7, false, 2, 4, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 5, bytes, 0, 7, false, 5, 7, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 0, 4, bytes, 0, 6, true, 4, 6, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 2, 2, bytes, 0, 3, true, 1, 3, expectedCompleted: false);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 5, false, 3, 5, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 3, bytes, 1, 5, true, 3, 5, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                1,
+                bytes,
+                0,
+                1,
+                true,
+                1,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                2,
+                bytes,
+                0,
+                1,
+                false,
+                2,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                2,
+                1,
+                bytes,
+                0,
+                5,
+                false,
+                1,
+                4,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                2,
+                bytes,
+                0,
+                7,
+                false,
+                2,
+                4,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                5,
+                bytes,
+                0,
+                7,
+                false,
+                5,
+                7,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                4,
+                bytes,
+                0,
+                6,
+                true,
+                4,
+                6,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                2,
+                2,
+                bytes,
+                0,
+                3,
+                true,
+                1,
+                3,
+                expectedCompleted: false
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                5,
+                false,
+                3,
+                5,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                3,
+                bytes,
+                1,
+                5,
+                true,
+                3,
+                5,
+                expectedCompleted: true
+            );
 
-            VerificationHelper(encoder, chars, 0, 2, bytes, 0, bytes.Length, false, 2, 1, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 2, 2, bytes, 0, bytes.Length, false, 2, 5, expectedCompleted: true);
-            VerificationHelper(encoder, chars, 1, 1, bytes, 0, bytes.Length, true, 1, 3, expectedCompleted: true);
+            VerificationHelper(
+                encoder,
+                chars,
+                0,
+                2,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                2,
+                1,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                2,
+                2,
+                bytes,
+                0,
+                bytes.Length,
+                false,
+                2,
+                5,
+                expectedCompleted: true
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                1,
+                bytes,
+                0,
+                bytes.Length,
+                true,
+                1,
+                3,
+                expectedCompleted: true
+            );
         }
 
-        private void VerificationHelper(Encoder encoder, char[] chars, int charIndex, int charCount,
-            byte[] bytes, int byteIndex, int byteCount, bool flush, int expectedCharsUsed, int expectedBytesUsed,
-            bool expectedCompleted)
+        private void VerificationHelper(
+            Encoder encoder,
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            bool flush,
+            int expectedCharsUsed,
+            int expectedBytesUsed,
+            bool expectedCompleted
+        )
         {
             int charsUsed;
             int bytesUsed;
             bool completed;
 
-            encoder.Convert(chars, charIndex, charCount, bytes, byteIndex, byteCount, flush, out charsUsed, out bytesUsed, out completed);
+            encoder.Convert(
+                chars,
+                charIndex,
+                charCount,
+                bytes,
+                byteIndex,
+                byteCount,
+                flush,
+                out charsUsed,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(expectedCharsUsed, charsUsed);
             Assert.Equal(expectedBytesUsed, bytesUsed);
             Assert.Equal(expectedCompleted, completed);

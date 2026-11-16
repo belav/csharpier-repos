@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
 using CoreFXTestLibrary;
 using TypeOfRepo;
-using System.Runtime.CompilerServices;
 
 namespace UnivConstCalls
 {
@@ -33,35 +33,71 @@ namespace UnivConstCalls
     public class ReferenceConstrainedCallTypeNonGenInterface : IDisposable
     {
         string _callRes = null;
-        public void Dispose() { _callRes = "ReferenceConstrainedCallTypeNonGenInterface.Dispose"; }
-        public override string ToString() { return _callRes; }
+
+        public void Dispose()
+        {
+            _callRes = "ReferenceConstrainedCallTypeNonGenInterface.Dispose";
+        }
+
+        public override string ToString()
+        {
+            return _callRes;
+        }
     }
+
     public class GenReferenceConstrainedCallTypeNonGenInterface<T> : IDisposable
     {
         string _callRes = null;
-        public void Dispose() { _callRes = "GenReferenceConstrainedCallTypeNonGenInterface<" + typeof(T) + ">.Dispose"; }
-        public override string ToString() { return _callRes; }
+
+        public void Dispose()
+        {
+            _callRes = "GenReferenceConstrainedCallTypeNonGenInterface<" + typeof(T) + ">.Dispose";
+        }
+
+        public override string ToString()
+        {
+            return _callRes;
+        }
     }
+
     public struct StructConstrainedCallTypeNonGenInterface : IDisposable
     {
         string _callRes;
-        public void Dispose() { _callRes = "StructConstrainedCallTypeNonGenInterface.Dispose"; }
-        public override string ToString() { return _callRes; }
+
+        public void Dispose()
+        {
+            _callRes = "StructConstrainedCallTypeNonGenInterface.Dispose";
+        }
+
+        public override string ToString()
+        {
+            return _callRes;
+        }
     }
+
     public struct GenStructonstrainedCallTypeNonGenInterface<T> : IDisposable
     {
         string _callRes;
-        public void Dispose() { _callRes = "GenStructonstrainedCallTypeNonGenInterface<" + typeof(T) + ">.Dispose"; }
-        public override string ToString() { return _callRes; }
+
+        public void Dispose()
+        {
+            _callRes = "GenStructonstrainedCallTypeNonGenInterface<" + typeof(T) + ">.Dispose";
+        }
+
+        public override string ToString()
+        {
+            return _callRes;
+        }
     }
 
-    public class ReferenceConstrainedCallType : ConstrainedCallBaseType, IConstrainedCallInterface<string>
+    public class ReferenceConstrainedCallType
+        : ConstrainedCallBaseType,
+            IConstrainedCallInterface<string>
     {
         public string MethodVal;
         public string GenMethodVal;
         public string VirtualMethodVal;
         public string GenVirtualMethodVal;
-
 
         public string Method()
         {
@@ -92,6 +128,7 @@ namespace UnivConstCalls
         {
             return valueToReturn.ToString();
         }
+
         public string GenMethod<T>()
         {
             return valueToReturn.ToString() + typeof(T).ToString();
@@ -102,7 +139,10 @@ namespace UnivConstCalls
     {
         void SetValue(object o);
     }
-    public struct GenericStructThatImplementsInterface<T> : IConstrainedCallInterface<T>, ISetValueToReturn
+
+    public struct GenericStructThatImplementsInterface<T>
+        : IConstrainedCallInterface<T>,
+            ISetValueToReturn
     {
         public T valueToReturn;
 
@@ -115,11 +155,11 @@ namespace UnivConstCalls
         {
             return valueToReturn;
         }
+
         public string GenMethod<U>()
         {
             return valueToReturn.ToString() + typeof(U).ToString();
         }
-
 
         public override bool Equals(object obj)
         {
@@ -147,7 +187,8 @@ namespace UnivConstCalls
         public static bool ToStringCalled;
     }
 
-    public struct NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs : IConstrainedCallInterface<string>
+    public struct NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs
+        : IConstrainedCallInterface<string>
     {
         public int valueToReturn;
 
@@ -155,6 +196,7 @@ namespace UnivConstCalls
         {
             return valueToReturn.ToString();
         }
+
         public string GenMethod<U>()
         {
             return valueToReturn.ToString() + typeof(U).ToString();
@@ -179,7 +221,6 @@ namespace UnivConstCalls
         }
     }
 
-
     public abstract class TestConstrainedCallBase
     {
         public abstract void StoreTargetObject(object onTarget);
@@ -191,7 +232,8 @@ namespace UnivConstCalls
         public abstract bool MakeEqualsCall(object comparand);
     }
 
-    public class UCGConstrainedCall<T, U, V> : TestConstrainedCallBase where T : IConstrainedCallInterface<V>
+    public class UCGConstrainedCall<T, U, V> : TestConstrainedCallBase
+        where T : IConstrainedCallInterface<V>
     {
         T storedValue;
 
@@ -204,6 +246,7 @@ namespace UnivConstCalls
         {
             return storedValue.Method().ToString();
         }
+
         public override string MakeGenericConstrainedCall()
         {
             return storedValue.GenMethod<V>().ToString();
@@ -213,6 +256,7 @@ namespace UnivConstCalls
         {
             return storedValue.ToString();
         }
+
         public override int MakeGetHashCodeCall()
         {
             return storedValue.GetHashCode();
@@ -224,7 +268,6 @@ namespace UnivConstCalls
         }
     }
 
-
     public abstract class TestReferenceConstrainedCallBase
     {
         public abstract void StoreTargetObject(object onTarget);
@@ -234,7 +277,8 @@ namespace UnivConstCalls
         public abstract string MakeConstrainedCallVirtualGeneric<T>();
     }
 
-    public class UCGReferenceConstrainedCall<T, U> : TestReferenceConstrainedCallBase where T : ConstrainedCallBaseType, IConstrainedCallInterface<string>
+    public class UCGReferenceConstrainedCall<T, U> : TestReferenceConstrainedCallBase
+        where T : ConstrainedCallBaseType, IConstrainedCallInterface<string>
     {
         T storedValue;
 
@@ -264,7 +308,8 @@ namespace UnivConstCalls
         }
     }
 
-    public class UCGNonGenInterfaceConstrainedCall<T, U> : TestReferenceConstrainedCallBase where T : IDisposable
+    public class UCGNonGenInterfaceConstrainedCall<T, U> : TestReferenceConstrainedCallBase
+        where T : IDisposable
     {
         T storedValue;
 
@@ -279,14 +324,28 @@ namespace UnivConstCalls
             return storedValue.ToString();
         }
 
-        public override string MakeConstrainedCallInterfaceGeneric<Z>() { return null; }
-        public override string MakeConstrainedCallVirtualNonGeneric() { return null; }
-        public override string MakeConstrainedCallVirtualGeneric<Z>() { return null; }
+        public override string MakeConstrainedCallInterfaceGeneric<Z>()
+        {
+            return null;
+        }
+
+        public override string MakeConstrainedCallVirtualNonGeneric()
+        {
+            return null;
+        }
+
+        public override string MakeConstrainedCallVirtualGeneric<Z>()
+        {
+            return null;
+        }
     }
 
     public static class Test
     {
-        public static void ReferenceTypeCallsTestWorker(TestReferenceConstrainedCallBase o, string[] ExpectedResults)
+        public static void ReferenceTypeCallsTestWorker(
+            TestReferenceConstrainedCallBase o,
+            string[] ExpectedResults
+        )
         {
             Assert.AreEqual(ExpectedResults[0], o.MakeConstrainedCallInterfaceNonGeneric());
             Assert.AreEqual(ExpectedResults[1], o.MakeConstrainedCallInterfaceGeneric<short>());
@@ -297,7 +356,10 @@ namespace UnivConstCalls
         [TestMethod]
         public static void TestRefTypeCallsOnNonGenClass()
         {
-            var instantiatedType = TypeOf.UCC_UCGReferenceConstrainedCall.MakeGenericType(TypeOf.UCC_ReferenceConstrainedCallType, TypeOf.Int16);
+            var instantiatedType = TypeOf.UCC_UCGReferenceConstrainedCall.MakeGenericType(
+                TypeOf.UCC_ReferenceConstrainedCallType,
+                TypeOf.Int16
+            );
             var o = (TestReferenceConstrainedCallBase)Activator.CreateInstance(instantiatedType);
 
             ReferenceConstrainedCallType rcct = new ReferenceConstrainedCallType();
@@ -306,12 +368,12 @@ namespace UnivConstCalls
             rcct.VirtualMethodVal = "NonGenericVirtualMethod";
             rcct.GenVirtualMethodVal = "GenericVirtualMethod";
             o.StoreTargetObject(rcct);
-            string []expectedResults = new string[]
+            string[] expectedResults = new string[]
             {
                 rcct.MethodVal,
-                rcct.GenMethodVal+TypeOf.Int16.ToString(),
+                rcct.GenMethodVal + TypeOf.Int16.ToString(),
                 rcct.VirtualMethodVal,
-                rcct.GenVirtualMethodVal+TypeOf.Int32.ToString(),
+                rcct.GenVirtualMethodVal + TypeOf.Int32.ToString(),
             };
 
             ReferenceTypeCallsTestWorker(o, expectedResults);
@@ -320,11 +382,16 @@ namespace UnivConstCalls
         [TestMethod]
         public static void TestUSCCallsOnNonGenStruct()
         {
-            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(TypeOf.UCC_NonGenericStructThatImplementsInterface, TypeOf.Int16, TypeOf.String);
+            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
+                TypeOf.UCC_NonGenericStructThatImplementsInterface,
+                TypeOf.Int16,
+                TypeOf.String
+            );
             var o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             {
-                NonGenericStructThatImplementsInterface testStruct = new NonGenericStructThatImplementsInterface();
+                NonGenericStructThatImplementsInterface testStruct =
+                    new NonGenericStructThatImplementsInterface();
                 testStruct.valueToReturn = 42;
                 o.StoreTargetObject(testStruct);
                 Assert.AreEqual("42", o.MakeConstrainedCall());
@@ -337,10 +404,15 @@ namespace UnivConstCalls
                 Assert.AreEqual(true, o.MakeEqualsCall(testStruct));
             }
 
-            t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(TypeOf.UCC_NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs, TypeOf.Int16, TypeOf.String);
+            t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
+                TypeOf.UCC_NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs,
+                TypeOf.Int16,
+                TypeOf.String
+            );
             o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
-            NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs testStruct2 = new NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs();
+            NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs testStruct2 =
+                new NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs();
             testStruct2.valueToReturn = 40;
             o.StoreTargetObject(testStruct2);
             Assert.AreEqual("40", o.MakeConstrainedCall());
@@ -370,11 +442,16 @@ namespace UnivConstCalls
         {
             // Use an explicit typeof here for GenericStructThatImplementsInterface<string> so that
             // that case uses the normal shared generic path, and not anything else.
-            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(typeof(GenericStructThatImplementsInterface<string>), TypeOf.Int16, TypeOf.String);
+            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
+                typeof(GenericStructThatImplementsInterface<string>),
+                TypeOf.Int16,
+                TypeOf.String
+            );
             var o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             {
-                GenericStructThatImplementsInterface<string> testStruct = new GenericStructThatImplementsInterface<string>();
+                GenericStructThatImplementsInterface<string> testStruct =
+                    new GenericStructThatImplementsInterface<string>();
                 testStruct.valueToReturn = "74";
                 o.StoreTargetObject(testStruct);
                 Assert.AreEqual("74", o.MakeConstrainedCall());
@@ -403,13 +480,19 @@ namespace UnivConstCalls
         [TestMethod]
         public static void TestUSCCallsOnUSCGenStruct()
         {
-            var tUniversalGenericInnerStruct = TypeOf.UCC_GenericStructThatImplementsInterface.MakeGenericType(TypeOf.Int16);
+            var tUniversalGenericInnerStruct =
+                TypeOf.UCC_GenericStructThatImplementsInterface.MakeGenericType(TypeOf.Int16);
 
-            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(tUniversalGenericInnerStruct, TypeOf.Int16, TypeOf.Int16);
+            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
+                tUniversalGenericInnerStruct,
+                TypeOf.Int16,
+                TypeOf.Int16
+            );
             var o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             {
-                ISetValueToReturn testStruct = (ISetValueToReturn)Activator.CreateInstance(tUniversalGenericInnerStruct);
+                ISetValueToReturn testStruct = (ISetValueToReturn)
+                    Activator.CreateInstance(tUniversalGenericInnerStruct);
                 testStruct.SetValue((short)162);
                 o.StoreTargetObject(testStruct);
                 Assert.AreEqual("162", o.MakeConstrainedCall());
@@ -441,7 +524,9 @@ namespace UnivConstCalls
             var typeArgs = new Type[]
             {
                 typeof(ReferenceConstrainedCallTypeNonGenInterface),
-                typeof(GenReferenceConstrainedCallTypeNonGenInterface<>).MakeGenericType(TypeOf.Double),
+                typeof(GenReferenceConstrainedCallTypeNonGenInterface<>).MakeGenericType(
+                    TypeOf.Double
+                ),
                 typeof(StructConstrainedCallTypeNonGenInterface),
                 typeof(GenStructonstrainedCallTypeNonGenInterface<>).MakeGenericType(TypeOf.Long),
             };
@@ -457,7 +542,10 @@ namespace UnivConstCalls
             for (int i = 0; i < typeArgs.Length; i++)
             {
                 var typeArg = typeArgs[i];
-                var t = typeof(UCGNonGenInterfaceConstrainedCall<,>).MakeGenericType(typeArg, TypeOf.Short);
+                var t = typeof(UCGNonGenInterfaceConstrainedCall<,>).MakeGenericType(
+                    typeArg,
+                    TypeOf.Short
+                );
                 var o = (TestReferenceConstrainedCallBase)Activator.CreateInstance(t);
 
                 o.StoreTargetObject(Activator.CreateInstance(typeArg));

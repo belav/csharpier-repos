@@ -27,35 +27,59 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             AnalyzerConfigOptions analyzerConfigOptions,
             FormatOptions formatOptions,
             ILogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (formatOptions.SaveFormattedFiles)
             {
-                return await GetFormattedDocument(document, optionSet, cancellationToken).ConfigureAwait(false);
+                return await GetFormattedDocument(document, optionSet, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else
             {
-                return await GetFormattedDocumentWithDetailedChanges(document, sourceText, optionSet, cancellationToken).ConfigureAwait(false);
+                return await GetFormattedDocumentWithDetailedChanges(
+                        document,
+                        sourceText,
+                        optionSet,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
         /// <summary>
         /// Returns a formatted <see cref="SourceText"/> with a single <see cref="TextChange"/> that encompasses the entire document.
         /// </summary>
-        private static async Task<SourceText> GetFormattedDocument(Document document, OptionSet optionSet, CancellationToken cancellationToken)
+        private static async Task<SourceText> GetFormattedDocument(
+            Document document,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
-            var formattedDocument = await Formatter.FormatAsync(document, optionSet, cancellationToken).ConfigureAwait(false);
+            var formattedDocument = await Formatter
+                .FormatAsync(document, optionSet, cancellationToken)
+                .ConfigureAwait(false);
             return await formattedDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Returns a formatted <see cref="SoureText"/> with multiple <see cref="TextChange"/>s for each formatting change.
         /// </summary>
-        private static async Task<SourceText> GetFormattedDocumentWithDetailedChanges(Document document, SourceText sourceText, OptionSet optionSet, CancellationToken cancellationToken)
+        private static async Task<SourceText> GetFormattedDocumentWithDetailedChanges(
+            Document document,
+            SourceText sourceText,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             // Since we've already checked that formatable documents support syntax tree, we know the `root` is not null.
-            var formattingTextChanges = Formatter.GetFormattedTextChanges(root!, document.Project.Solution.Workspace, optionSet, cancellationToken);
+            var formattingTextChanges = Formatter.GetFormattedTextChanges(
+                root!,
+                document.Project.Solution.Workspace,
+                optionSet,
+                cancellationToken
+            );
 
             return sourceText.WithChanges(formattingTextChanges);
         }

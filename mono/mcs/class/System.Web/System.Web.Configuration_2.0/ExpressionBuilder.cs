@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,65 +33,78 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class ExpressionBuilder : ConfigurationElement
+    {
+        static ConfigurationProperty expressionPrefixProp;
+        static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static ExpressionBuilder()
+        {
+            expressionPrefixProp = new ConfigurationProperty(
+                "expressionPrefix",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            typeProp = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class ExpressionBuilder : ConfigurationElement
-	{
-		static ConfigurationProperty expressionPrefixProp;
-		static ConfigurationProperty typeProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(expressionPrefixProp);
+            properties.Add(typeProp);
+        }
 
-		static ExpressionBuilder ()
-		{
-			expressionPrefixProp = new ConfigurationProperty ("expressionPrefix", typeof (string), "",
-									  TypeDescriptor.GetConverter (typeof (string)),
-									  PropertyHelper.NonEmptyStringValidator,
-									  ConfigurationPropertyOptions.IsRequired |
-									  ConfigurationPropertyOptions.IsKey);
-			typeProp = new ConfigurationProperty ("type", typeof (string), "",
-							      TypeDescriptor.GetConverter (typeof (string)),
-							      PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
+        internal ExpressionBuilder() { }
 
-			properties.Add (expressionPrefixProp);
-			properties.Add (typeProp);
-		}
+        public ExpressionBuilder(string expressionPrefix, string theType)
+        {
+            this.ExpressionPrefix = expressionPrefix;
+            this.Type = theType;
+        }
 
-		internal ExpressionBuilder ()
-		{
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "expressionPrefix",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string ExpressionPrefix
+        {
+            get { return (string)base[expressionPrefixProp]; }
+            set { base[expressionPrefixProp] = value; }
+        }
 
-		public ExpressionBuilder (string expressionPrefix, string theType)
-		{
-			this.ExpressionPrefix = expressionPrefix;
-			this.Type = theType;
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "type",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
+            set { base[typeProp] = value; }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("expressionPrefix", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string ExpressionPrefix {
-			get { return (string) base[expressionPrefixProp]; }
-			set { base[expressionPrefixProp] = value; }
-		}
+        internal Type TypeInternal
+        {
+            get { return System.Type.GetType(this.Type, true); }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Type {
-			get { return (string) base[typeProp]; }
-			set { base[typeProp] = value; }
-		}
-
-		internal Type TypeInternal {
-			get {
-				return System.Type.GetType (this.Type, true);
-			}
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

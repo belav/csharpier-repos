@@ -1,5 +1,5 @@
 //
-// DesignTimeParseDataCas.cs 
+// DesignTimeParseDataCas.cs
 //	- CAS unit tests for System.Web.UI.DesignTimeParseData
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,58 +27,63 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.ComponentModel.Design;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class DesignTimeParseDataCas : AspNetHostingMinimal
+    {
+        private void Handler(object sender, EventArgs e) { }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DesignTimeParseDataCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
+        {
+            DesignTimeParseData dtpd = new DesignTimeParseData(null, "parseText");
+            dtpd.DataBindingHandler = new EventHandler(Handler);
+            Assert.IsNotNull(dtpd.DataBindingHandler, "DataBindingHandler");
+            Assert.IsNull(dtpd.DesignerHost, "DesignerHost");
+            dtpd.DocumentUrl = String.Empty;
+            Assert.AreEqual(String.Empty, dtpd.DocumentUrl, "DocumentUrl");
+            Assert.AreEqual("parseText", dtpd.ParseText, "ParseText");
+        }
 
-		private void Handler (object sender, EventArgs e)
-		{
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor3_Deny_Unrestricted()
+        {
+            DesignTimeParseData dtpd = new DesignTimeParseData(null, "parseText", "filter");
+            Assert.AreEqual("filter", dtpd.Filter, "Filter");
+            dtpd.ShouldApplyTheme = true;
+            Assert.IsTrue(dtpd.ShouldApplyTheme, "ShouldApplyTheme");
+            Assert.IsNull(dtpd.UserControlRegisterEntries, "UserControlRegisterEntries");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			DesignTimeParseData dtpd = new DesignTimeParseData (null, "parseText");
-			dtpd.DataBindingHandler = new EventHandler (Handler);
-			Assert.IsNotNull (dtpd.DataBindingHandler, "DataBindingHandler");
-			Assert.IsNull (dtpd.DesignerHost, "DesignerHost");
-			dtpd.DocumentUrl = String.Empty;
-			Assert.AreEqual (String.Empty, dtpd.DocumentUrl, "DocumentUrl");
-			Assert.AreEqual ("parseText", dtpd.ParseText, "ParseText");
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor3_Deny_Unrestricted ()
-		{
-			DesignTimeParseData dtpd = new DesignTimeParseData (null, "parseText", "filter");
-			Assert.AreEqual ("filter", dtpd.Filter, "Filter");
-			dtpd.ShouldApplyTheme = true;
-			Assert.IsTrue (dtpd.ShouldApplyTheme, "ShouldApplyTheme");
-			Assert.IsNull (dtpd.UserControlRegisterEntries, "UserControlRegisterEntries");
-		}
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (IDesignerHost), typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(IDesignerHost,String)");
-			return ci.Invoke (new object[2] { null, "parseText" });
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[2] { typeof(IDesignerHost), typeof(string) }
+            );
+            Assert.IsNotNull(ci, ".ctor(IDesignerHost,String)");
+            return ci.Invoke(new object[2] { null, "parseText" });
+        }
 
-		public override Type Type {
-			get { return typeof (DesignTimeParseData); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(DesignTimeParseData); }
+        }
+    }
 }

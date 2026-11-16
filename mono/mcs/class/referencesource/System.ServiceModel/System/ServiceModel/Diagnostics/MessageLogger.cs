@@ -30,14 +30,18 @@ namespace System.ServiceModel.Diagnostics
         ServiceLevelSendRequest = 128,
         ServiceLevelReceiveReply = 256,
         ServiceLevelSendReply = 512,
-        ServiceLevelReceive = ServiceLevelReceiveReply | ServiceLevelReceiveRequest | ServiceLevelReceiveDatagram,
-        ServiceLevelSend = ServiceLevelSendReply | ServiceLevelSendRequest | ServiceLevelSendDatagram,
-        ServiceLevelService = ServiceLevelSendReply | ServiceLevelReceiveRequest | ServiceLevelReceiveDatagram,
-        ServiceLevelProxy = ServiceLevelReceiveReply | ServiceLevelSendRequest | ServiceLevelSendDatagram,
+        ServiceLevelReceive =
+            ServiceLevelReceiveReply | ServiceLevelReceiveRequest | ServiceLevelReceiveDatagram,
+        ServiceLevelSend =
+            ServiceLevelSendReply | ServiceLevelSendRequest | ServiceLevelSendDatagram,
+        ServiceLevelService =
+            ServiceLevelSendReply | ServiceLevelReceiveRequest | ServiceLevelReceiveDatagram,
+        ServiceLevelProxy =
+            ServiceLevelReceiveReply | ServiceLevelSendRequest | ServiceLevelSendDatagram,
         ServiceLevel = ServiceLevelReceive | ServiceLevelSend,
         Malformed = 1024,
         LastChance = 2048,
-        All = int.MaxValue
+        All = int.MaxValue,
     }
 
     internal static class MessageLogger
@@ -72,20 +76,27 @@ namespace System.ServiceModel.Diagnostics
 
         static bool FilterMessages
         {
-            get { return MessageLogger.FilterCount > 0 && (MessageLogger.numberOfMessagesToLog > 0 || MessageLogger.numberOfMessagesToLog == MessageLogger.Unlimited); }
+            get
+            {
+                return MessageLogger.FilterCount > 0
+                    && (
+                        MessageLogger.numberOfMessagesToLog > 0
+                        || MessageLogger.numberOfMessagesToLog == MessageLogger.Unlimited
+                    );
+            }
         }
 
         internal static bool LogKnownPii
         {
-            get 
+            get
             {
-                Fx.Assert(MessageLogger.initialized, "MessageLogger should be initialized before trying to retrieve LogKnownPii");
-                return MessageLogger.logKnownPii; 
+                Fx.Assert(
+                    MessageLogger.initialized,
+                    "MessageLogger should be initialized before trying to retrieve LogKnownPii"
+                );
+                return MessageLogger.logKnownPii;
             }
-            set
-            {
-                MessageLogger.logKnownPii = value;
-            }
+            set { MessageLogger.logKnownPii = value; }
         }
 
         internal static bool LogMalformedMessages
@@ -95,7 +106,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 lock (MessageLogger.syncObject)
                 {
-                    bool shouldProcessAudit = ShouldProcessAudit(MessageLoggingSource.Malformed, value);
+                    bool shouldProcessAudit = ShouldProcessAudit(
+                        MessageLoggingSource.Malformed,
+                        value
+                    );
                     if (value)
                     {
                         EnsureMessageTraceSource();
@@ -106,7 +120,8 @@ namespace System.ServiceModel.Diagnostics
                     }
                     else
                     {
-                        MessageLogger.sources &= MessageLoggingSource.All & ~MessageLoggingSource.Malformed;
+                        MessageLogger.sources &=
+                            MessageLoggingSource.All & ~MessageLoggingSource.Malformed;
                     }
                     if (shouldProcessAudit)
                     {
@@ -123,7 +138,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 lock (MessageLogger.syncObject)
                 {
-                    bool shouldProcessAudit = ShouldProcessAudit(MessageLoggingSource.ServiceLevel, value);
+                    bool shouldProcessAudit = ShouldProcessAudit(
+                        MessageLoggingSource.ServiceLevel,
+                        value
+                    );
                     if (value)
                     {
                         EnsureMessageTraceSource();
@@ -134,7 +152,8 @@ namespace System.ServiceModel.Diagnostics
                     }
                     else
                     {
-                        MessageLogger.sources &= MessageLoggingSource.All & ~MessageLoggingSource.ServiceLevel;
+                        MessageLogger.sources &=
+                            MessageLoggingSource.All & ~MessageLoggingSource.ServiceLevel;
                     }
                     if (shouldProcessAudit)
                     {
@@ -151,7 +170,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 lock (MessageLogger.syncObject)
                 {
-                    bool shouldProcessAudit = ShouldProcessAudit(MessageLoggingSource.Transport, value);
+                    bool shouldProcessAudit = ShouldProcessAudit(
+                        MessageLoggingSource.Transport,
+                        value
+                    );
                     if (value)
                     {
                         EnsureMessageTraceSource();
@@ -162,7 +184,8 @@ namespace System.ServiceModel.Diagnostics
                     }
                     else
                     {
-                        MessageLogger.sources &= MessageLoggingSource.All & ~MessageLoggingSource.Transport;
+                        MessageLogger.sources &=
+                            MessageLoggingSource.All & ~MessageLoggingSource.Transport;
                     }
                     if (shouldProcessAudit)
                     {
@@ -265,10 +288,15 @@ namespace System.ServiceModel.Diagnostics
 
         static bool ShouldLogMessages(MessageLoggingSource source)
         {
-            return (source & MessageLogger.Sources) != 0 &&
-                   ((MessageLogger.MessageTraceSource != null) ||
-                   ((source & MessageLoggingSource.Malformed) != 0 && TD.MessageLogWarningIsEnabled()) ||
-                   TD.MessageLogInfoIsEnabled());
+            return (source & MessageLogger.Sources) != 0
+                && (
+                    (MessageLogger.MessageTraceSource != null)
+                    || (
+                        (source & MessageLoggingSource.Malformed) != 0
+                        && TD.MessageLogWarningIsEnabled()
+                    )
+                    || TD.MessageLogInfoIsEnabled()
+                );
         }
 
         internal static void LogMessage(MessageLoggingSource source, string data)
@@ -283,7 +311,8 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 FailedToLogMessage(e);
             }
         }
@@ -301,7 +330,8 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 FailedToLogMessage(e);
             }
         }
@@ -319,12 +349,17 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 FailedToLogMessage(e);
             }
         }
 
-        internal static void LogMessage(ref Message message, XmlReader reader, MessageLoggingSource source)
+        internal static void LogMessage(
+            ref Message message,
+            XmlReader reader,
+            MessageLoggingSource source
+        )
         {
             Fx.Assert(null != message, "");
             try
@@ -337,7 +372,8 @@ namespace System.ServiceModel.Diagnostics
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 FailedToLogMessage(e);
             }
         }
@@ -347,23 +383,50 @@ namespace System.ServiceModel.Diagnostics
             LogMessage(ref message, null, source);
         }
 
-        static void LogMessageImpl(ref Message message, XmlReader reader, MessageLoggingSource source)
+        static void LogMessageImpl(
+            ref Message message,
+            XmlReader reader,
+            MessageLoggingSource source
+        )
         {
-            ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? TraceUtility.ExtractActivity(message) : null;
+            ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                ? TraceUtility.ExtractActivity(message)
+                : null;
             using (ServiceModelActivity.BoundOperation(activity))
             {
-                if (ShouldLogMessages(source) && (MessageLogger.numberOfMessagesToLog > 0 || MessageLogger.numberOfMessagesToLog == MessageLogger.Unlimited))
+                if (
+                    ShouldLogMessages(source)
+                    && (
+                        MessageLogger.numberOfMessagesToLog > 0
+                        || MessageLogger.numberOfMessagesToLog == MessageLogger.Unlimited
+                    )
+                )
                 {
-                    bool lastChance = (source & MessageLoggingSource.LastChance) != 0 || (source & MessageLoggingSource.TransportSend) != 0;
+                    bool lastChance =
+                        (source & MessageLoggingSource.LastChance) != 0
+                        || (source & MessageLoggingSource.TransportSend) != 0;
                     source &= ~MessageLoggingSource.LastChance;
-                    // MessageLogger doesn't log AddressingVersion.None in the encoder since we want to make sure we log 
+                    // MessageLogger doesn't log AddressingVersion.None in the encoder since we want to make sure we log
                     // as much of the message as possible. So let the Transport log later.
-                    if ((lastChance || message is NullMessage || message.Version.Addressing != AddressingVersion.None)
-                            && MatchFilters(message, source))
+                    if (
+                        (
+                            lastChance
+                            || message is NullMessage
+                            || message.Version.Addressing != AddressingVersion.None
+                        ) && MatchFilters(message, source)
+                    )
                     {
-                        if (MessageLogger.numberOfMessagesToLog == MessageLogger.Unlimited || MessageLogger.numberOfMessagesToLog > 0)
+                        if (
+                            MessageLogger.numberOfMessagesToLog == MessageLogger.Unlimited
+                            || MessageLogger.numberOfMessagesToLog > 0
+                        )
                         {
-                            MessageLogTraceRecord record = new MessageLogTraceRecord(ref message, reader, source, MessageLogger.LogMessageBody);
+                            MessageLogTraceRecord record = new MessageLogTraceRecord(
+                                ref message,
+                                reader,
+                                source,
+                                MessageLogger.LogMessageBody
+                            );
                             LogInternal(record);
                         }
                     }
@@ -407,10 +470,13 @@ namespace System.ServiceModel.Diagnostics
                 record.WriteTo(xmlWriter);
                 xmlWriter.Close();
                 TraceXPathNavigator navigator = xmlWriter.Navigator;
-                
-                if ((MessageLogger.messageTraceSource != null && 
-                    !MessageLogger.messageTraceSource.ShouldLogPii) ||
-                    !MessageLogger.LogKnownPii)
+
+                if (
+                    (
+                        MessageLogger.messageTraceSource != null
+                        && !MessageLogger.messageTraceSource.ShouldLogPii
+                    ) || !MessageLogger.LogKnownPii
+                )
                 {
                     navigator.RemovePii(MessageLogger.PiiHeadersPaths);
                     if (MessageLogger.LogMessageBody && null != record.Message)
@@ -428,8 +494,12 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.MessageNotLoggedQuotaExceeded,
-                        SR.GetString(SR.TraceCodeMessageNotLoggedQuotaExceeded), record.Message);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.MessageNotLoggedQuotaExceeded,
+                        SR.GetString(SR.TraceCodeMessageNotLoggedQuotaExceeded),
+                        record.Message
+                    );
                 }
             }
         }
@@ -447,8 +517,12 @@ namespace System.ServiceModel.Diagnostics
                         {
                             if (DiagnosticUtility.ShouldTraceInformation)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageCountLimitExceeded,
-                                    SR.GetString(SR.TraceCodeMessageCountLimitExceeded), data);
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
+                                    TraceCode.MessageCountLimitExceeded,
+                                    SR.GetString(SR.TraceCodeMessageCountLimitExceeded),
+                                    data
+                                );
                             }
                         }
                     }
@@ -478,10 +552,12 @@ namespace System.ServiceModel.Diagnostics
             }
             if (shouldLogError)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToLogMessage,
-                    e.ToString());
+                    e.ToString()
+                );
             }
         }
 
@@ -504,7 +580,7 @@ namespace System.ServiceModel.Diagnostics
                     if (TD.MessageLogEventSizeExceededIsEnabled())
                     {
                         TD.MessageLogEventSizeExceeded();
-                    }                   
+                    }
                 }
             }
             if (MessageLogger.MessageTraceSource != null)
@@ -541,8 +617,13 @@ namespace System.ServiceModel.Diagnostics
                         {
                             if (DiagnosticUtility.ShouldTraceInformation)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.FilterNotMatchedNodeQuotaExceeded,
-                                    SR.GetString(SR.TraceCodeFilterNotMatchedNodeQuotaExceeded), e, message);
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
+                                    TraceCode.FilterNotMatchedNodeQuotaExceeded,
+                                    SR.GetString(SR.TraceCodeFilterNotMatchedNodeQuotaExceeded),
+                                    e,
+                                    message
+                                );
                             }
                         }
                     }
@@ -552,10 +633,12 @@ namespace System.ServiceModel.Diagnostics
                         MessageLogger.Filters.Remove(filter);
                         PlainXmlWriter writer = new PlainXmlWriter();
                         filter.WriteXPathTo(writer, null, ConfigurationStrings.Filter, null, true);
-                        DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                        DiagnosticUtility.EventLog.LogEvent(
+                            TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
                             (uint)System.Runtime.Diagnostics.EventLogEventId.RemovedBadFilter,
-                            writer.Navigator.ToString());
+                            writer.Navigator.ToString()
+                        );
                     }
 
                     if (MessageLogger.FilterCount == 0)
@@ -579,10 +662,7 @@ namespace System.ServiceModel.Diagnostics
 
         internal static TraceSource MessageTraceSource
         {
-            get
-            {
-                return MessageLogger.messageTraceSource;
-            }
+            get { return MessageLogger.messageTraceSource; }
         }
 
         internal static void EnsureInitialized()
@@ -602,18 +682,21 @@ namespace System.ServiceModel.Diagnostics
                         MessageLogger.inPartialTrust = true;
                         if (DiagnosticUtility.ShouldTraceWarning)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Warning,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Warning,
                                 TraceCode.TraceHandledException,
                                 SR.GetString(SR.PartialTrustMessageLoggingNotEnabled),
                                 null,
-                                securityException);
+                                securityException
+                            );
                         }
                         // also write to event log
                         LogNonFatalInitializationException(
                             new SecurityException(
                                 SR.GetString(SR.PartialTrustMessageLoggingNotEnabled),
-                                securityException));
-                        
+                                securityException
+                            )
+                        );
                     }
                     MessageLogger.initialized = true;
                 }
@@ -626,7 +709,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 MessageLogger.EnsureInitialized();
             }
-            if (null == MessageLogger.MessageTraceSource && !MessageLogger.attemptedTraceSourceInitialization)
+            if (
+                null == MessageLogger.MessageTraceSource
+                && !MessageLogger.attemptedTraceSourceInitialization
+            )
             {
                 InitializeMessageTraceSource();
             }
@@ -637,11 +723,30 @@ namespace System.ServiceModel.Diagnostics
             get
             {
                 if (piiBodyPaths == null)
-                    piiBodyPaths = new string[][] { 
-                                new string[] { MessageLogTraceRecord.MessageLogTraceRecordElementName, "Envelope", "Body", "RequestSecurityToken" },
-                                new string[] { MessageLogTraceRecord.MessageLogTraceRecordElementName, "Envelope", "Body", "RequestSecurityTokenResponse" },
-                                new string[] { MessageLogTraceRecord.MessageLogTraceRecordElementName, "Envelope", "Body", "RequestSecurityTokenResponseCollection" }
-                            };
+                    piiBodyPaths = new string[][]
+                    {
+                        new string[]
+                        {
+                            MessageLogTraceRecord.MessageLogTraceRecordElementName,
+                            "Envelope",
+                            "Body",
+                            "RequestSecurityToken",
+                        },
+                        new string[]
+                        {
+                            MessageLogTraceRecord.MessageLogTraceRecordElementName,
+                            "Envelope",
+                            "Body",
+                            "RequestSecurityTokenResponse",
+                        },
+                        new string[]
+                        {
+                            MessageLogTraceRecord.MessageLogTraceRecordElementName,
+                            "Envelope",
+                            "Body",
+                            "RequestSecurityTokenResponseCollection",
+                        },
+                    };
                 return piiBodyPaths;
             }
         }
@@ -651,10 +756,23 @@ namespace System.ServiceModel.Diagnostics
             get
             {
                 if (piiHeadersPaths == null)
-                    piiHeadersPaths = new string[][] { 
-                                new string[] { MessageLogTraceRecord.MessageLogTraceRecordElementName, "Envelope", "Header", "Security" },
-                                new string[] { MessageLogTraceRecord.MessageLogTraceRecordElementName, "Envelope", "Header", "IssuedTokens" }
-                            };
+                    piiHeadersPaths = new string[][]
+                    {
+                        new string[]
+                        {
+                            MessageLogTraceRecord.MessageLogTraceRecordElementName,
+                            "Envelope",
+                            "Header",
+                            "Security",
+                        },
+                        new string[]
+                        {
+                            MessageLogTraceRecord.MessageLogTraceRecordElementName,
+                            "Envelope",
+                            "Header",
+                            "IssuedTokens",
+                        },
+                    };
                 return piiHeadersPaths;
             }
         }
@@ -664,44 +782,47 @@ namespace System.ServiceModel.Diagnostics
             get
             {
                 if (securityActions == null)
-                    securityActions = new string[] { 
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue", 
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Issue",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Renew",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Renew",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Cancel",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Cancel",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Validate",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Validate",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Amend",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Amend",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Renew",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Renew",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Cancel",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Cancel",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/KET",
-                                      "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/KET",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/SCT",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/SCT",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/SCT-Amend",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/SCT-Amend",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Issue",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Issue",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Renew",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Renew",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Validate",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Validate",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/KET",
-                                      "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/KET"
-                                    };
+                    securityActions = new string[]
+                    {
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Issue",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Renew",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Renew",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Cancel",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Cancel",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Validate",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Validate",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Amend",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Amend",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Renew",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Renew",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT/Cancel",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT/Cancel",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/KET",
+                        "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/KET",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/SCT",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/SCT",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/SCT-Amend",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/SCT-Amend",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Issue",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Issue",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Renew",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Renew",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Validate",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Validate",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/KET",
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/KET",
+                    };
                 return securityActions;
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method UnsafeGetSection which elevates in order to load config.",
-            Safe = "Does not leak any config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method UnsafeGetSection which elevates in order to load config.",
+            Safe = "Does not leak any config objects."
+        )]
         [SecuritySafeCritical]
         static void Initialize()
         {
@@ -710,11 +831,17 @@ namespace System.ServiceModel.Diagnostics
 
             if (section != null)
             {
-                MessageLogger.LogKnownPii = section.MessageLogging.LogKnownPii && MachineSettingsSection.EnableLoggingKnownPii;
+                MessageLogger.LogKnownPii =
+                    section.MessageLogging.LogKnownPii
+                    && MachineSettingsSection.EnableLoggingKnownPii;
                 MessageLogger.LogMalformedMessages = section.MessageLogging.LogMalformedMessages;
                 MessageLogger.LogMessageBody = section.MessageLogging.LogEntireMessage;
-                MessageLogger.LogMessagesAtServiceLevel = section.MessageLogging.LogMessagesAtServiceLevel;
-                MessageLogger.LogMessagesAtTransportLevel = section.MessageLogging.LogMessagesAtTransportLevel;
+                MessageLogger.LogMessagesAtServiceLevel = section
+                    .MessageLogging
+                    .LogMessagesAtServiceLevel;
+                MessageLogger.LogMessagesAtTransportLevel = section
+                    .MessageLogging
+                    .LogMessagesAtTransportLevel;
                 MessageLogger.MaxNumberOfMessagesToLog = section.MessageLogging.MaxMessagesToLog;
                 MessageLogger.MaxMessageSize = section.MessageLogging.MaxSizeOfMessageToLog;
 
@@ -727,14 +854,22 @@ namespace System.ServiceModel.Diagnostics
             try
             {
                 MessageLogger.attemptedTraceSourceInitialization = true;
-                PiiTraceSource tempSource = new PiiTraceSource(MessageLogger.MessageTraceSourceName, DiagnosticUtility.EventSourceName);
+                PiiTraceSource tempSource = new PiiTraceSource(
+                    MessageLogger.MessageTraceSourceName,
+                    DiagnosticUtility.EventSourceName
+                );
                 tempSource.Switch.Level = SourceLevels.Information;
                 tempSource.Listeners.Remove(MessageLogger.DefaultTraceListenerName);
                 if (tempSource.Listeners.Count > 0)
                 {
-                    AppDomain.CurrentDomain.DomainUnload += new EventHandler(ExitOrUnloadEventHandler);
-                    AppDomain.CurrentDomain.ProcessExit += new EventHandler(ExitOrUnloadEventHandler);
-                    AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExitOrUnloadEventHandler);
+                    AppDomain.CurrentDomain.DomainUnload += new EventHandler(
+                        ExitOrUnloadEventHandler
+                    );
+                    AppDomain.CurrentDomain.ProcessExit += new EventHandler(
+                        ExitOrUnloadEventHandler
+                    );
+                    AppDomain.CurrentDomain.UnhandledException +=
+                        new UnhandledExceptionEventHandler(ExitOrUnloadEventHandler);
                 }
                 else
                 {
@@ -754,38 +889,52 @@ namespace System.ServiceModel.Diagnostics
                 MessageLogger.inPartialTrust = true;
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
                         TraceCode.TraceHandledException,
                         SR.GetString(SR.PartialTrustMessageLoggingNotEnabled),
                         null,
-                        securityException);
+                        securityException
+                    );
                 }
                 // also write to event log
                 LogNonFatalInitializationException(
                     new SecurityException(
                         SR.GetString(SR.PartialTrustMessageLoggingNotEnabled),
-                        securityException));
+                        securityException
+                    )
+                );
             }
             catch (Exception e)
             {
                 MessageLogger.messageTraceSource = null;
 
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
 
                 LogNonFatalInitializationException(e);
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into an unsafe method to log event.",
-            Safe = "Event identities cannot be spoofed as they are constants determined inside the method.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into an unsafe method to log event.",
+            Safe = "Event identities cannot be spoofed as they are constants determined inside the method."
+        )]
         [SecuritySafeCritical]
         static void LogNonFatalInitializationException(Exception e)
         {
-            DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(TraceEventType.Critical,
+            DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                TraceEventType.Critical,
                 (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToCreateMessageLoggingTraceSource,
+                (uint)
+                    System
+                        .Runtime
+                        .Diagnostics
+                        .EventLogEventId
+                        .FailedToCreateMessageLoggingTraceSource,
                 true,
-                e.ToString());
+                e.ToString()
+            );
         }
 
         static void ExitOrUnloadEventHandler(object sender, EventArgs e)
@@ -805,7 +954,12 @@ namespace System.ServiceModel.Diagnostics
         {
             if ((source & MessageLoggingSource.Malformed) == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.OnlyMalformedMessagesAreSupported), "source"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.OnlyMalformedMessagesAreSupported),
+                        "source"
+                    )
+                );
             }
         }
 
@@ -815,16 +969,20 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (null != MessageLogger.messageTraceSource)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(TraceEventType.Information,
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Information,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn);
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn
+                    );
                 }
             }
             else
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Information,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Information,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOff);
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOff
+                );
             }
         }
 
@@ -844,4 +1002,3 @@ namespace System.ServiceModel.Diagnostics
         }
     }
 }
-

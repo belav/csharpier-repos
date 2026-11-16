@@ -14,16 +14,22 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.ComponentConverter'/> class.
         /// </summary>
-        public ComponentConverter(Type type) : base(type)
-        {
-        }
+        public ComponentConverter(Type type)
+            : base(type) { }
 
         /// <summary>
         /// Gets a collection of properties for the type of component
         /// specified by the value parameter.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext? context, object value, Attribute[]? attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext? context,
+            object value,
+            Attribute[]? attributes
+        )
         {
             return TypeDescriptor.GetProperties(value, attributes);
         }

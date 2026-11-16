@@ -6,108 +6,104 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class ProxyGraphUpdatesSqliteTest
 {
-    public abstract class ProxyGraphUpdatesSqliteTestBase<TFixture> : ProxyGraphUpdatesTestBase<TFixture>
-        where TFixture : ProxyGraphUpdatesSqliteTestBase<TFixture>.ProxyGraphUpdatesSqliteFixtureBase, new()
+    public abstract class ProxyGraphUpdatesSqliteTestBase<TFixture>
+        : ProxyGraphUpdatesTestBase<TFixture>
+        where TFixture : ProxyGraphUpdatesSqliteTestBase<TFixture>.ProxyGraphUpdatesSqliteFixtureBase,
+            new()
     {
         protected ProxyGraphUpdatesSqliteTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         public abstract class ProxyGraphUpdatesSqliteFixtureBase : ProxyGraphUpdatesFixtureBase
         {
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 
-    public class LazyLoading : ProxyGraphUpdatesSqliteTestBase<LazyLoading.ProxyGraphUpdatesWithLazyLoadingSqliteFixture>
+    public class LazyLoading
+        : ProxyGraphUpdatesSqliteTestBase<LazyLoading.ProxyGraphUpdatesWithLazyLoadingSqliteFixture>
     {
         public LazyLoading(ProxyGraphUpdatesWithLazyLoadingSqliteFixture fixture)
-            : base(fixture)
+            : base(fixture) { }
+
+        protected override bool DoesLazyLoading => true;
+
+        protected override bool DoesChangeTracking => false;
+
+        public class ProxyGraphUpdatesWithLazyLoadingSqliteFixture
+            : ProxyGraphUpdatesSqliteFixtureBase
         {
-        }
+            protected override string StoreName => "ProxyGraphLazyLoadingUpdatesTest";
 
-        protected override bool DoesLazyLoading
-            => true;
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder.UseLazyLoadingProxies());
 
-        protected override bool DoesChangeTracking
-            => false;
-
-        public class ProxyGraphUpdatesWithLazyLoadingSqliteFixture : ProxyGraphUpdatesSqliteFixtureBase
-        {
-            protected override string StoreName
-                => "ProxyGraphLazyLoadingUpdatesTest";
-
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder.UseLazyLoadingProxies());
-
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
         }
     }
 
-    public class ChangeTracking : ProxyGraphUpdatesSqliteTestBase<ChangeTracking.ProxyGraphUpdatesWithChangeTrackingSqliteFixture>
+    public class ChangeTracking
+        : ProxyGraphUpdatesSqliteTestBase<ChangeTracking.ProxyGraphUpdatesWithChangeTrackingSqliteFixture>
     {
         public ChangeTracking(ProxyGraphUpdatesWithChangeTrackingSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         // Needs lazy loading
-        public override void Save_two_entity_cycle_with_lazy_loading()
+        public override void Save_two_entity_cycle_with_lazy_loading() { }
+
+        protected override bool DoesLazyLoading => false;
+
+        protected override bool DoesChangeTracking => true;
+
+        public class ProxyGraphUpdatesWithChangeTrackingSqliteFixture
+            : ProxyGraphUpdatesSqliteFixtureBase
         {
-        }
+            protected override string StoreName => "ProxyGraphChangeTrackingUpdatesTest";
 
-        protected override bool DoesLazyLoading
-            => false;
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder.UseChangeTrackingProxies());
 
-        protected override bool DoesChangeTracking
-            => true;
-
-        public class ProxyGraphUpdatesWithChangeTrackingSqliteFixture : ProxyGraphUpdatesSqliteFixtureBase
-        {
-            protected override string StoreName
-                => "ProxyGraphChangeTrackingUpdatesTest";
-
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder.UseChangeTrackingProxies());
-
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
         }
     }
 
-    public class ChangeTrackingAndLazyLoading : ProxyGraphUpdatesSqliteTestBase<
-        ChangeTrackingAndLazyLoading.ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture>
+    public class ChangeTrackingAndLazyLoading
+        : ProxyGraphUpdatesSqliteTestBase<ChangeTrackingAndLazyLoading.ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture>
     {
-        public ChangeTrackingAndLazyLoading(ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture fixture)
-            : base(fixture)
+        public ChangeTrackingAndLazyLoading(
+            ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture fixture
+        )
+            : base(fixture) { }
+
+        protected override bool DoesLazyLoading => true;
+
+        protected override bool DoesChangeTracking => true;
+
+        public class ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture
+            : ProxyGraphUpdatesSqliteFixtureBase
         {
-        }
+            protected override string StoreName =>
+                "ProxyGraphChangeTrackingAndLazyLoadingUpdatesTest";
 
-        protected override bool DoesLazyLoading
-            => true;
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder.UseChangeTrackingProxies().UseLazyLoadingProxies());
 
-        protected override bool DoesChangeTracking
-            => true;
-
-        public class ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture : ProxyGraphUpdatesSqliteFixtureBase
-        {
-            protected override string StoreName
-                => "ProxyGraphChangeTrackingAndLazyLoadingUpdatesTest";
-
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder.UseChangeTrackingProxies().UseLazyLoadingProxies());
-
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
         }
     }
 }

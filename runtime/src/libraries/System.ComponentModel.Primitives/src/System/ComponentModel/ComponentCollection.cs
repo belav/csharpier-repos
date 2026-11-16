@@ -22,7 +22,16 @@ namespace System.ComponentModel
                     IList list = InnerList;
                     foreach (IComponent? comp in list)
                     {
-                        if (comp != null && comp.Site != null && comp.Site.Name != null && string.Equals(comp.Site.Name, name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            comp != null
+                            && comp.Site != null
+                            && comp.Site.Name != null
+                            && string.Equals(
+                                comp.Site.Name,
+                                name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             return comp;
                         }

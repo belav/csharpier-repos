@@ -12,11 +12,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ReliableSessionElement : BindingElementExtensionElement
     {
-        public ReliableSessionElement()
-        {
-        }
+        public ReliableSessionElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.AcknowledgementInterval, DefaultValue = ReliableSessionDefaults.AcknowledgementIntervalString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AcknowledgementInterval,
+            DefaultValue = ReliableSessionDefaults.AcknowledgementIntervalString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanOneTick)]
         public TimeSpan AcknowledgementInterval
@@ -37,7 +38,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.FlowControlEnabled] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.InactivityTimeout, DefaultValue = ReliableSessionDefaults.InactivityTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.InactivityTimeout,
+            DefaultValue = ReliableSessionDefaults.InactivityTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanOneTick)]
         public TimeSpan InactivityTimeout
@@ -46,7 +50,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.InactivityTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingChannels, DefaultValue = ReliableSessionDefaults.MaxPendingChannels)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingChannels,
+            DefaultValue = ReliableSessionDefaults.MaxPendingChannels
+        )]
         [IntegerValidator(MinValue = 1, MaxValue = 16384)]
         public int MaxPendingChannels
         {
@@ -54,7 +61,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxPendingChannels] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxRetryCount, DefaultValue = ReliableSessionDefaults.MaxRetryCount)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxRetryCount,
+            DefaultValue = ReliableSessionDefaults.MaxRetryCount
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxRetryCount
         {
@@ -62,7 +72,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxRetryCount] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxTransferWindowSize, DefaultValue = ReliableSessionDefaults.MaxTransferWindowSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxTransferWindowSize,
+            DefaultValue = ReliableSessionDefaults.MaxTransferWindowSize
+        )]
         [IntegerValidator(MinValue = 1, MaxValue = 4096)]
         public int MaxTransferWindowSize
         {
@@ -70,18 +83,28 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxTransferWindowSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Ordered, DefaultValue = ReliableSessionDefaults.Ordered)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Ordered,
+            DefaultValue = ReliableSessionDefaults.Ordered
+        )]
         public bool Ordered
         {
             get { return (bool)base[ConfigurationStrings.Ordered]; }
             set { base[ConfigurationStrings.Ordered] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReliableMessagingVersion, DefaultValue = ReliableSessionDefaults.ReliableMessagingVersionString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReliableMessagingVersion,
+            DefaultValue = ReliableSessionDefaults.ReliableMessagingVersionString
+        )]
         [TypeConverter(typeof(ReliableMessagingVersionConverter))]
         public ReliableMessagingVersion ReliableMessagingVersion
         {
-            get { return (ReliableMessagingVersion)base[ConfigurationStrings.ReliableMessagingVersion]; }
+            get
+            {
+                return (ReliableMessagingVersion)
+                    base[ConfigurationStrings.ReliableMessagingVersion];
+            }
             set { base[ConfigurationStrings.ReliableMessagingVersion] = value; }
         }
 
@@ -126,17 +149,35 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
             ReliableSessionBindingElement binding = (ReliableSessionBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AcknowledgementInterval, binding.AcknowledgementInterval);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.FlowControlEnabled, binding.FlowControlEnabled);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.InactivityTimeout, binding.InactivityTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPendingChannels, binding.MaxPendingChannels);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxRetryCount, binding.MaxRetryCount);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxTransferWindowSize, binding.MaxTransferWindowSize);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.AcknowledgementInterval,
+                binding.AcknowledgementInterval
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.FlowControlEnabled,
+                binding.FlowControlEnabled
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.InactivityTimeout,
+                binding.InactivityTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxPendingChannels,
+                binding.MaxPendingChannels
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxRetryCount,
+                binding.MaxRetryCount
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxTransferWindowSize,
+                binding.MaxTransferWindowSize
+            );
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Ordered, binding.Ordered);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReliableMessagingVersion, binding.ReliableMessagingVersion);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ReliableMessagingVersion,
+                binding.ReliableMessagingVersion
+            );
         }
     }
 }
-
-
-

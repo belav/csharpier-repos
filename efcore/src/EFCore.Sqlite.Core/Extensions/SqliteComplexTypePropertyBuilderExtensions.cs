@@ -22,7 +22,10 @@ public static class SqliteComplexTypePropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <param name="srid">The SRID.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static ComplexTypePropertyBuilder HasSrid(this ComplexTypePropertyBuilder propertyBuilder, int srid)
+    public static ComplexTypePropertyBuilder HasSrid(
+        this ComplexTypePropertyBuilder propertyBuilder,
+        int srid
+    )
     {
         propertyBuilder.Metadata.SetSrid(srid);
 
@@ -41,6 +44,8 @@ public static class SqliteComplexTypePropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static ComplexTypePropertyBuilder<TProperty> HasSrid<TProperty>(
         this ComplexTypePropertyBuilder<TProperty> propertyBuilder,
-        int srid)
-        => (ComplexTypePropertyBuilder<TProperty>)HasSrid((ComplexTypePropertyBuilder)propertyBuilder, srid);
+        int srid
+    ) =>
+        (ComplexTypePropertyBuilder<TProperty>)
+            HasSrid((ComplexTypePropertyBuilder)propertyBuilder, srid);
 }

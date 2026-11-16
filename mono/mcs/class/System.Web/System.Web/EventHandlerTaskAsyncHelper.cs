@@ -30,33 +30,40 @@ using System.Threading.Tasks;
 
 namespace System.Web
 {
-	public sealed class EventHandlerTaskAsyncHelper
-	{
-		readonly TaskEventHandler taskEventHandler;
-		readonly BeginEventHandler beginEventHandler;
-		static readonly EndEventHandler endEventHandler = TaskAsyncResult.Wait;
+    public sealed class EventHandlerTaskAsyncHelper
+    {
+        readonly TaskEventHandler taskEventHandler;
+        readonly BeginEventHandler beginEventHandler;
+        static readonly EndEventHandler endEventHandler = TaskAsyncResult.Wait;
 
-		public BeginEventHandler BeginEventHandler {
-			get { return beginEventHandler; }
-		}
+        public BeginEventHandler BeginEventHandler
+        {
+            get { return beginEventHandler; }
+        }
 
-		public EndEventHandler EndEventHandler {
-			get { return endEventHandler; }
-		}
+        public EndEventHandler EndEventHandler
+        {
+            get { return endEventHandler; }
+        }
 
-		public EventHandlerTaskAsyncHelper (TaskEventHandler handler)
-		{
-			if (handler == null)
-				throw new ArgumentNullException ("handler");
+        public EventHandlerTaskAsyncHelper(TaskEventHandler handler)
+        {
+            if (handler == null)
+                throw new ArgumentNullException("handler");
 
-			taskEventHandler = handler;
-			beginEventHandler = GetAsyncResult;
-		}
+            taskEventHandler = handler;
+            beginEventHandler = GetAsyncResult;
+        }
 
-		IAsyncResult GetAsyncResult (object sender, EventArgs e, AsyncCallback callback, object state)
-		{
-			Task task = taskEventHandler (sender, e);
-			return TaskAsyncResult.GetAsyncResult (task, callback, state);
-		}
-	}
+        IAsyncResult GetAsyncResult(
+            object sender,
+            EventArgs e,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            Task task = taskEventHandler(sender, e);
+            return TaskAsyncResult.GetAsyncResult(task, callback, state);
+        }
+    }
 }

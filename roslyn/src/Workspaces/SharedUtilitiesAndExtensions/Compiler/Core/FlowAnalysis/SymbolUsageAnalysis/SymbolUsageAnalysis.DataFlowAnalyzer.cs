@@ -22,44 +22,74 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
         {
             private readonly FlowGraphAnalysisData _analysisData;
 
-            private DataFlowAnalyzer(ControlFlowGraph cfg, ISymbol owningSymbol)
-                => _analysisData = FlowGraphAnalysisData.Create(cfg, owningSymbol, AnalyzeLocalFunctionOrLambdaInvocation);
+            private DataFlowAnalyzer(ControlFlowGraph cfg, ISymbol owningSymbol) =>
+                _analysisData = FlowGraphAnalysisData.Create(
+                    cfg,
+                    owningSymbol,
+                    AnalyzeLocalFunctionOrLambdaInvocation
+                );
 
             private DataFlowAnalyzer(
                 ControlFlowGraph cfg,
                 IMethodSymbol lambdaOrLocalFunction,
-                FlowGraphAnalysisData parentAnalysisData)
+                FlowGraphAnalysisData parentAnalysisData
+            )
             {
-                _analysisData = FlowGraphAnalysisData.Create(cfg, lambdaOrLocalFunction, parentAnalysisData);
+                _analysisData = FlowGraphAnalysisData.Create(
+                    cfg,
+                    lambdaOrLocalFunction,
+                    parentAnalysisData
+                );
 
                 var entryBlockAnalysisData = GetEmptyAnalysisData();
-                entryBlockAnalysisData.SetAnalysisDataFrom(parentAnalysisData.CurrentBlockAnalysisData);
+                entryBlockAnalysisData.SetAnalysisDataFrom(
+                    parentAnalysisData.CurrentBlockAnalysisData
+                );
                 _analysisData.SetBlockAnalysisData(cfg.EntryBlock(), entryBlockAnalysisData);
             }
 
-            public static SymbolUsageResult RunAnalysis(ControlFlowGraph cfg, ISymbol owningSymbol, CancellationToken cancellationToken)
+            public static SymbolUsageResult RunAnalysis(
+                ControlFlowGraph cfg,
+                ISymbol owningSymbol,
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 using var analyzer = new DataFlowAnalyzer(cfg, owningSymbol);
-                _ = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(cfg, analyzer, cancellationToken);
+                _ = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(
+                    cfg,
+                    analyzer,
+                    cancellationToken
+                );
                 return analyzer._analysisData.ToResult();
             }
 
-            public override void Dispose()
-                => _analysisData.Dispose();
+            public override void Dispose() => _analysisData.Dispose();
 
             private static BasicBlockAnalysisData AnalyzeLocalFunctionOrLambdaInvocation(
                 IMethodSymbol localFunctionOrLambda,
                 ControlFlowGraph cfg,
                 AnalysisData parentAnalysisData,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                Debug.Assert(localFunctionOrLambda.IsLocalFunction() || localFunctionOrLambda.IsAnonymousFunction());
+                Debug.Assert(
+                    localFunctionOrLambda.IsLocalFunction()
+                        || localFunctionOrLambda.IsAnonymousFunction()
+                );
 
                 cancellationToken.ThrowIfCancellationRequested();
-                using var analyzer = new DataFlowAnalyzer(cfg, localFunctionOrLambda, (FlowGraphAnalysisData)parentAnalysisData);
+                using var analyzer = new DataFlowAnalyzer(
+                    cfg,
+                    localFunctionOrLambda,
+                    (FlowGraphAnalysisData)parentAnalysisData
+                );
 
-                var resultBlockAnalysisData = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(cfg, analyzer, cancellationToken);
+                var resultBlockAnalysisData = CustomDataFlowAnalysis<BasicBlockAnalysisData>.Run(
+                    cfg,
+                    analyzer,
+                    cancellationToken
+                );
                 if (resultBlockAnalysisData == null)
                 {
                     // Unreachable exit block from lambda/local.
@@ -85,10 +115,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             //      return x;
             public override bool AnalyzeUnreachableBlocks => false;
 
-            public override BasicBlockAnalysisData AnalyzeBlock(BasicBlock basicBlock, CancellationToken cancellationToken)
+            public override BasicBlockAnalysisData AnalyzeBlock(
+                BasicBlock basicBlock,
+                CancellationToken cancellationToken
+            )
             {
                 BeforeBlockAnalysis();
-                Walker.AnalyzeOperationsAndUpdateData(_analysisData.OwningSymbol, basicBlock.Operations, _analysisData, cancellationToken);
+                Walker.AnalyzeOperationsAndUpdateData(
+                    _analysisData.OwningSymbol,
+                    basicBlock.Operations,
+                    _analysisData,
+                    cancellationToken
+                );
                 AfterBlockAnalysis();
                 return _analysisData.CurrentBlockAnalysisData;
 
@@ -108,8 +146,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 void AfterBlockAnalysis()
                 {
                     // If we are exiting the control flow graph, handle ref/out parameter definitions from method declaration.
-                    if (basicBlock.FallThroughSuccessor?.Destination == null &&
-                        basicBlock.ConditionalSuccessor?.Destination == null)
+                    if (
+                        basicBlock.FallThroughSuccessor?.Destination == null
+                        && basicBlock.ConditionalSuccessor?.Destination == null
+                    )
                     {
                         _analysisData.SetAnalysisDataOnMethodExit();
                     }
@@ -119,25 +159,48 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public override BasicBlockAnalysisData AnalyzeNonConditionalBranch(
                 BasicBlock basicBlock,
                 BasicBlockAnalysisData currentBlockAnalysisData,
-                CancellationToken cancellationToken)
-                => AnalyzeBranch(basicBlock.FallThroughSuccessor, basicBlock, currentBlockAnalysisData, cancellationToken);
+                CancellationToken cancellationToken
+            ) =>
+                AnalyzeBranch(
+                    basicBlock.FallThroughSuccessor,
+                    basicBlock,
+                    currentBlockAnalysisData,
+                    cancellationToken
+                );
 
-            public override (BasicBlockAnalysisData fallThroughSuccessorData, BasicBlockAnalysisData conditionalSuccessorData) AnalyzeConditionalBranch(
+            public override (
+                BasicBlockAnalysisData fallThroughSuccessorData,
+                BasicBlockAnalysisData conditionalSuccessorData
+            ) AnalyzeConditionalBranch(
                 BasicBlock basicBlock,
                 BasicBlockAnalysisData currentAnalysisData,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // Ensure that we use distinct input BasicBlockAnalysisData instances with identical analysis data for both AnalyzeBranch invocations.
                 using var savedCurrentAnalysisData = BasicBlockAnalysisData.GetInstance();
                 savedCurrentAnalysisData.SetAnalysisDataFrom(currentAnalysisData);
 
-                var newCurrentAnalysisData = AnalyzeBranch(basicBlock.FallThroughSuccessor, basicBlock, currentAnalysisData, cancellationToken);
+                var newCurrentAnalysisData = AnalyzeBranch(
+                    basicBlock.FallThroughSuccessor,
+                    basicBlock,
+                    currentAnalysisData,
+                    cancellationToken
+                );
 
                 // Ensure that we use different instances of block analysis data for fall through successor and conditional successor.
-                _analysisData.AdditionalConditionalBranchAnalysisData.SetAnalysisDataFrom(newCurrentAnalysisData);
-                var fallThroughSuccessorData = _analysisData.AdditionalConditionalBranchAnalysisData;
+                _analysisData.AdditionalConditionalBranchAnalysisData.SetAnalysisDataFrom(
+                    newCurrentAnalysisData
+                );
+                var fallThroughSuccessorData =
+                    _analysisData.AdditionalConditionalBranchAnalysisData;
 
-                var conditionalSuccessorData = AnalyzeBranch(basicBlock.ConditionalSuccessor, basicBlock, savedCurrentAnalysisData, cancellationToken);
+                var conditionalSuccessorData = AnalyzeBranch(
+                    basicBlock.ConditionalSuccessor,
+                    basicBlock,
+                    savedCurrentAnalysisData,
+                    cancellationToken
+                );
 
                 return (fallThroughSuccessorData, conditionalSuccessorData);
             }
@@ -146,14 +209,20 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ControlFlowBranch branch,
                 BasicBlock basicBlock,
                 BasicBlockAnalysisData currentBlockAnalysisData,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // Initialize current analysis data
                 _analysisData.SetCurrentBlockAnalysisDataFrom(currentBlockAnalysisData);
 
                 // Analyze the branch value
                 var operations = SpecializedCollections.SingletonEnumerable(basicBlock.BranchValue);
-                Walker.AnalyzeOperationsAndUpdateData(_analysisData.OwningSymbol, operations, _analysisData, cancellationToken);
+                Walker.AnalyzeOperationsAndUpdateData(
+                    _analysisData.OwningSymbol,
+                    operations,
+                    _analysisData,
+                    cancellationToken
+                );
                 ProcessOutOfScopeLocals();
                 return _analysisData.CurrentBlockAnalysisData;
 
@@ -166,8 +235,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         return;
                     }
 
-                    if (basicBlock.EnclosingRegion.Kind == ControlFlowRegionKind.Catch &&
-                        !branch.FinallyRegions.IsEmpty)
+                    if (
+                        basicBlock.EnclosingRegion.Kind == ControlFlowRegionKind.Catch
+                        && !branch.FinallyRegions.IsEmpty
+                    )
                     {
                         // Bail out for branches from the catch block
                         // as the locals are still accessible in the finally region.
@@ -195,23 +266,34 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
             }
 
-            public override BasicBlockAnalysisData GetCurrentAnalysisData(BasicBlock basicBlock)
-                => _analysisData.GetBlockAnalysisData(basicBlock) ?? GetEmptyAnalysisData();
+            public override BasicBlockAnalysisData GetCurrentAnalysisData(BasicBlock basicBlock) =>
+                _analysisData.GetBlockAnalysisData(basicBlock) ?? GetEmptyAnalysisData();
 
-            public override BasicBlockAnalysisData GetEmptyAnalysisData()
-                => _analysisData.CreateBlockAnalysisData();
+            public override BasicBlockAnalysisData GetEmptyAnalysisData() =>
+                _analysisData.CreateBlockAnalysisData();
 
-            public override void SetCurrentAnalysisData(BasicBlock basicBlock, BasicBlockAnalysisData data, CancellationToken cancellationToken)
-                => _analysisData.SetBlockAnalysisDataFrom(basicBlock, data, cancellationToken);
+            public override void SetCurrentAnalysisData(
+                BasicBlock basicBlock,
+                BasicBlockAnalysisData data,
+                CancellationToken cancellationToken
+            ) => _analysisData.SetBlockAnalysisDataFrom(basicBlock, data, cancellationToken);
 
-            public override bool IsEqual(BasicBlockAnalysisData analysisData1, BasicBlockAnalysisData analysisData2)
-                => analysisData1 == null ? analysisData2 == null : analysisData1.Equals(analysisData2);
+            public override bool IsEqual(
+                BasicBlockAnalysisData analysisData1,
+                BasicBlockAnalysisData analysisData2
+            ) =>
+                analysisData1 == null ? analysisData2 == null : analysisData1.Equals(analysisData2);
 
             public override BasicBlockAnalysisData Merge(
                 BasicBlockAnalysisData analysisData1,
                 BasicBlockAnalysisData analysisData2,
-                CancellationToken cancellationToken)
-                => BasicBlockAnalysisData.Merge(analysisData1, analysisData2, _analysisData.TrackAllocatedBlockAnalysisData);
+                CancellationToken cancellationToken
+            ) =>
+                BasicBlockAnalysisData.Merge(
+                    analysisData1,
+                    analysisData2,
+                    _analysisData.TrackAllocatedBlockAnalysisData
+                );
         }
     }
 }

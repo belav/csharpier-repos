@@ -162,42 +162,26 @@ public class WebHostFunctionalTests : LoggedTest
 "
             );
             using (
-                var webHost = WebHost.Start(
-                    "http://127.0.0.1:0",
-                    context => context.Response.WriteAsync("Hello, World!")
+                var webHost = WebHost.Start("http://127.0.0.1:0", context =>
+                    context.Response.WriteAsync("Hello, World!")
                 )
             )
             {
                 var factory = (ILoggerFactory)webHost.Services.GetService(typeof(ILoggerFactory));
                 var logger = factory.CreateLogger("Test");
 
-                logger.Log(
-                    LogLevel.Information,
-                    0,
-                    "Message",
-                    null,
-                    (s, e) =>
-                    {
-                        Assert.True(
-                            false,
-                            "Information log when log level set to warning in config"
-                        );
-                        return string.Empty;
-                    }
-                );
+                logger.Log(LogLevel.Information, 0, "Message", null, (s, e) =>
+                {
+                    Assert.True(false, "Information log when log level set to warning in config");
+                    return string.Empty;
+                });
 
                 var logWritten = false;
-                logger.Log(
-                    LogLevel.Warning,
-                    0,
-                    "Message",
-                    null,
-                    (s, e) =>
-                    {
-                        logWritten = true;
-                        return string.Empty;
-                    }
-                );
+                logger.Log(LogLevel.Warning, 0, "Message", null, (s, e) =>
+                {
+                    logWritten = true;
+                    return string.Empty;
+                });
 
                 Assert.True(logWritten);
             }
@@ -260,29 +244,26 @@ public class WebHostFunctionalTests : LoggedTest
         string applicationName
     )
     {
-        await ExecuteTestApp(
-            applicationName,
-            async (deploymentResult, logger) =>
-            {
-                var response = await RetryHelper.RetryRequest(
-                    () => getResponse(deploymentResult),
-                    logger,
-                    deploymentResult.HostShutdownToken
-                );
+        await ExecuteTestApp(applicationName, async (deploymentResult, logger) =>
+        {
+            var response = await RetryHelper.RetryRequest(
+                () => getResponse(deploymentResult),
+                logger,
+                deploymentResult.HostShutdownToken
+            );
 
-                var responseText = await response.Content.ReadAsStringAsync();
-                try
-                {
-                    Assert.Equal(applicationName, responseText);
-                }
-                catch (XunitException)
-                {
-                    logger.LogWarning(response.ToString());
-                    logger.LogWarning(responseText);
-                    throw;
-                }
+            var responseText = await response.Content.ReadAsStringAsync();
+            try
+            {
+                Assert.Equal(applicationName, responseText);
             }
-        );
+            catch (XunitException)
+            {
+                logger.LogWarning(response.ToString());
+                logger.LogWarning(responseText);
+                throw;
+            }
+        });
     }
 
     private async Task ExecuteTestApp(

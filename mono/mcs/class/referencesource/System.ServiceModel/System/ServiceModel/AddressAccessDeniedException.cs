@@ -10,8 +10,14 @@ namespace System.ServiceModel
     public class AddressAccessDeniedException : CommunicationException
     {
         public AddressAccessDeniedException() { }
-        public AddressAccessDeniedException(string message) : base(message) { }
-        public AddressAccessDeniedException(string message, Exception innerException) : base(message, innerException) { }
-        protected AddressAccessDeniedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        public AddressAccessDeniedException(string message)
+            : base(message) { }
+
+        public AddressAccessDeniedException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        protected AddressAccessDeniedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

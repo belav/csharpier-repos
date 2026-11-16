@@ -16,20 +16,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     [ComDefaultInterface(typeof(ICodeElements))]
     public sealed class ParameterCollection : AbstractCodeElementCollection
     {
-        internal static EnvDTE.CodeElements Create(
-            CodeModelState state,
-            AbstractCodeMember parent)
+        internal static EnvDTE.CodeElements Create(CodeModelState state, AbstractCodeMember parent)
         {
             var collection = new ParameterCollection(state, parent);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private ParameterCollection(
-            CodeModelState state,
-            AbstractCodeMember parent)
-            : base(state, parent)
-        {
-        }
+        private ParameterCollection(CodeModelState state, AbstractCodeMember parent)
+            : base(state, parent) { }
 
         private AbstractCodeMember ParentElement
         {
@@ -43,7 +37,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             if (index < parameters.Length)
             {
                 var parameter = parameters[index];
-                element = (EnvDTE.CodeElement)CodeParameter.Create(this.State, this.ParentElement, CodeModelService.GetParameterName(parameter));
+                element = (EnvDTE.CodeElement)
+                    CodeParameter.Create(
+                        this.State,
+                        this.ParentElement,
+                        CodeModelService.GetParameterName(parameter)
+                    );
                 return true;
             }
 
@@ -58,10 +57,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             {
                 if (CodeModelService.TryGetParameterNode(parentNode, name, out _))
                 {
-                    // The name of the CodeElement should be just the identifier name associated with the element 
-                    // devoid of the type characters hence we use the just identifier name for both creation and 
+                    // The name of the CodeElement should be just the identifier name associated with the element
+                    // devoid of the type characters hence we use the just identifier name for both creation and
                     // later searches
-                    element = (EnvDTE.CodeElement)CodeParameter.Create(this.State, this.ParentElement, name);
+                    element = (EnvDTE.CodeElement)
+                        CodeParameter.Create(this.State, this.ParentElement, name);
                     return true;
                 }
             }
@@ -72,10 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         public override int Count
         {
-            get
-            {
-                return ParentElement.GetParameters().Length;
-            }
+            get { return ParentElement.GetParameters().Length; }
         }
     }
 }

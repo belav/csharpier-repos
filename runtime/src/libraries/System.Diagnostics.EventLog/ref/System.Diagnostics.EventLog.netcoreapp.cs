@@ -9,6 +9,10 @@ namespace System.Diagnostics.Eventing.Reader
     public sealed partial class EventBookmark
     {
         public EventBookmark(string bookmarkXml) { }
-        public string BookmarkXml { get { throw null; } }
+
+        public string BookmarkXml
+        {
+            get { throw null; }
+        }
     }
 }

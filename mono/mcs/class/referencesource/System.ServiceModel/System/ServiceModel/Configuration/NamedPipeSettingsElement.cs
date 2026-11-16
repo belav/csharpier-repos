@@ -14,14 +14,18 @@ namespace System.ServiceModel.Configuration
 
     /// <summary>
     /// The NamedPipeSettingElement provides configuration support for the NamedPipeSetttings
-    /// on the NamedPipeTransportBinding element. 
+    /// on the NamedPipeTransportBinding element.
     /// </summary>
     public sealed partial class NamedPipeSettingsElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(ConfigurationStrings.ApplicationContainerSettings)]
         public ApplicationContainerSettingsElement ApplicationContainerSettings
         {
-            get { return (ApplicationContainerSettingsElement)base[ConfigurationStrings.ApplicationContainerSettings]; }
+            get
+            {
+                return (ApplicationContainerSettingsElement)
+                    base[ConfigurationStrings.ApplicationContainerSettings];
+            }
             set { base[ConfigurationStrings.ApplicationContainerSettings] = value; }
         }
 
@@ -32,7 +36,9 @@ namespace System.ServiceModel.Configuration
                 throw FxTrace.Exception.ArgumentNull("settings");
             }
 
-            this.ApplicationContainerSettings.ApplyConfiguration(settings.ApplicationContainerSettings);
+            this.ApplicationContainerSettings.ApplyConfiguration(
+                settings.ApplicationContainerSettings
+            );
         }
 
         internal void InitializeFrom(NamedPipeSettings settings)

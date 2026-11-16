@@ -93,7 +93,9 @@ namespace System.ComponentModel.Tests
         public void AddHandlers_NullList_ThrowsArgumentNullException()
         {
             var list = new EventHandlerList();
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() => list.AddHandlers(null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
+                list.AddHandlers(null)
+            );
         }
 
         [Fact]

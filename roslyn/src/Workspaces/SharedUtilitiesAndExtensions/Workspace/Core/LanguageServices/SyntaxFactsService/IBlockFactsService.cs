@@ -6,7 +6,5 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal interface IBlockFactsService : IBlockFacts, ILanguageService
-    {
-    }
+    internal interface IBlockFactsService : IBlockFacts, ILanguageService { }
 }

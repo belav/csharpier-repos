@@ -24,13 +24,17 @@ namespace System.Runtime
     // For other performance critical methods, it should be added manually.
     //============================================================================================================
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Constructor,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class TargetedPatchingOptOutAttribute : Attribute
     {
         private String m_reason;
 
-        public TargetedPatchingOptOutAttribute(String reason) 
-        { 
+        public TargetedPatchingOptOutAttribute(String reason)
+        {
             m_reason = reason;
         }
 

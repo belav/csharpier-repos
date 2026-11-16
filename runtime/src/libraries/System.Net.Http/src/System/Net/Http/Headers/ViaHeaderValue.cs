@@ -36,16 +36,17 @@ namespace System.Net.Http.Headers
         }
 
         public ViaHeaderValue(string protocolVersion, string receivedBy)
-            : this(protocolVersion, receivedBy, null, null)
-        {
-        }
+            : this(protocolVersion, receivedBy, null, null) { }
 
         public ViaHeaderValue(string protocolVersion, string receivedBy, string? protocolName)
-            : this(protocolVersion, receivedBy, protocolName, null)
-        {
-        }
+            : this(protocolVersion, receivedBy, protocolName, null) { }
 
-        public ViaHeaderValue(string protocolVersion, string receivedBy, string? protocolName, string? comment)
+        public ViaHeaderValue(
+            string protocolVersion,
+            string receivedBy,
+            string? protocolName,
+            string? comment
+        )
         {
             HeaderUtilities.CheckValidToken(protocolVersion);
             CheckReceivedBy(receivedBy);
@@ -110,16 +111,25 @@ namespace System.Net.Http.Headers
 
             // Note that for token and host case-insensitive comparison is used. Comments are compared using case-
             // sensitive comparison.
-            return string.Equals(_protocolVersion, other._protocolVersion, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(_receivedBy, other._receivedBy, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(_protocolName, other._protocolName, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(_comment, other._comment, StringComparison.Ordinal);
+            return string.Equals(
+                    _protocolVersion,
+                    other._protocolVersion,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && string.Equals(_receivedBy, other._receivedBy, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(
+                    _protocolName,
+                    other._protocolName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && string.Equals(_comment, other._comment, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()
         {
-            int result = StringComparer.OrdinalIgnoreCase.GetHashCode(_protocolVersion) ^
-                StringComparer.OrdinalIgnoreCase.GetHashCode(_receivedBy);
+            int result =
+                StringComparer.OrdinalIgnoreCase.GetHashCode(_protocolVersion)
+                ^ StringComparer.OrdinalIgnoreCase.GetHashCode(_receivedBy);
 
             if (!string.IsNullOrEmpty(_protocolName))
             {
@@ -137,15 +147,26 @@ namespace System.Net.Http.Headers
         public static ViaHeaderValue Parse(string input)
         {
             int index = 0;
-            return (ViaHeaderValue)GenericHeaderParser.SingleValueViaParser.ParseValue(input, null, ref index);
+            return (ViaHeaderValue)
+                GenericHeaderParser.SingleValueViaParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out ViaHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out ViaHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueViaParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueViaParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (ViaHeaderValue)output!;
                 return true;
@@ -165,7 +186,12 @@ namespace System.Net.Http.Headers
             }
 
             // Read <protocolName> and <protocolVersion> in '[<protocolName>/]<protocolVersion> <receivedBy> [<comment>]'
-            int current = GetProtocolEndIndex(input, startIndex, out string? protocolName, out string? protocolVersion);
+            int current = GetProtocolEndIndex(
+                input,
+                startIndex,
+                out string? protocolName,
+                out string? protocolVersion
+            );
 
             // If we reached the end of the string after reading protocolName/Version we return (we expect at least
             // <receivedBy> to follow). If reading protocolName/Version read 0 bytes, we return.
@@ -192,7 +218,10 @@ namespace System.Net.Http.Headers
             {
                 // We have a <comment> in '[<protocolName>/]<protocolVersion> <receivedBy> [<comment>]'
                 int commentLength;
-                if (HttpRuleParser.GetCommentLength(input, current, out commentLength) != HttpParseResult.Parsed)
+                if (
+                    HttpRuleParser.GetCommentLength(input, current, out commentLength)
+                    != HttpParseResult.Parsed
+                )
                 {
                     return 0; // We found a '(' character but it wasn't a valid comment. Abort.
                 }
@@ -207,8 +236,12 @@ namespace System.Net.Http.Headers
             return current - startIndex;
         }
 
-        private static int GetProtocolEndIndex(string input, int startIndex, out string? protocolName,
-            out string? protocolVersion)
+        private static int GetProtocolEndIndex(
+            string input,
+            int startIndex,
+            out string? protocolName,
+            out string? protocolVersion
+        )
         {
             // We have a string of the form '[<protocolName>/]<protocolVersion> <receivedBy> [<comment>]'. The first
             // token may either be the protocol name or protocol version. We'll only find out after reading the token
@@ -281,7 +314,13 @@ namespace System.Net.Http.Headers
             // is a valid host.;
             if (HttpRuleParser.GetHostLength(receivedBy, 0, true) != receivedBy.Length)
             {
-                throw new FormatException(SR.Format(System.Globalization.CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, receivedBy));
+                throw new FormatException(
+                    SR.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        receivedBy
+                    )
+                );
             }
         }
     }

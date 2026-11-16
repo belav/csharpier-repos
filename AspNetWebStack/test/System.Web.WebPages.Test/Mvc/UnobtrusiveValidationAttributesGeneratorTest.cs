@@ -16,12 +16,15 @@ namespace System.Web.WebPages.Test.Mvc
             var clientRules = new ModelClientValidationRule[]
             {
                 new ModelClientValidationMaxLengthRule("Max length message", 8),
-                new ModelClientValidationMinLengthRule("Min length message", 2)
+                new ModelClientValidationMinLengthRule("Min length message", 2),
             };
             var attributes = new Dictionary<string, object>();
 
             // Act
-            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(clientRules, attributes);
+            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(
+                clientRules,
+                attributes
+            );
 
             // Assert
             Assert.Equal(5, attributes.Count);
@@ -39,12 +42,15 @@ namespace System.Web.WebPages.Test.Mvc
             var clientRules = new ModelClientValidationRule[]
             {
                 new ModelClientValidationMinLengthRule("Min length message", 2),
-                new ModelClientValidationStringLengthRule("String length rule", 2, 6)
+                new ModelClientValidationStringLengthRule("String length rule", 2, 6),
             };
             var attributes = new Dictionary<string, object>();
 
             // Act
-            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(clientRules, attributes);
+            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(
+                clientRules,
+                attributes
+            );
 
             // Assert
             Assert.Equal(6, attributes.Count);

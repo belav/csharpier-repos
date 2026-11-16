@@ -8,7 +8,6 @@ using Xunit;
 
 public class My
 {
-
     static void Worker()
     {
         GC.Collect();
@@ -18,7 +17,6 @@ public class My
     [Fact]
     public static void TestEntryPoint()
     {
-
         Thread t = new Thread(new ThreadStart(Worker));
         t.Start();
 

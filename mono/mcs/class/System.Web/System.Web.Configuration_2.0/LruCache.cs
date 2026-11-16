@@ -30,114 +30,123 @@
 using System;
 using System.Collections.Generic;
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
+    class LruCache<TKey, TValue>
+    {
+        Dictionary<TKey, LinkedListNode<TValue>> dict;
+        Dictionary<LinkedListNode<TValue>, TKey> revdict;
+        LinkedList<TValue> list;
+        int entry_limit;
 
-	class LruCache<TKey, TValue> {
-		Dictionary<TKey, LinkedListNode <TValue>> dict;
-		Dictionary<LinkedListNode<TValue>, TKey> revdict;
-		LinkedList<TValue> list;
-		int entry_limit;
+        bool eviction_warning_shown;
+        int evictions;
 
-		bool eviction_warning_shown;
-		int evictions;
+        internal string EvictionWarning { set; private get; }
 
-		internal string EvictionWarning { set; private get; }
+        public LruCache(int entryLimit)
+        {
+            entry_limit = entryLimit;
+            dict = new Dictionary<TKey, LinkedListNode<TValue>>();
+            revdict = new Dictionary<LinkedListNode<TValue>, TKey>();
+            list = new LinkedList<TValue>();
+        }
 
-		public LruCache (int entryLimit)
-		{
-			entry_limit = entryLimit;
-			dict = new Dictionary<TKey, LinkedListNode<TValue>> ();
-			revdict = new Dictionary<LinkedListNode<TValue>, TKey> ();
-			list = new LinkedList<TValue> ();
-		}
+        //for debugging: public int Count { get { return dict.Count; } }
 
-		//for debugging: public int Count { get { return dict.Count; } }
+        void Evict()
+        {
+            var last = list.Last;
+            if (last == null)
+                return;
 
-		void Evict ()
-		{
-			var last = list.Last;
-			if (last == null)
-				return;
+            var key = revdict[last];
 
-			var key = revdict [last];
+            dict.Remove(key);
+            revdict.Remove(last);
+            list.RemoveLast();
+            DisposeValue(last.Value);
+            evictions++;
 
-			dict.Remove (key);
-			revdict.Remove (last);
-			list.RemoveLast ();
-			DisposeValue (last.Value);
-			evictions++;
+            if (
+                !String.IsNullOrEmpty(EvictionWarning)
+                && !eviction_warning_shown
+                && (evictions >= entry_limit)
+            )
+            {
+                Console.Error.WriteLine("WARNING: " + EvictionWarning);
+                eviction_warning_shown = true;
+            }
+        }
 
-			if (!String.IsNullOrEmpty (EvictionWarning) && !eviction_warning_shown && (evictions >= entry_limit)) {
-				Console.Error.WriteLine ("WARNING: " + EvictionWarning);
-				eviction_warning_shown = true;
-			}
-		}
+        public void Clear()
+        {
+            foreach (var element in list)
+            {
+                DisposeValue(element);
+            }
 
-		public void Clear ()
-		{
-			foreach (var element in list) {
-				DisposeValue (element);
-			}
+            dict.Clear();
+            revdict.Clear();
+            list.Clear();
+            eviction_warning_shown = false;
+            evictions = 0;
+        }
 
-			dict.Clear ();
-			revdict.Clear ();
-			list.Clear ();
-			eviction_warning_shown = false;
-			evictions = 0;
-		}
+        void DisposeValue(TValue value)
+        {
+            if (value is IDisposable)
+            {
+                ((IDisposable)value).Dispose();
+            }
+        }
 
-		void DisposeValue (TValue value)
-		{
-			if (value is IDisposable) {
-				((IDisposable)value).Dispose ();
-			}
-		}
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            LinkedListNode<TValue> node;
 
-		public bool TryGetValue (TKey key, out TValue value)
-		{
-			LinkedListNode<TValue> node;
+            if (dict.TryGetValue(key, out node))
+            {
+                list.Remove(node);
+                list.AddFirst(node);
 
-			if (dict.TryGetValue (key, out node)){
-				list.Remove (node);
-				list.AddFirst (node);
+                value = node.Value;
+                return true;
+            }
+            value = default(TValue);
+            return false;
+        }
 
-				value = node.Value;
-				return true;
-			}
-			value = default (TValue);
-			return false;
-		}
+        public void Add(TKey key, TValue value)
+        {
+            LinkedListNode<TValue> node;
 
-		public void Add (TKey key, TValue value)
-		{
-			LinkedListNode<TValue> node;
+            if (dict.TryGetValue(key, out node))
+            {
+                // If we already have a key, move it to the front
+                list.Remove(node);
+                list.AddFirst(node);
 
-			if (dict.TryGetValue (key, out node)){
+                // Remove the old value
+                DisposeValue(node.Value);
 
-				// If we already have a key, move it to the front
-				list.Remove (node);
-				list.AddFirst (node);
+                node.Value = value;
+                return;
+            }
 
-				// Remove the old value
-				DisposeValue (node.Value);
+            if (dict.Count >= entry_limit)
+                Evict();
 
-				node.Value = value;
-				return;
-			}
+            // Adding new node
+            node = new LinkedListNode<TValue>(value);
+            list.AddFirst(node);
+            dict[key] = node;
+            revdict[node] = key;
+        }
 
-			if (dict.Count >= entry_limit)
-				Evict ();
-
-			// Adding new node
-			node = new LinkedListNode<TValue> (value);
-			list.AddFirst (node);
-			dict [key] = node;
-			revdict [node] = key;
-		}
-
-		public override string ToString ()
-		{
-			return "LRUCache dict={0} revdict={1} list={2}";
-		}
-	}
+        public override string ToString()
+        {
+            return "LRUCache dict={0} revdict={1} list={2}";
+        }
+    }
 }

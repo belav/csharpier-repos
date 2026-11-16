@@ -23,11 +23,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SpellCheck
 #pragma warning disable CS0612 // Type or member is obsolete
 #pragma warning disable CS0618 // Type or member is obsolete
 
-        protected Task TestSuccessAsync(string content, string expected)
-            => TestAsync(content, expected, expectFailure: false);
+        protected Task TestSuccessAsync(string content, string expected) =>
+            TestAsync(content, expected, expectFailure: false);
 
-        protected Task TestFailureAsync(string content, string expected)
-            => TestAsync(content, expected, expectFailure: true);
+        protected Task TestFailureAsync(string content, string expected) =>
+            TestAsync(content, expected, expectFailure: true);
 
         private async Task TestAsync(string content, string expected, bool expectFailure)
         {
@@ -36,11 +36,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SpellCheck
             var threadingContext = workspace.ExportProvider.GetExportedValue<IThreadingContext>();
 
             var document = workspace.Documents.Single();
-            var service = (RoslynSpellCheckFixerProvider)workspace.ExportProvider.GetExportedValue<ISpellCheckFixerProvider>();
+            var service = (RoslynSpellCheckFixerProvider)
+                workspace.ExportProvider.GetExportedValue<ISpellCheckFixerProvider>();
 
             var buffer = document.GetTextBuffer();
             var (replacement, span) = document.AnnotatedSpans.Single();
-            var result = await service.GetTestAccessor().TryRenameAsync(buffer.CurrentSnapshot.GetSpan(span.Single().ToSpan()), replacement, CancellationToken.None);
+            var result = await service
+                .GetTestAccessor()
+                .TryRenameAsync(
+                    buffer.CurrentSnapshot.GetSpan(span.Single().ToSpan()),
+                    replacement,
+                    CancellationToken.None
+                );
 
             if (expectFailure)
             {

@@ -19,7 +19,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -32,35 +32,34 @@
 // obligated to do so.  If you do not wish to do so, delete this
 // exception statement from your version.
 
-namespace ICSharpCode.SharpZipLib.Tar {
-	
-	/// <summary>
-	/// This exception is used to indicate that there is a problem
-	/// with a TAR archive header.
-	/// </summary>
-	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-	public class InvalidHeaderException : TarException
-	{
-		/// <summary>
-		/// Initialise a new instance of the InvalidHeaderException class.
-		/// </summary>
-		public InvalidHeaderException()
-		{
-		}
+namespace ICSharpCode.SharpZipLib.Tar
+{
+    /// <summary>
+    /// This exception is used to indicate that there is a problem
+    /// with a TAR archive header.
+    /// </summary>
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
+    public class InvalidHeaderException : TarException
+    {
+        /// <summary>
+        /// Initialise a new instance of the InvalidHeaderException class.
+        /// </summary>
+        public InvalidHeaderException() { }
 
-		/// <summary>
-		/// Initialises a new instance of the InvalidHeaderException class with a specified message.
-		/// </summary>
-		public InvalidHeaderException(string msg) : base(msg)
-		{
-		}
-	}
+        /// <summary>
+        /// Initialises a new instance of the InvalidHeaderException class with a specified message.
+        /// </summary>
+        public InvalidHeaderException(string msg)
+            : base(msg) { }
+    }
 }
 
 /* The original Java file had this header:
 ** Authored by Timothy Gerard Endres
 ** <mailto:time@gjt.org>  <http://www.trustice.com>
-** 
+**
 ** This work has been placed into the public domain.
 ** You may use this work in any way and for any purpose you wish.
 **
@@ -68,7 +67,6 @@ namespace ICSharpCode.SharpZipLib.Tar {
 ** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
 ** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
 ** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
-** REDISTRIBUTION OF THIS SOFTWARE. 
-** 
+** REDISTRIBUTION OF THIS SOFTWARE.
+**
 */
-

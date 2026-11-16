@@ -1,42 +1,61 @@
 using System;
 using System.Globalization;
 using System.Xml;
-
 #if CONFIGURATION_DEP
 using System.Configuration;
 #endif
 
-namespace System.Xml.XmlConfiguration {
-    internal static class XmlConfigurationString {
+namespace System.Xml.XmlConfiguration
+{
+    internal static class XmlConfigurationString
+    {
         internal const string XmlReaderSectionName = "xmlReader";
         internal const string XsltSectionName = "xslt";
 
         internal const string ProhibitDefaultResolverName = "prohibitDefaultResolver";
         internal const string LimitXPathComplexityName = "limitXPathComplexity";
-        internal const string EnableMemberAccessForXslCompiledTransformName = "enableMemberAccessForXslCompiledTransform";
-        internal const string CollapseWhiteSpaceIntoEmptyStringName = "CollapseWhiteSpaceIntoEmptyString";
+        internal const string EnableMemberAccessForXslCompiledTransformName =
+            "enableMemberAccessForXslCompiledTransform";
+        internal const string CollapseWhiteSpaceIntoEmptyStringName =
+            "CollapseWhiteSpaceIntoEmptyString";
 
         internal const string XmlConfigurationSectionName = "system.xml";
 
-        internal static string XmlReaderSectionPath = string.Format(CultureInfo.InvariantCulture, @"{0}/{1}", XmlConfigurationSectionName, XmlReaderSectionName);
-        internal static string XsltSectionPath = string.Format(CultureInfo.InvariantCulture, @"{0}/{1}", XmlConfigurationSectionName, XsltSectionName);
+        internal static string XmlReaderSectionPath = string.Format(
+            CultureInfo.InvariantCulture,
+            @"{0}/{1}",
+            XmlConfigurationSectionName,
+            XmlReaderSectionName
+        );
+        internal static string XsltSectionPath = string.Format(
+            CultureInfo.InvariantCulture,
+            @"{0}/{1}",
+            XmlConfigurationSectionName,
+            XsltSectionName
+        );
     }
 
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public sealed class XmlReaderSection
 #if CONFIGURATION_DEP
-		: ConfigurationSection
+        : ConfigurationSection
 #endif
-	{
+    {
 #if CONFIGURATION_DEP
-        [ConfigurationProperty(XmlConfigurationString.ProhibitDefaultResolverName, DefaultValue = "false")]
-        public string ProhibitDefaultResolverString {
+        [ConfigurationProperty(
+            XmlConfigurationString.ProhibitDefaultResolverName,
+            DefaultValue = "false"
+        )]
+        public string ProhibitDefaultResolverString
+        {
             get { return (string)this[XmlConfigurationString.ProhibitDefaultResolverName]; }
             set { this[XmlConfigurationString.ProhibitDefaultResolverName] = value; }
         }
 
-        private bool _ProhibitDefaultResolver {
-            get {
+        private bool _ProhibitDefaultResolver
+        {
+            get
+            {
                 string value = ProhibitDefaultResolverString;
                 bool result;
                 XmlConvert.TryToBoolean(value, out result);
@@ -44,46 +63,61 @@ namespace System.Xml.XmlConfiguration {
             }
         }
 #endif
+
         //check the config every time, otherwise will have problem in different asp.net pages which have different settings.
         //ConfigurationManager will cache the section result, so expect no perf issue.
-        internal static bool ProhibitDefaultUrlResolver {
-            get {
+        internal static bool ProhibitDefaultUrlResolver
+        {
+            get
+            {
 #if CONFIGURATION_DEP
-                XmlReaderSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XmlReaderSectionPath) as XmlReaderSection;
+                XmlReaderSection section =
+                    System.Configuration.ConfigurationManager.GetSection(
+                        XmlConfigurationString.XmlReaderSectionPath
+                    ) as XmlReaderSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
 #else
-			return false;
+                return false;
 #endif
             }
         }
 
-        internal static XmlResolver CreateDefaultResolver() {
-                if (ProhibitDefaultUrlResolver)
-                    return null;
-                else
-                    return new XmlUrlResolver();
+        internal static XmlResolver CreateDefaultResolver()
+        {
+            if (ProhibitDefaultUrlResolver)
+                return null;
+            else
+                return new XmlUrlResolver();
         }
 
 #if CONFIGURATION_DEP
-        [ConfigurationProperty(XmlConfigurationString.CollapseWhiteSpaceIntoEmptyStringName, DefaultValue = "false")]
+        [ConfigurationProperty(
+            XmlConfigurationString.CollapseWhiteSpaceIntoEmptyStringName,
+            DefaultValue = "false"
+        )]
 #endif
-        public string CollapseWhiteSpaceIntoEmptyStringString {
-            get {
+        public string CollapseWhiteSpaceIntoEmptyStringString
+        {
+            get
+            {
 #if CONFIGURATION_DEP
                 return (string)this[XmlConfigurationString.CollapseWhiteSpaceIntoEmptyStringName];
 #else
                 return null;
 #endif
             }
-            set {
+            set
+            {
 #if CONFIGURATION_DEP
                 this[XmlConfigurationString.CollapseWhiteSpaceIntoEmptyStringName] = value;
 #endif
             }
         }
 
-        private bool _CollapseWhiteSpaceIntoEmptyString {
-            get {
+        private bool _CollapseWhiteSpaceIntoEmptyString
+        {
+            get
+            {
                 string value = CollapseWhiteSpaceIntoEmptyStringString;
                 bool result;
                 XmlConvert.TryToBoolean(value, out result);
@@ -93,10 +127,15 @@ namespace System.Xml.XmlConfiguration {
 
         //check the config every time, otherwise will have problem in different asp.net pages which have different settings.
         //ConfigurationManager will cache the section result, so expect no perf issue.
-        internal static bool CollapseWhiteSpaceIntoEmptyString {
-            get {
+        internal static bool CollapseWhiteSpaceIntoEmptyString
+        {
+            get
+            {
 #if CONFIGURATION_DEP
-                XmlReaderSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XmlReaderSectionPath) as XmlReaderSection;
+                XmlReaderSection section =
+                    System.Configuration.ConfigurationManager.GetSection(
+                        XmlConfigurationString.XmlReaderSectionPath
+                    ) as XmlReaderSection;
                 return (section != null) ? section._CollapseWhiteSpaceIntoEmptyString : false;
 #else
                 return false;
@@ -108,18 +147,24 @@ namespace System.Xml.XmlConfiguration {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public sealed class XsltConfigSection
 #if CONFIGURATION_DEP
-		: ConfigurationSection
+        : ConfigurationSection
 #endif
-	{
+    {
 #if CONFIGURATION_DEP
-        [ConfigurationProperty(XmlConfigurationString.ProhibitDefaultResolverName, DefaultValue = "false")]
-        public string ProhibitDefaultResolverString {
+        [ConfigurationProperty(
+            XmlConfigurationString.ProhibitDefaultResolverName,
+            DefaultValue = "false"
+        )]
+        public string ProhibitDefaultResolverString
+        {
             get { return (string)this[XmlConfigurationString.ProhibitDefaultResolverName]; }
             set { this[XmlConfigurationString.ProhibitDefaultResolverName] = value; }
         }
 
-        private bool _ProhibitDefaultResolver {
-            get {
+        private bool _ProhibitDefaultResolver
+        {
+            get
+            {
                 string value = ProhibitDefaultResolverString;
                 bool result;
                 XmlConvert.TryToBoolean(value, out result);
@@ -127,25 +172,35 @@ namespace System.Xml.XmlConfiguration {
             }
         }
 #endif
-        private static bool s_ProhibitDefaultUrlResolver {
-            get {
+        private static bool s_ProhibitDefaultUrlResolver
+        {
+            get
+            {
 #if CONFIGURATION_DEP
-                XsltConfigSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
+                XsltConfigSection section =
+                    System.Configuration.ConfigurationManager.GetSection(
+                        XmlConfigurationString.XsltSectionPath
+                    ) as XsltConfigSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
 #else
-			return false;
+                return false;
 #endif
             }
         }
 
-        internal static XmlResolver CreateDefaultResolver() {
-                if (s_ProhibitDefaultUrlResolver)
-                    return XmlNullResolver.Singleton;
-                else
-                    return new XmlUrlResolver();
+        internal static XmlResolver CreateDefaultResolver()
+        {
+            if (s_ProhibitDefaultUrlResolver)
+                return XmlNullResolver.Singleton;
+            else
+                return new XmlUrlResolver();
         }
+
 #if CONFIGURATION_DEP
-        [ConfigurationProperty(XmlConfigurationString.LimitXPathComplexityName, DefaultValue = "true")]
+        [ConfigurationProperty(
+            XmlConfigurationString.LimitXPathComplexityName,
+            DefaultValue = "true"
+        )]
         internal string LimitXPathComplexityString
         {
             get { return (string)this[XmlConfigurationString.LimitXPathComplexityName]; }
@@ -168,19 +223,33 @@ namespace System.Xml.XmlConfiguration {
             get
             {
 #if CONFIGURATION_DEP
-                XsltConfigSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
+                XsltConfigSection section =
+                    System.Configuration.ConfigurationManager.GetSection(
+                        XmlConfigurationString.XsltSectionPath
+                    ) as XsltConfigSection;
                 return (section != null) ? section._LimitXPathComplexity : true;
 #else
-				return true;
+                return true;
 #endif
             }
         }
+
 #if CONFIGURATION_DEP
-        [ConfigurationProperty(XmlConfigurationString.EnableMemberAccessForXslCompiledTransformName, DefaultValue = "False")]
+        [ConfigurationProperty(
+            XmlConfigurationString.EnableMemberAccessForXslCompiledTransformName,
+            DefaultValue = "False"
+        )]
         internal string EnableMemberAccessForXslCompiledTransformString
         {
-            get { return (string)this[XmlConfigurationString.EnableMemberAccessForXslCompiledTransformName]; }
-            set { this[XmlConfigurationString.EnableMemberAccessForXslCompiledTransformName] = value; }
+            get
+            {
+                return (string)
+                    this[XmlConfigurationString.EnableMemberAccessForXslCompiledTransformName];
+            }
+            set
+            {
+                this[XmlConfigurationString.EnableMemberAccessForXslCompiledTransformName] = value;
+            }
         }
 
         private bool _EnableMemberAccessForXslCompiledTransform
@@ -199,10 +268,15 @@ namespace System.Xml.XmlConfiguration {
             get
             {
 #if CONFIGURATION_DEP
-                XsltConfigSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
-                return (section != null) ? section._EnableMemberAccessForXslCompiledTransform : false;
+                XsltConfigSection section =
+                    System.Configuration.ConfigurationManager.GetSection(
+                        XmlConfigurationString.XsltSectionPath
+                    ) as XsltConfigSection;
+                return (section != null)
+                    ? section._EnableMemberAccessForXslCompiledTransform
+                    : false;
 #else
-				return false;
+                return false;
 #endif
             }
         }

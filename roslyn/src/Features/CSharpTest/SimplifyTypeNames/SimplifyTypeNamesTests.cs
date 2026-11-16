@@ -22,15 +22,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyTypeNames)]
-    public partial class SimplifyTypeNamesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyTypeNamesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyTypeNamesTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyTypeNamesDiagnosticAnalyzer(), new SimplifyTypeNamesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyTypeNamesDiagnosticAnalyzer(),
+                new SimplifyTypeNamesCodeFixProvider()
+            );
 
         [Fact]
         public async Task SimplifyGenericName()
@@ -67,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         var c = Goo(1, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -103,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         public int a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -131,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -159,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -218,14 +227,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 {
                     MyType c;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task UseAlias()
         {
-            var source =
-                """
+            var source = """
                 using MyType = System.Exception;
 
                 class A
@@ -234,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 using MyType = System.Exception;
 
@@ -242,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 {
                     MyType c;
                 }
-                """);
+                """
+            );
 
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
@@ -253,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 {
                     [|System.Exception|] c;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -281,7 +293,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -309,7 +322,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -343,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -365,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 {
                     MyType c;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -393,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -421,7 +438,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -455,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -489,7 +508,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21449")]
@@ -525,7 +545,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -563,7 +584,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21449")]
@@ -607,7 +629,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -639,7 +662,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType1 c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -671,7 +695,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         System.Exception c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -690,7 +715,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         [|System.Exception|] c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -712,7 +738,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -734,7 +761,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -772,7 +800,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -810,7 +839,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -844,7 +874,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -908,7 +939,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -968,7 +1000,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1000,7 +1033,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1020,7 +1054,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     public override string ToString() => throw null;
                     public string ToString(string format, IFormatProvider formatProvider) => throw null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1040,7 +1075,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     public override string ToString() => throw null;
                     public string ToString(string format, IFormatProvider formatProvider) => throw null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -1070,7 +1106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     public static void Goo() { }
                     public static void Goo(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1102,14 +1139,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         System.Exception c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task AliasInSiblingNamespace()
         {
-            var content =
-                """
+            var content = """
                 [|namespace Root 
                 {
                     namespace Sibling
@@ -1129,30 +1166,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task KeywordInt32()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     [|System.Int32|] i;
                 }
                 """;
             var featureOptions = PreferIntrinsicTypeEverywhere;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 class A
                 {
                     int i;
                 }
-                """, options: featureOptions);
+                """,
+                options: featureOptions
+            );
             await TestActionCountAsync(
-                source, count: 1, parameters: new TestParameters(options: featureOptions));
+                source,
+                count: 1,
+                parameters: new TestParameters(options: featureOptions)
+            );
             await TestSpansAsync(
                 """
                 class A
                 {
                     [|System.Int32|] i;
                 }
-                """, parameters: new TestParameters(options: featureOptions));
+                """,
+                parameters: new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
@@ -1173,11 +1217,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 { "System.String", "string" },
                 { "System.UInt16", "ushort" },
                 { "System.UInt32", "uint" },
-                { "System.UInt64", "ulong" }
+                { "System.UInt64", "ulong" },
             };
 
-            var content =
-                """
+            var content = """
                 class A
                 {
                     [|[||]|] i;
@@ -1195,8 +1238,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyTypeName()
         {
-            var content =
-                """
+            var content = """
                 namespace Root 
                 {
                     class A 
@@ -1211,8 +1253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyTypeName1()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 namespace Root
@@ -1224,7 +1265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 using System;
 
@@ -1235,7 +1277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         Exception c;
                     }
                 }
-                """);
+                """
+            );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
@@ -1248,14 +1291,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         [|System|].Exception c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimplifyTypeName1_FileScopedNamespace()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 namespace Root;
@@ -1266,7 +1309,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 using System;
 
@@ -1276,7 +1320,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 {
                     Exception c;
                 }
-                """);
+                """
+            );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
@@ -1288,7 +1333,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 {
                     [|System|].Exception c;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1312,7 +1358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         Exception c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1350,7 +1397,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1389,7 +1437,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         N2.A1 a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1427,14 +1476,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         NC1.A1 a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimplifyTypeName6()
         {
-            var content =
-                """
+            var content = """
                 namespace N1
                 {
                     public class A1 { }
@@ -1456,8 +1505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyTypeName7()
         {
-            var source =
-                """
+            var source = """
                 namespace N1
                 {
                     namespace N2
@@ -1472,7 +1520,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 namespace N1
                 {
@@ -1486,7 +1535,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
 
             await TestActionCountAsync(source, 1);
         }
@@ -1494,8 +1544,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyGenericTypeName1()
         {
-            var content =
-                """
+            var content = """
                 namespace N1
                 {
                     public class A1
@@ -1510,8 +1559,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyGenericTypeName2()
         {
-            var source =
-                """
+            var source = """
                 using System;
 
                 namespace N1
@@ -1523,7 +1571,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 using System;
 
@@ -1534,7 +1583,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         EventHandler<EventArgs> a;
                     }
                 }
-                """);
+                """
+            );
 
             await TestActionCountAsync(source, 1);
         }
@@ -1565,14 +1615,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         Action<Action<Action<EventArgs>, Action<Action<EventArgs, Action<EventArgs>, Action<Action<Action<Action<EventArgs>, Action<EventArgs>>>>>>>> a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimplifyGenericTypeName4()
         {
-            var content =
-                """
+            var content = """
                 using MyHandler = System.EventHandler;
 
                 namespace N1
@@ -1589,8 +1639,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact]
         public async Task SimplifyGenericTypeName5()
         {
-            var source =
-                """
+            var source = """
                 using MyHandler = System.EventHandler<System.EventArgs>;
 
                 namespace N1
@@ -1602,7 +1651,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 using MyHandler = System.EventHandler<System.EventArgs>;
 
@@ -1613,7 +1663,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         System.EventHandler<MyHandler> a;
                     }
                 }
-                """);
+                """
+            );
             await TestActionCountAsync(source, 1);
             await TestSpansAsync(
                 """
@@ -1626,7 +1677,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         System.EventHandler<[|System.EventHandler<System.EventArgs>|]> a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1672,7 +1724,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         MyType a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/9877")]
@@ -1719,7 +1772,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         N2.A1<MyType> a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1747,7 +1801,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         List<string[]> a;
                     }
                 }
-                """);
+                """
+            );
 
             // TODO: The below test is currently disabled due to restrictions of the test framework, this needs to be fixed.
 
@@ -1797,10 +1852,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         List<string[][,][,,,]> a;
                     }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")
+        ]
         public async Task SimplifyToPredefinedTypeNameShouldNotBeOfferedInsideNameOf1()
         {
             await TestMissingInRegularAndScriptAsync(
@@ -1814,7 +1874,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         var x = nameof([|Int32|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168")]
@@ -1829,10 +1890,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         var x = nameof([|System.Int32|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")
+        ]
         public async Task SimplifyToPredefinedTypeNameShouldNotBeOfferedInsideNameOf3()
         {
             await TestMissingInRegularAndScriptAsync(
@@ -1846,10 +1912,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         var x = nameof([|Int32|].MaxValue);
                     }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1073099")
+        ]
         public async Task SimplifyToPredefinedTypeNameShouldBeOfferedInsideFunctionCalledNameOf()
         {
             await TestInRegularAndScriptAsync(
@@ -1884,7 +1955,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         return string.Empty;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1912,7 +1984,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         var x = nameof(Int32);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168")]
@@ -1942,14 +2015,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """, options: PreferIntrinsicTypeEverywhere);
+                """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
         public async Task SimplifyAlias1()
         {
-            var content =
-                """
+            var content = """
                 using I64 = [|System.Int64|];
 
                 namespace N1
@@ -1988,7 +2062,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
@@ -2022,7 +2097,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538727")]
@@ -2058,14 +2134,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544631")]
         public async Task SimplifyAlias5()
         {
-            var content =
-                """
+            var content = """
                 using System;
 
                 namespace N
@@ -2074,8 +2150,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 }
                 """;
 
-            var result =
-                """
+            var result = """
                 using System;
 
                 namespace N
@@ -2111,7 +2186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538949")]
@@ -2133,7 +2209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 interface I<T>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538949")]
@@ -2155,14 +2232,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 interface I<T>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538991")]
         public async Task SimplifyMissingOnGeneric()
         {
-            var content =
-                """
+            var content = """
                 class A<T, S>
                 {
                     class B : [|A<B, B>|] { }
@@ -2175,8 +2252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539000")]
         public async Task SimplifyMissingOnUnmentionableTypeParameter1()
         {
-            var content =
-                """
+            var content = """
                 class A<T>
                 {
                     class D : A<T[]> { }
@@ -2203,7 +2279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539000")]
@@ -2227,7 +2304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         D.B x = new [|D.B|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539000")]
@@ -2250,7 +2328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         D.B x = new [|D.B|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2282,15 +2361,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                         string s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541748")]
         public async Task TestOnErrorInScript()
         {
-            await TestMissingAsync(
-@"[|Console.WrieLine();|]",
-new TestParameters(Options.Script));
+            await TestMissingAsync(@"[|Console.WrieLine();|]", new TestParameters(Options.Script));
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/9877")]
@@ -2452,7 +2530,8 @@ new TestParameters(Options.Script));
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2480,7 +2559,6 @@ index: 1);
                     }
                 }
                 """,
-
                 """
                 namespace N
                 {
@@ -2500,7 +2578,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2527,7 +2606,6 @@ index: 1);
                     }
                 }
                 """,
-
                 """
                 namespace N
                 {
@@ -2546,7 +2624,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2597,7 +2676,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -2648,7 +2728,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2666,7 +2747,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2696,7 +2778,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2714,7 +2797,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2732,7 +2816,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2750,7 +2835,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2768,7 +2854,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2798,7 +2885,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2828,7 +2916,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2858,7 +2947,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2888,7 +2978,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2918,7 +3009,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541929")]
@@ -2936,7 +3028,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542650")]
@@ -2964,7 +3057,8 @@ index: 1);
                             C|] x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542719")]
@@ -2986,7 +3080,8 @@ index: 1);
                         [|global::System.Console.WriteLine(v)|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544615")]
@@ -3005,7 +3100,8 @@ index: 1);
                         var x = ([|global::E|])-1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544616")]
@@ -3033,7 +3129,8 @@ index: 1);
                         var y = (x as int?) + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544974")]
@@ -3057,7 +3154,8 @@ index: 1);
                         Equals(1, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544974")]
@@ -3079,7 +3177,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544974")]
@@ -3101,7 +3200,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544977")]
@@ -3129,7 +3229,8 @@ index: 1);
                         var x = 1 is int? ? 2 : 3;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3144,7 +3245,8 @@ index: 1);
                 class A
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3158,7 +3260,8 @@ index: 1);
                 class A
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3172,7 +3275,8 @@ index: 1);
                 class A
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3196,7 +3300,8 @@ index: 1);
                 class C<T>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3213,7 +3318,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3229,7 +3335,8 @@ index: 1);
                 class A
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3254,7 +3361,8 @@ index: 1);
                 class A
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3280,7 +3388,8 @@ index: 1);
                 class C<T>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3306,7 +3415,8 @@ index: 1);
                 {
                     void Goo(int? i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3323,7 +3433,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3351,7 +3462,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3379,7 +3491,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3411,7 +3524,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3443,7 +3557,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29")]
@@ -3475,7 +3590,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3535,7 +3651,8 @@ index: 1);
                         Color.Goo();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3568,7 +3685,8 @@ index: 1);
                         [|Color.Goo|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40632")]
@@ -3612,7 +3730,8 @@ index: 1);
                         public Goo Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40632")]
@@ -3658,7 +3777,8 @@ index: 1);
                         public Goo Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40632")]
@@ -3681,7 +3801,8 @@ index: 1);
                         public Goo Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3722,14 +3843,14 @@ index: 1);
                             => [|Cci|].PrimitiveTypeCode.NotPrimitive;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAliasQualifiedType()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     static void Main()
@@ -3738,7 +3859,8 @@ index: 1);
                     }
                 }
                 """;
-            await TestAsync(source,
+            await TestAsync(
+                source,
                 """
                 class Program
                 {
@@ -3747,7 +3869,9 @@ index: 1);
                         Program a = null; 
                     }
                 }
-                """, parseOptions: null);
+                """,
+                parseOptions: null
+            );
 
             await TestMissingAsync(source, new TestParameters(GetScriptOptions()));
         }
@@ -3777,14 +3901,14 @@ index: 1);
                         int x = Console.Read() + System.Console.Read();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/551040")]
         public async Task TestSimplifyStaticMemberAccess()
         {
-            var source =
-                """
+            var source = """
                 class Preserve
                 {
                 	public static int Y;
@@ -3802,7 +3926,8 @@ index: 1);
                 	}
                 }
                 """;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 class Preserve
                 {
@@ -3820,14 +3945,14 @@ index: 1);
                 		int k = Preserve.Y;
                 	}
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/551040")]
         public async Task TestSimplifyNestedType()
         {
-            var source =
-                """
+            var source = """
                 class Preserve
                 {
                 	public class X
@@ -3848,7 +3973,8 @@ index: 1);
                 	}
                 }
                 """;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 class Preserve
                 {
@@ -3869,14 +3995,14 @@ index: 1);
                 		int k = Preserve.X.Y;
                 	}
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/568043")]
         public async Task DoNotSimplifyNamesWhenThereAreParseErrors()
         {
-            var markup =
-                """
+            var markup = """
                 using System;
                 using System.Collections.Generic;
                 using System.Linq;
@@ -3908,7 +4034,8 @@ index: 1);
                         Action a = [|Console.WriteLine|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/566749")]
@@ -3925,7 +4052,8 @@ index: 1);
                         Action a = [|Console.Blah|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/554010")]
@@ -3953,7 +4081,8 @@ index: 1);
                         Action a = Console.WriteLine;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578686")]
@@ -4013,7 +4142,8 @@ index: 1);
                         public A.B prop { get; set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578686")]
@@ -4061,7 +4191,8 @@ index: 1);
                         public NSB.DuplicateClassName InnocentProperty { get; set; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/577169")]
@@ -4078,7 +4209,8 @@ index: 1);
                         var w = new [|Nullable<>|].
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/577169")]
@@ -4095,7 +4227,8 @@ index: 1);
                         var x = typeof([|Nullable<>|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608190")]
@@ -4122,7 +4255,8 @@ index: 1);
                         x = y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608190")]
@@ -4149,7 +4283,8 @@ index: 1);
                         [|this.Equals|](y, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/608932")]
@@ -4179,7 +4314,8 @@ index: 1);
                         [|X|].E e; // Simplify type name as suggested
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/635933")]
@@ -4217,13 +4353,15 @@ index: 1);
                         return s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547246")]
         public async Task CodeIssueAtRightSpan()
         {
-            await TestSpansAsync("""
+            await TestSpansAsync(
+                """
                 using goo = System.Console;
                 class Program
                 {
@@ -4232,7 +4370,8 @@ index: 1);
                         [|System.Console|].Read();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/579172")]
@@ -4246,7 +4385,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/633182")]
@@ -4261,7 +4401,8 @@ index: 1);
                         ([|this.Goo|])();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627102")]
@@ -4295,13 +4436,15 @@ index: 1);
                         return "Hello world";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/629572")]
         public async Task DoNotIncludeAliasNameIfLastTargetNameIsTheSame_1()
         {
-            await TestSpansAsync("""
+            await TestSpansAsync(
+                """
                 using Generic = System.Collections.Generic;
                 class Program
                 {
@@ -4310,7 +4453,8 @@ index: 1);
                         var x = new [|System.Collections|].Generic.List<int>();
                     }
                 }
-                """);
+                """
+            );
 
             await TestInRegularAndScriptAsync(
                 """
@@ -4332,13 +4476,15 @@ index: 1);
                         var x = new Generic.List<int>();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/629572")]
         public async Task DoNotIncludeAliasNameIfLastTargetNameIsTheSame_2()
         {
-            await TestSpansAsync("""
+            await TestSpansAsync(
+                """
                 using Console = System.Console;
                 class Program
                 {
@@ -4347,7 +4493,8 @@ index: 1);
                         [|System|].Console.WriteLine("goo");
                     }
                 }
-                """);
+                """
+            );
 
             await TestInRegularAndScriptAsync(
                 """
@@ -4369,7 +4516,8 @@ index: 1);
                         Console.WriteLine("goo");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/736377")]
@@ -4390,7 +4538,8 @@ index: 1);
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/813385")]
@@ -4404,13 +4553,15 @@ index: 1);
                 {
                     [|Goo|] f;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/825541")]
         public async Task ShowOnlyRelevantSpanForReductionOfGenericName()
         {
-            await TestSpansAsync("""
+            await TestSpansAsync(
+                """
                 namespace A
                 {
                     class Program
@@ -4429,7 +4580,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/878773")]
@@ -4441,7 +4593,8 @@ index: 1);
                 class Attribute : System.Attribute
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4458,7 +4611,15 @@ index: 1);
                         [|this|].x = 4;
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.QualifyFieldAccess,
+                        true,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4484,7 +4645,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4499,7 +4661,8 @@ index: 1);
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int? x;
@@ -4507,7 +4670,9 @@ index: 1);
                     {
                     }
                 }
-                """, options: PreferIntrinsicTypeEverywhere);
+                """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4523,7 +4688,8 @@ index: 1);
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class C
                 {
@@ -4532,7 +4698,9 @@ index: 1);
                     {
                     }
                 }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4547,7 +4715,8 @@ index: 1);
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     /// <see cref="int"/>
@@ -4555,7 +4724,9 @@ index: 1);
                     {
                     }
                 }
-                """, options: PreferIntrinsicTypeEverywhere);
+                """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4571,7 +4742,8 @@ index: 1);
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 class C
                 {
@@ -4580,7 +4752,9 @@ index: 1);
                     {
                     }
                 }
-                """, options: PreferIntrinsicTypeEverywhere);
+                """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4598,7 +4772,15 @@ index: 1);
                     {
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4627,7 +4809,9 @@ index: 1);
                     {
                     }
                 }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4645,7 +4829,15 @@ index: 1);
                     {
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4674,7 +4866,8 @@ index: 1);
                     }
                 }
                 """,
-options: PreferIntrinsicTypeInMemberAccess);
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4689,7 +4882,15 @@ options: PreferIntrinsicTypeInMemberAccess);
                     {
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4714,7 +4915,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                     }
                 }
                 """,
-options: PreferIntrinsicTypeInMemberAccess);
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954536")]
@@ -4729,7 +4931,9 @@ options: PreferIntrinsicTypeInMemberAccess);
                     {
                     }
                 }
-                """, new TestParameters(options: PreferIntrinsicTypeInDeclaration));
+                """,
+                new TestParameters(options: PreferIntrinsicTypeInDeclaration)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4746,7 +4950,15 @@ options: PreferIntrinsicTypeInMemberAccess);
                         System.Int32 z = 9;
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4763,7 +4975,15 @@ options: PreferIntrinsicTypeInMemberAccess);
                         System.Int32 z = 9;
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4780,7 +5000,15 @@ options: PreferIntrinsicTypeInMemberAccess);
                         [|System.Int32|] z = 9;
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4804,7 +5032,9 @@ options: PreferIntrinsicTypeInMemberAccess);
                         var sss = int.MaxValue;
                     }
                 }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4832,7 +5062,9 @@ options: PreferIntrinsicTypeInMemberAccess);
                         var sss = int.MaxValue;
                     }
                 }
-                """, options: PreferIntrinsicTypeInMemberAccess);
+                """,
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/956667")]
@@ -4854,7 +5086,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 {
                     public static int Memb;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4871,7 +5104,15 @@ options: PreferIntrinsicTypeInMemberAccess);
                         var sss = [|Int32|].MaxValue;
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/942568")]
@@ -4886,7 +5127,15 @@ options: PreferIntrinsicTypeInMemberAccess);
                         var sss = [|System.Int32|].MaxValue;
                     }
                 }
-                """, new TestParameters(options: Option(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, false, NotificationOption2.Error)));
+                """,
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        false,
+                        NotificationOption2.Error
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/965208")]
@@ -4914,7 +5163,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                         Console.WriteLine(");
                     }
                 }
-                """);
+                """
+            );
 
             await TestInRegularAndScript1Async(
                 """
@@ -4938,7 +5188,9 @@ options: PreferIntrinsicTypeInMemberAccess);
                         int a;
                     }
                 }
-                """, parameters: new TestParameters(options: PreferIntrinsicTypeEverywhere));
+                """,
+                parameters: new TestParameters(options: PreferIntrinsicTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1019276")]
@@ -4972,7 +5224,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1068445")]
@@ -4996,7 +5249,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                         public object X => (int)0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1068445")]
@@ -5014,7 +5268,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 {
                     public string Goo() => (string)";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1068445")]
@@ -5032,7 +5287,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 {
                     public int this[int index] => (int)0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems?id=388744")]
@@ -5065,7 +5321,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions.Default);
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems?id=388744")]
@@ -5098,7 +5355,10 @@ options: PreferIntrinsicTypeInMemberAccess);
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6));
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15996")]
@@ -5126,7 +5386,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 }
                 """,
                 parseOptions: CSharpParseOptions.Default,
-                options: PreferIntrinsicTypeInDeclaration);
+                options: PreferIntrinsicTypeInDeclaration
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15996")]
@@ -5154,7 +5415,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 }
                 """,
                 parseOptions: CSharpParseOptions.Default,
-                options: PreferIntrinsicTypeInMemberAccess);
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15996")]
@@ -5182,7 +5444,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 }
                 """,
                 parseOptions: CSharpParseOptions.Default,
-                options: PreferIntrinsicTypeInMemberAccess);
+                options: PreferIntrinsicTypeInMemberAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26923")]
@@ -5203,7 +5466,9 @@ options: PreferIntrinsicTypeInMemberAccess);
                         }
                     }
                 }
-                """, new TestParameters(options: PreferImplicitTypeEverywhere));
+                """,
+                new TestParameters(options: PreferImplicitTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26923")]
@@ -5224,7 +5489,9 @@ options: PreferIntrinsicTypeInMemberAccess);
                         }
                     }
                 }
-                """, new TestParameters(options: PreferImplicitTypeEverywhere));
+                """,
+                new TestParameters(options: PreferImplicitTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31849")]
@@ -5242,7 +5509,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                         return Task.FromResult<[|string?|]>("something");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -5277,15 +5545,18 @@ options: PreferIntrinsicTypeInMemberAccess);
                         Exception c;
                     }
                 }
-                """, compilationOptions: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, warningLevel: warningLevel));
+                """,
+                compilationOptions: new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    warningLevel: warningLevel
+                )
+            );
         }
 
         [Fact]
         public async Task TestGlobalAliasSimplifiesInUsingDirective()
         {
-            await TestInRegularAndScriptAsync(
-                "using [|global::System.IO|];",
-                "using System.IO;");
+            await TestInRegularAndScriptAsync("using [|global::System.IO|];", "using System.IO;");
         }
 
         [Theory]
@@ -5306,7 +5577,8 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 $"using My{typeName} = [|global::System.{typeName}|];",
-                $"using My{typeName} = System.{typeName};");
+                $"using My{typeName} = System.{typeName};"
+            );
         }
 
         [Fact]
@@ -5314,7 +5586,8 @@ options: PreferIntrinsicTypeInMemberAccess);
         {
             await TestInRegularAndScriptAsync(
                 "using static [|global::System.Math|];",
-                "using static System.Math;");
+                "using static System.Math;"
+            );
         }
 
         [Fact]
@@ -5334,7 +5607,8 @@ options: PreferIntrinsicTypeInMemberAccess);
                 {
                     using System.IO;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40639")]
@@ -5348,7 +5622,10 @@ options: PreferIntrinsicTypeInMemberAccess);
                 class Base
                 {
                 }
-                """, IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId, DiagnosticSeverity.Hidden);
+                """,
+                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
+                DiagnosticSeverity.Hidden
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40639")]
@@ -5363,7 +5640,10 @@ options: PreferIntrinsicTypeInMemberAccess);
                 {
                     public void Foo(string s) { }
                 }
-                """, IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId, DiagnosticSeverity.Hidden);
+                """,
+                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
+                DiagnosticSeverity.Hidden
+            );
         }
 
         [Theory]
@@ -5376,19 +5656,22 @@ options: PreferIntrinsicTypeInMemberAccess);
         [InlineData("UInt32")]
         [InlineData("Int64")]
         [InlineData("UInt64")]
-        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace(string typeName)
+        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace(
+            string typeName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|global::System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = {typeName};
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -5396,19 +5679,22 @@ namespace N
         [InlineData("UInt8")]
         [InlineData("Float32")]
         [InlineData("Float64")]
-        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace_UnboundName(string typeName)
+        public async Task TestGlobalAliasSimplifiesInUsingAliasDirectiveWithinNamespace_UnboundName(
+            string typeName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|global::System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = System.{typeName};
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -5428,7 +5714,8 @@ namespace N
                 {
                     using static System.Math;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27819")]
@@ -5452,7 +5739,9 @@ namespace N
                         int i = 0;
                     }
                 }
-                """, options: PreferImplicitTypeEverywhere);
+                """,
+                options: PreferImplicitTypeEverywhere
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27819")]
@@ -5467,7 +5756,9 @@ namespace N
                         [|int|] i = 0;
                     }
                 }
-                """, new TestParameters(options: PreferImplicitTypeEverywhere));
+                """,
+                new TestParameters(options: PreferImplicitTypeEverywhere)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40647")]
@@ -5489,7 +5780,8 @@ namespace N
                 {
                     public void Goo(object o1, object o2) => ReferenceEquals(o1, o2);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5513,7 +5805,8 @@ namespace N
                 {
                     public MyList Goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5537,7 +5830,8 @@ namespace N
                 {
                     public MyList Goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5561,7 +5855,8 @@ namespace N
                 {
                     public MyList Goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40649")]
@@ -5576,7 +5871,8 @@ namespace N
                 {
                     public [|List<string>|] Goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40663")]
@@ -5604,7 +5900,8 @@ namespace N
                         var v = typeof(object);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40876")]
@@ -5624,7 +5921,6 @@ namespace N
                     }
                 }
                 """,
-
                 """
                 using System;
 
@@ -5637,7 +5933,8 @@ namespace N
                         Alias1 a1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5669,7 +5966,8 @@ namespace N
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5688,7 +5986,8 @@ namespace N
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5722,7 +6021,8 @@ namespace N
                         void Y(X x) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5756,7 +6056,8 @@ namespace N
                         void Y(X x) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -5776,11 +6077,12 @@ namespace N
         public async Task TestDoesNotSimplifyUsingAliasDirectiveToPrimitiveType(string typeName)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|{typeName}|];
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -5796,16 +6098,17 @@ namespace N
         public async Task TestSimplifyUsingAliasDirectiveToQualifiedBuiltInType(string typeName)
         {
             await TestInRegularAndScript1Async(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = {typeName};
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -5816,11 +6119,12 @@ namespace N
         public async Task TestDoesNotSimplifyUsingAliasWithUnboundTypes(string typeName)
         {
             await TestMissingInRegularAndScriptAsync(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|System.{typeName}|];
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -5848,7 +6152,8 @@ namespace N
                         return Equals(null, null);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5865,7 +6170,8 @@ namespace N
                         var v = [|base|].GetHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5893,7 +6199,8 @@ namespace N
                         var v = GetHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5921,7 +6228,8 @@ namespace N
                         var v = GetHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5940,7 +6248,8 @@ namespace N
 
                     public override int GetHashCode() => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5978,7 +6287,8 @@ namespace N
                         var v = Baz();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6002,7 +6312,8 @@ namespace N
 
                     public int Baz(int o) => 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6020,7 +6331,8 @@ namespace N
                             nameof([|Int32|]) => 0,
                         };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6044,7 +6356,8 @@ namespace N
                     public void Goo() => Bar(0);
                     public void Bar<T>(T t) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6059,7 +6372,8 @@ namespace N
                     public void Goo() => Bar[|<int>|](0);
                     public void Bar<T>() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6079,7 +6393,8 @@ namespace N
                     Goo = 1,
                     Bar = Goo,
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6103,7 +6418,8 @@ namespace N
                 {
                     Goo = 1,
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6118,7 +6434,8 @@ namespace N
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     /// <see cref="z"/>
@@ -6126,7 +6443,8 @@ namespace N
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6156,7 +6474,8 @@ namespace N
                 class Bar
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6186,7 +6505,8 @@ namespace N
                 class Bar
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6222,7 +6542,8 @@ namespace N
                 class Bar
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6258,7 +6579,8 @@ namespace N
                 class Bar
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6288,7 +6610,8 @@ namespace N
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40633")]
@@ -6339,7 +6662,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542100")]
@@ -6389,7 +6713,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542100")]
@@ -6435,7 +6760,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542100")]
@@ -6461,7 +6787,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6489,7 +6816,8 @@ namespace N
                         var v = Parse(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -6505,16 +6833,17 @@ namespace N
         public async Task TestDoesNotSimplifyUsingAliasDirectiveToBuiltInType(string typeName)
         {
             await TestInRegularAndScript1Async(
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = [|System.{typeName}|];
 }}",
-$@"using System;
+                $@"using System;
 namespace N
 {{
     using My{typeName} = {typeName};
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -6542,7 +6871,8 @@ namespace N
                         var x = ([|A|].Goo)o;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6574,7 +6904,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6632,7 +6963,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995168")]
@@ -6662,14 +6994,15 @@ namespace N
                         }
                     }
                 }
-                """, options: PreferIntrinsicTypeEverywhere);
+                """,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact]
         public async Task TestMissingOnInstanceMemberAccessOfOtherValue()
         {
-            var content =
-                """
+            var content = """
                 using System;
 
                 internal struct BitVector : IEquatable<BitVector>
@@ -6696,8 +7029,7 @@ namespace N
         [Fact]
         public async Task TestSimplifyStaticMemberAccessThroughDerivedType()
         {
-            var source =
-                """
+            var source = """
                 class Base
                 {
                     public static int Y;
@@ -6715,7 +7047,8 @@ namespace N
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(source,
+            await TestInRegularAndScriptAsync(
+                source,
                 """
                 class Base
                 {
@@ -6733,7 +7066,8 @@ namespace N
                         int k = Base.Y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22493")]
@@ -6763,7 +7097,8 @@ namespace N
                         Console.WriteLine(y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22493")]
@@ -6790,7 +7125,8 @@ namespace N
                         [|Derived|].Goo(y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6807,7 +7143,10 @@ namespace N
                         var v = nameof([|System|].Int32);
                     }
                 }
-                """, IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId, DiagnosticSeverity.Hidden);
+                """,
+                IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId,
+                DiagnosticSeverity.Hidden
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6835,7 +7174,8 @@ namespace N
                         var v = nameof(Goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6863,7 +7203,8 @@ namespace N
                         var v = nameof(Goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6892,10 +7233,11 @@ namespace N
                     {
                         var v = nameof(Goo);
                     }
-                
+
                     void Goo(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40972")]
@@ -6911,7 +7253,7 @@ namespace N
                     {
                         var v = nameof([|Base|].Goo);
                     }
-                
+
                     static void Goo(int i) { }
                 }
                 """,
@@ -6927,7 +7269,8 @@ namespace N
 
                     static void Goo(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11380")]
@@ -6943,7 +7286,8 @@ namespace N
                         [|Console.Equals|]("");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57767")]
@@ -6969,7 +7313,8 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57767")]
@@ -6993,21 +7338,24 @@ namespace N
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNint1_NoNumericIntPtr()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     [|System.IntPtr|] i;
                 }
                 """;
             var featureOptions = PreferIntrinsicTypeEverywhere;
-            await TestMissingInRegularAndScriptAsync(source, new TestParameters(options: featureOptions));
+            await TestMissingInRegularAndScriptAsync(
+                source,
+                new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
@@ -7030,7 +7378,9 @@ namespace N
                 {
                     nint i;
                 }
-                """, options: featureOptions);
+                """,
+                options: featureOptions
+            );
         }
 
         [Fact]
@@ -7047,21 +7397,25 @@ namespace N
                 }</Document>
                     </Project>
                 </Workspace>
-                """, new TestParameters(options: featureOptions));
+                """,
+                new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
         public async Task TestNUint1_NoNumericIntPtr()
         {
-            var source =
-                """
+            var source = """
                 class A
                 {
                     [|System.UIntPtr|] i;
                 }
                 """;
             var featureOptions = PreferIntrinsicTypeEverywhere;
-            await TestMissingInRegularAndScriptAsync(source, new TestParameters(options: featureOptions));
+            await TestMissingInRegularAndScriptAsync(
+                source,
+                new TestParameters(options: featureOptions)
+            );
         }
 
         [Fact]
@@ -7084,7 +7438,9 @@ namespace N
                 {
                     nuint i;
                 }
-                """, options: featureOptions);
+                """,
+                options: featureOptions
+            );
         }
 
         [Fact]
@@ -7101,43 +7457,84 @@ namespace N
                 }</Document>
                     </Project>
                 </Workspace>
-                """, new TestParameters(options: featureOptions));
+                """,
+                new TestParameters(options: featureOptions)
+            );
         }
 
-        private async Task TestWithPredefinedTypeOptionsAsync(string code, string expected, int index = 0)
-            => await TestInRegularAndScript1Async(code, expected, index, new TestParameters(options: PreferIntrinsicTypeEverywhere));
+        private async Task TestWithPredefinedTypeOptionsAsync(
+            string code,
+            string expected,
+            int index = 0
+        ) =>
+            await TestInRegularAndScript1Async(
+                code,
+                expected,
+                index,
+                new TestParameters(options: PreferIntrinsicTypeEverywhere)
+            );
 
-        private OptionsCollection PreferIntrinsicTypeEverywhere
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferIntrinsicTypeEverywhere =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, true, NotificationOption2.Error },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, this.onWithError },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    true,
+                    NotificationOption2.Error
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    this.onWithError
+                },
             };
 
-        private OptionsCollection PreferIntrinsicTypeInDeclaration
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferIntrinsicTypeInDeclaration =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, true, NotificationOption2.Error },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, this.offWithSilent },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    true,
+                    NotificationOption2.Error
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    this.offWithSilent
+                },
             };
 
-        private OptionsCollection PreferIntrinsicTypeInMemberAccess
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferIntrinsicTypeInMemberAccess =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, true, NotificationOption2.Error },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, this.offWithSilent },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    true,
+                    NotificationOption2.Error
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    this.offWithSilent
+                },
             };
 
-        private OptionsCollection PreferImplicitTypeEverywhere
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferImplicitTypeEverywhere =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        private readonly CodeStyleOption2<bool> offWithSilent = new CodeStyleOption2<bool>(false, NotificationOption2.Silent);
-        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> onWithError = new CodeStyleOption2<bool>(true, NotificationOption2.Error);
+        private readonly CodeStyleOption2<bool> offWithSilent = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Silent
+        );
+        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> onWithError = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Error
+        );
     }
 }

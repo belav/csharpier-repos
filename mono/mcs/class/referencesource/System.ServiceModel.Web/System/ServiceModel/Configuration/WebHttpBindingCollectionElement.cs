@@ -8,9 +8,9 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
 
-    public partial class WebHttpBindingCollectionElement : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
+    public partial class WebHttpBindingCollectionElement
+        : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
     {
-
         protected internal override Binding GetDefault()
         {
             return new WebHttpBinding();
@@ -20,9 +20,15 @@ namespace System.ServiceModel.Configuration
         {
             string sectionPath = "system.serviceModel/bindings";
 
-            BindingsSection bindings = (BindingsSection)AspNetEnvironment.Current.GetConfigurationSection(sectionPath);
+            BindingsSection bindings = (BindingsSection)
+                AspNetEnvironment.Current.GetConfigurationSection(sectionPath);
 
-            return (WebHttpBindingCollectionElement)bindings[WebHttpBinding.WebHttpBindingConfigurationStrings.WebHttpBindingCollectionElementName];
+            return (WebHttpBindingCollectionElement)
+                bindings[
+                    WebHttpBinding
+                        .WebHttpBindingConfigurationStrings
+                        .WebHttpBindingCollectionElementName
+                ];
         }
     }
 }

@@ -23,10 +23,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,154 +37,156 @@
 //
 
 using System.Globalization;
-using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace System
 {
-	[Serializable]
-	[CLSCompliant (false)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public unsafe readonly struct UIntPtr : ISerializable, IEquatable<UIntPtr>
-	{
-		public static readonly UIntPtr Zero = new UIntPtr (0u);
-		private readonly void* _pointer;
-	
-		public UIntPtr (ulong value)
-		{
-			if ((value > UInt32.MaxValue) && (UIntPtr.Size < 8)) {
-				throw new OverflowException (
-					Locale.GetText ("This isn't a 64bits machine."));
-			}
+    [Serializable]
+    [CLSCompliant(false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public readonly unsafe struct UIntPtr : ISerializable, IEquatable<UIntPtr>
+    {
+        public static readonly UIntPtr Zero = new UIntPtr(0u);
+        private readonly void* _pointer;
 
-			_pointer = (void*) value;
-		}
-		
-		public UIntPtr (uint value)
-		{
-			_pointer = (void*)value;
-		}
-	
-		[CLSCompliant (false)]
-		public unsafe UIntPtr (void* value)
-		{
-			_pointer = value;
-		}
-	
-		public override bool Equals (object obj)
-		{
-			if( obj is UIntPtr ) {
-				UIntPtr obj2 = (UIntPtr)obj;
-				return this._pointer == obj2._pointer;
-			}
-			return false;
-		}
+        public UIntPtr(ulong value)
+        {
+            if ((value > UInt32.MaxValue) && (UIntPtr.Size < 8))
+            {
+                throw new OverflowException(Locale.GetText("This isn't a 64bits machine."));
+            }
 
-		public override int GetHashCode ()
-		{
-			return (int)_pointer;
-		}
+            _pointer = (void*)value;
+        }
 
-		public uint ToUInt32 ()
-		{
-			return (uint) _pointer;
-		}
+        public UIntPtr(uint value)
+        {
+            _pointer = (void*)value;
+        }
 
-		public ulong ToUInt64 ()
-		{
-			return (ulong) _pointer;
-		}
+        [CLSCompliant(false)]
+        public unsafe UIntPtr(void* value)
+        {
+            _pointer = value;
+        }
 
-		[CLSCompliant (false)]
-		public unsafe void* ToPointer ()
-		{
-			return _pointer;
-		}
+        public override bool Equals(object obj)
+        {
+            if (obj is UIntPtr)
+            {
+                UIntPtr obj2 = (UIntPtr)obj;
+                return this._pointer == obj2._pointer;
+            }
+            return false;
+        }
 
-		public override string ToString ()
-		{
-			return UIntPtr.Size < 8 ? ((uint) _pointer).ToString() : ((ulong) _pointer).ToString();
-		}
+        public override int GetHashCode()
+        {
+            return (int)_pointer;
+        }
 
-		// Interface ISerializable
-		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
+        public uint ToUInt32()
+        {
+            return (uint)_pointer;
+        }
 
-			info.AddValue ("pointer", (ulong)_pointer);
-		}
+        public ulong ToUInt64()
+        {
+            return (ulong)_pointer;
+        }
 
-		public static bool operator == (UIntPtr value1, UIntPtr value2)
-		{
-			return value1._pointer == value2._pointer;
-		}
+        [CLSCompliant(false)]
+        public unsafe void* ToPointer()
+        {
+            return _pointer;
+        }
 
-		public static bool operator != (UIntPtr value1, UIntPtr value2)
-		{
-			return value1._pointer != value2._pointer;
-		}
+        public override string ToString()
+        {
+            return UIntPtr.Size < 8 ? ((uint)_pointer).ToString() : ((ulong)_pointer).ToString();
+        }
 
-		public static explicit operator ulong (UIntPtr value)
-		{
-			return (ulong)value._pointer;
-		}
+        // Interface ISerializable
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
 
-		public static explicit operator uint (UIntPtr value)
-		{
-			return (uint)value._pointer;
-		}
+            info.AddValue("pointer", (ulong)_pointer);
+        }
 
-		public static explicit operator UIntPtr (ulong value)
-		{
-			return new UIntPtr (value);
-		}
+        public static bool operator ==(UIntPtr value1, UIntPtr value2)
+        {
+            return value1._pointer == value2._pointer;
+        }
 
-		[CLSCompliant (false)]
-		public unsafe static explicit operator UIntPtr (void* value)
-		{
-			return new UIntPtr (value);
-		}
+        public static bool operator !=(UIntPtr value1, UIntPtr value2)
+        {
+            return value1._pointer != value2._pointer;
+        }
 
-		[CLSCompliant (false)]
-		public unsafe static explicit operator void* (UIntPtr value)
-		{
-			return value.ToPointer ();
-		}
+        public static explicit operator ulong(UIntPtr value)
+        {
+            return (ulong)value._pointer;
+        }
 
-		public static explicit operator UIntPtr (uint value)
-		{
-			return new UIntPtr (value);
-		}
+        public static explicit operator uint(UIntPtr value)
+        {
+            return (uint)value._pointer;
+        }
 
-		public static int Size {
-			get { return sizeof (void*); }
-		}
+        public static explicit operator UIntPtr(ulong value)
+        {
+            return new UIntPtr(value);
+        }
 
-		public static UIntPtr Add (UIntPtr pointer, int offset)
-		{
-			return (UIntPtr) (unchecked (((byte *) pointer) + offset));
-		}
+        [CLSCompliant(false)]
+        public static unsafe explicit operator UIntPtr(void* value)
+        {
+            return new UIntPtr(value);
+        }
 
-		public static UIntPtr Subtract (UIntPtr pointer, int offset)
-		{
-			return (UIntPtr) (unchecked (((byte *) pointer) - offset));
-		}
+        [CLSCompliant(false)]
+        public static unsafe explicit operator void*(UIntPtr value)
+        {
+            return value.ToPointer();
+        }
 
-		public static UIntPtr operator + (UIntPtr pointer, int offset)
-		{
-			return (UIntPtr) (unchecked (((byte *) pointer) + offset));
-		}
+        public static explicit operator UIntPtr(uint value)
+        {
+            return new UIntPtr(value);
+        }
 
-		public static UIntPtr operator - (UIntPtr pointer, int offset)
-		{
-			return (UIntPtr) (unchecked (((byte *) pointer) - offset));
-		}
+        public static int Size
+        {
+            get { return sizeof(void*); }
+        }
 
-		bool IEquatable<UIntPtr>.Equals(UIntPtr other)
-		{
-			return _pointer == other._pointer;
-		}
-	}
+        public static UIntPtr Add(UIntPtr pointer, int offset)
+        {
+            return (UIntPtr)(unchecked(((byte*)pointer) + offset));
+        }
+
+        public static UIntPtr Subtract(UIntPtr pointer, int offset)
+        {
+            return (UIntPtr)(unchecked(((byte*)pointer) - offset));
+        }
+
+        public static UIntPtr operator +(UIntPtr pointer, int offset)
+        {
+            return (UIntPtr)(unchecked(((byte*)pointer) + offset));
+        }
+
+        public static UIntPtr operator -(UIntPtr pointer, int offset)
+        {
+            return (UIntPtr)(unchecked(((byte*)pointer) - offset));
+        }
+
+        bool IEquatable<UIntPtr>.Equals(UIntPtr other)
+        {
+            return _pointer == other._pointer;
+        }
+    }
 }

@@ -15,8 +15,10 @@ public unsafe class Program
     }
 
     public static Type GrabArray<T>() => typeof(T[]);
+
     public static Type GrabPtr<T>() => typeof(T*);
-    public static Type GrabFnptr<T>() => typeof(delegate*<T>);
+
+    public static Type GrabFnptr<T>() => typeof(delegate* <T>);
 
     [Fact]
     public static void TestEntryPoint()

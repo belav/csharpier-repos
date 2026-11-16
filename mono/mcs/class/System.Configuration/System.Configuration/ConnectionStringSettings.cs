@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,79 +33,94 @@ using System.ComponentModel;
 
 namespace System.Configuration
 {
-	public sealed class ConnectionStringSettings : ConfigurationElement
-	{
-		private static ConfigurationPropertyCollection _properties;
-	
-		private static readonly ConfigurationProperty _propConnectionString;
-		private static readonly ConfigurationProperty _propName;
-		private static readonly ConfigurationProperty _propProviderName;
+    public sealed class ConnectionStringSettings : ConfigurationElement
+    {
+        private static ConfigurationPropertyCollection _properties;
 
-		static ConnectionStringSettings ()
-		{
-			_properties	= new ConfigurationPropertyCollection ();
-			_propName = new ConfigurationProperty ("name", typeof(string), null,
-							       TypeDescriptor.GetConverter (typeof (string)),
-							       null,
-							       ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        private static readonly ConfigurationProperty _propConnectionString;
+        private static readonly ConfigurationProperty _propName;
+        private static readonly ConfigurationProperty _propProviderName;
 
-			_propProviderName = new ConfigurationProperty ("providerName", typeof (string), "",
-								       ConfigurationPropertyOptions.None);
+        static ConnectionStringSettings()
+        {
+            _properties = new ConfigurationPropertyCollection();
+            _propName = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                null,
+                TypeDescriptor.GetConverter(typeof(string)),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			_propConnectionString = new ConfigurationProperty ("connectionString", typeof (string), "",
-									   ConfigurationPropertyOptions.IsRequired);
+            _propProviderName = new ConfigurationProperty(
+                "providerName",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.None
+            );
 
-			_properties.Add (_propName);
-			_properties.Add (_propProviderName);
-			_properties.Add (_propConnectionString);
-		}
+            _propConnectionString = new ConfigurationProperty(
+                "connectionString",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.IsRequired
+            );
 
-		public ConnectionStringSettings ()
-		{
-		}
+            _properties.Add(_propName);
+            _properties.Add(_propProviderName);
+            _properties.Add(_propConnectionString);
+        }
 
-		public ConnectionStringSettings (string name, string connectionString)
-			: this (name, connectionString, "")
-		{
-		}
+        public ConnectionStringSettings() { }
 
-		public ConnectionStringSettings (string name, string connectionString, string providerName)
-		{
-			Name = name;
-			ConnectionString = connectionString;
-			ProviderName = providerName;
-		}
+        public ConnectionStringSettings(string name, string connectionString)
+            : this(name, connectionString, "") { }
 
-		protected internal override ConfigurationPropertyCollection Properties
-		{
-			get { return _properties; }
-		}
+        public ConnectionStringSettings(string name, string connectionString, string providerName)
+        {
+            Name = name;
+            ConnectionString = connectionString;
+            ProviderName = providerName;
+        }
 
-		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name
-		{
-			get { return (string) base [_propName];}
-			set { base [_propName] = value; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
+        }
 
-		[ConfigurationProperty ("providerName", DefaultValue = "System.Data.SqlClient")]
-		public string ProviderName
-		{
-			get { return (string) base [_propProviderName]; }
-			set { base [_propProviderName] = value; }
-		}
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[_propName]; }
+            set { base[_propName] = value; }
+        }
 
-		[ConfigurationProperty ("connectionString", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string ConnectionString
-		{
-			get { return (string) base [_propConnectionString]; }
-			set { base [_propConnectionString] = value; }
-		}
-		
-		public override string ToString ()
-		{
-			return ConnectionString;
-		}
-	}
+        [ConfigurationProperty("providerName", DefaultValue = "System.Data.SqlClient")]
+        public string ProviderName
+        {
+            get { return (string)base[_propProviderName]; }
+            set { base[_propProviderName] = value; }
+        }
+
+        [ConfigurationProperty(
+            "connectionString",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string ConnectionString
+        {
+            get { return (string)base[_propConnectionString]; }
+            set { base[_propConnectionString] = value; }
+        }
+
+        public override string ToString()
+        {
+            return ConnectionString;
+        }
+    }
 }
-

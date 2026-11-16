@@ -11,15 +11,17 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.EntityFrameworkCore;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(InterpolatedStringUsageInRawQueriesCodeFixProvider))]
+[ExportCodeFixProvider(
+    LanguageNames.CSharp,
+    Name = nameof(InterpolatedStringUsageInRawQueriesCodeFixProvider)
+)]
 [Shared]
 public sealed class InterpolatedStringUsageInRawQueriesCodeFixProvider : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds
-        => ImmutableArray.Create(InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds =>
+        ImmutableArray.Create(InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer.Id);
 
-    public override FixAllProvider GetFixAllProvider()
-        => WellKnownFixAllProviders.BatchFixer;
+    public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
     public override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
@@ -33,7 +35,9 @@ public sealed class InterpolatedStringUsageInRawQueriesCodeFixProvider : CodeFix
 
         if (root!.FindNode(diagnostic.Location.SourceSpan) is not SimpleNameSyntax simpleName)
         {
-            Debug.Fail("Analyzer reported diagnostic not on a SimpleNameSyntax. This should never happen");
+            Debug.Fail(
+                "Analyzer reported diagnostic not on a SimpleNameSyntax. This should never happen"
+            );
             return;
         }
 
@@ -68,9 +72,16 @@ public sealed class InterpolatedStringUsageInRawQueriesCodeFixProvider : CodeFix
         context.RegisterCodeFix(
             CodeAction.Create(
                 AnalyzerStrings.InterpolatedStringUsageInRawQueriesCodeActionTitle,
-                _ => Task.FromResult(document.WithSyntaxRoot(root.ReplaceNode(simpleName, GetReplacementName(simpleName)))),
-                nameof(InterpolatedStringUsageInRawQueriesCodeFixProvider)),
-            diagnostic);
+                _ =>
+                    Task.FromResult(
+                        document.WithSyntaxRoot(
+                            root.ReplaceNode(simpleName, GetReplacementName(simpleName))
+                        )
+                    ),
+                nameof(InterpolatedStringUsageInRawQueriesCodeFixProvider)
+            ),
+            diagnostic
+        );
     }
 
     private static SimpleNameSyntax GetReplacementName(SimpleNameSyntax oldName)
@@ -78,10 +89,18 @@ public sealed class InterpolatedStringUsageInRawQueriesCodeFixProvider : CodeFix
         var oldNameToken = oldName.Identifier;
         var oldMethodName = oldNameToken.ValueText;
 
-        var replacementMethodName = InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer.GetReplacementMethodName(oldMethodName);
-        Debug.Assert(replacementMethodName != oldMethodName, "At this point we must find correct replacement name");
+        var replacementMethodName =
+            InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer.GetReplacementMethodName(
+                oldMethodName
+            );
+        Debug.Assert(
+            replacementMethodName != oldMethodName,
+            "At this point we must find correct replacement name"
+        );
 
-        var replacementToken = SyntaxFactory.Identifier(replacementMethodName).WithTriviaFrom(oldNameToken);
+        var replacementToken = SyntaxFactory
+            .Identifier(replacementMethodName)
+            .WithTriviaFrom(oldNameToken);
         return oldName.WithIdentifier(replacementToken);
     }
 }

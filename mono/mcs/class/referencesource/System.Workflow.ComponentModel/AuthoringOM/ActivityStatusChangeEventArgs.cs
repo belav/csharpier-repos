@@ -1,12 +1,14 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text;
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityExecutionStatusChangedEventArgs : EventArgs
     {
         private ActivityExecutionStatus status = ActivityExecutionStatus.Initialized;
@@ -17,7 +19,11 @@ namespace System.Workflow.ComponentModel
         [NonSerialized]
         private IWorkflowCoreRuntime workflowCoreRuntime = null;
 
-        internal ActivityExecutionStatusChangedEventArgs(ActivityExecutionStatus executionStatus, ActivityExecutionResult executionResult, Activity activity)
+        internal ActivityExecutionStatusChangedEventArgs(
+            ActivityExecutionStatus executionStatus,
+            ActivityExecutionResult executionResult,
+            Activity activity
+        )
         {
             this.status = executionStatus;
             this.activityExecutionResult = executionResult;
@@ -27,17 +33,11 @@ namespace System.Workflow.ComponentModel
 
         public ActivityExecutionStatus ExecutionStatus
         {
-            get
-            {
-                return this.status;
-            }
+            get { return this.status; }
         }
         public ActivityExecutionResult ExecutionResult
         {
-            get
-            {
-                return this.activityExecutionResult;
-            }
+            get { return this.activityExecutionResult; }
         }
         public Activity Activity
         {
@@ -46,7 +46,9 @@ namespace System.Workflow.ComponentModel
                 Activity activity = null;
                 if (this.workflowCoreRuntime != null)
                 {
-                    Activity contextActivity = this.workflowCoreRuntime.GetContextActivityForId(this.stateId);
+                    Activity contextActivity = this.workflowCoreRuntime.GetContextActivityForId(
+                        this.stateId
+                    );
                     if (contextActivity != null)
                         activity = contextActivity.GetActivityByName(this.activityQualifiedName);
                 }
@@ -54,17 +56,24 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        // 
+        //
         internal IWorkflowCoreRuntime BaseExecutor
         {
-            set
-            {
-                this.workflowCoreRuntime = value;
-            }
+            set { this.workflowCoreRuntime = value; }
         }
+
         public override string ToString()
         {
-            return "ActivityStatusChange('" + "(" + this.stateId.ToString(CultureInfo.CurrentCulture) + ")" + this.activityQualifiedName + "', " + Activity.ActivityExecutionStatusEnumToString(this.ExecutionStatus) + ", " + Activity.ActivityExecutionResultEnumToString(this.ExecutionResult) + ")";
+            return "ActivityStatusChange('"
+                + "("
+                + this.stateId.ToString(CultureInfo.CurrentCulture)
+                + ")"
+                + this.activityQualifiedName
+                + "', "
+                + Activity.ActivityExecutionStatusEnumToString(this.ExecutionStatus)
+                + ", "
+                + Activity.ActivityExecutionResultEnumToString(this.ExecutionResult)
+                + ")";
         }
     }
 }

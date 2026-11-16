@@ -112,16 +112,22 @@ namespace System.Activities.Debugger.Symbol
             return checksum;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Used to get a string from checksum that is provided by the user/from a file.",
-            Safe = "We not exposing any critical data. Just converting the byte array to a hex string.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Used to get a string from checksum that is provided by the user/from a file.",
+            Safe = "We not exposing any critical data. Just converting the byte array to a hex string."
+        )]
         [SecuritySafeCritical]
         public static string GetHexStringFromChecksum(byte[] checksum)
         {
-            return checksum == null ? string.Empty : string.Join(string.Empty, checksum.Select(x => x.ToString("X2")).ToArray());
+            return checksum == null
+                ? string.Empty
+                : string.Join(string.Empty, checksum.Select(x => x.ToString("X2")).ToArray());
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Used to validate checksum that is provided by the user/from a file.",
-            Safe = "We not exposing any critical data. Just validating that the provided checksum meets the format for the checksums we produce.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Used to validate checksum that is provided by the user/from a file.",
+            Safe = "We not exposing any critical data. Just validating that the provided checksum meets the format for the checksums we produce."
+        )]
         [SecuritySafeCritical]
         internal static bool ValidateChecksum(byte[] checksumToValidate)
         {
@@ -136,8 +142,11 @@ namespace System.Activities.Debugger.Symbol
             }
         }
 
-        [SuppressMessage("Microsoft.Cryptographic.Standard", "CA5350:MD5CannotBeUsed",
-            Justification = "Design has been approved.  We are not using MD5 for any security or cryptography purposes but rather as a hash.")]
+        [SuppressMessage(
+            "Microsoft.Cryptographic.Standard",
+            "CA5350:MD5CannotBeUsed",
+            Justification = "Design has been approved.  We are not using MD5 for any security or cryptography purposes but rather as a hash."
+        )]
         static HashAlgorithm CreateHashProvider()
         {
             if (LocalAppContextSwitches.UseMD5ForWFDebugger)

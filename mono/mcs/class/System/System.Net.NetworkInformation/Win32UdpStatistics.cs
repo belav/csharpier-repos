@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,44 +27,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-namespace System.Net.NetworkInformation {
-	class Win32UdpStatistics : UdpStatistics
-	{
-		Win32_MIB_UDPSTATS info;
+namespace System.Net.NetworkInformation
+{
+    class Win32UdpStatistics : UdpStatistics
+    {
+        Win32_MIB_UDPSTATS info;
 
-		public Win32UdpStatistics (Win32_MIB_UDPSTATS info)
-		{
-			this.info = info;
-		}
+        public Win32UdpStatistics(Win32_MIB_UDPSTATS info)
+        {
+            this.info = info;
+        }
 
-		public override long DatagramsReceived {
-			get { return info.InDatagrams; }
-		}
+        public override long DatagramsReceived
+        {
+            get { return info.InDatagrams; }
+        }
 
-		public override long DatagramsSent {
-			get { return info.OutDatagrams; }
-		}
+        public override long DatagramsSent
+        {
+            get { return info.OutDatagrams; }
+        }
 
-		public override long IncomingDatagramsDiscarded {
-			get { return info.NoPorts; }
-		}
+        public override long IncomingDatagramsDiscarded
+        {
+            get { return info.NoPorts; }
+        }
 
-		public override long IncomingDatagramsWithErrors {
-			get { return info.InErrors; }
-		}
+        public override long IncomingDatagramsWithErrors
+        {
+            get { return info.InErrors; }
+        }
 
-		public override int UdpListeners {
-			get { return info.NumAddrs; }
-		}
-	}
+        public override int UdpListeners
+        {
+            get { return info.NumAddrs; }
+        }
+    }
 
-	struct Win32_MIB_UDPSTATS
-	{
-		public uint InDatagrams;
-		public uint NoPorts;
-		public uint InErrors;
-		public uint OutDatagrams;
-		public int NumAddrs;
-	}
+    struct Win32_MIB_UDPSTATS
+    {
+        public uint InDatagrams;
+        public uint NoPorts;
+        public uint InErrors;
+        public uint OutDatagrams;
+        public int NumAddrs;
+    }
 }
 #endif

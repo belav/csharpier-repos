@@ -21,16 +21,26 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestDynamicFileInfoProviderThatProducesNoFiles()
+        public TestDynamicFileInfoProviderThatProducesNoFiles() { }
+
+        event EventHandler<string> IDynamicFileInfoProvider.Updated
         {
+            add { }
+            remove { }
         }
 
-        event EventHandler<string> IDynamicFileInfoProvider.Updated { add { } remove { } }
+        public Task<DynamicFileInfo> GetDynamicFileInfoAsync(
+            ProjectId projectId,
+            string projectFilePath,
+            string filePath,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Null<DynamicFileInfo>();
 
-        public Task<DynamicFileInfo> GetDynamicFileInfoAsync(ProjectId projectId, string projectFilePath, string filePath, CancellationToken cancellationToken)
-            => SpecializedTasks.Null<DynamicFileInfo>();
-
-        public Task RemoveDynamicFileInfoAsync(ProjectId projectId, string projectFilePath, string filePath, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public Task RemoveDynamicFileInfoAsync(
+            ProjectId projectId,
+            string projectFilePath,
+            string filePath,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
     }
 }

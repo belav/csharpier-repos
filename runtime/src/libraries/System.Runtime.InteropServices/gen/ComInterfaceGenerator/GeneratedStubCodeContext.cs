@@ -10,5 +10,6 @@ namespace Microsoft.Interop
         ManagedTypeInfo OriginalDefiningType,
         ContainingSyntaxContext ContainingSyntaxContext,
         SyntaxEquivalentNode<MethodDeclarationSyntax> Stub,
-        SequenceEqualImmutableArray<DiagnosticInfo> Diagnostics) : GeneratedMethodContextBase(OriginalDefiningType, Diagnostics);
+        SequenceEqualImmutableArray<DiagnosticInfo> Diagnostics
+    ) : GeneratedMethodContextBase(OriginalDefiningType, Diagnostics);
 }

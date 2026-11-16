@@ -27,27 +27,27 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 using NUnit.Framework;
-using System.Data;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class ColumnClickEventArgsTest : TestHelper
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			ColumnClickEventArgs ce;
+    [TestFixture]
+    public class ColumnClickEventArgsTest : TestHelper
+    {
+        [Test]
+        public void CtorTest()
+        {
+            ColumnClickEventArgs ce;
 
-			ce = new ColumnClickEventArgs (0);
-			Assert.AreEqual (0, ce.Column, "1");
+            ce = new ColumnClickEventArgs(0);
+            Assert.AreEqual(0, ce.Column, "1");
 
-			ce = new ColumnClickEventArgs (-1);
-			Assert.AreEqual (-1, ce.Column, "2");
-		}
-	}
+            ce = new ColumnClickEventArgs(-1);
+            Assert.AreEqual(-1, ce.Column, "2");
+        }
+    }
 }

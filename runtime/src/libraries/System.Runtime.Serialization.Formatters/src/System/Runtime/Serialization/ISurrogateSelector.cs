@@ -3,11 +3,19 @@
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public interface ISurrogateSelector
     {
         void ChainSelector(ISurrogateSelector selector);
-        ISerializationSurrogate? GetSurrogate(Type type, StreamingContext context, out ISurrogateSelector selector);
+        ISerializationSurrogate? GetSurrogate(
+            Type type,
+            StreamingContext context,
+            out ISurrogateSelector selector
+        );
         ISurrogateSelector? GetNextSelector();
     }
 }

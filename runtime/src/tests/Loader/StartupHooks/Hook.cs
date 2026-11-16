@@ -8,7 +8,10 @@ using System.Reflection;
 public class Hook
 {
     public static Hook Basic = new Hook(nameof(Basic), usePathAsValue: false);
-    public static Hook PrivateInitialize = new Hook(nameof(PrivateInitialize), Path.Combine(AppContext.BaseDirectory, "private"));
+    public static Hook PrivateInitialize = new Hook(
+        nameof(PrivateInitialize),
+        Path.Combine(AppContext.BaseDirectory, "private")
+    );
 
     public static Hook InstanceMethod = new Hook(nameof(InstanceMethod));
     public static Hook MultipleIncorrectSignatures = new Hook(nameof(MultipleIncorrectSignatures));
@@ -19,8 +22,7 @@ public class Hook
     private string directory;
 
     public Hook(string name, bool usePathAsValue = true)
-        : this(name, AppContext.BaseDirectory, usePathAsValue)
-    { }
+        : this(name, AppContext.BaseDirectory, usePathAsValue) { }
 
     public Hook(string name, string directory, bool usePathAsValue = true)
     {
@@ -40,7 +42,8 @@ public class Hook
         {
             if (TryGetCallCountProperty(out PropertyInfo callCount))
             {
-                delegate*<int> getCallCount = (delegate*<int>)callCount.GetMethod.MethodHandle.GetFunctionPointer();
+                delegate* <int> getCallCount = (delegate* <int>)
+                    callCount.GetMethod.MethodHandle.GetFunctionPointer();
                 return getCallCount();
             }
 
@@ -50,7 +53,8 @@ public class Hook
         {
             if (TryGetCallCountProperty(out PropertyInfo callCount))
             {
-                delegate*<int, void> setCallCount = (delegate*<int, void>)callCount.SetMethod.MethodHandle.GetFunctionPointer();
+                delegate* <int, void> setCallCount = (delegate* <int, void>)
+                    callCount.SetMethod.MethodHandle.GetFunctionPointer();
                 setCallCount(value);
             }
         }
@@ -60,7 +64,7 @@ public class Hook
     {
         callCount = null;
         Assembly asm = null;
-        foreach(Assembly loaded in AppDomain.CurrentDomain.GetAssemblies())
+        foreach (Assembly loaded in AppDomain.CurrentDomain.GetAssemblies())
         {
             if (loaded.GetName().Name == Name && loaded.Location == AssemblyPath)
             {
@@ -76,7 +80,10 @@ public class Hook
         if (hook == null)
             return false;
 
-        callCount = hook.GetProperty(nameof(CallCount), BindingFlags.NonPublic | BindingFlags.Static);
+        callCount = hook.GetProperty(
+            nameof(CallCount),
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
         return callCount != null;
     }
 }

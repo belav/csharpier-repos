@@ -1,6 +1,6 @@
 ﻿// <copyright>
 // Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
+// </copyright>
 
 namespace System.ServiceModel.Channels
 {
@@ -20,23 +20,41 @@ namespace System.ServiceModel.Channels
     {
         private EndpointAddress to;
 
-        public ClientUdpOutputChannel(ChannelManagerBase factory, IPEndPoint remoteEndPoint, MessageEncoder encoder, BufferManager bufferManager, UdpSocket[] sendSockets, UdpRetransmissionSettings retransmissionSettings, EndpointAddress to, Uri via, bool isMulticast)
-            : base(factory, encoder, bufferManager, sendSockets, retransmissionSettings, via, isMulticast)
+        public ClientUdpOutputChannel(
+            ChannelManagerBase factory,
+            IPEndPoint remoteEndPoint,
+            MessageEncoder encoder,
+            BufferManager bufferManager,
+            UdpSocket[] sendSockets,
+            UdpRetransmissionSettings retransmissionSettings,
+            EndpointAddress to,
+            Uri via,
+            bool isMulticast
+        )
+            : base(
+                factory,
+                encoder,
+                bufferManager,
+                sendSockets,
+                retransmissionSettings,
+                via,
+                isMulticast
+            )
         {
             Fx.Assert(to != null, "to address can't be null for this constructor...");
             Fx.Assert(remoteEndPoint != null, "remoteEndPoint can't be null");
-            
+
             this.RemoteEndPoint = remoteEndPoint;
             this.to = to;
         }
 
-        public IPEndPoint RemoteEndPoint
-        {
-            get;
-            private set;
-        }
+        public IPEndPoint RemoteEndPoint { get; private set; }
 
-        protected override UdpSocket[] GetSendSockets(Message message, out IPEndPoint remoteEndPoint, out Exception exceptionToBeThrown)
+        protected override UdpSocket[] GetSendSockets(
+            Message message,
+            out IPEndPoint remoteEndPoint,
+            out Exception exceptionToBeThrown
+        )
         {
             UdpSocket[] socketList = null;
             remoteEndPoint = this.RemoteEndPoint;
@@ -49,7 +67,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                Fx.Assert(this.SendSockets.Length == 1, "Unicast Send socket list on client should always be 1 item long");
+                Fx.Assert(
+                    this.SendSockets.Length == 1,
+                    "Unicast Send socket list on client should always be 1 item long"
+                );
                 socketList = this.SendSockets;
             }
 

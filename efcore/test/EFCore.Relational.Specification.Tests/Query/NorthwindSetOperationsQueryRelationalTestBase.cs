@@ -3,34 +3,47 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class NorthwindSetOperationsQueryRelationalTestBase<TFixture> : NorthwindSetOperationsQueryTestBase<TFixture>
+public abstract class NorthwindSetOperationsQueryRelationalTestBase<TFixture>
+    : NorthwindSetOperationsQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
     protected NorthwindSetOperationsQueryRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override async Task Collection_projection_after_set_operation_fails_if_distinct(bool async)
+    public override async Task Collection_projection_after_set_operation_fails_if_distinct(
+        bool async
+    )
     {
-        var message = (await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Collection_projection_after_set_operation_fails_if_distinct(async))).Message;
+        var message = (
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Collection_projection_after_set_operation_fails_if_distinct(async)
+            )
+        ).Message;
 
-        Assert.Equal(RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin, message);
+        Assert.Equal(
+            RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
+            message
+        );
     }
 
     public override async Task Collection_projection_before_set_operation_fails(bool async)
     {
-        var message = (await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Collection_projection_before_set_operation_fails(async))).Message;
+        var message = (
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Collection_projection_before_set_operation_fails(async)
+            )
+        ).Message;
 
         Assert.Equal(RelationalStrings.SetOperationsNotAllowedAfterClientEvaluation, message);
     }
 
-    protected virtual bool CanExecuteQueryString
-        => false;
+    protected virtual bool CanExecuteQueryString => false;
 
-    protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-        => new RelationalQueryAsserter(
-            fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+    protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+        new RelationalQueryAsserter(
+            fixture,
+            RewriteExpectedQueryExpression,
+            RewriteServerQueryExpression,
+            canExecuteQueryString: CanExecuteQueryString
+        );
 }

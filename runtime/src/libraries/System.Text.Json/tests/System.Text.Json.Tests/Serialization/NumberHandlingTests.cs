@@ -9,37 +9,44 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed partial class NumberHandlingTestsDynamic : NumberHandlingTests
     {
-        public NumberHandlingTestsDynamic() : base(JsonSerializerWrapper.StringSerializer) { }
+        public NumberHandlingTestsDynamic()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class NumberHandlingTests_AsyncStreamOverload : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_AsyncStreamOverload() : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+        public NumberHandlingTests_AsyncStreamOverload()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 
     public class NumberHandlingTests_SyncStreamOverload : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_SyncStreamOverload() : base(JsonSerializerWrapper.SyncStreamSerializer) { }
+        public NumberHandlingTests_SyncStreamOverload()
+            : base(JsonSerializerWrapper.SyncStreamSerializer) { }
     }
 
     public class NumberHandlingTests_SyncOverload : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_SyncOverload() : base(JsonSerializerWrapper.StringSerializer) { }
+        public NumberHandlingTests_SyncOverload()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class NumberHandlingTests_Document : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Document() : base(JsonSerializerWrapper.DocumentSerializer) { }
+        public NumberHandlingTests_Document()
+            : base(JsonSerializerWrapper.DocumentSerializer) { }
     }
 
     public class NumberHandlingTests_Element : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Element() : base(JsonSerializerWrapper.ElementSerializer) { }
+        public NumberHandlingTests_Element()
+            : base(JsonSerializerWrapper.ElementSerializer) { }
     }
 
     public class NumberHandlingTests_Node : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public NumberHandlingTests_Node()
+            : base(JsonSerializerWrapper.NodeSerializer) { }
     }
 
     public abstract class NumberHandlingTests_OverloadSpecific
@@ -57,12 +64,16 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
-                NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString,
+                NumberHandling =
+                    JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             Result result = await Serializer.DeserializeWrapper<Result>(json, options);
-            JsonTestHelper.AssertJsonEqual(json, await Serializer.SerializeWrapper(result, options));
+            JsonTestHelper.AssertJsonEqual(
+                json,
+                await Serializer.SerializeWrapper(result, options)
+            );
         }
 
         public static IEnumerable<object[]> NumberHandling_ForPropsReadAfter_DeserializingCtorParams_TestData()
@@ -78,7 +89,7 @@ namespace System.Text.Json.Serialization.Tests
                             ""summary"": ""a summary of the album""
                         }
                     }
-                }"
+                }",
             };
 
             yield return new object[]
@@ -92,7 +103,7 @@ namespace System.Text.Json.Serialization.Tests
                             ""summary"": ""a summary of the album""
                         }
                     }
-                }"
+                }",
             };
 
             yield return new object[]
@@ -106,7 +117,7 @@ namespace System.Text.Json.Serialization.Tests
                             ""summary"": ""a summary of the album""
                         }
                     }
-                }"
+                }",
             };
 
             yield return new object[]
@@ -120,7 +131,7 @@ namespace System.Text.Json.Serialization.Tests
                         },
                         ""userPlayCount"": ""123""
                     }
-                }"
+                }",
             };
         }
 

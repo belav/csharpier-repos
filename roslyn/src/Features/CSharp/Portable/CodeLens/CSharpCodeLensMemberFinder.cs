@@ -20,13 +20,16 @@ internal sealed class CSharpCodeLensMemberFinder : ICodeLensMemberFinder
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpCodeLensMemberFinder()
-    {
-    }
+    public CSharpCodeLensMemberFinder() { }
 
-    public async Task<ImmutableArray<CodeLensMember>> GetCodeLensMembersAsync(Document document, CancellationToken cancellationToken)
+    public async Task<ImmutableArray<CodeLensMember>> GetCodeLensMembersAsync(
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         using var _ = ArrayBuilder<CodeLensMember>.GetInstance(out var codeLensNodes);
         var visitor = new CSharpCodeLensVisitor(codeLensNodes);
@@ -36,7 +39,8 @@ internal sealed class CSharpCodeLensMemberFinder : ICodeLensMemberFinder
         return codeLensNodes.ToImmutable();
     }
 
-    private sealed class CSharpCodeLensVisitor(ArrayBuilder<CodeLensMember> memberBuilder) : CSharpSyntaxWalker
+    private sealed class CSharpCodeLensVisitor(ArrayBuilder<CodeLensMember> memberBuilder)
+        : CSharpSyntaxWalker
     {
         private readonly ArrayBuilder<CodeLensMember> _memberBuilder = memberBuilder;
 

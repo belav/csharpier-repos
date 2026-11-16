@@ -9,7 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
-
 using Internal.Win32.SafeHandles;
 
 //
@@ -49,8 +48,10 @@ namespace Internal.Win32
             // From windows 2003 server, if the name is too long we will get error code ERROR_FILENAME_EXCED_RANGE
             // This still means the name doesn't exist. We need to be consistent with previous OS.
             //
-            if (errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND ||
-                errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE)
+            if (
+                errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                || errorCode == Interop.Errors.ERROR_FILENAME_EXCED_RANGE
+            )
             {
                 if (throwOnMissingValue)
                 {
@@ -65,7 +66,10 @@ namespace Internal.Win32
             }
             // We really should throw an exception here if errorCode was bad,
             // but we can't for compatibility reasons.
-            Debug.Assert(errorCode == 0, $"RegDeleteValue failed.  Here's your error code: {errorCode}");
+            Debug.Assert(
+                errorCode == 0,
+                $"RegDeleteValue failed.  Here's your error code: {errorCode}"
+            );
         }
 
         internal static RegistryKey OpenBaseKey(IntPtr hKey)
@@ -83,13 +87,16 @@ namespace Internal.Win32
             // Make sure that the name does not contain double slahes
             Debug.Assert(!name.Contains(@"\\"));
 
-            int ret = Interop.Advapi32.RegOpenKeyEx(_hkey,
+            int ret = Interop.Advapi32.RegOpenKeyEx(
+                _hkey,
                 name,
                 0,
-                writable ?
-                    Interop.Advapi32.RegistryOperations.KEY_READ | Interop.Advapi32.RegistryOperations.KEY_WRITE :
-                    Interop.Advapi32.RegistryOperations.KEY_READ,
-                out SafeRegistryHandle result);
+                writable
+                    ? Interop.Advapi32.RegistryOperations.KEY_READ
+                        | Interop.Advapi32.RegistryOperations.KEY_WRITE
+                    : Interop.Advapi32.RegistryOperations.KEY_READ,
+                out SafeRegistryHandle result
+            );
 
             if (ret == 0 && !result.IsInvalid)
             {
@@ -99,7 +106,10 @@ namespace Internal.Win32
             result.Dispose();
 
             // Return null if we didn't find the key.
-            if (ret == Interop.Errors.ERROR_ACCESS_DENIED || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL)
+            if (
+                ret == Interop.Errors.ERROR_ACCESS_DENIED
+                || ret == Interop.Errors.ERROR_BAD_IMPERSONATION_LEVEL
+            )
             {
                 // We need to throw SecurityException here for compatibility reasons,
                 // although UnauthorizedAccessException will make more sense.
@@ -117,15 +127,20 @@ namespace Internal.Win32
             int result;
             int nameLength = name.Length;
 
-            while ((result = Interop.Advapi32.RegEnumKeyEx(
-                _hkey,
-                names.Count,
-                ref MemoryMarshal.GetReference(name),
-                ref nameLength,
-                null,
-                null,
-                null,
-                null)) != Interop.Errors.ERROR_NO_MORE_ITEMS)
+            while (
+                (
+                    result = Interop.Advapi32.RegEnumKeyEx(
+                        _hkey,
+                        names.Count,
+                        ref MemoryMarshal.GetReference(name),
+                        ref nameLength,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                ) != Interop.Errors.ERROR_NO_MORE_ITEMS
+            )
             {
                 switch (result)
                 {
@@ -162,15 +177,20 @@ namespace Internal.Win32
                 int result;
                 int nameLength = name.Length;
 
-                while ((result = Interop.Advapi32.RegEnumValue(
-                    _hkey,
-                    names.Count,
-                    name,
-                    ref nameLength,
-                    IntPtr.Zero,
-                    null,
-                    null,
-                    null)) != Interop.Errors.ERROR_NO_MORE_ITEMS)
+                while (
+                    (
+                        result = Interop.Advapi32.RegEnumValue(
+                            _hkey,
+                            names.Count,
+                            name,
+                            ref nameLength,
+                            IntPtr.Zero,
+                            null,
+                            null,
+                            null
+                        )
+                    ) != Interop.Errors.ERROR_NO_MORE_ITEMS
+                )
                 {
                     switch (result)
                     {
@@ -233,7 +253,14 @@ namespace Internal.Win32
 
                     fixed (byte* lpData = &MemoryMarshal.GetReference(span))
                     {
-                        result = Interop.Advapi32.RegQueryValueEx(_hkey, name, null, &type, lpData, (uint*)&dataLength);
+                        result = Interop.Advapi32.RegQueryValueEx(
+                            _hkey,
+                            name,
+                            null,
+                            &type,
+                            lpData,
+                            (uint*)&dataLength
+                        );
                         if (dataLength < 0)
                         {
                             // Greater than 2GB values aren't supported.
@@ -275,7 +302,10 @@ namespace Internal.Win32
                     }
 
                     // We only get here for a successful query of the data. Process and return the results.
-                    Debug.Assert((uint)dataLength <= span.Length, $"Expected {dataLength} <= {span.Length}");
+                    Debug.Assert(
+                        (uint)dataLength <= span.Length,
+                        $"Expected {dataLength} <= {span.Length}"
+                    );
                     switch (type)
                     {
                         case Interop.Advapi32.RegistryValues.REG_NONE:
@@ -295,92 +325,94 @@ namespace Internal.Win32
                         case Interop.Advapi32.RegistryValues.REG_SZ:
                         case Interop.Advapi32.RegistryValues.REG_EXPAND_SZ:
                         case Interop.Advapi32.RegistryValues.REG_MULTI_SZ:
+                        {
+                            // Handle the case where the registry contains an odd-byte length (corrupt data?)
+                            // by increasing the data by a single zero byte.
+                            if (dataLength % 2 == 1)
                             {
-                                // Handle the case where the registry contains an odd-byte length (corrupt data?)
-                                // by increasing the data by a single zero byte.
-                                if (dataLength % 2 == 1)
+                                if (dataLength == int.MaxValue)
                                 {
-                                    if (dataLength == int.MaxValue)
-                                    {
-                                        throw new IOException(SR.Arg_RegValueTooLarge);
-                                    }
-
-                                    if (dataLength >= span.Length)
-                                    {
-                                        byte[] newPooled = ArrayPool<byte>.Shared.Rent(dataLength + 1);
-                                        span.CopyTo(newPooled);
-                                        if (pooledArray is not null)
-                                        {
-                                            byte[] toReturn = pooledArray;
-                                            pooledArray = null;
-                                            ArrayPool<byte>.Shared.Return(toReturn);
-                                        }
-                                        span = pooledArray = newPooled;
-                                    }
-
-                                    span[dataLength++] = 0;
+                                    throw new IOException(SR.Arg_RegValueTooLarge);
                                 }
 
-                                // From here on, we interpret the read bytes as chars; span and dataLength should no longer be used.
-                                ReadOnlySpan<char> chars = MemoryMarshal.Cast<byte, char>(span.Slice(0, dataLength));
-
-                                if (type == Interop.Advapi32.RegistryValues.REG_MULTI_SZ)
+                                if (dataLength >= span.Length)
                                 {
-                                    string[] strings = Array.Empty<string>();
-                                    int count = 0;
-
-                                    while (chars.Length > 1 || (chars.Length == 1 && chars[0] != '\0'))
+                                    byte[] newPooled = ArrayPool<byte>.Shared.Rent(dataLength + 1);
+                                    span.CopyTo(newPooled);
+                                    if (pooledArray is not null)
                                     {
-                                        int nullPos = chars.IndexOf('\0');
-                                        string toAdd;
-                                        if (nullPos < 0)
-                                        {
-                                            toAdd = chars.ToString();
-                                            chars = default;
-                                        }
-                                        else
-                                        {
-                                            toAdd = chars.Slice(0, nullPos).ToString();
-                                            chars = chars.Slice(nullPos + 1);
-                                        }
-
-                                        if (count == strings.Length)
-                                        {
-                                            Array.Resize(ref strings, count == 0 ? 4 : count * 2);
-                                        }
-                                        strings[count++] = toAdd;
+                                        byte[] toReturn = pooledArray;
+                                        pooledArray = null;
+                                        ArrayPool<byte>.Shared.Return(toReturn);
                                     }
-
-                                    if (count != 0)
-                                    {
-                                        Array.Resize(ref strings, count);
-                                    }
-
-                                    return strings;
+                                    span = pooledArray = newPooled;
                                 }
-                                else
-                                {
-                                    if (chars.Length == 0)
-                                    {
-                                        return string.Empty;
-                                    }
 
-                                    // Remove null termination if it exists.
-                                    if (chars[^1] == 0)
-                                    {
-                                        chars = chars[0..^1];
-                                    }
-
-                                    // Get the resulting string from the bytes.
-                                    string str = chars.ToString();
-                                    if (type == Interop.Advapi32.RegistryValues.REG_EXPAND_SZ)
-                                    {
-                                        str = Environment.ExpandEnvironmentVariables(str);
-                                    }
-
-                                    return str;
-                                }
+                                span[dataLength++] = 0;
                             }
+
+                            // From here on, we interpret the read bytes as chars; span and dataLength should no longer be used.
+                            ReadOnlySpan<char> chars = MemoryMarshal.Cast<byte, char>(
+                                span.Slice(0, dataLength)
+                            );
+
+                            if (type == Interop.Advapi32.RegistryValues.REG_MULTI_SZ)
+                            {
+                                string[] strings = Array.Empty<string>();
+                                int count = 0;
+
+                                while (chars.Length > 1 || (chars.Length == 1 && chars[0] != '\0'))
+                                {
+                                    int nullPos = chars.IndexOf('\0');
+                                    string toAdd;
+                                    if (nullPos < 0)
+                                    {
+                                        toAdd = chars.ToString();
+                                        chars = default;
+                                    }
+                                    else
+                                    {
+                                        toAdd = chars.Slice(0, nullPos).ToString();
+                                        chars = chars.Slice(nullPos + 1);
+                                    }
+
+                                    if (count == strings.Length)
+                                    {
+                                        Array.Resize(ref strings, count == 0 ? 4 : count * 2);
+                                    }
+                                    strings[count++] = toAdd;
+                                }
+
+                                if (count != 0)
+                                {
+                                    Array.Resize(ref strings, count);
+                                }
+
+                                return strings;
+                            }
+                            else
+                            {
+                                if (chars.Length == 0)
+                                {
+                                    return string.Empty;
+                                }
+
+                                // Remove null termination if it exists.
+                                if (chars[^1] == 0)
+                                {
+                                    chars = chars[0..^1];
+                                }
+
+                                // Get the resulting string from the bytes.
+                                string str = chars.ToString();
+                                if (type == Interop.Advapi32.RegistryValues.REG_EXPAND_SZ)
+                                {
+                                    str = Environment.ExpandEnvironmentVariables(str);
+                                }
+
+                                return str;
+                            }
+                        }
 
                         default:
                             return defaultValue;
@@ -405,12 +437,14 @@ namespace Internal.Win32
             if (name != null && name.Length > MaxValueLength)
                 throw new ArgumentException(SR.Arg_RegValStrLenBug, nameof(name));
 
-            int ret = Interop.Advapi32.RegSetValueEx(_hkey,
+            int ret = Interop.Advapi32.RegSetValueEx(
+                _hkey,
                 name,
                 0,
                 Interop.Advapi32.RegistryValues.REG_SZ,
                 value,
-                checked(value.Length * 2 + 2));
+                checked(value.Length * 2 + 2)
+            );
 
             if (ret != 0)
             {
@@ -424,7 +458,9 @@ namespace Internal.Win32
             {
                 case Interop.Errors.ERROR_ACCESS_DENIED:
                     if (str != null)
-                        throw new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str));
+                        throw new UnauthorizedAccessException(
+                            SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
+                        );
                     else
                         throw new UnauthorizedAccessException();
 
@@ -440,9 +476,13 @@ namespace Internal.Win32
     internal static class Registry
     {
         /// <summary>Current User Key. This key should be used as the root for all user specific settings.</summary>
-        public static readonly RegistryKey CurrentUser = RegistryKey.OpenBaseKey(unchecked((IntPtr)(int)0x80000001));
+        public static readonly RegistryKey CurrentUser = RegistryKey.OpenBaseKey(
+            unchecked((IntPtr)(int)0x80000001)
+        );
 
         /// <summary>Local Machine key. This key should be used as the root for all machine specific settings.</summary>
-        public static readonly RegistryKey LocalMachine = RegistryKey.OpenBaseKey(unchecked((IntPtr)(int)0x80000002));
+        public static readonly RegistryKey LocalMachine = RegistryKey.OpenBaseKey(
+            unchecked((IntPtr)(int)0x80000002)
+        );
     }
 }

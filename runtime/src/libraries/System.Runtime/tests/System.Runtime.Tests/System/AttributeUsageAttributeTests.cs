@@ -25,7 +25,7 @@ namespace System.Tests
         {
             var attribute = new AttributeUsageAttribute(AttributeTargets.All)
             {
-                AllowMultiple = value
+                AllowMultiple = value,
             };
             Assert.Equal(value, attribute.AllowMultiple);
         }
@@ -35,10 +35,7 @@ namespace System.Tests
         [InlineData(false)]
         public void Inherited_Set_GetReturnsExpected(bool value)
         {
-            var attribute = new AttributeUsageAttribute(AttributeTargets.All)
-            {
-                Inherited = value
-            };
+            var attribute = new AttributeUsageAttribute(AttributeTargets.All) { Inherited = value };
             Assert.Equal(value, attribute.Inherited);
         }
     }

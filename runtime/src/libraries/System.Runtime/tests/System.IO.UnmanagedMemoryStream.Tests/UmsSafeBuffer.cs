@@ -24,7 +24,8 @@ namespace System.IO.Tests
     {
         private bool _isDisposed;
 
-        public TestSafeBuffer(int capacity) : base(true)
+        public TestSafeBuffer(int capacity)
+            : base(true)
         {
             Assert.True(capacity >= 0);
             Initialize((ulong)capacity);
@@ -41,7 +42,8 @@ namespace System.IO.Tests
             }
         }
 
-        public TestSafeBuffer(byte[] seedData) : base(true)
+        public TestSafeBuffer(byte[] seedData)
+            : base(true)
         {
             int capacity = seedData.Length;
             Initialize((ulong)capacity);
@@ -94,7 +96,12 @@ namespace System.IO.Tests
             const int length = 1000;
             using (var buffer = new TestSafeBuffer(length))
             {
-                var stream = new UnmanagedMemoryStream(buffer, 0, (long)buffer.ByteLength, FileAccess.Write);
+                var stream = new UnmanagedMemoryStream(
+                    buffer,
+                    0,
+                    (long)buffer.ByteLength,
+                    FileAccess.Write
+                );
                 Assert.Equal(length, stream.Length);
 
                 var bytes = ArrayHelpers.CreateByteArray(length);
@@ -115,7 +122,12 @@ namespace System.IO.Tests
             const int length = 1000;
             using (var buffer = new TestSafeBuffer(length))
             {
-                var stream = new UnmanagedMemoryStream(buffer, 0, (long)buffer.ByteLength, FileAccess.ReadWrite);
+                var stream = new UnmanagedMemoryStream(
+                    buffer,
+                    0,
+                    (long)buffer.ByteLength,
+                    FileAccess.ReadWrite
+                );
                 Assert.Equal(length, stream.Length);
 
                 var bytes = ArrayHelpers.CreateByteArray(length);

@@ -13,11 +13,12 @@ internal class RequestTelemetryLoggerFactory : ILspServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RequestTelemetryLoggerFactory()
-    {
-    }
+    public RequestTelemetryLoggerFactory() { }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    )
     {
         return new RequestTelemetryLogger(serverKind.ToTelemetryString());
     }

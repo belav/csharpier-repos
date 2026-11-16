@@ -12,12 +12,11 @@ namespace System.Threading
     {
         // creates a nameless semaphore object
         // Win32 only takes maximum count of int.MaxValue
-        public Semaphore(int initialCount, int maximumCount) : this(initialCount, maximumCount, null) { }
+        public Semaphore(int initialCount, int maximumCount)
+            : this(initialCount, maximumCount, null) { }
 
-        public Semaphore(int initialCount, int maximumCount, string? name) :
-            this(initialCount, maximumCount, name, out _)
-        {
-        }
+        public Semaphore(int initialCount, int maximumCount, string? name)
+            : this(initialCount, maximumCount, name, out _) { }
 
         public Semaphore(int initialCount, int maximumCount, string? name, out bool createdNew)
         {
@@ -38,7 +37,12 @@ namespace System.Threading
                 case OpenExistingResult.NameNotFound:
                     throw new WaitHandleCannotBeOpenedException();
                 case OpenExistingResult.NameInvalid:
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
                 case OpenExistingResult.PathNotFound:
                     throw new IOException(SR.Format(SR.IO_PathNotFound_Path, name));
                 default:
@@ -48,8 +52,10 @@ namespace System.Threading
         }
 
         [SupportedOSPlatform("windows")]
-        public static bool TryOpenExisting(string name, [NotNullWhen(true)] out Semaphore? result) =>
-            OpenExistingWorker(name, out result!) == OpenExistingResult.Success;
+        public static bool TryOpenExisting(
+            string name,
+            [NotNullWhen(true)] out Semaphore? result
+        ) => OpenExistingWorker(name, out result!) == OpenExistingResult.Success;
 
         public int Release() => ReleaseCore(1);
 

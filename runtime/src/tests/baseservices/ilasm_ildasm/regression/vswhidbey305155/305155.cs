@@ -11,7 +11,7 @@ public class MyAttribute : Attribute
 
 public class Test
 {
-    [MyAttribute(Types = new Type[]{typeof(string), typeof(void)})]
+    [MyAttribute(Types = new Type[] { typeof(string), typeof(void) })]
     [Fact]
     public static void TestEntryPoint() { }
 }

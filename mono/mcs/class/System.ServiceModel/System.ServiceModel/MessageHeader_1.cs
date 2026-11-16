@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,60 +35,68 @@ using System.Xml;
 // I think it is incorrectly put in this namespace ...
 namespace System.ServiceModel
 {
-	public class MessageHeader<T>
-	{
-		T content;
-		string actor;
-		bool must_understand, relay;
+    public class MessageHeader<T>
+    {
+        T content;
+        string actor;
+        bool must_understand,
+            relay;
 
-		XmlObjectSerializer formatter;
-		
-		public MessageHeader ()
-			: this (default (T), false, null, false)
-		{
-		}
+        XmlObjectSerializer formatter;
 
-		public MessageHeader (T content)
-			: this (content, false, null, false)
-		{
-		}
+        public MessageHeader()
+            : this(default(T), false, null, false) { }
 
-		public MessageHeader (T content, bool mustUnderstand, string actor, bool relay)
-		{
-			this.content = content;
-			this.must_understand = mustUnderstand;
-			this.actor = actor;
-			this.relay = relay;
-		}
+        public MessageHeader(T content)
+            : this(content, false, null, false) { }
 
-		public MessageHeader GetUntypedHeader (string name, string ns)
-		{
-			if (formatter == null)
-				formatter = new DataContractSerializer (typeof (T));
-			// FIXME: how to handle IsReferenceParameter
-			return new MessageHeader.DefaultMessageHeader (
-				name, ns, content, formatter, false, must_understand, actor, relay);
-		}
+        public MessageHeader(T content, bool mustUnderstand, string actor, bool relay)
+        {
+            this.content = content;
+            this.must_understand = mustUnderstand;
+            this.actor = actor;
+            this.relay = relay;
+        }
 
-		public string Actor {
-			get { return actor; }
-			set { actor = value; }
-		}
+        public MessageHeader GetUntypedHeader(string name, string ns)
+        {
+            if (formatter == null)
+                formatter = new DataContractSerializer(typeof(T));
+            // FIXME: how to handle IsReferenceParameter
+            return new MessageHeader.DefaultMessageHeader(
+                name,
+                ns,
+                content,
+                formatter,
+                false,
+                must_understand,
+                actor,
+                relay
+            );
+        }
 
-		public T Content {
-			get { return content; }
-			set { content = value; }
-		}
+        public string Actor
+        {
+            get { return actor; }
+            set { actor = value; }
+        }
 
-		public bool MustUnderstand {
-			get { return must_understand; }
-			set { must_understand = value; }
-		}
+        public T Content
+        {
+            get { return content; }
+            set { content = value; }
+        }
 
-		public bool Relay {
-			get { return relay; }
-			set { relay = value; }
-		}
-	}
+        public bool MustUnderstand
+        {
+            get { return must_understand; }
+            set { must_understand = value; }
+        }
 
+        public bool Relay
+        {
+            get { return relay; }
+            set { relay = value; }
+        }
+    }
 }

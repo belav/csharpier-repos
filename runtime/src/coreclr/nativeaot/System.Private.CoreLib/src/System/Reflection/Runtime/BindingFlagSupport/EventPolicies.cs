@@ -15,23 +15,37 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     {
         public static readonly EventPolicies Instance = new EventPolicies();
 
-        public EventPolicies() : base(MemberTypeIndex.Event) { }
+        public EventPolicies()
+            : base(MemberTypeIndex.Event) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Reflection implementation")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Reflection implementation"
+        )]
         public sealed override IEnumerable<EventInfo> GetDeclaredMembers(Type type)
         {
             return type.GetEvents(DeclaredOnlyLookup);
         }
 
-        public sealed override IEnumerable<EventInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? optionalNameFilter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<EventInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             return type.CoreGetDeclaredEvents(optionalNameFilter, reflectedType);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => false;
 
-        public sealed override void GetMemberAttributes(EventInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            EventInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             MethodInfo? accessorMethod = GetAccessorMethod(member);
             if (accessorMethod == null)
@@ -57,7 +71,12 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         //
         // Desktop compat: Events hide events in base types if they have the same name.
         //
-        public sealed override bool IsSuppressedByMoreDerivedMember(EventInfo member, EventInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            EventInfo member,
+            EventInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             for (int i = startIndex; i < endIndex; i++)
             {
@@ -67,7 +86,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return false;
         }
 
-        public sealed override bool ImplicitlyOverrides(EventInfo? baseMember, EventInfo? derivedMember)
+        public sealed override bool ImplicitlyOverrides(
+            EventInfo? baseMember,
+            EventInfo? derivedMember
+        )
         {
             MethodInfo? baseAccessor = GetAccessorMethod(baseMember!);
             MethodInfo? derivedAccessor = GetAccessorMethod(derivedMember!);

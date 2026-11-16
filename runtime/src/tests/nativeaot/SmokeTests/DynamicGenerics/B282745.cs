@@ -4,17 +4,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CoreFXTestLibrary;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-
+using CoreFXTestLibrary;
+using TypeOfRepo;
 #if INTERNAL_CONTRACTS
 using Internal.Runtime.Augments;
 #endif
-using TypeOfRepo;
 
 public static class B282745
 {
@@ -22,6 +21,7 @@ public static class B282745
     {
         public int field;
     }
+
     static object s_o = null;
 
     public static IntPtr GetIntPtrOnHeap()
@@ -30,7 +30,7 @@ public static class B282745
         s_o = to;
         unsafe
         {
-            fixed(int* pFld = &to.field)
+            fixed (int* pFld = &to.field)
             {
                 return new IntPtr(pFld);
             }
@@ -53,10 +53,10 @@ public static class B282745
     {
         int[] lengths = { 1, 2 };
         int[,] array = (int[,])Array.CreateInstance(typeof(int), lengths);
-        array[0,1] = GetIntPtrOnHeapAsInt();
+        array[0, 1] = GetIntPtrOnHeapAsInt();
 
         GC.Collect();
-            
+
         GC.KeepAlive(array);
 
         RuntimeTypeHandle arrayTypeHandle = array.GetType().TypeHandle;
@@ -71,9 +71,9 @@ public static class B282745
     {
         int[] lengths = { 1, 2 };
         long[,] array = (long[,])Array.CreateInstance(typeof(long), lengths);
-        array[0,1] = GetIntPtrOnHeapAsLong();
+        array[0, 1] = GetIntPtrOnHeapAsLong();
         GC.Collect();
-            
+
         GC.KeepAlive(array);
 
         RuntimeTypeHandle arrayTypeHandle = array.GetType().TypeHandle;
@@ -88,31 +88,32 @@ public static class B282745
         public int i;
         public long l;
     }
-    
+
     public class GenericType<T>
     {
         public static void test()
         {
-            int[] lengths = {1,2,3};
-            SomeGenStruct<T>[,,] array = (SomeGenStruct<T>[,,])Array.CreateInstance(typeof(SomeGenStruct<T>), lengths);
+            int[] lengths = { 1, 2, 3 };
+            SomeGenStruct<T>[,,] array = (SomeGenStruct<T>[,,])
+                Array.CreateInstance(typeof(SomeGenStruct<T>), lengths);
 
-            array[0,0,0].o = default(T);
-            array[0,0,0].i = GetIntPtrOnHeapAsInt();
-            array[0,0,0].l = GetIntPtrOnHeapAsInt();
+            array[0, 0, 0].o = default(T);
+            array[0, 0, 0].i = GetIntPtrOnHeapAsInt();
+            array[0, 0, 0].l = GetIntPtrOnHeapAsInt();
 
-            array[0,1,2].o = default(T);
-            array[0,1,2].i = GetIntPtrOnHeapAsInt();
-            array[0,1,2].l = GetIntPtrOnHeapAsLong();
+            array[0, 1, 2].o = default(T);
+            array[0, 1, 2].i = GetIntPtrOnHeapAsInt();
+            array[0, 1, 2].l = GetIntPtrOnHeapAsLong();
 
-            array[0,1,1].o = default(T);
-            array[0,1,1].i = GetIntPtrOnHeapAsInt();
-            array[0,1,1].l = GetIntPtrOnHeapAsLong();
+            array[0, 1, 1].o = default(T);
+            array[0, 1, 1].i = GetIntPtrOnHeapAsInt();
+            array[0, 1, 1].l = GetIntPtrOnHeapAsLong();
 
             GC.Collect();
-            
+
             GC.KeepAlive(array);
 
-        RuntimeTypeHandle arrayTypeHandle = array.GetType().TypeHandle;
+            RuntimeTypeHandle arrayTypeHandle = array.GetType().TypeHandle;
 #if INTERNAL_CONTRACTS
             Assert.IsTrue(RuntimeAugments.IsDynamicType(arrayTypeHandle));
 #endif
@@ -139,25 +140,26 @@ public static class B282745
         public static void test()
         {
             int[] lengths = { 42, 2, 3 };
-            SomeGenStruct1<T>[,,] array = (SomeGenStruct1<T>[,,])Array.CreateInstance(typeof(SomeGenStruct1<T>), lengths);
+            SomeGenStruct1<T>[,,] array = (SomeGenStruct1<T>[,,])
+                Array.CreateInstance(typeof(SomeGenStruct1<T>), lengths);
 
             for (int i = 0; i < 42; i++)
             {
-                array[i,0,0].o = default(T);
-                array[i,0,0].i = GetIntPtrOnHeapAsInt();
-                array[i,0,0].l = GetIntPtrOnHeapAsInt();
+                array[i, 0, 0].o = default(T);
+                array[i, 0, 0].i = GetIntPtrOnHeapAsInt();
+                array[i, 0, 0].l = GetIntPtrOnHeapAsInt();
 
-                array[i,1,2].o = default(T);
-                array[i,1,2].i = GetIntPtrOnHeapAsInt();
-                array[i,1,2].l = GetIntPtrOnHeapAsLong();
+                array[i, 1, 2].o = default(T);
+                array[i, 1, 2].i = GetIntPtrOnHeapAsInt();
+                array[i, 1, 2].l = GetIntPtrOnHeapAsLong();
 
-                array[i,1,1].o = default(T);
-                array[i,1,1].i = GetIntPtrOnHeapAsInt();
-                array[i,1,1].l = GetIntPtrOnHeapAsLong();
+                array[i, 1, 1].o = default(T);
+                array[i, 1, 1].i = GetIntPtrOnHeapAsInt();
+                array[i, 1, 1].l = GetIntPtrOnHeapAsLong();
             }
 
             GC.Collect();
- 
+
             GC.KeepAlive(array);
 
             RuntimeTypeHandle arrayTypeHandle = array.GetType().TypeHandle;
@@ -178,8 +180,10 @@ public static class B282745
     {
         [FieldOffset(0)]
         public int i;
+
         [FieldOffset(8)]
         public object o;
+
         [FieldOffset(16)]
         public long l;
     }
@@ -189,7 +193,9 @@ public static class B282745
         public static void test()
         {
             int[] lengths = { 1, 2, 3 };
-            StructWithNonGCValuesAtZeroOffset<T>[,,] array = (StructWithNonGCValuesAtZeroOffset<T>[,,])Array.CreateInstance(typeof(StructWithNonGCValuesAtZeroOffset<T>), lengths);
+            StructWithNonGCValuesAtZeroOffset<T>[,,] array =
+                (StructWithNonGCValuesAtZeroOffset<T>[,,])
+                    Array.CreateInstance(typeof(StructWithNonGCValuesAtZeroOffset<T>), lengths);
 
             array[0, 0, 0].v.o = null;
             array[0, 0, 0].v.i = GetIntPtrOnHeapAsInt();
@@ -225,7 +231,9 @@ public static class B282745
     [TestMethod]
     public static void testMDArrayWithPointerLikeValuesOfUnknownStructTypeWithNonGCValuesAtZeroOffset()
     {
-        Type genType = typeof(GenericTypeForStructWithNonGCValuesAtZeroOffset<>).MakeGenericType(TypeOf.String);
+        Type genType = typeof(GenericTypeForStructWithNonGCValuesAtZeroOffset<>).MakeGenericType(
+            TypeOf.String
+        );
         MethodInfo m = genType.GetTypeInfo().GetDeclaredMethod("test");
         m.Invoke(null, new object[] { });
     }
@@ -236,7 +244,7 @@ public static class B282745
     {
         Type genType = typeof(GenericType<>).MakeGenericType(TypeOf.String);
         MethodInfo m = genType.GetTypeInfo().GetDeclaredMethod("test");
-        m.Invoke(null, new object[] {});
+        m.Invoke(null, new object[] { });
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -246,13 +254,11 @@ public static class B282745
 #if UNIVERSAL_GENERICS
         Type genType = typeof(GenericType<>).MakeGenericType(TypeOf.Short);
         MethodInfo m = genType.GetTypeInfo().GetDeclaredMethod("test");
-        m.Invoke(null, new object[] {});
+        m.Invoke(null, new object[] { });
 #endif
     }
-    
-    public class MDArrayTestType
-    {
-    }
+
+    public class MDArrayTestType { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [TestMethod]
@@ -268,18 +274,22 @@ public static class B282745
         const int index2Max = 100;
         const int index3Max = 200;
 
-        object[] objArray = new object[index1Max*index2Max*index3Max];
-        MDArrayTestType[,,] mdObjArray = (MDArrayTestType[,,])Array.CreateInstance(TypeOf.B282475_MDArrayTestType, new int[]{index1Max,index2Max,index3Max});
+        object[] objArray = new object[index1Max * index2Max * index3Max];
+        MDArrayTestType[,,] mdObjArray = (MDArrayTestType[,,])
+            Array.CreateInstance(
+                TypeOf.B282475_MDArrayTestType,
+                new int[] { index1Max, index2Max, index3Max }
+            );
         for (int i = 0; i < index1Max; i++)
         {
             for (int j = 0; j < index2Max; j++)
             {
                 for (int k = 0; k < index3Max; k++)
                 {
-                    int index = i*(index3Max*index2Max) + j *index3Max + k;
+                    int index = i * (index3Max * index2Max) + j * index3Max + k;
                     MDArrayTestType o = new MDArrayTestType();
                     objArray[index] = o;
-                    mdObjArray[i,j,k] = o;
+                    mdObjArray[i, j, k] = o;
                 }
             }
         }
@@ -297,11 +307,10 @@ public static class B282745
             {
                 for (int k = 0; k < index3Max; k++)
                 {
-                    int index = i*(index3Max*index2Max) + j *index3Max + k;
-                    Assert.IsTrue(Object.ReferenceEquals(objArray[index], mdObjArray[i,j,k]));
+                    int index = i * (index3Max * index2Max) + j * index3Max + k;
+                    Assert.IsTrue(Object.ReferenceEquals(objArray[index], mdObjArray[i, j, k]));
                 }
             }
         }
     }
 }
-

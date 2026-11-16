@@ -17,15 +17,17 @@ namespace System.Management
         /// Managed Object Format
         /// </summary>
         Mof = 0,
+
         /// <summary>
         /// XML DTD that corresponds to CIM DTD version 2.0
         /// </summary>
         CimDtd20 = 1,
+
         /// <summary>
         /// XML WMI DTD that corresponds to CIM DTD version 2.0.
         /// Using this value enables a few WMI-specific extensions, like embedded objects.
         /// </summary>
-        WmiDtd20 = 2
+        WmiDtd20 = 2,
     };
 
     /// <summary>
@@ -37,54 +39,67 @@ namespace System.Management
         ///    <para>Invalid Type</para>
         /// </summary>
         None = 0,
+
         /// <summary>
         ///    <para>A signed 8-bit integer.</para>
         /// </summary>
         SInt8 = 16,
+
         /// <summary>
         ///    <para>An unsigned 8-bit integer.</para>
         /// </summary>
         UInt8 = 17,
+
         /// <summary>
         ///    <para>A signed 16-bit integer.</para>
         /// </summary>
         SInt16 = 2,
+
         /// <summary>
         ///    <para>An unsigned 16-bit integer.</para>
         /// </summary>
         UInt16 = 18,
+
         /// <summary>
         ///    <para>A signed 32-bit integer.</para>
         /// </summary>
         SInt32 = 3,
+
         /// <summary>
         ///    <para>An unsigned 32-bit integer.</para>
         /// </summary>
         UInt32 = 19,
+
         /// <summary>
         ///    <para>A signed 64-bit integer.</para>
         /// </summary>
         SInt64 = 20,
+
         /// <summary>
         ///    <para>An unsigned 64-bit integer.</para>
         /// </summary>
         UInt64 = 21,
+
         /// <summary>
         ///    <para>A floating-point 32-bit number.</para>
         /// </summary>
         Real32 = 4,
+
         /// <summary>
         ///    <para>A floating point 64-bit number.</para>
         /// </summary>
         Real64 = 5,
+
         /// <summary>
         ///    <para> A boolean.</para>
         /// </summary>
         Boolean = 11,
+
         /// <summary>
         ///    <para>A string.</para>
         /// </summary>
         String = 8,
+
         /// <summary>
         ///    <para> A date or time value, represented in a string in DMTF
         ///       date/time format: yyyymmddHHMMSS.mmmmmmsUUU</para>
@@ -95,15 +110,18 @@ namespace System.Management
         ///    <para>sUUU - is a sign (+ or -) and a 3-digit UTC offset</para>
         /// </summary>
         DateTime = 101,
+
         /// <summary>
         ///    <para>A reference to another object. This is represented by a
         ///       string containing the path to the referenced object</para>
         /// </summary>
         Reference = 102,
+
         /// <summary>
         ///    <para> A 16-bit character.</para>
         /// </summary>
         Char16 = 103,
+
         /// <summary>
         ///    <para>An embedded object.</para>
         ///    <para>Note that embedded objects differ from references in that the embedded object
@@ -124,20 +142,24 @@ namespace System.Management
         ///    <para>A mode that compares all elements of the compared objects.</para>
         /// </summary>
         IncludeAll = 0,
+
         /// <summary>
         ///    <para>A mode that compares the objects, ignoring qualifiers.</para>
         /// </summary>
         IgnoreQualifiers = 0x1,
+
         /// <summary>
         ///    <para> A mode that ignores the source of the objects, namely the server
         ///       and the namespace they came from, in comparison to other objects.</para>
         /// </summary>
         IgnoreObjectSource = 0x2,
+
         /// <summary>
         ///    <para> A mode that ignores the default values of properties.
         ///       This value is only meaningful when comparing classes.</para>
         /// </summary>
         IgnoreDefaultValues = 0x4,
+
         /// <summary>
         ///    <para>A mode that assumes that the objects being compared are instances of
         ///       the same class. Consequently, this value causes comparison
@@ -145,6 +167,7 @@ namespace System.Management
         ///       performance. If the objects are not of the same class, the results are undefined.</para>
         /// </summary>
         IgnoreClass = 0x8,
+
         /// <summary>
         ///    <para> A mode that compares string values in a case-insensitive
         ///       manner. This applies to strings and to qualifier values. Property and qualifier
@@ -152,22 +175,21 @@ namespace System.Management
         ///       specified or not.</para>
         /// </summary>
         IgnoreCase = 0x10,
+
         /// <summary>
         ///    <para>A mode that ignores qualifier flavors. This flag still takes
         ///       qualifier values into account, but ignores flavor distinctions such as
         ///       propagation rules and override restrictions.</para>
         /// </summary>
-        IgnoreFlavor = 0x20
+        IgnoreFlavor = 0x20,
     };
-
 
     internal enum QualifierType
     {
         ObjectQualifier,
         PropertyQualifier,
-        MethodQualifier
+        MethodQualifier,
     }
-
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//
     /// <summary>
@@ -206,10 +228,7 @@ namespace System.Management
                 }
                 return _wbemObject;
             }
-            set
-            {
-                _wbemObject = value;
-            }
+            set { _wbemObject = value; }
         }
 
         internal IWbemClassObjectFreeThreaded _wbemObject;
@@ -224,7 +243,11 @@ namespace System.Management
         /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
         /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         protected ManagementBaseObject(SerializationInfo info, StreamingContext context)
@@ -263,7 +286,6 @@ namespace System.Management
             return (IntPtr)managementObject.wbemObject;
         }
 
-
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new PlatformNotSupportedException();
@@ -282,7 +304,8 @@ namespace System.Management
         /// <param name="scope"> The scope</param>
         internal static ManagementBaseObject GetBaseObject(
             IWbemClassObjectFreeThreaded wbemObject,
-            ManagementScope scope)
+            ManagementScope scope
+        )
         {
             ManagementBaseObject newObject = null;
 
@@ -412,14 +435,32 @@ namespace System.Management
                 int propertyFlavor = 0;
                 int status = (int)ManagementStatus.NoError;
 
-                status = wbemObject.Get_("__SERVER", 0, ref serverName, ref propertyType, ref propertyFlavor);
+                status = wbemObject.Get_(
+                    "__SERVER",
+                    0,
+                    ref serverName,
+                    ref propertyType,
+                    ref propertyFlavor
+                );
 
                 if (status == (int)ManagementStatus.NoError)
                 {
-                    status = wbemObject.Get_("__NAMESPACE", 0, ref scopeName, ref propertyType, ref propertyFlavor);
+                    status = wbemObject.Get_(
+                        "__NAMESPACE",
+                        0,
+                        ref scopeName,
+                        ref propertyType,
+                        ref propertyFlavor
+                    );
 
                     if (status == (int)ManagementStatus.NoError)
-                        status = wbemObject.Get_("__CLASS", 0, ref className, ref propertyType, ref propertyFlavor);
+                        status = wbemObject.Get_(
+                            "__CLASS",
+                            0,
+                            ref className,
+                            ref propertyType,
+                            ref propertyFlavor
+                        );
                 }
 
                 if (status < 0)
@@ -444,14 +485,11 @@ namespace System.Management
                     classPath.NamespacePath = (string)(scopeName is System.DBNull ? "" : scopeName);
                     classPath.ClassName = (string)(className is System.DBNull ? "" : className);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 return classPath;
             }
         }
-
 
         //
         //Methods
@@ -535,7 +573,6 @@ namespace System.Management
             Qualifiers[qualifierName].Value = qualifierValue;
         }
 
-
         //******************************************************
         //GetPropertyQualifierValue
         //******************************************************
@@ -561,8 +598,11 @@ namespace System.Management
         /// <param name='propertyName'>The name of the property to which the qualifier belongs.</param>
         /// <param name='qualifierName'>The name of the property qualifier of interest.</param>
         /// <param name='qualifierValue'>The new value for the qualifier.</param>
-        public void SetPropertyQualifierValue(string propertyName, string qualifierName,
-            object qualifierValue)
+        public void SetPropertyQualifierValue(
+            string propertyName,
+            string qualifierName,
+            object qualifierValue
+        )
         {
             Properties[propertyName].Qualifiers[qualifierName].Value = qualifierValue;
         }
@@ -615,17 +655,24 @@ namespace System.Management
 
                     if (wbemTextSrc != null)
                     {
-                        status = wbemTextSrc.GetText_(0,
-                            (IWbemClassObject_DoNotMarshal)(Marshal.GetObjectForIUnknown(wbemObject)),
+                        status = wbemTextSrc.GetText_(
+                            0,
+                            (IWbemClassObject_DoNotMarshal)(
+                                Marshal.GetObjectForIUnknown(wbemObject)
+                            ),
                             (uint)format, //note: this assumes the format enum has the same values as the underlying WMI enum !!
                             ctx,
-                            out objText);
+                            out objText
+                        );
                         if (status < 0)
                         {
                             if ((status & 0xfffff000) == 0x80041000)
                                 ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
                             else
-                                Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
+                                Marshal.ThrowExceptionForHR(
+                                    status,
+                                    WmiNetUtilsHelper.GetErrorInfo_f()
+                                );
                         }
                     }
 
@@ -672,9 +719,11 @@ namespace System.Management
 
                     if (this is ManagementObject && obj is ManagementObject)
                     {
-                        int compareRes = string.Compare(((ManagementObject)this).Path.Path,
+                        int compareRes = string.Compare(
+                            ((ManagementObject)this).Path.Path,
                             ((ManagementObject)obj).Path.Path,
-                            StringComparison.OrdinalIgnoreCase);
+                            StringComparison.OrdinalIgnoreCase
+                        );
                         return (compareRes == 0);
                     }
                 }
@@ -763,7 +812,8 @@ namespace System.Management
             get
             {
                 object val = null;
-                int dummy1 = 0, dummy2 = 0;
+                int dummy1 = 0,
+                    dummy2 = 0;
                 int status = (int)ManagementStatus.NoError;
 
                 status = wbemObject.Get_("__CLASS", 0, ref val, ref dummy1, ref dummy2);
@@ -786,7 +836,8 @@ namespace System.Management
         private static bool _IsClass(IWbemClassObjectFreeThreaded wbemObject)
         {
             object val = null;
-            int dummy1 = 0, dummy2 = 0;
+            int dummy1 = 0,
+                dummy2 = 0;
 
             int status = wbemObject.Get_("__GENUS", 0, ref val, ref dummy1, ref dummy2);
 
@@ -803,10 +854,7 @@ namespace System.Management
 
         internal bool IsClass
         {
-            get
-            {
-                return _IsClass(wbemObject);
-            }
+            get { return _IsClass(wbemObject); }
         }
 
         /// <summary>
@@ -814,9 +862,7 @@ namespace System.Management
         /// </summary>
         /// <param name='propertyName'>The name of the property to be changed.</param>
         /// <param name='propertyValue'>The new value for this property.</param>
-        public void SetPropertyValue(
-            string propertyName,
-            object propertyValue)
+        public void SetPropertyValue(string propertyName, object propertyValue)
         {
             if (null == propertyName)
                 throw new ArgumentNullException(nameof(propertyName));
@@ -827,6 +873,5 @@ namespace System.Management
             else
                 Properties[propertyName].Value = propertyValue;
         }
-
-    }//ManagementBaseObject
+    } //ManagementBaseObject
 }

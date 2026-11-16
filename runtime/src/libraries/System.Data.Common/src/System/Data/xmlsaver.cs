@@ -21,7 +21,7 @@ namespace System.Data
         Remoting = 2,
         WebService = 3,
         RemotingSkipSchema = 4,
-        WebServiceSkipSchema = 5
+        WebServiceSkipSchema = 5,
     }
 
     /// <summary>
@@ -63,13 +63,18 @@ namespace System.Data
             AddExtendedProperties(props, node, null);
         }
 
-        internal static void AddExtendedProperties(PropertyCollection? props, XmlElement node, Type? type)
+        internal static void AddExtendedProperties(
+            PropertyCollection? props,
+            XmlElement node,
+            Type? type
+        )
         {
             if (props != null)
             {
                 foreach (DictionaryEntry entry in props)
                 {
-                    string s, v;
+                    string s,
+                        v;
 
                     if (entry.Key is INullable)
                     {
@@ -86,7 +91,12 @@ namespace System.Data
                     }
                     else if (entry.Value is System.Numerics.BigInteger)
                     {
-                        v = (string)BigIntegerStorage.ConvertFromBigInteger((System.Numerics.BigInteger)entry.Value, typeof(string), CultureInfo.InvariantCulture);
+                        v = (string)
+                            BigIntegerStorage.ConvertFromBigInteger(
+                                (System.Numerics.BigInteger)entry.Value,
+                                typeof(string),
+                                CultureInfo.InvariantCulture
+                            );
                     }
                     else
                     {
@@ -116,7 +126,14 @@ namespace System.Data
 
             PropertyDescriptorCollection pds = TypeDescriptor.GetProperties(instance);
 
-            if (!((instance is DataSet) || (instance is DataTable) || (instance is DataColumn) || (instance is DataRelation)))
+            if (
+                !(
+                    (instance is DataSet)
+                    || (instance is DataTable)
+                    || (instance is DataColumn)
+                    || (instance is DataRelation)
+                )
+            )
             {
                 return;
             }
@@ -133,7 +150,7 @@ namespace System.Data
         {
             Type type = pd.PropertyType;
             bool bisDataColumn = false;
-            DataColumn? col = null;  // it may cause problem to assign null here, I will need to change this.
+            DataColumn? col = null; // it may cause problem to assign null here, I will need to change this.
             bool bIsSqlType = false;
             bool bImplementsInullable = false;
 
@@ -145,19 +162,27 @@ namespace System.Data
                 bImplementsInullable = col.ImplementsINullable;
             }
 
-            if (bImplementsInullable == false &&
-                 type != typeof(string) &&     // DO NOT REMOVE THIS CHECK
-                 type != typeof(bool) &&
-                 type != typeof(Type) &&
-                 type != typeof(object) &&
-                 type != typeof(CultureInfo) &&
-                 type != typeof(long) &&
-                 type != typeof(int))
+            if (
+                bImplementsInullable == false
+                && type != typeof(string)
+                && // DO NOT REMOVE THIS CHECK
+                type != typeof(bool)
+                && type != typeof(Type)
+                && type != typeof(object)
+                && type != typeof(CultureInfo)
+                && type != typeof(long)
+                && type != typeof(int)
+            )
             {
                 return;
             }
 
-            if ((!pd.ShouldSerializeValue(instance) || !ContainsDesignerSerializationVisibleAttribute(pd)) && (bIsSqlType == false))
+            if (
+                (
+                    !pd.ShouldSerializeValue(instance)
+                    || !ContainsDesignerSerializationVisibleAttribute(pd)
+                ) && (bIsSqlType == false)
+            )
             {
                 return;
             }
@@ -174,18 +199,18 @@ namespace System.Data
             // SDUB: perf: Why not have this as a table?
             // there are several xdo properties that equal to some xml attributes, we should not explicitly output them.
             if (
-                string.Equals(pd.Name, "Namespace", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "PrimaryKey", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "ColumnName", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "DefaultValue", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "TableName", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "DataSetName", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "AllowDBNull", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "Unique", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "NestedInDataSet", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "Locale", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "CaseSensitive", StringComparison.Ordinal) ||
-                string.Equals(pd.Name, "RemotingFormat", StringComparison.Ordinal)
+                string.Equals(pd.Name, "Namespace", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "PrimaryKey", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "ColumnName", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "DefaultValue", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "TableName", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "DataSetName", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "AllowDBNull", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "Unique", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "NestedInDataSet", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "Locale", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "CaseSensitive", StringComparison.Ordinal)
+                || string.Equals(pd.Name, "RemotingFormat", StringComparison.Ordinal)
             )
             {
                 return;
@@ -198,9 +223,21 @@ namespace System.Data
                     string dt = XmlDataTypeName(col!.DataType);
                     if (bIsSqlType || (col.DataType == typeof(System.Numerics.BigInteger)))
                     {
-                        root.SetAttribute(Keywords.MSD_DATATYPE, Keywords.MSDNS, col.DataType.FullName);
+                        root.SetAttribute(
+                            Keywords.MSD_DATATYPE,
+                            Keywords.MSDNS,
+                            col.DataType.FullName
+                        );
                     }
-                    else if ((dt.Length == 0) || bImplementsInullable || ((dt == Keywords.XSD_ANYTYPE) && (col.XmlDataType != Keywords.XSD_ANYTYPE)) || (col.DataType == typeof(DateTimeOffset)))
+                    else if (
+                        (dt.Length == 0)
+                        || bImplementsInullable
+                        || (
+                            (dt == Keywords.XSD_ANYTYPE)
+                            && (col.XmlDataType != Keywords.XSD_ANYTYPE)
+                        )
+                        || (col.DataType == typeof(DateTimeOffset))
+                    )
                     {
                         // in Whidbey, XmlDataTypeName function changed to return "anyType" for typeof(Object)
                         // should still always hit this code path for all non-built in types
@@ -222,16 +259,25 @@ namespace System.Data
             return;
         }
 
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields, typeof(DesignerSerializationVisibilityAttribute))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The DynamicDependency ensures the correct members are preserved.")]
-        private static bool ContainsDesignerSerializationVisibleAttribute(PropertyDescriptor pd) => pd.Attributes.Contains(DesignerSerializationVisibilityAttribute.Visible);
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                | DynamicallyAccessedMemberTypes.PublicFields,
+            typeof(DesignerSerializationVisibilityAttribute)
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The DynamicDependency ensures the correct members are preserved."
+        )]
+        private static bool ContainsDesignerSerializationVisibleAttribute(PropertyDescriptor pd) =>
+            pd.Attributes.Contains(DesignerSerializationVisibilityAttribute.Visible);
 
         internal static string XmlDataTypeName(Type type)
         {
             if (type == typeof(char))
-                return "_";         // has to have SimpleType in this column.
+                return "_"; // has to have SimpleType in this column.
             if (type == typeof(byte[]) || type == typeof(SqlBytes))
-                return "base64Binary";       // has to have SimpleType in this column.
+                return "base64Binary"; // has to have SimpleType in this column.
             if (type == typeof(DateTime) || type == typeof(SqlDateTime))
                 return "dateTime";
             if (type == typeof(TimeSpan))
@@ -268,7 +314,12 @@ namespace System.Data
                 return "anyURI";
             if (type == typeof(SqlBinary))
                 return "hexBinary";
-            if (type == typeof(string) || type == typeof(SqlGuid) || type == typeof(SqlString) || type == typeof(SqlChars))
+            if (
+                type == typeof(string)
+                || type == typeof(SqlGuid)
+                || type == typeof(SqlString)
+                || type == typeof(SqlChars)
+            )
                 return "string";
             if (type == typeof(object) || type == typeof(SqlXml) || type == typeof(DateTimeOffset))
                 return Keywords.XSD_ANYTYPE;
@@ -372,7 +423,7 @@ namespace System.Data
             }
             // What about constraints?
             return false;
-        }// HaveExtendedProperties
+        } // HaveExtendedProperties
 
         internal void WriteSchemaRoot(XmlElement rootSchema, string targetNamespace)
         {
@@ -382,7 +433,6 @@ namespace System.Data
                         else
                             rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
             */
-
 
             if (!string.IsNullOrEmpty(targetNamespace))
             {
@@ -450,7 +500,10 @@ namespace System.Data
                         if (_autogenerated[fk.RelatedColumnsReference[0]] != null)
                             _autogenerated[fk.RelatedColumnsReference[0]] = null;
                         // special case of the ghosted constraints:
-                        UniqueConstraint? _constraint = (UniqueConstraint?)fk.RelatedTable.Constraints.FindConstraint(new UniqueConstraint("TEMP", fk.RelatedColumnsReference));
+                        UniqueConstraint? _constraint = (UniqueConstraint?)
+                            fk.RelatedTable.Constraints.FindConstraint(
+                                new UniqueConstraint("TEMP", fk.RelatedColumnsReference)
+                            );
 
                         if (_constraint == null)
                             continue;
@@ -474,6 +527,7 @@ namespace System.Data
                 }
             }
         }
+
         private void CreateTablesHierarchy(DataTable dt)
         {
             //            if (!dt.SerializeHierarchy)
@@ -541,13 +595,23 @@ namespace System.Data
         // SxS: this method can generate XSD files if the input xmlWriter is XmlTextWriter or DataTextWriter and its underlying stream is FileStream
         // These XSDs are located in the same folder as the underlying stream's file path (see SetPath method).
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        internal void SchemaTree(XmlDocument xd, XmlWriter xmlWriter, DataSet? ds, DataTable? dt, bool writeHierarchy)
+        internal void SchemaTree(
+            XmlDocument xd,
+            XmlWriter xmlWriter,
+            DataSet? ds,
+            DataTable? dt,
+            bool writeHierarchy
+        )
         {
             _constraintNames = new ArrayList();
             _autogenerated = new Hashtable();
             bool genSecondary = _filePath != null; //null non-file based streams.
 
-            _dsElement = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
+            _dsElement = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_ELEMENT,
+                Keywords.XSDNS
+            );
 
             DataTable[] top;
             bool fFlat = false;
@@ -582,14 +646,21 @@ namespace System.Data
             _namespaces = new Hashtable();
             _prefixes = new Hashtable();
 
-            XmlElement rootSchema = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SCHEMA, Keywords.XSDNS);
+            XmlElement rootSchema = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_SCHEMA,
+                Keywords.XSDNS
+            );
             _sRoot = rootSchema;
 
             // Need to writeid attribute on schema, as webservice relys on it for typeddataset deserialization
             // to get  class name
             if (_ds != null)
             {
-                rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName(_ds.DataSetName));
+                rootSchema.SetAttribute(
+                    Keywords.XSDID,
+                    XmlConvert.EncodeLocalName(_ds.DataSetName)
+                );
             }
             else
             {
@@ -652,14 +723,17 @@ namespace System.Data
                 }
             }
 
-
             //
             // Output all top level elements, which will recursively invoke to other tables.
             //
 
             top = ((ds != null) ? ds.TopLevelTables(true) : CreateToplevelTables());
 
-            if (top.Length == 0 || _schFormat == SchemaFormat.WebServiceSkipSchema || _schFormat == SchemaFormat.RemotingSkipSchema)
+            if (
+                top.Length == 0
+                || _schFormat == SchemaFormat.WebServiceSkipSchema
+                || _schFormat == SchemaFormat.RemotingSkipSchema
+            )
             {
                 // return an empty schema for now.
                 // probably we need to throw an exception
@@ -667,7 +741,6 @@ namespace System.Data
                 rootSchema.AppendChild(_dsElement);
                 AddXdoProperties(_ds, _dsElement);
                 AddExtendedProperties(ds!._extendedProperties, _dsElement);
-
 
                 xd.AppendChild(rootSchema);
                 xd.Save(xmlWriter);
@@ -682,7 +755,11 @@ namespace System.Data
             // Fill out dataset element
             XmlElement dsCompositor = FillDataSetElement(xd, ds, dt);
 
-            _constraintSeparator = xd.CreateElement(Keywords.XSD_PREFIX, "SHOULDNOTBEHERE", Keywords.XSDNS);
+            _constraintSeparator = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                "SHOULDNOTBEHERE",
+                Keywords.XSDNS
+            );
             _dsElement.AppendChild(_constraintSeparator);
             // DataSet properties
             if (_ds != null)
@@ -691,15 +768,21 @@ namespace System.Data
                 AddExtendedProperties(_ds._extendedProperties, _dsElement);
             }
 
-
             for (int i = 0; i < top.Length; i++)
             {
                 XmlElement el = HandleTable(top[i], xd, rootSchema);
-                if (((_ds != null) && (_ds.Namespace == top[i].Namespace)) || string.IsNullOrEmpty(top[i].Namespace) || (_schFormat == SchemaFormat.Remoting))
+                if (
+                    ((_ds != null) && (_ds.Namespace == top[i].Namespace))
+                    || string.IsNullOrEmpty(top[i].Namespace)
+                    || (_schFormat == SchemaFormat.Remoting)
+                )
                 {
                     bool fNestedInDataset = top[i]._fNestedInDataset;
 
-                    if (((_ds != null) && (_ds.Namespace.Length != 0)) && string.IsNullOrEmpty(top[i].Namespace))
+                    if (
+                        ((_ds != null) && (_ds.Namespace.Length != 0))
+                        && string.IsNullOrEmpty(top[i].Namespace)
+                    )
                     {
                         fNestedInDataset = true;
                     }
@@ -719,7 +802,10 @@ namespace System.Data
                     { //deal with maxOccurs properly
                         if (top[i].MinOccurs != 1)
                         {
-                            el.SetAttribute(Keywords.MINOCCURS, top[i].MinOccurs.ToString(CultureInfo.InvariantCulture));
+                            el.SetAttribute(
+                                Keywords.MINOCCURS,
+                                top[i].MinOccurs.ToString(CultureInfo.InvariantCulture)
+                            );
                         }
                         if (top[i].MaxOccurs == -1)
                         {
@@ -727,18 +813,34 @@ namespace System.Data
                         }
                         else if (top[i].MaxOccurs != 1)
                         {
-                            el.SetAttribute(Keywords.MAXOCCURS, top[i].MaxOccurs.ToString(CultureInfo.InvariantCulture));
+                            el.SetAttribute(
+                                Keywords.MAXOCCURS,
+                                top[i].MaxOccurs.ToString(CultureInfo.InvariantCulture)
+                            );
                         }
                     }
 
                     if (!fNestedInDataset)
                     {
                         rootSchema.AppendChild(el);
-                        XmlElement node = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
-                        if ((_ds != null && _ds.Namespace == top[i].Namespace) || string.IsNullOrEmpty(top[i].Namespace) || (_schFormat == SchemaFormat.Remoting))
+                        XmlElement node = xd.CreateElement(
+                            Keywords.XSD_PREFIX,
+                            Keywords.XSD_ELEMENT,
+                            Keywords.XSDNS
+                        );
+                        if (
+                            (_ds != null && _ds.Namespace == top[i].Namespace)
+                            || string.IsNullOrEmpty(top[i].Namespace)
+                            || (_schFormat == SchemaFormat.Remoting)
+                        )
                             node.SetAttribute(Keywords.REF, top[i].EncodedTableName);
                         else
-                            node.SetAttribute(Keywords.REF, ((string)_prefixes[top[i].Namespace]!) + ':' + top[i].EncodedTableName);
+                            node.SetAttribute(
+                                Keywords.REF,
+                                ((string)_prefixes[top[i].Namespace]!)
+                                    + ':'
+                                    + top[i].EncodedTableName
+                            );
 
                         dsCompositor.AppendChild(node);
                     }
@@ -748,12 +850,18 @@ namespace System.Data
                 else
                 {
                     AppendChildWithoutRef(top[i].Namespace, el);
-                    XmlElement node = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
-                    node.SetAttribute(Keywords.REF, ((string)_prefixes[top[i].Namespace]!) + ':' + top[i].EncodedTableName);
+                    XmlElement node = xd.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_ELEMENT,
+                        Keywords.XSDNS
+                    );
+                    node.SetAttribute(
+                        Keywords.REF,
+                        ((string)_prefixes[top[i].Namespace]!) + ':' + top[i].EncodedTableName
+                    );
                     dsCompositor.AppendChild(node);
                 }
             }
-
 
             _dsElement.RemoveChild(_constraintSeparator);
             rootSchema.AppendChild(_dsElement);
@@ -789,10 +897,18 @@ namespace System.Data
                     {
                         if (nodeAnn == null)
                         {
-                            nodeAnn = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ANNOTATION, Keywords.XSDNS);
+                            nodeAnn = xd.CreateElement(
+                                Keywords.XSD_PREFIX,
+                                Keywords.XSD_ANNOTATION,
+                                Keywords.XSDNS
+                            );
                             rootSchema.AppendChild(nodeAnn);
 
-                            nodeApp = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_APPINFO, Keywords.XSDNS);
+                            nodeApp = xd.CreateElement(
+                                Keywords.XSD_PREFIX,
+                                Keywords.XSD_APPINFO,
+                                Keywords.XSDNS
+                            );
                             nodeAnn.AppendChild(nodeApp);
                         }
                         Debug.Assert(nodeApp != null, "Need to create <application..> node first.");
@@ -801,33 +917,52 @@ namespace System.Data
                 }
             }
 
-
             XmlComment? comment = null;
             bool isMultipleNamespaceAndStreamingWriter = (_namespaces.Count > 1 && !genSecondary);
 
-            if (_schFormat != SchemaFormat.Remoting && _schFormat != SchemaFormat.RemotingSkipSchema)
+            if (
+                _schFormat != SchemaFormat.Remoting
+                && _schFormat != SchemaFormat.RemotingSkipSchema
+            )
             {
                 // complete processing of rootSchema
                 foreach (string ns in _namespaces.Keys)
                 {
-                    if (ns == ((_ds != null) ? _ds.Namespace : _dt.Namespace) || string.IsNullOrEmpty(ns))
+                    if (
+                        ns == ((_ds != null) ? _ds.Namespace : _dt.Namespace)
+                        || string.IsNullOrEmpty(ns)
+                    )
                     {
                         continue;
                     }
-                    XmlElement _import = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_IMPORT, Keywords.XSDNS);
+                    XmlElement _import = xd.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_IMPORT,
+                        Keywords.XSDNS
+                    );
                     _import.SetAttribute(Keywords.XSD_NAMESPACE, ns);
-                    if (_schFormat != SchemaFormat.WebService && !isMultipleNamespaceAndStreamingWriter)
+                    if (
+                        _schFormat != SchemaFormat.WebService
+                        && !isMultipleNamespaceAndStreamingWriter
+                    )
                     {
-                        _import.SetAttribute(Keywords.XSD_SCHEMALOCATION, _fileName + "_" + _prefixes[ns] + ".xsd");
+                        _import.SetAttribute(
+                            Keywords.XSD_SCHEMALOCATION,
+                            _fileName + "_" + _prefixes[ns] + ".xsd"
+                        );
                     }
                     rootSchema.PrependChild(_import);
                 }
                 if (_schFormat != SchemaFormat.WebService && isMultipleNamespaceAndStreamingWriter)
                 {
-                    rootSchema.SetAttribute(Keywords.MSD_FRAGMENTCOUNT, Keywords.MSDNS, _namespaces.Count.ToString(CultureInfo.InvariantCulture));
+                    rootSchema.SetAttribute(
+                        Keywords.MSD_FRAGMENTCOUNT,
+                        Keywords.MSDNS,
+                        _namespaces.Count.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
                 // Post rootSchema content to xmlWriter.
-                xd.AppendChild(rootSchema);  // KB
+                xd.AppendChild(rootSchema); // KB
                 if (_schFormat != SchemaFormat.WebService && isMultipleNamespaceAndStreamingWriter)
                 {
                     xd.WriteTo(xmlWriter);
@@ -841,7 +976,10 @@ namespace System.Data
 
                 foreach (string ns in _namespaces.Keys)
                 {
-                    if (ns == ((_ds != null) ? _ds.Namespace : _dt.Namespace) || string.IsNullOrEmpty(ns))
+                    if (
+                        ns == ((_ds != null) ? _ds.Namespace : _dt.Namespace)
+                        || string.IsNullOrEmpty(ns)
+                    )
                     {
                         continue;
                     }
@@ -854,7 +992,10 @@ namespace System.Data
                     }
                     else
                     {
-                        xw = new XmlTextWriter(_filePath + _fileName + "_" + _prefixes[ns] + ".xsd", null);
+                        xw = new XmlTextWriter(
+                            _filePath + _fileName + "_" + _prefixes[ns] + ".xsd",
+                            null
+                        );
                     }
 
                     try
@@ -883,21 +1024,37 @@ namespace System.Data
                                 continue; // do nothing
                             }
                             tNode.SetAttribute("xmlns:" + prefix, imp_ns);
-                            XmlElement _import2 = _dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_IMPORT, Keywords.XSDNS);
+                            XmlElement _import2 = _dc.CreateElement(
+                                Keywords.XSD_PREFIX,
+                                Keywords.XSD_IMPORT,
+                                Keywords.XSDNS
+                            );
                             _import2.SetAttribute(Keywords.XSD_NAMESPACE, imp_ns);
 
-                            if (_schFormat != SchemaFormat.WebService && !isMultipleNamespaceAndStreamingWriter)
+                            if (
+                                _schFormat != SchemaFormat.WebService
+                                && !isMultipleNamespaceAndStreamingWriter
+                            )
                             {
                                 if (imp_ns == ((_ds != null) ? _ds.Namespace : _dt.Namespace))
-                                    _import2.SetAttribute(Keywords.XSD_SCHEMALOCATION, _fileName + _fileExt); // for the dataset namespace don't append anything
+                                    _import2.SetAttribute(
+                                        Keywords.XSD_SCHEMALOCATION,
+                                        _fileName + _fileExt
+                                    ); // for the dataset namespace don't append anything
                                 else
-                                    _import2.SetAttribute(Keywords.XSD_SCHEMALOCATION, _fileName + "_" + prefix + ".xsd");
+                                    _import2.SetAttribute(
+                                        Keywords.XSD_SCHEMALOCATION,
+                                        _fileName + "_" + prefix + ".xsd"
+                                    );
                             }
 
                             tNode.PrependChild(_import2);
                         }
 
-                        if (_schFormat != SchemaFormat.WebService && isMultipleNamespaceAndStreamingWriter)
+                        if (
+                            _schFormat != SchemaFormat.WebService
+                            && isMultipleNamespaceAndStreamingWriter
+                        )
                         {
                             _dc.WriteTo(xw);
                         }
@@ -940,7 +1097,11 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal XmlElement SchemaTree(XmlDocument xd, DataTable dt)
         {
-            _dsElement = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
+            _dsElement = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_ELEMENT,
+                Keywords.XSDNS
+            );
             _constraintNames = new ArrayList();
             _ds = dt.DataSet;
             _dc = xd;
@@ -953,15 +1114,22 @@ namespace System.Data
                 _autogenerated = new Hashtable();
             }
 
-            XmlElement rootSchema = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SCHEMA, Keywords.XSDNS);
+            XmlElement rootSchema = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_SCHEMA,
+                Keywords.XSDNS
+            );
             _sRoot = rootSchema;
             WriteSchemaRoot(rootSchema, dt.Namespace);
 
             _ = FillDataSetElement(xd, null, dt);
 
-            _constraintSeparator = xd.CreateElement(Keywords.XSD_PREFIX, "SHOULDNOTBEHERE", Keywords.XSDNS);
+            _constraintSeparator = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                "SHOULDNOTBEHERE",
+                Keywords.XSDNS
+            );
             _dsElement.AppendChild(_constraintSeparator);
-
 
             if (_schFormat != SchemaFormat.Remoting)
             {
@@ -1019,52 +1187,113 @@ namespace System.Data
             DataSet? dataSet = ds ?? dt!.DataSet;
             if (dataSet != null)
             {
-                _dsElement.SetAttribute(Keywords.NAME, XmlConvert.EncodeLocalName(dataSet.DataSetName));
+                _dsElement.SetAttribute(
+                    Keywords.NAME,
+                    XmlConvert.EncodeLocalName(dataSet.DataSetName)
+                );
                 _dsElement.SetAttribute(Keywords.MSD_ISDATASET, Keywords.MSDNS, Keywords.TRUE);
                 if (ds == null)
-                    _dsElement.SetAttribute(Keywords.MSD_MAINDATATABLE, Keywords.MSDNS, XmlConvert.EncodeLocalName(((dt!.Namespace.Length == 0) ? dt.TableName : (dt.Namespace + ":" + dt.TableName))));
+                    _dsElement.SetAttribute(
+                        Keywords.MSD_MAINDATATABLE,
+                        Keywords.MSDNS,
+                        XmlConvert.EncodeLocalName(
+                            (
+                                (dt!.Namespace.Length == 0)
+                                    ? dt.TableName
+                                    : (dt.Namespace + ":" + dt.TableName)
+                            )
+                        )
+                    );
 
                 // Add CaseSensitive and locale properties
                 if (dataSet.CaseSensitive)
                 {
-                    _dsElement.SetAttribute(Keywords.MSD_CASESENSITIVE, Keywords.MSDNS, Keywords.TRUE);
+                    _dsElement.SetAttribute(
+                        Keywords.MSD_CASESENSITIVE,
+                        Keywords.MSDNS,
+                        Keywords.TRUE
+                    );
                 }
-                if (dataSet.ShouldSerializeLocale() || !dataSet.Locale.Equals(CultureInfo.CurrentCulture))
+                if (
+                    dataSet.ShouldSerializeLocale()
+                    || !dataSet.Locale.Equals(CultureInfo.CurrentCulture)
+                )
                 {
-                    _dsElement.SetAttribute(Keywords.MSD_LOCALE, Keywords.MSDNS, dataSet.Locale.ToString());
+                    _dsElement.SetAttribute(
+                        Keywords.MSD_LOCALE,
+                        Keywords.MSDNS,
+                        dataSet.Locale.ToString()
+                    );
                 }
                 else
                 {
-                    _dsElement.SetAttribute(Keywords.MSD_USECURRENTLOCALE, Keywords.MSDNS, Keywords.TRUE);
+                    _dsElement.SetAttribute(
+                        Keywords.MSD_USECURRENTLOCALE,
+                        Keywords.MSDNS,
+                        Keywords.TRUE
+                    );
                 }
             }
             else
             { // No DataSet
                 if (dt != null)
                 {
-                    _dsElement.SetAttribute(Keywords.NAME, XmlConvert.EncodeLocalName("NewDataSet"));
+                    _dsElement.SetAttribute(
+                        Keywords.NAME,
+                        XmlConvert.EncodeLocalName("NewDataSet")
+                    );
                     _dsElement.SetAttribute(Keywords.MSD_ISDATASET, Keywords.MSDNS, Keywords.TRUE);
-                    _dsElement.SetAttribute(Keywords.MSD_MAINDATATABLE, Keywords.MSDNS, XmlConvert.EncodeLocalName(((dt.Namespace.Length == 0) ? dt.TableName : (dt.Namespace + ":" + dt.TableName))));
+                    _dsElement.SetAttribute(
+                        Keywords.MSD_MAINDATATABLE,
+                        Keywords.MSDNS,
+                        XmlConvert.EncodeLocalName(
+                            (
+                                (dt.Namespace.Length == 0)
+                                    ? dt.TableName
+                                    : (dt.Namespace + ":" + dt.TableName)
+                            )
+                        )
+                    );
 
                     if (dt.CaseSensitive)
                     {
                         // it is a bug to go and write casesensitive attrib as 'true', by default
-                        _dsElement.SetAttribute(Keywords.MSD_CASESENSITIVE, Keywords.MSDNS, Keywords.TRUE);
+                        _dsElement.SetAttribute(
+                            Keywords.MSD_CASESENSITIVE,
+                            Keywords.MSDNS,
+                            Keywords.TRUE
+                        );
                     }
                     if (dt.ShouldSerializeLocale() || !dt.Locale.Equals(CultureInfo.CurrentCulture))
                     {
-                        _dsElement.SetAttribute(Keywords.MSD_LOCALE, Keywords.MSDNS, dt.Locale.ToString());
+                        _dsElement.SetAttribute(
+                            Keywords.MSD_LOCALE,
+                            Keywords.MSDNS,
+                            dt.Locale.ToString()
+                        );
                     }
                     else
                     {
-                        _dsElement.SetAttribute(Keywords.MSD_USECURRENTLOCALE, Keywords.MSDNS, Keywords.TRUE);
+                        _dsElement.SetAttribute(
+                            Keywords.MSD_USECURRENTLOCALE,
+                            Keywords.MSDNS,
+                            Keywords.TRUE
+                        );
                     }
                 }
             }
 
-            XmlElement type = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_COMPLEXTYPE, Keywords.XSDNS);
+            XmlElement type = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_COMPLEXTYPE,
+                Keywords.XSDNS
+            );
             _dsElement.AppendChild(type);
-            XmlElement compositor = xd.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_CHOICE, Keywords.XSDNS);
+            XmlElement compositor = xd.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_CHOICE,
+                Keywords.XSDNS
+            );
             compositor.SetAttribute(Keywords.MINOCCURS, Keywords.ZERO_DIGIT);
             compositor.SetAttribute(Keywords.MAXOCCURS, Keywords.ZERO_OR_MORE);
             type.AppendChild(compositor);
@@ -1128,7 +1357,13 @@ namespace System.Data
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        internal void Save(DataSet? ds, DataTable? dt, XmlWriter xw, bool writeHierarchy, Converter<Type, string>? multipleTargetConverter)
+        internal void Save(
+            DataSet? ds,
+            DataTable? dt,
+            XmlWriter xw,
+            bool writeHierarchy,
+            Converter<Type, string>? multipleTargetConverter
+        )
         {
             _targetConverter = multipleTargetConverter;
 
@@ -1137,9 +1372,17 @@ namespace System.Data
             {
                 SetPath(xw);
             }
-            if (_schFormat == SchemaFormat.WebServiceSkipSchema && xw.WriteState == WriteState.Element)
+            if (
+                _schFormat == SchemaFormat.WebServiceSkipSchema
+                && xw.WriteState == WriteState.Element
+            )
             {
-                xw.WriteAttributeString(Keywords.MSD, Keywords.MSD_SCHEMASERIALIZATIONMODE, Keywords.MSDNS, Keywords.MSD_EXCLUDESCHEMA);
+                xw.WriteAttributeString(
+                    Keywords.MSD,
+                    Keywords.MSD_SCHEMASERIALIZATIONMODE,
+                    Keywords.MSDNS,
+                    Keywords.MSD_EXCLUDESCHEMA
+                );
             }
             SchemaTree(doc, xw, ds, dt, writeHierarchy);
         }
@@ -1151,14 +1394,30 @@ namespace System.Data
             // convert relation name to valid xml name
             root.SetAttribute(Keywords.NAME, XmlConvert.EncodeLocalName(rel.RelationName));
 
-            root.SetAttribute(Keywords.MSD_PARENT, Keywords.MSDNS, rel.ParentKey.Table.EncodedTableName);
-            root.SetAttribute(Keywords.MSD_CHILD, Keywords.MSDNS, rel.ChildKey.Table.EncodedTableName);
+            root.SetAttribute(
+                Keywords.MSD_PARENT,
+                Keywords.MSDNS,
+                rel.ParentKey.Table.EncodedTableName
+            );
+            root.SetAttribute(
+                Keywords.MSD_CHILD,
+                Keywords.MSDNS,
+                rel.ChildKey.Table.EncodedTableName
+            );
 
             if ((_ds == null) || (_ds.Tables.InternalIndexOf(rel.ParentKey.Table.TableName) == -3))
-                root.SetAttribute(Keywords.MSD_PARENTTABLENS, Keywords.MSDNS, rel.ParentKey.Table.Namespace);
+                root.SetAttribute(
+                    Keywords.MSD_PARENTTABLENS,
+                    Keywords.MSDNS,
+                    rel.ParentKey.Table.Namespace
+                );
 
             if ((_ds == null) || (_ds.Tables.InternalIndexOf(rel.ChildKey.Table.TableName) == -3))
-                root.SetAttribute(Keywords.MSD_CHILDTABLENS, Keywords.MSDNS, rel.ChildKey.Table.Namespace);
+                root.SetAttribute(
+                    Keywords.MSD_CHILDTABLENS,
+                    Keywords.MSDNS,
+                    rel.ChildKey.Table.Namespace
+                );
 
             DataColumn[] key = rel.ParentKey.ColumnsReference;
 
@@ -1210,18 +1469,24 @@ namespace System.Data
                 }
             }
             return null;
-        }// FindSimpleType
+        } // FindSimpleType
 
         internal XmlElement GetSchema(string NamespaceURI)
         {
             XmlElement? schemaEl = (XmlElement?)_namespaces![NamespaceURI];
             if (schemaEl == null)
             {
-                schemaEl = _dc!.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SCHEMA, Keywords.XSDNS);
+                schemaEl = _dc!.CreateElement(
+                    Keywords.XSD_PREFIX,
+                    Keywords.XSD_SCHEMA,
+                    Keywords.XSDNS
+                );
                 WriteSchemaRoot(schemaEl, NamespaceURI);
                 if (!string.IsNullOrEmpty(NamespaceURI))
                 {
-                    string prefix = Keywords.APP + Convert.ToString(++_prefixCount, CultureInfo.InvariantCulture);
+                    string prefix =
+                        Keywords.APP
+                        + Convert.ToString(++_prefixCount, CultureInfo.InvariantCulture);
                     _sRoot!.SetAttribute("xmlns:" + prefix, NamespaceURI);
                     schemaEl.SetAttribute("xmlns:" + prefix, NamespaceURI);
                     _prefixes![NamespaceURI] = prefix;
@@ -1231,7 +1496,12 @@ namespace System.Data
             return schemaEl;
         }
 
-        internal void HandleColumnType(DataColumn col, XmlDocument dc, XmlElement root, XmlElement schema)
+        internal void HandleColumnType(
+            DataColumn col,
+            XmlDocument dc,
+            XmlElement root,
+            XmlElement schema
+        )
         {
             Debug.Assert(_prefixes != null);
 
@@ -1253,14 +1523,24 @@ namespace System.Data
                     if (!string.IsNullOrEmpty(name))
                     {
                         // For remoting, always need to work with root schema's namespace
-                        string nSpace = (_schFormat != SchemaFormat.Remoting) ? stNode.Namespace :
-                                                   (col.Table!.DataSet != null ? col.Table.DataSet.Namespace : col.Table.Namespace);
+                        string nSpace =
+                            (_schFormat != SchemaFormat.Remoting)
+                                ? stNode.Namespace
+                                : (
+                                    col.Table!.DataSet != null
+                                        ? col.Table.DataSet.Namespace
+                                        : col.Table.Namespace
+                                );
 
                         // for remoting we need to use columns NS, for other cases it is wrong to get Columns NS, we need to take type's namespace
                         XmlElement schNode = GetSchema(nSpace);
 
                         //SchNode To Ensure BaseSimpleType Prefix is Generated
-                        if (stNode.BaseSimpleType != null && stNode.BaseSimpleType.Namespace != null && stNode.BaseSimpleType.Namespace.Length > 0)
+                        if (
+                            stNode.BaseSimpleType != null
+                            && stNode.BaseSimpleType.Namespace != null
+                            && stNode.BaseSimpleType.Namespace.Length > 0
+                        )
                             GetSchema(stNode.BaseSimpleType.Namespace); //it will ensure a prefix has been created for this namespace
 
                         type = stNode.ToNode(dc, _prefixes, (_schFormat == SchemaFormat.Remoting));
@@ -1298,7 +1578,11 @@ namespace System.Data
                     else
                     {
                         //SchNode To Ensure BaseSimpleType Prefix is Generated
-                        if (stNode.BaseSimpleType != null && stNode.BaseSimpleType.Namespace != null && stNode.BaseSimpleType.Namespace.Length > 0)
+                        if (
+                            stNode.BaseSimpleType != null
+                            && stNode.BaseSimpleType.Namespace != null
+                            && stNode.BaseSimpleType.Namespace.Length > 0
+                        )
                             GetSchema(stNode.BaseSimpleType.Namespace); //it will ensure a prefix has been created for this namespace
                         type = stNode.ToNode(dc, _prefixes, _schFormat == SchemaFormat.Remoting);
                         root.AppendChild(type);
@@ -1307,7 +1591,11 @@ namespace System.Data
                     stNode = stNode.BaseSimpleType;
                 }
             }
-            else if (col.XmlDataType != null && col.XmlDataType.Length != 0 && XSDSchema.IsXsdType(col.XmlDataType))
+            else if (
+                col.XmlDataType != null
+                && col.XmlDataType.Length != 0
+                && XSDSchema.IsXsdType(col.XmlDataType)
+            )
             {
                 root.SetAttribute(keyword, XSDSchema.QualifiedName(col.XmlDataType));
             }
@@ -1338,11 +1626,20 @@ namespace System.Data
             if (col.DataType != typeof(string))
             {
                 string dt = XmlDataTypeName(col.DataType);
-                if ((col.IsSqlType && ((dt.Length == 0) || col.ImplementsINullable)) || (typeof(SqlXml) == col.DataType) || col.DataType == typeof(DateTimeOffset) || col.DataType == typeof(System.Numerics.BigInteger))
+                if (
+                    (col.IsSqlType && ((dt.Length == 0) || col.ImplementsINullable))
+                    || (typeof(SqlXml) == col.DataType)
+                    || col.DataType == typeof(DateTimeOffset)
+                    || col.DataType == typeof(System.Numerics.BigInteger)
+                )
                 { // no need to check if it is Sql typee if it already implements INullable,
                     root.SetAttribute(Keywords.MSD_DATATYPE, Keywords.MSDNS, col.DataType.FullName);
                 }
-                else if ((dt.Length == 0) || col.ImplementsINullable || ((dt == Keywords.XSD_ANYTYPE) && (col.XmlDataType != Keywords.XSD_ANYTYPE)))
+                else if (
+                    (dt.Length == 0)
+                    || col.ImplementsINullable
+                    || ((dt == Keywords.XSD_ANYTYPE) && (col.XmlDataType != Keywords.XSD_ANYTYPE))
+                )
                 {
                     // in Whidbey, XmlDataTypeName function changed to return "anyType" for typeof(Object)
                     // should still always hit this code path for all non-built in types
@@ -1365,10 +1662,18 @@ namespace System.Data
             }
 
             if (col.AutoIncrementSeed != 0)
-                root.SetAttribute("AutoIncrementSeed", Keywords.MSDNS, col.AutoIncrementSeed.ToString(CultureInfo.InvariantCulture));
+                root.SetAttribute(
+                    "AutoIncrementSeed",
+                    Keywords.MSDNS,
+                    col.AutoIncrementSeed.ToString(CultureInfo.InvariantCulture)
+                );
 
             if (col.AutoIncrementStep != 1)
-                root.SetAttribute("AutoIncrementStep", Keywords.MSDNS, col.AutoIncrementStep.ToString(CultureInfo.InvariantCulture));
+                root.SetAttribute(
+                    "AutoIncrementStep",
+                    Keywords.MSDNS,
+                    col.AutoIncrementStep.ToString(CultureInfo.InvariantCulture)
+                );
 
             if (col.Caption != col.ColumnName)
                 root.SetAttribute("Caption", Keywords.MSDNS, col.Caption);
@@ -1376,7 +1681,10 @@ namespace System.Data
             if (col.Prefix.Length != 0)
                 root.SetAttribute("Prefix", Keywords.MSDNS, col.Prefix);
 
-            if (col.DataType == typeof(DateTime) && col.DateTimeMode != DataSetDateTime.UnspecifiedLocal)
+            if (
+                col.DataType == typeof(DateTime)
+                && col.DateTimeMode != DataSetDateTime.UnspecifiedLocal
+            )
             {
                 root.SetAttribute("DateTimeMode", Keywords.MSDNS, col.DateTimeMode.ToString());
             }
@@ -1384,7 +1692,9 @@ namespace System.Data
 
         private string FindTargetNamespace(DataTable table)
         {
-            string tgNamespace = table.TypeName.IsEmpty ? table.Namespace : table.TypeName.Namespace;
+            string tgNamespace = table.TypeName.IsEmpty
+                ? table.Namespace
+                : table.TypeName.Namespace;
             if (string.IsNullOrEmpty(tgNamespace))
             {
                 DataRelation[] nestedParentRelations = table.NestedParentRelations;
@@ -1394,7 +1704,7 @@ namespace System.Data
                     {
                         DataTable parentTable = nestedParentRelations[i].ParentTable;
                         if (table != parentTable)
-                        {// table can be self nested so it may go to infinite loop!
+                        { // table can be self nested so it may go to infinite loop!
                             tgNamespace = FindTargetNamespace(parentTable);
                             if (!string.IsNullOrEmpty(tgNamespace))
                             {
@@ -1412,7 +1722,12 @@ namespace System.Data
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        internal XmlElement HandleColumn(DataColumn col, XmlDocument dc, XmlElement schema, bool fWriteOrdinal)
+        internal XmlElement HandleColumn(
+            DataColumn col,
+            XmlDocument dc,
+            XmlElement schema,
+            bool fWriteOrdinal
+        )
         {
             Debug.Assert(_prefixes != null);
             Debug.Assert(_dc != null);
@@ -1422,7 +1737,10 @@ namespace System.Data
 
             Debug.Assert(col.ColumnMapping != MappingType.SimpleContent, "Illegal state");
 
-            string refString = (col.ColumnMapping != MappingType.Element) ? Keywords.XSD_ATTRIBUTE : Keywords.XSD_ELEMENT;
+            string refString =
+                (col.ColumnMapping != MappingType.Element)
+                    ? Keywords.XSD_ATTRIBUTE
+                    : Keywords.XSD_ELEMENT;
             root = dc.CreateElement(Keywords.XSD_PREFIX, refString, Keywords.XSDNS);
 
             // First add any attributes.
@@ -1444,7 +1762,6 @@ namespace System.Data
             else
                 AddColumnProperties(col, root);
 
-
             AddExtendedProperties(col._extendedProperties, root);
             HandleColumnType(col, dc, root, schema);
             if (col.ColumnMapping == MappingType.Hidden)
@@ -1454,14 +1771,21 @@ namespace System.Data
 
                 if (!col.DefaultValueIsNull)
                     if (col.DataType == typeof(bool))
-                        root.SetAttribute(Keywords.MSD_DEFAULTVALUE, Keywords.MSDNS, (bool)(col.DefaultValue) ? Keywords.TRUE : Keywords.FALSE);
+                        root.SetAttribute(
+                            Keywords.MSD_DEFAULTVALUE,
+                            Keywords.MSDNS,
+                            (bool)(col.DefaultValue) ? Keywords.TRUE : Keywords.FALSE
+                        );
                     else
                     {
                         XmlTreeGen.ValidateColumnMapping(col.DataType);
-                        root.SetAttribute(Keywords.MSD_DEFAULTVALUE, Keywords.MSDNS, col.ConvertObjectToXml(col.DefaultValue));
+                        root.SetAttribute(
+                            Keywords.MSD_DEFAULTVALUE,
+                            Keywords.MSDNS,
+                            col.ConvertObjectToXml(col.DefaultValue)
+                        );
                     }
             }
-
 
             if ((!col.DefaultValueIsNull) && (col.ColumnMapping != MappingType.Hidden))
             {
@@ -1470,24 +1794,38 @@ namespace System.Data
                 {
                     if (col.DataType == typeof(bool))
                     {
-                        root.SetAttribute(Keywords.MSD_DEFAULTVALUE, Keywords.MSDNS, (bool)(col.DefaultValue) ? Keywords.TRUE : Keywords.FALSE);
+                        root.SetAttribute(
+                            Keywords.MSD_DEFAULTVALUE,
+                            Keywords.MSDNS,
+                            (bool)(col.DefaultValue) ? Keywords.TRUE : Keywords.FALSE
+                        );
                     }
                     else
                     { // CDT / UDT columns cn not be mapped to Attribute also
-                        root.SetAttribute(Keywords.MSD_DEFAULTVALUE, Keywords.MSDNS, col.ConvertObjectToXml(col.DefaultValue));
+                        root.SetAttribute(
+                            Keywords.MSD_DEFAULTVALUE,
+                            Keywords.MSDNS,
+                            col.ConvertObjectToXml(col.DefaultValue)
+                        );
                     }
                 }
                 else
                 { // Element Column : need to handle CDT
                     if (col.DataType == typeof(bool))
                     {
-                        root.SetAttribute(Keywords.DEFAULT, (bool)(col.DefaultValue) ? Keywords.TRUE : Keywords.FALSE);
+                        root.SetAttribute(
+                            Keywords.DEFAULT,
+                            (bool)(col.DefaultValue) ? Keywords.TRUE : Keywords.FALSE
+                        );
                     }
                     else
                     {
                         if (!col.IsCustomType)
                         { // built in type
-                            root.SetAttribute(Keywords.DEFAULT, col.ConvertObjectToXml(col.DefaultValue));
+                            root.SetAttribute(
+                                Keywords.DEFAULT,
+                                col.ConvertObjectToXml(col.DefaultValue)
+                            );
                         }
                         else
                         { // UDT column
@@ -1500,13 +1838,25 @@ namespace System.Data
                 root.SetAttribute(Keywords.TARGETNAMESPACE, Keywords.MSDNS, col.Namespace);
             else
             {
-                if ((col.Namespace != (col.Table!.TypeName.IsEmpty ? col.Table.Namespace : col.Table.TypeName.Namespace)) && (col.Namespace.Length != 0))
+                if (
+                    (
+                        col.Namespace
+                        != (
+                            col.Table!.TypeName.IsEmpty
+                                ? col.Table.Namespace
+                                : col.Table.TypeName.Namespace
+                        )
+                    ) && (col.Namespace.Length != 0)
+                )
                 {
                     XmlElement schNode = GetSchema(col.Namespace);
                     if (FindTypeNode(schNode, col.EncodedColumnName) == null)
                         schNode.AppendChild(root);
                     root = _dc.CreateElement(Keywords.XSD_PREFIX, refString, Keywords.XSDNS);
-                    root.SetAttribute(Keywords.REF, _prefixes[col.Namespace] + ":" + col.EncodedColumnName);
+                    root.SetAttribute(
+                        Keywords.REF,
+                        _prefixes[col.Namespace] + ":" + col.EncodedColumnName
+                    );
                     if (col.Table.Namespace != _ds!.Namespace)
                     {
                         _ = GetSchema(col.Table.Namespace);
@@ -1514,29 +1864,31 @@ namespace System.Data
                 }
             }
 
-
             minOccurs = (col.AllowDBNull) ? 0 : 1;
-
 
             // March 2001 change
             if (col.ColumnMapping == MappingType.Attribute && minOccurs != 0)
                 root.SetAttribute(Keywords.USE, Keywords.REQUIRED);
 
-
             if (col.ColumnMapping == MappingType.Hidden)
             {
                 root.SetAttribute(Keywords.USE, Keywords.PROHIBITED);
             }
-            else
-                if (col.ColumnMapping != MappingType.Attribute && minOccurs != 1)
-                root.SetAttribute(Keywords.MINOCCURS, minOccurs.ToString(CultureInfo.InvariantCulture));
+            else if (col.ColumnMapping != MappingType.Attribute && minOccurs != 1)
+                root.SetAttribute(
+                    Keywords.MINOCCURS,
+                    minOccurs.ToString(CultureInfo.InvariantCulture)
+                );
 
             if ((col.ColumnMapping == MappingType.Element) && fWriteOrdinal)
-                root.SetAttribute(Keywords.MSD_ORDINAL, Keywords.MSDNS, col.Ordinal.ToString(CultureInfo.InvariantCulture));
+                root.SetAttribute(
+                    Keywords.MSD_ORDINAL,
+                    Keywords.MSDNS,
+                    col.Ordinal.ToString(CultureInfo.InvariantCulture)
+                );
 
             return root;
         }
-
 
         internal static string TranslateAcceptRejectRule(AcceptRejectRule rule) =>
             rule switch
@@ -1575,10 +1927,12 @@ namespace System.Data
 
                 XmlElement child = (XmlElement)n;
 
-                if (XSDSchema.FEqualIdentity(child, Keywords.XSD_ELEMENT, Keywords.XSDNS) ||
-                    XSDSchema.FEqualIdentity(child, Keywords.XSD_ATTRIBUTE, Keywords.XSDNS) ||
-                    XSDSchema.FEqualIdentity(child, Keywords.XSD_COMPLEXTYPE, Keywords.XSDNS) ||
-                    XSDSchema.FEqualIdentity(child, Keywords.XSD_SIMPLETYPE, Keywords.XSDNS))
+                if (
+                    XSDSchema.FEqualIdentity(child, Keywords.XSD_ELEMENT, Keywords.XSDNS)
+                    || XSDSchema.FEqualIdentity(child, Keywords.XSD_ATTRIBUTE, Keywords.XSDNS)
+                    || XSDSchema.FEqualIdentity(child, Keywords.XSD_COMPLEXTYPE, Keywords.XSDNS)
+                    || XSDSchema.FEqualIdentity(child, Keywords.XSD_SIMPLETYPE, Keywords.XSDNS)
+                )
                 {
                     if (child.GetAttribute(Keywords.NAME) == strType)
                         return child;
@@ -1604,7 +1958,13 @@ namespace System.Data
             {
                 if (!hasElements && col.ColumnMapping == MappingType.Element)
                     hasElements = true;
-                if (!hasAttributes && (col.ColumnMapping == MappingType.Attribute || col.ColumnMapping == MappingType.Hidden))
+                if (
+                    !hasAttributes
+                    && (
+                        col.ColumnMapping == MappingType.Attribute
+                        || col.ColumnMapping == MappingType.Hidden
+                    )
+                )
                     hasAttributes = !AutoGenerated(col);
                 if (hasAttributes && hasElements)
                     return true;
@@ -1651,6 +2011,7 @@ namespace System.Data
 
             return false;
         }
+
         internal static bool AutoGenerated(DataRelation rel)
         {
             string rName = rel.ParentTable.TableName + "_" + rel.ChildTable.TableName;
@@ -1660,6 +2021,7 @@ namespace System.Data
                 return false;
             return true;
         }
+
         internal static bool AutoGenerated(UniqueConstraint unique)
         {
             // for now we use just this simple logic for the columns.
@@ -1714,17 +2076,29 @@ namespace System.Data
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        internal XmlElement HandleTable(DataTable table, XmlDocument dc, XmlElement schema, bool genNested)
+        internal XmlElement HandleTable(
+            DataTable table,
+            XmlDocument dc,
+            XmlElement schema,
+            bool genNested
+        )
         {
             Debug.Assert(_prefixes != null);
             Debug.Assert(_dc != null);
             Debug.Assert(_dsElement != null);
 
-            XmlElement root = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
+            XmlElement root = dc.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_ELEMENT,
+                Keywords.XSDNS
+            );
             bool fWriteOrdinals;
             bool fUnqualified = false;
 
-            if (((table.DataSet == null) || (_ds != null && table.Namespace != _ds.Namespace)) && (_schFormat == SchemaFormat.Remoting))
+            if (
+                ((table.DataSet == null) || (_ds != null && table.Namespace != _ds.Namespace))
+                && (_schFormat == SchemaFormat.Remoting)
+            )
                 root.SetAttribute(Keywords.TARGETNAMESPACE, Keywords.MSDNS, table.Namespace);
 
             // First add any attributes.
@@ -1769,10 +2143,13 @@ namespace System.Data
                 }
             }
 
-
             if (table.ShouldSerializeCaseSensitive())
             {
-                root.SetAttribute(Keywords.MSD_CASESENSITIVE, Keywords.MSDNS, table.CaseSensitive.ToString());
+                root.SetAttribute(
+                    Keywords.MSD_CASESENSITIVE,
+                    Keywords.MSDNS,
+                    table.CaseSensitive.ToString()
+                );
             }
             if (table.ShouldSerializeLocale())
             {
@@ -1796,7 +2173,11 @@ namespace System.Data
                         DataRelationCollection childRelations = table.ChildRelations;
                         for (int j = 0; j < childRelations.Count; j++)
                         {
-                            if (childRelations[j].Nested && childRelations[j].ParentKey.ColumnsReference.Length == 1 && childRelations[j].ParentKey.ColumnsReference[0] == col)
+                            if (
+                                childRelations[j].Nested
+                                && childRelations[j].ParentKey.ColumnsReference.Length == 1
+                                && childRelations[j].ParentKey.ColumnsReference[0] == col
+                            )
                                 realCount++;
                         }
                     }
@@ -1804,7 +2185,6 @@ namespace System.Data
                     if (col.ColumnMapping == MappingType.Element)
                         realCount++;
                 }
-
 
             if ((table._repeatableElement) && (realCount == 1))
             {
@@ -1822,7 +2202,11 @@ namespace System.Data
             }
 
             // Now add the type information nested inside the element or global.
-            XmlElement type = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_COMPLEXTYPE, Keywords.XSDNS);
+            XmlElement type = dc.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_COMPLEXTYPE,
+                Keywords.XSDNS
+            );
 
             if (!table.TypeName.IsEmpty && _schFormat != SchemaFormat.Remoting)
             {
@@ -1832,7 +2216,9 @@ namespace System.Data
                     if (_ds == null)
                         typeSchema = GetSchema(table.Namespace);
                     else
-                        typeSchema = fUnqualified ? GetSchema(_ds.Namespace) : GetSchema(table.Namespace);
+                        typeSchema = fUnqualified
+                            ? GetSchema(_ds.Namespace)
+                            : GetSchema(table.Namespace);
                 }
 
                 if (FindTypeNode(typeSchema, table.TypeName.Name) == null)
@@ -1848,7 +2234,13 @@ namespace System.Data
             if (!table.TypeName.IsEmpty)
             {
                 if (_schFormat != SchemaFormat.Remoting)
-                    root.SetAttribute(Keywords.TYPE, NewDiffgramGen.QualifiedName((string)_prefixes[table.TypeName.Namespace]!, table.TypeName.Name));
+                    root.SetAttribute(
+                        Keywords.TYPE,
+                        NewDiffgramGen.QualifiedName(
+                            (string)_prefixes[table.TypeName.Namespace]!,
+                            table.TypeName.Name
+                        )
+                    );
             }
 
             XmlElement? compositor;
@@ -1857,7 +2249,11 @@ namespace System.Data
 
             if (colTxt != null)
             {
-                XmlElement sc = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SIMPLECONTENT, Keywords.XSDNS);
+                XmlElement sc = dc.CreateElement(
+                    Keywords.XSD_PREFIX,
+                    Keywords.XSD_SIMPLECONTENT,
+                    Keywords.XSDNS
+                );
 
                 if (colTxt.GetType() != typeof(DataColumn))
                     AddXdoProperties(colTxt, sc);
@@ -1870,20 +2266,36 @@ namespace System.Data
                 if (!colTxt.DefaultValueIsNull)
                 {
                     XmlTreeGen.ValidateColumnMapping(colTxt.DataType);
-                    sc.SetAttribute(Keywords.MSD_DEFAULTVALUE, Keywords.MSDNS, colTxt.ConvertObjectToXml(colTxt.DefaultValue));
+                    sc.SetAttribute(
+                        Keywords.MSD_DEFAULTVALUE,
+                        Keywords.MSDNS,
+                        colTxt.ConvertObjectToXml(colTxt.DefaultValue)
+                    );
                 }
 
                 sc.SetAttribute(Keywords.MSD_COLUMNNAME, Keywords.MSDNS, colTxt.ColumnName);
-                sc.SetAttribute(Keywords.MSD_ORDINAL, Keywords.MSDNS, colTxt.Ordinal.ToString(CultureInfo.InvariantCulture));
+                sc.SetAttribute(
+                    Keywords.MSD_ORDINAL,
+                    Keywords.MSDNS,
+                    colTxt.Ordinal.ToString(CultureInfo.InvariantCulture)
+                );
 
                 type.AppendChild(sc);
-                XmlElement ext = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_EXTENSION, Keywords.XSDNS);
+                XmlElement ext = dc.CreateElement(
+                    Keywords.XSD_PREFIX,
+                    Keywords.XSD_EXTENSION,
+                    Keywords.XSDNS
+                );
                 sc.AppendChild(ext);
                 HandleColumnType(colTxt, dc, ext, schema);
                 type = ext;
             }
 
-            compositor = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SEQUENCE, Keywords.XSDNS);
+            compositor = dc.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_SEQUENCE,
+                Keywords.XSDNS
+            );
             type.AppendChild(compositor);
 
             fWriteOrdinals = HasMixedColumns(table);
@@ -1895,7 +2307,11 @@ namespace System.Data
                 if (col.ColumnMapping == MappingType.SimpleContent)
                     continue;
 
-                if (col.ColumnMapping == MappingType.Attribute || col.ColumnMapping == MappingType.Element || col.ColumnMapping == MappingType.Hidden)
+                if (
+                    col.ColumnMapping == MappingType.Attribute
+                    || col.ColumnMapping == MappingType.Element
+                    || col.ColumnMapping == MappingType.Hidden
+                )
                 {
                     if (IsAutoGenerated(col)) // skip automanifactured columns
                         continue;
@@ -1923,13 +2339,21 @@ namespace System.Data
 
                     if (childTable == table)
                     { // self join
-                        NestedTable = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
+                        NestedTable = dc.CreateElement(
+                            Keywords.XSD_PREFIX,
+                            Keywords.XSD_ELEMENT,
+                            Keywords.XSDNS
+                        );
 
                         NestedTable.SetAttribute(Keywords.REF, table.EncodedTableName);
                     }
                     else if (childTable.NestedParentsCount > 1)
                     { // skip relations with multiple parents
-                        NestedTable = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
+                        NestedTable = dc.CreateElement(
+                            Keywords.XSD_PREFIX,
+                            Keywords.XSD_ELEMENT,
+                            Keywords.XSDNS
+                        );
                         NestedTable.SetAttribute(Keywords.REF, childTable.EncodedTableName);
                     }
                     else
@@ -1941,7 +2365,11 @@ namespace System.Data
                         NestedTable.SetAttribute(Keywords.MAXOCCURS, Keywords.ZERO_OR_MORE);
                     }
 
-                    if ((childTable.Namespace == table.Namespace) || (childTable.Namespace.Length == 0) || _schFormat == SchemaFormat.Remoting)
+                    if (
+                        (childTable.Namespace == table.Namespace)
+                        || (childTable.Namespace.Length == 0)
+                        || _schFormat == SchemaFormat.Remoting
+                    )
                     {
                         compositor.AppendChild(NestedTable);
                     }
@@ -1949,18 +2377,35 @@ namespace System.Data
                     {
                         if (childTable.NestedParentsCount <= 1)
                             GetSchema(childTable.Namespace).AppendChild(NestedTable);
-                        NestedTable = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ELEMENT, Keywords.XSDNS);
-                        NestedTable.SetAttribute(Keywords.REF, ((string)_prefixes[childTable.Namespace]!) + ':' + childTable.EncodedTableName);
+                        NestedTable = dc.CreateElement(
+                            Keywords.XSD_PREFIX,
+                            Keywords.XSD_ELEMENT,
+                            Keywords.XSDNS
+                        );
+                        NestedTable.SetAttribute(
+                            Keywords.REF,
+                            ((string)_prefixes[childTable.Namespace]!)
+                                + ':'
+                                + childTable.EncodedTableName
+                        );
                         compositor.AppendChild(NestedTable);
                     }
 
                     if (childRelations[j].ChildKeyConstraint != null)
                         continue; // we write the relation using the constraint
 
-                    XmlElement nodeAnn = _dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_ANNOTATION, Keywords.XSDNS);
+                    XmlElement nodeAnn = _dc.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_ANNOTATION,
+                        Keywords.XSDNS
+                    );
                     NestedTable.PrependChild(nodeAnn);
 
-                    XmlElement nodeApp = _dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_APPINFO, Keywords.XSDNS);
+                    XmlElement nodeApp = _dc.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_APPINFO,
+                        Keywords.XSDNS
+                    );
                     nodeAnn.AppendChild(nodeApp);
 
                     nodeApp.AppendChild(HandleRelation(childRelations[j], dc));
@@ -1973,14 +2418,20 @@ namespace System.Data
 
             // Output all constraints.
 
-
             ConstraintCollection constraints = table.Constraints;
-            XmlElement selector, field;
-            string xpathprefix = (_ds != null) ? (_ds.Namespace.Length != 0 ? Keywords.MSTNS_PREFIX : string.Empty) : string.Empty;
+            XmlElement selector,
+                field;
+            string xpathprefix =
+                (_ds != null)
+                    ? (_ds.Namespace.Length != 0 ? Keywords.MSTNS_PREFIX : string.Empty)
+                    : string.Empty;
             if (_schFormat != SchemaFormat.Remoting)
             {
                 GetSchema(table.Namespace); // to ensure prefix handling
-                xpathprefix = table.Namespace.Length != 0 ? (string)_prefixes[table.Namespace]! + ':' : string.Empty;
+                xpathprefix =
+                    table.Namespace.Length != 0
+                        ? (string)_prefixes[table.Namespace]! + ':'
+                        : string.Empty;
             }
 
             for (int i = 0; i < constraints.Count; i++)
@@ -1996,29 +2447,52 @@ namespace System.Data
                     // special case of the ghosted constraints:
                     fields = unique.Key.ColumnsReference;
 
-
-                    constraint = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_UNIQUE, Keywords.XSDNS);
+                    constraint = dc.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_UNIQUE,
+                        Keywords.XSDNS
+                    );
 
                     if ((_ds == null) || (_ds.Tables.InternalIndexOf(table.TableName) == -3))
-                        constraint.SetAttribute(Keywords.MSD_TABLENS, Keywords.MSDNS, table.Namespace);
+                        constraint.SetAttribute(
+                            Keywords.MSD_TABLENS,
+                            Keywords.MSDNS,
+                            table.Namespace
+                        );
                     // convert constraint name to valid xml name
-                    constraint.SetAttribute(Keywords.NAME, XmlConvert.EncodeLocalName(unique.SchemaName));
+                    constraint.SetAttribute(
+                        Keywords.NAME,
+                        XmlConvert.EncodeLocalName(unique.SchemaName)
+                    );
 
                     if (unique.ConstraintName != unique.SchemaName)
-                        constraint.SetAttribute(Keywords.MSD_CONSTRAINTNAME, Keywords.MSDNS, unique.ConstraintName);
+                        constraint.SetAttribute(
+                            Keywords.MSD_CONSTRAINTNAME,
+                            Keywords.MSDNS,
+                            unique.ConstraintName
+                        );
 
                     AddExtendedProperties(unique._extendedProperties, constraint);
 
-
-                    selector = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SELECTOR, Keywords.XSDNS);
-                    selector.SetAttribute(Keywords.XSD_XPATH, ".//" + xpathprefix + table.EncodedTableName);
+                    selector = dc.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_SELECTOR,
+                        Keywords.XSDNS
+                    );
+                    selector.SetAttribute(
+                        Keywords.XSD_XPATH,
+                        ".//" + xpathprefix + table.EncodedTableName
+                    );
 
                     constraint.AppendChild(selector);
 
-
                     if (unique.IsPrimaryKey)
                     {
-                        constraint.SetAttribute(Keywords.MSD_PRIMARYKEY, Keywords.MSDNS, Keywords.TRUE);
+                        constraint.SetAttribute(
+                            Keywords.MSD_PRIMARYKEY,
+                            Keywords.MSDNS,
+                            Keywords.TRUE
+                        );
                     }
 
                     if (0 < fields.Length)
@@ -2041,11 +2515,18 @@ namespace System.Data
                             {
                                 encodedName.Append(xpathprefix).Append(fields[k].EncodedColumnName);
                             }
-                            if ((fields[k].ColumnMapping == MappingType.Attribute) || (fields[k].ColumnMapping == MappingType.Hidden))
+                            if (
+                                (fields[k].ColumnMapping == MappingType.Attribute)
+                                || (fields[k].ColumnMapping == MappingType.Hidden)
+                            )
                             {
                                 encodedName.Insert(0, '@');
                             }
-                            field = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_FIELD, Keywords.XSDNS);
+                            field = dc.CreateElement(
+                                Keywords.XSD_PREFIX,
+                                Keywords.XSD_FIELD,
+                                Keywords.XSDNS
+                            );
                             field.SetAttribute(Keywords.XSD_XPATH, encodedName.ToString());
 
                             constraint.AppendChild(field);
@@ -2060,32 +2541,54 @@ namespace System.Data
 
                     if (_tables.Count > 0)
                     {
-                        if (!_tables.Contains(foreign.RelatedTable) || !_tables.Contains(foreign.Table))
+                        if (
+                            !_tables.Contains(foreign.RelatedTable)
+                            || !_tables.Contains(foreign.Table)
+                        )
                             continue;
                     }
 
                     if (IsAutoGenerated(foreign))
                         continue;
 
-
                     DataRelation? rel = foreign.FindParentRelation();
 
                     // special case of the ghosted constraints:
                     fields = foreign.RelatedColumnsReference;
 
-
-                    UniqueConstraint? _constraint = (UniqueConstraint?)foreign.RelatedTable.Constraints.FindConstraint(new UniqueConstraint("TEMP", fields));
+                    UniqueConstraint? _constraint = (UniqueConstraint?)
+                        foreign.RelatedTable.Constraints.FindConstraint(
+                            new UniqueConstraint("TEMP", fields)
+                        );
 
                     if (_constraint == null)
                     {
-                        constraint = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_KEY, Keywords.XSDNS);
-                        constraint.SetAttribute(Keywords.NAME, XmlConvert.EncodeLocalName(foreign.SchemaName));
+                        constraint = dc.CreateElement(
+                            Keywords.XSD_PREFIX,
+                            Keywords.XSD_KEY,
+                            Keywords.XSDNS
+                        );
+                        constraint.SetAttribute(
+                            Keywords.NAME,
+                            XmlConvert.EncodeLocalName(foreign.SchemaName)
+                        );
 
                         if ((_ds == null) || (_ds.Tables.InternalIndexOf(table.TableName) == -3))
-                            constraint.SetAttribute(Keywords.MSD_TABLENS, Keywords.MSDNS, table.Namespace);
+                            constraint.SetAttribute(
+                                Keywords.MSD_TABLENS,
+                                Keywords.MSDNS,
+                                table.Namespace
+                            );
 
-                        selector = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SELECTOR, Keywords.XSDNS);
-                        selector.SetAttribute(Keywords.XSD_XPATH, ".//" + xpathprefix + foreign.RelatedTable.EncodedTableName);
+                        selector = dc.CreateElement(
+                            Keywords.XSD_PREFIX,
+                            Keywords.XSD_SELECTOR,
+                            Keywords.XSDNS
+                        );
+                        selector.SetAttribute(
+                            Keywords.XSD_XPATH,
+                            ".//" + xpathprefix + foreign.RelatedTable.EncodedTableName
+                        );
 
                         constraint.AppendChild(selector);
 
@@ -2101,19 +2604,30 @@ namespace System.Data
                                     GetSchema(fields[k].Namespace);
                                     if (!string.IsNullOrEmpty(fields[k].Namespace))
                                     {
-                                        encodedName.Append(_prefixes[fields[k].Namespace]).Append(':');
+                                        encodedName
+                                            .Append(_prefixes[fields[k].Namespace])
+                                            .Append(':');
                                     }
                                     encodedName.Append(fields[k].EncodedColumnName);
                                 }
                                 else
                                 {
-                                    encodedName.Append(xpathprefix).Append(fields[k].EncodedColumnName);
+                                    encodedName
+                                        .Append(xpathprefix)
+                                        .Append(fields[k].EncodedColumnName);
                                 }
-                                if ((fields[k].ColumnMapping == MappingType.Attribute) || (fields[k].ColumnMapping == MappingType.Hidden))
+                                if (
+                                    (fields[k].ColumnMapping == MappingType.Attribute)
+                                    || (fields[k].ColumnMapping == MappingType.Hidden)
+                                )
                                 {
                                     encodedName.Insert(0, '@');
                                 }
-                                field = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_FIELD, Keywords.XSDNS);
+                                field = dc.CreateElement(
+                                    Keywords.XSD_PREFIX,
+                                    Keywords.XSD_FIELD,
+                                    Keywords.XSDNS
+                                );
                                 field.SetAttribute(Keywords.XSD_XPATH, encodedName.ToString());
 
                                 constraint.AppendChild(field);
@@ -2123,53 +2637,115 @@ namespace System.Data
                         _dsElement.InsertBefore(constraint, _constraintSeparator);
                     }
 
-                    constraint = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_KEYREF, Keywords.XSDNS);
+                    constraint = dc.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_KEYREF,
+                        Keywords.XSDNS
+                    );
                     // convert constraint name to valid xml name
-                    constraint.SetAttribute(Keywords.NAME, XmlConvert.EncodeLocalName(foreign.SchemaName));
+                    constraint.SetAttribute(
+                        Keywords.NAME,
+                        XmlConvert.EncodeLocalName(foreign.SchemaName)
+                    );
 
-                    if ((_ds == null) || (_ds.Tables.InternalIndexOf(foreign.RelatedTable.TableName) == -3)) // if there is a conflicting name/namespace only
-                        constraint.SetAttribute(Keywords.MSD_TABLENS, Keywords.MSDNS, foreign.Table!.Namespace);
+                    if (
+                        (_ds == null)
+                        || (_ds.Tables.InternalIndexOf(foreign.RelatedTable.TableName) == -3)
+                    ) // if there is a conflicting name/namespace only
+                        constraint.SetAttribute(
+                            Keywords.MSD_TABLENS,
+                            Keywords.MSDNS,
+                            foreign.Table!.Namespace
+                        );
 
                     if (_constraint == null)
-                        constraint.SetAttribute(Keywords.REFER, XmlConvert.EncodeLocalName(foreign.SchemaName));
+                        constraint.SetAttribute(
+                            Keywords.REFER,
+                            XmlConvert.EncodeLocalName(foreign.SchemaName)
+                        );
                     else
-                        constraint.SetAttribute(Keywords.REFER, XmlConvert.EncodeLocalName(_constraint.SchemaName));
+                        constraint.SetAttribute(
+                            Keywords.REFER,
+                            XmlConvert.EncodeLocalName(_constraint.SchemaName)
+                        );
 
-                    AddExtendedProperties(foreign._extendedProperties, constraint, typeof(ForeignKeyConstraint));
+                    AddExtendedProperties(
+                        foreign._extendedProperties,
+                        constraint,
+                        typeof(ForeignKeyConstraint)
+                    );
 
                     if (foreign.ConstraintName != foreign.SchemaName)
-                        constraint.SetAttribute(Keywords.MSD_CONSTRAINTNAME, Keywords.MSDNS, foreign.ConstraintName);
+                        constraint.SetAttribute(
+                            Keywords.MSD_CONSTRAINTNAME,
+                            Keywords.MSDNS,
+                            foreign.ConstraintName
+                        );
 
                     if (null == rel)
                     {
-                        constraint.SetAttribute(Keywords.MSD_CONSTRAINTONLY, Keywords.MSDNS, Keywords.TRUE);
+                        constraint.SetAttribute(
+                            Keywords.MSD_CONSTRAINTONLY,
+                            Keywords.MSDNS,
+                            Keywords.TRUE
+                        );
                     }
                     else
                     {
                         if (rel.Nested)
-                            constraint.SetAttribute(Keywords.MSD_ISNESTED, Keywords.MSDNS, Keywords.TRUE);
+                            constraint.SetAttribute(
+                                Keywords.MSD_ISNESTED,
+                                Keywords.MSDNS,
+                                Keywords.TRUE
+                            );
 
-                        AddExtendedProperties(rel._extendedProperties, constraint, typeof(DataRelation));
+                        AddExtendedProperties(
+                            rel._extendedProperties,
+                            constraint,
+                            typeof(DataRelation)
+                        );
                         if (foreign.ConstraintName != rel.RelationName)
                         {
-                            constraint.SetAttribute(Keywords.MSD_RELATIONNAME, Keywords.MSDNS, XmlConvert.EncodeLocalName(rel.RelationName));
+                            constraint.SetAttribute(
+                                Keywords.MSD_RELATIONNAME,
+                                Keywords.MSDNS,
+                                XmlConvert.EncodeLocalName(rel.RelationName)
+                            );
                         }
                     }
 
-                    selector = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SELECTOR, Keywords.XSDNS);
-                    selector.SetAttribute(Keywords.XSD_XPATH, ".//" + xpathprefix + table.EncodedTableName);
+                    selector = dc.CreateElement(
+                        Keywords.XSD_PREFIX,
+                        Keywords.XSD_SELECTOR,
+                        Keywords.XSDNS
+                    );
+                    selector.SetAttribute(
+                        Keywords.XSD_XPATH,
+                        ".//" + xpathprefix + table.EncodedTableName
+                    );
 
                     constraint.AppendChild(selector);
 
                     if (foreign.AcceptRejectRule != ForeignKeyConstraint.AcceptRejectRule_Default)
-                        constraint.SetAttribute(Keywords.MSD_ACCEPTREJECTRULE, Keywords.MSDNS,
-                                                TranslateAcceptRejectRule(foreign.AcceptRejectRule));
+                        constraint.SetAttribute(
+                            Keywords.MSD_ACCEPTREJECTRULE,
+                            Keywords.MSDNS,
+                            TranslateAcceptRejectRule(foreign.AcceptRejectRule)
+                        );
 
                     if (foreign.UpdateRule != ForeignKeyConstraint.Rule_Default)
-                        constraint.SetAttribute(Keywords.MSD_UPDATERULE, Keywords.MSDNS, TranslateRule(foreign.UpdateRule));
+                        constraint.SetAttribute(
+                            Keywords.MSD_UPDATERULE,
+                            Keywords.MSDNS,
+                            TranslateRule(foreign.UpdateRule)
+                        );
 
                     if (foreign.DeleteRule != ForeignKeyConstraint.Rule_Default)
-                        constraint.SetAttribute(Keywords.MSD_DELETERULE, Keywords.MSDNS, TranslateRule(foreign.DeleteRule));
+                        constraint.SetAttribute(
+                            Keywords.MSD_DELETERULE,
+                            Keywords.MSDNS,
+                            TranslateRule(foreign.DeleteRule)
+                        );
 
                     fields = foreign.Columns;
 
@@ -2193,11 +2769,18 @@ namespace System.Data
                             {
                                 encodedName.Append(xpathprefix).Append(fields[k].EncodedColumnName);
                             }
-                            if ((fields[k].ColumnMapping == MappingType.Attribute) || (fields[k].ColumnMapping == MappingType.Hidden))
+                            if (
+                                (fields[k].ColumnMapping == MappingType.Attribute)
+                                || (fields[k].ColumnMapping == MappingType.Hidden)
+                            )
                             {
                                 encodedName.Insert(0, '@');
                             }
-                            field = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_FIELD, Keywords.XSDNS);
+                            field = dc.CreateElement(
+                                Keywords.XSD_PREFIX,
+                                Keywords.XSD_FIELD,
+                                Keywords.XSDNS
+                            );
                             field.SetAttribute(Keywords.XSD_XPATH, encodedName.ToString());
 
                             constraint.AppendChild(field);
@@ -2247,8 +2830,6 @@ namespace System.Data
         }
     }
 
-
-
     internal sealed class NewDiffgramGen
     {
         internal XmlDocument _doc;
@@ -2260,7 +2841,6 @@ namespace System.Data
         internal Hashtable _rowsOrder;
         private readonly ArrayList _tables = new ArrayList();
         private readonly bool _writeHierarchy;
-
 
         internal NewDiffgramGen(DataSet ds)
         {
@@ -2352,7 +2932,10 @@ namespace System.Data
             {
                 // write the datapart
                 if (table != null)
-                    new XmlDataTreeWriter(table, _writeHierarchy).SaveDiffgramData(_xmlw, _rowsOrder);
+                    new XmlDataTreeWriter(table, _writeHierarchy).SaveDiffgramData(
+                        _xmlw,
+                        _rowsOrder
+                    );
                 else
                     new XmlDataTreeWriter(_ds!).SaveDiffgramData(_xmlw, _rowsOrder);
 
@@ -2374,7 +2957,7 @@ namespace System.Data
                 }
 
                 if (_fBefore)
-                    _xmlw.WriteEndElement();  //SQL_BEFORE
+                    _xmlw.WriteEndElement(); //SQL_BEFORE
 
                 if (table == null)
                 {
@@ -2392,7 +2975,7 @@ namespace System.Data
                 }
 
                 if (_fErrors)
-                    _xmlw.WriteEndElement();  //ERRORS
+                    _xmlw.WriteEndElement(); //ERRORS
             }
 
             _xmlw.WriteEndElement();
@@ -2410,7 +2993,6 @@ namespace System.Data
             for (int rowNum = 0; rowNum < rowCount; ++rowNum)
                 GenerateRow(table.Rows[rowNum]);
         }
-
 
         private void GenerateTableErrors(DataTable table)
         {
@@ -2433,9 +3015,23 @@ namespace System.Data
                         _xmlw.WriteStartElement(Keywords.DFF, Keywords.MSD_ERRORS, Keywords.DFFNS);
                         _fErrors = true;
                     }
-                    _xmlw.WriteStartElement(prefix, row.Table.EncodedTableName, row.Table.Namespace);
-                    _xmlw.WriteAttributeString(Keywords.DFF, Keywords.DIFFID, Keywords.DFFNS, row.Table.TableName + row.rowID.ToString(CultureInfo.InvariantCulture));
-                    _xmlw.WriteAttributeString(Keywords.DFF, Keywords.MSD_ERROR, Keywords.DFFNS, row.RowError);
+                    _xmlw.WriteStartElement(
+                        prefix,
+                        row.Table.EncodedTableName,
+                        row.Table.Namespace
+                    );
+                    _xmlw.WriteAttributeString(
+                        Keywords.DFF,
+                        Keywords.DIFFID,
+                        Keywords.DFFNS,
+                        row.Table.TableName + row.rowID.ToString(CultureInfo.InvariantCulture)
+                    );
+                    _xmlw.WriteAttributeString(
+                        Keywords.DFF,
+                        Keywords.MSD_ERROR,
+                        Keywords.DFFNS,
+                        row.RowError
+                    );
                     tableName = true;
                 }
                 if (colCount <= 0)
@@ -2444,7 +3040,8 @@ namespace System.Data
                 {
                     DataColumn column = table.Columns[colNum];
                     string error = row.GetColumnError(column);
-                    string columnPrefix = (column.Namespace.Length != 0) ? column.Prefix : string.Empty;
+                    string columnPrefix =
+                        (column.Namespace.Length != 0) ? column.Prefix : string.Empty;
                     if (string.IsNullOrEmpty(error))
                     {
                         continue;
@@ -2454,18 +3051,39 @@ namespace System.Data
                     {
                         if (!_fErrors)
                         {
-                            _xmlw.WriteStartElement(Keywords.DFF, Keywords.MSD_ERRORS, Keywords.DFFNS);
+                            _xmlw.WriteStartElement(
+                                Keywords.DFF,
+                                Keywords.MSD_ERRORS,
+                                Keywords.DFFNS
+                            );
                             _fErrors = true;
                         }
 
-                        _xmlw.WriteStartElement(prefix, row.Table.EncodedTableName, row.Table.Namespace);
-                        _xmlw.WriteAttributeString(Keywords.DFF, Keywords.DIFFID, Keywords.DFFNS, row.Table.TableName + row.rowID.ToString(CultureInfo.InvariantCulture));
+                        _xmlw.WriteStartElement(
+                            prefix,
+                            row.Table.EncodedTableName,
+                            row.Table.Namespace
+                        );
+                        _xmlw.WriteAttributeString(
+                            Keywords.DFF,
+                            Keywords.DIFFID,
+                            Keywords.DFFNS,
+                            row.Table.TableName + row.rowID.ToString(CultureInfo.InvariantCulture)
+                        );
                         tableName = true;
                     }
 
-
-                    _xmlw.WriteStartElement(columnPrefix, column.EncodedColumnName, column.Namespace);
-                    _xmlw.WriteAttributeString(Keywords.DFF, Keywords.MSD_ERROR, Keywords.DFFNS, error);
+                    _xmlw.WriteStartElement(
+                        columnPrefix,
+                        column.EncodedColumnName,
+                        column.Namespace
+                    );
+                    _xmlw.WriteAttributeString(
+                        Keywords.DFF,
+                        Keywords.MSD_ERROR,
+                        Keywords.DFFNS,
+                        error
+                    );
 
                     _xmlw.WriteEndElement();
                 }
@@ -2498,10 +3116,11 @@ namespace System.Data
                 DataRow? parentRow = row.GetNestedParentRow(DataRowVersion.Original);
                 if (parentRow != null)
                 {
-                    parentId = parentRow.Table.TableName + parentRow.rowID.ToString(CultureInfo.InvariantCulture);
+                    parentId =
+                        parentRow.Table.TableName
+                        + parentRow.rowID.ToString(CultureInfo.InvariantCulture);
                 }
             }
-
 
             string tablePrefix = (table.Namespace.Length != 0) ? table.Prefix : string.Empty;
 
@@ -2511,25 +3130,44 @@ namespace System.Data
             _xmlw.WriteAttributeString(Keywords.DFF, Keywords.DIFFID, Keywords.DFFNS, rowIDString);
 
             if ((state == DataRowState.Deleted) && XmlDataTreeWriter.RowHasErrors(row))
-                _xmlw.WriteAttributeString(Keywords.DFF, Keywords.HASERRORS, Keywords.DFFNS, Keywords.TRUE);
+                _xmlw.WriteAttributeString(
+                    Keywords.DFF,
+                    Keywords.HASERRORS,
+                    Keywords.DFFNS,
+                    Keywords.TRUE
+                );
 
             if (parentId != null)
-                _xmlw.WriteAttributeString(Keywords.DFF, Keywords.DIFFPID, Keywords.DFFNS, parentId);
+                _xmlw.WriteAttributeString(
+                    Keywords.DFF,
+                    Keywords.DIFFPID,
+                    Keywords.DFFNS,
+                    parentId
+                );
 
-            _xmlw.WriteAttributeString(Keywords.MSD, Keywords.ROWORDER, Keywords.MSDNS, _rowsOrder[row]!.ToString());
+            _xmlw.WriteAttributeString(
+                Keywords.MSD,
+                Keywords.ROWORDER,
+                Keywords.MSDNS,
+                _rowsOrder[row]!.ToString()
+            );
             for (int colNum = 0; colNum < colCount; ++colNum)
             {
-                if ((row.Table.Columns[colNum].ColumnMapping == MappingType.Attribute) ||
-                    (row.Table.Columns[colNum].ColumnMapping == MappingType.Hidden))
+                if (
+                    (row.Table.Columns[colNum].ColumnMapping == MappingType.Attribute)
+                    || (row.Table.Columns[colNum].ColumnMapping == MappingType.Hidden)
+                )
                     GenerateColumn(row, row.Table.Columns[colNum], DataRowVersion.Original);
             }
             for (int colNum = 0; colNum < colCount; ++colNum)
             {
-                if ((row.Table.Columns[colNum].ColumnMapping == MappingType.Element) ||
-                    (row.Table.Columns[colNum].ColumnMapping == MappingType.SimpleContent))
+                if (
+                    (row.Table.Columns[colNum].ColumnMapping == MappingType.Element)
+                    || (row.Table.Columns[colNum].ColumnMapping == MappingType.SimpleContent)
+                )
                     GenerateColumn(row, row.Table.Columns[colNum], DataRowVersion.Original);
             }
-            _xmlw.WriteEndElement();  //old row
+            _xmlw.WriteEndElement(); //old row
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
@@ -2541,7 +3179,12 @@ namespace System.Data
             if (value == null)
             {
                 if (col.ColumnMapping == MappingType.SimpleContent)
-                    _xmlw.WriteAttributeString(Keywords.XSI, Keywords.XSI_NIL, Keywords.XSINS, Keywords.TRUE);
+                    _xmlw.WriteAttributeString(
+                        Keywords.XSI,
+                        Keywords.XSI_NIL,
+                        Keywords.XSINS,
+                        Keywords.TRUE
+                    );
                 return;
             }
 
@@ -2549,11 +3192,21 @@ namespace System.Data
             switch (col.ColumnMapping)
             {
                 case MappingType.Attribute:
-                    _xmlw.WriteAttributeString(colPrefix, col.EncodedColumnName, col.Namespace, value);
+                    _xmlw.WriteAttributeString(
+                        colPrefix,
+                        col.EncodedColumnName,
+                        col.Namespace,
+                        value
+                    );
                     break;
 
                 case MappingType.Hidden:
-                    _xmlw.WriteAttributeString(Keywords.MSD, "hidden" + col.EncodedColumnName, Keywords.MSDNS, value);
+                    _xmlw.WriteAttributeString(
+                        Keywords.MSD,
+                        "hidden" + col.EncodedColumnName,
+                        Keywords.MSDNS,
+                        value
+                    );
                     break;
 
                 case MappingType.SimpleContent:
@@ -2565,7 +3218,11 @@ namespace System.Data
                     object columnValue = row[col, version];
                     // if the object is built in type or if it implements IXMLSerializable, write the start Element, otherwise
                     //(if CDT and does not implement IXmlSerializable) skip it
-                    if (!col.IsCustomType || !DataColumn.IsValueCustomTypeInstance(columnValue) || (typeof(IXmlSerializable).IsAssignableFrom(columnValue.GetType())))
+                    if (
+                        !col.IsCustomType
+                        || !DataColumn.IsValueCustomTypeInstance(columnValue)
+                        || (typeof(IXmlSerializable).IsAssignableFrom(columnValue.GetType()))
+                    )
                     {
                         _xmlw.WriteStartElement(colPrefix, col.EncodedColumnName, col.Namespace);
                         startElementSkipped = false;
@@ -2577,21 +3234,39 @@ namespace System.Data
                         {
                             if (XmlDataTreeWriter.PreserveSpace(value))
                             {
-                                _xmlw.WriteAttributeString(Keywords.XML, Keywords.SPACE, Keywords.XML_XMLNS, Keywords.PRESERVE);
+                                _xmlw.WriteAttributeString(
+                                    Keywords.XML,
+                                    Keywords.SPACE,
+                                    Keywords.XML_XMLNS,
+                                    Keywords.PRESERVE
+                                );
                             }
                         }
                         _xmlw.WriteString(value);
                     }
                     else
                     { // Columns type is CDT
-                        if ((columnValue != DBNull.Value) && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(columnValue)))
+                        if (
+                            (columnValue != DBNull.Value)
+                            && (
+                                !col.ImplementsINullable
+                                || !DataStorage.IsObjectSqlNull(columnValue)
+                            )
+                        )
                         {
-                            if (DataColumn.IsValueCustomTypeInstance(columnValue)/* && valuesType != typeof(Type)*/)
-                            {// value is also CDT
+                            if (
+                                DataColumn.IsValueCustomTypeInstance(columnValue) /* && valuesType != typeof(Type)*/
+                            )
+                            { // value is also CDT
                                 // if SkippedElement, ie does not implement IXMLSerializable: so No Polymorphysm Support.
                                 if (!startElementSkipped && columnValue.GetType() != col.DataType)
                                 {
-                                    _xmlw.WriteAttributeString(Keywords.MSD, Keywords.MSD_INSTANCETYPE, Keywords.MSDNS, DataStorage.GetQualifiedName(valuesType));
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.MSD,
+                                        Keywords.MSD_INSTANCETYPE,
+                                        Keywords.MSDNS,
+                                        DataStorage.GetQualifiedName(valuesType)
+                                    );
                                 }
                                 if (!startElementSkipped)
                                 {
@@ -2602,32 +3277,62 @@ namespace System.Data
                                     // this column's type does not implement IXmlSerializable, so we need to handle serialization via XmlSerializer
                                     if (columnValue.GetType() != col.DataType)
                                     { // throw if polymorphism; not supported
-                                        throw ExceptionBuilder.PolymorphismNotSupported(valuesType.AssemblyQualifiedName!);
+                                        throw ExceptionBuilder.PolymorphismNotSupported(
+                                            valuesType.AssemblyQualifiedName!
+                                        );
                                     }
                                     // therefore we are skipping the start element, but by passing XmlRootAttribute with the same name as
                                     // we open the start element (column's name), XmlSerializer will open and close it for us
-                                    XmlRootAttribute xmlAttrib = new XmlRootAttribute(col.EncodedColumnName);
+                                    XmlRootAttribute xmlAttrib = new XmlRootAttribute(
+                                        col.EncodedColumnName
+                                    );
                                     xmlAttrib.Namespace = col.Namespace;
                                     col.ConvertObjectToXml(columnValue, _xmlw, xmlAttrib);
                                 }
                             }
                             else
                             { // value is built in CLR type (eg: string, int etc.)
-                              // these basic clr types do not have direct xsd type mappings
-                                if (valuesType == typeof(Type) || valuesType == typeof(Guid) || valuesType == typeof(char) ||
-                                    DataStorage.IsSqlType(valuesType))
+                                // these basic clr types do not have direct xsd type mappings
+                                if (
+                                    valuesType == typeof(Type)
+                                    || valuesType == typeof(Guid)
+                                    || valuesType == typeof(char)
+                                    || DataStorage.IsSqlType(valuesType)
+                                )
                                 { // if unmapped type or SQL type write msdata:Datatype=typeofinstance
-                                    _xmlw.WriteAttributeString(Keywords.MSD, Keywords.MSD_INSTANCETYPE, Keywords.MSDNS, valuesType.FullName);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.MSD,
+                                        Keywords.MSD_INSTANCETYPE,
+                                        Keywords.MSDNS,
+                                        valuesType.FullName
+                                    );
                                 }
                                 else if (columnValue is Type)
                                 {
-                                    _xmlw.WriteAttributeString(Keywords.MSD, Keywords.MSD_INSTANCETYPE, Keywords.MSDNS, Keywords.TYPEINSTANCE);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.MSD,
+                                        Keywords.MSD_INSTANCETYPE,
+                                        Keywords.MSDNS,
+                                        Keywords.TYPEINSTANCE
+                                    );
                                 }
                                 else
                                 {
-                                    string xsdTypeName = Keywords.XSD_PREFIXCOLON + XmlTreeGen.XmlDataTypeName(valuesType);
-                                    _xmlw.WriteAttributeString(Keywords.XSI, Keywords.TYPE, Keywords.XSINS, xsdTypeName);
-                                    _xmlw.WriteAttributeString(Keywords.XSD_PREFIX, Keywords.XMLNS, Keywords.XSDNS, xsdTypeName);
+                                    string xsdTypeName =
+                                        Keywords.XSD_PREFIXCOLON
+                                        + XmlTreeGen.XmlDataTypeName(valuesType);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.XSI,
+                                        Keywords.TYPE,
+                                        Keywords.XSINS,
+                                        xsdTypeName
+                                    );
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.XSD_PREFIX,
+                                        Keywords.XMLNS,
+                                        Keywords.XSDNS,
+                                        xsdTypeName
+                                    );
                                 }
                                 if (!DataStorage.IsSqlType(valuesType))
                                 {
@@ -2792,12 +3497,23 @@ namespace System.Data
             _isDiffgram = true;
             _rowsOrder = rowsOrder;
 
-            string prefix = (_ds != null) ? ((_ds.Namespace.Length == 0) ? "" : _ds.Prefix) : ((_dt!.Namespace.Length == 0) ? "" : _dt.Prefix);
+            string prefix =
+                (_ds != null)
+                    ? ((_ds.Namespace.Length == 0) ? "" : _ds.Prefix)
+                    : ((_dt!.Namespace.Length == 0) ? "" : _dt.Prefix);
 
             if (_ds == null || string.IsNullOrEmpty(_ds.DataSetName))
-                _xmlw.WriteStartElement(prefix, Keywords.DOCUMENTELEMENT, (_dt!.Namespace == null) ? "" : _dt.Namespace);
+                _xmlw.WriteStartElement(
+                    prefix,
+                    Keywords.DOCUMENTELEMENT,
+                    (_dt!.Namespace == null) ? "" : _dt.Namespace
+                );
             else
-                _xmlw.WriteStartElement(prefix, XmlConvert.EncodeLocalName(_ds.DataSetName), _ds.Namespace);
+                _xmlw.WriteStartElement(
+                    prefix,
+                    XmlConvert.EncodeLocalName(_ds.DataSetName),
+                    _ds.Namespace
+                );
 
             // new XmlTreeGen(true).Save(_ds,_xmlw, false /* we don't care since we specified it's serialized */);
 
@@ -2816,7 +3532,11 @@ namespace System.Data
                     }
                     else if (nestedParentRowCount > 1)
                     {
-                        throw ExceptionBuilder.MultipleParentRows(tempTable.Namespace.Length == 0 ? tempTable.TableName : tempTable.Namespace + tempTable.TableName);
+                        throw ExceptionBuilder.MultipleParentRows(
+                            tempTable.Namespace.Length == 0
+                                ? tempTable.TableName
+                                : tempTable.Namespace + tempTable.TableName
+                        );
                         // At all times a nested row can only have 0 or 1 parents, never more than 1
                     }
                 }
@@ -2836,7 +3556,10 @@ namespace System.Data
             int countTopTable = _topLevelTables.Length;
             bool fWriteDSElement = true;
 
-            string prefix = (_ds != null) ? ((_ds.Namespace.Length == 0) ? "" : _ds.Prefix) : ((_dt!.Namespace.Length == 0) ? "" : _dt.Prefix);
+            string prefix =
+                (_ds != null)
+                    ? ((_ds.Namespace.Length == 0) ? "" : _ds.Prefix)
+                    : ((_dt!.Namespace.Length == 0) ? "" : _dt.Prefix);
 
             if (!writeSchema && _ds != null && _ds._fTopLevelTable && countTopTable == 1)
             {
@@ -2855,14 +3578,23 @@ namespace System.Data
                     if (string.IsNullOrEmpty(_ds.DataSetName))
                         _xmlw.WriteStartElement(prefix, Keywords.DOCUMENTELEMENT, _ds.Namespace);
                     else
-                        _xmlw.WriteStartElement(prefix, XmlConvert.EncodeLocalName(_ds.DataSetName), _ds.Namespace);
+                        _xmlw.WriteStartElement(
+                            prefix,
+                            XmlConvert.EncodeLocalName(_ds.DataSetName),
+                            _ds.Namespace
+                        );
                 }
 
                 for (int i = 0; i < _dTables.Count; i++)
                 {
                     if (((DataTable)_dTables[i]!)._xmlText != null)
                     {
-                        _xmlw.WriteAttributeString(Keywords.XMLNS, Keywords.XSI, Keywords.XSD_XMLNS_NS, Keywords.XSINS);
+                        _xmlw.WriteAttributeString(
+                            Keywords.XMLNS,
+                            Keywords.XSI,
+                            Keywords.XSD_XMLNS_NS,
+                            Keywords.XSINS
+                        );
                         break;
                     }
                 }
@@ -2875,7 +3607,12 @@ namespace System.Data
                     }
                     else
                     {
-                        new XmlTreeGen(SchemaFormat.Public).Save(null, _dt!, _xmlw, _writeHierarchy);
+                        new XmlTreeGen(SchemaFormat.Public).Save(
+                            null,
+                            _dt!,
+                            _xmlw,
+                            _writeHierarchy
+                        );
                     }
                 }
             }
@@ -2894,7 +3631,9 @@ namespace System.Data
                     else if (parentRowCount > 1)
                     {
                         DataTable dt = (DataTable)_dTables[i]!;
-                        throw ExceptionBuilder.MultipleParentRows(dt.Namespace.Length == 0 ? dt.TableName : (dt.Namespace + dt.TableName));
+                        throw ExceptionBuilder.MultipleParentRows(
+                            dt.Namespace.Length == 0 ? dt.TableName : (dt.Namespace + dt.TableName)
+                        );
                         // At all times a nested row can only have 0 or 1 parents, never more than 1
                     }
                 }
@@ -2930,22 +3669,47 @@ namespace System.Data
 
             if (_isDiffgram)
             {
-                _xmlw.WriteAttributeString(Keywords.DFF, Keywords.DIFFID, Keywords.DFFNS, row.Table.TableName + row.rowID.ToString(CultureInfo.InvariantCulture));
+                _xmlw.WriteAttributeString(
+                    Keywords.DFF,
+                    Keywords.DIFFID,
+                    Keywords.DFFNS,
+                    row.Table.TableName + row.rowID.ToString(CultureInfo.InvariantCulture)
+                );
 
-                _xmlw.WriteAttributeString(Keywords.MSD, Keywords.ROWORDER, Keywords.MSDNS, _rowsOrder![row]!.ToString());
+                _xmlw.WriteAttributeString(
+                    Keywords.MSD,
+                    Keywords.ROWORDER,
+                    Keywords.MSDNS,
+                    _rowsOrder![row]!.ToString()
+                );
 
                 if (row.RowState == DataRowState.Added)
                 {
-                    _xmlw.WriteAttributeString(Keywords.DFF, Keywords.HASCHANGES, Keywords.DFFNS, Keywords.INSERTED);
+                    _xmlw.WriteAttributeString(
+                        Keywords.DFF,
+                        Keywords.HASCHANGES,
+                        Keywords.DFFNS,
+                        Keywords.INSERTED
+                    );
                 }
                 if (row.RowState == DataRowState.Modified)
                 {
-                    _xmlw.WriteAttributeString(Keywords.DFF, Keywords.HASCHANGES, Keywords.DFFNS, Keywords.MODIFIED);
+                    _xmlw.WriteAttributeString(
+                        Keywords.DFF,
+                        Keywords.HASCHANGES,
+                        Keywords.DFFNS,
+                        Keywords.MODIFIED
+                    );
                 }
 
                 if (RowHasErrors(row))
                 {
-                    _xmlw.WriteAttributeString(Keywords.DFF, Keywords.HASERRORS, Keywords.DFFNS, Keywords.TRUE);
+                    _xmlw.WriteAttributeString(
+                        Keywords.DFF,
+                        Keywords.HASERRORS,
+                        Keywords.DFFNS,
+                        Keywords.TRUE
+                    );
                 }
             }
 
@@ -2957,10 +3721,18 @@ namespace System.Data
                     value = row[col];
                     string colPrefix = (col.Namespace.Length == 0) ? "" : col.Prefix;
 
-                    if ((value != DBNull.Value) && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(value)))
+                    if (
+                        (value != DBNull.Value)
+                        && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(value))
+                    )
                     {
                         XmlTreeGen.ValidateColumnMapping(col.DataType);
-                        _xmlw.WriteAttributeString(colPrefix, col.EncodedColumnName, col.Namespace, col.ConvertObjectToXml(value));
+                        _xmlw.WriteAttributeString(
+                            colPrefix,
+                            col.EncodedColumnName,
+                            col.Namespace,
+                            col.ConvertObjectToXml(value)
+                        );
                     }
                 }
 
@@ -2971,10 +3743,18 @@ namespace System.Data
                 {
                     value = row[col];
 
-                    if ((value != DBNull.Value) && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(value)))
+                    if (
+                        (value != DBNull.Value)
+                        && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(value))
+                    )
                     {
                         XmlTreeGen.ValidateColumnMapping(col.DataType);
-                        _xmlw.WriteAttributeString(Keywords.MSD, "hidden" + col.EncodedColumnName, Keywords.MSDNS, col.ConvertObjectToXml(value));
+                        _xmlw.WriteAttributeString(
+                            Keywords.MSD,
+                            "hidden" + col.EncodedColumnName,
+                            Keywords.MSDNS,
+                            col.ConvertObjectToXml(value)
+                        );
                     }
                 }
             } //end foreach
@@ -2987,18 +3767,41 @@ namespace System.Data
                     string colPrefix = (col.Namespace.Length == 0) ? "" : col.Prefix;
                     bool startElementSkipped = true;
 
-                    if (((value == DBNull.Value) || (col.ImplementsINullable && DataStorage.IsObjectSqlNull(value))) && (col.ColumnMapping == MappingType.SimpleContent))
-                        _xmlw.WriteAttributeString(Keywords.XSI, Keywords.XSI_NIL, Keywords.XSINS, Keywords.TRUE);
+                    if (
+                        (
+                            (value == DBNull.Value)
+                            || (col.ImplementsINullable && DataStorage.IsObjectSqlNull(value))
+                        ) && (col.ColumnMapping == MappingType.SimpleContent)
+                    )
+                        _xmlw.WriteAttributeString(
+                            Keywords.XSI,
+                            Keywords.XSI_NIL,
+                            Keywords.XSINS,
+                            Keywords.TRUE
+                        );
                     // basically this is a continue; if it is null we write xsi:nil='true'
                     // below, the check is if it is not null
-                    if (((value != DBNull.Value) && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(value))) && (col._columnMapping != MappingType.Attribute))
+                    if (
+                        (
+                            (value != DBNull.Value)
+                            && (!col.ImplementsINullable || !DataStorage.IsObjectSqlNull(value))
+                        ) && (col._columnMapping != MappingType.Attribute)
+                    )
                     {
                         if (col._columnMapping != MappingType.SimpleContent)
                         {
                             // again, if we need to use XmlSerializer, do not write start Element (see above for more info)
-                            if (!col.IsCustomType || !DataColumn.IsValueCustomTypeInstance(value) || (typeof(IXmlSerializable).IsAssignableFrom(value.GetType())))
+                            if (
+                                !col.IsCustomType
+                                || !DataColumn.IsValueCustomTypeInstance(value)
+                                || (typeof(IXmlSerializable).IsAssignableFrom(value.GetType()))
+                            )
                             {
-                                _xmlw.WriteStartElement(colPrefix, col.EncodedColumnName, col.Namespace);
+                                _xmlw.WriteStartElement(
+                                    colPrefix,
+                                    col.EncodedColumnName,
+                                    col.Namespace
+                                );
                                 startElementSkipped = false;
                             }
                         }
@@ -3010,19 +3813,31 @@ namespace System.Data
                             {
                                 if (PreserveSpace(value))
                                 {
-                                    _xmlw.WriteAttributeString(Keywords.XML, Keywords.SPACE, Keywords.XML_XMLNS, Keywords.PRESERVE);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.XML,
+                                        Keywords.SPACE,
+                                        Keywords.XML_XMLNS,
+                                        Keywords.PRESERVE
+                                    );
                                 }
                             }
                             _xmlw.WriteString(col.ConvertObjectToXml(value));
                         }
                         else
                         { // Columns type is CDT
-                            if (DataColumn.IsValueCustomTypeInstance(value) /*&& !(value is Type) && valuesType != typeof(Type)*/)
-                            {// value is also CDT
+                            if (
+                                DataColumn.IsValueCustomTypeInstance(value) /*&& !(value is Type) && valuesType != typeof(Type)*/
+                            )
+                            { // value is also CDT
                                 // if SkippedElement, ie does not implement IXMLSerializable: so No Polymorphism Support.
                                 if (!startElementSkipped && valuesType != col.DataType)
                                 { // for polymorphism.
-                                    _xmlw.WriteAttributeString(Keywords.MSD, Keywords.MSD_INSTANCETYPE, Keywords.MSDNS, DataStorage.GetQualifiedName(valuesType));
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.MSD,
+                                        Keywords.MSD_INSTANCETYPE,
+                                        Keywords.MSDNS,
+                                        DataStorage.GetQualifiedName(valuesType)
+                                    );
                                 }
                                 if (!startElementSkipped)
                                 { // make sure XmlRootAttribute is passed null as this type implement IXmlSerializable
@@ -3032,31 +3847,61 @@ namespace System.Data
                                 { // startElement is skipped: this column's type does not implement IXmlSerializable, need to go via XmlSerializer
                                     if (value.GetType() != col.DataType)
                                     { // throw if polymorphism; not supported
-                                        throw ExceptionBuilder.PolymorphismNotSupported(valuesType.AssemblyQualifiedName!);
+                                        throw ExceptionBuilder.PolymorphismNotSupported(
+                                            valuesType.AssemblyQualifiedName!
+                                        );
                                     }
                                     // therefore we are skipping the start element, but by passing XmlRootAttribute with the same name as
                                     // we open the start element (column's name), XmlSerializer will open and close it for us
-                                    XmlRootAttribute xmlAttrib = new XmlRootAttribute(col.EncodedColumnName);
+                                    XmlRootAttribute xmlAttrib = new XmlRootAttribute(
+                                        col.EncodedColumnName
+                                    );
                                     xmlAttrib.Namespace = col.Namespace;
                                     col.ConvertObjectToXml(value, _xmlw, xmlAttrib);
                                 }
                             }
                             else
                             { // this is case that column type is object and value is CLR or SQLTypes
-                                if (valuesType == typeof(Type) || valuesType == typeof(Guid) || valuesType == typeof(char) ||
-                                    DataStorage.IsSqlType(valuesType))
+                                if (
+                                    valuesType == typeof(Type)
+                                    || valuesType == typeof(Guid)
+                                    || valuesType == typeof(char)
+                                    || DataStorage.IsSqlType(valuesType)
+                                )
                                 { // if unmapped type or SQL type write msdata:Datatype=typeofinstance
-                                    _xmlw.WriteAttributeString(Keywords.MSD, Keywords.MSD_INSTANCETYPE, Keywords.MSDNS, valuesType.FullName);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.MSD,
+                                        Keywords.MSD_INSTANCETYPE,
+                                        Keywords.MSDNS,
+                                        valuesType.FullName
+                                    );
                                 }
                                 else if (value is Type)
                                 {
-                                    _xmlw.WriteAttributeString(Keywords.MSD, Keywords.MSD_INSTANCETYPE, Keywords.MSDNS, Keywords.TYPEINSTANCE);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.MSD,
+                                        Keywords.MSD_INSTANCETYPE,
+                                        Keywords.MSDNS,
+                                        Keywords.TYPEINSTANCE
+                                    );
                                 }
                                 else
                                 {
-                                    string xsdTypeName = Keywords.XSD_PREFIXCOLON + XmlTreeGen.XmlDataTypeName(valuesType);
-                                    _xmlw.WriteAttributeString(Keywords.XSI, Keywords.TYPE, Keywords.XSINS, xsdTypeName);
-                                    _xmlw.WriteAttributeString(Keywords.XSD_PREFIX, Keywords.XMLNS, Keywords.XSDNS, xsdTypeName);
+                                    string xsdTypeName =
+                                        Keywords.XSD_PREFIXCOLON
+                                        + XmlTreeGen.XmlDataTypeName(valuesType);
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.XSI,
+                                        Keywords.TYPE,
+                                        Keywords.XSINS,
+                                        xsdTypeName
+                                    );
+                                    _xmlw.WriteAttributeString(
+                                        Keywords.XSD_PREFIX,
+                                        Keywords.XMLNS,
+                                        Keywords.XSDNS,
+                                        xsdTypeName
+                                    );
                                 }
                                 if (!DataStorage.IsSqlType(valuesType))
                                 {
@@ -3085,6 +3930,7 @@ namespace System.Data
 
             _xmlw.WriteEndElement();
         }
+
         internal static bool PreserveSpace(object value)
         {
             Debug.Assert(value != null, "Value can not be null");
@@ -3243,10 +4089,7 @@ namespace System.Data
 
         public override WriteState WriteState
         {
-            get
-            {
-                return _xmltextWriter.WriteState;
-            }
+            get { return _xmltextWriter.WriteState; }
         }
 
         public override void Close()
@@ -3276,18 +4119,12 @@ namespace System.Data
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _xmltextWriter.XmlSpace;
-            }
+            get { return _xmltextWriter.XmlSpace; }
         }
 
         public override string? XmlLang
         {
-            get
-            {
-                return _xmltextWriter.XmlLang;
-            }
+            get { return _xmltextWriter.XmlLang; }
         }
 
         public override void WriteNmToken(string name)
@@ -3295,7 +4132,6 @@ namespace System.Data
             _xmltextWriter.WriteNmToken(name);
         }
     }
-
 
     internal sealed class DataTextReader : XmlReader
     {
@@ -3314,42 +4150,27 @@ namespace System.Data
 
         public override XmlReaderSettings? Settings
         {
-            get
-            {
-                return _xmlreader.Settings;
-            }
+            get { return _xmlreader.Settings; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return _xmlreader.NodeType;
-            }
+            get { return _xmlreader.NodeType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _xmlreader.Name;
-            }
+            get { return _xmlreader.Name; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return _xmlreader.LocalName;
-            }
+            get { return _xmlreader.LocalName; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return _xmlreader.NamespaceURI;
-            }
+            get { return _xmlreader.NamespaceURI; }
         }
 
         public override string Prefix
@@ -3402,7 +4223,10 @@ namespace System.Data
             get { return _xmlreader.XmlLang; }
         }
 
-        public override int AttributeCount { get { return _xmlreader.AttributeCount; } }
+        public override int AttributeCount
+        {
+            get { return _xmlreader.AttributeCount; }
+        }
 
         public override string? GetAttribute(string name)
         {

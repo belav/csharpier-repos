@@ -38,7 +38,7 @@ internal class Program
         {
             ta[i].Join();
         }
-        double elapsed = 0.001*(System.Environment.TickCount - startTick);
+        double elapsed = 0.001 * (System.Environment.TickCount - startTick);
         Console.WriteLine("{0} seconds", elapsed);
     }
 }

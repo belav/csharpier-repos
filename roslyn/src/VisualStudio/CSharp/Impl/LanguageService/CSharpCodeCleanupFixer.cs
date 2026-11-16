@@ -21,9 +21,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeCleanUpFixer(IThreadingContext threadingContext, VisualStudioWorkspaceImpl workspace, IVsHierarchyItemManager vsHierarchyItemManager, IGlobalOptionService globalOptions)
-            : base(threadingContext, workspace, vsHierarchyItemManager, globalOptions)
-        {
-        }
+        public CSharpCodeCleanUpFixer(
+            IThreadingContext threadingContext,
+            VisualStudioWorkspaceImpl workspace,
+            IVsHierarchyItemManager vsHierarchyItemManager,
+            IGlobalOptionService globalOptions
+        )
+            : base(threadingContext, workspace, vsHierarchyItemManager, globalOptions) { }
     }
 }

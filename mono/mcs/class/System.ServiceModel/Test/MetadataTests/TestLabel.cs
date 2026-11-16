@@ -24,115 +24,117 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
-namespace MonoTests.System.ServiceModel.MetadataTests {
+namespace MonoTests.System.ServiceModel.MetadataTests
+{
+    public class TestLabel
+    {
+        List<Scope> scopes;
+        string delimiter;
+        Style defaultStyle;
 
-	public class TestLabel {
+        public enum Style
+        {
+            Letter,
+            Number,
+            HexNumer,
+        }
 
-		List<Scope> scopes;
-		string delimiter;
-		Style defaultStyle;
+        public TestLabel(string prefix)
+            : this(prefix, ".", Style.Letter) { }
 
-		public enum Style {
-			Letter,
-			Number,
-			HexNumer
-		}
+        public TestLabel(string prefix, string delimiter, Style style)
+        {
+            if ((prefix == null) || (prefix.Equals(string.Empty)))
+                throw new ArgumentException("Cannot be null or empty.", "prefix");
+            if (delimiter == null)
+                throw new ArgumentNullException("delimiter");
 
-		public TestLabel (string prefix)
-			: this (prefix, ".", Style.Letter)
-		{
-		}
+            scopes = new List<Scope>();
+            scopes.Add(new Scope(prefix, style));
 
-		public TestLabel (string prefix, string delimiter, Style style)
-		{
-			if ((prefix == null) || (prefix.Equals (string.Empty)))
-				throw new ArgumentException ("Cannot be null or empty.", "prefix");
-			if (delimiter == null)
-				throw new ArgumentNullException ("delimiter");
+            this.delimiter = delimiter;
+            this.defaultStyle = style;
+        }
 
-			scopes = new List<Scope> ();
-			scopes.Add (new Scope (prefix, style));
+        class Scope
+        {
+            public readonly string Text;
+            public readonly Style Style;
+            int id;
 
-			this.delimiter = delimiter;
-			this.defaultStyle = style;
-		}
+            public Scope(string text, Style style)
+            {
+                this.Text = text;
+                this.Style = style;
+                this.id = 0;
+            }
 
-		class Scope {
-			public readonly string Text;
-			public readonly Style Style;
-			int id;
+            public int GetID()
+            {
+                return ++id;
+            }
+        }
 
-			public Scope (string text, Style style)
-			{
-				this.Text = text;
-				this.Style = style;
-				this.id = 0;
-			}
+        public void EnterScope(string scope)
+        {
+            scopes.Add(new Scope(scope, defaultStyle));
+        }
 
-			public int GetID ()
-			{
-				return ++id;
-			}
-		}
+        public void LeaveScope()
+        {
+            if (scopes.Count <= 1)
+                throw new InvalidOperationException();
+            scopes.RemoveAt(scopes.Count - 1);
+        }
 
-		public void EnterScope (string scope)
-		{
-			scopes.Add (new Scope (scope, defaultStyle));
-		}
+        public string Get()
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < scopes.Count; i++)
+            {
+                sb.Append(scopes[i].Text);
+                sb.Append(delimiter);
+            }
 
-		public void LeaveScope ()
-		{
-			if (scopes.Count <= 1)
-				throw new InvalidOperationException ();
-			scopes.RemoveAt (scopes.Count - 1);
-		}
+            var scope = scopes[scopes.Count - 1];
+            var id = scope.GetID();
 
-		public string Get ()
-		{
-			var sb = new StringBuilder ();
-			for (int i = 0; i < scopes.Count; i++) {
-				sb.Append (scopes [i].Text);
-				sb.Append (delimiter);
-			}
+            switch (scope.Style)
+            {
+                case Style.Letter:
+                    if (id <= 26)
+                        sb.Append((char)('a' + id - 1));
+                    else
+                        goto case Style.Number;
+                    break;
 
-			var scope = scopes [scopes.Count - 1];
-			var id = scope.GetID ();
+                case Style.Number:
+                    sb.Append(id);
+                    break;
 
-			switch (scope.Style) {
-			case Style.Letter:
-				if (id <= 26)
-					sb.Append ((char)('a' + id - 1));
-				else
-					goto case Style.Number;
-				break;
+                case Style.HexNumer:
+                    sb.AppendFormat("{0:x2}", id);
+                    break;
+            }
 
-			case Style.Number:
-				sb.Append (id);
-				break;
+            return sb.ToString();
+        }
 
-			case Style.HexNumer:
-				sb.AppendFormat ("{0:x2}", id);
-				break;
-			}
-
-			return sb.ToString ();
-		}
-
-		public override string ToString ()
-		{
-			var sb = new StringBuilder ();
-			sb.Append ("[");
-			for (int i = 0; i < scopes.Count; i++) {
-				if (i > 0)
-					sb.Append (delimiter);
-				sb.Append (scopes [i].Text);
-			}
-			sb.Append ("]");
-			return sb.ToString ();
-		}
-	}
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("[");
+            for (int i = 0; i < scopes.Count; i++)
+            {
+                if (i > 0)
+                    sb.Append(delimiter);
+                sb.Append(scopes[i].Text);
+            }
+            sb.Append("]");
+            return sb.ToString();
+        }
+    }
 }
-

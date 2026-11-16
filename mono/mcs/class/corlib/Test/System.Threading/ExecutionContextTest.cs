@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,269 +25,292 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System.Runtime.Remoting.Messaging;
-
-
 using System;
+using System.Runtime.Remoting.Messaging;
 using System.Security;
 using System.Threading;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Threading {
+namespace MonoTests.System.Threading
+{
+    [TestFixture]
+    public class ExecutionContextTest
+    {
+        static bool success;
 
-	[TestFixture]
-	public class ExecutionContextTest {
+        static void Callback(object o)
+        {
+            success = (bool)o;
+        }
 
-		static bool success;
+        public class CallContextValue : ILogicalThreadAffinative
+        {
+            public object Value { get; set; }
 
-		static void Callback (object o)
-		{
-			success = (bool)o;
-		}
+            public CallContextValue(object value)
+            {
+                this.Value = value;
+            }
+        }
 
-		public class CallContextValue : ILogicalThreadAffinative {
-			public object Value { get; set; }
+        [SetUp]
+        public void SetUp()
+        {
+            success = false;
+        }
 
-			public CallContextValue (object value)
-			{
-				this.Value = value;
-			}
-		}
+        [TearDown]
+        public void TearDown()
+        {
+            if (ExecutionContext.IsFlowSuppressed())
+                ExecutionContext.RestoreFlow();
 
-		[SetUp]
-		public void SetUp ()
-		{
-			success = false;
-		}
+            CallContext.FreeNamedDataSlot("testlc");
+        }
 
-		[TearDown]
-		public void TearDown ()
-		{
-			if (ExecutionContext.IsFlowSuppressed ())
-				ExecutionContext.RestoreFlow ();
+        [Test]
+        [Category("MobileNotWorking")]
+        public void LogicalGetData_SetData()
+        {
+            var value = "a";
 
-			CallContext.FreeNamedDataSlot ("testlc");
-		}
+            CallContext.SetData("testlc", value);
+            var capturedValue = CallContext.LogicalGetData("testlc");
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void LogicalGetData_SetData()
-		{
-			var value = "a";
+            Assert.IsNull(capturedValue);
+        }
 
-			CallContext.SetData ("testlc", value);
-			var capturedValue = CallContext.LogicalGetData ("testlc");
+        [Test]
+        [Category("MobileNotWorking")]
+        public void LogicalGetData_SetDataLogicalThreadAffinative()
+        {
+            var value = new CallContextValue("a");
 
-			Assert.IsNull (capturedValue);
-		}
-		
-		[Test]
-		[Category("MobileNotWorking")]
-		public void LogicalGetData_SetDataLogicalThreadAffinative()
-		{
-			var value = new CallContextValue ("a");
+            CallContext.SetData("testlc", value);
+            var capturedValue = CallContext.LogicalGetData("testlc");
 
-			CallContext.SetData ("testlc", value);
-			var capturedValue = CallContext.LogicalGetData ("testlc");
+            Assert.AreEqual(value, capturedValue);
+        }
 
-			Assert.AreEqual (value, capturedValue);
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void GetData_SetLogicalData()
+        {
+            var value = "a";
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void GetData_SetLogicalData()
-		{
-			var value = "a";
+            CallContext.LogicalSetData("testlc", value);
+            var capturedValue = CallContext.GetData("testlc");
 
-			CallContext.LogicalSetData ("testlc", value);
-			var capturedValue = CallContext.GetData ("testlc");
+            Assert.AreEqual(value, capturedValue);
+        }
 
-			Assert.AreEqual (value, capturedValue);
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void CaptureLogicalCallContext()
+        {
+            var value = "Tester";
+            object capturedValue = null;
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void CaptureLogicalCallContext()
-		{
-			var value = "Tester";
-			object capturedValue = null;
+            CallContext.LogicalSetData("testlc", value);
 
-			CallContext.LogicalSetData ("testlc", value);
+            ExecutionContext ec = ExecutionContext.Capture();
+            Assert.IsNotNull(ec, "Capture");
+            Assert.AreEqual(value, CallContext.LogicalGetData("testlc"));
+            CallContext.LogicalSetData("testlc", null);
 
-			ExecutionContext ec = ExecutionContext.Capture ();
-			Assert.IsNotNull (ec, "Capture");
-			Assert.AreEqual (value, CallContext.LogicalGetData ("testlc"));
-			CallContext.LogicalSetData ("testlc", null);
+            ExecutionContext.Run(
+                ec,
+                new ContextCallback(
+                    new Action<object>(
+                        (data) =>
+                        {
+                            capturedValue = CallContext.LogicalGetData("testlc");
+                        }
+                    )
+                ),
+                null
+            );
 
-			ExecutionContext.Run (ec, new ContextCallback (new Action<object> ((data) => {
-				capturedValue = CallContext.LogicalGetData ("testlc");
-			})), null);
+            Assert.AreEqual(value, capturedValue);
+            Assert.AreNotEqual(value, CallContext.LogicalGetData("testlc"));
+        }
 
-			Assert.AreEqual (value, capturedValue);
-			Assert.AreNotEqual (value, CallContext.LogicalGetData ("testlc"));
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void CaptureCallContext()
+        {
+            var value = new CallContextValue(true);
+            object capturedValue = null;
 
-		[Test]
-		[Category ("MobileNotWorking")]
-		public void CaptureCallContext ()
-		{
-			var value = new CallContextValue (true);
-			object capturedValue = null;
+            CallContext.SetData("testlc", value);
 
-			CallContext.SetData ("testlc", value);
+            ExecutionContext ec = ExecutionContext.Capture();
+            Assert.IsNotNull(ec, "Capture");
+            Assert.AreEqual(value, CallContext.GetData("testlc"));
+            CallContext.SetData("testlc", null);
 
-			ExecutionContext ec = ExecutionContext.Capture ();
-			Assert.IsNotNull (ec, "Capture");
-			Assert.AreEqual (value, CallContext.GetData ("testlc")); 
-			CallContext.SetData ("testlc", null);
+            ExecutionContext.Run(
+                ec,
+                new ContextCallback(
+                    new Action<object>(
+                        (data) =>
+                        {
+                            capturedValue = CallContext.GetData("testlc");
+                        }
+                    )
+                ),
+                null
+            );
 
-			ExecutionContext.Run (ec, new ContextCallback (new Action<object> ((data) => {
-				capturedValue = CallContext.GetData ("testlc");
-			})), null);
+            Assert.AreEqual(value, capturedValue);
+            Assert.AreNotEqual(value, CallContext.GetData("testlc"));
+        }
 
-			Assert.AreEqual (value, capturedValue); 
-			Assert.AreNotEqual (value, CallContext.GetData ("testlc"));
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void Capture()
+        {
+            ExecutionContext ec = ExecutionContext.Capture();
+            Assert.IsNotNull(ec, "Capture");
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void Capture ()
-		{
-			ExecutionContext ec = ExecutionContext.Capture ();
-			Assert.IsNotNull (ec, "Capture");
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-1");
+            try
+            {
+                ec = ExecutionContext.Capture();
+                Assert.IsNull(ec, "Capture with SuppressFlow");
+            }
+            finally
+            {
+                afc.Undo();
+            }
+        }
 
-			AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-1");
-			try {
-				ec = ExecutionContext.Capture ();
-				Assert.IsNull (ec, "Capture with SuppressFlow");
-			}
-			finally {
-				afc.Undo ();
-			}
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void Copy()
+        {
+            ExecutionContext ec = ExecutionContext.Capture();
+            Assert.IsNotNull(ec, "Capture");
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void Copy ()
-		{
-			ExecutionContext ec = ExecutionContext.Capture ();
-			Assert.IsNotNull (ec, "Capture");
+            ExecutionContext copy = ec.CreateCopy();
+            Assert.IsNotNull(copy, "Copy of Capture");
 
-			ExecutionContext copy = ec.CreateCopy ();
-			Assert.IsNotNull (copy, "Copy of Capture");
+            Assert.IsFalse(ec.Equals(copy));
+            Assert.IsFalse(copy.Equals(ec));
+            Assert.IsFalse(Object.ReferenceEquals(ec, copy));
 
-			Assert.IsFalse (ec.Equals (copy));
-			Assert.IsFalse (copy.Equals (ec));
-			Assert.IsFalse (Object.ReferenceEquals (ec, copy));
+            ExecutionContext copy2nd = copy.CreateCopy();
+            Assert.IsNotNull(copy2nd, "2nd level copy of Capture");
+        }
 
-			ExecutionContext copy2nd = copy.CreateCopy ();
-			Assert.IsNotNull (copy2nd, "2nd level copy of Capture");
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        // The context might be the result of capture so no exception is thrown
+        [Category("NotWorking")]
+        public void Copy_FromThread()
+        {
+            ExecutionContext ec = Thread.CurrentThread.ExecutionContext;
+            Assert.IsNotNull(ec, "Thread.CurrentThread.ExecutionContext");
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		// The context might be the result of capture so no exception is thrown
-		[Category ("NotWorking")]
-		public void Copy_FromThread ()
-		{
-			ExecutionContext ec = Thread.CurrentThread.ExecutionContext;
-			Assert.IsNotNull (ec, "Thread.CurrentThread.ExecutionContext");
+            ExecutionContext copy = ec.CreateCopy();
+        }
 
-			ExecutionContext copy = ec.CreateCopy ();
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void IsFlowSuppressed()
+        {
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-1");
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void IsFlowSuppressed ()
-		{
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-1");
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-2");
+            afc.Undo();
 
-			AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-2");
-			afc.Undo ();
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-3");
+        }
 
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-3");
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        [Category("MobileNotWorking")]
+        public void RestoreFlow_None()
+        {
+            ExecutionContext.RestoreFlow();
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		[Category("MobileNotWorking")]
-		public void RestoreFlow_None ()
-		{
-			ExecutionContext.RestoreFlow ();
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void RestoreFlow_SuppressFlow()
+        {
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-1");
+            ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-2");
+            ExecutionContext.RestoreFlow();
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-3");
+        }
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void RestoreFlow_SuppressFlow ()
-		{
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-1");
-			ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-2");
-			ExecutionContext.RestoreFlow ();
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-3");
-		}
+        [Test]
+        [Category("CAS")] // since r60298 the SecurityContext is only captured if the security manager is active
+        public void Run() // see bug #78306 for details
+        {
+            Assert.IsFalse(success, "pre-check");
+            ExecutionContext.Run(ExecutionContext.Capture(), new ContextCallback(Callback), true);
+            Assert.IsTrue(success, "post-check");
+        }
 
-		[Test]
-		[Category ("CAS")] // since r60298 the SecurityContext is only captured if the security manager is active
-		public void Run () // see bug #78306 for details
-		{
-			Assert.IsFalse (success, "pre-check");
-			ExecutionContext.Run (ExecutionContext.Capture (), new ContextCallback (Callback), true);
-			Assert.IsTrue (success, "post-check");
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        [Category("MobileNotWorking")]
+        public void Run_SuppressFlow()
+        {
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed());
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed());
+            try
+            {
+                ExecutionContext.Run(
+                    ExecutionContext.Capture(),
+                    new ContextCallback(Callback),
+                    "Hello world."
+                );
+            }
+            finally
+            {
+                afc.Undo();
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		[Category("MobileNotWorking")]
-		public void Run_SuppressFlow ()
-		{
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed ());
-			AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed ());
-			try {
-				ExecutionContext.Run (ExecutionContext.Capture (), new ContextCallback (Callback), "Hello world.");
-			}
-			finally {
-				afc.Undo ();
-			}
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void SuppressFlow()
+        {
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-1");
 
-		[Test]
-		[Category("MobileNotWorking")]
-		public void SuppressFlow ()
-		{
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-1");
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-3");
+            afc.Undo();
 
-			AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-3");
-			afc.Undo ();
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-4");
+        }
 
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-4");
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        [Category("MobileNotWorking")]
+        public void SuppressFlow_Two_Undo()
+        {
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-1");
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		[Category("MobileNotWorking")]
-		public void SuppressFlow_Two_Undo ()
-		{
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-1");
+            AsyncFlowControl afc = ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-2");
 
-			AsyncFlowControl afc = ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-2");
+            AsyncFlowControl afc2 = ExecutionContext.SuppressFlow();
+            Assert.IsTrue(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-3");
+            afc2.Undo();
 
-			AsyncFlowControl afc2 = ExecutionContext.SuppressFlow ();
-			Assert.IsTrue (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-3");
-			afc2.Undo ();
+            // note: afc2 Undo return to the original (not the previous) state
+            Assert.IsFalse(ExecutionContext.IsFlowSuppressed(), "IsFlowSuppressed-4");
 
-			// note: afc2 Undo return to the original (not the previous) state
-			Assert.IsFalse (ExecutionContext.IsFlowSuppressed (), "IsFlowSuppressed-4");
-
-			// we can't use the first AsyncFlowControl
-			afc.Undo ();
-		}
-	}
+            // we can't use the first AsyncFlowControl
+            afc.Undo();
+        }
+    }
 }
-

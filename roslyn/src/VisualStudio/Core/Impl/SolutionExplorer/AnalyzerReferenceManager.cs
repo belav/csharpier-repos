@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AnalyzerReferenceManager(
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-            AnalyzerItemsTracker analyzerItemsTracker)
+            AnalyzerItemsTracker analyzerItemsTracker
+        )
         {
             _serviceProvider = serviceProvider;
             _tracker = analyzerItemsTracker;
@@ -41,14 +42,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public void ShowDialog()
         {
             var referenceManager = GetReferenceManager();
-            if (referenceManager != null &&
-                _tracker.SelectedHierarchy != null)
+            if (referenceManager != null && _tracker.SelectedHierarchy != null)
             {
-                referenceManager.ShowReferenceManager(this,
-                                                      SolutionExplorerShim.Add_Analyzer,
-                                                      null,
-                                                      VSConstants.FileReferenceProvider_Guid,
-                                                      fForceShowDefaultProvider: false);
+                referenceManager.ShowReferenceManager(
+                    this,
+                    SolutionExplorerShim.Add_Analyzer,
+                    null,
+                    VSConstants.FileReferenceProvider_Guid,
+                    fForceShowDefaultProvider: false
+                );
             }
         }
 
@@ -64,7 +66,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             Contract.ThrowIfNull(_tracker.SelectedHierarchy);
             if (_tracker.SelectedHierarchy.TryGetProject(out var project))
             {
-
                 if (project.Object is VSProject3 vsproject)
                 {
                     foreach (IVsReference reference in changedContext.References)
@@ -93,8 +94,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public Array GetProviderContexts()
         {
             // Return just the File provider context so that just the browse tab shows up.
-            var context = (IVsFileReferenceProviderContext)GetReferenceManager().CreateProviderContext(VSConstants.FileReferenceProvider_Guid);
-            context.BrowseFilter = string.Format("{0} (*.dll)\0*.dll\0", SolutionExplorerShim.Analyzer_Files);
+            var context = (IVsFileReferenceProviderContext)
+                GetReferenceManager().CreateProviderContext(VSConstants.FileReferenceProvider_Guid);
+            context.BrowseFilter = string.Format(
+                "{0} (*.dll)\0*.dll\0",
+                SolutionExplorerShim.Analyzer_Files
+            );
             return new[] { context };
         }
 
@@ -102,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             if (_referenceManager == null)
             {
-                _referenceManager = _serviceProvider.GetService(typeof(SVsReferenceManager)) as IVsReferenceManager;
+                _referenceManager =
+                    _serviceProvider.GetService(typeof(SVsReferenceManager)) as IVsReferenceManager;
                 Assumes.Present(_referenceManager);
             }
 

@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.Metadata;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
@@ -49,34 +48,22 @@ namespace ILCompiler
 
         public CustomAttributeHandleCollection GetCustomAttributes
         {
-            get
-            {
-                return Definition.GetCustomAttributes();
-            }
+            get { return Definition.GetCustomAttributes(); }
         }
 
         public MetadataType OwningType
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         public string Name
         {
-            get
-            {
-                return _type.MetadataReader.GetString(Definition.Name);
-            }
+            get { return _type.MetadataReader.GetString(Definition.Name); }
         }
 
         public EventDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         public EventPseudoDesc(EcmaType type, EventDefinitionHandle handle)
@@ -87,11 +74,13 @@ namespace ILCompiler
 
         public override TypeSystemContext Context => _type.Context;
 
-        public override bool Equals(object obj) => obj is not EventPseudoDesc @event ? false : this == @event;
+        public override bool Equals(object obj) =>
+            obj is not EventPseudoDesc @event ? false : this == @event;
 
         public override int GetHashCode() => _type.GetHashCode() ^ _handle.GetHashCode();
 
-        public static bool operator ==(EventPseudoDesc a, EventPseudoDesc b) => a._type == b._type && a._handle == b._handle;
+        public static bool operator ==(EventPseudoDesc a, EventPseudoDesc b) =>
+            a._type == b._type && a._handle == b._handle;
 
         public static bool operator !=(EventPseudoDesc a, EventPseudoDesc b) => !(a == b);
     }

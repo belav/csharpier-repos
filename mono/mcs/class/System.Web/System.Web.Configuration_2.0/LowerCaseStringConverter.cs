@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,36 +31,39 @@
 using System.ComponentModel;
 using System.Globalization;
 
+namespace System.Web.Configuration
+{
+    public sealed class LowerCaseStringConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext ctx, Type type)
+        {
+            return (type == typeof(string));
+        }
 
-namespace System.Web.Configuration {
+        public override bool CanConvertTo(ITypeDescriptorContext ctx, Type type)
+        {
+            return (type == typeof(string));
+        }
 
-	public sealed class LowerCaseStringConverter : TypeConverter
-	{
-		public override bool CanConvertFrom (ITypeDescriptorContext ctx, Type type)
-		{
-			return (type == typeof (string));
-		}
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            return ((string)data).ToLowerInvariant();
+        }
 
-		public override bool CanConvertTo (ITypeDescriptorContext ctx, Type type)
-		{
-			return (type == typeof (string));
-		}
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
+            if (value == null)
+                return "";
 
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
-			return ((string)data).ToLowerInvariant ();
-		}
+            if (!(value is string))
+                throw new ArgumentException("value");
 
-		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
-			if (value == null)
-				return "";
-
-			if (! (value is string))
-				throw new ArgumentException ("value");
-
-			return ((string)value).ToLowerInvariant ();
-		}
-	}
+            return ((string)value).ToLowerInvariant();
+        }
+    }
 }
-

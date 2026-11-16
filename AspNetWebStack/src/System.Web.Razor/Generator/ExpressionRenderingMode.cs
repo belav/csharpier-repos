@@ -10,7 +10,7 @@ namespace System.Web.Razor.Generator
         /// </summary>
         /// <example>
         /// If @foo is rendered with WriteToOutput, the code generator would output the following code:
-        /// 
+        ///
         /// Write(foo);
         /// </example>
         WriteToOutput,
@@ -21,9 +21,9 @@ namespace System.Web.Razor.Generator
         /// </summary>
         /// <example>
         /// If @foo is rendered with InjectCode, the code generator would output the following code:
-        /// 
+        ///
         /// foo
         /// </example>
-        InjectCode
+        InjectCode,
     }
 }

@@ -61,6 +61,5 @@ namespace System.ComponentModel.Composition
                 Assert.Same(error.Element, proxy.Element);
             }
         }
-
-   }
+    }
 }

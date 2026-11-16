@@ -76,8 +76,8 @@ public class SecurityStampTest
             new CookieAuthenticationOptions(),
             ticket
         );
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => SecurityStampValidator.ValidatePrincipalAsync(context)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            SecurityStampValidator.ValidatePrincipalAsync(context)
         );
     }
 

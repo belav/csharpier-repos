@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_Gt1
 {
     const int Pass = 100;
@@ -21,7 +21,9 @@ public class BringUpTest_Gt1
     public static int TestEntryPoint()
     {
         bool y = Gt1(1);
-        if (y == false) return Pass;
-        else return Fail;
+        if (y == false)
+            return Pass;
+        else
+            return Fail;
     }
 }

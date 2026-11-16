@@ -43,7 +43,9 @@ namespace OLEDB.Test.ModuleCore
             if (reflectionTypeInfo != null)
                 return reflectionTypeInfo.Type;
 
-            Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.FullName == typeInfo.Assembly.Name);
+            Assembly assembly = AppDomain
+                .CurrentDomain.GetAssemblies()
+                .FirstOrDefault(a => a.FullName == typeInfo.Assembly.Name);
             if (assembly != null)
             {
                 return assembly.GetType(typeInfo.Name);
@@ -61,14 +63,23 @@ namespace OLEDB.Test.ModuleCore
             return ToRuntimeType(methodInfo.Type);
         }
 
-        public virtual IEnumerable<object[]> GetData(IAttributeInfo dataAttribute, IMethodInfo testMethod)
+        public virtual IEnumerable<object[]> GetData(
+            IAttributeInfo dataAttribute,
+            IMethodInfo testMethod
+        )
         {
             string methodName = (string)dataAttribute.GetConstructorArguments().Single();
-            Func<CTestModule> moduleGenerator = XmlTestsAttribute.GetGenerator(GetDeclaringType(testMethod), methodName);
+            Func<CTestModule> moduleGenerator = XmlTestsAttribute.GetGenerator(
+                GetDeclaringType(testMethod),
+                methodName
+            );
             return GenerateTestCases(moduleGenerator);
         }
 
-        public virtual bool SupportsDiscoveryEnumeration(IAttributeInfo dataAttribute, IMethodInfo testMethod) => true;
+        public virtual bool SupportsDiscoveryEnumeration(
+            IAttributeInfo dataAttribute,
+            IMethodInfo testMethod
+        ) => true;
     }
 
     [DataDiscoverer("OLEDB.Test.ModuleCore.XmlInlineDataDiscoverer", "ModuleCore")]
@@ -86,7 +97,8 @@ namespace OLEDB.Test.ModuleCore
 
         public static Func<CTestModule> GetGenerator(Type type, string methodName)
         {
-            ModuleGenerator moduleGenerator = (ModuleGenerator)type.GetMethod(methodName).CreateDelegate(typeof(ModuleGenerator));
+            ModuleGenerator moduleGenerator = (ModuleGenerator)
+                type.GetMethod(methodName).CreateDelegate(typeof(ModuleGenerator));
             return new Func<CTestModule>(moduleGenerator);
         }
 

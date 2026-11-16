@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,40 +35,39 @@ using System.Drawing.Imaging;
 
 //
 public class SampleImageCodecs
-{	
-	public static void DumpCodeInfo (ImageCodecInfo codec)
-	{
-		Console.WriteLine ("Clsid:" + codec.Clsid);
-		Console.WriteLine ("FormatID:" + codec.FormatID);			
-		Console.WriteLine ("Codec:" + codec.CodecName);
-		Console.WriteLine ("DllName:" + codec.DllName);
-		Console.WriteLine ("Extension:" + codec.FilenameExtension);
-		Console.WriteLine ("Format:" + codec.FormatDescription);
-		Console.WriteLine ("MimeType:" + codec.MimeType);
-		Console.WriteLine ("Flags:" + codec.Flags);			
-		Console.WriteLine ("Version:" + codec.Version);			
-	}
-	
-	public static void Main(string[] args)
-	{	
-		ImageCodecInfo[] decoders =  ImageCodecInfo.GetImageDecoders();			
-		ImageCodecInfo[] encoders =  ImageCodecInfo.GetImageEncoders();			
-	
-		Console.WriteLine ("Encoders ********");
-		
-		for (int i = 0; i < encoders.Length; i++) {
-			DumpCodeInfo (encoders[i]);
-			Console.WriteLine ("---");
-		}
+{
+    public static void DumpCodeInfo(ImageCodecInfo codec)
+    {
+        Console.WriteLine("Clsid:" + codec.Clsid);
+        Console.WriteLine("FormatID:" + codec.FormatID);
+        Console.WriteLine("Codec:" + codec.CodecName);
+        Console.WriteLine("DllName:" + codec.DllName);
+        Console.WriteLine("Extension:" + codec.FilenameExtension);
+        Console.WriteLine("Format:" + codec.FormatDescription);
+        Console.WriteLine("MimeType:" + codec.MimeType);
+        Console.WriteLine("Flags:" + codec.Flags);
+        Console.WriteLine("Version:" + codec.Version);
+    }
 
-		Console.WriteLine ("Decoders ********");
-		
-		for (int i = 0; i < decoders.Length; i++) {
-			DumpCodeInfo (decoders[i]);
-			Console.WriteLine ("---");
-		}
-	}
+    public static void Main(string[] args)
+    {
+        ImageCodecInfo[] decoders = ImageCodecInfo.GetImageDecoders();
+        ImageCodecInfo[] encoders = ImageCodecInfo.GetImageEncoders();
 
+        Console.WriteLine("Encoders ********");
+
+        for (int i = 0; i < encoders.Length; i++)
+        {
+            DumpCodeInfo(encoders[i]);
+            Console.WriteLine("---");
+        }
+
+        Console.WriteLine("Decoders ********");
+
+        for (int i = 0; i < decoders.Length; i++)
+        {
+            DumpCodeInfo(decoders[i]);
+            Console.WriteLine("---");
+        }
+    }
 }
-
-

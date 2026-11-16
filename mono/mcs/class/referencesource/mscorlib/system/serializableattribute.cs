@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,25 +12,33 @@
 **
 **
 ============================================================*/
-namespace System {
-
+namespace System
+{
     using System;
     using System.Reflection;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Delegate, Inherited = false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class SerializableAttribute : Attribute 
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Delegate,
+        Inherited = false
+    )]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SerializableAttribute : Attribute
     {
-        internal static Attribute GetCustomAttribute(RuntimeType type) 
-        { 
-            return (type.Attributes & TypeAttributes.Serializable) == TypeAttributes.Serializable ? new SerializableAttribute() : null; 
-        }
-        internal static bool IsDefined(RuntimeType type) 
-        { 
-            return type.IsSerializable; 
+        internal static Attribute GetCustomAttribute(RuntimeType type)
+        {
+            return (type.Attributes & TypeAttributes.Serializable) == TypeAttributes.Serializable
+                ? new SerializableAttribute()
+                : null;
         }
 
-        public SerializableAttribute() {
+        internal static bool IsDefined(RuntimeType type)
+        {
+            return type.IsSerializable;
         }
+
+        public SerializableAttribute() { }
     }
 }

@@ -30,10 +30,10 @@ namespace System.Net.Http.Formatting
                 // string bodyEncoding, string[] supportedEncodings, string expectedEncoding
                 return new TheoryDataSet<string, string[], string>
                 {
-                    { null, new string[] { "utf-8", "utf-16"}, "utf-8" },
-                    { null, new string[] { "utf-16", "utf-8"}, "utf-16"},
-                    { "utf-32", new string[] { "utf-8", "utf-16"}, "utf-8" },
-                    { "utf-32", new string[] { "utf-8", "utf-16", "utf-32"}, "utf-32"}
+                    { null, new string[] { "utf-8", "utf-16" }, "utf-8" },
+                    { null, new string[] { "utf-16", "utf-8" }, "utf-16" },
+                    { "utf-32", new string[] { "utf-8", "utf-16" }, "utf-8" },
+                    { "utf-32", new string[] { "utf-8", "utf-16", "utf-32" }, "utf-32" },
                 };
             }
         }
@@ -41,7 +41,11 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(MediaTypeFormatter), TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsAbstract);
+            Assert.Type.HasProperties(
+                typeof(MediaTypeFormatter),
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+                    | TypeAssert.TypeProperties.IsAbstract
+            );
         }
 
         [Fact]
@@ -64,14 +68,23 @@ namespace System.Net.Http.Formatting
             TestMediaTypeFormatter derivedFormatter = new TestMediaTypeFormatter(formatter);
 
             Assert.Same(formatter.MediaTypeMappings, derivedFormatter.MediaTypeMappings);
-            Assert.Same(formatter.MediaTypeMappingsInternal, derivedFormatter.MediaTypeMappingsInternal);
+            Assert.Same(
+                formatter.MediaTypeMappingsInternal,
+                derivedFormatter.MediaTypeMappingsInternal
+            );
             Assert.Equal(formatter.RequiredMemberSelector, derivedFormatter.RequiredMemberSelector);
 
             Assert.Same(formatter.SupportedMediaTypes, derivedFormatter.SupportedMediaTypes);
-            Assert.Same(formatter.SupportedMediaTypesInternal, derivedFormatter.SupportedMediaTypesInternal);
+            Assert.Same(
+                formatter.SupportedMediaTypesInternal,
+                derivedFormatter.SupportedMediaTypesInternal
+            );
 
             Assert.Same(formatter.SupportedEncodings, derivedFormatter.SupportedEncodings);
-            Assert.Same(formatter.SupportedEncodingsInternal, derivedFormatter.SupportedEncodingsInternal);
+            Assert.Same(
+                formatter.SupportedEncodingsInternal,
+                derivedFormatter.SupportedEncodingsInternal
+            );
         }
 
         [Fact]
@@ -83,12 +96,15 @@ namespace System.Net.Http.Formatting
                 Assert.Reflection.IntegerProperty<MediaTypeFormatter, int>(
                     null,
                     c => MediaTypeFormatter.MaxHttpCollectionKeys,
-                    expectedDefaultValue: PlatformInfo.Platform == Platform.Net40 ? 1000 : Int32.MaxValue,
+                    expectedDefaultValue: PlatformInfo.Platform == Platform.Net40
+                        ? 1000
+                        : Int32.MaxValue,
                     minLegalValue: 1,
                     illegalLowerValue: 0,
                     maxLegalValue: null,
                     illegalUpperValue: null,
-                    roundTripTestValue: 125);
+                    roundTripTestValue: 125
+                );
             }
             finally
             {
@@ -125,7 +141,15 @@ namespace System.Net.Http.Formatting
         {
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter();
             Collection<MediaTypeHeaderValue> supportedMediaTypes = formatter.SupportedMediaTypes;
-            Assert.ThrowsArgument(() => supportedMediaTypes.Add(mediaType), "item", Error.Format(Properties.Resources.CannotUseMediaRangeForSupportedMediaType, typeof(MediaTypeHeaderValue).Name, mediaType.MediaType));
+            Assert.ThrowsArgument(
+                () => supportedMediaTypes.Add(mediaType),
+                "item",
+                Error.Format(
+                    Properties.Resources.CannotUseMediaRangeForSupportedMediaType,
+                    typeof(MediaTypeHeaderValue).Name,
+                    mediaType.MediaType
+                )
+            );
         }
 
         [Fact]
@@ -144,7 +168,15 @@ namespace System.Net.Http.Formatting
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter();
             Collection<MediaTypeHeaderValue> supportedMediaTypes = formatter.SupportedMediaTypes;
 
-            Assert.ThrowsArgument(() => supportedMediaTypes.Insert(0, mediaType), "item", Error.Format(Properties.Resources.CannotUseMediaRangeForSupportedMediaType, typeof(MediaTypeHeaderValue).Name, mediaType.MediaType));
+            Assert.ThrowsArgument(
+                () => supportedMediaTypes.Insert(0, mediaType),
+                "item",
+                Error.Format(
+                    Properties.Resources.CannotUseMediaRangeForSupportedMediaType,
+                    typeof(MediaTypeHeaderValue).Name,
+                    mediaType.MediaType
+                )
+            );
         }
 
         [Fact]
@@ -169,12 +201,18 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent("Hello World", Encoding.UTF8, "text/plain");
 
             // Act
-            Assert.Throws<InvalidOperationException>(() => formatter.SelectCharacterEncoding(content.Headers));
+            Assert.Throws<InvalidOperationException>(() =>
+                formatter.SelectCharacterEncoding(content.Headers)
+            );
         }
 
         [Theory]
         [PropertyData("SelectCharacterEncodingTestData")]
-        public void SelectCharacterEncoding_ReturnsBestEncoding(string bodyEncoding, string[] supportedEncodings, string expectedEncoding)
+        public void SelectCharacterEncoding_ReturnsBestEncoding(
+            string bodyEncoding,
+            string[] supportedEncodings,
+            string expectedEncoding
+        )
         {
             // Arrange
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter { CallBase = true };
@@ -196,7 +234,8 @@ namespace System.Net.Http.Formatting
             Encoding actualEncoding = formatter.SelectCharacterEncoding(contentHeaders);
 
             // Assert
-            Encoding expectedEnc = expectedEncoding != null ? Encoding.GetEncoding(expectedEncoding) : null;
+            Encoding expectedEnc =
+                expectedEncoding != null ? Encoding.GetEncoding(expectedEncoding) : null;
             Assert.Equal(expectedEnc, actualEncoding);
         }
 
@@ -205,8 +244,10 @@ namespace System.Net.Http.Formatting
         {
             var formatter = new Mock<MediaTypeFormatter> { CallBase = true }.Object;
 
-            Assert.Throws<NotSupportedException>(() => formatter.ReadFromStreamAsync(null, null, null, null),
-                "The media type formatter of type 'MediaTypeFormatterProxy' does not support reading because it does not implement the ReadFromStreamAsync method.");
+            Assert.Throws<NotSupportedException>(
+                () => formatter.ReadFromStreamAsync(null, null, null, null),
+                "The media type formatter of type 'MediaTypeFormatterProxy' does not support reading because it does not implement the ReadFromStreamAsync method."
+            );
         }
 
         [Fact]
@@ -214,8 +255,10 @@ namespace System.Net.Http.Formatting
         {
             var formatter = new Mock<MediaTypeFormatter> { CallBase = true }.Object;
 
-            Assert.Throws<NotSupportedException>(() => formatter.WriteToStreamAsync(null, null, null, null, null),
-                "The media type formatter of type 'MediaTypeFormatterProxy' does not support writing because it does not implement the WriteToStreamAsync method.");
+            Assert.Throws<NotSupportedException>(
+                () => formatter.WriteToStreamAsync(null, null, null, null, null),
+                "The media type formatter of type 'MediaTypeFormatterProxy' does not support writing because it does not implement the WriteToStreamAsync method."
+            );
         }
 
         [Theory]
@@ -243,7 +286,8 @@ namespace System.Net.Http.Formatting
         {
             TestStruct s = new TestStruct();
 
-            TestStruct result = (TestStruct)MediaTypeFormatter.GetDefaultValueForType(typeof(TestStruct));
+            TestStruct result = (TestStruct)
+                MediaTypeFormatter.GetDefaultValueForType(typeof(TestStruct));
 
             Assert.Equal(s, result);
         }
@@ -253,7 +297,10 @@ namespace System.Net.Http.Formatting
         {
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter();
             HttpContentHeaders contentHeaders = FormattingUtilities.CreateEmptyContentHeaders();
-            Assert.ThrowsArgumentNull(() => formatter.SetDefaultContentHeaders(null, contentHeaders, TestMediaTypeHeader), "type");
+            Assert.ThrowsArgumentNull(
+                () => formatter.SetDefaultContentHeaders(null, contentHeaders, TestMediaTypeHeader),
+                "type"
+            );
         }
 
         [Fact]
@@ -261,7 +308,10 @@ namespace System.Net.Http.Formatting
         {
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter();
             Type type = typeof(object);
-            Assert.ThrowsArgumentNull(() => formatter.SetDefaultContentHeaders(type, null, TestMediaTypeHeader), "headers");
+            Assert.ThrowsArgumentNull(
+                () => formatter.SetDefaultContentHeaders(type, null, TestMediaTypeHeader),
+                "headers"
+            );
         }
 
         [Fact]
@@ -341,11 +391,20 @@ namespace System.Net.Http.Formatting
             object value = new object();
             Type type = typeof(object);
             MemoryStream stream = new MemoryStream();
-            Mock<MediaTypeFormatter> formatter = new Mock<MediaTypeFormatter>{ CallBase = true };
+            Mock<MediaTypeFormatter> formatter = new Mock<MediaTypeFormatter> { CallBase = true };
 
             formatter.Setup(f => f.CanWriteType(type)).Returns(true);
             formatter
-                .Setup(f => f.WriteToStreamAsync(type, value, stream, It.IsAny<ObjectContent>(), null, CancellationToken.None))
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        type,
+                        value,
+                        stream,
+                        It.IsAny<ObjectContent>(),
+                        null,
+                        CancellationToken.None
+                    )
+                )
                 .Returns(TaskHelpers.Completed())
                 .Verifiable();
 
@@ -361,6 +420,7 @@ namespace System.Net.Http.Formatting
         public struct TestStruct
         {
             private int I;
+
             public TestStruct(int i)
             {
                 I = i + 1;
@@ -369,14 +429,10 @@ namespace System.Net.Http.Formatting
 
         private class TestMediaTypeFormatter : MediaTypeFormatter
         {
-            public TestMediaTypeFormatter()
-            {
-            }
+            public TestMediaTypeFormatter() { }
 
             public TestMediaTypeFormatter(TestMediaTypeFormatter formatter)
-                : base(formatter)
-            {
-            }
+                : base(formatter) { }
 
             public override bool CanReadType(Type type)
             {

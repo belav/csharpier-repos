@@ -62,7 +62,12 @@ namespace System.Security.Cryptography.Cose
         /// For sign operations in <see cref="CoseSign1Message"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the buckets of the content (and only) layer.
         /// For sign operations in <see cref="CoseMultiSignMessage"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the buckets of the signature layer.
         /// </remarks>
-        public CoseSigner(AsymmetricAlgorithm key, HashAlgorithmName hashAlgorithm, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null)
+        public CoseSigner(
+            AsymmetricAlgorithm key,
+            HashAlgorithmName hashAlgorithm,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null
+        )
         {
             if (key is null)
                 throw new ArgumentNullException(nameof(key));
@@ -101,7 +106,13 @@ namespace System.Security.Cryptography.Cose
         /// For sign operations in <see cref="CoseSign1Message"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the header parameters of the content layer.
         /// For sign operations in <see cref="CoseMultiSignMessage"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the header parameters of the signature layer.
         /// </remarks>
-        public CoseSigner(RSA key, RSASignaturePadding signaturePadding, HashAlgorithmName hashAlgorithm, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null)
+        public CoseSigner(
+            RSA key,
+            RSASignaturePadding signaturePadding,
+            HashAlgorithmName hashAlgorithm,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null
+        )
         {
             if (key is null)
                 throw new ArgumentNullException(nameof(key));
@@ -137,13 +148,22 @@ namespace System.Security.Cryptography.Cose
         {
             int algHeaderValue = GetCoseAlgorithmHeader();
 
-            if (_protectedHeaders != null && _protectedHeaders.TryGetValue(CoseHeaderLabel.Algorithm, out CoseHeaderValue value))
+            if (
+                _protectedHeaders != null
+                && _protectedHeaders.TryGetValue(
+                    CoseHeaderLabel.Algorithm,
+                    out CoseHeaderValue value
+                )
+            )
             {
                 ValidateAlgorithmHeader(value.EncodedValue, algHeaderValue);
                 return null;
             }
 
-            if (_unprotectedHeaders != null && _unprotectedHeaders.ContainsKey(CoseHeaderLabel.Algorithm))
+            if (
+                _unprotectedHeaders != null
+                && _unprotectedHeaders.ContainsKey(CoseHeaderLabel.Algorithm)
+            )
             {
                 throw new ArgumentException(SR.Sign1SignAlgMustBeProtected, "unprotectedHeaders");
             }
@@ -154,18 +174,32 @@ namespace System.Security.Cryptography.Cose
         private void ValidateAlgorithmHeader(ReadOnlyMemory<byte> encodedAlg, int expectedAlg)
         {
             int? alg = CoseHelpers.DecodeCoseAlgorithmHeader(encodedAlg);
-            Debug.Assert(alg.HasValue, "Algorithm (alg) is a known header and should have been validated in Set[Encoded]Value()");
+            Debug.Assert(
+                alg.HasValue,
+                "Algorithm (alg) is a known header and should have been validated in Set[Encoded]Value()"
+            );
 
             if (expectedAlg != alg.Value)
             {
                 string exMsg;
                 if (_keyType == KeyType.RSA)
                 {
-                    exMsg = SR.Format(SR.Sign1SignCoseAlgorithmDoesNotMatchSpecifiedKeyHashAlgorithmAndPadding, alg.Value, _keyType, HashAlgorithm.Name, RSASignaturePadding);
+                    exMsg = SR.Format(
+                        SR.Sign1SignCoseAlgorithmDoesNotMatchSpecifiedKeyHashAlgorithmAndPadding,
+                        alg.Value,
+                        _keyType,
+                        HashAlgorithm.Name,
+                        RSASignaturePadding
+                    );
                 }
                 else
                 {
-                    exMsg = SR.Format(SR.Sign1SignCoseAlgorithmDoesNotMatchSpecifiedKeyAndHashAlgorithm, alg.Value, _keyType, HashAlgorithm.Name);
+                    exMsg = SR.Format(
+                        SR.Sign1SignCoseAlgorithmDoesNotMatchSpecifiedKeyAndHashAlgorithm,
+                        alg.Value,
+                        _keyType,
+                        HashAlgorithm.Name
+                    );
                 }
 
                 throw new ArgumentException(exMsg, "protectedHeaders");
@@ -182,7 +216,10 @@ namespace System.Security.Cryptography.Cose
                     nameof(HashAlgorithmName.SHA256) => KnownCoseAlgorithms.ES256,
                     nameof(HashAlgorithmName.SHA384) => KnownCoseAlgorithms.ES384,
                     nameof(HashAlgorithmName.SHA512) => KnownCoseAlgorithms.ES512,
-                    _ => throw new ArgumentException(SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName), "hashAlgorithm")
+                    _ => throw new ArgumentException(
+                        SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
+                        "hashAlgorithm"
+                    ),
                 };
             }
 
@@ -196,7 +233,10 @@ namespace System.Security.Cryptography.Cose
                     nameof(HashAlgorithmName.SHA256) => KnownCoseAlgorithms.PS256,
                     nameof(HashAlgorithmName.SHA384) => KnownCoseAlgorithms.PS384,
                     nameof(HashAlgorithmName.SHA512) => KnownCoseAlgorithms.PS512,
-                    _ => throw new ArgumentException(SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName), "hashAlgorithm")
+                    _ => throw new ArgumentException(
+                        SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
+                        "hashAlgorithm"
+                    ),
                 };
             }
 
@@ -207,7 +247,10 @@ namespace System.Security.Cryptography.Cose
                 nameof(HashAlgorithmName.SHA256) => KnownCoseAlgorithms.RS256,
                 nameof(HashAlgorithmName.SHA384) => KnownCoseAlgorithms.RS384,
                 nameof(HashAlgorithmName.SHA512) => KnownCoseAlgorithms.RS512,
-                _ => throw new ArgumentException(SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName), "hashAlgorithm")
+                _ => throw new ArgumentException(
+                    SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
+                    "hashAlgorithm"
+                ),
             };
         }
     }

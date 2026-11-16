@@ -16,7 +16,7 @@ namespace System.DirectoryServices
             UseSigning = 0x40,
             UseSealing = 0x80,
             UseDelegation = 0x100,
-            UseServerBinding = 0x200
+            UseServerBinding = 0x200,
         }
     }
 }

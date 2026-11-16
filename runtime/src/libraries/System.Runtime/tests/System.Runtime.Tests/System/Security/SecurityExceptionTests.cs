@@ -3,7 +3,6 @@
 
 using System.Reflection;
 using System.Security;
-
 using Xunit;
 
 namespace System.Tests
@@ -16,7 +15,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new SecurityException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_SECURITY, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_SECURITY,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -24,7 +27,11 @@ namespace System.Tests
         {
             string message = "security problem";
             var exception = new SecurityException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_SECURITY, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_SECURITY,
+                message: message
+            );
         }
 
         [Fact]
@@ -33,7 +40,12 @@ namespace System.Tests
             string message = "security problem";
             var innerException = new Exception("Inner exception");
             var exception = new SecurityException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_SECURITY, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_SECURITY,
+                innerException: innerException,
+                message: message
+            );
         }
 
         [Fact]
@@ -41,7 +53,11 @@ namespace System.Tests
         {
             string message = "security problem";
             var exception = new SecurityException(message, typeof(SecurityExceptionTests));
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_SECURITY, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_SECURITY,
+                message: message
+            );
             Assert.Equal(typeof(SecurityExceptionTests), exception.PermissionType);
         }
 
@@ -49,8 +65,16 @@ namespace System.Tests
         public static void Ctor_String_Type_String()
         {
             string message = "security problem";
-            var exception = new SecurityException(message, typeof(SecurityExceptionTests), "permission state");
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_SECURITY, message: message);
+            var exception = new SecurityException(
+                message,
+                typeof(SecurityExceptionTests),
+                "permission state"
+            );
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_SECURITY,
+                message: message
+            );
             Assert.Equal(typeof(SecurityExceptionTests), exception.PermissionType);
             Assert.Equal("permission state", exception.PermissionState);
         }

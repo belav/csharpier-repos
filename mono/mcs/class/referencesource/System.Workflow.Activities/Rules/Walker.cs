@@ -7,9 +7,9 @@ using System.CodeDom;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -28,7 +28,13 @@ namespace System.Workflow.Activities.Rules
                 this.ruleExpr = ruleExpr;
             }
 
-            internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+            internal override void AnalyzeUsage(
+                CodeExpression expression,
+                RuleAnalysis analysis,
+                bool isRead,
+                bool isWritten,
+                RulePathQualifier qualifier
+            )
             {
                 ruleExpr.AnalyzeUsage(analysis, isRead, isWritten, qualifier);
             }
@@ -38,22 +44,36 @@ namespace System.Workflow.Activities.Rules
                 return ruleExpr.Clone();
             }
 
-            internal override void Decompile(CodeExpression expression, StringBuilder decompilation, CodeExpression parentExpression)
+            internal override void Decompile(
+                CodeExpression expression,
+                StringBuilder decompilation,
+                CodeExpression parentExpression
+            )
             {
                 ruleExpr.Decompile(decompilation, parentExpression);
             }
 
-            internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+            internal override RuleExpressionResult Evaluate(
+                CodeExpression expression,
+                RuleExecution execution
+            )
             {
                 return ruleExpr.Evaluate(execution);
             }
 
-            internal override bool Match(CodeExpression leftExpression, CodeExpression rightExpression)
+            internal override bool Match(
+                CodeExpression leftExpression,
+                CodeExpression rightExpression
+            )
             {
                 return ruleExpr.Match(rightExpression);
             }
 
-            internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+            internal override RuleExpressionInfo Validate(
+                CodeExpression expression,
+                RuleValidation validation,
+                bool isWritten
+            )
             {
                 return ruleExpr.Validate(validation, isWritten);
             }
@@ -71,20 +91,30 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        static TypeWrapperTuple[] typeWrappers = new TypeWrapperTuple[] {
+        static TypeWrapperTuple[] typeWrappers = new TypeWrapperTuple[]
+        {
             new TypeWrapperTuple(typeof(CodeThisReferenceExpression), new ThisExpression()),
             new TypeWrapperTuple(typeof(CodePrimitiveExpression), new PrimitiveExpression()),
-            new TypeWrapperTuple(typeof(CodeFieldReferenceExpression), new FieldReferenceExpression()),
-            new TypeWrapperTuple(typeof(CodePropertyReferenceExpression), new PropertyReferenceExpression()),
+            new TypeWrapperTuple(
+                typeof(CodeFieldReferenceExpression),
+                new FieldReferenceExpression()
+            ),
+            new TypeWrapperTuple(
+                typeof(CodePropertyReferenceExpression),
+                new PropertyReferenceExpression()
+            ),
             new TypeWrapperTuple(typeof(CodeBinaryOperatorExpression), new BinaryExpression()),
             new TypeWrapperTuple(typeof(CodeMethodInvokeExpression), new MethodInvokeExpression()),
             new TypeWrapperTuple(typeof(CodeIndexerExpression), new IndexerPropertyExpression()),
             new TypeWrapperTuple(typeof(CodeArrayIndexerExpression), new ArrayIndexerExpression()),
             new TypeWrapperTuple(typeof(CodeDirectionExpression), new DirectionExpression()),
-            new TypeWrapperTuple(typeof(CodeTypeReferenceExpression), new TypeReferenceExpression()),
+            new TypeWrapperTuple(
+                typeof(CodeTypeReferenceExpression),
+                new TypeReferenceExpression()
+            ),
             new TypeWrapperTuple(typeof(CodeCastExpression), new CastExpression()),
             new TypeWrapperTuple(typeof(CodeObjectCreateExpression), new ObjectCreateExpression()),
-            new TypeWrapperTuple(typeof(CodeArrayCreateExpression), new ArrayCreateExpression())
+            new TypeWrapperTuple(typeof(CodeArrayCreateExpression), new ArrayCreateExpression()),
         };
 
         private static RuleExpressionInternal GetExpression(CodeExpression expression)
@@ -108,7 +138,11 @@ namespace System.Workflow.Activities.Rules
 
         #endregion
 
-        public static RuleExpressionInfo Validate(RuleValidation validation, CodeExpression expression, bool isWritten)
+        public static RuleExpressionInfo Validate(
+            RuleValidation validation,
+            CodeExpression expression,
+            bool isWritten
+        )
         {
             if (validation == null)
                 throw new ArgumentNullException("validation");
@@ -124,8 +158,15 @@ namespace System.Workflow.Activities.Rules
                 RuleExpressionInternal ruleExpr = GetExpression(expression);
                 if (ruleExpr == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, expression.GetType().FullName);
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CodeExpressionNotHandled,
+                        expression.GetType().FullName
+                    );
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_CodeExpressionNotHandled
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = expression;
 
                     if (validation.Errors == null)
@@ -137,7 +178,10 @@ namespace System.Workflow.Activities.Rules
                         }
 
                         string exceptionMessage = string.Format(
-                            CultureInfo.CurrentCulture, Messages.ErrorsCollectionMissing, typeName);
+                            CultureInfo.CurrentCulture,
+                            Messages.ErrorsCollectionMissing,
+                            typeName
+                        );
 
                         throw new InvalidOperationException(exceptionMessage);
                     }
@@ -155,7 +199,13 @@ namespace System.Workflow.Activities.Rules
             return resultExprInfo;
         }
 
-        public static void AnalyzeUsage(RuleAnalysis analysis, CodeExpression expression, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        public static void AnalyzeUsage(
+            RuleAnalysis analysis,
+            CodeExpression expression,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             if (analysis == null)
                 throw new ArgumentNullException("analysis");
@@ -164,7 +214,10 @@ namespace System.Workflow.Activities.Rules
             ruleExpr.AnalyzeUsage(expression, analysis, isRead, isWritten, qualifier);
         }
 
-        public static RuleExpressionResult Evaluate(RuleExecution execution, CodeExpression expression)
+        public static RuleExpressionResult Evaluate(
+            RuleExecution execution,
+            CodeExpression expression
+        )
         {
             if (execution == null)
                 throw new ArgumentNullException("execution");
@@ -174,7 +227,11 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "0#")]
-        public static void Decompile(StringBuilder stringBuilder, CodeExpression expression, CodeExpression parentExpression)
+        public static void Decompile(
+            StringBuilder stringBuilder,
+            CodeExpression expression,
+            CodeExpression parentExpression
+        )
         {
             RuleExpressionInternal ruleExpr = GetExpression(expression);
             ruleExpr.Decompile(expression, stringBuilder, parentExpression);
@@ -237,7 +294,11 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CodeStatementNotHandled, statement.GetType().FullName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CodeStatementNotHandled,
+                    statement.GetType().FullName
+                );
                 NotSupportedException exception = new NotSupportedException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = statement;
                 throw exception;

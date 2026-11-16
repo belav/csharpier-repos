@@ -22,7 +22,7 @@ namespace System.Web.WebPages.Deployment
     public static class PreApplicationStartCode
     {
         /// <summary>
-        /// Key used to indicate to tooling that the compile exception we throw to refresh the app domain originated from us so that they can deal with it correctly. 
+        /// Key used to indicate to tooling that the compile exception we throw to refresh the app domain originated from us so that they can deal with it correctly.
         /// </summary>
         private const string ToolingIndicatorKey = "WebPages.VersionChange";
 
@@ -37,8 +37,8 @@ namespace System.Web.WebPages.Deployment
 
         public static void Start()
         {
-            // Even though ASP.NET will only call each PreAppStart once, we sometimes internally call one PreAppStart from 
-            // another PreAppStart to ensure that things get initialized in the right order. ASP.NET does not guarantee the 
+            // Even though ASP.NET will only call each PreAppStart once, we sometimes internally call one PreAppStart from
+            // another PreAppStart to ensure that things get initialized in the right order. ASP.NET does not guarantee the
             // order so we have to guard against multiple calls.
             // All Start calls are made on same thread, so no lock needed here.
 
@@ -59,18 +59,38 @@ namespace System.Web.WebPages.Deployment
             Action registerForChangeNotification = RegisterForChangeNotifications;
             IEnumerable<AssemblyName> loadedAssemblies = AssemblyUtils.GetLoadedAssemblies();
 
-            return StartCore(_physicalFileSystem, HttpRuntime.AppDomainAppPath, HttpRuntime.BinDirectory, appSettings, loadedAssemblies,
-                             buildManager, loadWebPages, registerForChangeNotification);
+            return StartCore(
+                _physicalFileSystem,
+                HttpRuntime.AppDomainAppPath,
+                HttpRuntime.BinDirectory,
+                appSettings,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChangeNotification
+            );
         }
 
         // Adds Parameter for unit tests
-        internal static bool StartCore(IFileSystem fileSystem, string appDomainAppPath, string binDirectory, NameValueCollection appSettings, IEnumerable<AssemblyName> loadedAssemblies,
-                                       IBuildManager buildManager, Action<Version> loadWebPages, Action registerForChangeNotification, Func<string, AssemblyName> getAssemblyNameThunk = null)
+        internal static bool StartCore(
+            IFileSystem fileSystem,
+            string appDomainAppPath,
+            string binDirectory,
+            NameValueCollection appSettings,
+            IEnumerable<AssemblyName> loadedAssemblies,
+            IBuildManager buildManager,
+            Action<Version> loadWebPages,
+            Action registerForChangeNotification,
+            Func<string, AssemblyName> getAssemblyNameThunk = null
+        )
         {
             if (WebPagesDeployment.IsExplicitlyDisabled(appSettings))
             {
                 // If WebPages is explicitly disabled, exit.
-                Debug.WriteLine("WebPages Bootstrapper v{0}: not loading WebPages since it is disabled", AssemblyUtils.ThisAssemblyName.Version);
+                Debug.WriteLine(
+                    "WebPages Bootstrapper v{0}: not loading WebPages since it is disabled",
+                    AssemblyUtils.ThisAssemblyName.Version
+                );
                 return false;
             }
 
@@ -79,24 +99,46 @@ namespace System.Web.WebPages.Deployment
             if (AssemblyUtils.ThisAssemblyName.Version != maxWebPagesVersion)
             {
                 // Always let the highest version determine what needs to be done. This would make future proofing simpler.
-                Debug.WriteLine("WebPages Bootstrapper v{0}: Higher version v{1} is available.", AssemblyUtils.ThisAssemblyName.Version, maxWebPagesVersion);
+                Debug.WriteLine(
+                    "WebPages Bootstrapper v{0}: Higher version v{1} is available.",
+                    AssemblyUtils.ThisAssemblyName.Version,
+                    maxWebPagesVersion
+                );
                 return false;
             }
 
-            var webPagesEnabled = WebPagesDeployment.IsEnabled(fileSystem, appDomainAppPath, appSettings);
-            Version binVersion = AssemblyUtils.GetVersionFromBin(binDirectory, fileSystem, getAssemblyNameThunk);
+            var webPagesEnabled = WebPagesDeployment.IsEnabled(
+                fileSystem,
+                appDomainAppPath,
+                appSettings
+            );
+            Version binVersion = AssemblyUtils.GetVersionFromBin(
+                binDirectory,
+                fileSystem,
+                getAssemblyNameThunk
+            );
             Version configVersion = WebPagesDeployment.GetVersionFromConfig(appSettings);
             Version version = configVersion ?? binVersion ?? AssemblyUtils.WebPagesV1Version;
 
-            // Asserts to ensure unit tests are set up correctly. So essentially, we're unit testing the unit tests. 
+            // Asserts to ensure unit tests are set up correctly. So essentially, we're unit testing the unit tests.
             Debug.Assert(version != null, "GetVersion always returns a version");
-            Debug.Assert(binVersion == null || binVersion <= maxWebPagesVersion, "binVersion cannot be higher than max version");
+            Debug.Assert(
+                binVersion == null || binVersion <= maxWebPagesVersion,
+                "binVersion cannot be higher than max version"
+            );
 
             if ((binVersion != null) && (binVersion != version))
             {
-                // Determine if there's a version conflict. A conflict could occur if there's a version specified in the bin which is different from the version specified in the 
+                // Determine if there's a version conflict. A conflict could occur if there's a version specified in the bin which is different from the version specified in the
                 // config that is different.
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ConfigurationResources.WebPagesVersionConflict, version, binVersion));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ConfigurationResources.WebPagesVersionConflict,
+                        version,
+                        binVersion
+                    )
+                );
             }
             else if (binVersion != null)
             {
@@ -106,37 +148,67 @@ namespace System.Web.WebPages.Deployment
             }
             else if (!webPagesEnabled)
             {
-                Debug.WriteLine("WebPages Bootstrapper v{0}: WebPages not enabled, registering for change notifications", AssemblyUtils.ThisAssemblyName.Version);
+                Debug.WriteLine(
+                    "WebPages Bootstrapper v{0}: WebPages not enabled, registering for change notifications",
+                    AssemblyUtils.ThisAssemblyName.Version
+                );
                 // Register for change notifications under the application root
                 registerForChangeNotification();
                 return false;
             }
             else if (!AssemblyUtils.IsVersionAvailable(loadedAssemblies, version))
             {
-                if (version == AssemblyUtils.WebPagesV1Version && configVersion == null && binVersion == null)
+                if (
+                    version == AssemblyUtils.WebPagesV1Version
+                    && configVersion == null
+                    && binVersion == null
+                )
                 {
-                    // No version was specified. We're implicitly assuming that the site is a v1 site. However, the user does not have V1 binaries available. 
-                    throw new InvalidOperationException(ConfigurationResources.WebPagesImplicitVersionFailure);
+                    // No version was specified. We're implicitly assuming that the site is a v1 site. However, the user does not have V1 binaries available.
+                    throw new InvalidOperationException(
+                        ConfigurationResources.WebPagesImplicitVersionFailure
+                    );
                 }
-                else 
+                else
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ConfigurationResources.WebPagesVersionNotFound, version, AssemblyUtils.ThisAssemblyName.Version));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            ConfigurationResources.WebPagesVersionNotFound,
+                            version,
+                            AssemblyUtils.ThisAssemblyName.Version
+                        )
+                    );
                 }
             }
 
-            Debug.WriteLine("WebPages Bootstrapper v{0}: loading version {1}, loading WebPages", AssemblyUtils.ThisAssemblyName.Version, version);
+            Debug.WriteLine(
+                "WebPages Bootstrapper v{0}: loading version {1}, loading WebPages",
+                AssemblyUtils.ThisAssemblyName.Version,
+                version
+            );
             // If the version the application was compiled earlier was different, invalidate compilation results by adding a file to the bin.
-            InvalidateCompilationResultsIfVersionChanged(buildManager, fileSystem, binDirectory, version);
+            InvalidateCompilationResultsIfVersionChanged(
+                buildManager,
+                fileSystem,
+                binDirectory,
+                version
+            );
             loadWebPages(version);
             return true;
         }
 
         /// <summary>
-        /// WebPages stores the version to be compiled against in AppSettings as &gt;add key="webpages:version" value="1.0" /&lt;. 
-        /// Changing values AppSettings does not cause recompilation therefore we could run into a state where we have files compiled against v1 but the application is 
+        /// WebPages stores the version to be compiled against in AppSettings as &gt;add key="webpages:version" value="1.0" /&lt;.
+        /// Changing values AppSettings does not cause recompilation therefore we could run into a state where we have files compiled against v1 but the application is
         /// currently v2.
         /// </summary>
-        private static void InvalidateCompilationResultsIfVersionChanged(IBuildManager buildManager, IFileSystem fileSystem, string binDirectory, Version currentVersion)
+        private static void InvalidateCompilationResultsIfVersionChanged(
+            IBuildManager buildManager,
+            IFileSystem fileSystem,
+            string binDirectory,
+            Version currentVersion
+        )
         {
             Version previousVersion = WebPagesDeployment.GetPreviousRuntimeVersion(buildManager);
 
@@ -151,7 +223,9 @@ namespace System.Web.WebPages.Deployment
             {
                 // If the previous runtime version is different, perturb the bin directory so that it forces recompilation.
                 WebPagesDeployment.ForceRecompile(fileSystem, binDirectory);
-                var httpCompileException = new HttpCompileException(ConfigurationResources.WebPagesVersionChanges);
+                var httpCompileException = new HttpCompileException(
+                    ConfigurationResources.WebPagesVersionChanges
+                );
                 // Indicator for tooling
                 httpCompileException.Data[ToolingIndicatorKey] = true;
                 throw httpCompileException;
@@ -159,8 +233,14 @@ namespace System.Web.WebPages.Deployment
         }
 
         // Copied from xsp\System\Web\Compilation\BuildManager.cs
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Copied from System.Web.dll")]
-        internal static ICollection<MethodInfo> GetPreStartInitMethodsFromAssemblyCollection(IEnumerable<Assembly> assemblies)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Copied from System.Web.dll"
+        )]
+        internal static ICollection<MethodInfo> GetPreStartInitMethodsFromAssemblyCollection(
+            IEnumerable<Assembly> assemblies
+        )
         {
             List<MethodInfo> methods = new List<MethodInfo>();
             foreach (Assembly assembly in assemblies)
@@ -168,7 +248,11 @@ namespace System.Web.WebPages.Deployment
                 PreApplicationStartMethodAttribute[] attributes = null;
                 try
                 {
-                    attributes = (PreApplicationStartMethodAttribute[])assembly.GetCustomAttributes(typeof(PreApplicationStartMethodAttribute), inherit: true);
+                    attributes = (PreApplicationStartMethodAttribute[])
+                        assembly.GetCustomAttributes(
+                            typeof(PreApplicationStartMethodAttribute),
+                            inherit: true
+                        );
                 }
                 catch
                 {
@@ -184,7 +268,11 @@ namespace System.Web.WebPages.Deployment
 
                     MethodInfo method = null;
                     // Ensure the Type on the attribute is in the same assembly as the attribute itself
-                    if (attribute.Type != null && !String.IsNullOrEmpty(attribute.MethodName) && attribute.Type.Assembly == assembly)
+                    if (
+                        attribute.Type != null
+                        && !String.IsNullOrEmpty(attribute.MethodName)
+                        && attribute.Type.Assembly == assembly
+                    )
                     {
                         method = FindPreStartInitMethod(attribute.Type, attribute.MethodName);
                     }
@@ -218,15 +306,22 @@ namespace System.Web.WebPages.Deployment
             {
                 // Verify that type is public to avoid allowing internal code execution. This implementation will not match
                 // nested public types.
-                method = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static | BindingFlags.IgnoreCase,
-                                        binder: null,
-                                        types: Type.EmptyTypes,
-                                        modifiers: null);
+                method = type.GetMethod(
+                    methodName,
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.IgnoreCase,
+                    binder: null,
+                    types: Type.EmptyTypes,
+                    modifiers: null
+                );
             }
             return method;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The cache disposes of the dependency")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The cache disposes of the dependency"
+        )]
         private static void RegisterForChangeNotifications()
         {
             string physicalPath = HttpRuntime.AppDomainAppPath;
@@ -234,9 +329,15 @@ namespace System.Web.WebPages.Deployment
             CacheDependency cacheDependency = new CacheDependency(physicalPath, DateTime.UtcNow);
             var key = WebPagesDeployment.CacheKeyPrefix + physicalPath;
 
-            HttpRuntime.Cache.Insert(key, physicalPath, cacheDependency,
-                                     Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration,
-                                     CacheItemPriority.NotRemovable, new CacheItemRemovedCallback(OnChanged));
+            HttpRuntime.Cache.Insert(
+                key,
+                physicalPath,
+                cacheDependency,
+                Cache.NoAbsoluteExpiration,
+                Cache.NoSlidingExpiration,
+                CacheItemPriority.NotRemovable,
+                new CacheItemRemovedCallback(OnChanged)
+            );
         }
 
         private static void OnChanged(string key, object value, CacheItemRemovedReason reason)
@@ -248,7 +349,12 @@ namespace System.Web.WebPages.Deployment
             }
 
             // Scan the app root for a webpages file
-            if (WebPagesDeployment.AppRootContainsWebPagesFile(_physicalFileSystem, HttpRuntime.AppDomainAppPath))
+            if (
+                WebPagesDeployment.AppRootContainsWebPagesFile(
+                    _physicalFileSystem,
+                    HttpRuntime.AppDomainAppPath
+                )
+            )
             {
                 // Unload the app domain so we register plan9 when the app restarts
                 InfrastructureHelper.UnloadAppDomain();

@@ -12,7 +12,10 @@ namespace System.Runtime.InteropServices.Marshalling
     /// </remarks>
     /// <seealso cref="LibraryImportAttribute" />
     /// <seealso cref="CustomMarshallerAttribute" />
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.ReturnValue,
+        AllowMultiple = true
+    )]
     public sealed class MarshalUsingAttribute : Attribute
     {
         /// <summary>

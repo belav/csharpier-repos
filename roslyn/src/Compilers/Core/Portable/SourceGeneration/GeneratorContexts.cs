@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.SourceGeneration;
 using Microsoft.CodeAnalysis.Text;
+
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
@@ -21,14 +22,23 @@ namespace Microsoft.CodeAnalysis
 
         private readonly AdditionalSourcesCollection _additionalSources;
 
-        internal GeneratorExecutionContext(Compilation compilation, ParseOptions parseOptions, ImmutableArray<AdditionalText> additionalTexts, AnalyzerConfigOptionsProvider optionsProvider, ISyntaxContextReceiver? syntaxReceiver, string sourceExtension, CancellationToken cancellationToken = default)
+        internal GeneratorExecutionContext(
+            Compilation compilation,
+            ParseOptions parseOptions,
+            ImmutableArray<AdditionalText> additionalTexts,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ISyntaxContextReceiver? syntaxReceiver,
+            string sourceExtension,
+            CancellationToken cancellationToken = default
+        )
         {
             Compilation = compilation;
             ParseOptions = parseOptions;
             AdditionalFiles = additionalTexts;
             AnalyzerConfigOptions = optionsProvider;
             SyntaxReceiver = (syntaxReceiver as SyntaxContextReceiverAdaptor)?.Receiver;
-            SyntaxContextReceiver = (syntaxReceiver is SyntaxContextReceiverAdaptor) ? null : syntaxReceiver;
+            SyntaxContextReceiver =
+                (syntaxReceiver is SyntaxContextReceiverAdaptor) ? null : syntaxReceiver;
             CancellationToken = cancellationToken;
             _additionalSources = new AdditionalSourcesCollection(sourceExtension);
             _diagnostics = new DiagnosticBag();
@@ -79,7 +89,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
-        public void AddSource(string hintName, string source) => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source) =>
+            AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation
@@ -89,10 +100,11 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Directory separators "/" and "\" are allowed in <paramref name="hintName"/>, they are normalized to "/" regardless of host platform.
         /// </remarks>
-        public void AddSource(string hintName, SourceText sourceText) => _additionalSources.Add(hintName, sourceText);
+        public void AddSource(string hintName, SourceText sourceText) =>
+            _additionalSources.Add(hintName, sourceText);
 
         /// <summary>
-        /// Adds a <see cref="Diagnostic"/> to the users compilation 
+        /// Adds a <see cref="Diagnostic"/> to the users compilation
         /// </summary>
         /// <param name="diagnostic">The diagnostic that should be added to the compilation</param>
         /// <remarks>
@@ -104,12 +116,20 @@ namespace Microsoft.CodeAnalysis
         /// </exception>
         public void ReportDiagnostic(Diagnostic diagnostic)
         {
-            DiagnosticAnalysisContextHelpers.VerifyArguments(diagnostic, Compilation, isSupportedDiagnostic: static (_, _) => true, CancellationToken);
+            DiagnosticAnalysisContextHelpers.VerifyArguments(
+                diagnostic,
+                Compilation,
+                isSupportedDiagnostic: static (_, _) => true,
+                CancellationToken
+            );
             _diagnostics.Add(diagnostic);
         }
 
-        internal (ImmutableArray<GeneratedSourceText> sources, ImmutableArray<Diagnostic> diagnostics) ToImmutableAndFree()
-            => (_additionalSources.ToImmutableAndFree(), _diagnostics.ToReadOnlyAndFree());
+        internal (
+            ImmutableArray<GeneratedSourceText> sources,
+            ImmutableArray<Diagnostic> diagnostics
+        ) ToImmutableAndFree() =>
+            (_additionalSources.ToImmutableAndFree(), _diagnostics.ToReadOnlyAndFree());
 
         internal void Free()
         {
@@ -147,21 +167,26 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// This method allows generators to be 'syntax aware'. Before each generation the <paramref name="receiverCreator"/> will be invoked to create
-        /// an instance of <see cref="ISyntaxReceiver"/>. This receiver will have its <see cref="ISyntaxReceiver.OnVisitSyntaxNode(SyntaxNode)"/> 
+        /// an instance of <see cref="ISyntaxReceiver"/>. This receiver will have its <see cref="ISyntaxReceiver.OnVisitSyntaxNode(SyntaxNode)"/>
         /// invoked for each syntax node in the compilation, allowing the receiver to build up information about the compilation before generation occurs.
-        /// 
+        ///
         /// During <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/> the generator can obtain the <see cref="ISyntaxReceiver"/> instance that was
         /// created by accessing the <see cref="GeneratorExecutionContext.SyntaxReceiver"/> property. Any information that was collected by the receiver can be
         /// used to generate the final output.
-        /// 
-        /// A new instance of <see cref="ISyntaxReceiver"/> is created per-generation, meaning there is no need to manage the lifetime of the 
+        ///
+        /// A new instance of <see cref="ISyntaxReceiver"/> is created per-generation, meaning there is no need to manage the lifetime of the
         /// receiver or its contents.
         /// </remarks>
         /// <param name="receiverCreator">A <see cref="SyntaxReceiverCreator"/> that can be invoked to create an instance of <see cref="ISyntaxReceiver"/></param>
         public void RegisterForSyntaxNotifications(SyntaxReceiverCreator receiverCreator)
         {
-            CheckIsEmpty(Callbacks.SyntaxContextReceiverCreator, $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}");
-            Callbacks.SyntaxContextReceiverCreator = SyntaxContextReceiverAdaptor.Create(receiverCreator);
+            CheckIsEmpty(
+                Callbacks.SyntaxContextReceiverCreator,
+                $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}"
+            );
+            Callbacks.SyntaxContextReceiverCreator = SyntaxContextReceiverAdaptor.Create(
+                receiverCreator
+            );
         }
 
         /// <summary>
@@ -169,20 +194,23 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// This method allows generators to be 'syntax aware'. Before each generation the <paramref name="receiverCreator"/> will be invoked to create
-        /// an instance of <see cref="ISyntaxContextReceiver"/>. This receiver will have its <see cref="ISyntaxContextReceiver.OnVisitSyntaxNode(GeneratorSyntaxContext)"/> 
+        /// an instance of <see cref="ISyntaxContextReceiver"/>. This receiver will have its <see cref="ISyntaxContextReceiver.OnVisitSyntaxNode(GeneratorSyntaxContext)"/>
         /// invoked for each syntax node in the compilation, allowing the receiver to build up information about the compilation before generation occurs.
-        /// 
+        ///
         /// During <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/> the generator can obtain the <see cref="ISyntaxContextReceiver"/> instance that was
         /// created by accessing the <see cref="GeneratorExecutionContext.SyntaxContextReceiver"/> property. Any information that was collected by the receiver can be
         /// used to generate the final output.
-        /// 
-        /// A new instance of <see cref="ISyntaxContextReceiver"/> is created prior to every call to <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/>, 
+        ///
+        /// A new instance of <see cref="ISyntaxContextReceiver"/> is created prior to every call to <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/>,
         /// meaning there is no need to manage the lifetime of the receiver or its contents.
         /// </remarks>
         /// <param name="receiverCreator">A <see cref="SyntaxContextReceiverCreator"/> that can be invoked to create an instance of <see cref="ISyntaxContextReceiver"/></param>
         public void RegisterForSyntaxNotifications(SyntaxContextReceiverCreator receiverCreator)
         {
-            CheckIsEmpty(Callbacks.SyntaxContextReceiverCreator, $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}");
+            CheckIsEmpty(
+                Callbacks.SyntaxContextReceiverCreator,
+                $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}"
+            );
             Callbacks.SyntaxContextReceiverCreator = receiverCreator;
         }
 
@@ -193,24 +221,38 @@ namespace Microsoft.CodeAnalysis
         /// This method allows a generator to opt-in to an extra phase in the generator lifecycle called PostInitialization. After being initialized
         /// any generators that have opted in will have their provided callback invoked with a <see cref="GeneratorPostInitializationContext"/> instance
         /// that can be used to alter the compilation that is provided to subsequent generator phases.
-        /// 
+        ///
         /// For example a generator may choose to add sources during PostInitialization. These will be added to the compilation before execution and
         /// will be visited by a registered <see cref="ISyntaxReceiver"/> and available for semantic analysis as part of the <see cref="GeneratorExecutionContext.Compilation"/>
-        /// 
-        /// Note that any sources added during PostInitialization <i>will</i> be visible to the later phases of other generators operating on the compilation. 
+        ///
+        /// Note that any sources added during PostInitialization <i>will</i> be visible to the later phases of other generators operating on the compilation.
         /// </remarks>
         /// <param name="callback">An <see cref="Action{T}"/> that accepts a <see cref="GeneratorPostInitializationContext"/> that will be invoked after initialization.</param>
-        public void RegisterForPostInitialization(Action<GeneratorPostInitializationContext> callback)
+        public void RegisterForPostInitialization(
+            Action<GeneratorPostInitializationContext> callback
+        )
         {
             CheckIsEmpty(Callbacks.PostInitCallback);
-            Callbacks.PostInitCallback = (context) => callback(new GeneratorPostInitializationContext(context.AdditionalSources, context.CancellationToken));
+            Callbacks.PostInitCallback = (context) =>
+                callback(
+                    new GeneratorPostInitializationContext(
+                        context.AdditionalSources,
+                        context.CancellationToken
+                    )
+                );
         }
 
-        private static void CheckIsEmpty<T>(T x, string? typeName = null) where T : class?
+        private static void CheckIsEmpty<T>(T x, string? typeName = null)
+            where T : class?
         {
             if (x is object)
             {
-                throw new InvalidOperationException(string.Format(CodeAnalysisResources.Single_type_per_generator_0, typeName ?? typeof(T).Name));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CodeAnalysisResources.Single_type_per_generator_0,
+                        typeName ?? typeof(T).Name
+                    )
+                );
             }
         }
 
@@ -230,7 +272,11 @@ namespace Microsoft.CodeAnalysis
         internal readonly ISyntaxHelper SyntaxHelper;
         private readonly Lazy<SemanticModel>? _semanticModel;
 
-        internal GeneratorSyntaxContext(SyntaxNode node, Lazy<SemanticModel>? semanticModel, ISyntaxHelper syntaxHelper)
+        internal GeneratorSyntaxContext(
+            SyntaxNode node,
+            Lazy<SemanticModel>? semanticModel,
+            ISyntaxHelper syntaxHelper
+        )
         {
             Node = node;
             _semanticModel = semanticModel;
@@ -255,7 +301,10 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly AdditionalSourcesCollection _additionalSources;
 
-        internal GeneratorPostInitializationContext(AdditionalSourcesCollection additionalSources, CancellationToken cancellationToken)
+        internal GeneratorPostInitializationContext(
+            AdditionalSourcesCollection additionalSources,
+            CancellationToken cancellationToken
+        )
         {
             _additionalSources = additionalSources;
             CancellationToken = cancellationToken;
@@ -271,7 +320,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
-        public void AddSource(string hintName, string source) => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source) =>
+            AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation that will be available during subsequent phases
@@ -281,6 +331,7 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Directory separators "/" and "\" are allowed in <paramref name="hintName"/>, they are normalized to "/" regardless of host platform.
         /// </remarks>
-        public void AddSource(string hintName, SourceText sourceText) => _additionalSources.Add(hintName, sourceText);
+        public void AddSource(string hintName, SourceText sourceText) =>
+            _additionalSources.Add(hintName, sourceText);
     }
 }

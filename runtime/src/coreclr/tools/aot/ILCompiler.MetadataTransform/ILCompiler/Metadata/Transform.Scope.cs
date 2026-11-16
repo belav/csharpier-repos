@@ -4,22 +4,22 @@
 using System;
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
-using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
-using Debug = System.Diagnostics.Debug;
-using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
-using AssemblyNameFlags = System.Reflection.AssemblyNameFlags;
 using AssemblyContentType = System.Reflection.AssemblyContentType;
+using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
 using AssemblyName = System.Reflection.AssemblyName;
+using AssemblyNameFlags = System.Reflection.AssemblyNameFlags;
+using Cts = Internal.TypeSystem;
+using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 
 namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        internal EntityMap<Cts.ModuleDesc, ScopeDefinition> _scopeDefs
-            = new EntityMap<Cts.ModuleDesc, ScopeDefinition>(EqualityComparer<Cts.ModuleDesc>.Default);
+        internal EntityMap<Cts.ModuleDesc, ScopeDefinition> _scopeDefs = new EntityMap<
+            Cts.ModuleDesc,
+            ScopeDefinition
+        >(EqualityComparer<Cts.ModuleDesc>.Default);
         private Action<Cts.ModuleDesc, ScopeDefinition> _initScopeDef;
 
         private ScopeDefinition HandleScopeDefinition(Cts.ModuleDesc module)
@@ -27,7 +27,10 @@ namespace ILCompiler.Metadata
             return _scopeDefs.GetOrCreate(module, _initScopeDef ??= InitializeScopeDefinition);
         }
 
-        private void InitializeScopeDefinition(Cts.ModuleDesc module, ScopeDefinition scopeDefinition)
+        private void InitializeScopeDefinition(
+            Cts.ModuleDesc module,
+            ScopeDefinition scopeDefinition
+        )
         {
             var assemblyDesc = module as Cts.IAssemblyDesc;
             if (assemblyDesc != null)
@@ -48,12 +51,16 @@ namespace ILCompiler.Metadata
                 scopeDefinition.RevisionNumber = checked((ushort)assemblyName.Version.Revision);
 
                 Debug.Assert((int)AssemblyFlags.PublicKey == (int)AssemblyNameFlags.PublicKey);
-                Debug.Assert((int)AssemblyFlags.Retargetable == (int)AssemblyNameFlags.Retargetable);
+                Debug.Assert(
+                    (int)AssemblyFlags.Retargetable == (int)AssemblyNameFlags.Retargetable
+                );
                 scopeDefinition.Flags = (AssemblyFlags)assemblyName.Flags;
 
                 if (assemblyName.ContentType == AssemblyContentType.WindowsRuntime)
                 {
-                    scopeDefinition.Flags |= (AssemblyFlags)((int)AssemblyContentType.WindowsRuntime << 9);
+                    scopeDefinition.Flags |= (AssemblyFlags)(
+                        (int)AssemblyContentType.WindowsRuntime << 9
+                    );
                 }
 
                 if ((scopeDefinition.Flags & AssemblyFlags.PublicKey) != 0)
@@ -74,28 +81,40 @@ namespace ILCompiler.Metadata
                 Cts.Ecma.EcmaAssembly ecmaAssembly = module as Cts.Ecma.EcmaAssembly;
                 if (ecmaAssembly != null)
                 {
-                    Ecma.CustomAttributeHandleCollection customAttributes = ecmaAssembly.AssemblyDefinition.GetCustomAttributes();
+                    Ecma.CustomAttributeHandleCollection customAttributes =
+                        ecmaAssembly.AssemblyDefinition.GetCustomAttributes();
                     if (customAttributes.Count > 0)
                     {
-                        scopeDefinition.CustomAttributes = HandleCustomAttributes(ecmaAssembly, customAttributes);
+                        scopeDefinition.CustomAttributes = HandleCustomAttributes(
+                            ecmaAssembly,
+                            customAttributes
+                        );
                     }
 
                     Cts.MethodDesc entryPoint = ecmaAssembly.EntryPoint;
                     if (entryPoint != null && _policy.GeneratesMetadata(entryPoint))
                     {
-                        scopeDefinition.EntryPoint = (QualifiedMethod)HandleQualifiedMethod(entryPoint);
+                        scopeDefinition.EntryPoint = (QualifiedMethod)HandleQualifiedMethod(
+                            entryPoint
+                        );
                     }
 
                     Ecma.MetadataReader reader = ecmaAssembly.MetadataReader;
                     Ecma.ModuleDefinition moduleDefinition = reader.GetModuleDefinition();
-                    scopeDefinition.ModuleName = HandleString(reader.GetString(moduleDefinition.Name));
+                    scopeDefinition.ModuleName = HandleString(
+                        reader.GetString(moduleDefinition.Name)
+                    );
                     scopeDefinition.Mvid = reader.GetGuid(moduleDefinition.Mvid).ToByteArray();
 
                     // This is rather awkward because ModuleDefinition doesn't offer means to get to the custom attributes
-                    Ecma.CustomAttributeHandleCollection moduleAttributes = reader.GetCustomAttributes(Ecma.Ecma335.MetadataTokens.EntityHandle(0x1));
+                    Ecma.CustomAttributeHandleCollection moduleAttributes =
+                        reader.GetCustomAttributes(Ecma.Ecma335.MetadataTokens.EntityHandle(0x1));
                     if (moduleAttributes.Count > 0)
                     {
-                        scopeDefinition.ModuleCustomAttributes = HandleCustomAttributes(ecmaAssembly, moduleAttributes);
+                        scopeDefinition.ModuleCustomAttributes = HandleCustomAttributes(
+                            ecmaAssembly,
+                            moduleAttributes
+                        );
                     }
 
                     HandleTypeForwarders(ecmaAssembly);
@@ -107,8 +126,10 @@ namespace ILCompiler.Metadata
             }
         }
 
-        private EntityMap<AssemblyName, ScopeReference> _scopeRefs
-            = new EntityMap<AssemblyName, ScopeReference>(new SimpleAssemblyNameComparer());
+        private EntityMap<AssemblyName, ScopeReference> _scopeRefs = new EntityMap<
+            AssemblyName,
+            ScopeReference
+        >(new SimpleAssemblyNameComparer());
         private Action<AssemblyName, ScopeReference> _initScopeRef;
 
         private ScopeReference HandleScopeReference(Cts.ModuleDesc module)
@@ -125,7 +146,10 @@ namespace ILCompiler.Metadata
             return _scopeRefs.GetOrCreate(assemblyName, _initScopeRef ??= InitializeScopeReference);
         }
 
-        private void InitializeScopeReference(AssemblyName assemblyName, ScopeReference scopeReference)
+        private void InitializeScopeReference(
+            AssemblyName assemblyName,
+            ScopeReference scopeReference
+        )
         {
             scopeReference.Name = HandleString(assemblyName.Name);
             scopeReference.Culture = HandleString(assemblyName.CultureName);
@@ -138,11 +162,15 @@ namespace ILCompiler.Metadata
             Debug.Assert((int)AssemblyFlags.Retargetable == (int)AssemblyNameFlags.Retargetable);
 
             // References use a public key token instead of full public key.
-            scopeReference.Flags = (AssemblyFlags)(assemblyName.Flags & ~AssemblyNameFlags.PublicKey);
+            scopeReference.Flags = (AssemblyFlags)(
+                assemblyName.Flags & ~AssemblyNameFlags.PublicKey
+            );
 
             if (assemblyName.ContentType == AssemblyContentType.WindowsRuntime)
             {
-                scopeReference.Flags |= (AssemblyFlags)((int)AssemblyContentType.WindowsRuntime << 9);
+                scopeReference.Flags |= (AssemblyFlags)(
+                    (int)AssemblyContentType.WindowsRuntime << 9
+                );
             }
 
             scopeReference.PublicKeyOrToken = assemblyName.GetPublicKeyToken();

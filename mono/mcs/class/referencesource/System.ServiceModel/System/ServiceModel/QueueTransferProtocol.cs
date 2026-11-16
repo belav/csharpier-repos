@@ -7,7 +7,7 @@ namespace System.ServiceModel
     {
         Native,
         Srmp,
-        SrmpSecure
+        SrmpSecure,
     }
 
     static class QueueTransferProtocolHelper

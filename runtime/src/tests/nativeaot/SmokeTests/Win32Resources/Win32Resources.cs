@@ -36,7 +36,12 @@ unsafe
     }
 
     [DllImport("kernel32")]
-    static extern nint FindResourceExW(nint hModule, ushort* lpType, ushort* lpName, ushort wLanguage);
+    static extern nint FindResourceExW(
+        nint hModule,
+        ushort* lpType,
+        ushort* lpName,
+        ushort wLanguage
+    );
 
     [DllImport("kernel32")]
     static extern nint LoadResource(nint hModule, nint hResInfo);

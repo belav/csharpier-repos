@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         public void UniqueIDEDiagnosticIds()
         {
             var type = typeof(IDEDiagnosticIds);
-            var listOfIDEDiagnosticIds = type.GetFields().Select(x => x.GetValue(null).ToString()).ToList();
+            var listOfIDEDiagnosticIds = type.GetFields()
+                .Select(x => x.GetValue(null).ToString())
+                .ToList();
             Assert.Equal(listOfIDEDiagnosticIds.Count, listOfIDEDiagnosticIds.Distinct().Count());
         }
     }

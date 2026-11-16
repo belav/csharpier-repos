@@ -39,7 +39,8 @@ namespace System.Security.Cryptography
 
         private static partial SP800108HmacCounterKdfImplementationBase CreateImplementation(
             ReadOnlySpan<byte> key,
-            HashAlgorithmName hashAlgorithm);
+            HashAlgorithmName hashAlgorithm
+        );
 
         /// <summary>
         ///   Initializes a new instance of <see cref="SP800108HmacCounterKdf" /> using a specified key and HMAC algorithm.
@@ -138,7 +139,13 @@ namespace System.Security.Cryptography
         /// <exception cref="PlatformNotSupportedException">
         ///   The current platform does not have a supported implementation of HMAC.
         /// </exception>
-        public static byte[] DeriveBytes(byte[] key, HashAlgorithmName hashAlgorithm, byte[] label, byte[] context, int derivedKeyLengthInBytes)
+        public static byte[] DeriveBytes(
+            byte[] key,
+            HashAlgorithmName hashAlgorithm,
+            byte[] label,
+            byte[] context,
+            int derivedKeyLengthInBytes
+        )
         {
             if (key is null)
                 throw new ArgumentNullException(nameof(key));
@@ -204,7 +211,13 @@ namespace System.Security.Cryptography
         /// <exception cref="PlatformNotSupportedException">
         ///   The current platform does not have a supported implementation of HMAC.
         /// </exception>
-        public static byte[] DeriveBytes(byte[] key, HashAlgorithmName hashAlgorithm, string label, string context, int derivedKeyLengthInBytes)
+        public static byte[] DeriveBytes(
+            byte[] key,
+            HashAlgorithmName hashAlgorithm,
+            string label,
+            string context,
+            int derivedKeyLengthInBytes
+        )
         {
             if (key is null)
                 throw new ArgumentNullException(nameof(key));
@@ -248,7 +261,13 @@ namespace System.Security.Cryptography
         /// <exception cref="PlatformNotSupportedException">
         ///   The current platform does not have a supported implementation of HMAC.
         /// </exception>
-        public static byte[] DeriveBytes(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, int derivedKeyLengthInBytes)
+        public static byte[] DeriveBytes(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            int derivedKeyLengthInBytes
+        )
         {
             CheckPrfOutputLength(derivedKeyLengthInBytes, nameof(derivedKeyLengthInBytes));
 
@@ -280,7 +299,13 @@ namespace System.Security.Cryptography
         /// <exception cref="PlatformNotSupportedException">
         ///   The current platform does not have a supported implementation of HMAC.
         /// </exception>
-        public static void DeriveBytes(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, Span<byte> destination)
+        public static void DeriveBytes(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            Span<byte> destination
+        )
         {
             CheckHashAlgorithm(hashAlgorithm);
             CheckPrfOutputLength(destination.Length, nameof(destination));
@@ -320,7 +345,13 @@ namespace System.Security.Cryptography
         ///   for other encodings, perform the conversion using the desired encoding and use an overload which accepts the
         ///   label and context as a sequence of bytes.
         /// </remarks>
-        public static byte[] DeriveBytes(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm, ReadOnlySpan<char> label, ReadOnlySpan<char> context, int derivedKeyLengthInBytes)
+        public static byte[] DeriveBytes(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            int derivedKeyLengthInBytes
+        )
         {
             CheckPrfOutputLength(derivedKeyLengthInBytes, nameof(derivedKeyLengthInBytes));
 
@@ -360,7 +391,13 @@ namespace System.Security.Cryptography
         ///   for other encodings, perform the conversion using the desired encoding and use an overload which accepts the
         ///   label and context as a sequence of bytes.
         /// </remarks>
-        public static void DeriveBytes(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm, ReadOnlySpan<char> label, ReadOnlySpan<char> context, Span<byte> destination)
+        public static void DeriveBytes(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            Span<byte> destination
+        )
         {
             CheckHashAlgorithm(hashAlgorithm);
             CheckPrfOutputLength(destination.Length, nameof(destination));
@@ -413,7 +450,11 @@ namespace System.Security.Cryptography
         ///   <paramref name="derivedKeyLengthInBytes" /> is negative or larger than the maximum number of bytes
         ///   that can be derived.
         /// </exception>
-        public byte[] DeriveKey(ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, int derivedKeyLengthInBytes)
+        public byte[] DeriveKey(
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            int derivedKeyLengthInBytes
+        )
         {
             CheckPrfOutputLength(derivedKeyLengthInBytes, nameof(derivedKeyLengthInBytes));
 
@@ -440,7 +481,11 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="destination" /> is larger than the maximum number of bytes that can be derived.
         /// </exception>
-        public void DeriveKey(ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, Span<byte> destination)
+        public void DeriveKey(
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            Span<byte> destination
+        )
         {
             CheckPrfOutputLength(destination.Length, nameof(destination));
             DeriveKeyCore(label, context, destination);
@@ -465,7 +510,11 @@ namespace System.Security.Cryptography
         ///   for other encodings, perform the conversion using the desired encoding and use an overload which accepts the
         ///   label and context as a sequence of bytes.
         /// </remarks>
-        public byte[] DeriveKey(ReadOnlySpan<char> label, ReadOnlySpan<char> context, int derivedKeyLengthInBytes)
+        public byte[] DeriveKey(
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            int derivedKeyLengthInBytes
+        )
         {
             CheckPrfOutputLength(derivedKeyLengthInBytes, nameof(derivedKeyLengthInBytes));
 
@@ -491,7 +540,11 @@ namespace System.Security.Cryptography
         ///   for other encodings, perform the conversion using the desired encoding and use an overload which accepts the
         ///   label and context as a sequence of bytes.
         /// </remarks>
-        public void DeriveKey(ReadOnlySpan<char> label, ReadOnlySpan<char> context, Span<byte> destination)
+        public void DeriveKey(
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            Span<byte> destination
+        )
         {
             CheckPrfOutputLength(destination.Length, nameof(destination));
             DeriveKeyCore(label, context, destination);
@@ -580,7 +633,9 @@ namespace System.Security.Cryptography
                     break;
 #endif
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmName)
+                    );
             }
         }
 
@@ -589,28 +644,39 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[] label,
             byte[] context,
-            int derivedKeyLengthInBytes);
+            int derivedKeyLengthInBytes
+        );
 
         private static partial void DeriveBytesCore(
             ReadOnlySpan<byte> key,
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> label,
             ReadOnlySpan<byte> context,
-            Span<byte> destination);
+            Span<byte> destination
+        );
 
         private static partial void DeriveBytesCore(
             ReadOnlySpan<byte> key,
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<char> label,
             ReadOnlySpan<char> context,
-            Span<byte> destination);
+            Span<byte> destination
+        );
 
-        private void DeriveKeyCore(ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, Span<byte> destination)
+        private void DeriveKeyCore(
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            Span<byte> destination
+        )
         {
             _implementation.DeriveBytes(label, context, destination);
         }
 
-        private void DeriveKeyCore(ReadOnlySpan<char> label, ReadOnlySpan<char> context, Span<byte> destination)
+        private void DeriveKeyCore(
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            Span<byte> destination
+        )
         {
             _implementation.DeriveBytes(label, context, destination);
         }
@@ -619,12 +685,18 @@ namespace System.Security.Cryptography
         {
             if (length > MaxPrfOutputSize)
             {
-                throw new ArgumentOutOfRangeException(paramName, SR.ArgumentOutOfRange_KOut_Too_Large);
+                throw new ArgumentOutOfRangeException(
+                    paramName,
+                    SR.ArgumentOutOfRange_KOut_Too_Large
+                );
             }
 
             if (length < 0)
             {
-                throw new ArgumentOutOfRangeException(paramName, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    paramName,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
         }
     }

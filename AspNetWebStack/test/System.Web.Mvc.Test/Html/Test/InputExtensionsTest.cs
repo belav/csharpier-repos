@@ -24,12 +24,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.CheckBox("baz", new { @checked = "checked", value = "false" });
+            MvcHtmlString html = helper.CheckBox(
+                "baz",
+                new { @checked = "checked", value = "false" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""baz"" name=""baz"" type=""checkbox"" value=""false"" />" +
-                         @"<input name=""baz"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""baz"" name=""baz"" type=""checkbox"" value=""false"" />"
+                    + @"<input name=""baz"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -39,12 +44,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", true /* isChecked */, new { @checked = "unchecked", value = "false" });
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                true /* isChecked */
+                ,
+                new { @checked = "unchecked", value = "false" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""false"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""false"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -54,12 +66,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", true /* isChecked */, new { id = "myID" });
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                true /* isChecked */
+                ,
+                new { id = "myID" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""myID"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""myID"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -70,8 +89,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.CheckBox(String.Empty); },
-                "name");
+                delegate
+                {
+                    helper.CheckBox(String.Empty);
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -82,8 +105,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.Throws<FormatException>(
-                delegate { helper.CheckBox("bar"); },
-                "String was not recognized as a valid Boolean.");
+                delegate
+                {
+                    helper.CheckBox("bar");
+                },
+                "String was not recognized as a valid Boolean."
+            );
         }
 
         [Fact]
@@ -93,12 +120,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", true /* isChecked */);
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                true /* isChecked */
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -106,15 +138,20 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper.ViewData.ModelState.SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
+            helper.ViewData.ModelState.SetModelValue(
+                "foo",
+                HtmlHelperTest.GetValueProviderResult("false", "false")
+            );
 
             // Act
             MvcHtmlString html = helper.CheckBox("foo");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -127,9 +164,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBox("foo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -140,15 +179,25 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.CheckBox("foo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -161,9 +210,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBox("foo", _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -176,9 +227,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBox("foo", _attributesObjectUnderscoresDictionary);
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -188,12 +241,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", false /* isChecked */, _attributesObjectDictionary);
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                false /* isChecked */
+                ,
+                _attributesObjectDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -203,12 +263,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", false /* isChecked */, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                false /* isChecked */
+                ,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -218,12 +285,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", false /* isChecked */, _attributesDictionary);
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                false /* isChecked */
+                ,
+                _attributesDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -234,12 +308,19 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
 
             // Act
-            MvcHtmlString html = helper.CheckBox("foo", false /* isChecked */, _attributesDictionary);
+            MvcHtmlString html = helper.CheckBox(
+                "foo",
+                false /* isChecked */
+                ,
+                _attributesDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""MyPrefix.foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""MyPrefix.foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -250,12 +331,19 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
 
             // Act
-            MvcHtmlString html = helper.CheckBox("", false /* isChecked */, _attributesDictionary);
+            MvcHtmlString html = helper.CheckBox(
+                "",
+                false /* isChecked */
+                ,
+                _attributesDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""MyPrefix"" name=""MyPrefix"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""MyPrefix"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""MyPrefix"" name=""MyPrefix"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""MyPrefix"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -263,7 +351,8 @@ namespace System.Web.Mvc.Html.Test
         public void CheckBox_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -271,15 +360,18 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.CheckBox(name: "name", htmlAttributes: new { attribute = text, }).ToHtmlString();
+            var result = helper
+                .CheckBox(name: "name", htmlAttributes: new { attribute = text })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" +
-                    encodedText +
-                    @""" id=""name"" name=""name"" type=""checkbox"" value=""true"" />" +
-                @"<input name=""name"" type=""hidden"" value=""false"" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""name"" type=""hidden"" value=""false"" />",
+                result
+            );
         }
 
         [Theory]
@@ -293,18 +385,27 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.CheckBox(text, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper.CheckBox(text, htmlAttributes: new { id = "id" }).ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input id=""id"" name=""" + encodedText + @""" type=""checkbox"" value=""true"" />" +
-                @"<input name=""" + encodedText + @""" type=""hidden"" value=""false"" />",
-                result);
+                @"<input id=""id"" name="""
+                    + encodedText
+                    + @""" type=""checkbox"" value=""true"" />"
+                    + @"<input name="""
+                    + encodedText
+                    + @""" type=""hidden"" value=""false"" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void CheckBox_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void CheckBox_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -314,13 +415,20 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.CheckBox(name: String.Empty, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .CheckBox(name: String.Empty, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input id=""id"" name=""" + encodedText + @""" type=""checkbox"" value=""true"" />" +
-                @"<input name=""" + encodedText + @""" type=""hidden"" value=""false"" />",
-                result);
+                @"<input id=""id"" name="""
+                    + encodedText
+                    + @""" type=""checkbox"" value=""true"" />"
+                    + @"<input name="""
+                    + encodedText
+                    + @""" type=""hidden"" value=""false"" />",
+                result
+            );
         }
 
         // No need for CheckBox_AttributeEncodes_Value() because CheckBox value is always true and hidden value
@@ -335,9 +443,7 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => helper.CheckBoxFor(null),
-                "expression");
+            Assert.ThrowsArgumentNull(() => helper.CheckBoxFor(null), "expression");
         }
 
         [Fact]
@@ -349,7 +455,8 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.Throws<FormatException>(
                 () => helper.CheckBoxFor(m => m.bar), // "bar" in ViewData isn't a valid boolean
-                "String was not recognized as a valid Boolean.");
+                "String was not recognized as a valid Boolean."
+            );
         }
 
         [Fact]
@@ -359,12 +466,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.CheckBoxFor(m => m.baz, new { @checked = "checked", value = "false" });
+            MvcHtmlString html = helper.CheckBoxFor(
+                m => m.baz,
+                new { @checked = "checked", value = "false" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""baz"" name=""baz"" type=""checkbox"" value=""false"" />" +
-                         @"<input name=""baz"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""baz"" name=""baz"" type=""checkbox"" value=""false"" />"
+                    + @"<input name=""baz"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -377,9 +489,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo, new { id = "myID" });
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""myID"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""myID"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -392,9 +506,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -405,15 +521,25 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -421,15 +547,20 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper.ViewContext.ViewData.ModelState.SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
+            helper.ViewContext.ViewData.ModelState.SetModelValue(
+                "foo",
+                HtmlHelperTest.GetValueProviderResult("false", "false")
+            );
 
             // Act
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -442,9 +573,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -454,12 +587,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.CheckBoxFor(m => m.foo, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.CheckBoxFor(
+                m => m.foo,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -472,9 +610,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" checked=""checked"" id=""foo"" name=""foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -488,9 +628,11 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""checkbox"" value=""true"" />" +
-                         @"<input name=""MyPrefix.foo"" type=""hidden"" value=""false"" />",
-                         html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""MyPrefix.foo"" type=""hidden"" value=""false"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -498,7 +640,8 @@ namespace System.Web.Mvc.Html.Test
         public void CheckBoxFor_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -507,20 +650,27 @@ namespace System.Web.Mvc.Html.Test
             var dummy = false;
 
             // Act
-            var result = helper.CheckBoxFor(m => dummy, htmlAttributes: new { attribute = text, }).ToHtmlString();
+            var result = helper
+                .CheckBoxFor(m => dummy, htmlAttributes: new { attribute = text })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" +
-                    encodedText +
-                    @""" id=""dummy"" name=""dummy"" type=""checkbox"" value=""true"" />" +
-                @"<input name=""dummy"" type=""hidden"" value=""false"" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""dummy"" name=""dummy"" type=""checkbox"" value=""true"" />"
+                    + @"<input name=""dummy"" type=""hidden"" value=""false"" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void CheckBoxFor_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void CheckBoxFor_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -531,13 +681,20 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.CheckBoxFor(m => dummy, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .CheckBoxFor(m => dummy, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input id=""id"" name=""" + encodedText + @".dummy"" type=""checkbox"" value=""true"" />" +
-                @"<input name=""" + encodedText + @".dummy"" type=""hidden"" value=""false"" />",
-                result);
+                @"<input id=""id"" name="""
+                    + encodedText
+                    + @".dummy"" type=""checkbox"" value=""true"" />"
+                    + @"<input name="""
+                    + encodedText
+                    + @".dummy"" type=""hidden"" value=""false"" />",
+                result
+            );
         }
 
         // No need for CheckBoxFor_AttributeEncodes_Value() because CheckBox value is always true and hidden value
@@ -559,86 +716,96 @@ namespace System.Web.Mvc.Html.Test
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo"))
+                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo")),
                 },
                 // Hidden(name, value)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt))
+                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt)),
                 },
                 // Hidden(name, value, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt, null))
+                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt, null)),
                 },
                 // Hidden(name, value, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt, new RouteValueDictionary()))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.Hidden("foo", dt, new RouteValueDictionary())
+                    ),
                 },
                 // RadioButton(name, value)
                 new
                 {
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt))
+                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt)),
                 },
                 // RadioButton(name, value, isChecked)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, false))
+                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, false)),
                 },
                 // RadioButton(name, value, htmlAttributes)
                 new
                 {
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, null))
+                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, null)),
                 },
                 // RadioButton(name, value)
                 new
                 {
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, new RouteValueDictionary()))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.RadioButton("foo", dt, new RouteValueDictionary())
+                    ),
                 },
                 // RadioButton(name, value, isChecked, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, false, null))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.RadioButton("foo", dt, false, null)
+                    ),
                 },
                 // RadioButton(name, value, isChecked, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, false, new RouteValueDictionary()))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.RadioButton("foo", dt, false, new RouteValueDictionary())
+                    ),
                 },
                 // TextBox(name)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo"))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo")),
                 },
                 // TextBox(name, value)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt)),
                 },
                 // TextBox(name, value, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt, (object)null))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt, (object)null)),
                 },
                 // TextBox(name, value, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt, new RouteValueDictionary()))
-                }
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.TextBox("foo", dt, new RouteValueDictionary())
+                    ),
+                },
             };
 
             // Act && Assert
@@ -657,10 +824,16 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString result = htmlHelper.Hidden("ProductName", ByteArrayModelBinderTest.Base64TestBytes);
+            MvcHtmlString result = htmlHelper.Hidden(
+                "ProductName",
+                ByteArrayModelBinderTest.Base64TestBytes
+            );
 
             // Assert
-            Assert.Equal("<input id=\"ProductName\" name=\"ProductName\" type=\"hidden\" value=\"Fys1\" />", result.ToHtmlString());
+            Assert.Equal(
+                "<input id=\"ProductName\" name=\"ProductName\" type=\"hidden\" value=\"Fys1\" />",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -670,10 +843,16 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString result = htmlHelper.Hidden("ProductName", new Binary(new byte[] { 23, 43, 53 }));
+            MvcHtmlString result = htmlHelper.Hidden(
+                "ProductName",
+                new Binary(new byte[] { 23, 43, 53 })
+            );
 
             // Assert
-            Assert.Equal("<input id=\"ProductName\" name=\"ProductName\" type=\"hidden\" value=\"Fys1\" />", result.ToHtmlString());
+            Assert.Equal(
+                "<input id=\"ProductName\" name=\"ProductName\" type=\"hidden\" value=\"Fys1\" />",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -684,8 +863,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.Hidden(String.Empty); },
-                "name");
+                delegate
+                {
+                    helper.Hidden(String.Empty);
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -698,7 +881,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", "DefaultFoo", null);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -711,7 +897,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", "DefaultFoo", _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -724,7 +913,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", "DefaultFoo", _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -734,10 +926,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetHiddenViewData());
 
             // Act
-            MvcHtmlString html = helper.Hidden("foo", "DefaultFoo", _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.Hidden(
+                "foo",
+                "DefaultFoo",
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -747,10 +946,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetHiddenViewData());
 
             // Act
-            MvcHtmlString html = helper.Hidden("foo", (string)null /* value */, (object)null /* htmlAttributes */);
+            MvcHtmlString html = helper.Hidden(
+                "foo",
+                (string)
+                    null /* value */
+                ,
+                (object)null /* htmlAttributes */
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -763,7 +971,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -776,7 +987,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", null, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -789,7 +1003,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("keyNotFound", null, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""keyNotFound"" name=""keyNotFound"" type=""hidden"" value="""" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""keyNotFound"" name=""keyNotFound"" type=""hidden"" value="""" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -802,7 +1019,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", null, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -815,7 +1035,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""hidden"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""hidden"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -829,7 +1052,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""hidden"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""hidden"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -843,7 +1069,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix"" name=""MyPrefix"" type=""hidden"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix"" name=""MyPrefix"" type=""hidden"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -854,8 +1083,14 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.Hidden(null /* name */); },
-                "name");
+                delegate
+                {
+                    helper.Hidden(
+                        null /* name */
+                    );
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -868,7 +1103,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", null, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -881,7 +1119,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Hidden("foo", null, new { @class = "foo-class" });
 
             // Assert
-            Assert.Equal(@"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -889,7 +1130,8 @@ namespace System.Web.Mvc.Html.Test
         public void Hidden_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -897,13 +1139,17 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.Hidden(name: "name", value: null, htmlAttributes: new { attribute = text, })
+            var result = helper
+                .Hidden(name: "name", value: null, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""hidden"" value="""" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""hidden"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -917,10 +1163,15 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.Hidden(text, value: null, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .Hidden(text, value: null, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""hidden"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""hidden"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -935,19 +1186,20 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.Hidden(name: String.Empty, value: null, htmlAttributes: new { id = "id", })
+            var result = helper
+                .Hidden(name: String.Empty, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""hidden"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""hidden"" value="""" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void Hidden_AttributeEncodes_Value(
-            string text,
-            bool htmlEncode,
-            string encodedText)
+        public void Hidden_AttributeEncodes_Value(string text, bool htmlEncode, string encodedText)
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -959,8 +1211,11 @@ namespace System.Web.Mvc.Html.Test
 
             // Assert
             Assert.Equal(
-                @"<input id=""name"" name=""name"" type=""hidden"" value=""" + encodedText + @""" />",
-                result);
+                @"<input id=""name"" name=""name"" type=""hidden"" value="""
+                    + encodedText
+                    + @""" />",
+                result
+            );
         }
 
         // HiddenFor
@@ -975,7 +1230,7 @@ namespace System.Web.Mvc.Html.Test
             Assert.ThrowsArgumentNull(
                 () => helper.HiddenFor<HiddenModel, object>(null),
                 "expression"
-                );
+            );
         }
 
         [Fact]
@@ -989,7 +1244,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1003,7 +1261,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = helper.HiddenFor(m => m.bytes);
 
             // Assert
-            Assert.Equal("<input id=\"bytes\" name=\"bytes\" type=\"hidden\" value=\"Fys1\" />", result.ToHtmlString());
+            Assert.Equal(
+                "<input id=\"bytes\" name=\"bytes\" type=\"hidden\" value=\"Fys1\" />",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1017,7 +1278,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = helper.HiddenFor(m => m.binary);
 
             // Assert
-            Assert.Equal("<input id=\"binary\" name=\"binary\" type=\"hidden\" value=\"Fys1\" />", result.ToHtmlString());
+            Assert.Equal(
+                "<input id=\"binary\" name=\"binary\" type=\"hidden\" value=\"Fys1\" />",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1031,7 +1295,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m.foo, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1045,7 +1312,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1056,10 +1326,16 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewData.Model.foo = "DefaultFoo";
 
             // Act
-            MvcHtmlString html = helper.HiddenFor(m => m.foo, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.HiddenFor(
+                m => m.foo,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""hidden"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1074,7 +1350,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""hidden"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""hidden"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1088,7 +1367,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m);
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix"" name=""MyPrefix"" type=""hidden"" value=""{ foo = (null) }"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix"" name=""MyPrefix"" type=""hidden"" value=""{ foo = (null) }"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1101,7 +1383,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1114,7 +1399,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.HiddenFor(m => m.foo, new { @class = "foo-class" });
 
             // Assert
-            Assert.Equal(@"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""hidden"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -1122,7 +1410,8 @@ namespace System.Web.Mvc.Html.Test
         public void HiddenFor_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1131,17 +1420,26 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.HiddenFor(m => m, htmlAttributes: new { attribute = text, }).ToHtmlString();
+            var result = helper
+                .HiddenFor(m => m, htmlAttributes: new { attribute = text })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""hidden"" value="""" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""hidden"" value="""" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void HiddenFor_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void HiddenFor_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1151,10 +1449,13 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.HiddenFor(m => m, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper.HiddenFor(m => m, htmlAttributes: new { id = "id" }).ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""hidden"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""hidden"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -1162,7 +1463,8 @@ namespace System.Web.Mvc.Html.Test
         public void HiddenFor_AttributeEncodes_Value(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1174,8 +1476,11 @@ namespace System.Web.Mvc.Html.Test
 
             // Assert
             Assert.Equal(
-                @"<input id=""text"" name=""text"" type=""hidden"" value=""" + encodedText + @""" />",
-                result);
+                @"<input id=""text"" name=""text"" type=""hidden"" value="""
+                    + encodedText
+                    + @""" />",
+                result
+            );
         }
 
         // Password
@@ -1188,8 +1493,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.Password(String.Empty); },
-                "name");
+                delegate
+                {
+                    helper.Password(String.Empty);
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -1202,7 +1511,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", "Some Value", new { type = "fooType" });
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""fooType"" value=""Some Value"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""fooType"" value=""Some Value"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1212,10 +1524,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetPasswordViewData());
 
             // Act
-            MvcHtmlString html = helper.Password("foo", "Some Value", new { value = "Another Value", name = "bar" });
+            MvcHtmlString html = helper.Password(
+                "foo",
+                "Some Value",
+                new { value = "Another Value", name = "bar" }
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" value=""Some Value"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" value=""Some Value"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1228,7 +1547,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", "DefaultFoo", (object)null);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1239,13 +1561,24 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.Password("foo", "DefaultFoo", (object)null);
 
             // Assert
-            Assert.Equal(@"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1258,7 +1591,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", "DefaultFoo", _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1271,7 +1607,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", "DefaultFoo", _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1281,10 +1620,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetPasswordViewData());
 
             // Act
-            MvcHtmlString html = helper.Password("foo", (string)null /* value */, (object)null);
+            MvcHtmlString html = helper.Password(
+                "foo",
+                (string)
+                    null /* value */
+                ,
+                (object)null
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1297,7 +1645,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1310,7 +1661,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", null, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1323,7 +1677,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("keyNotFound", null, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""keyNotFound"" name=""keyNotFound"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""keyNotFound"" name=""keyNotFound"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1336,7 +1693,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", null, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1346,10 +1706,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetPasswordViewData());
 
             // Act
-            MvcHtmlString html = helper.Password("foo", null, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.Password(
+                "foo",
+                null,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1362,7 +1729,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1376,7 +1746,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""password"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""password"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1390,7 +1763,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix"" name=""MyPrefix"" type=""password"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix"" name=""MyPrefix"" type=""password"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1401,8 +1777,14 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.Password(null /* name */); },
-                "name");
+                delegate
+                {
+                    helper.Password(
+                        null /* name */
+                    );
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -1415,7 +1797,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", null, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1428,7 +1813,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.Password("foo", null, new { @class = "foo-class" });
 
             // Assert
-            Assert.Equal(@"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -1436,7 +1824,8 @@ namespace System.Web.Mvc.Html.Test
         public void Password_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1444,13 +1833,17 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.Password(name: "name", value: null, htmlAttributes: new { attribute = text, })
+            var result = helper
+                .Password(name: "name", value: null, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""password"" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""password"" />",
+                result
+            );
         }
 
         [Theory]
@@ -1464,15 +1857,24 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.Password(text, value: null, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .Password(text, value: null, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""password"" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""password"" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void Password_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void Password_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1482,11 +1884,15 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.Password(name: String.Empty, value: null, htmlAttributes: new { id = "id", })
+            var result = helper
+                .Password(name: String.Empty, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""password"" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""password"" />",
+                result
+            );
         }
 
         [Theory]
@@ -1494,7 +1900,8 @@ namespace System.Web.Mvc.Html.Test
         public void Password_AttributeEncodes_Value(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1506,8 +1913,11 @@ namespace System.Web.Mvc.Html.Test
 
             // Assert
             Assert.Equal(
-                @"<input id=""name"" name=""name"" type=""password"" value=""" + encodedText + @""" />",
-                result);
+                @"<input id=""name"" name=""name"" type=""password"" value="""
+                    + encodedText
+                    + @""" />",
+                result
+            );
         }
 
         // PasswordFor
@@ -1521,7 +1931,8 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => helper.PasswordFor<FooModel, object>(null),
-                "expression");
+                "expression"
+            );
         }
 
         [Fact]
@@ -1534,7 +1945,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo, new { type = "fooType" });
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""fooType"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""fooType"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1547,7 +1961,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo, new { name = "bar" });
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1560,7 +1977,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1571,20 +1991,33 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.PasswordFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
         public void PasswordForWithDeepValueWithNullModel_Unobtrusive()
         { // Dev10 Bug #936192
             // Arrange
-            HtmlHelper<DeepContainerModel> helper = MvcHelper.GetHtmlHelper(new ViewDataDictionary<DeepContainerModel>());
+            HtmlHelper<DeepContainerModel> helper = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary<DeepContainerModel>()
+            );
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
@@ -1595,7 +2028,10 @@ namespace System.Web.Mvc.Html.Test
                 MvcHtmlString html = helper.PasswordFor(m => m.contained.foo);
 
                 // Assert
-                Assert.Equal(@"<input data-val=""true"" data-val-required=""The foo field is required."" id=""contained_foo"" name=""contained.foo"" type=""password"" />", html.ToHtmlString());
+                Assert.Equal(
+                    @"<input data-val=""true"" data-val-required=""The foo field is required."" id=""contained_foo"" name=""contained.foo"" type=""password"" />",
+                    html.ToHtmlString()
+                );
             }
         }
 
@@ -1609,7 +2045,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1622,7 +2061,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1632,10 +2074,16 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(GetPasswordViewData());
 
             // Act
-            MvcHtmlString html = helper.PasswordFor(m => m.foo, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.PasswordFor(
+                m => m.foo,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1649,7 +2097,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1662,7 +2113,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1675,7 +2129,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.PasswordFor(m => m.foo, new { @class = "foo-class" });
 
             // Assert
-            Assert.Equal(@"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""password"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""password"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -1683,7 +2140,8 @@ namespace System.Web.Mvc.Html.Test
         public void PasswordFor_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1692,17 +2150,26 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.PasswordFor(m => m, htmlAttributes: new { attribute = text, }).ToHtmlString();
+            var result = helper
+                .PasswordFor(m => m, htmlAttributes: new { attribute = text })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""password"" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""password"" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void PasswordFor_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void PasswordFor_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -1712,10 +2179,15 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.PasswordFor(m => m, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .PasswordFor(m => m, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""password"" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""password"" />",
+                result
+            );
         }
 
         // No need for PasswordFor_AttributeEncodes_Value() because PasswordFor() always uses a null value.
@@ -1729,10 +2201,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("bar", "ViewDataBar", new { @checked = "chucked", value = "baz" });
+            MvcHtmlString html = helper.RadioButton(
+                "bar",
+                "ViewDataBar",
+                new { @checked = "chucked", value = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""chucked"" id=""bar"" name=""bar"" type=""radio"" value=""ViewDataBar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""chucked"" id=""bar"" name=""bar"" type=""radio"" value=""ViewDataBar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1742,10 +2221,18 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("bar", "ViewDataBar", false, new { @checked = "checked", value = "baz" });
+            MvcHtmlString html = helper.RadioButton(
+                "bar",
+                "ViewDataBar",
+                false,
+                new { @checked = "checked", value = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""bar"" name=""bar"" type=""radio"" value=""ViewDataBar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""bar"" name=""bar"" type=""radio"" value=""ViewDataBar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1753,13 +2240,24 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper.ViewData.ModelState.SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo"));
+            helper.ViewData.ModelState.SetModelValue(
+                "foo",
+                HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
+            );
 
             // Act
-            MvcHtmlString html = helper.RadioButton("foo", "ModelStateFoo", false, new { @checked = "checked", value = "baz" });
+            MvcHtmlString html = helper.RadioButton(
+                "foo",
+                "ModelStateFoo",
+                false,
+                new { @checked = "checked", value = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ModelStateFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ModelStateFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1773,8 +2271,14 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html2 = helper.RadioButton("foo", "fooValue2");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue2"" />", html2.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue2"" />",
+                html2.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1785,8 +2289,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.RadioButton(String.Empty, "value"); },
-                "name");
+                delegate
+                {
+                    helper.RadioButton(String.Empty, "value");
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -1797,8 +2305,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { helper.RadioButton("foo", null); },
-                "value");
+                delegate
+                {
+                    helper.RadioButton("foo", null);
+                },
+                "value"
+            );
         }
 
         [Fact]
@@ -1811,7 +2323,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButton("foo", "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1822,13 +2337,24 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.RadioButton("foo", "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1842,7 +2368,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButton("foo", "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1856,7 +2385,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButton("", "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix"" name=""MyPrefix"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix"" name=""MyPrefix"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1869,7 +2401,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButton("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1879,10 +2414,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("bar", "barValue", false /* isChecked */);
+            MvcHtmlString html = helper.RadioButton(
+                "bar",
+                "barValue",
+                false /* isChecked */
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1892,10 +2434,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("bar", "barValue", true /* isChecked */);
+            MvcHtmlString html = helper.RadioButton(
+                "bar",
+                "barValue",
+                true /* isChecked */
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1908,7 +2457,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButton("foo", "fooValue", _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1918,10 +2470,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("foo", "fooValue", _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.RadioButton(
+                "foo",
+                "fooValue",
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1934,7 +2493,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButton("bar", "barValue", _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1944,10 +2506,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("foo", "bar", false /* isChecked */);
+            MvcHtmlString html = helper.RadioButton(
+                "foo",
+                "bar",
+                false /* isChecked */
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""radio"" value=""bar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""radio"" value=""bar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1957,10 +2526,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("foo", "bar", false /* isChecked */, _attributesObjectDictionary);
+            MvcHtmlString html = helper.RadioButton(
+                "foo",
+                "bar",
+                false /* isChecked */
+                ,
+                _attributesObjectDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""bar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""bar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1970,10 +2548,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("foo", "bar", false /* isChecked */, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.RadioButton(
+                "foo",
+                "bar",
+                false /* isChecked */
+                ,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""bar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""bar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1983,10 +2570,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButton("foo", "bar", false /* isChecked */, _attributesDictionary);
+            MvcHtmlString html = helper.RadioButton(
+                "foo",
+                "bar",
+                false /* isChecked */
+                ,
+                _attributesDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""radio"" value=""bar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""radio"" value=""bar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -1994,7 +2590,8 @@ namespace System.Web.Mvc.Html.Test
         public void RadioButton_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2002,18 +2599,26 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.RadioButton(name: "name", value: "value", htmlAttributes: new { attribute = text, })
+            var result = helper
+                .RadioButton(name: "name", value: "value", htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""radio"" value=""value"" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""radio"" value=""value"" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void RadioButton_AttributeEncodes_Name(string text, bool htmlEncode, string encodedText)
+        public void RadioButton_AttributeEncodes_Name(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2022,16 +2627,24 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.RadioButton(text, value: "value", htmlAttributes: new { id = "id", })
+            var result = helper
+                .RadioButton(text, value: "value", htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""radio"" value=""value"" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""radio"" value=""value"" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void RadioButton_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void RadioButton_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2041,11 +2654,19 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.RadioButton(name: String.Empty, value: String.Empty, htmlAttributes: new { id = "id", })
+            var result = helper
+                .RadioButton(
+                    name: String.Empty,
+                    value: String.Empty,
+                    htmlAttributes: new { id = "id" }
+                )
                 .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""radio"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""radio"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -2053,7 +2674,8 @@ namespace System.Web.Mvc.Html.Test
         public void RadioButton_AttributeEncodes_Value(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2065,8 +2687,11 @@ namespace System.Web.Mvc.Html.Test
 
             // Assert
             Assert.Equal(
-                @"<input id=""name"" name=""name"" type=""radio"" value=""" + encodedText + @""" />",
-                result);
+                @"<input id=""name"" name=""name"" type=""radio"" value="""
+                    + encodedText
+                    + @""" />",
+                result
+            );
         }
 
         // RadioButtonFor
@@ -2080,7 +2705,8 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => helper.RadioButtonFor<FooBarModel, object>(null, "value"),
-                "expression");
+                "expression"
+            );
         }
 
         [Fact]
@@ -2090,9 +2716,7 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => helper.RadioButtonFor(m => m.foo, null),
-                "value");
+            Assert.ThrowsArgumentNull(() => helper.RadioButtonFor(m => m.foo, null), "value");
         }
 
         [Fact]
@@ -2102,10 +2726,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButtonFor(m => m.bar, "ViewDataBar", new { @checked = "chucked", value = "baz" });
+            MvcHtmlString html = helper.RadioButtonFor(
+                m => m.bar,
+                "ViewDataBar",
+                new { @checked = "chucked", value = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""chucked"" id=""bar"" name=""bar"" type=""radio"" value=""ViewDataBar"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""chucked"" id=""bar"" name=""bar"" type=""radio"" value=""ViewDataBar"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2113,13 +2744,23 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper.ViewData.ModelState.SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo"));
+            helper.ViewData.ModelState.SetModelValue(
+                "foo",
+                HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
+            );
 
             // Act
-            MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "ModelStateFoo", new { @checked = "checked", value = "baz" });
+            MvcHtmlString html = helper.RadioButtonFor(
+                m => m.foo,
+                "ModelStateFoo",
+                new { @checked = "checked", value = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ModelStateFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ModelStateFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2129,10 +2770,14 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act & Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
-                         helper.RadioButtonFor(m => m.foo, "ViewDataFoo").ToHtmlString());
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue2"" />",
-                         helper.RadioButtonFor(m => m.foo, "fooValue2").ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
+                helper.RadioButtonFor(m => m.foo, "ViewDataFoo").ToHtmlString()
+            );
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue2"" />",
+                helper.RadioButtonFor(m => m.foo, "fooValue2").ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2145,20 +2790,28 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
         public void RadioButtonForWithNestedNameAndValue()
         {
             // Arrange
-            HtmlHelper<string> helper = MvcHelper.GetHtmlHelper(GetRadioButtonNestedAndUnsetViewData());
+            HtmlHelper<string> helper = MvcHelper.GetHtmlHelper(
+                GetRadioButtonNestedAndUnsetViewData()
+            );
 
             // Act
             MvcHtmlString html = helper.RadioButtonFor(m => m, "ViewItemFoo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2169,13 +2822,24 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input checked=""checked"" data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2189,7 +2853,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "ViewDataFoo");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""radio"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""radio"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2202,7 +2869,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2212,10 +2882,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "fooValue", _attributesObjectDictionary);
+            MvcHtmlString html = helper.RadioButtonFor(
+                m => m.foo,
+                "fooValue",
+                _attributesObjectDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2225,10 +2902,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButtonFor(m => m.foo, "fooValue", _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.RadioButtonFor(
+                m => m.foo,
+                "fooValue",
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""radio"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2238,10 +2922,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
 
             // Act
-            MvcHtmlString html = helper.RadioButtonFor(m => m.bar, "barValue", _attributesDictionary);
+            MvcHtmlString html = helper.RadioButtonFor(
+                m => m.bar,
+                "barValue",
+                _attributesDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""bar"" name=""bar"" type=""radio"" value=""barValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -2249,7 +2940,8 @@ namespace System.Web.Mvc.Html.Test
         public void RadioButtonFor_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2258,18 +2950,30 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.RadioButtonFor(m => m, value: String.Empty, htmlAttributes: new { attribute = text, })
+            var result = helper
+                .RadioButtonFor(
+                    m => m,
+                    value: String.Empty,
+                    htmlAttributes: new { attribute = text }
+                )
                 .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""radio"" value="""" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""radio"" value="""" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void RadioButtonFor_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void RadioButtonFor_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2279,11 +2983,15 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.RadioButtonFor(m => m, value: String.Empty, htmlAttributes: new { id = "id", })
+            var result = helper
+                .RadioButtonFor(m => m, value: String.Empty, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""radio"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""radio"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -2291,7 +2999,8 @@ namespace System.Web.Mvc.Html.Test
         public void RadioButtonFor_AttributeEncodes_Value(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2304,8 +3013,11 @@ namespace System.Web.Mvc.Html.Test
 
             // Assert
             Assert.Equal(
-                @"<input id=""name"" name=""name"" type=""radio"" value=""" + encodedText + @""" />",
-                result);
+                @"<input id=""name"" name=""name"" type=""radio"" value="""
+                    + encodedText
+                    + @""" />",
+                result
+            );
         }
 
         // TextBox
@@ -2320,7 +3032,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", "DefaultFoo", new { type = "fooType" });
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""fooType"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""fooType"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2330,10 +3045,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetTextBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.TextBox("foo", "DefaultFoo", new { value = "Some other value" });
+            MvcHtmlString html = helper.TextBox(
+                "foo",
+                "DefaultFoo",
+                new { value = "Some other value" }
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2346,7 +3068,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo.bar.baz", null);
 
             // Assert
-            Assert.Equal(@"<input id=""foo_bar_baz"" name=""foo.bar.baz"" type=""text"" value="""" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo_bar_baz"" name=""foo.bar.baz"" type=""text"" value="""" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2357,8 +3082,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.TextBox(String.Empty); },
-                "name");
+                delegate
+                {
+                    helper.TextBox(String.Empty);
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -2371,7 +3100,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", "DefaultFoo", (object)null);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2382,13 +3114,24 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.TextBox("foo", "DefaultFoo", (object)null);
 
             // Assert
-            Assert.Equal(@"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2401,7 +3144,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", "DefaultFoo", _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2414,7 +3160,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", "DefaultFoo", _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""DefaultFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2424,10 +3173,19 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetTextBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.TextBox("foo", (string)null /* value */, (object)null);
+            MvcHtmlString html = helper.TextBox(
+                "foo",
+                (string)
+                    null /* value */
+                ,
+                (object)null
+            );
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2440,7 +3198,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2453,7 +3214,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", null, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2466,7 +3230,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("keyNotFound", null, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""keyNotFound"" name=""keyNotFound"" type=""text"" value="""" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""keyNotFound"" name=""keyNotFound"" type=""text"" value="""" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2479,7 +3246,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", null, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2489,10 +3259,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetTextBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.TextBox("foo", null, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.TextBox(
+                "foo",
+                null,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewDataFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2503,8 +3280,14 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { helper.TextBox(null /* name */); },
-                "name");
+                delegate
+                {
+                    helper.TextBox(
+                        null /* name */
+                    );
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -2517,7 +3300,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""text"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""text"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2531,7 +3317,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""text"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""text"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2545,7 +3334,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("", "fooValue");
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix"" name=""MyPrefix"" type=""text"" value=""fooValue"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix"" name=""MyPrefix"" type=""text"" value=""fooValue"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2558,7 +3350,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", null, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2571,7 +3366,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBox("foo", null, new { @class = "foo-class" });
 
             // Assert
-            Assert.Equal(@"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -2579,7 +3377,8 @@ namespace System.Web.Mvc.Html.Test
         public void TextBox_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2587,13 +3386,17 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.TextBox(name: "name", value: null, htmlAttributes: new { attribute = text, })
+            var result = helper
+                .TextBox(name: "name", value: null, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""text"" value="""" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""text"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -2601,7 +3404,8 @@ namespace System.Web.Mvc.Html.Test
         public void TextBox_AttributeEncodes_Format(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2614,7 +3418,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 @"<input id=""name"" name=""name"" type=""text"" value=""" + encodedText + @""" />",
-                result);
+                result
+            );
         }
 
         [Theory]
@@ -2628,15 +3433,24 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.TextBox(text, value: null, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .TextBox(text, value: null, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""text"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""text"" value="""" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void TextBox_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void TextBox_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2646,19 +3460,20 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.TextBox(name: String.Empty, value: null, htmlAttributes: new { id = "id", })
+            var result = helper
+                .TextBox(name: String.Empty, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""text"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""text"" value="""" />",
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void TextBox_AttributeEncodes_Value(
-            string text,
-            bool htmlEncode,
-            string encodedText)
+        public void TextBox_AttributeEncodes_Value(string text, bool htmlEncode, string encodedText)
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2671,7 +3486,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 @"<input id=""name"" name=""name"" type=""text"" value=""" + encodedText + @""" />",
-                result);
+                result
+            );
         }
 
         // TextBoxFor
@@ -2684,9 +3500,12 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => helper.TextBoxFor<FooBarModel, object>(null /* expression */),
+                () =>
+                    helper.TextBoxFor<FooBarModel, object>(
+                        null /* expression */
+                    ),
                 "expression"
-                );
+            );
         }
 
         [Fact]
@@ -2699,7 +3518,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBoxFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2710,13 +3532,24 @@ namespace System.Web.Mvc.Html.Test
             helper.ViewContext.ClientValidationEnabled = true;
             helper.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             helper.ViewContext.FormContext = new FormContext();
-            helper.ClientValidationRuleFactory = (name, metadata) => new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" } };
+            helper.ClientValidationRuleFactory = (name, metadata) =>
+                new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "error",
+                    },
+                };
 
             // Act
             MvcHtmlString html = helper.TextBoxFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input data-val=""true"" data-val-type=""error"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2729,7 +3562,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBoxFor(m => m.foo, _attributesDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2742,7 +3578,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBoxFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2752,10 +3591,16 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetTextBoxViewData());
 
             // Act
-            MvcHtmlString html = helper.TextBoxFor(m => m.foo, _attributesObjectUnderscoresDictionary);
+            MvcHtmlString html = helper.TextBoxFor(
+                m => m.foo,
+                _attributesObjectUnderscoresDictionary
+            );
 
             // Assert
-            Assert.Equal(@"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input foo-baz=""BazObjValue"" id=""foo"" name=""foo"" type=""text"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2769,7 +3614,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBoxFor(m => m.foo);
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""text"" value=""ViewItemFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix_foo"" name=""MyPrefix.foo"" type=""text"" value=""ViewItemFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2783,33 +3631,46 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = helper.TextBoxFor(m => m);
 
             // Assert
-            Assert.Equal(@"<input id=""MyPrefix"" name=""MyPrefix"" type=""text"" value=""{ foo = ViewItemFoo, bar = ViewItemBar }"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input id=""MyPrefix"" name=""MyPrefix"" type=""text"" value=""{ foo = ViewItemFoo, bar = ViewItemBar }"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
         public void TextBoxForWithErrors()
         {
             // Arrange
-            HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetTextBoxViewDataWithErrors());
+            HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(
+                GetTextBoxViewDataWithErrors()
+            );
 
             // Act
             MvcHtmlString html = helper.TextBoxFor(m => m.foo, _attributesObjectDictionary);
 
             // Assert
-            Assert.Equal(@"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input baz=""BazObjValue"" class=""input-validation-error"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
         public void TextBoxForWithErrorsAndCustomClass()
         {
             // Arrange
-            HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetTextBoxViewDataWithErrors());
+            HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(
+                GetTextBoxViewDataWithErrors()
+            );
 
             // Act
             MvcHtmlString html = helper.TextBoxFor(m => m.foo, new { @class = "foo-class" });
 
             // Assert
-            Assert.Equal(@"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />", html.ToHtmlString());
+            Assert.Equal(
+                @"<input class=""input-validation-error foo-class"" id=""foo"" name=""foo"" type=""text"" value=""AttemptedValueFoo"" />",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -2818,9 +3679,14 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             DateTime dt = new DateTime(1900, 1, 1, 0, 0, 0);
-            HtmlHelper helper = MvcHelper.GetHtmlHelper(new ViewDataDictionary { { "viewDataDate", dt } });
+            HtmlHelper helper = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary { { "viewDataDate", dt } }
+            );
 
-            ViewDataDictionary<DateModel> viewData = new ViewDataDictionary<DateModel>() { Model = new DateModel { date = dt } };
+            ViewDataDictionary<DateModel> viewData = new ViewDataDictionary<DateModel>()
+            {
+                Model = new DateModel { date = dt },
+            };
             HtmlHelper<DateModel> dateModelhelper = MvcHelper.GetHtmlHelper(viewData);
 
             var tests = new[]
@@ -2829,44 +3695,56 @@ namespace System.Web.Mvc.Html.Test
                 new
                 {
                     Html = @"<input id=""viewDataDate"" name=""viewDataDate"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("viewDataDate", null, "-{0}-"))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.TextBox("viewDataDate", null, "-{0}-")
+                    ),
                 },
                 // TextBox(name, value, format)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("date", dt, "-{0}-"))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("date", dt, "-{0}-")),
                 },
                 // TextBox(name, value, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("date", dt, "-{0}-", (object)null))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.TextBox("date", dt, "-{0}-", (object)null)
+                    ),
                 },
                 // TextBox(name, value, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("date", dt, "-{0}-", new RouteValueDictionary()))
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.TextBox("date", dt, "-{0}-", new RouteValueDictionary())
+                    ),
                 },
                 // TextBoxFor(expression, format)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => dateModelhelper.TextBoxFor(m => m.date, "-{0}-"))
+                    Action = new Func<MvcHtmlString>(() =>
+                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-")
+                    ),
                 },
                 // TextBoxFor(expression, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => dateModelhelper.TextBoxFor(m => m.date, "-{0}-", (object)null))
+                    Action = new Func<MvcHtmlString>(() =>
+                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-", (object)null)
+                    ),
                 },
                 // TextBoxFor(expression, format, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => dateModelhelper.TextBoxFor(m => m.date, "-{0}-", new RouteValueDictionary()))
-                }
+                    Action = new Func<MvcHtmlString>(() =>
+                        dateModelhelper.TextBoxFor(m => m.date, "-{0}-", new RouteValueDictionary())
+                    ),
+                },
             };
 
             // Act && Assert
@@ -2881,7 +3759,8 @@ namespace System.Web.Mvc.Html.Test
         public void TextBoxFor_AttributeEncodes_AddedHtmlAttributes(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2890,12 +3769,17 @@ namespace System.Web.Mvc.Html.Test
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act
-            var result = helper.TextBoxFor(m => m, htmlAttributes: new { attribute = text, }).ToHtmlString();
+            var result = helper
+                .TextBoxFor(m => m, htmlAttributes: new { attribute = text })
+                .ToHtmlString();
 
             // Assert
             Assert.Equal(
-                @"<input attribute=""" + encodedText + @""" id=""name"" name=""name"" type=""text"" value="""" />",
-                result);
+                @"<input attribute="""
+                    + encodedText
+                    + @""" id=""name"" name=""name"" type=""text"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -2903,7 +3787,8 @@ namespace System.Web.Mvc.Html.Test
         public void TextBoxFor_AttributeEncodes_Format(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: String.Empty);
@@ -2917,12 +3802,17 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 @"<input id=""name"" name=""name"" type=""text"" value=""" + encodedText + @""" />",
-                result);
+                result
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void TextBoxFor_AttributeEncodes_Prefix(string text, bool htmlEncode, string encodedText)
+        public void TextBoxFor_AttributeEncodes_Prefix(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2932,10 +3822,15 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.TextBoxFor(m => m, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper
+                .TextBoxFor(m => m, htmlAttributes: new { id = "id" })
+                .ToHtmlString();
 
             // Assert
-            Assert.Equal(@"<input id=""id"" name=""" + encodedText + @""" type=""text"" value="""" />", result);
+            Assert.Equal(
+                @"<input id=""id"" name=""" + encodedText + @""" type=""text"" value="""" />",
+                result
+            );
         }
 
         [Theory]
@@ -2943,7 +3838,8 @@ namespace System.Web.Mvc.Html.Test
         public void TextBoxFor_AttributeEncodes_Value(
             string text,
             bool htmlEncode,
-            string encodedText)
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(model: null);
@@ -2956,7 +3852,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 @"<input id=""text"" name=""text"" type=""text"" value=""" + encodedText + @""" />",
-                result);
+                result
+            );
         }
 
         // MODELS
@@ -2976,7 +3873,11 @@ namespace System.Web.Mvc.Html.Test
 
             public override string ToString()
             {
-                return String.Format("{{ foo = {0}, bar = {1} }}", foo ?? "(null)", bar ?? "(null)");
+                return String.Format(
+                    "{{ foo = {0}, bar = {1} }}",
+                    foo ?? "(null)",
+                    bar ?? "(null)"
+                );
             }
         }
 
@@ -3017,25 +3918,39 @@ namespace System.Web.Mvc.Html.Test
         // CHECKBOX
         private static ViewDataDictionary<FooBarBazModel> GetCheckBoxViewData()
         {
-            ViewDataDictionary<FooBarBazModel> viewData = new ViewDataDictionary<FooBarBazModel> { { "foo", true }, { "bar", "NotTrue" }, { "baz", false } };
+            ViewDataDictionary<FooBarBazModel> viewData = new ViewDataDictionary<FooBarBazModel>
+            {
+                { "foo", true },
+                { "bar", "NotTrue" },
+                { "baz", false },
+            };
             return viewData;
         }
 
         // HIDDEN
         private static ViewDataDictionary<HiddenModel> GetHiddenViewData()
         {
-            return new ViewDataDictionary<HiddenModel>(new HiddenModel()) { { "foo", "ViewDataFoo" } };
+            return new ViewDataDictionary<HiddenModel>(new HiddenModel())
+            {
+                { "foo", "ViewDataFoo" },
+            };
         }
 
         private static ViewDataDictionary<HiddenModel> GetHiddenViewDataWithErrors()
         {
-            ViewDataDictionary<HiddenModel> viewData = new ViewDataDictionary<HiddenModel> { { "foo", "ViewDataFoo" } };
+            ViewDataDictionary<HiddenModel> viewData = new ViewDataDictionary<HiddenModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
             viewData.Model = new HiddenModel();
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));
             modelStateFoo.Errors.Add(new ModelError("foo error 2"));
             viewData.ModelState["foo"] = modelStateFoo;
-            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult("AttemptedValueFoo", "AttemptedValueFoo");
+            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(
+                "AttemptedValueFoo",
+                "AttemptedValueFoo"
+            );
 
             return viewData;
         }
@@ -3048,12 +3963,18 @@ namespace System.Web.Mvc.Html.Test
 
         private static ViewDataDictionary<FooModel> GetPasswordViewDataWithErrors()
         {
-            ViewDataDictionary<FooModel> viewData = new ViewDataDictionary<FooModel> { { "foo", "ViewDataFoo" } };
+            ViewDataDictionary<FooModel> viewData = new ViewDataDictionary<FooModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));
             modelStateFoo.Errors.Add(new ModelError("foo error 2"));
             viewData.ModelState["foo"] = modelStateFoo;
-            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult("AttemptedValueFoo", "AttemptedValueFoo");
+            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(
+                "AttemptedValueFoo",
+                "AttemptedValueFoo"
+            );
 
             return viewData;
         }
@@ -3061,7 +3982,10 @@ namespace System.Web.Mvc.Html.Test
         // RADIO
         private static ViewDataDictionary<FooBarModel> GetRadioButtonViewData()
         {
-            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { { "foo", "ViewDataFoo" } };
+            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
             ModelState modelState = new ModelState();
             modelState.Value = HtmlHelperTest.GetValueProviderResult("ViewDataFoo", "ViewDataFoo");
@@ -3075,12 +3999,10 @@ namespace System.Web.Mvc.Html.Test
             ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
 
-
             Expression<Func<FooBarModel, string>> containedExpression = m => m.foo;
 
             var metadata = ModelMetadata.FromLambdaExpression(containedExpression, viewData);
             var htmlFieldName = ExpressionHelper.GetExpressionText(containedExpression);
-
 
             ViewDataDictionary nestedViewData = new ViewDataDictionary(viewData)
             {
@@ -3089,20 +4011,27 @@ namespace System.Web.Mvc.Html.Test
                 TemplateInfo = new TemplateInfo
                 {
                     HtmlFieldPrefix = viewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName),
-                }
+                },
             };
 
             return new ViewDataDictionary<string>(nestedViewData);
         }
 
         // TEXTBOX
-        private static readonly RouteValueDictionary _attributesDictionary = new RouteValueDictionary(new { baz = "BazValue" });
+        private static readonly RouteValueDictionary _attributesDictionary =
+            new RouteValueDictionary(new { baz = "BazValue" });
         private static readonly object _attributesObjectDictionary = new { baz = "BazObjValue" };
-        private static readonly object _attributesObjectUnderscoresDictionary = new { foo_baz = "BazObjValue" };
+        private static readonly object _attributesObjectUnderscoresDictionary = new
+        {
+            foo_baz = "BazObjValue",
+        };
 
         private static ViewDataDictionary<FooBarModel> GetTextBoxViewData()
         {
-            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { { "foo", "ViewDataFoo" } };
+            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
 
             return viewData;
@@ -3110,13 +4039,19 @@ namespace System.Web.Mvc.Html.Test
 
         private static ViewDataDictionary<FooBarModel> GetTextBoxViewDataWithErrors()
         {
-            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { { "foo", "ViewDataFoo" } };
+            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));
             modelStateFoo.Errors.Add(new ModelError("foo error 2"));
             viewData.ModelState["foo"] = modelStateFoo;
-            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(new string[] { "AttemptedValueFoo" }, "AttemptedValueFoo");
+            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(
+                new string[] { "AttemptedValueFoo" },
+                "AttemptedValueFoo"
+            );
 
             return viewData;
         }

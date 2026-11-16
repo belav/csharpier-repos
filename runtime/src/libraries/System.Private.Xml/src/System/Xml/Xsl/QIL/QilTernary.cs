@@ -15,8 +15,9 @@ namespace System.Xml.Xsl.Qil
     /// </remarks>
     internal class QilTernary : QilNode
     {
-        private QilNode _left, _center, _right;
-
+        private QilNode _left,
+            _center,
+            _right;
 
         //-----------------------------------------------
         // Constructor
@@ -25,13 +26,13 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilTernary(QilNodeType nodeType, QilNode left, QilNode center, QilNode right) : base(nodeType)
+        public QilTernary(QilNodeType nodeType, QilNode left, QilNode center, QilNode right)
+            : base(nodeType)
         {
             _left = left;
             _center = center;
             _right = right;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
@@ -58,14 +59,20 @@ namespace System.Xml.Xsl.Qil
             {
                 switch (index)
                 {
-                    case 0: _left = value; break;
-                    case 1: _center = value; break;
-                    case 2: _right = value; break;
-                    default: throw new IndexOutOfRangeException();
+                    case 0:
+                        _left = value;
+                        break;
+                    case 1:
+                        _center = value;
+                        break;
+                    case 2:
+                        _right = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
         }
-
 
         //-----------------------------------------------
         // QilTernary methods

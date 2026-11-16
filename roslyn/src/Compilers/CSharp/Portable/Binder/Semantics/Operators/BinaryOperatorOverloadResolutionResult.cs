@@ -84,11 +84,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             var sb = new StringBuilder();
             if (this.Best.HasValue)
             {
-                sb.AppendLine("Overload resolution succeeded and chose " + this.Best.Signature.ToString());
+                sb.AppendLine(
+                    "Overload resolution succeeded and chose " + this.Best.Signature.ToString()
+                );
             }
             else if (CountKind(OperatorAnalysisResultKind.Applicable) > 1)
             {
-                sb.AppendLine("Overload resolution failed because of ambiguous possible best operators.");
+                sb.AppendLine(
+                    "Overload resolution failed because of ambiguous possible best operators."
+                );
             }
             else
             {
@@ -98,7 +102,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             sb.AppendLine("Detailed results:");
             foreach (var result in Results)
             {
-                sb.AppendFormat("operator: {0} reason: {1}\n", result.Signature.ToString(), result.Kind.ToString());
+                sb.AppendFormat(
+                    "operator: {0} reason: {1}\n",
+                    result.Signature.ToString(),
+                    result.Kind.ToString()
+                );
             }
 
             return sb.ToString();
@@ -137,12 +145,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.Results.Clear();
         }
 
-        public static readonly ObjectPool<BinaryOperatorOverloadResolutionResult> Pool = CreatePool();
+        public static readonly ObjectPool<BinaryOperatorOverloadResolutionResult> Pool =
+            CreatePool();
 
         private static ObjectPool<BinaryOperatorOverloadResolutionResult> CreatePool()
         {
             ObjectPool<BinaryOperatorOverloadResolutionResult> pool = null;
-            pool = new ObjectPool<BinaryOperatorOverloadResolutionResult>(() => new BinaryOperatorOverloadResolutionResult(), 10);
+            pool = new ObjectPool<BinaryOperatorOverloadResolutionResult>(
+                () => new BinaryOperatorOverloadResolutionResult(),
+                10
+            );
             return pool;
         }
 

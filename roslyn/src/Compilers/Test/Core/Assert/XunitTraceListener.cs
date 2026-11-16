@@ -16,14 +16,11 @@ namespace Roslyn.Test.Utilities
         private readonly StringBuilder _lineInProgress = new StringBuilder();
         private bool _disposed;
 
-        public XunitTraceListener(ITestOutputHelper logger)
-            => _logger = logger;
+        public XunitTraceListener(ITestOutputHelper logger) => _logger = logger;
 
-        public override bool IsThreadSafe
-            => false;
+        public override bool IsThreadSafe => false;
 
-        public override void Write(string? message)
-            => _lineInProgress.Append(message);
+        public override void Write(string? message) => _lineInProgress.Append(message);
 
         public override void WriteLine(string? message)
         {

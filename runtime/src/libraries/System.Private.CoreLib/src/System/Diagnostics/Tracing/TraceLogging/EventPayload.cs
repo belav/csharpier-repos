@@ -126,9 +126,9 @@ namespace System.Diagnostics.Tracing
             return false;
         }
 
-#region private
+        #region private
         private readonly string[] m_names;
         private readonly object?[] m_values;
-#endregion
+        #endregion
     }
 }

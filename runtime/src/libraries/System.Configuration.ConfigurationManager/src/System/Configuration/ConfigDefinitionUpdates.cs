@@ -18,19 +18,31 @@ namespace System.Configuration
         internal bool RequireLocation { get; set; }
 
         // Find the location update with a certain set of location attributes.
-        internal LocationUpdates FindLocationUpdates(OverrideModeSetting overrideMode, bool inheritInChildApps)
+        internal LocationUpdates FindLocationUpdates(
+            OverrideModeSetting overrideMode,
+            bool inheritInChildApps
+        )
         {
             foreach (LocationUpdates locationUpdates in LocationUpdatesList)
-                if (OverrideModeSetting.CanUseSameLocationTag(locationUpdates.OverrideMode, overrideMode) &&
-                    (locationUpdates.InheritInChildApps == inheritInChildApps))
+                if (
+                    OverrideModeSetting.CanUseSameLocationTag(
+                        locationUpdates.OverrideMode,
+                        overrideMode
+                    ) && (locationUpdates.InheritInChildApps == inheritInChildApps)
+                )
                     return locationUpdates;
 
             return null;
         }
 
         // Add a section definition update to the correct location update.
-        internal DefinitionUpdate AddUpdate(OverrideModeSetting overrideMode, bool inheritInChildApps, bool moved,
-            string updatedXml, SectionRecord sectionRecord)
+        internal DefinitionUpdate AddUpdate(
+            OverrideModeSetting overrideMode,
+            bool inheritInChildApps,
+            bool moved,
+            string updatedXml,
+            SectionRecord sectionRecord
+        )
         {
             LocationUpdates locationUpdates = FindLocationUpdates(overrideMode, inheritInChildApps);
             if (locationUpdates == null)
@@ -39,8 +51,12 @@ namespace System.Configuration
                 LocationUpdatesList.Add(locationUpdates);
             }
 
-            DefinitionUpdate definitionUpdate = new DefinitionUpdate(sectionRecord.ConfigKey, moved, updatedXml,
-                sectionRecord);
+            DefinitionUpdate definitionUpdate = new DefinitionUpdate(
+                sectionRecord.ConfigKey,
+                moved,
+                updatedXml,
+                sectionRecord
+            );
             locationUpdates.SectionUpdates.AddSection(definitionUpdate);
             return definitionUpdate;
         }
@@ -48,7 +64,8 @@ namespace System.Configuration
         // Determine which section definition updates are new.
         internal void CompleteUpdates()
         {
-            foreach (LocationUpdates locationUpdates in LocationUpdatesList) locationUpdates.CompleteUpdates();
+            foreach (LocationUpdates locationUpdates in LocationUpdatesList)
+                locationUpdates.CompleteUpdates();
         }
 
         internal void FlagLocationWritten()

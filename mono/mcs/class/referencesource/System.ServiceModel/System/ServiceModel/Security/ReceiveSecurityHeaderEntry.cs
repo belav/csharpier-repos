@@ -43,8 +43,14 @@ namespace System.ServiceModel.Security
         }
 
         public void SetElement(
-            ReceiveSecurityHeaderElementCategory elementCategory, object element,
-            ReceiveSecurityHeaderBindingModes bindingMode, string id, bool encrypted, byte[] decryptedBuffer, TokenTracker supportingTokenTracker)
+            ReceiveSecurityHeaderElementCategory elementCategory,
+            object element,
+            ReceiveSecurityHeaderBindingModes bindingMode,
+            string id,
+            bool encrypted,
+            byte[] decryptedBuffer,
+            TokenTracker supportingTokenTracker
+        )
         {
             this.elementCategory = elementCategory;
             this.element = element;

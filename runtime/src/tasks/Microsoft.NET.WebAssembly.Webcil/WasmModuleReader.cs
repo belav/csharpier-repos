@@ -39,15 +39,13 @@ internal class WasmModuleReader : IDisposable
     public WasmModuleReader(Stream stream)
     {
         _reader = new BinaryReader(stream, Encoding.UTF8, leaveOpen: true);
-         _isWasmModule = new Lazy<bool>(this.GetIsWasmModule);
+        _isWasmModule = new Lazy<bool>(this.GetIsWasmModule);
     }
-
 
     public void Dispose()
     {
         Dispose(true);
     }
-
 
     protected virtual void Dispose(bool disposing)
     {
@@ -57,7 +55,7 @@ internal class WasmModuleReader : IDisposable
         }
     }
 
-    protected virtual bool VisitSection (Section sec, out bool shouldStop)
+    protected virtual bool VisitSection(Section sec, out bool shouldStop)
     {
         shouldStop = false;
         return true;
@@ -73,7 +71,8 @@ internal class WasmModuleReader : IDisposable
             uint magic = _reader.ReadUInt32();
             if (magic == WASM_MAGIC)
                 return true;
-        } catch (EndOfStreamException) {}
+        }
+        catch (EndOfStreamException) { }
         return false;
     }
 
@@ -88,8 +87,9 @@ internal class WasmModuleReader : IDisposable
             return false;
 
         bool success = true;
-        while (success) {
-            success = DoVisitSection (out bool shouldStop);
+        while (success)
+        {
+            success = DoVisitSection(out bool shouldStop);
             if (shouldStop)
                 break;
         }
@@ -124,7 +124,8 @@ internal class WasmModuleReader : IDisposable
         {
             byte b = _reader.ReadByte();
             val |= (b & 0x7fu) << shift;
-            if ((b & 0x80u) == 0) break;
+            if ((b & 0x80u) == 0)
+                break;
             shift += 7;
             if (shift >= 35)
                 throw new OverflowException();
@@ -132,7 +133,7 @@ internal class WasmModuleReader : IDisposable
         return val;
     }
 
-    protected bool TryReadPassiveDataSegment (out long segmentLength, out long segmentStart)
+    protected bool TryReadPassiveDataSegment(out long segmentLength, out long segmentStart)
     {
         segmentLength = 0;
         segmentStart = 0;
@@ -142,7 +143,7 @@ internal class WasmModuleReader : IDisposable
         segmentLength = ReadULEB128();
         segmentStart = _reader.BaseStream.Position;
         // skip over the data
-        _reader.BaseStream.Seek (segmentLength, SeekOrigin.Current);
+        _reader.BaseStream.Seek(segmentLength, SeekOrigin.Current);
         return true;
     }
 }

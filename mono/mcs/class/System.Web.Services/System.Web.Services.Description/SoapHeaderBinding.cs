@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.SoapHeaderBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,84 +34,96 @@ using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("header", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (InputBinding), typeof (OutputBinding))]
-	public class SoapHeaderBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "header",
+        "http://schemas.xmlsoap.org/wsdl/soap/",
+        typeof(InputBinding),
+        typeof(OutputBinding)
+    )]
+    public class SoapHeaderBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        string encoding;
+        bool mapToProperty;
+        XmlQualifiedName message;
+        string ns;
+        string part;
+        SoapBindingUse use;
 
-		string encoding;
-		bool mapToProperty;
-		XmlQualifiedName message;
-		string ns;
-		string part;
-		SoapBindingUse use;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-	
-		public SoapHeaderBinding ()
-		{
-			encoding = String.Empty;
-			mapToProperty = false;
-			message = XmlQualifiedName.Empty;
-			ns = String.Empty;
-			part = String.Empty;
-			use = SoapBindingUse.Default;
-		}
-		
-		#endregion // Constructors
+        public SoapHeaderBinding()
+        {
+            encoding = String.Empty;
+            mapToProperty = false;
+            message = XmlQualifiedName.Empty;
+            ns = String.Empty;
+            part = String.Empty;
+            use = SoapBindingUse.Default;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[DefaultValue ("")]
-		[XmlAttribute ("encodingStyle")]
-		public string Encoding {
-			get { return encoding; }
-			set { encoding = value; }
-		}
+        #region Properties
 
-		[XmlIgnore]
-		public bool MapToProperty {	
-			get { return mapToProperty; }
-			set { mapToProperty = value; }
-		}
+        [DefaultValue("")]
+        [XmlAttribute("encodingStyle")]
+        public string Encoding
+        {
+            get { return encoding; }
+            set { encoding = value; }
+        }
 
-		[XmlAttribute ("message")]	
-		public XmlQualifiedName Message {
-			get { return message; }
-			set { message = value; }
-		}
+        [XmlIgnore]
+        public bool MapToProperty
+        {
+            get { return mapToProperty; }
+            set { mapToProperty = value; }
+        }
 
-		[DefaultValue ("")]	
-		[XmlAttribute ("namespace")]	
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        [XmlAttribute("message")]
+        public XmlQualifiedName Message
+        {
+            get { return message; }
+            set { message = value; }
+        }
 
-		[XmlAttribute ("part")]
-		public string Part {
-			get { return part; }
-			set { part = value; }
-		}
+        [DefaultValue("")]
+        [XmlAttribute("namespace")]
+        public string Namespace
+        {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		[DefaultValue (SoapBindingUse.Default)]
-		[XmlAttribute ("use")]
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        [XmlAttribute("part")]
+        public string Part
+        {
+            get { return part; }
+            set { part = value; }
+        }
 
-		[MonoTODO]
-		[XmlElement ("headerfault")]
-		public SoapHeaderFaultBinding Fault 
-		{
-			get { return null; }
-			set { ; }
-		}
+        [DefaultValue(SoapBindingUse.Default)]
+        [XmlAttribute("use")]
+        public SoapBindingUse Use
+        {
+            get { return use; }
+            set { use = value; }
+        }
 
-		#endregion // Properties
-	}
+        [MonoTODO]
+        [XmlElement("headerfault")]
+        public SoapHeaderFaultBinding Fault
+        {
+            get { return null; }
+            set { ; }
+        }
+
+        #endregion // Properties
+    }
 }

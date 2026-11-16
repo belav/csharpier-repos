@@ -36,7 +36,12 @@ namespace Microsoft.Extensions.Http.Logging
         /// <param name="request">The HTTP request message that was sent.</param>
         /// <param name="response">The HTTP response message that was received.</param>
         /// <param name="elapsed">Time elapsed since calling <see cref="LogRequestStart"/>.</param>
-        void LogRequestStop(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed);
+        void LogRequestStop(
+            object? context,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            TimeSpan elapsed
+        );
 
         /// <summary>
         /// Logs the exception happened while sending an HTTP request.
@@ -46,6 +51,12 @@ namespace Microsoft.Extensions.Http.Logging
         /// <param name="response">If available, the HTTP response message that was received, and `null` otherwise.</param>
         /// <param name="exception">Exception that happened during processing the HTTP request.</param>
         /// <param name="elapsed">Time elapsed since calling <see cref="LogRequestStart"/>.</param>
-        void LogRequestFailed(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception, TimeSpan elapsed);
+        void LogRequestFailed(
+            object? context,
+            HttpRequestMessage request,
+            HttpResponseMessage? response,
+            Exception exception,
+            TimeSpan elapsed
+        );
     }
 }

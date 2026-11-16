@@ -31,7 +31,12 @@ namespace System.Xml.XmlWriterApiTests
             switch (outputType)
             {
                 case "Stream":
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case "Textwriter":
                     StreamWriter tw = new StreamWriter(writerStream, wSettings.Encoding);
@@ -69,7 +74,12 @@ namespace System.Xml.XmlWriterApiTests
             }
             wSettings.CloseOutput = closeOutput;
 
-            XmlWriter w = WriterHelper.Create("writer.out", wSettings, overrideAsync: true, async: utils.Async);
+            XmlWriter w = WriterHelper.Create(
+                "writer.out",
+                wSettings,
+                overrideAsync: true,
+                async: utils.Async
+            );
             w.WriteStartElement("root");
             w.WriteEndElement();
             w.Dispose();
@@ -78,7 +88,7 @@ namespace System.Xml.XmlWriterApiTests
             Stream fs = null;
             try
             {
-                fs = FilePathUtil.getStream("writer.out");/*new FileStream("writer.out", FileMode.Open, FileAccess.ReadWrite);*/
+                fs = FilePathUtil.getStream("writer.out"); /*new FileStream("writer.out", FileMode.Open, FileAccess.ReadWrite);*/
             }
             catch (Exception e)
             {
@@ -94,8 +104,14 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         [Theory]
-        [XmlWriterInlineData(WriterType.NoAsync | WriterType.UTF8Writer | WriterType.UnicodeWriter, "Stream")]
-        [XmlWriterInlineData(WriterType.NoAsync | WriterType.UTF8Writer | WriterType.UnicodeWriter, "Textwriter")]
+        [XmlWriterInlineData(
+            WriterType.NoAsync | WriterType.UTF8Writer | WriterType.UnicodeWriter,
+            "Stream"
+        )]
+        [XmlWriterInlineData(
+            WriterType.NoAsync | WriterType.UTF8Writer | WriterType.UnicodeWriter,
+            "Textwriter"
+        )]
         public void CloseOutput_3(XmlWriterUtils utils, string outputType)
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -116,7 +132,12 @@ namespace System.Xml.XmlWriterApiTests
             switch (outputType)
             {
                 case "Stream":
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case "Textwriter":
                     StreamWriter tw = new StreamWriter(writerStream, wSettings.Encoding);
@@ -158,7 +179,12 @@ namespace System.Xml.XmlWriterApiTests
             switch (outputType)
             {
                 case "Stream":
-                    w = WriterHelper.Create(writerStream, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        writerStream,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case "Textwriter":
                     StreamWriter tw = new StreamWriter(writerStream, wSettings.Encoding);

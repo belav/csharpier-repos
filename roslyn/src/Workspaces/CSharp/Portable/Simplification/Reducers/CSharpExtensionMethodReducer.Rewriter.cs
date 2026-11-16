@@ -14,16 +14,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private class Rewriter : AbstractReductionRewriter
         {
             public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
-            {
-            }
+                : base(pool) { }
 
             public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
             {
                 return SimplifyNode(
                     node,
                     newNode: base.VisitInvocationExpression(node),
-                    simplifier: s_simplifyExtensionMethod);
+                    simplifier: s_simplifyExtensionMethod
+                );
             }
         }
     }

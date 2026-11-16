@@ -47,7 +47,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -56,11 +56,7 @@ namespace System.Activities.Statements
 
         [DefaultValue(null)]
         [DependsOn("Variables")]
-        public Activity Try
-        {
-            get;
-            set;
-        }
+        public Activity Try { get; set; }
 
         [DependsOn("Try")]
         public Collection<Catch> Catches
@@ -77,11 +73,7 @@ namespace System.Activities.Statements
 
         [DefaultValue(null)]
         [DependsOn("Catches")]
-        public Activity Finally
-        {
-            get;
-            set;
-        }
+        public Activity Finally { get; set; }
 
         FaultCallback ExceptionFromCatchOrFinallyHandler
         {
@@ -89,14 +81,19 @@ namespace System.Activities.Statements
             {
                 if (this.exceptionFromCatchOrFinallyHandler == null)
                 {
-                    this.exceptionFromCatchOrFinallyHandler = new FaultCallback(OnExceptionFromCatchOrFinally);
+                    this.exceptionFromCatchOrFinallyHandler = new FaultCallback(
+                        OnExceptionFromCatchOrFinally
+                    );
                 }
 
                 return this.exceptionFromCatchOrFinallyHandler;
             }
         }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -104,14 +101,21 @@ namespace System.Activities.Statements
         protected override void UpdateInstance(NativeActivityUpdateContext updateContext)
         {
             TryCatchState state = updateContext.GetValue(this.state);
-            if (state != null && !state.SuppressCancel && state.CaughtException != null && this.FindCatch(state.CaughtException.Exception) == null)
+            if (
+                state != null
+                && !state.SuppressCancel
+                && state.CaughtException != null
+                && this.FindCatch(state.CaughtException.Exception) == null
+            )
             {
-                // This is a very small window of time in which we want to block update inside TryCatch.  
-                // This is in between OnExceptionFromTry faultHandler and OnTryComplete completionHandler.  
+                // This is a very small window of time in which we want to block update inside TryCatch.
+                // This is in between OnExceptionFromTry faultHandler and OnTryComplete completionHandler.
                 // A Catch handler could be found at OnExceptionFromTry before update, yet that appropriate Catch handler could have been removed during update and not be found at OnTryComplete.
-                // In such case, the exception can be unintentionally ----ed without ever propagating it upward.  
+                // In such case, the exception can be unintentionally ----ed without ever propagating it upward.
                 // Such TryCatch state is detected by inspecting the TryCatchState private variable for SuppressCancel == false && CaughtException != Null && this.FindCatch(state.CaughtException.Exception) == null.
-                updateContext.DisallowUpdate(SR.TryCatchInvalidStateForUpdate(state.CaughtException.Exception));                
+                updateContext.DisallowUpdate(
+                    SR.TryCatchInvalidStateForUpdate(state.CaughtException.Exception)
+                );
             }
         }
 
@@ -168,11 +172,14 @@ namespace System.Activities.Statements
 
         protected override void Execute(NativeActivityContext context)
         {
-            ExceptionPersistenceExtension extension = context.GetExtension<ExceptionPersistenceExtension>();
+            ExceptionPersistenceExtension extension =
+                context.GetExtension<ExceptionPersistenceExtension>();
             if ((extension != null) && !extension.PersistExceptions)
             {
                 // We will need a NoPersistProperty if we catch an exception.
-                NoPersistProperty noPersistProperty = context.Properties.FindAtCurrentScope(NoPersistProperty.Name) as NoPersistProperty;
+                NoPersistProperty noPersistProperty =
+                    context.Properties.FindAtCurrentScope(NoPersistProperty.Name)
+                    as NoPersistProperty;
                 if (noPersistProperty == null)
                 {
                     noPersistProperty = new NoPersistProperty(context.CurrentExecutor);
@@ -183,7 +190,11 @@ namespace System.Activities.Statements
             this.state.Set(context, new TryCatchState());
             if (this.Try != null)
             {
-                context.ScheduleActivity(this.Try, new CompletionCallback(OnTryComplete), new FaultCallback(OnExceptionFromTry));
+                context.ScheduleActivity(
+                    this.Try,
+                    new CompletionCallback(OnTryComplete),
+                    new FaultCallback(OnExceptionFromTry)
+                );
             }
             else
             {
@@ -217,7 +228,12 @@ namespace System.Activities.Statements
                     if (toSchedule.GetAction() != null)
                     {
                         context.Properties.Add(FaultContextId, state.CaughtException, true);
-                        toSchedule.ScheduleAction(context, state.CaughtException.Exception, new CompletionCallback(OnCatchComplete), this.ExceptionFromCatchOrFinallyHandler);
+                        toSchedule.ScheduleAction(
+                            context,
+                            state.CaughtException.Exception,
+                            new CompletionCallback(OnCatchComplete),
+                            this.ExceptionFromCatchOrFinallyHandler
+                        );
                         return;
                     }
                 }
@@ -226,7 +242,11 @@ namespace System.Activities.Statements
             OnCatchComplete(context, null);
         }
 
-        void OnExceptionFromTry(NativeActivityFaultContext context, Exception propagatedException, ActivityInstance propagatedFrom)
+        void OnExceptionFromTry(
+            NativeActivityFaultContext context,
+            Exception propagatedException,
+            ActivityInstance propagatedFrom
+        )
         {
             if (propagatedFrom.IsCancellationRequested)
             {
@@ -246,17 +266,22 @@ namespace System.Activities.Statements
                 {
                     if (TD.TryCatchExceptionFromTryIsEnabled())
                     {
-                        TD.TryCatchExceptionFromTry(this.DisplayName, propagatedException.GetType().ToString());
+                        TD.TryCatchExceptionFromTry(
+                            this.DisplayName,
+                            propagatedException.GetType().ToString()
+                        );
                     }
 
                     context.CancelChild(propagatedFrom);
                     TryCatchState state = this.state.Get(context);
 
                     // If we are not supposed to persist exceptions, enter our noPersistScope
-                    ExceptionPersistenceExtension extension = context.GetExtension<ExceptionPersistenceExtension>();
+                    ExceptionPersistenceExtension extension =
+                        context.GetExtension<ExceptionPersistenceExtension>();
                     if ((extension != null) && !extension.PersistExceptions)
                     {
-                        NoPersistProperty noPersistProperty = (NoPersistProperty)context.Properties.FindAtCurrentScope(NoPersistProperty.Name);
+                        NoPersistProperty noPersistProperty = (NoPersistProperty)
+                            context.Properties.FindAtCurrentScope(NoPersistProperty.Name);
                         if (noPersistProperty != null)
                         {
                             // The property will be exited when the activity completes or aborts.
@@ -276,7 +301,10 @@ namespace System.Activities.Statements
             TryCatchState state = this.state.Get(context);
             state.SuppressCancel = true;
 
-            if (completedInstance != null && completedInstance.State != ActivityInstanceState.Closed)
+            if (
+                completedInstance != null
+                && completedInstance.State != ActivityInstanceState.Closed
+            )
             {
                 state.ExceptionHandled = false;
             }
@@ -285,7 +313,11 @@ namespace System.Activities.Statements
 
             if (this.Finally != null)
             {
-                context.ScheduleActivity(this.Finally, new CompletionCallback(OnFinallyComplete), this.ExceptionFromCatchOrFinallyHandler);
+                context.ScheduleActivity(
+                    this.Finally,
+                    new CompletionCallback(OnFinallyComplete),
+                    this.ExceptionFromCatchOrFinallyHandler
+                );
             }
             else
             {
@@ -302,7 +334,11 @@ namespace System.Activities.Statements
             }
         }
 
-        void OnExceptionFromCatchOrFinally(NativeActivityFaultContext context, Exception propagatedException, ActivityInstance propagatedFrom)
+        void OnExceptionFromCatchOrFinally(
+            NativeActivityFaultContext context,
+            Exception propagatedException,
+            ActivityInstance propagatedFrom
+        )
         {
             if (TD.TryCatchExceptionFromCatchOrFinallyIsEnabled())
             {
@@ -350,25 +386,13 @@ namespace System.Activities.Statements
         internal class TryCatchState
         {
             [DataMember(EmitDefaultValue = false)]
-            public bool SuppressCancel
-            {
-                get;
-                set;
-            }
+            public bool SuppressCancel { get; set; }
 
             [DataMember(EmitDefaultValue = false)]
-            public FaultContext CaughtException
-            {
-                get;
-                set;
-            }
+            public FaultContext CaughtException { get; set; }
 
             [DataMember(EmitDefaultValue = false)]
-            public bool ExceptionHandled
-            {
-                get;
-                set;
-            }
+            public bool ExceptionHandled { get; set; }
         }
 
         class CatchList : ValidatingCollection<Catch>
@@ -396,7 +420,10 @@ namespace System.Activities.Statements
 
                 if (existingCatch != null)
                 {
-                    throw FxTrace.Exception.Argument("item", SR.DuplicateCatchClause(item.ExceptionType.FullName));
+                    throw FxTrace.Exception.Argument(
+                        "item",
+                        SR.DuplicateCatchClause(item.ExceptionType.FullName)
+                    );
                 }
 
                 base.InsertItem(index, item);
@@ -413,7 +440,10 @@ namespace System.Activities.Statements
 
                 if (existingCatch != null && !object.ReferenceEquals(this[index], existingCatch))
                 {
-                    throw FxTrace.Exception.Argument("item", SR.DuplicateCatchClause(item.ExceptionType.FullName));
+                    throw FxTrace.Exception.Argument(
+                        "item",
+                        SR.DuplicateCatchClause(item.ExceptionType.FullName)
+                    );
                 }
 
                 base.SetItem(index, item);

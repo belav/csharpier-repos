@@ -19,20 +19,12 @@ namespace System.Activities.Statements
         /// Gets or sets Bookmark that starts evaluating condition(s).
         /// </summary>
         [DataMember]
-        public Bookmark Bookmark
-        {
-            get;
-            set;
-        }
+        public Bookmark Bookmark { get; set; }
 
         /// <summary>
         /// Gets or sets TriggerId, which is unique within a state
         /// </summary>
         [DataMember]
-        public int TriggedId
-        {
-            get;
-            set;
-        }
+        public int TriggedId { get; set; }
     }
 }

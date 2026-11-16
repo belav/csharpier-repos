@@ -25,4 +25,3 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 }
-

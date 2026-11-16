@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,18 +23,18 @@
 //	Peter Bartok	pbartok@novell.com
 //
 
-
 // COMPLETE
 
-namespace System.Windows.Forms {
-
-	[Flags]
-	public enum ButtonState {
-		Normal		= 0x00000000,
-		Inactive	= 0x00000100,
-		Pushed		= 0x00000200,
-		Checked		= 0x00000400,
-		Flat		= 0x00004000,
-		All		= 0x00004700
-	}
+namespace System.Windows.Forms
+{
+    [Flags]
+    public enum ButtonState
+    {
+        Normal = 0x00000000,
+        Inactive = 0x00000100,
+        Pushed = 0x00000200,
+        Checked = 0x00000400,
+        Flat = 0x00004000,
+        All = 0x00004700,
+    }
 }

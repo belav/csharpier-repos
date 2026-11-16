@@ -17,7 +17,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal abstract partial class AbstractGenerateVariableService<TService, TSimpleNameSyntax, TExpressionSyntax>
+    internal abstract partial class AbstractGenerateVariableService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax
+    >
     {
         private partial class GenerateVariableCodeAction : CodeAction
         {
@@ -37,7 +41,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 bool isReadonly,
                 bool isConstant,
                 RefKind refKind,
-                CodeAndImportGenerationOptionsProvider fallbackOptions)
+                CodeAndImportGenerationOptionsProvider fallbackOptions
+            )
             {
                 _semanticDocument = document;
                 _state = state;
@@ -49,30 +54,39 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 _fallbackOptions = fallbackOptions;
             }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
-                var generateUnsafe = _state.TypeMemberType.RequiresUnsafeModifier() &&
-                                     !_state.IsContainedInUnsafeType;
+                var generateUnsafe =
+                    _state.TypeMemberType.RequiresUnsafeModifier()
+                    && !_state.IsContainedInUnsafeType;
 
                 var context = new CodeGenerationSolutionContext(
                     _semanticDocument.Project.Solution,
                     new CodeGenerationContext(
                         afterThisLocation: _state.AfterThisLocation,
                         beforeThisLocation: _state.BeforeThisLocation,
-                        contextLocation: _state.IdentifierToken.GetLocation()),
-                    _fallbackOptions);
+                        contextLocation: _state.IdentifierToken.GetLocation()
+                    ),
+                    _fallbackOptions
+                );
 
                 if (_generateProperty)
                 {
                     var getAccessor = CreateAccessor(_state.DetermineMaximalAccessibility());
-                    var setAccessor = _isReadonly || _refKind != RefKind.None
-                        ? null
-                        : CreateAccessor(DetermineMinimalAccessibility(_state));
+                    var setAccessor =
+                        _isReadonly || _refKind != RefKind.None
+                            ? null
+                            : CreateAccessor(DetermineMinimalAccessibility(_state));
 
                     var propertySymbol = CodeGenerationSymbolFactory.CreatePropertySymbol(
                         attributes: default,
                         accessibility: _state.DetermineMaximalAccessibility(),
-                        modifiers: new DeclarationModifiers(isStatic: _state.IsStatic, isUnsafe: generateUnsafe),
+                        modifiers: new DeclarationModifiers(
+                            isStatic: _state.IsStatic,
+                            isUnsafe: generateUnsafe
+                        ),
                         type: _state.TypeMemberType,
                         refKind: _refKind,
                         explicitInterfaceImplementations: default,
@@ -80,10 +94,17 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         isIndexer: _state.IsIndexer,
                         parameters: _state.Parameters,
                         getMethod: getAccessor,
-                        setMethod: setAccessor);
+                        setMethod: setAccessor
+                    );
 
-                    return await CodeGenerator.AddPropertyDeclarationAsync(
-                        context, _state.TypeToGenerateIn, propertySymbol, cancellationToken).ConfigureAwait(false);
+                    return await CodeGenerator
+                        .AddPropertyDeclarationAsync(
+                            context,
+                            _state.TypeToGenerateIn,
+                            propertySymbol,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
@@ -92,12 +113,23 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         accessibility: DetermineMinimalAccessibility(_state),
                         modifiers: _isConstant
                             ? new DeclarationModifiers(isConst: true, isUnsafe: generateUnsafe)
-                            : new DeclarationModifiers(isStatic: _state.IsStatic, isReadOnly: _isReadonly, isUnsafe: generateUnsafe),
+                            : new DeclarationModifiers(
+                                isStatic: _state.IsStatic,
+                                isReadOnly: _isReadonly,
+                                isUnsafe: generateUnsafe
+                            ),
                         type: _state.TypeMemberType,
-                        name: _state.IdentifierToken.ValueText);
+                        name: _state.IdentifierToken.ValueText
+                    );
 
-                    return await CodeGenerator.AddFieldDeclarationAsync(
-                        context, _state.TypeToGenerateIn, fieldSymbol, cancellationToken).ConfigureAwait(false);
+                    return await CodeGenerator
+                        .AddFieldDeclarationAsync(
+                            context,
+                            _state.TypeToGenerateIn,
+                            fieldSymbol,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -106,17 +138,25 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 return CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     attributes: default,
                     accessibility: accessibility,
-                    statements: GenerateStatements());
+                    statements: GenerateStatements()
+                );
             }
 
             private ImmutableArray<SyntaxNode> GenerateStatements()
             {
-                var syntaxFactory = _semanticDocument.Project.Solution.Services.GetLanguageServices(_state.TypeToGenerateIn.Language).GetService<SyntaxGenerator>();
+                var syntaxFactory = _semanticDocument
+                    .Project.Solution.Services.GetLanguageServices(_state.TypeToGenerateIn.Language)
+                    .GetService<SyntaxGenerator>();
 
                 var throwStatement = CodeGenerationHelpers.GenerateThrowStatement(
-                    syntaxFactory, _semanticDocument, "System.NotImplementedException");
+                    syntaxFactory,
+                    _semanticDocument,
+                    "System.NotImplementedException"
+                );
 
-                return _state.TypeToGenerateIn.TypeKind != TypeKind.Interface && _refKind != RefKind.None
+                return
+                    _state.TypeToGenerateIn.TypeKind != TypeKind.Interface
+                    && _refKind != RefKind.None
                     ? ImmutableArray.Create(throwStatement)
                     : default;
             }
@@ -130,8 +170,13 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // Otherwise, figure out what accessibility modifier to use and optionally mark
                 // it as static.
-                var syntaxFacts = _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
-                if (syntaxFacts.IsAttributeNamedArgumentIdentifier(state.SimpleNameOrMemberAccessExpressionOpt))
+                var syntaxFacts =
+                    _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                if (
+                    syntaxFacts.IsAttributeNamedArgumentIdentifier(
+                        state.SimpleNameOrMemberAccessExpressionOpt
+                    )
+                )
                 {
                     return Accessibility.Public;
                 }
@@ -152,14 +197,18 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     // superclass.  In this case we need to make the method public or internal.
                     //
                     // However, this does not apply if the method will be static.  i.e.
-                    // 
+                    //
                     // class B : A { void Goo() { A.Goo(); }
                     //
                     // B can access the protected statics of A, and so we generate 'Goo' as
                     // protected.
                     return Accessibility.Protected;
                 }
-                else if (state.ContainingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(state.TypeToGenerateIn.ContainingAssembly))
+                else if (
+                    state.ContainingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(
+                        state.TypeToGenerateIn.ContainingAssembly
+                    )
+                )
                 {
                     return Accessibility.Internal;
                 }
@@ -172,23 +221,25 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             private static bool DerivesFrom(State state, INamedTypeSymbol containingType)
             {
-                return containingType.GetBaseTypes().Select(t => t.OriginalDefinition)
-                                                    .Contains(state.TypeToGenerateIn);
+                return containingType
+                    .GetBaseTypes()
+                    .Select(t => t.OriginalDefinition)
+                    .Contains(state.TypeToGenerateIn);
             }
 
             public override string Title
             {
                 get
                 {
-                    var text = _isConstant
-                        ? FeaturesResources.Generate_constant_0
+                    var text =
+                        _isConstant ? FeaturesResources.Generate_constant_0
                         : _generateProperty
-                            ? _isReadonly ? FeaturesResources.Generate_read_only_property_0 : FeaturesResources.Generate_property_0
-                            : _isReadonly ? FeaturesResources.Generate_read_only_field_0 : FeaturesResources.Generate_field_0;
+                            ? _isReadonly ? FeaturesResources.Generate_read_only_property_0
+                                : FeaturesResources.Generate_property_0
+                        : _isReadonly ? FeaturesResources.Generate_read_only_field_0
+                        : FeaturesResources.Generate_field_0;
 
-                    return string.Format(
-                        text,
-                        _state.IdentifierToken.ValueText);
+                    return string.Format(text, _state.IdentifierToken.ValueText);
                 }
             }
 

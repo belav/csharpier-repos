@@ -19,18 +19,29 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime.Language
 internal sealed class DateAndTimeLanguageDetector(
     EmbeddedLanguageInfo info,
     INamedTypeSymbol? dateTimeType,
-    INamedTypeSymbol? dateTimeOffsetType)
-    : AbstractLanguageDetector<DateAndTimeOptions, DateTimeTree, DateAndTimeLanguageDetector, DateAndTimeLanguageDetector.DateAndTimeInfo>(
-        info, LanguageIdentifiers, CommentDetector)
+    INamedTypeSymbol? dateTimeOffsetType
+)
+    : AbstractLanguageDetector<
+        DateAndTimeOptions,
+        DateTimeTree,
+        DateAndTimeLanguageDetector,
+        DateAndTimeLanguageDetector.DateAndTimeInfo
+    >(info, LanguageIdentifiers, CommentDetector)
 {
     internal readonly struct DateAndTimeInfo : ILanguageDetectorInfo<DateAndTimeLanguageDetector>
     {
-        public ImmutableArray<string> LanguageIdentifiers => ImmutableArray.Create("Date", "Time", "DateTime", "DateTimeFormat");
+        public ImmutableArray<string> LanguageIdentifiers =>
+            ImmutableArray.Create("Date", "Time", "DateTime", "DateTimeFormat");
 
-        public DateAndTimeLanguageDetector Create(Compilation compilation, EmbeddedLanguageInfo info)
+        public DateAndTimeLanguageDetector Create(
+            Compilation compilation,
+            EmbeddedLanguageInfo info
+        )
         {
             var dateTimeType = compilation.GetTypeByMetadataName(typeof(DateTime).FullName!);
-            var dateTimeOffsetType = compilation.GetTypeByMetadataName(typeof(DateTimeOffset).FullName!);
+            var dateTimeOffsetType = compilation.GetTypeByMetadataName(
+                typeof(DateTimeOffset).FullName!
+            );
 
             return new DateAndTimeLanguageDetector(info, dateTimeType, dateTimeOffsetType);
         }
@@ -41,7 +52,13 @@ internal sealed class DateAndTimeLanguageDetector(
     private readonly INamedTypeSymbol? _dateTimeType = dateTimeType;
     private readonly INamedTypeSymbol? _dateTimeOffsetType = dateTimeOffsetType;
 
-    protected override bool TryGetOptions(SemanticModel semanticModel, ITypeSymbol exprType, SyntaxNode expr, CancellationToken cancellationToken, out DateAndTimeOptions options)
+    protected override bool TryGetOptions(
+        SemanticModel semanticModel,
+        ITypeSymbol exprType,
+        SyntaxNode expr,
+        CancellationToken cancellationToken,
+        out DateAndTimeOptions options
+    )
     {
         // DateTime never has any options.  So just return empty and 'true' so we stop processing immediately.
         options = default;
@@ -55,7 +72,11 @@ internal sealed class DateAndTimeLanguageDetector(
         return DateTimeTree.Instance;
     }
 
-    protected override bool IsEmbeddedLanguageInterpolatedStringTextToken(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken)
+    protected override bool IsEmbeddedLanguageInterpolatedStringTextToken(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        CancellationToken cancellationToken
+    )
     {
         var syntaxFacts = Info.SyntaxFacts;
         var interpolationFormatClause = token.Parent;
@@ -73,7 +94,8 @@ internal sealed class DateAndTimeLanguageDetector(
         SyntaxNode argumentNode,
         SemanticModel semanticModel,
         CancellationToken cancellationToken,
-        out DateAndTimeOptions options)
+        out DateAndTimeOptions options
+    )
     {
         options = default;
 
@@ -84,9 +106,16 @@ internal sealed class DateAndTimeLanguageDetector(
         if (!syntaxFacts.IsInvocationExpression(invocationOrCreation))
             return false;
 
-        var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(invocationOrCreation);
+        var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(
+            invocationOrCreation
+        );
         var name = GetNameOfInvokedExpression(syntaxFacts, invokedExpression);
-        if (name is not nameof(ToString) and not nameof(DateTime.ParseExact) and not nameof(DateTime.TryParseExact))
+        if (
+            name
+            is not nameof(ToString)
+                and not nameof(DateTime.ParseExact)
+                and not nameof(DateTime.TryParseExact)
+        )
             return false;
 
         // We have a string literal passed to a method called ToString/ParseExact/TryParseExact.
@@ -116,10 +145,17 @@ internal sealed class DateAndTimeLanguageDetector(
         return false;
     }
 
-    private static string? GetNameOfInvokedExpression(ISyntaxFacts syntaxFacts, SyntaxNode invokedExpression)
+    private static string? GetNameOfInvokedExpression(
+        ISyntaxFacts syntaxFacts,
+        SyntaxNode invokedExpression
+    )
     {
         if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
-            return syntaxFacts.GetIdentifierOfSimpleName(syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)).ValueText;
+            return syntaxFacts
+                .GetIdentifierOfSimpleName(
+                    syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
+                )
+                .ValueText;
 
         if (syntaxFacts.IsMemberBindingExpression(invokedExpression))
             invokedExpression = syntaxFacts.GetNameOfMemberBindingExpression(invokedExpression);
@@ -130,9 +166,9 @@ internal sealed class DateAndTimeLanguageDetector(
         return null;
     }
 
-    private static bool IsMethodArgument(SyntaxToken token, ISyntaxFacts syntaxFacts)
-        => syntaxFacts.IsLiteralExpression(token.Parent) &&
-           syntaxFacts.IsArgument(token.Parent!.Parent);
+    private static bool IsMethodArgument(SyntaxToken token, ISyntaxFacts syntaxFacts) =>
+        syntaxFacts.IsLiteralExpression(token.Parent)
+        && syntaxFacts.IsArgument(token.Parent!.Parent);
 
     private (string? name, int? index) GetArgumentNameOrIndex(SyntaxNode argument)
     {
@@ -150,15 +186,15 @@ internal sealed class DateAndTimeLanguageDetector(
         return default;
     }
 
-    private bool TryAnalyzeInvocation(ISymbol? symbol, string? argName, int? argIndex)
-        => symbol is IMethodSymbol method &&
-           method.DeclaredAccessibility == Accessibility.Public &&
-           method.MethodKind == MethodKind.Ordinary &&
-           IsDateTimeType(method.ContainingType) &&
-           AnalyzeStringLiteral(method, argName, argIndex);
+    private bool TryAnalyzeInvocation(ISymbol? symbol, string? argName, int? argIndex) =>
+        symbol is IMethodSymbol method
+        && method.DeclaredAccessibility == Accessibility.Public
+        && method.MethodKind == MethodKind.Ordinary
+        && IsDateTimeType(method.ContainingType)
+        && AnalyzeStringLiteral(method, argName, argIndex);
 
-    private bool IsDateTimeType(ITypeSymbol? type)
-        => type != null && (type.Equals(_dateTimeType) || type.Equals(_dateTimeOffsetType));
+    private bool IsDateTimeType(ITypeSymbol? type) =>
+        type != null && (type.Equals(_dateTimeType) || type.Equals(_dateTimeOffsetType));
 
     private static bool AnalyzeStringLiteral(IMethodSymbol method, string? argName, int? argIndex)
     {

@@ -75,9 +75,7 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private bool _isDisposed;
 
-            public MyService()
-            {
-            }
+            public MyService() { }
 
             public bool IsDisposed => _isDisposed;
 

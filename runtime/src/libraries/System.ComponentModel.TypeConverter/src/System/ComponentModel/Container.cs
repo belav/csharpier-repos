@@ -24,7 +24,11 @@ namespace System.ComponentModel
         /// Adds the specified component to the <see cref='System.ComponentModel.Container'/>
         /// The component is unnamed.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "No name is provided.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "No name is provided."
+        )]
         public virtual void Add(IComponent? component) => Add(component, null);
 
         // Adds a component to the container.
@@ -32,7 +36,9 @@ namespace System.ComponentModel
         /// Adds the specified component to the <see cref='System.ComponentModel.Container'/> and assigns
         /// a name to it.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of components in the container cannot be statically discovered to validate the name.")]
+        [RequiresUnreferencedCode(
+            "The Type of components in the container cannot be statically discovered to validate the name."
+        )]
         public virtual void Add(IComponent? component, string? name)
         {
             lock (_syncObj)
@@ -127,7 +133,8 @@ namespace System.ComponentModel
             }
         }
 
-        protected virtual object? GetService(Type service) => service == typeof(IContainer) ? this : null;
+        protected virtual object? GetService(Type service) =>
+            service == typeof(IContainer) ? this : null;
 
         /// <summary>
         /// Gets all the components in the <see cref='System.ComponentModel.Container'/>.
@@ -157,13 +164,16 @@ namespace System.ComponentModel
 
                     if (!_checkedFilter)
                     {
-                        _filter = GetService(typeof(ContainerFilterService)) as ContainerFilterService;
+                        _filter =
+                            GetService(typeof(ContainerFilterService)) as ContainerFilterService;
                         _checkedFilter = true;
                     }
 
                     if (_filter != null)
                     {
-                        ComponentCollection filteredComponents = _filter.FilterComponents(_components);
+                        ComponentCollection filteredComponents = _filter.FilterComponents(
+                            _components
+                        );
                         if (filteredComponents != null)
                         {
                             _components = filteredComponents;
@@ -216,7 +226,9 @@ namespace System.ComponentModel
         /// verifies that name is either null or unique compared to the names of other
         /// components in the container.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of components in the container cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of components in the container cannot be statically discovered."
+        )]
         protected virtual void ValidateName(IComponent component, string? name)
         {
             ArgumentNullException.ThrowIfNull(component);
@@ -227,10 +239,20 @@ namespace System.ComponentModel
                 {
                     ISite? s = _sites[i];
 
-                    if (s?.Name != null && string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase) && s.Component != component)
+                    if (
+                        s?.Name != null
+                        && string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase)
+                        && s.Component != component
+                    )
                     {
-                        InheritanceAttribute inheritanceAttribute = (InheritanceAttribute)TypeDescriptor.GetAttributes(s.Component)[typeof(InheritanceAttribute)]!;
-                        if (inheritanceAttribute.InheritanceLevel != InheritanceLevel.InheritedReadOnly)
+                        InheritanceAttribute inheritanceAttribute = (InheritanceAttribute)
+                            TypeDescriptor.GetAttributes(s.Component)[
+                                typeof(InheritanceAttribute)
+                            ]!;
+                        if (
+                            inheritanceAttribute.InheritanceLevel
+                            != InheritanceLevel.InheritedReadOnly
+                        )
                         {
                             throw new ArgumentException(SR.Format(SR.DuplicateComponentName, name));
                         }
@@ -262,7 +284,9 @@ namespace System.ComponentModel
 
             public object? GetService(Type service)
             {
-                return ((service == typeof(ISite)) ? this : ((Container)Container).GetService(service));
+                return (
+                    (service == typeof(ISite)) ? this : ((Container)Container).GetService(service)
+                );
             }
 
             /// <summary>
@@ -276,7 +300,9 @@ namespace System.ComponentModel
             public string? Name
             {
                 get => _name;
-                [RequiresUnreferencedCode("The Type of components in the container cannot be statically discovered to validate the name.")]
+                [RequiresUnreferencedCode(
+                    "The Type of components in the container cannot be statically discovered to validate the name."
+                )]
                 set
                 {
                     if (value == null || _name == null || !value.Equals(_name))

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,48 +36,51 @@ using System.Threading;
 //
 namespace System.Web.Security
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class DefaultAuthenticationModule : IHttpModule
-	{
-		static readonly object authenticateEvent = new object ();
-		static IPrincipal generic_principal = new GenericPrincipal (new GenericIdentity ("", ""), new string [0]);
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class DefaultAuthenticationModule : IHttpModule
+    {
+        static readonly object authenticateEvent = new object();
+        static IPrincipal generic_principal = new GenericPrincipal(
+            new GenericIdentity("", ""),
+            new string[0]
+        );
 
-		EventHandlerList events = new EventHandlerList ();
-		
-		public event DefaultAuthenticationEventHandler Authenticate {
-			add { events.AddHandler (authenticateEvent, value); }
-			remove { events.RemoveHandler (authenticateEvent, value); }
-		}
-		
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public DefaultAuthenticationModule ()
-		{
-		}
+        EventHandlerList events = new EventHandlerList();
 
-		public void Dispose ()
-		{
-		}
+        public event DefaultAuthenticationEventHandler Authenticate
+        {
+            add { events.AddHandler(authenticateEvent, value); }
+            remove { events.RemoveHandler(authenticateEvent, value); }
+        }
 
-		public void Init (HttpApplication app)
-		{
-			app.DefaultAuthentication += new EventHandler (OnDefaultAuthentication);
-		}
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public DefaultAuthenticationModule() { }
 
-		void OnDefaultAuthentication (object sender, EventArgs args)
-		{
-			HttpApplication app = (HttpApplication) sender;
-			HttpContext context = app.Context;
+        public void Dispose() { }
 
-			DefaultAuthenticationEventHandler eh = events [authenticateEvent] as DefaultAuthenticationEventHandler;
-			if (context.User == null && eh != null)
-				eh (this, new DefaultAuthenticationEventArgs (context));
+        public void Init(HttpApplication app)
+        {
+            app.DefaultAuthentication += new EventHandler(OnDefaultAuthentication);
+        }
 
-			if (context.User == null)
-				context.User = generic_principal;
+        void OnDefaultAuthentication(object sender, EventArgs args)
+        {
+            HttpApplication app = (HttpApplication)sender;
+            HttpContext context = app.Context;
 
-			Thread.CurrentPrincipal = context.User;
-		}
-	}
+            DefaultAuthenticationEventHandler eh =
+                events[authenticateEvent] as DefaultAuthenticationEventHandler;
+            if (context.User == null && eh != null)
+                eh(this, new DefaultAuthenticationEventArgs(context));
+
+            if (context.User == null)
+                context.User = generic_principal;
+
+            Thread.CurrentPrincipal = context.User;
+        }
+    }
 }
-

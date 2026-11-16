@@ -7,31 +7,43 @@
 #pragma warning disable 0067 // Event is never used
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Reflection;
 using System.Runtime.CompilerServices;
-public class TopLevelType
-{
-}
+using System.Runtime.InteropServices;
+
+public class TopLevelType { }
 
 namespace SampleMetadata
 {
     public interface Interface1 { }
+
     public interface Interface2 { }
+
     public interface Interface3 { }
+
     public interface Interface4 { }
+
     public interface Interface5 { }
+
     public interface Interface123 : Interface1, Interface2, Interface3 { }
+
     public interface InterfaceI5 : Interface5 { }
+
     public interface InterfaceII5 : InterfaceI5 { }
+
     public interface IGeneric1<T> { }
+
     public interface IGeneric2<T> { }
 
     public class GenericClass1<T> { }
+
     public class GenericClass2<T, U> { }
+
     public class GenericClass3<T, U, V> { }
+
     public class GenericClass4<T, U> : IGeneric1<T>, IGeneric2<U> { }
+
     public class GenericClass5<T, U, V, W, X> { }
 
     public class OuterType1
@@ -47,45 +59,96 @@ namespace SampleMetadata
     }
 
     public class Base1 { }
+
     public class Derived1 : Base1 { }
+
     public class Derived2 : GenericClass1<int> { }
+
     public class Derived3<T, U> : GenericClass2<U, T> { }
 
     public class CInterfaceImplementerI1I2 : Interface1, Interface2 { }
-    public class CInterfaceImplementerC12I2I3 : CInterfaceImplementerI1I2, Interface2, Interface3 { }
+
+    public class CInterfaceImplementerC12I2I3
+        : CInterfaceImplementerI1I2,
+            Interface2,
+            Interface3 { }
+
     public class CInterfaceImplementerI123 : Interface123 { }
+
     public class CInterfaceImplementerII5 : InterfaceII5 { }
 
     public interface IConstrained1 { }
+
     public interface IConstrained2<I> { }
+
     public class CConstrained1 { }
 
     public class GenericClassWithNoConstraint<T> { }
-    public class GenericClassWithClassConstraint<T> where T : class { }
-    public class GenericClassWithStructConstraint<T> where T : struct { }
-    public class GenericClassWithNewConstraint<T> where T : new() { }
-    public class GenericClassWithEnumConstraint<T> where T : Enum { }
-    public class GenericClassWithTypeConstraints<T> where T : CConstrained1, IConstrained1, IConstrained2<T> { }
-    public class GenericClassWithInterfaceConstraints<T> where T : IConstrained1, IConstrained2<T> { }
-    public class GenericClassWithQuirkyConstraints1<T, U> where T : U where U : CConstrained1, IConstrained1 { }
-    public class GenericClassWithQuirkyConstraints2<T, U> where T : U where U : class, IConstrained1 { }
+
+    public class GenericClassWithClassConstraint<T>
+        where T : class { }
+
+    public class GenericClassWithStructConstraint<T>
+        where T : struct { }
+
+    public class GenericClassWithNewConstraint<T>
+        where T : new() { }
+
+    public class GenericClassWithEnumConstraint<T>
+        where T : Enum { }
+
+    public class GenericClassWithTypeConstraints<T>
+        where T : CConstrained1, IConstrained1, IConstrained2<T> { }
+
+    public class GenericClassWithInterfaceConstraints<T>
+        where T : IConstrained1, IConstrained2<T> { }
+
+    public class GenericClassWithQuirkyConstraints1<T, U>
+        where T : U
+        where U : CConstrained1, IConstrained1 { }
+
+    public class GenericClassWithQuirkyConstraints2<T, U>
+        where T : U
+        where U : class, IConstrained1 { }
 
     public class GenericMethodWithTypeConstraints<T>
     {
-        public void Foo<M, N>() where M : IConstrained2<N> where N : IConstrained2<T> { }
+        public void Foo<M, N>()
+            where M : IConstrained2<N>
+            where N : IConstrained2<T> { }
     }
 
     public enum EU1 : byte { }
+
     public enum EI1 : sbyte { }
+
     public enum EU2 : ushort { }
+
     public enum EI2 : short { }
+
     public enum EU4 : uint { }
+
     public enum EI4 : int { }
+
     public enum EU8 : ulong { }
+
     public enum EI8 : long { }
 
-    public enum E_2_I4 : int { min=int.MinValue, zero=0, one=1, max=int.MaxValue}
-    public enum E_2_U4 : uint { min = uint.MinValue, zero = 0, one = 1, max = uint.MaxValue }
+    public enum E_2_I4 : int
+    {
+        min = int.MinValue,
+        zero = 0,
+        one = 1,
+        max = int.MaxValue,
+    }
+
+    public enum E_2_U4 : uint
+    {
+        min = uint.MinValue,
+        zero = 0,
+        one = 1,
+        max = uint.MaxValue,
+    }
 
     public class GenericEnumContainer<T>
     {
@@ -123,7 +186,25 @@ namespace SampleMetadata
     {
         public bool Method1(int x, T t) => throw null!;
 
-        public void TestPrimitives1(bool bo, byte b, char c, short s, int i, long l, IntPtr ip, sbyte sb, ushort us, uint ui, ulong ul, UIntPtr uip, float fl, double db, object o, string str, TypedReference tr) => throw null!;
+        public void TestPrimitives1(
+            bool bo,
+            byte b,
+            char c,
+            short s,
+            int i,
+            long l,
+            IntPtr ip,
+            sbyte sb,
+            ushort us,
+            uint ui,
+            ulong ul,
+            UIntPtr uip,
+            float fl,
+            double db,
+            object o,
+            string str,
+            TypedReference tr
+        ) => throw null!;
     }
 
     public class ClassWithGenericMethods1
@@ -133,7 +214,8 @@ namespace SampleMetadata
 
     public class GenericClassWithGenericMethods1<T, U>
     {
-        public void GenericMethod1<M, N>(GenericClass5<N, M[], IEnumerable<U>, T[,], int> g) => throw null!;
+        public void GenericMethod1<M, N>(GenericClass5<N, M[], IEnumerable<U>, T[,], int> g) =>
+            throw null!;
     }
 
     public class ClassWithLiteralFields
@@ -197,27 +279,58 @@ namespace SampleMetadata
     public class ParametersWithDefaultValues
     {
         public void Foo1(int i) { }
+
         public void Foo2([Optional] int i) { }
+
         public void Foo3(int i = 42) { }
+
         public void Foo4(short s = -34) { }
+
         public void Foo5(decimal d = 1234m) { }
+
         public void Foo6([DateTimeConstant(ticks: 8736726782)] DateTime dt) { }
+
         public void Foo7(string s1 = "foo", string s2 = "", string s3 = null) { }
+
         public void Foo8(Action a = null) { }
     }
 
     public class ParametersWithPseudoCustomtAttributes
     {
-        public void Foo([In] int i, [Out] out object o, [Optional] object opt, [MarshalAs(UnmanagedType.I4)] int fa) => throw null!;
+        public void Foo(
+            [In] int i,
+            [Out] out object o,
+            [Optional] object opt,
+            [MarshalAs(UnmanagedType.I4)] int fa
+        ) => throw null!;
     }
 
     public class SampleCustomAttribute : Attribute
     {
-        public SampleCustomAttribute(int x) { Argument = x; }
-        public SampleCustomAttribute(string x) { Argument = x; }
-        public SampleCustomAttribute(Type x) { Argument = x; }
-        public SampleCustomAttribute(object x) { Argument = x; }
-        public SampleCustomAttribute(object[] x) { Argument = x; }
+        public SampleCustomAttribute(int x)
+        {
+            Argument = x;
+        }
+
+        public SampleCustomAttribute(string x)
+        {
+            Argument = x;
+        }
+
+        public SampleCustomAttribute(Type x)
+        {
+            Argument = x;
+        }
+
+        public SampleCustomAttribute(object x)
+        {
+            Argument = x;
+        }
+
+        public SampleCustomAttribute(object[] x)
+        {
+            Argument = x;
+        }
 
         public object Argument;
     }
@@ -254,7 +367,9 @@ namespace SampleMetadata
         [SampleCustom(new BindingFlags[] { BindingFlags.DeclaredOnly, BindingFlags.ExactBinding })]
         public class N10 { }
 
-        [SampleCustom(new object[] { 42, "Hello", typeof(IList<string>), BindingFlags.ExactBinding })]
+        [SampleCustom(
+            new object[] { 42, "Hello", typeof(IList<string>), BindingFlags.ExactBinding }
+        )]
         public class N11 { }
 
         [SampleCustom("Yeah")]
@@ -304,7 +419,9 @@ namespace SampleMetadata
     }
 
     public ref struct SampleByRefLikeStruct1 { }
+
     public ref struct SampleByRefLikeStruct2<T> { }
+
     [SampleCustom("Yeah")]
     public ref struct SampleByRefLikeStruct3 { }
 
@@ -383,10 +500,18 @@ namespace SampleMetadata
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 5)]
         public int F6;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1, ArraySubType = UnmanagedType.FunctionPtr)]
+        [MarshalAs(
+            UnmanagedType.ByValArray,
+            SizeConst = 1,
+            ArraySubType = UnmanagedType.FunctionPtr
+        )]
         public int F7;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 87, ArraySubType = UnmanagedType.FunctionPtr)]
+        [MarshalAs(
+            UnmanagedType.ByValArray,
+            SizeConst = 87,
+            ArraySubType = UnmanagedType.FunctionPtr
+        )]
         public int F8;
 
         [MarshalAs(UnmanagedType.SafeArray)]
@@ -395,10 +520,18 @@ namespace SampleMetadata
         [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
         public int F10;
 
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_RECORD, SafeArrayUserDefinedSubType = typeof(MyUdt))]
+        [MarshalAs(
+            UnmanagedType.SafeArray,
+            SafeArraySubType = VarEnum.VT_RECORD,
+            SafeArrayUserDefinedSubType = typeof(MyUdt)
+        )]
         public int F11;
 
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_RECORD, SafeArrayUserDefinedSubType = typeof(DateTime))]
+        [MarshalAs(
+            UnmanagedType.SafeArray,
+            SafeArraySubType = VarEnum.VT_RECORD,
+            SafeArrayUserDefinedSubType = typeof(DateTime)
+        )]
         public int F12;
 
         [MarshalAs(UnmanagedType.LPArray)]
@@ -407,10 +540,19 @@ namespace SampleMetadata
         [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
         public int F14;
 
-        [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStruct, SizeParamIndex = 677)]
+        [MarshalAs(
+            UnmanagedType.LPArray,
+            ArraySubType = UnmanagedType.LPStruct,
+            SizeParamIndex = 677
+        )]
         public int F15;
 
-        [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStruct, SizeParamIndex = 677, SizeConst = 87)]
+        [MarshalAs(
+            UnmanagedType.LPArray,
+            ArraySubType = UnmanagedType.LPStruct,
+            SizeParamIndex = 677,
+            SizeConst = 87
+        )]
         public int F16;
 
         [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(MyUdt))]
@@ -446,12 +588,12 @@ namespace SampleMetadata
         public ExerciseCallingConventions() { }
 
         public void InstanceMethod() { }
+
         public static void StaticMethod() { }
+
         public virtual void VirtualMethod() { }
 
-        static ExerciseCallingConventions()
-        {
-        }
+        static ExerciseCallingConventions() { }
     }
 
     public class MarkAttribute : Attribute
@@ -528,32 +670,98 @@ namespace SampleMetadata
 
     public class EventHolder1<T>
     {
-        public event Action<T> MyEvent { add { throw null!; } remove { throw null!; } }
+        public event Action<T> MyEvent
+        {
+            add { throw null!; }
+            remove { throw null!; }
+        }
     }
 
-    public class DerivedFromEventHolder1<T> : EventHolder1<T>
+    public class DerivedFromEventHolder1<T> : EventHolder1<T> { }
+
+    namespace NS0
     {
+        public class SameNamedType { }
     }
 
-    namespace NS0 { public class SameNamedType { } }
-    namespace NS1 { public class SameNamedType { } }
-    namespace NS2 { public class SameNamedType { } }
-    namespace NS3 { public class SameNamedType { } }
-    namespace NS4 { public class SameNamedType { } }
-    namespace NS5 { public class SameNamedType { } }
-    namespace NS6 { public class SameNamedType { } }
-    namespace NS7 { public class SameNamedType { } }
-    namespace NS8 { public class SameNamedType { } }
-    namespace NS9 { public class SameNamedType { } }
-    namespace NS10 { public class SameNamedType { } }
-    namespace NS11 { public class SameNamedType { } }
-    namespace NS12 { public class SameNamedType { } }
-    namespace NS13 { public class SameNamedType { } }
-    namespace NS14 { public class SameNamedType { } }
-    namespace NS15 { public class SameNamedType { } }
+    namespace NS1
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS2
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS3
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS4
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS5
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS6
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS7
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS8
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS9
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS10
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS11
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS12
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS13
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS14
+    {
+        public class SameNamedType { }
+    }
+
+    namespace NS15
+    {
+        public class SameNamedType { }
+    }
 
     [DefaultMember("Yes")]
-    public class ClassWithDefaultMember1<T> where T : ClassWithDefaultMember1<T>
+    public class ClassWithDefaultMember1<T>
+        where T : ClassWithDefaultMember1<T>
     {
         public int Yes;
     }

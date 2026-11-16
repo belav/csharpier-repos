@@ -4,25 +4,32 @@
 
 #nullable disable
 
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.PooledObjects;
-using System.Text;
-using System.Diagnostics;
-using System.Linq;
 
 namespace Microsoft.Cci
 {
     internal static class TypeNameSerializer
     {
-        internal static string GetSerializedTypeName(this ITypeReference typeReference, EmitContext context)
+        internal static string GetSerializedTypeName(
+            this ITypeReference typeReference,
+            EmitContext context
+        )
         {
             bool isAssemblyQualified = true;
             return GetSerializedTypeName(typeReference, context, ref isAssemblyQualified);
         }
 
-        internal static string GetSerializedTypeName(this ITypeReference typeReference, EmitContext context, ref bool isAssemblyQualified)
+        internal static string GetSerializedTypeName(
+            this ITypeReference typeReference,
+            EmitContext context,
+            ref bool isAssemblyQualified
+        )
         {
             var pooled = PooledStringBuilder.GetInstance();
             StringBuilder sb = pooled.Builder;
@@ -81,21 +88,32 @@ namespace Microsoft.Cci
                 if (typeReference is IFunctionPointerTypeReference)
                 {
                     var messageProvider = context.Module.CommonCompilation.MessageProvider;
-                    context.Diagnostics.Add(messageProvider.CreateDiagnostic(
-                        messageProvider.ERR_FunctionPointerTypesInAttributeNotSupported,
-                        context.Location ?? Location.None));
+                    context.Diagnostics.Add(
+                        messageProvider.CreateDiagnostic(
+                            messageProvider.ERR_FunctionPointerTypesInAttributeNotSupported,
+                            context.Location ?? Location.None
+                        )
+                    );
                     sb.Append("(fnptr)");
                     goto done;
                 }
 
-                ITypeReference uninstantiatedTypeReference = typeReference.GetUninstantiatedGenericType(context);
+                ITypeReference uninstantiatedTypeReference =
+                    typeReference.GetUninstantiatedGenericType(context);
                 Debug.Assert(uninstantiatedTypeReference != typeReference);
 
-                ArrayBuilder<ITypeReference> consolidatedTypeArguments = ArrayBuilder<ITypeReference>.GetInstance();
+                ArrayBuilder<ITypeReference> consolidatedTypeArguments =
+                    ArrayBuilder<ITypeReference>.GetInstance();
                 typeReference.GetConsolidatedTypeArguments(consolidatedTypeArguments, context);
 
                 bool uninstantiatedTypeIsAssemblyQualified = false;
-                sb.Append(GetSerializedTypeName(uninstantiatedTypeReference, context, ref uninstantiatedTypeIsAssemblyQualified));
+                sb.Append(
+                    GetSerializedTypeName(
+                        uninstantiatedTypeReference,
+                        context,
+                        ref uninstantiatedTypeIsAssemblyQualified
+                    )
+                );
                 sb.Append('[');
                 bool first = true;
                 foreach (ITypeReference argument in consolidatedTypeArguments)
@@ -122,23 +140,39 @@ namespace Microsoft.Cci
             if (nestedType != null)
             {
                 bool nestedTypeIsAssemblyQualified = false;
-                sb.Append(GetSerializedTypeName(nestedType.GetContainingType(context), context, ref nestedTypeIsAssemblyQualified));
+                sb.Append(
+                    GetSerializedTypeName(
+                        nestedType.GetContainingType(context),
+                        context,
+                        ref nestedTypeIsAssemblyQualified
+                    )
+                );
                 sb.Append('+');
                 sb.Append(GetEscapedMetadataName(nestedType));
                 goto done;
             }
 
-// TODO: error
-done:
+            // TODO: error
+            done:
             if (isAssemblyQualified)
             {
-                AppendAssemblyQualifierIfNecessary(sb, UnwrapTypeReference(typeReference, context), out isAssemblyQualified, context);
+                AppendAssemblyQualifierIfNecessary(
+                    sb,
+                    UnwrapTypeReference(typeReference, context),
+                    out isAssemblyQualified,
+                    context
+                );
             }
 
             return pooled.ToStringAndFree();
         }
 
-        private static void AppendSerializedTypeName(StringBuilder sb, ITypeReference type, ref bool isAssemQualified, EmitContext context)
+        private static void AppendSerializedTypeName(
+            StringBuilder sb,
+            ITypeReference type,
+            ref bool isAssemQualified,
+            EmitContext context
+        )
         {
             string argTypeName = GetSerializedTypeName(type, context, ref isAssemQualified);
             if (isAssemQualified)
@@ -153,33 +187,58 @@ done:
             }
         }
 
-        private static void AppendAssemblyQualifierIfNecessary(StringBuilder sb, ITypeReference typeReference, out bool isAssemQualified, EmitContext context)
+        private static void AppendAssemblyQualifierIfNecessary(
+            StringBuilder sb,
+            ITypeReference typeReference,
+            out bool isAssemQualified,
+            EmitContext context
+        )
         {
             INestedTypeReference nestedType = typeReference.AsNestedTypeReference;
             if (nestedType != null)
             {
-                AppendAssemblyQualifierIfNecessary(sb, nestedType.GetContainingType(context), out isAssemQualified, context);
+                AppendAssemblyQualifierIfNecessary(
+                    sb,
+                    nestedType.GetContainingType(context),
+                    out isAssemQualified,
+                    context
+                );
                 return;
             }
 
             IGenericTypeInstanceReference genInst = typeReference.AsGenericTypeInstanceReference;
             if (genInst != null)
             {
-                AppendAssemblyQualifierIfNecessary(sb, genInst.GetGenericType(context), out isAssemQualified, context);
+                AppendAssemblyQualifierIfNecessary(
+                    sb,
+                    genInst.GetGenericType(context),
+                    out isAssemQualified,
+                    context
+                );
                 return;
             }
 
             IArrayTypeReference arrType = typeReference as IArrayTypeReference;
             if (arrType != null)
             {
-                AppendAssemblyQualifierIfNecessary(sb, arrType.GetElementType(context), out isAssemQualified, context);
+                AppendAssemblyQualifierIfNecessary(
+                    sb,
+                    arrType.GetElementType(context),
+                    out isAssemQualified,
+                    context
+                );
                 return;
             }
 
             IPointerTypeReference pointer = typeReference as IPointerTypeReference;
             if (pointer != null)
             {
-                AppendAssemblyQualifierIfNecessary(sb, pointer.GetTargetType(context), out isAssemQualified, context);
+                AppendAssemblyQualifierIfNecessary(
+                    sb,
+                    pointer.GetTargetType(context),
+                    out isAssemQualified,
+                    context
+                );
                 return;
             }
 
@@ -195,7 +254,10 @@ done:
             {
                 var containingAssembly = context.Module.GetContainingAssembly(context);
 
-                if (containingAssembly == null || !ReferenceEquals(referencedAssembly, containingAssembly))
+                if (
+                    containingAssembly == null
+                    || !ReferenceEquals(referencedAssembly, containingAssembly)
+                )
                 {
                     sb.Append(", ");
                     sb.Append(MetadataWriter.StrongName(referencedAssembly));
@@ -237,7 +299,10 @@ done:
         /// <summary>
         /// Strip off *, &amp;, and [].
         /// </summary>
-        private static ITypeReference UnwrapTypeReference(ITypeReference typeReference, EmitContext context)
+        private static ITypeReference UnwrapTypeReference(
+            ITypeReference typeReference,
+            EmitContext context
+        )
         {
             while (true)
             {
@@ -282,8 +347,7 @@ done:
                 }
 
                 @namespace = @namespace.ContainingNamespace;
-            }
-            while (@namespace != null);
+            } while (@namespace != null);
 
             var result = PooledStringBuilder.GetInstance();
 

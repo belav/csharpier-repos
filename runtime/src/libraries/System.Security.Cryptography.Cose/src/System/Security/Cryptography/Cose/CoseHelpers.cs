@@ -13,7 +13,10 @@ namespace System.Security.Cryptography.Cose
         internal const int SizeOfNull = 1;
         internal const int SizeOfArrayOfLessThan24 = 1;
 
-        private static readonly UTF8Encoding s_utf8EncodingStrict = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly UTF8Encoding s_utf8EncodingStrict = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
         internal static int GetByteStringEncodedSize(int bstrLength)
         {
@@ -30,7 +33,8 @@ namespace System.Security.Cryptography.Cose
         {
             if (value < 0)
             {
-                ulong unsignedRepresentation = (value == long.MinValue) ? (ulong)long.MaxValue : (ulong)(-value) - 1;
+                ulong unsignedRepresentation =
+                    (value == long.MinValue) ? (ulong)long.MaxValue : (ulong)(-value) - 1;
                 return GetIntegerEncodedSize(unsignedRepresentation);
             }
             else
@@ -56,7 +60,10 @@ namespace System.Security.Cryptography.Cose
             }
             else if (value <= ushort.MaxValue)
             {
-                initialByte = new CborInitialByte(MajorType, CborAdditionalInfo.Additional16BitData);
+                initialByte = new CborInitialByte(
+                    MajorType,
+                    CborAdditionalInfo.Additional16BitData
+                );
                 Span<byte> buffer = stackalloc byte[1 + sizeof(ushort)];
                 buffer[0] = initialByte.InitialByte;
                 BinaryPrimitives.WriteUInt16BigEndian(buffer.Slice(1), (ushort)value);
@@ -64,7 +71,10 @@ namespace System.Security.Cryptography.Cose
             }
             else if (value <= uint.MaxValue)
             {
-                initialByte = new CborInitialByte(MajorType, CborAdditionalInfo.Additional32BitData);
+                initialByte = new CborInitialByte(
+                    MajorType,
+                    CborAdditionalInfo.Additional32BitData
+                );
                 Span<byte> buffer = stackalloc byte[1 + sizeof(uint)];
                 buffer[0] = initialByte.InitialByte;
                 BinaryPrimitives.WriteUInt32BigEndian(buffer.Slice(1), (uint)value);
@@ -72,7 +82,10 @@ namespace System.Security.Cryptography.Cose
             }
             else
             {
-                initialByte = new CborInitialByte(MajorType, CborAdditionalInfo.Additional64BitData);
+                initialByte = new CborInitialByte(
+                    MajorType,
+                    CborAdditionalInfo.Additional64BitData
+                );
                 Span<byte> buffer = stackalloc byte[1 + sizeof(ulong)];
                 buffer[0] = initialByte.InitialByte;
                 BinaryPrimitives.WriteUInt64BigEndian(buffer.Slice(1), value);
@@ -104,7 +117,11 @@ namespace System.Security.Cryptography.Cose
             }
         }
 
-        internal static int SignHash(CoseSigner signer, IncrementalHash hasher, Span<byte> destination)
+        internal static int SignHash(
+            CoseSigner signer,
+            IncrementalHash hasher,
+            Span<byte> destination
+        )
         {
             AsymmetricAlgorithm key = signer.Key;
             KeyType keyType = signer._keyType;
@@ -117,11 +134,21 @@ namespace System.Security.Cryptography.Cose
             {
                 Debug.Assert(keyType == KeyType.RSA);
                 Debug.Assert(signer.RSASignaturePadding != null);
-                return SignHashWithRSA((RSA)key, hasher, signer.HashAlgorithm, signer.RSASignaturePadding, destination);
+                return SignHashWithRSA(
+                    (RSA)key,
+                    hasher,
+                    signer.HashAlgorithm,
+                    signer.RSASignaturePadding,
+                    destination
+                );
             }
         }
 
-        private static int SignHashWithECDsa(ECDsa key, IncrementalHash hasher, Span<byte> destination)
+        private static int SignHashWithECDsa(
+            ECDsa key,
+            IncrementalHash hasher,
+            Span<byte> destination
+        )
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             byte[] signature = key.SignHash(hasher.GetHashAndReset());
@@ -142,7 +169,13 @@ namespace System.Security.Cryptography.Cose
 #endif
         }
 
-        private static int SignHashWithRSA(RSA key, IncrementalHash hasher, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding, Span<byte> destination)
+        private static int SignHashWithRSA(
+            RSA key,
+            IncrementalHash hasher,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding,
+            Span<byte> destination
+        )
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             byte[] signature = key.SignHash(hasher.GetHashAndReset(), hashAlgorithm, padding);
@@ -170,7 +203,13 @@ namespace System.Security.Cryptography.Cose
         }
 #endif
 
-        internal static int GetCoseSignEncodedLengthMinusSignature(bool isTagged, int sizeOfCborTag, int encodedProtectedHeadersLength, CoseHeaderMap unprotectedHeaders, byte[]? content)
+        internal static int GetCoseSignEncodedLengthMinusSignature(
+            bool isTagged,
+            int sizeOfCborTag,
+            int encodedProtectedHeadersLength,
+            CoseHeaderMap unprotectedHeaders,
+            byte[]? content
+        )
         {
             int retVal = 0;
 
@@ -223,11 +262,14 @@ namespace System.Security.Cryptography.Cose
             }
             else if (state == CborReaderState.NegativeInteger)
             {
-                ulong cborNegativeIntRepresentation = reader.ReadCborNegativeIntegerRepresentation();
+                ulong cborNegativeIntRepresentation =
+                    reader.ReadCborNegativeIntegerRepresentation();
 
                 if (cborNegativeIntRepresentation > long.MaxValue)
                 {
-                    KnownCoseAlgorithms.ThrowCborNegativeIntegerNotSupported(cborNegativeIntRepresentation);
+                    KnownCoseAlgorithms.ThrowCborNegativeIntegerNotSupported(
+                        cborNegativeIntRepresentation
+                    );
                 }
 
                 long alg = checked(-1L - (long)cborNegativeIntRepresentation);
@@ -256,7 +298,11 @@ namespace System.Security.Cryptography.Cose
             return null;
         }
 
-        internal static HashAlgorithmName GetHashAlgorithmFromCoseAlgorithmAndKeyType(int algorithm, KeyType keyType, out RSASignaturePadding? padding)
+        internal static HashAlgorithmName GetHashAlgorithmFromCoseAlgorithmAndKeyType(
+            int algorithm,
+            KeyType keyType,
+            out RSASignaturePadding? padding
+        )
         {
             if (keyType == KeyType.ECDsa)
             {
@@ -266,7 +312,13 @@ namespace System.Security.Cryptography.Cose
                     KnownCoseAlgorithms.ES256 => HashAlgorithmName.SHA256,
                     KnownCoseAlgorithms.ES384 => HashAlgorithmName.SHA384,
                     KnownCoseAlgorithms.ES512 => HashAlgorithmName.SHA512,
-                    _ => throw new CryptographicException(SR.Format(SR.Sign1AlgDoesNotMatchWithTheOnesSupportedByTypeOfKey, algorithm, typeof(ECDsa)))
+                    _ => throw new CryptographicException(
+                        SR.Format(
+                            SR.Sign1AlgDoesNotMatchWithTheOnesSupportedByTypeOfKey,
+                            algorithm,
+                            typeof(ECDsa)
+                        )
+                    ),
                 };
             }
             else
@@ -274,10 +326,19 @@ namespace System.Security.Cryptography.Cose
                 Debug.Assert(keyType == KeyType.RSA);
                 HashAlgorithmName hashAlgorithm = algorithm switch
                 {
-                    KnownCoseAlgorithms.PS256 or KnownCoseAlgorithms.RS256 => HashAlgorithmName.SHA256,
-                    KnownCoseAlgorithms.PS384 or KnownCoseAlgorithms.RS384 => HashAlgorithmName.SHA384,
-                    KnownCoseAlgorithms.PS512 or KnownCoseAlgorithms.RS512 => HashAlgorithmName.SHA512,
-                    _ => throw new CryptographicException(SR.Format(SR.Sign1AlgDoesNotMatchWithTheOnesSupportedByTypeOfKey, algorithm, typeof(RSA)))
+                    KnownCoseAlgorithms.PS256 or KnownCoseAlgorithms.RS256 =>
+                        HashAlgorithmName.SHA256,
+                    KnownCoseAlgorithms.PS384 or KnownCoseAlgorithms.RS384 =>
+                        HashAlgorithmName.SHA384,
+                    KnownCoseAlgorithms.PS512 or KnownCoseAlgorithms.RS512 =>
+                        HashAlgorithmName.SHA512,
+                    _ => throw new CryptographicException(
+                        SR.Format(
+                            SR.Sign1AlgDoesNotMatchWithTheOnesSupportedByTypeOfKey,
+                            algorithm,
+                            typeof(RSA)
+                        )
+                    ),
                 };
 
                 if (algorithm <= KnownCoseAlgorithms.RS256)
@@ -287,7 +348,10 @@ namespace System.Security.Cryptography.Cose
                 }
                 else
                 {
-                    Debug.Assert(algorithm >= KnownCoseAlgorithms.PS512 && algorithm <= KnownCoseAlgorithms.PS256);
+                    Debug.Assert(
+                        algorithm >= KnownCoseAlgorithms.PS512
+                            && algorithm <= KnownCoseAlgorithms.PS256
+                    );
                     padding = RSASignaturePadding.Pss;
                 }
 
@@ -301,11 +365,16 @@ namespace System.Security.Cryptography.Cose
             {
                 ECDsa => KeyType.ECDsa,
                 RSA => KeyType.RSA,
-                _ => throw new ArgumentException(SR.Format(SR.Sign1UnsupportedKey, key.GetType()), nameof(key))
+                _ => throw new ArgumentException(
+                    SR.Format(SR.Sign1UnsupportedKey, key.GetType()),
+                    nameof(key)
+                ),
             };
         }
 
-        internal static ReadOnlyMemory<byte> GetCoseAlgorithmFromProtectedHeaders(CoseHeaderMap protectedHeaders)
+        internal static ReadOnlyMemory<byte> GetCoseAlgorithmFromProtectedHeaders(
+            CoseHeaderMap protectedHeaders
+        )
         {
             // https://datatracker.ietf.org/doc/html/rfc8152#section-3.1 alg:
             // This parameter MUST be authenticated where the ability to do so exists.
@@ -318,9 +387,20 @@ namespace System.Security.Cryptography.Cose
             return value.EncodedValue;
         }
 
-        internal static int WriteHeaderMap(Span<byte> buffer, CborWriter writer, CoseHeaderMap? headerMap, bool isProtected, int? algHeaderValueToSlip)
+        internal static int WriteHeaderMap(
+            Span<byte> buffer,
+            CborWriter writer,
+            CoseHeaderMap? headerMap,
+            bool isProtected,
+            int? algHeaderValueToSlip
+        )
         {
-            int bytesWritten = CoseHeaderMap.Encode(headerMap, buffer, isProtected, algHeaderValueToSlip);
+            int bytesWritten = CoseHeaderMap.Encode(
+                headerMap,
+                buffer,
+                isProtected,
+                algHeaderValueToSlip
+            );
             ReadOnlySpan<byte> encodedValue = buffer.Slice(0, bytesWritten);
 
             if (isProtected)
@@ -335,7 +415,11 @@ namespace System.Security.Cryptography.Cose
             return bytesWritten;
         }
 
-        internal static void WriteContent(CborWriter writer, ReadOnlySpan<byte> content, bool isDetached)
+        internal static void WriteContent(
+            CborWriter writer,
+            ReadOnlySpan<byte> content,
+            bool isDetached
+        )
         {
             if (isDetached)
             {
@@ -347,7 +431,12 @@ namespace System.Security.Cryptography.Cose
             }
         }
 
-        internal static void WriteSignature(Span<byte> buffer, IncrementalHash hasher, CborWriter writer, CoseSigner signer)
+        internal static void WriteSignature(
+            Span<byte> buffer,
+            IncrementalHash hasher,
+            CborWriter writer,
+            CoseSigner signer
+        )
         {
             int bytesWritten = SignHash(signer, hasher, buffer);
             writer.WriteByteString(buffer.Slice(0, bytesWritten));

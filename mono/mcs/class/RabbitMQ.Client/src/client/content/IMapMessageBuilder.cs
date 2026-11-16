@@ -57,12 +57,14 @@
 using System;
 using System.Collections;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Interface for constructing messages binary-compatible
     ///with QPid's "MapMessage" wire encoding.</summary>
-    public interface IMapMessageBuilder: IMessageBuilder {
-	///<summary>Retrieves the dictionary that will be written into
-	///the body of the message.</summary>
-	IDictionary Body { get; }
+    public interface IMapMessageBuilder : IMessageBuilder
+    {
+        ///<summary>Retrieves the dictionary that will be written into
+        ///the body of the message.</summary>
+        IDictionary Body { get; }
     }
 }

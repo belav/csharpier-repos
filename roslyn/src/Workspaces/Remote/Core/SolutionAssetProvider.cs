@@ -23,7 +23,13 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         public const string ServiceName = "SolutionAssetProvider";
 
-        internal static ServiceDescriptor ServiceDescriptor { get; } = ServiceDescriptor.CreateInProcServiceDescriptor(ServiceDescriptors.ComponentName, ServiceName, suffix: "", ServiceDescriptors.GetFeatureDisplayName);
+        internal static ServiceDescriptor ServiceDescriptor { get; } =
+            ServiceDescriptor.CreateInProcServiceDescriptor(
+                ServiceDescriptors.ComponentName,
+                ServiceName,
+                suffix: "",
+                ServiceDescriptors.GetFeatureDisplayName
+            );
 
         private readonly SolutionServices _services = services;
 
@@ -32,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum solutionChecksum,
             AssetHint assetHint,
             ImmutableArray<Checksum> checksums,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Suppress ExecutionContext flow for asynchronous operations operate on the pipe. In addition to avoiding
             // ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone data set by
@@ -41,9 +48,21 @@ namespace Microsoft.CodeAnalysis.Remote
             // ⚠ DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
             // same thread where SuppressFlow was originally run.
             using var _ = FlowControlHelper.TrySuppressFlow();
-            return WriteAssetsSuppressedFlowAsync(pipeWriter, solutionChecksum, assetHint, checksums, cancellationToken);
+            return WriteAssetsSuppressedFlowAsync(
+                pipeWriter,
+                solutionChecksum,
+                assetHint,
+                checksums,
+                cancellationToken
+            );
 
-            async ValueTask WriteAssetsSuppressedFlowAsync(PipeWriter pipeWriter, Checksum solutionChecksum, AssetHint assetHint, ImmutableArray<Checksum> checksums, CancellationToken cancellationToken)
+            async ValueTask WriteAssetsSuppressedFlowAsync(
+                PipeWriter pipeWriter,
+                Checksum solutionChecksum,
+                AssetHint assetHint,
+                ImmutableArray<Checksum> checksums,
+                CancellationToken cancellationToken
+            )
             {
                 // The responsibility is on us (as per the requirements of RemoteCallback.InvokeAsync) to Complete the
                 // pipewriter.  This will signal to streamjsonrpc that the writer passed into it is complete, which will
@@ -51,7 +70,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 Exception? exception = null;
                 try
                 {
-                    await WriteAssetsWorkerAsync(pipeWriter, solutionChecksum, assetHint, checksums, cancellationToken).ConfigureAwait(false);
+                    await WriteAssetsWorkerAsync(
+                            pipeWriter,
+                            solutionChecksum,
+                            assetHint,
+                            checksums,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 catch (Exception ex) when ((exception = ex) == null)
                 {
@@ -69,22 +95,35 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum solutionChecksum,
             AssetHint assetHint,
             ImmutableArray<Checksum> checksums,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var assetStorage = _services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
+            var assetStorage = _services
+                .GetRequiredService<ISolutionAssetStorageProvider>()
+                .AssetStorage;
             var serializer = _services.GetRequiredService<ISerializerService>();
             var scope = assetStorage.GetScope(solutionChecksum);
 
             using var _ = Creator.CreateResultMap(out var resultMap);
 
-            await scope.AddAssetsAsync(assetHint, checksums, resultMap, cancellationToken).ConfigureAwait(false);
+            await scope
+                .AddAssetsAsync(assetHint, checksums, resultMap, cancellationToken)
+                .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
             using var stream = new PipeWriterStream(pipeWriter);
-            await RemoteHostAssetSerialization.WriteDataAsync(
-                stream, resultMap, serializer, scope.ReplicationContext,
-                solutionChecksum, checksums, cancellationToken).ConfigureAwait(false);
+            await RemoteHostAssetSerialization
+                .WriteDataAsync(
+                    stream,
+                    resultMap,
+                    serializer,
+                    scope.ReplicationContext,
+                    solutionChecksum,
+                    checksums,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -162,7 +201,12 @@ namespace Microsoft.CodeAnalysis.Remote
 #endif
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 this.Write(buffer, offset, count);
@@ -185,13 +229,15 @@ namespace Microsoft.CodeAnalysis.Remote
                 _writer.Write(buffer);
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 this.Write(buffer.Span);
                 return default;
             }
-
 #endif
 
             #region read/seek api (not supported)
@@ -203,30 +249,35 @@ namespace Microsoft.CodeAnalysis.Remote
                 set => this.ThrowDisposedOr(new NotSupportedException());
             }
 
-            public override int Read(byte[] buffer, int offset, int count)
-                => throw this.ThrowDisposedOr(new NotSupportedException());
+            public override int Read(byte[] buffer, int offset, int count) =>
+                throw this.ThrowDisposedOr(new NotSupportedException());
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-                => throw this.ThrowDisposedOr(new NotSupportedException());
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) => throw this.ThrowDisposedOr(new NotSupportedException());
 
 #if NET
 
-            public override int Read(Span<byte> buffer)
-                => throw this.ThrowDisposedOr(new NotSupportedException());
+            public override int Read(Span<byte> buffer) =>
+                throw this.ThrowDisposedOr(new NotSupportedException());
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
-                => throw this.ThrowDisposedOr(new NotSupportedException());
-
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken
+            ) => throw this.ThrowDisposedOr(new NotSupportedException());
 #endif
 
-            public override int ReadByte()
-                => throw this.ThrowDisposedOr(new NotSupportedException());
+            public override int ReadByte() =>
+                throw this.ThrowDisposedOr(new NotSupportedException());
 
-            public override long Seek(long offset, SeekOrigin origin)
-                => throw this.ThrowDisposedOr(new NotSupportedException());
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw this.ThrowDisposedOr(new NotSupportedException());
 
-            public override void SetLength(long value)
-                => this.ThrowDisposedOr(new NotSupportedException());
+            public override void SetLength(long value) =>
+                this.ThrowDisposedOr(new NotSupportedException());
 
             #endregion
         }

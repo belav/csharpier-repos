@@ -29,44 +29,43 @@ using System.Security.Cryptography;
 
 namespace Mono.Btls.Interface
 {
-	public class BtlsX509Lookup : BtlsObject
-	{
-		new internal MonoBtlsX509Lookup Instance {
-			get { return (MonoBtlsX509Lookup)base.Instance; }
-		}
+    public class BtlsX509Lookup : BtlsObject
+    {
+        internal new MonoBtlsX509Lookup Instance
+        {
+            get { return (MonoBtlsX509Lookup)base.Instance; }
+        }
 
-		internal BtlsX509Lookup (MonoBtlsX509Lookup lookup)
-			: base (lookup)
-		{
-		}
+        internal BtlsX509Lookup(MonoBtlsX509Lookup lookup)
+            : base(lookup) { }
 
-		public void Initialize ()
-		{
-			Instance.Initialize ();
-		}
+        public void Initialize()
+        {
+            Instance.Initialize();
+        }
 
-		public void Shutdown ()
-		{
-			Instance.Shutdown ();
-		}
+        public void Shutdown()
+        {
+            Instance.Shutdown();
+        }
 
-		public BtlsX509 LookupBySubject (BtlsX509Name name)
-		{
-			var x509 = Instance.LookupBySubject (name.Instance);
-			if (x509 == null)
-				return null;
+        public BtlsX509 LookupBySubject(BtlsX509Name name)
+        {
+            var x509 = Instance.LookupBySubject(name.Instance);
+            if (x509 == null)
+                return null;
 
-			return new BtlsX509 (x509);
-		}
+            return new BtlsX509(x509);
+        }
 
-		public void LoadFile (string file, BtlsX509Format type)
-		{
-			Instance.LoadFile (file, (MonoBtlsX509FileType)type);
-		}
+        public void LoadFile(string file, BtlsX509Format type)
+        {
+            Instance.LoadFile(file, (MonoBtlsX509FileType)type);
+        }
 
-		public void AddDirectory (string dir, BtlsX509Format type)
-		{
-			Instance.AddDirectory (dir, (MonoBtlsX509FileType)type);
-		}
-	}
+        public void AddDirectory(string dir, BtlsX509Format type)
+        {
+            Instance.AddDirectory(dir, (MonoBtlsX509FileType)type);
+        }
+    }
 }

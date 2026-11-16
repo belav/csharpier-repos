@@ -21,7 +21,7 @@ namespace System.Net.Mime
         private bool _streamUsedOnce;
         private AsyncCallback? _readCallback;
         private AsyncCallback? _writeCallback;
-        private const int maxBufferSize = 0x4400;  //seems optimal for send based on perf analysis
+        private const int maxBufferSize = 0x4400; //seems optimal for send based on perf analysis
 
         internal MimePart() { }
 
@@ -40,7 +40,9 @@ namespace System.Net.Mime
                 _contentDisposition = value;
                 if (value == null)
                 {
-                    ((HeaderCollection)Headers).InternalRemove(MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!);
+                    ((HeaderCollection)Headers).InternalRemove(
+                        MailHeaderInfo.GetString(MailHeaderID.ContentDisposition)!
+                    );
                 }
                 else
                 {
@@ -53,7 +55,9 @@ namespace System.Net.Mime
         {
             get
             {
-                string value = Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)!]!;
+                string value = Headers[
+                    MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)!
+                ]!;
                 if (value.Equals("base64", StringComparison.OrdinalIgnoreCase))
                 {
                     return TransferEncoding.Base64;
@@ -80,23 +84,29 @@ namespace System.Net.Mime
                 //QFE 4554
                 if (value == TransferEncoding.Base64)
                 {
-                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] = "base64";
+                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] =
+                        "base64";
                 }
                 else if (value == TransferEncoding.QuotedPrintable)
                 {
-                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] = "quoted-printable";
+                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] =
+                        "quoted-printable";
                 }
                 else if (value == TransferEncoding.SevenBit)
                 {
-                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] = "7bit";
+                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] =
+                        "7bit";
                 }
                 else if (value == TransferEncoding.EightBit)
                 {
-                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] = "8bit";
+                    Headers[MailHeaderInfo.GetString(MailHeaderID.ContentTransferEncoding)] =
+                        "8bit";
                 }
                 else
                 {
-                    throw new NotSupportedException(SR.Format(SR.MimeTransferEncodingNotSupported, value));
+                    throw new NotSupportedException(
+                        SR.Format(SR.MimeTransferEncodingNotSupported, value)
+                    );
                 }
             }
         }
@@ -163,7 +173,6 @@ namespace System.Net.Mime
             context._result.InvokeCallback(e);
         }
 
-
         internal void ReadCallback(IAsyncResult result)
         {
             if (result.CompletedSynchronously)
@@ -189,7 +198,13 @@ namespace System.Net.Mime
             context._bytesLeft = Stream!.EndRead(result);
             if (context._bytesLeft > 0)
             {
-                IAsyncResult writeResult = context._outputStream!.BeginWrite(context._buffer, 0, context._bytesLeft, _writeCallback, context);
+                IAsyncResult writeResult = context._outputStream!.BeginWrite(
+                    context._buffer,
+                    0,
+                    context._bytesLeft,
+                    _writeCallback,
+                    context
+                );
                 if (writeResult.CompletedSynchronously)
                 {
                     WriteCallbackHandler(writeResult);
@@ -224,7 +239,13 @@ namespace System.Net.Mime
         {
             MimePartContext context = (MimePartContext)result.AsyncState!;
             context._outputStream!.EndWrite(result);
-            IAsyncResult readResult = Stream!.BeginRead(context._buffer, 0, context._buffer.Length, _readCallback, context);
+            IAsyncResult readResult = Stream!.BeginRead(
+                context._buffer,
+                0,
+                context._buffer.Length,
+                _readCallback,
+                context
+            );
             if (readResult.CompletedSynchronously)
             {
                 ReadCallbackHandler(readResult);
@@ -243,7 +264,10 @@ namespace System.Net.Mime
             {
                 outputStream = new QuotedPrintableStream(outputStream, true);
             }
-            else if (TransferEncoding == TransferEncoding.SevenBit || TransferEncoding == TransferEncoding.EightBit)
+            else if (
+                TransferEncoding == TransferEncoding.SevenBit
+                || TransferEncoding == TransferEncoding.EightBit
+            )
             {
                 outputStream = new EightBitStream(outputStream);
             }
@@ -259,7 +283,13 @@ namespace System.Net.Mime
 
             _readCallback = new AsyncCallback(ReadCallback);
             _writeCallback = new AsyncCallback(WriteCallback);
-            IAsyncResult readResult = Stream!.BeginRead(context._buffer, 0, context._buffer.Length, _readCallback, context);
+            IAsyncResult readResult = Stream!.BeginRead(
+                context._buffer,
+                0,
+                context._buffer.Length,
+                _readCallback,
+                context
+            );
             if (readResult.CompletedSynchronously)
             {
                 ReadCallbackHandler(readResult);
@@ -303,7 +333,12 @@ namespace System.Net.Mime
             internal bool _completedSynchronously = true;
         }
 
-        internal override IAsyncResult BeginSend(BaseWriter writer, AsyncCallback? callback, bool allowUnicode, object? state)
+        internal override IAsyncResult BeginSend(
+            BaseWriter writer,
+            AsyncCallback? callback,
+            bool allowUnicode,
+            object? state
+        )
         {
             PrepareHeaders(allowUnicode);
             writer.WriteHeaders(Headers, allowUnicode);
@@ -312,7 +347,10 @@ namespace System.Net.Mime
 
             ResetStream();
             _streamUsedOnce = true;
-            IAsyncResult contentResult = writer.BeginGetContentStream(new AsyncCallback(ContentStreamCallback), context);
+            IAsyncResult contentResult = writer.BeginGetContentStream(
+                new AsyncCallback(ContentStreamCallback),
+                context
+            );
             if (contentResult.CompletedSynchronously)
             {
                 ContentStreamCallbackHandler(contentResult);

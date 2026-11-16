@@ -1,29 +1,32 @@
-namespace System.Diagnostics {
-    using System.Runtime.InteropServices;
-    using System.Globalization;
-    using System.Security.Permissions;
-    using System.Security;
-    using System.Text;
-    using System.Threading;
-    using System.Reflection;
+namespace System.Diagnostics
+{
     using System.Collections;
-    using System.ComponentModel;
     using System.Collections.Specialized;
-    using Microsoft.Win32;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 
-    internal class PerformanceCounterLib {
+    internal class PerformanceCounterLib
+    {
         internal const string PerfShimName = "netfxperf.dll";
-        private  const string PerfShimFullNameSuffix = @"\netfxperf.dll";
-        private  const string PerfShimPathExp = @"%systemroot%\system32\netfxperf.dll";
+        private const string PerfShimFullNameSuffix = @"\netfxperf.dll";
+        private const string PerfShimPathExp = @"%systemroot%\system32\netfxperf.dll";
         internal const string OpenEntryPoint = "OpenPerformanceData";
         internal const string CollectEntryPoint = "CollectPerformanceData";
         internal const string CloseEntryPoint = "ClosePerformanceData";
         internal const string SingleInstanceName = "systemdiagnosticsperfcounterlibsingleinstance";
 
-        private const string PerflibPath = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Perflib";
+        private const string PerflibPath =
+            "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Perflib";
         internal const string ServicePath = "SYSTEM\\CurrentControlSet\\Services";
         private const string categorySymbolPrefix = "OBJECT_";
         private const string conterSymbolPrefix = "DEVICE_COUNTER_";
@@ -59,9 +62,12 @@ namespace System.Diagnostics {
         private readonly object HelpTableLock = new Object();
 
         private static Object s_InternalSyncObject;
-        private static Object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        private static Object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     Object o = new Object();
                     Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
                 }
@@ -69,19 +75,25 @@ namespace System.Diagnostics {
             }
         }
 
-        internal PerformanceCounterLib(string machineName, string lcid) {
+        internal PerformanceCounterLib(string machineName, string lcid)
+        {
             this.machineName = machineName;
             this.perfLcid = lcid;
         }
 
         /// <internalonly/>
-        internal static string ComputerName {
-            get {
-                if (computerName == null) {
-                    lock (InternalSyncObject) {
-                        if (computerName == null) {
+        internal static string ComputerName
+        {
+            get
+            {
+                if (computerName == null)
+                {
+                    lock (InternalSyncObject)
+                    {
+                        if (computerName == null)
+                        {
                             StringBuilder sb = new StringBuilder(256);
-                            SafeNativeMethods.GetComputerName(sb, new int[] {sb.Capacity});
+                            SafeNativeMethods.GetComputerName(sb, new int[] { sb.Capacity });
                             computerName = sb.ToString();
                         }
                     }
@@ -91,16 +103,23 @@ namespace System.Diagnostics {
             }
         }
 
-        private unsafe Hashtable CategoryTable {
-            get {
-                if (this.categoryTable == null) {
-                    lock (this.CategoryTableLock) {
-                        if (this.categoryTable == null) {
-                            byte[] perfData =  GetPerformanceData("Global");
+        private unsafe Hashtable CategoryTable
+        {
+            get
+            {
+                if (this.categoryTable == null)
+                {
+                    lock (this.CategoryTableLock)
+                    {
+                        if (this.categoryTable == null)
+                        {
+                            byte[] perfData = GetPerformanceData("Global");
 
-                            fixed (byte* perfDataPtr = perfData) {
-                                IntPtr dataRef = new IntPtr( (void*) perfDataPtr);
-                                NativeMethods.PERF_DATA_BLOCK dataBlock = new NativeMethods.PERF_DATA_BLOCK();
+                            fixed (byte* perfDataPtr = perfData)
+                            {
+                                IntPtr dataRef = new IntPtr((void*)perfDataPtr);
+                                NativeMethods.PERF_DATA_BLOCK dataBlock =
+                                    new NativeMethods.PERF_DATA_BLOCK();
                                 Marshal.PtrToStructure(dataRef, dataBlock);
                                 dataRef = (IntPtr)((long)dataRef + dataBlock.HeaderLength);
                                 int categoryNumber = dataBlock.NumObjectTypes;
@@ -109,44 +128,80 @@ namespace System.Diagnostics {
                                 // This causes us to walk past the end of our data, potentially crashing or reading
                                 // data we shouldn't.  We use endPerfData to make sure we don't go past the end
                                 // of the perf data.  (ASURT 137097)
-                                long endPerfData = (long)(new IntPtr((void*)perfDataPtr)) + dataBlock.TotalByteLength;
-                                Hashtable tempCategoryTable = new Hashtable(categoryNumber, StringComparer.OrdinalIgnoreCase);
-                                for (int index = 0; index < categoryNumber && ((long) dataRef < endPerfData); index++) {
-                                    NativeMethods.PERF_OBJECT_TYPE perfObject = new NativeMethods.PERF_OBJECT_TYPE();
+                                long endPerfData =
+                                    (long)(new IntPtr((void*)perfDataPtr))
+                                    + dataBlock.TotalByteLength;
+                                Hashtable tempCategoryTable = new Hashtable(
+                                    categoryNumber,
+                                    StringComparer.OrdinalIgnoreCase
+                                );
+                                for (
+                                    int index = 0;
+                                    index < categoryNumber && ((long)dataRef < endPerfData);
+                                    index++
+                                )
+                                {
+                                    NativeMethods.PERF_OBJECT_TYPE perfObject =
+                                        new NativeMethods.PERF_OBJECT_TYPE();
 
                                     Marshal.PtrToStructure(dataRef, perfObject);
 
                                     CategoryEntry newCategoryEntry = new CategoryEntry(perfObject);
-                                    IntPtr nextRef =  (IntPtr)((long)dataRef + perfObject.TotalByteLength);
+                                    IntPtr nextRef = (IntPtr)(
+                                        (long)dataRef + perfObject.TotalByteLength
+                                    );
                                     dataRef = (IntPtr)((long)dataRef + perfObject.HeaderLength);
 
                                     int index3 = 0;
                                     int previousCounterIndex = -1;
                                     //Need to filter out counters that are repeated, some providers might
                                     //return several adyacent copies of the same counter.
-                                    for (int index2 = 0; index2 < newCategoryEntry.CounterIndexes.Length; ++ index2) {
-                                        NativeMethods.PERF_COUNTER_DEFINITION perfCounter = new NativeMethods.PERF_COUNTER_DEFINITION();
+                                    for (
+                                        int index2 = 0;
+                                        index2 < newCategoryEntry.CounterIndexes.Length;
+                                        ++index2
+                                    )
+                                    {
+                                        NativeMethods.PERF_COUNTER_DEFINITION perfCounter =
+                                            new NativeMethods.PERF_COUNTER_DEFINITION();
                                         Marshal.PtrToStructure(dataRef, perfCounter);
-                                        if (perfCounter.CounterNameTitleIndex != previousCounterIndex) {
-                                            newCategoryEntry.CounterIndexes[index3] =  perfCounter.CounterNameTitleIndex;
-                                            newCategoryEntry.HelpIndexes[index3] = perfCounter.CounterHelpTitleIndex;
-                                            previousCounterIndex = perfCounter.CounterNameTitleIndex;
-                                            ++ index3;
+                                        if (
+                                            perfCounter.CounterNameTitleIndex
+                                            != previousCounterIndex
+                                        )
+                                        {
+                                            newCategoryEntry.CounterIndexes[index3] =
+                                                perfCounter.CounterNameTitleIndex;
+                                            newCategoryEntry.HelpIndexes[index3] =
+                                                perfCounter.CounterHelpTitleIndex;
+                                            previousCounterIndex =
+                                                perfCounter.CounterNameTitleIndex;
+                                            ++index3;
                                         }
                                         dataRef = (IntPtr)((long)dataRef + perfCounter.ByteLength);
                                     }
 
                                     //Lets adjust the entry counter arrays in case there were repeated copies
-                                    if (index3 <  newCategoryEntry.CounterIndexes.Length) {
+                                    if (index3 < newCategoryEntry.CounterIndexes.Length)
+                                    {
                                         int[] adjustedCounterIndexes = new int[index3];
                                         int[] adjustedHelpIndexes = new int[index3];
-                                        Array.Copy(newCategoryEntry.CounterIndexes, adjustedCounterIndexes, index3);
-                                        Array.Copy(newCategoryEntry.HelpIndexes, adjustedHelpIndexes, index3);
+                                        Array.Copy(
+                                            newCategoryEntry.CounterIndexes,
+                                            adjustedCounterIndexes,
+                                            index3
+                                        );
+                                        Array.Copy(
+                                            newCategoryEntry.HelpIndexes,
+                                            adjustedHelpIndexes,
+                                            index3
+                                        );
                                         newCategoryEntry.CounterIndexes = adjustedCounterIndexes;
                                         newCategoryEntry.HelpIndexes = adjustedHelpIndexes;
                                     }
 
-                                    string categoryName = (string)this.NameTable[newCategoryEntry.NameIndex];
+                                    string categoryName = (string)
+                                        this.NameTable[newCategoryEntry.NameIndex];
                                     if (categoryName != null)
                                         tempCategoryTable[categoryName] = newCategoryEntry;
 
@@ -163,10 +218,14 @@ namespace System.Diagnostics {
             }
         }
 
-        internal Hashtable HelpTable {
-            get {
-                if (this.helpTable == null) {
-                    lock(this.HelpTableLock) {
+        internal Hashtable HelpTable
+        {
+            get
+            {
+                if (this.helpTable == null)
+                {
+                    lock (this.HelpTableLock)
+                    {
                         if (this.helpTable == null)
                             this.helpTable = GetStringTable(true);
                     }
@@ -177,23 +236,32 @@ namespace System.Diagnostics {
         }
 
         // Returns a temp file name
-        private static string IniFilePath {
+        private static string IniFilePath
+        {
             [ResourceExposure(ResourceScope.AppDomain)]
             [ResourceConsumption(ResourceScope.AppDomain)]
-            get {
-                if (iniFilePath == null) {
-                    lock (InternalSyncObject) {
-                        if (iniFilePath == null) {
+            get
+            {
+                if (iniFilePath == null)
+                {
+                    lock (InternalSyncObject)
+                    {
+                        if (iniFilePath == null)
+                        {
                             // Need to assert Environment permissions here
                             //                        the environment check is not exposed as a public
                             //                        method
-                            EnvironmentPermission environmentPermission = new EnvironmentPermission(PermissionState.Unrestricted);
+                            EnvironmentPermission environmentPermission = new EnvironmentPermission(
+                                PermissionState.Unrestricted
+                            );
                             environmentPermission.Assert();
-                            try {
+                            try
+                            {
                                 iniFilePath = Path.GetTempFileName();
                             }
-                            finally {
-                                 EnvironmentPermission.RevertAssert();
+                            finally
+                            {
+                                EnvironmentPermission.RevertAssert();
                             }
                         }
                     }
@@ -203,10 +271,14 @@ namespace System.Diagnostics {
             }
         }
 
-        internal Hashtable NameTable {
-            get {
-                if (this.nameTable == null) {
-                    lock(this.NameTableLock) {
+        internal Hashtable NameTable
+        {
+            get
+            {
+                if (this.nameTable == null)
+                {
+                    lock (this.NameTableLock)
+                    {
                         if (this.nameTable == null)
                             this.nameTable = GetStringTable(false);
                     }
@@ -217,30 +289,43 @@ namespace System.Diagnostics {
         }
 
         // Returns a temp file name
-        private static string SymbolFilePath {
+        private static string SymbolFilePath
+        {
             [ResourceExposure(ResourceScope.AppDomain)]
             [ResourceConsumption(ResourceScope.AppDomain | ResourceScope.Machine)]
-            get {
-                if (symbolFilePath == null) {
-                    lock (InternalSyncObject) {
-                        if (symbolFilePath == null) {
+            get
+            {
+                if (symbolFilePath == null)
+                {
+                    lock (InternalSyncObject)
+                    {
+                        if (symbolFilePath == null)
+                        {
                             string tempPath;
-                            
-                            EnvironmentPermission environmentPermission = new EnvironmentPermission(PermissionState.Unrestricted);
+
+                            EnvironmentPermission environmentPermission = new EnvironmentPermission(
+                                PermissionState.Unrestricted
+                            );
                             environmentPermission.Assert();
                             tempPath = Path.GetTempPath();
                             EnvironmentPermission.RevertAssert();
 
                             // We need both FileIOPermission EvironmentPermission
                             PermissionSet ps = new PermissionSet(PermissionState.None);
-                            ps.AddPermission(new EnvironmentPermission(PermissionState.Unrestricted));
-                            ps.AddPermission(new FileIOPermission(FileIOPermissionAccess.Write, tempPath));
+                            ps.AddPermission(
+                                new EnvironmentPermission(PermissionState.Unrestricted)
+                            );
+                            ps.AddPermission(
+                                new FileIOPermission(FileIOPermissionAccess.Write, tempPath)
+                            );
                             ps.Assert();
-                            try {
+                            try
+                            {
                                 symbolFilePath = Path.GetTempFileName();
                             }
-                            finally {
-                                 PermissionSet.RevertAssert();
+                            finally
+                            {
+                                PermissionSet.RevertAssert();
                             }
                         }
                     }
@@ -250,14 +335,20 @@ namespace System.Diagnostics {
             }
         }
 
-        internal static bool CategoryExists(string machine, string category) {
-            PerformanceCounterLib library = GetPerformanceCounterLib(machine, new CultureInfo(EnglishLCID));
-            if (library.CategoryExists(category)) 
+        internal static bool CategoryExists(string machine, string category)
+        {
+            PerformanceCounterLib library = GetPerformanceCounterLib(
+                machine,
+                new CultureInfo(EnglishLCID)
+            );
+            if (library.CategoryExists(category))
                 return true;
 
-            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                while (culture != CultureInfo.InvariantCulture) {
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     if (library.CategoryExists(category))
                         return true;
@@ -268,12 +359,15 @@ namespace System.Diagnostics {
             return false;
         }
 
-        internal bool CategoryExists(string category) {
+        internal bool CategoryExists(string category)
+        {
             return CategoryTable.ContainsKey(category);
         }
 
-        internal static void CloseAllLibraries() {
-            if (libraryTable != null) {
+        internal static void CloseAllLibraries()
+        {
+            if (libraryTable != null)
+            {
                 foreach (PerformanceCounterLib library in libraryTable.Values)
                     library.Close();
 
@@ -281,22 +375,27 @@ namespace System.Diagnostics {
             }
         }
 
-        internal static void CloseAllTables() {
-            if (libraryTable != null) {
+        internal static void CloseAllTables()
+        {
+            if (libraryTable != null)
+            {
                 foreach (PerformanceCounterLib library in libraryTable.Values)
                     library.CloseTables();
             }
         }
 
-        internal void CloseTables() {
+        internal void CloseTables()
+        {
             this.nameTable = null;
             this.helpTable = null;
             this.categoryTable = null;
             this.customCategoryTable = null;
         }
 
-        internal void Close() {
-            if (this.performanceMonitor != null) {
+        internal void Close()
+        {
+            if (this.performanceMonitor != null)
+            {
                 this.performanceMonitor.Close();
                 this.performanceMonitor = null;
             }
@@ -304,14 +403,20 @@ namespace System.Diagnostics {
             CloseTables();
         }
 
-        internal static bool CounterExists(string machine, string category, string counter) {
-            PerformanceCounterLib library = GetPerformanceCounterLib(machine, new CultureInfo(EnglishLCID));
+        internal static bool CounterExists(string machine, string category, string counter)
+        {
+            PerformanceCounterLib library = GetPerformanceCounterLib(
+                machine,
+                new CultureInfo(EnglishLCID)
+            );
             bool categoryExists = false;
             bool counterExists = library.CounterExists(category, counter, ref categoryExists);
 
-            if (!categoryExists && CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            if (!categoryExists && CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                while (culture != CultureInfo.InvariantCulture) {
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     counterExists = library.CounterExists(category, counter, ref categoryExists);
                     if (counterExists)
@@ -321,7 +426,8 @@ namespace System.Diagnostics {
                 }
             }
 
-            if (!categoryExists) {
+            if (!categoryExists)
+            {
                 // Consider adding diagnostic logic here, may be we can dump the nameTable...
                 throw new InvalidOperationException(SR.GetString(SR.MissingCategory));
             }
@@ -329,7 +435,8 @@ namespace System.Diagnostics {
             return counterExists;
         }
 
-        private bool CounterExists(string category, string counter, ref bool categoryExists) {
+        private bool CounterExists(string category, string counter, ref bool categoryExists)
+        {
             categoryExists = false;
             if (!CategoryTable.ContainsKey(category))
                 return false;
@@ -337,11 +444,12 @@ namespace System.Diagnostics {
                 categoryExists = true;
 
             CategoryEntry entry = (CategoryEntry)this.CategoryTable[category];
-            for (int index = 0; index < entry.CounterIndexes.Length; ++ index) {
+            for (int index = 0; index < entry.CounterIndexes.Length; ++index)
+            {
                 int counterIndex = entry.CounterIndexes[index];
                 string counterName = (string)this.NameTable[counterIndex];
                 if (counterName == null)
-                   counterName = String.Empty;
+                    counterName = String.Empty;
 
                 if (String.Compare(counterName, counter, StringComparison.OrdinalIgnoreCase) == 0)
                     return true;
@@ -352,13 +460,21 @@ namespace System.Diagnostics {
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void CreateIniFile(string categoryName, string categoryHelp, CounterCreationDataCollection creationData, string[] languageIds) {
+        private static void CreateIniFile(
+            string categoryName,
+            string categoryHelp,
+            CounterCreationDataCollection creationData,
+            string[] languageIds
+        )
+        {
             //SECREVIEW: PerformanceCounterPermission must have been demanded before
             FileIOPermission permission = new FileIOPermission(PermissionState.Unrestricted);
             permission.Assert();
-            try {
+            try
+            {
                 StreamWriter iniWriter = new StreamWriter(IniFilePath, false, Encoding.Unicode);
-                try {
+                try
+                {
                     //NT4 won't be able to parse Unicode ini files without this
                     //extra white space.
                     iniWriter.WriteLine("");
@@ -372,7 +488,8 @@ namespace System.Diagnostics {
                     iniWriter.WriteLine("");
 
                     iniWriter.WriteLine(languageDefinition);
-                    foreach (string languageId in languageIds) {
+                    foreach (string languageId in languageIds)
+                    {
                         iniWriter.Write(languageId);
                         iniWriter.Write("=");
                         iniWriter.Write(languageKeyword);
@@ -381,7 +498,8 @@ namespace System.Diagnostics {
                     iniWriter.WriteLine("");
 
                     iniWriter.WriteLine(objectDefinition);
-                    foreach (string languageId in languageIds) {
+                    foreach (string languageId in languageIds)
+                    {
                         iniWriter.Write(categorySymbolPrefix);
                         iniWriter.Write("1_");
                         iniWriter.Write(languageId);
@@ -392,7 +510,8 @@ namespace System.Diagnostics {
                     iniWriter.WriteLine("");
 
                     iniWriter.WriteLine(textDefinition);
-                    foreach (string languageId in languageIds) {
+                    foreach (string languageId in languageIds)
+                    {
                         iniWriter.Write(categorySymbolPrefix);
                         iniWriter.Write("1_");
                         iniWriter.Write(languageId);
@@ -409,9 +528,9 @@ namespace System.Diagnostics {
                         else
                             iniWriter.WriteLine(categoryHelp);
 
-
                         int counterIndex = 0;
-                        foreach (CounterCreationData counterData in creationData) {
+                        foreach (CounterCreationData counterData in creationData)
+                        {
                             ++counterIndex;
                             iniWriter.WriteLine("");
                             iniWriter.Write(conterSymbolPrefix);
@@ -429,25 +548,36 @@ namespace System.Diagnostics {
                             iniWriter.Write(helpSufix);
                             iniWriter.Write("=");
 
-                            Debug.Assert(!String.IsNullOrEmpty(counterData.CounterHelp), "CounterHelp should have been fixed up by the caller");
+                            Debug.Assert(
+                                !String.IsNullOrEmpty(counterData.CounterHelp),
+                                "CounterHelp should have been fixed up by the caller"
+                            );
                             iniWriter.WriteLine(counterData.CounterHelp);
                         }
                     }
 
                     iniWriter.WriteLine("");
                 }
-                finally {
+                finally
+                {
                     iniWriter.Close();
                 }
             }
-            finally {
+            finally
+            {
                 FileIOPermission.RevertAssert();
             }
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void CreateRegistryEntry(string categoryName, PerformanceCounterCategoryType categoryType, CounterCreationDataCollection creationData, ref bool iniRegistered) {
+        private static void CreateRegistryEntry(
+            string categoryName,
+            PerformanceCounterCategoryType categoryType,
+            CounterCreationDataCollection creationData,
+            ref bool iniRegistered
+        )
+        {
             RegistryKey serviceParentKey = null;
             RegistryKey serviceKey = null;
             RegistryKey linkageKey = null;
@@ -455,45 +585,52 @@ namespace System.Diagnostics {
             //SECREVIEW: Whoever is able to call this function, must already
             //                         have demmanded PerformanceCounterPermission
             //                         we can therefore assert the RegistryPermission.
-            RegistryPermission registryPermission = new RegistryPermission(PermissionState.Unrestricted);
+            RegistryPermission registryPermission = new RegistryPermission(
+                PermissionState.Unrestricted
+            );
             registryPermission.Assert();
-            try {
+            try
+            {
                 serviceParentKey = Registry.LocalMachine.OpenSubKey(ServicePath, true);
 
                 serviceKey = serviceParentKey.OpenSubKey(categoryName + "\\Performance", true);
                 if (serviceKey == null)
                     serviceKey = serviceParentKey.CreateSubKey(categoryName + "\\Performance");
 
-                serviceKey.SetValue("Open","OpenPerformanceData");
+                serviceKey.SetValue("Open", "OpenPerformanceData");
                 serviceKey.SetValue("Collect", "CollectPerformanceData");
-                serviceKey.SetValue("Close","ClosePerformanceData");
+                serviceKey.SetValue("Close", "ClosePerformanceData");
                 serviceKey.SetValue("Library", DllName);
-                serviceKey.SetValue("IsMultiInstance", (int) categoryType, RegistryValueKind.DWord);
+                serviceKey.SetValue("IsMultiInstance", (int)categoryType, RegistryValueKind.DWord);
                 serviceKey.SetValue("CategoryOptions", 0x3, RegistryValueKind.DWord);
 
-                string [] counters = new string[creationData.Count];
-                string [] counterTypes = new string[creationData.Count];
-                for (int i = 0; i < creationData.Count; i++) {
+                string[] counters = new string[creationData.Count];
+                string[] counterTypes = new string[creationData.Count];
+                for (int i = 0; i < creationData.Count; i++)
+                {
                     counters[i] = creationData[i].CounterName;
-                    counterTypes[i] = ((int) creationData[i].CounterType).ToString(CultureInfo.InvariantCulture);
+                    counterTypes[i] = ((int)creationData[i].CounterType).ToString(
+                        CultureInfo.InvariantCulture
+                    );
                 }
 
-                linkageKey = serviceParentKey.OpenSubKey(categoryName + "\\Linkage" , true);
+                linkageKey = serviceParentKey.OpenSubKey(categoryName + "\\Linkage", true);
                 if (linkageKey == null)
-                    linkageKey = serviceParentKey.CreateSubKey(categoryName + "\\Linkage" );
+                    linkageKey = serviceParentKey.CreateSubKey(categoryName + "\\Linkage");
 
-                linkageKey.SetValue("Export", new string[]{categoryName});
+                linkageKey.SetValue("Export", new string[] { categoryName });
 
-                serviceKey.SetValue("Counter Types", (object) counterTypes);
-                serviceKey.SetValue("Counter Names", (object) counters);
+                serviceKey.SetValue("Counter Types", (object)counterTypes);
+                serviceKey.SetValue("Counter Names", (object)counters);
 
                 object firstID = serviceKey.GetValue("First Counter");
                 if (firstID != null)
-                    iniRegistered  = true;
+                    iniRegistered = true;
                 else
-                    iniRegistered  = false;
+                    iniRegistered = false;
             }
-            finally {
+            finally
+            {
                 if (serviceKey != null)
                     serviceKey.Close();
 
@@ -509,59 +646,75 @@ namespace System.Diagnostics {
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void CreateSymbolFile(CounterCreationDataCollection creationData) {
+        private static void CreateSymbolFile(CounterCreationDataCollection creationData)
+        {
             //SECREVIEW: PerformanceCounterPermission must have been demanded before
             FileIOPermission permission = new FileIOPermission(PermissionState.Unrestricted);
             permission.Assert();
-            try {
+            try
+            {
                 StreamWriter symbolWriter = new StreamWriter(SymbolFilePath);
-                try {
+                try
+                {
                     symbolWriter.Write(defineKeyword);
                     symbolWriter.Write(" ");
                     symbolWriter.Write(categorySymbolPrefix);
                     symbolWriter.WriteLine("1 0;");
 
-                    for (int counterIndex = 1; counterIndex <= creationData.Count; ++ counterIndex) {
+                    for (int counterIndex = 1; counterIndex <= creationData.Count; ++counterIndex)
+                    {
                         symbolWriter.Write(defineKeyword);
                         symbolWriter.Write(" ");
                         symbolWriter.Write(conterSymbolPrefix);
                         symbolWriter.Write(counterIndex.ToString(CultureInfo.InvariantCulture));
                         symbolWriter.Write(" ");
-                        symbolWriter.Write((counterIndex * 2).ToString(CultureInfo.InvariantCulture));
+                        symbolWriter.Write(
+                            (counterIndex * 2).ToString(CultureInfo.InvariantCulture)
+                        );
                         symbolWriter.WriteLine(";");
                     }
 
                     symbolWriter.WriteLine("");
                 }
-                finally {
+                finally
+                {
                     symbolWriter.Close();
                 }
             }
-            finally {
+            finally
+            {
                 FileIOPermission.RevertAssert();
             }
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void DeleteRegistryEntry(string categoryName) {
+        private static void DeleteRegistryEntry(string categoryName)
+        {
             RegistryKey serviceKey = null;
 
             //SECREVIEW: Whoever is able to call this function, must already
             //                         have demmanded PerformanceCounterPermission
             //                         we can therefore assert the RegistryPermission.
-            RegistryPermission registryPermission = new RegistryPermission(PermissionState.Unrestricted);
+            RegistryPermission registryPermission = new RegistryPermission(
+                PermissionState.Unrestricted
+            );
             registryPermission.Assert();
-            try {
+            try
+            {
                 serviceKey = Registry.LocalMachine.OpenSubKey(ServicePath, true);
 
                 bool deleteCategoryKey = false;
-                using (RegistryKey categoryKey = serviceKey.OpenSubKey(categoryName, true)) {
-                    if (categoryKey != null) {
-                        if (categoryKey.GetValueNames().Length == 0) {
+                using (RegistryKey categoryKey = serviceKey.OpenSubKey(categoryName, true))
+                {
+                    if (categoryKey != null)
+                    {
+                        if (categoryKey.GetValueNames().Length == 0)
+                        {
                             deleteCategoryKey = true;
                         }
-                        else {
+                        else
+                        {
                             categoryKey.DeleteSubKeyTree("Linkage");
                             categoryKey.DeleteSubKeyTree("Performance");
                         }
@@ -569,9 +722,9 @@ namespace System.Diagnostics {
                 }
                 if (deleteCategoryKey)
                     serviceKey.DeleteSubKeyTree(categoryName);
-                
             }
-            finally {
+            finally
+            {
                 if (serviceKey != null)
                     serviceKey.Close();
 
@@ -581,40 +734,52 @@ namespace System.Diagnostics {
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void DeleteTemporaryFiles() {
-            try {
+        private static void DeleteTemporaryFiles()
+        {
+            try
+            {
                 File.Delete(IniFilePath);
             }
-            catch {
-            }
+            catch { }
 
-            try {
+            try
+            {
                 File.Delete(SymbolFilePath);
             }
-            catch {
-            }
+            catch { }
         }
 
-        // Ensures that the customCategoryTable is initialized and decides whether the category passed in 
+        // Ensures that the customCategoryTable is initialized and decides whether the category passed in
         //  1) is a custom category
         //  2) is a multi instance custom category
-        // The return value is whether the category is a custom category or not. 
+        // The return value is whether the category is a custom category or not.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        internal bool FindCustomCategory(string category, out PerformanceCounterCategoryType categoryType) {
+        internal bool FindCustomCategory(
+            string category,
+            out PerformanceCounterCategoryType categoryType
+        )
+        {
             RegistryKey key = null;
             RegistryKey baseKey = null;
             categoryType = PerformanceCounterCategoryType.Unknown;
-            
-            if (this.customCategoryTable == null) {
-                Interlocked.CompareExchange(ref this.customCategoryTable, new Hashtable(StringComparer.OrdinalIgnoreCase), null);
+
+            if (this.customCategoryTable == null)
+            {
+                Interlocked.CompareExchange(
+                    ref this.customCategoryTable,
+                    new Hashtable(StringComparer.OrdinalIgnoreCase),
+                    null
+                );
             }
 
-            if (this.customCategoryTable.ContainsKey(category)) {
-                categoryType= (PerformanceCounterCategoryType) this.customCategoryTable[category];
+            if (this.customCategoryTable.ContainsKey(category))
+            {
+                categoryType = (PerformanceCounterCategoryType)this.customCategoryTable[category];
                 return true;
             }
-            else {
+            else
+            {
                 //SECREVIEW: Whoever is able to call this function, must already
                 //                         have demanded PerformanceCounterPermission
                 //                         we can therefore assert the RegistryPermission.
@@ -622,18 +787,35 @@ namespace System.Diagnostics {
                 ps.AddPermission(new RegistryPermission(PermissionState.Unrestricted));
                 ps.AddPermission(new SecurityPermission(SecurityPermissionFlag.UnmanagedCode));
                 ps.Assert();
-                try {
+                try
+                {
                     string keyPath = ServicePath + "\\" + category + "\\Performance";
-                    if (machineName == "." || String.Compare(this.machineName, ComputerName, StringComparison.OrdinalIgnoreCase) == 0) {
+                    if (
+                        machineName == "."
+                        || String.Compare(
+                            this.machineName,
+                            ComputerName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    {
                         key = Registry.LocalMachine.OpenSubKey(keyPath);
                     }
-                    else {
-                        baseKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "\\\\" + this.machineName);
-                        if (baseKey != null) {
-                            try {
+                    else
+                    {
+                        baseKey = RegistryKey.OpenRemoteBaseKey(
+                            RegistryHive.LocalMachine,
+                            "\\\\" + this.machineName
+                        );
+                        if (baseKey != null)
+                        {
+                            try
+                            {
                                 key = baseKey.OpenSubKey(keyPath);
-                            } catch (SecurityException) {
-                                // we may not have permission to read the registry key on the remote machine.  The security exception  
+                            }
+                            catch (SecurityException)
+                            {
+                                // we may not have permission to read the registry key on the remote machine.  The security exception
                                 // is thrown when RegOpenKeyEx returns ERROR_ACCESS_DENIED or ERROR_BAD_IMPERSONATION_LEVEL
                                 //
                                 // In this case we return an 'Unknown' category type and 'false' to indicate the category is *not* custom.
@@ -645,23 +827,46 @@ namespace System.Diagnostics {
                         }
                     }
 
-                    if (key != null) {
-                        object systemDllName = key.GetValue("Library", null, RegistryValueOptions.DoNotExpandEnvironmentNames);
-                        if (systemDllName != null && systemDllName is string 
-                            && (String.Compare((string)systemDllName, PerformanceCounterLib.PerfShimName, StringComparison.OrdinalIgnoreCase) == 0
-                              || ((string)systemDllName).EndsWith(PerformanceCounterLib.PerfShimFullNameSuffix, StringComparison.OrdinalIgnoreCase))) {
-                            
+                    if (key != null)
+                    {
+                        object systemDllName = key.GetValue(
+                            "Library",
+                            null,
+                            RegistryValueOptions.DoNotExpandEnvironmentNames
+                        );
+                        if (
+                            systemDllName != null
+                            && systemDllName is string
+                            && (
+                                String.Compare(
+                                    (string)systemDllName,
+                                    PerformanceCounterLib.PerfShimName,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
+                                || ((string)systemDllName).EndsWith(
+                                    PerformanceCounterLib.PerfShimFullNameSuffix,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                        )
+                        {
                             object isMultiInstanceObject = key.GetValue("IsMultiInstance");
-                            if (isMultiInstanceObject != null) {
-                                categoryType = (PerformanceCounterCategoryType) isMultiInstanceObject;
-                                if (categoryType < PerformanceCounterCategoryType.Unknown || categoryType > PerformanceCounterCategoryType.MultiInstance)
+                            if (isMultiInstanceObject != null)
+                            {
+                                categoryType =
+                                    (PerformanceCounterCategoryType)isMultiInstanceObject;
+                                if (
+                                    categoryType < PerformanceCounterCategoryType.Unknown
+                                    || categoryType > PerformanceCounterCategoryType.MultiInstance
+                                )
                                     categoryType = PerformanceCounterCategoryType.Unknown;
                             }
                             else
                                 categoryType = PerformanceCounterCategoryType.Unknown;
-                                
+
                             object objectID = key.GetValue("First Counter");
-                            if (objectID != null) {
+                            if (objectID != null)
+                            {
                                 int firstID = (int)objectID;
 
                                 this.customCategoryTable[category] = categoryType;
@@ -670,22 +875,27 @@ namespace System.Diagnostics {
                         }
                     }
                 }
-                finally {
-                    if (key != null) key.Close();
-                    if (baseKey != null) baseKey.Close();
+                finally
+                {
+                    if (key != null)
+                        key.Close();
+                    if (baseKey != null)
+                        baseKey.Close();
                     PermissionSet.RevertAssert();
                 }
             }
             return false;
         }
 
-        internal static string[] GetCategories(string machineName) {
+        internal static string[] GetCategories(string machineName)
+        {
             PerformanceCounterLib library;
             CultureInfo culture = CultureInfo.CurrentCulture;
-            while (culture != CultureInfo.InvariantCulture) {
+            while (culture != CultureInfo.InvariantCulture)
+            {
                 library = GetPerformanceCounterLib(machineName, culture);
                 string[] categories = library.GetCategories();
-                if (categories.Length != 0 ) 
+                if (categories.Length != 0)
                     return categories;
                 culture = culture.Parent;
             }
@@ -694,23 +904,27 @@ namespace System.Diagnostics {
             return library.GetCategories();
         }
 
-        internal string[] GetCategories() {
+        internal string[] GetCategories()
+        {
             ICollection keys = CategoryTable.Keys;
             string[] categories = new string[keys.Count];
             keys.CopyTo(categories, 0);
             return categories;
         }
 
-        internal static string GetCategoryHelp(string machine, string category) {
+        internal static string GetCategoryHelp(string machine, string category)
+        {
             PerformanceCounterLib library;
             string help;
 
-            //First check the current culture for the category. This will allow 
+            //First check the current culture for the category. This will allow
             //PerformanceCounterCategory.CategoryHelp to return localized strings.
-            if(CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-               
-                while (culture != CultureInfo.InvariantCulture) {
+
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     help = library.GetCategoryHelp(category);
                     if (help != null)
@@ -730,7 +944,8 @@ namespace System.Diagnostics {
             return help;
         }
 
-        private string GetCategoryHelp(string category) {
+        private string GetCategoryHelp(string category)
+        {
             CategoryEntry entry = (CategoryEntry)this.CategoryTable[category];
             if (entry == null)
                 return null;
@@ -738,12 +953,18 @@ namespace System.Diagnostics {
             return (string)this.HelpTable[entry.HelpIndex];
         }
 
-        internal static CategorySample GetCategorySample(string machine, string category) {
-            PerformanceCounterLib library = GetPerformanceCounterLib(machine, new CultureInfo(EnglishLCID));
+        internal static CategorySample GetCategorySample(string machine, string category)
+        {
+            PerformanceCounterLib library = GetPerformanceCounterLib(
+                machine,
+                new CultureInfo(EnglishLCID)
+            );
             CategorySample sample = library.GetCategorySample(category);
-            if (sample == null && CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            if (sample == null && CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                while (culture != CultureInfo.InvariantCulture) {
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     sample = library.GetCategorySample(category);
                     if (sample != null)
@@ -757,13 +978,16 @@ namespace System.Diagnostics {
             return sample;
         }
 
-        private CategorySample GetCategorySample(string category) {
+        private CategorySample GetCategorySample(string category)
+        {
             CategoryEntry entry = (CategoryEntry)this.CategoryTable[category];
             if (entry == null)
                 return null;
 
             CategorySample sample = null;
-            byte[] dataRef = GetPerformanceData(entry.NameIndex.ToString(CultureInfo.InvariantCulture));
+            byte[] dataRef = GetPerformanceData(
+                entry.NameIndex.ToString(CultureInfo.InvariantCulture)
+            );
             if (dataRef == null)
                 throw new InvalidOperationException(SR.GetString(SR.CantReadCategory, category));
 
@@ -771,14 +995,20 @@ namespace System.Diagnostics {
             return sample;
         }
 
-        internal static string[] GetCounters(string machine, string category) {
-            PerformanceCounterLib library = GetPerformanceCounterLib(machine, new CultureInfo(EnglishLCID));
+        internal static string[] GetCounters(string machine, string category)
+        {
+            PerformanceCounterLib library = GetPerformanceCounterLib(
+                machine,
+                new CultureInfo(EnglishLCID)
+            );
             bool categoryExists = false;
             string[] counters = library.GetCounters(category, ref categoryExists);
 
-            if (!categoryExists && CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            if (!categoryExists && CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                while (culture != CultureInfo.InvariantCulture) {
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     counters = library.GetCounters(category, ref categoryExists);
                     if (categoryExists)
@@ -787,14 +1017,15 @@ namespace System.Diagnostics {
                     culture = culture.Parent;
                 }
             }
-            
+
             if (!categoryExists)
                 throw new InvalidOperationException(SR.GetString(SR.MissingCategory));
 
             return counters;
         }
 
-        private string[] GetCounters(string category, ref bool categoryExists) {
+        private string[] GetCounters(string category, ref bool categoryExists)
+        {
             categoryExists = false;
             CategoryEntry entry = (CategoryEntry)this.CategoryTable[category];
             if (entry == null)
@@ -804,17 +1035,20 @@ namespace System.Diagnostics {
 
             int index2 = 0;
             string[] counters = new string[entry.CounterIndexes.Length];
-            for (int index = 0; index < counters.Length; ++ index) {
+            for (int index = 0; index < counters.Length; ++index)
+            {
                 int counterIndex = entry.CounterIndexes[index];
                 string counterName = (string)this.NameTable[counterIndex];
-                if (counterName != null && counterName != String.Empty) {
+                if (counterName != null && counterName != String.Empty)
+                {
                     counters[index2] = counterName;
                     ++index2;
                 }
             }
 
             //Lets adjust the array in case there were null entries
-            if (index2 < counters.Length) {
+            if (index2 < counters.Length)
+            {
                 string[] adjustedCounters = new string[index2];
                 Array.Copy(counters, adjustedCounters, index2);
                 counters = adjustedCounters;
@@ -823,16 +1057,19 @@ namespace System.Diagnostics {
             return counters;
         }
 
-        internal static string GetCounterHelp(string machine, string category, string counter) {
+        internal static string GetCounterHelp(string machine, string category, string counter)
+        {
             PerformanceCounterLib library;
             bool categoryExists = false;
             string help;
 
-            //First check the current culture for the counter. This will allow 
-            //PerformanceCounter.CounterHelp to return localized strings.            
-            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            //First check the current culture for the counter. This will allow
+            //PerformanceCounter.CounterHelp to return localized strings.
+            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                while (culture != CultureInfo.InvariantCulture) {
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     help = library.GetCounterHelp(category, counter, ref categoryExists);
                     if (categoryExists)
@@ -847,12 +1084,15 @@ namespace System.Diagnostics {
             help = library.GetCounterHelp(category, counter, ref categoryExists);
 
             if (!categoryExists)
-                throw new InvalidOperationException(SR.GetString(SR.MissingCategoryDetail, category));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.MissingCategoryDetail, category)
+                );
 
             return help;
         }
 
-        private string GetCounterHelp(string category, string counter, ref bool categoryExists) {
+        private string GetCounterHelp(string category, string counter, ref bool categoryExists)
+        {
             categoryExists = false;
             CategoryEntry entry = (CategoryEntry)this.CategoryTable[category];
             if (entry == null)
@@ -861,13 +1101,15 @@ namespace System.Diagnostics {
                 categoryExists = true;
 
             int helpIndex = -1;
-            for (int index = 0; index < entry.CounterIndexes.Length; ++ index) {
+            for (int index = 0; index < entry.CounterIndexes.Length; ++index)
+            {
                 int counterIndex = entry.CounterIndexes[index];
                 string counterName = (string)this.NameTable[counterIndex];
                 if (counterName == null)
-                   counterName = String.Empty;
+                    counterName = String.Empty;
 
-                if (String.Compare(counterName, counter, StringComparison.OrdinalIgnoreCase) == 0) {
+                if (String.Compare(counterName, counter, StringComparison.OrdinalIgnoreCase) == 0)
+                {
                     helpIndex = entry.HelpIndexes[index];
                     break;
                 }
@@ -883,7 +1125,8 @@ namespace System.Diagnostics {
                 return help;
         }
 
-        internal string GetCounterName(int index) {
+        internal string GetCounterName(int index)
+        {
             if (this.NameTable.ContainsKey(index))
                 return (string)this.NameTable[index];
 
@@ -892,17 +1135,20 @@ namespace System.Diagnostics {
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static string[] GetLanguageIds() {
+        private static string[] GetLanguageIds()
+        {
             RegistryKey libraryParentKey = null;
             string[] ids = new string[0];
             new RegistryPermission(PermissionState.Unrestricted).Assert();
-            try {
+            try
+            {
                 libraryParentKey = Registry.LocalMachine.OpenSubKey(PerflibPath);
 
                 if (libraryParentKey != null)
                     ids = libraryParentKey.GetSubKeyNames();
             }
-            finally {
+            finally
+            {
                 if (libraryParentKey != null)
                     libraryParentKey.Close();
 
@@ -912,7 +1158,11 @@ namespace System.Diagnostics {
             return ids;
         }
 
-        internal static PerformanceCounterLib GetPerformanceCounterLib(string machineName, CultureInfo culture) {
+        internal static PerformanceCounterLib GetPerformanceCounterLib(
+            string machineName,
+            CultureInfo culture
+        )
+        {
             SharedUtils.CheckEnvironment();
 
             string lcidString = culture.LCID.ToString("X3", CultureInfo.InvariantCulture);
@@ -921,8 +1171,10 @@ namespace System.Diagnostics {
             else
                 machineName = machineName.ToLower(CultureInfo.InvariantCulture);
 
-            if (PerformanceCounterLib.libraryTable == null) {
-                lock (InternalSyncObject) {
+            if (PerformanceCounterLib.libraryTable == null)
+            {
+                lock (InternalSyncObject)
+                {
                     if (PerformanceCounterLib.libraryTable == null)
                         PerformanceCounterLib.libraryTable = new Hashtable();
                 }
@@ -931,27 +1183,32 @@ namespace System.Diagnostics {
             string libraryKey = machineName + ":" + lcidString;
             if (PerformanceCounterLib.libraryTable.Contains(libraryKey))
                 return (PerformanceCounterLib)PerformanceCounterLib.libraryTable[libraryKey];
-            else {
+            else
+            {
                 PerformanceCounterLib library = new PerformanceCounterLib(machineName, lcidString);
                 PerformanceCounterLib.libraryTable[libraryKey] = library;
                 return library;
             }
         }
 
-        internal byte[] GetPerformanceData(string item) {
-            if (this.performanceMonitor == null) {
-                lock (InternalSyncObject) {
+        internal byte[] GetPerformanceData(string item)
+        {
+            if (this.performanceMonitor == null)
+            {
+                lock (InternalSyncObject)
+                {
                     if (this.performanceMonitor == null)
                         this.performanceMonitor = new PerformanceMonitor(this.machineName);
                 }
             }
 
-           return this.performanceMonitor.GetData(item);
+            return this.performanceMonitor.GetData(item);
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private Hashtable GetStringTable(bool isHelp) {
+        private Hashtable GetStringTable(bool isHelp)
+        {
             Hashtable stringTable;
             RegistryKey libraryKey;
 
@@ -960,35 +1217,47 @@ namespace System.Diagnostics {
             ps.AddPermission(new SecurityPermission(SecurityPermissionFlag.UnmanagedCode));
             ps.Assert();
 
-            if (String.Compare(this.machineName, ComputerName, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(this.machineName, ComputerName, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
                 libraryKey = Registry.PerformanceData;
-            else {
-                libraryKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.PerformanceData, this.machineName);
+            else
+            {
+                libraryKey = RegistryKey.OpenRemoteBaseKey(
+                    RegistryHive.PerformanceData,
+                    this.machineName
+                );
             }
 
-            try {
+            try
+            {
                 string[] names = null;
-                int waitRetries = 14;   //((2^13)-1)*10ms == approximately 1.4mins
+                int waitRetries = 14; //((2^13)-1)*10ms == approximately 1.4mins
                 int waitSleep = 0;
 
-                // In some stress situations, querying counter values from 
-                // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Perflib\009 
-                // often returns null/empty data back. We should build fault-tolerance logic to 
-                // make it more reliable because getting null back once doesn't necessarily mean 
-                // that the data is corrupted, most of the time we would get the data just fine 
+                // In some stress situations, querying counter values from
+                // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Perflib\009
+                // often returns null/empty data back. We should build fault-tolerance logic to
+                // make it more reliable because getting null back once doesn't necessarily mean
+                // that the data is corrupted, most of the time we would get the data just fine
                 // in subsequent tries.
-                while (waitRetries > 0) {
-                    try {
+                while (waitRetries > 0)
+                {
+                    try
+                    {
                         if (!isHelp)
                             names = (string[])libraryKey.GetValue("Counter " + perfLcid);
                         else
                             names = (string[])libraryKey.GetValue("Explain " + perfLcid);
 
-                        if ((names == null) || (names.Length == 0)) {
+                        if ((names == null) || (names.Length == 0))
+                        {
                             --waitRetries;
                             if (waitSleep == 0)
                                 waitSleep = 10;
-                            else {
+                            else
+                            {
                                 System.Threading.Thread.Sleep(waitSleep);
                                 waitSleep *= 2;
                             }
@@ -996,13 +1265,15 @@ namespace System.Diagnostics {
                         else
                             break;
                     }
-                    catch (IOException) {
+                    catch (IOException)
+                    {
                         // RegistryKey throws if it can't find the value.  We want to return an empty table
-                        // and throw a different exception higher up the stack. 
+                        // and throw a different exception higher up the stack.
                         names = null;
                         break;
                     }
-                    catch (InvalidCastException) {
+                    catch (InvalidCastException)
+                    {
                         // Unable to cast object of type 'System.Byte[]' to type 'System.String[]'.
                         // this happens when the registry data store is corrupt and the type is not even REG_MULTI_SZ
                         names = null;
@@ -1012,23 +1283,39 @@ namespace System.Diagnostics {
 
                 if (names == null)
                     stringTable = new Hashtable();
-                else {
-                    stringTable = new Hashtable(names.Length/2);
-                    
-                    for (int index = 0; index < (names.Length/2); ++ index) {
-                        string nameString =  names[(index *2) + 1];
+                else
+                {
+                    stringTable = new Hashtable(names.Length / 2);
+
+                    for (int index = 0; index < (names.Length / 2); ++index)
+                    {
+                        string nameString = names[(index * 2) + 1];
                         if (nameString == null)
                             nameString = String.Empty;
-                        
+
                         int key;
-                        if (!Int32.TryParse(names[index * 2], NumberStyles.Integer, CultureInfo.InvariantCulture, out key)) {
-                            if (isHelp) {
+                        if (
+                            !Int32.TryParse(
+                                names[index * 2],
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out key
+                            )
+                        )
+                        {
+                            if (isHelp)
+                            {
                                 // Category Help Table
-                                throw new InvalidOperationException(SR.GetString(SR.CategoryHelpCorrupt, names[index * 2]));
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.CategoryHelpCorrupt, names[index * 2])
+                                );
                             }
-                            else {
-                                // Counter Name Table 
-                                throw new InvalidOperationException(SR.GetString(SR.CounterNameCorrupt, names[index * 2]));
+                            else
+                            {
+                                // Counter Name Table
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.CounterNameCorrupt, names[index * 2])
+                                );
                             }
                         }
 
@@ -1036,21 +1323,28 @@ namespace System.Diagnostics {
                     }
                 }
             }
-            finally {
+            finally
+            {
                 libraryKey.Close();
             }
 
             return stringTable;
         }
-        
-        internal static bool IsCustomCategory(string machine, string category) {
-            PerformanceCounterLib library = GetPerformanceCounterLib(machine, new CultureInfo(EnglishLCID));
-            if (library.IsCustomCategory(category)) 
+
+        internal static bool IsCustomCategory(string machine, string category)
+        {
+            PerformanceCounterLib library = GetPerformanceCounterLib(
+                machine,
+                new CultureInfo(EnglishLCID)
+            );
+            if (library.IsCustomCategory(category))
                 return true;
 
-            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+            if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+            {
                 CultureInfo culture = CultureInfo.CurrentCulture;
-                while (culture != CultureInfo.InvariantCulture) {
+                while (culture != CultureInfo.InvariantCulture)
+                {
                     library = GetPerformanceCounterLib(machine, culture);
                     if (library.IsCustomCategory(category))
                         return true;
@@ -1061,28 +1355,42 @@ namespace System.Diagnostics {
             return false;
         }
 
-        internal static bool IsBaseCounter(int type) {
-            return (type == NativeMethods.PERF_AVERAGE_BASE ||
-                    type == NativeMethods.PERF_COUNTER_MULTI_BASE ||
-                    type == NativeMethods.PERF_RAW_BASE  ||
-                    type == NativeMethods.PERF_LARGE_RAW_BASE  ||
-                    type == NativeMethods.PERF_SAMPLE_BASE);
+        internal static bool IsBaseCounter(int type)
+        {
+            return (
+                type == NativeMethods.PERF_AVERAGE_BASE
+                || type == NativeMethods.PERF_COUNTER_MULTI_BASE
+                || type == NativeMethods.PERF_RAW_BASE
+                || type == NativeMethods.PERF_LARGE_RAW_BASE
+                || type == NativeMethods.PERF_SAMPLE_BASE
+            );
         }
-        
-        private bool IsCustomCategory(string category) {
+
+        private bool IsCustomCategory(string category)
+        {
             PerformanceCounterCategoryType categoryType;
-            
+
             return FindCustomCategory(category, out categoryType);
         }
 
-        internal static PerformanceCounterCategoryType GetCategoryType(string machine, string category) {
+        internal static PerformanceCounterCategoryType GetCategoryType(
+            string machine,
+            string category
+        )
+        {
             PerformanceCounterCategoryType categoryType = PerformanceCounterCategoryType.Unknown;
-            
-            PerformanceCounterLib library = GetPerformanceCounterLib(machine, new CultureInfo(EnglishLCID));
-            if (!library.FindCustomCategory(category, out categoryType)) {
-                if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID) {
+
+            PerformanceCounterLib library = GetPerformanceCounterLib(
+                machine,
+                new CultureInfo(EnglishLCID)
+            );
+            if (!library.FindCustomCategory(category, out categoryType))
+            {
+                if (CultureInfo.CurrentCulture.Parent.LCID != EnglishLCID)
+                {
                     CultureInfo culture = CultureInfo.CurrentCulture;
-                    while (culture != CultureInfo.InvariantCulture) {
+                    while (culture != CultureInfo.InvariantCulture)
+                    {
                         library = GetPerformanceCounterLib(machine, culture);
                         if (library.FindCustomCategory(category, out categoryType))
                             return categoryType;
@@ -1107,11 +1415,19 @@ namespace System.Diagnostics {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static void RegisterCategory(string categoryName, PerformanceCounterCategoryType categoryType, string categoryHelp, CounterCreationDataCollection creationData) {
-            try {
+        internal static void RegisterCategory(
+            string categoryName,
+            PerformanceCounterCategoryType categoryType,
+            string categoryHelp,
+            CounterCreationDataCollection creationData
+        )
+        {
+            try
+            {
                 bool iniRegistered = false;
                 CreateRegistryEntry(categoryName, categoryType, creationData, ref iniRegistered);
-                if (!iniRegistered) {
+                if (!iniRegistered)
+                {
                     string[] languageIds = GetLanguageIds();
                     CreateIniFile(categoryName, categoryHelp, creationData, languageIds);
                     CreateSymbolFile(creationData);
@@ -1120,14 +1436,16 @@ namespace System.Diagnostics {
                 CloseAllTables();
                 CloseAllLibraries();
             }
-            finally {
+            finally
+            {
                 DeleteTemporaryFiles();
             }
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void RegisterFiles(string arg0, bool unregister) {
+        private static void RegisterFiles(string arg0, bool unregister)
+        {
             Process p;
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
             processStartInfo.UseShellExecute = false;
@@ -1143,20 +1461,24 @@ namespace System.Diagnostics {
 
             int res = 0;
             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Assert();
-            try {
+            try
+            {
                 processStartInfo.Arguments = "\"" + arg0 + "\"";
                 p = Process.Start(processStartInfo);
                 p.WaitForExit();
 
                 res = p.ExitCode;
             }
-            finally {
+            finally
+            {
                 SecurityPermission.RevertAssert();
             }
-            
 
-            if (res == NativeMethods.ERROR_ACCESS_DENIED) {
-                throw new UnauthorizedAccessException(SR.GetString(SR.CantChangeCategoryRegistration, arg0));
+            if (res == NativeMethods.ERROR_ACCESS_DENIED)
+            {
+                throw new UnauthorizedAccessException(
+                    SR.GetString(SR.CantChangeCategoryRegistration, arg0)
+                );
             }
 
             // Look at Q269225, unlodctr might return 2 when WMI is not installed.
@@ -1167,7 +1489,8 @@ namespace System.Diagnostics {
                 throw SharedUtils.CreateSafeWin32Exception(res);
         }
 
-        internal static void UnregisterCategory(string categoryName) {
+        internal static void UnregisterCategory(string categoryName)
+        {
             RegisterFiles(categoryName, true);
             DeleteRegistryEntry(categoryName);
             CloseAllTables();
@@ -1175,68 +1498,91 @@ namespace System.Diagnostics {
         }
     }
 
-    internal class PerformanceMonitor {
+    internal class PerformanceMonitor
+    {
         private RegistryKey perfDataKey = null;
         private string machineName;
 
-        internal PerformanceMonitor(string machineName) {
+        internal PerformanceMonitor(string machineName)
+        {
             this.machineName = machineName;
             Init();
         }
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private void Init() {
-            try {
-                if (machineName != "." && String.Compare(machineName, PerformanceCounterLib.ComputerName, StringComparison.OrdinalIgnoreCase) != 0) {
+        private void Init()
+        {
+            try
+            {
+                if (
+                    machineName != "."
+                    && String.Compare(
+                        machineName,
+                        PerformanceCounterLib.ComputerName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                )
+                {
                     new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Assert();
-                    perfDataKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.PerformanceData, machineName);
+                    perfDataKey = RegistryKey.OpenRemoteBaseKey(
+                        RegistryHive.PerformanceData,
+                        machineName
+                    );
                 }
                 else
                     perfDataKey = Registry.PerformanceData;
             }
-            catch (UnauthorizedAccessException) {
+            catch (UnauthorizedAccessException)
+            {
                 // we need to do this for compatibility with v1.1 and v1.0.
                 throw new Win32Exception(NativeMethods.ERROR_ACCESS_DENIED);
             }
-            catch (IOException e) {
+            catch (IOException e)
+            {
                 // we need to do this for compatibility with v1.1 and v1.0.
                 throw new Win32Exception(Marshal.GetHRForException(e));
             }
         }
 
-        internal void Close() {
-            if( perfDataKey != null)
+        internal void Close()
+        {
+            if (perfDataKey != null)
                 perfDataKey.Close();
 
             perfDataKey = null;
         }
 
-        // Win32 RegQueryValueEx for perf data could deadlock (for a Mutex) up to 2mins in some 
-        // scenarios before they detect it and exit gracefully. In the mean time, ERROR_BUSY, 
-        // ERROR_NOT_READY etc can be seen by other concurrent calls (which is the reason for the 
-        // wait loop and switch case below). We want to wait most certainly more than a 2min window. 
-        // The curent wait time of up to 10mins takes care of the known stress deadlock issues. In most 
-        // cases we wouldn't wait for more than 2mins anyways but in worst cases how much ever time 
-        // we wait may not be sufficient if the Win32 code keeps running into this deadlock again 
-        // and again. A condition very rare but possible in theory. We would get back to the user 
+        // Win32 RegQueryValueEx for perf data could deadlock (for a Mutex) up to 2mins in some
+        // scenarios before they detect it and exit gracefully. In the mean time, ERROR_BUSY,
+        // ERROR_NOT_READY etc can be seen by other concurrent calls (which is the reason for the
+        // wait loop and switch case below). We want to wait most certainly more than a 2min window.
+        // The curent wait time of up to 10mins takes care of the known stress deadlock issues. In most
+        // cases we wouldn't wait for more than 2mins anyways but in worst cases how much ever time
+        // we wait may not be sufficient if the Win32 code keeps running into this deadlock again
+        // and again. A condition very rare but possible in theory. We would get back to the user
         // in this case with InvalidOperationException after the wait time expires.
-        internal byte[] GetData(string item) {
-            int waitRetries = 17;   //2^16*10ms == approximately 10mins
+        internal byte[] GetData(string item)
+        {
+            int waitRetries = 17; //2^16*10ms == approximately 10mins
             int waitSleep = 0;
             byte[] data = null;
             int error = 0;
 
             // no need to revert here since we'll fall off the end of the method
             new RegistryPermission(PermissionState.Unrestricted).Assert();
-            while (waitRetries > 0) {
-                try {
-                    data = (byte[]) perfDataKey.GetValue(item);
+            while (waitRetries > 0)
+            {
+                try
+                {
+                    data = (byte[])perfDataKey.GetValue(item);
                     return data;
                 }
-                catch (IOException e) {
+                catch (IOException e)
+                {
                     error = Marshal.GetHRForException(e);
-                    switch (error) {
+                    switch (error)
+                    {
                         case NativeMethods.RPC_S_CALL_FAILED:
                         case NativeMethods.ERROR_INVALID_HANDLE:
                         case NativeMethods.RPC_S_SERVER_UNAVAILABLE:
@@ -1248,10 +1594,12 @@ namespace System.Diagnostics {
                         case NativeMethods.ERROR_LOCK_FAILED:
                         case NativeMethods.ERROR_BUSY:
                             --waitRetries;
-                            if (waitSleep == 0) {
+                            if (waitSleep == 0)
+                            {
                                 waitSleep = 10;
                             }
-                            else {
+                            else
+                            {
                                 System.Threading.Thread.Sleep(waitSleep);
                                 waitSleep *= 2;
                             }
@@ -1261,23 +1609,28 @@ namespace System.Diagnostics {
                             throw SharedUtils.CreateSafeWin32Exception(error);
                     }
                 }
-                catch (InvalidCastException e) {
-                    throw new InvalidOperationException(SR.GetString(SR.CounterDataCorrupt, perfDataKey.ToString()), e);
+                catch (InvalidCastException e)
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.CounterDataCorrupt, perfDataKey.ToString()),
+                        e
+                    );
                 }
             }
 
             throw SharedUtils.CreateSafeWin32Exception(error);
         }
-
     }
 
-    internal class CategoryEntry {
+    internal class CategoryEntry
+    {
         internal int NameIndex;
         internal int HelpIndex;
         internal int[] CounterIndexes;
         internal int[] HelpIndexes;
 
-        internal CategoryEntry(NativeMethods.PERF_OBJECT_TYPE perfObject) {
+        internal CategoryEntry(NativeMethods.PERF_OBJECT_TYPE perfObject)
+        {
             this.NameIndex = perfObject.ObjectNameTitleIndex;
             this.HelpIndex = perfObject.ObjectHelpTitleIndex;
             this.CounterIndexes = new int[perfObject.NumCounters];
@@ -1285,7 +1638,8 @@ namespace System.Diagnostics {
         }
     }
 
-    internal class CategorySample {
+    internal class CategorySample
+    {
         internal readonly long SystemFrequency;
         internal readonly long TimeStamp;
         internal readonly long TimeStamp100nSec;
@@ -1297,13 +1651,19 @@ namespace System.Diagnostics {
         private CategoryEntry entry;
         private PerformanceCounterLib library;
 
-        internal unsafe CategorySample(byte[] data, CategoryEntry entry, PerformanceCounterLib library) {
+        internal unsafe CategorySample(
+            byte[] data,
+            CategoryEntry entry,
+            PerformanceCounterLib library
+        )
+        {
             this.entry = entry;
             this.library = library;
             int categoryIndex = entry.NameIndex;
             NativeMethods.PERF_DATA_BLOCK dataBlock = new NativeMethods.PERF_DATA_BLOCK();
-            fixed (byte* dataPtr = data) {
-                IntPtr dataRef = new IntPtr((void*) dataPtr);
+            fixed (byte* dataPtr = data)
+            {
+                IntPtr dataRef = new IntPtr((void*)dataPtr);
 
                 Marshal.PtrToStructure(dataRef, dataBlock);
                 this.SystemFrequency = dataBlock.PerfFreq;
@@ -1311,7 +1671,8 @@ namespace System.Diagnostics {
                 this.TimeStamp100nSec = dataBlock.PerfTime100nSec;
                 dataRef = (IntPtr)((long)dataRef + dataBlock.HeaderLength);
                 int numPerfObjects = dataBlock.NumObjectTypes;
-                if (numPerfObjects == 0) {
+                if (numPerfObjects == 0)
+                {
                     this.CounterTable = new Hashtable();
                     this.InstanceNameTable = new Hashtable(StringComparer.OrdinalIgnoreCase);
                     return;
@@ -1321,11 +1682,13 @@ namespace System.Diagnostics {
                 //several of them.
                 NativeMethods.PERF_OBJECT_TYPE perfObject = null;
                 bool foundCategory = false;
-                for (int index = 0; index < numPerfObjects; index++) {
+                for (int index = 0; index < numPerfObjects; index++)
+                {
                     perfObject = new NativeMethods.PERF_OBJECT_TYPE();
                     Marshal.PtrToStructure(dataRef, perfObject);
 
-                   if (perfObject.ObjectNameTitleIndex == categoryIndex) {
+                    if (perfObject.ObjectNameTitleIndex == categoryIndex)
+                    {
                         foundCategory = true;
                         break;
                     }
@@ -1334,7 +1697,12 @@ namespace System.Diagnostics {
                 }
 
                 if (!foundCategory)
-                    throw new InvalidOperationException(SR.GetString(SR.CantReadCategoryIndex, categoryIndex.ToString(CultureInfo.CurrentCulture)));
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.CantReadCategoryIndex,
+                            categoryIndex.ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
 
                 this.CounterFrequency = perfObject.PerfFreq;
                 this.CounterTimeStamp = perfObject.PerfTime;
@@ -1345,74 +1713,107 @@ namespace System.Diagnostics {
                     IsMultiInstance = false;
                 else
                     IsMultiInstance = true;
-                
+
                 // Move pointer forward to end of PERF_OBJECT_TYPE
                 dataRef = (IntPtr)((long)dataRef + perfObject.HeaderLength);
 
                 CounterDefinitionSample[] samples = new CounterDefinitionSample[counterNumber];
                 this.CounterTable = new Hashtable(counterNumber);
-                for (int index = 0; index < samples.Length; ++ index) {
-                    NativeMethods.PERF_COUNTER_DEFINITION perfCounter = new NativeMethods.PERF_COUNTER_DEFINITION();
+                for (int index = 0; index < samples.Length; ++index)
+                {
+                    NativeMethods.PERF_COUNTER_DEFINITION perfCounter =
+                        new NativeMethods.PERF_COUNTER_DEFINITION();
                     Marshal.PtrToStructure(dataRef, perfCounter);
                     samples[index] = new CounterDefinitionSample(perfCounter, this, instanceNumber);
                     dataRef = (IntPtr)((long)dataRef + perfCounter.ByteLength);
 
                     int currentSampleType = samples[index].CounterType;
-                    if (!PerformanceCounterLib.IsBaseCounter(currentSampleType)) {
-                        // We'll put only non-base counters in the table. 
+                    if (!PerformanceCounterLib.IsBaseCounter(currentSampleType))
+                    {
+                        // We'll put only non-base counters in the table.
                         if (currentSampleType != NativeMethods.PERF_COUNTER_NODATA)
                             this.CounterTable[samples[index].NameIndex] = samples[index];
                     }
-                    else {
-                        // it's a base counter, try to hook it up to the main counter. 
-                        Debug.Assert(index > 0, "Index > 0 because base counters should never be at index 0");
+                    else
+                    {
+                        // it's a base counter, try to hook it up to the main counter.
+                        Debug.Assert(
+                            index > 0,
+                            "Index > 0 because base counters should never be at index 0"
+                        );
                         if (index > 0)
-                            samples[index-1].BaseCounterDefinitionSample = samples[index];
+                            samples[index - 1].BaseCounterDefinitionSample = samples[index];
                     }
                 }
 
-                // now set up the InstanceNameTable.  
-                if (!IsMultiInstance) {
+                // now set up the InstanceNameTable.
+                if (!IsMultiInstance)
+                {
                     this.InstanceNameTable = new Hashtable(1, StringComparer.OrdinalIgnoreCase);
                     this.InstanceNameTable[PerformanceCounterLib.SingleInstanceName] = 0;
 
-                    for (int index = 0; index < samples.Length; ++ index)  {
+                    for (int index = 0; index < samples.Length; ++index)
+                    {
                         samples[index].SetInstanceValue(0, dataRef);
                     }
                 }
-                else {
+                else
+                {
                     string[] parentInstanceNames = null;
-                    this.InstanceNameTable = new Hashtable(instanceNumber, StringComparer.OrdinalIgnoreCase);
-                    for (int i = 0; i < instanceNumber; i++) {
-                        NativeMethods.PERF_INSTANCE_DEFINITION perfInstance = new NativeMethods.PERF_INSTANCE_DEFINITION();
+                    this.InstanceNameTable = new Hashtable(
+                        instanceNumber,
+                        StringComparer.OrdinalIgnoreCase
+                    );
+                    for (int i = 0; i < instanceNumber; i++)
+                    {
+                        NativeMethods.PERF_INSTANCE_DEFINITION perfInstance =
+                            new NativeMethods.PERF_INSTANCE_DEFINITION();
                         Marshal.PtrToStructure(dataRef, perfInstance);
                         if (perfInstance.ParentObjectTitleIndex > 0 && parentInstanceNames == null)
-                            parentInstanceNames = GetInstanceNamesFromIndex(perfInstance.ParentObjectTitleIndex);
+                            parentInstanceNames = GetInstanceNamesFromIndex(
+                                perfInstance.ParentObjectTitleIndex
+                            );
 
                         string instanceName;
-                        if (parentInstanceNames != null && perfInstance.ParentObjectInstance >= 0 && perfInstance.ParentObjectInstance < parentInstanceNames.Length - 1)
-                            instanceName = parentInstanceNames[perfInstance.ParentObjectInstance] + "/" + Marshal.PtrToStringUni((IntPtr)((long)dataRef + perfInstance.NameOffset));
+                        if (
+                            parentInstanceNames != null
+                            && perfInstance.ParentObjectInstance >= 0
+                            && perfInstance.ParentObjectInstance < parentInstanceNames.Length - 1
+                        )
+                            instanceName =
+                                parentInstanceNames[perfInstance.ParentObjectInstance]
+                                + "/"
+                                + Marshal.PtrToStringUni(
+                                    (IntPtr)((long)dataRef + perfInstance.NameOffset)
+                                );
                         else
-                            instanceName = Marshal.PtrToStringUni((IntPtr)((long)dataRef + perfInstance.NameOffset));
+                            instanceName = Marshal.PtrToStringUni(
+                                (IntPtr)((long)dataRef + perfInstance.NameOffset)
+                            );
 
                         //In some cases instance names are not unique (Process), same as perfmon
                         //generate a unique name.
                         string newInstanceName = instanceName;
                         int newInstanceNumber = 1;
-                        while (true) {
-                            if (!this.InstanceNameTable.ContainsKey(newInstanceName)) {
+                        while (true)
+                        {
+                            if (!this.InstanceNameTable.ContainsKey(newInstanceName))
+                            {
                                 this.InstanceNameTable[newInstanceName] = i;
                                 break;
                             }
-                            else {
-                                newInstanceName =  instanceName + "#" + newInstanceNumber.ToString(CultureInfo.InvariantCulture);
-                                ++  newInstanceNumber;
+                            else
+                            {
+                                newInstanceName =
+                                    instanceName
+                                    + "#"
+                                    + newInstanceNumber.ToString(CultureInfo.InvariantCulture);
+                                ++newInstanceNumber;
                             }
                         }
 
-
                         dataRef = (IntPtr)((long)dataRef + perfInstance.ByteLength);
-                        for (int index = 0; index < samples.Length; ++ index)
+                        for (int index = 0; index < samples.Length; ++index)
                             samples[index].SetInstanceValue(i, dataRef);
 
                         dataRef = (IntPtr)((long)dataRef + Marshal.ReadInt32(dataRef));
@@ -1421,10 +1822,14 @@ namespace System.Diagnostics {
             }
         }
 
-        internal unsafe string[] GetInstanceNamesFromIndex(int categoryIndex) {
-            byte[] data = library.GetPerformanceData(categoryIndex.ToString(CultureInfo.InvariantCulture));
-            fixed (byte* dataPtr = data) {
-                IntPtr dataRef = new IntPtr((void*) dataPtr);
+        internal unsafe string[] GetInstanceNamesFromIndex(int categoryIndex)
+        {
+            byte[] data = library.GetPerformanceData(
+                categoryIndex.ToString(CultureInfo.InvariantCulture)
+            );
+            fixed (byte* dataPtr = data)
+            {
+                IntPtr dataRef = new IntPtr((void*)dataPtr);
 
                 NativeMethods.PERF_DATA_BLOCK dataBlock = new NativeMethods.PERF_DATA_BLOCK();
                 Marshal.PtrToStructure(dataRef, dataBlock);
@@ -1433,11 +1838,13 @@ namespace System.Diagnostics {
 
                 NativeMethods.PERF_OBJECT_TYPE perfObject = null;
                 bool foundCategory = false;
-                for (int index = 0; index < numPerfObjects; index++) {
+                for (int index = 0; index < numPerfObjects; index++)
+                {
                     perfObject = new NativeMethods.PERF_OBJECT_TYPE();
                     Marshal.PtrToStructure(dataRef, perfObject);
 
-                    if (perfObject.ObjectNameTitleIndex == categoryIndex) {
+                    if (perfObject.ObjectNameTitleIndex == categoryIndex)
+                    {
                         foundCategory = true;
                         break;
                     }
@@ -1456,17 +1863,23 @@ namespace System.Diagnostics {
                     return new string[0];
 
                 CounterDefinitionSample[] samples = new CounterDefinitionSample[counterNumber];
-                for (int index = 0; index < samples.Length; ++ index) {
-                    NativeMethods.PERF_COUNTER_DEFINITION perfCounter = new NativeMethods.PERF_COUNTER_DEFINITION();
+                for (int index = 0; index < samples.Length; ++index)
+                {
+                    NativeMethods.PERF_COUNTER_DEFINITION perfCounter =
+                        new NativeMethods.PERF_COUNTER_DEFINITION();
                     Marshal.PtrToStructure(dataRef, perfCounter);
                     dataRef = (IntPtr)((long)dataRef + perfCounter.ByteLength);
                 }
 
                 string[] instanceNames = new string[instanceNumber];
-                for (int i = 0; i < instanceNumber; i++) {
-                    NativeMethods.PERF_INSTANCE_DEFINITION perfInstance = new NativeMethods.PERF_INSTANCE_DEFINITION();
+                for (int i = 0; i < instanceNumber; i++)
+                {
+                    NativeMethods.PERF_INSTANCE_DEFINITION perfInstance =
+                        new NativeMethods.PERF_INSTANCE_DEFINITION();
                     Marshal.PtrToStructure(dataRef, perfInstance);
-                    instanceNames[i] =  Marshal.PtrToStringUni((IntPtr)((long)dataRef + perfInstance.NameOffset));
+                    instanceNames[i] = Marshal.PtrToStringUni(
+                        (IntPtr)((long)dataRef + perfInstance.NameOffset)
+                    );
                     dataRef = (IntPtr)((long)dataRef + perfInstance.ByteLength);
                     dataRef = (IntPtr)((long)dataRef + Marshal.ReadInt32(dataRef));
                 }
@@ -1475,18 +1888,33 @@ namespace System.Diagnostics {
             }
         }
 
-        internal CounterDefinitionSample GetCounterDefinitionSample(string counter) {
-            for (int index = 0; index < this.entry.CounterIndexes.Length; ++ index) {
+        internal CounterDefinitionSample GetCounterDefinitionSample(string counter)
+        {
+            for (int index = 0; index < this.entry.CounterIndexes.Length; ++index)
+            {
                 int counterIndex = entry.CounterIndexes[index];
                 string counterName = (string)this.library.NameTable[counterIndex];
-                if (counterName != null) {
-                    if (String.Compare(counterName, counter, StringComparison.OrdinalIgnoreCase) == 0) {
-                        CounterDefinitionSample sample = (CounterDefinitionSample)this.CounterTable[counterIndex];
-                        if (sample == null) {
+                if (counterName != null)
+                {
+                    if (
+                        String.Compare(counterName, counter, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
+                    {
+                        CounterDefinitionSample sample = (CounterDefinitionSample)
+                            this.CounterTable[counterIndex];
+                        if (sample == null)
+                        {
                             //This is a base counter and has not been added to the table
-                            foreach (CounterDefinitionSample multiSample in this.CounterTable.Values) {
-                                if (multiSample.BaseCounterDefinitionSample != null &&
-                                    multiSample.BaseCounterDefinitionSample.NameIndex == counterIndex)
+                            foreach (
+                                CounterDefinitionSample multiSample in this.CounterTable.Values
+                            )
+                            {
+                                if (
+                                    multiSample.BaseCounterDefinitionSample != null
+                                    && multiSample.BaseCounterDefinitionSample.NameIndex
+                                        == counterIndex
+                                )
                                     return multiSample.BaseCounterDefinitionSample;
                             }
 
@@ -1500,17 +1928,20 @@ namespace System.Diagnostics {
             throw new InvalidOperationException(SR.GetString(SR.CantReadCounter, counter));
         }
 
-        internal InstanceDataCollectionCollection ReadCategory() {
-
+        internal InstanceDataCollectionCollection ReadCategory()
+        {
 #pragma warning disable 618
             InstanceDataCollectionCollection data = new InstanceDataCollectionCollection();
 #pragma warning restore 618
-            for (int index = 0; index < this.entry.CounterIndexes.Length; ++ index) {
+            for (int index = 0; index < this.entry.CounterIndexes.Length; ++index)
+            {
                 int counterIndex = entry.CounterIndexes[index];
 
                 string name = (string)library.NameTable[counterIndex];
-                if (name != null && name != String.Empty) {
-                    CounterDefinitionSample sample = (CounterDefinitionSample)this.CounterTable[counterIndex];
+                if (name != null && name != String.Empty)
+                {
+                    CounterDefinitionSample sample = (CounterDefinitionSample)
+                        this.CounterTable[counterIndex];
                     if (sample != null)
                         //If the current index refers to a counter base,
                         //the sample will be null
@@ -1522,7 +1953,8 @@ namespace System.Diagnostics {
         }
     }
 
-    internal class CounterDefinitionSample {
+    internal class CounterDefinitionSample
+    {
         internal readonly int NameIndex;
         internal readonly int CounterType;
         internal CounterDefinitionSample BaseCounterDefinitionSample;
@@ -1532,12 +1964,18 @@ namespace System.Diagnostics {
         private long[] instanceValues;
         private CategorySample categorySample;
 
-        internal CounterDefinitionSample(NativeMethods.PERF_COUNTER_DEFINITION perfCounter, CategorySample categorySample, int instanceNumber) {
+        internal CounterDefinitionSample(
+            NativeMethods.PERF_COUNTER_DEFINITION perfCounter,
+            CategorySample categorySample,
+            int instanceNumber
+        )
+        {
             this.NameIndex = perfCounter.CounterNameTitleIndex;
             this.CounterType = perfCounter.CounterType;
             this.offset = perfCounter.CounterOffset;
             this.size = perfCounter.CounterSize;
-            if (instanceNumber == -1) {
+            if (instanceNumber == -1)
+            {
                 this.instanceValues = new long[1];
             }
             else
@@ -1546,50 +1984,62 @@ namespace System.Diagnostics {
             this.categorySample = categorySample;
         }
 
-        private long ReadValue(IntPtr pointer) {
-            if (this.size == 4) {
+        private long ReadValue(IntPtr pointer)
+        {
+            if (this.size == 4)
+            {
                 return (long)(uint)Marshal.ReadInt32((IntPtr)((long)pointer + this.offset));
             }
-            else if (this.size == 8) {
+            else if (this.size == 8)
+            {
                 return (long)Marshal.ReadInt64((IntPtr)((long)pointer + this.offset));
             }
 
             return -1;
         }
 
-        internal CounterSample GetInstanceValue(string instanceName) {
-
-            if (!categorySample.InstanceNameTable.ContainsKey(instanceName)) { 
+        internal CounterSample GetInstanceValue(string instanceName)
+        {
+            if (!categorySample.InstanceNameTable.ContainsKey(instanceName))
+            {
                 // Our native dll truncates instance names to 128 characters.  If we can't find the instance
-                // with the full name, try truncating to 128 characters. 
+                // with the full name, try truncating to 128 characters.
                 if (instanceName.Length > SharedPerformanceCounter.InstanceNameMaxLength)
-                    instanceName = instanceName.Substring(0, SharedPerformanceCounter.InstanceNameMaxLength);
-                
+                    instanceName = instanceName.Substring(
+                        0,
+                        SharedPerformanceCounter.InstanceNameMaxLength
+                    );
+
                 if (!categorySample.InstanceNameTable.ContainsKey(instanceName))
-                    throw new InvalidOperationException(SR.GetString(SR.CantReadInstance, instanceName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.CantReadInstance, instanceName)
+                    );
             }
 
             int index = (int)categorySample.InstanceNameTable[instanceName];
             long rawValue = this.instanceValues[index];
             long baseValue = 0;
-            if (this.BaseCounterDefinitionSample != null) {
+            if (this.BaseCounterDefinitionSample != null)
+            {
                 CategorySample baseCategorySample = this.BaseCounterDefinitionSample.categorySample;
                 int baseIndex = (int)baseCategorySample.InstanceNameTable[instanceName];
                 baseValue = this.BaseCounterDefinitionSample.instanceValues[baseIndex];
             }
 
-            return new CounterSample(rawValue,
-                                                        baseValue,
-                                                        categorySample.CounterFrequency,
-                                                        categorySample.SystemFrequency,
-                                                        categorySample.TimeStamp,
-                                                        categorySample.TimeStamp100nSec,
-                                                        (PerformanceCounterType)this.CounterType,
-                                                        categorySample.CounterTimeStamp);
-
+            return new CounterSample(
+                rawValue,
+                baseValue,
+                categorySample.CounterFrequency,
+                categorySample.SystemFrequency,
+                categorySample.TimeStamp,
+                categorySample.TimeStamp100nSec,
+                (PerformanceCounterType)this.CounterType,
+                categorySample.CounterTimeStamp
+            );
         }
 
-        internal InstanceDataCollection ReadInstanceData(string counterName) {
+        internal InstanceDataCollection ReadInstanceData(string counterName)
+        {
 #pragma warning disable 618
             InstanceDataCollection data = new InstanceDataCollection(counterName);
 #pragma warning restore 618
@@ -1598,22 +2048,27 @@ namespace System.Diagnostics {
             categorySample.InstanceNameTable.Keys.CopyTo(keys, 0);
             int[] indexes = new int[categorySample.InstanceNameTable.Count];
             categorySample.InstanceNameTable.Values.CopyTo(indexes, 0);
-            for (int index = 0; index < keys.Length; ++ index) {
+            for (int index = 0; index < keys.Length; ++index)
+            {
                 long baseValue = 0;
-                if (this.BaseCounterDefinitionSample != null) {
-                    CategorySample baseCategorySample = this.BaseCounterDefinitionSample.categorySample;
+                if (this.BaseCounterDefinitionSample != null)
+                {
+                    CategorySample baseCategorySample =
+                        this.BaseCounterDefinitionSample.categorySample;
                     int baseIndex = (int)baseCategorySample.InstanceNameTable[keys[index]];
                     baseValue = this.BaseCounterDefinitionSample.instanceValues[baseIndex];
                 }
 
-                CounterSample sample = new CounterSample(this.instanceValues[indexes[index]],
-                                                        baseValue,
-                                                        categorySample.CounterFrequency,
-                                                        categorySample.SystemFrequency,
-                                                        categorySample.TimeStamp,
-                                                        categorySample.TimeStamp100nSec,
-                                                        (PerformanceCounterType)this.CounterType,
-                                                        categorySample.CounterTimeStamp);
+                CounterSample sample = new CounterSample(
+                    this.instanceValues[indexes[index]],
+                    baseValue,
+                    categorySample.CounterFrequency,
+                    categorySample.SystemFrequency,
+                    categorySample.TimeStamp,
+                    categorySample.TimeStamp100nSec,
+                    (PerformanceCounterType)this.CounterType,
+                    categorySample.CounterTimeStamp
+                );
 
                 data.Add(keys[index], new InstanceData(keys[index], sample));
             }
@@ -1621,23 +2076,27 @@ namespace System.Diagnostics {
             return data;
         }
 
-        internal CounterSample GetSingleValue() {
+        internal CounterSample GetSingleValue()
+        {
             long rawValue = this.instanceValues[0];
             long baseValue = 0;
             if (this.BaseCounterDefinitionSample != null)
                 baseValue = this.BaseCounterDefinitionSample.instanceValues[0];
 
-            return new CounterSample(rawValue,
-                                                        baseValue,
-                                                        categorySample.CounterFrequency,
-                                                        categorySample.SystemFrequency,
-                                                        categorySample.TimeStamp,
-                                                        categorySample.TimeStamp100nSec,
-                                                        (PerformanceCounterType)this.CounterType,
-                                                        categorySample.CounterTimeStamp);
+            return new CounterSample(
+                rawValue,
+                baseValue,
+                categorySample.CounterFrequency,
+                categorySample.SystemFrequency,
+                categorySample.TimeStamp,
+                categorySample.TimeStamp100nSec,
+                (PerformanceCounterType)this.CounterType,
+                categorySample.CounterTimeStamp
+            );
         }
 
-        internal void SetInstanceValue(int index, IntPtr dataRef) {
+        internal void SetInstanceValue(int index, IntPtr dataRef)
+        {
             long rawValue = ReadValue(dataRef);
             this.instanceValues[index] = rawValue;
         }

@@ -16,12 +16,12 @@ namespace System.Diagnostics.Tracing
         /// Field receives default formatting based on the field's underlying type.
         /// </summary>
         Default = 0,
-#if false 
+#if false
         /// <summary>
         /// Field should not be displayed.
         /// </summary>
         NoPrint = 1,
-#endif 
+#endif
         /// <summary>
         /// Field should be formatted as character or string data.
         /// Typically applied to 8-bit or 16-bit integers.
@@ -41,7 +41,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         Hexadecimal = 4,
 
-#if false 
+#if false
         /// <summary>
         /// Field should be formatted as a process identifier. Typically applied to
         /// 32-bit integer types.
@@ -74,7 +74,7 @@ namespace System.Diagnostics.Tracing
         /// Field should be formatted as a SOCKADDR. Typically applied to byte[] types.
         /// </summary>
         SocketAddress = 10,
-#endif 
+#endif
         /// <summary>
         /// Field should be formatted as XML string data. Typically applied to
         /// strings or arrays of 8-bit or 16-bit integers.
@@ -86,7 +86,7 @@ namespace System.Diagnostics.Tracing
         /// strings or arrays of 8-bit or 16-bit integers.
         /// </summary>
         Json = 12,
-#if false 
+#if false
         /// <summary>
         /// Field should be formatted as a Win32 error code. Typically applied to
         /// 32-bit integer types.
@@ -104,7 +104,7 @@ namespace System.Diagnostics.Tracing
         /// 32-bit integer types.
         /// </summary>
         HResult = 15,
-#if false 
+#if false
         /// <summary>
         /// Field should be formatted as a FILETIME. Typically applied to 64-bit
         /// integer types. This is the default format for DateTime types.

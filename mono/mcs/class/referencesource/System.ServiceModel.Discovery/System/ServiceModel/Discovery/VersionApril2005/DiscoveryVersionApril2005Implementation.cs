@@ -4,19 +4,29 @@
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.ServiceModel.Description;
-    using System.Globalization;
 
     class DiscoveryVersionApril2005Implementation : IDiscoveryVersionImplementation
     {
-        static readonly Uri ScopeMatchByExact = new Uri(ProtocolStrings.VersionApril2005.ScopeMatchByExact);
-        static readonly Uri ScopeMatchByLdap = new Uri(ProtocolStrings.VersionApril2005.ScopeMatchByLdap);
-        static readonly Uri ScopeMatchByPrefix = new Uri(ProtocolStrings.VersionApril2005.ScopeMatchByPrefix);
-        static readonly Uri ScopeMatchByUuid = new Uri(ProtocolStrings.VersionApril2005.ScopeMatchByUuid);
-        static readonly Uri ScopeMatchByNone = new Uri(ProtocolStrings.VersionApril2005.ScopeMatchByNone);
+        static readonly Uri ScopeMatchByExact = new Uri(
+            ProtocolStrings.VersionApril2005.ScopeMatchByExact
+        );
+        static readonly Uri ScopeMatchByLdap = new Uri(
+            ProtocolStrings.VersionApril2005.ScopeMatchByLdap
+        );
+        static readonly Uri ScopeMatchByPrefix = new Uri(
+            ProtocolStrings.VersionApril2005.ScopeMatchByPrefix
+        );
+        static readonly Uri ScopeMatchByUuid = new Uri(
+            ProtocolStrings.VersionApril2005.ScopeMatchByUuid
+        );
+        static readonly Uri ScopeMatchByNone = new Uri(
+            ProtocolStrings.VersionApril2005.ScopeMatchByNone
+        );
 
         Uri discoveryAddress;
         DataContractSerializer eprSerializer;
@@ -36,10 +46,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 
         public string WsaNamespace
         {
-            get
-            {
-                return ProtocolStrings.WsaNamespaceAugust2004;
-            }
+            get { return ProtocolStrings.WsaNamespaceAugust2004; }
         }
 
         public Uri DiscoveryAddress
@@ -56,10 +63,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return MessageVersion.Soap12WSAddressingAugust2004;
-            }
+            get { return MessageVersion.Soap12WSAddressingAugust2004; }
         }
 
         public DiscoveryVersion.SchemaQualifiedNames QualifiedNames
@@ -68,7 +72,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             {
                 if (this.qualifiedNames == null)
                 {
-                    this.qualifiedNames = new DiscoveryVersion.SchemaQualifiedNames(ProtocolStrings.VersionApril2005.Namespace, this.WsaNamespace);
+                    this.qualifiedNames = new DiscoveryVersion.SchemaQualifiedNames(
+                        ProtocolStrings.VersionApril2005.Namespace,
+                        this.WsaNamespace
+                    );
                 }
                 return this.qualifiedNames;
             }
@@ -80,7 +87,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             {
                 if (this.eprSerializer == null)
                 {
-                    this.eprSerializer = new DataContractSerializer(typeof(EndpointAddressAugust2004));
+                    this.eprSerializer = new DataContractSerializer(
+                        typeof(EndpointAddressAugust2004)
+                    );
                 }
                 return this.eprSerializer;
             }
@@ -96,7 +105,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                     {
                         if (this.adhocDiscoveryContract == null)
                         {
-                            this.adhocDiscoveryContract = DiscoveryUtility.GetContract(typeof(IDiscoveryContractAdhocApril2005));
+                            this.adhocDiscoveryContract = DiscoveryUtility.GetContract(
+                                typeof(IDiscoveryContractAdhocApril2005)
+                            );
                         }
                     }
                 }
@@ -110,7 +121,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                     {
                         if (this.managedDiscoveryContract == null)
                         {
-                            this.managedDiscoveryContract = DiscoveryUtility.GetContract(typeof(IDiscoveryContractManagedApril2005));
+                            this.managedDiscoveryContract = DiscoveryUtility.GetContract(
+                                typeof(IDiscoveryContractManagedApril2005)
+                            );
                         }
                     }
                 }
@@ -118,7 +131,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             }
             else
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode))
+                );
             }
         }
 
@@ -130,30 +145,47 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                 {
                     if (this.announcementContract == null)
                     {
-                        this.announcementContract = DiscoveryUtility.GetContract(typeof(IAnnouncementContractApril2005));
+                        this.announcementContract = DiscoveryUtility.GetContract(
+                            typeof(IAnnouncementContractApril2005)
+                        );
                     }
                 }
             }
             return this.announcementContract;
         }
 
-        public IDiscoveryInnerClient CreateDiscoveryInnerClient(DiscoveryEndpoint discoveryEndpoint, IDiscoveryInnerClientResponse responseReceiver)
+        public IDiscoveryInnerClient CreateDiscoveryInnerClient(
+            DiscoveryEndpoint discoveryEndpoint,
+            IDiscoveryInnerClientResponse responseReceiver
+        )
         {
             if (discoveryEndpoint.DiscoveryMode == ServiceDiscoveryMode.Adhoc)
             {
-                return new DiscoveryInnerClientApril2005<IDiscoveryContractAdhocApril2005>(discoveryEndpoint, responseReceiver);
+                return new DiscoveryInnerClientApril2005<IDiscoveryContractAdhocApril2005>(
+                    discoveryEndpoint,
+                    responseReceiver
+                );
             }
             else if (discoveryEndpoint.DiscoveryMode == ServiceDiscoveryMode.Managed)
             {
-                return new DiscoveryInnerClientApril2005<IDiscoveryContractManagedApril2005>(discoveryEndpoint, responseReceiver);
+                return new DiscoveryInnerClientApril2005<IDiscoveryContractManagedApril2005>(
+                    discoveryEndpoint,
+                    responseReceiver
+                );
             }
             else
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(
+                        SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)
+                    )
+                );
             }
         }
 
-        public IAnnouncementInnerClient CreateAnnouncementInnerClient(AnnouncementEndpoint announcementEndpoint)
+        public IAnnouncementInnerClient CreateAnnouncementInnerClient(
+            AnnouncementEndpoint announcementEndpoint
+        )
         {
             return new AnnouncementInnerClientApril2005(announcementEndpoint);
         }
@@ -162,23 +194,38 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         {
             Uri scopeMatchBy = versionDependentScopeMatchBy;
 
-            if (versionDependentScopeMatchBy == DiscoveryVersionApril2005Implementation.ScopeMatchByExact)
+            if (
+                versionDependentScopeMatchBy
+                == DiscoveryVersionApril2005Implementation.ScopeMatchByExact
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByExact;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionApril2005Implementation.ScopeMatchByPrefix)
+            else if (
+                versionDependentScopeMatchBy
+                == DiscoveryVersionApril2005Implementation.ScopeMatchByPrefix
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByPrefix;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionApril2005Implementation.ScopeMatchByLdap)
+            else if (
+                versionDependentScopeMatchBy
+                == DiscoveryVersionApril2005Implementation.ScopeMatchByLdap
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByLdap;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionApril2005Implementation.ScopeMatchByUuid)
+            else if (
+                versionDependentScopeMatchBy
+                == DiscoveryVersionApril2005Implementation.ScopeMatchByUuid
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByUuid;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionApril2005Implementation.ScopeMatchByNone)
+            else if (
+                versionDependentScopeMatchBy
+                == DiscoveryVersionApril2005Implementation.ScopeMatchByNone
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByNone;
             }

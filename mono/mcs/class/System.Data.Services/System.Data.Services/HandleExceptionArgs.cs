@@ -26,26 +26,18 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Data.Services {
-	public class HandleExceptionArgs {
-		public Exception Exception {
-			get; set;
-		}
+namespace System.Data.Services
+{
+    public class HandleExceptionArgs
+    {
+        public Exception Exception { get; set; }
 
-		public string ResponseContentType {
-			get; private set;
-		}
+        public string ResponseContentType { get; private set; }
 
-		public int ResponseStatusCode {
-			get; private set;
-		}
+        public int ResponseStatusCode { get; private set; }
 
-		public bool ResponseWritten {
-			get; private set;
-		}
+        public bool ResponseWritten { get; private set; }
 
-		public bool UseVerboseErrors {
-			get; set;
-		}
-	}
+        public bool UseVerboseErrors { get; set; }
+    }
 }

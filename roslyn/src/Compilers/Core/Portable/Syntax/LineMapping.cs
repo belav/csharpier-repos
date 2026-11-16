@@ -31,7 +31,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public readonly FileLinePositionSpan MappedSpan { get; }
 
-        public LineMapping(LinePositionSpan span, int? characterOffset, FileLinePositionSpan mappedSpan)
+        public LineMapping(
+            LinePositionSpan span,
+            int? characterOffset,
+            FileLinePositionSpan mappedSpan
+        )
         {
             Span = span;
             CharacterOffset = characterOffset;
@@ -41,23 +45,24 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// True if the line mapping marks hidden code.
         /// </summary>
-        public bool IsHidden
-            => !MappedSpan.IsValid;
+        public bool IsHidden => !MappedSpan.IsValid;
 
-        public override bool Equals(object? obj)
-            => obj is LineMapping other && Equals(other);
+        public override bool Equals(object? obj) => obj is LineMapping other && Equals(other);
 
-        public bool Equals(LineMapping other)
-            => Span.Equals(other.Span) && CharacterOffset.Equals(other.CharacterOffset) && MappedSpan.Equals(other.MappedSpan);
+        public bool Equals(LineMapping other) =>
+            Span.Equals(other.Span)
+            && CharacterOffset.Equals(other.CharacterOffset)
+            && MappedSpan.Equals(other.MappedSpan);
 
-        public override int GetHashCode()
-            => Hash.Combine(Hash.Combine(Span.GetHashCode(), CharacterOffset.GetHashCode()), MappedSpan.GetHashCode());
+        public override int GetHashCode() =>
+            Hash.Combine(
+                Hash.Combine(Span.GetHashCode(), CharacterOffset.GetHashCode()),
+                MappedSpan.GetHashCode()
+            );
 
-        public static bool operator ==(LineMapping left, LineMapping right)
-            => left.Equals(right);
+        public static bool operator ==(LineMapping left, LineMapping right) => left.Equals(right);
 
-        public static bool operator !=(LineMapping left, LineMapping right)
-            => !(left == right);
+        public static bool operator !=(LineMapping left, LineMapping right) => !(left == right);
 
         public override string? ToString()
         {

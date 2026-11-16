@@ -27,7 +27,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static TValue? Deserialize<TValue>(this JsonNode? node, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<TValue>(
+            this JsonNode? node,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return ReadFromNode(node, jsonTypeInfo);
@@ -49,7 +52,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static object? Deserialize(this JsonNode? node, Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            this JsonNode? node,
+            Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (returnType is null)
             {
@@ -73,7 +80,10 @@ namespace System.Text.Json
         /// <exception cref="JsonException">
         /// <typeparamref name="TValue" /> is not compatible with the JSON.
         /// </exception>
-        public static TValue? Deserialize<TValue>(this JsonNode? node, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static TValue? Deserialize<TValue>(
+            this JsonNode? node,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -136,7 +146,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static object? Deserialize(this JsonNode? node, Type returnType, JsonSerializerContext context)
+        public static object? Deserialize(
+            this JsonNode? node,
+            Type returnType,
+            JsonSerializerContext context
+        )
         {
             if (returnType is null)
             {
@@ -151,7 +165,10 @@ namespace System.Text.Json
             return ReadFromNodeAsObject(node, jsonTypeInfo);
         }
 
-        private static TValue? ReadFromNode<TValue>(JsonNode? node, JsonTypeInfo<TValue> jsonTypeInfo)
+        private static TValue? ReadFromNode<TValue>(
+            JsonNode? node,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
 

@@ -25,7 +25,10 @@ namespace System.Linq.Parallel
         /// AggregateException. Thus, we introduce a wrapper enumerator that catches exceptions
         /// and wraps them with an AggregateException.
         /// </summary>
-        internal static IEnumerable<TElement> WrapEnumerable<TElement>(IEnumerable<TElement> source, CancellationState cancellationState)
+        internal static IEnumerable<TElement> WrapEnumerable<TElement>(
+            IEnumerable<TElement> source,
+            CancellationState cancellationState
+        )
         {
             using (IEnumerator<TElement> enumerator = source.GetEnumerator())
             {
@@ -49,14 +52,15 @@ namespace System.Linq.Parallel
             }
         }
 
-
         /// <summary>
         /// A variant of WrapEnumerable that accepts a QueryOperatorEnumerator{,} instead of an IEnumerable{}.
         /// The code duplication is necessary to avoid extra virtual method calls that would otherwise be needed to
         /// convert the QueryOperatorEnumerator{,} to an IEnumerator{}.
         /// </summary>
-        internal static IEnumerable<TElement> WrapQueryEnumerator<TElement, TIgnoreKey>(QueryOperatorEnumerator<TElement, TIgnoreKey> source,
-            CancellationState cancellationState)
+        internal static IEnumerable<TElement> WrapQueryEnumerator<TElement, TIgnoreKey>(
+            QueryOperatorEnumerator<TElement, TIgnoreKey> source,
+            CancellationState cancellationState
+        )
         {
             TElement elem = default(TElement)!;
             TIgnoreKey ignoreKey = default(TIgnoreKey)!;
@@ -95,19 +99,22 @@ namespace System.Linq.Parallel
         /// legitimately cancelled, in which case we will propagate the CancellationException with the appropriate
         /// token.
         /// </summary>
-        internal static void ThrowOCEorAggregateException(Exception ex, CancellationState cancellationState)
+        internal static void ThrowOCEorAggregateException(
+            Exception ex,
+            CancellationState cancellationState
+        )
         {
             if (ThrowAnOCE(ex, cancellationState))
             {
                 CancellationState.ThrowWithStandardMessageIfCanceled(
-                    cancellationState.ExternalCancellationToken);
+                    cancellationState.ExternalCancellationToken
+                );
             }
             else
             {
                 throw new AggregateException(ex);
             }
         }
-
 
         /// <summary>
         /// Wraps a function with a try/catch that morphs all exceptions into AggregateException.
@@ -120,18 +127,18 @@ namespace System.Linq.Parallel
         internal static Func<T, U> WrapFunc<T, U>(Func<T, U> f, CancellationState cancellationState)
         {
             return t =>
+            {
+                U retval = default(U)!;
+                try
                 {
-                    U retval = default(U)!;
-                    try
-                    {
-                        retval = f(t);
-                    }
-                    catch (Exception ex)
-                    {
-                        ThrowOCEorAggregateException(ex, cancellationState);
-                    }
-                    return retval;
-                };
+                    retval = f(t);
+                }
+                catch (Exception ex)
+                {
+                    ThrowOCEorAggregateException(ex, cancellationState);
+                }
+                return retval;
+            };
         }
 
         // return: true ==> throw an OCE(externalCT)
@@ -145,18 +152,22 @@ namespace System.Linq.Parallel
             // check for co-operative cancellation.
             if (ex is OperationCanceledException cancelEx)
             {
-                if (cancelEx.CancellationToken == cancellationState.ExternalCancellationToken
-                    && cancellationState.ExternalCancellationToken.IsCancellationRequested)
+                if (
+                    cancelEx.CancellationToken == cancellationState.ExternalCancellationToken
+                    && cancellationState.ExternalCancellationToken.IsCancellationRequested
+                )
                 {
-                    return true;  // let the OCE(extCT) be rethrown.
+                    return true; // let the OCE(extCT) be rethrown.
                 }
 
                 // check for external cancellation which triggered the mergedToken.
-                if (cancelEx.CancellationToken == cancellationState.MergedCancellationToken
+                if (
+                    cancelEx.CancellationToken == cancellationState.MergedCancellationToken
                     && cancellationState.MergedCancellationToken.IsCancellationRequested
-                    && cancellationState.ExternalCancellationToken.IsCancellationRequested)
+                    && cancellationState.ExternalCancellationToken.IsCancellationRequested
+                )
                 {
-                    return true;  // convert internal cancellation back to OCE(extCT).
+                    return true; // convert internal cancellation back to OCE(extCT).
                 }
             }
             return false;

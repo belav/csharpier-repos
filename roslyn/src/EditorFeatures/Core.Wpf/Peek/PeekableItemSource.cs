@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             IPeekableItemFactory peekableItemFactory,
             IPeekResultFactory peekResultFactory,
             IThreadingContext threadingContext,
-            IUIThreadOperationExecutor uiThreadOperationExecutor)
+            IUIThreadOperationExecutor uiThreadOperationExecutor
+        )
         {
             _textBuffer = textBuffer;
             _peekableItemFactory = peekableItemFactory;
@@ -46,7 +47,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
 
         public void AugmentPeekSession(IPeekSession session, IList<IPeekableItem> peekableItems)
         {
-            if (!string.Equals(session.RelationshipName, PredefinedPeekRelationships.Definitions.Name, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    session.RelationshipName,
+                    PredefinedPeekRelationships.Definitions.Name,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return;
             }
@@ -63,14 +70,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 return;
             }
 
-            _uiThreadOperationExecutor.Execute(EditorFeaturesResources.Peek, EditorFeaturesResources.Loading_Peek_information, allowCancellation: true, showProgress: false, action: context =>
-            {
-                _threadingContext.JoinableTaskFactory.Run(() => AugumentPeekSessionAsync(peekableItems, context, triggerPoint.Value, document));
-            });
+            _uiThreadOperationExecutor.Execute(
+                EditorFeaturesResources.Peek,
+                EditorFeaturesResources.Loading_Peek_information,
+                allowCancellation: true,
+                showProgress: false,
+                action: context =>
+                {
+                    _threadingContext.JoinableTaskFactory.Run(() =>
+                        AugumentPeekSessionAsync(
+                            peekableItems,
+                            context,
+                            triggerPoint.Value,
+                            document
+                        )
+                    );
+                }
+            );
         }
 
         private async Task AugumentPeekSessionAsync(
-            IList<IPeekableItem> peekableItems, IUIThreadOperationContext context, SnapshotPoint triggerPoint, Document document)
+            IList<IPeekableItem> peekableItems,
+            IUIThreadOperationContext context,
+            SnapshotPoint triggerPoint,
+            Document document
+        )
         {
             var cancellationToken = context.UserCancellationToken;
             var services = document.Project.Solution.Services;
@@ -83,21 +107,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (service == null)
                     return;
 
-                var navigableItems = await service.GetNavigableItemsAsync(document, triggerPoint.Position, cancellationToken).ConfigureAwait(false);
-                await foreach (var item in GetPeekableItemsForNavigableItemsAsync(
-                    navigableItems, document.Project, _peekResultFactory, cancellationToken).ConfigureAwait(false))
+                var navigableItems = await service
+                    .GetNavigableItemsAsync(document, triggerPoint.Position, cancellationToken)
+                    .ConfigureAwait(false);
+                await foreach (
+                    var item in GetPeekableItemsForNavigableItemsAsync(
+                            navigableItems,
+                            document.Project,
+                            _peekResultFactory,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     peekableItems.Add(item);
                 }
             }
             else
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var semanticInfo = await SymbolFinder.GetSemanticInfoAtPositionAsync(
-                    semanticModel,
-                    triggerPoint.Position,
-                    services,
-                    cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var semanticInfo = await SymbolFinder
+                    .GetSemanticInfoAtPositionAsync(
+                        semanticModel,
+                        triggerPoint.Position,
+                        services,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 var symbol = semanticInfo.GetAnySymbol(includeType: true);
                 if (symbol == null)
                 {
@@ -109,46 +147,69 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 // Get the symbol back from the originating workspace
                 var symbolMappingService = services.GetRequiredService<ISymbolMappingService>();
 
-                var mappingResult = await symbolMappingService.MapSymbolAsync(document, symbol, cancellationToken).ConfigureAwait(false);
+                var mappingResult = await symbolMappingService
+                    .MapSymbolAsync(document, symbol, cancellationToken)
+                    .ConfigureAwait(false);
 
                 mappingResult ??= new SymbolMappingResult(document.Project, symbol);
 
-                peekableItems.AddRange(await _peekableItemFactory.GetPeekableItemsAsync(
-                    mappingResult.Symbol, mappingResult.Project, _peekResultFactory, cancellationToken).ConfigureAwait(false));
+                peekableItems.AddRange(
+                    await _peekableItemFactory
+                        .GetPeekableItemsAsync(
+                            mappingResult.Symbol,
+                            mappingResult.Project,
+                            _peekResultFactory,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
             }
         }
 
         private static async IAsyncEnumerable<IPeekableItem> GetPeekableItemsForNavigableItemsAsync(
-            IEnumerable<INavigableItem>? navigableItems, Project project,
+            IEnumerable<INavigableItem>? navigableItems,
+            Project project,
             IPeekResultFactory peekResultFactory,
-            [EnumeratorCancellation] CancellationToken cancellationToken)
+            [EnumeratorCancellation] CancellationToken cancellationToken
+        )
         {
             if (navigableItems != null)
             {
                 var workspace = project.Solution.Workspace;
-                var navigationService = workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                var navigationService =
+                    workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
                 foreach (var item in navigableItems)
                 {
                     var document = item.Document;
-                    if (await navigationService.CanNavigateToPositionAsync(
-                            workspace, document.Id, item.SourceSpan.Start, cancellationToken).ConfigureAwait(false))
+                    if (
+                        await navigationService
+                            .CanNavigateToPositionAsync(
+                                workspace,
+                                document.Id,
+                                item.SourceSpan.Start,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
-                        var text = await document.GetTextAsync(project.Solution, cancellationToken).ConfigureAwait(false);
+                        var text = await document
+                            .GetTextAsync(project.Solution, cancellationToken)
+                            .ConfigureAwait(false);
                         var linePositionSpan = text.Lines.GetLinePositionSpan(item.SourceSpan);
                         if (document.FilePath != null)
                         {
                             yield return new ExternalFilePeekableItem(
                                 new FileLinePositionSpan(document.FilePath, linePositionSpan),
-                                PredefinedPeekRelationships.Definitions, peekResultFactory);
+                                PredefinedPeekRelationships.Definitions,
+                                peekResultFactory
+                            );
                         }
                     }
                 }
             }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

@@ -12,15 +12,18 @@ public abstract class EventIdTestBase
         Type loggerExtensionType,
         LoggingDefinitions loggerDefinitions,
         IDictionary<Type, Func<object>> fakeFactories,
-        Dictionary<string, IList<string>> eventMappings = null)
-        => TestEventLogging(
+        Dictionary<string, IList<string>> eventMappings = null
+    ) =>
+        TestEventLogging(
             eventIdType,
             loggerExtensionType,
             loggerMethodTypes: Array.Empty<Type>(),
             loggerDefinitions,
             fakeFactories,
-            serviceCollectionBuilder: services => new EntityFrameworkServicesBuilder(services).TryAddCoreServices(),
-            eventMappings);
+            serviceCollectionBuilder: services =>
+                new EntityFrameworkServicesBuilder(services).TryAddCoreServices(),
+            eventMappings
+        );
 
     public void TestEventLogging(
         Type eventIdType,
@@ -29,7 +32,8 @@ public abstract class EventIdTestBase
         LoggingDefinitions loggerDefinitions,
         IDictionary<Type, Func<object>> fakeFactories,
         Action<ServiceCollection> serviceCollectionBuilder,
-        Dictionary<string, IList<string>> eventMappings = null)
+        Dictionary<string, IList<string>> eventMappings = null
+    )
     {
         var testLoggerFactory = new TestLoggerFactory(loggerDefinitions);
         var testLogger = testLoggerFactory.Logger;
@@ -37,26 +41,31 @@ public abstract class EventIdTestBase
         var contextLogger = new TestDbContextLogger();
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.TryAdd(new ServiceDescriptor(typeof(LoggingDefinitions), loggerDefinitions));
+        serviceCollection.TryAdd(
+            new ServiceDescriptor(typeof(LoggingDefinitions), loggerDefinitions)
+        );
         serviceCollection.TryAdd(new ServiceDescriptor(typeof(ILoggerFactory), testLoggerFactory));
         serviceCollection.TryAdd(new ServiceDescriptor(typeof(DiagnosticSource), testDiagnostics));
         serviceCollection.TryAdd(new ServiceDescriptor(typeof(IDbContextLogger), contextLogger));
-        serviceCollection.TryAdd(new ServiceDescriptor(typeof(IDbContextOptions), new DbContextOptionsBuilder().Options));
+        serviceCollection.TryAdd(
+            new ServiceDescriptor(typeof(IDbContextOptions), new DbContextOptionsBuilder().Options)
+        );
         serviceCollectionBuilder(serviceCollection);
         using var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
         using var serviceScope = serviceProvider.CreateScope();
         var scopeServiceProvider = serviceScope.ServiceProvider;
 
-        var eventIdFields = eventIdType.GetTypeInfo()
-            .DeclaredFields
-            .Where(p => p.FieldType == typeof(EventId) && p.GetCustomAttribute<ObsoleteAttribute>() == null)
+        var eventIdFields = eventIdType
+            .GetTypeInfo()
+            .DeclaredFields.Where(p =>
+                p.FieldType == typeof(EventId) && p.GetCustomAttribute<ObsoleteAttribute>() == null
+            )
             .ToList();
 
         foreach (var eventIdField in eventIdFields)
         {
             var eventName = eventIdField.Name;
-            if (eventMappings == null
-                || !eventMappings.TryGetValue(eventName, out var mappedNames))
+            if (eventMappings == null || !eventMappings.TryGetValue(eventName, out var mappedNames))
             {
                 mappedNames = new List<string> { eventName };
             }
@@ -75,8 +84,12 @@ public abstract class EventIdTestBase
 
                 var category = isExtensionMethod
                     ? loggerParameters[0].ParameterType.GenericTypeArguments[0]
-                    : loggerMethod.DeclaringType!.GetInterfaces()
-                        .Single(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDiagnosticsLogger<>))
+                    : loggerMethod
+                        .DeclaringType!.GetInterfaces()
+                        .Single(i =>
+                            i.IsGenericType
+                            && i.GetGenericTypeDefinition() == typeof(IDiagnosticsLogger<>)
+                        )
                         .GetGenericArguments()[0];
 
                 if (category.ContainsGenericParameters)
@@ -95,7 +108,8 @@ public abstract class EventIdTestBase
                 var diagnosticLogger = scopeServiceProvider.GetRequiredService(
                     isExtensionMethod
                         ? typeof(IDiagnosticsLogger<>).MakeGenericType(category)
-                        : loggerMethod.DeclaringType);
+                        : loggerMethod.DeclaringType
+                );
 
                 var args = new object[loggerParameters.Length];
                 var i = 0;
@@ -122,10 +136,11 @@ public abstract class EventIdTestBase
                         {
                             Assert.Fail(
                                 "Need to add fake test factory for type "
-                                + type.DisplayName()
-                                + " in class "
-                                + eventIdType.Name
-                                + "Test");
+                                    + type.DisplayName()
+                                    + " in class "
+                                    + eventIdType.Name
+                                    + "Test"
+                            );
                         }
                     }
                 }
@@ -155,8 +170,10 @@ public abstract class EventIdTestBase
                             }
                         }
 
-                        if (enableFor == eventId.Name
-                            && categoryName != DbLoggerCategory.Scaffolding.Name)
+                        if (
+                            enableFor == eventId.Name
+                            && categoryName != DbLoggerCategory.Scaffolding.Name
+                        )
                         {
                             Assert.Equal(eventId.Name, testDiagnostics.LoggedEventName);
                             if (testDiagnostics.LoggedMessage != null)

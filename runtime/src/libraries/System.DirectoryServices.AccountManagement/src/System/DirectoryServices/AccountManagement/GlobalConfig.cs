@@ -9,15 +9,16 @@ namespace System.DirectoryServices.AccountManagement
     {
         public const DebugLevel DefaultDebugLevel =
 #if DEBUG
-            DebugLevel.Info;
+        DebugLevel.Info;
 #else
-            DebugLevel.None;
+        DebugLevel.None;
 #endif
 
         public static DebugLevel DebugLevel => s_configSettings?.DebugLevel ?? DefaultDebugLevel;
 
         public static string DebugLogFile => s_configSettings?.DebugLogFile;
 
-        private static readonly ConfigSettings s_configSettings = (ConfigSettings)ConfigurationManager.GetSection("System.DirectoryServices.AccountManagement");
+        private static readonly ConfigSettings s_configSettings = (ConfigSettings)
+            ConfigurationManager.GetSection("System.DirectoryServices.AccountManagement");
     }
 }

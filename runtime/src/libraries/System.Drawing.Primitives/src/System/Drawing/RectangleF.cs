@@ -11,7 +11,9 @@ namespace System.Drawing
     /// Stores the location and size of a rectangular region.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public struct RectangleF : IEquatable<RectangleF>
     {
         /// <summary>
@@ -186,7 +188,8 @@ namespace System.Drawing
         /// Tests whether <paramref name="obj"/> is a <see cref='System.Drawing.RectangleF'/> with the same location and
         /// size of this <see cref='System.Drawing.RectangleF'/>.
         /// </summary>
-        public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is RectangleF && Equals((RectangleF)obj);
+        public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is RectangleF && Equals((RectangleF)obj);
 
         public readonly bool Equals(RectangleF other) => this == other;
 
@@ -194,7 +197,10 @@ namespace System.Drawing
         /// Tests whether two <see cref='System.Drawing.RectangleF'/> objects have equal location and size.
         /// </summary>
         public static bool operator ==(RectangleF left, RectangleF right) =>
-            left.X == right.X && left.Y == right.Y && left.Width == right.Width && left.Height == right.Height;
+            left.X == right.X
+            && left.Y == right.Y
+            && left.Width == right.Width
+            && left.Height == right.Height;
 
         /// <summary>
         /// Tests whether two <see cref='System.Drawing.RectangleF'/> objects differ in location or size.
@@ -205,7 +211,8 @@ namespace System.Drawing
         /// Determines if the specified point is contained within the rectangular region defined by this
         /// <see cref='System.Drawing.Rectangle'/> .
         /// </summary>
-        public readonly bool Contains(float x, float y) => X <= x && x < X + Width && Y <= y && y < Y + Height;
+        public readonly bool Contains(float x, float y) =>
+            X <= x && x < X + Width && Y <= y && y < Y + Height;
 
         /// <summary>
         /// Determines if the specified point is contained within the rectangular region defined by this
@@ -218,7 +225,10 @@ namespace System.Drawing
         /// the rectangular region represented by this <see cref='System.Drawing.Rectangle'/> .
         /// </summary>
         public readonly bool Contains(RectangleF rect) =>
-            (X <= rect.X) && (rect.X + rect.Width <= X + Width) && (Y <= rect.Y) && (rect.Y + rect.Height <= Y + Height);
+            (X <= rect.X)
+            && (rect.X + rect.Width <= X + Width)
+            && (Y <= rect.Y)
+            && (rect.Y + rect.Height <= Y + Height);
 
         /// <summary>
         /// Gets the hash code for this <see cref='System.Drawing.RectangleF'/>.
@@ -287,7 +297,10 @@ namespace System.Drawing
         /// Determines if this rectangle intersects with rect.
         /// </summary>
         public readonly bool IntersectsWith(RectangleF rect) =>
-            (rect.X < X + Width) && (X < rect.X + rect.Width) && (rect.Y < Y + Height) && (Y < rect.Y + rect.Height);
+            (rect.X < X + Width)
+            && (X < rect.X + rect.Width)
+            && (rect.Y < Y + Height)
+            && (Y < rect.Y + rect.Height);
 
         /// <summary>
         /// Creates a rectangle that represents the union between a and b.
@@ -320,12 +333,14 @@ namespace System.Drawing
         /// Converts the specified <see cref='System.Drawing.Rectangle'/> to a
         /// <see cref='System.Drawing.RectangleF'/>.
         /// </summary>
-        public static implicit operator RectangleF(Rectangle r) => new RectangleF(r.X, r.Y, r.Width, r.Height);
+        public static implicit operator RectangleF(Rectangle r) =>
+            new RectangleF(r.X, r.Y, r.Width, r.Height);
 
         /// <summary>
         /// Converts the <see cref='System.Drawing.RectangleF.Location'/> and <see cref='System.Drawing.RectangleF.Size'/>
         /// of this <see cref='System.Drawing.RectangleF'/> to a human-readable string.
         /// </summary>
-        public override readonly string ToString() => $"{{X={X},Y={Y},Width={Width},Height={Height}}}";
+        public override readonly string ToString() =>
+            $"{{X={X},Y={Y},Width={Width},Height={Height}}}";
     }
 }

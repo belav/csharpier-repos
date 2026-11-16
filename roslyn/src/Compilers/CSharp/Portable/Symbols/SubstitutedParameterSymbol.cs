@@ -14,18 +14,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private readonly Symbol _containingSymbol;
 
-        internal SubstitutedParameterSymbol(MethodSymbol containingSymbol, TypeMap map, ParameterSymbol originalParameter) :
-            this((Symbol)containingSymbol, map, originalParameter)
-        {
-        }
+        internal SubstitutedParameterSymbol(
+            MethodSymbol containingSymbol,
+            TypeMap map,
+            ParameterSymbol originalParameter
+        )
+            : this((Symbol)containingSymbol, map, originalParameter) { }
 
-        internal SubstitutedParameterSymbol(PropertySymbol containingSymbol, TypeMap map, ParameterSymbol originalParameter) :
-            this((Symbol)containingSymbol, map, originalParameter)
-        {
-        }
+        internal SubstitutedParameterSymbol(
+            PropertySymbol containingSymbol,
+            TypeMap map,
+            ParameterSymbol originalParameter
+        )
+            : this((Symbol)containingSymbol, map, originalParameter) { }
 
-        private SubstitutedParameterSymbol(Symbol containingSymbol, TypeMap map, ParameterSymbol originalParameter) :
-            base(originalParameter)
+        private SubstitutedParameterSymbol(
+            Symbol containingSymbol,
+            TypeMap map,
+            ParameterSymbol originalParameter
+        )
+            : base(originalParameter)
         {
             Debug.Assert(originalParameter.IsDefinition);
             _containingSymbol = containingSymbol;
@@ -52,11 +60,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return type;
                 }
 
-                TypeWithAnnotations substituted = ((TypeMap)mapOrType).SubstituteType(this._underlyingParameter.TypeWithAnnotations);
+                TypeWithAnnotations substituted = ((TypeMap)mapOrType).SubstituteType(
+                    this._underlyingParameter.TypeWithAnnotations
+                );
 
-                if (substituted.CustomModifiers.IsEmpty &&
-                    this._underlyingParameter.TypeWithAnnotations.CustomModifiers.IsEmpty &&
-                    this._underlyingParameter.RefCustomModifiers.IsEmpty)
+                if (
+                    substituted.CustomModifiers.IsEmpty
+                    && this._underlyingParameter.TypeWithAnnotations.CustomModifiers.IsEmpty
+                    && this._underlyingParameter.RefCustomModifiers.IsEmpty
+                )
                 {
                     _mapOrType = substituted;
                 }
@@ -65,16 +77,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => _underlyingParameter.InterpolatedStringHandlerArgumentIndexes;
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            _underlyingParameter.InterpolatedStringHandlerArgumentIndexes;
 
-        internal override bool HasInterpolatedStringHandlerArgumentError => _underlyingParameter.HasInterpolatedStringHandlerArgumentError;
+        internal override bool HasInterpolatedStringHandlerArgumentError =>
+            _underlyingParameter.HasInterpolatedStringHandlerArgumentError;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
             get
             {
                 var map = _mapOrType as TypeMap;
-                return map != null ? map.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers) : this._underlyingParameter.RefCustomModifiers;
+                return map != null
+                    ? map.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers)
+                    : this._underlyingParameter.RefCustomModifiers;
             }
         }
 
@@ -106,14 +122,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // Equality of ordinal and containing symbol is a correct
-            // implementation for all ParameterSymbols, but we don't 
+            // implementation for all ParameterSymbols, but we don't
             // define it on the base type because most can simply use
             // ReferenceEquals.
 
             var other = obj as SubstitutedParameterSymbol;
-            return other is not null &&
-                this.Ordinal == other.Ordinal &&
-                this.ContainingSymbol.Equals(other.ContainingSymbol, compareKind);
+            return other is not null
+                && this.Ordinal == other.Ordinal
+                && this.ContainingSymbol.Equals(other.ContainingSymbol, compareKind);
         }
 
         public sealed override int GetHashCode()

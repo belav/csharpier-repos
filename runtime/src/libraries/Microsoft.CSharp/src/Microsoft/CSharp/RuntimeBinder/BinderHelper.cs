@@ -22,17 +22,21 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal static DynamicMetaObject Bind(
-                ICSharpBinder action,
-                RuntimeBinder binder,
-                DynamicMetaObject[] args,
-                IEnumerable<CSharpArgumentInfo> arginfos,
-                DynamicMetaObject onBindingError)
+            ICSharpBinder action,
+            RuntimeBinder binder,
+            DynamicMetaObject[] args,
+            IEnumerable<CSharpArgumentInfo> arginfos,
+            DynamicMetaObject onBindingError
+        )
         {
             Expression[] parameters = new Expression[args.Length];
             BindingRestrictions restrictions = BindingRestrictions.Empty;
-            ICSharpInvokeOrInvokeMemberBinder callPayload = action as ICSharpInvokeOrInvokeMemberBinder;
+            ICSharpInvokeOrInvokeMemberBinder callPayload =
+                action as ICSharpInvokeOrInvokeMemberBinder;
             ParameterExpression tempForIncrement = null;
-            IEnumerator<CSharpArgumentInfo> arginfosEnum = (arginfos ?? Array.Empty<CSharpArgumentInfo>()).GetEnumerator();
+            IEnumerator<CSharpArgumentInfo> arginfosEnum = (
+                arginfos ?? Array.Empty<CSharpArgumentInfo>()
+            ).GetEnumerator();
 
             for (int index = 0; index < args.Length; ++index)
             {
@@ -52,7 +56,10 @@ namespace Microsoft.CSharp.RuntimeBinder
                     // in boxed, and we'd need to unbox it to get the original type in order
                     // to increment. The only way to do that is to create a new temporary.
                     object value = o.Value;
-                    tempForIncrement = Expression.Variable(value != null ? value.GetType() : typeof(object), "t0");
+                    tempForIncrement = Expression.Variable(
+                        value != null ? value.GetType() : typeof(object),
+                        "t0"
+                    );
                     parameters[0] = tempForIncrement;
                 }
                 else
@@ -72,17 +79,24 @@ namespace Microsoft.CSharp.RuntimeBinder
                     {
                         MethodInfo isNaN = s_DoubleIsNaN ??= typeof(double).GetMethod("IsNaN");
                         Expression e = Expression.Call(null, isNaN, o.Expression);
-                        restrictions = restrictions.Merge(BindingRestrictions.GetExpressionRestriction(e));
+                        restrictions = restrictions.Merge(
+                            BindingRestrictions.GetExpressionRestriction(e)
+                        );
                     }
                     else if (o.Value is float && float.IsNaN((float)o.Value))
                     {
                         MethodInfo isNaN = s_SingleIsNaN ??= typeof(float).GetMethod("IsNaN");
                         Expression e = Expression.Call(null, isNaN, o.Expression);
-                        restrictions = restrictions.Merge(BindingRestrictions.GetExpressionRestriction(e));
+                        restrictions = restrictions.Merge(
+                            BindingRestrictions.GetExpressionRestriction(e)
+                        );
                     }
                     else
                     {
-                        Expression e = Expression.Equal(o.Expression, Expression.Constant(o.Value, o.Expression.Type));
+                        Expression e = Expression.Equal(
+                            o.Expression,
+                            Expression.Constant(o.Value, o.Expression.Type)
+                        );
                         r = BindingRestrictions.GetExpressionRestriction(e);
                         restrictions = restrictions.Merge(r);
                     }
@@ -92,7 +106,12 @@ namespace Microsoft.CSharp.RuntimeBinder
             // Get the bound expression.
             try
             {
-                Expression expression = binder.Bind(action, parameters, args, out DynamicMetaObject deferredBinding);
+                Expression expression = binder.Bind(
+                    action,
+                    parameters,
+                    args,
+                    out DynamicMetaObject deferredBinding
+                );
 
                 if (deferredBinding != null)
                 {
@@ -115,9 +134,16 @@ namespace Microsoft.CSharp.RuntimeBinder
 
                     expression = Expression.Block(
                         new[] { tempForIncrement },
-                        Expression.Assign(tempForIncrement, Expression.Convert(arg0.Expression, arg0.Value.GetType())),
+                        Expression.Assign(
+                            tempForIncrement,
+                            Expression.Convert(arg0.Expression, arg0.Value.GetType())
+                        ),
                         expression,
-                        Expression.Assign(arg0.Expression, Expression.Convert(tempForIncrement, arg0.Expression.Type)));
+                        Expression.Assign(
+                            arg0.Expression,
+                            Expression.Convert(tempForIncrement, arg0.Expression.Type)
+                        )
+                    );
                 }
 
                 expression = ConvertResult(expression, action);
@@ -134,7 +160,9 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return new DynamicMetaObject(
                     Expression.Throw(
                         Expression.New(
-                            typeof(RuntimeBinderException).GetConstructor(new Type[] { typeof(string) }),
+                            typeof(RuntimeBinderException).GetConstructor(
+                                new Type[] { typeof(string) }
+                            ),
                             Expression.Constant(e.Message)
                         ),
                         GetTypeForErrorMetaObject(action, args)
@@ -168,7 +196,8 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         private static bool IsTypeOfStaticCall(
             int parameterIndex,
-            ICSharpInvokeOrInvokeMemberBinder callPayload)
+            ICSharpInvokeOrInvokeMemberBinder callPayload
+        )
         {
             return parameterIndex == 0 && callPayload != null && callPayload.StaticCall;
         }
@@ -182,7 +211,10 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         /////////////////////////////////////////////////////////////////////////////////
 
-        private static bool IsDynamicallyTypedRuntimeProxy(DynamicMetaObject argument, CSharpArgumentInfo info)
+        private static bool IsDynamicallyTypedRuntimeProxy(
+            DynamicMetaObject argument,
+            CSharpArgumentInfo info
+        )
         {
             // This detects situations where, although the argument has a value with
             // a given type, that type is insufficient to determine, statically, the
@@ -191,9 +223,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             // to IFoo while another does not.
 
             bool isDynamicObject =
-                info != null &&
-                !info.UseCompileTimeType &&
-                IsComObject(argument.Value);
+                info != null && !info.UseCompileTimeType && IsComObject(argument.Value);
 
             return isDynamicObject;
         }
@@ -204,7 +234,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             int parameterIndex,
             ICSharpInvokeOrInvokeMemberBinder callPayload,
             DynamicMetaObject argument,
-            CSharpArgumentInfo info)
+            CSharpArgumentInfo info
+        )
         {
             // Here we deduce what predicates the DLR can apply to future calls in order to
             // determine whether to use the previously-computed-and-cached delegate, or
@@ -230,13 +261,13 @@ namespace Microsoft.CSharp.RuntimeBinder
             //    something like value restrictions, and that is accomplished in Bind().
 
             bool useValueRestriction =
-                argument.Value == null ||
-                IsTypeOfStaticCall(parameterIndex, callPayload) ||
-                IsDynamicallyTypedRuntimeProxy(argument, info);
+                argument.Value == null
+                || IsTypeOfStaticCall(parameterIndex, callPayload)
+                || IsDynamicallyTypedRuntimeProxy(argument, info);
 
-            return useValueRestriction ?
-                    BindingRestrictions.GetInstanceRestriction(argument.Expression, argument.Value) :
-                    BindingRestrictions.GetTypeRestriction(argument.Expression, argument.RuntimeType);
+            return useValueRestriction
+                ? BindingRestrictions.GetInstanceRestriction(argument.Expression, argument.Value)
+                : BindingRestrictions.GetTypeRestriction(argument.Expression, argument.RuntimeType);
         }
 
         /////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +310,10 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         /////////////////////////////////////////////////////////////////////////////////
 
-        private static Type GetTypeForErrorMetaObject(ICSharpBinder action, DynamicMetaObject[] args)
+        private static Type GetTypeForErrorMetaObject(
+            ICSharpBinder action,
+            DynamicMetaObject[] args
+        )
         {
             // This is similar to ConvertResult but has fewer things to worry about.
 
@@ -298,7 +332,10 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         private static bool IsIncrementOrDecrementActionOnLocal(ICSharpBinder action) =>
             action is CSharpUnaryOperationBinder operatorPayload
-            && (operatorPayload.Operation == ExpressionType.Increment || operatorPayload.Operation == ExpressionType.Decrement);
+            && (
+                operatorPayload.Operation == ExpressionType.Increment
+                || operatorPayload.Operation == ExpressionType.Decrement
+            );
 
         /////////////////////////////////////////////////////////////////////////////////
 
@@ -331,11 +368,15 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         /////////////////////////////////////////////////////////////////////////////////
 
-        internal static T[] ToArray<T>(IEnumerable<T> source) => source == null ? Array.Empty<T>() : source.ToArray();
+        internal static T[] ToArray<T>(IEnumerable<T> source) =>
+            source == null ? Array.Empty<T>() : source.ToArray();
 
         /////////////////////////////////////////////////////////////////////////////////
 
-        internal static CallInfo CreateCallInfo(ref IEnumerable<CSharpArgumentInfo> argInfos, int discard)
+        internal static CallInfo CreateCallInfo(
+            ref IEnumerable<CSharpArgumentInfo> argInfos,
+            int discard
+        )
         {
             // This function converts the C# Binder's notion of argument information to the
             // DLR's notion. The DLR counts arguments differently than C#. Here are some
@@ -373,7 +414,6 @@ namespace Microsoft.CSharp.RuntimeBinder
         internal static string GetCLROperatorName(this ExpressionType p) =>
             p switch
             {
-
                 // Binary Operators
                 ExpressionType.Add => SpecialNames.CLR_Add,
                 ExpressionType.Subtract => SpecialNames.CLR_Subtract,
@@ -418,7 +458,11 @@ namespace Microsoft.CSharp.RuntimeBinder
                 _ => null,
             };
 
-        internal static int AddArgHashes(int hash, Type[] typeArguments, CSharpArgumentInfo[] argInfos)
+        internal static int AddArgHashes(
+            int hash,
+            Type[] typeArguments,
+            CSharpArgumentInfo[] argInfos
+        )
         {
             foreach (var typeArg in typeArguments)
             {
@@ -443,7 +487,12 @@ namespace Microsoft.CSharp.RuntimeBinder
             return hash;
         }
 
-        internal static bool CompareArgInfos(Type[] typeArgs, Type[] otherTypeArgs, CSharpArgumentInfo[] argInfos, CSharpArgumentInfo[] otherArgInfos)
+        internal static bool CompareArgInfos(
+            Type[] typeArgs,
+            Type[] otherTypeArgs,
+            CSharpArgumentInfo[] argInfos,
+            CSharpArgumentInfo[] otherArgInfos
+        )
         {
             for (int i = 0; i < typeArgs.Length; i++)
             {
@@ -456,15 +505,17 @@ namespace Microsoft.CSharp.RuntimeBinder
             return CompareArgInfos(argInfos, otherArgInfos);
         }
 
-        internal static bool CompareArgInfos(CSharpArgumentInfo[] argInfos, CSharpArgumentInfo[] otherArgInfos)
+        internal static bool CompareArgInfos(
+            CSharpArgumentInfo[] argInfos,
+            CSharpArgumentInfo[] otherArgInfos
+        )
         {
             for (int i = 0; i < argInfos.Length; i++)
             {
                 var argInfo = argInfos[i];
                 var otherArgInfo = otherArgInfos[i];
 
-                if (argInfo.Flags != otherArgInfo.Flags ||
-                    argInfo.Name != otherArgInfo.Name)
+                if (argInfo.Flags != otherArgInfo.Flags || argInfo.Name != otherArgInfo.Name)
                 {
                     return false;
                 }

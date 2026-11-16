@@ -16,16 +16,20 @@ namespace Microsoft.CodeAnalysis.Editing
             "dotnet_sort_system_directives_first",
             defaultValue: AddImportPlacementOptions.Default.PlaceSystemNamespaceFirst,
             group: CodeStyleOptionGroups.Usings,
-            isEditorConfigOption: true);
+            isEditorConfigOption: true
+        );
 
         public static readonly PerLanguageOption2<bool> SeparateImportDirectiveGroups = new(
             "dotnet_separate_import_directive_groups",
             defaultValue: SyntaxFormattingOptions.CommonDefaults.SeparateImportDirectiveGroups,
             group: CodeStyleOptionGroups.Usings,
-            isEditorConfigOption: true);
+            isEditorConfigOption: true
+        );
 
-        public static readonly ImmutableArray<IOption2> AllOptions = ImmutableArray.Create<IOption2>(
-            PlaceSystemNamespaceFirst,
-            SeparateImportDirectiveGroups);
+        public static readonly ImmutableArray<IOption2> AllOptions =
+            ImmutableArray.Create<IOption2>(
+                PlaceSystemNamespaceFirst,
+                SeparateImportDirectiveGroups
+            );
     }
 }

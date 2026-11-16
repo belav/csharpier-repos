@@ -90,9 +90,12 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
-        private static readonly int Op2ElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
+        private static readonly int Op2ElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
 
         private static Byte[] _data1 = new Byte[Op1ElementCount];
         private static Byte[] _data2 = new Byte[Op2ElementCount];
@@ -109,10 +112,24 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
         {
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar1),
+                ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar2),
+                ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
         }
 
         public SimpleBinaryOpTest__MultipleSumAbsoluteDifferences()
@@ -121,14 +138,39 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld1), ref Unsafe.As<Byte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld2), ref Unsafe.As<Byte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld1),
+                ref Unsafe.As<Byte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld2),
+                ref Unsafe.As<Byte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            _dataTable = new SimpleBinaryOpTest__DataTable<UInt16, Byte, Byte>(_data1, _data2, new UInt16[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            _dataTable = new SimpleBinaryOpTest__DataTable<UInt16, Byte, Byte>(
+                _data1,
+                _data2,
+                new UInt16[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Sse41.IsSupported;
@@ -138,7 +180,7 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
         public void RunBasicScenario_UnsafeRead()
         {
             const byte imm8 = 0;
-            
+
             var result = Sse41.MultipleSumAbsoluteDifferences(
                 Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
                 Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr),
@@ -146,13 +188,18 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, imm8, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                imm8,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_Load()
         {
             const byte imm8 = 1;
-            
+
             var result = Sse41.MultipleSumAbsoluteDifferences(
                 Sse2.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
                 Sse2.LoadVector128((Byte*)(_dataTable.inArray2Ptr)),
@@ -160,7 +207,12 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, imm8, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                imm8,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_LoadAligned()
@@ -174,63 +226,103 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, imm8, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                imm8,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_UnsafeRead()
         {
             const byte imm8 = 3;
 
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.MultipleSumAbsoluteDifferences), new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr),
-                                        imm8
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(
+                    nameof(Sse41.MultipleSumAbsoluteDifferences),
+                    new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr),
+                        imm8,
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, imm8, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                imm8,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_Load()
         {
             const byte imm8 = 4;
 
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.MultipleSumAbsoluteDifferences), new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
-                                        Sse2.LoadVector128((Byte*)(_dataTable.inArray2Ptr)),
-                                        imm8
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(
+                    nameof(Sse41.MultipleSumAbsoluteDifferences),
+                    new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Sse2.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
+                        Sse2.LoadVector128((Byte*)(_dataTable.inArray2Ptr)),
+                        imm8,
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, imm8, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                imm8,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_LoadAligned()
         {
             const byte imm8 = 5;
 
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.MultipleSumAbsoluteDifferences), new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray1Ptr)),
-                                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray2Ptr)),
-                                        imm8
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(
+                    nameof(Sse41.MultipleSumAbsoluteDifferences),
+                    new Type[] { typeof(Vector128<Byte>), typeof(Vector128<Byte>), typeof(Byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray1Ptr)),
+                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray2Ptr)),
+                        imm8,
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, imm8, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                imm8,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunClsVarScenario()
         {
             const byte imm8 = 6;
 
-            var result = Sse41.MultipleSumAbsoluteDifferences(
-                _clsVar1,
-                _clsVar2,
-                imm8
-            );
+            var result = Sse41.MultipleSumAbsoluteDifferences(_clsVar1, _clsVar2, imm8);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar1, _clsVar2, imm8, _dataTable.outArrayPtr);
@@ -307,7 +399,13 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
             }
         }
 
-        private void ValidateResult(Vector128<Byte> left, Vector128<Byte> right, byte imm8, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Byte> left,
+            Vector128<Byte> right,
+            byte imm8,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
@@ -315,89 +413,143 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray1[0]), left);
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray2[0]), right);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             ValidateResult(inArray1, inArray2, imm8, outArray, method);
         }
 
-        private void ValidateResult(void* left, void* right, byte imm8, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* left,
+            void* right,
+            byte imm8,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray1 = new Byte[Op1ElementCount];
             Byte[] inArray2 = new Byte[Op2ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(left), (uint)Unsafe.SizeOf<Vector128<Byte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray2[0]), ref Unsafe.AsRef<byte>(right), (uint)Unsafe.SizeOf<Vector128<Byte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(left),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray2[0]),
+                ref Unsafe.AsRef<byte>(right),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             ValidateResult(inArray1, inArray2, imm8, outArray, method);
         }
 
-        private void ValidateResult(Byte[] left, Byte[] right, byte imm8, UInt16[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] left,
+            Byte[] right,
+            byte imm8,
+            UInt16[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             var srcOffset = ((imm8 & 0x3) * 32) / 8;
             var dstOffset = (((imm8 & 0x4) >> 2) * 32) / 8;
 
-            if (result[0] != Math.Abs(left[dstOffset + 0] - right[srcOffset + 0]) +
-                             Math.Abs(left[dstOffset + 1] - right[srcOffset + 1]) +
-                             Math.Abs(left[dstOffset + 2] - right[srcOffset + 2]) +
-                             Math.Abs(left[dstOffset + 3] - right[srcOffset + 3]))
+            if (
+                result[0]
+                != Math.Abs(left[dstOffset + 0] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 1] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 2] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 3] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[1] != Math.Abs(left[dstOffset + 1] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 2] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 3] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 4] - right[srcOffset + 3]))
+            else if (
+                result[1]
+                != Math.Abs(left[dstOffset + 1] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 2] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 3] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 4] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[2] != Math.Abs(left[dstOffset + 2] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 3] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 4] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 5] - right[srcOffset + 3]))
+            else if (
+                result[2]
+                != Math.Abs(left[dstOffset + 2] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 3] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 4] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 5] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[3] != Math.Abs(left[dstOffset + 3] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 4] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 5] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 6] - right[srcOffset + 3]))
+            else if (
+                result[3]
+                != Math.Abs(left[dstOffset + 3] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 4] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 5] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 6] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[4] != Math.Abs(left[dstOffset + 4] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 5] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 6] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 7] - right[srcOffset + 3]))
+            else if (
+                result[4]
+                != Math.Abs(left[dstOffset + 4] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 5] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 6] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 7] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[5] != Math.Abs(left[dstOffset + 5] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 6] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 7] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 8] - right[srcOffset + 3]))
+            else if (
+                result[5]
+                != Math.Abs(left[dstOffset + 5] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 6] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 7] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 8] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[6] != Math.Abs(left[dstOffset + 6] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 7] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 8] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 9] - right[srcOffset + 3]))
+            else if (
+                result[6]
+                != Math.Abs(left[dstOffset + 6] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 7] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 8] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 9] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
-            else if (result[7] != Math.Abs(left[dstOffset + 7] - right[srcOffset + 0]) +
-                                  Math.Abs(left[dstOffset + 8] - right[srcOffset + 1]) +
-                                  Math.Abs(left[dstOffset + 9] - right[srcOffset + 2]) +
-                                  Math.Abs(left[dstOffset + 10] - right[srcOffset + 3]))
+            else if (
+                result[7]
+                != Math.Abs(left[dstOffset + 7] - right[srcOffset + 0])
+                    + Math.Abs(left[dstOffset + 8] - right[srcOffset + 1])
+                    + Math.Abs(left[dstOffset + 9] - right[srcOffset + 2])
+                    + Math.Abs(left[dstOffset + 10] - right[srcOffset + 3])
+            )
             {
                 Succeeded = false;
             }
 
             if (!Succeeded)
             {
-                Console.WriteLine($"{nameof(Sse41)}.{nameof(Sse41.MultipleSumAbsoluteDifferences)}Vector128<UInt16>(Vector128<Byte>, Vector128<Byte>, Byte): {method} failed:");
+                Console.WriteLine(
+                    $"{nameof(Sse41)}.{nameof(Sse41.MultipleSumAbsoluteDifferences)}Vector128<UInt16>(Vector128<Byte>, Vector128<Byte>, Byte): {method} failed:"
+                );
                 Console.WriteLine($"    left: ({string.Join(", ", left)})");
                 Console.WriteLine($"   right: ({string.Join(", ", right)})");
                 Console.WriteLine($"    imm8: ({imm8})");

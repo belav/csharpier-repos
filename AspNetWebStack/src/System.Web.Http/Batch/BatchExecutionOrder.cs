@@ -16,6 +16,6 @@ namespace System.Web.Http.Batch
         /// <summary>
         /// Executes the batch requests non-sequentially.
         /// </summary>
-        NonSequential
+        NonSequential,
     }
 }

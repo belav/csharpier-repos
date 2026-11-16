@@ -9,17 +9,23 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.ViewModel
 {
-    internal partial class AnalyzerSettingsViewModel : SettingsViewModelBase<
-        AnalyzerSetting,
-        AnalyzerSettingsViewModel.SettingsSnapshotFactory,
-        AnalyzerSettingsViewModel.SettingsEntriesSnapshot>
+    internal partial class AnalyzerSettingsViewModel
+        : SettingsViewModelBase<
+            AnalyzerSetting,
+            AnalyzerSettingsViewModel.SettingsSnapshotFactory,
+            AnalyzerSettingsViewModel.SettingsEntriesSnapshot
+        >
     {
-        internal sealed class SettingsSnapshotFactory : SettingsSnapshotFactoryBase<AnalyzerSetting, SettingsEntriesSnapshot>
+        internal sealed class SettingsSnapshotFactory
+            : SettingsSnapshotFactoryBase<AnalyzerSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<AnalyzerSetting> data) : base(data) { }
+            public SettingsSnapshotFactory(ISettingsProvider<AnalyzerSetting> data)
+                : base(data) { }
 
-            protected override SettingsEntriesSnapshot CreateSnapshot(ImmutableArray<AnalyzerSetting> data, int currentVersionNumber)
-                => new(data, currentVersionNumber);
+            protected override SettingsEntriesSnapshot CreateSnapshot(
+                ImmutableArray<AnalyzerSetting> data,
+                int currentVersionNumber
+            ) => new(data, currentVersionNumber);
         }
     }
 }

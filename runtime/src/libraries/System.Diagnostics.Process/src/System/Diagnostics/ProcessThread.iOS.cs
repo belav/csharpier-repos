@@ -31,6 +31,7 @@ namespace System.Diagnostics
         }
 
         private static DateTime GetStartTime() => throw new PlatformNotSupportedException();
+
         /// <summary>
         /// Returns the amount of time the associated thread has spent utilizing the CPU.
         /// It is the sum of the System.Diagnostics.ProcessThread.UserProcessorTime and

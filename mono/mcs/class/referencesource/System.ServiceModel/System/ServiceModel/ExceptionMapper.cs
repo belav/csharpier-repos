@@ -25,9 +25,7 @@ namespace System.ServiceModel
         /// <summary>
         /// ExceptionMapper constructor.
         /// </summary>
-        public ExceptionMapper()
-        {
-        }
+        public ExceptionMapper() { }
 
         /// <summary>
         /// Translates the input exception to a fault using the mapping defined in ExceptionMap.
@@ -46,13 +44,17 @@ namespace System.ServiceModel
         /// <param name="soapNamespace">The SOAP Namespace to be used when generating the mapped fault.</param>
         /// <param name="trustNamespace">The WS-Trust Namespace to be used when generating the mapped fault.</param>
         /// <returns>The fault corresponding to the input exception.</returns>
-        public virtual FaultException FromException(Exception ex, string soapNamespace, string trustNamespace)
+        public virtual FaultException FromException(
+            Exception ex,
+            string soapNamespace,
+            string trustNamespace
+        )
         {
             return null;
         }
 
         /// <summary>
-        /// Determines whether an exception that occurred during the processing of a security token 
+        /// Determines whether an exception that occurred during the processing of a security token
         /// should be handled using the defined ExceptionMap.
         /// </summary>
         /// <param name="ex">The input exception.</param>

@@ -337,6 +337,6 @@ namespace System.Diagnostics.Tracing
         /// Encoding assumes 32-bit value.
         /// Decoding treats as HRESULT.
         /// </summary>
-        HResult = Int32 + (EventFieldFormat.HResult << 8)
+        HResult = Int32 + (EventFieldFormat.HResult << 8),
     }
 }

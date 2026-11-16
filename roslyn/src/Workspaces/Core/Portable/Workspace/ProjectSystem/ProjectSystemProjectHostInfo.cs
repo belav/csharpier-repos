@@ -11,7 +11,10 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 {
     internal record ProjectSystemHostInfo(
-        ImmutableArray<Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata>> DynamicFileInfoProviders,
+        ImmutableArray<
+            Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata>
+        > DynamicFileInfoProviders,
         IProjectSystemDiagnosticSource DiagnosticSource,
-        IHostDiagnosticAnalyzerProvider HostDiagnosticAnalyzerProvider);
+        IHostDiagnosticAnalyzerProvider HostDiagnosticAnalyzerProvider
+    );
 }

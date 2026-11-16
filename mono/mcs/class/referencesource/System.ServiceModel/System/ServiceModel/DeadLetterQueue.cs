@@ -7,7 +7,7 @@ namespace System.ServiceModel
     {
         None,
         System,
-        Custom
+        Custom,
     }
 
     static class DeadLetterQueueHelper

@@ -11,7 +11,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnlyList<SyntaxNodeOrToken>
+    public readonly partial struct ChildSyntaxList
+        : IEquatable<ChildSyntaxList>,
+            IReadOnlyList<SyntaxNodeOrToken>
     {
         private readonly SyntaxNode? _node;
         private readonly int _count;
@@ -27,10 +29,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         internal static int CountNodes(GreenNode green)
@@ -169,7 +168,10 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Assumes that <paramref name="targetPosition"/> is within the span of <paramref name="node"/>.
         /// </remarks>
-        internal static SyntaxNodeOrToken ChildThatContainsPosition(SyntaxNode node, int targetPosition)
+        internal static SyntaxNodeOrToken ChildThatContainsPosition(
+            SyntaxNode node,
+            int targetPosition
+        )
         {
             // The targetPosition must already be within this node
             Debug.Assert(node.FullSpan.Contains(targetPosition));
@@ -299,10 +301,7 @@ namespace Microsoft.CodeAnalysis
         private SyntaxNodeOrToken[] Nodes
 #pragma warning restore IDE0051 // Remove unused private members
         {
-            get
-            {
-                return this.ToArray();
-            }
+            get { return this.ToArray(); }
         }
 
         public bool Any()
@@ -314,7 +313,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the first child in the list.
         /// </summary>
         /// <returns>The first child in the list.</returns>
-        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>    
+        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>
         public SyntaxNodeOrToken First()
         {
             if (Any())
@@ -329,7 +328,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the last child in the list.
         /// </summary>
         /// <returns>The last child in the list.</returns>
-        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>    
+        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>
         public SyntaxNodeOrToken Last()
         {
             if (Any())

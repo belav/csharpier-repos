@@ -26,15 +26,17 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         /// <param name="debuggeeSideVisualizerAssemblyName">[Required] The full name of the debuggee-side visualizer assembly</param>
         /// <param name="visualizerDescription">[Required] The visualizer description</param>
         /// <param name="extensionPartId">[Required] This is a unique id for visualizers that are installed via the ExtensionPartManager.</param>
-        internal DkmClrDebuggerVisualizerAttribute(string targetMember,
+        internal DkmClrDebuggerVisualizerAttribute(
+            string targetMember,
             string uiSideVisualizerTypeName,
             string uiSideVisualizerAssemblyName,
             DkmClrCustomVisualizerAssemblyLocation uiSideVisualizerAssemblyLocation,
             string debuggeeSideVisualizerTypeName,
             string debuggeeSideVisualizerAssemblyName,
             string visualizerDescription,
-            System.Guid extensionPartId) :
-            base(null)
+            System.Guid extensionPartId
+        )
+            : base(null)
         {
             UISideVisualizerTypeName = uiSideVisualizerTypeName;
             UISideVisualizerAssemblyName = uiSideVisualizerAssemblyName;
@@ -67,17 +69,20 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         // Summary:
         //     Location unknown.
         Unknown,
+
         //
         // Summary:
         //     The ...\Documents\...\Visual Studio X\Visualizers directory.
         UserDirectory,
+
         //
         // Summary:
         //     The ...\Common7\Packages\Debugger\Visualizers directory.
         SharedDirectory,
+
         //
         // Summary:
         //     Present on an assembly loaded by the debuggee.
-        Debuggee
+        Debuggee,
     }
 }

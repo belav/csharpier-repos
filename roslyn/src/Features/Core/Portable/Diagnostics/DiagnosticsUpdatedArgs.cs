@@ -23,10 +23,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ProjectId? projectId,
             DocumentId? documentId,
             ImmutableArray<DiagnosticData> diagnostics,
-            DiagnosticsUpdatedKind kind)
+            DiagnosticsUpdatedKind kind
+        )
             : base(id, workspace, projectId, documentId)
         {
-            Debug.Assert(diagnostics.All(d => d.ProjectId == projectId && d.DocumentId == documentId));
+            Debug.Assert(
+                diagnostics.All(d => d.ProjectId == projectId && d.DocumentId == documentId)
+            );
             Debug.Assert(kind != DiagnosticsUpdatedKind.DiagnosticsRemoved || diagnostics.IsEmpty);
 
             Solution = solution;
@@ -42,9 +45,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Solution? solution,
             ProjectId? projectId,
             DocumentId? documentId,
-            ImmutableArray<DiagnosticData> diagnostics)
+            ImmutableArray<DiagnosticData> diagnostics
+        )
         {
-            return new DiagnosticsUpdatedArgs(id, workspace, solution, projectId, documentId, diagnostics, DiagnosticsUpdatedKind.DiagnosticsCreated);
+            return new DiagnosticsUpdatedArgs(
+                id,
+                workspace,
+                solution,
+                projectId,
+                documentId,
+                diagnostics,
+                DiagnosticsUpdatedKind.DiagnosticsCreated
+            );
         }
 
         public static DiagnosticsUpdatedArgs DiagnosticsRemoved(
@@ -52,9 +64,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Workspace workspace,
             Solution? solution,
             ProjectId? projectId,
-            DocumentId? documentId)
+            DocumentId? documentId
+        )
         {
-            return new DiagnosticsUpdatedArgs(id, workspace, solution, projectId, documentId, ImmutableArray<DiagnosticData>.Empty, DiagnosticsUpdatedKind.DiagnosticsRemoved);
+            return new DiagnosticsUpdatedArgs(
+                id,
+                workspace,
+                solution,
+                projectId,
+                documentId,
+                ImmutableArray<DiagnosticData>.Empty,
+                DiagnosticsUpdatedKind.DiagnosticsRemoved
+            );
         }
     }
 }

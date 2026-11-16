@@ -6,17 +6,18 @@ using System.Data.Common;
 
 namespace System.Data.Odbc
 {
-    [Editor("Microsoft.VSDesigner.Data.Design.DBParametersEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.DBParametersEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed partial class OdbcParameterCollection : DbParameterCollection
     {
-        private bool _rebindCollection;   // The collection needs to be (re)bound
+        private bool _rebindCollection; // The collection needs to be (re)bound
 
         private static readonly Type s_itemType = typeof(OdbcParameter);
 
-        internal OdbcParameterCollection() : base()
-        {
-        }
+        internal OdbcParameterCollection()
+            : base() { }
 
         internal bool RebindCollection
         {
@@ -24,36 +25,18 @@ namespace System.Data.Odbc
             set { _rebindCollection = value; }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new OdbcParameter this[int index]
         {
-            get
-            {
-                return (OdbcParameter)GetParameter(index);
-            }
-            set
-            {
-                SetParameter(index, value);
-            }
+            get { return (OdbcParameter)GetParameter(index); }
+            set { SetParameter(index, value); }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new OdbcParameter this[string parameterName]
         {
-            get
-            {
-                return (OdbcParameter)GetParameter(parameterName);
-            }
-            set
-            {
-                SetParameter(parameterName, value);
-            }
+            get { return (OdbcParameter)GetParameter(parameterName); }
+            set { SetParameter(parameterName, value); }
         }
 
         public OdbcParameter Add(OdbcParameter value)
@@ -64,7 +47,9 @@ namespace System.Data.Odbc
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        [Obsolete("Add(String parameterName, Object value) has been deprecated. Use AddWithValue(String parameterName, Object value) instead.")]
+        [Obsolete(
+            "Add(String parameterName, Object value) has been deprecated. Use AddWithValue(String parameterName, Object value) instead."
+        )]
         public OdbcParameter Add(string? parameterName, object? value)
         {
             // MDAC 59206
@@ -87,7 +72,12 @@ namespace System.Data.Odbc
             return Add(new OdbcParameter(parameterName, odbcType, size));
         }
 
-        public OdbcParameter Add(string? parameterName, OdbcType odbcType, int size, string? sourceColumn)
+        public OdbcParameter Add(
+            string? parameterName,
+            OdbcType odbcType,
+            int size,
+            string? sourceColumn
+        )
         {
             return Add(new OdbcParameter(parameterName, odbcType, size, sourceColumn));
         }
@@ -100,11 +90,22 @@ namespace System.Data.Odbc
 
         // Walks through the collection and binds each parameter
         //
-        internal void Bind(OdbcCommand command, CMDWrapper cmdWrapper, CNativeBuffer parameterBuffer)
+        internal void Bind(
+            OdbcCommand command,
+            CMDWrapper cmdWrapper,
+            CNativeBuffer parameterBuffer
+        )
         {
             for (int i = 0; i < Count; ++i)
             {
-                this[i].Bind(cmdWrapper.StatementHandle!, command, checked((short)(i + 1)), parameterBuffer, true);
+                this[i]
+                    .Bind(
+                        cmdWrapper.StatementHandle!,
+                        command,
+                        checked((short)(i + 1)),
+                        parameterBuffer,
+                        true
+                    );
             }
             _rebindCollection = false;
         }
@@ -122,7 +123,8 @@ namespace System.Data.Odbc
                 }
                 this[i].PrepareForBind(command, (short)(i + 1), ref parameterBufferSize);
 
-                parameterBufferSize = (parameterBufferSize + (IntPtr.Size - 1)) & ~(IntPtr.Size - 1);          // align buffer;
+                parameterBufferSize =
+                    (parameterBufferSize + (IntPtr.Size - 1)) & ~(IntPtr.Size - 1); // align buffer;
             }
             return parameterBufferSize;
         }

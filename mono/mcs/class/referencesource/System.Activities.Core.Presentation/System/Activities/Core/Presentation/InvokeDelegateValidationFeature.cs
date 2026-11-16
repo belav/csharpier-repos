@@ -35,7 +35,10 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.constraints == null)
                 {
-                    this.constraints = new List<Constraint> { this.CreateCheckDelegateRule(this.editingContext) };
+                    this.constraints = new List<Constraint>
+                    {
+                        this.CreateCheckDelegateRule(this.editingContext),
+                    };
                 }
 
                 return this.constraints;
@@ -50,8 +53,10 @@ namespace System.Activities.Core.Presentation
 
         private Constraint CreateCheckDelegateRule(EditingContext editingContext)
         {
-            DelegateInArgument<InvokeDelegate> invokeDelegate = new DelegateInArgument<InvokeDelegate>();
-            DelegateInArgument<ValidationContext> context = new DelegateInArgument<ValidationContext>();
+            DelegateInArgument<InvokeDelegate> invokeDelegate =
+                new DelegateInArgument<InvokeDelegate>();
+            DelegateInArgument<ValidationContext> context =
+                new DelegateInArgument<ValidationContext>();
 
             return new Constraint<InvokeDelegate>
             {
@@ -63,8 +68,8 @@ namespace System.Activities.Core.Presentation
                     {
                         Activity = invokeDelegate,
                         EditingContext = editingContext,
-                    }
-                }
+                    },
+                },
             };
         }
 
@@ -78,13 +83,13 @@ namespace System.Activities.Core.Presentation
                 {
                     Assertion = false,
                     IsWarning = true,
-                    Message = new VariableValue<string> { Variable = this.WarningMessageVariable }
+                    Message = new VariableValue<string> { Variable = this.WarningMessageVariable },
                 };
                 this.ShowError = new AssertValidation()
                 {
                     Assertion = false,
                     IsWarning = false,
-                    Message = new VariableValue<string> { Variable = this.ErrorMessageVariable }
+                    Message = new VariableValue<string> { Variable = this.ErrorMessageVariable },
                 };
             }
 
@@ -103,9 +108,16 @@ namespace System.Activities.Core.Presentation
 
             protected override void CacheMetadata(NativeActivityMetadata metadata)
             {
-                RuntimeArgument activityArgument = new RuntimeArgument("Activity", typeof(InvokeDelegate), ArgumentDirection.In, true);
+                RuntimeArgument activityArgument = new RuntimeArgument(
+                    "Activity",
+                    typeof(InvokeDelegate),
+                    ArgumentDirection.In,
+                    true
+                );
                 metadata.Bind(this.Activity, activityArgument);
-                metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { activityArgument });
+                metadata.SetArgumentsCollection(
+                    new Collection<RuntimeArgument> { activityArgument }
+                );
 
                 metadata.AddImplementationChild(this.ShowWarning);
                 metadata.AddImplementationChild(this.ShowError);
@@ -118,47 +130,87 @@ namespace System.Activities.Core.Presentation
                 StringBuilder errorBuilder = new StringBuilder();
                 InvokeDelegate activity = this.Activity.Get(context);
 
-                string reference = PropertyReferenceUtilities.GetPropertyReference(activity, "Delegate");
+                string reference = PropertyReferenceUtilities.GetPropertyReference(
+                    activity,
+                    "Delegate"
+                );
 
                 if (reference != null)
                 {
                     DynamicActivityProperty property = null;
 
-                    ModelTreeManager manager = this.EditingContext.Services.GetService<ModelTreeManager>();
+                    ModelTreeManager manager =
+                        this.EditingContext.Services.GetService<ModelTreeManager>();
                     if (manager.Root.ItemType == typeof(ActivityBuilder))
                     {
-                        property = DynamicActivityPropertyUtilities.Find(manager.Root.Properties["Properties"].Collection, reference);
+                        property = DynamicActivityPropertyUtilities.Find(
+                            manager.Root.Properties["Properties"].Collection,
+                            reference
+                        );
                     }
 
                     if (property == null)
                     {
-                        this.EmitValidationError(context, string.Format(CultureInfo.CurrentUICulture, SR.PropertyReferenceNotResolved, reference));
+                        this.EmitValidationError(
+                            context,
+                            string.Format(
+                                CultureInfo.CurrentUICulture,
+                                SR.PropertyReferenceNotResolved,
+                                reference
+                            )
+                        );
                         return;
                     }
 
                     if (property.Type == typeof(ActivityDelegate))
                     {
-                        this.EmitValidationWarning(context, string.Format(CultureInfo.CurrentUICulture, SR.PropertyIsNotAConcreteActivityDelegate, reference));
+                        this.EmitValidationWarning(
+                            context,
+                            string.Format(
+                                CultureInfo.CurrentUICulture,
+                                SR.PropertyIsNotAConcreteActivityDelegate,
+                                reference
+                            )
+                        );
                         return;
                     }
 
                     if (!property.Type.IsSubclassOf(typeof(ActivityDelegate)))
                     {
-                        this.EmitValidationError(context, string.Format(CultureInfo.CurrentUICulture, SR.PropertyIsNotAnActivityDelegate, reference));
+                        this.EmitValidationError(
+                            context,
+                            string.Format(
+                                CultureInfo.CurrentUICulture,
+                                SR.PropertyIsNotAnActivityDelegate,
+                                reference
+                            )
+                        );
                         return;
                     }
 
                     if (property.Type.IsAbstract)
                     {
-                        this.EmitValidationWarning(context, string.Format(CultureInfo.CurrentUICulture, SR.PropertyIsNotAConcreteActivityDelegate, reference));
+                        this.EmitValidationWarning(
+                            context,
+                            string.Format(
+                                CultureInfo.CurrentUICulture,
+                                SR.PropertyIsNotAConcreteActivityDelegate,
+                                reference
+                            )
+                        );
                         return;
                     }
 
-                    ActivityDelegateMetadata metadata = ActivityDelegateUtilities.GetMetadata(property.Type);
+                    ActivityDelegateMetadata metadata = ActivityDelegateUtilities.GetMetadata(
+                        property.Type
+                    );
 
                     if (activity.DelegateArguments.Count != metadata.Count)
                     {
-                        this.EmitValidationWarning(context, SR.WrongNumberOfArgumentsForActivityDelegate);
+                        this.EmitValidationWarning(
+                            context,
+                            SR.WrongNumberOfArgumentsForActivityDelegate
+                        );
                         return;
                     }
 
@@ -166,35 +218,85 @@ namespace System.Activities.Core.Presentation
                     {
                         Argument delegateArgument = null;
 
-                        if (activity.DelegateArguments.TryGetValue(expectedArgument.Name, out delegateArgument))
+                        if (
+                            activity.DelegateArguments.TryGetValue(
+                                expectedArgument.Name,
+                                out delegateArgument
+                            )
+                        )
                         {
-                            if ((expectedArgument.Direction == ActivityDelegateArgumentDirection.In && delegateArgument.Direction != ArgumentDirection.In) ||
-                                (expectedArgument.Direction == ActivityDelegateArgumentDirection.Out && delegateArgument.Direction != ArgumentDirection.Out))
+                            if (
+                                (
+                                    expectedArgument.Direction
+                                        == ActivityDelegateArgumentDirection.In
+                                    && delegateArgument.Direction != ArgumentDirection.In
+                                )
+                                || (
+                                    expectedArgument.Direction
+                                        == ActivityDelegateArgumentDirection.Out
+                                    && delegateArgument.Direction != ArgumentDirection.Out
+                                )
+                            )
                             {
-                                errorBuilder.AppendFormat(CultureInfo.CurrentUICulture, SR.DelegateArgumentsDirectionalityMismatch, expectedArgument.Name, delegateArgument.Direction, expectedArgument.Direction);
+                                errorBuilder.AppendFormat(
+                                    CultureInfo.CurrentUICulture,
+                                    SR.DelegateArgumentsDirectionalityMismatch,
+                                    expectedArgument.Name,
+                                    delegateArgument.Direction,
+                                    expectedArgument.Direction
+                                );
                             }
 
                             if (delegateArgument.ArgumentType != expectedArgument.Type)
                             {
-                                if (expectedArgument.Direction == ActivityDelegateArgumentDirection.In)
+                                if (
+                                    expectedArgument.Direction
+                                    == ActivityDelegateArgumentDirection.In
+                                )
                                 {
-                                    if (!TypeHelper.AreTypesCompatible(delegateArgument.ArgumentType, expectedArgument.Type))
+                                    if (
+                                        !TypeHelper.AreTypesCompatible(
+                                            delegateArgument.ArgumentType,
+                                            expectedArgument.Type
+                                        )
+                                    )
                                     {
-                                        errorBuilder.AppendFormat(CultureInfo.CurrentUICulture, SR.DelegateInArgumentTypeMismatch, expectedArgument.Name, expectedArgument.Type, delegateArgument.ArgumentType);
+                                        errorBuilder.AppendFormat(
+                                            CultureInfo.CurrentUICulture,
+                                            SR.DelegateInArgumentTypeMismatch,
+                                            expectedArgument.Name,
+                                            expectedArgument.Type,
+                                            delegateArgument.ArgumentType
+                                        );
                                     }
                                 }
                                 else
                                 {
-                                    if (!TypeHelper.AreTypesCompatible(expectedArgument.Type, delegateArgument.ArgumentType))
+                                    if (
+                                        !TypeHelper.AreTypesCompatible(
+                                            expectedArgument.Type,
+                                            delegateArgument.ArgumentType
+                                        )
+                                    )
                                     {
-                                        errorBuilder.AppendFormat(CultureInfo.CurrentUICulture, SR.DelegateOutArgumentTypeMismatch, expectedArgument.Name, expectedArgument.Type, delegateArgument.ArgumentType);
+                                        errorBuilder.AppendFormat(
+                                            CultureInfo.CurrentUICulture,
+                                            SR.DelegateOutArgumentTypeMismatch,
+                                            expectedArgument.Name,
+                                            expectedArgument.Type,
+                                            delegateArgument.ArgumentType
+                                        );
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            errorBuilder.AppendFormat(CultureInfo.CurrentUICulture, SR.DelegateArgumentMissing, expectedArgument.Name);
+                            errorBuilder.AppendFormat(
+                                CultureInfo.CurrentUICulture,
+                                SR.DelegateArgumentMissing,
+                                expectedArgument.Name
+                            );
                         }
                     }
 

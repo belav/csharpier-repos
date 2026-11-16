@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact()]
         public void Test1()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .assembly extern NotReferenced {}
 
 .class public auto ansi sealed D1`1<T>
@@ -187,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void Test2()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .assembly extern NotReferenced {}
 
 .class public auto ansi sealed D1`1<T>

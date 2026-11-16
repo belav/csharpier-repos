@@ -5,17 +5,21 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
     using System.Configuration;
     using System.Globalization;
     using System.ServiceModel;
+    using System.ServiceModel.Dispatcher;
 
     [ConfigurationCollection(typeof(XPathMessageFilterElement))]
-    public sealed class XPathMessageFilterElementCollection : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>
+    public sealed class XPathMessageFilterElementCollection
+        : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>
     {
         public XPathMessageFilterElementCollection()
-            : base(ConfigurationElementCollectionType.AddRemoveClearMap, null, new XPathMessageFilterElementComparer())
-        { }
+            : base(
+                ConfigurationElementCollectionType.AddRemoveClearMap,
+                null,
+                new XPathMessageFilterElementComparer()
+            ) { }
 
         public override bool ContainsKey(object key)
         {
@@ -27,7 +31,9 @@ namespace System.ServiceModel.Configuration
             string newKey = string.Empty;
             if (key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
             {
-                newKey = XPathMessageFilterElementComparer.ParseXPathString((XPathMessageFilter)key);
+                newKey = XPathMessageFilterElementComparer.ParseXPathString(
+                    (XPathMessageFilter)key
+                );
             }
             else if (key.GetType().IsAssignableFrom(typeof(string)))
             {
@@ -35,11 +41,16 @@ namespace System.ServiceModel.Configuration
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.ConfigInvalidKeyType,
-                    "XPathMessageFilterElement",
-                    typeof(XPathMessageFilter).AssemblyQualifiedName,
-                    key.GetType().AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ConfigInvalidKeyType,
+                            "XPathMessageFilterElement",
+                            typeof(XPathMessageFilter).AssemblyQualifiedName,
+                            key.GetType().AssemblyQualifiedName
+                        )
+                    )
+                );
             }
 
             return base.ContainsKey(newKey);
@@ -56,8 +67,10 @@ namespace System.ServiceModel.Configuration
 
             if (configElement.Filter == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("element",
-                    SR.GetString(SR.ConfigXPathFilterIsNull));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "element",
+                    SR.GetString(SR.ConfigXPathFilterIsNull)
+                );
             }
 
             return XPathMessageFilterElementComparer.ParseXPathString(configElement.Filter);
@@ -79,19 +92,26 @@ namespace System.ServiceModel.Configuration
 
                 if (!key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.ConfigInvalidKeyType,
-                        "XPathMessageFilterElement",
-                        typeof(XPathMessageFilter).AssemblyQualifiedName,
-                        key.GetType().AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ConfigInvalidKeyType,
+                                "XPathMessageFilterElement",
+                                typeof(XPathMessageFilter).AssemblyQualifiedName,
+                                key.GetType().AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
                 XPathMessageFilterElement retval = (XPathMessageFilterElement)this.BaseGet(key);
                 if (retval == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new System.Collections.Generic.KeyNotFoundException(
-                        SR.GetString(SR.ConfigKeyNotFoundInElementCollection,
-                        key.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new System.Collections.Generic.KeyNotFoundException(
+                            SR.GetString(SR.ConfigKeyNotFoundInElementCollection, key.ToString())
+                        )
+                    );
                 }
                 return retval;
             }
@@ -114,14 +134,21 @@ namespace System.ServiceModel.Configuration
 
                 if (!key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.ConfigInvalidKeyType,
-                        "XPathMessageFilterElement",
-                        typeof(XPathMessageFilter).AssemblyQualifiedName,
-                        key.GetType().AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ConfigInvalidKeyType,
+                                "XPathMessageFilterElement",
+                                typeof(XPathMessageFilter).AssemblyQualifiedName,
+                                key.GetType().AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
-                string oldKey = XPathMessageFilterElementComparer.ParseXPathString((XPathMessageFilter)key);
+                string oldKey = XPathMessageFilterElementComparer.ParseXPathString(
+                    (XPathMessageFilter)key
+                );
                 string newKey = (string)this.GetElementKey(value);
 
                 if (String.Equals(oldKey, newKey, StringComparison.Ordinal))
@@ -134,13 +161,15 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigKeysDoNotMatch,
-                        this.GetElementKey(value).ToString(),
-                        key.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigKeysDoNotMatch,
+                            this.GetElementKey(value).ToString(),
+                            key.ToString()
+                        )
+                    );
                 }
             }
         }
     }
 }
-
-

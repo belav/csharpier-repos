@@ -26,7 +26,8 @@ namespace System.Security.Cryptography.Xml
         // work around https://github.com/dotnet/runtime/issues/81864 by splitting this into a separate class.
         internal static class Consts
         {
-            internal const string XmlDecryptionTransformNamespaceUrl = "http://www.w3.org/2002/07/decrypt#";
+            internal const string XmlDecryptionTransformNamespaceUrl =
+                "http://www.w3.org/2002/07/decrypt#";
         }
 
         public XmlDecryptionTransform()
@@ -40,8 +41,11 @@ namespace System.Security.Cryptography.Xml
         {
             if (inputElement == null)
                 return false;
-            if (inputElement.GetAttribute("Id") == idValue || inputElement.GetAttribute("id") == idValue ||
-                inputElement.GetAttribute("ID") == idValue)
+            if (
+                inputElement.GetAttribute("Id") == idValue
+                || inputElement.GetAttribute("id") == idValue
+                || inputElement.GetAttribute("ID") == idValue
+            )
                 return true;
 
             return false;
@@ -96,10 +100,17 @@ namespace System.Security.Cryptography.Xml
                 XmlElement? elem = node as XmlElement;
                 if (elem != null)
                 {
-                    if (elem.LocalName == "Except" && elem.NamespaceURI == Consts.XmlDecryptionTransformNamespaceUrl)
+                    if (
+                        elem.LocalName == "Except"
+                        && elem.NamespaceURI == Consts.XmlDecryptionTransformNamespaceUrl
+                    )
                     {
                         // the Uri is required
-                        string? uri = Utils.GetAttribute(elem, "URI", Consts.XmlDecryptionTransformNamespaceUrl);
+                        string? uri = Utils.GetAttribute(
+                            elem,
+                            "URI",
+                            Consts.XmlDecryptionTransformNamespaceUrl
+                        );
                         if (string.IsNullOrEmpty(uri) || uri[0] != '#')
                             throw new CryptographicException(SR.Cryptography_Xml_UriRequired);
                         if (!Utils.VerifyAttributes(elem, "URI"))
@@ -127,7 +138,10 @@ namespace System.Security.Cryptography.Xml
                 element.SetAttribute("Algorithm", Algorithm);
             foreach (string uri in ExceptUris)
             {
-                XmlElement exceptUriElement = document.CreateElement("Except", Consts.XmlDecryptionTransformNamespaceUrl);
+                XmlElement exceptUriElement = document.CreateElement(
+                    "Except",
+                    Consts.XmlDecryptionTransformNamespaceUrl
+                );
                 exceptUriElement.SetAttribute("URI", uri);
                 element.AppendChild(exceptUriElement);
             }
@@ -150,7 +164,9 @@ namespace System.Security.Cryptography.Xml
         {
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
-            XmlResolver resolver = (ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver());
+            XmlResolver resolver = (
+                ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver()
+            );
             XmlReader xmlReader = Utils.PreProcessStreamInput(stream, resolver, BaseURI!);
             document.Load(xmlReader);
             _containingDocument = document;
@@ -230,8 +246,11 @@ namespace System.Security.Cryptography.Xml
             while (node != null)
             {
                 XmlElement? encryptedDataElement = node as XmlElement;
-                if (encryptedDataElement != null && encryptedDataElement.LocalName == "EncryptedData" &&
-                    encryptedDataElement.NamespaceURI == EncryptedXml.XmlEncNamespaceUrl)
+                if (
+                    encryptedDataElement != null
+                    && encryptedDataElement.LocalName == "EncryptedData"
+                    && encryptedDataElement.NamespaceURI == EncryptedXml.XmlEncNamespaceUrl
+                )
                 {
                     XmlNode sibling = encryptedDataElement.NextSibling!;
                     XmlNode parent = encryptedDataElement.ParentNode!;
@@ -275,7 +294,10 @@ namespace System.Security.Cryptography.Xml
             if (type == typeof(XmlDocument))
                 return (XmlDocument)GetOutput();
             else
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
         }
     }
 }

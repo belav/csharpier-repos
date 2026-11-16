@@ -14,9 +14,17 @@ namespace System.Globalization.Tests
             TaiwanCalendar tc = new TaiwanCalendar();
 
             DateTime randomDateTime = TaiwanCalendarUtilities.RandomDateTime();
-            yield return new object[] { randomDateTime, rand.Next(1, (tc.MaxSupportedDateTime.Year - randomDateTime.Year - 1911)) };
+            yield return new object[]
+            {
+                randomDateTime,
+                rand.Next(1, (tc.MaxSupportedDateTime.Year - randomDateTime.Year - 1911)),
+            };
 
-            yield return new object[] { randomDateTime, rand.Next((tc.MinSupportedDateTime.Year - randomDateTime.Year), 0) };
+            yield return new object[]
+            {
+                randomDateTime,
+                rand.Next((tc.MinSupportedDateTime.Year - randomDateTime.Year), 0),
+            };
 
             yield return new object[] { tc.MinSupportedDateTime, 0 };
             yield return new object[] { tc.MaxSupportedDateTime, 0 };

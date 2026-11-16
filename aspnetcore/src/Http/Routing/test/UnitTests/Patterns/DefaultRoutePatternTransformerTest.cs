@@ -82,13 +82,11 @@ public class DefaultRoutePatternTransformerTest
             kvp => Assert.Equal(new KeyValuePair<string, object>("controller", "Home"), kvp)
         ); // default is preserved
 
-        Assert.Collection(
-            actual.RequiredValues.OrderBy(kvp => kvp.Key),
-            kvp =>
-                Assert.Equal(
-                    new KeyValuePair<string, object>("controller", RoutePattern.RequiredValueAny),
-                    kvp
-                )
+        Assert.Collection(actual.RequiredValues.OrderBy(kvp => kvp.Key), kvp =>
+            Assert.Equal(
+                new KeyValuePair<string, object>("controller", RoutePattern.RequiredValueAny),
+                kvp
+            )
         );
     }
 

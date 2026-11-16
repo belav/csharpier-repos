@@ -16,9 +16,7 @@ namespace System.ServiceModel.Activities
     public sealed class SendMessageContent : SendContent
     {
         public SendMessageContent()
-            : base()
-        {
-        }
+            : base() { }
 
         public SendMessageContent(InArgument message)
             : this()
@@ -37,23 +35,15 @@ namespace System.ServiceModel.Activities
         // DeclaredMessageType property is also specified, it is validated against
         // Message.Expression.ResultType.
         [DefaultValue(null)]
-        public InArgument Message
-        {
-            get;
-            set;
-        }
+        public InArgument Message { get; set; }
 
         // Allows the type of the variable specified for Message to be a derived type from the type
         // on the message contract. This type specifies what the type is one the message contract.
-        // If DeclaredMessageType is not specified, the type from the Message InArgument is used. 
-        // The DeclaredMessageType must either be the same as the type of the InArgument Message, 
+        // If DeclaredMessageType is not specified, the type from the Message InArgument is used.
+        // The DeclaredMessageType must either be the same as the type of the InArgument Message,
         // or it must be a base type of Message.
         [DefaultValue(null)]
-        public Type DeclaredMessageType
-        {
-            get;
-            set;
-        }
+        public Type DeclaredMessageType { get; set; }
 
         internal Type InternalDeclaredMessageType
         {
@@ -72,11 +62,13 @@ namespace System.ServiceModel.Activities
 
         internal override bool IsFault
         {
-            get 
+            get
             {
                 if (this.InternalDeclaredMessageType != null)
                 {
-                    return ContractInferenceHelper.ExceptionType.IsAssignableFrom(this.InternalDeclaredMessageType);
+                    return ContractInferenceHelper.ExceptionType.IsAssignableFrom(
+                        this.InternalDeclaredMessageType
+                    );
                 }
                 else
                 {
@@ -103,31 +95,56 @@ namespace System.ServiceModel.Activities
             return true;
         }
 
-        internal override void CacheMetadata(ActivityMetadata metadata, Activity owner, string operationName)
+        internal override void CacheMetadata(
+            ActivityMetadata metadata,
+            Activity owner,
+            string operationName
+        )
         {
-            MessagingActivityHelper.FixMessageArgument(this.Message, ArgumentDirection.In, metadata);
+            MessagingActivityHelper.FixMessageArgument(
+                this.Message,
+                ArgumentDirection.In,
+                metadata
+            );
 
             if (this.DeclaredMessageType != null)
             {
                 if (this.Message == null && this.DeclaredMessageType != TypeHelper.VoidType)
                 {
-                    string errorOperationName = ContractValidationHelper.GetErrorMessageOperationName(operationName);
-                    metadata.AddValidationError(SR.ValueCannotBeNull(owner.DisplayName, errorOperationName));
+                    string errorOperationName =
+                        ContractValidationHelper.GetErrorMessageOperationName(operationName);
+                    metadata.AddValidationError(
+                        SR.ValueCannotBeNull(owner.DisplayName, errorOperationName)
+                    );
                 }
-                else if (this.Message != null && !this.DeclaredMessageType.IsAssignableFrom(this.Message.ArgumentType))
+                else if (
+                    this.Message != null
+                    && !this.DeclaredMessageType.IsAssignableFrom(this.Message.ArgumentType)
+                )
                 {
-                    string errorOperationName = ContractValidationHelper.GetErrorMessageOperationName(operationName);
-                    metadata.AddValidationError(SR.ValueArgumentTypeNotDerivedFromValueType(owner.DisplayName, errorOperationName));
+                    string errorOperationName =
+                        ContractValidationHelper.GetErrorMessageOperationName(operationName);
+                    metadata.AddValidationError(
+                        SR.ValueArgumentTypeNotDerivedFromValueType(
+                            owner.DisplayName,
+                            errorOperationName
+                        )
+                    );
                 }
             }
         }
 
-        internal override void ConfigureInternalSend(InternalSendMessage internalSendMessage, out ToRequest requestFormatter)
+        internal override void ConfigureInternalSend(
+            InternalSendMessage internalSendMessage,
+            out ToRequest requestFormatter
+        )
         {
             if (this.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
             {
                 // Value is a Message, do not use the formatter but directly pass it to InternalSendMessage
-                internalSendMessage.Message = new InArgument<Message>(context => ((InArgument<Message>)this.Message).Get(context));
+                internalSendMessage.Message = new InArgument<Message>(context =>
+                    ((InArgument<Message>)this.Message).Get(context)
+                );
                 requestFormatter = null;
             }
             else
@@ -135,16 +152,23 @@ namespace System.ServiceModel.Activities
                 requestFormatter = new ToRequest();
                 if (this.Message != null)
                 {
-                    requestFormatter.Parameters.Add(InArgument.CreateReference(this.Message, "Message"));
+                    requestFormatter.Parameters.Add(
+                        InArgument.CreateReference(this.Message, "Message")
+                    );
                 }
             }
         }
 
-        internal override void ConfigureInternalSendReply(InternalSendMessage internalSendMessage, out ToReply responseFormatter)
+        internal override void ConfigureInternalSendReply(
+            InternalSendMessage internalSendMessage,
+            out ToReply responseFormatter
+        )
         {
             if (this.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
             {
-                internalSendMessage.Message = new InArgument<Message>(context => ((InArgument<Message>)this.Message).Get(context));
+                internalSendMessage.Message = new InArgument<Message>(context =>
+                    ((InArgument<Message>)this.Message).Get(context)
+                );
                 responseFormatter = null;
             }
             else
@@ -158,14 +182,23 @@ namespace System.ServiceModel.Activities
                 }
                 else if (this.Message != null)
                 {
-                    responseFormatter.Parameters.Add(InArgument.CreateReference(this.Message, "Message"));
+                    responseFormatter.Parameters.Add(
+                        InArgument.CreateReference(this.Message, "Message")
+                    );
                 }
             }
         }
 
-        internal override void InferMessageDescription(OperationDescription operation, object owner, MessageDirection direction)
+        internal override void InferMessageDescription(
+            OperationDescription operation,
+            object owner,
+            MessageDirection direction
+        )
         {
-            ContractInferenceHelper.CheckForDisposableParameters(operation, this.InternalDeclaredMessageType);
+            ContractInferenceHelper.CheckForDisposableParameters(
+                operation,
+                this.InternalDeclaredMessageType
+            );
 
             string overridingAction = null;
             SerializerOption serializerOption = SerializerOption.DataContractSerializer;
@@ -178,22 +211,40 @@ namespace System.ServiceModel.Activities
             else
             {
                 SendReply sendReply = owner as SendReply;
-                Fx.Assert(sendReply != null, "The owner of SendMessageContent can only be Send or SendReply!");
+                Fx.Assert(
+                    sendReply != null,
+                    "The owner of SendMessageContent can only be Send or SendReply!"
+                );
                 overridingAction = sendReply.Action;
                 serializerOption = sendReply.Request.SerializerOption;
             }
 
             if (direction == MessageDirection.Input)
             {
-                ContractInferenceHelper.AddInputMessage(operation, overridingAction, this.InternalDeclaredMessageType, serializerOption);
+                ContractInferenceHelper.AddInputMessage(
+                    operation,
+                    overridingAction,
+                    this.InternalDeclaredMessageType,
+                    serializerOption
+                );
             }
             else
             {
-                ContractInferenceHelper.AddOutputMessage(operation, overridingAction, this.InternalDeclaredMessageType, serializerOption);
+                ContractInferenceHelper.AddOutputMessage(
+                    operation,
+                    overridingAction,
+                    this.InternalDeclaredMessageType,
+                    serializerOption
+                );
             }
         }
-        
-        internal override void ValidateContract(NativeActivityContext context, OperationDescription targetOperation, object owner, MessageDirection direction)
+
+        internal override void ValidateContract(
+            NativeActivityContext context,
+            OperationDescription targetOperation,
+            object owner,
+            MessageDirection direction
+        )
         {
             MessageDescription targetMessage;
             string overridingAction;
@@ -202,11 +253,17 @@ namespace System.ServiceModel.Activities
 
             if (direction == MessageDirection.Input)
             {
-                Fx.Assert(targetOperation.Messages.Count >= 1, "There must be at least one MessageDescription in an OperationDescription!");
+                Fx.Assert(
+                    targetOperation.Messages.Count >= 1,
+                    "There must be at least one MessageDescription in an OperationDescription!"
+                );
                 targetMessage = targetOperation.Messages[0];
 
                 Send send = owner as Send;
-                Fx.Assert(send != null, "The parent of a SendMessageContent with in-message can only be Send!");
+                Fx.Assert(
+                    send != null,
+                    "The parent of a SendMessageContent with in-message can only be Send!"
+                );
 
                 overridingAction = send.Action;
                 serializerOption = send.SerializerOption;
@@ -215,12 +272,21 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                Fx.Assert(targetOperation.Messages.Count == 2, "There must be exactly two MessageDescription objects for a two-way operation!");
+                Fx.Assert(
+                    targetOperation.Messages.Count == 2,
+                    "There must be exactly two MessageDescription objects for a two-way operation!"
+                );
                 targetMessage = targetOperation.Messages[1];
 
                 SendReply sendReply = owner as SendReply;
-                Fx.Assert(sendReply != null, "The parent of a SendMessageContent with out-message can only be SendReply!");
-                Fx.Assert(sendReply.Request != null, "SendReply.Request should not be null by now!");
+                Fx.Assert(
+                    sendReply != null,
+                    "The parent of a SendMessageContent with out-message can only be SendReply!"
+                );
+                Fx.Assert(
+                    sendReply.Request != null,
+                    "SendReply.Request should not be null by now!"
+                );
                 overridingAction = sendReply.Action;
                 serializerOption = sendReply.Request.SerializerOption;
 
@@ -229,29 +295,60 @@ namespace System.ServiceModel.Activities
 
             if (!this.IsFault)
             {
-                ContractValidationHelper.ValidateAction(context, targetMessage, overridingAction, targetOperation, isResponse);
+                ContractValidationHelper.ValidateAction(
+                    context,
+                    targetMessage,
+                    overridingAction,
+                    targetOperation,
+                    isResponse
+                );
                 if (ContractValidationHelper.IsSendParameterContent(targetOperation))
                 {
-                    Constraint.AddValidationError(context, new ValidationError(SR.MisuseOfMessageContent(targetOperation.Name, targetOperation.DeclaringContract.Name))); 
+                    Constraint.AddValidationError(
+                        context,
+                        new ValidationError(
+                            SR.MisuseOfMessageContent(
+                                targetOperation.Name,
+                                targetOperation.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    ContractValidationHelper.ValidateMessageContent(context, targetMessage, this.InternalDeclaredMessageType,
-                        serializerOption, targetOperation, isResponse);
+                    ContractValidationHelper.ValidateMessageContent(
+                        context,
+                        targetMessage,
+                        this.InternalDeclaredMessageType,
+                        serializerOption,
+                        targetOperation,
+                        isResponse
+                    );
                 }
             }
             else
             {
-                Fx.Assert(this.InternalDeclaredMessageType != null, "IsFault returns true only when argument is of exception type!");
+                Fx.Assert(
+                    this.InternalDeclaredMessageType != null,
+                    "IsFault returns true only when argument is of exception type!"
+                );
                 Type argumentType = this.InternalDeclaredMessageType;
 
-                if (argumentType.IsGenericType && argumentType.GetGenericTypeDefinition() == ContractInferenceHelper.FaultExceptionType)
+                if (
+                    argumentType.IsGenericType
+                    && argumentType.GetGenericTypeDefinition()
+                        == ContractInferenceHelper.FaultExceptionType
+                )
                 {
                     Type faultType = argumentType.GetGenericArguments()[0];
-                    ContractValidationHelper.ValidateFault(context, targetOperation, overridingAction, faultType);
+                    ContractValidationHelper.ValidateFault(
+                        context,
+                        targetOperation,
+                        overridingAction,
+                        faultType
+                    );
                 }
             }
         }
-
     }
 }

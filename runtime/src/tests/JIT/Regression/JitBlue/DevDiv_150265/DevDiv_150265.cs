@@ -11,7 +11,7 @@ public class Program
 
     [Fact]
     public static int TestEntryPoint()
-    {            
+    {
         flag = true;
         return Test();
     }
@@ -25,7 +25,7 @@ public class Program
         catch (NullReferenceException)
         {
             Console.WriteLine("Failure");
-            return 101;                 
+            return 101;
         }
         catch (Exception)
         {
@@ -77,6 +77,6 @@ public class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static string GetString()
     {
-        return flag ? (string) null : "test";
+        return flag ? (string)null : "test";
     }
 }

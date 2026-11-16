@@ -14,24 +14,34 @@ namespace System.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void NonBlockingStdout_AllDataReceived()
         {
-            RemoteInvokeHandle remote = RemoteExecutor.Invoke(() =>
-            {
-                char[] data = Enumerable.Repeat('a', 1024).ToArray();
-
-                const int StdoutFd = 1;
-                Assert.Equal(0, Interop.Sys.Fcntl.DangerousSetIsNonBlocking((IntPtr)StdoutFd, 1));
-
-                for (int i = 0; i < 10_000; i++)
+            RemoteInvokeHandle remote = RemoteExecutor.Invoke(
+                () =>
                 {
-                    Console.Write(data);
+                    char[] data = Enumerable.Repeat('a', 1024).ToArray();
+
+                    const int StdoutFd = 1;
+                    Assert.Equal(
+                        0,
+                        Interop.Sys.Fcntl.DangerousSetIsNonBlocking((IntPtr)StdoutFd, 1)
+                    );
+
+                    for (int i = 0; i < 10_000; i++)
+                    {
+                        Console.Write(data);
+                    }
+                },
+                new RemoteInvokeOptions
+                {
+                    StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true },
                 }
-            }, new RemoteInvokeOptions { StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true } });
+            );
 
             using (remote)
             {
                 Assert.Equal(
                     new string('a', 1024 * 10_000),
-                    remote.Process.StandardOutput.ReadToEnd());
+                    remote.Process.StandardOutput.ReadToEnd()
+                );
             }
         }
     }

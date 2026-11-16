@@ -8,30 +8,46 @@ using System.Runtime.Serialization;
 namespace System.Net
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class HttpListenerException : Win32Exception
     {
-        public HttpListenerException() : base(Marshal.GetLastPInvokeError())
+        public HttpListenerException()
+            : base(Marshal.GetLastPInvokeError())
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
-        public HttpListenerException(int errorCode) : base(errorCode)
+        public HttpListenerException(int errorCode)
+            : base(errorCode)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
-        public HttpListenerException(int errorCode, string message) : base(errorCode, message)
+        public HttpListenerException(int errorCode, string message)
+            : base(errorCode, message)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected HttpListenerException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected HttpListenerException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
             : base(serializationInfo, streamingContext)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
         // the base class returns the HResult with this property

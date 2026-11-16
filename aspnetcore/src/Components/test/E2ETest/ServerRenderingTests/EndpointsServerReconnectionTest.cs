@@ -37,13 +37,11 @@ public class EndpointsServerReconnectionTest
         var javascript = (IJavaScriptExecutor)Browser;
 
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
-        Browser.Equal(
-            "block",
-            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        Browser.Equal("block", () =>
+            Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
         );
-        Browser.Equal(
-            "none",
-            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        Browser.Equal("none", () =>
+            Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
         );
         Browser.Exists(By.Id("increment-0")).Click();
         Browser.Equal("1", () => Browser.Exists(By.Id("count-0")).Text);
@@ -63,13 +61,11 @@ public class EndpointsServerReconnectionTest
 
         // Perform the first reconnect
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
-        Browser.Equal(
-            "block",
-            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        Browser.Equal("block", () =>
+            Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
         );
-        Browser.Equal(
-            "none",
-            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        Browser.Equal("none", () =>
+            Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
         );
         Browser.Exists(By.Id("increment-0")).Click();
         Browser.Equal("1", () => Browser.Exists(By.Id("count-0")).Text);
@@ -80,13 +76,11 @@ public class EndpointsServerReconnectionTest
 
         // Perform the second reconnect
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
-        Browser.Equal(
-            "block",
-            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        Browser.Equal("block", () =>
+            Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
         );
-        Browser.Equal(
-            "none",
-            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        Browser.Equal("none", () =>
+            Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
         );
         Browser.Exists(By.Id("increment-0")).Click();
         Browser.Equal("3", () => Browser.Exists(By.Id("count-0")).Text);

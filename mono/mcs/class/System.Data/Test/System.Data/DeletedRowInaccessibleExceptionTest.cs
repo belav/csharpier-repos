@@ -26,63 +26,74 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Text;
-using System.IO;
 using System.Data;
+using System.IO;
+using System.Text;
 using MonoTests.System.Data.Utils;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture] public class DeletedRowInaccessibleExceptionTest
-	{
-		[Test] public void Generate()
-		{
-			DataTable dtParent;
-			dtParent= DataProvider.CreateParentDataTable(); 
+    [TestFixture]
+    public class DeletedRowInaccessibleExceptionTest
+    {
+        [Test]
+        public void Generate()
+        {
+            DataTable dtParent;
+            dtParent = DataProvider.CreateParentDataTable();
 
-			DataRow dr = dtParent.Rows[0];
-			dr.Delete();
+            DataRow dr = dtParent.Rows[0];
+            dr.Delete();
 
-			// DeletedRowInaccessible Exception (BeginEdit)
-			try 
-			{
-				dr.BeginEdit();
-				Assert.Fail("DRIE1: BeginEdit failed to raise DeletedRowInaccessibleException.");
-			}
-			catch (DeletedRowInaccessibleException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("DRIE2: Indexer wrong exception type. Got: " + exc);
-			}
+            // DeletedRowInaccessible Exception (BeginEdit)
+            try
+            {
+                dr.BeginEdit();
+                Assert.Fail("DRIE1: BeginEdit failed to raise DeletedRowInaccessibleException.");
+            }
+            catch (DeletedRowInaccessibleException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("DRIE2: Indexer wrong exception type. Got: " + exc);
+            }
 
-			// DeletedRowInaccessible Exception (Item)
-			try 
-			{
-				string s = dr[0].ToString();
-				Assert.Fail("DRIE3: Indexer failed to raise DeletedRowInaccessibleException.");
-			}
-			catch (DeletedRowInaccessibleException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("DRIE4: Indexer wrong exception type. Got: " + exc);
-			}
+            // DeletedRowInaccessible Exception (Item)
+            try
+            {
+                string s = dr[0].ToString();
+                Assert.Fail("DRIE3: Indexer failed to raise DeletedRowInaccessibleException.");
+            }
+            catch (DeletedRowInaccessibleException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("DRIE4: Indexer wrong exception type. Got: " + exc);
+            }
 
-			// DeletedRowInaccessible Exception (ItemArray)
-			try 
-			{
-				object[] o = dr.ItemArray;
-				Assert.Fail("DRIE5: Indexer failed to raise DeletedRowInaccessibleException.");
-			}
-			catch (DeletedRowInaccessibleException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("DRIE6: Indexer wrong exception type. Got: " + exc);
-			}
-		}
-	}
+            // DeletedRowInaccessible Exception (ItemArray)
+            try
+            {
+                object[] o = dr.ItemArray;
+                Assert.Fail("DRIE5: Indexer failed to raise DeletedRowInaccessibleException.");
+            }
+            catch (DeletedRowInaccessibleException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("DRIE6: Indexer wrong exception type. Got: " + exc);
+            }
+        }
+    }
 }

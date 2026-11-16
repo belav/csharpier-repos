@@ -12,9 +12,9 @@ namespace System.Reflection
         None = 0x0000,
 
         // This Enum matches the CorEventAttr defined in CorHdr.h
-        SpecialName = 0x0200,     // event is special.  Name describes how.
+        SpecialName = 0x0200, // event is special.  Name describes how.
 
-        RTSpecialName = 0x0400,     // Runtime(metadata internal APIs) should check name encoding.
+        RTSpecialName = 0x0400, // Runtime(metadata internal APIs) should check name encoding.
 
         ReservedMask = 0x0400,
     }

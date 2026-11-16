@@ -7,17 +7,16 @@
 // (C)2005 Novell Inc,
 //
 
-
 namespace System.Transactions
 {
-	public enum IsolationLevel {
-		Serializable,
-		RepeatableRead,
-		ReadCommitted,
-		ReadUncommitted,
-		Snapshot,
-		Chaos,
-		Unspecified
-	}
+    public enum IsolationLevel
+    {
+        Serializable,
+        RepeatableRead,
+        ReadCommitted,
+        ReadUncommitted,
+        Snapshot,
+        Chaos,
+        Unspecified,
+    }
 }
-

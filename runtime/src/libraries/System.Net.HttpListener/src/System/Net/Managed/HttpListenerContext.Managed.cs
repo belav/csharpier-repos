@@ -41,21 +41,38 @@ namespace System.Net
 
             if (IsBasicHeader(header))
             {
-                _user = ParseBasicAuthentication(header.Substring(AuthenticationTypes.Basic.Length + 1));
+                _user = ParseBasicAuthentication(
+                    header.Substring(AuthenticationTypes.Basic.Length + 1)
+                );
             }
         }
 
         internal static IPrincipal? ParseBasicAuthentication(string authData) =>
-            TryParseBasicAuth(authData, out _, out string? username, out string? password) ?
-                new GenericPrincipal(new HttpListenerBasicIdentity(username, password), Array.Empty<string>()) :
-                null;
+            TryParseBasicAuth(authData, out _, out string? username, out string? password)
+                ? new GenericPrincipal(
+                    new HttpListenerBasicIdentity(username, password),
+                    Array.Empty<string>()
+                )
+                : null;
 
         internal static bool IsBasicHeader(string header) =>
-            header.Length >= 6 &&
-            header[5] == ' ' &&
-            string.Compare(header, 0, AuthenticationTypes.Basic, 0, 5, StringComparison.OrdinalIgnoreCase) == 0;
+            header.Length >= 6
+            && header[5] == ' '
+            && string.Compare(
+                header,
+                0,
+                AuthenticationTypes.Basic,
+                0,
+                5,
+                StringComparison.OrdinalIgnoreCase
+            ) == 0;
 
-        internal static bool TryParseBasicAuth(string headerValue, out HttpStatusCode errorCode, [NotNullWhen(true)] out string? username, [NotNullWhen(true)] out string? password)
+        internal static bool TryParseBasicAuth(
+            string headerValue,
+            out HttpStatusCode errorCode,
+            [NotNullWhen(true)] out string? username,
+            [NotNullWhen(true)] out string? password
+        )
         {
             errorCode = HttpStatusCode.OK;
             username = password = null;
@@ -86,16 +103,40 @@ namespace System.Net
             }
         }
 
-        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string? subProtocol, int receiveBufferSize, TimeSpan keepAliveInterval)
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string? subProtocol,
+            int receiveBufferSize,
+            TimeSpan keepAliveInterval
+        )
         {
-            return HttpWebSocket.AcceptWebSocketAsyncCore(this, subProtocol, receiveBufferSize, keepAliveInterval);
+            return HttpWebSocket.AcceptWebSocketAsyncCore(
+                this,
+                subProtocol,
+                receiveBufferSize,
+                keepAliveInterval
+            );
         }
 
-        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string? subProtocol, int receiveBufferSize, TimeSpan keepAliveInterval, ArraySegment<byte> internalBuffer)
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string? subProtocol,
+            int receiveBufferSize,
+            TimeSpan keepAliveInterval,
+            ArraySegment<byte> internalBuffer
+        )
         {
             WebSocketValidate.ValidateArraySegment(internalBuffer, nameof(internalBuffer));
-            HttpWebSocket.ValidateOptions(subProtocol, receiveBufferSize, HttpWebSocket.MinSendBufferSize, keepAliveInterval);
-            return HttpWebSocket.AcceptWebSocketAsyncCore(this, subProtocol, receiveBufferSize, keepAliveInterval);
+            HttpWebSocket.ValidateOptions(
+                subProtocol,
+                receiveBufferSize,
+                HttpWebSocket.MinSendBufferSize,
+                keepAliveInterval
+            );
+            return HttpWebSocket.AcceptWebSocketAsyncCore(
+                this,
+                subProtocol,
+                receiveBufferSize,
+                keepAliveInterval
+            );
         }
     }
 }

@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 public class MusicStoreContext : IdentityDbContext<ApplicationUser>
 {
     public MusicStoreContext(DbContextOptions<MusicStoreContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<Album> Albums { get; set; }
     public DbSet<Artist> Artists { get; set; }

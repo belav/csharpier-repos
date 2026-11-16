@@ -35,7 +35,10 @@ namespace System.Runtime.Versioning.Tests
         [InlineData("Windows8.0", "Message in a bottle")]
         [InlineData("Android4.1", "Message on a pigeon")]
         [InlineData("", null)]
-        public void TestUnsupportedOSPlatformAttributeWithMessage(string platformName, string? message)
+        public void TestUnsupportedOSPlatformAttributeWithMessage(
+            string platformName,
+            string? message
+        )
         {
             var tpa = new UnsupportedOSPlatformAttribute(platformName, message);
 
@@ -69,7 +72,10 @@ namespace System.Runtime.Versioning.Tests
         [InlineData("Windows8.0", "Message in a bottle")]
         [InlineData("Android4.1", "Message on a pigeon")]
         [InlineData("", null)]
-        public void TestObsoletedOSPlatformAttributeWithMessage(string platformName, string? message)
+        public void TestObsoletedOSPlatformAttributeWithMessage(
+            string platformName,
+            string? message
+        )
         {
             var tpa = new ObsoletedOSPlatformAttribute(platformName, message);
 

@@ -18,7 +18,11 @@ namespace System.ServiceModel.Channels
         Message EndReceive();
         Message Receive(TimeSpan timeout);
 
-        AsyncReceiveResult BeginWaitForMessage(TimeSpan timeout, WaitCallback callback, object state);
+        AsyncReceiveResult BeginWaitForMessage(
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        );
         bool EndWaitForMessage();
         bool WaitForMessage(TimeSpan timeout);
     }

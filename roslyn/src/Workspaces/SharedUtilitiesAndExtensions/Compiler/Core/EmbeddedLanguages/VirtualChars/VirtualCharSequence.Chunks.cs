@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// </summary>
         private abstract partial class Chunk
         {
-            protected Chunk()
-            {
-            }
+            protected Chunk() { }
 
             public abstract int Length { get; }
             public abstract VirtualChar this[int index] { get; }
@@ -100,8 +98,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
                     // when the string has the same number of chars as there are VirtualChars.
                     if (char.IsHighSurrogate(data[index]))
                     {
-                        Debug.Assert(index + 1 >= data.Length ||
-                                     !char.IsLowSurrogate(data[index + 1]));
+                        Debug.Assert(
+                            index + 1 >= data.Length || !char.IsLowSurrogate(data[index + 1])
+                        );
                     }
 #endif
 

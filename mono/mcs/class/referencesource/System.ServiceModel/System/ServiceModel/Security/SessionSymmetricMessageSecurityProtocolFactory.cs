@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Tokens;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
 
     class SessionSymmetricMessageSecurityProtocolFactory : MessageSecurityProtocolFactory
@@ -16,16 +16,11 @@ namespace System.ServiceModel.Security
         SessionDerivedKeySecurityTokenParameters derivedKeyTokenParameters;
 
         public SessionSymmetricMessageSecurityProtocolFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityTokenParameters SecurityTokenParameters
         {
-            get
-            {
-                return this.securityTokenParameters;
-            }
+            get { return this.securityTokenParameters; }
             set
             {
                 ThrowIfImmutable();
@@ -39,7 +34,9 @@ namespace System.ServiceModel.Security
             {
                 SecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
                 this.SecurityTokenParameters.InitializeSecurityTokenRequirement(requirement);
-                return ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(requirement);
+                return ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(
+                    requirement
+                );
             }
             else
             {
@@ -47,7 +44,12 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             if (this.ActAsInitiator)
             {
@@ -68,7 +70,9 @@ namespace System.ServiceModel.Security
             if (this.SecurityTokenParameters.RequireDerivedKeys)
             {
                 this.ExpectKeyDerivation = true;
-                this.derivedKeyTokenParameters = new SessionDerivedKeySecurityTokenParameters(this.ActAsInitiator);
+                this.derivedKeyTokenParameters = new SessionDerivedKeySecurityTokenParameters(
+                    this.ActAsInitiator
+                );
             }
             base.OnOpen(timeout);
         }
@@ -90,7 +94,9 @@ namespace System.ServiceModel.Security
     {
         bool actAsInitiator;
 
-        protected SessionDerivedKeySecurityTokenParameters(SessionDerivedKeySecurityTokenParameters other)
+        protected SessionDerivedKeySecurityTokenParameters(
+            SessionDerivedKeySecurityTokenParameters other
+        )
             : base(other)
         {
             this.actAsInitiator = other.actAsInitiator;
@@ -100,22 +106,39 @@ namespace System.ServiceModel.Security
             : base()
         {
             this.actAsInitiator = actAsInitiator;
-            this.InclusionMode = actAsInitiator ? SecurityTokenInclusionMode.AlwaysToRecipient : SecurityTokenInclusionMode.AlwaysToInitiator;
+            this.InclusionMode = actAsInitiator
+                ? SecurityTokenInclusionMode.AlwaysToRecipient
+                : SecurityTokenInclusionMode.AlwaysToInitiator;
             base.RequireDerivedKeys = false;
         }
 
-        internal protected override bool SupportsClientAuthentication { get { return false; } }
-        internal protected override bool SupportsServerAuthentication { get { return false; } }
-        internal protected override bool SupportsClientWindowsIdentity { get { return false; } }
+        protected internal override bool SupportsClientAuthentication
+        {
+            get { return false; }
+        }
+        protected internal override bool SupportsServerAuthentication
+        {
+            get { return false; }
+        }
+        protected internal override bool SupportsClientWindowsIdentity
+        {
+            get { return false; }
+        }
 
-        internal protected override bool HasAsymmetricKey { get { return false; } }
+        protected internal override bool HasAsymmetricKey
+        {
+            get { return false; }
+        }
 
         protected override SecurityTokenParameters CloneCore()
         {
             return new SessionDerivedKeySecurityTokenParameters(this);
         }
 
-        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        protected internal override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             if (referenceStyle == SecurityTokenReferenceStyle.Internal)
             {
@@ -127,11 +150,16 @@ namespace System.ServiceModel.Security
             }
         }
 
-        internal protected override bool MatchesKeyIdentifierClause(SecurityToken token, SecurityKeyIdentifierClause keyIdentifierClause, SecurityTokenReferenceStyle referenceStyle)
+        protected internal override bool MatchesKeyIdentifierClause(
+            SecurityToken token,
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             if (referenceStyle == SecurityTokenReferenceStyle.Internal)
             {
-                LocalIdKeyIdentifierClause localClause = keyIdentifierClause as LocalIdKeyIdentifierClause;
+                LocalIdKeyIdentifierClause localClause =
+                    keyIdentifierClause as LocalIdKeyIdentifierClause;
                 if (localClause == null)
                 {
                     return false;
@@ -147,7 +175,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected internal override void InitializeSecurityTokenRequirement(SecurityTokenRequirement requirement)
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }

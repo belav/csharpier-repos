@@ -8,12 +8,17 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.ServiceModel;
 
-    abstract class ContextInputChannelBase<TChannel> : LayeredChannel<TChannel> where TChannel : class, IInputChannel
+    abstract class ContextInputChannelBase<TChannel> : LayeredChannel<TChannel>
+        where TChannel : class, IInputChannel
     {
         ContextExchangeMechanism contextExchangeMechanism;
         ServiceContextProtocol contextProtocol;
 
-        protected ContextInputChannelBase(ChannelManagerBase channelManager, TChannel innerChannel, ContextExchangeMechanism contextExchangeMechanism)
+        protected ContextInputChannelBase(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism
+        )
             : base(channelManager, innerChannel)
         {
             this.contextExchangeMechanism = contextExchangeMechanism;
@@ -40,7 +45,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.BeginTryReceive(timeout, callback, state);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginWaitForMessage(timeout, callback, state);
         }

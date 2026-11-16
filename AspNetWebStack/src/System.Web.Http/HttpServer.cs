@@ -17,13 +17,16 @@ using System.Web.Http.Properties;
 namespace System.Web.Http
 {
     /// <summary>
-    /// Defines an implementation of an <see cref="HttpMessageHandler"/> which dispatches an 
+    /// Defines an implementation of an <see cref="HttpMessageHandler"/> which dispatches an
     /// incoming <see cref="HttpRequestMessage"/> and creates an <see cref="HttpResponseMessage"/> as a result.
     /// </summary>
     public class HttpServer : DelegatingHandler
     {
         // _anonymousPrincipal needs thread-safe intialization so use a static field initializer
-        private static readonly IPrincipal _anonymousPrincipal = new GenericPrincipal(new GenericIdentity(String.Empty), new string[0]);
+        private static readonly IPrincipal _anonymousPrincipal = new GenericPrincipal(
+            new GenericIdentity(String.Empty),
+            new string[0]
+        );
 
         private readonly HttpConfiguration _configuration;
         private readonly HttpMessageHandler _dispatcher;
@@ -38,42 +41,49 @@ namespace System.Web.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpServer"/> class with default configuration and dispatcher.
         /// </summary>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "The configuration object is disposed as part of this class.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The configuration object is disposed as part of this class."
+        )]
         public HttpServer()
-            : this(new HttpConfiguration())
-        {
-        }
+            : this(new HttpConfiguration()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpServer"/> class with default dispatcher.
         /// </summary>
         /// <param name="configuration">The <see cref="HttpConfiguration"/> used to configure this <see cref="HttpServer"/> instance.</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "The configuration object is disposed as part of this class.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The configuration object is disposed as part of this class."
+        )]
         public HttpServer(HttpConfiguration configuration)
-            : this(configuration, new HttpRoutingDispatcher(configuration))
-        {
-        }
+            : this(configuration, new HttpRoutingDispatcher(configuration)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpServer"/> class with a custom dispatcher.
         /// </summary>
         /// <param name="dispatcher">Http dispatcher responsible for handling incoming requests.</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "The configuration object is disposed as part of this class.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The configuration object is disposed as part of this class."
+        )]
         public HttpServer(HttpMessageHandler dispatcher)
-            : this(new HttpConfiguration(), dispatcher)
-        {
-        }
+            : this(new HttpConfiguration(), dispatcher) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpServer"/> class.
         /// </summary>
         /// <param name="configuration">The <see cref="HttpConfiguration"/> used to configure this <see cref="HttpServer"/> instance.</param>
         /// <param name="dispatcher">Http dispatcher responsible for handling incoming requests.</param>
-        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "principal",
-            Justification = "Must access Thread.CurrentPrincipal to work around problem in .NET 4.5")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1804:RemoveUnusedLocals",
+            MessageId = "principal",
+            Justification = "Must access Thread.CurrentPrincipal to work around problem in .NET 4.5"
+        )]
         public HttpServer(HttpConfiguration configuration, HttpMessageHandler dispatcher)
         {
             if (configuration == null)
@@ -86,7 +96,7 @@ namespace System.Web.Http
                 throw Error.ArgumentNull("dispatcher");
             }
 
-            // Read the thread principal to work around a problem up to .NET 4.5.1 that CurrentPrincipal creates a new instance each time it is read in async 
+            // Read the thread principal to work around a problem up to .NET 4.5.1 that CurrentPrincipal creates a new instance each time it is read in async
             // code if it has not been queried from the spawning thread.
             IPrincipal principal = Thread.CurrentPrincipal;
 
@@ -122,10 +132,7 @@ namespace System.Web.Http
 
                 return _exceptionLogger;
             }
-            set
-            {
-                _exceptionLogger = value;
-            }
+            set { _exceptionLogger = value; }
         }
 
         /// <remarks>This property is settable only for unit testing purposes.</remarks>
@@ -140,10 +147,7 @@ namespace System.Web.Http
 
                 return _exceptionHandler;
             }
-            set
-            {
-                _exceptionHandler = value;
-            }
+            set { _exceptionHandler = value; }
         }
 
         /// <summary>
@@ -170,9 +174,20 @@ namespace System.Web.Http
         /// <param name="request">The request to dispatch</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task{HttpResponseMessage}"/> representing the ongoing operation.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller becomes owner.")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "we are converting exceptions to error responses.")]
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller becomes owner."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "we are converting exceptions to error responses."
+        )]
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -181,7 +196,10 @@ namespace System.Web.Http
 
             if (_disposed)
             {
-                return request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable, SRResources.HttpServerDisposed);
+                return request.CreateErrorResponse(
+                    HttpStatusCode.ServiceUnavailable,
+                    SRResources.HttpServerDisposed
+                );
             }
 
             // The first request initializes the server
@@ -194,7 +212,7 @@ namespace System.Web.Http
                 request.SetSynchronizationContext(context);
             }
 
-            // Add HttpConfiguration object as a parameter to the request 
+            // Add HttpConfiguration object as a parameter to the request
             request.SetConfiguration(_configuration);
 
             // Ensure we have a principal, even if the host didn't give us one
@@ -239,11 +257,16 @@ namespace System.Web.Http
 
                 Debug.Assert(exceptionInfo.SourceException != null);
 
-                ExceptionContext exceptionContext = new ExceptionContext(exceptionInfo.SourceException,
-                    ExceptionCatchBlocks.HttpServer, request);
+                ExceptionContext exceptionContext = new ExceptionContext(
+                    exceptionInfo.SourceException,
+                    ExceptionCatchBlocks.HttpServer,
+                    request
+                );
                 await ExceptionLogger.LogAsync(exceptionContext, cancellationToken);
-                HttpResponseMessage response = await ExceptionHandler.HandleAsync(exceptionContext,
-                    cancellationToken);
+                HttpResponseMessage response = await ExceptionHandler.HandleAsync(
+                    exceptionContext,
+                    cancellationToken
+                );
 
                 if (response == null)
                 {
@@ -260,11 +283,16 @@ namespace System.Web.Http
 
         private void EnsureInitialized()
         {
-            LazyInitializer.EnsureInitialized(ref _initializationTarget, ref _initialized, ref _initializationLock, () =>
-            {
-                Initialize();
-                return null;
-            });
+            LazyInitializer.EnsureInitialized(
+                ref _initializationTarget,
+                ref _initialized,
+                ref _initializationLock,
+                () =>
+                {
+                    Initialize();
+                    return null;
+                }
+            );
         }
 
         /// <summary>
@@ -281,7 +309,10 @@ namespace System.Web.Http
             _configuration.EnsureInitialized();
 
             // Create pipeline
-            InnerHandler = HttpClientFactory.CreatePipeline(_dispatcher, _configuration.MessageHandlers);
+            InnerHandler = HttpClientFactory.CreatePipeline(
+                _dispatcher,
+                _configuration.MessageHandlers
+            );
         }
 
         private static HttpConfiguration EnsureNonNull(HttpConfiguration configuration)

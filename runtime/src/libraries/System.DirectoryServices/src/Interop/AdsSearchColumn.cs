@@ -9,7 +9,8 @@ namespace System.DirectoryServices
     internal unsafe struct AdsSearchColumn
     {
         public IntPtr pszAttrName;
-        public int/*AdsType*/ dwADsType;
+        public int /*AdsType*/
+        dwADsType;
         public AdsValue* pADsValues;
         public int dwNumValues;
         public IntPtr hReserved;

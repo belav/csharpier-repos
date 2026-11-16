@@ -5,13 +5,12 @@
 // compile with csc /o+
 using System;
 using Xunit;
+
 public class MyClass
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
-
         double d1 = double.PositiveInfinity;
         double d2 = -0.0;
         double d3 = d1 / d2;

@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System.Security.Permissions;
     using System.Web;
 
@@ -15,16 +15,16 @@ namespace System.Web.UI.WebControls {
     /// Used by LayoutTable.  Top-level class instead of private so LayoutTableCells can be added dynamically
     /// to LayoutTable.
     /// </devdoc>
-    internal sealed class LayoutTableCell : TableCell {
-
-        protected internal override void AddedControl(Control control, int index) {
-            if (control.Page == null) {
+    internal sealed class LayoutTableCell : TableCell
+    {
+        protected internal override void AddedControl(Control control, int index)
+        {
+            if (control.Page == null)
+            {
                 control.Page = Page;
             }
         }
 
-        protected internal override void RemovedControl(Control control) {
-        }
+        protected internal override void RemovedControl(Control control) { }
     }
 }
-

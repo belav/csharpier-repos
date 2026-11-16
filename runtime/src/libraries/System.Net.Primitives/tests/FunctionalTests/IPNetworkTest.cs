@@ -71,7 +71,10 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData("192.168.0.1", 33)]
         [InlineData("::", -1)]
         [InlineData("ffff::", 129)]
-        public void Constructor_PrefixLenghtOutOfRange_ThrowsArgumentOutOfRangeException(string ipStr, int prefixLength)
+        public void Constructor_PrefixLenghtOutOfRange_ThrowsArgumentOutOfRangeException(
+            string ipStr,
+            int prefixLength
+        )
         {
             IPAddress address = IPAddress.Parse(ipStr);
             Assert.Throws<ArgumentOutOfRangeException>(() => new IPNetwork(address, prefixLength));
@@ -82,7 +85,10 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData("42.42.192.0", 17)]
         [InlineData("128.0.0.0", 0)]
         [InlineData("2a01:110:8012::", 46)]
-        public void Constructor_NonZeroBitsAfterNetworkPrefix_ThrowsArgumentException(string ipStr, int prefixLength)
+        public void Constructor_NonZeroBitsAfterNetworkPrefix_ThrowsArgumentException(
+            string ipStr,
+            int prefixLength
+        )
         {
             IPAddress address = IPAddress.Parse(ipStr);
             Assert.Throws<ArgumentException>(() => new IPNetwork(address, prefixLength));
@@ -153,15 +159,45 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData("0.0.0.0/0", "0.0.0.0", "127.127.127.127", "255.255.255.255")] // the whole IPv4 space
         [InlineData("::/0", "::", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")] // the whole IPv6 space
         [InlineData("255.255.255.255/32", "255.255.255.255")] // single IPv4 address
-        [InlineData("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")] // single IPv6 address
+        [InlineData(
+            "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128",
+            "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+        )] // single IPv6 address
         [InlineData("255.255.255.0/24", "255.255.255.0", "255.255.255.255")]
         [InlineData("198.51.248.0/22", "198.51.248.0", "198.51.250.42", "198.51.251.255")]
         [InlineData("255.255.255.128/25", "255.255.255.128", "255.255.255.129", "255.255.255.255")]
-        [InlineData("2a00::/13", "2a00::", "2a00::1", "2a01::", "2a07::", "2a07:ffff:ffff:ffff:ffff:ffff:ffff:ffff")]
-        [InlineData("2a01:110:8012::/47", "2a01:110:8012::", "2a01:110:8012:42::", "2a01:110:8013::", "2a01:110:8013:ffff:ffff:ffff:ffff:ffff")]
-        [InlineData("2a01:110:8012:1012:314f:2a00::/87", "2a01:110:8012:1012:314f:2a00::", "2a01:110:8012:1012:314f:2a00::1", "2a01:110:8012:1012:314f:2a00:abcd:4242", "2a01:110:8012:1012:314f:2bff:ffff:ffff")]
-        [InlineData("2a01:110:8012:1010:914e:2451:1700:0/105", "2a01:110:8012:1010:914e:2451:1700:0", "2a01:110:8012:1010:914e:2451:1742:4242", "2a01:110:8012:1010:914e:2451:177f:ffff")]
-        public void Contains_WhenInNework_ReturnsTrue(string networkString, params string[] addresses)
+        [InlineData(
+            "2a00::/13",
+            "2a00::",
+            "2a00::1",
+            "2a01::",
+            "2a07::",
+            "2a07:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+        )]
+        [InlineData(
+            "2a01:110:8012::/47",
+            "2a01:110:8012::",
+            "2a01:110:8012:42::",
+            "2a01:110:8013::",
+            "2a01:110:8013:ffff:ffff:ffff:ffff:ffff"
+        )]
+        [InlineData(
+            "2a01:110:8012:1012:314f:2a00::/87",
+            "2a01:110:8012:1012:314f:2a00::",
+            "2a01:110:8012:1012:314f:2a00::1",
+            "2a01:110:8012:1012:314f:2a00:abcd:4242",
+            "2a01:110:8012:1012:314f:2bff:ffff:ffff"
+        )]
+        [InlineData(
+            "2a01:110:8012:1010:914e:2451:1700:0/105",
+            "2a01:110:8012:1010:914e:2451:1700:0",
+            "2a01:110:8012:1010:914e:2451:1742:4242",
+            "2a01:110:8012:1010:914e:2451:177f:ffff"
+        )]
+        public void Contains_WhenInNework_ReturnsTrue(
+            string networkString,
+            params string[] addresses
+        )
         {
             var network = IPNetwork.Parse(networkString);
 
@@ -173,15 +209,50 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [InlineData("255.255.255.255/32", "255.255.255.254")] // single IPv4 address
-        [InlineData("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:fffe")] // single IPv6 address
+        [InlineData(
+            "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128",
+            "ffff:ffff:ffff:ffff:ffff:ffff:ffff:fffe"
+        )] // single IPv6 address
         [InlineData("255.255.255.0/24", "255.255.254.0")]
-        [InlineData("198.51.248.0/22", "198.50.248.1", "198.52.248.1", "198.51.247.1", "198.51.252.1")]
+        [InlineData(
+            "198.51.248.0/22",
+            "198.50.248.1",
+            "198.52.248.1",
+            "198.51.247.1",
+            "198.51.252.1"
+        )]
         [InlineData("255.255.255.128/25", "255.255.255.127")]
-        [InlineData("2a00::/13", "2900:ffff:ffff:ffff:ffff:ffff:ffff:ffff", "2a08::", "2a10::", "3a00::", "2b00::")]
-        [InlineData("2a01:110:8012::/47", "2a01:110:8011:1::", "2a01:110:8014::", "2a00:110:8012::1", "2a01:111:8012::")]
-        [InlineData("2a01:110:8012:1012:314f:2a00::/87", "2a01:110:8012:1012:314f:2c00::", "2a01:110:8012:1012:314f:2900::", "2a01:110:8012:1012:324f:2aff:ffff:ffff")]
-        [InlineData("2a01:110:8012:1010:914e:2451:1700:0/105", "2a01:110:8012:1010:914e:2451:16ff:ffff", "2a01:110:8012:1010:914e:2451:1780:0", "2a01:110:8013:1010:914e:2451:1700:0")]
-        public void Contains_WhenNotInNetwork_ReturnsFalse(string networkString, params string[] addresses)
+        [InlineData(
+            "2a00::/13",
+            "2900:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+            "2a08::",
+            "2a10::",
+            "3a00::",
+            "2b00::"
+        )]
+        [InlineData(
+            "2a01:110:8012::/47",
+            "2a01:110:8011:1::",
+            "2a01:110:8014::",
+            "2a00:110:8012::1",
+            "2a01:111:8012::"
+        )]
+        [InlineData(
+            "2a01:110:8012:1012:314f:2a00::/87",
+            "2a01:110:8012:1012:314f:2c00::",
+            "2a01:110:8012:1012:314f:2900::",
+            "2a01:110:8012:1012:324f:2aff:ffff:ffff"
+        )]
+        [InlineData(
+            "2a01:110:8012:1010:914e:2451:1700:0/105",
+            "2a01:110:8012:1010:914e:2451:16ff:ffff",
+            "2a01:110:8012:1010:914e:2451:1780:0",
+            "2a01:110:8013:1010:914e:2451:1700:0"
+        )]
+        public void Contains_WhenNotInNetwork_ReturnsFalse(
+            string networkString,
+            params string[] addresses
+        )
         {
             var network = IPNetwork.Parse(networkString);
 
@@ -242,13 +313,9 @@ namespace System.Net.Primitives.Functional.Tests
         }
 
         public static IEnumerable<object[]> CidrInputs() =>
-            new[]
-            {
-                "127.0.0.0/24",
-                "172.16.0.0/12",
-                "10.0.0.0/16",
-                "192.168.2.0/24",
-            }.Select(s => new object[] { s });
+            new[] { "127.0.0.0/24", "172.16.0.0/12", "10.0.0.0/16", "192.168.2.0/24" }.Select(s =>
+                new object[] { s }
+            );
 
         [Theory]
         [MemberData(nameof(CidrInputs))]

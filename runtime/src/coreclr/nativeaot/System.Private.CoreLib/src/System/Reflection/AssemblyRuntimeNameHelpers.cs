@@ -24,7 +24,11 @@ namespace System.Reflection
 #pragma warning disable SYSLIB0037 // AssemblyName.ProcessorArchitecture is obsolete
             ProcessorArchitecture processorArchitecture = assemblyName.ProcessorArchitecture;
 #pragma warning restore SYSLIB0037
-            AssemblyNameFlags combinedFlags = CombineAssemblyNameFlags(flags, contentType, processorArchitecture);
+            AssemblyNameFlags combinedFlags = CombineAssemblyNameFlags(
+                flags,
+                contentType,
+                processorArchitecture
+            );
             byte[]? pkOriginal;
             if (0 != (flags & AssemblyNameFlags.PublicKey))
                 pkOriginal = assemblyName.GetPublicKey();
@@ -40,12 +44,24 @@ namespace System.Reflection
                 Array.Copy(pkOriginal, pkCopy, pkOriginal.Length);
             }
 
-            return new RuntimeAssemblyName(assemblyName.Name, assemblyName.Version, assemblyName.CultureName, combinedFlags, pkCopy);
+            return new RuntimeAssemblyName(
+                assemblyName.Name,
+                assemblyName.Version,
+                assemblyName.CultureName,
+                combinedFlags,
+                pkCopy
+            );
         }
 
-        internal static AssemblyNameFlags CombineAssemblyNameFlags(AssemblyNameFlags flags, AssemblyContentType contentType, ProcessorArchitecture processorArchitecture)
+        internal static AssemblyNameFlags CombineAssemblyNameFlags(
+            AssemblyNameFlags flags,
+            AssemblyContentType contentType,
+            ProcessorArchitecture processorArchitecture
+        )
         {
-            return (AssemblyNameFlags)(((int)flags) | (((int)contentType) << 9) | ((int)processorArchitecture << 4));
+            return (AssemblyNameFlags)(
+                ((int)flags) | (((int)contentType) << 9) | ((int)processorArchitecture << 4)
+            );
         }
     }
 }

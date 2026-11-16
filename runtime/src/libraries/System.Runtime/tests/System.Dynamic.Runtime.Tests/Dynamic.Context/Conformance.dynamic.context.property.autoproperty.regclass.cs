@@ -20,231 +20,85 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass
     {
-        public string Property_string
-        {
-            set;
-            get;
-        }
+        public string Property_string { set; get; }
 
-        public MyClass Property_MyClass
-        {
-            get;
-            set;
-        }
+        public MyClass Property_MyClass { get; set; }
 
-        public MyStruct Property_MyStruct
-        {
-            set;
-            get;
-        }
+        public MyStruct Property_MyStruct { set; get; }
 
-        public MyEnum Property_MyEnum
-        {
-            set;
-            private get;
-        }
+        public MyEnum Property_MyEnum { set; private get; }
 
-        public short Property_short
-        {
-            set;
-            protected get;
-        }
+        public short Property_short { set; protected get; }
 
-        public ulong Property_ulong
-        {
-            set;
-            protected internal get;
-        }
+        public ulong Property_ulong { set; protected internal get; }
 
-        public char Property_char
-        {
-            private set;
-            get;
-        }
+        public char Property_char { private set; get; }
 
-        public bool Property_bool
-        {
-            protected set;
-            get;
-        }
+        public bool Property_bool { protected set; get; }
 
-        public decimal Property_decimal
-        {
-            protected internal set;
-            get;
-        }
+        public decimal Property_decimal { protected internal set; get; }
 
-        public MyStruct? Property_MyStructNull
-        {
-            set;
-            get;
-        }
+        public MyStruct? Property_MyStructNull { set; get; }
 
-        public MyEnum? Property_MyEnumNull
-        {
-            set;
-            private get;
-        }
+        public MyEnum? Property_MyEnumNull { set; private get; }
 
-        public short? Property_shortNull
-        {
-            set;
-            get;
-        }
+        public short? Property_shortNull { set; get; }
 
-        public ulong? Property_ulongNull
-        {
-            set;
-            protected internal get;
-        }
+        public ulong? Property_ulongNull { set; protected internal get; }
 
-        public char? Property_charNull
-        {
-            private set;
-            get;
-        }
+        public char? Property_charNull { private set; get; }
 
-        public bool? Property_boolNull
-        {
-            protected set;
-            get;
-        }
+        public bool? Property_boolNull { protected set; get; }
 
-        public decimal? Property_decimalNull
-        {
-            protected internal set;
-            get;
-        }
+        public decimal? Property_decimalNull { protected internal set; get; }
 
-        public string[] Property_stringArr
-        {
-            set;
-            get;
-        }
+        public string[] Property_stringArr { set; get; }
 
-        public MyClass[] Property_MyClassArr
-        {
-            set;
-            get;
-        }
+        public MyClass[] Property_MyClassArr { set; get; }
 
-        public MyStruct[] Property_MyStructArr
-        {
-            get;
-            set;
-        }
+        public MyStruct[] Property_MyStructArr { get; set; }
 
-        public MyEnum[] Property_MyEnumArr
-        {
-            set;
-            private get;
-        }
+        public MyEnum[] Property_MyEnumArr { set; private get; }
 
-        public short[] Property_shortArr
-        {
-            set;
-            protected get;
-        }
+        public short[] Property_shortArr { set; protected get; }
 
-        public ulong[] Property_ulongArr
-        {
-            set;
-            protected internal get;
-        }
+        public ulong[] Property_ulongArr { set; protected internal get; }
 
-        public char[] Property_charArr
-        {
-            private set;
-            get;
-        }
+        public char[] Property_charArr { private set; get; }
 
-        public bool[] Property_boolArr
-        {
-            protected set;
-            get;
-        }
+        public bool[] Property_boolArr { protected set; get; }
 
-        public decimal[] Property_decimalArr
-        {
-            protected internal set;
-            get;
-        }
+        public decimal[] Property_decimalArr { protected internal set; get; }
 
-        public MyStruct?[] Property_MyStructNullArr
-        {
-            set;
-            get;
-        }
+        public MyStruct?[] Property_MyStructNullArr { set; get; }
 
-        public MyEnum?[] Property_MyEnumNullArr
-        {
-            set;
-            private get;
-        }
+        public MyEnum?[] Property_MyEnumNullArr { set; private get; }
 
-        public short?[] Property_shortNullArr
-        {
-            set;
-            protected get;
-        }
+        public short?[] Property_shortNullArr { set; protected get; }
 
-        public ulong?[] Property_ulongNullArr
-        {
-            set;
-            protected internal get;
-        }
+        public ulong?[] Property_ulongNullArr { set; protected internal get; }
 
-        public char?[] Property_charNullArr
-        {
-            private set;
-            get;
-        }
+        public char?[] Property_charNullArr { private set; get; }
 
-        public bool?[] Property_boolNullArr
-        {
-            protected set;
-            get;
-        }
+        public bool?[] Property_boolNullArr { protected set; get; }
 
-        public decimal?[] Property_decimalNullArr
-        {
-            protected internal set;
-            get;
-        }
+        public decimal?[] Property_decimalNullArr { protected internal set; get; }
 
-        public float Property_Float
-        {
-            get;
-            set;
-        }
+        public float Property_Float { get; set; }
 
-        public float?[] Property_FloatNullArr
-        {
-            get;
-            set;
-        }
+        public float?[] Property_FloatNullArr { get; set; }
 
-        public dynamic Property_Dynamic
-        {
-            get;
-            set;
-        }
+        public dynamic Property_Dynamic { get; set; }
 
-        public static string Property_stringStatic
-        {
-            set;
-            get;
-        }
+        public static string Property_stringStatic { set; get; }
         // Move declarations to the call site
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass001.regclass001
 {
@@ -266,7 +120,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static int MainMethod()
         {
             Test t1 = new Test();
-            return t1.TestGetMethod<long>(1, new MemberClass()) + t1.TestSetMethod<Test, string>(string.Empty, new MemberClass()) == 0 ? 0 : 1;
+            return
+                t1.TestGetMethod<long>(1, new MemberClass())
+                    + t1.TestSetMethod<Test, string>(string.Empty, new MemberClass())
+                == 0
+                ? 0
+                : 1;
         }
 
         public int TestGetMethod<T>(T t, MemberClass mc)
@@ -293,8 +152,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass003.regclass003
 {
     // <Title> Tests regular class auto property used in variable initializer.</Title>
@@ -314,17 +171,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
         public static int MainMethod()
         {
-            string[] bas = new string[]
-            {
-            "Test", string.Empty, null
-            }
-
-            ;
+            string[] bas = new string[] { "Test", string.Empty, null };
             MemberClass mc = new MemberClass();
             mc.Property_stringArr = bas;
             dynamic dy = mc;
             string[] loc = dy.Property_stringArr;
-            if (ReferenceEquals(bas, loc) && loc[0] == "Test" && loc[1] == string.Empty && loc[2] == null)
+            if (
+                ReferenceEquals(bas, loc)
+                && loc[0] == "Test"
+                && loc[1] == string.Empty
+                && loc[2] == null
+            )
             {
                 return 0;
             }
@@ -334,8 +191,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass004.regclass004
 {
@@ -359,20 +214,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             MemberClass mc1 = new MemberClass();
             MemberClass mc2 = new MemberClass();
             mc1.Property_MyStructNull = null;
-            mc2.Property_MyStructNull = new MyStruct()
-            {
-                Number = 1
-            }
-
-            ;
+            mc2.Property_MyStructNull = new MyStruct() { Number = 1 };
             dynamic dy1 = mc1;
             dynamic dy2 = mc2;
             var loc = new MyStruct?[]
             {
-            (MyStruct? )dy1.Property_MyStructNull, (MyStruct? )dy2.Property_MyStructNull
-            }
-
-            ;
+                (MyStruct?)dy1.Property_MyStructNull,
+                (MyStruct?)dy2.Property_MyStructNull,
+            };
             if (loc.Length == 2 && loc[0] == null && loc[1].Value.Number == 1)
                 return 0;
             return 1;
@@ -380,8 +229,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass005.regclass005
 {
@@ -417,8 +264,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass006.regclass006
 {
     // <Title> Tests regular class auto property used in null coalescing operator.</Title>
@@ -441,18 +286,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             MemberClass mc = new MemberClass();
             mc.Property_MyStructArr = new MyStruct[]
             {
-            new MyStruct()
-            {
-            Number = 0
-            }
-
-            , new MyStruct()
-            {
-            Number = 1
-            }
-            }
-
-            ;
+                new MyStruct() { Number = 0 },
+                new MyStruct() { Number = 1 },
+            };
             dynamic dy = mc;
             string s1 = ((string)dy.Property_string) ?? string.Empty;
             mc.Property_string = "Test";
@@ -467,8 +303,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass007.regclass007
 {
@@ -486,6 +320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     {
         private static string s_field;
         public static object locker = new object();
+
         ~Test()
         {
             lock (locker)
@@ -536,8 +371,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass008.regclass008
 {
     // <Title> Tests regular class auto property used in extension method body.</Title>
@@ -572,12 +405,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         {
             MemberClass mc = new MemberClass();
             dynamic dy = mc;
-            dy.Property_MyStruct = new MyStruct()
-            {
-                Number = i
-            }
-
-            ;
+            dy.Property_MyStruct = new MyStruct() { Number = i };
             mc = dy; //because MC might be a struct
             return mc.Property_MyStruct;
         }
@@ -585,20 +413,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static MyStruct TestGetMyStruct(this int i)
         {
             MemberClass mc = new MemberClass();
-            mc.Property_MyStruct = new MyStruct()
-            {
-                Number = i
-            }
-
-            ;
+            mc.Property_MyStruct = new MyStruct() { Number = i };
             dynamic dy = mc;
             return (MyStruct)dy.Property_MyStruct;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass009.regclass009
 {
@@ -630,8 +451,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass010.regclass010
 {
     // <Title> Tests regular class auto property used in array initializer list.</Title>
@@ -653,12 +472,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         {
             MemberClass mc = new MemberClass();
             dynamic dy = mc;
-            bool[] array = new bool[]
-            {
-            (bool)dy.Property_bool, true
-            }
-
-            ;
+            bool[] array = new bool[] { (bool)dy.Property_bool, true };
             if (array.Length == 2 && array[0] == false && array[1] == true)
                 return 0;
             return 1;
@@ -666,8 +480,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass014.regclass014
 {
@@ -680,7 +492,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -689,12 +500,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static int MainMethod()
         {
             dynamic mc = new MemberClass();
-            ulong[] array = new ulong[]
-            {
-            1L, 2L, 3L, ulong.MinValue, ulong.MaxValue
-            }
-
-            ;
+            ulong[] array = new ulong[] { 1L, 2L, 3L, ulong.MinValue, ulong.MaxValue };
             for (int i = 0; i < array.Length; i++)
             {
                 mc.Property_ulong = array[i];
@@ -706,8 +512,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass015.regclass015
 {
@@ -732,13 +536,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             MemberClass mc = new MemberClass();
             mc.Property_MyClassArr = new MyClass[]
             {
-            null, new MyClass()
-            {
-            Field = -1
-            }
-            }
-
-            ;
+                null,
+                new MyClass() { Field = -1 },
+            };
             dynamic dy = mc;
             List<MyClass> list = new List<MyClass>();
             foreach (MyClass myclass in dy.Property_MyClassArr)
@@ -753,8 +553,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass016.regclass016
 {
@@ -794,8 +592,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass018.regclass018
 {
     // <Title> Tests regular class auto property used in uncheck expression.</Title>
@@ -807,7 +603,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -826,8 +621,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass019.regclass019
 {
     // <Title> Tests regular class auto property used in static constructor.</Title>
@@ -840,6 +633,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     public class Test
     {
         private static char? s_charValue = 'a';
+
         static Test()
         {
             dynamic dy = new MemberClass();
@@ -861,8 +655,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass020.regclass020
 {
@@ -891,8 +683,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass022.regclass022
 {
@@ -924,8 +714,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass023.regclass023
 {
@@ -959,8 +747,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass024.regclass024
 {
     // <Title> Tests regular class auto property used in static generic method body.</Title>
@@ -993,7 +779,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleGetter, e.Message, "MemberClass.Property_shortArr"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.InaccessibleGetter,
+                        e.Message,
+                        "MemberClass.Property_shortArr"
+                    )
+                )
                     return 0;
             }
 
@@ -1002,8 +794,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass025.regclass025
 {
@@ -1016,7 +806,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1026,23 +815,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         {
             dynamic dy = new MemberClass();
             ulong[] array = null;
-            dy.Property_ulongArr = new ulong[]
-            {
-            0, 1
-            }
-
-            ;
+            dy.Property_ulongArr = new ulong[] { 0, 1 };
 #if MS
-array = new ulong[] { (ulong)dy.Property_ulong };
+            array = new ulong[] { (ulong)dy.Property_ulong };
 
- #else
+#else
             try
             {
                 array = dy.Property_ulongArr;
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleGetter, e.Message, "MemberClass.Property_ulongArr"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.InaccessibleGetter,
+                        e.Message,
+                        "MemberClass.Property_ulongArr"
+                    )
+                )
                     return 0;
                 else
                 {
@@ -1061,8 +851,6 @@ array = new ulong[] { (ulong)dy.Property_ulong };
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass026.regclass026
 {
@@ -1098,8 +886,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass027.regclass027
 {
     // <Title> Tests regular class auto property used in using block.</Title>
@@ -1112,7 +898,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1121,27 +906,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static int MainMethod()
         {
             MemberClass mc = new MemberClass();
-            mc.Property_decimalArr = new decimal[]
-            {
-            1M, 1.1M
-            }
-
-            ;
+            mc.Property_decimalArr = new decimal[] { 1M, 1.1M };
             dynamic dy = mc;
             using (MemoryStream ms = new MemoryStream())
             {
-                if (((decimal[])dy.Property_decimalArr)[0] != 1M && ((decimal[])dy.Property_decimalArr)[1] != 1.1M)
+                if (
+                    ((decimal[])dy.Property_decimalArr)[0] != 1M
+                    && ((decimal[])dy.Property_decimalArr)[1] != 1.1M
+                )
                     return 1;
             }
 
             using (MemoryStream ms = new MemoryStream())
             {
-                dy.Property_decimalArr = new decimal[]
-                {
-                10M
-                }
-
-                ;
+                dy.Property_decimalArr = new decimal[] { 10M };
                 ((decimal[])dy.Property_decimalArr)[0] = 10.01M;
             }
 
@@ -1152,8 +930,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass028.regclass028
 {
@@ -1183,13 +959,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             MemberClass mc = new MemberClass();
             mc.Property_MyStructNullArr = new MyStruct?[]
             {
-            null, new MyStruct()
-            {
-            Number = 10
-            }
-            }
-
-            ;
+                null,
+                new MyStruct() { Number = 10 },
+            };
             dynamic dy = mc;
             return (int)dy.Property_MyStructNullArr.Length == 2 ? 0 : 1;
         }
@@ -1200,21 +972,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             dynamic dy = mc;
             dy.Property_MyStructNullArr = new MyStruct?[]
             {
-            null, new MyStruct()
-            {
-            Number = 10
-            }
-            }
-
-            ;
+                null,
+                new MyStruct() { Number = 10 },
+            };
             mc = dy;
             return (int)dy.Property_MyStructNullArr.Length == 2 ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass029.regclass029
 {
@@ -1242,7 +1008,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleGetter, e.Message, "MemberClass.Property_MyEnumNullArr"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.InaccessibleGetter,
+                        e.Message,
+                        "MemberClass.Property_MyEnumNullArr"
+                    )
+                )
                     return 0;
             }
 
@@ -1251,8 +1023,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass030.regclass030
 {
@@ -1266,6 +1036,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     public class Test
     {
         public static int Return;
+
         public Test()
         {
             dynamic dy = new MemberClass();
@@ -1276,7 +1047,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleGetter, e.Message, "MemberClass.Property_shortNullArr"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.InaccessibleGetter,
+                        e.Message,
+                        "MemberClass.Property_shortNullArr"
+                    )
+                )
                     Test.Return = 0;
                 else
                     Test.Return = 1;
@@ -1298,8 +1075,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass031.regclass031
 {
     // <Title> Tests regular class auto property used in null coalescing operator.</Title>
@@ -1311,7 +1086,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1330,8 +1104,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass032.regclass032
 {
@@ -1363,8 +1135,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass034.regclass034
 {
     // <Title> Tests regular class auto property used in switch section statement.</Title>
@@ -1376,7 +1146,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1389,16 +1158,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             int result = int.MaxValue;
             try
             {
-                dy.Property_decimalNullArr = new decimal?[]
-                {
-                int.MinValue
-                }
-
-                ;
+                dy.Property_decimalNullArr = new decimal?[] { int.MinValue };
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, e.Message, "MemberClass.Property_decimalNullArr"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.InaccessibleSetter,
+                        e.Message,
+                        "MemberClass.Property_decimalNullArr"
+                    )
+                )
                     result = int.MaxValue;
             }
 
@@ -1426,8 +1196,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass035.regclass035
 {
@@ -1470,8 +1238,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass036.regclass036
 {
     // <Title> Tests regular class auto property used in foreach body.</Title>
@@ -1495,19 +1261,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             dynamic dy = mc;
             dy.Property_FloatNullArr = new float?[]
             {
-            float.Epsilon, float.MaxValue, float.MinValue, float.NaN, float.NegativeInfinity, float.PositiveInfinity
-            }
-
-            ;
-            if (dy.Property_FloatNullArr.Length == 6 && dy.Property_FloatNullArr[0] == float.Epsilon && dy.Property_FloatNullArr[1] == float.MaxValue && dy.Property_FloatNullArr[2] == float.MinValue && float.IsNaN((float)dy.Property_FloatNullArr[3]) && float.IsNegativeInfinity((float)dy.Property_FloatNullArr[4]) && float.IsPositiveInfinity((float)dy.Property_FloatNullArr[5]))
+                float.Epsilon,
+                float.MaxValue,
+                float.MinValue,
+                float.NaN,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+            };
+            if (
+                dy.Property_FloatNullArr.Length == 6
+                && dy.Property_FloatNullArr[0] == float.Epsilon
+                && dy.Property_FloatNullArr[1] == float.MaxValue
+                && dy.Property_FloatNullArr[2] == float.MinValue
+                && float.IsNaN((float)dy.Property_FloatNullArr[3])
+                && float.IsNegativeInfinity((float)dy.Property_FloatNullArr[4])
+                && float.IsPositiveInfinity((float)dy.Property_FloatNullArr[5])
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass037.regclass037
 {

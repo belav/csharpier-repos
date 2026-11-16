@@ -17,19 +17,27 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.StringIndentation
 {
-    internal partial class StringIndentationAdornmentManager : AbstractAdornmentManager<StringIndentationTag>
+    internal partial class StringIndentationAdornmentManager
+        : AbstractAdornmentManager<StringIndentationTag>
     {
         public StringIndentationAdornmentManager(
             IThreadingContext threadingContext,
             IWpfTextView textView,
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IAsynchronousOperationListener asyncListener,
-            string adornmentLayerName)
-            : base(threadingContext, textView, tagAggregatorFactoryService, asyncListener, adornmentLayerName)
-        {
-        }
+            string adornmentLayerName
+        )
+            : base(
+                threadingContext,
+                textView,
+                tagAggregatorFactoryService,
+                asyncListener,
+                adornmentLayerName
+            ) { }
 
-        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(NormalizedSnapshotSpanCollection changedSpanCollection)
+        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(
+            NormalizedSnapshotSpanCollection changedSpanCollection
+        )
         {
             // this method should only run on UI thread as we do WPF here.
             Contract.ThrowIfFalse(TextView.VisualElement.Dispatcher.CheckAccess());
@@ -57,13 +65,27 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                     if (!ShouldDrawTag(tagMappingSpan))
                         continue;
 
-                    if (!TryMapToSingleSnapshotSpan(tagMappingSpan.Span, TextView.TextSnapshot, out var span))
+                    if (
+                        !TryMapToSingleSnapshotSpan(
+                            tagMappingSpan.Span,
+                            TextView.TextSnapshot,
+                            out var span
+                        )
+                    )
                         continue;
 
-                    if (!TryMapHoleSpans(tagMappingSpan.Tag.OrderedHoleSpans, out var orderedHoleSpans))
+                    if (
+                        !TryMapHoleSpans(
+                            tagMappingSpan.Tag.OrderedHoleSpans,
+                            out var orderedHoleSpans
+                        )
+                    )
                         continue;
 
-                    if (VisibleBlock.CreateVisibleBlock(span, orderedHoleSpans, TextView) is not VisibleBlock block)
+                    if (
+                        VisibleBlock.CreateVisibleBlock(span, orderedHoleSpans, TextView)
+                        is not VisibleBlock block
+                    )
                         continue;
 
                     var brush = tagMappingSpan.Tag.GetBrush(TextView);
@@ -86,20 +108,24 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                             visualSpan: span,
                             tag: block,
                             adornment: line,
-                            removedCallback: delegate { });
+                            removedCallback: delegate { }
+                        );
                     }
                 }
             }
         }
 
-        protected override void RemoveAdornmentFromAdornmentLayer_CallOnlyOnUIThread(SnapshotSpan span)
+        protected override void RemoveAdornmentFromAdornmentLayer_CallOnlyOnUIThread(
+            SnapshotSpan span
+        )
         {
             AdornmentLayer.RemoveAdornmentsByVisualSpan(span);
         }
 
         private bool TryMapHoleSpans(
             ImmutableArray<SnapshotSpan> spans,
-            out ImmutableArray<SnapshotSpan> result)
+            out ImmutableArray<SnapshotSpan> result
+        )
         {
             using var _ = ArrayBuilder<SnapshotSpan>.GetInstance(out var builder);
             foreach (var span in spans)

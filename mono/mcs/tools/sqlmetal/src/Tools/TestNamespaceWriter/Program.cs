@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 namespace TestNamespaceWriter
@@ -75,8 +75,10 @@ namespace TestNamespaceWriter
 
         private const string Marker = "// test ns";
 
-        private static readonly Regex HeaderEx = new Regex(Regex.Escape(Marker) + "(?<ns>[^\n\r]*)?" + "(?<holder>.*?){",
-                                                           RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex HeaderEx = new Regex(
+            Regex.Escape(Marker) + "(?<ns>[^\n\r]*)?" + "(?<holder>.*?){",
+            RegexOptions.Compiled | RegexOptions.Singleline
+        );
 
         /// <summary>
         /// Sets the namespaces.
@@ -85,12 +87,15 @@ namespace TestNamespaceWriter
         /// <returns></returns>
         private static string SetNamespaces(string text)
         {
-            return HeaderEx.Replace(text, delegate(Match match)
-                                              {
-                                                  var ns = match.Groups["ns"].Value.Trim();
-                                                  var newHeader = Marker + " " + ns + "\r\n" + GetNamespaces(ns) + "{";
-                                                  return newHeader;
-                                              });
+            return HeaderEx.Replace(
+                text,
+                delegate(Match match)
+                {
+                    var ns = match.Groups["ns"].Value.Trim();
+                    var newHeader = Marker + " " + ns + "\r\n" + GetNamespaces(ns) + "{";
+                    return newHeader;
+                }
+            );
         }
 
         private static string GetNamespaces(string ns)
@@ -106,8 +111,11 @@ namespace TestNamespaceWriter
                 var keys = key.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var literalKeys = string.Join(" && ", keys);
                 namespacesBuilder.AppendLine(literalKeys);
-                namespacesBuilder.AppendFormat("    namespace {0}{1}\r\n", ConfigurationManager.AppSettings[key],
-                    string.IsNullOrEmpty(ns) ? "" : "." + ns);
+                namespacesBuilder.AppendFormat(
+                    "    namespace {0}{1}\r\n",
+                    ConfigurationManager.AppSettings[key],
+                    string.IsNullOrEmpty(ns) ? "" : "." + ns
+                );
             }
             namespacesBuilder.AppendLine("#endif");
             return namespacesBuilder.ToString();

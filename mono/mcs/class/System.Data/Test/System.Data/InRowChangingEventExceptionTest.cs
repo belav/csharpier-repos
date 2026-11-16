@@ -26,45 +26,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Text;
-using System.IO;
 using System.Data;
+using System.IO;
+using System.Text;
 using MonoTests.System.Data.Utils;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture] public class InRowChangingEventExceptionTest
-	{
-		private bool _EventTriggered = false;
-		[Test] public void Generate()
-		{
-			DataTable dt = DataProvider.CreateParentDataTable();
+    [TestFixture]
+    public class InRowChangingEventExceptionTest
+    {
+        private bool _EventTriggered = false;
 
-			dt.RowChanging  += new DataRowChangeEventHandler ( Row_Changing );
-			dt.Rows[0][1] = "NewValue";
+        [Test]
+        public void Generate()
+        {
+            DataTable dt = DataProvider.CreateParentDataTable();
 
-			//this event must be raised in order to test the exception
-			// RowChanging - Event raised
-			Assert.AreEqual(true , _EventTriggered , "IRCEE1");
-		}
+            dt.RowChanging += new DataRowChangeEventHandler(Row_Changing);
+            dt.Rows[0][1] = "NewValue";
 
-		private void Row_Changing( object sender, DataRowChangeEventArgs e )
-		{
-			// InRowChangingEventException - EndEdit
-			try 
-			{
-				e.Row.EndEdit(); //can't invoke EndEdit while in ChangingEvent
-				Assert.Fail("IRCEE2: Row.EndEdit failed to raise InRowChangingEventException.");
-			}
-			catch (InRowChangingEventException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("IRCEE3: Columns.Add wrong exception type. Got: " + exc);
-			}
-			_EventTriggered = true;
-		}
-	}
+            //this event must be raised in order to test the exception
+            // RowChanging - Event raised
+            Assert.AreEqual(true, _EventTriggered, "IRCEE1");
+        }
+
+        private void Row_Changing(object sender, DataRowChangeEventArgs e)
+        {
+            // InRowChangingEventException - EndEdit
+            try
+            {
+                e.Row.EndEdit(); //can't invoke EndEdit while in ChangingEvent
+                Assert.Fail("IRCEE2: Row.EndEdit failed to raise InRowChangingEventException.");
+            }
+            catch (InRowChangingEventException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("IRCEE3: Columns.Add wrong exception type. Got: " + exc);
+            }
+            _EventTriggered = true;
+        }
+    }
 }

@@ -27,14 +27,17 @@ namespace System.Threading.Tests
                 Assert.Throws<InvalidOperationException>(() => hecm.Revert(previousState0));
 
                 object otherThreadState = null;
-                ThreadTestHelpers.RunTestInBackgroundThread(
-                    () => otherThreadState = hecm.SetHostExecutionContext(new HostExecutionContext()));
+                ThreadTestHelpers.RunTestInBackgroundThread(() =>
+                    otherThreadState = hecm.SetHostExecutionContext(new HostExecutionContext())
+                );
                 Assert.Throws<InvalidOperationException>(() => hecm.Revert(otherThreadState));
 
                 ExecutionContext.Run(
                     ec,
-                    state => Assert.Throws<InvalidOperationException>(() => hecm.Revert(previousState1)),
-                    null);
+                    state =>
+                        Assert.Throws<InvalidOperationException>(() => hecm.Revert(previousState1)),
+                    null
+                );
 
                 hecm.Revert(previousState1);
                 Assert.Throws<InvalidOperationException>(() => hecm.Revert(previousState1));

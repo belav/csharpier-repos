@@ -16,7 +16,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     /// A simple key-value map that does not support updates and that supports range queries.
     /// </summary>
     /// <typeparam name="TValue">The type of values.</typeparam>
-    public class KeyValueMap<TKey, TValue> where TKey : IComparable<TKey>
+    public class KeyValueMap<TKey, TValue>
+        where TKey : IComparable<TKey>
     {
         // Native offsets in order
         private TKey[] _keys;

@@ -57,7 +57,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             while (set.Count < numberOfItemsToAdd)
             {
                 T toAdd = CreateT(seed++);
-                while (set.Contains(toAdd) || (InvalidValues != Array.Empty<T>() && InvalidValues.Contains(toAdd, GetIEqualityComparer())))
+                while (
+                    set.Contains(toAdd)
+                    || (
+                        InvalidValues != Array.Empty<T>()
+                        && InvalidValues.Contains(toAdd, GetIEqualityComparer())
+                    )
+                )
                     toAdd = CreateT(seed++);
                 set.Add(toAdd);
             }
@@ -71,7 +77,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override ICollection<T> GenericICollectionFactory() => GenericISetFactory();
 
-        protected override ICollection<T> GenericICollectionFactory(int count) => GenericISetFactory(count);
+        protected override ICollection<T> GenericICollectionFactory(int count) =>
+            GenericISetFactory(count);
 
         protected override bool DuplicateValuesAllowed => false;
         protected override bool DefaultValueWhenNotAllowed_Throws => false;
@@ -188,7 +195,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     break;
                 }
             }
-            Assert.Equal(!setContainsValueNotInEnumerable && enumerableContainsValueNotInSet, set.IsProperSubsetOf(enumerable));
+            Assert.Equal(
+                !setContainsValueNotInEnumerable && enumerableContainsValueNotInSet,
+                set.IsProperSubsetOf(enumerable)
+            );
         }
 
         private void Validate_IsProperSupersetOf(ISet<T> set, IEnumerable<T> enumerable)
@@ -326,91 +336,211 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_ExceptWith(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_ExceptWith(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_ExceptWith(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_IntersectWith(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_IntersectWith(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_IntersectWith(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_IsProperSubsetOf(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_IsProperSubsetOf(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_IsProperSubsetOf(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_IsProperSupersetOf(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_IsProperSupersetOf(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_IsProperSupersetOf(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_IsSubsetOf(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_IsSubsetOf(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_IsSubsetOf(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_IsSupersetOf(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_IsSupersetOf(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_IsSupersetOf(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_Overlaps(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_Overlaps(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_Overlaps(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_SetEquals(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_SetEquals(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_SetEquals(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_SymmetricExceptWith(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_SymmetricExceptWith(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_SymmetricExceptWith(set, enumerable);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_UnionWith(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_UnionWith(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Validate_UnionWith(set, enumerable);
         }
 
@@ -588,13 +718,25 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void ISet_Generic_SymmetricExceptWith_AfterRemovingElements(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void ISet_Generic_SymmetricExceptWith_AfterRemovingElements(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             ISet<T> set = GenericISetFactory(setLength);
             T value = CreateT(532);
             set.Add(value);
             set.Remove(value);
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, set, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                set,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             Debug.Assert(enumerable != null);
 
             IEqualityComparer<T> comparer = GetIEqualityComparer();

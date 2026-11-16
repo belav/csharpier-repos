@@ -12,12 +12,19 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer, CSharpUseNullCheckOverTypeCheckCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer,
+        CSharpUseNullCheckOverTypeCheckCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
     public class CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzerTests
     {
-        private static async Task VerifyAsync(string source, string fixedSource, LanguageVersion languageVersion)
+        private static async Task VerifyAsync(
+            string source,
+            string fixedSource,
+            LanguageVersion languageVersion
+        )
         {
             await new VerifyCS.Test
             {
@@ -27,11 +34,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
             }.RunAsync();
         }
 
-        private static async Task VerifyCSharp9Async(string source, string fixedSource)
-            => await VerifyAsync(source, fixedSource, LanguageVersion.CSharp9);
+        private static async Task VerifyCSharp9Async(string source, string fixedSource) =>
+            await VerifyAsync(source, fixedSource, LanguageVersion.CSharp9);
 
-        private static async Task VerifyCSharp8Async(string source, string fixedSource)
-            => await VerifyAsync(source, fixedSource, LanguageVersion.CSharp8);
+        private static async Task VerifyCSharp8Async(string source, string fixedSource) =>
+            await VerifyAsync(source, fixedSource, LanguageVersion.CSharp8);
 
         [Fact]
         public async Task TestIsObjectCSharp8()

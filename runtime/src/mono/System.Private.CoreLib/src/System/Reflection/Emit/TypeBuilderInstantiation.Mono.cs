@@ -44,8 +44,11 @@ namespace System.Reflection.Emit
     {
         //  Sequence of _genericType and _typeArguments fields should kept in sync with MonoReflectionGenericClass in object-internals.h
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:UnrecognizedReflectionPattern",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2055:UnrecognizedReflectionPattern",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         internal override Type InternalResolve()
         {
             Type gtd = _genericType.InternalResolve();

@@ -10,8 +10,15 @@ namespace System.Net.Http.Headers
     {
         public double? Quality
         {
-            get => HeaderUtilities.GetQuality((UnvalidatedObjectCollection<NameValueHeaderValue>)Parameters);
-            set => HeaderUtilities.SetQuality((UnvalidatedObjectCollection<NameValueHeaderValue>)Parameters, value);
+            get =>
+                HeaderUtilities.GetQuality(
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)Parameters
+                );
+            set =>
+                HeaderUtilities.SetQuality(
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)Parameters,
+                    value
+                );
         }
 
         internal MediaTypeWithQualityHeaderValue()
@@ -21,9 +28,7 @@ namespace System.Net.Http.Headers
         }
 
         public MediaTypeWithQualityHeaderValue(string mediaType)
-            : base(mediaType)
-        {
-        }
+            : base(mediaType) { }
 
         public MediaTypeWithQualityHeaderValue(string mediaType, double quality)
             : base(mediaType)
@@ -45,16 +50,30 @@ namespace System.Net.Http.Headers
         public static new MediaTypeWithQualityHeaderValue Parse(string input)
         {
             int index = 0;
-            return (MediaTypeWithQualityHeaderValue)MediaTypeHeaderParser.SingleValueWithQualityParser.ParseValue(
-                input, null, ref index);
+            return (MediaTypeWithQualityHeaderValue)
+                MediaTypeHeaderParser.SingleValueWithQualityParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out MediaTypeWithQualityHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out MediaTypeWithQualityHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (MediaTypeHeaderParser.SingleValueWithQualityParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                MediaTypeHeaderParser.SingleValueWithQualityParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (MediaTypeWithQualityHeaderValue)output!;
                 return true;

@@ -43,7 +43,7 @@ namespace JitTest_ldc_mul_unsigned_cs
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

@@ -117,8 +117,11 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///     Creates all tables for the current model in the database. No attempt is made
     ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
     /// </summary>
-    public virtual void CreateTables()
-        => Dependencies.MigrationCommandExecutor.ExecuteNonQuery(GetCreateTablesCommands(), Dependencies.Connection);
+    public virtual void CreateTables() =>
+        Dependencies.MigrationCommandExecutor.ExecuteNonQuery(
+            GetCreateTablesCommands(),
+            Dependencies.Connection
+        );
 
     /// <summary>
     ///     Asynchronously creates all tables for the current model in the database. No attempt is made
@@ -129,9 +132,12 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///     A task that represents the asynchronous operation.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default)
-        => Dependencies.MigrationCommandExecutor.ExecuteNonQueryAsync(
-            GetCreateTablesCommands(), Dependencies.Connection, cancellationToken);
+    public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default) =>
+        Dependencies.MigrationCommandExecutor.ExecuteNonQueryAsync(
+            GetCreateTablesCommands(),
+            Dependencies.Connection,
+            cancellationToken
+        );
 
     /// <summary>
     ///     Gets the commands that will create all tables from the model.
@@ -139,13 +145,15 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     /// <param name="options">The options to use when generating commands.</param>
     /// <returns>The generated commands.</returns>
     protected virtual IReadOnlyList<MigrationCommand> GetCreateTablesCommands(
-        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
+        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+    )
     {
         var model = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>().Model;
         return Dependencies.MigrationsSqlGenerator.Generate(
             Dependencies.ModelDiffer.GetDifferences(null, model.GetRelationalModel()),
             model,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -212,7 +220,9 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///     if the database is deleted, <see langword="false" /> if it did not exist.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<bool> EnsureDeletedAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         if (await ExistsAsync(cancellationToken).ConfigureAwait(false))
         {
@@ -234,7 +244,12 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     /// </returns>
     public virtual bool EnsureCreated()
     {
-        using (new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
+        using (
+            new TransactionScope(
+                TransactionScopeOption.Suppress,
+                TransactionScopeAsyncFlowOption.Enabled
+            )
+        )
         {
             if (!Exists())
             {
@@ -264,9 +279,14 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///     if the database is created, <see langword="false" /> if it already existed.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<bool> EnsureCreatedAsync(
+        CancellationToken cancellationToken = default
+    )
     {
-        var transactionScope = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+        var transactionScope = new TransactionScope(
+            TransactionScopeOption.Suppress,
+            TransactionScopeAsyncFlowOption.Enabled
+        );
         try
         {
             if (!await ExistsAsync(cancellationToken).ConfigureAwait(false))

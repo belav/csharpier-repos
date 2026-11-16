@@ -23,7 +23,12 @@ namespace System.Reflection.Emit.Tests
         public void PackagingSize_Set_ReturnsExpected(PackingSize packingSize)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            TypeBuilder type = module.DefineType("TestType", TypeAttributes.Class | TypeAttributes.Public, null, packingSize);
+            TypeBuilder type = module.DefineType(
+                "TestType",
+                TypeAttributes.Class | TypeAttributes.Public,
+                null,
+                packingSize
+            );
             Assert.Equal(packingSize, type.PackingSize);
 
             type.DefineGenericParameters("T", "U");

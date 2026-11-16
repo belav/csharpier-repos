@@ -9,6 +9,8 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial Interop.Kernel32.COORD GetLargestConsoleWindowSize(IntPtr hConsoleOutput);
+        internal static partial Interop.Kernel32.COORD GetLargestConsoleWindowSize(
+            IntPtr hConsoleOutput
+        );
     }
 }

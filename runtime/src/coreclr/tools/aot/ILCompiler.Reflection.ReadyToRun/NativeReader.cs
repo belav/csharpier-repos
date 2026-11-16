@@ -168,7 +168,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                     // Extension bit is not set, sign-extend and we're done.
                     int sbits = BITS_PER_SIZE_T - (shift + len);
                     result <<= sbits;
-                    result >>= sbits;   // This provides the sign extension
+                    result >>= sbits; // This provides the sign extension
                     return result;
                 }
             }
@@ -195,8 +195,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (offset + 1 >= image.Length)
                     throw new System.BadImageFormatException("offset out of bounds");
 
-                pValue = (val >> 2) |
-                      ((uint)ReadByte(image, ref off) << 6);
+                pValue = (val >> 2) | ((uint)ReadByte(image, ref off) << 6);
                 offset += 2;
             }
             else if ((val & 4) == 0)
@@ -204,9 +203,10 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (offset + 2 >= image.Length)
                     throw new System.BadImageFormatException("offset out of bounds");
 
-                pValue = (val >> 3) |
-                      ((uint)ReadByte(image, ref off) << 5) |
-                      ((uint)ReadByte(image, ref off) << 13);
+                pValue =
+                    (val >> 3)
+                    | ((uint)ReadByte(image, ref off) << 5)
+                    | ((uint)ReadByte(image, ref off) << 13);
                 offset += 3;
             }
             else if ((val & 8) == 0)
@@ -214,10 +214,11 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (offset + 3 >= image.Length)
                     throw new System.BadImageFormatException("offset out of bounds");
 
-                pValue = (val >> 4) |
-                      ((uint)ReadByte(image, ref off) << 4) |
-                      ((uint)ReadByte(image, ref off) << 12) |
-                      ((uint)ReadByte(image, ref off) << 20);
+                pValue =
+                    (val >> 4)
+                    | ((uint)ReadByte(image, ref off) << 4)
+                    | ((uint)ReadByte(image, ref off) << 12)
+                    | ((uint)ReadByte(image, ref off) << 20);
                 offset += 4;
             }
             else if ((val & 16) == 0)
@@ -254,8 +255,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (offset + 1 >= image.Length)
                     throw new System.BadImageFormatException("offset out of bounds");
 
-                pValue = (val >> 2) |
-                      (ReadByte(image, ref off) << 6);
+                pValue = (val >> 2) | (ReadByte(image, ref off) << 6);
                 offset += 2;
             }
             else if ((val & 4) == 0)
@@ -263,9 +263,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (offset + 2 >= image.Length)
                     throw new System.BadImageFormatException("offset out of bounds");
 
-                pValue = (val >> 3) |
-                      (ReadByte(image, ref off) << 5) |
-                      (ReadByte(image, ref off) << 13);
+                pValue =
+                    (val >> 3) | (ReadByte(image, ref off) << 5) | (ReadByte(image, ref off) << 13);
                 offset += 3;
             }
             else if ((val & 8) == 0)
@@ -273,10 +272,11 @@ namespace ILCompiler.Reflection.ReadyToRun
                 if (offset + 3 >= image.Length)
                     throw new System.BadImageFormatException("offset out of bounds");
 
-                pValue = (val >> 4) |
-                      (ReadByte(image, ref off) << 4) |
-                      (ReadByte(image, ref off) << 12) |
-                      (ReadByte(image, ref off) << 20);
+                pValue =
+                    (val >> 4)
+                    | (ReadByte(image, ref off) << 4)
+                    | (ReadByte(image, ref off) << 12)
+                    | (ReadByte(image, ref off) << 20);
                 offset += 4;
             }
             else if ((val & 16) == 0)
@@ -304,7 +304,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                 start++;
                 return (byte)data;
             }
-            if ((data & 0xC0) == 0x80)  // 10?? ????
+            if ((data & 0xC0) == 0x80) // 10?? ????
             {
                 data = (uint)((ReadByte(image, ref start) & 0x3f) << 8);
                 data |= ReadByte(image, ref start);
@@ -343,7 +343,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         public static int DecodeSignedGc(byte[] image, ref int start)
         {
             int size = 1;
-            byte data  = image[start++];
+            byte data = image[start++];
             byte first = data;
             int value = data & 0x3f;
             while ((data & 0x80) != 0)

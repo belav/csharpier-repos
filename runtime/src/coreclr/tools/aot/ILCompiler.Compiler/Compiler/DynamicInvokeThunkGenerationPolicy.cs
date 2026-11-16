@@ -31,7 +31,8 @@ namespace ILCompiler
     /// <summary>
     /// A thunk generation policy that uses static invocation thunks whenever possible.
     /// </summary>
-    public sealed class DefaultDynamicInvokeThunkGenerationPolicy : DynamicInvokeThunkGenerationPolicy
+    public sealed class DefaultDynamicInvokeThunkGenerationPolicy
+        : DynamicInvokeThunkGenerationPolicy
     {
         public override bool HasStaticInvokeThunk(MethodDesc targetMethod) => true;
     }

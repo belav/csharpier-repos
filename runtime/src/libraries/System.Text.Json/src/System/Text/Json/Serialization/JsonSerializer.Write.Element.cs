@@ -23,7 +23,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static JsonElement SerializeToElement<TValue>(TValue value, JsonSerializerOptions? options = null)
+        public static JsonElement SerializeToElement<TValue>(
+            TValue value,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return WriteElement(value, jsonTypeInfo);
@@ -48,7 +51,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static JsonElement SerializeToElement(object? value, Type inputType, JsonSerializerOptions? options = null)
+        public static JsonElement SerializeToElement(
+            object? value,
+            Type inputType,
+            JsonSerializerOptions? options = null
+        )
         {
             ValidateInputType(value, inputType);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, inputType);
@@ -65,7 +72,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonElement SerializeToElement<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static JsonElement SerializeToElement<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -117,7 +127,11 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="inputType"/> or <paramref name="context"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonElement SerializeToElement(object? value, Type inputType, JsonSerializerContext context)
+        public static JsonElement SerializeToElement(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context is null)
             {
@@ -129,17 +143,26 @@ namespace System.Text.Json
             return WriteElementAsObject(value, typeInfo);
         }
 
-        private static JsonElement WriteElement<TValue>(in TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        private static JsonElement WriteElement<TValue>(
+            in TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
             JsonSerializerOptions options = jsonTypeInfo.Options;
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {
                 jsonTypeInfo.Serialize(writer, value);
-                return JsonElement.ParseValue(output.WrittenMemory.Span, options.GetDocumentOptions());
+                return JsonElement.ParseValue(
+                    output.WrittenMemory.Span,
+                    options.GetDocumentOptions()
+                );
             }
             finally
             {
@@ -152,12 +175,18 @@ namespace System.Text.Json
             JsonSerializerOptions options = jsonTypeInfo.Options;
             Debug.Assert(options != null);
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {
                 jsonTypeInfo.SerializeAsObject(writer, value);
-                return JsonElement.ParseValue(output.WrittenMemory.Span, options.GetDocumentOptions());
+                return JsonElement.ParseValue(
+                    output.WrittenMemory.Span,
+                    options.GetDocumentOptions()
+                );
             }
             finally
             {

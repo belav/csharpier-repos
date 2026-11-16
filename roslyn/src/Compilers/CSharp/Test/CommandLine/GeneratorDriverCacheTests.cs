@@ -10,7 +10,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
 {
     public class GeneratorDriverCacheTests : CommandLineTestBase
     {
-
         [Fact]
         public void DriverCache_Returns_Null_For_No_Match()
         {
@@ -62,7 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             {
                 driverCache.CacheGenerator(i.ToString(), drivers[i]);
             }
-            // current cache state is 
+            // current cache state is
             // (10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
             // now try and retrieve the first driver which should no longer be in the cache
@@ -72,7 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             // add it back
             driverCache.CacheGenerator("0", drivers[0]);
 
-            // current cache state is 
+            // current cache state is
             // (0, 10, 9, 8, 7, 6, 5, 4, 3, 2)
 
             // access some drivers in the middle
@@ -80,7 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             driver = driverCache.TryGetDriver("4");
             driver = driverCache.TryGetDriver("2");
 
-            // current cache state is 
+            // current cache state is
             // (2, 4, 7, 0, 10, 9, 8, 6, 5, 3)
 
             // try and get a new driver that was never in the cache
@@ -88,7 +87,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             Assert.Null(driver);
             driverCache.CacheGenerator("11", drivers[11]);
 
-            // current cache state is 
+            // current cache state is
             // (11, 2, 4, 7, 0, 10, 9, 8, 6, 5)
 
             // get a driver that has been evicted
@@ -96,6 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             Assert.Null(driver);
         }
 
-        private static GeneratorDriver[] GetDrivers(int count) => Enumerable.Range(0, count).Select(i => CSharpGeneratorDriver.Create(Array.Empty<ISourceGenerator>())).ToArray();
+        private static GeneratorDriver[] GetDrivers(int count) =>
+            Enumerable
+                .Range(0, count)
+                .Select(i => CSharpGeneratorDriver.Create(Array.Empty<ISourceGenerator>()))
+                .ToArray();
     }
 }

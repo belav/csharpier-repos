@@ -18,25 +18,26 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         private Event(EventKind kind, string scope, Id<Element> data, IdFactory idFactory)
             : base(label: "$event", idFactory)
         {
-            this.Kind = kind switch { EventKind.Begin => "begin", EventKind.End => "end", _ => throw new ArgumentException(nameof(kind)) };
+            this.Kind = kind switch
+            {
+                EventKind.Begin => "begin",
+                EventKind.End => "end",
+                _ => throw new ArgumentException(nameof(kind)),
+            };
             this.Scope = scope;
             this.Data = data;
         }
 
         public Event(EventKind kind, Id<LsifProject> data, IdFactory idFactory)
-            : this(kind, "project", data.As<LsifProject, Element>(), idFactory)
-        {
-        }
+            : this(kind, "project", data.As<LsifProject, Element>(), idFactory) { }
 
         public Event(EventKind kind, Id<LsifDocument> data, IdFactory idFactory)
-            : this(kind, "document", data.As<LsifDocument, Element>(), idFactory)
-        {
-        }
+            : this(kind, "document", data.As<LsifDocument, Element>(), idFactory) { }
 
         public enum EventKind
         {
             Begin,
-            End
+            End,
         }
     }
 }

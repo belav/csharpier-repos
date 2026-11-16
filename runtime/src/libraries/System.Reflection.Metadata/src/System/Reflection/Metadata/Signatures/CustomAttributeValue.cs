@@ -10,7 +10,10 @@ namespace System.Reflection.Metadata
         public ImmutableArray<CustomAttributeTypedArgument<TType>> FixedArguments { get; }
         public ImmutableArray<CustomAttributeNamedArgument<TType>> NamedArguments { get; }
 
-        public CustomAttributeValue(ImmutableArray<CustomAttributeTypedArgument<TType>> fixedArguments, ImmutableArray<CustomAttributeNamedArgument<TType>> namedArguments)
+        public CustomAttributeValue(
+            ImmutableArray<CustomAttributeTypedArgument<TType>> fixedArguments,
+            ImmutableArray<CustomAttributeNamedArgument<TType>> namedArguments
+        )
         {
             FixedArguments = fixedArguments;
             NamedArguments = namedArguments;

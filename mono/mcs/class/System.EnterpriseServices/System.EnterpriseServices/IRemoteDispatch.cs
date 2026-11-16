@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.IRemoteDispatch.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,19 +31,19 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
+namespace System.EnterpriseServices
+{
+    [Guid("6619a740-8154-43be-a186-0319578e02db")]
+    public interface IRemoteDispatch
+    {
+        #region Methods
 
-	[Guid("6619a740-8154-43be-a186-0319578e02db")]
-	public interface IRemoteDispatch {
+        [AutoComplete]
+        string RemoteDispatchAutoDone(string s);
 
-		#region Methods
+        [AutoComplete(false)]
+        string RemoteDispatchNotAutoDone(string s);
 
-		[AutoComplete]
-		string RemoteDispatchAutoDone (string s);
-
-		[AutoComplete (false)]
-		string RemoteDispatchNotAutoDone (string s);
-
-		#endregion
-	}
+        #endregion
+    }
 }

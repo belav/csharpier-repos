@@ -19,24 +19,40 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             private readonly ImmutableArray<ApplyChangesKind> _allowedKinds;
             private readonly Func<ParseOptions, ParseOptions, bool>? _canApplyParseOptions;
-            private readonly Func<CompilationOptions, CompilationOptions, bool>? _canApplyCompilationOptions;
+            private readonly Func<
+                CompilationOptions,
+                CompilationOptions,
+                bool
+            >? _canApplyCompilationOptions;
 
             public CustomizedCanApplyWorkspace(params ApplyChangesKind[] allowedKinds)
-                : this(allowedKinds, canApplyParseOptions: null)
-            {
-            }
+                : this(allowedKinds, canApplyParseOptions: null) { }
 
-            public CustomizedCanApplyWorkspace(ApplyChangesKind[] allowedKinds,
+            public CustomizedCanApplyWorkspace(
+                ApplyChangesKind[] allowedKinds,
                 Func<ParseOptions, ParseOptions, bool>? canApplyParseOptions = null,
-                Func<CompilationOptions, CompilationOptions, bool>? canApplyCompilationOptions = null)
-                : base(Host.Mef.MefHostServices.DefaultHost, workspaceKind: nameof(CustomizedCanApplyWorkspace))
+                Func<CompilationOptions, CompilationOptions, bool>? canApplyCompilationOptions =
+                    null
+            )
+                : base(
+                    Host.Mef.MefHostServices.DefaultHost,
+                    workspaceKind: nameof(CustomizedCanApplyWorkspace)
+                )
             {
                 _allowedKinds = allowedKinds.ToImmutableArray();
                 _canApplyParseOptions = canApplyParseOptions;
                 _canApplyCompilationOptions = canApplyCompilationOptions;
 
                 // Add a C# project automatically so each test has something to try mutating
-                OnProjectAdded(ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Default, "TestProject", "TestProject", LanguageNames.CSharp));
+                OnProjectAdded(
+                    ProjectInfo.Create(
+                        ProjectId.CreateNewId(),
+                        VersionStamp.Default,
+                        "TestProject",
+                        "TestProject",
+                        LanguageNames.CSharp
+                    )
+                );
             }
 
             public override bool CanApplyChange(ApplyChangesKind feature)
@@ -44,7 +60,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 return _allowedKinds.Contains(feature);
             }
 
-            public override bool CanApplyParseOptionChange(ParseOptions oldOptions, ParseOptions newOptions, Project project)
+            public override bool CanApplyParseOptionChange(
+                ParseOptions oldOptions,
+                ParseOptions newOptions,
+                Project project
+            )
             {
                 if (_canApplyParseOptions != null)
                 {
@@ -54,7 +74,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 return base.CanApplyParseOptionChange(oldOptions, newOptions, project);
             }
 
-            public override bool CanApplyCompilationOptionChange(CompilationOptions oldOptions, CompilationOptions newOptions, Project project)
+            public override bool CanApplyCompilationOptionChange(
+                CompilationOptions oldOptions,
+                CompilationOptions newOptions,
+                Project project
+            )
             {
                 if (_canApplyCompilationOptions != null)
                 {
@@ -72,11 +96,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // to the other method
             using var workspace = new CustomizedCanApplyWorkspace(
                 allowedKinds: [ApplyChangesKind.ChangeCompilationOptions],
-                canApplyCompilationOptions: (_, __) => throw new Exception("This should not have been called."));
+                canApplyCompilationOptions: (_, __) =>
+                    throw new Exception("This should not have been called.")
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            Assert.True(workspace.TryApplyChanges(project.WithCompilationOptions(project.CompilationOptions!.WithMainTypeName("Test")).Solution));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    project
+                        .WithCompilationOptions(
+                            project.CompilationOptions!.WithMainTypeName("Test")
+                        )
+                        .Solution
+                )
+            );
         }
 
         [Fact]
@@ -85,11 +119,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
                 allowedKinds: [],
-                canApplyCompilationOptions: (_, newCompilationOptions) => newCompilationOptions.MainTypeName == "Test");
+                canApplyCompilationOptions: (_, newCompilationOptions) =>
+                    newCompilationOptions.MainTypeName == "Test"
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            Assert.True(workspace.TryApplyChanges(project.WithCompilationOptions(project.CompilationOptions!.WithMainTypeName("Test")).Solution));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    project
+                        .WithCompilationOptions(
+                            project.CompilationOptions!.WithMainTypeName("Test")
+                        )
+                        .Solution
+                )
+            );
         }
 
         [Fact]
@@ -98,14 +142,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
                 allowedKinds: [],
-                canApplyCompilationOptions: (_, newCompilationOptions) => newCompilationOptions.MainTypeName == "Expected");
+                canApplyCompilationOptions: (_, newCompilationOptions) =>
+                    newCompilationOptions.MainTypeName == "Expected"
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var exception = Assert.Throws<NotSupportedException>(
-                () => workspace.TryApplyChanges(project.WithCompilationOptions(project.CompilationOptions!.WithMainTypeName("WrongThing")).Solution));
+            var exception = Assert.Throws<NotSupportedException>(() =>
+                workspace.TryApplyChanges(
+                    project
+                        .WithCompilationOptions(
+                            project.CompilationOptions!.WithMainTypeName("WrongThing")
+                        )
+                        .Solution
+                )
+            );
 
-            Assert.Equal(WorkspacesResources.Changing_compilation_options_is_not_supported, exception.Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_compilation_options_is_not_supported,
+                exception.Message
+            );
         }
 
         [Fact]
@@ -115,13 +171,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // to the other method
             using var workspace = new CustomizedCanApplyWorkspace(
                 allowedKinds: [ApplyChangesKind.ChangeParseOptions],
-                canApplyParseOptions: (_, __) => throw new Exception("This should not have been called."));
+                canApplyParseOptions: (_, __) =>
+                    throw new Exception("This should not have been called.")
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            Assert.True(workspace.TryApplyChanges(
-                project.WithParseOptions(
-                    project.ParseOptions!.WithFeatures(new[] { KeyValuePairUtil.Create("Feature", "") })).Solution));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    project
+                        .WithParseOptions(
+                            project.ParseOptions!.WithFeatures(
+                                new[] { KeyValuePairUtil.Create("Feature", "") }
+                            )
+                        )
+                        .Solution
+                )
+            );
         }
 
         [Fact]
@@ -130,13 +196,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
                 allowedKinds: [],
-                canApplyParseOptions: (_, newParseOptions) => newParseOptions.Features["Feature"] == "ExpectedValue");
+                canApplyParseOptions: (_, newParseOptions) =>
+                    newParseOptions.Features["Feature"] == "ExpectedValue"
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    project.WithParseOptions(project.ParseOptions!.WithFeatures(new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") })).Solution));
+                    project
+                        .WithParseOptions(
+                            project.ParseOptions!.WithFeatures(
+                                new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") }
+                            )
+                        )
+                        .Solution
+                )
+            );
         }
 
         [Fact]
@@ -145,25 +221,46 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
                 allowedKinds: [],
-                canApplyParseOptions: (_, newParseOptions) => newParseOptions.Features["Feature"] == "ExpectedValue");
+                canApplyParseOptions: (_, newParseOptions) =>
+                    newParseOptions.Features["Feature"] == "ExpectedValue"
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var exception = Assert.Throws<NotSupportedException>(
-                () => workspace.TryApplyChanges(
-                    project.WithParseOptions(project.ParseOptions!.WithFeatures(new[] { KeyValuePairUtil.Create("Feature", "WrongThing") })).Solution));
+            var exception = Assert.Throws<NotSupportedException>(() =>
+                workspace.TryApplyChanges(
+                    project
+                        .WithParseOptions(
+                            project.ParseOptions!.WithFeatures(
+                                new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
+                            )
+                        )
+                        .Solution
+                )
+            );
 
-            Assert.Equal(WorkspacesResources.Changing_parse_options_is_not_supported, exception.Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_parse_options_is_not_supported,
+                exception.Message
+            );
         }
 
         [Fact]
         public void TryApplyWorksWhenAddingEditorConfigWithoutSupportingCompilationOptionsChanging()
         {
-            using var workspace = new CustomizedCanApplyWorkspace(allowedKinds: ApplyChangesKind.AddAnalyzerConfigDocument);
+            using var workspace = new CustomizedCanApplyWorkspace(
+                allowedKinds: ApplyChangesKind.AddAnalyzerConfigDocument
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
 
-            Assert.True(workspace.TryApplyChanges(project.AddAnalyzerConfigDocument(".editorconfig", SourceText.From("")).Project.Solution));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    project
+                        .AddAnalyzerConfigDocument(".editorconfig", SourceText.From(""))
+                        .Project.Solution
+                )
+            );
         }
     }
 }

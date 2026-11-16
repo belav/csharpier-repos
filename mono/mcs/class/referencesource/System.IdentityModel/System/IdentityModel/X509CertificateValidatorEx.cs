@@ -25,56 +25,67 @@ namespace System.IdentityModel
         public X509CertificateValidatorEx(
             X509CertificateValidationMode certificateValidationMode,
             X509RevocationMode revocationMode,
-            StoreLocation trustedStoreLocation)
+            StoreLocation trustedStoreLocation
+        )
         {
             this.certificateValidationMode = certificateValidationMode;
 
             switch (this.certificateValidationMode)
             {
                 case X509CertificateValidationMode.None:
-                    {
-                        this.validator = X509CertificateValidator.None;
-                        break;
-                    }
+                {
+                    this.validator = X509CertificateValidator.None;
+                    break;
+                }
 
                 case X509CertificateValidationMode.PeerTrust:
-                    {
-                        this.validator = X509CertificateValidator.PeerTrust;
-                        break;
-                    }
+                {
+                    this.validator = X509CertificateValidator.PeerTrust;
+                    break;
+                }
 
                 case X509CertificateValidationMode.ChainTrust:
-                    {
-                        bool useMachineContext = trustedStoreLocation == StoreLocation.LocalMachine;
-                        this.chainPolicy = new X509ChainPolicy();
-                        this.chainPolicy.RevocationMode = revocationMode;
+                {
+                    bool useMachineContext = trustedStoreLocation == StoreLocation.LocalMachine;
+                    this.chainPolicy = new X509ChainPolicy();
+                    this.chainPolicy.RevocationMode = revocationMode;
 
-                        this.validator = X509CertificateValidator.CreateChainTrustValidator(useMachineContext, this.chainPolicy);
-                        break;
-                    }
+                    this.validator = X509CertificateValidator.CreateChainTrustValidator(
+                        useMachineContext,
+                        this.chainPolicy
+                    );
+                    break;
+                }
 
                 case X509CertificateValidationMode.PeerOrChainTrust:
-                    {
-                        bool useMachineContext = trustedStoreLocation == StoreLocation.LocalMachine;
-                        this.chainPolicy = new X509ChainPolicy();
-                        this.chainPolicy.RevocationMode = revocationMode;
+                {
+                    bool useMachineContext = trustedStoreLocation == StoreLocation.LocalMachine;
+                    this.chainPolicy = new X509ChainPolicy();
+                    this.chainPolicy.RevocationMode = revocationMode;
 
-                        this.validator = X509CertificateValidator.CreatePeerOrChainTrustValidator(useMachineContext, this.chainPolicy);
-                        break;
-                    }
+                    this.validator = X509CertificateValidator.CreatePeerOrChainTrustValidator(
+                        useMachineContext,
+                        this.chainPolicy
+                    );
+                    break;
+                }
 
                 case X509CertificateValidationMode.Custom:
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4256)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ID4256))
+                    );
             }
         }
 
         public override void Validate(X509Certificate2 certificate)
         {
-            if (this.certificateValidationMode == X509CertificateValidationMode.ChainTrust ||
-                 this.certificateValidationMode == X509CertificateValidationMode.PeerOrChainTrust)
+            if (
+                this.certificateValidationMode == X509CertificateValidationMode.ChainTrust
+                || this.certificateValidationMode == X509CertificateValidationMode.PeerOrChainTrust
+            )
             {
-                // This is needed due to a .NET issue where the validation time is not properly set, 
+                // This is needed due to a .NET issue where the validation time is not properly set,
                 // causing certificates created after the creation of the validator to fail chain trust.
                 this.chainPolicy.VerificationTime = DateTime.Now;
             }

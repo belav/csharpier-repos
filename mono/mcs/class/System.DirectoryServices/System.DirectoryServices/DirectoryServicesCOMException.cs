@@ -26,41 +26,37 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices
 {
-	[Serializable]
-	public class DirectoryServicesCOMException : COMException, ISerializable
-	{
-		public int ExtendedError {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+    [Serializable]
+    public class DirectoryServicesCOMException : COMException, ISerializable
+    {
+        public int ExtendedError
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string ExtendedErrorMessage {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string ExtendedErrorMessage
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public DirectoryServicesCOMException ()
-		{
-		}
+        public DirectoryServicesCOMException() { }
 
-		public DirectoryServicesCOMException (string message) : base(message)
-		{
-		}
+        public DirectoryServicesCOMException(string message)
+            : base(message) { }
 
-		public DirectoryServicesCOMException (string message, Exception inner) : base(message, inner)
-		{
-		}
+        public DirectoryServicesCOMException(string message, Exception inner)
+            : base(message, inner) { }
 
-		protected DirectoryServicesCOMException (SerializationInfo info, StreamingContext context) : base(info, context)
-		{
-		}
+        protected DirectoryServicesCOMException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

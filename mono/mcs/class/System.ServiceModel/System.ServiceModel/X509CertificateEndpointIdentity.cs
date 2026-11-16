@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,45 +32,49 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-
 namespace System.ServiceModel
 {
-	public class X509CertificateEndpointIdentity : EndpointIdentity
-	{
-		X509Certificate2 primary;
-		X509Certificate2Collection supporting, all;
+    public class X509CertificateEndpointIdentity : EndpointIdentity
+    {
+        X509Certificate2 primary;
+        X509Certificate2Collection supporting,
+            all;
 
-		public X509CertificateEndpointIdentity (X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			primary = certificate;
-			Initialize (Claim.CreateThumbprintClaim (certificate.GetCertHash ()));
-		}
+        public X509CertificateEndpointIdentity(X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            primary = certificate;
+            Initialize(Claim.CreateThumbprintClaim(certificate.GetCertHash()));
+        }
 
-		public X509CertificateEndpointIdentity (
-			X509Certificate2 primaryCertificate,
-			X509Certificate2Collection supportingCertificates)
-		{
-			if (primaryCertificate == null)
-				throw new ArgumentNullException ("primaryCertificate");
-			if (supportingCertificates == null)
-				throw new ArgumentNullException ("supportingCertificates");
+        public X509CertificateEndpointIdentity(
+            X509Certificate2 primaryCertificate,
+            X509Certificate2Collection supportingCertificates
+        )
+        {
+            if (primaryCertificate == null)
+                throw new ArgumentNullException("primaryCertificate");
+            if (supportingCertificates == null)
+                throw new ArgumentNullException("supportingCertificates");
 
-			primary = primaryCertificate;
-			supporting = supportingCertificates;
-		}
+            primary = primaryCertificate;
+            supporting = supportingCertificates;
+        }
 
-		public X509Certificate2Collection Certificates {
-			get {
-				if (all == null) {
-					all = new X509Certificate2Collection ();
-					all.Add (primary);
-					if (supporting != null)
-						all.AddRange (supporting);
-				}
-				return all;
-			}
-		}
-	}
+        public X509Certificate2Collection Certificates
+        {
+            get
+            {
+                if (all == null)
+                {
+                    all = new X509Certificate2Collection();
+                    all.Add(primary);
+                    if (supporting != null)
+                        all.AddRange(supporting);
+                }
+                return all;
+            }
+        }
+    }
 }

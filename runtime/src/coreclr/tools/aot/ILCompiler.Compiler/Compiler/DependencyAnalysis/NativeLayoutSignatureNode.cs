@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
@@ -22,7 +21,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public TypeSystemEntity Identity => _identity;
 
-        public NativeLayoutSignatureNode(NativeLayoutSavedVertexNode nativeSignature, TypeSystemEntity identity, Utf8String identityPrefix)
+        public NativeLayoutSignatureNode(
+            NativeLayoutSavedVertexNode nativeSignature,
+            TypeSystemEntity identity,
+            Utf8String identityPrefix
+        )
         {
             _nativeSignature = nativeSignature;
             _identity = identity;
@@ -50,11 +53,16 @@ namespace ILCompiler.DependencyAnalysis
                 identityString = new Utf8String("unknown");
             }
 
-            sb.Append(nameMangler.CompilationUnitPrefix).Append(_identityPrefix).Append(identityString);
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append(_identityPrefix)
+                .Append(identityString);
         }
 
         public int Offset => 0;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
         protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory)
         {
             if (factory.Target.IsWindows)
@@ -62,21 +70,32 @@ namespace ILCompiler.DependencyAnalysis
             else
                 return ObjectNodeSection.DataSection;
         }
+
         public override bool IsShareable => false;
         public override bool StaticDependenciesAreComputed => true;
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
             DependencyList dependencies = new DependencyList();
-            dependencies.Add(new DependencyListEntry(_nativeSignature, "NativeLayoutSignatureNode target vertex"));
+            dependencies.Add(
+                new DependencyListEntry(_nativeSignature, "NativeLayoutSignatureNode target vertex")
+            );
             return dependencies;
         }
 
-        protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly = false)
+        protected override ObjectData GetDehydratableData(
+            NodeFactory factory,
+            bool relocsOnly = false
+        )
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Ensure native layout is saved to get valid Vertex offsets
             factory.MetadataManager.NativeLayoutInfo.SaveNativeLayoutInfoWriter(factory);
@@ -101,7 +120,10 @@ namespace ILCompiler.DependencyAnalysis
             {
                 if (otherSignature._identity is TypeDesc || otherSignature._identity is FieldDesc)
                     return -1;
-                return comparer.Compare((MethodDesc)_identity, (MethodDesc)((NativeLayoutSignatureNode)other)._identity);
+                return comparer.Compare(
+                    (MethodDesc)_identity,
+                    (MethodDesc)((NativeLayoutSignatureNode)other)._identity
+                );
             }
             else if (_identity is TypeDesc)
             {
@@ -111,13 +133,19 @@ namespace ILCompiler.DependencyAnalysis
                 if (otherSignature._identity is FieldDesc)
                     return -1;
 
-                return comparer.Compare((TypeDesc)_identity, (TypeDesc)((NativeLayoutSignatureNode)other)._identity);
+                return comparer.Compare(
+                    (TypeDesc)_identity,
+                    (TypeDesc)((NativeLayoutSignatureNode)other)._identity
+                );
             }
             else if (_identity is FieldDesc)
             {
                 if (otherSignature._identity is MethodDesc || otherSignature._identity is TypeDesc)
                     return 1;
-                return comparer.Compare((FieldDesc)_identity, (FieldDesc)((NativeLayoutSignatureNode)other)._identity);
+                return comparer.Compare(
+                    (FieldDesc)_identity,
+                    (FieldDesc)((NativeLayoutSignatureNode)other)._identity
+                );
             }
             else
             {

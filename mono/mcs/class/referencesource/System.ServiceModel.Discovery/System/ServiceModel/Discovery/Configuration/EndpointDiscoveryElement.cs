@@ -8,70 +8,53 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Configuration;
-    using System.Xml.Linq;
     using System.Xml;
+    using System.Xml.Linq;
 
     public sealed class EndpointDiscoveryElement : BehaviorExtensionElement
     {
         ConfigurationPropertyCollection properties;
 
-        public EndpointDiscoveryElement()
-        {
-        }
+        public EndpointDiscoveryElement() { }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule,
-            Justification = "This property is defined by the base class to determine the type of the behavior.")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "This property is defined by the base class to determine the type of the behavior."
+        )]
         public override Type BehaviorType
         {
-            get
-            {
-                return typeof(EndpointDiscoveryBehavior);
-            }
+            get { return typeof(EndpointDiscoveryBehavior); }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Enabled, DefaultValue = true)]
         public bool Enabled
         {
-            get
-            {
-                return (bool)base[ConfigurationStrings.Enabled];
-            }
-
-            set
-            {
-                base[ConfigurationStrings.Enabled] = value;
-            }
+            get { return (bool)base[ConfigurationStrings.Enabled]; }
+            set { base[ConfigurationStrings.Enabled] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Types)]
         [SuppressMessage(
             FxCop.Category.Configuration,
             FxCop.Rule.ConfigurationPropertyNameRule,
-            Justification = "The configuration name for this element is 'types'.")]
+            Justification = "The configuration name for this element is 'types'."
+        )]
         public ContractTypeNameElementCollection ContractTypeNames
         {
-            get
-            {
-                return (ContractTypeNameElementCollection)base[ConfigurationStrings.Types];
-            }
+            get { return (ContractTypeNameElementCollection)base[ConfigurationStrings.Types]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Scopes)]
         public ScopeElementCollection Scopes
         {
-            get
-            {
-                return (ScopeElementCollection)base[ConfigurationStrings.Scopes];
-            }
+            get { return (ScopeElementCollection)base[ConfigurationStrings.Scopes]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Extensions)]
         public XmlElementElementCollection Extensions
         {
-            get
-            {
-                return (XmlElementElementCollection)base[ConfigurationStrings.Extensions]; 
-            }
+            get { return (XmlElementElementCollection)base[ConfigurationStrings.Extensions]; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -80,43 +63,52 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Enabled, 
-                        typeof(Boolean), 
-                        true, 
-                        null, 
-                        null, 
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Enabled,
+                            typeof(Boolean),
+                            true,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Types,
-                        typeof(ContractTypeNameElementCollection),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Types,
+                            typeof(ContractTypeNameElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Scopes, 
-                        typeof(ScopeElementCollection), 
-                        null, 
-                        null, 
-                        null, 
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Scopes,
+                            typeof(ScopeElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Extensions, 
-                        typeof(XmlElementElementCollection), 
-                        null, 
-                        null, 
-                        null, 
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Extensions,
+                            typeof(XmlElementElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     this.properties = properties;
                 }
@@ -142,7 +134,11 @@ namespace System.ServiceModel.Discovery.Configuration
                 foreach (ContractTypeNameElement contractTypeNameElement in ContractTypeNames)
                 {
                     behavior.ContractTypeNames.Add(
-                        new XmlQualifiedName(contractTypeNameElement.Name, contractTypeNameElement.Namespace));
+                        new XmlQualifiedName(
+                            contractTypeNameElement.Name,
+                            contractTypeNameElement.Namespace
+                        )
+                    );
                 }
             }
 

@@ -13,38 +13,34 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 
 /// <summary>
 /// Breakpoint spans:
-/// 
+///
 /// class [|C(int a, int b)|] : B;
 /// </summary>
-internal sealed class PrimaryConstructorWithImplicitInitializerDeclarationBody(TypeDeclarationSyntax typeDeclaration)
-    : PrimaryConstructorDeclarationBody(typeDeclaration)
+internal sealed class PrimaryConstructorWithImplicitInitializerDeclarationBody(
+    TypeDeclarationSyntax typeDeclaration
+) : PrimaryConstructorDeclarationBody(typeDeclaration)
 {
-    public ParameterListSyntax ParameterList
-        => TypeDeclaration.ParameterList!;
+    public ParameterListSyntax ParameterList => TypeDeclaration.ParameterList!;
 
-    public override bool HasExplicitInitializer
-        => false;
+    public override bool HasExplicitInitializer => false;
 
-    public override SyntaxNode InitializerActiveStatement
-        => ParameterList;
+    public override SyntaxNode InitializerActiveStatement => ParameterList;
 
-    public override TextSpan InitializerActiveStatementSpan
-        => BreakpointSpans.CreateSpanForImplicitPrimaryConstructorInitializer(TypeDeclaration);
+    public override TextSpan InitializerActiveStatementSpan =>
+        BreakpointSpans.CreateSpanForImplicitPrimaryConstructorInitializer(TypeDeclaration);
 
-    public override SyntaxNode? MatchRoot
-        => null;
+    public override SyntaxNode? MatchRoot => null;
 
-    public override IEnumerable<SyntaxToken>? GetActiveTokens()
-        => BreakpointSpans.GetActiveTokensForImplicitPrimaryConstructorInitializer(TypeDeclaration);
+    public override IEnumerable<SyntaxToken>? GetActiveTokens() =>
+        BreakpointSpans.GetActiveTokensForImplicitPrimaryConstructorInitializer(TypeDeclaration);
 
-    public sealed override SyntaxNode EncompassingAncestor
-        => TypeDeclaration;
+    public sealed override SyntaxNode EncompassingAncestor => TypeDeclaration;
 
-    public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model)
-        => ImmutableArray<ISymbol>.Empty;
+    public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model) =>
+        ImmutableArray<ISymbol>.Empty;
 
     // Active spans of copy-constructor and primary record properties overlap with the primary constructor initializer span,
     // but do not belong to the primary constructor body. The only active span that belongs is the initializer span itself.
-    public override bool IsExcludedActiveStatementSpanWithinEnvelope(TextSpan span)
-       => span != InitializerActiveStatementSpan;
+    public override bool IsExcludedActiveStatementSpanWithinEnvelope(TextSpan span) =>
+        span != InitializerActiveStatementSpan;
 }

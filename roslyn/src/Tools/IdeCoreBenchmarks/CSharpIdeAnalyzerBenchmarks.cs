@@ -34,8 +34,13 @@ namespace IdeCoreBenchmarks
 
         public CSharpIdeAnalyzerBenchmarks()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            _solutionPath = Path.Combine(roslynRoot, @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            _solutionPath = Path.Combine(
+                roslynRoot,
+                @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln"
+            );
 
             if (!File.Exists(_solutionPath))
             {
@@ -46,7 +51,10 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public void Setup()
         {
-            var analyzerAssemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.CodeAnalysis.CSharp.Features.dll");
+            var analyzerAssemblyPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "Microsoft.CodeAnalysis.CSharp.Features.dll"
+            );
 
             _options = new Options(
                 analyzerPath: analyzerAssemblyPath,
@@ -60,12 +68,15 @@ namespace IdeCoreBenchmarks
                 iterations: 1,
                 usePersistentStorage: false,
                 fullSolutionAnalysis: false,
-                incrementalAnalyzerNames: ImmutableArray<string>.Empty);
+                incrementalAnalyzerNames: ImmutableArray<string>.Empty
+            );
 
             _workspace = AnalyzerRunnerHelper.CreateWorkspace();
             _diagnosticAnalyzerRunner = new DiagnosticAnalyzerRunner(_workspace, _options);
 
-            _ = _workspace.OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None).Result;
+            _ = _workspace
+                .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                .Result;
         }
 
         [GlobalCleanup]

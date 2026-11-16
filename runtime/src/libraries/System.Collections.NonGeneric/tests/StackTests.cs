@@ -35,7 +35,9 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_Int_NegativeInitialCapacity_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () => new Stack(-1)); // InitialCapacity < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () =>
+                new Stack(-1)
+            ); // InitialCapacity < 0
         }
 
         [Theory]
@@ -69,7 +71,10 @@ namespace System.Collections.Tests
             AssertExtensions.Throws<ArgumentNullException>("col", () => new Stack(null)); // Collection is null
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new Stack());
@@ -80,14 +85,20 @@ namespace System.Collections.Tests
             stack.Push("b");
             stack.Push(2);
 
-            DebuggerAttributeInfo debuggerAttribute = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property => property.Name == "Items");
+            DebuggerAttributeInfo debuggerAttribute =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
+            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property =>
+                property.Name == "Items"
+            );
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(stack.ToArray(), items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute_NullStack_ThrowsArgumentNullException()
         {
             bool threwNull = false;
@@ -233,13 +244,25 @@ namespace System.Collections.Tests
             Stack stack1 = Helpers.CreateIntStack(100);
             Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
             {
-                AssertExtensions.Throws<ArgumentNullException>("array", () => stack2.CopyTo(null, 0)); // Array is null
-                AssertExtensions.Throws<ArgumentException>("array", null, () => stack2.CopyTo(new object[10, 10], 0)); // Array is multidimensional
+                AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                    stack2.CopyTo(null, 0)
+                ); // Array is null
+                AssertExtensions.Throws<ArgumentException>("array", null, () =>
+                    stack2.CopyTo(new object[10, 10], 0)
+                ); // Array is multidimensional
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => stack2.CopyTo(new object[100], -1)); // Index < 0
-                AssertExtensions.Throws<ArgumentException>(null, () => stack2.CopyTo(new object[0], 0)); // Index >= array.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => stack2.CopyTo(new object[100], 1)); // Index + array.Count > stack.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => stack2.CopyTo(new object[150], 51)); // Index + array.Count > stack.Count
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    stack2.CopyTo(new object[100], -1)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    stack2.CopyTo(new object[0], 0)
+                ); // Index >= array.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    stack2.CopyTo(new object[100], 1)
+                ); // Index + array.Count > stack.Count
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    stack2.CopyTo(new object[150], 51)
+                ); // Index + array.Count > stack.Count
             });
         }
 
@@ -342,7 +365,8 @@ namespace System.Collections.Tests
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
                 // Index > dictionary.Count
-                while (enumerator.MoveNext()) ;
+                while (enumerator.MoveNext())
+                    ;
                 Assert.False(enumerator.MoveNext());
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 

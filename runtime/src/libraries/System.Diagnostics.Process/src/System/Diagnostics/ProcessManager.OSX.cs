@@ -35,8 +35,18 @@ namespace System.Diagnostics
                 // Set the values we have; all the other values don't have meaning or don't exist on OSX
                 Interop.libproc.proc_taskallinfo temp = info.Value;
                 string processName;
-                unsafe { processName = Marshal.PtrToStringUTF8(new IntPtr(temp.pbsd.pbi_comm))!; }
-                if (!string.IsNullOrEmpty(processNameFilter) && !string.Equals(processName, processNameFilter, StringComparison.OrdinalIgnoreCase))
+                unsafe
+                {
+                    processName = Marshal.PtrToStringUTF8(new IntPtr(temp.pbsd.pbi_comm))!;
+                }
+                if (
+                    !string.IsNullOrEmpty(processNameFilter)
+                    && !string.Equals(
+                        processName,
+                        processNameFilter,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return null;
                 }
@@ -52,10 +62,7 @@ namespace System.Diagnostics
             }
             else if (string.IsNullOrEmpty(processNameFilter))
             {
-                procInfo = new ProcessInfo()
-                {
-                    ProcessId = pid,
-                };
+                procInfo = new ProcessInfo() { ProcessId = pid };
             }
             else
             {
@@ -72,7 +79,8 @@ namespace System.Diagnostics
             }
 
             // Create a threadinfo for each thread in the process
-            List<KeyValuePair<ulong, Interop.libproc.proc_threadinfo?>> lstThreads = Interop.libproc.GetAllThreadsInProcess(pid);
+            List<KeyValuePair<ulong, Interop.libproc.proc_threadinfo?>> lstThreads =
+                Interop.libproc.GetAllThreadsInProcess(pid);
             foreach (KeyValuePair<ulong, Interop.libproc.proc_threadinfo?> t in lstThreads)
             {
                 var ti = new ThreadInfo()
@@ -80,15 +88,19 @@ namespace System.Diagnostics
                     _processId = pid,
                     _threadId = t.Key,
                     _basePriority = procInfo.BasePriority,
-                    _startAddress = null
+                    _startAddress = null,
                 };
 
                 // Fill in additional info if we were able to retrieve such data about the thread
                 if (t.Value.HasValue)
                 {
                     ti._currentPriority = t.Value.Value.pth_curpri;
-                    ti._threadState = ConvertOsxThreadRunStateToThreadState((Interop.libproc.ThreadRunState)t.Value.Value.pth_run_state);
-                    ti._threadWaitReason = ConvertOsxThreadFlagsToWaitReason((Interop.libproc.ThreadFlags)t.Value.Value.pth_flags);
+                    ti._threadState = ConvertOsxThreadRunStateToThreadState(
+                        (Interop.libproc.ThreadRunState)t.Value.Value.pth_run_state
+                    );
+                    ti._threadWaitReason = ConvertOsxThreadFlagsToWaitReason(
+                        (Interop.libproc.ThreadFlags)t.Value.Value.pth_flags
+                    );
                 }
 
                 procInfo._threadInfoList.Add(ti);
@@ -101,7 +113,9 @@ namespace System.Diagnostics
         // ---- Unix PAL layer ends here ----
         // ----------------------------------
 
-        private static System.Diagnostics.ThreadState ConvertOsxThreadRunStateToThreadState(Interop.libproc.ThreadRunState state)
+        private static System.Diagnostics.ThreadState ConvertOsxThreadRunStateToThreadState(
+            Interop.libproc.ThreadRunState state
+        )
         {
             switch (state)
             {
@@ -120,10 +134,15 @@ namespace System.Diagnostics
             }
         }
 
-        private static System.Diagnostics.ThreadWaitReason ConvertOsxThreadFlagsToWaitReason(Interop.libproc.ThreadFlags flags)
+        private static System.Diagnostics.ThreadWaitReason ConvertOsxThreadFlagsToWaitReason(
+            Interop.libproc.ThreadFlags flags
+        )
         {
             // Since ThreadWaitReason isn't a flag, we have to do a mapping and will lose some information.
-            if ((flags & Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED) == Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED)
+            if (
+                (flags & Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED)
+                == Interop.libproc.ThreadFlags.TH_FLAGS_SWAPPED
+            )
                 return ThreadWaitReason.PageOut;
             else
                 return ThreadWaitReason.Unknown; // There isn't a good mapping for anything else

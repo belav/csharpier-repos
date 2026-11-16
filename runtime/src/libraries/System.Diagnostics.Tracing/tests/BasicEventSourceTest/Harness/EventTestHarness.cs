@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace BasicEventSourceTests
 {
@@ -46,14 +46,19 @@ namespace BasicEventSourceTests
         ///
         /// Note that this routine calls Dispose on the listener, so it can't be used after that.
         /// </summary>
-        public static void RunTests(List<SubTest> tests, Listener listener, EventSource source, FilteringOptions options = null)
+        public static void RunTests(
+            List<SubTest> tests,
+            Listener listener,
+            EventSource source,
+            FilteringOptions options = null
+        )
         {
             int expectedTestNumber = 0;
             SubTest currentTest = null;
             List<Event> replies = new List<Event>(2);
 
             // Wire up the callback to handle the validation when the listener receives events.
-            listener.OnEvent = delegate (Event data)
+            listener.OnEvent = delegate(Event data)
             {
                 if (data.ProviderName == "TestHarnessEventSource")
                 {
@@ -112,7 +117,6 @@ namespace BasicEventSourceTests
             // Run the tests. collecting and validating the results.
             try
             {
-
                 using (TestHarnessEventSource testHarnessEventSource = new TestHarnessEventSource())
                 {
                     // Turn on the test EventSource.
@@ -128,7 +132,7 @@ namespace BasicEventSourceTests
                         test.EventGenerator();
                         testNumber++;
                     }
-                    testHarnessEventSource.StartTest("", testNumber);        // Empty test marks the end of testing.
+                    testHarnessEventSource.StartTest("", testNumber); // Empty test marks the end of testing.
 
                     // Disable the listeners.
                     listener.EventSourceCommand(source.Name, EventCommand.Disable);
@@ -166,7 +170,7 @@ namespace BasicEventSourceTests
                 throw new EventTestHarnessException(exceptionText.ToString(), e);
             }
 
-            listener.Dispose();         // Indicate we are done listening.  For the ETW file based cases, we do all the processing here
+            listener.Dispose(); // Indicate we are done listening.  For the ETW file based cases, we do all the processing here
 
             // expectedTetst number are the number of tests we successfully ran.
             Assert.Equal(expectedTestNumber, tests.Count);
@@ -174,7 +178,8 @@ namespace BasicEventSourceTests
 
         public class EventTestHarnessException : Exception
         {
-            public EventTestHarnessException(string message, Exception exception) : base(message, exception) { }
+            public EventTestHarnessException(string message, Exception exception)
+                : base(message, exception) { }
         }
 
         /// <summary>
@@ -182,11 +187,18 @@ namespace BasicEventSourceTests
         /// </summary>
         private class TestHarnessEventSource : EventSource
         {
-            public void StartTest(string name, int testNumber) { WriteEvent(1, name, testNumber); }
+            public void StartTest(string name, int testNumber)
+            {
+                WriteEvent(1, name, testNumber);
+            }
+
             /// <summary>
             /// Sent to make sure the listener is ignoring when it should be.
             /// </summary>
-            public void IgnoreEvent() { WriteEvent(2); }
+            public void IgnoreEvent()
+            {
+                WriteEvent(2);
+            }
         }
     }
 
@@ -206,6 +218,7 @@ namespace BasicEventSourceTests
             EventGenerator = eventGenerator;
             EventValidator = eventValidator;
         }
+
         /// <summary>
         /// If a single event does not produce a single response (if you expect additional error messages)
         /// use this constructor to validate the response.
@@ -219,14 +232,17 @@ namespace BasicEventSourceTests
 
         // This action cause the eventSource to emit an event (it is the test)
         public Action EventGenerator { get; private set; }
+
         // This action is given the resulting event and should Assert that it is correct
         public Action<Event> EventValidator { get; private set; }
         public Action<List<Event>> EventListValidator { get; private set; }
         public string Name { get; private set; }
+
         public bool Equals(SubTest other)
         {
             return Name == other.Name;
         }
+
         public override string ToString()
         {
             return Name;

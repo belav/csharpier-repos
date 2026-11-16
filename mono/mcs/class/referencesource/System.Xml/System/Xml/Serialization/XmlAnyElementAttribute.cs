@@ -2,10 +2,11 @@
 // <copyright file="XmlAnyElementAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
     using System.Xml.Schema;
 
@@ -13,8 +14,15 @@ namespace System.Xml.Serialization {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple=true)]
-    public class XmlAnyElementAttribute : System.Attribute {
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = true
+    )]
+    public class XmlAnyElementAttribute : System.Attribute
+    {
         string name;
         string ns;
         int order = -1;
@@ -24,14 +32,14 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAnyElementAttribute() {
-        }
-        
+        public XmlAnyElementAttribute() { }
+
         /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAnyElementAttribute(string name) {
+        public XmlAnyElementAttribute(string name)
+        {
             this.name = name;
         }
 
@@ -39,29 +47,33 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAnyElementAttribute(string name, string ns) {
+        public XmlAnyElementAttribute(string name, string ns)
+        {
             this.name = name;
             this.ns = ns;
             nsSpecified = true;
         }
-        
+
         /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.Name"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Name {
+        public string Name
+        {
             get { return name == null ? string.Empty : name; }
             set { name = value; }
         }
-        
+
         /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
-            set { 
-                ns = value; 
+            set
+            {
+                ns = value;
                 nsSpecified = true;
             }
         }
@@ -70,16 +82,22 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Order {
+        public int Order
+        {
             get { return order; }
-            set {
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentException(Res.GetString(Res.XmlDisallowNegativeValues), "Order");
+                    throw new ArgumentException(
+                        Res.GetString(Res.XmlDisallowNegativeValues),
+                        "Order"
+                    );
                 order = value;
             }
         }
 
-        internal bool NamespaceSpecified {
+        internal bool NamespaceSpecified
+        {
             get { return nsSpecified; }
         }
     }

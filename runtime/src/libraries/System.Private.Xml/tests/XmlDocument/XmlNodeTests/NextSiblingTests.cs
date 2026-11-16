@@ -14,7 +14,10 @@ namespace System.Xml.XmlDocumentTests
             xmlDocument.LoadXml("<root>some text<child1/></root>");
 
             Assert.Equal(XmlNodeType.Text, xmlDocument.DocumentElement.ChildNodes[0].NodeType);
-            Assert.Equal(xmlDocument.DocumentElement.ChildNodes[0].NextSibling, xmlDocument.DocumentElement.ChildNodes[1]);
+            Assert.Equal(
+                xmlDocument.DocumentElement.ChildNodes[0].NextSibling,
+                xmlDocument.DocumentElement.ChildNodes[1]
+            );
         }
 
         [Fact]
@@ -42,7 +45,10 @@ namespace System.Xml.XmlDocumentTests
             xmlDocument.LoadXml("<root><!--some text--><child1/></root>");
 
             Assert.Equal(XmlNodeType.Comment, xmlDocument.DocumentElement.ChildNodes[0].NodeType);
-            Assert.Equal(xmlDocument.DocumentElement.ChildNodes[0].NextSibling, xmlDocument.DocumentElement.ChildNodes[1]);
+            Assert.Equal(
+                xmlDocument.DocumentElement.ChildNodes[0].NextSibling,
+                xmlDocument.DocumentElement.ChildNodes[1]
+            );
         }
 
         [Fact]
@@ -58,10 +64,15 @@ namespace System.Xml.XmlDocumentTests
         public static void OnCDataNode()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><![CDATA[ <opentag> without an </endtag> and & <! are all ok here ]]><child1/></root>");
+            xmlDocument.LoadXml(
+                "<root><![CDATA[ <opentag> without an </endtag> and & <! are all ok here ]]><child1/></root>"
+            );
 
             Assert.Equal(XmlNodeType.CDATA, xmlDocument.DocumentElement.ChildNodes[0].NodeType);
-            Assert.Equal(xmlDocument.DocumentElement.ChildNodes[0].NextSibling, xmlDocument.DocumentElement.ChildNodes[1]);
+            Assert.Equal(
+                xmlDocument.DocumentElement.ChildNodes[0].NextSibling,
+                xmlDocument.DocumentElement.ChildNodes[1]
+            );
         }
 
         [Fact]
@@ -104,7 +115,9 @@ namespace System.Xml.XmlDocumentTests
         public static void OnAttributeNodeWithChildren()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root attr1='test' attr2='test2'><child1/><child2/><child3/></root>");
+            xmlDocument.LoadXml(
+                "<root attr1='test' attr2='test2'><child1/><child2/><child3/></root>"
+            );
 
             var node = xmlDocument.DocumentElement.ChildNodes[2];
 
@@ -125,7 +138,9 @@ namespace System.Xml.XmlDocumentTests
         public static void OnAllSiblings()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><child1/><child2/><child3 attr='1'/>Some Text<child4/><!-- comment --><?PI processing info?></root>");
+            xmlDocument.LoadXml(
+                "<root><child1/><child2/><child3 attr='1'/>Some Text<child4/><!-- comment --><?PI processing info?></root>"
+            );
 
             var count = xmlDocument.DocumentElement.ChildNodes.Count;
             var previousNode = xmlDocument.DocumentElement.ChildNodes[0];
@@ -282,7 +297,10 @@ namespace System.Xml.XmlDocumentTests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<root><child1/><child2/><child3/></root>");
 
-            Assert.Equal(xmlDocument.DocumentElement.ChildNodes[1], xmlDocument.DocumentElement.FirstChild.NextSibling);
+            Assert.Equal(
+                xmlDocument.DocumentElement.ChildNodes[1],
+                xmlDocument.DocumentElement.FirstChild.NextSibling
+            );
         }
     }
 }

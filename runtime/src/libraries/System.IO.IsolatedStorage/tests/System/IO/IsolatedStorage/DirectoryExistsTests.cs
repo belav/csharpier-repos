@@ -20,9 +20,7 @@ namespace System.IO.IsolatedStorage
         public void DirectoryExists_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.DirectoryExists("foo"));
         }
@@ -79,20 +77,32 @@ namespace System.IO.IsolatedStorage
                 string directory = "DirectoryExists_Existence";
                 isf.CreateDirectory(directory);
 
-                Assert.True(Directory.Exists(Path.Combine(root, directory)), "exists per file.io where expected");
+                Assert.True(
+                    Directory.Exists(Path.Combine(root, directory)),
+                    "exists per file.io where expected"
+                );
                 Assert.True(isf.DirectoryExists(directory), "exists per iso");
                 isf.DeleteDirectory(directory);
-                Assert.False(Directory.Exists(Path.Combine(root, directory)), "doesn't exist per file.io where expected");
+                Assert.False(
+                    Directory.Exists(Path.Combine(root, directory)),
+                    "doesn't exist per file.io where expected"
+                );
                 Assert.False(isf.DirectoryExists(directory), "doesn't exist per iso");
 
                 // Now nested
                 directory = Path.Combine(directory, directory);
                 isf.CreateDirectory(directory);
 
-                Assert.True(Directory.Exists(Path.Combine(root, directory)), "exists nested per file.io where expected");
+                Assert.True(
+                    Directory.Exists(Path.Combine(root, directory)),
+                    "exists nested per file.io where expected"
+                );
                 Assert.True(isf.DirectoryExists(directory), "exists nested per iso");
                 isf.DeleteDirectory(directory);
-                Assert.False(Directory.Exists(Path.Combine(root, directory)), "doesn't exist nested per file.io where expected");
+                Assert.False(
+                    Directory.Exists(Path.Combine(root, directory)),
+                    "doesn't exist nested per file.io where expected"
+                );
                 Assert.False(isf.DirectoryExists(directory), "doesn't exist nested per iso");
             }
         }

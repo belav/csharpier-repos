@@ -19,66 +19,118 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     [UseExportProvider]
     public class TextFactoryTests
     {
-        private readonly byte[] _nonUtf8StringBytes = [0x80, 0x92, 0xA4, 0xB6, 0xC9, 0xDB, 0xED, 0xFF];
+        private readonly byte[] _nonUtf8StringBytes =
+        [
+            0x80,
+            0x92,
+            0xA4,
+            0xB6,
+            0xC9,
+            0xDB,
+            0xED,
+            0xFF,
+        ];
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038018"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1041792")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038018"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1041792")
+        ]
         public void TestCreateTextFallsBackToSystemDefaultEncoding()
         {
-            using var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices());
-            var textFactoryService = Assert.IsType<EditorTextFactoryService>(workspace.Services.GetRequiredService<ITextFactoryService>());
+            using var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices()
+            );
+            var textFactoryService = Assert.IsType<EditorTextFactoryService>(
+                workspace.Services.GetRequiredService<ITextFactoryService>()
+            );
 
             TestCreateTextInferredEncoding(
                 textFactoryService,
                 _nonUtf8StringBytes,
                 defaultEncoding: null,
-                expectedEncoding: Encoding.Default);
+                expectedEncoding: Encoding.Default
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038018")]
         public void TestCreateTextFallsBackToUTF8Encoding()
         {
-            using var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices());
-            var textFactoryService = Assert.IsType<EditorTextFactoryService>(workspace.Services.GetRequiredService<ITextFactoryService>());
+            using var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices()
+            );
+            var textFactoryService = Assert.IsType<EditorTextFactoryService>(
+                workspace.Services.GetRequiredService<ITextFactoryService>()
+            );
 
             TestCreateTextInferredEncoding(
                 textFactoryService,
                 new ASCIIEncoding().GetBytes("Test"),
                 defaultEncoding: null,
-                expectedEncoding: new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
+                expectedEncoding: new UTF8Encoding(
+                    encoderShouldEmitUTF8Identifier: false,
+                    throwOnInvalidBytes: true
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038018")]
         public void TestCreateTextFallsBackToProvidedDefaultEncoding()
         {
-            using var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices());
-            var textFactoryService = Assert.IsType<EditorTextFactoryService>(workspace.Services.GetRequiredService<ITextFactoryService>());
+            using var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices()
+            );
+            var textFactoryService = Assert.IsType<EditorTextFactoryService>(
+                workspace.Services.GetRequiredService<ITextFactoryService>()
+            );
 
             TestCreateTextInferredEncoding(
                 textFactoryService,
-                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true).GetBytes("Test"),
+                new UTF8Encoding(
+                    encoderShouldEmitUTF8Identifier: false,
+                    throwOnInvalidBytes: true
+                ).GetBytes("Test"),
                 defaultEncoding: Encoding.GetEncoding(1254),
-                expectedEncoding: Encoding.GetEncoding(1254));
+                expectedEncoding: Encoding.GetEncoding(1254)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038018")]
         public void TestCreateTextUsesByteOrderMarkIfPresent()
         {
-            using var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices());
-            var textFactoryService = Assert.IsType<EditorTextFactoryService>(workspace.Services.GetRequiredService<ITextFactoryService>());
+            using var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices()
+            );
+            var textFactoryService = Assert.IsType<EditorTextFactoryService>(
+                workspace.Services.GetRequiredService<ITextFactoryService>()
+            );
 
             TestCreateTextInferredEncoding(
                 textFactoryService,
-                Encoding.UTF8.GetPreamble().Concat(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true).GetBytes("Test")).ToArray(),
+                Encoding
+                    .UTF8.GetPreamble()
+                    .Concat(
+                        new UTF8Encoding(
+                            encoderShouldEmitUTF8Identifier: false,
+                            throwOnInvalidBytes: true
+                        ).GetBytes("Test")
+                    )
+                    .ToArray(),
                 defaultEncoding: Encoding.GetEncoding(1254),
-                expectedEncoding: Encoding.UTF8);
+                expectedEncoding: Encoding.UTF8
+            );
         }
 
         [Fact]
         public async Task TestCreateFromTemporaryStorage()
         {
-            using var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices());
+            using var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices()
+            );
 
-            var temporaryStorageService = Assert.IsType<TemporaryStorageService>(workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>());
+            var temporaryStorageService = Assert.IsType<TemporaryStorageService>(
+                workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>()
+            );
 
             var text = SourceText.From("Hello, World!");
 
@@ -98,9 +150,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         [Fact]
         public async Task TestCreateFromTemporaryStorageWithEncoding()
         {
-            using var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices());
+            using var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices()
+            );
 
-            var temporaryStorageService = Assert.IsType<TemporaryStorageService>(workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>());
+            var temporaryStorageService = Assert.IsType<TemporaryStorageService>(
+                workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>()
+            );
 
             var text = SourceText.From("Hello, World!", Encoding.ASCII);
 
@@ -117,10 +173,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             Assert.Equal(text2.Encoding, Encoding.ASCII);
         }
 
-        private static void TestCreateTextInferredEncoding(ITextFactoryService textFactoryService, byte[] bytes, Encoding? defaultEncoding, Encoding expectedEncoding)
+        private static void TestCreateTextInferredEncoding(
+            ITextFactoryService textFactoryService,
+            byte[] bytes,
+            Encoding? defaultEncoding,
+            Encoding expectedEncoding
+        )
         {
             using var stream = new MemoryStream(bytes);
-            var text = textFactoryService.CreateText(stream, defaultEncoding, SourceHashAlgorithms.Default, CancellationToken.None);
+            var text = textFactoryService.CreateText(
+                stream,
+                defaultEncoding,
+                SourceHashAlgorithms.Default,
+                CancellationToken.None
+            );
             Assert.Equal(expectedEncoding, text.Encoding);
             Assert.Equal(SourceHashAlgorithms.Default, text.ChecksumAlgorithm);
         }

@@ -1,9 +1,9 @@
 //
-// bmpsave.cs sample 
+// bmpsave.cs sample
 //
 // Author:
 //   Alexandre Pigolkine(pigolkine@gmx.de)
-// 
+//
 // Copyright (C) Ximian, Inc.  http://www.ximian.com
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,17 +34,20 @@ using System.Drawing.Imaging;
 
 namespace MonoSamples.System.Drawing
 {
-	public class BmpSave
-	{
-		public static void Main (string[] argv) {
-			if (argv.Length == 1) {
-				Bitmap bmp = new Bitmap (argv[0]);
-				Console.WriteLine ("Output file bmpsave.bmp");
-				bmp.Save ("bmpsave.bmp", ImageFormat.Bmp);
-			}
-			else {
-				Console.WriteLine ("usage: bmpsave.exe <filename>");
-			}
-		}
-	}
+    public class BmpSave
+    {
+        public static void Main(string[] argv)
+        {
+            if (argv.Length == 1)
+            {
+                Bitmap bmp = new Bitmap(argv[0]);
+                Console.WriteLine("Output file bmpsave.bmp");
+                bmp.Save("bmpsave.bmp", ImageFormat.Bmp);
+            }
+            else
+            {
+                Console.WriteLine("usage: bmpsave.exe <filename>");
+            }
+        }
+    }
 }

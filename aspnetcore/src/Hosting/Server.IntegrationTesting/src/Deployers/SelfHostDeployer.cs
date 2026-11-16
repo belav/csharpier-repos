@@ -104,8 +104,7 @@ public class SelfHostDeployer : ApplicationDeployer
             {
                 // Core+Standalone always publishes. This must be Clr+Standalone or Core+Portable.
                 // Run from the pre-built bin/{config}/{tfm} directory.
-                var targetFramework =
-                    DeploymentParameters.TargetFramework
+                var targetFramework = DeploymentParameters.TargetFramework
                     ?? (
                         DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
                             ? Tfm.Net462

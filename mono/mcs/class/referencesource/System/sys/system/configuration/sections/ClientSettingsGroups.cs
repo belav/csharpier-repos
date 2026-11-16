@@ -1,14 +1,12 @@
 //------------------------------------------------------------------------------
 // <copyright file="ClientSettingsGroups.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-    
-    public sealed class ApplicationSettingsGroup : ConfigurationSectionGroup {
-    }
+namespace System.Configuration
+{
+    public sealed class ApplicationSettingsGroup : ConfigurationSectionGroup { }
 
-    public sealed class UserSettingsGroup : ConfigurationSectionGroup {
-    }
+    public sealed class UserSettingsGroup : ConfigurationSectionGroup { }
 }

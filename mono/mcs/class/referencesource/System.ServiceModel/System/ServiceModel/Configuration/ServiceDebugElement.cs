@@ -4,15 +4,13 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
     using System.Configuration;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
 
     public sealed partial class ServiceDebugElement : BehaviorExtensionElement
     {
-        public ServiceDebugElement()
-        {
-        }
+        public ServiceDebugElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.HttpHelpPageEnabled, DefaultValue = true)]
         public bool HttpHelpPageEnabled
@@ -34,7 +32,7 @@ namespace System.ServiceModel.Configuration
             get { return (bool)base[ConfigurationStrings.HttpsHelpPageEnabled]; }
             set { base[ConfigurationStrings.HttpsHelpPageEnabled] = value; }
         }
-        
+
         [ConfigurationProperty(ConfigurationStrings.HttpsHelpPageUrl)]
         public Uri HttpsHelpPageUrl
         {
@@ -50,7 +48,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.HttpHelpPageBinding] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HttpHelpPageBindingConfiguration, DefaultValue = "")]
+        [ConfigurationProperty(
+            ConfigurationStrings.HttpHelpPageBindingConfiguration,
+            DefaultValue = ""
+        )]
         [StringValidator(MinLength = 0)]
         public string HttpHelpPageBindingConfiguration
         {
@@ -66,7 +67,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.HttpsHelpPageBinding] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HttpsHelpPageBindingConfiguration, DefaultValue = "")]
+        [ConfigurationProperty(
+            ConfigurationStrings.HttpsHelpPageBindingConfiguration,
+            DefaultValue = ""
+        )]
         [StringValidator(MinLength = 0)]
         public string HttpsHelpPageBindingConfiguration
         {
@@ -74,7 +78,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.HttpsHelpPageBindingConfiguration] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IncludeExceptionDetailInFaults, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IncludeExceptionDetailInFaults,
+            DefaultValue = false
+        )]
         public bool IncludeExceptionDetailInFaults
         {
             get { return (bool)base[ConfigurationStrings.IncludeExceptionDetailInFaults]; }
@@ -96,7 +103,6 @@ namespace System.ServiceModel.Configuration
             this.HttpHelpPageBindingConfiguration = source.HttpHelpPageBindingConfiguration;
             this.HttpsHelpPageBinding = source.HttpsHelpPageBinding;
             this.HttpsHelpPageBindingConfiguration = source.HttpsHelpPageBindingConfiguration;
-
         }
 
         protected internal override object CreateBehavior()
@@ -109,9 +115,15 @@ namespace System.ServiceModel.Configuration
             behavior.HttpsHelpPageUrl = this.HttpsHelpPageUrl;
             behavior.IncludeExceptionDetailInFaults = this.IncludeExceptionDetailInFaults;
             if (!String.IsNullOrEmpty(this.HttpHelpPageBinding))
-                behavior.HttpHelpPageBinding = ConfigLoader.LookupBinding(this.HttpHelpPageBinding, this.HttpHelpPageBindingConfiguration);
+                behavior.HttpHelpPageBinding = ConfigLoader.LookupBinding(
+                    this.HttpHelpPageBinding,
+                    this.HttpHelpPageBindingConfiguration
+                );
             if (!String.IsNullOrEmpty(this.HttpsHelpPageBinding))
-                behavior.HttpsHelpPageBinding = ConfigLoader.LookupBinding(this.HttpsHelpPageBinding, this.HttpsHelpPageBindingConfiguration);
+                behavior.HttpsHelpPageBinding = ConfigLoader.LookupBinding(
+                    this.HttpsHelpPageBinding,
+                    this.HttpsHelpPageBindingConfiguration
+                );
 
             return behavior;
         }
@@ -122,7 +134,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-
-

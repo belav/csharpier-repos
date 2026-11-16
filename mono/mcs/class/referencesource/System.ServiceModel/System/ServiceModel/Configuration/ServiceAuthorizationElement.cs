@@ -5,27 +5,31 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Security;
     using System.ComponentModel;
     using System.Configuration;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     public sealed partial class ServiceAuthorizationElement : BehaviorExtensionElement
     {
-        public ServiceAuthorizationElement()
-        {
-        }
+        public ServiceAuthorizationElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.PrincipalPermissionMode, DefaultValue = PrincipalPermissionMode.UseWindowsGroups)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PrincipalPermissionMode,
+            DefaultValue = PrincipalPermissionMode.UseWindowsGroups
+        )]
         [ServiceModelEnumValidator(typeof(PrincipalPermissionModeHelper))]
         public PrincipalPermissionMode PrincipalPermissionMode
         {
-            get { return (PrincipalPermissionMode)base[ConfigurationStrings.PrincipalPermissionMode]; }
+            get
+            {
+                return (PrincipalPermissionMode)base[ConfigurationStrings.PrincipalPermissionMode];
+            }
             set { base[ConfigurationStrings.PrincipalPermissionMode] = value; }
         }
 
@@ -43,22 +47,31 @@ namespace System.ServiceModel.Configuration
                 base[ConfigurationStrings.RoleProviderName] = value;
             }
         }
-        
-        [ConfigurationProperty(ConfigurationStrings.ImpersonateCallerForAllOperations, DefaultValue = ServiceAuthorizationBehavior.DefaultImpersonateCallerForAllOperations)]
+
+        [ConfigurationProperty(
+            ConfigurationStrings.ImpersonateCallerForAllOperations,
+            DefaultValue = ServiceAuthorizationBehavior.DefaultImpersonateCallerForAllOperations
+        )]
         public bool ImpersonateCallerForAllOperations
         {
             get { return (bool)base[ConfigurationStrings.ImpersonateCallerForAllOperations]; }
             set { base[ConfigurationStrings.ImpersonateCallerForAllOperations] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ImpersonateOnSerializingReply, DefaultValue = ServiceAuthorizationBehavior.DefaultImpersonateOnSerializingReply)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ImpersonateOnSerializingReply,
+            DefaultValue = ServiceAuthorizationBehavior.DefaultImpersonateOnSerializingReply
+        )]
         public bool ImpersonateOnSerializingReply
         {
             get { return (bool)base[ConfigurationStrings.ImpersonateOnSerializingReply]; }
             set { base[ConfigurationStrings.ImpersonateOnSerializingReply] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ServiceAuthorizationManagerType, DefaultValue = "")]
+        [ConfigurationProperty(
+            ConfigurationStrings.ServiceAuthorizationManagerType,
+            DefaultValue = ""
+        )]
         [StringValidator(MinLength = 0)]
         public string ServiceAuthorizationManagerType
         {
@@ -76,7 +89,11 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.AuthorizationPolicies)]
         public AuthorizationPolicyTypeElementCollection AuthorizationPolicies
         {
-            get { return (AuthorizationPolicyTypeElementCollection)base[ConfigurationStrings.AuthorizationPolicies]; }
+            get
+            {
+                return (AuthorizationPolicyTypeElementCollection)
+                    base[ConfigurationStrings.AuthorizationPolicies];
+            }
         }
 
         public override void CopyFrom(ServiceModelExtensionElement from)
@@ -90,8 +107,10 @@ namespace System.ServiceModel.Configuration
             this.ImpersonateCallerForAllOperations = source.ImpersonateCallerForAllOperations;
             this.ImpersonateOnSerializingReply = source.ImpersonateOnSerializingReply;
             this.ServiceAuthorizationManagerType = source.ServiceAuthorizationManagerType;
-            AuthorizationPolicyTypeElementCollection srcAuthorizationPolicies = source.AuthorizationPolicies;
-            AuthorizationPolicyTypeElementCollection dstAuthorizationPolicies = this.AuthorizationPolicies;
+            AuthorizationPolicyTypeElementCollection srcAuthorizationPolicies =
+                source.AuthorizationPolicies;
+            AuthorizationPolicyTypeElementCollection dstAuthorizationPolicies =
+                this.AuthorizationPolicies;
             for (int i = 0; i < srcAuthorizationPolicies.Count; ++i)
             {
                 dstAuthorizationPolicies.Add(srcAuthorizationPolicies[i]);
@@ -108,8 +127,11 @@ namespace System.ServiceModel.Configuration
                 behavior.RoleProvider = SystemWebHelper.GetRoleProvider(roleProviderName);
                 if (behavior.RoleProvider == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.InvalidRoleProviderSpecifiedInConfig, roleProviderName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.InvalidRoleProviderSpecifiedInConfig, roleProviderName)
+                        )
+                    );
                 }
             }
 
@@ -122,22 +144,40 @@ namespace System.ServiceModel.Configuration
                 Type type = Type.GetType(serviceAuthorizationManagerType, true);
                 if (!typeof(ServiceAuthorizationManager).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigInvalidServiceAuthorizationManagerType, serviceAuthorizationManagerType, typeof(ServiceAuthorizationManager))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidServiceAuthorizationManagerType,
+                                serviceAuthorizationManagerType,
+                                typeof(ServiceAuthorizationManager)
+                            )
+                        )
+                    );
                 }
-                behavior.ServiceAuthorizationManager = (ServiceAuthorizationManager)Activator.CreateInstance(type);
+                behavior.ServiceAuthorizationManager = (ServiceAuthorizationManager)
+                    Activator.CreateInstance(type);
             }
-            AuthorizationPolicyTypeElementCollection authorizationPolicies = this.AuthorizationPolicies;
+            AuthorizationPolicyTypeElementCollection authorizationPolicies =
+                this.AuthorizationPolicies;
             if (authorizationPolicies.Count > 0)
             {
-                List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>(authorizationPolicies.Count);
+                List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>(
+                    authorizationPolicies.Count
+                );
                 for (int i = 0; i < authorizationPolicies.Count; ++i)
                 {
                     Type type = Type.GetType(authorizationPolicies[i].PolicyType, true);
                     if (!typeof(IAuthorizationPolicy).IsAssignableFrom(type))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigInvalidAuthorizationPolicyType, authorizationPolicies[i].PolicyType, typeof(IAuthorizationPolicy))));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidAuthorizationPolicyType,
+                                    authorizationPolicies[i].PolicyType,
+                                    typeof(IAuthorizationPolicy)
+                                )
+                            )
+                        );
                     }
                     policies.Add((IAuthorizationPolicy)Activator.CreateInstance(type));
                 }

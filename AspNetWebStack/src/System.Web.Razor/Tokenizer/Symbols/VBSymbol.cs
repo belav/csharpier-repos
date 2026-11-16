@@ -12,7 +12,10 @@ namespace System.Web.Razor.Tokenizer.Symbols
     public class VBSymbol : SymbolBase<VBSymbolType>
     {
         // Helper constructor
-        private static Dictionary<VBSymbolType, string> _symbolSamples = new Dictionary<VBSymbolType, string>()
+        private static Dictionary<VBSymbolType, string> _symbolSamples = new Dictionary<
+            VBSymbolType,
+            string
+        >()
         {
             { VBSymbolType.LineContinuation, "_" },
             { VBSymbolType.LeftParenthesis, "(" },
@@ -40,28 +43,37 @@ namespace System.Web.Razor.Tokenizer.Symbols
             { VBSymbolType.Dollar, "$" },
             { VBSymbolType.Transition, "@" },
             { VBSymbolType.RazorCommentTransition, "@" },
-            { VBSymbolType.RazorCommentStar, "*" }
+            { VBSymbolType.RazorCommentStar, "*" },
         };
 
         public VBSymbol(int offset, int line, int column, string content, VBSymbolType type)
-            : this(new SourceLocation(offset, line, column), content, type, Enumerable.Empty<RazorError>())
-        {
-        }
+            : this(
+                new SourceLocation(offset, line, column),
+                content,
+                type,
+                Enumerable.Empty<RazorError>()
+            ) { }
 
         public VBSymbol(SourceLocation start, string content, VBSymbolType type)
-            : this(start, content, type, Enumerable.Empty<RazorError>())
-        {
-        }
+            : this(start, content, type, Enumerable.Empty<RazorError>()) { }
 
-        public VBSymbol(int offset, int line, int column, string content, VBSymbolType type, IEnumerable<RazorError> errors)
-            : base(new SourceLocation(offset, line, column), content, type, errors)
-        {
-        }
+        public VBSymbol(
+            int offset,
+            int line,
+            int column,
+            string content,
+            VBSymbolType type,
+            IEnumerable<RazorError> errors
+        )
+            : base(new SourceLocation(offset, line, column), content, type, errors) { }
 
-        public VBSymbol(SourceLocation start, string content, VBSymbolType type, IEnumerable<RazorError> errors)
-            : base(start, content, type, errors)
-        {
-        }
+        public VBSymbol(
+            SourceLocation start,
+            string content,
+            VBSymbolType type,
+            IEnumerable<RazorError> errors
+        )
+            : base(start, content, type, errors) { }
 
         public VBKeyword? Keyword { get; set; }
 

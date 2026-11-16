@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
 
@@ -28,8 +28,8 @@ namespace System.ServiceModel.Dispatcher
         {
             get
             {
-                return ((this.cachedEndpoints != null) ? cachedEndpoints.Count : 0) +
-                    ((this.filters != null) ? this.filters.Count : 0);
+                return ((this.cachedEndpoints != null) ? cachedEndpoints.Count : 0)
+                    + ((this.filters != null) ? this.filters.Count : 0);
             }
         }
 
@@ -75,7 +75,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-        
+
         public void RemoveEndpoint(EndpointDispatcher endpoint)
         {
             lock (ThisLock)
@@ -122,7 +122,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         matchResult = cachedFilter.Match(message);
                     }
-                    
+
                     if (matchResult)
                     {
                         addressMatched = true;
@@ -142,7 +142,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (duplicatePriority)
             {
-                throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches)), message);
+                throw TraceUtility.ThrowHelperError(
+                    new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches)),
+                    message
+                );
             }
 
             return result;

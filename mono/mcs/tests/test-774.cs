@@ -1,24 +1,21 @@
 interface I
 {
-	int this[int i] { get; set; }
+    int this[int i] { get; set; }
 }
 
 class C : I
 {
-	int I.this[int i]
-	{
-		get { return i; }
-		set { }
-	}
+    int I.this[int i]
+    {
+        get { return i; }
+        set { }
+    }
 
-	public int this[int i]
-	{
-		get { return i; }
-		private set { }
-	}
+    public int this[int i]
+    {
+        get { return i; }
+        private set { }
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }
-

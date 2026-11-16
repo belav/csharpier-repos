@@ -35,37 +35,31 @@ public class MultipleComponents
             app.UseDeveloperExceptionPage();
         }
 
-        app.Map(
-            "/Client/multiple-components",
-            app =>
+        app.Map("/Client/multiple-components", app =>
+        {
+            app.UseBlazorFrameworkFiles();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseBlazorFrameworkFiles();
-                app.UseStaticFiles();
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapRazorPages();
-                    endpoints.MapFallbackToPage("/Client/MultipleComponents");
-                });
-            }
-        );
+                endpoints.MapRazorPages();
+                endpoints.MapFallbackToPage("/Client/MultipleComponents");
+            });
+        });
 
-        app.Map(
-            "/multiple-components",
-            app =>
+        app.Map("/multiple-components", app =>
+        {
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseStaticFiles();
-
-                app.UseAuthentication();
-
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapRazorPages();
-                    endpoints.MapFallbackToPage("/MultipleComponents");
-                    endpoints.MapBlazorHub();
-                });
-            }
-        );
+                endpoints.MapRazorPages();
+                endpoints.MapFallbackToPage("/MultipleComponents");
+                endpoints.MapBlazorHub();
+            });
+        });
     }
 }

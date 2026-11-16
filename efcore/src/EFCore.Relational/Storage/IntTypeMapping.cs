@@ -34,27 +34,26 @@ public class IntTypeMapping : RelationalTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    public IntTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Int32)
-        : base(storeType, typeof(int), dbType, jsonValueReaderWriter: JsonInt32ReaderWriter.Instance)
-    {
-    }
+    public IntTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int32)
+        : base(
+            storeType,
+            typeof(int),
+            dbType,
+            jsonValueReaderWriter: JsonInt32ReaderWriter.Instance
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="IntTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected IntTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new IntTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new IntTypeMapping(parameters);
 }

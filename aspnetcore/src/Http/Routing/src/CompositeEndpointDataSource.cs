@@ -251,9 +251,8 @@ public sealed class CompositeEndpointDataSource : EndpointDataSource, IDisposabl
             foreach (var dataSource in _dataSources)
             {
                 _changeTokenRegistrations.Add(
-                    ChangeToken.OnChange(
-                        dataSource.GetChangeToken,
-                        () => HandleChange(collectionChanged: false)
+                    ChangeToken.OnChange(dataSource.GetChangeToken, () =>
+                        HandleChange(collectionChanged: false)
                     )
                 );
             }

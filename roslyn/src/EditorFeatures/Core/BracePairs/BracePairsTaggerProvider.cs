@@ -36,22 +36,34 @@ internal sealed class BracePairsTaggerProvider(
     IThreadingContext threadingContext,
     IGlobalOptionService globalOptionService,
     [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-    IAsynchronousOperationListenerProvider listenerProvider) : AsynchronousViewportTaggerProvider<IBracePairTag>(threadingContext,
-          globalOptionService,
-          visibilityTracker,
-          listenerProvider.GetListener(FeatureAttribute.BracePairs))
+    IAsynchronousOperationListenerProvider listenerProvider
+)
+    : AsynchronousViewportTaggerProvider<IBracePairTag>(
+        threadingContext,
+        globalOptionService,
+        visibilityTracker,
+        listenerProvider.GetListener(FeatureAttribute.BracePairs)
+    )
 {
     protected override TaggerDelay EventChangeDelay => TaggerDelay.NearImmediate;
 
-    protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+    protected override ITaggerEventSource CreateEventSource(
+        ITextView textView,
+        ITextBuffer subjectBuffer
+    )
     {
         return TaggerEventSources.Compose(
             TaggerEventSources.OnViewSpanChanged(ThreadingContext, textView),
             TaggerEventSources.OnTextChanged(subjectBuffer),
-            TaggerEventSources.OnParseOptionChanged(subjectBuffer));
+            TaggerEventSources.OnParseOptionChanged(subjectBuffer)
+        );
     }
 
-    protected override async Task ProduceTagsAsync(TaggerContext<IBracePairTag> context, DocumentSnapshotSpan spanToTag, CancellationToken cancellationToken)
+    protected override async Task ProduceTagsAsync(
+        TaggerContext<IBracePairTag> context,
+        DocumentSnapshotSpan spanToTag,
+        CancellationToken cancellationToken
+    )
     {
         var document = spanToTag.Document;
         if (document is null)
@@ -63,8 +75,14 @@ internal sealed class BracePairsTaggerProvider(
 
         using var _ = ArrayBuilder<BracePairData>.GetInstance(out var bracePairs);
 
-        await service.AddBracePairsAsync(
-            document, spanToTag.SnapshotSpan.Span.ToTextSpan(), bracePairs, cancellationToken).ConfigureAwait(false);
+        await service
+            .AddBracePairsAsync(
+                document,
+                spanToTag.SnapshotSpan.Span.ToTextSpan(),
+                bracePairs,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         var snapshot = spanToTag.SnapshotSpan.Snapshot;
         foreach (var bracePair in bracePairs)
@@ -74,15 +92,21 @@ internal sealed class BracePairsTaggerProvider(
             if (start is null && end is null)
                 continue;
 
-            context.AddTag(new TagSpan<IBracePairTag>(
-                new SnapshotSpan(snapshot, Span.FromBounds(bracePair.Start.Start, bracePair.End.End)),
-                new BracePairTag(start, end)));
+            context.AddTag(
+                new TagSpan<IBracePairTag>(
+                    new SnapshotSpan(
+                        snapshot,
+                        Span.FromBounds(bracePair.Start.Start, bracePair.End.End)
+                    ),
+                    new BracePairTag(start, end)
+                )
+            );
         }
 
         return;
 
-        static SnapshotSpan? CreateSnapshotSpan(TextSpan span, ITextSnapshot snapshot)
-            => span.IsEmpty ? null : span.ToSnapshotSpan(snapshot);
+        static SnapshotSpan? CreateSnapshotSpan(TextSpan span, ITextSnapshot snapshot) =>
+            span.IsEmpty ? null : span.ToSnapshotSpan(snapshot);
     }
 
     protected override bool TagEquals(IBracePairTag tag1, IBracePairTag tag2)
@@ -93,9 +117,7 @@ internal sealed class BracePairsTaggerProvider(
         if (tag1 is null || tag2 is null)
             return false;
 
-        return SpanEquals(tag1.Start, tag2.Start) &&
-               SpanEquals(tag1.End, tag2.End);
+        return SpanEquals(tag1.Start, tag2.Start) && SpanEquals(tag1.End, tag2.End);
     }
 }
 #pragma warning restore CS0618 // Type or member is obsolete
-

@@ -10,7 +10,8 @@ namespace System.Security.Cryptography
     {
         internal const int ClearAll = -1;
 
-        internal static byte[] Rent(int minimumLength) => ArrayPool<byte>.Shared.Rent(minimumLength);
+        internal static byte[] Rent(int minimumLength) =>
+            ArrayPool<byte>.Shared.Rent(minimumLength);
 
         internal static void Return(ArraySegment<byte> arraySegment)
         {

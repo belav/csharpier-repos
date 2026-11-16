@@ -21,8 +21,8 @@ public static class SqlServerKeyExtensions
     /// </summary>
     /// <param name="key">The key.</param>
     /// <returns><see langword="true" /> if the key is clustered.</returns>
-    public static bool? IsClustered(this IReadOnlyKey key)
-        => (key is RuntimeKey)
+    public static bool? IsClustered(this IReadOnlyKey key) =>
+        (key is RuntimeKey)
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
             : (bool?)key[SqlServerAnnotationNames.Clustered];
 
@@ -48,7 +48,10 @@ public static class SqlServerKeyExtensions
         return GetDefaultIsClustered(key, storeObject);
     }
 
-    private static bool? GetDefaultIsClustered(IReadOnlyKey key, in StoreObjectIdentifier storeObject)
+    private static bool? GetDefaultIsClustered(
+        IReadOnlyKey key,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var sharedTableRootKey = key.FindSharedObjectRootKey(storeObject);
         return sharedTableRootKey?.IsClustered(storeObject);
@@ -59,8 +62,8 @@ public static class SqlServerKeyExtensions
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="clustered">The value to set.</param>
-    public static void SetIsClustered(this IMutableKey key, bool? clustered)
-        => key.SetOrRemoveAnnotation(SqlServerAnnotationNames.Clustered, clustered);
+    public static void SetIsClustered(this IMutableKey key, bool? clustered) =>
+        key.SetOrRemoveAnnotation(SqlServerAnnotationNames.Clustered, clustered);
 
     /// <summary>
     ///     Sets a value indicating whether the key is clustered.
@@ -69,17 +72,23 @@ public static class SqlServerKeyExtensions
     /// <param name="clustered">The value to set.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    public static bool? SetIsClustered(this IConventionKey key, bool? clustered, bool fromDataAnnotation = false)
-        => (bool?)key.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.Clustered,
-            clustered,
-            fromDataAnnotation)?.Value;
+    public static bool? SetIsClustered(
+        this IConventionKey key,
+        bool? clustered,
+        bool fromDataAnnotation = false
+    ) =>
+        (bool?)
+            key.SetOrRemoveAnnotation(
+                SqlServerAnnotationNames.Clustered,
+                clustered,
+                fromDataAnnotation
+            )?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for whether the key is clustered.
     /// </summary>
     /// <param name="key">The key.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for whether the key is clustered.</returns>
-    public static ConfigurationSource? GetIsClusteredConfigurationSource(this IConventionKey key)
-        => key.FindAnnotation(SqlServerAnnotationNames.Clustered)?.GetConfigurationSource();
+    public static ConfigurationSource? GetIsClusteredConfigurationSource(this IConventionKey key) =>
+        key.FindAnnotation(SqlServerAnnotationNames.Clustered)?.GetConfigurationSource();
 }

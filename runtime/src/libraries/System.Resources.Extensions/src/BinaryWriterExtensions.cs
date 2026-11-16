@@ -9,7 +9,7 @@ namespace System.IO
         {
             // Write out an int 7 bits at a time.  The high bit of the byte,
             // when on, tells reader to continue reading more bytes.
-            uint v = (uint)value;   // support negative numbers
+            uint v = (uint)value; // support negative numbers
             while (v >= 0x80)
             {
                 writer.Write((byte)(v | 0x80));

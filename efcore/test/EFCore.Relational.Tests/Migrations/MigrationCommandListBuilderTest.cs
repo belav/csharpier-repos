@@ -14,7 +14,9 @@ public class MigrationCommandListBuilderTest
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public void MigrationCommandListBuilder_groups_multiple_statements_into_one_batch(bool suppressTransaction)
+    public void MigrationCommandListBuilder_groups_multiple_statements_into_one_batch(
+        bool suppressTransaction
+    )
     {
         var commandListBuilder = CreateBuilder();
         commandListBuilder.AppendLine("Statement1");
@@ -34,13 +36,16 @@ Statement2
 Statement3
 ",
             commandList[0].CommandText,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public void MigrationCommandListBuilder_correctly_produces_multiple_batches(bool suppressTransaction)
+    public void MigrationCommandListBuilder_correctly_produces_multiple_batches(
+        bool suppressTransaction
+    )
     {
         var commandListBuilder = CreateBuilder();
         commandListBuilder.AppendLine("Statement1");
@@ -63,7 +68,8 @@ Statement3
             @"Statement1
 ",
             commandList[0].CommandText,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         Assert.Equal(suppressTransaction, commandList[1].TransactionSuppressed);
         Assert.NotNull(commandList[1].CommandLogger);
@@ -72,7 +78,8 @@ Statement3
 Statement3
 ",
             commandList[1].CommandText,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         Assert.Equal(suppressTransaction, commandList[2].TransactionSuppressed);
         Assert.NotNull(commandList[2].CommandLogger);
@@ -82,7 +89,8 @@ Statement5
 Statement6
 ",
             commandList[2].CommandText,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalTheory]
@@ -110,7 +118,8 @@ Statement6
             @"Statement1
 ",
             commandList[0].CommandText,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         Assert.Equal(suppressTransaction, commandList[1].TransactionSuppressed);
         Assert.NotNull(commandList[1].CommandLogger);
@@ -119,39 +128,44 @@ Statement6
 Statement3
 ",
             commandList[1].CommandText,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
     }
 
     private MigrationCommandListBuilder CreateBuilder()
     {
         var typeMappingSource = new TestRelationalTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var logger = new FakeRelationalCommandDiagnosticsLogger();
         var migrationsLogger = new FakeDiagnosticsLogger<DbLoggerCategory.Migrations>();
-        var generationHelper = new RelationalSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies());
+        var generationHelper = new RelationalSqlGenerationHelper(
+            new RelationalSqlGenerationHelperDependencies()
+        );
 
         return new MigrationCommandListBuilder(
             new MigrationsSqlGeneratorDependencies(
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         typeMappingSource,
-                        new ExceptionDetector())),
+                        new ExceptionDetector()
+                    )
+                ),
                 new FakeSqlGenerator(
-                    new UpdateSqlGeneratorDependencies(
-                        generationHelper,
-                        typeMappingSource)),
+                    new UpdateSqlGeneratorDependencies(generationHelper, typeMappingSource)
+                ),
                 generationHelper,
                 typeMappingSource,
                 new CurrentDbContext(new FakeDbContext()),
                 new ModificationCommandFactory(),
                 new LoggingOptions(),
                 logger,
-                migrationsLogger));
+                migrationsLogger
+            )
+        );
     }
 
-    private class FakeDbContext : DbContext
-    {
-    }
+    private class FakeDbContext : DbContext { }
 }

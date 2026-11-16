@@ -30,10 +30,7 @@ namespace System.ServiceModel
         /// </summary>
         public ServiceDescription Description
         {
-            get
-            {
-                return this.host.Description;
-            }
+            get { return this.host.Description; }
         }
 
         /// <summary>
@@ -41,10 +38,7 @@ namespace System.ServiceModel
         /// </summary>
         public ServiceAuthenticationBehavior Authentication
         {
-            get
-            {
-                return this.host.Authentication;
-            }
+            get { return this.host.Authentication; }
         }
 
         /// <summary>
@@ -52,10 +46,7 @@ namespace System.ServiceModel
         /// </summary>
         public ServiceAuthorizationBehavior Authorization
         {
-            get
-            {
-                return this.host.Authorization;
-            }
+            get { return this.host.Authorization; }
         }
 
         /// <summary>
@@ -63,10 +54,7 @@ namespace System.ServiceModel
         /// </summary>
         public ServiceCredentials Credentials
         {
-            get
-            {
-                return this.host.Credentials;
-            }
+            get { return this.host.Credentials; }
         }
 
         /// <summary>
@@ -74,10 +62,7 @@ namespace System.ServiceModel
         /// </summary>
         public ReadOnlyCollection<Uri> BaseAddresses
         {
-            get
-            {
-                return this.host.BaseAddresses;
-            }
+            get { return this.host.BaseAddresses; }
         }
 
         /// <summary>
@@ -85,15 +70,8 @@ namespace System.ServiceModel
         /// </summary>
         public TimeSpan OpenTimeout
         {
-            get
-            {
-                return this.host.OpenTimeout;
-            }
-
-            set
-            {
-                this.host.OpenTimeout = value;
-            }
+            get { return this.host.OpenTimeout; }
+            set { this.host.OpenTimeout = value; }
         }
 
         /// <summary>
@@ -101,15 +79,8 @@ namespace System.ServiceModel
         /// </summary>
         public TimeSpan CloseTimeout
         {
-            get
-            {
-                return this.host.CloseTimeout;
-            }
-
-            set
-            {
-                this.host.CloseTimeout = value;
-            }
+            get { return this.host.CloseTimeout; }
+            set { this.host.CloseTimeout = value; }
         }
 
         /// <summary>
@@ -117,15 +88,8 @@ namespace System.ServiceModel
         /// </summary>
         public bool UseIdentityConfiguration
         {
-            get
-            {
-                return this.Credentials.UseIdentityConfiguration;
-            }
-
-            set
-            {
-                this.Credentials.UseIdentityConfiguration = value;
-            }
+            get { return this.Credentials.UseIdentityConfiguration; }
+            set { this.Credentials.UseIdentityConfiguration = value; }
         }
 
         /// <summary>
@@ -133,15 +97,8 @@ namespace System.ServiceModel
         /// </summary>
         public IdentityConfiguration IdentityConfiguration
         {
-            get
-            {
-                return this.Credentials.IdentityConfiguration;
-            }
-            
-            set
-            {
-                this.Credentials.IdentityConfiguration = value;
-            }
+            get { return this.Credentials.IdentityConfiguration; }
+            set { this.Credentials.IdentityConfiguration = value; }
         }
 
         /// <summary>
@@ -153,39 +110,64 @@ namespace System.ServiceModel
             CheckArgument(endpoint, "endpoint");
 
             // Do some other checks to match ServiceHostBase.AddServiceEndpoint
-            if ((this.host.State != CommunicationState.Created) && (this.host.State != CommunicationState.Opening))
+            if (
+                (this.host.State != CommunicationState.Created)
+                && (this.host.State != CommunicationState.Opening)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString("SFxServiceHostBaseCannotAddEndpointAfterOpen")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString("SFxServiceHostBaseCannotAddEndpointAfterOpen")
+                    )
+                );
             }
 
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString("SFxServiceHostBaseCannotAddEndpointWithoutDescription")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString("SFxServiceHostBaseCannotAddEndpointWithoutDescription")
+                    )
+                );
             }
 
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString("SFxEndpointAddressNotSpecified"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString("SFxEndpointAddressNotSpecified")
+                );
             }
 
             if (endpoint.Contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString("SFxEndpointContractNotSpecified"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString("SFxEndpointContractNotSpecified")
+                );
             }
 
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString("SFxEndpointBindingNotSpecified"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString("SFxEndpointBindingNotSpecified")
+                );
             }
 
-            if (!endpoint.IsSystemEndpoint || (endpoint.Contract.ContractType == typeof(IMetadataExchange)))
+            if (
+                !endpoint.IsSystemEndpoint
+                || (endpoint.Contract.ContractType == typeof(IMetadataExchange))
+            )
             {
                 // Throw if contract is not valid for this service
-                //   i.e. if contract is not implemented by service, unless endpoint is a standard endpoint 
-                //   note: (metadata endpoints require metadata behavior to implement IMetadataExchange even though it's a standard endpoint)            
-                IContractResolver resolver = this.host.GetContractResolver(this.host.ImplementedContracts);
+                //   i.e. if contract is not implemented by service, unless endpoint is a standard endpoint
+                //   note: (metadata endpoints require metadata behavior to implement IMetadataExchange even though it's a standard endpoint)
+                IContractResolver resolver = this.host.GetContractResolver(
+                    this.host.ImplementedContracts
+                );
                 ConfigLoader configLoader = new ConfigLoader(resolver);
-                configLoader.LookupContract(endpoint.Contract.ConfigurationName, this.Description.Name); // throws on failure
+                configLoader.LookupContract(
+                    endpoint.Contract.ConfigurationName,
+                    this.Description.Name
+                ); // throws on failure
             }
 
             this.Description.Endpoints.Add(endpoint);
@@ -198,10 +180,18 @@ namespace System.ServiceModel
         /// <param name="binding">protocol to use for communication</param>
         /// <param name="address">absolute address for service, or address relative to base address for supplied binding</param>
         /// <returns>The endpoint which was created</returns>
-        public ServiceEndpoint AddServiceEndpoint(Type contractType, Binding binding, string address)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type contractType,
+            Binding binding,
+            string address
+        )
         {
             CheckArgument(address, "address");
-            return this.AddServiceEndpoint(contractType, binding, new Uri(address, UriKind.RelativeOrAbsolute));
+            return this.AddServiceEndpoint(
+                contractType,
+                binding,
+                new Uri(address, UriKind.RelativeOrAbsolute)
+            );
         }
 
         /// <summary>
@@ -217,15 +207,31 @@ namespace System.ServiceModel
             CheckArgument(binding, "binding");
             CheckArgument(address, "address");
 
-            ContractDescription contract = this.host.ImplementedContracts == null
-                ? null
-                : this.host.ImplementedContracts.Values.FirstOrDefault(implementedContract => implementedContract.ContractType == contractType);
+            ContractDescription contract =
+                this.host.ImplementedContracts == null
+                    ? null
+                    : this.host.ImplementedContracts.Values.FirstOrDefault(implementedContract =>
+                        implementedContract.ContractType == contractType
+                    );
             if (contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("contractType", SR.GetString(SR.SFxMethodNotSupportedByType2, this.host.Description.ServiceType, contractType));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "contractType",
+                    SR.GetString(
+                        SR.SFxMethodNotSupportedByType2,
+                        this.host.Description.ServiceType,
+                        contractType
+                    )
+                );
             }
 
-            ServiceEndpoint endpoint = new ServiceEndpoint(contract, binding, new EndpointAddress(ServiceHost.MakeAbsoluteUri(address, binding, this.host.InternalBaseAddresses)));
+            ServiceEndpoint endpoint = new ServiceEndpoint(
+                contract,
+                binding,
+                new EndpointAddress(
+                    ServiceHost.MakeAbsoluteUri(address, binding, this.host.InternalBaseAddresses)
+                )
+            );
             this.AddServiceEndpoint(endpoint);
             return endpoint;
         }
@@ -238,7 +244,12 @@ namespace System.ServiceModel
         /// <param name="address">absolute logical address for service, or address relative to base address for supplied binding</param>
         /// <param name="listenUri">absolute physical address for service, or address relative to base address for supplied binding</param>
         /// <returns>The endpoint which was created</returns>
-        public ServiceEndpoint AddServiceEndpoint(Type contractType, Binding binding, string address, Uri listenUri)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type contractType,
+            Binding binding,
+            string address,
+            Uri listenUri
+        )
         {
             CheckArgument(listenUri, "listenUri");
 
@@ -255,7 +266,12 @@ namespace System.ServiceModel
         /// <param name="address">absolute logical address for service, or address relative to base address for supplied binding</param>
         /// <param name="listenUri">absolute physical address for service, or address relative to base address for supplied binding</param>
         /// <returns>The endpoint which was created</returns>
-        public ServiceEndpoint AddServiceEndpoint(Type contractType, Binding binding, Uri address, Uri listenUri)
+        public ServiceEndpoint AddServiceEndpoint(
+            Type contractType,
+            Binding binding,
+            Uri address,
+            Uri listenUri
+        )
         {
             CheckArgument(listenUri, "listenUri");
 
@@ -289,12 +305,14 @@ namespace System.ServiceModel
 
             if (this.host.ImplementedContracts != null)
             {
-                // don't generate endpoints for contracts that serve as the base type for other reflected contracts            
+                // don't generate endpoints for contracts that serve as the base type for other reflected contracts
                 IEnumerable<ContractDescription> contracts = this.host.ImplementedContracts.Values;
-                IEnumerable<ContractDescription> mostSpecificContracts = contracts.Where(contract
-                    => contracts.All(otherContract
-                        => object.ReferenceEquals(contract, otherContract)
-                            || !contract.ContractType.IsAssignableFrom(otherContract.ContractType)));
+                IEnumerable<ContractDescription> mostSpecificContracts = contracts.Where(contract =>
+                    contracts.All(otherContract =>
+                        object.ReferenceEquals(contract, otherContract)
+                        || !contract.ContractType.IsAssignableFrom(otherContract.ContractType)
+                    )
+                );
 
                 foreach (var uri in this.host.BaseAddresses)
                 {
@@ -302,7 +320,11 @@ namespace System.ServiceModel
                     {
                         foreach (ContractDescription contract in mostSpecificContracts)
                         {
-                            ServiceEndpoint endpoint = new ServiceEndpoint(contract, protocol, new EndpointAddress(uri));
+                            ServiceEndpoint endpoint = new ServiceEndpoint(
+                                contract,
+                                protocol,
+                                new EndpointAddress(uri)
+                            );
                             this.AddServiceEndpoint(endpoint);
                             generatedEndpoints.Add(endpoint);
                         }
@@ -342,7 +364,11 @@ namespace System.ServiceModel
         private void SetListenUri(ServiceEndpoint endpoint, Binding binding, Uri listenUri)
         {
             endpoint.UnresolvedListenUri = listenUri;
-            endpoint.ListenUri = ServiceHost.MakeAbsoluteUri(listenUri, binding, this.host.InternalBaseAddresses);
+            endpoint.ListenUri = ServiceHost.MakeAbsoluteUri(
+                listenUri,
+                binding,
+                this.host.InternalBaseAddresses
+            );
         }
     }
 }

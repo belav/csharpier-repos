@@ -22,9 +22,7 @@ public class Runtime_86538
                 finallyResult = result;
             }
         }
-        catch when (result++ == 99)
-        {
-        }
+        catch when (result++ == 99) { }
 
         if (finallyResult != 100)
         {

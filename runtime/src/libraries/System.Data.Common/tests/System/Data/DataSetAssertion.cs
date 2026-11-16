@@ -24,7 +24,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using System.IO;
 using System.Xml;
@@ -79,15 +78,20 @@ namespace System.Data.Tests
             string[] names = (string[])al.ToArray(typeof(string));
             al.Clear();
             foreach (string name in names)
-                al.Add(el.RemoveAttributeNode(
-                    el.GetAttributeNode(name)));
+                al.Add(el.RemoveAttributeNode(el.GetAttributeNode(name)));
             foreach (XmlAttribute a in al)
                 // Exclude xmlns="" here.
-                if (a.Name != "xmlns")// || a.Value != String.Empty)
+                if (a.Name != "xmlns") // || a.Value != String.Empty)
                     el.SetAttributeNode(a);
         }
 
-        public static void AssertDataSet(string label, DataSet ds, string name, int tableCount, int relCount)
+        public static void AssertDataSet(
+            string label,
+            DataSet ds,
+            string name,
+            int tableCount,
+            int relCount
+        )
         {
             Assert.Equal(name, ds.DataSetName);
             Assert.Equal(tableCount, ds.Tables.Count);
@@ -95,7 +99,17 @@ namespace System.Data.Tests
                 Assert.Equal(relCount, ds.Relations.Count);
         }
 
-        public static void AssertDataTable(string label, DataTable dt, string name, int columnCount, int rowCount, int parentRelationCount, int childRelationCount, int constraintCount, int primaryKeyLength)
+        public static void AssertDataTable(
+            string label,
+            DataTable dt,
+            string name,
+            int columnCount,
+            int rowCount,
+            int parentRelationCount,
+            int childRelationCount,
+            int constraintCount,
+            int primaryKeyLength
+        )
         {
             Assert.Equal(name, dt.TableName);
             Assert.Equal(columnCount, dt.Columns.Count);
@@ -106,18 +120,68 @@ namespace System.Data.Tests
             Assert.Equal(primaryKeyLength, dt.PrimaryKey.Length);
         }
 
-        public static void AssertReadXml(DataSet ds, string label, string xml, XmlReadMode readMode, XmlReadMode resultMode, string datasetName, int tableCount)
+        public static void AssertReadXml(
+            DataSet ds,
+            string label,
+            string xml,
+            XmlReadMode readMode,
+            XmlReadMode resultMode,
+            string datasetName,
+            int tableCount
+        )
         {
-            DataSetAssertion.AssertReadXml(ds, label, xml, readMode, resultMode, datasetName, tableCount, ReadState.EndOfFile, null, null);
+            DataSetAssertion.AssertReadXml(
+                ds,
+                label,
+                xml,
+                readMode,
+                resultMode,
+                datasetName,
+                tableCount,
+                ReadState.EndOfFile,
+                null,
+                null
+            );
         }
 
-        public static void AssertReadXml(DataSet ds, string label, string xml, XmlReadMode readMode, XmlReadMode resultMode, string datasetName, int tableCount, ReadState state)
+        public static void AssertReadXml(
+            DataSet ds,
+            string label,
+            string xml,
+            XmlReadMode readMode,
+            XmlReadMode resultMode,
+            string datasetName,
+            int tableCount,
+            ReadState state
+        )
         {
-            DataSetAssertion.AssertReadXml(ds, label, xml, readMode, resultMode, datasetName, tableCount, state, null, null);
+            DataSetAssertion.AssertReadXml(
+                ds,
+                label,
+                xml,
+                readMode,
+                resultMode,
+                datasetName,
+                tableCount,
+                state,
+                null,
+                null
+            );
         }
 
         // a bit detailed version
-        public static void AssertReadXml(DataSet ds, string label, string xml, XmlReadMode readMode, XmlReadMode resultMode, string datasetName, int tableCount, ReadState state, string readerLocalName, string readerNS)
+        public static void AssertReadXml(
+            DataSet ds,
+            string label,
+            string xml,
+            XmlReadMode readMode,
+            XmlReadMode resultMode,
+            string datasetName,
+            int tableCount,
+            ReadState state,
+            string readerLocalName,
+            string readerNS
+        )
         {
             XmlReader xtr = new XmlTextReader(xml, XmlNodeType.Element, null);
             Assert.Equal(resultMode, ds.ReadXml(xtr, readMode));
@@ -129,9 +193,16 @@ namespace System.Data.Tests
                 Assert.Equal(readerNS, xtr.NamespaceURI);
         }
 
-        public static void AssertDataRelation(string label, DataRelation rel, string name, bool nested,
-            string[] parentColNames, string[] childColNames,
-            bool existsUK, bool existsFK)
+        public static void AssertDataRelation(
+            string label,
+            DataRelation rel,
+            string name,
+            bool nested,
+            string[] parentColNames,
+            string[] childColNames,
+            bool existsUK,
+            bool existsFK
+        )
         {
             Assert.Equal(name, rel.RelationName);
             Assert.Equal(nested, rel.Nested);
@@ -151,8 +222,13 @@ namespace System.Data.Tests
                 Assert.Null(rel.ChildKeyConstraint);
         }
 
-        public static void AssertUniqueConstraint(string label, UniqueConstraint uc,
-            string name, bool isPrimaryKey, string[] colNames)
+        public static void AssertUniqueConstraint(
+            string label,
+            UniqueConstraint uc,
+            string name,
+            bool isPrimaryKey,
+            string[] colNames
+        )
         {
             Assert.Equal(name, uc.ConstraintName);
             Assert.Equal(isPrimaryKey, uc.IsPrimaryKey);
@@ -161,10 +237,16 @@ namespace System.Data.Tests
             Assert.Equal(colNames.Length, uc.Columns.Length);
         }
 
-        public static void AssertForeignKeyConstraint(string label,
-            ForeignKeyConstraint fk, string name,
-            AcceptRejectRule acceptRejectRule, Rule delRule, Rule updateRule,
-            string[] colNames, string[] relColNames)
+        public static void AssertForeignKeyConstraint(
+            string label,
+            ForeignKeyConstraint fk,
+            string name,
+            AcceptRejectRule acceptRejectRule,
+            Rule delRule,
+            Rule updateRule,
+            string[] colNames,
+            string[] relColNames
+        )
         {
             Assert.Equal(name, fk.ConstraintName);
             Assert.Equal(acceptRejectRule, fk.AcceptRejectRule);
@@ -178,13 +260,26 @@ namespace System.Data.Tests
             Assert.Equal(relColNames.Length, fk.RelatedColumns.Length);
         }
 
-        public static void AssertDataColumn(string label, DataColumn col,
-            string colName, bool allowDBNull,
-            bool autoIncr, int autoIncrSeed, int autoIncrStep,
-            string caption, MappingType colMap,
-            Type type, object defaultValue, string expression,
-            int maxLength, string ns, int ordinal, string prefix,
-            bool readOnly, bool unique)
+        public static void AssertDataColumn(
+            string label,
+            DataColumn col,
+            string colName,
+            bool allowDBNull,
+            bool autoIncr,
+            int autoIncrSeed,
+            int autoIncrStep,
+            string caption,
+            MappingType colMap,
+            Type type,
+            object defaultValue,
+            string expression,
+            int maxLength,
+            string ns,
+            int ordinal,
+            string prefix,
+            bool readOnly,
+            bool unique
+        )
         {
             Assert.Equal(colName, col.ColumnName);
             Assert.Equal(allowDBNull, col.AllowDBNull);

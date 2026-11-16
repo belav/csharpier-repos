@@ -51,7 +51,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return _qbeFilter;
             }
-
             set
             {
                 if (null == value)
@@ -93,17 +92,26 @@ namespace System.DirectoryServices.AccountManagement
 
             using (PrincipalSearchResult<Principal> fr = FindAll(true))
             {
-                FindResultEnumerator<Principal> fre = (FindResultEnumerator<Principal>)fr.GetEnumerator();
+                FindResultEnumerator<Principal> fre =
+                    (FindResultEnumerator<Principal>)fr.GetEnumerator();
 
                 // If there's (at least) one result, return it.  Else return null.
                 if (fre.MoveNext())
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "FindOne(): found a principal");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalSearcher",
+                        "FindOne(): found a principal"
+                    );
                     return (Principal)fre.Current;
                 }
                 else
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "FindOne(): found no principal");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalSearcher",
+                        "FindOne(): found no principal"
+                    );
                     return null;
                 }
             }
@@ -121,7 +129,11 @@ namespace System.DirectoryServices.AccountManagement
         // and returns underlyingSearcher.
         public object GetUnderlyingSearcher()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "Entering GetUnderlyingSearcher");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalSearcher",
+                "Entering GetUnderlyingSearcher"
+            );
 
             CheckDisposed();
 
@@ -155,7 +167,11 @@ namespace System.DirectoryServices.AccountManagement
 
         public Type GetUnderlyingSearcherType()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "Entering GetUnderlyingSearcherType");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalSearcher",
+                "Entering GetUnderlyingSearcherType"
+            );
 
             CheckDisposed();
 
@@ -177,14 +193,20 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (!_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "Dispose: disposing");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalSearcher",
+                    "Dispose: disposing"
+                );
 
                 if ((this.UnderlyingSearcher != null) && (this.UnderlyingSearcher is IDisposable))
                 {
                     GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "PrincipalSearcher",
-                            "Dispose: disposing underlying searcher of type " + this.UnderlyingSearcher.GetType().ToString());
+                        GlobalDebug.Info,
+                        "PrincipalSearcher",
+                        "Dispose: disposing underlying searcher of type "
+                            + this.UnderlyingSearcher.GetType().ToString()
+                    );
 
                     ((IDisposable)this.UnderlyingSearcher).Dispose();
                 }
@@ -222,15 +244,8 @@ namespace System.DirectoryServices.AccountManagement
         private object _underlyingSearcher;
         internal object UnderlyingSearcher
         {
-            get
-            {
-                return _underlyingSearcher;
-            }
-
-            set
-            {
-                _underlyingSearcher = value;
-            }
+            get { return _underlyingSearcher; }
+            set { _underlyingSearcher = value; }
         }
 
         // The core search method.
@@ -245,7 +260,11 @@ namespace System.DirectoryServices.AccountManagement
         // returned otherwise.
         private PrincipalSearchResult<Principal> FindAll(bool returnOne)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "Entering FindAll, returnOne=" + returnOne.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalSearcher",
+                "Entering FindAll, returnOne=" + returnOne.ToString()
+            );
 
             if (_qbeFilter == null)
                 throw new InvalidOperationException(SR.PrincipalSearcherMustSetFilter);
@@ -259,7 +278,11 @@ namespace System.DirectoryServices.AccountManagement
             if (HasReferentialPropertiesSet())
                 throw new InvalidOperationException(SR.PrincipalSearcherNonReferentialProps);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "FindAll: qbeFilter is non-null and passes");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalSearcher",
+                "FindAll: qbeFilter is non-null and passes"
+            );
 
             ResultSet resultSet = _ctx.QueryCtx.Query(this, returnOne ? 1 : -1);
 
@@ -276,9 +299,10 @@ namespace System.DirectoryServices.AccountManagement
                 // If our context is AD-backed (has an ADStoreCtx), use pagesize of 256.
                 // Otherwise, turn off paging.
                 GlobalDebug.WriteLineIf(
-                        GlobalDebug.Info,
-                        "PrincipalSearcher",
-                        "SetDefaultPageSizeForContext: type is " + _ctx.QueryCtx.GetType().ToString());
+                    GlobalDebug.Info,
+                    "PrincipalSearcher",
+                    "SetDefaultPageSizeForContext: type is " + _ctx.QueryCtx.GetType().ToString()
+                );
 
                 if (_ctx.QueryCtx is ADStoreCtx)
                 {
@@ -307,7 +331,11 @@ namespace System.DirectoryServices.AccountManagement
             // If this type of Principal doesn't have any, the Properties hashtable will return null.
             Type t = _qbeFilter.GetType();
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearcher", "HasReferentialPropertiesSet: using type " + t.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalSearcher",
+                "HasReferentialPropertiesSet: using type " + t.ToString()
+            );
 
             ArrayList referentialProperties = (ArrayList)ReferentialProperties.Properties[t];
 
@@ -318,7 +346,11 @@ namespace System.DirectoryServices.AccountManagement
                     if (_qbeFilter.GetChangeStatusForProperty(propertyName))
                     {
                         // Property was set.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalSearcher", "HasReferentialPropertiesSet: found ref property " + propertyName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Warn,
+                            "PrincipalSearcher",
+                            "HasReferentialPropertiesSet: found ref property " + propertyName
+                        );
                         return true;
                     }
                 }
@@ -332,7 +364,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalSearcher", "CheckDisposed: accessing disposed object");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "PrincipalSearcher",
+                    "CheckDisposed: accessing disposed object"
+                );
                 throw new ObjectDisposedException(this.GetType().ToString());
             }
         }

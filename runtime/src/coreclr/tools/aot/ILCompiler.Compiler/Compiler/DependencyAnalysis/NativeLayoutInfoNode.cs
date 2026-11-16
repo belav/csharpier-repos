@@ -3,9 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
-using Internal.Text;
 using Internal.NativeFormat;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis
 {
@@ -27,7 +26,10 @@ namespace ILCompiler.DependencyAnalysis
 
         private List<NativeLayoutVertexNode> _vertexNodesToWrite;
 
-        public NativeLayoutInfoNode(ExternalReferencesTableNode externalReferences, ExternalReferencesTableNode staticsReferences)
+        public NativeLayoutInfoNode(
+            ExternalReferencesTableNode externalReferences,
+            ExternalReferencesTableNode staticsReferences
+        )
         {
             _externalReferences = externalReferences;
             _staticsReferences = staticsReferences;
@@ -44,12 +46,18 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__nativelayoutinfo");
         }
+
         int INodeWithSize.Size => _size.Value;
         public int Offset => 0;
         public override bool IsShareable => false;
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
+
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public Section LdTokenInfoSection => _ldTokenInfoSection;
         public Section SignaturesSection => _signaturesSection;
@@ -82,13 +90,23 @@ namespace ILCompiler.DependencyAnalysis
         {
             // Dependencies of the NativeLayoutInfo node are tracked by the callers that emit data into the native layout writer
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             SaveNativeLayoutInfoWriter(factory);
 
             _size = _writerSavedBytes.Length;
 
-            return new ObjectData(_writerSavedBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                _writerSavedBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

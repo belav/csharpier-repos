@@ -29,15 +29,24 @@ namespace System.Linq.Expressions
                 {
                     switch (type.GetTypeCode())
                     {
-                        case TypeCode.Boolean: return new PrimitiveParameterExpression<bool>(name);
-                        case TypeCode.Byte: return new PrimitiveParameterExpression<byte>(name);
-                        case TypeCode.Char: return new PrimitiveParameterExpression<char>(name);
-                        case TypeCode.DateTime: return new PrimitiveParameterExpression<DateTime>(name);
-                        case TypeCode.Decimal: return new PrimitiveParameterExpression<decimal>(name);
-                        case TypeCode.Double: return new PrimitiveParameterExpression<double>(name);
-                        case TypeCode.Int16: return new PrimitiveParameterExpression<short>(name);
-                        case TypeCode.Int32: return new PrimitiveParameterExpression<int>(name);
-                        case TypeCode.Int64: return new PrimitiveParameterExpression<long>(name);
+                        case TypeCode.Boolean:
+                            return new PrimitiveParameterExpression<bool>(name);
+                        case TypeCode.Byte:
+                            return new PrimitiveParameterExpression<byte>(name);
+                        case TypeCode.Char:
+                            return new PrimitiveParameterExpression<char>(name);
+                        case TypeCode.DateTime:
+                            return new PrimitiveParameterExpression<DateTime>(name);
+                        case TypeCode.Decimal:
+                            return new PrimitiveParameterExpression<decimal>(name);
+                        case TypeCode.Double:
+                            return new PrimitiveParameterExpression<double>(name);
+                        case TypeCode.Int16:
+                            return new PrimitiveParameterExpression<short>(name);
+                        case TypeCode.Int32:
+                            return new PrimitiveParameterExpression<int>(name);
+                        case TypeCode.Int64:
+                            return new PrimitiveParameterExpression<long>(name);
                         case TypeCode.Object:
                             // common reference types which we optimize go here.  Of course object is in
                             // the list, the others are driven by profiling of various workloads.  This list
@@ -55,12 +64,18 @@ namespace System.Linq.Expressions
                                 return new PrimitiveParameterExpression<object[]>(name);
                             }
                             break;
-                        case TypeCode.SByte: return new PrimitiveParameterExpression<sbyte>(name);
-                        case TypeCode.Single: return new PrimitiveParameterExpression<float>(name);
-                        case TypeCode.String: return new PrimitiveParameterExpression<string>(name);
-                        case TypeCode.UInt16: return new PrimitiveParameterExpression<ushort>(name);
-                        case TypeCode.UInt32: return new PrimitiveParameterExpression<uint>(name);
-                        case TypeCode.UInt64: return new PrimitiveParameterExpression<ulong>(name);
+                        case TypeCode.SByte:
+                            return new PrimitiveParameterExpression<sbyte>(name);
+                        case TypeCode.Single:
+                            return new PrimitiveParameterExpression<float>(name);
+                        case TypeCode.String:
+                            return new PrimitiveParameterExpression<string>(name);
+                        case TypeCode.UInt16:
+                            return new PrimitiveParameterExpression<ushort>(name);
+                        case TypeCode.UInt32:
+                            return new PrimitiveParameterExpression<uint>(name);
+                        case TypeCode.UInt64:
+                            return new PrimitiveParameterExpression<ulong>(name);
                     }
                 }
             }
@@ -109,9 +124,7 @@ namespace System.Linq.Expressions
     internal sealed class ByRefParameterExpression : TypedParameterExpression
     {
         internal ByRefParameterExpression(Type type, string? name)
-            : base(type, name)
-        {
-        }
+            : base(type, name) { }
 
         internal override bool GetIsByRef() => true;
     }
@@ -138,9 +151,7 @@ namespace System.Linq.Expressions
     internal sealed class PrimitiveParameterExpression<T> : ParameterExpression
     {
         internal PrimitiveParameterExpression(string? name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public sealed override Type Type => typeof(T);
     }

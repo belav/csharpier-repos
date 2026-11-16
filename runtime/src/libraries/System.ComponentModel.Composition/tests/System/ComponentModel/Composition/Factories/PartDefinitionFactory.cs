@@ -22,7 +22,12 @@ namespace System.ComponentModel.Composition.Factories
 
         public static ReflectionComposablePartDefinition CreateAttributed(Type type)
         {
-            return AttributedModelDiscovery.CreatePartDefinition(type, null, false, (ICompositionElement)null);
+            return AttributedModelDiscovery.CreatePartDefinition(
+                type,
+                null,
+                false,
+                (ICompositionElement)null
+            );
         }
 
         public static ComposablePartDefinition Create()
@@ -32,23 +37,37 @@ namespace System.ComponentModel.Composition.Factories
 
         public static ComposablePartDefinition Create(ComposablePart part)
         {
-            return Create(part.Metadata, () => part, part.ImportDefinitions, part.ExportDefinitions);
+            return Create(
+                part.Metadata,
+                () => part,
+                part.ImportDefinitions,
+                part.ExportDefinitions
+            );
         }
 
-        public static ComposablePartDefinition Create(IDictionary<string, object> metadata,
-                                              Func<ComposablePart> partCreator,
-                                              IEnumerable<ImportDefinition> imports,
-                                              IEnumerable<ExportDefinition> exports)
+        public static ComposablePartDefinition Create(
+            IDictionary<string, object> metadata,
+            Func<ComposablePart> partCreator,
+            IEnumerable<ImportDefinition> imports,
+            IEnumerable<ExportDefinition> exports
+        )
         {
             return Create(metadata, partCreator, () => imports, () => exports);
         }
 
-        public static ComposablePartDefinition Create(IDictionary<string, object> metadata,
-                                                      Func<ComposablePart> partCreator,
-                                                      Func<IEnumerable<ImportDefinition>> importsCreator,
-                                                      Func<IEnumerable<ExportDefinition>> exportsCreator)
+        public static ComposablePartDefinition Create(
+            IDictionary<string, object> metadata,
+            Func<ComposablePart> partCreator,
+            Func<IEnumerable<ImportDefinition>> importsCreator,
+            Func<IEnumerable<ExportDefinition>> exportsCreator
+        )
         {
-            return new DerivedComposablePartDefinition(metadata, partCreator, importsCreator, exportsCreator);
+            return new DerivedComposablePartDefinition(
+                metadata,
+                partCreator,
+                importsCreator,
+                exportsCreator
+            );
         }
     }
 }

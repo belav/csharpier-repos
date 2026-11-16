@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -26,6 +25,6 @@ internal static partial class Interop
             out SafeAccessTokenHandle Token,
             out QUOTA_LIMITS Quotas,
             out int SubStatus
-            );
+        );
     }
 }

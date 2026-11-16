@@ -31,7 +31,11 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
     /// Interaction logic for DocumentOutlineView.xaml
     /// All operations happen on the UI thread for visual studio
     /// </summary>
-    internal sealed partial class DocumentOutlineView : UserControl, IOleCommandTarget, IDisposable, IVsWindowSearch
+    internal sealed partial class DocumentOutlineView
+        : UserControl,
+            IOleCommandTarget,
+            IDisposable,
+            IVsWindowSearch
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IGlobalOptionService _globalOptionService;
@@ -48,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             IGlobalOptionService globalOptionService,
             IOutliningManagerService outliningManagerService,
             VsCodeWindowViewTracker viewTracker,
-            DocumentOutlineViewModel viewModel)
+            DocumentOutlineViewModel viewModel
+        )
         {
             _threadingContext = threadingContext;
             _globalOptionService = globalOptionService;
@@ -58,14 +63,26 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 
             DataContext = _viewModel;
             InitializeComponent();
-            UpdateSort(_globalOptionService.GetOption(DocumentOutlineOptionsStorage.DocumentOutlineSortOrder), userSelected: false);
+            UpdateSort(
+                _globalOptionService.GetOption(
+                    DocumentOutlineOptionsStorage.DocumentOutlineSortOrder
+                ),
+                userSelected: false
+            );
 
             ErrorHandler.ThrowOnFailure(uiShell.CreateToolbarTray(this, out _toolbarTrayHost));
-            ErrorHandler.ThrowOnFailure(_toolbarTrayHost.AddToolbar(Guids.RoslynGroupId, ID.RoslynCommands.DocumentOutlineToolbar));
+            ErrorHandler.ThrowOnFailure(
+                _toolbarTrayHost.AddToolbar(
+                    Guids.RoslynGroupId,
+                    ID.RoslynCommands.DocumentOutlineToolbar
+                )
+            );
 
             ErrorHandler.ThrowOnFailure(_toolbarTrayHost.GetToolbarTray(out var toolbarTray));
             ErrorHandler.ThrowOnFailure(toolbarTray.GetUIObject(out var uiObject));
-            ErrorHandler.ThrowOnFailure(((IVsUIWpfElement)uiObject).GetFrameworkElement(out var frameworkElement));
+            ErrorHandler.ThrowOnFailure(
+                ((IVsUIWpfElement)uiObject).GetFrameworkElement(out var frameworkElement)
+            );
             Commands.Content = frameworkElement;
 
             _windowSearchHost = windowSearchHostFactory.CreateWindowSearchHost(SearchHost);
@@ -82,7 +99,12 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             _viewModel.Dispose();
         }
 
-        int IOleCommandTarget.QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
+        int IOleCommandTarget.QueryStatus(
+            ref Guid pguidCmdGroup,
+            uint cCmds,
+            OLECMD[] prgCmds,
+            IntPtr pCmdText
+        )
         {
             if (pguidCmdGroup == Guids.RoslynGroupId)
             {
@@ -91,29 +113,39 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                     switch (prgCmds[i].cmdID)
                     {
                         case ID.RoslynCommands.DocumentOutlineExpandAll:
-                            prgCmds[i].cmdf = (uint)(OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED);
+                            prgCmds[i].cmdf = (uint)(
+                                OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED
+                            );
                             break;
 
                         case ID.RoslynCommands.DocumentOutlineCollapseAll:
-                            prgCmds[i].cmdf = (uint)(OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED);
+                            prgCmds[i].cmdf = (uint)(
+                                OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED
+                            );
                             break;
 
                         case ID.RoslynCommands.DocumentOutlineSortByName:
-                            prgCmds[i].cmdf = (uint)(OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED);
+                            prgCmds[i].cmdf = (uint)(
+                                OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED
+                            );
                             if (_viewModel.SortOption == SortOption.Name)
                                 prgCmds[i].cmdf |= (uint)OLECMDF.OLECMDF_LATCHED;
 
                             break;
 
                         case ID.RoslynCommands.DocumentOutlineSortByOrder:
-                            prgCmds[i].cmdf = (uint)(OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED);
+                            prgCmds[i].cmdf = (uint)(
+                                OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED
+                            );
                             if (_viewModel.SortOption == SortOption.Location)
                                 prgCmds[i].cmdf |= (uint)OLECMDF.OLECMDF_LATCHED;
 
                             break;
 
                         case ID.RoslynCommands.DocumentOutlineSortByType:
-                            prgCmds[i].cmdf = (uint)(OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED);
+                            prgCmds[i].cmdf = (uint)(
+                                OLECMDF.OLECMDF_SUPPORTED | OLECMDF.OLECMDF_ENABLED
+                            );
                             if (_viewModel.SortOption == SortOption.Type)
                                 prgCmds[i].cmdf |= (uint)OLECMDF.OLECMDF_LATCHED;
 
@@ -131,7 +163,13 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             return (int)OleConstants.OLECMDERR_E_NOTSUPPORTED;
         }
 
-        int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
+        int IOleCommandTarget.Exec(
+            ref Guid pguidCmdGroup,
+            uint nCmdID,
+            uint nCmdexecopt,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             if (pguidCmdGroup == Guids.RoslynGroupId)
             {
@@ -170,7 +208,11 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 
         IVsEnumWindowSearchOptions? IVsWindowSearch.SearchOptionsEnum => null;
 
-        IVsSearchTask IVsWindowSearch.CreateSearch(uint dwCookie, IVsSearchQuery pSearchQuery, IVsSearchCallback pSearchCallback)
+        IVsSearchTask IVsWindowSearch.CreateSearch(
+            uint dwCookie,
+            IVsSearchQuery pSearchQuery,
+            IVsSearchCallback pSearchCallback
+        )
         {
             _viewModel.SearchText = pSearchQuery.SearchString;
             return new VsSearchTask(dwCookie, pSearchQuery, pSearchCallback);
@@ -183,16 +225,56 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 
         void IVsWindowSearch.ProvideSearchSettings(IVsUIDataSource pSearchSettings)
         {
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.ControlMaxWidth, uint.MaxValue);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.SearchStartType, (uint)VSSEARCHSTARTTYPE.SST_DELAYED);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.SearchStartDelay, (uint)100);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.SearchUseMRU, true);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.PrefixFilterMRUItems, false);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.MaximumMRUItems, (uint)25);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.SearchWatermark, ServicesVSResources.Document_Outline_Search);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.SearchPopupAutoDropdown, false);
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.ControlBorderThickness, "1");
-            InternalUtilities.SetValue(pSearchSettings, SearchSettingsDataSource.PropertyNames.SearchProgressType, (uint)VSSEARCHPROGRESSTYPE.SPT_INDETERMINATE);
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.ControlMaxWidth,
+                uint.MaxValue
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.SearchStartType,
+                (uint)VSSEARCHSTARTTYPE.SST_DELAYED
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.SearchStartDelay,
+                (uint)100
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.SearchUseMRU,
+                true
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.PrefixFilterMRUItems,
+                false
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.MaximumMRUItems,
+                (uint)25
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.SearchWatermark,
+                ServicesVSResources.Document_Outline_Search
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.SearchPopupAutoDropdown,
+                false
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.ControlBorderThickness,
+                "1"
+            );
+            InternalUtilities.SetValue(
+                pSearchSettings,
+                SearchSettingsDataSource.PropertyNames.SearchProgressType,
+                (uint)VSSEARCHPROGRESSTYPE.SPT_INDETERMINATE
+            );
         }
 
         bool IVsWindowSearch.OnNavigationKeyDown(uint dwNavigationKey, uint dwModifiers)
@@ -208,15 +290,21 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             if (userSelected)
             {
                 // Log which sort option was used and save it back to the global options
-                Logger.Log(sortOption switch
-                {
-                    SortOption.Name => FunctionId.DocumentOutline_SortByName,
-                    SortOption.Location => FunctionId.DocumentOutline_SortByOrder,
-                    SortOption.Type => FunctionId.DocumentOutline_SortByType,
-                    _ => throw new NotImplementedException(),
-                }, logLevel: LogLevel.Information);
+                Logger.Log(
+                    sortOption switch
+                    {
+                        SortOption.Name => FunctionId.DocumentOutline_SortByName,
+                        SortOption.Location => FunctionId.DocumentOutline_SortByOrder,
+                        SortOption.Type => FunctionId.DocumentOutline_SortByType,
+                        _ => throw new NotImplementedException(),
+                    },
+                    logLevel: LogLevel.Information
+                );
 
-                _globalOptionService.SetGlobalOption(DocumentOutlineOptionsStorage.DocumentOutlineSortOrder, sortOption);
+                _globalOptionService.SetGlobalOption(
+                    DocumentOutlineOptionsStorage.DocumentOutlineSortOrder,
+                    sortOption
+                );
             }
 
             // "DocumentSymbolItems" is the key name we specified for our CollectionViewSource in the XAML file
@@ -237,22 +325,35 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         }
 
         private static ImmutableArray<SortDescription> NameSortDescriptions { get; } =
-            ImmutableArray.Create(new SortDescription(
-                $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.Name)}",
-                ListSortDirection.Ascending));
+            ImmutableArray.Create(
+                new SortDescription(
+                    $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.Name)}",
+                    ListSortDirection.Ascending
+                )
+            );
         private static ImmutableArray<SortDescription> LocationSortDescriptions { get; } =
-            ImmutableArray.Create(new SortDescription(
-                $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.RangeSpan)}.{nameof(DocumentSymbolDataViewModel.Data.RangeSpan.Start)}.{nameof(DocumentSymbolDataViewModel.Data.RangeSpan.Start.Position)}",
-                ListSortDirection.Ascending));
-        private static ImmutableArray<SortDescription> TypeSortDescriptions { get; } = ImmutableArray.Create(
-            new SortDescription(
-                $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.SymbolKind)}",
-                ListSortDirection.Ascending),
-            new SortDescription(
-                $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.Name)}",
-                ListSortDirection.Ascending));
+            ImmutableArray.Create(
+                new SortDescription(
+                    $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.RangeSpan)}.{nameof(DocumentSymbolDataViewModel.Data.RangeSpan.Start)}.{nameof(DocumentSymbolDataViewModel.Data.RangeSpan.Start.Position)}",
+                    ListSortDirection.Ascending
+                )
+            );
+        private static ImmutableArray<SortDescription> TypeSortDescriptions { get; } =
+            ImmutableArray.Create(
+                new SortDescription(
+                    $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.SymbolKind)}",
+                    ListSortDirection.Ascending
+                ),
+                new SortDescription(
+                    $"{nameof(DocumentSymbolDataViewModel.Data)}.{nameof(DocumentSymbolDataViewModel.Data.Name)}",
+                    ListSortDirection.Ascending
+                )
+            );
 
-        public static void UpdateSortDescription(SortDescriptionCollection sortDescriptions, SortOption sortOption)
+        public static void UpdateSortDescription(
+            SortDescriptionCollection sortDescriptions,
+            SortOption sortOption
+        )
         {
             sortDescriptions.Clear();
             var newSortDescriptions = sortOption switch
@@ -281,9 +382,12 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             // include a final check that keyboard focus in currently within the selected tree view item, which implies
             // that the keyboard focus is _not_ within the editor (and thus, we will not be interfering with a user who
             // is editing source code). See https://github.com/dotnet/roslyn/issues/69292.
-            if (!_viewModel.IsNavigating
-                && e.OriginalSource is TreeViewItem { DataContext: DocumentSymbolDataViewModel symbolModel } item
-                && FocusHelper.IsKeyboardFocusWithin(item))
+            if (
+                !_viewModel.IsNavigating
+                && e.OriginalSource
+                    is TreeViewItem { DataContext: DocumentSymbolDataViewModel symbolModel } item
+                && FocusHelper.IsKeyboardFocusWithin(item)
+            )
             {
                 // This is a user-initiated navigation, and we need to prevent reentrancy.  Specifically: when a user
                 // does click on an item, we do navigate, and that does move the caret. This part happens synchronously.
@@ -293,8 +397,14 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 {
                     var textView = _viewTracker.GetActiveView();
                     textView.TryMoveCaretToAndEnsureVisible(
-                        symbolModel.Data.SelectionRangeSpan.TranslateTo(textView.TextSnapshot, SpanTrackingMode.EdgeInclusive).Start,
-                        _outliningManagerService);
+                        symbolModel
+                            .Data.SelectionRangeSpan.TranslateTo(
+                                textView.TextSnapshot,
+                                SpanTrackingMode.EdgeInclusive
+                            )
+                            .Start,
+                        _outliningManagerService
+                    );
                 }
                 finally
                 {
@@ -332,8 +442,13 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                     renderHeight = item.RenderSize.Height;
                 }
 
-                var croppedRenderWidth = Math.Min(item.RenderSize.Width, SymbolTree.RenderSize.Width / 4);
-                item.BringIntoView(new Rect(new Point(0, 0), new Size(croppedRenderWidth, renderHeight)));
+                var croppedRenderWidth = Math.Min(
+                    item.RenderSize.Width,
+                    SymbolTree.RenderSize.Width / 4
+                );
+                item.BringIntoView(
+                    new Rect(new Point(0, 0), new Size(croppedRenderWidth, renderHeight))
+                );
             }
         }
 

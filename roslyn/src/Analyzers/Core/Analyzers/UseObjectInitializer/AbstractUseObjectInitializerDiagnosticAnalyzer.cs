@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         TAssignmentStatementSyntax,
         TLocalDeclarationStatementSyntax,
         TVariableDeclaratorSyntax,
-        TAnalyzer>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TAnalyzer
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
@@ -33,40 +33,61 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         where TLocalDeclarationStatementSyntax : TStatementSyntax
         where TVariableDeclaratorSyntax : SyntaxNode
         where TAnalyzer : AbstractUseNamedMemberInitializerAnalyzer<
-            TExpressionSyntax,
-            TStatementSyntax,
-            TObjectCreationExpressionSyntax,
-            TMemberAccessExpressionSyntax,
-            TAssignmentStatementSyntax,
-            TLocalDeclarationStatementSyntax,
-            TVariableDeclaratorSyntax,
-            TAnalyzer>, new()
+                TExpressionSyntax,
+                TStatementSyntax,
+                TObjectCreationExpressionSyntax,
+                TMemberAccessExpressionSyntax,
+                TAssignmentStatementSyntax,
+                TLocalDeclarationStatementSyntax,
+                TVariableDeclaratorSyntax,
+                TAnalyzer
+            >,
+            new()
     {
         private static readonly DiagnosticDescriptor s_descriptor = CreateDescriptorWithId(
             IDEDiagnosticIds.UseObjectInitializerDiagnosticId,
             EnforceOnBuildValues.UseObjectInitializer,
             hasAnyCodeStyleOption: true,
-            new LocalizableResourceString(nameof(AnalyzersResources.Simplify_object_initialization), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-            new LocalizableResourceString(nameof(AnalyzersResources.Object_initialization_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-            isUnnecessary: false);
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Simplify_object_initialization),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            ),
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Object_initialization_can_be_simplified),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            ),
+            isUnnecessary: false
+        );
 
-        private static readonly DiagnosticDescriptor s_unnecessaryCodeDescriptor = CreateDescriptorWithId(
-            IDEDiagnosticIds.UseObjectInitializerDiagnosticId,
-            EnforceOnBuildValues.UseObjectInitializer,
-            hasAnyCodeStyleOption: true,
-            new LocalizableResourceString(nameof(AnalyzersResources.Simplify_object_initialization), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-            new LocalizableResourceString(nameof(AnalyzersResources.Object_initialization_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-            isUnnecessary: true);
+        private static readonly DiagnosticDescriptor s_unnecessaryCodeDescriptor =
+            CreateDescriptorWithId(
+                IDEDiagnosticIds.UseObjectInitializerDiagnosticId,
+                EnforceOnBuildValues.UseObjectInitializer,
+                hasAnyCodeStyleOption: true,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Simplify_object_initialization),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Object_initialization_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                isUnnecessary: true
+            );
 
         protected abstract bool FadeOutOperatorToken { get; }
         protected abstract TAnalyzer GetAnalyzer();
 
         protected AbstractUseObjectInitializerDiagnosticAnalyzer()
-            : base(ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
-                    .Add(s_descriptor, CodeStyleOptions2.PreferObjectInitializer)
-                    .Add(s_unnecessaryCodeDescriptor, CodeStyleOptions2.PreferObjectInitializer))
-        {
-        }
+            : base(
+                ImmutableDictionary<DiagnosticDescriptor, IOption2>
+                    .Empty.Add(s_descriptor, CodeStyleOptions2.PreferObjectInitializer)
+                    .Add(s_unnecessaryCodeDescriptor, CodeStyleOptions2.PreferObjectInitializer)
+            ) { }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
@@ -79,9 +100,15 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
 
                 var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
                 using var matchKinds = TemporaryArray<TSyntaxKind>.Empty;
-                matchKinds.Add(syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.ObjectCreationExpression));
+                matchKinds.Add(
+                    syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.ObjectCreationExpression)
+                );
                 if (syntaxKinds.ImplicitObjectCreationExpression != null)
-                    matchKinds.Add(syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.ImplicitObjectCreationExpression.Value));
+                    matchKinds.Add(
+                        syntaxKinds.Convert<TSyntaxKind>(
+                            syntaxKinds.ImplicitObjectCreationExpression.Value
+                        )
+                    );
                 var matchKindsArray = matchKinds.ToImmutableAndClear();
 
                 // We wrap the SyntaxNodeAction within a CodeBlockStartAction, which allows us to
@@ -90,7 +117,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 // Without the containing CodeBlockStartAction, our reported diagnostic would be classified
                 // as a non-local diagnostic and would not participate in lightbulb for computing code fixes.
                 context.RegisterCodeBlockStartAction<TSyntaxKind>(blockStartContext =>
-                    blockStartContext.RegisterSyntaxNodeAction(AnalyzeNode, matchKindsArray));
+                    blockStartContext.RegisterSyntaxNodeAction(AnalyzeNode, matchKindsArray)
+                );
             });
         }
 
@@ -112,38 +140,57 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
 
             var syntaxFacts = GetSyntaxFacts();
             using var analyzer = GetAnalyzer();
-            var matches = analyzer.Analyze(semanticModel, syntaxFacts, objectCreationExpression, context.CancellationToken);
+            var matches = analyzer.Analyze(
+                semanticModel,
+                syntaxFacts,
+                objectCreationExpression,
+                context.CancellationToken
+            );
 
             if (matches.IsDefaultOrEmpty)
                 return;
 
-            var containingStatement = objectCreationExpression.FirstAncestorOrSelf<TStatementSyntax>();
+            var containingStatement =
+                objectCreationExpression.FirstAncestorOrSelf<TStatementSyntax>();
             if (containingStatement == null)
                 return;
 
             if (!IsValidContainingStatement(containingStatement))
                 return;
 
-            var nodes = ImmutableArray.Create<SyntaxNode>(containingStatement).AddRange(matches.Select(m => m.Statement));
+            var nodes = ImmutableArray
+                .Create<SyntaxNode>(containingStatement)
+                .AddRange(matches.Select(m => m.Statement));
             if (syntaxFacts.ContainsInterleavedDirective(nodes, context.CancellationToken))
                 return;
 
             var locations = ImmutableArray.Create(objectCreationExpression.GetLocation());
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                s_descriptor,
-                objectCreationExpression.GetFirstToken().GetLocation(),
-                option.Notification,
-                locations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    s_descriptor,
+                    objectCreationExpression.GetFirstToken().GetLocation(),
+                    option.Notification,
+                    locations,
+                    properties: null
+                )
+            );
 
             FadeOutCode(context, matches, locations);
         }
 
         private void FadeOutCode(
             SyntaxNodeAnalysisContext context,
-            ImmutableArray<Match<TExpressionSyntax, TStatementSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax>> matches,
-            ImmutableArray<Location> locations)
+            ImmutableArray<
+                Match<
+                    TExpressionSyntax,
+                    TStatementSyntax,
+                    TMemberAccessExpressionSyntax,
+                    TAssignmentStatementSyntax
+                >
+            > matches,
+            ImmutableArray<Location> locations
+        )
         {
             var syntaxTree = context.Node.SyntaxTree;
 
@@ -152,31 +199,53 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             foreach (var match in matches)
             {
                 var end = FadeOutOperatorToken
-                    ? syntaxFacts.GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression).Span.End
-                    : syntaxFacts.GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!.Span.End;
+                    ? syntaxFacts
+                        .GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression)
+                        .Span.End
+                    : syntaxFacts
+                        .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!
+                        .Span.End;
 
-                var location1 = Location.Create(syntaxTree, TextSpan.FromBounds(
-                    match.MemberAccessExpression.SpanStart, end));
+                var location1 = Location.Create(
+                    syntaxTree,
+                    TextSpan.FromBounds(match.MemberAccessExpression.SpanStart, end)
+                );
 
                 if (match.Statement.Span.End > match.Initializer.FullSpan.End)
                 {
-                    context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-                        s_unnecessaryCodeDescriptor,
-                        location1,
-                        NotificationOption2.ForSeverity(s_unnecessaryCodeDescriptor.DefaultSeverity),
-                        additionalLocations: locations,
-                        additionalUnnecessaryLocations: ImmutableArray.Create(
-                            syntaxTree.GetLocation(TextSpan.FromBounds(match.Initializer.FullSpan.End, match.Statement.Span.End)))));
+                    context.ReportDiagnostic(
+                        DiagnosticHelper.CreateWithLocationTags(
+                            s_unnecessaryCodeDescriptor,
+                            location1,
+                            NotificationOption2.ForSeverity(
+                                s_unnecessaryCodeDescriptor.DefaultSeverity
+                            ),
+                            additionalLocations: locations,
+                            additionalUnnecessaryLocations: ImmutableArray.Create(
+                                syntaxTree.GetLocation(
+                                    TextSpan.FromBounds(
+                                        match.Initializer.FullSpan.End,
+                                        match.Statement.Span.End
+                                    )
+                                )
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(
-                        s_unnecessaryCodeDescriptor, location1, additionalLocations: locations));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            s_unnecessaryCodeDescriptor,
+                            location1,
+                            additionalLocations: locations
+                        )
+                    );
                 }
             }
         }
 
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

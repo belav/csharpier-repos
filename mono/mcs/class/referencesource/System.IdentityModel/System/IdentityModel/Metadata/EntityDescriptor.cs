@@ -22,9 +22,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         public EntityDescriptor()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         /// <summary>
         /// Constructs an entity descriptor with the entity id.

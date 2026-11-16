@@ -21,7 +21,9 @@ namespace System.Diagnostics
             ProcessManager.ThrowIfRemoteMachine(machineName);
 
             int[] procIds = ProcessManager.GetProcessIds();
-            var processes = new ArrayBuilder<Process>(string.IsNullOrEmpty(processName) ? procIds.Length : 0);
+            var processes = new ArrayBuilder<Process>(
+                string.IsNullOrEmpty(processName) ? procIds.Length : 0
+            );
 
             // Iterate through all process IDs to load information about each process
             foreach (int pid in procIds)
@@ -29,7 +31,9 @@ namespace System.Diagnostics
                 ProcessInfo? processInfo = ProcessManager.CreateProcessInfo(pid, processName);
                 if (processInfo != null)
                 {
-                    processes.Add(new Process(machineName, isRemoteMachine: false, pid, processInfo));
+                    processes.Add(
+                        new Process(machineName, isRemoteMachine: false, pid, processInfo)
+                    );
                 }
             }
 
@@ -41,16 +45,9 @@ namespace System.Diagnostics
         /// </summary>
         private static IntPtr ProcessorAffinityCore
         {
-            get
-            {
-                throw new PlatformNotSupportedException(SR.ProcessorAffinityNotSupported);
-            }
-            set
-            {
-                throw new PlatformNotSupportedException(SR.ProcessorAffinityNotSupported);
-            }
+            get { throw new PlatformNotSupportedException(SR.ProcessorAffinityNotSupported); }
+            set { throw new PlatformNotSupportedException(SR.ProcessorAffinityNotSupported); }
         }
-
 
         /// <summary>
         /// Make sure we have obtained the min and max working set limits.
@@ -59,7 +56,9 @@ namespace System.Diagnostics
         {
             // We can only do this for the current process on OS X
             if (_processId != Environment.ProcessId)
-                throw new PlatformNotSupportedException(SR.OsxExternalProcessWorkingSetNotSupported);
+                throw new PlatformNotSupportedException(
+                    SR.OsxExternalProcessWorkingSetNotSupported
+                );
 
             // Minimum working set (or resident set, as it is called on *nix) doesn't exist so set to 0
             minWorkingSet = IntPtr.Zero;
@@ -68,9 +67,10 @@ namespace System.Diagnostics
             Interop.Sys.RLimit limit;
             if (Interop.Sys.GetRLimit(Interop.Sys.RlimitResources.RLIMIT_RSS, out limit) == 0)
             {
-                maxWorkingSet = limit.CurrentLimit == Interop.Sys.RLIM_INFINITY ?
-                    new IntPtr(long.MaxValue) :
-                    new IntPtr(Convert.ToInt64(limit.CurrentLimit));
+                maxWorkingSet =
+                    limit.CurrentLimit == Interop.Sys.RLIM_INFINITY
+                        ? new IntPtr(long.MaxValue)
+                        : new IntPtr(Convert.ToInt64(limit.CurrentLimit));
             }
             else
             {
@@ -84,11 +84,18 @@ namespace System.Diagnostics
         /// <param name="newMax">The new maximum working set limit, or null not to change it.</param>
         /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
         /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
-        private void SetWorkingSetLimitsCore(IntPtr? newMin, IntPtr? newMax, out IntPtr resultingMin, out IntPtr resultingMax)
+        private void SetWorkingSetLimitsCore(
+            IntPtr? newMin,
+            IntPtr? newMax,
+            out IntPtr resultingMin,
+            out IntPtr resultingMax
+        )
         {
             // We can only do this for the current process on OS X
             if (_processId != Environment.ProcessId)
-                throw new PlatformNotSupportedException(SR.OsxExternalProcessWorkingSetNotSupported);
+                throw new PlatformNotSupportedException(
+                    SR.OsxExternalProcessWorkingSetNotSupported
+                );
 
             // There isn't a way to set the minimum working set, so throw an exception here
             if (newMin.HasValue)
@@ -104,8 +111,14 @@ namespace System.Diagnostics
             // if you aren't root and move the upper limit down, you need root to move it back up
             if (newMax.HasValue)
             {
-                Interop.Sys.RLimit limits = new Interop.Sys.RLimit() { CurrentLimit = (ulong)newMax.Value.ToInt64() };
-                int result = Interop.Sys.SetRLimit(Interop.Sys.RlimitResources.RLIMIT_RSS, ref limits);
+                Interop.Sys.RLimit limits = new Interop.Sys.RLimit()
+                {
+                    CurrentLimit = (ulong)newMax.Value.ToInt64(),
+                };
+                int result = Interop.Sys.SetRLimit(
+                    Interop.Sys.RlimitResources.RLIMIT_RSS,
+                    ref limits
+                );
                 if (result != 0)
                 {
                     throw new System.ComponentModel.Win32Exception(SR.RUsageFailure);
@@ -113,7 +126,8 @@ namespace System.Diagnostics
 
                 // Try to grab the actual value, in case the OS decides to fudge the numbers
                 result = Interop.Sys.GetRLimit(Interop.Sys.RlimitResources.RLIMIT_RSS, out limits);
-                if (result == 0) resultingMax = new IntPtr((long)limits.CurrentLimit);
+                if (result == 0)
+                    resultingMax = new IntPtr((long)limits.CurrentLimit);
             }
         }
     }

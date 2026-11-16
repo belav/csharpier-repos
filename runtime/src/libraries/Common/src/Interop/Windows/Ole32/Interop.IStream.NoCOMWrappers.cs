@@ -15,9 +15,11 @@ internal static partial class Interop
         /// The definition in <see cref="System.Runtime.InteropServices.ComTypes"/> does not lend
         /// itself to efficiently accessing / implementing IStream.
         /// </remarks>
-        [ComImport,
+        [
+            ComImport,
             Guid("0000000C-0000-0000-C000-000000000046"),
-            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         internal interface IStream
         {
             // pcbRead is optional so it must be a pointer
@@ -32,11 +34,7 @@ internal static partial class Interop
             void SetSize(ulong libNewSize);
 
             // pcbRead and pcbWritten are optional
-            unsafe void CopyTo(
-                IStream pstm,
-                ulong cb,
-                ulong* pcbRead,
-                ulong* pcbWritten);
+            unsafe void CopyTo(IStream pstm, ulong cb, ulong* pcbRead, ulong* pcbWritten);
 
             void Commit(uint grfCommitFlags);
 
@@ -45,20 +43,12 @@ internal static partial class Interop
             // Using PreserveSig to allow explicitly returning the HRESULT for "not supported".
 
             [PreserveSig]
-            HRESULT LockRegion(
-                ulong libOffset,
-                ulong cb,
-                uint dwLockType);
+            HRESULT LockRegion(ulong libOffset, ulong cb, uint dwLockType);
 
             [PreserveSig]
-            HRESULT UnlockRegion(
-                ulong libOffset,
-                ulong cb,
-                uint dwLockType);
+            HRESULT UnlockRegion(ulong libOffset, ulong cb, uint dwLockType);
 
-            unsafe void Stat(
-                STATSTG* pstatstg,
-                STATFLAG grfStatFlag);
+            unsafe void Stat(STATSTG* pstatstg, STATFLAG grfStatFlag);
 
             IStream Clone();
         }

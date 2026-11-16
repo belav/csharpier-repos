@@ -23,11 +23,10 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     }
 
     [ConditionalFact]
-    public virtual Task Create_table()
-        => Test(
+    public virtual Task Create_table() =>
+        Test(
             builder => { },
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id").ValueGeneratedOnAdd();
                     e.Property<string>("Name");
@@ -39,39 +38,43 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
     public virtual async Task Create_table_all_settings()
     {
         var intStoreType = TypeMappingSource.FindMapping(typeof(int)).StoreType;
-        var char11StoreType = TypeMappingSource.FindMapping(typeof(string), storeTypeName: null, size: 11).StoreType;
+        var char11StoreType = TypeMappingSource
+            .FindMapping(typeof(string), storeTypeName: null, size: 11)
+            .StoreType;
 
         await Test(
-            builder => builder.Entity(
-                "Employers", e =>
+            builder => builder.Entity("Employers", e =>
                 {
                     e.Property<int>("Id");
                     e.HasKey("Id");
                 }),
             builder => { },
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
-                    e.ToTable(
-                        "People", "dbo2", tb =>
-                        {
-                            tb.HasCheckConstraint("CK_People_EmployerId", $"{DelimitIdentifier("EmployerId")} > 0");
-                            tb.HasComment("Table comment");
-                        });
+                    e.ToTable("People", "dbo2", tb =>
+                    {
+                        tb.HasCheckConstraint(
+                            "CK_People_EmployerId",
+                            $"{DelimitIdentifier("EmployerId")} > 0"
+                        );
+                        tb.HasComment("Table comment");
+                    });
 
                     e.Property<int>("CustomId");
-                    e.Property<int>("EmployerId")
-                        .HasComment("Employer ID comment");
+                    e.Property<int>("EmployerId").HasComment("Employer ID comment");
                     e.Property<string>("SSN")
                         .HasColumnType(char11StoreType)
                         .UseCollation(NonDefaultCollation)
@@ -117,46 +120,56 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         Assert.False(c.IsNullable);
                         Assert.Equal(char11StoreType, c.StoreType);
                         Assert.Null(c.Comment);
-                    });
+                    }
+                );
 
                 Assert.Same(
                     peopleTable.Columns.Single(c => c.Name == "CustomId"),
-                    Assert.Single(peopleTable.PrimaryKey!.Columns));
+                    Assert.Single(peopleTable.PrimaryKey!.Columns)
+                );
                 Assert.Same(
                     peopleTable.Columns.Single(c => c.Name == "SSN"),
-                    Assert.Single(Assert.Single(peopleTable.UniqueConstraints).Columns));
+                    Assert.Single(Assert.Single(peopleTable.UniqueConstraints).Columns)
+                );
                 // TODO: Need to scaffold check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
 
                 var foreignKey = Assert.Single(peopleTable.ForeignKeys);
                 Assert.Same(peopleTable, foreignKey.Table);
-                Assert.Same(peopleTable.Columns.Single(c => c.Name == "EmployerId"), Assert.Single(foreignKey.Columns));
+                Assert.Same(
+                    peopleTable.Columns.Single(c => c.Name == "EmployerId"),
+                    Assert.Single(foreignKey.Columns)
+                );
                 Assert.Same(employersTable, foreignKey.PrincipalTable);
-                Assert.Same(employersTable.Columns.Single(), Assert.Single(foreignKey.PrincipalColumns));
+                Assert.Same(
+                    employersTable.Columns.Single(),
+                    Assert.Single(foreignKey.PrincipalColumns)
+                );
 
                 if (AssertComments)
                 {
                     Assert.Equal("Table comment", peopleTable.Comment);
                 }
-            });
+            }
+        );
     }
 
     [ConditionalFact]
-    public virtual Task Create_table_no_key()
-        => Test(
+    public virtual Task Create_table_no_key() =>
+        Test(
             builder => { },
             builder => builder.Entity("Anonymous").Property<int>("SomeColumn"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Null(table.PrimaryKey);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_table_with_comments()
-        => Test(
+    public virtual Task Create_table_with_comments() =>
+        Test(
             builder => { },
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name").HasComment("Column comment");
@@ -171,18 +184,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     Assert.Equal("Table comment", table.Comment);
                     Assert.Equal("Column comment", column.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
     public virtual Task Create_table_with_multiline_comments()
     {
-        var tableComment = "This is a multi-line\r\ntable comment.\r\nMore information can\r\nbe found in the docs.";
-        var columnComment = "This is a multi-line\ncolumn comment.\nMore information can\nbe found in the docs.";
+        var tableComment =
+            "This is a multi-line\r\ntable comment.\r\nMore information can\r\nbe found in the docs.";
+        var columnComment =
+            "This is a multi-line\ncolumn comment.\nMore information can\nbe found in the docs.";
 
         return Test(
             builder => { },
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name").HasComment(columnComment);
@@ -197,25 +212,27 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     Assert.Equal(tableComment, table.Comment);
                     Assert.Equal(columnComment, column.Comment);
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
     [InlineData(null)]
-    public virtual Task Create_table_with_computed_column(bool? stored)
-        => Test(
+    public virtual Task Create_table_with_computed_column(bool? stored) =>
+        Test(
             builder => { },
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
-                    e.Property<string>("Sum").HasComputedColumnSql(
-                        $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
-                        stored);
+                    e.Property<string>("Sum")
+                        .HasComputedColumnSql(
+                            $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
+                            stored
+                        );
                 }),
             model =>
             {
@@ -230,63 +247,56 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         Assert.Equal(stored, sumColumn.IsStored);
                     }
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Create_table_with_json_column()
-        => await Test(
+    public virtual async Task Create_table_with_json_column() =>
+        await Test(
             builder => { },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
-
-                        e.OwnsOne(
-                            "Owned", "OwnedRequiredReference", o =>
-                            {
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.Navigation("OwnedRequiredReference").IsRequired();
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+
+                    e.OwnsOne("Owned", "OwnedRequiredReference", o =>
+                    {
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
+
+                    e.Navigation("OwnedRequiredReference").IsRequired();
+                });
             },
             model =>
             {
@@ -307,42 +317,42 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     {
                         Assert.Equal("OwnedRequiredReference", c.Name);
                         Assert.False(c.IsNullable);
-                    });
+                    }
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Create_table_with_json_column_explicit_json_column_names()
-        => await Test(
+    public virtual async Task Create_table_with_json_column_explicit_json_column_names() =>
+        await Test(
             builder => { },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.OwnsOne("Owned", "json_reference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned", "json_reference", o =>
-                            {
-                                o.OwnsOne("Nested", "json_reference", n => n.Property<int>("Number"));
-                                o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "json_collection", o =>
-                            {
-                                o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
-                                o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "json_reference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "json_collection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -354,15 +364,18 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("json_collection", c.Name),
-                    c => Assert.Equal("json_reference", c.Name));
+                    c => Assert.Equal("json_reference", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_table_add_comment()
-        => Test(
+    public virtual Task Alter_table_add_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
             builder => builder.Entity("People").ToTable(tb => tb.HasComment("Table comment")),
@@ -373,17 +386,19 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("Table comment", table.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_table_add_comment_non_default_schema()
-        => Test(
-            builder => builder.Entity("People")
-                .ToTable("People", "SomeOtherSchema")
-                .Property<int>("Id"),
+    public virtual Task Alter_table_add_comment_non_default_schema() =>
+        Test(
+            builder =>
+                builder.Entity("People").ToTable("People", "SomeOtherSchema").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People")
-                .ToTable("People", "SomeOtherSchema", tb => tb.HasComment("Table comment")),
+            builder =>
+                builder
+                    .Entity("People")
+                    .ToTable("People", "SomeOtherSchema", tb => tb.HasComment("Table comment")),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -391,11 +406,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("Table comment", table.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_table_change_comment()
-        => Test(
+    public virtual Task Alter_table_change_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").ToTable(tb => tb.HasComment("Table comment1")),
             builder => builder.Entity("People").ToTable(tb => tb.HasComment("Table comment2")),
@@ -406,45 +422,47 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("Table comment2", table.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_table_remove_comment()
-        => Test(
+    public virtual Task Alter_table_remove_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").ToTable(tb => tb.HasComment("Table comment1")),
             builder => { },
-            model => Assert.Null(Assert.Single(model.Tables).Comment));
+            model => Assert.Null(Assert.Single(model.Tables).Comment)
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_table()
-        => Test(
+    public virtual Task Drop_table() =>
+        Test(
             builder => builder.Entity("People", e => e.Property<int>("Id")),
             builder => { },
-            model => Assert.Empty(model.Tables));
+            model => Assert.Empty(model.Tables)
+        );
 
     [ConditionalFact]
-    public virtual Task Rename_table()
-        => Test(
+    public virtual Task Rename_table() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").ToTable("Persons").Property<int>("Id"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Persons", table.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Rename_table_with_primary_key()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Rename_table_with_primary_key() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.HasKey("Id");
                 }),
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.ToTable("Persons");
                     e.Property<int>("Id");
@@ -454,84 +472,75 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Persons", table.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Rename_table_with_json_column()
-        => await Test(
+    public virtual async Task Rename_table_with_json_column() =>
+        await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("Entities");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.ToTable("Entities");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("NewEntities");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.ToTable("NewEntities");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
-                                o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
-                                o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -543,15 +552,18 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("OwnedCollection", c.Name),
-                    c => Assert.Equal("OwnedReference", c.Name));
+                    c => Assert.Equal("OwnedReference", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Move_table()
-        => Test(
+    public virtual Task Move_table() =>
+        Test(
             builder => builder.Entity("TestTable").Property<int>("Id"),
             builder => { },
             builder => builder.Entity("TestTable").ToTable("TestTable", "TestTableSchema"),
@@ -564,15 +576,15 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 }
 
                 Assert.Equal("TestTable", table.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_schema()
-        => Test(
+    public virtual Task Create_schema() =>
+        Test(
             builder => { },
-            builder => builder.Entity("People")
-                .ToTable("People", "SomeOtherSchema")
-                .Property<int>("Id"),
+            builder =>
+                builder.Entity("People").ToTable("People", "SomeOtherSchema").Property<int>("Id"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -580,16 +592,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("SomeOtherSchema", table.Schema);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_defaultValue_string()
-        => Test(
+    public virtual Task Add_column_with_defaultValue_string() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .IsRequired()
-                .HasDefaultValue("John Doe"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<string>("Name")
+                    .IsRequired()
+                    .HasDefaultValue("John Doe"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -597,30 +613,34 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var nameColumn = Assert.Single(table.Columns, c => c.Name == "Name");
                 Assert.False(nameColumn.IsNullable);
                 Assert.Contains("John Doe", nameColumn.DefaultValueSql);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_defaultValue_datetime()
-        => Test(
+    public virtual Task Add_column_with_defaultValue_datetime() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<DateTime>("Birthday")
-                .HasDefaultValue(new DateTime(2015, 4, 12, 17, 5, 0)),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<DateTime>("Birthday")
+                    .HasDefaultValue(new DateTime(2015, 4, 12, 17, 5, 0)),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal(2, table.Columns.Count);
                 var birthdayColumn = Assert.Single(table.Columns, c => c.Name == "Birthday");
                 Assert.False(birthdayColumn.IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_defaultValueSql()
-        => Test(
+    public virtual Task Add_column_with_defaultValueSql() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasDefaultValueSql("1 + 2"),
+            builder => builder.Entity("People").Property<int>("Sum").HasDefaultValueSql("1 + 2"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -629,7 +649,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Contains("1", sumColumn.DefaultValueSql);
                 Assert.Contains("+", sumColumn.DefaultValueSql);
                 Assert.Contains("2", sumColumn.DefaultValueSql);
-            });
+            }
+        );
 
     [ConditionalFact]
     public virtual async Task Add_column_with_defaultValueSql_unspecified()
@@ -637,8 +658,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<int?>("Sum")
-                .HasDefaultValueSql());
+            builder => builder.Entity("People").Property<int?>("Sum").HasDefaultValueSql()
+        );
         Assert.Equal(RelationalStrings.DefaultValueSqlUnspecified("People", "Sum"), ex.Message);
     }
 
@@ -648,8 +669,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<int?>("Sum")
-                .HasDefaultValue());
+            builder => builder.Entity("People").Property<int?>("Sum").HasDefaultValue()
+        );
         Assert.Equal(RelationalStrings.DefaultValueUnspecified("People", "Sum"), ex.Message);
     }
 
@@ -665,10 +686,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     }
 
     [ConditionalFact]
-    public virtual async Task Add_json_columns_to_existing_table()
-        => await Test(
-            builder => builder.Entity(
-                "Entity", e =>
+    public virtual async Task Add_json_columns_to_existing_table() =>
+        await Test(
+            builder => builder.Entity("Entity", e =>
                 {
                     e.Property<int>("Id").ValueGeneratedOnAdd();
                     e.HasKey("Id");
@@ -676,56 +696,48 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 }),
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsOne(
-                            "Owned", "OwnedRequiredReference", o =>
-                            {
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.Navigation("OwnedRequiredReference").IsRequired();
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsOne("Owned", "OwnedRequiredReference", o =>
+                    {
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
+
+                    e.Navigation("OwnedRequiredReference").IsRequired();
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -746,28 +758,36 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     {
                         Assert.Equal("OwnedRequiredReference", c.Name);
                         Assert.False(c.IsNullable);
-                    });
+                    }
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
     [InlineData(null)]
-    public virtual Task Add_column_with_computedSql(bool? stored)
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Add_column_with_computedSql(bool? stored) =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
                 }),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}", stored),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<string>("Sum")
+                    .HasComputedColumnSql(
+                        $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
+                        stored
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -781,7 +801,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         Assert.Equal(stored, sumColumn.IsStored);
                     }
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
     public virtual async Task Add_column_with_computedSql_unspecified()
@@ -789,14 +810,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<int?>("Sum")
-                .HasComputedColumnSql());
+            builder => builder.Entity("People").Property<int?>("Sum").HasComputedColumnSql()
+        );
         Assert.Equal(RelationalStrings.ComputedColumnSqlUnspecified("Sum", "People"), ex.Message);
     }
 
     [ConditionalFact]
-    public virtual Task Add_column_with_required()
-        => Test(
+    public virtual Task Add_column_with_required() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
             builder => builder.Entity("People").Property<string>("Name").IsRequired(),
@@ -804,13 +825,17 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Name");
-                Assert.Equal(TypeMappingSource.FindMapping(typeof(string)).StoreType, column.StoreType);
+                Assert.Equal(
+                    TypeMappingSource.FindMapping(typeof(string)).StoreType,
+                    column.StoreType
+                );
                 Assert.False(column.IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_ansi()
-        => Test(
+    public virtual Task Add_column_with_ansi() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
             builder => builder.Entity("People").Property<string>("Name").IsUnicode(false),
@@ -821,13 +846,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(
                     TypeMappingSource
                         .FindMapping(typeof(string), storeTypeName: null, unicode: false)
-                        .StoreType, column.StoreType);
+                        .StoreType,
+                    column.StoreType
+                );
                 Assert.True(column.IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_max_length()
-        => Test(
+    public virtual Task Add_column_with_max_length() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(30),
@@ -839,12 +867,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     TypeMappingSource
                         .FindMapping(typeof(string), storeTypeName: null, size: 30)
                         .StoreType,
-                    column.StoreType);
-            });
+                    column.StoreType
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_unbounded_max_length()
-        => Test(
+    public virtual Task Add_column_with_unbounded_max_length() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(-1),
@@ -856,21 +886,22 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     TypeMappingSource
                         .FindMapping(typeof(string), storeTypeName: null, size: -1)
                         .StoreType,
-                    column.StoreType);
-            });
+                    column.StoreType
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_max_length_on_derived()
-        => Test(
+    public virtual Task Add_column_with_max_length_on_derived() =>
+        Test(
             builder =>
             {
                 builder.Entity("Person");
-                builder.Entity(
-                    "SpecialPerson", e =>
-                    {
-                        e.HasBaseType("Person");
-                        e.Property<string>("Name").HasMaxLength(30);
-                    });
+                builder.Entity("SpecialPerson", e =>
+                {
+                    e.HasBaseType("Person");
+                    e.Property<string>("Name").HasMaxLength(30);
+                });
 
                 builder.Entity("MoreSpecialPerson").HasBaseType("SpecialPerson");
             },
@@ -884,34 +915,43 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     TypeMappingSource
                         .FindMapping(typeof(string), storeTypeName: null, size: 30)
                         .StoreType,
-                    column.StoreType);
-            });
+                    column.StoreType
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_fixed_length()
-        => Test(
+    public virtual Task Add_column_with_fixed_length() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .IsFixedLength()
-                .HasMaxLength(100),
+            builder =>
+                builder.Entity("People").Property<string>("Name").IsFixedLength().HasMaxLength(100),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Name");
                 Assert.Equal(
                     TypeMappingSource
-                        .FindMapping(typeof(string), storeTypeName: null, fixedLength: true, size: 100)
+                        .FindMapping(
+                            typeof(string),
+                            storeTypeName: null,
+                            fixedLength: true,
+                            size: 100
+                        )
                         .StoreType,
-                    column.StoreType);
-            });
+                    column.StoreType
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_comment()
-        => Test(
+    public virtual Task Add_column_with_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("FullName").HasComment("My comment"),
+            builder =>
+                builder.Entity("People").Property<string>("FullName").HasComment("My comment"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -920,15 +960,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("My comment", column.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_collation()
-        => Test(
+    public virtual Task Add_column_with_collation() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .UseCollation(NonDefaultCollation),
+            builder =>
+                builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -938,18 +979,22 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal(NonDefaultCollation, nameColumn.Collation);
                 }
-            });
+            }
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual Task Add_column_computed_with_collation(bool stored)
-        => Test(
+    public virtual Task Add_column_computed_with_collation(bool stored) =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .HasComputedColumnSql("'hello'", stored)
-                .UseCollation(NonDefaultCollation),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<string>("Name")
+                    .HasComputedColumnSql("'hello'", stored)
+                    .UseCollation(NonDefaultCollation),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -965,11 +1010,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal(NonDefaultCollation, nameColumn.Collation);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_shared()
-        => Test(
+    public virtual Task Add_column_shared() =>
+        Test(
             builder =>
             {
                 builder.Entity("Base").Property<int>("Id");
@@ -982,27 +1028,33 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Foo");
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_column_with_check_constraint()
-        => Test(
+    public virtual Task Add_column_with_check_constraint() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("DriverLicense");
-                    e.ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", $"{DelimitIdentifier("DriverLicense")} > 0"));
+                    e.ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
+                    );
                 }),
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_change_type()
-        => Test(
+    public virtual Task Alter_column_change_type() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").Property<int>("SomeColumn"),
             builder => builder.Entity("People").Property<long>("SomeColumn"),
@@ -1010,14 +1062,17 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "SomeColumn");
-                Assert.Equal(_typeMappingSource.FindMapping(typeof(long)).StoreType, column.StoreType);
-            });
+                Assert.Equal(
+                    _typeMappingSource.FindMapping(typeof(long)).StoreType,
+                    column.StoreType
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_make_required()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_make_required() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("SomeColumn");
@@ -1029,17 +1084,19 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name != "Id");
                 Assert.False(column.IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_make_required_with_null_data()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_make_required_with_null_data() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("SomeColumn");
-                    e.HasData(new Dictionary<string, object> { { "Id", 1 }, { "SomeColumn", null } });
+                    e.HasData(
+                        new Dictionary<string, object> { { "Id", 1 }, { "SomeColumn", null } }
+                    );
                 }),
             builder => { },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
@@ -1048,13 +1105,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name != "Id");
                 Assert.False(column.IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_make_required_with_index()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_make_required_with_index() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("SomeColumn");
@@ -1069,13 +1126,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.False(column.IsNullable);
                 var index = Assert.Single(table.Indexes);
                 Assert.Same(column, Assert.Single(index.Columns));
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_make_required_with_composite_index()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_make_required_with_composite_index() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("FirstName");
@@ -1093,24 +1150,30 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(2, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "FirstName"), index.Columns);
                 Assert.Contains(table.Columns.Single(c => c.Name == "LastName"), index.Columns);
-            });
+            }
+        );
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
     [InlineData(null)]
-    public virtual Task Alter_column_make_computed(bool? stored)
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_make_computed(bool? stored) =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
                 }),
             builder => builder.Entity("People").Property<int>("Sum"),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}", stored),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql(
+                        $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
+                        stored
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1125,23 +1188,29 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         Assert.Equal(stored, sumColumn.IsStored);
                     }
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_change_computed()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_change_computed() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
                     e.Property<int>("Sum");
                 }),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} - {DelimitIdentifier("Y")}"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} - {DelimitIdentifier("Y")}"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1152,13 +1221,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     Assert.Contains("Y", sumColumn.ComputedColumnSql);
                     Assert.Contains("-", sumColumn.ComputedColumnSql);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_change_computed_recreates_indexes()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_change_computed_recreates_indexes() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
@@ -1167,10 +1236,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
                     e.HasIndex("Sum");
                 }),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} - {DelimitIdentifier("Y")}"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} - {DelimitIdentifier("Y")}"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1184,23 +1259,35 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
                 var sumIndex = Assert.Single(table.Indexes);
                 Assert.Collection(sumIndex.Columns, c => Assert.Equal("Sum", c.Name));
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_change_computed_type()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_change_computed_type() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
                     e.Property<int>("Sum");
                 }),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}", stored: false),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}", stored: true),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql(
+                        $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
+                        stored: false
+                    ),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql(
+                        $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
+                        stored: true
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1209,20 +1296,23 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.True(sumColumn.IsStored);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_make_non_computed()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_column_make_non_computed() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
                 }),
-            builder => builder.Entity("People").Property<int>("Sum")
-                .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("Sum")
+                    .HasComputedColumnSql($"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}"),
             builder => builder.Entity("People").Property<int>("Sum"),
             model =>
             {
@@ -1230,11 +1320,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var sumColumn = Assert.Single(table.Columns, c => c.Name == "Sum");
                 Assert.Null(sumColumn.ComputedColumnSql);
                 Assert.NotEqual(true, sumColumn.IsStored);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_add_comment()
-        => Test(
+    public virtual Task Alter_column_add_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").Property<int>("Id").HasComment("Some comment"),
             model =>
@@ -1245,19 +1336,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("Some comment", column.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_computed_column_add_comment()
-        => Test(
-            builder => builder.Entity(
-                "People", x =>
+    public virtual Task Alter_computed_column_add_comment() =>
+        Test(
+            builder => builder.Entity("People", x =>
                 {
                     x.Property<int>("Id");
                     x.Property<int>("SomeColumn").HasComputedColumnSql("42");
                 }),
             builder => { },
-            builder => builder.Entity("People").Property<int>("SomeColumn").HasComment("Some comment"),
+            builder =>
+                builder.Entity("People").Property<int>("SomeColumn").HasComment("Some comment"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -1266,11 +1358,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("Some comment", column.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_change_comment()
-        => Test(
+    public virtual Task Alter_column_change_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id").HasComment("Some comment1"),
             builder => builder.Entity("People").Property<int>("Id").HasComment("Some comment2"),
             model =>
@@ -1281,11 +1374,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("Some comment2", column.Comment);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_remove_comment()
-        => Test(
+    public virtual Task Alter_column_remove_comment() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id").HasComment("Some comment"),
             builder => builder.Entity("People").Property<int>("Id"),
             model =>
@@ -1293,15 +1387,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns);
                 Assert.Null(column.Comment);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_set_collation()
-        => Test(
+    public virtual Task Alter_column_set_collation() =>
+        Test(
             builder => builder.Entity("People").Property<string>("Name"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .UseCollation(NonDefaultCollation),
+            builder =>
+                builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             model =>
             {
                 var nameColumn = Assert.Single(Assert.Single(model.Tables).Columns);
@@ -1309,187 +1404,166 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal(NonDefaultCollation, nameColumn.Collation);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_column_reset_collation()
-        => Test(
+    public virtual Task Alter_column_reset_collation() =>
+        Test(
             builder => builder.Entity("People").Property<string>("Name"),
-            builder => builder.Entity("People").Property<string>("Name")
-                .UseCollation(NonDefaultCollation),
+            builder =>
+                builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             builder => { },
             model =>
             {
                 var nameColumn = Assert.Single(Assert.Single(model.Tables).Columns);
                 Assert.Null(nameColumn.Collation);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Convert_json_entities_to_regular_owned()
-        => await Test(
+    public virtual async Task Convert_json_entities_to_regular_owned() =>
+        await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                    });
+                });
             },
             model =>
             {
                 Assert.Equal(4, model.Tables.Count());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Convert_regular_owned_entities_to_json()
-        => await Test(
+    public virtual async Task Convert_regular_owned_entities_to_json() =>
+        await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
-                                o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
-                                o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -1501,11 +1575,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("OwnedCollection", c.Name),
-                    c => Assert.Equal("OwnedReference", c.Name));
+                    c => Assert.Equal("OwnedReference", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
     public virtual async Task Convert_string_column_to_a_json_column_containing_reference()
@@ -1513,31 +1590,28 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    });
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
 
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.ToJson("Name");
-                                o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
-                                o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
-                                o.Property<DateTime>("Date");
-                            });
+                    e.OwnsOne("Owned", "OwnedReference", o =>
+                    {
+                        o.ToJson("Name");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
                     });
+                });
             },
             model =>
             {
@@ -1545,44 +1619,43 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
-            });
+                    c => Assert.Equal("Name", c.Name)
+                );
+            }
+        );
 
         AssertSql();
     }
 
     [ConditionalFact]
-    public virtual async Task Convert_string_column_to_a_json_column_containing_required_reference()
-        => await Test(
+    public virtual async Task Convert_string_column_to_a_json_column_containing_required_reference() =>
+        await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    });
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.ToJson("Name");
-                                o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
-                                o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
-                                o.Property<DateTime>("Date");
-                            });
-
-                        e.Navigation("OwnedReference").IsRequired();
+                        o.ToJson("Name");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
                     });
+
+                    e.Navigation("OwnedReference").IsRequired();
+                });
             },
             model =>
             {
@@ -1590,8 +1663,10 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
-            });
+                    c => Assert.Equal("Name", c.Name)
+                );
+            }
+        );
 
     [ConditionalFact]
     public virtual async Task Convert_string_column_to_a_json_column_containing_collection()
@@ -1599,31 +1674,28 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    });
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
 
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
-                                o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("Name");
-                            });
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson("Name");
                     });
+                });
             },
             model =>
             {
@@ -1631,15 +1703,17 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
-            });
+                    c => Assert.Equal("Name", c.Name)
+                );
+            }
+        );
 
         AssertSql();
     }
 
     [ConditionalFact]
-    public virtual Task Drop_column()
-        => Test(
+    public virtual Task Drop_column() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").Property<int>("SomeColumn"),
             builder => { },
@@ -1647,14 +1721,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Id", Assert.Single(table.Columns).Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_column_primary_key()
-        => Test(
+    public virtual Task Drop_column_primary_key() =>
+        Test(
             builder => builder.Entity("People").Property<int>("SomeColumn"),
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.HasKey("Id");
@@ -1664,14 +1738,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("SomeColumn", Assert.Single(table.Columns).Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_column_computed_and_non_computed_with_dependency()
-        => Test(
+    public virtual Task Drop_column_computed_and_non_computed_with_dependency() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder => builder.Entity(
-                "People", e =>
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("X");
                     e.Property<int>("Y").HasComputedColumnSql($"{DelimitIdentifier("X")} + 1");
@@ -1681,56 +1755,49 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Id", Assert.Single(table.Columns).Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Drop_json_columns_from_existing_table()
-        => await Test(
+    public virtual async Task Drop_json_columns_from_existing_table() =>
+        await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
-            builder => builder.Entity(
-                "Entity", e =>
+            builder => builder.Entity("Entity", e =>
                 {
                     e.Property<int>("Id").ValueGeneratedOnAdd();
                     e.HasKey("Id");
@@ -1744,99 +1811,97 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Rename_column()
-        => Test(
+    public virtual Task Rename_column() =>
+        Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => builder.Entity("People").Property<string>("SomeColumn"),
-            builder => builder.Entity("People").Property<string>("SomeColumn").HasColumnName("SomeOtherColumn"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<string>("SomeColumn")
+                    .HasColumnName("SomeOtherColumn"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal(2, table.Columns.Count);
                 Assert.Single(table.Columns, c => c.Name == "SomeOtherColumn");
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual async Task Rename_json_column()
-        => await Test(
+    public virtual async Task Rename_json_column() =>
+        await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested", "NestedReference", n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    });
-                                o.OwnsMany(
-                                    "Nested2", "NestedCollection", n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    });
-                                o.Property<DateTime>("Date");
-                                o.ToJson("json_reference");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3", "NestedReference2", n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    });
-                                o.OwnsMany(
-                                    "Nested4", "NestedCollection2", n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    });
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("json_collection");
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson("json_reference");
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson("json_collection");
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity", e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-
-                        e.OwnsOne(
-                            "Owned", "OwnedReference", o =>
-                            {
-                                o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
-                                o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
-                                o.Property<DateTime>("Date");
-                                o.ToJson("new_json_reference");
-                            });
-
-                        e.OwnsMany(
-                            "Owned2", "OwnedCollection", o =>
-                            {
-                                o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
-                                o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("new_json_collection");
-                            });
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson("new_json_reference");
                     });
+
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson("new_json_collection");
+                    });
+                });
             },
             model =>
             {
@@ -1848,17 +1913,19 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("new_json_collection", c.Name),
-                    c => Assert.Equal("new_json_reference", c.Name));
+                    c => Assert.Equal("new_json_reference", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_index()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Create_index() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("FirstName");
@@ -1870,7 +1937,10 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.Same(table, index.Table);
-                Assert.Same(table.Columns.Single(c => c.Name == "FirstName"), Assert.Single(index.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "FirstName"),
+                    Assert.Single(index.Columns)
+                );
                 Assert.Equal("IX_People_FirstName", index.Name);
                 Assert.False(index.IsUnique);
 
@@ -1880,13 +1950,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 }
 
                 Assert.Null(index.Filter);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_index_unique()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Create_index_unique() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("FirstName");
@@ -1899,13 +1969,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.True(index.IsUnique);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_index_descending()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Create_index_descending() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
@@ -1917,13 +1987,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.Collection(index.IsDescending, Assert.True);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_index_descending_mixed()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Create_index_descending_mixed() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
@@ -1931,21 +2001,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     e.Property<int>("Z");
                 }),
             builder => { },
-            builder => builder.Entity("People")
-                .HasIndex("X", "Y", "Z")
-                .IsDescending(false, true, false),
+            builder =>
+                builder.Entity("People").HasIndex("X", "Y", "Z").IsDescending(false, true, false),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.Collection(index.IsDescending, Assert.False, Assert.True, Assert.False);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_index_make_unique()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_index_make_unique() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
@@ -1957,67 +2026,77 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.True(index.IsUnique);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_index_change_sort_order()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_index_change_sort_order() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("X");
                     e.Property<int>("Y");
                     e.Property<int>("Z");
                 }),
-            builder => builder.Entity("People")
-                .HasIndex("X", "Y", "Z")
-                .IsDescending(true, false, true),
-            builder => builder.Entity("People")
-                .HasIndex("X", "Y", "Z")
-                .IsDescending(false, true, false),
+            builder =>
+                builder.Entity("People").HasIndex("X", "Y", "Z").IsDescending(true, false, true),
+            builder =>
+                builder.Entity("People").HasIndex("X", "Y", "Z").IsDescending(false, true, false),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.Collection(index.IsDescending, Assert.False, Assert.True, Assert.False);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_index_with_filter()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Create_index_with_filter() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name");
                 }),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .HasFilter($"{DelimitIdentifier("Name")} IS NOT NULL"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .HasFilter($"{DelimitIdentifier("Name")} IS NOT NULL"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
-                Assert.Same(table.Columns.Single(c => c.Name == "Name"), Assert.Single(index.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Name"),
+                    Assert.Single(index.Columns)
+                );
                 if (AssertIndexFilters)
                 {
                     Assert.Contains("Name", index.Filter);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_unique_index_with_filter()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Create_unique_index_with_filter() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name");
                 }),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name").IsUnique()
-                .HasFilter($"{DelimitIdentifier("Name")} IS NOT NULL AND {DelimitIdentifier("Name")} <> ''"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .HasFilter(
+                        $"{DelimitIdentifier("Name")} IS NOT NULL AND {DelimitIdentifier("Name")} <> ''"
+                    ),
             model =>
             {
                 var index = model.Tables.Single().Indexes.Single();
@@ -2026,26 +2105,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Contains("Name", index.Filter);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_index()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Drop_index() => Test(builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("SomeField");
-                }),
-            builder => builder.Entity("People").HasIndex("SomeField"),
-            builder => { },
-            model => Assert.Empty(Assert.Single(model.Tables).Indexes));
+                }), builder => builder.Entity("People").HasIndex("SomeField"), builder => { }, model => Assert.Empty(Assert.Single(model.Tables).Indexes));
 
     [ConditionalFact]
-    public virtual Task Rename_index()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Rename_index() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("FirstName");
@@ -2057,11 +2130,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.Equal("foo", index.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_primary_key_int()
-        => Test(
+    public virtual Task Add_primary_key_int() =>
+        Test(
             builder => builder.Entity("People").Property<int>("SomeField"),
             builder => { },
             builder => builder.Entity("People").HasKey("SomeField"),
@@ -2076,11 +2150,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("PK_People", primaryKey.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_primary_key_string()
-        => Test(
+    public virtual Task Add_primary_key_string() =>
+        Test(
             builder => builder.Entity("People").Property<string>("SomeField").IsRequired(),
             builder => { },
             builder => builder.Entity("People").HasKey("SomeField"),
@@ -2095,11 +2170,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("PK_People", primaryKey.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_primary_key_with_name()
-        => Test(
+    public virtual Task Add_primary_key_with_name() =>
+        Test(
             builder => builder.Entity("People").Property<string>("SomeField"),
             builder => { },
             builder => builder.Entity("People").HasKey("SomeField").HasName("PK_Foo"),
@@ -2114,19 +2190,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("PK_Foo", primaryKey.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_primary_key_composite_with_name()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Add_primary_key_composite_with_name() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("SomeField1");
                     e.Property<int>("SomeField2");
                 }),
             builder => { },
-            builder => builder.Entity("People").HasKey("SomeField1", "SomeField2").HasName("PK_Foo"),
+            builder =>
+                builder.Entity("People").HasKey("SomeField1", "SomeField2").HasName("PK_Foo"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2136,50 +2213,52 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     primaryKey.Columns,
                     c => Assert.Same(table.Columns[0], c),
-                    c => Assert.Same(table.Columns[1], c));
+                    c => Assert.Same(table.Columns[1], c)
+                );
                 if (AssertConstraintNames)
                 {
                     Assert.Equal("PK_Foo", primaryKey.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_primary_key_int()
-        => Test(
+    public virtual Task Drop_primary_key_int() =>
+        Test(
             builder => builder.Entity("People").Property<int>("SomeField"),
             builder => builder.Entity("People").HasKey("SomeField"),
             builder => { },
-            model => Assert.Null(Assert.Single(model.Tables).PrimaryKey));
+            model => Assert.Null(Assert.Single(model.Tables).PrimaryKey)
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_primary_key_string()
-        => Test(
+    public virtual Task Drop_primary_key_string() =>
+        Test(
             builder => builder.Entity("People").Property<string>("SomeField").IsRequired(),
             builder => builder.Entity("People").HasKey("SomeField"),
             builder => { },
-            model => Assert.Null(Assert.Single(model.Tables).PrimaryKey));
+            model => Assert.Null(Assert.Single(model.Tables).PrimaryKey)
+        );
 
     [ConditionalFact]
-    public virtual Task Add_foreign_key()
-        => Test(
+    public virtual Task Add_foreign_key() =>
+        Test(
             builder =>
             {
-                builder.Entity(
-                    "Customers", e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    });
-                builder.Entity(
-                    "Orders", e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("CustomerId");
-                    });
+                builder.Entity("Customers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                });
+                builder.Entity("Orders", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("CustomerId");
+                });
             },
             builder => { },
-            builder => builder.Entity("Orders").HasOne("Customers").WithMany()
-                .HasForeignKey("CustomerId"),
+            builder =>
+                builder.Entity("Orders").HasOne("Customers").WithMany().HasForeignKey("CustomerId"),
             model =>
             {
                 var customersTable = Assert.Single(model.Tables, t => t.Name == "Customers");
@@ -2192,31 +2271,38 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
                 Assert.Equal(ReferentialAction.Cascade, foreignKey.OnDelete);
                 Assert.Same(customersTable, foreignKey.PrincipalTable);
-                Assert.Same(customersTable.Columns.Single(), Assert.Single(foreignKey.PrincipalColumns));
+                Assert.Same(
+                    customersTable.Columns.Single(),
+                    Assert.Single(foreignKey.PrincipalColumns)
+                );
                 Assert.Equal("CustomerId", Assert.Single(foreignKey.Columns).Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_foreign_key_with_name()
-        => Test(
+    public virtual Task Add_foreign_key_with_name() =>
+        Test(
             builder =>
             {
-                builder.Entity(
-                    "Customers", e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    });
-                builder.Entity(
-                    "Orders", e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("CustomerId");
-                    });
+                builder.Entity("Customers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                });
+                builder.Entity("Orders", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("CustomerId");
+                });
             },
             builder => { },
-            builder => builder.Entity("Orders").HasOne("Customers").WithMany()
-                .HasForeignKey("CustomerId").HasConstraintName("FK_Foo"),
+            builder =>
+                builder
+                    .Entity("Orders")
+                    .HasOne("Customers")
+                    .WithMany()
+                    .HasForeignKey("CustomerId")
+                    .HasConstraintName("FK_Foo"),
             model =>
             {
                 var table = Assert.Single(model.Tables, t => t.Name == "Orders");
@@ -2225,39 +2311,39 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Assert.Equal("FK_Foo", foreignKey.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_foreign_key()
-        => Test(
+    public virtual Task Drop_foreign_key() =>
+        Test(
             builder =>
             {
-                builder.Entity(
-                    "Customers", e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    });
-                builder.Entity(
-                    "Orders", e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("CustomerId");
-                    });
+                builder.Entity("Customers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                });
+                builder.Entity("Orders", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("CustomerId");
+                });
             },
-            builder => builder.Entity("Orders").HasOne("Customers").WithMany().HasForeignKey("CustomerId"),
+            builder =>
+                builder.Entity("Orders").HasOne("Customers").WithMany().HasForeignKey("CustomerId"),
             builder => { },
             model =>
             {
                 var customersTable = Assert.Single(model.Tables, t => t.Name == "Customers");
                 Assert.Empty(customersTable.ForeignKeys);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_unique_constraint()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Add_unique_constraint() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("AlternateKeyColumn");
@@ -2269,25 +2355,32 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var table = Assert.Single(model.Tables);
                 var uniqueConstraint = table.UniqueConstraints.Single();
                 Assert.Same(table, uniqueConstraint.Table);
-                Assert.Same(table.Columns.Single(c => c.Name == "AlternateKeyColumn"), Assert.Single(uniqueConstraint.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "AlternateKeyColumn"),
+                    Assert.Single(uniqueConstraint.Columns)
+                );
                 if (AssertConstraintNames)
                 {
                     Assert.Equal("AK_People_AlternateKeyColumn", uniqueConstraint.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_unique_constraint_composite_with_name()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Add_unique_constraint_composite_with_name() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("AlternateKeyColumn1");
                     e.Property<int>("AlternateKeyColumn2");
                 }),
             builder => { },
-            builder => builder.Entity("People").HasAlternateKey("AlternateKeyColumn1", "AlternateKeyColumn2").HasName("AK_Foo"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasAlternateKey("AlternateKeyColumn1", "AlternateKeyColumn2")
+                    .HasName("AK_Foo"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2296,18 +2389,19 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Collection(
                     uniqueConstraint.Columns,
                     c => Assert.Same(table.Columns.Single(c => c.Name == "AlternateKeyColumn1"), c),
-                    c => Assert.Same(table.Columns.Single(c => c.Name == "AlternateKeyColumn2"), c));
+                    c => Assert.Same(table.Columns.Single(c => c.Name == "AlternateKeyColumn2"), c)
+                );
                 if (AssertConstraintNames)
                 {
                     Assert.Equal("AK_Foo", uniqueConstraint.Name);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_unique_constraint()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Drop_unique_constraint() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("AlternateKeyColumn");
@@ -2317,103 +2411,137 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             model =>
             {
                 Assert.Empty(Assert.Single(model.Tables).UniqueConstraints);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Add_check_constraint_with_name()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Add_check_constraint_with_name() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("DriverLicense");
                 }),
             builder => { },
-            builder => builder.Entity("People")
-                .ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", $"{DelimitIdentifier("DriverLicense")} > 0")),
+            builder =>
+                builder
+                    .Entity("People")
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
+                    ),
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_check_constraint()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Alter_check_constraint() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("DriverLicense");
                 }),
-            builder => builder.Entity("People")
-                .ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", $"{DelimitIdentifier("DriverLicense")} > 0")),
-            builder => builder.Entity("People")
-                .ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", $"{DelimitIdentifier("DriverLicense")} > 1")),
+            builder =>
+                builder
+                    .Entity("People")
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
+                    ),
+            builder =>
+                builder
+                    .Entity("People")
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 1"
+                        )
+                    ),
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_check_constraint()
-        => Test(
-            builder => builder.Entity(
-                "People", e =>
+    public virtual Task Drop_check_constraint() =>
+        Test(
+            builder => builder.Entity("People", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("DriverLicense");
                 }),
-            builder => builder.Entity("People")
-                .ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", $"{DelimitIdentifier("DriverLicense")} > 0")),
+            builder =>
+                builder
+                    .Entity("People")
+                    .ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
+                    ),
             builder => { },
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_sequence()
-        => Test(
+    public virtual Task Create_sequence() =>
+        Test(
             builder => { },
             builder => builder.HasSequence<int>("TestSequence"),
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_sequence_long()
-        => Test(
+    public virtual Task Create_sequence_long() =>
+        Test(
             builder => { },
             builder => builder.HasSequence<long>("TestSequence"),
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_sequence_short()
-        => Test(
+    public virtual Task Create_sequence_short() =>
+        Test(
             builder => { },
             builder => builder.HasSequence<short>("TestSequence"),
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Create_sequence_all_settings()
-        => Test(
+    public virtual Task Create_sequence_all_settings() =>
+        Test(
             builder => { },
-            builder => builder.HasSequence<long>("TestSequence", "dbo2")
-                .StartsAt(3)
-                .IncrementsBy(2)
-                .HasMin(2)
-                .HasMax(916)
-                .IsCyclic(),
+            builder =>
+                builder
+                    .HasSequence<long>("TestSequence", "dbo2")
+                    .StartsAt(3)
+                    .IncrementsBy(2)
+                    .HasMin(2)
+                    .HasMax(916)
+                    .IsCyclic(),
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
@@ -2424,19 +2552,22 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(2, sequence.MinValue);
                 Assert.Equal(916, sequence.MaxValue);
                 Assert.True(sequence.IsCyclic);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_sequence_all_settings()
-        => Test(
+    public virtual Task Alter_sequence_all_settings() =>
+        Test(
             builder => builder.HasSequence<int>("foo"),
             builder => { },
-            builder => builder.HasSequence<int>("foo")
-                .StartsAt(-3)
-                .IncrementsBy(2)
-                .HasMin(-5)
-                .HasMax(10)
-                .IsCyclic(),
+            builder =>
+                builder
+                    .HasSequence<int>("foo")
+                    .StartsAt(-3)
+                    .IncrementsBy(2)
+                    .HasMin(-5)
+                    .HasMax(10)
+                    .IsCyclic(),
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
@@ -2445,11 +2576,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(-5, sequence.MinValue);
                 Assert.Equal(10, sequence.MaxValue);
                 Assert.True(sequence.IsCyclic);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_sequence_increment_by()
-        => Test(
+    public virtual Task Alter_sequence_increment_by() =>
+        Test(
             builder => builder.HasSequence<int>("foo"),
             builder => { },
             builder => builder.HasSequence<int>("foo").IncrementsBy(2),
@@ -2457,11 +2589,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal(2, sequence.IncrementBy);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Alter_sequence_restart_with()
-        => Test(
+    public virtual Task Alter_sequence_restart_with() =>
+        Test(
             builder => builder.HasSequence<int>("foo"),
             builder => { },
             builder => builder.HasSequence<int>("foo").StartsAt(3),
@@ -2469,29 +2602,32 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal(3, sequence.StartValue);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Drop_sequence()
-        => Test(
+    public virtual Task Drop_sequence() =>
+        Test(
             builder => builder.HasSequence("TestSequence"),
             builder => { },
-            model => Assert.Empty(model.Sequences));
+            model => Assert.Empty(model.Sequences)
+        );
 
     [ConditionalFact]
-    public virtual Task Rename_sequence()
-        => Test(
+    public virtual Task Rename_sequence() =>
+        Test(
             builder => builder.HasSequence<int>("TestSequence"),
             builder => builder.HasSequence<int>("testsequence"),
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("testsequence", sequence.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task Move_sequence()
-        => Test(
+    public virtual Task Move_sequence() =>
+        Test(
             builder => builder.HasSequence<int>("TestSequence"),
             builder => builder.HasSequence<int>("TestSequence", "TestSequenceSchema"),
             model =>
@@ -2499,48 +2635,31 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequenceSchema", sequence.Schema);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual Task InsertDataOperation()
-        => Test(
-            builder => builder.Entity(
-                "Person", e =>
+    public virtual Task InsertDataOperation() => Test(builder => builder.Entity("Person", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name");
                     e.HasKey("Id");
-                }),
-            builder => { },
-            builder => builder.Entity("Person")
-                .HasData(
-                    new Person { Id = 1, Name = "Daenerys Targaryen" },
-                    new Person { Id = 2, Name = "John Snow" },
-                    new Person { Id = 3, Name = "Arya Stark" },
-                    new Person { Id = 4, Name = "Harry Strickland" },
-                    new Person { Id = 5, Name = null }),
-            model => { });
+                }), builder => { }, builder => builder.Entity("Person").HasData(new Person { Id = 1, Name = "Daenerys Targaryen" }, new Person { Id = 2, Name = "John Snow" }, new Person { Id = 3, Name = "Arya Stark" }, new Person { Id = 4, Name = "Harry Strickland" }, new Person { Id = 5, Name = null }), model => { });
 
     [ConditionalFact]
-    public virtual Task DeleteDataOperation_simple_key()
-        => Test(
-            builder => builder.Entity(
-                "Person", e =>
+    public virtual Task DeleteDataOperation_simple_key() =>
+        Test(builder => builder.Entity("Person", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name");
                     e.HasKey("Id");
                     e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
-                }),
-            builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder => { },
-            model => { });
+                }), builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }), builder => { }, model => { });
 
     [ConditionalFact]
-    public virtual Task DeleteDataOperation_composite_key()
-        => Test(
-            builder => builder.Entity(
-                "Person", e =>
+    public virtual Task DeleteDataOperation_composite_key() =>
+        Test(
+            builder => builder.Entity("Person", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("AnotherId");
@@ -2551,39 +2670,39 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 1,
                             AnotherId = 11,
-                            Name = "Daenerys Targaryen"
-                        });
+                            Name = "Daenerys Targaryen",
+                        }
+                    );
                 }),
-            builder => builder.Entity("Person").HasData(
-                new Person
-                {
-                    Id = 2,
-                    AnotherId = 12,
-                    Name = "John Snow"
-                }),
+            builder =>
+                builder
+                    .Entity("Person")
+                    .HasData(
+                        new Person
+                        {
+                            Id = 2,
+                            AnotherId = 12,
+                            Name = "John Snow",
+                        }
+                    ),
             builder => { },
-            model => { });
+            model => { }
+        );
 
     [ConditionalFact]
-    public virtual Task UpdateDataOperation_simple_key()
-        => Test(
-            builder => builder.Entity(
-                "Person", e =>
+    public virtual Task UpdateDataOperation_simple_key() =>
+        Test(builder => builder.Entity("Person", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name");
                     e.HasKey("Id");
                     e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
-                }),
-            builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }),
-            model => { });
+                }), builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }), builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }), model => { });
 
     [ConditionalFact]
-    public virtual Task UpdateDataOperation_composite_key()
-        => Test(
-            builder => builder.Entity(
-                "Person", e =>
+    public virtual Task UpdateDataOperation_composite_key() =>
+        Test(
+            builder => builder.Entity("Person", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<int>("AnotherId");
@@ -2594,30 +2713,39 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 1,
                             AnotherId = 11,
-                            Name = "Daenerys Targaryen"
-                        });
+                            Name = "Daenerys Targaryen",
+                        }
+                    );
                 }),
-            builder => builder.Entity("Person").HasData(
-                new Person
-                {
-                    Id = 2,
-                    AnotherId = 11,
-                    Name = "John Snow"
-                }),
-            builder => builder.Entity("Person").HasData(
-                new Person
-                {
-                    Id = 2,
-                    AnotherId = 11,
-                    Name = "Another John Snow"
-                }),
-            model => { });
+            builder =>
+                builder
+                    .Entity("Person")
+                    .HasData(
+                        new Person
+                        {
+                            Id = 2,
+                            AnotherId = 11,
+                            Name = "John Snow",
+                        }
+                    ),
+            builder =>
+                builder
+                    .Entity("Person")
+                    .HasData(
+                        new Person
+                        {
+                            Id = 2,
+                            AnotherId = 11,
+                            Name = "Another John Snow",
+                        }
+                    ),
+            model => { }
+        );
 
     [ConditionalFact]
-    public virtual Task UpdateDataOperation_multiple_columns()
-        => Test(
-            builder => builder.Entity(
-                "Person", e =>
+    public virtual Task UpdateDataOperation_multiple_columns() =>
+        Test(
+            builder => builder.Entity("Person", e =>
                 {
                     e.Property<int>("Id");
                     e.Property<string>("Name");
@@ -2628,24 +2756,34 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 1,
                             Name = "Daenerys Targaryen",
-                            Age = 18
-                        });
+                            Age = 18,
+                        }
+                    );
                 }),
-            builder => builder.Entity("Person").HasData(
-                new Person
-                {
-                    Id = 2,
-                    Name = "John Snow",
-                    Age = 20
-                }),
-            builder => builder.Entity("Person").HasData(
-                new Person
-                {
-                    Id = 2,
-                    Name = "Another John Snow",
-                    Age = 21
-                }),
-            model => { });
+            builder =>
+                builder
+                    .Entity("Person")
+                    .HasData(
+                        new Person
+                        {
+                            Id = 2,
+                            Name = "John Snow",
+                            Age = 20,
+                        }
+                    ),
+            builder =>
+                builder
+                    .Entity("Person")
+                    .HasData(
+                        new Person
+                        {
+                            Id = 2,
+                            Name = "Another John Snow",
+                            Age = 21,
+                        }
+                    ),
+            model => { }
+        );
 
     [ConditionalFact]
     public virtual async Task SqlOperation()
@@ -2657,12 +2795,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             {
                 Assert.Empty(model.Tables);
                 Assert.Empty(model.Sequences);
-            });
+            }
+        );
 
         AssertSql(
             """
 -- I <3 DDL
-""");
+"""
+        );
     }
 
     protected class Person
@@ -2673,46 +2813,50 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         public int Age { get; set; }
     }
 
-    protected virtual bool AssertSchemaNames
-        => true;
+    protected virtual bool AssertSchemaNames => true;
 
-    protected virtual bool AssertComments
-        => true;
+    protected virtual bool AssertComments => true;
 
-    protected virtual bool AssertComputedColumns
-        => true;
+    protected virtual bool AssertComputedColumns => true;
 
-    protected virtual bool AssertCollations
-        => true;
+    protected virtual bool AssertCollations => true;
 
-    protected virtual bool AssertIndexFilters
-        => true;
+    protected virtual bool AssertIndexFilters => true;
 
-    protected virtual bool AssertConstraintNames
-        => true;
+    protected virtual bool AssertConstraintNames => true;
 
     protected abstract string NonDefaultCollation { get; }
 
-    protected virtual DbContext CreateContext()
-        => Fixture.CreateContext();
+    protected virtual DbContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual string DelimitIdentifier(string unquotedIdentifier)
-        => _sqlGenerationHelper?.DelimitIdentifier(unquotedIdentifier)
-            ?? throw new InvalidOperationException(
-                $"No ISqlGenerationHelper singleton was found, consider overriding {nameof(DelimitIdentifier)}");
+    protected virtual string DelimitIdentifier(string unquotedIdentifier) =>
+        _sqlGenerationHelper?.DelimitIdentifier(unquotedIdentifier)
+        ?? throw new InvalidOperationException(
+            $"No ISqlGenerationHelper singleton was found, consider overriding {nameof(DelimitIdentifier)}"
+        );
 
-    protected virtual IRelationalTypeMappingSource TypeMappingSource
-        => _typeMappingSource
-            ?? throw new InvalidOperationException(
-                $"No IRelationalTypeMappingSource singleton was found, consider overriding {nameof(TypeMappingSource)}");
+    protected virtual IRelationalTypeMappingSource TypeMappingSource =>
+        _typeMappingSource
+        ?? throw new InvalidOperationException(
+            $"No IRelationalTypeMappingSource singleton was found, consider overriding {nameof(TypeMappingSource)}"
+        );
 
     protected virtual Task Test(
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
         Action<DatabaseModel> asserter,
         bool withConventions = true,
-        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions = MigrationsSqlGenerationOptions.Default)
-        => Test(_ => { }, buildSourceAction, buildTargetAction, asserter, withConventions, migrationsSqlGenerationOptions);
+        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions =
+            MigrationsSqlGenerationOptions.Default
+    ) =>
+        Test(
+            _ => { },
+            buildSourceAction,
+            buildTargetAction,
+            asserter,
+            withConventions,
+            migrationsSqlGenerationOptions
+        );
 
     protected virtual Task Test(
         Action<ModelBuilder> buildCommonAction,
@@ -2720,7 +2864,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Action<ModelBuilder> buildTargetAction,
         Action<DatabaseModel> asserter,
         bool withConventions = true,
-        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions = MigrationsSqlGenerationOptions.Default)
+        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions =
+            MigrationsSqlGenerationOptions.Default
+    )
     {
         var context = CreateContext();
         var modelDiffer = context.GetService<IMigrationsModelDiffer>();
@@ -2731,13 +2877,22 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         buildCommonAction(sourceModelBuilder);
         buildSourceAction(sourceModelBuilder);
         var preSnapshotSourceModel = modelRuntimeInitializer.Initialize(
-            (IModel)sourceModelBuilder.Model, designTime: true, validationLogger: null);
+            (IModel)sourceModelBuilder.Model,
+            designTime: true,
+            validationLogger: null
+        );
 
         // Round-trip the source model through a snapshot, compiling it and then extracting it back again.
         // This simulates the real-world migration flow and can expose errors in snapshot generation
-        var migrationsCodeGenerator = Fixture.TestHelpers.CreateDesignServiceProvider().GetRequiredService<IMigrationsCodeGenerator>();
+        var migrationsCodeGenerator = Fixture
+            .TestHelpers.CreateDesignServiceProvider()
+            .GetRequiredService<IMigrationsCodeGenerator>();
         var sourceModelSnapshot = migrationsCodeGenerator.GenerateSnapshot(
-            modelSnapshotNamespace: null, typeof(DbContext), "MigrationsTestSnapshot", preSnapshotSourceModel);
+            modelSnapshotNamespace: null,
+            typeof(DbContext),
+            "MigrationsTestSnapshot",
+            preSnapshotSourceModel
+        );
         var sourceModel = BuildModelFromSnapshotSource(sourceModelSnapshot);
 
         // Build the target model, possibly with conventions
@@ -2745,10 +2900,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         buildCommonAction(targetModelBuilder);
         buildTargetAction(targetModelBuilder);
         var targetModel = modelRuntimeInitializer.Initialize(
-            (IModel)targetModelBuilder.Model, designTime: true, validationLogger: null);
+            (IModel)targetModelBuilder.Model,
+            designTime: true,
+            validationLogger: null
+        );
 
         // Get the migration operations between the two models and test
-        var operations = modelDiffer.GetDifferences(sourceModel.GetRelationalModel(), targetModel.GetRelationalModel());
+        var operations = modelDiffer.GetDifferences(
+            sourceModel.GetRelationalModel(),
+            targetModel.GetRelationalModel()
+        );
 
         return Test(sourceModel, targetModel, operations, asserter, migrationsSqlGenerationOptions);
     }
@@ -2758,15 +2919,25 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         MigrationOperation operation,
         Action<DatabaseModel> asserter,
         bool withConventions = true,
-        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions = MigrationsSqlGenerationOptions.Default)
-        => Test(buildSourceAction, new[] { operation }, asserter, withConventions, migrationsSqlGenerationOptions);
+        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions =
+            MigrationsSqlGenerationOptions.Default
+    ) =>
+        Test(
+            buildSourceAction,
+            new[] { operation },
+            asserter,
+            withConventions,
+            migrationsSqlGenerationOptions
+        );
 
     protected virtual Task Test(
         Action<ModelBuilder> buildSourceAction,
         IReadOnlyList<MigrationOperation> operations,
         Action<DatabaseModel> asserter,
         bool withConventions = true,
-        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions = MigrationsSqlGenerationOptions.Default)
+        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions =
+            MigrationsSqlGenerationOptions.Default
+    )
     {
         var sourceModelBuilder = CreateModelBuilder(withConventions);
         buildSourceAction(sourceModelBuilder);
@@ -2778,16 +2949,31 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         var context = CreateContext();
         var modelRuntimeInitializer = context.GetService<IModelRuntimeInitializer>();
         var preSnapshotSourceModel = modelRuntimeInitializer.Initialize(
-            (IModel)sourceModelBuilder.Model, designTime: true, validationLogger: null);
+            (IModel)sourceModelBuilder.Model,
+            designTime: true,
+            validationLogger: null
+        );
 
         // Round-trip the source model through a snapshot, compiling it and then extracting it back again.
         // This simulates the real-world migration flow and can expose errors in snapshot generation
-        var migrationsCodeGenerator = Fixture.TestHelpers.CreateDesignServiceProvider().GetRequiredService<IMigrationsCodeGenerator>();
+        var migrationsCodeGenerator = Fixture
+            .TestHelpers.CreateDesignServiceProvider()
+            .GetRequiredService<IMigrationsCodeGenerator>();
         var sourceModelSnapshot = migrationsCodeGenerator.GenerateSnapshot(
-            modelSnapshotNamespace: null, typeof(DbContext), "MigrationsTestSnapshot", preSnapshotSourceModel);
+            modelSnapshotNamespace: null,
+            typeof(DbContext),
+            "MigrationsTestSnapshot",
+            preSnapshotSourceModel
+        );
         var sourceModel = BuildModelFromSnapshotSource(sourceModelSnapshot);
 
-        return Test(sourceModel, targetModel: null, operations, asserter, migrationsSqlGenerationOptions);
+        return Test(
+            sourceModel,
+            targetModel: null,
+            operations,
+            asserter,
+            migrationsSqlGenerationOptions
+        );
     }
 
     protected virtual async Task Test(
@@ -2795,13 +2981,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         IModel targetModel,
         IReadOnlyList<MigrationOperation> operations,
         Action<DatabaseModel> asserter,
-        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions = MigrationsSqlGenerationOptions.Default)
+        MigrationsSqlGenerationOptions migrationsSqlGenerationOptions =
+            MigrationsSqlGenerationOptions.Default
+    )
     {
         var context = CreateContext();
         var serviceProvider = ((IInfrastructure<IServiceProvider>)context).Instance;
         var migrationsSqlGenerator = serviceProvider.GetRequiredService<IMigrationsSqlGenerator>();
         var modelDiffer = serviceProvider.GetRequiredService<IMigrationsModelDiffer>();
-        var migrationsCommandExecutor = serviceProvider.GetRequiredService<IMigrationCommandExecutor>();
+        var migrationsCommandExecutor =
+            serviceProvider.GetRequiredService<IMigrationCommandExecutor>();
         var connection = serviceProvider.GetRequiredService<IRelationalConnection>();
         var databaseModelFactory = serviceProvider.GetRequiredService<IDatabaseModelFactory>();
 
@@ -2815,18 +3004,27 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
                     migrationsSqlGenerator.Generate(
                         modelDiffer.GetDifferences(null, sourceModel.GetRelationalModel()),
                         sourceModel,
-                        migrationsSqlGenerationOptions),
-                    connection);
+                        migrationsSqlGenerationOptions
+                    ),
+                    connection
+                );
             }
 
             // Apply migrations to get from source to target, then reverse-engineer and execute the
             // test-provided assertions on the resulting database model
             await migrationsCommandExecutor.ExecuteNonQueryAsync(
-                migrationsSqlGenerator.Generate(operations, targetModel, migrationsSqlGenerationOptions), connection);
+                migrationsSqlGenerator.Generate(
+                    operations,
+                    targetModel,
+                    migrationsSqlGenerationOptions
+                ),
+                connection
+            );
 
             var scaffoldedModel = databaseModelFactory.Create(
                 context.Database.GetDbConnection(),
-                new DatabaseModelFactoryOptions());
+                new DatabaseModelFactoryOptions()
+            );
 
             asserter?.Invoke(scaffoldedModel);
         }
@@ -2840,31 +3038,42 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     protected virtual Task<T> TestThrows<T>(
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
-        bool withConventions = true)
-        where T : Exception
-        => TestThrows<T>(b => { }, buildSourceAction, buildTargetAction, withConventions);
+        bool withConventions = true
+    )
+        where T : Exception =>
+        TestThrows<T>(b => { }, buildSourceAction, buildTargetAction, withConventions);
 
     protected virtual Task<T> TestThrows<T>(
         Action<ModelBuilder> buildCommonAction,
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
-        bool withConventions = true)
-        where T : Exception
-        => Assert.ThrowsAsync<T>(() => Test(buildCommonAction, buildSourceAction, buildTargetAction, asserter: null, withConventions));
+        bool withConventions = true
+    )
+        where T : Exception =>
+        Assert.ThrowsAsync<T>(() =>
+            Test(
+                buildCommonAction,
+                buildSourceAction,
+                buildTargetAction,
+                asserter: null,
+                withConventions
+            )
+        );
 
-    protected virtual void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    protected virtual void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public abstract class MigrationsFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
     {
         public abstract RelationalTestHelpers TestHelpers { get; }
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 
-    private ModelBuilder CreateModelBuilder(bool withConventions)
-        => withConventions ? Fixture.TestHelpers.CreateConventionBuilder() : new ModelBuilder(new ConventionSet());
+    private ModelBuilder CreateModelBuilder(bool withConventions) =>
+        withConventions
+            ? Fixture.TestHelpers.CreateConventionBuilder()
+            : new ModelBuilder(new ConventionSet());
 
     protected IModel BuildModelFromSnapshotSource(string code)
     {
@@ -2875,7 +3084,9 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Abstractions"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"));
 
-        var databaseProvider = Fixture.TestHelpers.CreateContextServices().GetRequiredService<IDatabaseProvider>();
+        var databaseProvider = Fixture
+            .TestHelpers.CreateContextServices()
+            .GetRequiredService<IDatabaseProvider>();
         build.References.Add(BuildReference.ByName(databaseProvider.Name));
 
         foreach (var buildReference in GetAdditionalReferences())
@@ -2891,20 +3102,22 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             BindingFlags.Instance | BindingFlags.NonPublic,
             null,
             new[] { typeof(ModelBuilder) },
-            null);
+            null
+        );
 
         var builder = new ModelBuilder();
         builder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
 
-        buildModelMethod.Invoke(
-            Activator.CreateInstance(factoryType),
-            new object[] { builder });
+        buildModelMethod.Invoke(Activator.CreateInstance(factoryType), new object[] { builder });
 
         var services = Fixture.TestHelpers.CreateContextServices();
-        var processor = new SnapshotModelProcessor(new TestOperationReporter(), services.GetService<IModelRuntimeInitializer>());
+        var processor = new SnapshotModelProcessor(
+            new TestOperationReporter(),
+            services.GetService<IModelRuntimeInitializer>()
+        );
         return processor.Process(builder.Model);
     }
 
-    protected virtual ICollection<BuildReference> GetAdditionalReferences()
-        => Array.Empty<BuildReference>();
+    protected virtual ICollection<BuildReference> GetAdditionalReferences() =>
+        Array.Empty<BuildReference>();
 }

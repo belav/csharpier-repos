@@ -9,16 +9,16 @@ namespace System.ServiceModel.Routing
     using System.ComponentModel;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.Transactions;
     using SR2 = System.ServiceModel.Routing.SR;
-    using System.Security.Principal;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     // This class wraps a Message, MessageBuffer (if requested), and the OperationContext
     // The message is not buffered if nobody calls MessageRpc.CreateBuffer.  If the message
@@ -38,7 +38,11 @@ namespace System.ServiceModel.Routing
         WindowsIdentity windowsIdentity;
         EventTraceActivity eventTraceActivity;
 
-        public MessageRpc(Message message, OperationContext operationContext, bool impersonationRequired)
+        public MessageRpc(
+            Message message,
+            OperationContext operationContext,
+            bool impersonationRequired
+        )
         {
             Fx.Assert(message != null, "message cannot be null");
             Fx.Assert(operationContext != null, "operationContext cannot be null");
@@ -55,7 +59,11 @@ namespace System.ServiceModel.Routing
             this.windowsIdentity = WindowsIdentity.GetCurrent(true);
             if (impersonationRequired && !AspNetEnvironment.Current.AspNetCompatibilityEnabled)
             {
-                if (this.windowsIdentity == null || this.windowsIdentity.ImpersonationLevel != TokenImpersonationLevel.Impersonation)
+                if (
+                    this.windowsIdentity == null
+                    || this.windowsIdentity.ImpersonationLevel
+                        != TokenImpersonationLevel.Impersonation
+                )
                 {
                     //Temporarily revert impersonation to process token to throw an exception
                     IDisposable autoRevert = null;
@@ -67,8 +75,12 @@ namespace System.ServiceModel.Routing
                             autoRevert = WindowsIdentity.Impersonate(IntPtr.Zero);
                         }
 
-                        Win32Exception errorDetail = new Win32Exception(ERROR_BAD_IMPERSONATION_LEVEL);
-                        throw FxTrace.Exception.AsError(new SecurityNegotiationException(errorDetail.Message));
+                        Win32Exception errorDetail = new Win32Exception(
+                            ERROR_BAD_IMPERSONATION_LEVEL
+                        );
+                        throw FxTrace.Exception.AsError(
+                            new SecurityNegotiationException(errorDetail.Message)
+                        );
                     }
                     finally
                     {
@@ -96,17 +108,10 @@ namespace System.ServiceModel.Routing
 
         internal EventTraceActivity EventTraceActivity
         {
-            get
-            {
-                return this.eventTraceActivity;
-            }
+            get { return this.eventTraceActivity; }
         }
 
-        public OperationContext OperationContext
-        {
-            get;
-            private set;
-        }
+        public OperationContext OperationContext { get; private set; }
 
         public string UniqueID
         {
@@ -114,8 +119,10 @@ namespace System.ServiceModel.Routing
             {
                 if (this.uniqueID == null)
                 {
-                    if (this.Message.Version != MessageVersion.None &&
-                        this.Message.Headers.MessageId != null)
+                    if (
+                        this.Message.Version != MessageVersion.None
+                        && this.Message.Headers.MessageId != null
+                    )
                     {
                         this.uniqueID = this.originalMessage.Headers.MessageId.ToString();
                     }
@@ -135,7 +142,10 @@ namespace System.ServiceModel.Routing
                 // If we've created a MessageBuffer then the originalMessage has already been consumed
                 if (this.messageBuffer != null)
                 {
-                    Fx.Assert(this.clonedMessage != null, "Need to set clonedMessage if we buffered the message");
+                    Fx.Assert(
+                        this.clonedMessage != null,
+                        "Need to set clonedMessage if we buffered the message"
+                    );
                     return this.clonedMessage;
                 }
                 else
@@ -181,17 +191,29 @@ namespace System.ServiceModel.Routing
             IEnumerable<ServiceEndpoint> result;
             if (routingConfig.RouteOnHeadersOnly)
             {
-                if (TD.RoutingServiceFilterTableMatchStartIsEnabled()) { TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStartIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity);
+                }
                 routingConfig.InternalFilterTable.GetMatchingValue(this.Message, out result);
-                if (TD.RoutingServiceFilterTableMatchStopIsEnabled()) { TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStopIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity);
+                }
             }
             else
             {
                 MessageBuffer buffer = this.CreateBuffer();
 
-                if (TD.RoutingServiceFilterTableMatchStartIsEnabled()) { TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStartIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity);
+                }
                 routingConfig.InternalFilterTable.GetMatchingValue(buffer, out result);
-                if (TD.RoutingServiceFilterTableMatchStopIsEnabled()) { TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStopIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity);
+                }
             }
 
             if (result == null)
@@ -201,34 +223,57 @@ namespace System.ServiceModel.Routing
 
             if (TD.RoutingServiceMessageRoutedToEndpointsIsEnabled())
             {
-                TD.RoutingServiceMessageRoutedToEndpoints(this.eventTraceActivity, this.UniqueID, "1");
+                TD.RoutingServiceMessageRoutedToEndpoints(
+                    this.eventTraceActivity,
+                    this.UniqueID,
+                    "1"
+                );
             }
 
             this.operations = new List<SendOperation>(1);
-            this.operations.Add(new SendOperation(result, typeof(TContract), this.OperationContext));
+            this.operations.Add(
+                new SendOperation(result, typeof(TContract), this.OperationContext)
+            );
         }
 
         public void RouteToEndpoints<TContract>(RoutingConfiguration routingConfig)
         {
-            List<IEnumerable<ServiceEndpoint>> endpointLists = new List<IEnumerable<ServiceEndpoint>>();
+            List<IEnumerable<ServiceEndpoint>> endpointLists =
+                new List<IEnumerable<ServiceEndpoint>>();
             if (routingConfig.RouteOnHeadersOnly)
             {
-                if (TD.RoutingServiceFilterTableMatchStartIsEnabled()) { TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStartIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity);
+                }
                 routingConfig.InternalFilterTable.GetMatchingValues(this.Message, endpointLists);
-                if (TD.RoutingServiceFilterTableMatchStopIsEnabled()) { TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStopIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity);
+                }
             }
             else
             {
                 MessageBuffer messageBuffer = this.CreateBuffer();
 
-                if (TD.RoutingServiceFilterTableMatchStartIsEnabled()) { TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStartIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStart(this.eventTraceActivity);
+                }
                 routingConfig.InternalFilterTable.GetMatchingValues(messageBuffer, endpointLists);
-                if (TD.RoutingServiceFilterTableMatchStopIsEnabled()) { TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity); }
+                if (TD.RoutingServiceFilterTableMatchStopIsEnabled())
+                {
+                    TD.RoutingServiceFilterTableMatchStop(this.eventTraceActivity);
+                }
             }
-            
+
             if (TD.RoutingServiceMessageRoutedToEndpointsIsEnabled())
             {
-                TD.RoutingServiceMessageRoutedToEndpoints(this.eventTraceActivity, this.UniqueID, endpointLists.Count.ToString(TD.Culture));
+                TD.RoutingServiceMessageRoutedToEndpoints(
+                    this.eventTraceActivity,
+                    this.UniqueID,
+                    endpointLists.Count.ToString(TD.Culture)
+                );
             }
             if (endpointLists.Count == 0)
             {
@@ -237,7 +282,9 @@ namespace System.ServiceModel.Routing
             this.operations = new List<SendOperation>(endpointLists.Count);
             foreach (IEnumerable<ServiceEndpoint> endpointList in endpointLists)
             {
-                this.operations.Add(new SendOperation(endpointList, typeof(TContract), this.OperationContext));
+                this.operations.Add(
+                    new SendOperation(endpointList, typeof(TContract), this.OperationContext)
+                );
             }
         }
 
@@ -246,7 +293,7 @@ namespace System.ServiceModel.Routing
             OperationContextScope nullContextScope;
             WindowsImpersonationContext impersonation;
 
-            public CallState (MessageRpc messageRpc)
+            public CallState(MessageRpc messageRpc)
             {
                 this.nullContextScope = new OperationContextScope((OperationContext)null);
 

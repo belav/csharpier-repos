@@ -85,7 +85,9 @@ namespace System.Threading
         /// depends on the likelihood of the spin being successful and how long the wait would be but those are not accounted
         /// for here.
         /// </remarks>
-        internal static readonly int SpinCountforSpinBeforeWait = Environment.IsSingleProcessor ? 1 : 35;
+        internal static readonly int SpinCountforSpinBeforeWait = Environment.IsSingleProcessor
+            ? 1
+            : 35;
 
         // The number of times we've spun already.
         private int _count;
@@ -167,11 +169,15 @@ namespace System.Threading
             //     excessive delays.
             //   - If there are multiple threads doing Yield and Sleep(0) (typically from the same spin loop due to
             //     contention), they may switch between one another, delaying work that can make progress.
-            if ((
-                    _count >= YieldThreshold &&
-                    ((_count >= sleep1Threshold && sleep1Threshold >= 0) || (_count - YieldThreshold) % 2 == 0)
-                ) ||
-                Environment.IsSingleProcessor)
+            if (
+                (
+                    _count >= YieldThreshold
+                    && (
+                        (_count >= sleep1Threshold && sleep1Threshold >= 0)
+                        || (_count - YieldThreshold) % 2 == 0
+                    )
+                ) || Environment.IsSingleProcessor
+            )
             {
                 //
                 // We must yield.
@@ -194,7 +200,8 @@ namespace System.Threading
                 }
                 else
                 {
-                    int yieldsSoFar = _count >= YieldThreshold ? (_count - YieldThreshold) / 2 : _count;
+                    int yieldsSoFar =
+                        _count >= YieldThreshold ? (_count - YieldThreshold) / 2 : _count;
                     if ((yieldsSoFar % Sleep0EveryHowManyYields) == (Sleep0EveryHowManyYields - 1))
                     {
                         Thread.Sleep(0);
@@ -283,7 +290,10 @@ namespace System.Threading
             if (totalMilliseconds < -1 || totalMilliseconds > int.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(timeout), timeout, SR.SpinWait_SpinUntil_TimeoutWrong);
+                    nameof(timeout),
+                    timeout,
+                    SR.SpinWait_SpinUntil_TimeoutWrong
+                );
             }
 
             // Call wait with the timeout milliseconds
@@ -305,7 +315,10 @@ namespace System.Threading
             if (millisecondsTimeout < Timeout.Infinite)
             {
                 throw new ArgumentOutOfRangeException(
-                   nameof(millisecondsTimeout), millisecondsTimeout, SR.SpinWait_SpinUntil_TimeoutWrong);
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.SpinWait_SpinUntil_TimeoutWrong
+                );
             }
             ArgumentNullException.ThrowIfNull(condition);
             uint startTime = 0;

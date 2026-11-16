@@ -14,22 +14,26 @@ internal static partial class Interop
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_StoreEnumerateUserRoot(
             out SafeCFArrayHandle pCertsOut,
-            out int pOSStatusOut);
+            out int pOSStatusOut
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_StoreEnumerateMachineRoot(
             out SafeCFArrayHandle pCertsOut,
-            out int pOSStatusOut);
+            out int pOSStatusOut
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_StoreEnumerateUserDisallowed(
             out SafeCFArrayHandle pCertsOut,
-            out int pOSStatusOut);
+            out int pOSStatusOut
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_StoreEnumerateMachineDisallowed(
             out SafeCFArrayHandle pCertsOut,
-            out int pOSStatusOut);
+            out int pOSStatusOut
+        );
 
         private delegate int StoreEnumerator(out SafeCFArrayHandle pCertsOut, out int pOSStatusOut);
 
@@ -38,7 +42,8 @@ internal static partial class Interop
             return EnumerateStore(
                 location,
                 AppleCryptoNative_StoreEnumerateUserDisallowed,
-                AppleCryptoNative_StoreEnumerateMachineDisallowed);
+                AppleCryptoNative_StoreEnumerateMachineDisallowed
+            );
         }
 
         internal static SafeCFArrayHandle StoreEnumerateRoot(StoreLocation location)
@@ -46,13 +51,15 @@ internal static partial class Interop
             return EnumerateStore(
                 location,
                 AppleCryptoNative_StoreEnumerateUserRoot,
-                AppleCryptoNative_StoreEnumerateMachineRoot);
+                AppleCryptoNative_StoreEnumerateMachineRoot
+            );
         }
 
         private static SafeCFArrayHandle EnumerateStore(
             StoreLocation location,
             StoreEnumerator userEnumerator,
-            StoreEnumerator machineEnumerator)
+            StoreEnumerator machineEnumerator
+        )
         {
             const int RetryLimit = 3;
             int osStatus = 0;

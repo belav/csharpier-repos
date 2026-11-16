@@ -11,8 +11,17 @@ internal static partial class Interop
         [LibraryImport(Libraries.Advapi32)]
         internal static unsafe partial uint EventRegister(
             Guid* providerId,
-            delegate* unmanaged<Guid*, int, byte, long, long, EVENT_FILTER_DESCRIPTOR*, void*, void> enableCallback,
+            delegate* unmanaged<
+                Guid*,
+                int,
+                byte,
+                long,
+                long,
+                EVENT_FILTER_DESCRIPTOR*,
+                void*,
+                void> enableCallback,
             void* callbackContext,
-            long* registrationHandle);
+            long* registrationHandle
+        );
     }
 }

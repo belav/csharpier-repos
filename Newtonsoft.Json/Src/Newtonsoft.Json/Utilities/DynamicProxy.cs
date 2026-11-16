@@ -36,7 +36,12 @@ namespace Newtonsoft.Json.Utilities
             return CollectionUtils.ArrayEmpty<string>();
         }
 
-        public virtual bool TryBinaryOperation(T instance, BinaryOperationBinder binder, object arg, out object? result)
+        public virtual bool TryBinaryOperation(
+            T instance,
+            BinaryOperationBinder binder,
+            object arg,
+            out object? result
+        )
         {
             result = null;
             return false;
@@ -48,7 +53,12 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public virtual bool TryCreateInstance(T instance, CreateInstanceBinder binder, object[] args, out object? result)
+        public virtual bool TryCreateInstance(
+            T instance,
+            CreateInstanceBinder binder,
+            object[] args,
+            out object? result
+        )
         {
             result = null;
             return false;
@@ -64,7 +74,12 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public virtual bool TryGetIndex(T instance, GetIndexBinder binder, object[] indexes, out object? result)
+        public virtual bool TryGetIndex(
+            T instance,
+            GetIndexBinder binder,
+            object[] indexes,
+            out object? result
+        )
         {
             result = null;
             return false;
@@ -76,19 +91,34 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public virtual bool TryInvoke(T instance, InvokeBinder binder, object[] args, out object? result)
+        public virtual bool TryInvoke(
+            T instance,
+            InvokeBinder binder,
+            object[] args,
+            out object? result
+        )
         {
             result = null;
             return false;
         }
 
-        public virtual bool TryInvokeMember(T instance, InvokeMemberBinder binder, object[] args, out object? result)
+        public virtual bool TryInvokeMember(
+            T instance,
+            InvokeMemberBinder binder,
+            object[] args,
+            out object? result
+        )
         {
             result = null;
             return false;
         }
 
-        public virtual bool TrySetIndex(T instance, SetIndexBinder binder, object[] indexes, object value)
+        public virtual bool TrySetIndex(
+            T instance,
+            SetIndexBinder binder,
+            object[] indexes,
+            object value
+        )
         {
             return false;
         }
@@ -98,7 +128,11 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public virtual bool TryUnaryOperation(T instance, UnaryOperationBinder binder, out object? result)
+        public virtual bool TryUnaryOperation(
+            T instance,
+            UnaryOperationBinder binder,
+            out object? result
+        )
         {
             result = null;
             return false;

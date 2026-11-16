@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,35 +32,39 @@ using System.Linq;
 using System.Text;
 using Mono.Cecil;
 
-namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprConv : Expr {
+namespace Mono.CodeContracts.Rewrite.Ast
+{
+    class ExprConv : Expr
+    {
+        public ExprConv(MethodInfo methodInfo, Expr exprToConvert, TypeCode convToType)
+            : base(methodInfo)
+        {
+            this.ExprToConvert = exprToConvert;
+            this.ConvToType = convToType;
+        }
 
-		public ExprConv (MethodInfo methodInfo, Expr exprToConvert, TypeCode convToType)
-			: base (methodInfo)
-		{
-			this.ExprToConvert = exprToConvert;
-			this.ConvToType = convToType;
-		}
+        public override ExprType ExprType
+        {
+            get { return ExprType.Conv; }
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.Conv; }
-		}
+        public Expr ExprToConvert { get; private set; }
+        public TypeCode ConvToType { get; private set; }
 
-		public Expr ExprToConvert { get; private set; }
-		public TypeCode ConvToType { get; private set; }
-
-		public override TypeReference ReturnType {
-			get {
-				switch (this.ConvToType) {
-				case TypeCode.Int32:
-					return base.MethodInfo.TypeInt32;
-				case TypeCode.Int64:
-					return base.MethodInfo.TypeInt64;
-				default:
-					throw new NotSupportedException ("Cannot conv to: " + this.ConvToType);
-				}
-			}
-		}
-
-	}
+        public override TypeReference ReturnType
+        {
+            get
+            {
+                switch (this.ConvToType)
+                {
+                    case TypeCode.Int32:
+                        return base.MethodInfo.TypeInt32;
+                    case TypeCode.Int64:
+                        return base.MethodInfo.TypeInt64;
+                    default:
+                        throw new NotSupportedException("Cannot conv to: " + this.ConvToType);
+                }
+            }
+        }
+    }
 }

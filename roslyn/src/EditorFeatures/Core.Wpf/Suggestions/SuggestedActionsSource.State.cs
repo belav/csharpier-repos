@@ -26,7 +26,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 public Workspace? Workspace => Registration.Workspace;
 
-                public State(SuggestedActionsSource source, SuggestedActionsSourceProvider owner, ITextView textView, ITextBuffer textBuffer)
+                public State(
+                    SuggestedActionsSource source,
+                    SuggestedActionsSourceProvider owner,
+                    ITextView textView,
+                    ITextBuffer textBuffer
+                )
                 {
                     _source = source;
 

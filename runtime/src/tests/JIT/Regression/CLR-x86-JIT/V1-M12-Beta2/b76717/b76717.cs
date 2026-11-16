@@ -19,8 +19,10 @@ public class rep
         if (chars2.Length != 1)
             throw new Exception("Expected length to be 1!");
         if (chars2[0] != chars[0])
-            throw new Exception("Char differed after being roundtripped!  got: U+" + ((short)chars2[0]).ToString("x"));
+            throw new Exception(
+                "Char differed after being roundtripped!  got: U+"
+                    + ((short)chars2[0]).ToString("x")
+            );
         Console.WriteLine("looks good.");
     }
 }
-

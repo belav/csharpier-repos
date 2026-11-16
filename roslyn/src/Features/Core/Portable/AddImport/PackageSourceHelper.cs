@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.AddImport
         private const string NugetOrg = "nuget.org";
         public const string NugetOrgSourceName = "::nuget::";
 
-        public static IEnumerable<(string sourceName, string sourceUrl)> GetPackageSources(ImmutableArray<PackageSource> packageSources)
+        public static IEnumerable<(string sourceName, string sourceUrl)> GetPackageSources(
+            ImmutableArray<PackageSource> packageSources
+        )
         {
             // Package source names are user configurable, but various operations and background tasks process
             // only the nuget source, so we ignore the user defined name for nuget.org so we can identify it later.

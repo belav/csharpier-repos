@@ -30,27 +30,37 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         private bool _workspaceDiagnosticsPresent = false;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
+        )]
         public RemoteDiagnosticListTable(
             IGlobalOptionService globalOptions,
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
             RemoteLanguageServiceWorkspace workspace,
             IDiagnosticService diagnosticService,
-            ITableManagerProvider provider)
+            ITableManagerProvider provider
+        )
             : base(workspace, provider)
         {
-            _source = new LiveTableDataSource(workspace, globalOptions, threadingContext, diagnosticService, IdentifierString);
+            _source = new LiveTableDataSource(
+                workspace,
+                globalOptions,
+                threadingContext,
+                diagnosticService,
+                IdentifierString
+            );
             AddInitialTableSource(workspace.CurrentSolution, _source);
 
             ConnectWorkspaceEvents();
         }
 
-        public IGlobalOptionService GlobalOptions
-            => _source.GlobalOptions;
+        public IGlobalOptionService GlobalOptions => _source.GlobalOptions;
 
-        public void UpdateWorkspaceDiagnosticsPresent(bool diagnosticsPresent)
-            => _workspaceDiagnosticsPresent = diagnosticsPresent;
+        public void UpdateWorkspaceDiagnosticsPresent(bool diagnosticsPresent) =>
+            _workspaceDiagnosticsPresent = diagnosticsPresent;
 
         protected override void AddTableSourceIfNecessary(Solution solution)
         {
@@ -78,7 +88,6 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             TableManager.RemoveSource(_source);
         }
 
-        protected override void ShutdownSource()
-            => _source.Shutdown();
+        protected override void ShutdownSource() => _source.Shutdown();
     }
 }

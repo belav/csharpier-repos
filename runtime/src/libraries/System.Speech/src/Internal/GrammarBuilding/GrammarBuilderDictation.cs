@@ -10,9 +10,7 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Constructors
 
         internal GrammarBuilderDictation()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         internal GrammarBuilderDictation(string category)
         {
@@ -31,6 +29,7 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return _category == refObj._category;
         }
+
         public override int GetHashCode()
         {
             return _category == null ? 0 : _category.GetHashCode();
@@ -45,7 +44,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return new GrammarBuilderDictation(_category);
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Return the IRuleRef to the dictation grammar
             return CreateRuleRefToDictation(elementFactory, parent);

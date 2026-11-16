@@ -538,14 +538,11 @@ public class TryUpdateModelIntegrationTest
 
         // Arrays should not be updated.
         Assert.Single(model.Address);
-        Assert.Collection(
-            model.Address,
-            (a) =>
-            {
-                Assert.Equal("Redmond", a.City);
-                Assert.Equal("One Microsoft Way", a.Street);
-            }
-        );
+        Assert.Collection(model.Address, (a) =>
+        {
+            Assert.Equal("Redmond", a.City);
+            Assert.Equal("One Microsoft Way", a.Street);
+        });
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -583,14 +580,11 @@ public class TryUpdateModelIntegrationTest
 
         // Arrays should not be updated.
         Assert.Single(model.Address);
-        Assert.Collection(
-            model.Address,
-            (a) =>
-            {
-                Assert.Equal("Redmond", a.City);
-                Assert.Equal("One Microsoft Way", a.Street);
-            }
-        );
+        Assert.Collection(model.Address, (a) =>
+        {
+            Assert.Equal("Redmond", a.City);
+            Assert.Equal("One Microsoft Way", a.Street);
+        });
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -1122,8 +1116,8 @@ public class TryUpdateModelIntegrationTest
         var oldModel = model;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => TryUpdateModelAsync(model, string.Empty, testContext)
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            TryUpdateModelAsync(model, string.Empty, testContext)
         );
         Assert.Equal(
             $"TryUpdateModelAsync cannot update a record type model. If a '{model.GetType()}' must be updated, include it in an object type.",

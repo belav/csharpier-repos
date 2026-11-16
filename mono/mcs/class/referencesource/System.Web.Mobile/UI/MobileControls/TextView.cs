@@ -1,28 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="TextView.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
-using System.Text;
-using System.Diagnostics;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile TextView class.
      * The TextView control is for displaying large fields of text data.
@@ -32,16 +31,26 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView"]/*' />
     [
-        DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign),
+        DataBindingHandler(
+            "System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign
+        ),
         DefaultProperty("Text"),
         Designer(typeof(System.Web.UI.Design.MobileControls.TextViewDesigner)),
         DesignerAdapter("System.Web.UI.Design.MobileControls.Adapters.DesignerTextViewAdapter"),
         ToolboxData("<{0}:TextView runat=\"server\">TextView</{0}:TextView>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class TextView : PagedControl
     {
         private bool _haveContent = false;
@@ -57,12 +66,7 @@ namespace System.Web.UI.MobileControls
         ]
         public String Text
         {
-
-            get
-            {
-                return InnerText;
-            }
-
+            get { return InnerText; }
             set
             {
                 InnerText = value;
@@ -82,48 +86,28 @@ namespace System.Web.UI.MobileControls
         ]
         public new int ItemCount
         {
-            get
-            {
-                return base.ItemCount;
-            }
-            set
-            {
-                base.ItemCount = value;
-            }
+            get { return base.ItemCount; }
+            set { base.ItemCount = value; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.ItemsPerPage"]/*' />
         [
             Bindable(false),
             Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),            
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
         public new int ItemsPerPage
         {
-            get
-            {
-                return base.ItemsPerPage;
-            }
-            set
-            {
-                base.ItemsPerPage = value;
-            }
+            get { return base.ItemsPerPage; }
+            set { base.ItemsPerPage = value; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.LoadItems"]/*' />
-        [
-            Browsable(false)
-        ]
+        [Browsable(false)]
         public new event LoadItemsEventHandler LoadItems
         {
-            add
-            {
-                base.LoadItems += value;
-            }
-            remove
-            {
-                base.LoadItems -= value;
-            }
+            add { base.LoadItems += value; }
+            remove { base.LoadItems -= value; }
         }
 
         // Note that this value doesn't relate to device specific info
@@ -131,7 +115,7 @@ namespace System.Web.UI.MobileControls
         // to be counted as an item for pagination.  Depending on each
         // device's page weight, different numbers of items will be returned
         // for display.
-        private static readonly int PagingUnitSize = ControlPager.DefaultWeight;  // chars
+        private static readonly int PagingUnitSize = ControlPager.DefaultWeight; // chars
 
         private int _length = 0;
         private int _pageBeginElement;
@@ -200,8 +184,10 @@ namespace System.Web.UI.MobileControls
                     }
                 }
 
-                while (elementLength - currentPosition <= PagingUnitSize - blockSize ||
-                            (blockElement == elementIndex && element.Url != null))
+                while (
+                    elementLength - currentPosition <= PagingUnitSize - blockSize
+                    || (blockElement == elementIndex && element.Url != null)
+                )
                 {
                     elementIndex++;
                     if (elementIndex == _elements.Count)
@@ -229,7 +215,11 @@ namespace System.Web.UI.MobileControls
                 else
                 {
                     int i;
-                    for (i = currentPosition + (PagingUnitSize - blockSize) - 1; i >= currentPosition; i--)
+                    for (
+                        i = currentPosition + (PagingUnitSize - blockSize) - 1;
+                        i >= currentPosition;
+                        i--
+                    )
                     {
                         char c = element.Text[i];
                         if (Char.IsWhiteSpace(c) || Char.IsPunctuation(c))
@@ -260,55 +250,31 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.FirstVisibleElementIndex"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int FirstVisibleElementIndex
         {
-            get
-            {
-                return _pageBeginElement;
-            }
+            get { return _pageBeginElement; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.FirstVisibleElementOffset"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int FirstVisibleElementOffset
         {
-            get
-            {
-                return _pageBeginOffset;
-            }
+            get { return _pageBeginOffset; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.LastVisibleElementIndex"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]    
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int LastVisibleElementIndex
         {
-            get
-            {
-                return _pageEndElement;
-            }
+            get { return _pageEndElement; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.LastVisibleElementOffset"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int LastVisibleElementOffset
         {
-            get
-            {
-                return _pageEndOffset;
-            }
+            get { return _pageEndOffset; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.OnRender"]/*' />
@@ -328,9 +294,14 @@ namespace System.Web.UI.MobileControls
         private StringBuilder _translateBuilder;
         private StringWriter _translateWriter;
 
-        internal void AddElement(String text, String href, bool isBold, bool isUnderline, bool breakAfter)
+        internal void AddElement(
+            String text,
+            String href,
+            bool isBold,
+            bool isUnderline,
+            bool breakAfter
+        )
         {
-
             // Convert text if it has special characters.
 
             if (text.IndexOf('&') >= 0)
@@ -342,7 +313,10 @@ namespace System.Web.UI.MobileControls
                 else
                 {
                     _translateBuilder = new StringBuilder();
-                    _translateWriter = new StringWriter(_translateBuilder, CultureInfo.InvariantCulture);
+                    _translateWriter = new StringWriter(
+                        _translateBuilder,
+                        CultureInfo.InvariantCulture
+                    );
                 }
 
                 TranslateAndAppendText(text, _translateWriter);
@@ -357,19 +331,13 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.InternalItemCount"]/*' />
         protected override int InternalItemCount
         {
-            get
-            {
-                return (_length + PagingUnitSize - 1) / PagingUnitSize;
-            }
+            get { return (_length + PagingUnitSize - 1) / PagingUnitSize; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.ItemWeight"]/*' />
         protected override int ItemWeight
         {
-            get
-            {
-                return PagingUnitSize;
-            }
+            get { return PagingUnitSize; }
         }
 
         /// <include file='doc\TextView.uex' path='docs/doc[@for="TextView.PaginateRecursive"]/*' />
@@ -396,26 +364,17 @@ namespace System.Web.UI.MobileControls
 
         internal override bool AllowMultiLines
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override bool AllowInnerMarkup
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override bool TrimInnerText
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         private class TextViewLiteralTextParser : LiteralTextParser
@@ -433,14 +392,17 @@ namespace System.Web.UI.MobileControls
                 String text = element.Text != null ? element.Text : String.Empty;
                 String href = null;
 
-                if(element.Type == LiteralElementType.Anchor) {
+                if (element.Type == LiteralElementType.Anchor)
+                {
                     href = element.GetAttribute("href");
                 }
-                _parent.AddElement(text,
-                           href,
-                           ((element.Format & LiteralFormat.Bold) == LiteralFormat.Bold),
-                           ((element.Format & LiteralFormat.Italic) == LiteralFormat.Italic),
-                           element.BreakAfter);
+                _parent.AddElement(
+                    text,
+                    href,
+                    ((element.Format & LiteralFormat.Bold) == LiteralFormat.Bold),
+                    ((element.Format & LiteralFormat.Italic) == LiteralFormat.Italic),
+                    element.BreakAfter
+                );
                 _hasElements = true;
             }
 

@@ -38,9 +38,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         internal readonly bool IsMarked(int bitPosition)
         {
             var bitArrayIndex = bitPosition / IntSize;
-            return
-                (uint)bitArrayIndex < (uint)_span.Length &&
-                (_span[bitArrayIndex] & (1 << (bitPosition % IntSize))) != 0;
+            return (uint)bitArrayIndex < (uint)_span.Length
+                && (_span[bitArrayIndex] & (1 << (bitPosition % IntSize))) != 0;
         }
 
         /// <summary>How many ints must be allocated to represent n bits. Returns (n+31)/32, but avoids overflow.</summary>

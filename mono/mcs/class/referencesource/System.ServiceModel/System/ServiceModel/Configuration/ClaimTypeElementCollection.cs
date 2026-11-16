@@ -10,11 +10,11 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
 
     [ConfigurationCollection(typeof(ClaimTypeElement))]
-    public sealed class ClaimTypeElementCollection : ServiceModelConfigurationElementCollection<ClaimTypeElement>
+    public sealed class ClaimTypeElementCollection
+        : ServiceModelConfigurationElementCollection<ClaimTypeElement>
     {
         public ClaimTypeElementCollection()
-            : base()
-        { }
+            : base() { }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
@@ -27,5 +27,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

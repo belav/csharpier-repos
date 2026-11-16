@@ -1,32 +1,34 @@
 //------------------------------------------------------------------------------
 // <copyright file="StyleReferenceConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
     using System.Collections;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Web.UI.MobileControls;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Util;
+    using System.Web.UI.MobileControls;
 
     /// <summary>
     ///    <para>
     ///       Can filter and retrieve several types of values from controls.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class StyleReferenceConverter: StringConverter
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class StyleReferenceConverter : StringConverter
     {
-        protected virtual Object [] GetStyles(Object instance)
+        protected virtual Object[] GetStyles(Object instance)
         {
             StyleSheet styleSheet = null;
             Style instanceStyle = null;
@@ -37,16 +39,18 @@ namespace System.Web.UI.Design.MobileControls.Converters
             {
                 instance = ((IDeviceSpecificChoiceDesigner)instance).UnderlyingObject;
             }
-            
+
             if (instance is System.Web.UI.MobileControls.Style)
             {
-                instanceStyle = (Style) instance;
+                instanceStyle = (Style)instance;
                 if (instanceStyle.Control is StyleSheet)
                 {
-                    styleSheet = (StyleSheet) instanceStyle.Control;
+                    styleSheet = (StyleSheet)instanceStyle.Control;
                 }
-                else if ((instanceStyle.Control is Form && instanceStyle is PagerStyle) ||
-                    (instanceStyle.Control is ObjectList))
+                else if (
+                    (instanceStyle.Control is Form && instanceStyle is PagerStyle)
+                    || (instanceStyle.Control is ObjectList)
+                )
                 {
                     if (instanceStyle.Control.MobilePage != null)
                     {
@@ -92,7 +96,15 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 System.Web.UI.MobileControls.Style style = styleSheet[key];
                 if (style.Name != null && style.Name.Length > 0)
                 {
-                    if (null == instanceStyle || 0 != String.Compare(instanceStyle.Name, style.Name, StringComparison.Ordinal))
+                    if (
+                        null == instanceStyle
+                        || 0
+                            != String.Compare(
+                                instanceStyle.Name,
+                                style.Name,
+                                StringComparison.Ordinal
+                            )
+                    )
                     {
                         styleArray.Add(style.Name);
                     }
@@ -111,7 +123,15 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 System.Web.UI.MobileControls.Style style = StyleSheet.Default[key];
                 if (style.Name != null && style.Name.Length > 0)
                 {
-                    if (null == instanceStyle || 0 != String.Compare(instanceStyle.Name, style.Name, StringComparison.Ordinal))
+                    if (
+                        null == instanceStyle
+                        || 0
+                            != String.Compare(
+                                instanceStyle.Name,
+                                style.Name,
+                                StringComparison.Ordinal
+                            )
+                    )
                     {
                         styleArray.Add(style.Name);
                     }
@@ -129,7 +149,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
             int i = 1;
             while (i < styleArray.Count)
             {
-                if (String.Equals((String)styleArray[i], preID, StringComparison.OrdinalIgnoreCase)) {
+                if (String.Equals((String)styleArray[i], preID, StringComparison.OrdinalIgnoreCase))
+                {
                     styleArray.RemoveAt(i);
                 }
                 else
@@ -164,7 +185,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 return null;
             }
 
-            Object [] objValues = GetStyles(context.Instance);
+            Object[] objValues = GetStyles(context.Instance);
             if (objValues != null)
             {
                 return new StandardValuesCollection(objValues);
@@ -172,7 +193,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             else
             {
                 return null;
-            }            
+            }
         }
 
         /// <summary>
@@ -186,7 +207,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context contains exclusive standard 
+        ///    <see langword='true'/> if the specified context contains exclusive standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
@@ -206,13 +227,13 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context conatins supported standard 
+        ///    <see langword='true'/> if the specified context conatins supported standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             return true;
-        }        
-    }    
+        }
+    }
 }

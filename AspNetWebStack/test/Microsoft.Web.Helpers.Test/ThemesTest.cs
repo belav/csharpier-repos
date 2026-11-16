@@ -20,11 +20,23 @@ namespace Microsoft.Web.Helpers.Test
             var scope = new ScopeStorageDictionary();
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ThemesImplementation(mockVpp, scope).Initialize(null, "foo"), "themeDirectory");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ThemesImplementation(mockVpp, scope).Initialize("", "foo"), "themeDirectory");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ThemesImplementation(mockVpp, scope).Initialize(null, "foo"),
+                "themeDirectory"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ThemesImplementation(mockVpp, scope).Initialize("", "foo"),
+                "themeDirectory"
+            );
 
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ThemesImplementation(mockVpp, scope).Initialize("~/folder", null), "defaultTheme");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ThemesImplementation(mockVpp, scope).Initialize("~/folder", ""), "defaultTheme");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ThemesImplementation(mockVpp, scope).Initialize("~/folder", null),
+                "defaultTheme"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ThemesImplementation(mockVpp, scope).Initialize("~/folder", ""),
+                "defaultTheme"
+            );
         }
 
         [Fact]
@@ -36,8 +48,20 @@ namespace Microsoft.Web.Helpers.Test
             var themesImpl = new ThemesImplementation(mockVpp, scope);
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => { themesImpl.CurrentTheme = null; }, "value");
-            Assert.ThrowsArgumentNullOrEmptyString(() => { themesImpl.CurrentTheme = String.Empty; }, "value");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    themesImpl.CurrentTheme = null;
+                },
+                "value"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    themesImpl.CurrentTheme = String.Empty;
+                },
+                "value"
+            );
         }
 
         [Fact]
@@ -49,23 +73,50 @@ namespace Microsoft.Web.Helpers.Test
             var themesImpl = new ThemesImplementation(mockVpp, scope);
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() => themesImpl.CurrentTheme = "Foo",
-                                                              @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class.");
+            Assert.Throws<InvalidOperationException>(
+                () => themesImpl.CurrentTheme = "Foo",
+                @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class."
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { var x = themesImpl.CurrentTheme; },
-                                                              @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var x = themesImpl.CurrentTheme;
+                },
+                @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class."
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { var x = themesImpl.AvailableThemes; },
-                                                              @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var x = themesImpl.AvailableThemes;
+                },
+                @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class."
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { var x = themesImpl.DefaultTheme; },
-                                                              @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var x = themesImpl.DefaultTheme;
+                },
+                @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class."
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { var x = themesImpl.GetResourcePath("baz"); },
-                                                              @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var x = themesImpl.GetResourcePath("baz");
+                },
+                @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class."
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { var x = themesImpl.GetResourcePath("baz", "some-file"); },
-                                                              @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var x = themesImpl.GetResourcePath("baz", "some-file");
+                },
+                @"You must call the ""Themes.Initialize"" method before you call any other method of the ""Themes"" class."
+            );
         }
 
         [Fact]
@@ -76,13 +127,21 @@ namespace Microsoft.Web.Helpers.Test
             var themeDirectory = "theme-directory";
 
             var scope = new ScopeStorageDictionary();
-            var themesImpl = new ThemesImplementation(GetVirtualPathProvider(themeDirectory, new Dir("not-default-theme")), scope);
+            var themesImpl = new ThemesImplementation(
+                GetVirtualPathProvider(themeDirectory, new Dir("not-default-theme")),
+                scope
+            );
 
             // Act And Assert
             Assert.ThrowsArgument(
-                () => themesImpl.Initialize(themeDirectory: themeDirectory, defaultTheme: defaultTheme),
+                () =>
+                    themesImpl.Initialize(
+                        themeDirectory: themeDirectory,
+                        defaultTheme: defaultTheme
+                    ),
                 "defaultTheme",
-                "Unknown theme 'default-theme'. Ensure that a directory labeled 'default-theme' exists under the theme directory.");
+                "Unknown theme 'default-theme'. Ensure that a directory labeled 'default-theme' exists under the theme directory."
+            );
         }
 
         [Fact]
@@ -93,7 +152,10 @@ namespace Microsoft.Web.Helpers.Test
             var themeDirectory = "theme-directory";
 
             var scope = new ScopeStorageDictionary();
-            var themesImpl = new ThemesImplementation(GetVirtualPathProvider(themeDirectory, new Dir(defaultTheme)), scope);
+            var themesImpl = new ThemesImplementation(
+                GetVirtualPathProvider(themeDirectory, new Dir(defaultTheme)),
+                scope
+            );
 
             // Act
             themesImpl.Initialize(themeDirectory: themeDirectory, defaultTheme: defaultTheme);
@@ -112,7 +174,10 @@ namespace Microsoft.Web.Helpers.Test
             var themeDirectory = "theme-directory";
 
             var scope = new ScopeStorageDictionary();
-            var themesImpl = new ThemesImplementation(GetVirtualPathProvider(themeDirectory, new Dir(defaultTheme)), scope);
+            var themesImpl = new ThemesImplementation(
+                GetVirtualPathProvider(themeDirectory, new Dir(defaultTheme)),
+                scope
+            );
             themesImpl.Initialize(themeDirectory, defaultTheme);
 
             // Act and Assert
@@ -126,13 +191,22 @@ namespace Microsoft.Web.Helpers.Test
             // Arrange
             var defaultTheme = "default-theme";
             var themeDirectory = "theme-directory";
-            var themesImpl = new ThemesImplementation(GetVirtualPathProvider(themeDirectory, new Dir(defaultTheme), new Dir("not-a-random-value")), new ScopeStorageDictionary());
+            var themesImpl = new ThemesImplementation(
+                GetVirtualPathProvider(
+                    themeDirectory,
+                    new Dir(defaultTheme),
+                    new Dir("not-a-random-value")
+                ),
+                new ScopeStorageDictionary()
+            );
             themesImpl.Initialize(themeDirectory, defaultTheme);
 
             // Act and Assert
-            Assert.ThrowsArgument(() => themesImpl.CurrentTheme = "random-value",
-                                                    "value",
-                                                    "Unknown theme 'random-value'. Ensure that a directory labeled 'random-value' exists under the theme directory.");
+            Assert.ThrowsArgument(
+                () => themesImpl.CurrentTheme = "random-value",
+                "value",
+                "Unknown theme 'random-value'. Ensure that a directory labeled 'random-value' exists under the theme directory."
+            );
         }
 
         [Fact]
@@ -143,7 +217,14 @@ namespace Microsoft.Web.Helpers.Test
             var themeDirectory = "theme-directory";
             var currentThemeDir = "custom-theme-dir";
             var scope = new ScopeStorageDictionary();
-            var themesImpl = new ThemesImplementation(GetVirtualPathProvider(themeDirectory, new Dir(defaultTheme), new Dir("custom-theme-dir")), scope);
+            var themesImpl = new ThemesImplementation(
+                GetVirtualPathProvider(
+                    themeDirectory,
+                    new Dir(defaultTheme),
+                    new Dir("custom-theme-dir")
+                ),
+                scope
+            );
 
             // Act
             themesImpl.Initialize(themeDirectory, defaultTheme);
@@ -157,33 +238,63 @@ namespace Microsoft.Web.Helpers.Test
         public void GetResourcePathThrowsIfCurrentDirectoryIsNull()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile", "wp7.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile", "wp7.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act and Assert
-            Assert.ThrowsArgumentNull(() => themesImpl.GetResourcePath(folder: null, fileName: "wp7.css"), "folder");
+            Assert.ThrowsArgumentNull(
+                () => themesImpl.GetResourcePath(folder: null, fileName: "wp7.css"),
+                "folder"
+            );
         }
 
         [Fact]
         public void GetResourcePathThrowsIfFileNameIsNullOrEmpty()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile", "wp7.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile", "wp7.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => themesImpl.GetResourcePath(folder: String.Empty, fileName: null), "fileName");
-            Assert.ThrowsArgumentNullOrEmptyString(() => themesImpl.GetResourcePath(folder: String.Empty, fileName: String.Empty), "fileName");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => themesImpl.GetResourcePath(folder: String.Empty, fileName: null),
+                "fileName"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => themesImpl.GetResourcePath(folder: String.Empty, fileName: String.Empty),
+                "fileName"
+            );
         }
 
         [Fact]
         public void GetResourcePathReturnsItemFromThemeRootIfAvailable()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile", "wp7.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile", "wp7.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act
@@ -198,8 +309,16 @@ namespace Microsoft.Web.Helpers.Test
         public void GetResourcePathReturnsItemFromCurrentThemeDirectoryIfAvailable()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile\styles", "wp7.css"), new Dir(@"default\styles", "main.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile\styles", "wp7.css"),
+                    new Dir(@"default\styles", "main.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act
@@ -214,8 +333,16 @@ namespace Microsoft.Web.Helpers.Test
         public void GetResourcePathReturnsItemFromDefaultThemeDirectoryIfNotFoundInCurrentThemeDirectory()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile\styles", "wp7.css"), new Dir(@"default\styles", "main.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile\styles", "wp7.css"),
+                    new Dir(@"default\styles", "main.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act
@@ -230,13 +357,24 @@ namespace Microsoft.Web.Helpers.Test
         public void GetResourcePathReturnsNullIfDirectoryDoesNotExist()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile\styles", "wp7.css"), new Dir(@"default\styles", "main.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile\styles", "wp7.css"),
+                    new Dir(@"default\styles", "main.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act
             themesImpl.CurrentTheme = "mobile";
-            var themePath = themesImpl.GetResourcePath(folder: "does-not-exist", fileName: "main.css");
+            var themePath = themesImpl.GetResourcePath(
+                folder: "does-not-exist",
+                fileName: "main.css"
+            );
 
             // Assert
             Assert.Null(themePath);
@@ -246,13 +384,24 @@ namespace Microsoft.Web.Helpers.Test
         public void GetResourcePathReturnsNullIfItemNotFoundInCurrentAndDefaultThemeDirectories()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir(@"mobile\styles", "wp7.css"), new Dir(@"default\styles", "main.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir(@"mobile\styles", "wp7.css"),
+                    new Dir(@"default\styles", "main.css")
+                )
+            );
             themesImpl.Initialize("themes", "default");
 
             // Act
             themesImpl.CurrentTheme = "mobile";
-            var themePath = themesImpl.GetResourcePath(folder: "styles", fileName: "awesome-blinking-text.css");
+            var themePath = themesImpl.GetResourcePath(
+                folder: "styles",
+                fileName: "awesome-blinking-text.css"
+            );
 
             // Assert
             Assert.Null(themePath);
@@ -262,8 +411,15 @@ namespace Microsoft.Web.Helpers.Test
         public void AvaliableThemesReturnsTopLevelDirectoriesUnderThemeDirectory()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("mobile"), new Dir("rotary-phone")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("mobile"),
+                    new Dir("rotary-phone")
+                )
+            );
             // Act
             themesImpl.Initialize("themes", "default");
             var themes = themesImpl.AvailableThemes;
@@ -286,8 +442,16 @@ namespace Microsoft.Web.Helpers.Test
         public void FileWithSlash_ReturnsNull()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("root"), new Dir(@"root\foo", "wp7.css"), new Dir(@"default\styles", "main.css")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider(
+                    "themes",
+                    new Dir("default"),
+                    new Dir("root"),
+                    new Dir(@"root\foo", "wp7.css"),
+                    new Dir(@"default\styles", "main.css")
+                )
+            );
 
             // Act
             var actual = themesImpl.FindMatchingFile("root", "foo/bar.cs");
@@ -300,8 +464,10 @@ namespace Microsoft.Web.Helpers.Test
         public void DirectoryWithNoFilesReturnsNull()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("empty-dir")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider("themes", new Dir("default"), new Dir("empty-dir"))
+            );
 
             // Act
             var actual = themesImpl.FindMatchingFile(@"themes\empty-dir", "main.css");
@@ -314,8 +480,10 @@ namespace Microsoft.Web.Helpers.Test
         public void MatchingFiles_ReturnsCorrectFile()
         {
             // Arrange
-            var themesImpl = new ThemesImplementation(scopeStorage: new ScopeStorageDictionary(),
-                                                      vpp: GetVirtualPathProvider("themes", new Dir(@"nomatchingfiles", "foo.cs")));
+            var themesImpl = new ThemesImplementation(
+                scopeStorage: new ScopeStorageDictionary(),
+                vpp: GetVirtualPathProvider("themes", new Dir(@"nomatchingfiles", "foo.cs"))
+            );
 
             // Act
             var bar = themesImpl.FindMatchingFile(@"themes\nomatchingfiles", "bar.cs");
@@ -326,7 +494,10 @@ namespace Microsoft.Web.Helpers.Test
             Assert.Equal(@"themes/nomatchingfiles/foo.cs", foo);
         }
 
-        private static VirtualPathProvider GetVirtualPathProvider(string themeRoot, params Dir[] fileSystem)
+        private static VirtualPathProvider GetVirtualPathProvider(
+            string themeRoot,
+            params Dir[] fileSystem
+        )
         {
             var mockVpp = new Mock<VirtualPathProvider>();
             var dirRoot = new Mock<VirtualDirectory>(themeRoot);
@@ -337,7 +508,15 @@ namespace Microsoft.Web.Helpers.Test
                 var dir = new Mock<VirtualDirectory>(directory.Name);
                 var directoryPath = themeRoot + '\\' + directory.Name;
                 dir.SetupGet(d => d.Name).Returns(directory.Name);
-                mockVpp.Setup(c => c.GetDirectory(It.Is<string>(p => p.Equals(directoryPath, StringComparison.OrdinalIgnoreCase)))).Returns(dir.Object);
+                mockVpp
+                    .Setup(c =>
+                        c.GetDirectory(
+                            It.Is<string>(p =>
+                                p.Equals(directoryPath, StringComparison.OrdinalIgnoreCase)
+                            )
+                        )
+                    )
+                    .Returns(dir.Object);
 
                 var fileList = new List<VirtualFile>();
                 foreach (var item in directory.Files)

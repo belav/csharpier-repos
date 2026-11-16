@@ -28,5 +28,6 @@ public interface IEntityFinderSource
         IStateManager stateManager,
         IDbSetSource setSource,
         IDbSetCache setCache,
-        IEntityType type);
+        IEntityType type
+    );
 }

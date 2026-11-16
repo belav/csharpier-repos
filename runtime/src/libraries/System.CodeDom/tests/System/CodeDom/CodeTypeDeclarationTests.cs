@@ -120,11 +120,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             declaration.BaseTypes.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, declaration.BaseTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                declaration.BaseTypes.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(char));
             declaration.BaseTypes.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, declaration.BaseTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                declaration.BaseTypes.Cast<CodeTypeReference>()
+            );
         }
 
         [Fact]
@@ -155,11 +161,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeMember member1 = new CodeMemberField("Type", "Name1");
             declaration.Members.Add(member1);
-            Assert.Equal(new CodeTypeMember[] { member1 }, declaration.Members.Cast<CodeTypeMember>());
+            Assert.Equal(
+                new CodeTypeMember[] { member1 },
+                declaration.Members.Cast<CodeTypeMember>()
+            );
 
             CodeTypeMember member2 = new CodeMemberField("Type", "Name1");
             declaration.Members.Add(member2);
-            Assert.Equal(new CodeTypeMember[] { member1, member2 }, declaration.Members.Cast<CodeTypeMember>());
+            Assert.Equal(
+                new CodeTypeMember[] { member1, member2 },
+                declaration.Members.Cast<CodeTypeMember>()
+            );
         }
 
         [Fact]
@@ -190,11 +202,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeParameter parameter1 = new CodeTypeParameter("Name1");
             declaration.TypeParameters.Add(parameter1);
-            Assert.Equal(new CodeTypeParameter[] { parameter1 }, declaration.TypeParameters.Cast<CodeTypeParameter>());
+            Assert.Equal(
+                new CodeTypeParameter[] { parameter1 },
+                declaration.TypeParameters.Cast<CodeTypeParameter>()
+            );
 
             CodeTypeParameter parameter2 = new CodeTypeParameter("Name2");
             declaration.TypeParameters.Add(parameter2);
-            Assert.Equal(new CodeTypeParameter[] { parameter1, parameter2 }, declaration.TypeParameters.Cast<CodeTypeParameter>());
+            Assert.Equal(
+                new CodeTypeParameter[] { parameter1, parameter2 },
+                declaration.TypeParameters.Cast<CodeTypeParameter>()
+            );
         }
     }
 }

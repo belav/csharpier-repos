@@ -32,14 +32,14 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
         internal abstract class CommonEmbeddedMember : Cci.IEmbeddedDefinition
         {
             internal abstract TEmbeddedTypesManager TypeManager { get; }
 
-            public bool IsEncDeleted
-                => false;
+            public bool IsEncDeleted => false;
         }
 
         internal abstract class CommonEmbeddedMember<TMember> : CommonEmbeddedMember, Cci.IReference
@@ -53,14 +53,24 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 this.UnderlyingSymbol = underlyingSymbol;
             }
 
-            protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(TPEModuleBuilder moduleBuilder);
+            protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(
+                TPEModuleBuilder moduleBuilder
+            );
 
-            protected virtual TAttributeData PortAttributeIfNeedTo(TAttributeData attrData, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+            protected virtual TAttributeData PortAttributeIfNeedTo(
+                TAttributeData attrData,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            )
             {
                 return null;
             }
 
-            private ImmutableArray<TAttributeData> GetAttributes(TPEModuleBuilder moduleBuilder, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+            private ImmutableArray<TAttributeData> GetAttributes(
+                TPEModuleBuilder moduleBuilder,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            )
             {
                 var builder = ArrayBuilder<TAttributeData>.GetInstance();
 
@@ -72,16 +82,41 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
                 foreach (var attrData in GetCustomAttributesToEmit(moduleBuilder))
                 {
-                    if (TypeManager.IsTargetAttribute(attrData, AttributeDescription.DispIdAttribute, out int signatureIndex))
+                    if (
+                        TypeManager.IsTargetAttribute(
+                            attrData,
+                            AttributeDescription.DispIdAttribute,
+                            out int signatureIndex
+                        )
+                    )
                     {
-                        if (signatureIndex == 0 && TypeManager.TryGetAttributeArguments(attrData, out var constructorArguments, out var namedArguments, syntaxNodeOpt, diagnostics))
+                        if (
+                            signatureIndex == 0
+                            && TypeManager.TryGetAttributeArguments(
+                                attrData,
+                                out var constructorArguments,
+                                out var namedArguments,
+                                syntaxNodeOpt,
+                                diagnostics
+                            )
+                        )
                         {
-                            builder.AddOptional(TypeManager.CreateSynthesizedAttribute(WellKnownMember.System_Runtime_InteropServices_DispIdAttribute__ctor, constructorArguments, namedArguments, syntaxNodeOpt, diagnostics));
+                            builder.AddOptional(
+                                TypeManager.CreateSynthesizedAttribute(
+                                    WellKnownMember.System_Runtime_InteropServices_DispIdAttribute__ctor,
+                                    constructorArguments,
+                                    namedArguments,
+                                    syntaxNodeOpt,
+                                    diagnostics
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        builder.AddOptional(PortAttributeIfNeedTo(attrData, syntaxNodeOpt, diagnostics));
+                        builder.AddOptional(
+                            PortAttributeIfNeedTo(attrData, syntaxNodeOpt, diagnostics)
+                        );
                     }
                 }
 
@@ -93,7 +128,11 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 if (_lazyAttributes.IsDefault)
                 {
                     var diagnostics = DiagnosticBag.GetInstance();
-                    var attributes = GetAttributes((TPEModuleBuilder)context.Module, (TSyntaxNode)context.SyntaxNode, diagnostics);
+                    var attributes = GetAttributes(
+                        (TPEModuleBuilder)context.Module,
+                        (TSyntaxNode)context.SyntaxNode,
+                        diagnostics
+                    );
 
                     if (ImmutableInterlocked.InterlockedInitialize(ref _lazyAttributes, attributes))
                     {

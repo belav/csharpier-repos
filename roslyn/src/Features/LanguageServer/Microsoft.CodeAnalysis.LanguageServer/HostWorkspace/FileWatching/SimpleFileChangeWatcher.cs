@@ -30,12 +30,17 @@ internal sealed class SimpleFileChangeWatcher : IFileChangeWatcher
         /// The directory watchers for the <see cref="_watchedDirectories"/>.
         /// </summary>
         private readonly ImmutableArray<FileSystemWatcher> _directoryFileSystemWatchers;
-        private readonly ConcurrentSet<IndividualWatchedFile> _individualWatchedFiles = new ConcurrentSet<IndividualWatchedFile>();
+        private readonly ConcurrentSet<IndividualWatchedFile> _individualWatchedFiles =
+            new ConcurrentSet<IndividualWatchedFile>();
 
         public FileChangeContext(ImmutableArray<WatchedDirectory> watchedDirectories)
         {
-            var watchedDirectoriesBuilder = ImmutableArray.CreateBuilder<WatchedDirectory>(watchedDirectories.Length);
-            var watcherBuilder = ImmutableArray.CreateBuilder<FileSystemWatcher>(watchedDirectories.Length);
+            var watchedDirectoriesBuilder = ImmutableArray.CreateBuilder<WatchedDirectory>(
+                watchedDirectories.Length
+            );
+            var watcherBuilder = ImmutableArray.CreateBuilder<FileSystemWatcher>(
+                watchedDirectories.Length
+            );
 
             foreach (var watchedDirectory in watchedDirectories)
             {
@@ -72,7 +77,13 @@ internal sealed class SimpleFileChangeWatcher : IFileChangeWatcher
         public IWatchedFile EnqueueWatchingFile(string filePath)
         {
             // If this path is already covered by one of our directory watchers, nothing further to do
-            if (WatchedDirectory.FilePathCoveredByWatchedDirectories(_watchedDirectories, filePath, StringComparison.Ordinal))
+            if (
+                WatchedDirectory.FilePathCoveredByWatchedDirectories(
+                    _watchedDirectories,
+                    filePath,
+                    StringComparison.Ordinal
+                )
+            )
                 return NoOpWatchedFile.Instance;
 
             var individualWatchedFile = new IndividualWatchedFile(filePath, this);

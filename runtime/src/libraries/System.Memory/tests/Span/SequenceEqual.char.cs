@@ -65,7 +65,9 @@ namespace System.SpanTests
 
                     Assert.False(firstSpan.SequenceEqual(secondSpan));
                     Assert.False(firstSpan.SequenceEqual(secondSpan, null));
-                    Assert.False(firstSpan.SequenceEqual(secondSpan, EqualityComparer<char>.Default));
+                    Assert.False(
+                        firstSpan.SequenceEqual(secondSpan, EqualityComparer<char>.Default)
+                    );
                 }
             }
         }

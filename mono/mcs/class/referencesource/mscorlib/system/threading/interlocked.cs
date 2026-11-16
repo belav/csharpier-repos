@@ -1,26 +1,26 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
 namespace System.Threading
 {
     using System;
-    using System.Security.Permissions;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.Versioning;
-    using System.Runtime;
+    using System.Security.Permissions;
 
-    // After much discussion, we decided the Interlocked class doesn't need 
-    // any HPA's for synchronization or external threading.  They hurt C#'s 
-    // codegen for the yield keyword, and arguably they didn't protect much.  
-    // Instead, they penalized people (and compilers) for writing threadsafe 
+    // After much discussion, we decided the Interlocked class doesn't need
+    // any HPA's for synchronization or external threading.  They hurt C#'s
+    // codegen for the yield keyword, and arguably they didn't protect much.
+    // Instead, they penalized people (and compilers) for writing threadsafe
     // code.
     public static class Interlocked
-    {        
+    {
         /******************************
          * Increment
          *   Implemented: int
@@ -106,13 +106,14 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Runtime.InteropServices.ComVisible(false)]
         [System.Security.SecuritySafeCritical]
-        public static T Exchange<T>(ref T location1, T value) where T : class
+        public static T Exchange<T>(ref T location1, T value)
+            where T : class
         {
             _Exchange(__makeref(location1), __makeref(value));
             //Since value is a local we use trash its data on return
             //  The Exchange replaces the data with new data
             //  so after the return "value" contains the original location1
-            //See ExchangeGeneric for more details           
+            //See ExchangeGeneric for more details
             return value;
         }
 
@@ -136,50 +137,66 @@ namespace System.Threading
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
-        public static extern int CompareExchange(ref int location1, int value, int comparand);    
+        public static extern int CompareExchange(ref int location1, int value, int comparand);
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [System.Security.SecuritySafeCritical]
-        public static extern long CompareExchange(ref long location1, long value, long comparand);    
+        public static extern long CompareExchange(ref long location1, long value, long comparand);
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [System.Security.SecuritySafeCritical]
-        public static extern float CompareExchange(ref float location1, float value, float comparand);    
+        public static extern float CompareExchange(
+            ref float location1,
+            float value,
+            float comparand
+        );
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [System.Security.SecuritySafeCritical]
-        public static extern double CompareExchange(ref double location1, double value, double comparand);    
+        public static extern double CompareExchange(
+            ref double location1,
+            double value,
+            double comparand
+        );
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
-        public static extern Object CompareExchange(ref Object location1, Object value, Object comparand);
+        public static extern Object CompareExchange(
+            ref Object location1,
+            Object value,
+            Object comparand
+        );
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
-        public static extern IntPtr CompareExchange(ref IntPtr location1, IntPtr value, IntPtr comparand);
+        public static extern IntPtr CompareExchange(
+            ref IntPtr location1,
+            IntPtr value,
+            IntPtr comparand
+        );
 
         /*****************************************************************
          * CompareExchange<T>
-         * 
+         *
          * Notice how CompareExchange<T>() uses the __makeref keyword
          * to create two TypedReferences before calling _CompareExchange().
          * This is horribly slow. Ideally we would like CompareExchange<T>()
-         * to simply call CompareExchange(ref Object, Object, Object); 
-         * however, this would require casting a "ref T" into a "ref Object", 
+         * to simply call CompareExchange(ref Object, Object, Object);
+         * however, this would require casting a "ref T" into a "ref Object",
          * which is not legal in C#.
-         * 
+         *
          * Thus we opted to cheat, and hacked to JIT so that when it reads
          * the method body for CompareExchange<T>() it gets back the
          * following IL:
          *
-         *     ldarg.0 
+         *     ldarg.0
          *     ldarg.1
          *     ldarg.2
          *     call System.Threading.Interlocked::CompareExchange(ref Object, Object, Object)
@@ -188,11 +205,12 @@ namespace System.Threading
          * See getILIntrinsicImplementationForInterlocked() in VM\JitInterface.cpp
          * for details.
          *****************************************************************/
-        
+
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Runtime.InteropServices.ComVisible(false)]
         [System.Security.SecuritySafeCritical]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class
         {
             // _CompareExchange() passes back the value read from location1 via local named 'value'
             _CompareExchange(__makeref(location1), __makeref(value), comparand);
@@ -203,14 +221,23 @@ namespace System.Threading
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
-        private static extern void _CompareExchange(TypedReference location1, TypedReference value, Object comparand);
+        private static extern void _CompareExchange(
+            TypedReference location1,
+            TypedReference value,
+            Object comparand
+        );
 
         // BCL-internal overload that returns success via a ref bool param, useful for reliable spin locks.
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
-        internal static extern int CompareExchange(ref int location1, int value, int comparand, ref bool succeeded);
+        internal static extern int CompareExchange(
+            ref int location1,
+            int value,
+            int comparand,
+            ref bool succeeded
+        );
 
         /******************************
          * Add
@@ -228,25 +255,24 @@ namespace System.Threading
         internal static extern long ExchangeAdd(ref long location1, long value);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static int Add(ref int location1, int value) 
+        public static int Add(ref int location1, int value)
         {
             return ExchangeAdd(ref location1, value) + value;
         }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static long Add(ref long location1, long value) 
+        public static long Add(ref long location1, long value)
         {
             return ExchangeAdd(ref location1, value) + value;
         }
-     
+
         /******************************
          * Read
          *****************************/
         public static long Read(ref long location)
         {
-            return Interlocked.CompareExchange(ref location,0,0);
+            return Interlocked.CompareExchange(ref location, 0, 0);
         }
-
 
         public static void MemoryBarrier()
         {

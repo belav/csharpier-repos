@@ -31,8 +31,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                SelfHostHttpRequestContext context = CreateProductUnderTest(expectedServiceModelContext, configuration,
-                    request);
+                SelfHostHttpRequestContext context = CreateProductUnderTest(
+                    expectedServiceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 RequestContext serviceModelContext = context.RequestContext;
@@ -50,8 +53,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                SelfHostHttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration,
-                    expectedRequest);
+                SelfHostHttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    expectedRequest
+                );
 
                 // Act
                 HttpRequestMessage request = context.Request;
@@ -69,7 +75,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -89,9 +99,15 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
-                request.Properties[HttpSelfHostServer.SecurityKey] = CreateSecurityProperty(expectedCertificate);
+                request.Properties[HttpSelfHostServer.SecurityKey] = CreateSecurityProperty(
+                    expectedCertificate
+                );
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -111,7 +127,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 X509Certificate2 expectedCertificate = CreateCertificate();
 
                 // Act
@@ -131,9 +151,15 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
-                request.Properties[HttpSelfHostServer.SecurityKey] = CreateSecurityProperty(CreateCertificate());
+                request.Properties[HttpSelfHostServer.SecurityKey] = CreateSecurityProperty(
+                    CreateCertificate()
+                );
 
                 // Act
                 context.ClientCertificate = null;
@@ -152,8 +178,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration expectedConfiguration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, expectedConfiguration,
-                    request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    expectedConfiguration,
+                    request
+                );
 
                 // Act
                 HttpConfiguration configuration = context.Configuration;
@@ -172,8 +201,11 @@ namespace System.Web.Http.SelfHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration expectedConfiguration = CreateConfiguration())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, initialConfiguration,
-                    request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    initialConfiguration,
+                    request
+                );
 
                 // Act
                 context.Configuration = expectedConfiguration;
@@ -193,7 +225,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 context.Configuration = null;
 
                 // Act
@@ -212,7 +248,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 context.Configuration = null;
                 context.IsLocal = true;
 
@@ -233,14 +273,22 @@ namespace System.Web.Http.SelfHost
         [InlineData(false, IncludeErrorDetailPolicy.LocalOnly, false)]
         [InlineData(true, IncludeErrorDetailPolicy.Default, true)]
         [InlineData(false, IncludeErrorDetailPolicy.Default, false)]
-        public void IncludeErrorDetailGet_ForPolicy(bool expected, IncludeErrorDetailPolicy policy, bool isLocal)
+        public void IncludeErrorDetailGet_ForPolicy(
+            bool expected,
+            IncludeErrorDetailPolicy policy,
+            bool isLocal
+        )
         {
             // Arrange
             using (RequestContext serviceModelContext = CreateStubServiceModelContext())
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 context.IsLocal = isLocal;
                 configuration.IncludeErrorDetailPolicy = policy;
 
@@ -262,7 +310,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 context.IncludeErrorDetail = expectedIncludeErrorDetail;
@@ -276,14 +328,21 @@ namespace System.Web.Http.SelfHost
         [Theory]
         [InlineData(true, IncludeErrorDetailPolicy.Never)]
         [InlineData(false, IncludeErrorDetailPolicy.Always)]
-        public void IncludeErrorDetailSet_OverridesPolicy(bool expected, IncludeErrorDetailPolicy policy)
+        public void IncludeErrorDetailSet_OverridesPolicy(
+            bool expected,
+            IncludeErrorDetailPolicy policy
+        )
         {
             // Arrange
             using (RequestContext serviceModelContext = CreateStubServiceModelContext())
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 configuration.IncludeErrorDetailPolicy = policy;
 
                 // Act
@@ -305,7 +364,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 context.IsLocal = expectedIncludeErrorDetail;
                 bool ignore = context.IncludeErrorDetail;
                 context.IsLocal = !expectedIncludeErrorDetail;
@@ -327,7 +390,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 bool isLocal = context.IsLocal;
@@ -348,7 +415,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 bool isLocal = context.IsLocal;
@@ -368,7 +439,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 context.IsLocal = expectedIsLocal;
@@ -390,7 +465,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 bool ignore = context.IsLocal;
                 SetIsLocal(message, !expectedIsLocal);
 
@@ -413,7 +492,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 Thread.CurrentPrincipal = expectedPrincipal;
 
                 // Act
@@ -435,7 +518,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 context.Principal = expectedPrincipal;
@@ -454,7 +541,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, expectedRequest);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    expectedRequest
+                );
 
                 // Act
                 UrlHelper url = context.Url;
@@ -473,7 +564,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 UrlHelper firstUrl = context.Url;
 
                 // Act
@@ -492,7 +587,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 UrlHelper expectedUrl = CreateDummyUrlHelper();
 
                 // Act
@@ -512,7 +611,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 context.Url = null;
@@ -531,7 +634,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 string virtualPathRoot = context.VirtualPathRoot;
@@ -549,7 +656,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 context.Configuration = null;
 
                 // Act
@@ -570,7 +681,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration(expectedVirtualPathRoot))
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 string virtualPathRoot = context.VirtualPathRoot;
@@ -584,7 +699,9 @@ namespace System.Web.Http.SelfHost
         [InlineData("a b")]
         [InlineData("/a b")]
         [InlineData("/a%20b")]
-        public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(string configurationVirtualPathRoot)
+        public void VirtualPathRootGet_ReturnsUnescapedConfigurationVirtualPathRoot(
+            string configurationVirtualPathRoot
+        )
         {
             // Arrange
             var expectedVirtualPathRoot = "/a b";
@@ -610,7 +727,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 string expectedVirtualPathRoot = "foo";
 
                 // Act
@@ -630,7 +751,11 @@ namespace System.Web.Http.SelfHost
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage request = CreateRequest())
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
 
                 // Act
                 context.VirtualPathRoot = null;
@@ -651,7 +776,11 @@ namespace System.Web.Http.SelfHost
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration otherConfiguration = CreateConfiguration("/other"))
             {
-                HttpRequestContext context = CreateProductUnderTest(serviceModelContext, configuration, request);
+                HttpRequestContext context = CreateProductUnderTest(
+                    serviceModelContext,
+                    configuration,
+                    request
+                );
                 string ignore = context.VirtualPathRoot;
                 context.Configuration = otherConfiguration;
 
@@ -700,8 +829,11 @@ namespace System.Web.Http.SelfHost
             return message;
         }
 
-        private static SelfHostHttpRequestContext CreateProductUnderTest(RequestContext requestContext,
-            HttpConfiguration configuration, HttpRequestMessage request)
+        private static SelfHostHttpRequestContext CreateProductUnderTest(
+            RequestContext requestContext,
+            HttpConfiguration configuration,
+            HttpRequestMessage request
+        )
         {
             return new SelfHostHttpRequestContext(requestContext, configuration, request);
         }
@@ -714,7 +846,9 @@ namespace System.Web.Http.SelfHost
         private static SecurityMessageProperty CreateSecurityProperty(X509Certificate2 certificate)
         {
             AuthorizationContext authorizationContext = new X509AuthorizationContext(certificate);
-            ServiceSecurityContext securityContext = new ServiceSecurityContext(authorizationContext);
+            ServiceSecurityContext securityContext = new ServiceSecurityContext(
+                authorizationContext
+            );
             SecurityMessageProperty securityProperty = new SecurityMessageProperty();
             securityProperty.ServiceSecurityContext = securityContext;
             return securityProperty;
@@ -742,8 +876,8 @@ namespace System.Web.Http.SelfHost
         private static void SetIsLocal(Message message, bool value)
         {
             IPAddress address = value ? IPAddress.Loopback : IPAddress.None;
-            message.Properties[RemoteEndpointMessageProperty.Name] = new RemoteEndpointMessageProperty(
-                address.ToString(), 0);
+            message.Properties[RemoteEndpointMessageProperty.Name] =
+                new RemoteEndpointMessageProperty(address.ToString(), 0);
         }
 
         private class X509AuthorizationContext : AuthorizationContext
@@ -753,8 +887,9 @@ namespace System.Web.Http.SelfHost
             public X509AuthorizationContext(X509Certificate2 certificate)
             {
                 Contract.Assert(certificate != null);
-                _claimSets = new ReadOnlyCollection<ClaimSet>(new List<ClaimSet>(new ClaimSet[] {
-                    new X509CertificateClaimSet(certificate) }));
+                _claimSets = new ReadOnlyCollection<ClaimSet>(
+                    new List<ClaimSet>(new ClaimSet[] { new X509CertificateClaimSet(certificate) })
+                );
             }
 
             public override ReadOnlyCollection<ClaimSet> ClaimSets

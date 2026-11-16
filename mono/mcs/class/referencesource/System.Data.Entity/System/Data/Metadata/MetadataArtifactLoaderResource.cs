@@ -30,7 +30,11 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="path">The path to the resource to load</param>
         /// <param name="uriRegistry">The global registry of URIs</param>
-        internal MetadataArtifactLoaderResource(Assembly assembly, string resourceName, ICollection<string> uriRegistry)
+        internal MetadataArtifactLoaderResource(
+            Assembly assembly,
+            string resourceName,
+            ICollection<string> uriRegistry
+        )
         {
             Debug.Assert(assembly != null);
             Debug.Assert(resourceName != null);
@@ -38,7 +42,10 @@ namespace System.Data.Metadata.Edm
             _assembly = assembly;
             _resourceName = resourceName;
 
-            string tempPath = MetadataArtifactLoaderCompositeResource.CreateResPath(_assembly, _resourceName);
+            string tempPath = MetadataArtifactLoaderCompositeResource.CreateResPath(
+                _assembly,
+                _resourceName
+            );
             _alreadyLoaded = uriRegistry.Contains(tempPath);
             if (!_alreadyLoaded)
             {
@@ -53,9 +60,12 @@ namespace System.Data.Metadata.Edm
 
         public override string Path
         {
-            get 
+            get
             {
-                return MetadataArtifactLoaderCompositeResource.CreateResPath(_assembly, _resourceName);
+                return MetadataArtifactLoaderCompositeResource.CreateResPath(
+                    _assembly,
+                    _resourceName
+                );
             }
         }
 
@@ -133,12 +143,13 @@ namespace System.Data.Metadata.Edm
         /// Create and return an XmlReader around the resource represented by this instance.
         /// </summary>
         /// <returns>A List of XmlReaders for all resources</returns>
-        public override List<XmlReader> GetReaders(Dictionary<MetadataArtifactLoader, XmlReader> sourceDictionary)
+        public override List<XmlReader> GetReaders(
+            Dictionary<MetadataArtifactLoader, XmlReader> sourceDictionary
+        )
         {
             List<XmlReader> list = new List<XmlReader>();
             if (!_alreadyLoaded)
             {
-
                 XmlReader reader = CreateReader();
                 list.Add(reader);
 
@@ -152,7 +163,6 @@ namespace System.Data.Metadata.Edm
 
         private XmlReader CreateReader()
         {
-
             Stream stream = LoadResource();
 
             XmlReaderSettings readerSettings = Schema.CreateEdmStandardXmlReaderSettings();

@@ -6,8 +6,8 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Net.Sockets;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [KnownType(typeof(TcpDuplicateContext))]
@@ -28,18 +28,12 @@ namespace System.ServiceModel.Activation
 
         public Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
         }
 
         public byte[] ReadData
         {
-            get
-            {
-                return this.readData;
-            }
+            get { return this.readData; }
         }
     }
 }

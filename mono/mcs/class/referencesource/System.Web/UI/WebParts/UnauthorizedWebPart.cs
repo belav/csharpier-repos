@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -14,16 +14,18 @@ namespace System.Web.UI.WebControls.WebParts {
     using System.Web.UI.WebControls;
     using System.Web.Util;
 
-    [
-    ToolboxItem(false)
-    ]
-    public sealed class UnauthorizedWebPart : ProxyWebPart {
+    [ToolboxItem(false)]
+    public sealed class UnauthorizedWebPart : ProxyWebPart
+    {
+        public UnauthorizedWebPart(WebPart webPart)
+            : base(webPart) { }
 
-        public UnauthorizedWebPart(WebPart webPart) : base(webPart) {
-        }
-
-        public UnauthorizedWebPart(string originalID, string originalTypeName, string originalPath, string genericWebPartID) :
-            base(originalID, originalTypeName, originalPath, genericWebPartID) {
-        }
+        public UnauthorizedWebPart(
+            string originalID,
+            string originalTypeName,
+            string originalPath,
+            string genericWebPartID
+        )
+            : base(originalID, originalTypeName, originalPath, genericWebPartID) { }
     }
 }

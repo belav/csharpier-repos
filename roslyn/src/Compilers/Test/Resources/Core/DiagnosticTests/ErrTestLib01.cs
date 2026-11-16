@@ -13,8 +13,10 @@ namespace NS
         // for CS1682
         public class B { }
     }
+
     // for CS1684
     public class C { }
+
     // for CS1714
     public class D<T> { }
 }

@@ -18,14 +18,29 @@ namespace System.PrivateUri.Tests
             yield return new object[] { HighSurrogate + LowSurrogate, "%F0%9F%BF%BE" };
             yield return new object[] { HighSurrogate, UrlEncodedReplacementChar };
             yield return new object[] { LowSurrogate, UrlEncodedReplacementChar };
-            yield return new object[] { LowSurrogate + HighSurrogate, UrlEncodedReplacementChar + UrlEncodedReplacementChar };
-            yield return new object[] { LowSurrogate + LowSurrogate, UrlEncodedReplacementChar + UrlEncodedReplacementChar };
-            yield return new object[] { HighSurrogate + HighSurrogate, UrlEncodedReplacementChar + UrlEncodedReplacementChar };
+            yield return new object[]
+            {
+                LowSurrogate + HighSurrogate,
+                UrlEncodedReplacementChar + UrlEncodedReplacementChar,
+            };
+            yield return new object[]
+            {
+                LowSurrogate + LowSurrogate,
+                UrlEncodedReplacementChar + UrlEncodedReplacementChar,
+            };
+            yield return new object[]
+            {
+                HighSurrogate + HighSurrogate,
+                UrlEncodedReplacementChar + UrlEncodedReplacementChar,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ReplacesStandaloneSurrogatesWithReplacementChar_Data))]
-        public static void ReplacesStandaloneSurrogatesWithReplacementChar(string input, string expected)
+        public static void ReplacesStandaloneSurrogatesWithReplacementChar(
+            string input,
+            string expected
+        )
         {
             const string Prefix = "scheme:";
             Uri uri = new Uri(Prefix + input);

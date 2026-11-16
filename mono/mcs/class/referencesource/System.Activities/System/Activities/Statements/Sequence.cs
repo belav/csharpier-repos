@@ -41,7 +41,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -64,14 +64,17 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.activities;
             }
         }
 
-        protected override void OnCreateDynamicUpdateMap(DynamicUpdate.NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            DynamicUpdate.NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             // Our algorithm for recovering from update depends on iterating a unique Activities list.
             // So we can't support update if the same activity is referenced more than once.
@@ -109,7 +112,10 @@ namespace System.Activities.Statements
         {
             int completedInstanceIndex = this.lastIndexHint.Get(context);
 
-            if (completedInstanceIndex >= this.Activities.Count || this.Activities[completedInstanceIndex] != completedInstance.Activity)
+            if (
+                completedInstanceIndex >= this.Activities.Count
+                || this.Activities[completedInstanceIndex] != completedInstance.Activity
+            )
             {
                 completedInstanceIndex = this.Activities.IndexOf(completedInstance.Activity);
             }

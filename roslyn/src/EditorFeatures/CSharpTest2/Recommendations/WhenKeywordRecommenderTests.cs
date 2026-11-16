@@ -15,70 +15,62 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestForCatchClause_AfterCatch()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"try {} catch $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"try {} catch $$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_AfterCatchDeclaration1()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"try {} catch (Exception) $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"try {} catch (Exception) $$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_AfterCatchDeclaration2()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"try {} catch (Exception e) $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"try {} catch (Exception e) $$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_AfterCatchDeclarationEmpty()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"try {} catch () $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"try {} catch () $$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_NotAfterTryBlock()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"try {} $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"try {} $$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_NotAfterFilter1()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"try {} catch (Exception e) when $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"try {} catch (Exception e) when $$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_NotAfterFilter2()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"try {} catch (Exception e) when ($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"try {} catch (Exception e) when ($$"));
         }
 
         [Fact]
         public async Task TestForCatchClause_NotAfterFilter3()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"try {} catch (Exception e) when (true) $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"try {} catch (Exception e) when (true) $$"));
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24113")]
-        public async Task TestForSwitchCase_AfterDeclarationPattern()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (1) { case int i $$ }"));
+        public async Task TestForSwitchCase_AfterDeclarationPattern() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"switch (1) { case int i $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_AfterDeclarationPattern_BeforeBreak()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (1) { case int i $$ break; }"));
+        public async Task TestForSwitchCase_AfterDeclarationPattern_BeforeBreak() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"switch (1) { case int i $$ break; }"));
 
         [Fact]
-        public async Task TestForSwitchCase_AfterDeclarationPattern_BeforeWhen()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (1) { case int i $$ when }"));
+        public async Task TestForSwitchCase_AfterDeclarationPattern_BeforeWhen() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"switch (1) { case int i $$ when }"));
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/25084")]
         [InlineData("int.MinValue")]
@@ -86,8 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("1 + 1")]
         [InlineData("true ? 1 : 1")]
         [InlineData("(1 + )")]
-        public async Task TestForSwitchCase_AfterExpression(string expression)
-            => await VerifyKeywordAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ }}"));
+        public async Task TestForSwitchCase_AfterExpression(string expression) =>
+            await VerifyKeywordAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ }}"));
 
         [Theory]
         [InlineData("int.MinValue")]
@@ -95,8 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("1 + 1")]
         [InlineData("true ? 1 : 1")]
         [InlineData("(1 + )")]
-        public async Task TestForSwitchCase_AfterExpression_BeforeBreak(string expression)
-            => await VerifyKeywordAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ break; }}"));
+        public async Task TestForSwitchCase_AfterExpression_BeforeBreak(string expression) =>
+            await VerifyKeywordAsync(
+                AddInsideMethod($@"switch (1) {{ case {expression} $$ break; }}")
+            );
 
         [Theory]
         [InlineData("int.MinValue")]
@@ -104,8 +98,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("1 + 1")]
         [InlineData("true ? 1 : 1")]
         [InlineData("(1 + )")]
-        public async Task TestForSwitchCase_AfterExpression_BeforeWhen(string expression)
-            => await VerifyKeywordAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ when }}"));
+        public async Task TestForSwitchCase_AfterExpression_BeforeWhen(string expression) =>
+            await VerifyKeywordAsync(
+                AddInsideMethod($@"switch (1) {{ case {expression} $$ when }}")
+            );
 
         [Theory]
         [InlineData("int.")]
@@ -115,8 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("true ? 1 :")]
         [InlineData("(1")]
         [InlineData("(1 + 1")]
-        public async Task TestForSwitchCase_NotAfterIncompleteExpression(string expression)
-            => await VerifyAbsenceAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ }}"));
+        public async Task TestForSwitchCase_NotAfterIncompleteExpression(string expression) =>
+            await VerifyAbsenceAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ }}"));
 
         [Theory]
         [InlineData("int.")]
@@ -126,8 +122,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("true ? 1 :")]
         [InlineData("(1")]
         [InlineData("(1 + 1")]
-        public async Task TestForSwitchCase_NotAfterIncompleteExpression_BeforeBreak(string expression)
-            => await VerifyAbsenceAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ break; }}"));
+        public async Task TestForSwitchCase_NotAfterIncompleteExpression_BeforeBreak(
+            string expression
+        ) =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod($@"switch (1) {{ case {expression} $$ break; }}")
+            );
 
         [Theory]
         [InlineData("int.")]
@@ -137,226 +137,267 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("true ? 1 :")]
         [InlineData("(1")]
         [InlineData("(1 + 1")]
-        public async Task TestForSwitchCase_NotAfterIncompleteExpression_BeforeWhen(string expression)
-            => await VerifyAbsenceAsync(AddInsideMethod($@"switch (1) {{ case {expression} $$ when }}"));
+        public async Task TestForSwitchCase_NotAfterIncompleteExpression_BeforeWhen(
+            string expression
+        ) =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod($@"switch (1) {{ case {expression} $$ when }}")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_NotInsideExpression()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case (1 + 1 $$) }"));
+        public async Task TestForSwitchCase_NotInsideExpression() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case (1 + 1 $$) }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotInsideExpression_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case (1 + 1 $$) break; }"));
+        public async Task TestForSwitchCase_NotInsideExpression_BeforeBreak() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case (1 + 1 $$) break; }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotInsideExpression_BeforeWhen()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case (1 + 1 $$) when }"));
+        public async Task TestForSwitchCase_NotInsideExpression_BeforeWhen() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case (1 + 1 $$) when }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterCase()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case $$ }"));
+        public async Task TestForSwitchCase_NotAfterCase() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterCase_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case $$ break; }"));
+        public async Task TestForSwitchCase_NotAfterCase_BeforeBreak() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case $$ break; }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterCase_BeforeWhen()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case $$ when }"));
+        public async Task TestForSwitchCase_NotAfterCase_BeforeWhen() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case $$ when }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterDefault()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { default $$ }"));
+        public async Task TestForSwitchCase_NotAfterDefault() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { default $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterDefault_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { default $$ break; }"));
+        public async Task TestForSwitchCase_NotAfterDefault_BeforeBreak() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { default $$ break; }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterWhen()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1 when $$ }"));
+        public async Task TestForSwitchCase_NotAfterWhen() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1 when $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterWhen_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1 when $$ break; }"));
+        public async Task TestForSwitchCase_NotAfterWhen_BeforeBreak() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1 when $$ break; }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterColon()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1: $$ }"));
+        public async Task TestForSwitchCase_NotAfterColon() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1: $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotAfterColon_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1: $$ break; }"));
+        public async Task TestForSwitchCase_NotAfterColon_BeforeBreak() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { case 1: $$ break; }"));
 
         [Fact]
-        public async Task TestForSwitchCase_NotInEmptySwitchStatement()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { $$ }"));
+        public async Task TestForSwitchCase_NotInEmptySwitchStatement() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (1) { $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterPredefinedType()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case int $$ }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterPredefinedType() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case int $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterPredefinedType_BeforeBreak()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case int $$ break; }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterPredefinedType_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case int $$ break; }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterPredefinedType_BeforeWhen()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case int $$ when }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterPredefinedType_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case int $$ when }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterGenericType()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case Dictionary<string, int> $$ }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterGenericType() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case Dictionary<string, int> $$ }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterGenericType_BeforeBreak()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case Dictionary<string, int> $$ break; }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterGenericType_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case Dictionary<string, int> $$ break; }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterGenericType_BeforeWhen()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case Dictionary<string, int> $$ when }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterGenericType_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case Dictionary<string, int> $$ when }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterCustomType()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterCustomType() =>
+            await VerifyKeywordAsync(
+                """
                 class SyntaxNode { }
                 class C
                 {
                     void M() { switch (new object()) { case SyntaxNode $$ } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterCustomType_BeforeBreak()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterCustomType_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                """
                 class SyntaxNode { }
                 class C
                 {
                     void M() { switch (new object()) { case SyntaxNode $$ break; } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterCustomType_BeforeWhen()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterCustomType_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                """
                 class SyntaxNode { }
                 class C
                 {
                     void M() { switch (new object()) { case SyntaxNode $$ when } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAlias()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAlias() =>
+            await VerifyKeywordAsync(
+                """
                 using Type = System.String;
                 class C
                 {
                     void M() { switch (new object()) { case Type $$ } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAlias_BeforeBreak()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAlias_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                """
                 using Type = System.String;
                 class C
                 {
                     void M() { switch (new object()) { case Type $$ break; } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAlias_BeforeWhen()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAlias_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                """
                 using Type = System.String;
                 class C
                 {
                     void M() { switch (new object()) { case Type $$ when } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterOverloadedTypeName()
-    => await VerifyKeywordAsync("""
-        class ValueTuple { }
-        class ValueTuple<T> { }
-        class C
-        {
-            void M() { switch (new object()) { case ValueTuple $$ } }
-        }
-        """);
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterOverloadedTypeName() =>
+            await VerifyKeywordAsync(
+                """
+                class ValueTuple { }
+                class ValueTuple<T> { }
+                class C
+                {
+                    void M() { switch (new object()) { case ValueTuple $$ } }
+                }
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterOverloadedTypeName_BeforeBreak()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterOverloadedTypeName_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                """
                 class ValueTuple { }
                 class ValueTuple<T> { }
                 class C
                 {
                     void M() { switch (new object()) { case ValueTuple $$ break; } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterOverloadedTypeName_BeforeWhen()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterOverloadedTypeName_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                """
                 class ValueTuple { }
                 class ValueTuple<T> { }
                 class C
                 {
                     void M() { switch (new object()) { case ValueTuple $$ when } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterColorColor()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_AfterColorColor() =>
+            await VerifyKeywordAsync(
+                """
                 class Color { }
                 class C
                 {
                     const Color Color = null;
                     void M() { switch (new object()) { case Color $$ } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterColorColor_BeforeBreak()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_AfterColorColor_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                """
                 class Color { }
                 class C
                 {
                     const Color Color = null;
                     void M() { switch (new object()) { case Color $$ break; } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterColorColor_BeforeWhen()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_AfterColorColor_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                """
                 class Color { }
                 class C
                 {
                     const Color Color = null;
                     void M() { switch (new object()) { case Color $$ when } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterOverloadedTypeNameColorColor()
-    => await VerifyKeywordAsync("""
-        class Color<T> { }
-        class Color { }
-        class C
-        {
-            const Color Color = null;
-            void M() { switch (new object()) { case Color $$ } }
-        }
-        """);
+        public async Task TestForSwitchCase_SemanticCheck_AfterOverloadedTypeNameColorColor() =>
+            await VerifyKeywordAsync(
+                """
+                class Color<T> { }
+                class Color { }
+                class C
+                {
+                    const Color Color = null;
+                    void M() { switch (new object()) { case Color $$ } }
+                }
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterOverloadedTypeNameColorColor_BeforeBreak()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_AfterOverloadedTypeNameColorColor_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                """
                 class Color<T> { }
                 class Color { }
                 class C
@@ -364,11 +405,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     const Color Color = null;
                     void M() { switch (new object()) { case Color $$ break; } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterOverloadedTypeNameColorColor_BeforeWhen()
-            => await VerifyKeywordAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_AfterOverloadedTypeNameColorColor_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                """
                 class Color<T> { }
                 class Color { }
                 class C
@@ -376,195 +419,247 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     const Color Color = null;
                     void M() { switch (new object()) { case Color $$ when } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstant()
-            => await VerifyKeywordAsync(AddInsideMethod(@"const object c = null; switch (new object()) { case c $$ }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstant() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"const object c = null; switch (new object()) { case c $$ }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstant_BeforeBreak()
-            => await VerifyKeywordAsync(AddInsideMethod(@"const object c = null; switch (new object()) { case c $$ break; }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstant_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"const object c = null; switch (new object()) { case c $$ break; }"
+                )
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstant_BeforeWhen()
-            => await VerifyKeywordAsync(AddInsideMethod(@"const object c = null; switch (new object()) { case c $$ when }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstant_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"const object c = null; switch (new object()) { case c $$ when }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterUnknownName()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case unknown $$ }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterUnknownName() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case unknown $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterUnknownName_BeforeBreak()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case unknown $$ break; }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterUnknownName_BeforeBreak() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case unknown $$ break; }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterUnknownName_BeforeWhen()
-            => await VerifyKeywordAsync(AddInsideMethod(@"switch (new object()) { case unknown $$ when }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterUnknownName_BeforeWhen() =>
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"switch (new object()) { case unknown $$ when }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterVar()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (new object()) { case var $$ }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterVar() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch (new object()) { case var $$ }"));
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterVar_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (new object()) { case var $$ break; }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterVar_BeforeBreak() =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod(@"switch (new object()) { case var $$ break; }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterVar_BeforeWhen()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"switch (new object()) { case var $$ when }"));
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterVar_BeforeWhen() =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod(@"switch (new object()) { case var $$ when }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterClassVar()
-            => await VerifyAbsenceAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterClassVar() =>
+            await VerifyAbsenceAsync(
+                """
                 class var { }
                 class C
                 {
                     void M() { switch (new object()) { case var $$ } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterClassVar_BeforeBreak()
-            => await VerifyAbsenceAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterClassVar_BeforeBreak() =>
+            await VerifyAbsenceAsync(
+                """
                 class var { }
                 class C
                 {
                     void M() { switch (new object()) { case var $$ break; } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_NotAfterClassVar_BeforeWhen()
-            => await VerifyAbsenceAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_NotAfterClassVar_BeforeWhen() =>
+            await VerifyAbsenceAsync(
+                """
                 class var { }
                 class C
                 {
                     void M() { switch (new object()) { case var $$ when } }
                 }
-                """);
+                """
+            );
 
         [Fact]
         public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAliasVar()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using var = System.String;
                 class C
                 {
                     void M() { switch (new object()) { case var $$ } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAliasVar_BeforeBreak()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using var = System.String;
                 class C
                 {
                     void M() { switch (new object()) { case var $$ break; } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestForSwitchCase_SemanticCheck_NotAfterTypeAliasVar_BeforeWhen()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using var = System.String;
                 class C
                 {
                     void M() { switch (new object()) { case var $$ when } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstantVar()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"const object var = null; switch (new object()) { case var $$ }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstantVar() =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod(@"const object var = null; switch (new object()) { case var $$ }")
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstantVar_BeforeBreak()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"const object var = null; switch (new object()) { case var $$ break; }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstantVar_BeforeBreak() =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"const object var = null; switch (new object()) { case var $$ break; }"
+                )
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstantVar_BeforeWhen()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"const object var = null; switch (new object()) { case var $$ when }"));
+        public async Task TestForSwitchCase_SemanticCheck_AfterLocalConstantVar_BeforeWhen() =>
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"const object var = null; switch (new object()) { case var $$ when }"
+                )
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterClassAndLocalConstantVar()
-            => await VerifyAbsenceAsync("""
+        public async Task TestForSwitchCase_SemanticCheck_AfterClassAndLocalConstantVar() =>
+            await VerifyAbsenceAsync(
+                """
                 class var { }
                 class C
                 {
                     void M() { const object var = null; switch (new object()) { case var $$ } }
                 }
-                """);
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterClassAndLocalConstantVar_BeforeBreak()
-    => await VerifyAbsenceAsync("""
-        class var { }
-        class C
-        {
-            void M() { const object var = null; switch (new object()) { case var $$ break; } }
-        }
-        """);
+        public async Task TestForSwitchCase_SemanticCheck_AfterClassAndLocalConstantVar_BeforeBreak() =>
+            await VerifyAbsenceAsync(
+                """
+                class var { }
+                class C
+                {
+                    void M() { const object var = null; switch (new object()) { case var $$ break; } }
+                }
+                """
+            );
 
         [Fact]
-        public async Task TestForSwitchCase_SemanticCheck_AfterClassAndLocalConstantVar_BeforeWhen()
-    => await VerifyAbsenceAsync("""
-        class var { }
-        class C
-        {
-            void M() { const object var = null; switch (new object()) { case var $$ when } }
-        }
-        """);
+        public async Task TestForSwitchCase_SemanticCheck_AfterClassAndLocalConstantVar_BeforeWhen() =>
+            await VerifyAbsenceAsync(
+                """
+                class var { }
+                class C
+                {
+                    void M() { const object var = null; switch (new object()) { case var $$ when } }
+                }
+                """
+            );
 
         [Fact]
         public async Task TestForSwitchCase_SemanticCheck_AfterTypeAliasAndFieldConstantVar()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using var = System.String;
                 class C
                 {
                     const object var = null;
                     void M() { switch (new object()) { case var $$ } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestForSwitchCase_SemanticCheck_AfterTypeAliasAndFieldConstantVar_BeforeBreak()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using var = System.String;
                 class C
                 {
                     const object var = null;
                     void M() { switch (new object()) { case var $$ break; } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestForSwitchCase_SemanticCheck_AfterTypeAliasAndFieldConstantVar_BeforeWhen()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using var = System.String;
                 class C
                 {
                     const object var = null;
                     void M() { switch (new object()) { case var $$ when } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44480")]
         public async Task TestAfterSwitchExpressionPattern1()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 using var = System.String;
                 class C
                 {
@@ -576,13 +671,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44480")]
         public async Task TestAfterSwitchExpressionPattern2()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 using var = System.String;
                 class C
                 {
@@ -594,13 +691,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44480")]
         public async Task TestAfterSwitchExpressionPattern3()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 using var = System.String;
                 class C
                 {
@@ -612,13 +711,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44480")]
         public async Task TestAfterSwitchExpressionPattern4()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 using var = System.String;
                 class C
                 {
@@ -630,7 +731,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

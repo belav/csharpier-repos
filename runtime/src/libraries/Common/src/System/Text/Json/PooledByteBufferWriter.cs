@@ -33,7 +33,8 @@ namespace System.Text.Json
 #endif
         }
 
-        public PooledByteBufferWriter(int initialCapacity) : this()
+        public PooledByteBufferWriter(int initialCapacity)
+            : this()
         {
             Debug.Assert(initialCapacity > 0);
 
@@ -125,7 +126,8 @@ namespace System.Text.Json
             _index = 0;
         }
 
-        public static PooledByteBufferWriter CreateEmptyInstanceForCaching() => new PooledByteBufferWriter();
+        public static PooledByteBufferWriter CreateEmptyInstanceForCaching() =>
+            new PooledByteBufferWriter();
 
         public void Advance(int count)
         {
@@ -148,7 +150,10 @@ namespace System.Text.Json
         }
 
 #if NETCOREAPP
-        internal ValueTask WriteToStreamAsync(Stream destination, CancellationToken cancellationToken)
+        internal ValueTask WriteToStreamAsync(
+            Stream destination,
+            CancellationToken cancellationToken
+        )
         {
             return destination.WriteAsync(WrittenMemory, cancellationToken);
         }
@@ -197,7 +202,9 @@ namespace System.Text.Json
                     newSize = currentLength + sizeHint;
                     if ((uint)newSize > MaximumBufferSize)
                     {
-                        ThrowHelper.ThrowOutOfMemoryException_BufferMaximumSizeExceeded((uint)newSize);
+                        ThrowHelper.ThrowOutOfMemoryException_BufferMaximumSizeExceeded(
+                            (uint)newSize
+                        );
                     }
                 }
 

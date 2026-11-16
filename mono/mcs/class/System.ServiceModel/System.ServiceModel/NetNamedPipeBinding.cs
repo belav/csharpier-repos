@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,105 +37,115 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	public class NetNamedPipeBinding : Binding, IBindingRuntimePreferences
-	{
-		// We don't support PNRP
-		public static bool IsPnrpAvailable {
-			get { return false; }
-		}
+    public class NetNamedPipeBinding : Binding, IBindingRuntimePreferences
+    {
+        // We don't support PNRP
+        public static bool IsPnrpAvailable
+        {
+            get { return false; }
+        }
 
-		XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas ();
-		NetNamedPipeSecurity security;
-		NamedPipeTransportBindingElement transport = new NamedPipeTransportBindingElement ();
+        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas();
+        NetNamedPipeSecurity security;
+        NamedPipeTransportBindingElement transport = new NamedPipeTransportBindingElement();
 
-		public NetNamedPipeBinding ()
-			: this (NetNamedPipeSecurityMode.None)
-		{
-		}
+        public NetNamedPipeBinding()
+            : this(NetNamedPipeSecurityMode.None) { }
 
-		public NetNamedPipeBinding (NetNamedPipeSecurityMode securityMode)
-		{
-			security = new NetNamedPipeSecurity () { Mode = securityMode };
-		}
+        public NetNamedPipeBinding(NetNamedPipeSecurityMode securityMode)
+        {
+            security = new NetNamedPipeSecurity() { Mode = securityMode };
+        }
 
-		[MonoTODO]
-		public NetNamedPipeBinding (string configurationName)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public NetNamedPipeBinding(string configurationName)
+        {
+            throw new NotImplementedException();
+        }
 
-		public EnvelopeVersion EnvelopeVersion {
-			get { return EnvelopeVersion.Soap12; }
-		}
+        public EnvelopeVersion EnvelopeVersion
+        {
+            get { return EnvelopeVersion.Soap12; }
+        }
 
-		[MonoTODO]
-		public HostNameComparisonMode HostNameComparisonMode {
-			get { return transport.HostNameComparisonMode; }
-			set { transport.HostNameComparisonMode = value; }
-		}
+        [MonoTODO]
+        public HostNameComparisonMode HostNameComparisonMode
+        {
+            get { return transport.HostNameComparisonMode; }
+            set { transport.HostNameComparisonMode = value; }
+        }
 
-		[MonoTODO]
-		public long MaxBufferPoolSize {
-			get { return transport.MaxBufferPoolSize; }
-			set { transport.MaxBufferPoolSize = value; }
-		}
+        [MonoTODO]
+        public long MaxBufferPoolSize
+        {
+            get { return transport.MaxBufferPoolSize; }
+            set { transport.MaxBufferPoolSize = value; }
+        }
 
-		[MonoTODO]
-		public int MaxBufferSize {
-			get { return transport.MaxBufferSize; }
-			set { transport.MaxBufferSize = value; }
-		}
+        [MonoTODO]
+        public int MaxBufferSize
+        {
+            get { return transport.MaxBufferSize; }
+            set { transport.MaxBufferSize = value; }
+        }
 
-		[MonoTODO]
-		public int MaxConnections { get; set; }
+        [MonoTODO]
+        public int MaxConnections { get; set; }
 
-		[MonoTODO]
-		public long MaxReceivedMessageSize {
-			get { return transport.MaxReceivedMessageSize; }
-			set { transport.MaxReceivedMessageSize = value; }
-		}
+        [MonoTODO]
+        public long MaxReceivedMessageSize
+        {
+            get { return transport.MaxReceivedMessageSize; }
+            set { transport.MaxReceivedMessageSize = value; }
+        }
 
-		public XmlDictionaryReaderQuotas ReaderQuotas {
-			get { return reader_quotas; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("value");
-				reader_quotas = value;
-			}
-		}
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
+            get { return reader_quotas; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                reader_quotas = value;
+            }
+        }
 
-		public override string Scheme {
-			get { return "net.pipe"; }
-		}
-		
-		public NetNamedPipeSecurity Security {
-			get { return security; }
-		}
+        public override string Scheme
+        {
+            get { return "net.pipe"; }
+        }
 
-		[MonoTODO]
-		public bool TransactionFlow { get; set; }
+        public NetNamedPipeSecurity Security
+        {
+            get { return security; }
+        }
 
-		[MonoTODO]
-		public TransactionProtocol TransactionProtocol { get; set; }
+        [MonoTODO]
+        public bool TransactionFlow { get; set; }
 
-		public TransferMode TransferMode {
-			get { return transport.TransferMode; }
-			set { transport.TransferMode = value; }
-		}
+        [MonoTODO]
+        public TransactionProtocol TransactionProtocol { get; set; }
 
-		public override BindingElementCollection CreateBindingElements ()
-		{
-			var mbe = new BinaryMessageEncodingBindingElement ();
-			if (ReaderQuotas != null)
-				ReaderQuotas.CopyTo (mbe.ReaderQuotas);
+        public TransferMode TransferMode
+        {
+            get { return transport.TransferMode; }
+            set { transport.TransferMode = value; }
+        }
 
-			return new BindingElementCollection (new BindingElement [] { mbe, transport.Clone () });
-		}
+        public override BindingElementCollection CreateBindingElements()
+        {
+            var mbe = new BinaryMessageEncodingBindingElement();
+            if (ReaderQuotas != null)
+                ReaderQuotas.CopyTo(mbe.ReaderQuotas);
 
-		// explicit interface implementations
+            return new BindingElementCollection(new BindingElement[] { mbe, transport.Clone() });
+        }
 
-		bool IBindingRuntimePreferences.ReceiveSynchronously {
-			get { return false; }
-		}
-	}
+        // explicit interface implementations
+
+        bool IBindingRuntimePreferences.ReceiveSynchronously
+        {
+            get { return false; }
+        }
+    }
 }

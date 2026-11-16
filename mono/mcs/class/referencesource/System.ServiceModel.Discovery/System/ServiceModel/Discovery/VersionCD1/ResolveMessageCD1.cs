@@ -9,12 +9,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
     [MessageContract(IsWrapped = false)]
     class ResolveMessageCD1
     {
-        [MessageBodyMember(Name = ProtocolStrings.SchemaNames.ResolveElement, Namespace = ProtocolStrings.VersionCD1.Namespace)]
-        public ResolveCriteriaCD1 Resolve
-        {
-            get;
-            set;
-        }
+        [MessageBodyMember(
+            Name = ProtocolStrings.SchemaNames.ResolveElement,
+            Namespace = ProtocolStrings.VersionCD1.Namespace
+        )]
+        public ResolveCriteriaCD1 Resolve { get; set; }
     }
 }
-

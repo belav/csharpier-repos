@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 {
     public class SpeculativeTCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(SpeculativeTCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(SpeculativeTCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task IsCommitCharacterTest()
@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
-        public void IsTextualTriggerCharacterTest()
-            => TestCommonIsTextualTriggerCharacter();
+        public void IsTextualTriggerCharacterTest() => TestCommonIsTextualTriggerCharacter();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task SendEnterThroughToEditorTest()
@@ -47,9 +46,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifySendEnterThroughToEnterAsync(markup, "T", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "T", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "T", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "T",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "T",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "T",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -825,7 +839,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             var markup = @"$$";
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -833,7 +852,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             var markup = @"void $$";
 
-            await VerifyItemIsAbsentAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemIsAbsentAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -841,7 +865,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             var markup = @"int $$";
 
-            await VerifyItemIsAbsentAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemIsAbsentAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -852,7 +881,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 Func<$$
                 """;
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -863,7 +897,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 Func<Func<$$
                 """;
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -874,7 +913,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 Func<Func<int,$$
                 """;
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]

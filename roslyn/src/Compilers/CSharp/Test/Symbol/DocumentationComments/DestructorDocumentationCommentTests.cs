@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public DestructorDocumentationCommentTests()
         {
-            _compilation = CreateCompilationWithMscorlib40AndDocumentationComments(@"namespace Acme
+            _compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                @"namespace Acme
 {
 	class Widget: IProcess
 	{
@@ -29,21 +30,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         ~Widget() {...}
 	}
 }
-");
+"
+            );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace.GetMembers("Acme").Single();
+            _acmeNamespace = (NamespaceSymbol)
+                _compilation.GlobalNamespace.GetMembers("Acme").Single();
             _widgetClass = _acmeNamespace.GetTypeMembers("Widget").Single();
         }
 
         [Fact]
         public void TestDestructor()
         {
-            Assert.Equal("M:Acme.Widget.Finalize", _widgetClass.GetMembers("Finalize").Single().GetDocumentationCommentId());
             Assert.Equal(
-@"<member name=""M:Acme.Widget.Finalize"">
+                "M:Acme.Widget.Finalize",
+                _widgetClass.GetMembers("Finalize").Single().GetDocumentationCommentId()
+            );
+            Assert.Equal(
+                @"<member name=""M:Acme.Widget.Finalize"">
     <summary>Destructor Documentation</summary>
 </member>
-", _widgetClass.GetMembers("Finalize").Single().GetDocumentationCommentXml());
+",
+                _widgetClass.GetMembers("Finalize").Single().GetDocumentationCommentXml()
+            );
         }
     }
 }

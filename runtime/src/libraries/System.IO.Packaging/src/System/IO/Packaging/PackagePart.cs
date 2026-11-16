@@ -37,9 +37,7 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentNullException">If parameter "package" is null</exception>
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
         protected PackagePart(Package package, Uri partUri)
-            : this(package, partUri, null, CompressionOption.NotCompressed)
-        {
-        }
+            : this(package, partUri, null, CompressionOption.NotCompressed) { }
 
         /// <summary>
         /// Protected constructor for the abstract Base class.
@@ -65,10 +63,7 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
         /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri syntax</exception>
         protected PackagePart(Package package, Uri partUri, string? contentType)
-            : this(package, partUri, contentType, CompressionOption.NotCompressed)
-        {
-        }
-
+            : this(package, partUri, contentType, CompressionOption.NotCompressed) { }
 
         /// <summary>
         /// Protected constructor for the abstract Base class.
@@ -93,10 +88,12 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
         /// <exception cref="ArgumentOutOfRangeException">If CompressionOption enumeration [compressionOption] does not have one of the valid values</exception>
         /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri syntax</exception>
-        protected PackagePart(Package package,
-                                Uri partUri,
-                                string? contentType,
-                                CompressionOption compressionOption)
+        protected PackagePart(
+            Package package,
+            Uri partUri,
+            string? contentType,
+            CompressionOption compressionOption
+        )
         {
             if (package is null)
             {
@@ -194,7 +191,6 @@ namespace System.IO.Packaging
             }
         }
 
-
         /// <summary>
         /// The parent container for this PackagePart
         /// The PackagePart properties can not be accessed if the parent container is closed.
@@ -251,7 +247,6 @@ namespace System.IO.Packaging
         {
             throw new NotSupportedException(SR.GetContentTypeCoreNotImplemented);
         }
-
 
         #endregion Content Type Method
 
@@ -379,7 +374,11 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentOutOfRangeException">If parameter "targetMode" enumeration does not have a valid value</exception>
         /// <exception cref="ArgumentException">If TargetMode is TargetMode.Internal and the targetUri is an absolute Uri </exception>
         /// <exception cref="ArgumentException">If relationship is being targeted to a relationship part</exception>
-        public PackageRelationship CreateRelationship(Uri targetUri, TargetMode targetMode, string relationshipType)
+        public PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType
+        )
         {
             return CreateRelationship(targetUri, targetMode, relationshipType, null);
         }
@@ -405,7 +404,12 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentException">If relationship is being targeted to a relationship part</exception>
         /// <exception cref="System.Xml.XmlException">If parameter "id" is not a valid Xsd Id</exception>
         /// <exception cref="System.Xml.XmlException">If an id is provided in the method, and its not unique</exception>
-        public PackageRelationship CreateRelationship(Uri targetUri, TargetMode targetMode, string relationshipType, string? id)
+        public PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string? id
+        )
         {
             CheckInvalidState();
             _container.ThrowIfReadOnly();
@@ -531,32 +535,20 @@ namespace System.IO.Packaging
 
         internal bool IsRelationshipPart
         {
-            get
-            {
-                return _isRelationshipPart;
-            }
+            get { return _isRelationshipPart; }
         }
 
         //This property can be set to indicate if the part has been deleted
         internal bool IsDeleted
         {
-            get
-            {
-                return _deleted;
-            }
-            set
-            {
-                _deleted = value;
-            }
+            get { return _deleted; }
+            set { _deleted = value; }
         }
 
         //This property can be set to indicate if the part has been deleted
         internal bool IsClosed
         {
-            get
-            {
-                return _disposed;
-            }
+            get { return _disposed; }
         }
 
         /// <summary>
@@ -565,10 +557,7 @@ namespace System.IO.Packaging
         /// </summary>
         internal ContentType ValidatedContentType
         {
-            get
-            {
-                return _contentType!;
-            }
+            get { return _contentType!; }
         }
 
         #endregion Internal Properties
@@ -585,7 +574,10 @@ namespace System.IO.Packaging
         //Note: This method is never be called on a deleted part
         internal void Flush()
         {
-            Debug.Assert(_deleted != true, "PackagePart.Flush should never be called on a deleted part");
+            Debug.Assert(
+                _deleted != true,
+                "PackagePart.Flush should never be called on a deleted part"
+            );
 
             if (_requestedStreams != null)
             {
@@ -653,7 +645,10 @@ namespace System.IO.Packaging
         /// </remarks>
         internal void FlushRelationships()
         {
-            Debug.Assert(_deleted != true, "PackagePart.FlushRelationsips should never be called on a deleted part");
+            Debug.Assert(
+                _deleted != true,
+                "PackagePart.FlushRelationsips should never be called on a deleted part"
+            );
 
             // flush relationships
             if (_relationships != null && _container.FileOpenAccess != FileAccess.Read)
@@ -661,7 +656,6 @@ namespace System.IO.Packaging
                 _relationships.Flush();
             }
         }
-
 
         internal void CloseRelationships()
         {
@@ -697,13 +691,22 @@ namespace System.IO.Packaging
             Package.ThrowIfFileAccessInvalid(access);
 
             //Creating a part using a readonly stream.
-            if (access == FileAccess.Read &&
-                (mode == FileMode.Create || mode == FileMode.CreateNew || mode == FileMode.Truncate || mode == FileMode.Append))
+            if (
+                access == FileAccess.Read
+                && (
+                    mode == FileMode.Create
+                    || mode == FileMode.CreateNew
+                    || mode == FileMode.Truncate
+                    || mode == FileMode.Append
+                )
+            )
                 throw new IOException(SR.UnsupportedCombinationOfModeAccess);
 
             //Incompatible access modes between container and part stream.
-            if ((_container.FileOpenAccess == FileAccess.Read && access != FileAccess.Read) ||
-                (_container.FileOpenAccess == FileAccess.Write && access != FileAccess.Write))
+            if (
+                (_container.FileOpenAccess == FileAccess.Read && access != FileAccess.Read)
+                || (_container.FileOpenAccess == FileAccess.Write && access != FileAccess.Write)
+            )
                 throw new IOException(SR.ContainerAndPartModeIncompatible);
         }
 

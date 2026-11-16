@@ -9,7 +9,8 @@ namespace System.Net
     {
         private readonly object? _unexpectedValue;
 
-        internal InternalException() : this(null) { }
+        internal InternalException()
+            : this(null) { }
 
         internal InternalException(object? unexpectedValue)
         {
@@ -17,8 +18,7 @@ namespace System.Net
             _unexpectedValue = unexpectedValue;
         }
 
-        public override string Message => _unexpectedValue != null ?
-            base.Message + " " + _unexpectedValue :
-            base.Message;
+        public override string Message =>
+            _unexpectedValue != null ? base.Message + " " + _unexpectedValue : base.Message;
     }
 }

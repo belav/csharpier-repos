@@ -65,7 +65,10 @@ namespace System.Web.Http.ModelBinding
         public void CreatePropertyModelName()
         {
             // Act
-            string fullChildName = ModelBindingHelper.CreatePropertyModelName("parentName", "childName");
+            string fullChildName = ModelBindingHelper.CreatePropertyModelName(
+                "parentName",
+                "childName"
+            );
 
             // Assert
             Assert.Equal("parentName.childName", fullChildName);
@@ -85,7 +88,11 @@ namespace System.Web.Http.ModelBinding
         public void GetPossibleBinderInstance_Match_ReturnsBinder()
         {
             // Act
-            IModelBinder binder = ModelBindingHelper.GetPossibleBinderInstance(typeof(List<int>), typeof(List<>), typeof(SampleGenericBinder<>));
+            IModelBinder binder = ModelBindingHelper.GetPossibleBinderInstance(
+                typeof(List<int>),
+                typeof(List<>),
+                typeof(SampleGenericBinder<>)
+            );
 
             // Assert
             Assert.IsType<SampleGenericBinder<int>>(binder);
@@ -95,7 +102,11 @@ namespace System.Web.Http.ModelBinding
         public void GetPossibleBinderInstance_NoMatch_ReturnsNull()
         {
             // Act
-            IModelBinder binder = ModelBindingHelper.GetPossibleBinderInstance(typeof(ArraySegment<int>), typeof(List<>), typeof(SampleGenericBinder<>));
+            IModelBinder binder = ModelBindingHelper.GetPossibleBinderInstance(
+                typeof(ArraySegment<int>),
+                typeof(List<>),
+                typeof(SampleGenericBinder<>)
+            );
 
             // Assert
             Assert.Null(binder);
@@ -213,7 +224,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
             bindingContext.ModelMetadata.Model = "hello!";
 
@@ -230,7 +241,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
 
             // Act
@@ -246,7 +257,8 @@ namespace System.Web.Http.ModelBinding
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => ModelBindingHelper.ValidateBindingContext(null, typeof(string), true),
-                "bindingContext");
+                "bindingContext"
+            );
         }
 
         [Fact]
@@ -255,15 +267,21 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
             bindingContext.ModelMetadata.Model = 42;
 
             // Act & assert
             Assert.ThrowsArgument(
-                () => ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(string), allowNullModel: true),
+                () =>
+                    ModelBindingHelper.ValidateBindingContext(
+                        bindingContext,
+                        typeof(string),
+                        allowNullModel: true
+                    ),
                 "bindingContext",
-                "The binding context has a Model of type 'System.Int32', but this binder can only operate on models of type 'System.String'.");
+                "The binding context has a Model of type 'System.Int32', but this binder can only operate on models of type 'System.String'."
+            );
         }
 
         [Fact]
@@ -272,14 +290,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
 
             // Act & assert
             Assert.ThrowsArgument(
-                () => ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(string), false),
+                () =>
+                    ModelBindingHelper.ValidateBindingContext(
+                        bindingContext,
+                        typeof(string),
+                        false
+                    ),
                 "bindingContext",
-                "The binding context has a null Model, but this binder requires a non-null model of type 'System.String'.");
+                "The binding context has a null Model, but this binder requires a non-null model of type 'System.String'."
+            );
         }
 
         [Fact]
@@ -290,9 +314,11 @@ namespace System.Web.Http.ModelBinding
 
             // Act & assert
             Assert.ThrowsArgument(
-                () => ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(string), true),
+                () =>
+                    ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(string), true),
                 "bindingContext",
-                "The binding context cannot have a null ModelMetadata.");
+                "The binding context cannot have a null ModelMetadata."
+            );
         }
 
         [Fact]
@@ -301,14 +327,16 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(object))
+                ModelMetadata = GetMetadata(typeof(object)),
             };
 
             // Act & assert
             Assert.ThrowsArgument(
-                () => ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(string), true),
+                () =>
+                    ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(string), true),
                 "bindingContext",
-                "The binding context has a ModelType of 'System.Object', but this binder can only operate on models of type 'System.String'.");
+                "The binding context has a ModelType of 'System.Object', but this binder can only operate on models of type 'System.String'."
+            );
         }
 
         private static ModelMetadata GetMetadata(Type modelType)
@@ -319,7 +347,10 @@ namespace System.Web.Http.ModelBinding
 
         private class SampleGenericBinder<T> : IModelBinder
         {
-            public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+            public bool BindModel(
+                HttpActionContext actionContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

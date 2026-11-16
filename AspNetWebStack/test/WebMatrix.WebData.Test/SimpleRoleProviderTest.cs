@@ -21,9 +21,12 @@ namespace WebMatrix.WebData.Test
             var provider = new SimpleRoleProvider();
 
             var message =
-                "The value of argument 'value' (" + value + ") is invalid for Enum type " +
-                "'SimpleMembershipProviderCasingBehavior'." + Environment.NewLine +
-                "Parameter name: value";
+                "The value of argument 'value' ("
+                + value
+                + ") is invalid for Enum type "
+                + "'SimpleMembershipProviderCasingBehavior'."
+                + Environment.NewLine
+                + "Parameter name: value";
 
             // Act
             Exception exception = null;
@@ -40,7 +43,10 @@ namespace WebMatrix.WebData.Test
             // Assert
             if (isValid)
             {
-                Assert.Equal((SimpleMembershipProviderCasingBehavior)value, provider.CasingBehavior);
+                Assert.Equal(
+                    (SimpleMembershipProviderCasingBehavior)value,
+                    provider.CasingBehavior
+                );
             }
             else
             {

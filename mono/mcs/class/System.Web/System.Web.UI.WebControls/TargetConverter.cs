@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,31 +27,46 @@
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class TargetConverter : System.ComponentModel.StringConverter
+    {
+        #region Public Constructors
+        public TargetConverter() { }
+        #endregion	// Public Constructors
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class TargetConverter : System.ComponentModel.StringConverter {
-		#region Public Constructors
-		public TargetConverter() {
-		}
-		#endregion	// Public Constructors
+        #region Public Instance Methods
+        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
+            System.ComponentModel.ITypeDescriptorContext context
+        )
+        {
+            string[] values = new string[] { "_blank", "_parent", "_search", "_self", "_top" };
+            return new TypeConverter.StandardValuesCollection(values);
+        }
 
-		#region Public Instance Methods
-		public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context) {
-			string[] values = new string[] { "_blank", "_parent", "_search", "_self", "_top"};
-			return new TypeConverter.StandardValuesCollection(values);
-		}
+        public override bool GetStandardValuesExclusive(
+            System.ComponentModel.ITypeDescriptorContext context
+        )
+        {
+            return false;
+        }
 
-		public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context) {
-			return false;
-		}
+        public override bool GetStandardValuesSupported(
+            System.ComponentModel.ITypeDescriptorContext context
+        )
+        {
+            return true;
+        }
 
-		public override bool GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext context) {
-			return true;
-		}
-
-		#endregion	// Public Instance Methods
-	}
+        #endregion	// Public Instance Methods
+    }
 }

@@ -9,8 +9,8 @@ using System;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// A bitwise combination of the enumeration values to use when computing differences with 
-    /// <see cref="IDocumentTextDifferencingService" />. 
+    /// A bitwise combination of the enumeration values to use when computing differences with
+    /// <see cref="IDocumentTextDifferencingService" />.
     /// </summary>
     /// <remarks>
     /// Since computing differences can be slow with large data sets, you should not use the Character type
@@ -32,6 +32,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Compute the character difference.
         /// </summary>
-        Character = 4
+        Character = 4,
     }
 }

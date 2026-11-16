@@ -10,16 +10,17 @@ using Microsoft.CodeAnalysis.Simplification;
 namespace Microsoft.CodeAnalysis.VisualBasic.Simplification;
 
 [DataContract]
-internal sealed record class VisualBasicSimplifierOptions : SimplifierOptions, IEquatable<VisualBasicSimplifierOptions>
+internal sealed record class VisualBasicSimplifierOptions
+    : SimplifierOptions,
+        IEquatable<VisualBasicSimplifierOptions>
 {
     public static readonly VisualBasicSimplifierOptions Default = new();
 
-    public VisualBasicSimplifierOptions()
-    {
-    }
+    public VisualBasicSimplifierOptions() { }
 
-    public VisualBasicSimplifierOptions(IOptionsReader options, VisualBasicSimplifierOptions? fallbackOptions)
-        : base(options, fallbackOptions ?? Default, LanguageNames.VisualBasic)
-    {
-    }
+    public VisualBasicSimplifierOptions(
+        IOptionsReader options,
+        VisualBasicSimplifierOptions? fallbackOptions
+    )
+        : base(options, fallbackOptions ?? Default, LanguageNames.VisualBasic) { }
 }

@@ -8,16 +8,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static bool IsIdentityOrImplicitReference(this Conversion conversion)
         {
-            return conversion.IsIdentity ||
-                (conversion.IsImplicit && conversion.IsReference);
+            return conversion.IsIdentity || (conversion.IsImplicit && conversion.IsReference);
         }
 
         public static bool IsImplicitUserDefinedConversion(this Conversion conversion)
         {
-            return conversion.IsUserDefined &&
-                conversion.MethodSymbol != null &&
-                conversion.MethodSymbol.MethodKind == MethodKind.Conversion &&
-                conversion.MethodSymbol.Name == "op_Implicit";
+            return conversion.IsUserDefined
+                && conversion.MethodSymbol != null
+                && conversion.MethodSymbol.MethodKind == MethodKind.Conversion
+                && conversion.MethodSymbol.Name == "op_Implicit";
         }
     }
 }

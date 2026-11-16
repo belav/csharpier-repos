@@ -23,6 +23,6 @@ public class SequentialGuidValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Does_not_generate_temp_values()
-        => Assert.False(new SequentialGuidValueGenerator().GeneratesTemporaryValues);
+    public void Does_not_generate_temp_values() =>
+        Assert.False(new SequentialGuidValueGenerator().GeneratesTemporaryValues);
 }

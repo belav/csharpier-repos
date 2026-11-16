@@ -22,7 +22,7 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
         None,
         Awaiting,
         Ready,
-        Completed
+        Completed,
     }
 
     private State _state;
@@ -38,7 +38,10 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     {
         _state = State.None;
         _hasWaiter = false;
-        _valueTaskSource = new ManualResetValueTaskSourceCore<bool>() { RunContinuationsAsynchronously = true };
+        _valueTaskSource = new ManualResetValueTaskSourceCore<bool>()
+        {
+            RunContinuationsAsynchronously = true,
+        };
         _cancellationRegistration = default;
         _cancelledToken = default;
         _keepAlive = default;
@@ -49,13 +52,17 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     /// Allows setting additional cancellation action to be called if token passed to <see cref="TryGetValueTask(out ValueTask, object?, CancellationToken)"/> fires off.
     /// The argument for the action is the <c>keepAlive</c> object from the same <see cref="TryGetValueTask(out ValueTask, object?, CancellationToken)"/> call.
     /// </summary>
-    public Action<object?> CancellationAction { init { _cancellationAction = value; } }
+    public Action<object?> CancellationAction
+    {
+        init { _cancellationAction = value; }
+    }
 
     /// <summary>
     /// Returns <c>true</c> is this task source has entered its final state, i.e. <see cref="TrySetResult(bool)"/> or <see cref="TrySetException(Exception, bool)"/>
     /// was called with <c>final</c> set to <c>true</c> and the result was propagated.
     /// </summary>
-    public bool IsCompleted => (State)Volatile.Read(ref Unsafe.As<State, byte>(ref _state)) == State.Completed;
+    public bool IsCompleted =>
+        (State)Volatile.Read(ref Unsafe.As<State, byte>(ref _state)) == State.Completed;
 
     /// <summary>
     /// Tries to get a value task representing this task source. If this task source is <see cref="State.None"/>, it'll also transition it into <see cref="State.Awaiting"/> state.
@@ -67,7 +74,11 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     /// <param name="keepAlive">An object to hold during a P/Invoke call. It'll get release with setting the result/exception.</param>
     /// <param name="cancellationToken">A cancellation token which might cancel the value task.</param>
     /// <returns><c>true</c> if this is not an overlapping call (task source transitioned or was already set); otherwise, <c>false</c>.</returns>
-    public bool TryGetValueTask(out ValueTask valueTask, object? keepAlive = null, CancellationToken cancellationToken = default)
+    public bool TryGetValueTask(
+        out ValueTask valueTask,
+        object? keepAlive = null,
+        CancellationToken cancellationToken = default
+    )
     {
         lock (this)
         {
@@ -77,15 +88,22 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
                 // Register cancellation if the token can be cancelled and the task is not completed yet.
                 if (cancellationToken.CanBeCanceled)
                 {
-                    _cancellationRegistration = cancellationToken.UnsafeRegister(static (obj, cancellationToken) =>
-                    {
-                        (ResettableValueTaskSource thisRef, object? target) = ((ResettableValueTaskSource, object?))obj!;
-                        lock (thisRef)
+                    _cancellationRegistration = cancellationToken.UnsafeRegister(
+                        static (obj, cancellationToken) =>
                         {
-                            thisRef._cancelledToken = cancellationToken;
-                        }
-                        thisRef._cancellationAction?.Invoke(target);
-                    }, (this, keepAlive));
+                            (ResettableValueTaskSource thisRef, object? target) = ((
+                                ResettableValueTaskSource,
+                                object?
+                            ))
+                                obj!;
+                            lock (thisRef)
+                            {
+                                thisRef._cancelledToken = cancellationToken;
+                            }
+                            thisRef._cancellationAction?.Invoke(target);
+                        },
+                        (this, keepAlive)
+                    );
                 }
             }
 
@@ -105,9 +123,7 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
                 _state = State.Awaiting;
             }
             // None, Ready, Completed: return the current task.
-            if (state == State.None ||
-                state == State.Ready ||
-                state == State.Completed)
+            if (state == State.None || state == State.Ready || state == State.Completed)
             {
                 // Remember that the value task with the current version is being given out.
                 _hasWaiter = true;
@@ -167,8 +183,7 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
 
                 // If the _valueTaskSource has already been set, we don't want to lose the result by overwriting it.
                 // So keep it as is and store the result in _finalTaskSource.
-                if (state == State.None ||
-                    state == State.Awaiting)
+                if (state == State.None || state == State.Awaiting)
                 {
                     _state = final ? State.Completed : State.Ready;
                 }
@@ -177,17 +192,17 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
                 if (exception is not null)
                 {
                     // Set up the exception stack trace for the caller.
-                    exception = exception.StackTrace is null ? ExceptionDispatchInfo.SetCurrentStackTrace(exception) : exception;
-                    if (state == State.None ||
-                        state == State.Awaiting)
+                    exception = exception.StackTrace is null
+                        ? ExceptionDispatchInfo.SetCurrentStackTrace(exception)
+                        : exception;
+                    if (state == State.None || state == State.Awaiting)
                     {
                         _valueTaskSource.SetException(exception);
                     }
                 }
                 else
                 {
-                    if (state == State.None ||
-                        state == State.Awaiting)
+                    if (state == State.None || state == State.Awaiting)
                     {
                         _valueTaskSource.SetResult(final);
                     }
@@ -242,11 +257,15 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
         return TryComplete(exception, final);
     }
 
-    ValueTaskSourceStatus IValueTaskSource.GetStatus(short token)
-        => _valueTaskSource.GetStatus(token);
+    ValueTaskSourceStatus IValueTaskSource.GetStatus(short token) =>
+        _valueTaskSource.GetStatus(token);
 
-    void IValueTaskSource.OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
-        => _valueTaskSource.OnCompleted(continuation, state, token, flags);
+    void IValueTaskSource.OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    ) => _valueTaskSource.OnCompleted(continuation, state, token, flags);
 
     void IValueTaskSource.GetResult(short token)
     {
@@ -315,14 +334,22 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
         {
             if (_finalTaskSource is null)
             {
-                _finalTaskSource = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _finalTaskSource = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 if (!_isCompleted)
                 {
                     GCHandle handle = GCHandle.Alloc(keepAlive);
-                    _finalTaskSource.Task.ContinueWith(static (_, state) =>
-                    {
-                        ((GCHandle)state!).Free();
-                    }, handle, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                    _finalTaskSource.Task.ContinueWith(
+                        static (_, state) =>
+                        {
+                            ((GCHandle)state!).Free();
+                        },
+                        handle,
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
                 }
                 if (_isSignaled)
                 {

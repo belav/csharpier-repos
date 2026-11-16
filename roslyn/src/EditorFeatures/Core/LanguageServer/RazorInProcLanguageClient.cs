@@ -48,13 +48,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         IThreadingContext threadingContext,
         ILspServiceLoggerFactory lspLoggerFactory,
         ExportProvider exportProvider,
-        [Import(AllowDefault = true)] AbstractLanguageClientMiddleLayer middleLayer) : AbstractInProcLanguageClient(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext, exportProvider, middleLayer)
+        [Import(AllowDefault = true)] AbstractLanguageClientMiddleLayer middleLayer
+    )
+        : AbstractInProcLanguageClient(
+            lspServiceProvider,
+            globalOptions,
+            lspLoggerFactory,
+            threadingContext,
+            exportProvider,
+            middleLayer
+        )
     {
         public const string ClientName = ProtocolConstants.RazorCSharp;
 
-        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider = experimentalCapabilitiesProvider;
+        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider =
+            experimentalCapabilitiesProvider;
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         protected override void Activate_OffUIThread()
         {
@@ -65,7 +76,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
-            var capabilities = _experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities);
+            var capabilities = _experimentalCapabilitiesProvider.GetCapabilities(
+                clientCapabilities
+            );
 
             // Razor doesn't use workspace symbols, so disable to prevent duplicate results (with LiveshareLanguageClient) in liveshare.
             capabilities.WorkspaceSymbolProvider = false;
@@ -82,10 +95,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 experimental[MapCodeHandler.WorkspaceMapCodeName] = true;
 
                 var regexExpression = string.Join("|", InlineCompletionsHandler.BuiltInSnippets);
-                var regex = new Regex(regexExpression, RegexOptions.Compiled | RegexOptions.Singleline, TimeSpan.FromSeconds(1));
+                var regex = new Regex(
+                    regexExpression,
+                    RegexOptions.Compiled | RegexOptions.Singleline,
+                    TimeSpan.FromSeconds(1)
+                );
                 vsServerCapabilities.InlineCompletionOptions = new VSInternalInlineCompletionOptions
                 {
-                    Pattern = regex
+                    Pattern = regex,
                 };
 
                 return vsServerCapabilities;
@@ -99,6 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => true;
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.RazorLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.RazorLspServer;
     }
 }

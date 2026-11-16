@@ -12,41 +12,45 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class SimpleLambdaExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<SimpleLambdaExpressionSyntax>
+public class SimpleLambdaExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<SimpleLambdaExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new SimpleLambdaExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new SimpleLambdaExpressionStructureProvider();
 
     [Fact]
     public async Task TestLambda()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        {|hint:$$f => {|textspan:{
-                            x();
-                        };|}|}
-                    }
+                    {|hint:$$f => {|textspan:{
+                        x();
+                    };|}|}
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
     public async Task TestLambdaInForLoop()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        for (Action a = x$$ => { }; true; a()) { }
-                    }
+                    for (Action a = x$$ => { }; true; a()) { }
                 }
-                """;
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -55,37 +59,41 @@ public class SimpleLambdaExpressionStructureTests : AbstractCSharpSyntaxNodeStru
     public async Task TestLambdaInMethodCall1()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        someMethod(42, "test", false, {|hint:$$x => {|textspan:{
-                            return x;
-                        }|}|}, "other arguments}");
-                    }
+                    someMethod(42, "test", false, {|hint:$$x => {|textspan:{
+                        return x;
+                    }|}|}, "other arguments}");
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
     public async Task TestLambdaInMethodCall2()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        someMethod(42, "test", false, {|hint:$$x => {|textspan:{
-                            return x;
-                        }|}|});
-                    }
+                    someMethod(42, "test", false, {|hint:$$x => {|textspan:{
+                        return x;
+                    }|}|});
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

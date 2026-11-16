@@ -36,14 +36,11 @@ public class AuthenticationBuilder
     {
         Services.Configure<AuthenticationOptions>(o =>
         {
-            o.AddScheme(
-                authenticationScheme,
-                scheme =>
-                {
-                    scheme.HandlerType = typeof(THandler);
-                    scheme.DisplayName = displayName;
-                }
-            );
+            o.AddScheme(authenticationScheme, scheme =>
+            {
+                scheme.HandlerType = typeof(THandler);
+                scheme.DisplayName = displayName;
+            });
         });
         if (configureOptions != null)
         {

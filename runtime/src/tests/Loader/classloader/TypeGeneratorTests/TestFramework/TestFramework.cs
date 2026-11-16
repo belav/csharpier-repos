@@ -3,16 +3,20 @@
 //
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 // There are 100000s of uses of TestFramework in the IL files.
 #pragma warning disable CA1050 // Declare types in namespaces
 
 public class TestFramework
 {
-    public static void MethodCallTest(string actualResult, string expectedResults, string invocationString)
+    public static void MethodCallTest(
+        string actualResult,
+        string expectedResults,
+        string invocationString
+    )
     {
         if (expectedResults != actualResult)
         {
@@ -26,21 +30,37 @@ public class TestFramework
         }
     }
 
-    public static void MethodCallTest(string expectedResults, string constrainedCallerMethod, int count, params string[] actualResults)
+    public static void MethodCallTest(
+        string expectedResults,
+        string constrainedCallerMethod,
+        int count,
+        params string[] actualResults
+    )
     {
         string[] expectedResultsArray = expectedResults.Split(new char[] { '#' });
 
-        if ((expectedResults == "" && count != 0) || (expectedResults != "" && count == 0) || ((expectedResultsArray.Length - 1) != count) || (count > 0 && count != actualResults.Length))
+        if (
+            (expectedResults == "" && count != 0)
+            || (expectedResults != "" && count == 0)
+            || ((expectedResultsArray.Length - 1) != count)
+            || (count > 0 && count != actualResults.Length)
+        )
         {
-            Console.WriteLine("Error in method count in constrained caller [ " + constrainedCallerMethod + " ]");
+            Console.WriteLine(
+                "Error in method count in constrained caller [ " + constrainedCallerMethod + " ]"
+            );
 
             Console.WriteLine(constrainedCallerMethod);
-    
+
             Console.WriteLine("   # count = " + count);
-            Console.WriteLine("   # expectedResultsArray.Length = " + (expectedResultsArray.Length - 1));
+            Console.WriteLine(
+                "   # expectedResultsArray.Length = " + (expectedResultsArray.Length - 1)
+            );
             for (int i = 0; i < expectedResultsArray.Length - 1; i++)
-                Console.WriteLine("      # expectedResultsArray[" + i + "] = '" + expectedResultsArray[i] + "'");
-    
+                Console.WriteLine(
+                    "      # expectedResultsArray[" + i + "] = '" + expectedResultsArray[i] + "'"
+                );
+
             throw new Exception("Method count failure");
         }
 
@@ -49,7 +69,9 @@ public class TestFramework
         {
             if (expectedResultsArray[i] != actualResults[i])
             {
-                Console.WriteLine("Wrong method called in constrained caller " + constrainedCallerMethod);
+                Console.WriteLine(
+                    "Wrong method called in constrained caller " + constrainedCallerMethod
+                );
 
                 Console.WriteLine("    -> EXPECTED: " + expectedResultsArray[i]);
                 Console.WriteLine("    -> GOT:      " + actualResults[i]);
@@ -57,7 +79,8 @@ public class TestFramework
                 success = false;
             }
         }
-        if (!success) throw new Exception("Wrong method called");
+        if (!success)
+            throw new Exception("Wrong method called");
     }
 }
 #pragma warning restore CA1050

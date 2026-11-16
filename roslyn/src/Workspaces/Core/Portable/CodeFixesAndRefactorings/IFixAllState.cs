@@ -10,7 +10,7 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {
     /// <summary>
-    /// Represents internal FixAllState for code fixes or refactorings. 
+    /// Represents internal FixAllState for code fixes or refactorings.
     /// </summary>
     internal interface IFixAllState
     {
@@ -33,6 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         IFixAllState With(
             Optional<(Document? document, Project project)> documentAndProject = default,
             Optional<FixAllScope> scope = default,
-            Optional<string?> codeActionEquivalenceKey = default);
+            Optional<string?> codeActionEquivalenceKey = default
+        );
     }
 }

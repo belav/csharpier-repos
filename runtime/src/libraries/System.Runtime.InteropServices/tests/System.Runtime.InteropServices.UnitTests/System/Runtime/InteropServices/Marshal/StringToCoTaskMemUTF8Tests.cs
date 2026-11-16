@@ -17,7 +17,9 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData("za\u0306\u01FD\u03B2\uD8FF\uDCFF")]
         [InlineData("\u0023\u0025\u03a0\u03a3")]
         [InlineData("\u00C5")]
-        [InlineData("\u0065\u0065\u00E1\u0065\u0065\u8000\u00E1\u0065\uD800\uDC00\u8000\u00E1\u0065\u0065\u0065")]
+        [InlineData(
+            "\u0065\u0065\u00E1\u0065\u0065\u8000\u00E1\u0065\uD800\uDC00\u8000\u00E1\u0065\u0065\u0065"
+        )]
         [InlineData("\u00A4\u00D0aR|{AnGe\u00A3\u00A4")]
         [InlineData("\uD800\uDC00\uD800\uDC00\uD800\uDC00")]
         [InlineData("\uD800\uDC00\u0065\uD800\uDC00")]
@@ -25,7 +27,9 @@ namespace System.Runtime.InteropServices.Tests
         public void StringToCoTaskMemUTF8_PtrToStringUTF8_Roundtrips(string s)
         {
             int nullIndex = s.IndexOf('\0');
-            byte[] expected = Encoding.UTF8.GetBytes(nullIndex == -1 ? s : s.Substring(0, nullIndex));
+            byte[] expected = Encoding.UTF8.GetBytes(
+                nullIndex == -1 ? s : s.Substring(0, nullIndex)
+            );
 
             IntPtr ptr = Marshal.StringToCoTaskMemUTF8(s);
             try

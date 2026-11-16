@@ -16,18 +16,18 @@
 // Note that OS page sizes are typically 0x1000 (4096) bytes, but could be bigger.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace BigFrames_bigframes
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct Struct4096 // One page
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(4092)]
         public int i2;
     }
@@ -37,6 +37,7 @@ namespace BigFrames_bigframes
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(5372)]
         public int i2;
     }
@@ -46,6 +47,7 @@ namespace BigFrames_bigframes
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(8188)]
         public int i2;
     }
@@ -55,6 +57,7 @@ namespace BigFrames_bigframes
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(12284)]
         public int i2;
     }
@@ -64,6 +67,7 @@ namespace BigFrames_bigframes
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(16380)]
         public int i2;
     }

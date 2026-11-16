@@ -23,34 +23,44 @@ namespace System.Diagnostics.Tracing
         private Action<EventWrittenEventArgs> _eventWritten;
         private readonly List<EventSource> _eventSourceList = new List<EventSource>();
 
-        public TestEventListener(string targetSourceName, EventLevel level, double? eventCounterInterval = null)
+        public TestEventListener(
+            string targetSourceName,
+            EventLevel level,
+            double? eventCounterInterval = null
+        )
         {
             _eventCounterInterval = eventCounterInterval;
             AddSource(targetSourceName, level);
         }
 
-        public TestEventListener(Guid targetSourceGuid, EventLevel level, double? eventCounterInterval = null)
+        public TestEventListener(
+            Guid targetSourceGuid,
+            EventLevel level,
+            double? eventCounterInterval = null
+        )
         {
             _eventCounterInterval = eventCounterInterval;
             AddSource(targetSourceGuid, level);
         }
 
-        public void AddSource(string name, EventLevel level, EventKeywords keywords = EventKeywords.All) =>
-            AddSource(name, null, level, keywords);
+        public void AddSource(
+            string name,
+            EventLevel level,
+            EventKeywords keywords = EventKeywords.All
+        ) => AddSource(name, null, level, keywords);
 
-        public void AddSource(Guid guid, EventLevel level, EventKeywords keywords = EventKeywords.All) =>
-            AddSource(null, guid, level, keywords);
+        public void AddSource(
+            Guid guid,
+            EventLevel level,
+            EventKeywords keywords = EventKeywords.All
+        ) => AddSource(null, guid, level, keywords);
 
         private void AddSource(string name, Guid? guid, EventLevel level, EventKeywords keywords)
         {
             EventSource sourceToEnable = null;
             lock (_eventSourceList)
             {
-                var settings = new Settings()
-                {
-                    Level = level,
-                    Keywords = keywords
-                };
+                var settings = new Settings() { Level = level, Keywords = keywords };
 
                 if (name is not null)
                     _names.Add(name, settings);
@@ -75,7 +85,11 @@ namespace System.Diagnostics.Tracing
         }
 
         public void AddActivityTracking() =>
-            AddSource("System.Threading.Tasks.TplEventSource", EventLevel.Informational, (EventKeywords)0x80 /* TasksFlowActivityIds */);
+            AddSource(
+                "System.Threading.Tasks.TplEventSource",
+                EventLevel.Informational,
+                (EventKeywords)0x80 /* TasksFlowActivityIds */
+            );
 
         protected override void OnEventSourceCreated(EventSource eventSource)
         {
@@ -84,7 +98,9 @@ namespace System.Diagnostics.Tracing
             lock (_eventSourceList)
             {
                 _eventSourceList.Add(eventSource);
-                shouldEnable = _names.TryGetValue(eventSource.Name, out settings) || _guids.TryGetValue(eventSource.Guid, out settings);
+                shouldEnable =
+                    _names.TryGetValue(eventSource.Name, out settings)
+                    || _guids.TryGetValue(eventSource.Guid, out settings);
             }
 
             if (shouldEnable)
@@ -108,15 +124,30 @@ namespace System.Diagnostics.Tracing
         public void RunWithCallback(Action<EventWrittenEventArgs> handler, Action body)
         {
             _eventWritten = handler;
-            try { body(); }
-            finally { _eventWritten = null; }
+            try
+            {
+                body();
+            }
+            finally
+            {
+                _eventWritten = null;
+            }
         }
 
-        public async Task RunWithCallbackAsync(Action<EventWrittenEventArgs> handler, Func<Task> body)
+        public async Task RunWithCallbackAsync(
+            Action<EventWrittenEventArgs> handler,
+            Func<Task> body
+        )
         {
             _eventWritten = handler;
-            try { await body().ConfigureAwait(false); }
-            finally { _eventWritten = null; }
+            try
+            {
+                await body().ConfigureAwait(false);
+            }
+            finally
+            {
+                _eventWritten = null;
+            }
         }
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
@@ -124,5 +155,4 @@ namespace System.Diagnostics.Tracing
             _eventWritten?.Invoke(eventData);
         }
     }
-
 }

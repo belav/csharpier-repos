@@ -14,7 +14,9 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
 
-    sealed class AcceptorSessionSymmetricMessageSecurityProtocol : MessageSecurityProtocol, IAcceptorSecuritySessionProtocol
+    sealed class AcceptorSessionSymmetricMessageSecurityProtocol
+        : MessageSecurityProtocol,
+            IAcceptorSecuritySessionProtocol
     {
         SecurityToken outgoingSessionToken;
         SecurityTokenAuthenticator sessionTokenAuthenticator;
@@ -28,42 +30,54 @@ namespace System.ServiceModel.Security
         Object thisLock = new Object();
         bool requireDerivedKeys;
 
-        public AcceptorSessionSymmetricMessageSecurityProtocol(SessionSymmetricMessageSecurityProtocolFactory factory,
-            EndpointAddress target)
+        public AcceptorSessionSymmetricMessageSecurityProtocol(
+            SessionSymmetricMessageSecurityProtocolFactory factory,
+            EndpointAddress target
+        )
             : base(factory, target, null)
         {
             if (factory.ActAsInitiator == true)
             {
                 Fx.Assert("This protocol can only be used at the recipient.");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ProtocolMustBeRecipient, this.GetType().ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ProtocolMustBeRecipient, this.GetType().ToString())
+                    )
+                );
             }
             this.requireDerivedKeys = factory.SecurityTokenParameters.RequireDerivedKeys;
             if (requireDerivedKeys)
             {
-                SecurityTokenSerializer innerTokenSerializer = this.Factory.StandardsManager.SecurityTokenSerializer;
-                WSSecureConversation secureConversation = (innerTokenSerializer is WSSecurityTokenSerializer) ? ((WSSecurityTokenSerializer)innerTokenSerializer).SecureConversation : new WSSecurityTokenSerializer(this.Factory.MessageSecurityVersion.SecurityVersion).SecureConversation;
-                this.sessionStandardsManager = new SecurityStandardsManager(factory.MessageSecurityVersion, new DerivedKeyCachingSecurityTokenSerializer(2, false, secureConversation, innerTokenSerializer));
+                SecurityTokenSerializer innerTokenSerializer = this.Factory
+                    .StandardsManager
+                    .SecurityTokenSerializer;
+                WSSecureConversation secureConversation =
+                    (innerTokenSerializer is WSSecurityTokenSerializer)
+                        ? ((WSSecurityTokenSerializer)innerTokenSerializer).SecureConversation
+                        : new WSSecurityTokenSerializer(
+                            this.Factory.MessageSecurityVersion.SecurityVersion
+                        ).SecureConversation;
+                this.sessionStandardsManager = new SecurityStandardsManager(
+                    factory.MessageSecurityVersion,
+                    new DerivedKeyCachingSecurityTokenSerializer(
+                        2,
+                        false,
+                        secureConversation,
+                        innerTokenSerializer
+                    )
+                );
             }
         }
 
         Object ThisLock
         {
-            get
-            {
-                return thisLock;
-            }
+            get { return thisLock; }
         }
 
-        public bool ReturnCorrelationState 
+        public bool ReturnCorrelationState
         {
-            get
-            {
-                return this.returnCorrelationState;
-            }
-            set
-            {
-                this.returnCorrelationState = value;
-            }
+            get { return this.returnCorrelationState; }
+            set { this.returnCorrelationState = value; }
         }
 
         protected override bool PerformIncomingAndOutgoingMessageExpectationChecks
@@ -73,7 +87,11 @@ namespace System.ServiceModel.Security
 
         SessionSymmetricMessageSecurityProtocolFactory Factory
         {
-            get { return (SessionSymmetricMessageSecurityProtocolFactory)base.MessageSecurityProtocolFactory; }
+            get
+            {
+                return (SessionSymmetricMessageSecurityProtocolFactory)
+                    base.MessageSecurityProtocolFactory;
+            }
         }
 
         public SecurityToken GetOutgoingSessionToken()
@@ -95,20 +113,60 @@ namespace System.ServiceModel.Security
                 this.outgoingSessionToken = token;
                 if (this.requireDerivedKeys)
                 {
-                    string derivationAlgorithm = SecurityUtils.GetKeyDerivationAlgorithm(this.sessionStandardsManager.MessageSecurityVersion.SecureConversationVersion);
+                    string derivationAlgorithm = SecurityUtils.GetKeyDerivationAlgorithm(
+                        this.sessionStandardsManager
+                            .MessageSecurityVersion
+                            .SecureConversationVersion
+                    );
 
-                    this.derivedSignatureToken = new DerivedKeySecurityToken(-1, 0, 
-                        this.Factory.OutgoingAlgorithmSuite.GetSignatureKeyDerivationLength(token, this.sessionStandardsManager.MessageSecurityVersion.SecureConversationVersion), null, 
-                        DerivedKeySecurityToken.DefaultNonceLength, token, this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(token, SecurityTokenReferenceStyle.External), derivationAlgorithm, SecurityUtils.GenerateId());
+                    this.derivedSignatureToken = new DerivedKeySecurityToken(
+                        -1,
+                        0,
+                        this.Factory.OutgoingAlgorithmSuite.GetSignatureKeyDerivationLength(
+                            token,
+                            this.sessionStandardsManager
+                                .MessageSecurityVersion
+                                .SecureConversationVersion
+                        ),
+                        null,
+                        DerivedKeySecurityToken.DefaultNonceLength,
+                        token,
+                        this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(
+                            token,
+                            SecurityTokenReferenceStyle.External
+                        ),
+                        derivationAlgorithm,
+                        SecurityUtils.GenerateId()
+                    );
 
-                    this.derivedEncryptionToken = new DerivedKeySecurityToken(-1, 0,
-                        this.Factory.OutgoingAlgorithmSuite.GetEncryptionKeyDerivationLength(token, this.sessionStandardsManager.MessageSecurityVersion.SecureConversationVersion), null,
-                        DerivedKeySecurityToken.DefaultNonceLength, token, this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(token, SecurityTokenReferenceStyle.External), derivationAlgorithm, SecurityUtils.GenerateId());
+                    this.derivedEncryptionToken = new DerivedKeySecurityToken(
+                        -1,
+                        0,
+                        this.Factory.OutgoingAlgorithmSuite.GetEncryptionKeyDerivationLength(
+                            token,
+                            this.sessionStandardsManager
+                                .MessageSecurityVersion
+                                .SecureConversationVersion
+                        ),
+                        null,
+                        DerivedKeySecurityToken.DefaultNonceLength,
+                        token,
+                        this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(
+                            token,
+                            SecurityTokenReferenceStyle.External
+                        ),
+                        derivationAlgorithm,
+                        SecurityUtils.GenerateId()
+                    );
                 }
             }
         }
 
-        public void SetSessionTokenAuthenticator(UniqueId sessionId, SecurityTokenAuthenticator sessionTokenAuthenticator, SecurityTokenResolver sessionTokenResolver)
+        public void SetSessionTokenAuthenticator(
+            UniqueId sessionId,
+            SecurityTokenAuthenticator sessionTokenAuthenticator,
+            SecurityTokenResolver sessionTokenResolver
+        )
         {
             this.CommunicationObject.ThrowIfDisposedOrImmutable();
             lock (ThisLock)
@@ -122,7 +180,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        void GetTokensForOutgoingMessages(out SecurityToken signingToken, out SecurityToken encryptionToken, out SecurityTokenParameters tokenParameters)
+        void GetTokensForOutgoingMessages(
+            out SecurityToken signingToken,
+            out SecurityToken encryptionToken,
+            out SecurityTokenParameters tokenParameters
+        )
         {
             lock (ThisLock)
             {
@@ -139,37 +201,81 @@ namespace System.ServiceModel.Security
             tokenParameters = this.Factory.GetTokenParameters();
         }
 
-        protected override IAsyncResult BeginSecureOutgoingMessageCore(Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginSecureOutgoingMessageCore(
+            Message message,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState correlationState,
+            AsyncCallback callback,
+            object state
+        )
         {
             SecurityToken signingToken;
             SecurityToken encryptionToken;
             SecurityTokenParameters tokenParameters;
-            this.GetTokensForOutgoingMessages(out signingToken, out encryptionToken, out tokenParameters);
-            SetUpDelayedSecurityExecution(ref message, signingToken, encryptionToken, tokenParameters, correlationState);
+            this.GetTokensForOutgoingMessages(
+                out signingToken,
+                out encryptionToken,
+                out tokenParameters
+            );
+            SetUpDelayedSecurityExecution(
+                ref message,
+                signingToken,
+                encryptionToken,
+                tokenParameters,
+                correlationState
+            );
             return new CompletedAsyncResult<Message>(message, callback, state);
         }
 
-        protected override SecurityProtocolCorrelationState SecureOutgoingMessageCore(ref Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState)
+        protected override SecurityProtocolCorrelationState SecureOutgoingMessageCore(
+            ref Message message,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState correlationState
+        )
         {
             SecurityToken signingToken;
             SecurityToken encryptionToken;
             SecurityTokenParameters tokenParameters;
-            this.GetTokensForOutgoingMessages(out signingToken, out encryptionToken, out tokenParameters);
-            SetUpDelayedSecurityExecution(ref message, signingToken, encryptionToken, tokenParameters, correlationState);
+            this.GetTokensForOutgoingMessages(
+                out signingToken,
+                out encryptionToken,
+                out tokenParameters
+            );
+            SetUpDelayedSecurityExecution(
+                ref message,
+                signingToken,
+                encryptionToken,
+                tokenParameters,
+                correlationState
+            );
             return null;
         }
 
-        protected override void EndSecureOutgoingMessageCore(IAsyncResult result, out Message message, out SecurityProtocolCorrelationState newCorrelationState)
+        protected override void EndSecureOutgoingMessageCore(
+            IAsyncResult result,
+            out Message message,
+            out SecurityProtocolCorrelationState newCorrelationState
+        )
         {
             message = CompletedAsyncResult<Message>.End(result);
             newCorrelationState = null;
         }
 
-        void SetUpDelayedSecurityExecution(ref Message message, SecurityToken signingToken, SecurityToken encryptionToken, 
-            SecurityTokenParameters tokenParameters, SecurityProtocolCorrelationState correlationState)
+        void SetUpDelayedSecurityExecution(
+            ref Message message,
+            SecurityToken signingToken,
+            SecurityToken encryptionToken,
+            SecurityTokenParameters tokenParameters,
+            SecurityProtocolCorrelationState correlationState
+        )
         {
             string actor = string.Empty;
-            SendSecurityHeader securityHeader = ConfigureSendSecurityHeader(message, actor, null, correlationState);
+            SendSecurityHeader securityHeader = ConfigureSendSecurityHeader(
+                message,
+                actor,
+                null,
+                correlationState
+            );
             if (this.Factory.ApplyIntegrity)
             {
                 securityHeader.SetSigningToken(signingToken, tokenParameters);
@@ -181,24 +287,56 @@ namespace System.ServiceModel.Security
             message = securityHeader.SetupExecution();
         }
 
-        protected override SecurityProtocolCorrelationState VerifyIncomingMessageCore(ref Message message, string actor, TimeSpan timeout, SecurityProtocolCorrelationState[] correlationStates)
+        protected override SecurityProtocolCorrelationState VerifyIncomingMessageCore(
+            ref Message message,
+            string actor,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState[] correlationStates
+        )
         {
             SessionSymmetricMessageSecurityProtocolFactory factory = this.Factory;
             IList<SupportingTokenAuthenticatorSpecification> supportingAuthenticators;
-            ReceiveSecurityHeader securityHeader = ConfigureReceiveSecurityHeader(message, string.Empty, correlationStates, (this.requireDerivedKeys) ? this.sessionStandardsManager : null, out supportingAuthenticators);
-            securityHeader.ConfigureSymmetricBindingServerReceiveHeader(this.sessionTokenAuthenticator, this.Factory.SecurityTokenParameters, supportingAuthenticators);
-            securityHeader.ConfigureOutOfBandTokenResolver(MergeOutOfBandResolvers(supportingAuthenticators, this.sessionResolverList));
+            ReceiveSecurityHeader securityHeader = ConfigureReceiveSecurityHeader(
+                message,
+                string.Empty,
+                correlationStates,
+                (this.requireDerivedKeys) ? this.sessionStandardsManager : null,
+                out supportingAuthenticators
+            );
+            securityHeader.ConfigureSymmetricBindingServerReceiveHeader(
+                this.sessionTokenAuthenticator,
+                this.Factory.SecurityTokenParameters,
+                supportingAuthenticators
+            );
+            securityHeader.ConfigureOutOfBandTokenResolver(
+                MergeOutOfBandResolvers(supportingAuthenticators, this.sessionResolverList)
+            );
             // do not enforce key derivation requirement for Cancel messages due to WSE interop
-            securityHeader.EnforceDerivedKeyRequirement = (message.Headers.Action != factory.StandardsManager.SecureConversationDriver.CloseAction.Value);
+            securityHeader.EnforceDerivedKeyRequirement = (
+                message.Headers.Action
+                != factory.StandardsManager.SecureConversationDriver.CloseAction.Value
+            );
             ProcessSecurityHeader(securityHeader, ref message, null, timeout, correlationStates);
             SecurityToken signingToken = securityHeader.SignatureToken;
-            SecurityContextSecurityToken signingSct = (signingToken as SecurityContextSecurityToken);
+            SecurityContextSecurityToken signingSct = (
+                signingToken as SecurityContextSecurityToken
+            );
             if (signingSct == null || signingSct.ContextId != sessionId)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.NoSessionTokenPresentInMessage)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new MessageSecurityException(SR.GetString(SR.NoSessionTokenPresentInMessage))
+                );
             }
-            AttachRecipientSecurityProperty(message, signingToken, false, securityHeader.BasicSupportingTokens, securityHeader.EndorsingSupportingTokens, securityHeader.SignedEndorsingSupportingTokens,
-                securityHeader.SignedSupportingTokens, securityHeader.SecurityTokenAuthorizationPoliciesMapping);
+            AttachRecipientSecurityProperty(
+                message,
+                signingToken,
+                false,
+                securityHeader.BasicSupportingTokens,
+                securityHeader.EndorsingSupportingTokens,
+                securityHeader.SignedEndorsingSupportingTokens,
+                securityHeader.SignedSupportingTokens,
+                securityHeader.SecurityTokenAuthorizationPoliciesMapping
+            );
             return GetCorrelationState(null, securityHeader);
         }
     }

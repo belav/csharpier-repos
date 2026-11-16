@@ -18,17 +18,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
     public class ValidateFormatStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ValidateFormatStringTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider?) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpValidateFormatStringDiagnosticAnalyzer(), null);
+        internal override (DiagnosticAnalyzer, CodeFixProvider?) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpValidateFormatStringDiagnosticAnalyzer(), null);
 
         [Fact]
         public async Task OnePlaceholder()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -36,13 +36,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0[||]} works", "test"); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TwoPlaceholders()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -50,13 +52,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0[||]} {1} works", "test", "also"); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ThreePlaceholders()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -64,13 +68,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0} {1[||]} works {2} ", "test", "also", "well"); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task FourPlaceholders()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -79,13 +85,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                             "teststring3", "teststring4", "teststring5", "teststring6", "teststring7");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ObjectArray()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -94,13 +102,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0} {1} {2[||]} works", objectArray); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task MultipleObjectArrays()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -109,13 +119,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0} {1} {2[||]} works", objectArray, objectArray, objectArray, objectArray); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IntArray()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -124,13 +136,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0[||]} works", intArray); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task StringArray()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -139,13 +153,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0} {1} {2[||]} works", stringArray); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task LiteralArray()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -153,13 +169,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0[||]} {1} {2} {3} works", new [] {"test1", "test2", "test3", "test4"}); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task StringArrayOutOfBounds_NoDiagnostic()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -168,13 +186,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This {0} {1} {2[||]} works", stringArray); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndOnePlaceholder()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -183,13 +203,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0[||]:C2} per ounce", 2.45);
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndTwoPlaceholders()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -198,13 +220,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         testStr = string.Format(new CultureInfo("pt-BR", useUserOverride: false), "The current price is {0[||]:C2} per {1} ", 2.45, "ounce");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndThreePlaceholders()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -214,13 +238,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                             2.45, "per", "ounce");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndFourPlaceholders()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -230,13 +256,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                             2.45, "per", "ounce", "today only");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndObjectArray()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -246,13 +274,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(new CultureInfo("pt-BR", useUserOverride: false), "This {0} {1} {[||]2} works", objectArray); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithComma()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -260,13 +290,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("{0[||],6}", 34);
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithColon()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -274,13 +306,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("{[||]0:N0}", 34);
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithCommaAndColon()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -288,13 +322,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("Test {0,[||]15:N0} output", 34);
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithPlaceholderAtBeginning()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -302,13 +338,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("{0[||]} is my test case", "This");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithPlaceholderAtEnd()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -316,13 +354,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("This is my {0[||]}", "test");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithDoubleBraces()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -330,13 +370,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(" {{ 2}} This {1[||]} is {2} {{ my {0} test }} ", "teststring1", "teststring2", "teststring3");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithDoubleBracesAtBeginning()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -344,13 +386,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("{{ 2}} This {1[||]} is {2} {{ my {0} test }} ", "teststring1", "teststring2", "teststring3");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithDoubleBracesAtEnd()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -358,13 +402,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(" {{ 2}} This {1[||]} is {2} {{ my {0} test }}", "teststring1", "teststring2", "teststring3");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task WithTripleBraces()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -372,13 +418,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(" {{{2}} This {1[||]} is {2} {{ my {0} test }}", "teststring1", "teststring2", "teststring3");
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task NamedParameters()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -386,13 +434,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(arg0: "test", arg1: "also", format: "This {0} {[||]1} works"); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task NamedParametersWithIFormatProvider()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.Globalization;
                 class Program
                 {
@@ -401,13 +451,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(arg0: "test", provider: new CultureInfo("pt-BR", useUserOverride: false), format: "This {0[||]} works"); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task NamespaceAliasForStringClass()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using stringAlias = System.String;
                 class Program
                 {
@@ -416,13 +468,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         stringAlias.Format("This {0[||]} works", "test"); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task MethodCallAsAnArgumentToAnotherMethod()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System.IO;
                 class Program
                 {
@@ -431,13 +485,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         Console.WriteLine(string.Format(format: "This {0[||]} works", arg0:"test")); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task VerbatimMultipleLines()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -446,13 +502,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 {1} {2[||]} works", "multiple", "line", "test")); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task Interpolated()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -463,13 +521,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format($"{Name,[||] 20} is {Age:D3} "); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task Empty()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -477,13 +537,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("[||]"); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task LeftParenOnly()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -491,13 +553,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format([||]; 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ParenthesesOnly()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -505,13 +569,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format([||]); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task EmptyString()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -519,13 +585,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format("[||]"); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task FormatOnly_NoStringDot()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using static System.String
                 class Program
                 {
@@ -534,13 +602,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         Format("[||]"); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task NamedParameters_BlankName()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -548,13 +618,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format( : "value"[||])); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task DuplicateNamedArgs()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -562,13 +634,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         string.Format(format:"This [||] ", format:" test "); 
                     }     
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task GenericIdentifier()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -593,13 +667,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ClassNamedString()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System;
 
                 namespace System
@@ -617,7 +693,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         Console.WriteLine(String.Format("test {[||]5} ", 1));
                     }
                 }
-                """);
+                """
+            );
         }
 
 #if CODE_STYLE
@@ -625,7 +702,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
         [Fact]
         public async Task TestOption_Ignored()
         {
-            var source = @"class Program
+            var source =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -637,7 +715,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 #else
         [Fact]
@@ -652,7 +731,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                     }     
                 }
                 """;
-            var options = Option(IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls, true);
+            var options = Option(
+                IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls,
+                true
+            );
 
             await TestDiagnosticInfoAsync(
                 source,
@@ -660,7 +742,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 globalOptions: options,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
@@ -675,15 +758,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                     }     
                 }
                 """;
-            var options = Option(IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls, false);
+            var options = Option(
+                IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls,
+                false
+            );
 
             await TestDiagnosticMissingAsync(source, new TestParameters(globalOptions: options));
         }
 #endif
+
         [Fact]
         public async Task OnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -695,13 +783,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task TwoPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -713,13 +803,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task ThreePlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -731,13 +823,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task FourPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -750,13 +844,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task iFormatProviderAndOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -769,13 +865,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task iFormatProviderAndTwoPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -788,13 +886,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndThreePlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -808,13 +908,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task IFormatProviderAndFourPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -828,13 +930,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task PlaceholderAtBeginningWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -846,13 +950,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task PlaceholderAtEndWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -864,13 +970,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task DoubleBracesAtBeginningWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -882,13 +990,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task DoubleBracesAtEndWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -900,13 +1010,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task NamedParametersOneOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -919,13 +1031,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task NamedParametersWithIFormatProviderOneOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using System.Globalization; 
                 class Program
                 {
@@ -938,13 +1052,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task FormatOnly_NoStringDot_OneOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 using static System.String
                 class Program
                 {
@@ -957,7 +1073,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
@@ -980,17 +1097,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                                 </Project>
                             </Workspace>
                 """;
-            await TestDiagnosticInfoAsync(input,
+            await TestDiagnosticInfoAsync(
+                input,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task VerbatimMultipleLinesPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1003,13 +1123,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task IntArrayOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1022,13 +1144,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task FirstPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1041,13 +1165,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task SecondPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1060,13 +1186,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task FirstOfMultipleSameNamedPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1079,13 +1207,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task SecondOfMultipleSameNamedPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1098,13 +1228,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact]
         public async Task EmptyPlaceholder()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1117,13 +1249,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29398")]
         public async Task LocalFunctionNamedFormat()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 public class C
                 {
                     public void M()
@@ -1132,7 +1266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
                         void Format() { }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

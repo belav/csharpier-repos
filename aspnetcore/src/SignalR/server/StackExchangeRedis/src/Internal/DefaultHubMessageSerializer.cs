@@ -16,8 +16,9 @@ internal sealed class DefaultHubMessageSerializer
         IList<string>? hubSupportedProtocols
     )
     {
-        var supportedProtocols =
-            hubSupportedProtocols ?? globalSupportedProtocols ?? Array.Empty<string>();
+        var supportedProtocols = hubSupportedProtocols
+            ?? globalSupportedProtocols
+            ?? Array.Empty<string>();
         _hubProtocols = new List<IHubProtocol>(supportedProtocols.Count);
         foreach (var protocolName in supportedProtocols)
         {

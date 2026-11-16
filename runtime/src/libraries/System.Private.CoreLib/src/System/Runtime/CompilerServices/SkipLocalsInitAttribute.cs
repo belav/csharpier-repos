@@ -17,18 +17,19 @@ namespace System.Runtime.CompilerServices
     /// assemblies. Use at the module level instead to apply to multiple type
     /// declarations.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Module
-        | AttributeTargets.Class
-        | AttributeTargets.Struct
-        | AttributeTargets.Interface
-        | AttributeTargets.Constructor
-        | AttributeTargets.Method
-        | AttributeTargets.Property
-        | AttributeTargets.Event, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Event,
+        Inherited = false
+    )]
     public sealed class SkipLocalsInitAttribute : Attribute
     {
-        public SkipLocalsInitAttribute()
-        {
-        }
+        public SkipLocalsInitAttribute() { }
     }
 }

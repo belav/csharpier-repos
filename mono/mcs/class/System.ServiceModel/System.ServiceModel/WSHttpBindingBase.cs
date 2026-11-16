@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,160 +36,176 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-	[MonoTODO]
-	public abstract class WSHttpBindingBase : Binding, 
-		IBindingRuntimePreferences
-	{
-		bool bypass_proxy_on_local, reliable_session_enabled;
-		HostNameComparisonMode host_name_comparison_mode
-			= HostNameComparisonMode.StrongWildcard;
-		// FIXME: could be configurable
-		long max_buffer_pool_size = 0x80000;
-		// FIXME: could be configurable
-		long max_recv_msg_size = 0x10000;
-		WSMessageEncoding message_encoding
-			= WSMessageEncoding.Text;
-		Uri proxy_address;
-		XmlDictionaryReaderQuotas reader_quotas
-			= new XmlDictionaryReaderQuotas ();
-		OptionalReliableSession reliable_session;
-		// FIXME: could be configurable.
-		EnvelopeVersion env_version = EnvelopeVersion.Soap12;
-		Encoding text_encoding = new UTF8Encoding ();
-		bool transaction_flow;
-		bool use_default_web_proxy = true;
+    [MonoTODO]
+    public abstract class WSHttpBindingBase : Binding, IBindingRuntimePreferences
+    {
+        bool bypass_proxy_on_local,
+            reliable_session_enabled;
+        HostNameComparisonMode host_name_comparison_mode = HostNameComparisonMode.StrongWildcard;
 
-		ReliableSessionBindingElement rel_element =
-			new ReliableSessionBindingElement ();
+        // FIXME: could be configurable
+        long max_buffer_pool_size = 0x80000;
 
-		protected WSHttpBindingBase ()
-			: this (false)
-		{
-		}
+        // FIXME: could be configurable
+        long max_recv_msg_size = 0x10000;
+        WSMessageEncoding message_encoding = WSMessageEncoding.Text;
+        Uri proxy_address;
+        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas();
+        OptionalReliableSession reliable_session;
 
-		protected WSHttpBindingBase (bool reliableSessionEnabled)
-		{
-			reliable_session = new OptionalReliableSession (rel_element);
-			reliable_session.Enabled = reliableSessionEnabled;
-		}
+        // FIXME: could be configurable.
+        EnvelopeVersion env_version = EnvelopeVersion.Soap12;
+        Encoding text_encoding = new UTF8Encoding();
+        bool transaction_flow;
+        bool use_default_web_proxy = true;
 
-		internal WSHttpBindingBase (WSHttpBindingBaseElement config)
-			: this (config.ReliableSession.Enabled)
-		{
-			BypassProxyOnLocal = config.BypassProxyOnLocal;
-			HostNameComparisonMode = config.HostNameComparisonMode;
-			MaxBufferPoolSize = config.MaxBufferPoolSize;
-			MaxReceivedMessageSize = config.MaxReceivedMessageSize;
-			MessageEncoding = config.MessageEncoding;
-			ProxyAddress = config.ProxyAddress;
-			// ReaderQuotas = config.ReaderQuotas;
+        ReliableSessionBindingElement rel_element = new ReliableSessionBindingElement();
 
-			TextEncoding = config.TextEncoding;
-			TransactionFlow = config.TransactionFlow;
-			UseDefaultWebProxy = config.UseDefaultWebProxy;
-			throw new NotImplementedException ();
-		}
+        protected WSHttpBindingBase()
+            : this(false) { }
 
-		public bool BypassProxyOnLocal {
-			get { return bypass_proxy_on_local; }
-			set { bypass_proxy_on_local = value; }
-		}
+        protected WSHttpBindingBase(bool reliableSessionEnabled)
+        {
+            reliable_session = new OptionalReliableSession(rel_element);
+            reliable_session.Enabled = reliableSessionEnabled;
+        }
 
-		public HostNameComparisonMode HostNameComparisonMode {
-			get { return host_name_comparison_mode; }
-			set { host_name_comparison_mode = value; }
-		}
+        internal WSHttpBindingBase(WSHttpBindingBaseElement config)
+            : this(config.ReliableSession.Enabled)
+        {
+            BypassProxyOnLocal = config.BypassProxyOnLocal;
+            HostNameComparisonMode = config.HostNameComparisonMode;
+            MaxBufferPoolSize = config.MaxBufferPoolSize;
+            MaxReceivedMessageSize = config.MaxReceivedMessageSize;
+            MessageEncoding = config.MessageEncoding;
+            ProxyAddress = config.ProxyAddress;
+            // ReaderQuotas = config.ReaderQuotas;
 
-		public long MaxBufferPoolSize {
-			get { return max_buffer_pool_size; }
-			set { max_buffer_pool_size = value; }
-		}
+            TextEncoding = config.TextEncoding;
+            TransactionFlow = config.TransactionFlow;
+            UseDefaultWebProxy = config.UseDefaultWebProxy;
+            throw new NotImplementedException();
+        }
 
-		public long MaxReceivedMessageSize {
-			get { return max_recv_msg_size; }
-			set { max_recv_msg_size = value; }
-		}
+        public bool BypassProxyOnLocal
+        {
+            get { return bypass_proxy_on_local; }
+            set { bypass_proxy_on_local = value; }
+        }
 
-		public WSMessageEncoding MessageEncoding {
-			get { return message_encoding; }
-			set { message_encoding = value; }
-		}
+        public HostNameComparisonMode HostNameComparisonMode
+        {
+            get { return host_name_comparison_mode; }
+            set { host_name_comparison_mode = value; }
+        }
 
-		public Uri ProxyAddress {
-			get { return proxy_address; }
-			set { proxy_address = value; }
-		}
+        public long MaxBufferPoolSize
+        {
+            get { return max_buffer_pool_size; }
+            set { max_buffer_pool_size = value; }
+        }
 
-		public XmlDictionaryReaderQuotas ReaderQuotas {
-			get { return reader_quotas; }
-			set { reader_quotas = value; }
-		}
+        public long MaxReceivedMessageSize
+        {
+            get { return max_recv_msg_size; }
+            set { max_recv_msg_size = value; }
+        }
 
-		public override string Scheme {
-			get { return GetTransport ().Scheme; }
-		}
+        public WSMessageEncoding MessageEncoding
+        {
+            get { return message_encoding; }
+            set { message_encoding = value; }
+        }
 
-		public OptionalReliableSession ReliableSession {
-			get { return reliable_session; }
-		}
+        public Uri ProxyAddress
+        {
+            get { return proxy_address; }
+            set { proxy_address = value; }
+        }
 
-		public EnvelopeVersion EnvelopeVersion {
-			get { return env_version; }
-		}
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
+            get { return reader_quotas; }
+            set { reader_quotas = value; }
+        }
 
-		public Encoding TextEncoding {
-			get { return text_encoding; }
-			set { text_encoding = value; }
-		}
+        public override string Scheme
+        {
+            get { return GetTransport().Scheme; }
+        }
 
-		public bool TransactionFlow {
-			get { return transaction_flow; }
-			set { transaction_flow = value; }
-		}
+        public OptionalReliableSession ReliableSession
+        {
+            get { return reliable_session; }
+        }
 
-		public bool UseDefaultWebProxy {
-			get { return use_default_web_proxy; }
-			set { use_default_web_proxy = value; }
-		}
+        public EnvelopeVersion EnvelopeVersion
+        {
+            get { return env_version; }
+        }
 
-		[MonoTODO]
-		public override BindingElementCollection
-			CreateBindingElements ()
-		{
-			BindingElement tx = new TransactionFlowBindingElement (TransactionProtocol.WSAtomicTransactionOctober2004);
-			SecurityBindingElement sec = CreateMessageSecurity ();
-			BindingElement msg = null;
-			MessageVersion msgver = MessageVersion.CreateVersion (EnvelopeVersion, AddressingVersion.WSAddressing10);
-			switch (MessageEncoding) {
-			case WSMessageEncoding.Mtom:
-				msg = new MtomMessageEncodingBindingElement (msgver, TextEncoding);
-				break;
-			case WSMessageEncoding.Text:
-				msg = new TextMessageEncodingBindingElement (msgver, TextEncoding);
-				break;
-			default:
-				throw new NotImplementedException ("mhm, another WSMessageEncoding?");
-			}
-			BindingElement tr = GetTransport ();
-			List<BindingElement> list = new List<BindingElement> ();
-			list.Add (tx); // it is always added.
-			if (sec != null)
-				list.Add (sec);
-			list.Add (msg);
-			if (tr != null)
-				list.Add (tr);
-			// FIXME: add ReliableSessionBindingElement
-			return new BindingElementCollection (list.ToArray ());
-		}
+        public Encoding TextEncoding
+        {
+            get { return text_encoding; }
+            set { text_encoding = value; }
+        }
 
-		protected abstract SecurityBindingElement CreateMessageSecurity ();
+        public bool TransactionFlow
+        {
+            get { return transaction_flow; }
+            set { transaction_flow = value; }
+        }
 
-		protected abstract TransportBindingElement GetTransport ();
+        public bool UseDefaultWebProxy
+        {
+            get { return use_default_web_proxy; }
+            set { use_default_web_proxy = value; }
+        }
 
-		// explicit interface implementations
+        [MonoTODO]
+        public override BindingElementCollection CreateBindingElements()
+        {
+            BindingElement tx = new TransactionFlowBindingElement(
+                TransactionProtocol.WSAtomicTransactionOctober2004
+            );
+            SecurityBindingElement sec = CreateMessageSecurity();
+            BindingElement msg = null;
+            MessageVersion msgver = MessageVersion.CreateVersion(
+                EnvelopeVersion,
+                AddressingVersion.WSAddressing10
+            );
+            switch (MessageEncoding)
+            {
+                case WSMessageEncoding.Mtom:
+                    msg = new MtomMessageEncodingBindingElement(msgver, TextEncoding);
+                    break;
+                case WSMessageEncoding.Text:
+                    msg = new TextMessageEncodingBindingElement(msgver, TextEncoding);
+                    break;
+                default:
+                    throw new NotImplementedException("mhm, another WSMessageEncoding?");
+            }
+            BindingElement tr = GetTransport();
+            List<BindingElement> list = new List<BindingElement>();
+            list.Add(tx); // it is always added.
+            if (sec != null)
+                list.Add(sec);
+            list.Add(msg);
+            if (tr != null)
+                list.Add(tr);
+            // FIXME: add ReliableSessionBindingElement
+            return new BindingElementCollection(list.ToArray());
+        }
 
-		bool IBindingRuntimePreferences.ReceiveSynchronously {
-			get { return false; }
-		}
-	}
+        protected abstract SecurityBindingElement CreateMessageSecurity();
+
+        protected abstract TransportBindingElement GetTransport();
+
+        // explicit interface implementations
+
+        bool IBindingRuntimePreferences.ReceiveSynchronously
+        {
+            get { return false; }
+        }
+    }
 }

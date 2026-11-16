@@ -11,10 +11,10 @@ public class Test_PinnedInt
     public static int Main()
     {
         int i = 10;
-        Object temp1, temp2;
+        Object temp1,
+            temp2;
 
         GCHandle handle = GCUtil.Alloc(i, GCHandleType.Pinned);
-
 
         temp1 = GCUtil.GetTarget(handle);
         Console.WriteLine(temp1);

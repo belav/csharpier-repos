@@ -24,16 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 
 namespace System.Threading
 {
-	public
-	static class Volatile
-	{
+    public static class Volatile
+    {
         #region Boolean
-        private struct VolatileBoolean { public volatile bool Value; }
+        private struct VolatileBoolean
+        {
+            public volatile bool Value;
+        }
 
         [Intrinsic]
         public static bool Read(ref bool location) =>
@@ -45,7 +47,10 @@ namespace System.Threading
         #endregion
 
         #region Byte
-        private struct VolatileByte { public volatile byte Value; }
+        private struct VolatileByte
+        {
+            public volatile byte Value;
+        }
 
         [Intrinsic]
         public static byte Read(ref byte location) =>
@@ -57,7 +62,10 @@ namespace System.Threading
         #endregion
 
         #region Int16
-        private struct VolatileInt16 { public volatile short Value; }
+        private struct VolatileInt16
+        {
+            public volatile short Value;
+        }
 
         [Intrinsic]
         public static short Read(ref short location) =>
@@ -69,7 +77,10 @@ namespace System.Threading
         #endregion
 
         #region Int32
-        private struct VolatileInt32 { public volatile int Value; }
+        private struct VolatileInt32
+        {
+            public volatile int Value;
+        }
 
         [Intrinsic]
         public static int Read(ref int location) =>
@@ -81,7 +92,10 @@ namespace System.Threading
         #endregion
 
         #region IntPtr
-        private struct VolatileIntPtr { public volatile IntPtr Value; }
+        private struct VolatileIntPtr
+        {
+            public volatile IntPtr Value;
+        }
 
         [Intrinsic]
         public static IntPtr Read(ref IntPtr location) =>
@@ -93,7 +107,10 @@ namespace System.Threading
         #endregion
 
         #region SByte
-        private struct VolatileSByte { public volatile sbyte Value; }
+        private struct VolatileSByte
+        {
+            public volatile sbyte Value;
+        }
 
         [CLSCompliant(false)]
         [Intrinsic]
@@ -107,7 +124,10 @@ namespace System.Threading
         #endregion
 
         #region Single
-        private struct VolatileSingle { public volatile float Value; }
+        private struct VolatileSingle
+        {
+            public volatile float Value;
+        }
 
         [Intrinsic]
         public static float Read(ref float location) =>
@@ -119,7 +139,10 @@ namespace System.Threading
         #endregion
 
         #region UInt16
-        private struct VolatileUInt16 { public volatile ushort Value; }
+        private struct VolatileUInt16
+        {
+            public volatile ushort Value;
+        }
 
         [CLSCompliant(false)]
         [Intrinsic]
@@ -133,7 +156,10 @@ namespace System.Threading
         #endregion
 
         #region UInt32
-        private struct VolatileUInt32 { public volatile uint Value; }
+        private struct VolatileUInt32
+        {
+            public volatile uint Value;
+        }
 
         [CLSCompliant(false)]
         [Intrinsic]
@@ -147,7 +173,10 @@ namespace System.Threading
         #endregion
 
         #region UIntPtr
-        private struct VolatileUIntPtr { public volatile UIntPtr Value; }
+        private struct VolatileUIntPtr
+        {
+            public volatile UIntPtr Value;
+        }
 
         [CLSCompliant(false)]
         [Intrinsic]
@@ -161,41 +190,44 @@ namespace System.Threading
         #endregion
 
         #region T
-        private struct VolatileObject { public volatile object Value; }
+        private struct VolatileObject
+        {
+            public volatile object Value;
+        }
 
         [Intrinsic]
-        public static T Read<T>(ref T location) where T : class =>
-            Unsafe.As<T>(Unsafe.As<T, VolatileObject>(ref location).Value);
+        public static T Read<T>(ref T location)
+            where T : class => Unsafe.As<T>(Unsafe.As<T, VolatileObject>(ref location).Value);
 
         [Intrinsic]
-        public static void Write<T>(ref T location, T value) where T : class =>
-            Unsafe.As<T, VolatileObject>(ref location).Value = value;
+        public static void Write<T>(ref T location, T value)
+            where T : class => Unsafe.As<T, VolatileObject>(ref location).Value = value;
         #endregion
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static long Read (ref long location);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public static extern long Read(ref long location);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		[CLSCompliant (false)]
-		public extern static ulong Read (ref ulong location);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [CLSCompliant(false)]
+        public static extern ulong Read(ref ulong location);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static double Read (ref double location);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public static extern double Read(ref double location);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static void Write (ref long location, long value);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public static extern void Write(ref long location, long value);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		[CLSCompliant (false)]
-		public extern static void Write (ref ulong location, ulong value);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [CLSCompliant(false)]
+        public static extern void Write(ref ulong location, ulong value);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-		public extern static void Write (ref double location, double value);
-	}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public static extern void Write(ref double location, double value);
+    }
 }

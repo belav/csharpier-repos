@@ -10,15 +10,20 @@ namespace Wasm.Build.Tests;
 public class BlazorWasmProjectProvider : WasmSdkBasedProjectProvider
 {
     public BlazorWasmProjectProvider(ITestOutputHelper _testOutput, string? _projectDir = null)
-            : base(_testOutput, _projectDir)
-    {}
+        : base(_testOutput, _projectDir) { }
 
-    public void AssertBundle(BlazorBuildOptions options)
-        => AssertBundle(new AssertWasmSdkBundleOptions(
+    public void AssertBundle(BlazorBuildOptions options) =>
+        AssertBundle(
+            new AssertWasmSdkBundleOptions(
                 Config: options.Config,
                 IsPublish: options.IsPublish,
                 TargetFramework: options.TargetFramework,
-                BinFrameworkDir: options.BinFrameworkDir ?? FindBinFrameworkDir(options.Config, options.IsPublish, options.TargetFramework),
+                BinFrameworkDir: options.BinFrameworkDir
+                    ?? FindBinFrameworkDir(
+                        options.Config,
+                        options.IsPublish,
+                        options.TargetFramework
+                    ),
                 GlobalizationMode: options.GlobalizationMode,
                 PredefinedIcudt: options.PredefinedIcudt,
                 ExpectFingerprintOnDotnetJs: options.ExpectFingerprintOnDotnetJs,
@@ -26,5 +31,6 @@ public class BlazorWasmProjectProvider : WasmSdkBasedProjectProvider
                 RuntimeType: options.RuntimeType,
                 AssertIcuAssets: true,
                 AssertSymbolsFile: false // FIXME: not supported yet
-            ));
+            )
+        );
 }

@@ -4,20 +4,40 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Structure;
 using Microsoft.CodeAnalysis.Shared.Extensions;
+using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
 {
     internal static class OmniSharpBlockStructureService
     {
-        public static async Task<OmniSharpBlockStructure?> GetBlockStructureAsync(Document document, OmniSharpBlockStructureOptions options, CancellationToken cancellationToken)
+        public static async Task<OmniSharpBlockStructure?> GetBlockStructureAsync(
+            Document document,
+            OmniSharpBlockStructureOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<BlockStructureService>();
-            var blockStructure = await service.GetBlockStructureAsync(document, options.ToBlockStructureOptions(), cancellationToken).ConfigureAwait(false);
+            var blockStructure = await service
+                .GetBlockStructureAsync(
+                    document,
+                    options.ToBlockStructureOptions(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (blockStructure != null)
             {
-                return new OmniSharpBlockStructure(blockStructure.Spans.SelectAsArray(x => new OmniSharpBlockSpan(x.Type, x.IsCollapsible, x.TextSpan, x.HintSpan, x.BannerText, x.AutoCollapse, x.IsDefaultCollapsed)));
+                return new OmniSharpBlockStructure(
+                    blockStructure.Spans.SelectAsArray(x => new OmniSharpBlockSpan(
+                        x.Type,
+                        x.IsCollapsible,
+                        x.TextSpan,
+                        x.HintSpan,
+                        x.BannerText,
+                        x.AutoCollapse,
+                        x.IsDefaultCollapsed
+                    ))
+                );
             }
             else
             {

@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <remarks>
-        /// This temp is not interesting to the expression compiler.  However, it 
+        /// This temp is not interesting to the expression compiler.  However, it
         /// may be replaced by an interesting local in a later stage.
         /// </remarks>
         public LocalVariableAttributes PdbAttributes => LocalVariableAttributes.DebuggerHidden;
@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public byte[] Signature => _signature;
 
-        public LocalSlotDebugInfo SlotInfo
-            => new LocalSlotDebugInfo(SynthesizedLocalKind.EmitterTemp, LocalDebugId.None);
+        public LocalSlotDebugInfo SlotInfo =>
+            new LocalSlotDebugInfo(SynthesizedLocalKind.EmitterTemp, LocalDebugId.None);
     }
 }

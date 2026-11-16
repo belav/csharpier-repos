@@ -11,8 +11,6 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
     {
         public static readonly DateTimeTree Instance = new();
 
-        private DateTimeTree()
-        {
-        }
+        private DateTimeTree() { }
     }
 }

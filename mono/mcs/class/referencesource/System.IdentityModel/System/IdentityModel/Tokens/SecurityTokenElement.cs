@@ -5,12 +5,12 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Collections.ObjectModel;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.IO;
-using System.Xml;
 using System.Security.Claims;
-using System.Collections.ObjectModel;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
@@ -34,7 +34,7 @@ namespace System.IdentityModel.Tokens
         /// <remarks>
         /// <see cref="GetIdentities"/> is not supported by this object if this constructor is used unless
         /// <see cref="ValidateToken"/> is overriden.
-        /// If the securityToken passed in is a <see cref="GenericXmlSecurityToken"/> then SecurityTokenXml will 
+        /// If the securityToken passed in is a <see cref="GenericXmlSecurityToken"/> then SecurityTokenXml will
         /// be set to the value found in <see cref="GenericXmlSecurityToken"/>
         /// </remarks>
         public SecurityTokenElement(SecurityToken securityToken)
@@ -57,18 +57,25 @@ namespace System.IdentityModel.Tokens
         /// Creates an instance of this object using XML representation of the security token.
         /// </summary>
         /// <param name="securityTokenXml">The <see cref="XmlElement"/> representation of the security token.</param>
-        /// <param name="securityTokenHandlers">The collection of <see cref="SecurityTokenHandler"/> objects that may 
+        /// <param name="securityTokenHandlers">The collection of <see cref="SecurityTokenHandler"/> objects that may
         /// be used to read and validate the security token this object represents.</param>
-        public SecurityTokenElement(XmlElement securityTokenXml, SecurityTokenHandlerCollection securityTokenHandlers)
+        public SecurityTokenElement(
+            XmlElement securityTokenXml,
+            SecurityTokenHandlerCollection securityTokenHandlers
+        )
         {
             if (securityTokenXml == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenXml");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenXml"
+                );
             }
 
             if (securityTokenHandlers == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenHandlers");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandlers"
+                );
             }
 
             _securityTokenXml = securityTokenXml;
@@ -83,11 +90,9 @@ namespace System.IdentityModel.Tokens
         /// </remarks>
         public XmlElement SecurityTokenXml
         {
-            get
-            {
-                return _securityTokenXml;
-            }
+            get { return _securityTokenXml; }
         }
+
         /// <summary>
         /// Gets the security token this object represents.
         /// </summary>
@@ -126,15 +131,20 @@ namespace System.IdentityModel.Tokens
         /// Creates the identities for the represented by the <see cref="SecurityToken"/>.
         /// </summary>
         /// <param name="securityTokenXml">The <see cref="XmlElement"/> representation of the security token.</param>
-        /// <param name="securityTokenHandlers">The collection of <see cref="SecurityTokenHandler"/> objects that may 
+        /// <param name="securityTokenHandlers">The collection of <see cref="SecurityTokenHandler"/> objects that may
         /// be used to read and validate the security token this object represents.</param>
         /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
         /// <exception cref="InvalidOperationException">If either parameter 'securityTokenXml' or 'securityTokenHandlers' are null.</exception>
-        protected virtual ReadOnlyCollection<ClaimsIdentity> ValidateToken(XmlElement securityTokenXml, SecurityTokenHandlerCollection securityTokenHandlers)
+        protected virtual ReadOnlyCollection<ClaimsIdentity> ValidateToken(
+            XmlElement securityTokenXml,
+            SecurityTokenHandlerCollection securityTokenHandlers
+        )
         {
             if (securityTokenXml == null || securityTokenHandlers == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4052)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4052))
+                );
             }
 
             SecurityToken securityToken = GetSecurityToken();
@@ -148,8 +158,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="securityTokenHandlers">The <see cref="SecurityTokenHandlerCollection"/> used to
         /// read the token.</param>
         /// <returns>A <see cref="SecurityToken"/>.</returns>
-        protected virtual SecurityToken ReadSecurityToken(XmlElement securityTokenXml,
-                                                           SecurityTokenHandlerCollection securityTokenHandlers)
+        protected virtual SecurityToken ReadSecurityToken(
+            XmlElement securityTokenXml,
+            SecurityTokenHandlerCollection securityTokenHandlers
+        )
         {
             SecurityToken securityToken = null;
             XmlReader reader = new XmlNodeReader(securityTokenXml);
@@ -159,7 +171,16 @@ namespace System.IdentityModel.Tokens
             securityToken = securityTokenHandlers.ReadToken(reader);
             if (securityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4051, securityTokenXml, reader.LocalName, reader.NamespaceURI)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ID4051,
+                            securityTokenXml,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        )
+                    )
+                );
             }
 
             return securityToken;

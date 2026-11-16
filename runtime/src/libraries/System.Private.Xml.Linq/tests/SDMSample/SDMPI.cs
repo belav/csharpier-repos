@@ -63,7 +63,10 @@ namespace XDocumentTests.SDMSample
             Assert.False(XNode.DeepEquals(c1, c4));
             Assert.True(XNode.DeepEquals(c1, c5));
 
-            Assert.Equal(XNode.EqualityComparer.GetHashCode(c1), XNode.EqualityComparer.GetHashCode(c5));
+            Assert.Equal(
+                XNode.EqualityComparer.GetHashCode(c1),
+                XNode.EqualityComparer.GetHashCode(c5)
+            );
         }
 
         /// <summary>
@@ -112,7 +115,8 @@ namespace XDocumentTests.SDMSample
 
             Assert.Equal(
                 "<?xml version=\"1.0\" encoding=\"utf-16\"?><x><?target data?></x>",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
         }
     }
 }

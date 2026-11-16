@@ -40,7 +40,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
         internal PreserveReferencesCallbackTestObject _parent;
         internal SerializationInfo _serializationInfo;
 
-        public PreserveReferencesCallbackTestObject(string stringValue, int intValue, PersonReference p1, PersonReference p2, PersonReference p3)
+        public PreserveReferencesCallbackTestObject(
+            string stringValue,
+            int intValue,
+            PersonReference p1,
+            PersonReference p2,
+            PersonReference p3
+        )
         {
             _stringValue = stringValue;
             _intValue = intValue;
@@ -49,7 +55,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             _person3 = p3;
         }
 
-        protected PreserveReferencesCallbackTestObject(SerializationInfo info, StreamingContext context)
+        protected PreserveReferencesCallbackTestObject(
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
             _serializationInfo = info;
         }
@@ -74,14 +83,17 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
             _stringValue = _serializationInfo.GetString("stringValue");
             _intValue = _serializationInfo.GetInt32("intValue");
-            _person1 = (PersonReference)_serializationInfo.GetValue("person1", typeof(PersonReference));
-            _person2 = (PersonReference)_serializationInfo.GetValue("person2", typeof(PersonReference));
-            _person3 = (PersonReference)_serializationInfo.GetValue("person3", typeof(PersonReference));
-            _parent = (PreserveReferencesCallbackTestObject)_serializationInfo.GetValue("parent", typeof(PreserveReferencesCallbackTestObject));
+            _person1 = (PersonReference)
+                _serializationInfo.GetValue("person1", typeof(PersonReference));
+            _person2 = (PersonReference)
+                _serializationInfo.GetValue("person2", typeof(PersonReference));
+            _person3 = (PersonReference)
+                _serializationInfo.GetValue("person3", typeof(PersonReference));
+            _parent = (PreserveReferencesCallbackTestObject)
+                _serializationInfo.GetValue("parent", typeof(PreserveReferencesCallbackTestObject));
 
             _serializationInfo = null;
         }
     }
 #endif
-
 }

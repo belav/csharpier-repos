@@ -34,7 +34,9 @@ namespace System.Web.Mvc
                     IViewStartPageChild child = ChildPage as IViewStartPageChild;
                     if (child == null)
                     {
-                        throw new InvalidOperationException(MvcResources.ViewStartPage_RequiresMvcRazorView);
+                        throw new InvalidOperationException(
+                            MvcResources.ViewStartPage_RequiresMvcRazorView
+                        );
                     }
                     _viewStartPageChild = child;
                 }

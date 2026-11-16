@@ -10,29 +10,28 @@
 
 using System;
 using System.Security.Cryptography;
-
-using NUnit.Framework;
 using Mono.Security.Cryptography;
+using NUnit.Framework;
 
-namespace MonoTests.Mono.Security.Cryptography {
+namespace MonoTests.Mono.Security.Cryptography
+{
+    [TestFixture]
+    public class MD4ManagedTest : MD4Test
+    {
+        [SetUp]
+        public void Setup()
+        {
+            hash = new MD4Managed();
+        }
 
-	[TestFixture]
-	public class MD4ManagedTest : MD4Test {
+        // this will run ALL tests defined in MD4Test.cs with the MD4Managed implementation
 
-		[SetUp]
-		public void Setup () 
-		{
-			hash = new MD4Managed ();
-		}
-
-		// this will run ALL tests defined in MD4Test.cs with the MD4Managed implementation
-		
-		[Test]
-		public override void Create () 
-		{
-			// try creating ourselve using Create
-			HashAlgorithm h = MD4.Create ("MD4Managed");
-			Assert.IsTrue ((h is MD4Managed), "MD4Managed");
-		}
-	}
+        [Test]
+        public override void Create()
+        {
+            // try creating ourselve using Create
+            HashAlgorithm h = MD4.Create("MD4Managed");
+            Assert.IsTrue((h is MD4Managed), "MD4Managed");
+        }
+    }
 }

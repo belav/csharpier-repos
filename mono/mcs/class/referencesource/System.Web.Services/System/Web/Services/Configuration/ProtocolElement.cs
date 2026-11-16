@@ -5,21 +5,23 @@
 namespace System.Web.Services.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Globalization;
     using System.Security.Permissions;
 
     public sealed class ProtocolElement : ConfigurationElement
     {
-        // These three constructors are used by the configuration system. 
-        public ProtocolElement() : base()
+        // These three constructors are used by the configuration system.
+        public ProtocolElement()
+            : base()
         {
             this.properties.Add(this.name);
         }
 
-        public ProtocolElement(WebServiceProtocols protocol) : this()
+        public ProtocolElement(WebServiceProtocols protocol)
+            : this()
         {
             this.Name = protocol;
         }
@@ -28,8 +30,8 @@ namespace System.Web.Services.Configuration
         public WebServiceProtocols Name
         {
             get { return (WebServiceProtocols)base[this.name]; }
-            set 
-            { 
+            set
+            {
                 if (!IsValidProtocolsValue(value))
                 {
                     value = WebServiceProtocols.Unknown;
@@ -48,9 +50,11 @@ namespace System.Web.Services.Configuration
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-        readonly ConfigurationProperty name = new ConfigurationProperty("name", typeof(WebServiceProtocols), WebServiceProtocols.Unknown, ConfigurationPropertyOptions.IsKey);
+        readonly ConfigurationProperty name = new ConfigurationProperty(
+            "name",
+            typeof(WebServiceProtocols),
+            WebServiceProtocols.Unknown,
+            ConfigurationPropertyOptions.IsKey
+        );
     }
 }
-
-
-

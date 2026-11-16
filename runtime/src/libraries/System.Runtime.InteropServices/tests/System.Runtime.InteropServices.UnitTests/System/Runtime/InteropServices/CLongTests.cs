@@ -13,8 +13,10 @@ namespace System.Runtime.InteropServices.Tests
     public class CLongTests
     {
         private static bool Has64BitStorage => !Has32BitStorage;
-        private static bool Has32BitStorage => PlatformDetection.Is32BitProcess || PlatformDetection.IsWindows;
-        private static bool NativeIntConstructorCanOverflow => !PlatformDetection.Is32BitProcess && Has32BitStorage;
+        private static bool Has32BitStorage =>
+            PlatformDetection.Is32BitProcess || PlatformDetection.IsWindows;
+        private static bool NativeIntConstructorCanOverflow =>
+            !PlatformDetection.Is32BitProcess && Has32BitStorage;
         private static bool NativeIntConstructorCannotOverflow => !NativeIntConstructorCanOverflow;
 
         [Fact]

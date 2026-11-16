@@ -13,9 +13,7 @@ using System.Threading;
 namespace Microsoft.TestCommon
 {
     [Xunit.CollectionDefinition("PortReserver Collection", DisableParallelization = true)]
-    public class PortReserverCollection
-    {
-    }
+    public class PortReserverCollection { }
 
     /// <summary>
     /// This class allocates ports while ensuring that:
@@ -24,7 +22,9 @@ namespace Microsoft.TestCommon
     ///
     /// Gotcha: If another application grabs a port during the test, we have a race condition.
     /// </summary>
-    [DebuggerDisplay("Port: {PortNumber}, Port count for this app domain: {_appDomainOwnedPorts.Count}")]
+    [DebuggerDisplay(
+        "Port: {PortNumber}, Port count for this app domain: {_appDomainOwnedPorts.Count}"
+    )]
     public class PortReserver : IDisposable
     {
         private Mutex _portMutex;
@@ -35,17 +35,16 @@ namespace Microsoft.TestCommon
         // Since practically there is no perf issue or concern here, this keeps the code the simplest possible.
         private static HashSet<int> _appDomainOwnedPorts = new HashSet<int>();
 
-        public int PortNumber
-        {
-            get;
-            private set;
-        }
+        public int PortNumber { get; private set; }
 
         public PortReserver(int basePort = 50231)
         {
             if (basePort <= 0)
             {
-                throw new ArgumentOutOfRangeException("basePort", "Argument must be greater than 0.");
+                throw new ArgumentOutOfRangeException(
+                    "basePort",
+                    "Argument must be greater than 0."
+                );
             }
 
             // Grab a cross appdomain/cross process/cross thread lock, to ensure only one port is reserved at a time.
@@ -77,7 +76,8 @@ namespace Microsoft.TestCommon
                         }
 
                         // Create a well known mutex
-                        string mutexName = "WebStack-Port-" + port.ToString(CultureInfo.InvariantCulture);
+                        string mutexName =
+                            "WebStack-Port-" + port.ToString(CultureInfo.InvariantCulture);
                         _portMutex = new Mutex(initiallyOwned: false, name: mutexName);
 
                         // If no one else is using this port grab it.
@@ -106,7 +106,11 @@ namespace Microsoft.TestCommon
         {
             get
             {
-                return String.Format(CultureInfo.InvariantCulture, "http://localhost:{0}/", PortNumber);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    "http://localhost:{0}/",
+                    PortNumber
+                );
             }
         }
 
@@ -150,7 +154,11 @@ namespace Microsoft.TestCommon
             if (!mutex.WaitOne(TimeSpan.FromSeconds(timeoutInSeconds)))
             {
                 throw new InvalidOperationException(
-                    String.Format("Unable to reserve global Mutex within {0} seconds.", timeoutInSeconds));
+                    String.Format(
+                        "Unable to reserve global Mutex within {0} seconds.",
+                        timeoutInSeconds
+                    )
+                );
             }
 
             return mutex;
@@ -160,7 +168,8 @@ namespace Microsoft.TestCommon
         {
             IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
 
-            return ipGlobalProperties.GetActiveTcpListeners()
+            return ipGlobalProperties
+                .GetActiveTcpListeners()
                 .Concat(ipGlobalProperties.GetActiveUdpListeners())
                 .ToArray();
         }

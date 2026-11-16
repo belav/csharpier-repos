@@ -239,8 +239,9 @@ internal sealed class HttpConnection : ITimeoutHandler
     private HttpProtocols SelectProtocol()
     {
         var hasTls = _context.ConnectionFeatures.Get<ITlsConnectionFeature>() != null;
-        var applicationProtocol =
-            _context.ConnectionFeatures.Get<ITlsApplicationProtocolFeature>()?.ApplicationProtocol
+        var applicationProtocol = _context
+            .ConnectionFeatures.Get<ITlsApplicationProtocolFeature>()
+            ?.ApplicationProtocol
             ?? new ReadOnlyMemory<byte>();
         var isMultiplexTransport = _context is HttpMultiplexedConnectionContext;
         var http1Enabled = _context.Protocols.HasFlag(HttpProtocols.Http1);

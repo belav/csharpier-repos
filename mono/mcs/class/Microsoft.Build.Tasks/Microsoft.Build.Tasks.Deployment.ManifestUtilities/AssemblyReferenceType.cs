@@ -25,18 +25,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	public enum AssemblyReferenceType {
-		Unspecified,
-		ClickOnceManifest,
-		ManagedAssembly,
-		NativeAssembly
-	}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    public enum AssemblyReferenceType
+    {
+        Unspecified,
+        ClickOnceManifest,
+        ManagedAssembly,
+        NativeAssembly,
+    }
 }
-

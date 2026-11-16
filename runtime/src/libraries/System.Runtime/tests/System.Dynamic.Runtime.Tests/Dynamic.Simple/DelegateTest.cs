@@ -29,9 +29,7 @@ namespace SampleDynamicTests
             return s.Length + d.ToString().Length + o.ToString().Length;
         }
 
-        private static void Bar(string s, dynamic d, object o)
-        {
-        }
+        private static void Bar(string s, dynamic d, object o) { }
 
         [Fact]
         public static void VariantFuncTest()

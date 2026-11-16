@@ -9,19 +9,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Common;
 using System.Data.EntityClient;
 using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
-using System.ComponentModel;
-using System.Data.Common;
-using System.Data.Objects.DataClasses;
-using System.Data.Objects;
-using System.Data;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace System.Web.UI.WebControls
 {
@@ -31,11 +31,12 @@ namespace System.Web.UI.WebControls
     internal abstract class EntityDataSourceColumn
     {
         protected EntityDataSourceColumn(string displayName)
-            : this(displayName, (EntityDataSourceColumn)null)
-        {
-        }
+            : this(displayName, (EntityDataSourceColumn)null) { }
 
-        protected EntityDataSourceColumn(string displayName, EntityDataSourceColumn controllingColumn)
+        protected EntityDataSourceColumn(
+            string displayName,
+            EntityDataSourceColumn controllingColumn
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(displayName, "displayName");
 
@@ -60,12 +61,12 @@ namespace System.Web.UI.WebControls
         /// </summary>
         internal bool IsHidden
         {
-            get 
+            get
             {
                 // Columns with dependents are not shown to the user. They are
                 // merely used to plumb values (e.g. via referential integrity
                 // constraints)
-                return this.ControllingColumn != null; 
+                return this.ControllingColumn != null;
             }
         }
 
@@ -114,14 +115,16 @@ namespace System.Web.UI.WebControls
         private readonly EntityDataSourceMemberPath memberPath;
 
         internal EntityDataSourcePropertyColumn(EntityDataSourceMemberPath memberPath)
-            : base(EntityDataSourceUtil.CheckArgumentNull(memberPath, "memberPath").GetDescription())
+            : base(
+                EntityDataSourceUtil.CheckArgumentNull(memberPath, "memberPath").GetDescription()
+            )
         {
             this.memberPath = memberPath;
         }
 
         internal override bool IsInteresting
         {
-            get 
+            get
             {
                 // the member path knows if its interesting...
                 return this.memberPath.IsInteresting;
@@ -130,10 +133,10 @@ namespace System.Web.UI.WebControls
 
         internal override bool CanWrite
         {
-            get 
+            get
             {
                 // can always write
-                return true; 
+                return true;
             }
         }
 
@@ -152,12 +155,12 @@ namespace System.Web.UI.WebControls
             get { return this.memberPath.ClrType; }
         }
 
-        override internal object GetValue(EntityDataSourceWrapper entity)
+        internal override object GetValue(EntityDataSourceWrapper entity)
         {
             return this.memberPath.GetValue(entity);
         }
 
-        override internal void SetValue(EntityDataSourceWrapper entity, object value)
+        internal override void SetValue(EntityDataSourceWrapper entity, object value)
         {
             this.memberPath.SetValue(entity, value);
         }
@@ -182,7 +185,7 @@ namespace System.Web.UI.WebControls
     }
 
     /// <summary>
-    /// An EntityDataSourceView column 
+    /// An EntityDataSourceView column
     /// </summary>
     internal class EntityDataSourceReferenceKeyColumn : EntityDataSourceColumn
     {
@@ -191,12 +194,20 @@ namespace System.Web.UI.WebControls
         private readonly Type clrType;
         private readonly bool isNullable;
 
-        internal EntityDataSourceReferenceKeyColumn(MetadataWorkspace workspace, EntityDataSourceReferenceGroup group, EdmProperty keyMember, EntityDataSourceColumn dependent)
+        internal EntityDataSourceReferenceKeyColumn(
+            MetadataWorkspace workspace,
+            EntityDataSourceReferenceGroup group,
+            EdmProperty keyMember,
+            EntityDataSourceColumn dependent
+        )
             : base(CreateDisplayName(group, keyMember), dependent)
         {
             EntityDataSourceUtil.CheckArgumentNull(group, "group");
             EntityDataSourceUtil.CheckArgumentNull(keyMember, "keyMember");
-            Debug.Assert(EntityDataSourceUtil.IsScalar(keyMember.TypeUsage.EdmType), "Expected primitive or enum type for key members.");
+            Debug.Assert(
+                EntityDataSourceUtil.IsScalar(keyMember.TypeUsage.EdmType),
+                "Expected primitive or enum type for key members."
+            );
 
             this.group = group;
             this.keyMember = keyMember;
@@ -204,7 +215,10 @@ namespace System.Web.UI.WebControls
 
             // if the association end is optional (0..1), make sure the CLR type
             // is also nullable
-            if (this.group.End.CorrespondingAssociationEndMember.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne)
+            if (
+                this.group.End.CorrespondingAssociationEndMember.RelationshipMultiplicity
+                == RelationshipMultiplicity.ZeroOrOne
+            )
             {
                 this.clrType = EntityDataSourceUtil.MakeNullable(clrType);
                 this.isNullable = true;
@@ -213,7 +227,7 @@ namespace System.Web.UI.WebControls
 
         internal override bool IsInteresting
         {
-            get 
+            get
             {
                 // references are always interesting
                 return true;
@@ -222,7 +236,7 @@ namespace System.Web.UI.WebControls
 
         internal override bool CanWrite
         {
-            get 
+            get
             {
                 // references can always be written
                 return true;
@@ -254,7 +268,10 @@ namespace System.Web.UI.WebControls
             get { return this.keyMember; }
         }
 
-        private static string CreateDisplayName(EntityDataSourceReferenceGroup group, EdmProperty keyMember)
+        private static string CreateDisplayName(
+            EntityDataSourceReferenceGroup group,
+            EdmProperty keyMember
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(group, "group");
             EntityDataSourceUtil.CheckArgumentNull(keyMember, "keyMember");
@@ -263,7 +280,12 @@ namespace System.Web.UI.WebControls
 
             string result;
 
-            if (EntityDataSourceUtil.TryGetCorrespondingNavigationProperty(group.End.CorrespondingAssociationEndMember, out navigationProperty))
+            if (
+                EntityDataSourceUtil.TryGetCorrespondingNavigationProperty(
+                    group.End.CorrespondingAssociationEndMember,
+                    out navigationProperty
+                )
+            )
             {
                 result = navigationProperty.Name + "." + keyMember.Name;
             }
@@ -279,8 +301,12 @@ namespace System.Web.UI.WebControls
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "<Set = {0}, Role = {1}>",
-                this.group.End.ParentAssociationSet.Name, this.group.End.Name);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "<Set = {0}, Role = {1}>",
+                this.group.End.ParentAssociationSet.Name,
+                this.group.End.Name
+            );
         }
 
         internal override object GetValue(EntityDataSourceWrapper entity)
@@ -318,9 +344,17 @@ namespace System.Web.UI.WebControls
             builder.Append("NAVIGATE(");
             builder.Append(EntityDataSourceUtil.EntitySqlElementAlias);
             builder.Append(", ");
-            builder.Append(EntityDataSourceUtil.CreateEntitySqlTypeIdentifier(this.Group.End.ParentAssociationSet.ElementType));
+            builder.Append(
+                EntityDataSourceUtil.CreateEntitySqlTypeIdentifier(
+                    this.Group.End.ParentAssociationSet.ElementType
+                )
+            );
             builder.Append(", ");
-            builder.Append(EntityDataSourceUtil.QuoteEntitySqlIdentifier(this.Group.End.CorrespondingAssociationEndMember.Name));
+            builder.Append(
+                EntityDataSourceUtil.QuoteEntitySqlIdentifier(
+                    this.Group.End.CorrespondingAssociationEndMember.Name
+                )
+            );
             builder.Append(").");
             builder.Append(EntityDataSourceUtil.QuoteEntitySqlIdentifier(this.keyMember.Name));
             string result = builder.ToString();
@@ -333,8 +367,15 @@ namespace System.Web.UI.WebControls
     {
         private readonly NavigationProperty navigationProperty;
 
-        protected EntityDataSourceReferenceValueColumn(MetadataWorkspace ocWorkspace, NavigationProperty navigationProperty)
-            : base(EntityDataSourceUtil.CheckArgumentNull(navigationProperty, "navigationProperty").Name)
+        protected EntityDataSourceReferenceValueColumn(
+            MetadataWorkspace ocWorkspace,
+            NavigationProperty navigationProperty
+        )
+            : base(
+                EntityDataSourceUtil
+                    .CheckArgumentNull(navigationProperty, "navigationProperty")
+                    .Name
+            )
         {
             EntityDataSourceUtil.CheckArgumentNull(ocWorkspace, "ocWorkspace");
 
@@ -342,12 +383,19 @@ namespace System.Web.UI.WebControls
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        internal static EntityDataSourceReferenceValueColumn Create(Type clrToType, MetadataWorkspace ocWorkspace, NavigationProperty navigationProperty)
+        internal static EntityDataSourceReferenceValueColumn Create(
+            Type clrToType,
+            MetadataWorkspace ocWorkspace,
+            NavigationProperty navigationProperty
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(clrToType, "clrToType");
 
-            Type columnType = typeof(EntityDataSourceReferenceValueColumn<>).MakeGenericType(clrToType);
-            EntityDataSourceReferenceValueColumn result = (EntityDataSourceReferenceValueColumn)Activator.CreateInstance(columnType, ocWorkspace, navigationProperty);
+            Type columnType = typeof(EntityDataSourceReferenceValueColumn<>).MakeGenericType(
+                clrToType
+            );
+            EntityDataSourceReferenceValueColumn result = (EntityDataSourceReferenceValueColumn)
+                Activator.CreateInstance(columnType, ocWorkspace, navigationProperty);
             return result;
         }
 
@@ -362,7 +410,11 @@ namespace System.Web.UI.WebControls
 
         internal override bool IsNullable
         {
-            get { return navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne; }
+            get
+            {
+                return navigationProperty.ToEndMember.RelationshipMultiplicity
+                    == RelationshipMultiplicity.ZeroOrOne;
+            }
         }
 
         protected NavigationProperty NavigationProperty
@@ -378,7 +430,10 @@ namespace System.Web.UI.WebControls
         internal override string GetEntitySqlValue()
         {
             // it.NavigationPropertyName
-            string result = EntityDataSourceUtil.EntitySqlElementAlias + "." + EntityDataSourceUtil.QuoteEntitySqlIdentifier(this.navigationProperty.Name);
+            string result =
+                EntityDataSourceUtil.EntitySqlElementAlias
+                + "."
+                + EntityDataSourceUtil.QuoteEntitySqlIdentifier(this.navigationProperty.Name);
             return result;
         }
 
@@ -400,10 +455,11 @@ namespace System.Web.UI.WebControls
     internal class EntityDataSourceReferenceValueColumn<T> : EntityDataSourceReferenceValueColumn
         where T : class
     {
-        public EntityDataSourceReferenceValueColumn(MetadataWorkspace ocWorkspace, NavigationProperty navigationProperty)
-            : base(ocWorkspace, navigationProperty)
-        {
-        }
+        public EntityDataSourceReferenceValueColumn(
+            MetadataWorkspace ocWorkspace,
+            NavigationProperty navigationProperty
+        )
+            : base(ocWorkspace, navigationProperty) { }
 
         internal override object GetValue(EntityDataSourceWrapper entity)
         {
@@ -422,10 +478,7 @@ namespace System.Web.UI.WebControls
 
         internal override Type ClrType
         {
-            get
-            {
-                return typeof(T);
-            }
+            get { return typeof(T); }
         }
 
         private EntityReference<T> GetRelatedReference(EntityDataSourceWrapper entity)
@@ -434,7 +487,8 @@ namespace System.Web.UI.WebControls
             Debug.Assert(relationshipManager != null, "Coldn't retrieve a RelationshipManager");
             EntityReference<T> reference = relationshipManager.GetRelatedReference<T>(
                 this.NavigationProperty.RelationshipType.FullName,
-                this.NavigationProperty.ToEndMember.Name);
+                this.NavigationProperty.ToEndMember.Name
+            );
             return reference;
         }
     }

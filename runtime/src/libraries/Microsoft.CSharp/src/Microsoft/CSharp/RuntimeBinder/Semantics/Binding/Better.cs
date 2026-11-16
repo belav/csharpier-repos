@@ -19,29 +19,318 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private static readonly byte[][] s_betterConversionTable =
         {
             //          BYTE    SHORT   INT     LONG    FLOAT   DOUBLE  DECIMAL CHAR    BOOL    SBYTE   USHORT  UINT    ULONG   IPTR     UIPTR    OBJECT
-            new byte[] /* BYTE*/   {3,     3,      3,      3,      3,      3,      3,      3,      3,      2,      3,      3,      3,      3,       3,       3},
-            new byte[] /* SHORT*/  {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      1,      1,      1,      3,       3,       3},
-            new byte[] /* INT*/    {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      1,      1,      3,       3,       3},
-            new byte[] /* LONG*/   {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      1,      3,       3,       3},
-            new byte[] /* FLOAT*/  {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* DOUBLE*/ {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* DECIMAL*/{3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* CHAR*/   {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* BOOL*/   {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* SBYTE*/  {1,     3,      3,      3,      3,      3,      3,      3,      3,      3,      1,      1,      1,      3,       3,       3},
-            new byte[] /* USHORT*/ {3,     2,      3,      3,      3,      3,      3,      3,      3,      2,      3,      3,      3,      3,       3,       3},
-            new byte[] /* UINT*/   {3,     2,      2,      3,      3,      3,      3,      3,      3,      2,      3,      3,      3,      3,       3,       3},
-            new byte[] /* ULONG*/  {3,     2,      2,      2,      3,      3,      3,      3,      3,      2,      3,      3,      3,      3,       3,       3},
-            new byte[] /* IPTR*/   {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* UIPTR*/  {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3},
-            new byte[] /* OBJECT*/ {3,     3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,      3,       3,       3}
+            new byte[] /* BYTE*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* SHORT*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                1,
+                1,
+                1,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* INT*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                1,
+                1,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* LONG*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                1,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* FLOAT*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* DOUBLE*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* DECIMAL*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* CHAR*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* BOOL*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* SBYTE*/
+            {
+                1,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                1,
+                1,
+                1,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* USHORT*/
+            {
+                3,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* UINT*/
+            {
+                3,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* ULONG*/
+            {
+                3,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* IPTR*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* UIPTR*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
+            new byte[] /* OBJECT*/
+            {
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+            },
         };
 
         private static BetterType WhichMethodIsBetterTieBreaker(
             CandidateFunctionMember node1,
             CandidateFunctionMember node2,
             CType pTypeThrough,
-            ArgInfos args)
+            ArgInfos args
+        )
         {
             MethPropWithInst mpwi1 = node1.mpwi;
             MethPropWithInst mpwi2 = node2.mpwi;
@@ -83,8 +372,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // See if one's parameter types (un-instantiated) are more specific.
             BetterType nT = CompareTypes(
-               RearrangeNamedArguments(mpwi1.MethProp().Params, mpwi1, pTypeThrough, args),
-               RearrangeNamedArguments(mpwi2.MethProp().Params, mpwi2, pTypeThrough, args));
+                RearrangeNamedArguments(mpwi1.MethProp().Params, mpwi1, pTypeThrough, args),
+                RearrangeNamedArguments(mpwi2.MethProp().Params, mpwi2, pTypeThrough, args)
+            );
             if (nT == BetterType.Left || nT == BetterType.Right)
             {
                 return nT;
@@ -93,7 +383,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // Fewer modopts wins.
             if (mpwi1.MethProp().modOptCount != mpwi2.MethProp().modOptCount)
             {
-                return mpwi1.MethProp().modOptCount < mpwi2.MethProp().modOptCount ? BetterType.Left : BetterType.Right;
+                return mpwi1.MethProp().modOptCount < mpwi2.MethProp().modOptCount
+                    ? BetterType.Left
+                    : BetterType.Right;
             }
 
             // Bona-fide tie.
@@ -121,7 +413,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 CType type2 = ta2[i];
                 BetterType nParam = BetterType.Neither;
 
-LAgain:
+                LAgain:
                 if (type1.TypeKind != type2.TypeKind)
                 {
                     if (type1 is TypeParameterType)
@@ -152,7 +444,10 @@ LAgain:
                             goto LAgain;
 
                         case TypeKind.TK_AggregateType:
-                            nParam = CompareTypes(((AggregateType)type1).TypeArgsAll, ((AggregateType)type2).TypeArgsAll);
+                            nParam = CompareTypes(
+                                ((AggregateType)type1).TypeArgsAll,
+                                ((AggregateType)type2).TypeArgsAll
+                            );
                             break;
                     }
                 }
@@ -198,7 +493,12 @@ LAgain:
         // By rearranging the arguments as such we make sure that any specified named arguments appear in the same position for both
         // methods and we also maintain the relative order of the other parameters (the type long appears after int in the above example)
 
-        private static TypeArray RearrangeNamedArguments(TypeArray pta, MethPropWithInst mpwi, CType pTypeThrough, ArgInfos args)
+        private static TypeArray RearrangeNamedArguments(
+            TypeArray pta,
+            MethPropWithInst mpwi,
+            CType pTypeThrough,
+            ArgInfos args
+        )
         {
 #if DEBUG
             // We never have a named argument that is in a position in the argument
@@ -218,7 +518,10 @@ LAgain:
 
             CType type = pTypeThrough ?? mpwi.GetType();
             CType[] typeList = new CType[pta.Count];
-            MethodOrPropertySymbol methProp = GroupToArgsBinder.FindMostDerivedMethod(mpwi.MethProp(), type);
+            MethodOrPropertySymbol methProp = GroupToArgsBinder.FindMostDerivedMethod(
+                mpwi.MethProp(),
+                type
+            );
 
             // We initialize the new type array with the parameters for the method.
             for (int iParam = 0; iParam < pta.Count; iParam++)
@@ -281,7 +584,8 @@ LAgain:
             CandidateFunctionMember node1,
             CandidateFunctionMember node2,
             CType pTypeThrough,
-            ArgInfos args)
+            ArgInfos args
+        )
         {
             MethPropWithInst mpwi1 = node1.mpwi;
             MethPropWithInst mpwi2 = node2.mpwi;
@@ -484,7 +788,8 @@ LAgain:
             CType pTypeThrough,
             ArgInfos args,
             out CandidateFunctionMember methAmbig1,
-            out CandidateFunctionMember methAmbig2)
+            out CandidateFunctionMember methAmbig2
+        )
         {
             Debug.Assert(list.Count != 0);
             Debug.Assert(list[0].mpwi != null);
@@ -517,7 +822,7 @@ LAgain:
                 switch (WhichMethodIsBetter(candidate, contender, pTypeThrough, args))
                 {
                     case BetterType.Left:
-                        ambiguous = false;  // (meaning m1 is better...)
+                        ambiguous = false; // (meaning m1 is better...)
                         break;
 
                     case BetterType.Right:

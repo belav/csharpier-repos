@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="TemplateColumn.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -13,29 +13,23 @@ namespace System.Web.UI.WebControls {
     using System.Web.UI;
 
     /// <devdoc>
-    ///    <para>Defines the template for controls layout within a 
-    ///    <see cref='System.Web.UI.WebControls.DataGrid'/> 
+    ///    <para>Defines the template for controls layout within a
+    ///    <see cref='System.Web.UI.WebControls.DataGrid'/>
     ///    column.</para>
     /// </devdoc>
-    // 
+    //
 
-
-    public class TemplateColumn : DataGridColumn {
-
+    public class TemplateColumn : DataGridColumn
+    {
         private ITemplate headerTemplate;
         private ITemplate footerTemplate;
         private ITemplate itemTemplate;
         private ITemplate editItemTemplate;
 
-        
-
         /// <devdoc>
         ///    Initializes a new instance of the <see cref='System.Web.UI.WebControls.TemplateColumn'/> class.
         /// </devdoc>
-        public TemplateColumn() {
-        }
-
-        
+        public TemplateColumn() { }
 
         /// <devdoc>
         /// <para>Specifies the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how items in edit mode are rendered. </para>
@@ -47,16 +41,15 @@ namespace System.Web.UI.WebControls {
             PersistenceMode(PersistenceMode.InnerProperty),
             TemplateContainer(typeof(DataGridItem))
         ]
-        public virtual ITemplate EditItemTemplate {
-            get {
-                return editItemTemplate;
-            }
-            set {
+        public virtual ITemplate EditItemTemplate
+        {
+            get { return editItemTemplate; }
+            set
+            {
                 editItemTemplate = value;
                 OnColumnChanged();
             }
         }
-        
 
         /// <devdoc>
         /// <para>Specifies the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the control footer is rendered. </para>
@@ -68,16 +61,15 @@ namespace System.Web.UI.WebControls {
             PersistenceMode(PersistenceMode.InnerProperty),
             TemplateContainer(typeof(DataGridItem))
         ]
-        public virtual ITemplate FooterTemplate {
-            get {
-                return footerTemplate;
-            }
-            set {
+        public virtual ITemplate FooterTemplate
+        {
+            get { return footerTemplate; }
+            set
+            {
                 footerTemplate = value;
                 OnColumnChanged();
             }
         }
-        
 
         /// <devdoc>
         /// <para>Specifies the <see cref='System.Web.UI.ITemplate' qualify='true'/>
@@ -90,16 +82,15 @@ namespace System.Web.UI.WebControls {
             PersistenceMode(PersistenceMode.InnerProperty),
             TemplateContainer(typeof(DataGridItem))
         ]
-        public virtual ITemplate HeaderTemplate {
-            get {
-                return headerTemplate;
-            }
-            set {
+        public virtual ITemplate HeaderTemplate
+        {
+            get { return headerTemplate; }
+            set
+            {
                 headerTemplate = value;
                 OnColumnChanged();
             }
         }
-
 
         /// <devdoc>
         /// <para> Specifies the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how items are rendered. </para>
@@ -111,39 +102,40 @@ namespace System.Web.UI.WebControls {
             PersistenceMode(PersistenceMode.InnerProperty),
             TemplateContainer(typeof(DataGridItem))
         ]
-        public virtual ITemplate ItemTemplate {
-            get {
-                return itemTemplate;
-            }
-            set {
+        public virtual ITemplate ItemTemplate
+        {
+            get { return itemTemplate; }
+            set
+            {
                 itemTemplate = value;
                 OnColumnChanged();
             }
         }
-        
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override void InitializeCell(TableCell cell, int columnIndex, ListItemType itemType) {
+        public override void InitializeCell(TableCell cell, int columnIndex, ListItemType itemType)
+        {
             base.InitializeCell(cell, columnIndex, itemType);
 
             ITemplate contentTemplate = null;
-            switch (itemType) {
+            switch (itemType)
+            {
                 case ListItemType.Header:
                     contentTemplate = headerTemplate;
                     break;
-                    
+
                 case ListItemType.Footer:
                     contentTemplate = footerTemplate;
                     break;
-                    
+
                 case ListItemType.Item:
                 case ListItemType.AlternatingItem:
                 case ListItemType.SelectedItem:
                     contentTemplate = itemTemplate;
                     break;
-                    
+
                 case ListItemType.EditItem:
                     if (editItemTemplate != null)
                         contentTemplate = editItemTemplate;
@@ -151,25 +143,29 @@ namespace System.Web.UI.WebControls {
                         goto case ListItemType.Item;
                     break;
             }
-            
-            if (contentTemplate != null) {
+
+            if (contentTemplate != null)
+            {
                 // The base class might have added a control or some text for some cases
                 // such as header text which need to be removed before
                 // the corresponding template is used.
                 // Note that setting text also has the effect of clearing out any controls.
                 cell.Text = String.Empty;
-                
+
                 contentTemplate.InstantiateIn(cell);
             }
-            else {
-                if (itemType == ListItemType.Item || 
-                    itemType == ListItemType.AlternatingItem || 
-                    itemType == ListItemType.SelectedItem || 
-                    itemType == ListItemType.EditItem) {
+            else
+            {
+                if (
+                    itemType == ListItemType.Item
+                    || itemType == ListItemType.AlternatingItem
+                    || itemType == ListItemType.SelectedItem
+                    || itemType == ListItemType.EditItem
+                )
+                {
                     cell.Text = "&nbsp;";
                 }
             }
         }
     }
 }
-

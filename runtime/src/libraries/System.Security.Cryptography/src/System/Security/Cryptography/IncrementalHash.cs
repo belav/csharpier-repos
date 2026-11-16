@@ -176,9 +176,9 @@ namespace System.Security.Cryptography
             Debug.Assert(destination.Length >= HashLengthInBytes);
 
             Debug.Assert((_hash != null) ^ (_hmac != null));
-            return _hash != null ?
-                _hash.FinalizeHashAndReset(destination) :
-                _hmac!.FinalizeHashAndReset(destination);
+            return _hash != null
+                ? _hash.FinalizeHashAndReset(destination)
+                : _hmac!.FinalizeHashAndReset(destination);
         }
 
         /// <summary>
@@ -266,9 +266,9 @@ namespace System.Security.Cryptography
             Debug.Assert(destination.Length >= HashLengthInBytes);
 
             Debug.Assert((_hash != null) ^ (_hmac != null));
-            return _hash != null ?
-                _hash.GetCurrentHash(destination) :
-                _hmac!.GetCurrentHash(destination);
+            return _hash != null
+                ? _hash.GetCurrentHash(destination)
+                : _hmac!.GetCurrentHash(destination);
         }
 
         /// <summary>
@@ -310,7 +310,10 @@ namespace System.Security.Cryptography
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             CheckSha3Support(hashAlgorithm.Name);
 
-            return new IncrementalHash(hashAlgorithm, HashProviderDispenser.CreateHashProvider(hashAlgorithm.Name));
+            return new IncrementalHash(
+                hashAlgorithm,
+                HashProviderDispenser.CreateHashProvider(hashAlgorithm.Name)
+            );
         }
 
         /// <summary>
@@ -364,7 +367,10 @@ namespace System.Security.Cryptography
         ///     the empty string.
         /// </exception>
         /// <exception cref="CryptographicException"><paramref name="hashAlgorithm"/> is not a known hash algorithm.</exception>
-        public static IncrementalHash CreateHMAC(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> key)
+        public static IncrementalHash CreateHMAC(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> key
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             CheckSha3Support(hashAlgorithm.Name);

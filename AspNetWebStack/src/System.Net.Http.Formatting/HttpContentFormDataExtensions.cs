@@ -35,7 +35,12 @@ namespace System.Net.Http
             }
 
             MediaTypeHeaderValue contentType = content.Headers.ContentType;
-            return contentType != null && String.Equals(ApplicationFormUrlEncoded, contentType.MediaType, StringComparison.OrdinalIgnoreCase);
+            return contentType != null
+                && String.Equals(
+                    ApplicationFormUrlEncoded,
+                    contentType.MediaType,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         /// <summary>
@@ -58,21 +63,33 @@ namespace System.Net.Http
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task{T}"/> which will provide the result. If the data can not be read
         /// as HTML form URL-encoded data then the result is null.</returns>
-        public static Task<NameValueCollection> ReadAsFormDataAsync(this HttpContent content, CancellationToken cancellationToken)
+        public static Task<NameValueCollection> ReadAsFormDataAsync(
+            this HttpContent content,
+            CancellationToken cancellationToken
+        )
         {
             if (content == null)
             {
                 throw Error.ArgumentNull("content");
             }
 
-            MediaTypeFormatter[] formatters = new MediaTypeFormatter[1] { new FormUrlEncodedMediaTypeFormatter() };
+            MediaTypeFormatter[] formatters = new MediaTypeFormatter[1]
+            {
+                new FormUrlEncodedMediaTypeFormatter(),
+            };
             return ReadAsAsyncCore(content, formatters, cancellationToken);
         }
 
-        private static async Task<NameValueCollection> ReadAsAsyncCore(HttpContent content, MediaTypeFormatter[] formatters,
-            CancellationToken cancellationToken)
+        private static async Task<NameValueCollection> ReadAsAsyncCore(
+            HttpContent content,
+            MediaTypeFormatter[] formatters,
+            CancellationToken cancellationToken
+        )
         {
-            FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>(formatters, cancellationToken);
+            FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>(
+                formatters,
+                cancellationToken
+            );
             return formData == null ? null : formData.ReadAsNameValueCollection();
         }
     }

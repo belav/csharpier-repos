@@ -13,18 +13,32 @@ namespace System.Net.Http.Formatting
         public void AddUriPathExtensionMapping_MediaTypeHeaderValue_ThrowsWithNullThis()
         {
             MediaTypeFormatter formatter = null;
-            Assert.ThrowsArgumentNull(() => formatter.AddUriPathExtensionMapping("xml", new MediaTypeHeaderValue("application/xml")), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    formatter.AddUriPathExtensionMapping(
+                        "xml",
+                        new MediaTypeHeaderValue("application/xml")
+                    ),
+                "formatter"
+            );
         }
 
         [Fact]
         public void AddUriPathExtensionMapping_MediaTypeHeaderValue_UpdatesMediaTypeMappingsCollection()
         {
-            MediaTypeFormatter mockFormatter = new Mock<MediaTypeFormatter> { CallBase = true }.Object;
+            MediaTypeFormatter mockFormatter = new Mock<MediaTypeFormatter>
+            {
+                CallBase = true,
+            }.Object;
 
-            mockFormatter.AddUriPathExtensionMapping("ext", new MediaTypeHeaderValue("application/test"));
+            mockFormatter.AddUriPathExtensionMapping(
+                "ext",
+                new MediaTypeHeaderValue("application/test")
+            );
 
             MediaTypeMapping mediaTypeMapping = Assert.Single(mockFormatter.MediaTypeMappings);
-            UriPathExtensionMapping uriPathExtensionMapping = Assert.IsType<UriPathExtensionMapping>(mediaTypeMapping);
+            UriPathExtensionMapping uriPathExtensionMapping =
+                Assert.IsType<UriPathExtensionMapping>(mediaTypeMapping);
             Assert.Equal("ext", uriPathExtensionMapping.UriPathExtension);
             Assert.Equal("application/test", uriPathExtensionMapping.MediaType.MediaType);
         }
@@ -33,18 +47,25 @@ namespace System.Net.Http.Formatting
         public void AddUriPathExtensionMapping_MediaType_ThrowsWithNullThis()
         {
             MediaTypeFormatter formatter = null;
-            Assert.ThrowsArgumentNull(() => formatter.AddUriPathExtensionMapping("xml", "application/xml"), "formatter");
+            Assert.ThrowsArgumentNull(
+                () => formatter.AddUriPathExtensionMapping("xml", "application/xml"),
+                "formatter"
+            );
         }
 
         [Fact]
         public void AddUriPathExtensionMapping_MediaType_UpdatesMediaTypeMappingsCollection()
         {
-            MediaTypeFormatter mockFormatter = new Mock<MediaTypeFormatter> { CallBase = true }.Object;
+            MediaTypeFormatter mockFormatter = new Mock<MediaTypeFormatter>
+            {
+                CallBase = true,
+            }.Object;
 
             mockFormatter.AddUriPathExtensionMapping("ext", "application/test");
 
             MediaTypeMapping mediaTypeMapping = Assert.Single(mockFormatter.MediaTypeMappings);
-            UriPathExtensionMapping uriPathExtensionMapping = Assert.IsType<UriPathExtensionMapping>(mediaTypeMapping);
+            UriPathExtensionMapping uriPathExtensionMapping =
+                Assert.IsType<UriPathExtensionMapping>(mediaTypeMapping);
             Assert.Equal("ext", uriPathExtensionMapping.UriPathExtension);
             Assert.Equal("application/test", uriPathExtensionMapping.MediaType.MediaType);
         }

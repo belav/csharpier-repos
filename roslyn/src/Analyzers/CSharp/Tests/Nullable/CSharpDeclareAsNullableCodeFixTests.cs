@@ -15,17 +15,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNullable
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsDeclareAsNullable)]
-    public class CSharpDeclareAsNullableCodeFixTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class CSharpDeclareAsNullableCodeFixTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpDeclareAsNullableCodeFixTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpDeclareAsNullableCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpDeclareAsNullableCodeFixProvider());
 
-        private static readonly TestParameters s_nullableFeature = new TestParameters(parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8));
+        private static readonly TestParameters s_nullableFeature = new TestParameters(
+            parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8)
+        );
 
         [Fact]
         public async Task FixAll()
@@ -64,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                             return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -90,7 +94,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -116,7 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -148,7 +156,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         }
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -174,7 +184,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -194,7 +206,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     static string? M() => null;
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26639")]
@@ -210,7 +224,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         string local() => [|null|];
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26639")]
@@ -242,7 +258,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         }
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -258,7 +276,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return [|null|];
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26628")]
@@ -278,7 +298,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     string? x = null;
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -306,7 +328,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -334,7 +358,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -360,7 +386,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         string? x = null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -388,7 +416,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -405,7 +435,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = [|null|];
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -431,7 +463,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -449,7 +483,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = [|null|];
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -467,7 +503,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         x = [|null|];
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -483,7 +521,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         var x = [|null|];
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -499,7 +539,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         string x = [|null|], y = null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26628")]
@@ -519,7 +561,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     string? x { get; set; } = null;
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -539,7 +583,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     string? x { get { return null; } }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -559,7 +605,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     string? x => null;
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26626")]
@@ -580,7 +628,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     static void M(string? x = null) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -606,7 +656,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         string? x = o as string;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -632,7 +684,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         yield return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -658,7 +712,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         yield return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -690,7 +746,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         }
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -722,7 +780,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         }
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39422")]
@@ -748,7 +808,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return value?.ToString();
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39422")]
@@ -804,7 +866,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39422")]
@@ -864,7 +928,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39420")]
@@ -890,7 +956,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return value ? "text" : null;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39423")]
@@ -916,7 +984,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return default;
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39423")]
@@ -942,7 +1012,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         return default(string);
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -970,7 +1042,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     }
                     void M2(string? x) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44338")]
@@ -987,7 +1061,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         list.Add(item: [|null|]);
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1015,7 +1091,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     }
                     void M2(int i, string? x) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44338")]
@@ -1032,7 +1110,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         dict.Add(value: 0, key: [|null|]);
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1050,7 +1130,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     partial void M2(string x);
                     partial void M2(string x) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1078,7 +1160,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     }
                     void M2(string? x) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44338")]
@@ -1095,7 +1179,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                         list.Add([|null|]);
                     }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1123,7 +1209,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     }
                     void M2(int i, string? x) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1140,7 +1228,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     }
                     void M2(params string[] x) { }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1158,7 +1248,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     }
                     int this[string x] { get { throw null!; } set { throw null!; } }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -1181,7 +1273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     string? S { get; }
                 }
                 """,
-                parameters: s_nullableFeature);
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44983")]
@@ -1204,7 +1297,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     private string? _value;
                 }
                 """,
-                parameters: s_nullableFeature);
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44983")]
@@ -1217,7 +1311,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                 {
                     string [|s|], s2 = "hello";
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46354")]
@@ -1245,7 +1341,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     t.Item1 = null;
                   }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46354")]
@@ -1273,7 +1371,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     t.Foo = null;
                   }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46354")]
@@ -1305,7 +1405,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNu
                     var (a, b) = t;
                   }
                 }
-                """, parameters: s_nullableFeature);
+                """,
+                parameters: s_nullableFeature
+            );
         }
     }
 }

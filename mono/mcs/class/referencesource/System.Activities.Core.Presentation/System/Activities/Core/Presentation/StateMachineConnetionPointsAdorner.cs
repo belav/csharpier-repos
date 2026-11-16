@@ -9,19 +9,21 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation.View;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Runtime;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Runtime;
-    using System.Windows.Controls;
 
     internal class StateMachineConnectionPointsAdorner : ConnectionPointsAdorner
     {
-        public StateMachineConnectionPointsAdorner(UIElement adornedElement, List<ConnectionPoint> connectionPointsToShow, bool isParentShapeSelected)
-            : base(adornedElement, connectionPointsToShow, isParentShapeSelected)
-        {
-        }
+        public StateMachineConnectionPointsAdorner(
+            UIElement adornedElement,
+            List<ConnectionPoint> connectionPointsToShow,
+            bool isParentShapeSelected
+        )
+            : base(adornedElement, connectionPointsToShow, isParentShapeSelected) { }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -33,10 +35,13 @@ namespace System.Activities.Core.Presentation
 
             foreach (ConnectionPoint connPoint in connectionPoints)
             {
-                actualPoint = new Point(connPoint.Location.X - origin.X, connPoint.Location.Y - origin.Y);
+                actualPoint = new Point(
+                    connPoint.Location.X - origin.X,
+                    connPoint.Location.Y - origin.Y
+                );
                 this.DrawConnectionPoint(connPoint, actualPoint, drawingContext);
             }
-            
+
             base.OnRender(drawingContext);
         }
 
@@ -66,7 +71,11 @@ namespace System.Activities.Core.Presentation
 
         private void RaiseMouseEvent(MouseButtonEventArgs e)
         {
-            MouseButtonEventArgs args = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton);
+            MouseButtonEventArgs args = new MouseButtonEventArgs(
+                e.MouseDevice,
+                e.Timestamp,
+                e.ChangedButton
+            );
             args.RoutedEvent = e.RoutedEvent;
             UIElement target = this.AdornedElement;
             if (target is VirtualizedContainerService.VirtualizingContainer)

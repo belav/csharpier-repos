@@ -3,7 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
-    [AttributeUsage(ServiceModelAttributeTargets.MessageMember, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        ServiceModelAttributeTargets.MessageMember,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public class MessageHeaderAttribute : MessageContractMemberAttribute
     {
         bool mustUnderstand;
@@ -15,13 +19,21 @@ namespace System.ServiceModel
         public bool MustUnderstand
         {
             get { return mustUnderstand; }
-            set { mustUnderstand = value; isMustUnderstandSet = true; }
+            set
+            {
+                mustUnderstand = value;
+                isMustUnderstandSet = true;
+            }
         }
 
         public bool Relay
         {
             get { return relay; }
-            set { relay = value; isRelaySet = true; }
+            set
+            {
+                relay = value;
+                isRelaySet = true;
+            }
         }
 
         public string Actor

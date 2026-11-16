@@ -10,26 +10,23 @@ internal sealed class ClearCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command(
-            "clear",
-            cmd =>
+        app.Command("clear", cmd =>
+        {
+            cmd.Description = Resources.ClearCommand_Description;
+
+            var forceOption = cmd.Option(
+                "--force",
+                Resources.ClearCommand_ForceOption_Description,
+                CommandOptionType.NoValue
+            );
+
+            cmd.HelpOption("-h|--help");
+
+            cmd.OnExecute(() =>
             {
-                cmd.Description = Resources.ClearCommand_Description;
-
-                var forceOption = cmd.Option(
-                    "--force",
-                    Resources.ClearCommand_ForceOption_Description,
-                    CommandOptionType.NoValue
-                );
-
-                cmd.HelpOption("-h|--help");
-
-                cmd.OnExecute(() =>
-                {
-                    return Execute(cmd.Reporter, cmd.ProjectOption.Value(), forceOption.HasValue());
-                });
-            }
-        );
+                return Execute(cmd.Reporter, cmd.ProjectOption.Value(), forceOption.HasValue());
+            });
+        });
     }
 
     private static int Execute(IReporter reporter, string projectPath, bool force)

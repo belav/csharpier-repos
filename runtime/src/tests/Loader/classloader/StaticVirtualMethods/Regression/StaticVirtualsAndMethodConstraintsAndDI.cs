@@ -6,15 +6,14 @@ using Xunit;
 
 namespace StaticVirtualsAndMethodConstraintsAndDefaultImplementation
 {
-    public interface ITestItem<T>
-    {
-    }
+    public interface ITestItem<T> { }
 
     public interface IStaticInterfaceBase<T, in TRequest>
         where T : class
         where TRequest : IStaticInterfaceBase<T, TRequest>
     {
-        static abstract int TryInvoke<TItem>(TItem item, TRequest request) where TItem : ITestItem<T>;
+        static abstract int TryInvoke<TItem>(TItem item, TRequest request)
+            where TItem : ITestItem<T>;
     }
 
     public interface IStaticInterface<T, in TRequest> : IStaticInterfaceBase<T, TRequest>
@@ -27,16 +26,14 @@ namespace StaticVirtualsAndMethodConstraintsAndDefaultImplementation
         }
     }
 
-    public class Request : IStaticInterface<object, Request>
-    {
-    }
+    public class Request : IStaticInterface<object, Request> { }
 
     public class Program
     {
         public static int Invoke<T, TRequest>(TRequest request)
             where T : class
             where TRequest : IStaticInterfaceBase<T, TRequest> =>
-            TRequest.TryInvoke((ITestItem<T>) null!, request);
+            TRequest.TryInvoke((ITestItem<T>)null!, request);
 
         [Fact]
         public static int TestEntryPoint() => Invoke<object, Request>(new Request());

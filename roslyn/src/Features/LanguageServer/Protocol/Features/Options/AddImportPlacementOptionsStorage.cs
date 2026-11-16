@@ -11,9 +11,23 @@ namespace Microsoft.CodeAnalysis.AddImport;
 
 internal static class AddImportPlacementOptionsStorage
 {
-    public static ValueTask<AddImportPlacementOptions> GetAddImportPlacementOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetAddImportPlacementOptionsAsync(globalOptions.GetAddImportPlacementOptions(document.Project.Services), cancellationToken);
+    public static ValueTask<AddImportPlacementOptions> GetAddImportPlacementOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetAddImportPlacementOptionsAsync(
+            globalOptions.GetAddImportPlacementOptions(document.Project.Services),
+            cancellationToken
+        );
 
-    public static AddImportPlacementOptions GetAddImportPlacementOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-        => globalOptions.GetAddImportPlacementOptions(languageServices, allowInHiddenRegions: null, fallbackOptions: null);
+    public static AddImportPlacementOptions GetAddImportPlacementOptions(
+        this IGlobalOptionService globalOptions,
+        LanguageServices languageServices
+    ) =>
+        globalOptions.GetAddImportPlacementOptions(
+            languageServices,
+            allowInHiddenRegions: null,
+            fallbackOptions: null
+        );
 }

@@ -10,10 +10,18 @@ namespace Microsoft.CodeAnalysis.Formatting;
 
 internal static class LineFormattingOptionsStorage
 {
-    public static ValueTask<LineFormattingOptions> GetLineFormattingOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetLineFormattingOptionsAsync(globalOptions.GetLineFormattingOptions(document.Project.Language), cancellationToken);
+    public static ValueTask<LineFormattingOptions> GetLineFormattingOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetLineFormattingOptionsAsync(
+            globalOptions.GetLineFormattingOptions(document.Project.Language),
+            cancellationToken
+        );
 
-    public static LineFormattingOptions GetLineFormattingOptions(this IGlobalOptionService globalOptions, string language)
-        => globalOptions.GetLineFormattingOptions(language, fallbackOptions: null);
+    public static LineFormattingOptions GetLineFormattingOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) => globalOptions.GetLineFormattingOptions(language, fallbackOptions: null);
 }
-

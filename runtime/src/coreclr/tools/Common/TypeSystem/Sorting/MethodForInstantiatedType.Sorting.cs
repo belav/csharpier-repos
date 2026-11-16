@@ -12,7 +12,10 @@ namespace Internal.TypeSystem
         {
             var otherMethod = (MethodForInstantiatedType)other;
 
-            int result = comparer.CompareWithinClass(_instantiatedType, otherMethod._instantiatedType);
+            int result = comparer.CompareWithinClass(
+                _instantiatedType,
+                otherMethod._instantiatedType
+            );
             if (result != 0)
                 return result;
 

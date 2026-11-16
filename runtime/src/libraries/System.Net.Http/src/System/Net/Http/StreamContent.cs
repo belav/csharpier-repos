@@ -42,10 +42,15 @@ namespace System.Net.Http
             {
                 _start = content.Position;
             }
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, content);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Associate(this, content);
         }
 
-        protected override void SerializeToStream(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        protected override void SerializeToStream(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(stream != null);
             PrepareContent();
@@ -56,11 +61,16 @@ namespace System.Net.Http
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
             SerializeToStreamAsyncCore(stream, default);
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken) =>
+        protected override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        ) =>
             // Only skip the original protected virtual SerializeToStreamAsync if this
             // isn't a derived type that may have overridden the behavior.
-            GetType() == typeof(StreamContent) ? SerializeToStreamAsyncCore(stream, cancellationToken) :
-            base.SerializeToStreamAsync(stream, context, cancellationToken);
+            GetType() == typeof(StreamContent)
+                ? SerializeToStreamAsyncCore(stream, cancellationToken)
+                : base.SerializeToStreamAsync(stream, context, cancellationToken);
 
         private Task SerializeToStreamAsyncCore(Stream stream, CancellationToken cancellationToken)
         {
@@ -71,7 +81,8 @@ namespace System.Net.Http
                 stream,
                 _bufferSize,
                 !_content.CanSeek, // If the stream can't be re-read, make sure that it gets disposed once it is consumed.
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         protected internal override bool TryComputeLength(out long length)
@@ -107,8 +118,10 @@ namespace System.Net.Http
         }
 
         internal override Stream? TryCreateContentReadStream() =>
-            GetType() == typeof(StreamContent) ? new ReadOnlyStream(_content) : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
-            null;
+            GetType() == typeof(StreamContent)
+                ? new ReadOnlyStream(_content)
+                : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
+                null;
 
         internal override bool AllowDuplex => false;
 
@@ -134,21 +147,26 @@ namespace System.Net.Http
 
         private sealed class ReadOnlyStream : DelegatingStream
         {
-            public ReadOnlyStream(Stream innerStream) : base(innerStream)
-            {
-            }
+            public ReadOnlyStream(Stream innerStream)
+                : base(innerStream) { }
 
             public override bool CanWrite => false;
 
             public override void Flush() { }
 
-            public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+            public override Task FlushAsync(CancellationToken cancellationToken) =>
+                Task.CompletedTask;
 
             public override void SetLength(long value) =>
                 throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-                throw new NotSupportedException(SR.net_http_content_readonly_stream);
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) => throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
             public override void EndWrite(IAsyncResult asyncResult) =>
                 throw new NotSupportedException(SR.net_http_content_readonly_stream);
@@ -162,11 +180,17 @@ namespace System.Net.Http
             public override void WriteByte(byte value) =>
                 throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
-                throw new NotSupportedException(SR.net_http_content_readonly_stream);
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) => throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default) =>
-                throw new NotSupportedException(SR.net_http_content_readonly_stream);
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            ) => throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
             public override int WriteTimeout
             {

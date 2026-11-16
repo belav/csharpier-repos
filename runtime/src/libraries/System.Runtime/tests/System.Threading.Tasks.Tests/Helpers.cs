@@ -6,6 +6,7 @@ namespace System.Threading.Tasks.Tests
     internal class InvokeActionOnFinalization
     {
         public Action Action;
+
         ~InvokeActionOnFinalization() => Action?.Invoke();
     }
 }

@@ -11,9 +11,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class Test
     {
@@ -36,8 +34,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamicfieldorlocal002.dynamicfieldorlocal002
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -49,6 +45,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class C
     {
         private int _dynamic = 1;
+
         public int M()
         {
             _dynamic = 2;
@@ -94,8 +91,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared001.dynamictypedeclared001
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -137,8 +132,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared002.dynamictypedeclared002
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -167,24 +160,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         private dynamic _mydynamic;
         public dynamic MyProperty
         {
-            get
-            {
-                return _mydynamic;
-            }
-
-            set
-            {
-                _mydynamic = value;
-            }
+            get { return _mydynamic; }
+            set { _mydynamic = value; }
         }
 
         public dynamic this[int index]
         {
-            get
-            {
-                return new dynamic(index);
-            }
-
+            get { return new dynamic(index); }
             set
             { /* set the specified index to value here */
             }
@@ -230,8 +212,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared003.dynamictypedeclared003
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -248,6 +228,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
 
         public int i = 0;
+
         public static int operator +(dynamic v1, dynamic v2)
         {
             return v1.i + v2.i;
@@ -263,11 +244,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
         public int this[dynamic v]
         {
-            get
-            {
-                return v.i;
-            }
-
+            get { return v.i; }
             set
             { /* set the specified index to value here */
             }
@@ -305,8 +282,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared004.dynamictypedeclared004
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -315,14 +290,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class G<T>
         where T : dynamic
     {
-        public R M<R>(R r) where R : dynamic
+        public R M<R>(R r)
+            where R : dynamic
         {
             return r;
         }
@@ -343,8 +317,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared005.dynamictypedeclared005
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -353,9 +325,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public struct @dynamic
-    {
-    }
+    public struct @dynamic { }
 
     public class Test
     {
@@ -378,8 +348,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared006.dynamictypedeclared006
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -388,13 +356,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
-    public class D : dynamic
-    {
-    }
+    public class D : dynamic { }
 
     public class Test
     {
@@ -417,43 +381,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
             {
                 return -1;
             }
-
             ;
             D x = new D();
             dynamic[,] dynamicr3 =
             {
-            {
-            x, x
-            }
-
-            , {
-            x, x
-            }
-
-            , {
-            x, x
-            }
-            }
-
-            ;
+                { x, x },
+                { x, x },
+                { x, x },
+            };
             if (dynamicr3.Length != 6)
             {
                 return -1;
             }
-
             ;
             if (!(dynamicr3[0, 0].Equals(x)))
             {
                 return -1;
             }
-
             ;
             return 0;
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared007.dynamictypedeclared007
 {
@@ -516,8 +465,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared008.dynamictypedeclared008
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -526,13 +473,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class Test
     {
         private static dynamic s_v = new dynamic();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -551,8 +497,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared009.dynamictypedeclared009
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -561,14 +505,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class Test
     {
         private static dynamic s_v1 = new dynamic();
         private static dynamic s_v2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -593,8 +536,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared010.dynamictypedeclared010
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -603,13 +544,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class Test
     {
         private static dynamic s_v1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -630,8 +570,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared011.dynamictypedeclared011
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -640,15 +578,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class G<T>
         where T : new()
     {
         public T V = new T();
-        public R M<R>() where R : new()
+
+        public R M<R>()
+            where R : new()
         {
             return new R();
         }
@@ -680,8 +618,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared012.dynamictypedeclared012
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -698,7 +634,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
     public class C
     {
-        public dynamic M<@dynamic>() where dynamic : new()
+        public dynamic M<@dynamic>()
+            where dynamic : new()
         {
             return new dynamic();
         }
@@ -744,9 +681,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
     namespace NS
     {
-        public class @dynamic
-        {
-        }
+        public class @dynamic { }
 
         public class G2<@dynamic>
             where dynamic : new()
@@ -756,15 +691,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
         public class C2
         {
-            public dynamic M<@dynamic>() where dynamic : new()
+            public dynamic M<@dynamic>()
+                where dynamic : new()
             {
                 return new dynamic();
             }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared013.dynamictypedeclared013
 {
@@ -774,9 +708,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class G<@dynamic>
         where dynamic : new()
@@ -786,7 +718,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
     public class C
     {
-        public dynamic M<@dynamic>() where dynamic : new()
+        public dynamic M<@dynamic>()
+            where dynamic : new()
         {
             return new dynamic();
         }
@@ -819,8 +752,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared014.dynamictypedeclared014
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -829,11 +760,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     internal delegate dynamic D(dynamic v);
+
     public class Test
     {
         [Fact]
@@ -844,12 +774,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
         public static int MainMethod()
         {
-            D d = delegate (dynamic v)
+            D d = delegate(dynamic v)
             {
                 return new dynamic();
-            }
-
-            ;
+            };
             if (!d(new dynamic()).GetType().Equals(typeof(dynamic)))
             {
                 return -1;
@@ -859,8 +787,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared015.dynamictypedeclared015
 {
@@ -892,8 +818,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     //}
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared016.dynamictypedeclared016
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -905,7 +829,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     internal enum @dynamic
     {
         foo,
-        bar
+        bar,
     }
 
     public class A
@@ -929,8 +853,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared017.dynamictypedeclared017
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -939,9 +861,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class @dynamic
-    {
-    }
+    public class @dynamic { }
 
     public class A
     {
@@ -964,8 +884,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared018.dynamictypedeclared018
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -986,12 +904,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         {
             A a = new A();
             int c = 0;
-            a.MyEvent += delegate (int i)
+            a.MyEvent += delegate(int i)
             {
                 c += i;
-            }
-
-            ;
+            };
             a.MyEvent(1);
             a.MyEvent(2);
             if (c != 3)
@@ -1006,8 +922,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         private delegate void @dynamic(int i);
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared019.dynamictypedeclared019
 {
@@ -1035,8 +949,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared021.dynamictypedeclared021
 {
@@ -1080,8 +992,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared023.dynamictypedeclared023
 {
     public class Test
@@ -1108,8 +1018,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.errorverifier.errorverifier
 {
@@ -1230,6 +1138,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         RefReadonlyLocal, // Cannot pass '{0}' as a ref or out argument because it is read-only
         ReturnNotLValue, // Cannot modify the return value of '{0}' because it is not a variable
         BadArgExtraRef, // Argument '{0}' should not be passed with the '{1}' keyword
+
         // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional attribute (REMOVED)
         BadArgRef, // Argument '{0}' must be passed with the '{1}' keyword
         AssgReadonly2, // Members of readonly field '{0}' cannot be modified (except in a constructor or a variable initializer)
@@ -1256,44 +1165,59 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public enum RuntimeErrorId
     {
         None,
+
         // RuntimeBinderInternalCompilerException
         InternalCompilerError, // An unexpected exception occurred while binding a dynamic operation
+
         // ArgumentException
         BindRequireArguments, // Cannot bind call with no calling object
+
         // RuntimeBinderException
         BindCallFailedOverloadResolution, // Overload resolution failed
+
         // ArgumentException
         BindBinaryOperatorRequireTwoArguments, // Binary operators must be invoked with two arguments
+
         // ArgumentException
         BindUnaryOperatorRequireOneArgument, // Unary operators must be invoked with one argument
+
         // RuntimeBinderException
         BindPropertyFailedMethodGroup, // The name '{0}' is bound to a method and cannot be used like a property
+
         // RuntimeBinderException
         BindPropertyFailedEvent, // The event '{0}' can only appear on the left hand side of += or -=
+
         // RuntimeBinderException
         BindInvokeFailedNonDelegate, // Cannot invoke a non-delegate type
+
         // ArgumentException
         BindImplicitConversionRequireOneArgument, // Implicit conversion takes exactly one argument
+
         // ArgumentException
         BindExplicitConversionRequireOneArgument, // Explicit conversion takes exactly one argument
+
         // ArgumentException
         BindBinaryAssignmentRequireTwoArguments, // Binary operators cannot be invoked with one argument
+
         // RuntimeBinderException
         BindBinaryAssignmentFailedNullReference, // Cannot perform member assignment on a null reference
+
         // RuntimeBinderException
         NullReferenceOnMemberException, // Cannot perform runtime binding on a null reference
+
         // RuntimeBinderException
         BindCallToConditionalMethod, // Cannot dynamically invoke method '{0}' because it has a Conditional attribute
+
         // RuntimeBinderException
         BindToVoidMethodButExpectResult, // Cannot implicitly convert type 'void' to 'object'
+
         // EE?
         EmptyDynamicView, // No further information on this object could be discovered
+
         // MissingMemberException
         GetValueonWriteOnlyProperty, // Write Only properties are not supported
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.variablenameddynamic001.variablenameddynamic001
 {
@@ -1330,8 +1254,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamicnsdeclared.dynamicnsdeclared
 {
     // <Title>declare dynamic namespace</Title>
@@ -1357,12 +1279,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
     }
 
-    namespace var
-    {
-    }
+    namespace var { }
 
-    namespace dynamic
-    {
-    }
+    namespace dynamic { }
     // </Code>
 }

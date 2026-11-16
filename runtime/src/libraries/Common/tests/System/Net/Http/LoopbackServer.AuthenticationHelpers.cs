@@ -15,94 +15,144 @@ namespace System.Net.Test.Common
         {
             Basic,
             Digest,
-            None
+            None,
         }
 
-        public async Task<List<string>> AcceptConnectionPerformAuthenticationAndCloseAsync(string authenticateHeaders)
+        public async Task<List<string>> AcceptConnectionPerformAuthenticationAndCloseAsync(
+            string authenticateHeaders
+        )
         {
             List<string> lines = null;
             await AcceptConnectionAsync(async connection =>
-            {
-                string headerName = _options.IsProxy ? "Proxy-Authorization" : "Authorization";
-                lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
-                if (GetRequestHeaderValue(lines, headerName) == null)
                 {
-                    await connection.SendResponseAsync( _options.IsProxy ?
-                                    HttpStatusCode.ProxyAuthenticationRequired : HttpStatusCode.Unauthorized, authenticateHeaders).ConfigureAwait(false);
-
+                    string headerName = _options.IsProxy ? "Proxy-Authorization" : "Authorization";
                     lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
-                }
-                Debug.Assert(lines.Count > 0);
-
-                int index = lines[0] != null ? lines[0].IndexOf(' ') : -1;
-                string requestMethod = null;
-                if (index != -1)
-                {
-                    requestMethod = lines[0].Substring(0, index);
-                }
-
-                // Read the authorization header from client.
-                AuthenticationProtocols protocol = AuthenticationProtocols.None;
-                string clientResponse = null;
-                for (int i = 1; i < lines.Count; i++)
-                {
-                    if (lines[i].StartsWith(headerName))
+                    if (GetRequestHeaderValue(lines, headerName) == null)
                     {
-                        clientResponse = lines[i];
-                        if (lines[i].Contains(nameof(AuthenticationProtocols.Basic)))
+                        await connection
+                            .SendResponseAsync(
+                                _options.IsProxy
+                                    ? HttpStatusCode.ProxyAuthenticationRequired
+                                    : HttpStatusCode.Unauthorized,
+                                authenticateHeaders
+                            )
+                            .ConfigureAwait(false);
+
+                        lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
+                    }
+                    Debug.Assert(lines.Count > 0);
+
+                    int index = lines[0] != null ? lines[0].IndexOf(' ') : -1;
+                    string requestMethod = null;
+                    if (index != -1)
+                    {
+                        requestMethod = lines[0].Substring(0, index);
+                    }
+
+                    // Read the authorization header from client.
+                    AuthenticationProtocols protocol = AuthenticationProtocols.None;
+                    string clientResponse = null;
+                    for (int i = 1; i < lines.Count; i++)
+                    {
+                        if (lines[i].StartsWith(headerName))
                         {
-                            protocol = AuthenticationProtocols.Basic;
-                            break;
-                        }
-                        else if (lines[i].Contains(nameof(AuthenticationProtocols.Digest)))
-                        {
-                            protocol = AuthenticationProtocols.Digest;
-                            break;
+                            clientResponse = lines[i];
+                            if (lines[i].Contains(nameof(AuthenticationProtocols.Basic)))
+                            {
+                                protocol = AuthenticationProtocols.Basic;
+                                break;
+                            }
+                            else if (lines[i].Contains(nameof(AuthenticationProtocols.Digest)))
+                            {
+                                protocol = AuthenticationProtocols.Digest;
+                                break;
+                            }
                         }
                     }
-                }
 
-                bool success = false;
-                switch (protocol)
-                {
-                    case AuthenticationProtocols.Basic:
-                        success = IsBasicAuthTokenValid(clientResponse, _options);
-                        break;
+                    bool success = false;
+                    switch (protocol)
+                    {
+                        case AuthenticationProtocols.Basic:
+                            success = IsBasicAuthTokenValid(clientResponse, _options);
+                            break;
 
-                    case AuthenticationProtocols.Digest:
-                        // Read the request content.
-                        success = IsDigestAuthTokenValid(clientResponse, requestMethod, _options);
-                        break;
-                }
+                        case AuthenticationProtocols.Digest:
+                            // Read the request content.
+                            success = IsDigestAuthTokenValid(
+                                clientResponse,
+                                requestMethod,
+                                _options
+                            );
+                            break;
+                    }
 
-                if (success)
-                {
-                    await connection.SendResponseAsync(additionalHeaders: "Connection: close\r\n").ConfigureAwait(false);
-                }
-                else
-                {
-                    await connection.SendResponseAsync(HttpStatusCode.Unauthorized, "Connection: close\r\n" + authenticateHeaders).ConfigureAwait(false);
-                }
-            }).ConfigureAwait(false);
+                    if (success)
+                    {
+                        await connection
+                            .SendResponseAsync(additionalHeaders: "Connection: close\r\n")
+                            .ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await connection
+                            .SendResponseAsync(
+                                HttpStatusCode.Unauthorized,
+                                "Connection: close\r\n" + authenticateHeaders
+                            )
+                            .ConfigureAwait(false);
+                    }
+                })
+                .ConfigureAwait(false);
 
             return lines;
         }
 
-        internal static bool IsBasicAuthTokenValid(string clientResponse, LoopbackServer.Options options)
+        internal static bool IsBasicAuthTokenValid(
+            string clientResponse,
+            LoopbackServer.Options options
+        )
         {
-            string clientHash = clientResponse.Substring(clientResponse.IndexOf(nameof(AuthenticationProtocols.Basic), StringComparison.OrdinalIgnoreCase) +
-                nameof(AuthenticationProtocols.Basic).Length).Trim();
-            string userPass = string.IsNullOrEmpty(options.Domain) ? options.Username + ":" + options.Password : options.Domain + "\\" + options.Username + ":" + options.Password;
+            string clientHash = clientResponse
+                .Substring(
+                    clientResponse.IndexOf(
+                        nameof(AuthenticationProtocols.Basic),
+                        StringComparison.OrdinalIgnoreCase
+                    ) + nameof(AuthenticationProtocols.Basic).Length
+                )
+                .Trim();
+            string userPass = string.IsNullOrEmpty(options.Domain)
+                ? options.Username + ":" + options.Password
+                : options.Domain + "\\" + options.Username + ":" + options.Password;
             return clientHash == Convert.ToBase64String(Encoding.UTF8.GetBytes(userPass));
         }
 
-        internal static bool IsDigestAuthTokenValid(string clientResponse, string requestMethod, LoopbackServer.Options options)
+        internal static bool IsDigestAuthTokenValid(
+            string clientResponse,
+            string requestMethod,
+            LoopbackServer.Options options
+        )
         {
-            string clientHash = clientResponse.Substring(clientResponse.IndexOf(nameof(AuthenticationProtocols.Digest), StringComparison.OrdinalIgnoreCase) +
-                nameof(AuthenticationProtocols.Digest).Length).Trim();
+            string clientHash = clientResponse
+                .Substring(
+                    clientResponse.IndexOf(
+                        nameof(AuthenticationProtocols.Digest),
+                        StringComparison.OrdinalIgnoreCase
+                    ) + nameof(AuthenticationProtocols.Digest).Length
+                )
+                .Trim();
             string[] values = clientHash.Split(',');
 
-            string username = null, uri = null, realm = null, nonce = null, response = null, algorithm = null, cnonce = null, opaque = null, qop = null, nc = null;
+            string username = null,
+                uri = null,
+                realm = null,
+                nonce = null,
+                response = null,
+                algorithm = null,
+                cnonce = null,
+                opaque = null,
+                qop = null,
+                nc = null;
             bool userhash = false;
             for (int i = 0; i < values.Length; i++)
             {
@@ -115,7 +165,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        username = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        username = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
 
                     // Username is mandatory.
@@ -132,7 +185,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        uri = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        uri = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
 
                     // Request uri is mandatory.
@@ -146,7 +202,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        realm = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        realm = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
 
                     // Realm is mandatory.
@@ -160,7 +219,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        cnonce = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        cnonce = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
                 }
                 else if (trimmedValue.StartsWith(nameof(nonce)))
@@ -170,7 +232,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        nonce = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        nonce = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
 
                     // Nonce is mandatory.
@@ -184,7 +249,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        response = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        response = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
 
                     // Response is mandatory.
@@ -197,7 +265,9 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        algorithm = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex).Trim();
+                        algorithm = trimmedValue
+                            .Substring(startIndex, trimmedValue.Length - startIndex)
+                            .Trim();
                     }
                 }
                 else if (trimmedValue.StartsWith(nameof(opaque)))
@@ -207,7 +277,10 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        opaque = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        opaque = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
                 }
                 else if (trimmedValue.StartsWith(nameof(qop)))
@@ -216,12 +289,17 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        qop = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex - 1);
+                        qop = trimmedValue.Substring(
+                            startIndex,
+                            trimmedValue.Length - startIndex - 1
+                        );
                     }
                     else if ((startIndex = trimmedValue.IndexOf('=')) != -1)
                     {
                         startIndex += 1;
-                        qop = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex).Trim();
+                        qop = trimmedValue
+                            .Substring(startIndex, trimmedValue.Length - startIndex)
+                            .Trim();
                     }
                 }
                 else if (trimmedValue.StartsWith(nameof(nc)))
@@ -230,7 +308,9 @@ namespace System.Net.Test.Common
                     if (startIndex != -1)
                     {
                         startIndex += 1;
-                        nc = trimmedValue.Substring(startIndex, trimmedValue.Length - startIndex).Trim();
+                        nc = trimmedValue
+                            .Substring(startIndex, trimmedValue.Length - startIndex)
+                            .Trim();
                     }
                 }
             }
@@ -287,7 +367,14 @@ namespace System.Net.Test.Common
         {
             // Disable MD5 insecure warning.
 #pragma warning disable CA5351
-            using (HashAlgorithm hash = algorithm.StartsWith("SHA-256", StringComparison.OrdinalIgnoreCase) ? SHA256.Create() : (HashAlgorithm)MD5.Create())
+            using (
+                HashAlgorithm hash = algorithm.StartsWith(
+                    "SHA-256",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                    ? SHA256.Create()
+                    : (HashAlgorithm)MD5.Create()
+            )
 #pragma warning restore CA5351
             {
                 Encoding enc = Encoding.UTF8;

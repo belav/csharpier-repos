@@ -19,65 +19,105 @@ namespace System.Reflection.Runtime.MethodInfos
                 {
                     if (s_lazyMap == null)
                     {
-                        Dictionary<MethodBase, CustomMethodInvokerAction> map = new Dictionary<MethodBase, CustomMethodInvokerAction>();
+                        Dictionary<MethodBase, CustomMethodInvokerAction> map =
+                            new Dictionary<MethodBase, CustomMethodInvokerAction>();
 
                         Type type = typeof(string);
 
                         unsafe
                         {
-                            map.AddConstructor(type, new Type[] { typeof(char), typeof(int) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(char), typeof(int) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
                                     return new string((char)(args[0]), (int)(args[1]));
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(char[]) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(char[]) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
                                     return new string((char[])(args[0]));
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(char[]), typeof(int), typeof(int) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(char[]), typeof(int), typeof(int) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
-                                    return new string((char[])(args[0]), (int)(args[1]), (int)(args[2]));
+                                    return new string(
+                                        (char[])(args[0]),
+                                        (int)(args[1]),
+                                        (int)(args[2])
+                                    );
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(char*) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(char*) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
                                     return new string((char*)(IntPtr)(args[0]));
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(char*), typeof(int), typeof(int) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(char*), typeof(int), typeof(int) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
-                                    return new string((char*)(IntPtr)(args[0]), (int)(args[1]), (int)(args[2]));
+                                    return new string(
+                                        (char*)(IntPtr)(args[0]),
+                                        (int)(args[1]),
+                                        (int)(args[2])
+                                    );
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(sbyte*) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(sbyte*) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
                                     return new string((sbyte*)(IntPtr)(args[0]));
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(sbyte*), typeof(int), typeof(int) },
+                            map.AddConstructor(
+                                type,
+                                new Type[] { typeof(sbyte*), typeof(int), typeof(int) },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
-                                    return new string((sbyte*)(IntPtr)(args[0]), (int)(args[1]), (int)(args[2]));
+                                    return new string(
+                                        (sbyte*)(IntPtr)(args[0]),
+                                        (int)(args[1]),
+                                        (int)(args[2])
+                                    );
                                 }
                             );
 
-                            map.AddConstructor(type, new Type[] { typeof(sbyte*), typeof(int), typeof(int), typeof(Encoding) },
+                            map.AddConstructor(
+                                type,
+                                new Type[]
+                                {
+                                    typeof(sbyte*),
+                                    typeof(int),
+                                    typeof(int),
+                                    typeof(Encoding),
+                                },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {
-                                    return new string((sbyte*)(IntPtr)(args[0]), (int)(args[1]), (int)(args[2]), (Encoding)(args[3]));
+                                    return new string(
+                                        (sbyte*)(IntPtr)(args[0]),
+                                        (int)(args[1]),
+                                        (int)(args[2]),
+                                        (Encoding)(args[3])
+                                    );
                                 }
                             );
                         }

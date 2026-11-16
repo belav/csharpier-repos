@@ -23,8 +23,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.add001.add001
 {
     // <Area>operator on dynamic indexer</Area>
@@ -39,15 +37,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -67,18 +58,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 + t[index];
             result[4] = t[1] + t[index];
             result[5] = t[index] + t[1];
-            return Verify.Check(result, new int[]
-            {
-            3, 3, 3, 3, 2, 2
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 3, 3, 3, 2, 2 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.add002.add002
 {
@@ -94,15 +78,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -122,7 +99,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "+",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -134,7 +117,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "+",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -144,8 +133,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.and001.and001
 {
@@ -161,15 +148,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[bool index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -182,7 +162,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         {
             dynamic t = new Test();
             bool[] result = new bool[6];
-            bool i = true, T = true, F = false;
+            bool i = true,
+                T = true,
+                F = false;
             result[0] = t[i] && T;
             result[1] = F && t[i];
             dynamic index = false;
@@ -190,18 +172,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = F && t[index];
             result[4] = t[i] && t[index];
             result[5] = t[index] && t[i];
-            return Verify.Check(result, new bool[]
-            {
-            true, false, false, false, false, false
-            }
-
-            );
+            return Verify.Check(result, new bool[] { true, false, false, false, false, false });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.and002.and002
 {
@@ -217,15 +192,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -245,7 +213,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, ex.Message, "int", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    ex.Message,
+                    "int",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -257,7 +230,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, ex.Message, "int", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    ex.Message,
+                    "int",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -267,8 +245,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment001.assignment001
 {
@@ -284,15 +260,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -312,18 +281,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] += t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            3, 3, 2
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 3, 2 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment0010e.assignment0010e
 {
@@ -339,15 +301,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -367,7 +322,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">>=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">>=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -379,7 +340,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">>=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">>=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -389,8 +356,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment001e.assignment001e
 {
@@ -406,15 +371,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -434,7 +392,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "+=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -446,7 +410,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "+=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -456,8 +426,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment002.assignment002
 {
@@ -473,15 +441,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -501,18 +462,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] -= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            -1, -1, 0
-            }
-
-            );
+            return Verify.Check(result, new int[] { -1, -1, 0 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment002e.assignment002e
 {
@@ -528,15 +482,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -556,7 +503,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "-=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -568,7 +521,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "-=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -578,8 +537,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment003.assignment003
 {
@@ -595,15 +552,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -623,18 +573,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] *= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            2, 2, 1
-            }
-
-            );
+            return Verify.Check(result, new int[] { 2, 2, 1 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment003e.assignment003e
 {
@@ -650,15 +593,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -678,7 +614,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "*=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -690,7 +632,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "*=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -700,8 +648,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment004.assignment004
 {
@@ -717,15 +663,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -745,18 +684,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] /= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            3, 4, 1
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 4, 1 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment004e.assignment004e
 {
@@ -772,15 +704,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -800,7 +725,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "/=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "/=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -812,7 +743,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "/=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "/=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -822,8 +759,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment005.assignment005
 {
@@ -839,15 +774,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -867,18 +795,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] %= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            0, 1, 0
-            }
-
-            );
+            return Verify.Check(result, new int[] { 0, 1, 0 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment005e.assignment005e
 {
@@ -894,15 +815,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -922,7 +836,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "%=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "%=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -934,7 +854,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "%=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "%=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -944,8 +870,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment006.assignment006
 {
@@ -961,15 +885,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -989,18 +906,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] &= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            2, 0, 1
-            }
-
-            );
+            return Verify.Check(result, new int[] { 2, 0, 1 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment006e.assignment006e
 {
@@ -1016,15 +926,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1044,7 +947,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "&=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1056,7 +965,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "&=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1066,8 +981,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment007.assignment007
 {
@@ -1083,15 +996,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1111,18 +1017,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] |= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            6, 11, 9
-            }
-
-            );
+            return Verify.Check(result, new int[] { 6, 11, 9 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment007e.assignment007e
 {
@@ -1138,15 +1037,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1166,7 +1058,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "|=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "|=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1178,7 +1076,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "|=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "|=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1188,8 +1092,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment008.assignment008
 {
@@ -1205,15 +1107,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1233,18 +1128,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] ^= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            4, 11, 8
-            }
-
-            );
+            return Verify.Check(result, new int[] { 4, 11, 8 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment008e.assignment008e
 {
@@ -1260,15 +1148,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1288,7 +1169,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "^=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1300,7 +1187,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "^=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1310,8 +1203,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment009.assignment009
 {
@@ -1327,15 +1218,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1355,18 +1239,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] >>= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            3, 2, 0
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 2, 0 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment009e.assignment009e
 {
@@ -1382,15 +1259,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1410,7 +1280,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<<=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<<=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1422,7 +1298,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<<=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<<=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1432,8 +1314,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.assignment010.assignment010
 {
@@ -1449,15 +1329,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1477,18 +1350,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[1] = t.flag;
             t[1] <<= t[index];
             result[2] = t.flag;
-            return Verify.Check(result, new int[]
-            {
-            12, 36, 512
-            }
-
-            );
+            return Verify.Check(result, new int[] { 12, 36, 512 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.devide001.devide001
 {
@@ -1504,15 +1370,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1532,18 +1391,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 24 / t[index];
             result[4] = t[16] / t[index];
             result[5] = t[index] / t[2];
-            return Verify.Check(result, new int[]
-            {
-            5, 2, 4, 3, 2, 4
-            }
-
-            );
+            return Verify.Check(result, new int[] { 5, 2, 4, 3, 2, 4 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.devide002.devide002
 {
@@ -1559,15 +1411,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1587,7 +1432,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "/", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "/",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1599,7 +1450,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "/", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "/",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1609,8 +1466,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.equal001.equal001
 {
@@ -1626,15 +1481,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1654,18 +1502,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 == t[index];
             result[4] = t[1] == t[index];
             result[5] = t[index] == t[1];
-            return Verify.Check(result, new bool[]
-            {
-            false, false, false, false, true, true
-            }
-
-            );
+            return Verify.Check(result, new bool[] { false, false, false, false, true, true });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.equal002.equal002
 {
@@ -1681,15 +1522,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1709,7 +1543,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "int", "string");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "==",
+                    "int",
+                    "string"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1721,7 +1561,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "int", "string");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "==",
+                    "int",
+                    "string"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1731,8 +1577,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.greater001.greater001
 {
@@ -1748,15 +1592,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1776,18 +1613,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 > t[index];
             result[4] = t[1] > t[index];
             result[5] = t[index] > t[1];
-            return Verify.Check(result, new bool[]
-            {
-            false, true, false, true, false, false
-            }
-
-            );
+            return Verify.Check(result, new bool[] { false, true, false, true, false, false });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.greater002.greater002
 {
@@ -1803,15 +1633,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1831,7 +1654,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1843,7 +1672,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1853,8 +1688,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.greaterequal001.greaterequal001
 {
@@ -1870,15 +1703,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -1898,18 +1724,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 >= t[index];
             result[4] = t[1] >= t[index];
             result[5] = t[index] >= t[1];
-            return Verify.Check(result, new bool[]
-            {
-            false, true, false, true, true, true
-            }
-
-            );
+            return Verify.Check(result, new bool[] { false, true, false, true, true, true });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.greaterequal002.greaterequal002
 {
@@ -1925,15 +1744,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -1953,7 +1765,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1965,7 +1783,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -1975,8 +1799,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.is001.is001
 {
@@ -1993,15 +1815,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2021,18 +1836,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = t[index] is dynamic;
             result[4] = t[index] is string;
             result[5] = t[index] is Test;
-            return Verify.Check(result, new bool[]
-            {
-            true, true, true, true, false, false
-            }
-
-            );
+            return Verify.Check(result, new bool[] { true, true, true, true, false, false });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.leftshift001.leftshift001
 {
@@ -2048,15 +1856,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2076,18 +1877,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 << t[index];
             result[4] = t[1] << t[index];
             result[5] = t[index] << t[1];
-            return Verify.Check(result, new int[]
-            {
-            4, 4, 4, 4, 2, 2
-            }
-
-            );
+            return Verify.Check(result, new int[] { 4, 4, 4, 4, 2, 2 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.leftshift002.leftshift002
 {
@@ -2103,15 +1897,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2131,7 +1918,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<<", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<<",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2143,7 +1936,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<<", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<<",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2153,8 +1952,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.less001.less001
 {
@@ -2170,15 +1967,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2198,18 +1988,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 < t[index];
             result[4] = t[1] < t[index];
             result[5] = t[index] < t[1];
-            return Verify.Check(result, new bool[]
-            {
-            true, false, true, false, false, false
-            }
-
-            );
+            return Verify.Check(result, new bool[] { true, false, true, false, false, false });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.less002.less002
 {
@@ -2225,15 +2008,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2253,7 +2029,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2265,7 +2047,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2275,8 +2063,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.lessequal001.lessequal001
 {
@@ -2292,15 +2078,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2320,18 +2099,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 <= t[index];
             result[4] = t[1] <= t[index];
             result[5] = t[index] <= t[1];
-            return Verify.Check(result, new bool[]
-            {
-            true, false, true, false, true, true
-            }
-
-            );
+            return Verify.Check(result, new bool[] { true, false, true, false, true, true });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.lessequal002.lessequal002
 {
@@ -2347,15 +2119,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2375,7 +2140,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2387,7 +2158,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "<=", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "<=",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2397,8 +2174,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.logicaland001.logicaland001
 {
@@ -2414,15 +2189,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2442,18 +2210,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 & t[index];
             result[4] = t[1] & t[index];
             result[5] = t[index] & t[1];
-            return Verify.Check(result, new int[]
-            {
-            0, 0, 0, 0, 1, 1
-            }
-
-            );
+            return Verify.Check(result, new int[] { 0, 0, 0, 0, 1, 1 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.logicaland002.logicaland002
 {
@@ -2469,15 +2230,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2497,7 +2251,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "&",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2509,7 +2269,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "&",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2519,8 +2285,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.logicalor001.logicalor001
 {
@@ -2536,15 +2300,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2564,18 +2321,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 | t[index];
             result[4] = t[1] | t[index];
             result[5] = t[index] | t[1];
-            return Verify.Check(result, new int[]
-            {
-            3, 3, 3, 3, 1, 1
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 3, 3, 3, 1, 1 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.logicalor002.logicalor002
 {
@@ -2591,15 +2341,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2619,7 +2362,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "|", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "|",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2631,7 +2380,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "|", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "|",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2641,8 +2396,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.logicalxor001.logicalxor001
 {
@@ -2658,15 +2411,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2686,18 +2432,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 ^ t[index];
             result[4] = t[1] ^ t[index];
             result[5] = t[index] ^ t[1];
-            return Verify.Check(result, new int[]
-            {
-            3, 3, 3, 3, 0, 0
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 3, 3, 3, 0, 0 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.logicalxor002.logicalxor002
 {
@@ -2713,15 +2452,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2741,7 +2473,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "^",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2753,7 +2491,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "^",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2763,8 +2507,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.multi001.multi001
 {
@@ -2780,15 +2522,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2808,18 +2543,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 * t[index];
             result[4] = t[1] * t[index];
             result[5] = t[index] * t[1];
-            return Verify.Check(result, new int[]
-            {
-            2, 2, 2, 2, 1, 1
-            }
-
-            );
+            return Verify.Check(result, new int[] { 2, 2, 2, 2, 1, 1 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.multi002.multi002
 {
@@ -2835,15 +2563,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -2863,7 +2584,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "*",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2875,7 +2602,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "*",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2885,8 +2618,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.notequal001.notequal001
 {
@@ -2902,15 +2633,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2930,18 +2654,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 != t[index];
             result[4] = t[1] != t[index];
             result[5] = t[index] != t[1];
-            return Verify.Check(result, new bool[]
-            {
-            true, true, true, true, false, false
-            }
-
-            );
+            return Verify.Check(result, new bool[] { true, true, true, true, false, false });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.notequal002.notequal002
 {
@@ -2957,15 +2674,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -2985,7 +2695,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "!=", "int", "string");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "!=",
+                    "int",
+                    "string"
+                );
                 if (!ret)
                     return 1;
             }
@@ -2997,7 +2713,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "!=", "int", "string");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "!=",
+                    "int",
+                    "string"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3007,8 +2729,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.or001.or001
 {
@@ -3024,15 +2744,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[bool index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -3045,7 +2758,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         {
             dynamic t = new Test();
             bool[] result = new bool[6];
-            bool i = true, T = true, F = false;
+            bool i = true,
+                T = true,
+                F = false;
             result[0] = t[i] || T;
             result[1] = F || t[i];
             dynamic index = false;
@@ -3053,18 +2768,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = F || t[index];
             result[4] = t[i] || t[index];
             result[5] = t[index] || t[i];
-            return Verify.Check(result, new bool[]
-            {
-            true, true, true, false, true, true
-            }
-
-            );
+            return Verify.Check(result, new bool[] { true, true, true, false, true, true });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.or002.or002
 {
@@ -3080,15 +2788,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -3108,7 +2809,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, ex.Message, "int", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    ex.Message,
+                    "int",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3120,7 +2826,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, ex.Message, "int", "bool");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    ex.Message,
+                    "int",
+                    "bool"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3130,8 +2841,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.remainder001.remainder001
 {
@@ -3147,15 +2856,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -3175,18 +2877,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 12 % t[index];
             result[4] = t[12] % t[index];
             result[5] = t[index] % t[2];
-            return Verify.Check(result, new int[]
-            {
-            1, 2, 2, 4, 4, 0
-            }
-
-            );
+            return Verify.Check(result, new int[] { 1, 2, 2, 4, 4, 0 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.remainder002.remainder002
 {
@@ -3202,15 +2897,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -3230,7 +2918,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "%", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "%",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3242,7 +2936,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "%", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "%",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3252,8 +2952,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.rightshift001.rightshift001
 {
@@ -3269,15 +2967,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -3297,18 +2988,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 >> t[index];
             result[4] = t[1] >> t[index];
             result[5] = t[index] >> t[1];
-            return Verify.Check(result, new int[]
-            {
-            2, 1, 4, 0, 0, 8
-            }
-
-            );
+            return Verify.Check(result, new int[] { 2, 1, 4, 0, 0, 8 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.rightshift002.rightshift002
 {
@@ -3324,15 +3008,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -3352,7 +3029,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">>", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">>",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3364,7 +3047,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">>", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    ">>",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3374,8 +3063,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.sub001.sub001
 {
@@ -3391,15 +3078,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public int flag;
         public int this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index;
-            }
+            set { flag = value; }
+            get { return index; }
         }
 
         [Fact]
@@ -3419,18 +3099,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             result[3] = 2 - t[index];
             result[4] = t[1] - t[index];
             result[5] = t[index] - t[1];
-            return Verify.Check(result, new int[]
-            {
-            3, 3, 3, 3, 2, 2
-            }
-
-            );
+            return Verify.Check(result, new int[] { 3, 3, 3, 3, 2, 2 });
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOperator.Binary.sub002.sub002
 {
@@ -3446,15 +3119,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
         public bool flag;
         public bool this[int index]
         {
-            set
-            {
-                flag = value;
-            }
-
-            get
-            {
-                return index > 5;
-            }
+            set { flag = value; }
+            get { return index > 5; }
         }
 
         [Fact]
@@ -3474,7 +3140,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "-",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }
@@ -3486,7 +3158,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.IndexerOpera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-", "bool", "int");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadBinaryOps,
+                    ex.Message,
+                    "-",
+                    "bool",
+                    "int"
+                );
                 if (!ret)
                     return 1;
             }

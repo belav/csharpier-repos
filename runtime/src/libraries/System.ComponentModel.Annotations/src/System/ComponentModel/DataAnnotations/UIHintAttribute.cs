@@ -22,9 +22,7 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="uiHint">The name of the UI control.</param>
         public UIHintAttribute(string uiHint)
-            : this(uiHint, null, Array.Empty<object>())
-        {
-        }
+            : this(uiHint, null, Array.Empty<object>()) { }
 
         /// <summary>
         ///     Constructor that accepts both the name of the control as well as the presentation layer
@@ -32,9 +30,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="uiHint">The name of the control to use</param>
         /// <param name="presentationLayer">The name of the presentation layer that supports this control</param>
         public UIHintAttribute(string uiHint, string? presentationLayer)
-            : this(uiHint, presentationLayer, Array.Empty<object>())
-        {
-        }
+            : this(uiHint, presentationLayer, Array.Empty<object>()) { }
 
         /// <summary>
         ///     Full constructor that accepts the name of the control, presentation layer, and optional parameters
@@ -43,9 +39,17 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="uiHint">The name of the control</param>
         /// <param name="presentationLayer">The presentation layer</param>
         /// <param name="controlParameters">The list of parameters for the control</param>
-        public UIHintAttribute(string uiHint, string? presentationLayer, params object?[]? controlParameters)
+        public UIHintAttribute(
+            string uiHint,
+            string? presentationLayer,
+            params object?[]? controlParameters
+        )
         {
-            _implementation = new UIHintImplementation(uiHint, presentationLayer, controlParameters);
+            _implementation = new UIHintImplementation(
+                uiHint,
+                presentationLayer,
+                controlParameters
+            );
         }
 
         /// <summary>
@@ -67,21 +71,30 @@ namespace System.ComponentModel.DataAnnotations
         public override int GetHashCode() => _implementation.GetHashCode();
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is UIHintAttribute otherAttribute && _implementation.Equals(otherAttribute._implementation);
+            obj is UIHintAttribute otherAttribute
+            && _implementation.Equals(otherAttribute._implementation);
 
         internal sealed class UIHintImplementation
         {
             private readonly object?[]? _inputControlParameters;
             private IDictionary<string, object?>? _controlParameters;
 
-            public UIHintImplementation(string uiHint, string? presentationLayer, params object?[]? controlParameters)
+            public UIHintImplementation(
+                string uiHint,
+                string? presentationLayer,
+                params object?[]? controlParameters
+            )
             {
                 UIHint = uiHint;
                 PresentationLayer = presentationLayer;
                 if (controlParameters != null)
                 {
                     _inputControlParameters = new object[controlParameters.Length];
-                    Array.Copy(controlParameters, _inputControlParameters, controlParameters.Length);
+                    Array.Copy(
+                        controlParameters,
+                        _inputControlParameters,
+                        controlParameters.Length
+                    );
                 }
             }
 
@@ -123,9 +136,11 @@ namespace System.ComponentModel.DataAnnotations
             {
                 var otherImplementation = obj as UIHintImplementation;
 
-                if (otherImplementation is null ||
-                    UIHint != otherImplementation.UIHint ||
-                    PresentationLayer != otherImplementation.PresentationLayer)
+                if (
+                    otherImplementation is null
+                    || UIHint != otherImplementation.UIHint
+                    || PresentationLayer != otherImplementation.PresentationLayer
+                )
                 {
                     return false;
                 }
@@ -149,9 +164,10 @@ namespace System.ComponentModel.DataAnnotations
                 {
                     return false;
                 }
-                return leftParams.OrderBy(p => p.Key).SequenceEqual(rightParams.OrderBy(p => p.Key));
+                return leftParams
+                    .OrderBy(p => p.Key)
+                    .SequenceEqual(rightParams.OrderBy(p => p.Key));
             }
-
 
             /// <summary>
             ///     Validates the input control parameters and throws InvalidOperationException if they are not correct.
@@ -171,7 +187,9 @@ namespace System.ComponentModel.DataAnnotations
                 }
                 if (inputControlParameters.Length % 2 != 0)
                 {
-                    throw new InvalidOperationException(SR.UIHintImplementation_NeedEvenNumberOfControlParameters);
+                    throw new InvalidOperationException(
+                        SR.UIHintImplementation_NeedEvenNumberOfControlParameters
+                    );
                 }
 
                 for (int i = 0; i < inputControlParameters.Length; i += 2)
@@ -180,21 +198,31 @@ namespace System.ComponentModel.DataAnnotations
                     object? value = inputControlParameters[i + 1];
                     if (key == null)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.UIHintImplementation_ControlParameterKeyIsNull, i));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.UIHintImplementation_ControlParameterKeyIsNull, i)
+                        );
                     }
 
                     if (!(key is string keyString))
                     {
-                        throw new InvalidOperationException(SR.Format(SR.UIHintImplementation_ControlParameterKeyIsNotAString,
-                                                            i,
-                                                            inputControlParameters[i]!.ToString()));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.UIHintImplementation_ControlParameterKeyIsNotAString,
+                                i,
+                                inputControlParameters[i]!.ToString()
+                            )
+                        );
                     }
 
                     if (controlParameters.ContainsKey(keyString))
                     {
-                        throw new InvalidOperationException(SR.Format(SR.UIHintImplementation_ControlParameterKeyOccursMoreThanOnce,
-                                                            i,
-                                                            keyString));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.UIHintImplementation_ControlParameterKeyOccursMoreThanOnce,
+                                i,
+                                keyString
+                            )
+                        );
                     }
 
                     controlParameters[keyString] = value;

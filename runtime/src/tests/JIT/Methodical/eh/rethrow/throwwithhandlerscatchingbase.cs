@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // 119053
-// throw in a handler will not work properly if the protected block is protected by other 
+// throw in a handler will not work properly if the protected block is protected by other
 // clauses that catch the base class of the exception being thrown
 
 using System;
@@ -28,12 +28,12 @@ namespace hello_throwwithhandlerscatchingbase_rethrow_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void f2()
+        public static void f2()
         {
             throw new FileNotFoundException("File x not found");
         }
 
-        static public void f1()
+        public static void f1()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace hello_throwwithhandlerscatchingbase_rethrow_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -78,4 +78,3 @@ namespace hello_throwwithhandlerscatchingbase_rethrow_cs
         }
     }
 }
-

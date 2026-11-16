@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,51 +29,54 @@
 using System;
 using System.IO;
 
-namespace System.Configuration {
-	public class LongValidator : ConfigurationValidatorBase
-	{
-		bool rangeIsExclusive;
-		long minValue;
-		long maxValue;
-		long resolution;
+namespace System.Configuration
+{
+    public class LongValidator : ConfigurationValidatorBase
+    {
+        bool rangeIsExclusive;
+        long minValue;
+        long maxValue;
+        long resolution;
 
-		public LongValidator (long minValue, long maxValue, bool rangeIsExclusive, long resolution)
-		{
-			this.minValue = minValue;
-			this.maxValue = maxValue;
-			this.rangeIsExclusive = rangeIsExclusive;
-			this.resolution = resolution;
-		}
+        public LongValidator(long minValue, long maxValue, bool rangeIsExclusive, long resolution)
+        {
+            this.minValue = minValue;
+            this.maxValue = maxValue;
+            this.rangeIsExclusive = rangeIsExclusive;
+            this.resolution = resolution;
+        }
 
-		public LongValidator (long minValue, long maxValue, bool rangeIsExclusive)
-			: this (minValue, maxValue, rangeIsExclusive, 0)
-		{
-		}
+        public LongValidator(long minValue, long maxValue, bool rangeIsExclusive)
+            : this(minValue, maxValue, rangeIsExclusive, 0) { }
 
-		public LongValidator (long minValue, long maxValue)
-			: this (minValue, maxValue, false, 0)
-		{
-		}
+        public LongValidator(long minValue, long maxValue)
+            : this(minValue, maxValue, false, 0) { }
 
-		public override bool CanValidate (Type type)
-		{
-			return type == typeof (long);
-		}
+        public override bool CanValidate(Type type)
+        {
+            return type == typeof(long);
+        }
 
-		public override void Validate (object value)
-		{
-			long l = (long) value;
+        public override void Validate(object value)
+        {
+            long l = (long)value;
 
-			if (!rangeIsExclusive) {
-				if (l < minValue || l > maxValue)
-					throw new ArgumentException ("The value must be in the range " + minValue + " - " + maxValue);
-			} else {
-				if (l >= minValue && l <= maxValue)
-					throw new ArgumentException ("The value must not be in the range " + minValue + " - " + maxValue);
-			}
-			if (resolution != 0 && l % resolution != 0)
-				throw new ArgumentException ("The value must have a resolution of " + resolution);
-		}
-	}
+            if (!rangeIsExclusive)
+            {
+                if (l < minValue || l > maxValue)
+                    throw new ArgumentException(
+                        "The value must be in the range " + minValue + " - " + maxValue
+                    );
+            }
+            else
+            {
+                if (l >= minValue && l <= maxValue)
+                    throw new ArgumentException(
+                        "The value must not be in the range " + minValue + " - " + maxValue
+                    );
+            }
+            if (resolution != 0 && l % resolution != 0)
+                throw new ArgumentException("The value must have a resolution of " + resolution);
+        }
+    }
 }
-

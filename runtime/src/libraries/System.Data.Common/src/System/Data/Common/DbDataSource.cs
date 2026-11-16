@@ -30,7 +30,9 @@ namespace System.Data.Common
             }
         }
 
-        protected virtual async ValueTask<DbConnection> OpenDbConnectionAsync(CancellationToken cancellationToken = default)
+        protected virtual async ValueTask<DbConnection> OpenDbConnectionAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             var connection = CreateDbConnection();
 
@@ -54,23 +56,20 @@ namespace System.Data.Common
             return new DbCommandWrapper(command);
         }
 
-        protected virtual DbBatch CreateDbBatch()
-            => new DbBatchWrapper(CreateDbConnection().CreateBatch());
+        protected virtual DbBatch CreateDbBatch() =>
+            new DbBatchWrapper(CreateDbConnection().CreateBatch());
 
-        public DbConnection CreateConnection()
-            => CreateDbConnection();
+        public DbConnection CreateConnection() => CreateDbConnection();
 
-        public DbConnection OpenConnection()
-            => OpenDbConnection();
+        public DbConnection OpenConnection() => OpenDbConnection();
 
-        public ValueTask<DbConnection> OpenConnectionAsync(CancellationToken cancellationToken = default)
-            => OpenDbConnectionAsync(cancellationToken);
+        public ValueTask<DbConnection> OpenConnectionAsync(
+            CancellationToken cancellationToken = default
+        ) => OpenDbConnectionAsync(cancellationToken);
 
-        public DbCommand CreateCommand(string? commandText = null)
-            => CreateDbCommand(commandText);
+        public DbCommand CreateCommand(string? commandText = null) => CreateDbCommand(commandText);
 
-        public DbBatch CreateBatch()
-            => CreateDbBatch();
+        public DbBatch CreateBatch() => CreateDbBatch();
 
         public void Dispose()
         {
@@ -86,12 +85,9 @@ namespace System.Data.Common
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
-        protected virtual ValueTask DisposeAsyncCore()
-            => default;
+        protected virtual ValueTask DisposeAsyncCore() => default;
 
         private sealed class DbCommandWrapper : DbCommand
         {
@@ -132,13 +128,16 @@ namespace System.Data.Common
                 }
             }
 
-            public override async Task<int> ExecuteNonQueryAsync(CancellationToken cancellationToken)
+            public override async Task<int> ExecuteNonQueryAsync(
+                CancellationToken cancellationToken
+            )
             {
                 await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    return await _wrappedCommand.ExecuteNonQueryAsync(cancellationToken)
+                    return await _wrappedCommand
+                        .ExecuteNonQueryAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
                 finally
@@ -185,13 +184,16 @@ namespace System.Data.Common
                 }
             }
 
-            public override async Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken)
+            public override async Task<object?> ExecuteScalarAsync(
+                CancellationToken cancellationToken
+            )
             {
                 await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    return await _wrappedCommand.ExecuteScalarAsync(cancellationToken)
+                    return await _wrappedCommand
+                        .ExecuteScalarAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
                 finally
@@ -218,7 +220,9 @@ namespace System.Data.Common
 
                 try
                 {
-                    return _wrappedCommand.ExecuteReader(behavior | CommandBehavior.CloseConnection);
+                    return _wrappedCommand.ExecuteReader(
+                        behavior | CommandBehavior.CloseConnection
+                    );
                 }
                 catch
                 {
@@ -239,15 +243,18 @@ namespace System.Data.Common
 
             protected override async Task<DbDataReader> ExecuteDbDataReaderAsync(
                 CommandBehavior behavior,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    return await _wrappedCommand.ExecuteReaderAsync(
+                    return await _wrappedCommand
+                        .ExecuteReaderAsync(
                             behavior | CommandBehavior.CloseConnection,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 catch
@@ -267,11 +274,9 @@ namespace System.Data.Common
                 }
             }
 
-            protected override DbParameter CreateDbParameter()
-                => _wrappedCommand.CreateParameter();
+            protected override DbParameter CreateDbParameter() => _wrappedCommand.CreateParameter();
 
-            public override void Cancel()
-                => _wrappedCommand.Cancel();
+            public override void Cancel() => _wrappedCommand.Cancel();
 
             [AllowNull]
             public override string CommandText
@@ -292,8 +297,8 @@ namespace System.Data.Common
                 set => _wrappedCommand.CommandType = value;
             }
 
-            protected override DbParameterCollection DbParameterCollection
-                => _wrappedCommand.Parameters;
+            protected override DbParameterCollection DbParameterCollection =>
+                _wrappedCommand.Parameters;
 
             public override bool DesignTimeVisible
             {
@@ -331,11 +336,11 @@ namespace System.Data.Common
             // When prepared statements are global (not bound to a specific connection), providers would need to
             // provide their own connection-less implementation anyway (i.e. interacting with the originating
             // DbDataSource), so they'd have to override this in any case.
-            public override void Prepare()
-                => throw ExceptionBuilder.NotSupportedOnDataSourceCommand();
+            public override void Prepare() =>
+                throw ExceptionBuilder.NotSupportedOnDataSourceCommand();
 
-            public override Task PrepareAsync(CancellationToken cancellationToken = default)
-                => Task.FromException(ExceptionBuilder.NotSupportedOnDataSourceCommand());
+            public override Task PrepareAsync(CancellationToken cancellationToken = default) =>
+                Task.FromException(ExceptionBuilder.NotSupportedOnDataSourceCommand());
 
             // The below are incompatible with commands executed directly against DbDataSource, since no DbConnection
             // is involved at the user API level and the DbCommandWrapper owns the DbConnection.
@@ -391,13 +396,16 @@ namespace System.Data.Common
                 }
             }
 
-            public override async Task<int> ExecuteNonQueryAsync(CancellationToken cancellationToken)
+            public override async Task<int> ExecuteNonQueryAsync(
+                CancellationToken cancellationToken
+            )
             {
                 await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    return await _wrappedBatch.ExecuteNonQueryAsync(cancellationToken)
+                    return await _wrappedBatch
+                        .ExecuteNonQueryAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
                 finally
@@ -444,13 +452,16 @@ namespace System.Data.Common
                 }
             }
 
-            public override async Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken)
+            public override async Task<object?> ExecuteScalarAsync(
+                CancellationToken cancellationToken
+            )
             {
                 await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    return await _wrappedBatch.ExecuteScalarAsync(cancellationToken)
+                    return await _wrappedBatch
+                        .ExecuteScalarAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
                 finally
@@ -498,15 +509,18 @@ namespace System.Data.Common
 
             protected override async Task<DbDataReader> ExecuteDbDataReaderAsync(
                 CommandBehavior behavior,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    return await _wrappedBatch.ExecuteReaderAsync(
+                    return await _wrappedBatch
+                        .ExecuteReaderAsync(
                             behavior | CommandBehavior.CloseConnection,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 catch
@@ -526,12 +540,13 @@ namespace System.Data.Common
                 }
             }
 
-            protected override DbBatchCommand CreateDbBatchCommand() => throw new NotImplementedException();
+            protected override DbBatchCommand CreateDbBatchCommand() =>
+                throw new NotImplementedException();
 
-            public override void Cancel()
-                => _wrappedBatch.Cancel();
+            public override void Cancel() => _wrappedBatch.Cancel();
 
-            protected override DbBatchCommandCollection DbBatchCommands => _wrappedBatch.BatchCommands;
+            protected override DbBatchCommandCollection DbBatchCommands =>
+                _wrappedBatch.BatchCommands;
 
             public override int Timeout
             {
@@ -560,11 +575,11 @@ namespace System.Data.Common
             // When prepared statements are global (not bound to a specific connection), providers would need to
             // provide their own connection-less implementation anyway (i.e. interacting with the originating
             // DbDataSource), so they'd have to override this in any case.
-            public override void Prepare()
-                => throw ExceptionBuilder.NotSupportedOnDataSourceCommand();
+            public override void Prepare() =>
+                throw ExceptionBuilder.NotSupportedOnDataSourceCommand();
 
-            public override Task PrepareAsync(CancellationToken cancellationToken = default)
-                => Task.FromException(ExceptionBuilder.NotSupportedOnDataSourceCommand());
+            public override Task PrepareAsync(CancellationToken cancellationToken = default) =>
+                Task.FromException(ExceptionBuilder.NotSupportedOnDataSourceCommand());
 
             // The below are incompatible with batches executed directly against DbDataSource, since no DbConnection
             // is involved at the user API level and the DbBatchWrapper owns the DbConnection.

@@ -10,16 +10,26 @@ namespace System.CommandLine.Suggest
 {
     public class SuggestionStore : ISuggestionStore
     {
-        public string GetCompletions(string exeFileName, string suggestionTargetArguments, TimeSpan timeout)
+        public string GetCompletions(
+            string exeFileName,
+            string suggestionTargetArguments,
+            TimeSpan timeout
+        )
         {
             if (string.IsNullOrWhiteSpace(exeFileName))
             {
-                throw new ArgumentException("Value cannot be null, empty, or consist entirely of whitespace.", nameof(exeFileName));
+                throw new ArgumentException(
+                    "Value cannot be null, empty, or consist entirely of whitespace.",
+                    nameof(exeFileName)
+                );
             }
 
             if (string.IsNullOrWhiteSpace(suggestionTargetArguments))
             {
-                throw new ArgumentException("Value cannot be null, empty, or consist entirely of whitespace.", nameof(suggestionTargetArguments));
+                throw new ArgumentException(
+                    "Value cannot be null, empty, or consist entirely of whitespace.",
+                    nameof(suggestionTargetArguments)
+                );
             }
 
             string result = "";
@@ -27,18 +37,13 @@ namespace System.CommandLine.Suggest
             try
             {
                 // Invoke target with args
-                var processStartInfo = new ProcessStartInfo(
-                                           exeFileName, 
-                                           suggestionTargetArguments)
-                                       {
-                                           UseShellExecute = false,
-                                           RedirectStandardOutput = true
-                                       };
+                var processStartInfo = new ProcessStartInfo(exeFileName, suggestionTargetArguments)
+                {
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                };
 
-                using (var process = new Process
-                                     {
-                                         StartInfo = processStartInfo
-                                     })
+                using (var process = new Process { StartInfo = processStartInfo })
                 {
                     process.Start();
 
@@ -66,12 +71,10 @@ namespace System.CommandLine.Suggest
                     Program.LogDebug($"exception: {message}");
 #endif
 
-                    throw new ArgumentException(
-                        message, nameof(exeFileName), exception);
+                    throw new ArgumentException(message, nameof(exeFileName), exception);
                 }
             }
             return result;
         }
     }
 }
-

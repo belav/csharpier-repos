@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="RecommendedAsConfigurableAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -17,8 +17,11 @@ namespace System.ComponentModel {
     ///       used as an application setting.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Property)]
-    [Obsolete("Use System.ComponentModel.SettingsBindableAttribute instead to work with the new settings model.")]
-    public class RecommendedAsConfigurableAttribute : Attribute {
+    [Obsolete(
+        "Use System.ComponentModel.SettingsBindableAttribute instead to work with the new settings model."
+    )]
+    public class RecommendedAsConfigurableAttribute : Attribute
+    {
         private bool recommendedAsConfigurable = false;
 
         /// <devdoc>
@@ -27,7 +30,8 @@ namespace System.ComponentModel {
         ///       the <see cref='System.ComponentModel.RecommendedAsConfigurableAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public RecommendedAsConfigurableAttribute(bool recommendedAsConfigurable) {
+        public RecommendedAsConfigurableAttribute(bool recommendedAsConfigurable)
+        {
             this.recommendedAsConfigurable = recommendedAsConfigurable;
         }
 
@@ -35,19 +39,19 @@ namespace System.ComponentModel {
         ///    <para>Gets a value indicating whether the property this
         ///       attribute is bound to can be used as an application setting.</para>
         /// </devdoc>
-        public bool RecommendedAsConfigurable {
-            get {
-                return recommendedAsConfigurable;
-            }
+        public bool RecommendedAsConfigurable
+        {
+            get { return recommendedAsConfigurable; }
         }
 
         /// <devdoc>
         ///    <para>
         ///       Specifies that a property cannot be used as an application setting. This
-        ///    <see langword='static '/>field is read-only. 
+        ///    <see langword='static '/>field is read-only.
         ///    </para>
         /// </devdoc>
-        public static readonly RecommendedAsConfigurableAttribute No = new RecommendedAsConfigurableAttribute(false);
+        public static readonly RecommendedAsConfigurableAttribute No =
+            new RecommendedAsConfigurableAttribute(false);
 
         /// <devdoc>
         ///    <para>
@@ -55,7 +59,8 @@ namespace System.ComponentModel {
         ///       that a property can be used as an application setting. This <see langword='static '/>field is read-only.
         ///    </para>
         /// </devdoc>
-        public static readonly RecommendedAsConfigurableAttribute Yes = new RecommendedAsConfigurableAttribute(true);
+        public static readonly RecommendedAsConfigurableAttribute Yes =
+            new RecommendedAsConfigurableAttribute(true);
 
         /// <devdoc>
         ///    <para>
@@ -64,35 +69,37 @@ namespace System.ComponentModel {
         ///    </para>
         /// </devdoc>
         public static readonly RecommendedAsConfigurableAttribute Default = No;
-        
+
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
             RecommendedAsConfigurableAttribute other = obj as RecommendedAsConfigurableAttribute;
 
             return other != null && other.RecommendedAsConfigurable == recommendedAsConfigurable;
-            
-            
         }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Returns the hashcode for this object.
         ///    </para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return !recommendedAsConfigurable;
         }
     }

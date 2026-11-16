@@ -4,14 +4,16 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
-    using System.Xml;
+    using System.Collections.ObjectModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class ResourceCollectionInfo : IExtensibleSyndicationObject
     {
         static IEnumerable<string> singleEmptyAccept;
@@ -22,26 +24,29 @@ namespace System.ServiceModel.Syndication
         Uri link;
         TextSyndicationContent title;
 
-        public ResourceCollectionInfo()
-        {
-        }
+        public ResourceCollectionInfo() { }
 
         public ResourceCollectionInfo(string title, Uri link)
-            : this((title == null) ? null : new TextSyndicationContent(title), link)
-        {
-        }
+            : this((title == null) ? null : new TextSyndicationContent(title), link) { }
 
         public ResourceCollectionInfo(TextSyndicationContent title, Uri link)
-            : this(title, link, null, null)
-        {
-        }
+            : this(title, link, null, null) { }
 
-        public ResourceCollectionInfo(TextSyndicationContent title, Uri link, IEnumerable<CategoriesDocument> categories, bool allowsNewEntries)
+        public ResourceCollectionInfo(
+            TextSyndicationContent title,
+            Uri link,
+            IEnumerable<CategoriesDocument> categories,
+            bool allowsNewEntries
+        )
             : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept())
-        {
-        }
+        { }
 
-        public ResourceCollectionInfo(TextSyndicationContent title, Uri link, IEnumerable<CategoriesDocument> categories, IEnumerable<string> accepts)
+        public ResourceCollectionInfo(
+            TextSyndicationContent title,
+            Uri link,
+            IEnumerable<CategoriesDocument> categories,
+            IEnumerable<string> accepts
+        )
         {
             if (title == null)
             {
@@ -85,10 +90,7 @@ namespace System.ServiceModel.Syndication
 
         public Dictionary<XmlQualifiedName, string> AttributeExtensions
         {
-            get
-            {
-                return this.extensions.AttributeExtensions;
-            }
+            get { return this.extensions.AttributeExtensions; }
         }
 
         public Uri BaseUri
@@ -111,10 +113,7 @@ namespace System.ServiceModel.Syndication
 
         public SyndicationElementExtensionCollection ElementExtensions
         {
-            get
-            {
-                return this.extensions.ElementExtensions;
-            }
+            get { return this.extensions.ElementExtensions; }
         }
 
         public Uri Link
@@ -139,7 +138,12 @@ namespace System.ServiceModel.Syndication
             return new ReferencedCategoriesDocument();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -159,7 +163,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

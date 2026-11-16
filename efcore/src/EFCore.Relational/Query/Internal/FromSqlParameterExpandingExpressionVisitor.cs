@@ -15,8 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
 {
-    private readonly IDictionary<FromSqlExpression, Expression> _visitedFromSqlExpressions
-        = new Dictionary<FromSqlExpression, Expression>(ReferenceEqualityComparer.Instance);
+    private readonly IDictionary<FromSqlExpression, Expression> _visitedFromSqlExpressions =
+        new Dictionary<FromSqlExpression, Expression>(ReferenceEqualityComparer.Instance);
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -33,7 +33,8 @@ public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public FromSqlParameterExpandingExpressionVisitor(
-        RelationalParameterBasedSqlProcessorDependencies dependencies)
+        RelationalParameterBasedSqlProcessorDependencies dependencies
+    )
     {
         Dependencies = dependencies;
 
@@ -58,7 +59,8 @@ public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
     public virtual Expression Expand(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parameterValues,
-        out bool canCache)
+        out bool canCache
+    )
     {
         _visitedFromSqlExpressions.Clear();
         _parameterNameGenerator = _parameterNameGeneratorFactory.Create();
@@ -122,12 +124,17 @@ public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
                                 parameterName,
                                 parameterName,
                                 _typeMappingSource.GetMappingForValue(parameterValues[i]),
-                                parameterValues[i]?.GetType().IsNullableType()));
+                                parameterValues[i]?.GetType().IsNullableType()
+                            )
+                        );
                     }
                 }
 
                 return _visitedFromSqlExpressions[fromSql] = fromSql.Update(
-                    Expression.Constant(new CompositeRelationalParameter(parameterExpression.Name!, subParameters)));
+                    Expression.Constant(
+                        new CompositeRelationalParameter(parameterExpression.Name!, subParameters)
+                    )
+                );
 
             case ConstantExpression { Value: object?[] existingValues }:
             {
@@ -137,7 +144,9 @@ public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
                     constantValues[i] = ProcessConstantValue(existingValues[i]);
                 }
 
-                return _visitedFromSqlExpressions[fromSql] = fromSql.Update(Expression.Constant(constantValues, typeof(object[])));
+                return _visitedFromSqlExpressions[fromSql] = fromSql.Update(
+                    Expression.Constant(constantValues, typeof(object[]))
+                );
             }
 
             case NewArrayExpression { Expressions: var expressions }:
@@ -154,7 +163,9 @@ public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
                     constantValues[i] = ProcessConstantValue(existingValue);
                 }
 
-                return _visitedFromSqlExpressions[fromSql] = fromSql.Update(Expression.Constant(constantValues, typeof(object[])));
+                return _visitedFromSqlExpressions[fromSql] = fromSql.Update(
+                    Expression.Constant(constantValues, typeof(object[]))
+                );
             }
 
             default:
@@ -180,7 +191,9 @@ public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
             }
 
             return _sqlExpressionFactory.Constant(
-                existingConstantValue, _typeMappingSource.GetMappingForValue(existingConstantValue));
+                existingConstantValue,
+                _typeMappingSource.GetMappingForValue(existingConstantValue)
+            );
         }
     }
 }

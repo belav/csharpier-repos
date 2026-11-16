@@ -58,7 +58,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             int twoDigitYearMax = 2049,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             if (twoDigitYearMax < 1 || twoDigitYearMax > 9999)
             {
@@ -90,7 +91,8 @@ namespace System.Formats.Asn1
                 UniversalTagNumber.UtcTime,
                 out int bytesRead,
                 ref rented,
-                tmpSpace);
+                tmpSpace
+            );
 
             DateTimeOffset value = ParseUtcTime(contents, ruleSet, twoDigitYearMax);
 
@@ -107,7 +109,8 @@ namespace System.Formats.Asn1
         private static DateTimeOffset ParseUtcTime(
             ReadOnlySpan<byte> contentOctets,
             AsnEncodingRules ruleSet,
-            int twoDigitYearMax)
+            int twoDigitYearMax
+        )
         {
             // The full allowed formats (T-REC-X.680-201510 sec 47.3)
             // a) YYMMDD
@@ -139,9 +142,11 @@ namespace System.Formats.Asn1
 
             // 11, 13, 15, 17 are legal.
             // Range check + odd.
-            if (contentOctets.Length < NoSecondsZulu ||
-                contentOctets.Length > HasSecondsOffset ||
-                (contentOctets.Length & 1) != 1)
+            if (
+                contentOctets.Length < NoSecondsZulu
+                || contentOctets.Length > HasSecondsOffset
+                || (contentOctets.Length & 1) != 1
+            )
             {
                 throw new AsnContentException();
             }
@@ -158,14 +163,12 @@ namespace System.Formats.Asn1
             int offsetMinute = 0;
             bool minus = false;
 
-            if (contentOctets.Length == HasSecondsOffset ||
-                contentOctets.Length == HasSecondsZulu)
+            if (contentOctets.Length == HasSecondsOffset || contentOctets.Length == HasSecondsZulu)
             {
                 second = ParseNonNegativeIntAndSlice(ref contents, 2);
             }
 
-            if (contentOctets.Length == NoSecondsZulu ||
-                contentOctets.Length == HasSecondsZulu)
+            if (contentOctets.Length == NoSecondsZulu || contentOctets.Length == HasSecondsZulu)
             {
                 if (contents[0] != 'Z')
                 {
@@ -175,8 +178,9 @@ namespace System.Formats.Asn1
             else
             {
                 Debug.Assert(
-                    contentOctets.Length == NoSecondsOffset ||
-                    contentOctets.Length == HasSecondsOffset);
+                    contentOctets.Length == NoSecondsOffset
+                        || contentOctets.Length == HasSecondsOffset
+                );
 
                 if (contents[0] == '-')
                 {
@@ -276,7 +280,8 @@ namespace System.Formats.Asn1
                 RuleSet,
                 out int consumed,
                 _options.UtcTimeTwoDigitYearMax,
-                expectedTag);
+                expectedTag
+            );
 
             _data = _data.Slice(consumed);
             return ret;
@@ -315,8 +320,13 @@ namespace System.Formats.Asn1
         /// <seealso cref="System.Globalization.Calendar.TwoDigitYearMax"/>
         public DateTimeOffset ReadUtcTime(int twoDigitYearMax, Asn1Tag? expectedTag = null)
         {
-            DateTimeOffset ret =
-                AsnDecoder.ReadUtcTime(_data.Span, RuleSet, out int consumed, twoDigitYearMax, expectedTag);
+            DateTimeOffset ret = AsnDecoder.ReadUtcTime(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                twoDigitYearMax,
+                expectedTag
+            );
 
             _data = _data.Slice(consumed);
             return ret;

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,75 +31,74 @@ using System;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class HtmlInputFilePoker : HtmlInputFile
+    {
+        public HtmlInputFilePoker()
+        {
+            TrackViewState();
+        }
 
-	public class HtmlInputFilePoker : HtmlInputFile {
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-		public HtmlInputFilePoker ()
-		{
-			TrackViewState ();
-		}
+        public void LoadState(object state)
+        {
+            LoadViewState(state);
+        }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+        public void DoRenderAttributes(HtmlTextWriter writer)
+        {
+            RenderAttributes(writer);
+        }
+    }
 
-		public void LoadState (object state)
-		{
-			LoadViewState (state);
-		}
+    [TestFixture]
+    public class HtmlInputFileTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
 
-		public void DoRenderAttributes (HtmlTextWriter writer)
-		{
-			RenderAttributes (writer);
-		}
-	}
+            /* MS throws a null exception on both
+             * get_PostedFile and get_Value in this test,
+             * which makes me think (in the PostedFile
+             * case at least) they're directly accessing
+             * Page.Request.Files (which our test doesn't
+             * support) */
 
-	[TestFixture]
-	public class HtmlInputFileTest {
+            Assert.AreEqual("", p.Accept, "A1");
+            Assert.AreEqual(-1, p.MaxLength, "A2");
+            //Assert.IsNull (p.PostedFile, "A3");
+            Assert.AreEqual(-1, p.Size, "A4");
+            //Assert.AreEqual ("", p.Value, "A5");
+        }
 
-		[Test]
-		public void Defaults ()
-		{
-			HtmlInputFilePoker p = new HtmlInputFilePoker ();
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ValueSetter()
+        {
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
+            p.Value = "/etc/passwd";
+        }
 
-			/* MS throws a null exception on both
-			 * get_PostedFile and get_Value in this test,
-			 * which makes me think (in the PostedFile
-			 * case at least) they're directly accessing
-			 * Page.Request.Files (which our test doesn't
-			 * support) */
+        [Test]
+        public void Attribute_Count()
+        {
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
 
-			Assert.AreEqual ("", p.Accept, "A1");
-			Assert.AreEqual (-1, p.MaxLength, "A2");
-			//Assert.IsNull (p.PostedFile, "A3");
-			Assert.AreEqual (-1, p.Size, "A4");
-			//Assert.AreEqual ("", p.Value, "A5");
-		}
+            p.Accept = "*.*";
+            p.MaxLength = 50;
+            p.Size = 20;
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ValueSetter ()
-		{
-			HtmlInputFilePoker p = new HtmlInputFilePoker ();
-			p.Value = "/etc/passwd";
-		}
-
-		[Test]
-		public void Attribute_Count ()
-		{
-			HtmlInputFilePoker p = new HtmlInputFilePoker ();
-
-			p.Accept = "*.*";
-			p.MaxLength = 50;
-			p.Size = 20;
-
-			Assert.AreEqual (4, p.Attributes.Count, "A1");
-		}
+            Assert.AreEqual(4, p.Attributes.Count, "A1");
+        }
 
 #if false
 		[Test]
@@ -117,17 +116,16 @@ namespace MonoTests.System.Web.UI.HtmlControls {
 		}
 #endif
 
-		[Test]
-		public void RenderAttributes ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
+        [Test]
+        public void RenderAttributes()
+        {
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-			HtmlInputFilePoker p = new HtmlInputFilePoker ();
+            HtmlInputFilePoker p = new HtmlInputFilePoker();
 
-			p.DoRenderAttributes (tw);
-			Assert.AreEqual (" name type=\"file\" /", sw.ToString (), "A1");
-		}
-	}	
+            p.DoRenderAttributes(tw);
+            Assert.AreEqual(" name type=\"file\" /", sw.ToString(), "A1");
+        }
+    }
 }
-

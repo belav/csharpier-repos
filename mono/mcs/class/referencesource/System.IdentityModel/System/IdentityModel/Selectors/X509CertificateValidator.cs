@@ -58,7 +58,11 @@ namespace System.IdentityModel.Selectors
             get
             {
                 if (ntAuthChainTrust == null)
-                    ntAuthChainTrust = new ChainTrustValidator(false, null, CAPI.CERT_CHAIN_POLICY_NT_AUTH);
+                    ntAuthChainTrust = new ChainTrustValidator(
+                        false,
+                        null,
+                        CAPI.CERT_CHAIN_POLICY_NT_AUTH
+                    );
                 return ntAuthChainTrust;
             }
         }
@@ -73,14 +77,24 @@ namespace System.IdentityModel.Selectors
             }
         }
 
-        public static X509CertificateValidator CreateChainTrustValidator(bool useMachineContext, X509ChainPolicy chainPolicy)
+        public static X509CertificateValidator CreateChainTrustValidator(
+            bool useMachineContext,
+            X509ChainPolicy chainPolicy
+        )
         {
             if (chainPolicy == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("chainPolicy");
-            return new ChainTrustValidator(useMachineContext, chainPolicy, X509CertificateChain.DefaultChainPolicyOID);
+            return new ChainTrustValidator(
+                useMachineContext,
+                chainPolicy,
+                X509CertificateChain.DefaultChainPolicyOID
+            );
         }
 
-        public static X509CertificateValidator CreatePeerOrChainTrustValidator(bool useMachineContext, X509ChainPolicy chainPolicy)
+        public static X509CertificateValidator CreatePeerOrChainTrustValidator(
+            bool useMachineContext,
+            X509ChainPolicy chainPolicy
+        )
         {
             if (chainPolicy == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("chainPolicy");
@@ -95,7 +109,11 @@ namespace System.IdentityModel.Selectors
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                )
+            );
         }
 
         class NoneX509CertificateValidator : X509CertificateValidator
@@ -121,12 +139,19 @@ namespace System.IdentityModel.Selectors
 
             static bool StoreContainsCertificate(StoreName storeName, X509Certificate2 certificate)
             {
-                X509CertificateStore store = new X509CertificateStore(storeName, StoreLocation.CurrentUser);
+                X509CertificateStore store = new X509CertificateStore(
+                    storeName,
+                    StoreLocation.CurrentUser
+                );
                 X509Certificate2Collection certificates = null;
                 try
                 {
                     store.Open(OpenFlags.ReadOnly);
-                    certificates = store.Find(X509FindType.FindByThumbprint, certificate.GetCertHash(), false);
+                    certificates = store.Find(
+                        X509FindType.FindByThumbprint,
+                        certificate.GetCertHash(),
+                        false
+                    );
                     return certificates.Count > 0;
                 }
                 finally
@@ -151,26 +176,44 @@ namespace System.IdentityModel.Selectors
                 // I put a DebugAssert so that this will ensure that the we are compatible with the CLR we shipped with
 
                 DateTime now = DateTime.Now;
-                DiagnosticUtility.DebugAssert(now.Kind == certificate.NotAfter.Kind && now.Kind == certificate.NotBefore.Kind, "");
+                DiagnosticUtility.DebugAssert(
+                    now.Kind == certificate.NotAfter.Kind && now.Kind == certificate.NotBefore.Kind,
+                    ""
+                );
 
                 if (now > certificate.NotAfter || now < certificate.NotBefore)
                 {
-                    exception = new SecurityTokenValidationException(SR.GetString(SR.X509InvalidUsageTime,
-                        SecurityUtils.GetCertificateId(certificate), now, certificate.NotBefore, certificate.NotAfter));
+                    exception = new SecurityTokenValidationException(
+                        SR.GetString(
+                            SR.X509InvalidUsageTime,
+                            SecurityUtils.GetCertificateId(certificate),
+                            now,
+                            certificate.NotBefore,
+                            certificate.NotAfter
+                        )
+                    );
                     return false;
                 }
 
                 if (!StoreContainsCertificate(StoreName.TrustedPeople, certificate))
                 {
-                    exception = new SecurityTokenValidationException(SR.GetString(SR.X509IsNotInTrustedStore,
-                        SecurityUtils.GetCertificateId(certificate)));
+                    exception = new SecurityTokenValidationException(
+                        SR.GetString(
+                            SR.X509IsNotInTrustedStore,
+                            SecurityUtils.GetCertificateId(certificate)
+                        )
+                    );
                     return false;
                 }
 
                 if (StoreContainsCertificate(StoreName.Disallowed, certificate))
                 {
-                    exception = new SecurityTokenValidationException(SR.GetString(SR.X509IsInUntrustedStore,
-                        SecurityUtils.GetCertificateId(certificate)));
+                    exception = new SecurityTokenValidationException(
+                        SR.GetString(
+                            SR.X509IsInUntrustedStore,
+                            SecurityUtils.GetCertificateId(certificate)
+                        )
+                    );
                     return false;
                 }
                 exception = null;
@@ -189,7 +232,11 @@ namespace System.IdentityModel.Selectors
                 this.chainPolicy = null;
             }
 
-            public ChainTrustValidator(bool useMachineContext, X509ChainPolicy chainPolicy, uint chainPolicyOID)
+            public ChainTrustValidator(
+                bool useMachineContext,
+                X509ChainPolicy chainPolicy,
+                uint chainPolicyOID
+            )
             {
                 this.useMachineContext = useMachineContext;
                 this.chainPolicy = chainPolicy;
@@ -209,8 +256,15 @@ namespace System.IdentityModel.Selectors
 
                 if (!chain.Build(certificate))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.X509ChainBuildFail,
-                        SecurityUtils.GetCertificateId(certificate), GetChainStatusInformation(chain.ChainStatus))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(
+                                SR.X509ChainBuildFail,
+                                SecurityUtils.GetCertificateId(certificate),
+                                GetChainStatusInformation(chain.ChainStatus)
+                            )
+                        )
+                    );
                 }
             }
 
@@ -243,7 +297,10 @@ namespace System.IdentityModel.Selectors
 
             public PeerOrChainTrustValidator(bool useMachineContext, X509ChainPolicy chainPolicy)
             {
-                this.chain = X509CertificateValidator.CreateChainTrustValidator(useMachineContext, chainPolicy);
+                this.chain = X509CertificateValidator.CreateChainTrustValidator(
+                    useMachineContext,
+                    chainPolicy
+                );
                 this.peer = (PeerTrustValidator)X509CertificateValidator.PeerTrust;
             }
 
@@ -262,7 +319,9 @@ namespace System.IdentityModel.Selectors
                 }
                 catch (SecurityTokenValidationException ex)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(exception.Message + " " + ex.Message));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(exception.Message + " " + ex.Message)
+                    );
                 }
             }
         }

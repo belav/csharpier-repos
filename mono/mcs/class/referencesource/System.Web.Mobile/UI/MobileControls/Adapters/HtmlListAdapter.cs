@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlListAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
+using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
-using System.Globalization;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -26,24 +26,29 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlListAdapter.uex' path='docs/doc[@for="HtmlListAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlListAdapter : HtmlControlAdapter
     {
         /// <include file='doc\HtmlListAdapter.uex' path='docs/doc[@for="HtmlListAdapter.Control"]/*' />
         protected new List Control
         {
-            get
-            {
-                return (List)base.Control;
-            }
+            get { return (List)base.Control; }
         }
 
         /// <include file='doc\HtmlListAdapter.uex' path='docs/doc[@for="HtmlListAdapter.Render"]/*' />
         public override void Render(HtmlMobileTextWriter writer)
         {
-            if(Control.HasControls())
+            if (Control.HasControls())
             {
                 RenderChildren(writer);
                 return;
@@ -66,7 +71,9 @@ namespace System.Web.UI.MobileControls.Adapters
 
             // Determine what markup to use.
 
-            String listSuffix, itemPrefix, itemSuffix;
+            String listSuffix,
+                itemPrefix,
+                itemSuffix;
             ListDecoration decoration = Control.Decoration;
             bool insideStyle = true;
 
@@ -120,7 +127,7 @@ namespace System.Web.UI.MobileControls.Adapters
                         Style.Wrapping = Wrapping.NotSet;
                         writer.EnterLayout(Style);
                         writer.WriteLine("<table>");
-                        if(wrap == Wrapping.NoWrap)
+                        if (wrap == Wrapping.NoWrap)
                         {
                             itemPrefix = "<tr nowrap><td>";
                         }
@@ -146,30 +153,34 @@ namespace System.Web.UI.MobileControls.Adapters
                 MobileListItem item = items[pageStart + i];
                 writer.Write(itemPrefix);
 
-                if(insideStyle)
+                if (insideStyle)
                 {
                     writer.BeginStyleContext();
                     writer.EnterFormat(Style);
                 }
 
-                if(Control.ItemsAsLinks)
+                if (Control.ItemsAsLinks)
                 {
                     RenderBeginLink(writer, item.Value);
                 }
-                else if(hasCmdHandler) 
+                else if (hasCmdHandler)
                 {
                     writer.WriteBeginTag("a");
-                    RenderPostBackEventAsAttribute(writer, "href", item.Index.ToString(CultureInfo.InvariantCulture));
+                    RenderPostBackEventAsAttribute(
+                        writer,
+                        "href",
+                        item.Index.ToString(CultureInfo.InvariantCulture)
+                    );
                     writer.Write(">");
-                } 
+                }
                 writer.WriteEncodedText(item.Text);
-                
+
                 if (hasCmdHandler || Control.ItemsAsLinks)
                 {
                     RenderEndLink(writer);
                 }
 
-                if(insideStyle)
+                if (insideStyle)
                 {
                     writer.ExitFormat(Style);
                     writer.EndStyleContext();

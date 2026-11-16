@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 
             public Rewriter(
                 ISet<UsingDirectiveSyntax> unnecessaryUsings,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
                 : base(visitIntoStructuredTrivia: true)
             {
                 _unnecessaryUsingsDoNotAccessDirectly = unnecessaryUsings;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 SyntaxList<UsingDirectiveSyntax> usings,
                 ISet<UsingDirectiveSyntax> usingsToRemove,
                 out SyntaxList<UsingDirectiveSyntax> finalUsings,
-                out SyntaxTriviaList finalTrivia)
+                out SyntaxTriviaList finalTrivia
+            )
             {
                 var currentUsings = new List<UsingDirectiveSyntax>(usings);
                 var firstUsingNotBeingRemoved = true;
@@ -60,8 +62,15 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 
                         var leadingTrivia = currentUsing.GetLeadingTrivia();
                         // We always preserve trivia on the first using in a file scoped namespace
-                        if (ShouldPreserveTrivia(leadingTrivia) ||
-                            (i == 0 && currentUsing.IsParentKind(SyntaxKind.FileScopedNamespaceDeclaration)))
+                        if (
+                            ShouldPreserveTrivia(leadingTrivia)
+                            || (
+                                i == 0
+                                && currentUsing.IsParentKind(
+                                    SyntaxKind.FileScopedNamespaceDeclaration
+                                )
+                            )
+                        )
                         {
                             // This using had trivia we want to preserve.  If we're the last
                             // directive, then copy this trivia out so that our caller can place
@@ -76,13 +85,17 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                                 {
                                     // If we need to preserve the next trivia too then, prepend
                                     // the two together.
-                                    currentUsings[nextIndex] = nextUsing.WithPrependedLeadingTrivia(leadingTrivia);
+                                    currentUsings[nextIndex] = nextUsing.WithPrependedLeadingTrivia(
+                                        leadingTrivia
+                                    );
                                 }
                                 else
                                 {
                                     // Otherwise, replace the next trivia with this trivia that we
                                     // want to preserve.
-                                    currentUsings[nextIndex] = nextUsing.WithLeadingTrivia(leadingTrivia);
+                                    currentUsings[nextIndex] = nextUsing.WithLeadingTrivia(
+                                        leadingTrivia
+                                    );
                                 }
 
                                 passedLeadngTrivia = true;
@@ -113,7 +126,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                         {
                             var currentUsing = currentUsings[i];
                             var currentUsingLeadingTrivia = currentUsing.GetLeadingTrivia();
-                            currentUsings[i] = currentUsing.WithLeadingTrivia(currentUsingLeadingTrivia.WithoutLeadingBlankLines());
+                            currentUsings[i] = currentUsing.WithLeadingTrivia(
+                                currentUsingLeadingTrivia.WithoutLeadingBlankLines()
+                            );
                         }
 
                         firstUsingNotBeingRemoved = false;
@@ -123,12 +138,13 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 finalUsings = currentUsings.WhereNotNull().ToSyntaxList();
             }
 
-            private static bool ShouldPreserveTrivia(SyntaxTriviaList trivia)
-                => trivia.Any(t => !t.IsWhitespaceOrEndOfLine());
+            private static bool ShouldPreserveTrivia(SyntaxTriviaList trivia) =>
+                trivia.Any(t => !t.IsWhitespaceOrEndOfLine());
 
             private ISet<UsingDirectiveSyntax> GetUsingsToRemove(
                 SyntaxList<UsingDirectiveSyntax> oldUsings,
-                SyntaxList<UsingDirectiveSyntax> newUsings)
+                SyntaxList<UsingDirectiveSyntax> newUsings
+            )
             {
                 Debug.Assert(oldUsings.Count == newUsings.Count);
 
@@ -154,18 +170,27 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     return compilationUnit;
                 }
 
-                ProcessUsings(compilationUnit.Usings, usingsToRemove, out var finalUsings, out var finalTrivia);
+                ProcessUsings(
+                    compilationUnit.Usings,
+                    usingsToRemove,
+                    out var finalUsings,
+                    out var finalTrivia
+                );
 
                 // If all the using directives were removed, and the group was followed by a blank line, remove a single
                 // blank line as well.
                 if (compilationUnit.Usings.Count > 0 && finalUsings.Count == 0)
                 {
-                    var nextToken = compilationUnit.Usings.Last().GetLastToken().GetNextTokenOrEndOfFile();
+                    var nextToken = compilationUnit
+                        .Usings.Last()
+                        .GetLastToken()
+                        .GetNextTokenOrEndOfFile();
                     if (nextToken.HasLeadingTrivia && nextToken.LeadingTrivia[0].IsEndOfLine())
                     {
                         compilationUnit = compilationUnit.ReplaceToken(
                             nextToken,
-                            nextToken.WithLeadingTrivia(nextToken.LeadingTrivia.RemoveAt(0)));
+                            nextToken.WithLeadingTrivia(nextToken.LeadingTrivia.RemoveAt(0))
+                        );
                     }
                 }
 
@@ -173,51 +198,83 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = compilationUnit.Usings.Last().GetLastToken().GetNextTokenOrEndOfFile();
-                    compilationUnit = compilationUnit.ReplaceToken(nextToken, nextToken.WithPrependedLeadingTrivia(finalTrivia));
+                    var nextToken = compilationUnit
+                        .Usings.Last()
+                        .GetLastToken()
+                        .GetNextTokenOrEndOfFile();
+                    compilationUnit = compilationUnit.ReplaceToken(
+                        nextToken,
+                        nextToken.WithPrependedLeadingTrivia(finalTrivia)
+                    );
                 }
 
                 var resultCompilationUnit = compilationUnit.WithUsings(finalUsings);
-                if (finalUsings.Count == 0 &&
-                    resultCompilationUnit.Externs.Count == 0 &&
-                    resultCompilationUnit.Members.Count >= 1)
+                if (
+                    finalUsings.Count == 0
+                    && resultCompilationUnit.Externs.Count == 0
+                    && resultCompilationUnit.Members.Count >= 1
+                )
                 {
                     // We've removed all the usings and now the first thing in the namespace is a
                     // type.  In this case, remove any newlines preceding the type.
                     var firstToken = resultCompilationUnit.GetFirstToken();
-                    var newFirstToken = RemoveUnnecessaryImportsHelpers.StripNewLines(CSharpSyntaxFacts.Instance, firstToken);
-                    resultCompilationUnit = resultCompilationUnit.ReplaceToken(firstToken, newFirstToken);
+                    var newFirstToken = RemoveUnnecessaryImportsHelpers.StripNewLines(
+                        CSharpSyntaxFacts.Instance,
+                        firstToken
+                    );
+                    resultCompilationUnit = resultCompilationUnit.ReplaceToken(
+                        firstToken,
+                        newFirstToken
+                    );
                 }
 
                 return resultCompilationUnit;
             }
 
-            public override SyntaxNode VisitFileScopedNamespaceDeclaration(FileScopedNamespaceDeclarationSyntax node)
-                => VisitBaseNamespaceDeclaration(node, (BaseNamespaceDeclarationSyntax)base.VisitFileScopedNamespaceDeclaration(node));
+            public override SyntaxNode VisitFileScopedNamespaceDeclaration(
+                FileScopedNamespaceDeclarationSyntax node
+            ) =>
+                VisitBaseNamespaceDeclaration(
+                    node,
+                    (BaseNamespaceDeclarationSyntax)base.VisitFileScopedNamespaceDeclaration(node)
+                );
 
-            public override SyntaxNode VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
-                => VisitBaseNamespaceDeclaration(node, (BaseNamespaceDeclarationSyntax)base.VisitNamespaceDeclaration(node));
+            public override SyntaxNode VisitNamespaceDeclaration(NamespaceDeclarationSyntax node) =>
+                VisitBaseNamespaceDeclaration(
+                    node,
+                    (BaseNamespaceDeclarationSyntax)base.VisitNamespaceDeclaration(node)
+                );
 
             private SyntaxNode VisitBaseNamespaceDeclaration(
                 BaseNamespaceDeclarationSyntax node,
-                BaseNamespaceDeclarationSyntax namespaceDeclaration)
+                BaseNamespaceDeclarationSyntax namespaceDeclaration
+            )
             {
                 var usingsToRemove = GetUsingsToRemove(node.Usings, namespaceDeclaration.Usings);
                 if (usingsToRemove.Count == 0)
                     return namespaceDeclaration;
 
-                ProcessUsings(namespaceDeclaration.Usings, usingsToRemove, out var finalUsings, out var finalTrivia);
+                ProcessUsings(
+                    namespaceDeclaration.Usings,
+                    usingsToRemove,
+                    out var finalUsings,
+                    out var finalTrivia
+                );
 
                 // If all the using directives were removed, and the group was followed by a blank line, remove a single
                 // blank line as well.
                 if (namespaceDeclaration.Usings.Count > 0 && finalUsings.Count == 0)
                 {
-                    var nextToken = namespaceDeclaration.Usings.Last().GetLastToken().GetNextTokenOrEndOfFile();
+                    var nextToken = namespaceDeclaration
+                        .Usings.Last()
+                        .GetLastToken()
+                        .GetNextTokenOrEndOfFile();
                     if (nextToken.HasLeadingTrivia && nextToken.LeadingTrivia[0].IsEndOfLine())
                     {
                         namespaceDeclaration = namespaceDeclaration.ReplaceToken(
                             nextToken,
-                            nextToken.WithLeadingTrivia(nextToken.LeadingTrivia.RemoveAt(0)));
+                            nextToken.WithLeadingTrivia(nextToken.LeadingTrivia.RemoveAt(0))
+                        );
                     }
                 }
 
@@ -225,19 +282,30 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = namespaceDeclaration.Usings.Last().GetLastToken().GetNextToken();
-                    namespaceDeclaration = namespaceDeclaration.ReplaceToken(nextToken, nextToken.WithPrependedLeadingTrivia(finalTrivia));
+                    var nextToken = namespaceDeclaration
+                        .Usings.Last()
+                        .GetLastToken()
+                        .GetNextToken();
+                    namespaceDeclaration = namespaceDeclaration.ReplaceToken(
+                        nextToken,
+                        nextToken.WithPrependedLeadingTrivia(finalTrivia)
+                    );
                 }
 
                 var resultNamespace = namespaceDeclaration.WithUsings(finalUsings);
-                if (finalUsings.Count == 0 &&
-                    resultNamespace.Externs.Count == 0 &&
-                    resultNamespace.Members.Count >= 1)
+                if (
+                    finalUsings.Count == 0
+                    && resultNamespace.Externs.Count == 0
+                    && resultNamespace.Members.Count >= 1
+                )
                 {
                     // We've removed all the usings and now the first thing in the namespace is a
                     // type.  In this case, remove any newlines preceding the type.
                     var firstToken = resultNamespace.Members.First().GetFirstToken();
-                    var newFirstToken = RemoveUnnecessaryImportsHelpers.StripNewLines(CSharpSyntaxFacts.Instance, firstToken);
+                    var newFirstToken = RemoveUnnecessaryImportsHelpers.StripNewLines(
+                        CSharpSyntaxFacts.Instance,
+                        firstToken
+                    );
                     resultNamespace = resultNamespace.ReplaceToken(firstToken, newFirstToken);
                 }
 

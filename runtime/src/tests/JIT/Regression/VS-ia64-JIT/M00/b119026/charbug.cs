@@ -15,7 +15,7 @@ public class test
     {
         int exitCode = -1;
         sbyte i8 = -1;
-        char c = (char) i8;
+        char c = (char)i8;
 
         Console.WriteLine("{0:X}: {1}", Convert.ToUInt32(c), ((ushort)c));
 

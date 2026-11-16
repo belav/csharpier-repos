@@ -23,7 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using Newtonsoft.Json.Serialization;
+using User = Newtonsoft.Json.Tests.Serialization.MetadataPropertyHandlingTests.User;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -31,11 +36,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using User = Newtonsoft.Json.Tests.Serialization.MetadataPropertyHandlingTests.User;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 {
@@ -48,18 +48,22 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             try
             {
                 #region Usage
-                string json = @"{
+                string json =
+                    @"{
                   'Name': 'James',
                   'Password': 'Password1',
                   '$type': 'MyNamespace.User, MyAssembly'
                 }";
 
-                object o = JsonConvert.DeserializeObject(json, new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All,
-                    // $type no longer needs to be first
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
-                });
+                object o = JsonConvert.DeserializeObject(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All,
+                        // $type no longer needs to be first
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                    }
+                );
 
                 User u = (User)o;
 
@@ -67,9 +71,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // James
                 #endregion
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 }

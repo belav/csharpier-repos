@@ -19,7 +19,7 @@ namespace System.ComponentModel.Composition
     ///     Enables the AssemblyCatalog to discover user provided ReflectionContexts.
     /// </summary>
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false,Inherited = true)]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = true)]
     public class CatalogReflectionContextAttribute : Attribute
     {
         Type _reflectionContextType;
@@ -38,15 +38,22 @@ namespace System.ComponentModel.Composition
             ReflectionContext reflectionContext = null;
             try
             {
-                reflectionContext = (ReflectionContext)Activator.CreateInstance(this._reflectionContextType);
+                reflectionContext = (ReflectionContext)
+                    Activator.CreateInstance(this._reflectionContextType);
             }
             catch (InvalidCastException invalidCastException)
             {
-                throw new InvalidOperationException(Strings.ReflectionContext_Type_Required, invalidCastException);
+                throw new InvalidOperationException(
+                    Strings.ReflectionContext_Type_Required,
+                    invalidCastException
+                );
             }
             catch (MissingMethodException missingMethodException)
             {
-                throw new MissingMethodException(Strings.ReflectionContext_Requires_DefaultConstructor, missingMethodException);
+                throw new MissingMethodException(
+                    Strings.ReflectionContext_Requires_DefaultConstructor,
+                    missingMethodException
+                );
             }
 
             return reflectionContext;

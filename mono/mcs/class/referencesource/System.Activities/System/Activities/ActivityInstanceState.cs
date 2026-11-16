@@ -4,8 +4,8 @@
 
 namespace System.Activities
 {
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     public enum ActivityInstanceState

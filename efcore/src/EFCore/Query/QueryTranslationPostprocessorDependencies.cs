@@ -45,7 +45,5 @@ public sealed record QueryTranslationPostprocessorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public QueryTranslationPostprocessorDependencies()
-    {
-    }
+    public QueryTranslationPostprocessorDependencies() { }
 }

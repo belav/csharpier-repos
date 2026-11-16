@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class NonGenericProjectEnumTest
 {
     private MapperConfiguration _config;
@@ -8,18 +9,31 @@ public class NonGenericProjectEnumTest
         _config = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap(typeof(Customer), typeof(CustomerDto));
-            cfg.CreateMap(typeof(CustomerType), typeof(string)).ConvertUsing(ct => ct.ToString().ToUpper());
+            cfg.CreateMap(typeof(CustomerType), typeof(string))
+                .ConvertUsing(ct => ct.ToString().ToUpper());
         });
     }
 
     [Fact]
     public void ProjectingEnumToString()
     {
-        var customers = new[] { new Customer() { FirstName = "Bill", LastName = "White", CustomerType = CustomerType.Vip } }.AsQueryable();
+        var customers = new[]
+        {
+            new Customer()
+            {
+                FirstName = "Bill",
+                LastName = "White",
+                CustomerType = CustomerType.Vip,
+            },
+        }.AsQueryable();
 
         var projected = customers.ProjectTo<CustomerDto>(_config);
         projected.ShouldNotBeNull();
-        customers.Single().CustomerType.ToString().ToUpper().ShouldBe(projected.Single().CustomerType);
+        customers
+            .Single()
+            .CustomerType.ToString()
+            .ToUpper()
+            .ShouldBe(projected.Single().CustomerType);
     }
 
     public class Customer
@@ -55,8 +69,9 @@ public class NonGenericProjectAndMapEnumTest
     {
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap(typeof (Customer), typeof (CustomerDto));
-            cfg.CreateMap(typeof (CustomerType), typeof (string)).ConvertUsing(ct => ct.ToString().ToUpper());
+            cfg.CreateMap(typeof(Customer), typeof(CustomerDto));
+            cfg.CreateMap(typeof(CustomerType), typeof(string))
+                .ConvertUsing(ct => ct.ToString().ToUpper());
         });
         _mapper = config.CreateMapper();
     }
@@ -64,11 +79,23 @@ public class NonGenericProjectAndMapEnumTest
     [Fact]
     public void ProjectingEnumToString()
     {
-        var customers = new[] { new Customer() { FirstName = "Bill", LastName = "White", CustomerType = CustomerType.Vip } }.AsQueryable();
+        var customers = new[]
+        {
+            new Customer()
+            {
+                FirstName = "Bill",
+                LastName = "White",
+                CustomerType = CustomerType.Vip,
+            },
+        }.AsQueryable();
 
         var projected = customers.ProjectTo<CustomerDto>(_mapper.ConfigurationProvider);
         projected.ShouldNotBeNull();
-        Assert.Equal(customers.Single().CustomerType.ToString(), projected.Single().CustomerType, StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(
+            customers.Single().CustomerType.ToString(),
+            projected.Single().CustomerType,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     public class Customer
@@ -98,20 +125,20 @@ public class NonGenericProjectAndMapEnumTest
 
 public class NonGenericProjectionOverrides : AutoMapperSpecBase
 {
-    public class Source
-    {
-        
-    }
+    public class Source { }
 
     public class Dest
     {
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof (Source), typeof (Dest)).ConvertUsing(src => new Dest {Value = 10});
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap(typeof(Source), typeof(Dest))
+                .ConvertUsing(src => new Dest { Value = 10 });
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }

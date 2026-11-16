@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="UpWmlMobileTextWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -9,20 +9,20 @@ using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
-
-using SR=System.Web.UI.MobileControls.Adapters.SR;
-
+using SR = System.Web.UI.MobileControls.Adapters.SR;
 #if COMPILING_FOR_SHIPPED_SOURCE
-using Adapters=System.Web.UI.MobileControls.ShippedAdapterSource;
+using Adapters = System.Web.UI.MobileControls.ShippedAdapterSource;
+
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
-using Adapters=System.Web.UI.MobileControls.Adapters;
+using Adapters = System.Web.UI.MobileControls.Adapters;
+
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -32,36 +32,44 @@ namespace System.Web.UI.MobileControls.Adapters
      */
 
     /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class UpWmlMobileTextWriter : WmlMobileTextWriter
     {
-        private int       _screenWidth;
-        private int       _screenHeight;
-        private bool      _inHyperlink = false;
-        private bool      _inPostBack = false;
-        private bool      _inSoftkey = false;
+        private int _screenWidth;
+        private int _screenHeight;
+        private bool _inHyperlink = false;
+        private bool _inPostBack = false;
+        private bool _inSoftkey = false;
         private Alignment _lastAlignment = Alignment.Left;
-        private Wrapping  _lastWrapping = Wrapping.Wrap;
-        private int       _currentCardIndex = -1;
+        private Wrapping _lastWrapping = Wrapping.Wrap;
+        private int _currentCardIndex = -1;
         private ArrayList _cards = new ArrayList();
-        private int       _currentCardAnchorCount = 0;
-        private int       _currentCardPostBacks = 0;
-        private int       _currentCardSubmits = 0;
-        private bool      _canRenderMixedSelects = false;
-        private bool      _requiresOptionSubmitCard = false;
-        private int       _optionSubmitCardIndex = 0;
-        private String    _optionMenuName = null;
-        
-        private String    _linkText = null;
-        private String    _targetUrl = null;
-        private String    _softkeyLabel = null;
-        private bool      _encodeUrl = false;
-        private bool      _useMenuOptionTitle = false;
-        
+        private int _currentCardAnchorCount = 0;
+        private int _currentCardPostBacks = 0;
+        private int _currentCardSubmits = 0;
+        private bool _canRenderMixedSelects = false;
+        private bool _requiresOptionSubmitCard = false;
+        private int _optionSubmitCardIndex = 0;
+        private String _optionMenuName = null;
+
+        private String _linkText = null;
+        private String _targetUrl = null;
+        private String _softkeyLabel = null;
+        private bool _encodeUrl = false;
+        private bool _useMenuOptionTitle = false;
+
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.UpWmlMobileTextWriter"]/*' />
-        public UpWmlMobileTextWriter(TextWriter writer, MobileCapabilities device, MobilePage page) 
+        public UpWmlMobileTextWriter(TextWriter writer, MobileCapabilities device, MobilePage page)
             : base(writer, device, page)
         {
             _screenWidth = device.ScreenCharactersWidth;
@@ -71,10 +79,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private UpCard CurrentCard
         {
-            get
-            {
-                return (UpCard)_cards[_currentCardIndex];
-            }
+            get { return (UpCard)_cards[_currentCardIndex]; }
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.BeginForm"]/*' />
@@ -98,7 +103,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        private static readonly int _filePathSuffixLength = 
+        private static readonly int _filePathSuffixLength =
             Constants.UniqueFilePathSuffixVariableWithoutEqual.Length + 1;
         private int _sessionCount = -1;
         private int SessionCount
@@ -108,8 +113,9 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (_sessionCount == -1)
                 {
                     _sessionCount = 0;
-                    String filePathSuffix = 
-                        Page.Request.QueryString[Constants.UniqueFilePathSuffixVariableWithoutEqual];
+                    String filePathSuffix = Page.Request.QueryString[
+                        Constants.UniqueFilePathSuffixVariableWithoutEqual
+                    ];
 
                     if (filePathSuffix != null && filePathSuffix.Length == _filePathSuffixLength)
                     {
@@ -130,7 +136,7 @@ namespace System.Web.UI.MobileControls.Adapters
             get
             {
                 IDictionary dictionary = Page.Adapter.CookielessDataDictionary;
-                if((dictionary != null) && (dictionary.Count > 0))
+                if ((dictionary != null) && (dictionary.Count > 0))
                 {
                     return true;
                 }
@@ -143,15 +149,22 @@ namespace System.Web.UI.MobileControls.Adapters
             if (Device.RequiresUniqueFilePathSuffix && RequiresLoopDetectionCard)
             {
                 Debug.Assert(!AnalyzeMode);
-                Write(String.Format(CultureInfo.InvariantCulture, _loopDetectionCard, Page.ActiveForm.ClientID));
+                Write(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        _loopDetectionCard,
+                        Page.ActiveForm.ClientID
+                    )
+                );
             }
         }
 
         private String _cachedFormQueryString;
+
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.CalculateFormQueryString"]/*' />
         protected override String CalculateFormQueryString()
         {
-            if(_cachedFormQueryString != null)
+            if (_cachedFormQueryString != null)
             {
                 return _cachedFormQueryString;
             }
@@ -164,7 +177,7 @@ namespace System.Web.UI.MobileControls.Adapters
             if (Device.RequiresUniqueFilePathSuffix)
             {
                 String ufps = Page.UniqueFilePathSuffix;
-                if(this.HasFormVariables)
+                if (this.HasFormVariables)
                 {
                     if (SessionCount == 9)
                     {
@@ -188,7 +201,7 @@ namespace System.Web.UI.MobileControls.Adapters
             return queryString;
         }
 
-        private const String _loopDetectionCard = 
+        private const String _loopDetectionCard =
             "<card ontimer=\"#{0}\"><onevent type=\"onenterbackward\"><prev /></onevent><timer value=\"1\" /></card>";
 
         internal override bool ShouldWriteFormID(Form form)
@@ -229,7 +242,12 @@ namespace System.Web.UI.MobileControls.Adapters
                 WriteLine("\">");
 
                 Write("<onevent type=\"onenterforward\">");
-                RenderGoAction(null, _postBackEventArgumentVarName, WmlPostFieldType.Variable, true);
+                RenderGoAction(
+                    null,
+                    _postBackEventArgumentVarName,
+                    WmlPostFieldType.Variable,
+                    true
+                );
                 WriteLine("</onevent>");
 
                 WriteLine("<onevent type=\"onenterbackward\"><prev /></onevent>");
@@ -308,29 +326,32 @@ namespace System.Web.UI.MobileControls.Adapters
                     // card before it, and entering an explicit <br> creates two
                     // breaks.  Therefore, we just render a &nbsp; in this
                     // situation.
-                    
-                    if (!CurrentCard.RenderedTextElementYet &&
-                        Device.RendersBreakBeforeWmlSelectAndInput &&
-                        !((WmlPageAdapter)Page.Adapter).IsKDDIPhone())
+
+                    if (
+                        !CurrentCard.RenderedTextElementYet
+                        && Device.RendersBreakBeforeWmlSelectAndInput
+                        && !((WmlPageAdapter)Page.Adapter).IsKDDIPhone()
+                    )
                     {
                         CurrentCard.RenderedTextElementYet = true;
                         if (breakAfter && (text != null && text.Length == 0))
                         {
                             base.RenderText("&nbsp;", false, false);
-                        } 
+                        }
                     }
                     base.RenderText(text, breakAfter, encodeText);
                 }
-                
             }
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginHyperlink"]/*' />
-        public override void RenderBeginHyperlink(String targetUrl, 
-                                                  bool encodeUrl, 
-                                                  String softkeyLabel, 
-                                                  bool implicitSoftkeyLabel,
-                                                  bool mapToSoftkey)
+        public override void RenderBeginHyperlink(
+            String targetUrl,
+            bool encodeUrl,
+            String softkeyLabel,
+            bool implicitSoftkeyLabel,
+            bool mapToSoftkey
+        )
         {
             if (_inHyperlink || _inPostBack)
             {
@@ -382,11 +403,13 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else if (!CurrentCard.UsesDefaultSubmit)
                 {
-                    base.RenderBeginHyperlink(targetUrl, 
-                                              encodeUrl, 
-                                              softkeyLabel, 
-                                              implicitSoftkeyLabel, 
-                                              mapToSoftkey);
+                    base.RenderBeginHyperlink(
+                        targetUrl,
+                        encodeUrl,
+                        softkeyLabel,
+                        implicitSoftkeyLabel,
+                        mapToSoftkey
+                    );
                 }
             }
             _inHyperlink = true;
@@ -459,28 +482,31 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     base.RenderEndHyperlink(breakAfter);
                 }
-
             }
             _currentCardAnchorCount++;
-            
-            if (!AnalyzeMode &&
-                    _currentCardAnchorCount == CurrentCard.AnchorCount && 
-                    _currentCardIndex < _cards.Count - 1)
+
+            if (
+                !AnalyzeMode
+                && _currentCardAnchorCount == CurrentCard.AnchorCount
+                && _currentCardIndex < _cards.Count - 1
+            )
             {
                 BeginNextCard();
             }
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderTextBox"]/*' />
-        public override void RenderTextBox(String id, 
-                                           String value,
-                                           String format, 
-                                           String title,
-                                           bool password, 
-                                           int size, 
-                                           int maxLength, 
-                                           bool generateRandomID,
-                                           bool breakAfter)
+        public override void RenderTextBox(
+            String id,
+            String value,
+            String format,
+            String title,
+            bool password,
+            int size,
+            int maxLength,
+            bool generateRandomID,
+            bool breakAfter
+        )
         {
             if (AnalyzeMode)
             {
@@ -492,9 +518,13 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     BeginNextCard();
                 }
-                else if (CurrentCard.HasInputElements && 
-                            (!Device.CanRenderInputAndSelectElementsTogether ||
-                                !Device.CanRenderAfterInputOrSelectElement))
+                else if (
+                    CurrentCard.HasInputElements
+                    && (
+                        !Device.CanRenderInputAndSelectElementsTogether
+                        || !Device.CanRenderAfterInputOrSelectElement
+                    )
+                )
                 {
                     BeginNextCard();
                 }
@@ -507,18 +537,34 @@ namespace System.Web.UI.MobileControls.Adapters
             else
             {
                 // Don't write breaks after textboxes on UP.
-                base.RenderTextBox(id, value, format, title, password, size, maxLength, generateRandomID, false);
+                base.RenderTextBox(
+                    id,
+                    value,
+                    format,
+                    title,
+                    password,
+                    size,
+                    maxLength,
+                    generateRandomID,
+                    false
+                );
 
                 // If we can't render more than one input element on this card, and
                 // there are no anchors left to render, break here.
 
-                if (!Device.CanRenderAfterInputOrSelectElement && _currentCardIndex < _cards.Count - 1)
+                if (
+                    !Device.CanRenderAfterInputOrSelectElement
+                    && _currentCardIndex < _cards.Count - 1
+                )
                 {
                     CurrentCard.NoOKLink = true;
                     BeginNextCard();
                 }
-                else if (CurrentCard.AnchorCount == 0 && _currentCardIndex < _cards.Count - 1 &&
-                        !Device.CanRenderInputAndSelectElementsTogether)
+                else if (
+                    CurrentCard.AnchorCount == 0
+                    && _currentCardIndex < _cards.Count - 1
+                    && !Device.CanRenderInputAndSelectElementsTogether
+                )
                 {
                     CurrentCard.NoOKLink = true;
                     BeginNextCard();
@@ -527,10 +573,12 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderImage"]/*' />
-        public override void RenderImage(String source, 
-                                         String localSource, 
-                                         String alternateText, 
-                                         bool breakAfter)
+        public override void RenderImage(
+            String source,
+            String localSource,
+            String alternateText,
+            bool breakAfter
+        )
         {
             if (AnalyzeMode)
             {
@@ -587,9 +635,11 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginPostBack"]/*' />
-        public override void RenderBeginPostBack(String softkeyLabel, 
-                                                 bool implicitSoftkeyLabel, 
-                                                 bool mapToSoftkey)
+        public override void RenderBeginPostBack(
+            String softkeyLabel,
+            bool implicitSoftkeyLabel,
+            bool mapToSoftkey
+        )
         {
             if (_inHyperlink || _inPostBack)
             {
@@ -612,7 +662,6 @@ namespace System.Web.UI.MobileControls.Adapters
                     _softkeyLabel = softkeyLabel;
                     _linkText = String.Empty;
                 }
-
             }
             else
             {
@@ -638,7 +687,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndPostBack"]/*' />
-        public override void RenderEndPostBack(String target, String argument, WmlPostFieldType postBackType, bool includeVariables, bool breakAfter)
+        public override void RenderEndPostBack(
+            String target,
+            String argument,
+            WmlPostFieldType postBackType,
+            bool includeVariables,
+            bool breakAfter
+        )
         {
             if (!_inPostBack)
             {
@@ -760,15 +815,22 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else if (!CurrentCard.UsesDefaultSubmit)
                 {
-                    base.RenderEndPostBack(target, argument, postBackType, 
-                            includeVariables, breakAfter);
+                    base.RenderEndPostBack(
+                        target,
+                        argument,
+                        postBackType,
+                        includeVariables,
+                        breakAfter
+                    );
                 }
             }
             _currentCardAnchorCount++;
 
-            if (!AnalyzeMode &&
-                    _currentCardAnchorCount == CurrentCard.AnchorCount && 
-                    _currentCardIndex < _cards.Count - 1)
+            if (
+                !AnalyzeMode
+                && _currentCardAnchorCount == CurrentCard.AnchorCount
+                && _currentCardIndex < _cards.Count - 1
+            )
             {
                 BeginNextCard();
             }
@@ -783,9 +845,11 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.AnalyzePostBack"]/*' />
-        protected override void AnalyzePostBack(bool includeVariables, WmlPostFieldType postBackType)
+        protected override void AnalyzePostBack(
+            bool includeVariables,
+            WmlPostFieldType postBackType
+        )
         {
             base.AnalyzePostBack(includeVariables, postBackType);
             if (CurrentForm.Action.Length > 0)
@@ -810,7 +874,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginSelect"]/*' />
-        public override void RenderBeginSelect(String name, String iname, String ivalue, String title, bool multiSelect)
+        public override void RenderBeginSelect(
+            String name,
+            String iname,
+            String ivalue,
+            String title,
+            bool multiSelect
+        )
         {
             if (AnalyzeMode)
             {
@@ -821,9 +891,13 @@ namespace System.Web.UI.MobileControls.Adapters
                     // next card.
                     BeginNextCard();
                 }
-                else if (CurrentCard.HasInputElements &&
-                            (!Device.CanRenderInputAndSelectElementsTogether ||
-                                !Device.CanRenderAfterInputOrSelectElement))
+                else if (
+                    CurrentCard.HasInputElements
+                    && (
+                        !Device.CanRenderInputAndSelectElementsTogether
+                        || !Device.CanRenderAfterInputOrSelectElement
+                    )
+                )
                 {
                     BeginNextCard();
                 }
@@ -854,13 +928,19 @@ namespace System.Web.UI.MobileControls.Adapters
                 // If we can't render more than one input element on this card, and
                 // there are no anchors left to render, break here.
 
-                if (!Device.CanRenderAfterInputOrSelectElement && _currentCardIndex < _cards.Count - 1)
+                if (
+                    !Device.CanRenderAfterInputOrSelectElement
+                    && _currentCardIndex < _cards.Count - 1
+                )
                 {
                     CurrentCard.NoOKLink = true;
                     BeginNextCard();
-                } 
-                else if (CurrentCard.AnchorCount == 0 && _currentCardIndex < _cards.Count - 1 &&
-                        !Device.CanRenderInputAndSelectElementsTogether)
+                }
+                else if (
+                    CurrentCard.AnchorCount == 0
+                    && _currentCardIndex < _cards.Count - 1
+                    && !Device.CanRenderInputAndSelectElementsTogether
+                )
                 {
                     CurrentCard.NoOKLink = true;
                     BeginNextCard();
@@ -914,7 +994,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (CurrentCard.MenuTarget != null)
                 {
                     menuTarget = CurrentCard.MenuTarget;
-                    if (menuTarget.IndexOf(":", StringComparison.Ordinal) >= 0) 
+                    if (menuTarget.IndexOf(":", StringComparison.Ordinal) >= 0)
                     {
                         menuTargetClientID = menuTarget.Replace(":", "_");
                     }
@@ -940,12 +1020,16 @@ namespace System.Web.UI.MobileControls.Adapters
             else
             {
                 String GoLabel = SR.GetString(SR.WmlMobileTextWriterGoLabel);
-                RenderDoEvent("accept", 
-                              menuTarget, 
-                              menuTargetClientID != null ? MapClientIDToShortName(menuTargetClientID, false) : null,
-                              postFieldType,
-                              GoLabel,
-                              true);
+                RenderDoEvent(
+                    "accept",
+                    menuTarget,
+                    menuTargetClientID != null
+                        ? MapClientIDToShortName(menuTargetClientID, false)
+                        : null,
+                    postFieldType,
+                    GoLabel,
+                    true
+                );
             }
 
             base.RenderBeginSelect(menuTargetClientID, null, null, null, false);
@@ -999,11 +1083,17 @@ namespace System.Web.UI.MobileControls.Adapters
         // they are changing, even if they are set to defaults.
 
         /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.OpenParagraph"]/*' />
-        protected override void OpenParagraph(WmlLayout layout, bool writeAlignment, bool writeWrapping)
+        protected override void OpenParagraph(
+            WmlLayout layout,
+            bool writeAlignment,
+            bool writeWrapping
+        )
         {
-            base.OpenParagraph(layout,
-                               writeAlignment || layout.Align != _lastAlignment,
-                               writeWrapping  || layout.Wrap != _lastWrapping);
+            base.OpenParagraph(
+                layout,
+                writeAlignment || layout.Align != _lastAlignment,
+                writeWrapping || layout.Wrap != _lastWrapping
+            );
             _lastAlignment = layout.Align;
             _lastWrapping = layout.Wrap;
         }
@@ -1047,16 +1137,19 @@ namespace System.Web.UI.MobileControls.Adapters
             if (card.RenderAsMenu)
             {
                 // If the card is the last card, and has only
-                // one anchor that can be mapped to a softkey, 
-                // ignore the 
+                // one anchor that can be mapped to a softkey,
+                // ignore the
 
-                if (card.AnchorCount == 1 && cardIndex == _cards.Count - 1 && card.SoftkeysUsed == 1)
+                if (
+                    card.AnchorCount == 1
+                    && cardIndex == _cards.Count - 1
+                    && card.SoftkeysUsed == 1
+                )
                 {
                     card.RenderAsMenu = false;
                 }
-
                 // If the card has a lot of static content followed by
-                // a number of links, don't render it as a menu card, 
+                // a number of links, don't render it as a menu card,
                 // because the card would scroll off the static content
                 // to get to the menu.
 
@@ -1072,7 +1165,7 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             base.PostAnalyzeForm();
 
-            for(int i = 0; i < _cards.Count; i++)
+            for (int i = 0; i < _cards.Count; i++)
             {
                 PostAnalyzeCard(i);
             }
@@ -1082,8 +1175,11 @@ namespace System.Web.UI.MobileControls.Adapters
             // don't render as a separate anchor (otherwise, the user would
             // see an extra screen at the end with a single anchor)
             UpCard lastCard = CurrentCard;
-            if (lastCard.HasInputElements && _currentCardAnchorCount >= 1 && 
-                    _currentCardAnchorCount <= Device.DefaultSubmitButtonLimit)
+            if (
+                lastCard.HasInputElements
+                && _currentCardAnchorCount >= 1
+                && _currentCardAnchorCount <= Device.DefaultSubmitButtonLimit
+            )
             {
                 lastCard.UsesDefaultSubmit = true;
             }
@@ -1092,9 +1188,7 @@ namespace System.Web.UI.MobileControls.Adapters
         private void RenderCardOpening(int cardIndex)
         {
             UpCard card = (UpCard)_cards[cardIndex];
-            if (card.RenderAsMenu)
-            {
-            }
+            if (card.RenderAsMenu) { }
             else
             {
                 // Render softkeys
@@ -1143,7 +1237,8 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 // Add a softkey on the current card, to go to the new card.
 
-                String nextCardId = "card" + (_currentCardIndex + 1).ToString(CultureInfo.InvariantCulture);
+                String nextCardId =
+                    "card" + (_currentCardIndex + 1).ToString(CultureInfo.InvariantCulture);
 
                 UpHyperlinkSoftkey softkey = new UpHyperlinkSoftkey();
                 softkey.TargetUrl = "#" + nextCardId;
@@ -1163,11 +1258,11 @@ namespace System.Web.UI.MobileControls.Adapters
                 CloseParagraph();
                 WriteEndTag("card");
                 WriteLine();
-    
+
                 _currentCardIndex++;
                 _lastAlignment = Alignment.Left;
                 _lastWrapping = Wrapping.NoWrap;
-    
+
                 WriteBeginTag("card");
                 WriteAttribute("id", CurrentCard.Id);
                 String formTitle = CurrentForm.Title;
@@ -1225,12 +1320,14 @@ namespace System.Web.UI.MobileControls.Adapters
             UpPostBackSoftkey postBackSoftkey = softkey as UpPostBackSoftkey;
             if (postBackSoftkey != null)
             {
-                RenderDoEvent(doType, 
-                              postBackSoftkey.Target, 
-                              postBackSoftkey.Argument, 
-                              postBackSoftkey.PostBackType, 
-                              postBackSoftkey.Label,
-                              postBackSoftkey.IncludeVariables); 
+                RenderDoEvent(
+                    doType,
+                    postBackSoftkey.Target,
+                    postBackSoftkey.Argument,
+                    postBackSoftkey.PostBackType,
+                    postBackSoftkey.Label,
+                    postBackSoftkey.IncludeVariables
+                );
                 return;
             }
         }
@@ -1271,8 +1368,6 @@ namespace System.Web.UI.MobileControls.Adapters
             public bool ExternalSubmitMenu = false;
             public bool NoOKLink = false;
             public bool RenderedTextElementYet = false;
-            
         }
-
     }
 }

@@ -25,8 +25,7 @@ public class RequestPathBaseCookieBuilder : CookieBuilder
         var path = Path;
         if (path == null)
         {
-            var originalPathBase =
-                context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase
+            var originalPathBase = context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase
                 ?? context.Request.PathBase;
             path = originalPathBase + AdditionalPath;
         }

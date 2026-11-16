@@ -31,12 +31,15 @@ namespace System.Web.Http.ModelBinding
         public async Task Action_Directly_Reads_HttpRequestMessage(string mediaType)
         {
             Order order = new Order() { OrderId = "99", OrderValue = 100.0 };
-            var formatter = new MediaTypeFormatterCollection().FindWriter(typeof(Order), new MediaTypeHeaderValue(mediaType));
+            var formatter = new MediaTypeFormatterCollection().FindWriter(
+                typeof(Order),
+                new MediaTypeHeaderValue(mediaType)
+            );
             HttpRequestMessage request = new HttpRequestMessage()
             {
                 Content = new ObjectContent<Order>(order, formatter, mediaType),
                 RequestUri = new Uri(baseAddress + "/HttpContentBinding/HandleMessage"),
-                Method = HttpMethod.Post
+                Method = HttpMethod.Post,
             };
 
             HttpResponseMessage response = await httpClient.SendAsync(request);
@@ -56,7 +59,11 @@ namespace System.Web.Http.ModelBinding
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
             config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-            config.Routes.MapHttpRoute("Default", "{controller}/{action}", new { controller = "HttpContentBinding", action = "HandleMessage" });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "HttpContentBinding", action = "HandleMessage" }
+            );
             config.MessageHandlers.Add(new ConvertToStreamMessageHandler());
 
             server = new HttpServer(config);
@@ -78,7 +85,7 @@ namespace System.Web.Http.ModelBinding
             Order order = await Request.Content.ReadAsAsync<Order>();
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<Order>(order, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<Order>(order, new JsonMediaTypeFormatter()),
             };
         }
     }

@@ -13,11 +13,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         // among linked files, therefore delegate to CompletionLinkedFilesSymbolEquivalenceComparer
         protected readonly record struct SymbolAndSelectionInfo(ISymbol Symbol, bool Preselect)
         {
-            public bool Equals(SymbolAndSelectionInfo other)
-                => LinkedFilesSymbolEquivalenceComparer.Instance.Equals(Symbol, other.Symbol);
+            public bool Equals(SymbolAndSelectionInfo other) =>
+                LinkedFilesSymbolEquivalenceComparer.Instance.Equals(Symbol, other.Symbol);
 
-            public override int GetHashCode()
-                => LinkedFilesSymbolEquivalenceComparer.Instance.GetHashCode(Symbol);
+            public override int GetHashCode() =>
+                LinkedFilesSymbolEquivalenceComparer.Instance.GetHashCode(Symbol);
         }
     }
 }

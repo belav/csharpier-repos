@@ -4,14 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Internal;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Primitives
 {
     /// <summary>
-    ///     Represents an export. That is, a type that is made up of a delay-created exported value 
+    ///     Represents an export. That is, a type that is made up of a delay-created exported value
     ///     and metadata that describes that object.
     /// </summary>
     public class Export
@@ -20,7 +20,7 @@ namespace System.ComponentModel.Composition.Primitives
         private readonly Func<object> _exportedValueGetter;
         private static readonly object _EmptyValue = new object();
         private volatile object _exportedValue = Export._EmptyValue;
-        
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class.
         /// </summary>
@@ -30,20 +30,18 @@ namespace System.ComponentModel.Composition.Primitives
         ///         and <see cref="GetExportedValueCore"/>.
         ///     </note>
         /// </remarks>
-        protected Export()
-        {
-        }
+        protected Export() { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Export"/> class 
+        ///     Initializes a new instance of the <see cref="Export"/> class
         ///     with the specified contract name and exported value getter.
         /// </summary>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the 
+        ///     A <see cref="String"/> containing the contract name of the
         ///     <see cref="Export"/>.
         /// </param>
         /// <param name="exportedValueGetter">
-        ///     A <see cref="Func{T}"/> that is called to create the exported value of the 
+        ///     A <see cref="Func{T}"/> that is called to create the exported value of the
         ///     <see cref="Export"/>. This allows the creation of the object to be delayed
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -57,26 +55,27 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="contractName"/> is an empty string ("").
         /// </exception>
         public Export(string contractName, Func<object> exportedValueGetter)
-            : this(new ExportDefinition(contractName, (IDictionary<string, object>)null), exportedValueGetter)
-        {
-        }
+            : this(
+                new ExportDefinition(contractName, (IDictionary<string, object>)null),
+                exportedValueGetter
+            ) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Export"/> class 
+        ///     Initializes a new instance of the <see cref="Export"/> class
         ///     with the specified contract name, metadata and exported value getter.
         /// </summary>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the 
+        ///     A <see cref="String"/> containing the contract name of the
         ///     <see cref="Export"/>.
         /// </param>
         /// <param name="metadata">
-        ///     An <see cref="IDictionary{TKey, TValue}"/> containing the metadata of the 
-        ///     <see cref="Export"/>; or <see langword="null"/> to set the 
-        ///     <see cref="Metadata"/> property to an empty, read-only 
+        ///     An <see cref="IDictionary{TKey, TValue}"/> containing the metadata of the
+        ///     <see cref="Export"/>; or <see langword="null"/> to set the
+        ///     <see cref="Metadata"/> property to an empty, read-only
         ///     <see cref="IDictionary{TKey, TValue}"/>.
         /// </param>
         /// <param name="exportedValueGetter">
-        ///     A <see cref="Func{T}"/> that is called to create the exported value of the 
+        ///     A <see cref="Func{T}"/> that is called to create the exported value of the
         ///     <see cref="Export"/>. This allows the creation of the object to be delayed.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -89,22 +88,24 @@ namespace System.ComponentModel.Composition.Primitives
         /// <exception cref="ArgumentException">
         ///     <paramref name="contractName"/> is an empty string ("").
         /// </exception>
-        public Export(string contractName, IDictionary<string, object> metadata, Func<object> exportedValueGetter) 
-            : this(new ExportDefinition(contractName, metadata), exportedValueGetter)
-        {
-        }
+        public Export(
+            string contractName,
+            IDictionary<string, object> metadata,
+            Func<object> exportedValueGetter
+        )
+            : this(new ExportDefinition(contractName, metadata), exportedValueGetter) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Export"/> class 
+        ///     Initializes a new instance of the <see cref="Export"/> class
         ///     with the specified export definition and exported value getter.
         /// </summary>
         /// <param name="definition">
-        ///     An <see cref="ExportDefinition"/> that describes the contract that the 
+        ///     An <see cref="ExportDefinition"/> that describes the contract that the
         ///     <see cref="Export"/> satisfies.
         /// </param>
         /// <param name="exportedValueGetter">
-        ///     A <see cref="Func{T}"/> that is called to create the exported value of the 
-        ///     <see cref="Export"/>. This allows the creation of the object to be delayed. 
+        ///     A <see cref="Func{T}"/> that is called to create the exported value of the
+        ///     <see cref="Export"/>. This allows the creation of the object to be delayed.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="definition"/> is <see langword="null"/>.
@@ -126,7 +127,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///     Gets the definition that describes the contract that the export satisfies.
         /// </summary>
         /// <value>
-        ///     An <see cref="ExportDefinition"/> that describes the contract that 
+        ///     An <see cref="ExportDefinition"/> that describes the contract that
         ///     the <see cref="Export"/> satisfies.
         /// </value>
         /// <exception cref="NotImplementedException">
@@ -140,10 +141,10 @@ namespace System.ComponentModel.Composition.Primitives
         /// </remarks>
         public virtual ExportDefinition Definition
         {
-            get 
+            get
             {
                 Contract.Ensures(Contract.Result<ExportDefinition>() != null);
-                
+
                 if (_definition != null)
                 {
                     return _definition;
@@ -157,7 +158,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///     Gets the metadata of the export.
         /// </summary>
         /// <value>
-        ///     An <see cref="IDictionary{TKey, TValue}"/> containing the metadata of the 
+        ///     An <see cref="IDictionary{TKey, TValue}"/> containing the metadata of the
         ///     <see cref="Export"/>.
         /// </value>
         /// <exception cref="NotImplementedException">
@@ -171,12 +172,12 @@ namespace System.ComponentModel.Composition.Primitives
         /// </remarks>
         public IDictionary<string, object> Metadata
         {
-            get 
+            get
             {
                 Contract.Ensures(Contract.Result<IDictionary<string, object>>() != null);
 
-                return Definition.Metadata; 
-            }        
+                return Definition.Metadata;
+            }
         }
 
         /// <summary>
@@ -186,11 +187,11 @@ namespace System.ComponentModel.Composition.Primitives
         ///     The exported <see cref="Object"/> of the <see cref="Export"/>.
         /// </returns>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         /// <exception cref="CompositionContractMismatchException">
-        ///     The current instance is an instance of <see cref="Lazy{T}"/> and the underlying 
+        ///     The current instance is an instance of <see cref="Lazy{T}"/> and the underlying
         ///     exported value cannot be cast to <c>T</c>.
         /// </exception>
         /// <exception cref="NotImplementedException">
@@ -208,7 +209,11 @@ namespace System.ComponentModel.Composition.Primitives
 
                     // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus when used with Interlocked API.
 #pragma warning disable 420
-                    Interlocked.CompareExchange(ref this._exportedValue, exportedValue, Export._EmptyValue);
+                    Interlocked.CompareExchange(
+                        ref this._exportedValue,
+                        exportedValue,
+                        Export._EmptyValue
+                    );
 #pragma warning restore 420
                 }
 
@@ -223,11 +228,11 @@ namespace System.ComponentModel.Composition.Primitives
         ///     The exported <see cref="Object"/> of the <see cref="Export"/>.
         /// </returns>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         /// <exception cref="CompositionContractMismatchException">
-        ///     The current instance is an instance of <see cref="Lazy{T}"/> and the underlying 
+        ///     The current instance is an instance of <see cref="Lazy{T}"/> and the underlying
         ///     exported value cannot be cast to <c>T</c>.
         /// </exception>
         /// <exception cref="NotImplementedException">
@@ -249,5 +254,5 @@ namespace System.ComponentModel.Composition.Primitives
 
             throw ExceptionBuilder.CreateNotOverriddenByDerived("GetExportedValueCore");
         }
-    }   
+    }
 }

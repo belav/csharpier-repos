@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.Data.Objects;
+using System.Linq;
+using System.Text;
 
 namespace System.Web.UI.WebControls
 {
@@ -19,12 +19,12 @@ namespace System.Web.UI.WebControls
     {
         private readonly ObjectContext _context = null;
 
-        internal EntityDataSourceContextDisposingEventArgs(ObjectContext instance) 
+        internal EntityDataSourceContextDisposingEventArgs(ObjectContext instance)
         {
             _context = instance;
         }
 
-        public ObjectContext Context 
+        public ObjectContext Context
         {
             get { return _context; }
         }

@@ -4,11 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
-
-    public enum AutoCompleteType {
-
+namespace System.Web.UI.WebControls
+{
+    public enum AutoCompleteType
+    {
         None = 0,
 
         Disabled = 1,
@@ -72,8 +71,7 @@ namespace System.Web.UI.WebControls {
         BusinessZipCode = 30,
 
         Search = 31,
-        
-        Enabled = 32//This should be the last one
+
+        Enabled = 32, //This should be the last one
     }
 }
-

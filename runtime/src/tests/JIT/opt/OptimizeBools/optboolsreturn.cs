@@ -168,7 +168,7 @@ public class CBoolTest
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool GreaterThanOrEqualZeroBis(int x)
     {
-        return  x > 0 || x == 0;
+        return x > 0 || x == 0;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -206,6 +206,7 @@ public class CBoolTest
     {
         return x <= 0 && x != 0;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool AreBothGreatThanZero(int x, int y)
     {
@@ -253,7 +254,7 @@ public class CBoolTest
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool IsGreaterThanOrEqualZeroBis(int x)
     {
-        bool b =  x > 0 || x == 0;
+        bool b = x > 0 || x == 0;
         if (b)
         {
             Console.WriteLine("IsGreaterThanOrEqualZeroBis true");
@@ -275,7 +276,7 @@ public class CBoolTest
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool IsLessThanOrEqualZeroBis(int x)
     {
-        bool b =  x < 0 || x == 0;
+        bool b = x < 0 || x == 0;
         if (b)
         {
             Console.WriteLine("IsLessThanOrEqualZeroBis true");

@@ -8,7 +8,15 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegisterEventSourceW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial SafeEventLogWriteHandle RegisterEventSource(string lpUNCServerName, string lpSourceName);
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegisterEventSourceW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        internal static partial SafeEventLogWriteHandle RegisterEventSource(
+            string lpUNCServerName,
+            string lpSourceName
+        );
     }
 }

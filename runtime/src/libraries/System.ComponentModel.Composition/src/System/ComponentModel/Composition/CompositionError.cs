@@ -29,9 +29,12 @@ namespace System.ComponentModel.Composition
         ///     <see cref="Description"/> property to an empty string ("").
         /// </param>
         public CompositionError(string? message)
-            : this(CompositionErrorId.Unknown, message, (ICompositionElement?)null, (Exception?)null)
-        {
-        }
+            : this(
+                CompositionErrorId.Unknown,
+                message,
+                (ICompositionElement?)null,
+                (Exception?)null
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionError"/> class
@@ -50,9 +53,7 @@ namespace System.ComponentModel.Composition
         ///     <see cref="Description"/> property to an empty string ("").
         /// </param>
         public CompositionError(string? message, ICompositionElement? element)
-            : this(CompositionErrorId.Unknown, message, element, (Exception?)null)
-        {
-        }
+            : this(CompositionErrorId.Unknown, message, element, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionError"/> class
@@ -70,9 +71,7 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="CompositionError.Exception"/> property to <see langword="null"/>.
         /// </param>
         public CompositionError(string? message, Exception? exception)
-            : this(CompositionErrorId.Unknown, message, (ICompositionElement?)null, exception)
-        {
-        }
+            : this(CompositionErrorId.Unknown, message, (ICompositionElement?)null, exception) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionError"/> class
@@ -96,11 +95,14 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="CompositionError.Exception"/> property to <see langword="null"/>.
         /// </param>
         public CompositionError(string? message, ICompositionElement? element, Exception? exception)
-            : this(CompositionErrorId.Unknown, message, element, exception)
-        {
-        }
+            : this(CompositionErrorId.Unknown, message, element, exception) { }
 
-        internal CompositionError(CompositionErrorId id, string? description, ICompositionElement? element, Exception? exception)
+        internal CompositionError(
+            CompositionErrorId id,
+            string? description,
+            ICompositionElement? element,
+            Exception? exception
+        )
         {
             _id = id;
             _description = description ?? string.Empty;
@@ -165,19 +167,39 @@ namespace System.ComponentModel.Composition
             return Description;
         }
 
-        internal static CompositionError Create(CompositionErrorId id, string format, params object?[] parameters)
+        internal static CompositionError Create(
+            CompositionErrorId id,
+            string format,
+            params object?[] parameters
+        )
         {
             return Create(id, (ICompositionElement?)null, (Exception?)null, format, parameters);
         }
 
-        internal static CompositionError Create(CompositionErrorId id, ICompositionElement element, string format, params object?[] parameters)
+        internal static CompositionError Create(
+            CompositionErrorId id,
+            ICompositionElement element,
+            string format,
+            params object?[] parameters
+        )
         {
             return Create(id, element, (Exception?)null, format, parameters);
         }
 
-        internal static CompositionError Create(CompositionErrorId id, ICompositionElement? element, Exception? exception, string format, params object?[] parameters)
+        internal static CompositionError Create(
+            CompositionErrorId id,
+            ICompositionElement? element,
+            Exception? exception,
+            string format,
+            params object?[] parameters
+        )
         {
-            return new CompositionError(id, string.Format(CultureInfo.CurrentCulture, format, parameters), element, exception);
+            return new CompositionError(
+                id,
+                string.Format(CultureInfo.CurrentCulture, format, parameters),
+                element,
+                exception
+            );
         }
     }
 }

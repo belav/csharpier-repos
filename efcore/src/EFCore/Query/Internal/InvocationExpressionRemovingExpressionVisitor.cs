@@ -30,9 +30,11 @@ public class InvocationExpressionRemovingExpressionVisitor : ExpressionVisitor
 
     private static Expression StripTrivialConversions(Expression expression)
     {
-        while (expression is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
-               && expression.Type == unaryExpression.Operand.Type
-               && unaryExpression.Method == null)
+        while (
+            expression is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
+            && expression.Type == unaryExpression.Operand.Type
+            && unaryExpression.Method == null
+        )
         {
             expression = unaryExpression.Operand;
         }
@@ -40,8 +42,12 @@ public class InvocationExpressionRemovingExpressionVisitor : ExpressionVisitor
         return expression;
     }
 
-    private static Expression InlineLambdaExpression(LambdaExpression lambdaExpression, ReadOnlyCollection<Expression> arguments)
-        => new ReplacingExpressionVisitor(
-                lambdaExpression.Parameters.ToArray<Expression>(), arguments.ToArray())
-            .Visit(lambdaExpression.Body);
+    private static Expression InlineLambdaExpression(
+        LambdaExpression lambdaExpression,
+        ReadOnlyCollection<Expression> arguments
+    ) =>
+        new ReplacingExpressionVisitor(
+            lambdaExpression.Parameters.ToArray<Expression>(),
+            arguments.ToArray()
+        ).Visit(lambdaExpression.Body);
 }

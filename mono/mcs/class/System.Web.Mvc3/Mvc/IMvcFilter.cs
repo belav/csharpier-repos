@@ -1,5 +1,7 @@
-﻿namespace System.Web.Mvc {
-    public interface IMvcFilter {
+﻿namespace System.Web.Mvc
+{
+    public interface IMvcFilter
+    {
         bool AllowMultiple { get; }
         int Order { get; }
     }

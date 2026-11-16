@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;
@@ -52,7 +50,6 @@ public class DblArray3
         }
     }
 
-
     public static void f1c()
     {
         double[,] arr = new double[5, 5];
@@ -72,7 +69,6 @@ public class DblArray3
             throw new Exception();
         }
     }
-
 
     public static void f2a()
     {

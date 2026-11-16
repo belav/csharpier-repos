@@ -16,25 +16,16 @@ namespace Internal.TypeSystem.Interop
             OwningType = owningType;
         }
 
-        public override TypeDesc OwningType
-        {
-            get;
-        }
+        public override TypeDesc OwningType { get; }
 
         public override string Name
         {
-            get
-            {
-                return ".ctor";
-            }
+            get { return ".ctor"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return ".ctor";
-            }
+            get { return ".ctor"; }
         }
 
         private MethodSignature _signature;
@@ -42,22 +33,19 @@ namespace Internal.TypeSystem.Interop
         {
             get
             {
-                _signature ??= new MethodSignature(MethodSignatureFlags.None,
-                        genericParameterCount: 0,
-                        returnType: Context.GetWellKnownType(WellKnownType.Void),
-                        parameters: new TypeDesc[] {
-                        Context.GetWellKnownType(WellKnownType.IntPtr)
-                        });
+                _signature ??= new MethodSignature(
+                    MethodSignatureFlags.None,
+                    genericParameterCount: 0,
+                    returnType: Context.GetWellKnownType(WellKnownType.Void),
+                    parameters: new TypeDesc[] { Context.GetWellKnownType(WellKnownType.IntPtr) }
+                );
                 return _signature;
             }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return OwningType.Context;
-            }
+            get { return OwningType.Context; }
         }
 
         public override MethodIL EmitIL()
@@ -66,8 +54,14 @@ namespace Internal.TypeSystem.Interop
             ILCodeStream codeStream = emitter.NewCodeStream();
             codeStream.EmitLdArg(0);
             codeStream.EmitLdArg(1);
-            codeStream.Emit(ILOpcode.call, emitter.NewToken(
-                InteropTypes.GetNativeFunctionPointerWrapper(Context).GetMethod(".ctor", Signature)));
+            codeStream.Emit(
+                ILOpcode.call,
+                emitter.NewToken(
+                    InteropTypes
+                        .GetNativeFunctionPointerWrapper(Context)
+                        .GetMethod(".ctor", Signature)
+                )
+            );
             codeStream.Emit(ILOpcode.ret);
             return emitter.Link(this);
         }

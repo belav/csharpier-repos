@@ -1,19 +1,19 @@
 using System;
-using System.Xml;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design.Serialization;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
 using System.Workflow.ComponentModel.Serialization;
 using System.Workflow.Runtime;
-using System.Globalization;
+using System.Xml;
 
 namespace System.Workflow.Activities
 {
@@ -29,7 +29,11 @@ namespace System.Workflow.Activities
             return (destinationType == typeof(string));
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             object convertedValue = null;
             string correlatorName = value as String;
@@ -52,7 +56,12 @@ namespace System.Workflow.Activities
             return convertedValue;
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             object convertedValue = null;
             CorrelationToken correlator = value as CorrelationToken;
@@ -69,10 +78,13 @@ namespace System.Workflow.Activities
             {
                 foreach (Activity preceedingActivity in GetPreceedingActivities(activity))
                 {
-                    PropertyDescriptor correlatorProperty = TypeDescriptor.GetProperties(preceedingActivity)["CorrelationToken"] as PropertyDescriptor;
+                    PropertyDescriptor correlatorProperty =
+                        TypeDescriptor.GetProperties(preceedingActivity)["CorrelationToken"]
+                        as PropertyDescriptor;
                     if (correlatorProperty != null)
                     {
-                        CorrelationToken correlator = correlatorProperty.GetValue(preceedingActivity) as CorrelationToken;
+                        CorrelationToken correlator =
+                            correlatorProperty.GetValue(preceedingActivity) as CorrelationToken;
                         if (correlator != null && !values.Contains(correlator))
                             values.Add(correlator);
                     }
@@ -91,14 +103,24 @@ namespace System.Workflow.Activities
             return false;
         }
 
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
-            PropertyDescriptorCollection properties = base.GetProperties(context, value, attributes);
+            PropertyDescriptorCollection properties = base.GetProperties(
+                context,
+                value,
+                attributes
+            );
             ArrayList props = new ArrayList(properties);
-            return new PropertyDescriptorCollection((PropertyDescriptor[])props.ToArray(typeof(PropertyDescriptor)));
+            return new PropertyDescriptorCollection(
+                (PropertyDescriptor[])props.ToArray(typeof(PropertyDescriptor))
+            );
         }
 
-        // 
+        //
         private IEnumerable GetPreceedingActivities(Activity startActivity)
         {
             Activity currentActivity = null;
@@ -118,7 +140,11 @@ namespace System.Workflow.Activities
                         {
                             if (siblingActivity is CompositeActivity)
                             {
-                                foreach (Activity containedActivity in GetContainedActivities((CompositeActivity)siblingActivity))
+                                foreach (
+                                    Activity containedActivity in GetContainedActivities(
+                                        (CompositeActivity)siblingActivity
+                                    )
+                                )
                                     yield return containedActivity;
                             }
                             else
@@ -142,7 +168,11 @@ namespace System.Workflow.Activities
             {
                 if (containedActivity is CompositeActivity)
                 {
-                    foreach (Activity nestedActivity in GetContainedActivities((CompositeActivity)containedActivity))
+                    foreach (
+                        Activity nestedActivity in GetContainedActivities(
+                            (CompositeActivity)containedActivity
+                        )
+                    )
                     {
                         if (nestedActivity.Enabled)
                             yield return nestedActivity;

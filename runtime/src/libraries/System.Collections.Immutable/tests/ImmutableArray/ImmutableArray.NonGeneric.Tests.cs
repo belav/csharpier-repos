@@ -13,17 +13,27 @@ namespace System.Collections.Immutable.Tests
         protected override bool ExpectedIsSynchronized => true;
         protected override bool ICollection_NonGeneric_SupportsSyncRoot => false;
 
-        protected override Type IList_NonGeneric_Item_InvalidIndex_ThrowType => typeof(IndexOutOfRangeException);
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override Type IList_NonGeneric_Item_InvalidIndex_ThrowType =>
+            typeof(IndexOutOfRangeException);
+
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
+
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
-        protected override Type ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowType => typeof(RankException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowType =>
+            typeof(RankException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
+
         protected override IList NonGenericIListFactory(int count)
         {
             object[] items = new object[count];

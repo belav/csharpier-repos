@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 {
@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         string? textValue,
         string? interpolationExpression,
         string? interpolationAlignmentClause,
-        string? interpolationFormatClause)
+        string? interpolationFormatClause
+    )
     {
         public StringCopyPasteContentKind Kind { get; } = kind;
 
@@ -56,10 +57,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         [MemberNotNullWhen(true, nameof(InterpolationExpression))]
         public bool IsInterpolation => Kind == StringCopyPasteContentKind.Interpolation;
 
-        public static StringCopyPasteContent ForText(string text)
-            => new(StringCopyPasteContentKind.Text, text, null, null, null);
+        public static StringCopyPasteContent ForText(string text) =>
+            new(StringCopyPasteContentKind.Text, text, null, null, null);
 
-        public static StringCopyPasteContent ForInterpolation(string expression, string? alignmentClause, string? formatClause)
-            => new(StringCopyPasteContentKind.Interpolation, null, expression, alignmentClause, formatClause);
+        public static StringCopyPasteContent ForInterpolation(
+            string expression,
+            string? alignmentClause,
+            string? formatClause
+        ) =>
+            new(
+                StringCopyPasteContentKind.Interpolation,
+                null,
+                expression,
+                alignmentClause,
+                formatClause
+            );
     }
 }

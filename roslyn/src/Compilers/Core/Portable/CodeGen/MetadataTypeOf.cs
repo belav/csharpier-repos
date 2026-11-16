@@ -23,10 +23,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// </summary>
         public Cci.ITypeReference TypeToGet
         {
-            get
-            {
-                return _typeToGet;
-            }
+            get { return _typeToGet; }
         }
 
         void Cci.IMetadataExpression.Dispatch(Cci.MetadataVisitor visitor)

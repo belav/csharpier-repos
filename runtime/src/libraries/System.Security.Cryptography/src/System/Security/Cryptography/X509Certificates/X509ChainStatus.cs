@@ -20,10 +20,7 @@ namespace System.Security.Cryptography.X509Certificates
                     return string.Empty;
                 return _statusInformation;
             }
-            set
-            {
-                _statusInformation = value;
-            }
+            set { _statusInformation = value; }
         }
 
         private string? _statusInformation;

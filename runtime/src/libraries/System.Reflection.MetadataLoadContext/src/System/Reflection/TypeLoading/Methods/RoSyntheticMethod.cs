@@ -13,12 +13,18 @@ namespace System.Reflection.TypeLoading
     internal sealed partial class RoSyntheticMethod : RoMethod
     {
         private readonly RoType _declaringType;
-        private readonly int _uniquifier;   // Since all array methods have the same "MetadataToken", this serves as a distinguisher so they don't all compare Equal
+        private readonly int _uniquifier; // Since all array methods have the same "MetadataToken", this serves as a distinguisher so they don't all compare Equal
         private readonly string _name;
         private readonly RoType _returnType;
         private readonly RoType[] _parameterTypes;
 
-        internal RoSyntheticMethod(RoType declaringType, int uniquifier, string name, RoType returnType, params RoType[] parameterTypes)
+        internal RoSyntheticMethod(
+            RoType declaringType,
+            int uniquifier,
+            string name,
+            RoType returnType,
+            params RoType[] parameterTypes
+        )
             : base(declaringType)
         {
             Debug.Assert(declaringType != null);
@@ -30,14 +36,23 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType GetRoDeclaringType() => _declaringType;
+
         internal sealed override RoModule GetRoModule() => GetRoDeclaringType().GetRoModule();
 
         protected sealed override string ComputeName() => _name;
+
         public sealed override int MetadataToken => 0x06000000;
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
-        protected sealed override MethodAttributes ComputeAttributes() => MethodAttributes.PrivateScope | MethodAttributes.Public;
-        protected sealed override CallingConventions ComputeCallingConvention() => CallingConventions.Standard | CallingConventions.HasThis;
-        protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() => MethodImplAttributes.IL;
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
+
+        protected sealed override MethodAttributes ComputeAttributes() =>
+            MethodAttributes.PrivateScope | MethodAttributes.Public;
+
+        protected sealed override CallingConventions ComputeCallingConvention() =>
+            CallingConventions.Standard | CallingConventions.HasThis;
+
+        protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
+            MethodImplAttributes.IL;
 
         protected sealed override MethodSig<RoParameter> ComputeMethodSig()
         {
@@ -46,7 +61,11 @@ namespace System.Reflection.TypeLoading
             sig[-1] = new RoThinMethodParameter(this, -1, _returnType);
             for (int position = 0; position < parameterCount; position++)
             {
-                sig[position] = new RoThinMethodParameter(this, position, _parameterTypes[position]);
+                sig[position] = new RoThinMethodParameter(
+                    this,
+                    position,
+                    _parameterTypes[position]
+                );
             }
             return sig;
         }
@@ -79,15 +98,26 @@ namespace System.Reflection.TypeLoading
             return true;
         }
 
-        public sealed override int GetHashCode() => DeclaringType.GetHashCode() ^ _uniquifier.GetHashCode();
+        public sealed override int GetHashCode() =>
+            DeclaringType.GetHashCode() ^ _uniquifier.GetHashCode();
 
         public sealed override bool IsGenericMethodDefinition => false;
         public sealed override bool IsConstructedGenericMethod => false;
-        public sealed override MethodInfo GetGenericMethodDefinition() => throw new InvalidOperationException();
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
-        public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) => throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
-        protected sealed override RoType[] ComputeGenericArgumentsOrParameters() => Array.Empty<RoType>();
+
+        public sealed override MethodInfo GetGenericMethodDefinition() =>
+            throw new InvalidOperationException();
+
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
+        public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) =>
+            throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
+
+        protected sealed override RoType[] ComputeGenericArgumentsOrParameters() =>
+            Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
 
         public sealed override TypeContext TypeContext => default;

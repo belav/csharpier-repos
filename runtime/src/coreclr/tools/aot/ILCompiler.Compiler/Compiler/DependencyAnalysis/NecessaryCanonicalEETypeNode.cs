@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
@@ -13,7 +12,8 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public sealed class NecessaryCanonicalEETypeNode : EETypeNode
     {
-        public NecessaryCanonicalEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public NecessaryCanonicalEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(!type.IsCanonicalDefinitionType(CanonicalFormKind.Any));
             Debug.Assert(type.IsCanonicalSubtype(CanonicalFormKind.Any));
@@ -23,10 +23,13 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override ISymbolNode GetBaseTypeNode(NodeFactory factory)
         {
-            return _type.BaseType != null ? factory.NecessaryTypeSymbol(_type.BaseType.NormalizeInstantiation()) : null;
+            return _type.BaseType != null
+                ? factory.NecessaryTypeSymbol(_type.BaseType.NormalizeInstantiation())
+                : null;
         }
 
-        protected override FrozenRuntimeTypeNode GetFrozenRuntimeTypeNode(NodeFactory factory) => throw new NotSupportedException();
+        protected override FrozenRuntimeTypeNode GetFrozenRuntimeTypeNode(NodeFactory factory) =>
+            throw new NotSupportedException();
 
         public override int ClassCode => 1505000724;
     }

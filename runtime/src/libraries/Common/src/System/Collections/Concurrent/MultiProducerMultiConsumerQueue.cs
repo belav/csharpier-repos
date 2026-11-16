@@ -11,16 +11,24 @@ namespace System.Collections.Concurrent
     /// </summary>
     /// <typeparam name="T">Specifies the type of data contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class MultiProducerMultiConsumerQueue<T> : ConcurrentQueue<T>, IProducerConsumerQueue<T>
+    internal sealed class MultiProducerMultiConsumerQueue<T>
+        : ConcurrentQueue<T>,
+            IProducerConsumerQueue<T>
     {
         /// <summary>Enqueues an item into the queue.</summary>
         /// <param name="item">The item to enqueue.</param>
-        void IProducerConsumerQueue<T>.Enqueue(T item) { Enqueue(item); }
+        void IProducerConsumerQueue<T>.Enqueue(T item)
+        {
+            Enqueue(item);
+        }
 
         /// <summary>Attempts to dequeue an item from the queue.</summary>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
-        bool IProducerConsumerQueue<T>.TryDequeue([MaybeNullWhen(false)] out T result) { return TryDequeue(out result); }
+        bool IProducerConsumerQueue<T>.TryDequeue([MaybeNullWhen(false)] out T result)
+        {
+            return TryDequeue(out result);
+        }
 
         /// <summary>Gets whether the collection is currently empty.</summary>
         bool IProducerConsumerQueue<T>.IsEmpty => IsEmpty;

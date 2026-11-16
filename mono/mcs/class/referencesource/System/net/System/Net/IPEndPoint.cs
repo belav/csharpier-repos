@@ -4,9 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-    using System.Net.Sockets;
+namespace System.Net
+{
     using System.Globalization;
+    using System.Net.Sockets;
 
     /// <devdoc>
     ///    <para>
@@ -14,7 +15,8 @@ namespace System.Net {
     ///    </para>
     /// </devdoc>
     [Serializable]
-    public class IPEndPoint : EndPoint {
+    public class IPEndPoint : EndPoint
+    {
         /// <devdoc>
         ///    <para>
         ///       Specifies the minimum acceptable value for the <see cref='System.Net.IPEndPoint.Port'/>
@@ -22,6 +24,7 @@ namespace System.Net {
         ///    </para>
         /// </devdoc>
         public const int MinPort = 0x00000000;
+
         /// <devdoc>
         ///    <para>
         ///       Specifies the maximum acceptable value for the <see cref='System.Net.IPEndPoint.Port'/>
@@ -35,15 +38,16 @@ namespace System.Net {
 
         internal const int AnyPort = MinPort;
 
-        internal static IPEndPoint Any     = new IPEndPoint(IPAddress.Any, AnyPort);
-        internal static IPEndPoint IPv6Any = new IPEndPoint(IPAddress.IPv6Any,AnyPort);
-
+        internal static IPEndPoint Any = new IPEndPoint(IPAddress.Any, AnyPort);
+        internal static IPEndPoint IPv6Any = new IPEndPoint(IPAddress.IPv6Any, AnyPort);
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override AddressFamily AddressFamily {
-            get {
+        public override AddressFamily AddressFamily
+        {
+            get
+            {
                 //
                 // IPv6 Changes: Always delegate this to the address we are
                 //               wrapping.
@@ -56,8 +60,10 @@ namespace System.Net {
         ///    <para>Creates a new instance of the IPEndPoint class with the specified address and
         ///       port.</para>
         /// </devdoc>
-        public IPEndPoint(long address, int port) {
-            if (!ValidationHelper.ValidateTcpPort(port)) {
+        public IPEndPoint(long address, int port)
+        {
+            if (!ValidationHelper.ValidateTcpPort(port))
+            {
                 throw new ArgumentOutOfRangeException("port");
             }
             m_Port = port;
@@ -67,11 +73,14 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>Creates a new instance of the IPEndPoint class with the specified address and port.</para>
         /// </devdoc>
-        public IPEndPoint(IPAddress address, int port) {
-            if (address==null) {
+        public IPEndPoint(IPAddress address, int port)
+        {
+            if (address == null)
+            {
                 throw new ArgumentNullException("address");
             }
-            if (!ValidationHelper.ValidateTcpPort(port)) {
+            if (!ValidationHelper.ValidateTcpPort(port))
+            {
                 throw new ArgumentOutOfRangeException("port");
             }
             m_Port = port;
@@ -83,13 +92,10 @@ namespace System.Net {
         ///       Gets or sets the IP address.
         ///    </para>
         /// </devdoc>
-        public IPAddress Address {
-            get {
-                return m_Address;
-            }
-            set {
-                m_Address = value;
-            }
+        public IPAddress Address
+        {
+            get { return m_Address; }
+            set { m_Address = value; }
         }
 
         /// <devdoc>
@@ -97,35 +103,41 @@ namespace System.Net {
         ///       Gets or sets the port.
         ///    </para>
         /// </devdoc>
-        public int Port {
-            get {
-                return m_Port;
-            }
-            set {
-                if (!ValidationHelper.ValidateTcpPort(value)) {
+        public int Port
+        {
+            get { return m_Port; }
+            set
+            {
+                if (!ValidationHelper.ValidateTcpPort(value))
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 m_Port = value;
             }
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string ToString() {
+        public override string ToString()
+        {
             string format;
             if (m_Address.AddressFamily == AddressFamily.InterNetworkV6)
                 format = "[{0}]:{1}";
             else
                 format = "{0}:{1}";
-            return String.Format(format, m_Address.ToString(), Port.ToString(NumberFormatInfo.InvariantInfo));
+            return String.Format(
+                format,
+                m_Address.ToString(),
+                Port.ToString(NumberFormatInfo.InvariantInfo)
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override SocketAddress Serialize() {
+        public override SocketAddress Serialize()
+        {
             // Let SocketAddress do the bulk of the work
             return new SocketAddress(Address, Port);
         }
@@ -133,31 +145,52 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override EndPoint Create(SocketAddress socketAddress) {
+        public override EndPoint Create(SocketAddress socketAddress)
+        {
             //
             // validate SocketAddress
             //
-            if (socketAddress.Family != this.AddressFamily) {
-                throw new ArgumentException(SR.GetString(SR.net_InvalidAddressFamily, socketAddress.Family.ToString(), this.GetType().FullName, this.AddressFamily.ToString()), "socketAddress");
+            if (socketAddress.Family != this.AddressFamily)
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.net_InvalidAddressFamily,
+                        socketAddress.Family.ToString(),
+                        this.GetType().FullName,
+                        this.AddressFamily.ToString()
+                    ),
+                    "socketAddress"
+                );
             }
-            if (socketAddress.Size<8) {
-                throw new ArgumentException(SR.GetString(SR.net_InvalidSocketAddressSize, socketAddress.GetType().FullName, this.GetType().FullName), "socketAddress");
+            if (socketAddress.Size < 8)
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.net_InvalidSocketAddressSize,
+                        socketAddress.GetType().FullName,
+                        this.GetType().FullName
+                    ),
+                    "socketAddress"
+                );
             }
 
             return socketAddress.GetIPEndPoint();
         }
 
-
         //UEUE
-        public override bool Equals(object comparand) {
-            if (!(comparand is IPEndPoint)) {
+        public override bool Equals(object comparand)
+        {
+            if (!(comparand is IPEndPoint))
+            {
                 return false;
             }
-            return ((IPEndPoint)comparand).m_Address.Equals(m_Address) && ((IPEndPoint)comparand).m_Port==m_Port;
+            return ((IPEndPoint)comparand).m_Address.Equals(m_Address)
+                && ((IPEndPoint)comparand).m_Port == m_Port;
         }
 
         //UEUE
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return m_Address.GetHashCode() ^ m_Port;
         }
 

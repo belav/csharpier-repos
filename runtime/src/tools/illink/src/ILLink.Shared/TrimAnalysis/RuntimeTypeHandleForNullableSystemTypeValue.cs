@@ -10,24 +10,28 @@ using ILLink.Shared.TypeSystemProxy;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-	/// <summary>
-	/// This represents a type handle Nullable<T> where T is a known SystemTypeValue.
-	/// It is necessary to track the underlying type to propagate DynamicallyAccessedMembers annotations to the underlying type when applied to a Nullable.
-	/// </summary>
-	internal sealed record RuntimeTypeHandleForNullableSystemTypeValue : SingleValue
-	{
-		public RuntimeTypeHandleForNullableSystemTypeValue (in TypeProxy nullableType, in SystemTypeValue underlyingTypeValue)
-		{
-			Debug.Assert (nullableType.IsTypeOf (WellKnownType.System_Nullable_T));
-			UnderlyingTypeValue = underlyingTypeValue;
-			NullableType = nullableType;
-		}
-		public readonly TypeProxy NullableType;
+    /// <summary>
+    /// This represents a type handle Nullable<T> where T is a known SystemTypeValue.
+    /// It is necessary to track the underlying type to propagate DynamicallyAccessedMembers annotations to the underlying type when applied to a Nullable.
+    /// </summary>
+    internal sealed record RuntimeTypeHandleForNullableSystemTypeValue : SingleValue
+    {
+        public RuntimeTypeHandleForNullableSystemTypeValue(
+            in TypeProxy nullableType,
+            in SystemTypeValue underlyingTypeValue
+        )
+        {
+            Debug.Assert(nullableType.IsTypeOf(WellKnownType.System_Nullable_T));
+            UnderlyingTypeValue = underlyingTypeValue;
+            NullableType = nullableType;
+        }
 
-		public readonly SystemTypeValue UnderlyingTypeValue;
+        public readonly TypeProxy NullableType;
 
-		public override SingleValue DeepCopy () => this; // This value is immutable
+        public readonly SystemTypeValue UnderlyingTypeValue;
 
-		public override string ToString () => this.ValueToString (UnderlyingTypeValue, NullableType);
-	}
+        public override SingleValue DeepCopy() => this; // This value is immutable
+
+        public override string ToString() => this.ValueToString(UnderlyingTypeValue, NullableType);
+    }
 }

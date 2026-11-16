@@ -28,14 +28,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         public CSharpCodeModelServiceFactory(
             EditorOptionsService editorOptionsService,
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _editorOptionsService = editorOptionsService;
             _refactorNotifyServices = refactorNotifyServices;
             _threadingContext = threadingContext;
         }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => new CSharpCodeModelService(provider, _editorOptionsService, _refactorNotifyServices, _threadingContext);
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            new CSharpCodeModelService(
+                provider,
+                _editorOptionsService,
+                _refactorNotifyServices,
+                _threadingContext
+            );
     }
 }

@@ -14,12 +14,15 @@ namespace System.Activities.Statements
     using System.Globalization;
     using System.Linq;
     using System.Runtime.Serialization;
-    
+
     /// <summary>
     /// StateMachineEventManager is used to manage triggered events globally.
     /// </summary>
-    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-        Justification = "This type is actually used in LINQ expression and FxCop didn't detect that.")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1812:AvoidUninstantiatedInternalClasses",
+        Justification = "This type is actually used in LINQ expression and FxCop didn't detect that."
+    )]
     [DataContract]
     class StateMachineEventManager
     {
@@ -28,10 +31,10 @@ namespace System.Activities.Statements
 
         // queue is used to store triggered events
         Queue<TriggerCompletedEvent> queue;
-        
+
         // If a state is running, its condition evaluation bookmark will be added in to activityBookmarks.
         // If a state is completed, its bookmark will be removed.
-        Collection<Bookmark> activeBookmarks;     
+        Collection<Bookmark> activeBookmarks;
 
         /// <summary>
         /// Constructor to do initialization.
@@ -46,41 +49,26 @@ namespace System.Activities.Statements
         /// Gets or sets the trigger index of current being processed event.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public TriggerCompletedEvent CurrentBeingProcessedEvent
-        {
-            get;
-            set;
-        }
+        public TriggerCompletedEvent CurrentBeingProcessedEvent { get; set; }
 
         /// <summary>
         /// Gets or sets the CurrentConditionIndex denotes the index of condition is being evaluated.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public int CurrentConditionIndex
-        {
-            get;
-            set;
-        }
+        public int CurrentConditionIndex { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether StateMachine is on the way of transition.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public bool OnTransition
-        {
-            get;
-            set;
-        }
+        public bool OnTransition { get; set; }
 
         /// <summary>
         /// Gets the EventManager queue.
         /// </summary>
         public IEnumerable<TriggerCompletedEvent> Queue
         {
-            get
-            {
-                return this.queue;
-            }
+            get { return this.queue; }
         }
 
         /// <summary>
@@ -90,7 +78,9 @@ namespace System.Activities.Statements
         {
             get
             {
-                return this.CurrentBeingProcessedEvent == null && !this.OnTransition && this.queue.Count == 0;
+                return this.CurrentBeingProcessedEvent == null
+                    && !this.OnTransition
+                    && this.queue.Count == 0;
             }
         }
 
@@ -143,7 +133,8 @@ namespace System.Activities.Statements
         /// <returns>True is the bookmark references to the event being processed.</returns>
         public bool IsReferredByBeingProcessedEvent(Bookmark bookmark)
         {
-            return this.CurrentBeingProcessedEvent != null && this.CurrentBeingProcessedEvent.Bookmark == bookmark;
+            return this.CurrentBeingProcessedEvent != null
+                && this.CurrentBeingProcessedEvent.Bookmark == bookmark;
         }
 
         /// <summary>
@@ -151,7 +142,10 @@ namespace System.Activities.Statements
         /// </summary>
         /// <param name="completedEvent">TriggerCompletedEvent reference.</param>
         /// <param name="canBeProcessedImmediately">True if the Condition can be evaluated.</param>
-        public void RegisterCompletedEvent(TriggerCompletedEvent completedEvent, out bool canBeProcessedImmediately)
+        public void RegisterCompletedEvent(
+            TriggerCompletedEvent completedEvent,
+            out bool canBeProcessedImmediately
+        )
         {
             canBeProcessedImmediately = this.CanProcessEventImmediately;
             this.queue.Enqueue(completedEvent);

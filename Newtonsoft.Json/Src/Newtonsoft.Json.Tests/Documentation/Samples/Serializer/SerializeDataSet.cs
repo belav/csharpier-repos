@@ -84,7 +84,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Table1"": [
     {
       ""id"": 0,
@@ -95,7 +96,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
       ""item"": ""item 1""
     }
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

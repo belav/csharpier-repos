@@ -24,7 +24,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(bool value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            bool value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             char symbol = FormattingHelpers.GetSymbolOrDefault(format, 'G');
 
@@ -77,10 +82,10 @@ namespace System.Buffers.Text
                 return true;
             }
 
-        BadFormat:
+            BadFormat:
             ThrowHelper.ThrowFormatException_BadFormatSpecifier();
 
-        BufferTooSmall:
+            BufferTooSmall:
             bytesWritten = 0;
             return false;
         }

@@ -35,9 +35,7 @@ namespace Mono
             // MonoClass* interfaces [];
         }
 
-        internal struct MonoClass
-        {
-        }
+        internal struct MonoClass { }
 
         // class-internals.h MonoGenericParamInfo
         internal unsafe struct GenericParamInfo
@@ -60,9 +58,9 @@ namespace Mono
     //Maps to metadata-internals.h:: MonoAssemblyName
     internal unsafe struct MonoAssemblyName
     {
-        #pragma warning disable CA1823 // TODO: https://github.com/dotnet/roslyn/issues/37593
+#pragma warning disable CA1823 // TODO: https://github.com/dotnet/roslyn/issues/37593
         private const int MONO_PUBLIC_KEY_TOKEN_LENGTH = 17;
-        #pragma warning restore CA1823
+#pragma warning restore CA1823
 
         internal IntPtr name;
         internal IntPtr culture;
@@ -72,16 +70,18 @@ namespace Mono
         internal uint hash_alg;
         internal uint hash_len;
         internal uint flags;
-        internal int major, minor, build, revision, arch;
+        internal int major,
+            minor,
+            build,
+            revision,
+            arch;
     }
 
     // Used to implement generic sharing
     // See mini-generic-sharing.c
     // We use these instead of the normal ValueTuple types to avoid linking in the
     // c# methods belonging to those types
-    internal struct ValueTuple
-    {
-    }
+    internal struct ValueTuple { }
 
     internal struct ValueTuple<T1>
     {
@@ -139,35 +139,19 @@ namespace Mono
         public T7 Item7;
     }
 
-    internal enum I8Enum : byte
-    {
-    }
+    internal enum I8Enum : byte { }
 
-    internal enum UI8Enum : sbyte
-    {
-    }
+    internal enum UI8Enum : sbyte { }
 
-    internal enum I16Enum : short
-    {
-    }
+    internal enum I16Enum : short { }
 
-    internal enum UI16Enum : ushort
-    {
-    }
+    internal enum UI16Enum : ushort { }
 
-    internal enum I32Enum : int
-    {
-    }
+    internal enum I32Enum : int { }
 
-    internal enum UI32Enum : uint
-    {
-    }
+    internal enum UI32Enum : uint { }
 
-    internal enum I64Enum : long
-    {
-    }
+    internal enum I64Enum : long { }
 
-    internal enum UI64Enum : ulong
-    {
-    }
+    internal enum UI64Enum : ulong { }
 }

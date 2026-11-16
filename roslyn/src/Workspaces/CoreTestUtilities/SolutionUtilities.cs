@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     public class SolutionUtilities
     {
-        public static ProjectChanges GetSingleChangedProjectChanges(Solution oldSolution, Solution newSolution)
+        public static ProjectChanges GetSingleChangedProjectChanges(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var solutionDifferences = newSolution.GetChanges(oldSolution);
             var projectChanges = solutionDifferences.GetProjectChanges();
@@ -30,10 +33,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return newProject.GetChanges(oldProject);
         }
 
-        private static IEnumerable<ProjectChanges> GetChangedProjectChanges(Solution oldSolution, Solution newSolution)
+        private static IEnumerable<ProjectChanges> GetChangedProjectChanges(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var solutionDifferences = newSolution.GetChanges(oldSolution);
-            return solutionDifferences.GetProjectChanges().Select(n => n.NewProject.GetChanges(n.OldProject));
+            return solutionDifferences
+                .GetProjectChanges()
+                .Select(n => n.NewProject.GetChanges(n.OldProject));
         }
 
         public static Document GetSingleChangedDocument(Solution oldSolution, Solution newSolution)
@@ -44,7 +52,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return newSolution.GetDocument(documentId)!;
         }
 
-        public static TextDocument GetSingleChangedAdditionalDocument(Solution oldSolution, Solution newSolution)
+        public static TextDocument GetSingleChangedAdditionalDocument(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var projectDifferences = GetSingleChangedProjectChanges(oldSolution, newSolution);
             var documentId = projectDifferences.GetChangedAdditionalDocuments().Single();
@@ -52,7 +63,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return newSolution.GetAdditionalDocument(documentId)!;
         }
 
-        public static IEnumerable<DocumentId> GetChangedDocuments(Solution oldSolution, Solution newSolution)
+        public static IEnumerable<DocumentId> GetChangedDocuments(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var changedDocuments = new List<DocumentId>();
             var projectsDifference = GetChangedProjectChanges(oldSolution, newSolution);
@@ -72,19 +86,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return newSolution.GetDocument(documentId)!;
         }
 
-        public static IEnumerable<DocumentId> GetTextChangedDocuments(Solution oldSolution, Solution newSolution)
+        public static IEnumerable<DocumentId> GetTextChangedDocuments(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var changedDocuments = new List<DocumentId>();
             var projectsDifference = GetChangedProjectChanges(oldSolution, newSolution);
             foreach (var projectDifference in projectsDifference)
             {
-                changedDocuments.AddRange(projectDifference.GetChangedDocuments(onlyGetDocumentsWithTextChanges: true));
+                changedDocuments.AddRange(
+                    projectDifference.GetChangedDocuments(onlyGetDocumentsWithTextChanges: true)
+                );
             }
 
             return changedDocuments;
         }
 
-        public static IEnumerable<DocumentId> GetAddedDocuments(Solution oldSolution, Solution newSolution)
+        public static IEnumerable<DocumentId> GetAddedDocuments(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var addedDocuments = new List<DocumentId>();
             var projectsDifference = GetChangedProjectChanges(oldSolution, newSolution);
@@ -96,22 +118,36 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return addedDocuments;
         }
 
-        public static Tuple<Project, ProjectReference> GetSingleAddedProjectReference(Solution oldSolution, Solution newSolution)
+        public static Tuple<Project, ProjectReference> GetSingleAddedProjectReference(
+            Solution oldSolution,
+            Solution newSolution
+        )
         {
             var projectChanges = GetSingleChangedProjectChanges(oldSolution, newSolution);
-            return Tuple.Create(projectChanges.NewProject, projectChanges.GetAddedProjectReferences().Single());
+            return Tuple.Create(
+                projectChanges.NewProject,
+                projectChanges.GetAddedProjectReferences().Single()
+            );
         }
 
-        public static Project AddEmptyProject(Solution solution, string languageName = LanguageNames.CSharp, string name = "TestProject")
+        public static Project AddEmptyProject(
+            Solution solution,
+            string languageName = LanguageNames.CSharp,
+            string name = "TestProject"
+        )
         {
             var id = ProjectId.CreateNewId();
-            return solution.AddProject(
-                ProjectInfo.Create(
-                    id,
-                    VersionStamp.Default,
-                    name: name,
-                    assemblyName: name,
-                    language: languageName)).GetRequiredProject(id);
+            return solution
+                .AddProject(
+                    ProjectInfo.Create(
+                        id,
+                        VersionStamp.Default,
+                        name: name,
+                        assemblyName: name,
+                        language: languageName
+                    )
+                )
+                .GetRequiredProject(id);
         }
     }
 }

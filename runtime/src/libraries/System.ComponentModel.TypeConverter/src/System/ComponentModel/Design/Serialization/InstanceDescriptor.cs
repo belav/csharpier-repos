@@ -16,9 +16,8 @@ namespace System.ComponentModel.Design.Serialization
         /// <summary>
         /// Creates a new InstanceDescriptor.
         /// </summary>
-        public InstanceDescriptor(MemberInfo? member, ICollection? arguments) : this(member, arguments, true)
-        {
-        }
+        public InstanceDescriptor(MemberInfo? member, ICollection? arguments)
+            : this(member, arguments, true) { }
 
         /// <summary>
         /// Creates a new InstanceDescriptor.

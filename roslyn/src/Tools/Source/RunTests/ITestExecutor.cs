@@ -16,7 +16,14 @@ namespace RunTests
         internal bool Retry { get; }
         internal bool CollectDumps { get; }
 
-        internal TestExecutionOptions(string dotnetFilePath, string testResultsDirectory, string? testFilter, bool includeHtml, bool retry, bool collectDumps)
+        internal TestExecutionOptions(
+            string dotnetFilePath,
+            string testResultsDirectory,
+            string? testFilter,
+            bool includeHtml,
+            bool retry,
+            bool collectDumps
+        )
         {
             DotnetFilePath = dotnetFilePath;
             TestResultsDirectory = testResultsDirectory;
@@ -31,7 +38,7 @@ namespace RunTests
     /// The actual results from running the xunit tests.
     /// </summary>
     /// <remarks>
-    /// The difference between <see cref="TestResultInfo"/>  and <see cref="TestResult"/> is the former 
+    /// The difference between <see cref="TestResultInfo"/>  and <see cref="TestResult"/> is the former
     /// is specifically for the actual test execution results while the latter can contain extra metadata
     /// about the results.  For example whether it was cached, or had diagnostic, output, etc ...
     /// </remarks>
@@ -52,7 +59,14 @@ namespace RunTests
         /// </summary>
         internal string? HtmlResultsFilePath { get; }
 
-        internal TestResultInfo(int exitCode, string? resultsFilePath, string? htmlResultsFilePath, TimeSpan elapsed, string standardOutput, string errorOutput)
+        internal TestResultInfo(
+            int exitCode,
+            string? resultsFilePath,
+            string? htmlResultsFilePath,
+            TimeSpan elapsed,
+            string standardOutput,
+            string errorOutput
+        )
         {
             ExitCode = exitCode;
             ResultsFilePath = resultsFilePath;
@@ -81,14 +95,23 @@ namespace RunTests
         internal TimeSpan Elapsed => TestResultInfo.Elapsed;
         internal string StandardOutput => TestResultInfo.StandardOutput;
         internal string ErrorOutput => TestResultInfo.ErrorOutput;
-        internal string? ResultsDisplayFilePath => TestResultInfo.HtmlResultsFilePath ?? TestResultInfo.ResultsFilePath;
+        internal string? ResultsDisplayFilePath =>
+            TestResultInfo.HtmlResultsFilePath ?? TestResultInfo.ResultsFilePath;
 
-        internal TestResult(WorkItemInfo workItemInfo, TestResultInfo testResultInfo, string commandLine, ImmutableArray<ProcessResult> processResults = default, string? diagnostics = null)
+        internal TestResult(
+            WorkItemInfo workItemInfo,
+            TestResultInfo testResultInfo,
+            string commandLine,
+            ImmutableArray<ProcessResult> processResults = default,
+            string? diagnostics = null
+        )
         {
             WorkItemInfo = workItemInfo;
             TestResultInfo = testResultInfo;
             CommandLine = commandLine;
-            ProcessResults = processResults.IsDefault ? ImmutableArray<ProcessResult>.Empty : processResults;
+            ProcessResults = processResults.IsDefault
+                ? ImmutableArray<ProcessResult>.Empty
+                : processResults;
             Diagnostics = diagnostics;
         }
     }

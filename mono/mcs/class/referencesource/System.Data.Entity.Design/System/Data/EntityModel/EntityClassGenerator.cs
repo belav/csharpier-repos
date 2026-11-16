@@ -10,18 +10,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Data;
+using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel;
 using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
-using System.Data.EntityModel;
-using System.Data.Entity.Design.Common;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Xml;
-using System.Data.Entity.Design.SsdlGenerator;
-using Microsoft.Build.Utilities;
 using System.Runtime.Versioning;
+using System.Xml;
+using Microsoft.Build.Utilities;
 
 namespace System.Data.Entity.Design
 {
@@ -65,18 +65,19 @@ namespace System.Data.Entity.Design
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        public EntityClassGenerator()
-        {
-        }
+        public EntityClassGenerator() { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public EntityClassGenerator(LanguageOption languageOption)
         {
-            _languageOption = EDesignUtil.CheckLanguageOptionArgument(languageOption, "languageOption");
+            _languageOption = EDesignUtil.CheckLanguageOptionArgument(
+                languageOption,
+                "languageOption"
+            );
         }
 
         /// <summary>
@@ -92,14 +93,21 @@ namespace System.Data.Entity.Design
         /// Gets the map entries use to customize the namespace of .net types that are generated
         /// and referenced by the generated code
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public EdmToObjectNamespaceMap EdmToObjectNamespaceMap
         {
             get { return _edmToObjectNamespaceMap; }
         }
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public IList<EdmSchemaError> GenerateCode(XmlReader sourceEdmSchema, TextWriter target)
         {
             EDesignUtil.CheckArgumentNull(sourceEdmSchema, "sourceEdmSchema");
@@ -107,19 +115,29 @@ namespace System.Data.Entity.Design
             return GenerateCode(sourceEdmSchema, target, new XmlReader[] { });
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceExposure(ResourceScope.None)] //No resource is exposed since we pass in null as the target paath.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)] //For GenerateCodeCommon method call. Since we use null as the path, we have not changed the scope of the resource.
-        public IList<EdmSchemaError> GenerateCode(XmlReader sourceEdmSchema, TextWriter target, IEnumerable<XmlReader> additionalEdmSchemas)
+        public IList<EdmSchemaError> GenerateCode(
+            XmlReader sourceEdmSchema,
+            TextWriter target,
+            IEnumerable<XmlReader> additionalEdmSchemas
+        )
         {
             EDesignUtil.CheckArgumentNull(sourceEdmSchema, "sourceEdmSchema");
             EDesignUtil.CheckArgumentNull(additionalEdmSchemas, "additionalEdmSchemas");
             EDesignUtil.CheckArgumentNull(target, "target");
-            
+
             List<EdmSchemaError> errors = new List<EdmSchemaError>();
             try
             {
-                MetadataArtifactLoader sourceLoader = new MetadataArtifactLoaderXmlReaderWrapper(sourceEdmSchema);
+                MetadataArtifactLoader sourceLoader = new MetadataArtifactLoaderXmlReaderWrapper(
+                    sourceEdmSchema
+                );
                 List<MetadataArtifactLoader> loaders = new List<MetadataArtifactLoader>();
                 loaders.Add(sourceLoader);
 
@@ -128,12 +146,16 @@ namespace System.Data.Entity.Design
                 {
                     if (additionalEdmSchema == null)
                     {
-                        throw EDesignUtil.Argument(Strings.NullAdditionalSchema("additionalEdmSchema", index));
+                        throw EDesignUtil.Argument(
+                            Strings.NullAdditionalSchema("additionalEdmSchema", index)
+                        );
                     }
 
                     try
                     {
-                        MetadataArtifactLoader loader = new MetadataArtifactLoaderXmlReaderWrapper(additionalEdmSchema);
+                        MetadataArtifactLoader loader = new MetadataArtifactLoaderXmlReaderWrapper(
+                            additionalEdmSchema
+                        );
                         Debug.Assert(loader != null, "when is the loader ever null?");
                         loaders.Add(loader);
                     }
@@ -141,9 +163,13 @@ namespace System.Data.Entity.Design
                     {
                         if (MetadataUtil.IsCatchableExceptionType(e))
                         {
-                            errors.Add(new EdmSchemaError(e.Message,
-                                (int)ModelBuilderErrorCode.CodeGenAdditionalEdmSchemaIsInvalid,
-                                EdmSchemaErrorSeverity.Error));
+                            errors.Add(
+                                new EdmSchemaError(
+                                    e.Message,
+                                    (int)ModelBuilderErrorCode.CodeGenAdditionalEdmSchemaIsInvalid,
+                                    EdmSchemaErrorSeverity.Error
+                                )
+                            );
                         }
                         else
                         {
@@ -154,13 +180,15 @@ namespace System.Data.Entity.Design
                 }
                 ThrowOnAnyNonWarningErrors(errors);
 
-                GenerateCodeCommon(sourceLoader, 
-                    loaders, 
+                GenerateCodeCommon(
+                    sourceLoader,
+                    loaders,
                     new LazyTextWriterCreator(target),
-                    null,  // source path
-                    null,  // target file path
+                    null, // source path
+                    null, // target file path
                     false, // dispose readers?
-                    errors);
+                    errors
+                );
             }
             catch (TerminalErrorException)
             {
@@ -171,21 +199,45 @@ namespace System.Data.Entity.Design
             return errors;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceExposure(ResourceScope.Machine)] //Exposes the sourceEdmSchemaFilePath which is a Machine resource
         [ResourceConsumption(ResourceScope.Machine)] //For GenerateCode method call. But the path is not created in this method.
-        public IList<EdmSchemaError> GenerateCode(string sourceEdmSchemaFilePath, string targetFilePath)
+        public IList<EdmSchemaError> GenerateCode(
+            string sourceEdmSchemaFilePath,
+            string targetFilePath
+        )
         {
-            return GenerateCode(sourceEdmSchemaFilePath, targetFilePath, new string[] { });        
+            return GenerateCode(sourceEdmSchemaFilePath, targetFilePath, new string[] { });
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA2208:InstantiateArgumentExceptionsCorrectly"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Naming",
+                "CA1704:IdentifiersShouldBeSpelledCorrectly",
+                MessageId = "Edm"
+            )
+        ]
         [ResourceExposure(ResourceScope.Machine)] //Exposes the sourceEdmSchemaFilePath which is a Machine resource
         [ResourceConsumption(ResourceScope.Machine)] //For MetadataArtifactLoader.Create method call. But the path is not created in this method.
-        public IList<EdmSchemaError> GenerateCode(string sourceEdmSchemaFilePath, string targetPath, IEnumerable<string> additionalEdmSchemaFilePaths)
+        public IList<EdmSchemaError> GenerateCode(
+            string sourceEdmSchemaFilePath,
+            string targetPath,
+            IEnumerable<string> additionalEdmSchemaFilePaths
+        )
         {
             EDesignUtil.CheckStringArgument(sourceEdmSchemaFilePath, "sourceEdmSchemaFilePath");
-            EDesignUtil.CheckArgumentNull(additionalEdmSchemaFilePaths, "additionalEdmSchemaFilePaths");
+            EDesignUtil.CheckArgumentNull(
+                additionalEdmSchemaFilePaths,
+                "additionalEdmSchemaFilePaths"
+            );
             EDesignUtil.CheckStringArgument(targetPath, "targetPath");
 
             List<EdmSchemaError> errors = new List<EdmSchemaError>();
@@ -196,18 +248,31 @@ namespace System.Data.Entity.Design
                 MetadataArtifactLoader sourceLoader;
                 try
                 {
-                    sourceLoader = MetadataArtifactLoader.Create(sourceEdmSchemaFilePath, MetadataArtifactLoader.ExtensionCheck.Specific,
-                        XmlConstants.CSpaceSchemaExtension, uriRegistry);
+                    sourceLoader = MetadataArtifactLoader.Create(
+                        sourceEdmSchemaFilePath,
+                        MetadataArtifactLoader.ExtensionCheck.Specific,
+                        XmlConstants.CSpaceSchemaExtension,
+                        uriRegistry
+                    );
                 }
                 catch (MetadataException e)
                 {
-                    errors.Add(CreateErrorForException(ModelBuilderErrorCode.CodeGenSourceFilePathIsInvalid, e, sourceEdmSchemaFilePath));
+                    errors.Add(
+                        CreateErrorForException(
+                            ModelBuilderErrorCode.CodeGenSourceFilePathIsInvalid,
+                            e,
+                            sourceEdmSchemaFilePath
+                        )
+                    );
                     return errors;
                 }
 
                 if (sourceLoader.IsComposite)
                 {
-                    throw new ArgumentException(Strings.CodeGenSourceFilePathIsNotAFile, "sourceEdmSchemaPath");
+                    throw new ArgumentException(
+                        Strings.CodeGenSourceFilePathIsNotAFile,
+                        "sourceEdmSchemaPath"
+                    );
                 }
 
                 // create loaders for all the additional schemas
@@ -218,22 +283,33 @@ namespace System.Data.Entity.Design
                 {
                     if (additionalSchemaFilePath == null)
                     {
-                        throw EDesignUtil.Argument(Strings.NullAdditionalSchema("additionalEdmSchemaFilePaths", index));
+                        throw EDesignUtil.Argument(
+                            Strings.NullAdditionalSchema("additionalEdmSchemaFilePaths", index)
+                        );
                     }
 
                     try
                     {
-                        MetadataArtifactLoader loader = MetadataArtifactLoader.Create(additionalSchemaFilePath,
+                        MetadataArtifactLoader loader = MetadataArtifactLoader.Create(
+                            additionalSchemaFilePath,
                             MetadataArtifactLoader.ExtensionCheck.Specific,
-                            XmlConstants.CSpaceSchemaExtension, uriRegistry);
+                            XmlConstants.CSpaceSchemaExtension,
+                            uriRegistry
+                        );
                         Debug.Assert(loader != null, "when is the loader ever null?");
                         loaders.Add(loader);
                     }
                     catch (Exception e)
                     {
-                        if(MetadataUtil.IsCatchableExceptionType(e))
+                        if (MetadataUtil.IsCatchableExceptionType(e))
                         {
-                            errors.Add(CreateErrorForException(ModelBuilderErrorCode.CodeGenAdditionalEdmSchemaIsInvalid, e, additionalSchemaFilePath));
+                            errors.Add(
+                                CreateErrorForException(
+                                    ModelBuilderErrorCode.CodeGenAdditionalEdmSchemaIsInvalid,
+                                    e,
+                                    additionalSchemaFilePath
+                                )
+                            );
                         }
                         else
                         {
@@ -248,14 +324,26 @@ namespace System.Data.Entity.Design
                 {
                     using (LazyTextWriterCreator target = new LazyTextWriterCreator(targetPath))
                     {
-                        GenerateCodeCommon(sourceLoader, loaders, target, sourceEdmSchemaFilePath, targetPath,
+                        GenerateCodeCommon(
+                            sourceLoader,
+                            loaders,
+                            target,
+                            sourceEdmSchemaFilePath,
+                            targetPath,
                             true, // dispose readers
-                            errors);
+                            errors
+                        );
                     }
                 }
                 catch (System.IO.IOException ex)
                 {
-                    errors.Add(CreateErrorForException(System.Data.EntityModel.SchemaObjectModel.ErrorCode.IOException, ex, targetPath));
+                    errors.Add(
+                        CreateErrorForException(
+                            System.Data.EntityModel.SchemaObjectModel.ErrorCode.IOException,
+                            ex,
+                            targetPath
+                        )
+                    );
                     return errors;
                 }
             }
@@ -267,29 +355,35 @@ namespace System.Data.Entity.Design
             return errors;
         }
 
-        private void GenerateCodeCommon(MetadataArtifactLoader sourceLoader, 
+        private void GenerateCodeCommon(
+            MetadataArtifactLoader sourceLoader,
             List<MetadataArtifactLoader> loaders,
             LazyTextWriterCreator target,
             string sourceEdmSchemaFilePath,
             string targetFilePath,
             bool closeReaders,
-            List<EdmSchemaError> errors)
+            List<EdmSchemaError> errors
+        )
         {
-            MetadataArtifactLoaderComposite composite = new MetadataArtifactLoaderComposite(loaders);
-            
+            MetadataArtifactLoaderComposite composite = new MetadataArtifactLoaderComposite(
+                loaders
+            );
+
             // create the schema manager from the xml readers
-            Dictionary<MetadataArtifactLoader, XmlReader> readerSourceMap = new Dictionary<MetadataArtifactLoader, XmlReader>();
+            Dictionary<MetadataArtifactLoader, XmlReader> readerSourceMap =
+                new Dictionary<MetadataArtifactLoader, XmlReader>();
             IList<Schema> schemas;
             List<XmlReader> readers = composite.GetReaders(readerSourceMap);
 
             try
             {
-                IList<EdmSchemaError> schemaManagerErrors =
-                    SchemaManager.ParseAndValidate(readers,
-                        composite.GetPaths(),
-                        SchemaDataModelOption.EntityDataModel,
-                        EdmProviderManifest.Instance,
-                        out schemas);
+                IList<EdmSchemaError> schemaManagerErrors = SchemaManager.ParseAndValidate(
+                    readers,
+                    composite.GetPaths(),
+                    SchemaDataModelOption.EntityDataModel,
+                    EdmProviderManifest.Instance,
+                    out schemas
+                );
                 errors.AddRange(schemaManagerErrors);
             }
             finally
@@ -300,56 +394,108 @@ namespace System.Data.Entity.Design
                 }
             }
             ThrowOnAnyNonWarningErrors(errors);
-            Debug.Assert(readerSourceMap.ContainsKey(sourceLoader), "the source loader didn't produce any of the xml readers...");
+            Debug.Assert(
+                readerSourceMap.ContainsKey(sourceLoader),
+                "the source loader didn't produce any of the xml readers..."
+            );
             XmlReader sourceReader = readerSourceMap[sourceLoader];
 
-
             // use the index of the "source" xml reader as the index of the "source" schema
-            Debug.Assert(readers.Contains(sourceReader), "the source reader is not in the list of readers");
+            Debug.Assert(
+                readers.Contains(sourceReader),
+                "the source reader is not in the list of readers"
+            );
             int index = readers.IndexOf(sourceReader);
             Debug.Assert(index >= 0, "couldn't find the source reader in the list of readers");
 
-            Debug.Assert(readers.Count == schemas.Count, "We have a different number of readers than schemas");
+            Debug.Assert(
+                readers.Count == schemas.Count,
+                "We have a different number of readers than schemas"
+            );
             Schema sourceSchema = schemas[index];
             Debug.Assert(sourceSchema != null, "sourceSchema is null");
 
             // create the EdmItemCollection from the schemas
             EdmItemCollection itemCollection = new EdmItemCollection(schemas);
-            if (EntityFrameworkVersionsUtil.ConvertToVersion(itemCollection.EdmVersion) >= EntityFrameworkVersions.Version2)
+            if (
+                EntityFrameworkVersionsUtil.ConvertToVersion(itemCollection.EdmVersion)
+                >= EntityFrameworkVersions.Version2
+            )
             {
-                throw EDesignUtil.InvalidOperation(Strings.TargetEntityFrameworkVersionToNewForEntityClassGenerator);  
+                throw EDesignUtil.InvalidOperation(
+                    Strings.TargetEntityFrameworkVersionToNewForEntityClassGenerator
+                );
             }
 
             // generate code
-            ClientApiGenerator generator = new ClientApiGenerator(sourceSchema, itemCollection, this, errors);
+            ClientApiGenerator generator = new ClientApiGenerator(
+                sourceSchema,
+                itemCollection,
+                this,
+                errors
+            );
             generator.GenerateCode(target, targetFilePath);
         }
-
 
         #endregion
 
         #region Private Methods
-        private static EdmSchemaError CreateErrorForException(System.Data.EntityModel.SchemaObjectModel.ErrorCode errorCode, System.Exception exception, string sourceLocation)
+        private static EdmSchemaError CreateErrorForException(
+            System.Data.EntityModel.SchemaObjectModel.ErrorCode errorCode,
+            System.Exception exception,
+            string sourceLocation
+        )
         {
             Debug.Assert(exception != null);
             Debug.Assert(sourceLocation != null);
 
-            return new EdmSchemaError(exception.Message, (int)errorCode, EdmSchemaErrorSeverity.Error, sourceLocation, 0, 0, exception);
+            return new EdmSchemaError(
+                exception.Message,
+                (int)errorCode,
+                EdmSchemaErrorSeverity.Error,
+                sourceLocation,
+                0,
+                0,
+                exception
+            );
         }
 
-        internal static EdmSchemaError CreateErrorForException(ModelBuilderErrorCode errorCode, System.Exception exception, string sourceLocation)
+        internal static EdmSchemaError CreateErrorForException(
+            ModelBuilderErrorCode errorCode,
+            System.Exception exception,
+            string sourceLocation
+        )
         {
             Debug.Assert(exception != null);
             Debug.Assert(sourceLocation != null);
 
-            return new EdmSchemaError(exception.Message, (int)errorCode, EdmSchemaErrorSeverity.Error, sourceLocation, 0, 0, exception);
+            return new EdmSchemaError(
+                exception.Message,
+                (int)errorCode,
+                EdmSchemaErrorSeverity.Error,
+                sourceLocation,
+                0,
+                0,
+                exception
+            );
         }
 
-        internal static EdmSchemaError CreateErrorForException(ModelBuilderErrorCode errorCode, System.Exception exception)
+        internal static EdmSchemaError CreateErrorForException(
+            ModelBuilderErrorCode errorCode,
+            System.Exception exception
+        )
         {
             Debug.Assert(exception != null);
 
-            return new EdmSchemaError(exception.Message, (int)errorCode, EdmSchemaErrorSeverity.Error, null, 0, 0, exception);
+            return new EdmSchemaError(
+                exception.Message,
+                (int)errorCode,
+                EdmSchemaErrorSeverity.Error,
+                null,
+                0,
+                0,
+                exception
+            );
         }
 
         private void ThrowOnAnyNonWarningErrors(List<EdmSchemaError> errors)

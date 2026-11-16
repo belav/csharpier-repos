@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class RelationalShapedQueryCompilingExpressionVisitorFactory : IShapedQueryCompilingExpressionVisitorFactory
+public class RelationalShapedQueryCompilingExpressionVisitorFactory
+    : IShapedQueryCompilingExpressionVisitorFactory
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -19,7 +20,8 @@ public class RelationalShapedQueryCompilingExpressionVisitorFactory : IShapedQue
     /// </summary>
     public RelationalShapedQueryCompilingExpressionVisitorFactory(
         ShapedQueryCompilingExpressionVisitorDependencies dependencies,
-        RelationalShapedQueryCompilingExpressionVisitorDependencies relationalDependencies)
+        RelationalShapedQueryCompilingExpressionVisitorDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -41,9 +43,12 @@ public class RelationalShapedQueryCompilingExpressionVisitorFactory : IShapedQue
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ShapedQueryCompilingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
-        => new RelationalShapedQueryCompilingExpressionVisitor(
+    public virtual ShapedQueryCompilingExpressionVisitor Create(
+        QueryCompilationContext queryCompilationContext
+    ) =>
+        new RelationalShapedQueryCompilingExpressionVisitor(
             Dependencies,
             RelationalDependencies,
-            queryCompilationContext);
+            queryCompilationContext
+        );
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,77 +30,107 @@
 
 using System;
 
-namespace Mono.Data.Tds.Protocol {
-	public class TdsInternalInfoMessageEventArgs : EventArgs
-	{
-		#region Fields
+namespace Mono.Data.Tds.Protocol
+{
+    public class TdsInternalInfoMessageEventArgs : EventArgs
+    {
+        #region Fields
 
-		TdsInternalErrorCollection errors;
+        TdsInternalErrorCollection errors;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public TdsInternalInfoMessageEventArgs (TdsInternalErrorCollection errors)
-		{
-			this.errors = errors;
-		}
+        #region Constructors
 
-		public TdsInternalInfoMessageEventArgs (TdsInternalError error)
-		{
-			this.errors = new TdsInternalErrorCollection ();
-			errors.Add (error);
-		}
+        public TdsInternalInfoMessageEventArgs(TdsInternalErrorCollection errors)
+        {
+            this.errors = errors;
+        }
 
-		#endregion // Constructors
+        public TdsInternalInfoMessageEventArgs(TdsInternalError error)
+        {
+            this.errors = new TdsInternalErrorCollection();
+            errors.Add(error);
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		public TdsInternalErrorCollection Errors {
-			get { return errors; }
-		}
+        #region Properties
 
-		public byte Class {
-			get { return errors[0].Class; }
-		}
+        public TdsInternalErrorCollection Errors
+        {
+            get { return errors; }
+        }
 
-		public int LineNumber {
-			get { return errors[0].LineNumber; }
-		}
+        public byte Class
+        {
+            get { return errors[0].Class; }
+        }
 
-		public string Message {
-			get { return errors[0].Message; }
-		}
+        public int LineNumber
+        {
+            get { return errors[0].LineNumber; }
+        }
 
-		public int Number {
-			get { return errors[0].Number; }
-		}
+        public string Message
+        {
+            get { return errors[0].Message; }
+        }
 
-		public string Procedure {
-			get { return errors[0].Procedure; }
-		}
+        public int Number
+        {
+            get { return errors[0].Number; }
+        }
 
-		public string Server {
-			get { return errors[0].Server; }
-		}
-		
-		public string Source {
-			get { return errors[0].Source; }
-		}
+        public string Procedure
+        {
+            get { return errors[0].Procedure; }
+        }
 
-		public byte State {
-			get { return errors[0].State; }
-		}
+        public string Server
+        {
+            get { return errors[0].Server; }
+        }
 
-		#endregion // Properties
+        public string Source
+        {
+            get { return errors[0].Source; }
+        }
 
-		#region Methods
+        public byte State
+        {
+            get { return errors[0].State; }
+        }
 
-		public int Add (byte theClass, int lineNumber, string message, int number, string procedure, string server, string source, byte state)
-		{
-			return errors.Add (new TdsInternalError (theClass, lineNumber, message, number, procedure, server, source, state));
-		}
+        #endregion // Properties
 
-		#endregion // Methods
-	}
+        #region Methods
+
+        public int Add(
+            byte theClass,
+            int lineNumber,
+            string message,
+            int number,
+            string procedure,
+            string server,
+            string source,
+            byte state
+        )
+        {
+            return errors.Add(
+                new TdsInternalError(
+                    theClass,
+                    lineNumber,
+                    message,
+                    number,
+                    procedure,
+                    server,
+                    source,
+                    state
+                )
+            );
+        }
+
+        #endregion // Methods
+    }
 }

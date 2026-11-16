@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Xunit;
 
 public abstract class AComponent { }
+
 public class Component : AComponent { }
 
 public abstract class Abstract

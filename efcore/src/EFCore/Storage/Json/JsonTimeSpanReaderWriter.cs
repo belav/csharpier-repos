@@ -16,15 +16,15 @@ public sealed class JsonTimeSpanReaderWriter : JsonValueReaderWriter<TimeSpan>
     /// </summary>
     public static JsonTimeSpanReaderWriter Instance { get; } = new();
 
-    private JsonTimeSpanReaderWriter()
-    {
-    }
+    private JsonTimeSpanReaderWriter() { }
 
     /// <inheritdoc />
-    public override TimeSpan FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => TimeSpan.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
+    public override TimeSpan FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => TimeSpan.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, TimeSpan value)
-        => writer.WriteStringValue(value.ToString("g", CultureInfo.InvariantCulture));
+    public override void ToJsonTyped(Utf8JsonWriter writer, TimeSpan value) =>
+        writer.WriteStringValue(value.ToString("g", CultureInfo.InvariantCulture));
 }

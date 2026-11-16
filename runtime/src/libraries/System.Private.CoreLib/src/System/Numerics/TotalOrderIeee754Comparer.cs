@@ -12,7 +12,10 @@ namespace System.Numerics
     /// with IEEE 754 totalOrder semantic.
     /// </summary>
     /// <typeparam name="T">The type of the numbers to be compared, must be an IEEE 754 floating-point type.</typeparam>
-    public readonly struct TotalOrderIeee754Comparer<T> : IComparer<T>, IEqualityComparer<T>, IEquatable<TotalOrderIeee754Comparer<T>>
+    public readonly struct TotalOrderIeee754Comparer<T>
+        : IComparer<T>,
+            IEqualityComparer<T>,
+            IEquatable<TotalOrderIeee754Comparer<T>>
         where T : IFloatingPointIeee754<T>?
     {
         /// <summary>
@@ -52,15 +55,24 @@ namespace System.Numerics
         {
             if (typeof(T) == typeof(float))
             {
-                return CompareIntegerSemantic(BitConverter.SingleToInt32Bits((float)(object)x!), BitConverter.SingleToInt32Bits((float)(object)y!));
+                return CompareIntegerSemantic(
+                    BitConverter.SingleToInt32Bits((float)(object)x!),
+                    BitConverter.SingleToInt32Bits((float)(object)y!)
+                );
             }
             else if (typeof(T) == typeof(double))
             {
-                return CompareIntegerSemantic(BitConverter.DoubleToInt64Bits((double)(object)x!), BitConverter.DoubleToInt64Bits((double)(object)y!));
+                return CompareIntegerSemantic(
+                    BitConverter.DoubleToInt64Bits((double)(object)x!),
+                    BitConverter.DoubleToInt64Bits((double)(object)y!)
+                );
             }
             else if (typeof(T) == typeof(Half))
             {
-                return CompareIntegerSemantic(BitConverter.HalfToInt16Bits((Half)(object)x!), BitConverter.HalfToInt16Bits((Half)(object)y!));
+                return CompareIntegerSemantic(
+                    BitConverter.HalfToInt16Bits((Half)(object)x!),
+                    BitConverter.HalfToInt16Bits((Half)(object)y!)
+                );
             }
             else
             {
@@ -81,7 +93,9 @@ namespace System.Numerics
                 // Negative values are represented in sign-magnitude, instead of two's complement like integers
                 // Just negating the comparison result when both numbers are negative is enough
 
-                return (TInteger.IsNegative(x) && TInteger.IsNegative(y)) ? y.CompareTo(x) : x.CompareTo(y);
+                return (TInteger.IsNegative(x) && TInteger.IsNegative(y))
+                    ? y.CompareTo(x)
+                    : x.CompareTo(y);
             }
 
             static int CompareGeneric(T? x, T? y)
@@ -155,8 +169,14 @@ namespace System.Numerics
                             int xSignificandLength = x.GetSignificandByteCount();
                             int ySignificandLength = y.GetSignificandByteCount();
 
-                            Span<byte> significandX = (uint)xSignificandLength <= StackAllocThreshold ? stackalloc byte[xSignificandLength] : new byte[xSignificandLength];
-                            Span<byte> significandY = (uint)ySignificandLength <= StackAllocThreshold ? stackalloc byte[ySignificandLength] : new byte[ySignificandLength];
+                            Span<byte> significandX =
+                                (uint)xSignificandLength <= StackAllocThreshold
+                                    ? stackalloc byte[xSignificandLength]
+                                    : new byte[xSignificandLength];
+                            Span<byte> significandY =
+                                (uint)ySignificandLength <= StackAllocThreshold
+                                    ? stackalloc byte[ySignificandLength]
+                                    : new byte[ySignificandLength];
 
                             x.WriteSignificandBigEndian(significandX);
                             y.WriteSignificandBigEndian(significandY);
@@ -194,7 +214,9 @@ namespace System.Numerics
                     else
                     {
                         // T does not correctly implement IEEE754 semantics
-                        ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
+                        ThrowHelper.ThrowArgumentException(
+                            ExceptionResource.Argument_InvalidArgumentForComparison
+                        );
                         return 0; // unreachable
                     }
                 }
@@ -226,7 +248,8 @@ namespace System.Numerics
 
         public bool Equals(TotalOrderIeee754Comparer<T> other) => true;
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is TotalOrderIeee754Comparer<T>;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is TotalOrderIeee754Comparer<T>;
 
         public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode();
     }

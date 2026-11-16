@@ -3,9 +3,8 @@
 
 using System;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
 using ILVerify;
+using Internal.TypeSystem;
 
 namespace Internal.IL
 {
@@ -19,13 +18,19 @@ namespace Internal.IL
             PermanentHome = 1 << 2,
             ThisPtr = 1 << 3,
         }
+
         private StackValueFlags Flags;
 
         public readonly StackValueKind Kind;
         public readonly TypeDesc Type;
         public readonly MethodDesc Method;
 
-        private StackValue(StackValueKind kind, TypeDesc type = null, MethodDesc method = null, StackValueFlags flags = StackValueFlags.None)
+        private StackValue(
+            StackValueKind kind,
+            TypeDesc type = null,
+            MethodDesc method = null,
+            StackValueFlags flags = StackValueFlags.None
+        )
         {
             this.Kind = kind;
             this.Type = type;
@@ -86,44 +91,54 @@ namespace Internal.IL
             return CreateFromType(Type);
         }
 
-        static public StackValue CreateUnknown()
+        public static StackValue CreateUnknown()
         {
             return new StackValue(StackValueKind.Unknown);
         }
 
-        static public StackValue CreatePrimitive(StackValueKind kind)
+        public static StackValue CreatePrimitive(StackValueKind kind)
         {
-            Debug.Assert(kind == StackValueKind.Int32 ||
-                         kind == StackValueKind.Int64 ||
-                         kind == StackValueKind.NativeInt ||
-                         kind == StackValueKind.Float);
+            Debug.Assert(
+                kind == StackValueKind.Int32
+                    || kind == StackValueKind.Int64
+                    || kind == StackValueKind.NativeInt
+                    || kind == StackValueKind.Float
+            );
 
             return new StackValue(kind);
         }
 
-        static public StackValue CreateObjRef(TypeDesc type)
+        public static StackValue CreateObjRef(TypeDesc type)
         {
             return new StackValue(StackValueKind.ObjRef, type);
         }
 
-        static public StackValue CreateValueType(TypeDesc type)
+        public static StackValue CreateValueType(TypeDesc type)
         {
             return new StackValue(StackValueKind.ValueType, type);
         }
 
-        static public StackValue CreateByRef(TypeDesc type, bool readOnly = false, bool permanentHome = false)
+        public static StackValue CreateByRef(
+            TypeDesc type,
+            bool readOnly = false,
+            bool permanentHome = false
+        )
         {
-            return new StackValue(StackValueKind.ByRef, type, null,
-                (readOnly ? StackValueFlags.ReadOnly : StackValueFlags.None) |
-                (permanentHome ? StackValueFlags.PermanentHome : StackValueFlags.None));
+            return new StackValue(
+                StackValueKind.ByRef,
+                type,
+                null,
+                (readOnly ? StackValueFlags.ReadOnly : StackValueFlags.None)
+                    | (permanentHome ? StackValueFlags.PermanentHome : StackValueFlags.None)
+            );
         }
 
-        static public StackValue CreateMethod(MethodDesc method)
+        public static StackValue CreateMethod(MethodDesc method)
         {
             return new StackValue(StackValueKind.NativeInt, null, method);
         }
 
-        static public StackValue CreateFromType(TypeDesc type)
+        public static StackValue CreateFromType(TypeDesc type)
         {
             switch (type.Category)
             {
@@ -183,12 +198,12 @@ namespace Internal.IL
 
         public override int GetHashCode()
         {
-                const int prime = 17;
-                int hash = 23;
-                hash = (hash * prime) ^ Type.GetHashCode();
-                hash = (hash * prime) ^ Kind.GetHashCode();
-                hash = (hash * prime) ^ Flags.GetHashCode();
-                return hash;
+            const int prime = 17;
+            int hash = 23;
+            hash = (hash * prime) ^ Type.GetHashCode();
+            hash = (hash * prime) ^ Kind.GetHashCode();
+            hash = (hash * prime) ^ Flags.GetHashCode();
+            return hash;
         }
 
         // For now, match PEVerify type formating to make it easy to compare with baseline
@@ -196,20 +211,34 @@ namespace Internal.IL
         {
             switch (type.Category)
             {
-                case TypeFlags.Boolean: return "Boolean";
-                case TypeFlags.Char:    return "Char";
-                case TypeFlags.SByte:   return "SByte";
-                case TypeFlags.Byte:    return "Byte";
-                case TypeFlags.Int16:   return "Int16";
-                case TypeFlags.UInt16:  return "UInt16";
-                case TypeFlags.Int32:   return "Int32";
-                case TypeFlags.UInt32:  return "UInt32";
-                case TypeFlags.Int64:   return "Int64";
-                case TypeFlags.UInt64:  return "UInt64";
-                case TypeFlags.Single:  return "Single";
-                case TypeFlags.Double:  return "Double";
-                case TypeFlags.IntPtr:  return "IntPtr";
-                case TypeFlags.UIntPtr: return "UIntPtr";
+                case TypeFlags.Boolean:
+                    return "Boolean";
+                case TypeFlags.Char:
+                    return "Char";
+                case TypeFlags.SByte:
+                    return "SByte";
+                case TypeFlags.Byte:
+                    return "Byte";
+                case TypeFlags.Int16:
+                    return "Int16";
+                case TypeFlags.UInt16:
+                    return "UInt16";
+                case TypeFlags.Int32:
+                    return "Int32";
+                case TypeFlags.UInt32:
+                    return "UInt32";
+                case TypeFlags.Int64:
+                    return "Int64";
+                case TypeFlags.UInt64:
+                    return "UInt64";
+                case TypeFlags.Single:
+                    return "Single";
+                case TypeFlags.Double:
+                    return "Double";
+                case TypeFlags.IntPtr:
+                    return "IntPtr";
+                case TypeFlags.UIntPtr:
+                    return "UIntPtr";
             }
 
             return "'" + type.ToString() + "'";
@@ -228,9 +257,13 @@ namespace Internal.IL
                 case StackValueKind.Float:
                     return "Double";
                 case StackValueKind.ByRef:
-                    return (IsReadOnly ? "readonly " : "") + "address of " + TypeToStringForByRef(Type);
+                    return (IsReadOnly ? "readonly " : "")
+                        + "address of "
+                        + TypeToStringForByRef(Type);
                 case StackValueKind.ObjRef:
-                    return (Type != null) ? "ref '" + Type.ToString() + "'" : "Nullobjref 'NullReference'";
+                    return (Type != null)
+                        ? "ref '" + Type.ToString() + "'"
+                        : "Nullobjref 'NullReference'";
                 case StackValueKind.ValueType:
                     return "value '" + Type.ToString() + "'";
                 default:
@@ -249,7 +282,11 @@ namespace Internal.IL
         /// <param name="valueB">The value to be merged with <paramref name="valueA"/>.</param>
         /// <param name="merged">The resulting type of merging <paramref name="valueA"/> and <paramref name="valueB"/>.</param>
         /// <returns>True if merge operation was successful, false if the merge operation failed.</returns>
-        public static bool TryMergeStackValues(StackValue valueA, StackValue valueB, out StackValue merged)
+        public static bool TryMergeStackValues(
+            StackValue valueA,
+            StackValue valueB,
+            out StackValue merged
+        )
         {
             merged = valueA;
 
@@ -444,11 +481,16 @@ namespace Internal.IL
                 mergedElementType = MergeArrayTypes(arrayTypeA, arrayTypeB);
             }
             //Both array element types are ObjRefs
-            else if ((!arrayTypeA.ElementType.IsValueType && !arrayTypeA.ElementType.IsByRef) &&
-                     (!arrayTypeB.ElementType.IsValueType && !arrayTypeB.ElementType.IsByRef))
+            else if (
+                (!arrayTypeA.ElementType.IsValueType && !arrayTypeA.ElementType.IsByRef)
+                && (!arrayTypeB.ElementType.IsValueType && !arrayTypeB.ElementType.IsByRef)
+            )
             {
                 // Find common ancestor of the element types
-                mergedElementType = MergeObjectReferences(arrayTypeA.ElementType, arrayTypeB.ElementType);
+                mergedElementType = MergeObjectReferences(
+                    arrayTypeA.ElementType,
+                    arrayTypeB.ElementType
+                );
             }
             else
             {
@@ -496,46 +538,48 @@ namespace Internal.IL
 
             switch (src.Kind)
             {
-            case StackValueKind.ObjRef:
-                if (dst.Kind != StackValueKind.ObjRef)
+                case StackValueKind.ObjRef:
+                    if (dst.Kind != StackValueKind.ObjRef)
+                        return false;
+
+                    // null is always assignable
+                    if (src.Type == null)
+                        return true;
+
+                    return CastingHelper.CanCastTo(src.Type, dst.Type);
+
+                case StackValueKind.ValueType:
+
+                    // TODO: Other cases - variance, etc.
+
                     return false;
 
-                // null is always assignable
-                if (src.Type == null)
-                    return true;
+                case StackValueKind.ByRef:
+                    if (dst.Kind == StackValueKind.ByRef && dst.IsReadOnly)
+                        return src.Type == dst.Type;
 
-                return CastingHelper.CanCastTo(src.Type, dst.Type);
+                    // TODO: Other cases - variance, etc.
 
-            case StackValueKind.ValueType:
+                    return false;
 
-                // TODO: Other cases - variance, etc.
+                case StackValueKind.Int32:
+                    return (
+                        dst.Kind == StackValueKind.Int64 || dst.Kind == StackValueKind.NativeInt
+                    );
 
-                return false;
+                case StackValueKind.Int64:
+                    return false;
 
-            case StackValueKind.ByRef:
-                if (dst.Kind == StackValueKind.ByRef && dst.IsReadOnly)
-                    return src.Type == dst.Type;
+                case StackValueKind.NativeInt:
+                    return (dst.Kind == StackValueKind.Int64);
 
-                // TODO: Other cases - variance, etc.
+                case StackValueKind.Float:
+                    return false;
 
-                return false;
-
-            case StackValueKind.Int32:
-                return (dst.Kind == StackValueKind.Int64 || dst.Kind == StackValueKind.NativeInt);
-
-            case StackValueKind.Int64:
-                return false;
-
-            case StackValueKind.NativeInt:
-                return (dst.Kind == StackValueKind.Int64);
-
-            case StackValueKind.Float:
-                return false;
-
-            default:
-                // TODO:
-                // return false;
-                throw new NotImplementedException();
+                default:
+                    // TODO:
+                    // return false;
+                    throw new NotImplementedException();
             }
 
 #if false
@@ -623,7 +667,6 @@ namespace Internal.IL
 #endif
         }
 
-
         bool IsBinaryComparable(StackValue src, StackValue dst, ILOpcode op)
         {
             if (src.Kind == dst.Kind && src.Type == dst.Type)
@@ -639,9 +682,12 @@ namespace Internal.IL
                             // __cgt.un__ is allowed and verifiable on ObjectRefs (O). This is commonly used when
                             // comparing an ObjectRef with null(there is no "compare - not - equal" instruction, which
                             // would otherwise be a more obvious solution)
-                            return op == ILOpcode.beq || op == ILOpcode.beq_s ||
-                                   op == ILOpcode.bne_un || op == ILOpcode.bne_un_s ||
-                                   op == ILOpcode.ceq || op == ILOpcode.cgt_un;
+                            return op == ILOpcode.beq
+                                || op == ILOpcode.beq_s
+                                || op == ILOpcode.bne_un
+                                || op == ILOpcode.bne_un_s
+                                || op == ILOpcode.ceq
+                                || op == ILOpcode.cgt_un;
                         default:
                             return false;
                     }
@@ -655,15 +701,19 @@ namespace Internal.IL
                         case StackValueKind.ByRef:
                             return true;
                         case StackValueKind.NativeInt:
-                            return op == ILOpcode.beq || op == ILOpcode.beq_s ||
-                                   op == ILOpcode.bne_un || op == ILOpcode.bne_un_s ||
-                                   op == ILOpcode.ceq;
+                            return op == ILOpcode.beq
+                                || op == ILOpcode.beq_s
+                                || op == ILOpcode.bne_un
+                                || op == ILOpcode.bne_un_s
+                                || op == ILOpcode.ceq;
                         default:
                             return false;
                     }
 
                 case StackValueKind.Int32:
-                    return (dst.Kind == StackValueKind.Int64 || dst.Kind == StackValueKind.NativeInt);
+                    return (
+                        dst.Kind == StackValueKind.Int64 || dst.Kind == StackValueKind.NativeInt
+                    );
 
                 case StackValueKind.Int64:
                     return (dst.Kind == StackValueKind.Int64);
@@ -675,9 +725,11 @@ namespace Internal.IL
                         case StackValueKind.NativeInt:
                             return true;
                         case StackValueKind.ByRef:
-                            return op == ILOpcode.beq || op == ILOpcode.beq_s ||
-                                   op == ILOpcode.bne_un || op == ILOpcode.bne_un_s ||
-                                   op == ILOpcode.ceq;
+                            return op == ILOpcode.beq
+                                || op == ILOpcode.beq_s
+                                || op == ILOpcode.bne_un
+                                || op == ILOpcode.bne_un_s
+                                || op == ILOpcode.ceq;
                         default:
                             return false;
                     }

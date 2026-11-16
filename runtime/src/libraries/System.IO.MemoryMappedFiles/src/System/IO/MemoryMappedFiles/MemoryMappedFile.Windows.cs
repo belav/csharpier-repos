@@ -11,7 +11,11 @@ namespace System.IO.MemoryMappedFiles
     public partial class MemoryMappedFile
     {
         // This will verify file access.
-        private static void VerifyMemoryMappedFileAccess(MemoryMappedFileAccess access, long capacity, long fileSize)
+        private static void VerifyMemoryMappedFileAccess(
+            MemoryMappedFileAccess access,
+            long capacity,
+            long fileSize
+        )
         {
             if (access == MemoryMappedFileAccess.Read && capacity > fileSize)
             {
@@ -21,7 +25,10 @@ namespace System.IO.MemoryMappedFiles
             // one can always create a small view if they do not want to map an entire file
             if (fileSize > capacity)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_CapacityGEFileSizeRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_CapacityGEFileSizeRequired
+                );
             }
         }
 
@@ -31,8 +38,14 @@ namespace System.IO.MemoryMappedFiles
         /// out empty).
         /// </summary>
         private static SafeMemoryMappedFileHandle CreateCore(
-            SafeFileHandle? fileHandle, string? mapName, HandleInheritability inheritability,
-            MemoryMappedFileAccess access, MemoryMappedFileOptions options, long capacity, long fileSize)
+            SafeFileHandle? fileHandle,
+            string? mapName,
+            HandleInheritability inheritability,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            long capacity,
+            long fileSize
+        )
         {
             Debug.Assert(fileHandle is null || fileSize >= 0);
 
@@ -43,9 +56,22 @@ namespace System.IO.MemoryMappedFiles
                 VerifyMemoryMappedFileAccess(access, capacity, fileSize);
             }
 
-            SafeMemoryMappedFileHandle handle = fileHandle != null ?
-                Interop.CreateFileMapping(fileHandle, ref secAttrs, GetPageAccess(access) | (int)options, capacity, mapName) :
-                Interop.CreateFileMapping(new IntPtr(-1), ref secAttrs, GetPageAccess(access) | (int)options, capacity, mapName);
+            SafeMemoryMappedFileHandle handle =
+                fileHandle != null
+                    ? Interop.CreateFileMapping(
+                        fileHandle,
+                        ref secAttrs,
+                        GetPageAccess(access) | (int)options,
+                        capacity,
+                        mapName
+                    )
+                    : Interop.CreateFileMapping(
+                        new IntPtr(-1),
+                        ref secAttrs,
+                        GetPageAccess(access) | (int)options,
+                        capacity,
+                        mapName
+                    );
 
             int errorCode = Marshal.GetLastPInvokeError();
             if (!handle.IsInvalid)
@@ -71,7 +97,11 @@ namespace System.IO.MemoryMappedFiles
         /// caller used CreateOrOpen since Create isn't valid with Write access
         /// </summary>
         private static SafeMemoryMappedFileHandle OpenCore(
-            string mapName, HandleInheritability inheritability, MemoryMappedFileAccess access, bool createOrOpen)
+            string mapName,
+            HandleInheritability inheritability,
+            MemoryMappedFileAccess access,
+            bool createOrOpen
+        )
         {
             return OpenCore(mapName, inheritability, GetFileMapAccess(access), createOrOpen);
         }
@@ -82,7 +112,11 @@ namespace System.IO.MemoryMappedFiles
         /// caller used CreateOrOpen since Create isn't valid with Write access
         /// </summary>
         private static SafeMemoryMappedFileHandle OpenCore(
-            string mapName, HandleInheritability inheritability, MemoryMappedFileRights rights, bool createOrOpen)
+            string mapName,
+            HandleInheritability inheritability,
+            MemoryMappedFileRights rights,
+            bool createOrOpen
+        )
         {
             return OpenCore(mapName, inheritability, GetFileMapAccess(rights), createOrOpen);
         }
@@ -91,8 +125,12 @@ namespace System.IO.MemoryMappedFiles
         /// Used by the CreateOrOpen factory method groups.
         /// </summary>
         private static SafeMemoryMappedFileHandle CreateOrOpenCore(
-            string mapName, HandleInheritability inheritability, MemoryMappedFileAccess access,
-            MemoryMappedFileOptions options, long capacity)
+            string mapName,
+            HandleInheritability inheritability,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            long capacity
+        )
         {
             // Try to open the file if it exists -- this requires a bit more work. Loop until we can
             // either create or open a memory mapped file up to a timeout. CreateFileMapping may fail
@@ -104,20 +142,28 @@ namespace System.IO.MemoryMappedFiles
             // out in approximately 1.4 minutes. If after retrying, a MMF handle still hasn't been opened,
             // throw an InvalidOperationException.
 
-            Debug.Assert(access != MemoryMappedFileAccess.Write, "Callers requesting write access shouldn't try to create a mmf");
+            Debug.Assert(
+                access != MemoryMappedFileAccess.Write,
+                "Callers requesting write access shouldn't try to create a mmf"
+            );
 
             SafeMemoryMappedFileHandle? handle = null;
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(inheritability);
 
-            int waitRetries = 14;   //((2^13)-1)*10ms == approximately 1.4mins
+            int waitRetries = 14; //((2^13)-1)*10ms == approximately 1.4mins
             int waitSleep = 0;
 
             // keep looping until we've exhausted retries or break as soon we get valid handle
             while (waitRetries > 0)
             {
                 // try to create
-                handle = Interop.CreateFileMapping(new IntPtr(-1), ref secAttrs,
-                    GetPageAccess(access) | (int)options, capacity, mapName);
+                handle = Interop.CreateFileMapping(
+                    new IntPtr(-1),
+                    ref secAttrs,
+                    GetPageAccess(access) | (int)options,
+                    capacity,
+                    mapName
+                );
 
                 if (!handle.IsInvalid)
                 {
@@ -134,8 +180,11 @@ namespace System.IO.MemoryMappedFiles
                 }
 
                 // try to open
-                handle = Interop.OpenFileMapping(GetFileMapAccess(access), (inheritability &
-                    HandleInheritability.Inheritable) != 0, mapName);
+                handle = Interop.OpenFileMapping(
+                    GetFileMapAccess(access),
+                    (inheritability & HandleInheritability.Inheritable) != 0,
+                    mapName
+                );
 
                 // valid handle
                 if (!handle.IsInvalid)
@@ -193,14 +242,23 @@ namespace System.IO.MemoryMappedFiles
         {
             switch (access)
             {
-                case MemoryMappedFileAccess.Read: return Interop.Kernel32.FileMapOptions.FILE_MAP_READ;
-                case MemoryMappedFileAccess.Write: return Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE;
-                case MemoryMappedFileAccess.ReadWrite: return Interop.Kernel32.FileMapOptions.FILE_MAP_READ | Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE;
-                case MemoryMappedFileAccess.CopyOnWrite: return Interop.Kernel32.FileMapOptions.FILE_MAP_COPY;
-                case MemoryMappedFileAccess.ReadExecute: return Interop.Kernel32.FileMapOptions.FILE_MAP_EXECUTE | Interop.Kernel32.FileMapOptions.FILE_MAP_READ;
+                case MemoryMappedFileAccess.Read:
+                    return Interop.Kernel32.FileMapOptions.FILE_MAP_READ;
+                case MemoryMappedFileAccess.Write:
+                    return Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE;
+                case MemoryMappedFileAccess.ReadWrite:
+                    return Interop.Kernel32.FileMapOptions.FILE_MAP_READ
+                        | Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE;
+                case MemoryMappedFileAccess.CopyOnWrite:
+                    return Interop.Kernel32.FileMapOptions.FILE_MAP_COPY;
+                case MemoryMappedFileAccess.ReadExecute:
+                    return Interop.Kernel32.FileMapOptions.FILE_MAP_EXECUTE
+                        | Interop.Kernel32.FileMapOptions.FILE_MAP_READ;
                 default:
                     Debug.Assert(access == MemoryMappedFileAccess.ReadWriteExecute);
-                    return Interop.Kernel32.FileMapOptions.FILE_MAP_EXECUTE | Interop.Kernel32.FileMapOptions.FILE_MAP_READ | Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE;
+                    return Interop.Kernel32.FileMapOptions.FILE_MAP_EXECUTE
+                        | Interop.Kernel32.FileMapOptions.FILE_MAP_READ
+                        | Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE;
             }
         }
 
@@ -213,10 +271,14 @@ namespace System.IO.MemoryMappedFiles
         {
             switch (access)
             {
-                case MemoryMappedFileAccess.Read: return Interop.Kernel32.PageOptions.PAGE_READONLY;
-                case MemoryMappedFileAccess.ReadWrite: return Interop.Kernel32.PageOptions.PAGE_READWRITE;
-                case MemoryMappedFileAccess.CopyOnWrite: return Interop.Kernel32.PageOptions.PAGE_WRITECOPY;
-                case MemoryMappedFileAccess.ReadExecute: return Interop.Kernel32.PageOptions.PAGE_EXECUTE_READ;
+                case MemoryMappedFileAccess.Read:
+                    return Interop.Kernel32.PageOptions.PAGE_READONLY;
+                case MemoryMappedFileAccess.ReadWrite:
+                    return Interop.Kernel32.PageOptions.PAGE_READWRITE;
+                case MemoryMappedFileAccess.CopyOnWrite:
+                    return Interop.Kernel32.PageOptions.PAGE_WRITECOPY;
+                case MemoryMappedFileAccess.ReadExecute:
+                    return Interop.Kernel32.PageOptions.PAGE_EXECUTE_READ;
                 default:
                     Debug.Assert(access == MemoryMappedFileAccess.ReadWriteExecute);
                     return Interop.Kernel32.PageOptions.PAGE_EXECUTE_READWRITE;
@@ -229,10 +291,17 @@ namespace System.IO.MemoryMappedFiles
         /// caller used CreateOrOpen since Create isn't valid with Write access
         /// </summary>
         private static SafeMemoryMappedFileHandle OpenCore(
-            string mapName, HandleInheritability inheritability, int desiredAccessRights, bool createOrOpen)
+            string mapName,
+            HandleInheritability inheritability,
+            int desiredAccessRights,
+            bool createOrOpen
+        )
         {
             SafeMemoryMappedFileHandle handle = Interop.OpenFileMapping(
-                desiredAccessRights, (inheritability & HandleInheritability.Inheritable) != 0, mapName);
+                desiredAccessRights,
+                (inheritability & HandleInheritability.Inheritable) != 0,
+                mapName
+            );
             int lastError = Marshal.GetLastPInvokeError();
 
             if (handle.IsInvalid)
@@ -254,9 +323,12 @@ namespace System.IO.MemoryMappedFiles
         /// Helper method used to extract the native binary security descriptor from the MemoryMappedFileSecurity
         /// type. If pinningHandle is not null, caller must free it AFTER the call to CreateFile has returned.
         /// </summary>
-        private static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(HandleInheritability inheritability)
+        private static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
+            HandleInheritability inheritability
+        )
         {
-            Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default(Interop.Kernel32.SECURITY_ATTRIBUTES);
+            Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs =
+                default(Interop.Kernel32.SECURITY_ATTRIBUTES);
             if ((inheritability & HandleInheritability.Inheritable) != 0)
             {
                 secAttrs = default;

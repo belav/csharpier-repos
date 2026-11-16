@@ -185,7 +185,7 @@ namespace System.Reflection
         /// <summary>
         /// Retrieves a version of the Secure Hash Algorithm with a hash size of 512 bits.
         /// </summary>
-        Sha512 = 0x800e
+        Sha512 = 0x800e,
     }
 
     [Flags]

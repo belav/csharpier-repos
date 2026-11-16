@@ -18,10 +18,7 @@ namespace System
     {
         internal static Exception ByDesign
         {
-            get
-            {
-                return new NotImplementedException();
-            }
+            get { return new NotImplementedException(); }
         }
 
         internal static Exception ByDesignWithMessage(String message)

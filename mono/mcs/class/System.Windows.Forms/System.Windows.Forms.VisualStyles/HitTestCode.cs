@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,17 +28,17 @@
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum HitTestCode
-	{
-		Nowhere = 0,
-		Client = 1,
-		Left = 10,
-		Right = 11,
-		Top = 12,
-		TopLeft = 13,
-		TopRight = 14,
-		Bottom = 15,
-		BottomLeft = 16,
-		BottomRight = 17
-	}
+    public enum HitTestCode
+    {
+        Nowhere = 0,
+        Client = 1,
+        Left = 10,
+        Right = 11,
+        Top = 12,
+        TopLeft = 13,
+        TopRight = 14,
+        Bottom = 15,
+        BottomLeft = 16,
+        BottomRight = 17,
+    }
 }

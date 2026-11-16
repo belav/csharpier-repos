@@ -4,39 +4,23 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net 
+namespace System.Net
 {
     using System.Collections;
     using System.Collections.Specialized;
     using System.Net;
 
-    internal interface IAuthenticationManager 
+    internal interface IAuthenticationManager
     {
-        ICredentialPolicy CredentialPolicy 
-        { 
-            get; 
-            set; 
-        }
+        ICredentialPolicy CredentialPolicy { get; set; }
 
-        StringDictionary CustomTargetNameDictionary 
-        { 
-            get; 
-        }
+        StringDictionary CustomTargetNameDictionary { get; }
 
-        SpnDictionary SpnDictionary 
-        { 
-            get; 
-        }
+        SpnDictionary SpnDictionary { get; }
 
-        bool OSSupportsExtendedProtection 
-        { 
-            get; 
-        }
+        bool OSSupportsExtendedProtection { get; }
 
-        bool SspSupportsExtendedProtection 
-        { 
-            get; 
-        }
+        bool SspSupportsExtendedProtection { get; }
 
         void EnsureConfigLoaded();
 
@@ -50,10 +34,7 @@ namespace System.Net
 
         void Unregister(string authenticationScheme);
 
-        IEnumerator RegisteredModules 
-        { 
-            get; 
-        }
+        IEnumerator RegisteredModules { get; }
 
         void BindModule(Uri uri, Authorization response, IAuthenticationModule module);
     } // class AuthenticationManager

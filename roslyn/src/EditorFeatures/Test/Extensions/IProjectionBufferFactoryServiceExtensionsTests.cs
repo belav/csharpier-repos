@@ -25,18 +25,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         [Fact]
         public void TestCreateElisionBufferWithoutIndentation()
         {
-            var exportProvider = EditorTestCompositions.Editor.ExportProviderFactory.CreateExportProvider();
-            var contentTypeRegistryService = exportProvider.GetExportedValue<IContentTypeRegistryService>();
-            var textBuffer = exportProvider.GetExportedValue<ITextBufferFactoryService>().CreateTextBuffer(
-@"  line 1
+            var exportProvider =
+                EditorTestCompositions.Editor.ExportProviderFactory.CreateExportProvider();
+            var contentTypeRegistryService =
+                exportProvider.GetExportedValue<IContentTypeRegistryService>();
+            var textBuffer = exportProvider
+                .GetExportedValue<ITextBufferFactoryService>()
+                .CreateTextBuffer(
+                    @"  line 1
   line 2
-  line 3", contentTypeRegistryService.GetContentType("text"));
+  line 3",
+                    contentTypeRegistryService.GetContentType("text")
+                );
 
-            var elisionBuffer = IProjectionBufferFactoryServiceExtensions.CreateProjectionBufferWithoutIndentation(
-                exportProvider.GetExportedValue<IProjectionBufferFactoryService>(),
-                exportProvider.GetExportedValue<IEditorOptionsFactoryService>().GlobalOptions,
-                contentType: null,
-                exposedSpans: textBuffer.CurrentSnapshot.GetFullSpan());
+            var elisionBuffer =
+                IProjectionBufferFactoryServiceExtensions.CreateProjectionBufferWithoutIndentation(
+                    exportProvider.GetExportedValue<IProjectionBufferFactoryService>(),
+                    exportProvider.GetExportedValue<IEditorOptionsFactoryService>().GlobalOptions,
+                    contentType: null,
+                    exposedSpans: textBuffer.CurrentSnapshot.GetFullSpan()
+                );
 
             var elisionSnapshot = elisionBuffer.CurrentSnapshot;
             Assert.Equal(3, elisionSnapshot.LineCount);
@@ -52,12 +60,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         {
             var composition = EditorTestCompositions.EditorFeatures;
             var exportProvider = composition.ExportProviderFactory.CreateExportProvider();
-            var contentTypeRegistryService = exportProvider.GetExportedValue<IContentTypeRegistryService>();
-            var textBuffer = exportProvider.GetExportedValue<ITextBufferFactoryService>().CreateTextBuffer(
-@"  line 1
+            var contentTypeRegistryService =
+                exportProvider.GetExportedValue<IContentTypeRegistryService>();
+            var textBuffer = exportProvider
+                .GetExportedValue<ITextBufferFactoryService>()
+                .CreateTextBuffer(
+                    @"  line 1
   line 2
   line 3
-  line 4", contentTypeRegistryService.GetContentType("text"));
+  line 4",
+                    contentTypeRegistryService.GetContentType("text")
+                );
 
             var projectionBuffer = IProjectionBufferFactoryServiceExtensions.CreateProjectionBuffer(
                 exportProvider.GetExportedValue<IProjectionBufferFactoryService>(),
@@ -65,7 +78,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                 exportProvider.GetExportedValue<IEditorOptionsFactoryService>().GlobalOptions,
                 textBuffer.CurrentSnapshot,
                 "...",
-                LineSpan.FromBounds(1, 2), LineSpan.FromBounds(3, 4));
+                LineSpan.FromBounds(1, 2),
+                LineSpan.FromBounds(3, 4)
+            );
 
             var projectionSnapshot = projectionBuffer.CurrentSnapshot;
             Assert.Equal(4, projectionSnapshot.LineCount);
@@ -82,20 +97,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         {
             var composition = EditorTestCompositions.EditorFeatures;
             var exportProvider = composition.ExportProviderFactory.CreateExportProvider();
-            var contentTypeRegistryService = exportProvider.GetExportedValue<IContentTypeRegistryService>();
-            var textBuffer = exportProvider.GetExportedValue<ITextBufferFactoryService>().CreateTextBuffer(
-@"  line 1
+            var contentTypeRegistryService =
+                exportProvider.GetExportedValue<IContentTypeRegistryService>();
+            var textBuffer = exportProvider
+                .GetExportedValue<ITextBufferFactoryService>()
+                .CreateTextBuffer(
+                    @"  line 1
   line 2
   line 3
-    line 4", contentTypeRegistryService.GetContentType("text"));
+    line 4",
+                    contentTypeRegistryService.GetContentType("text")
+                );
 
-            var projectionBuffer = IProjectionBufferFactoryServiceExtensions.CreateProjectionBufferWithoutIndentation(
-                exportProvider.GetExportedValue<IProjectionBufferFactoryService>(),
-                exportProvider.GetExportedValue<IContentTypeRegistryService>(),
-                exportProvider.GetExportedValue<IEditorOptionsFactoryService>().GlobalOptions,
-                textBuffer.CurrentSnapshot,
-                "...",
-                LineSpan.FromBounds(0, 1), LineSpan.FromBounds(2, 4));
+            var projectionBuffer =
+                IProjectionBufferFactoryServiceExtensions.CreateProjectionBufferWithoutIndentation(
+                    exportProvider.GetExportedValue<IProjectionBufferFactoryService>(),
+                    exportProvider.GetExportedValue<IContentTypeRegistryService>(),
+                    exportProvider.GetExportedValue<IEditorOptionsFactoryService>().GlobalOptions,
+                    textBuffer.CurrentSnapshot,
+                    "...",
+                    LineSpan.FromBounds(0, 1),
+                    LineSpan.FromBounds(2, 4)
+                );
 
             var projectionSnapshot = projectionBuffer.CurrentSnapshot;
             Assert.Equal(4, projectionSnapshot.LineCount);

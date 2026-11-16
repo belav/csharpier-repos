@@ -36,7 +36,10 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                     else
                     {
                         // armv7/armv6 process running on arm64 host
-                        Assert.True(processArch == Architecture.Arm || processArch == Architecture.Armv6, $"Unexpected process architecture: {processArch}");
+                        Assert.True(
+                            processArch == Architecture.Arm || processArch == Architecture.Armv6,
+                            $"Unexpected process architecture: {processArch}"
+                        );
                     }
                     break;
 

@@ -1,4 +1,3 @@
-
 //-----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
@@ -6,24 +5,30 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
 
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Compat", Justification = "Compat is an accepted abbreviation")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Compat",
+        Justification = "Compat is an accepted abbreviation"
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ClientOperationCompatBase
     {
         internal ClientOperationCompatBase() { }
+
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         public IList<IParameterInspector> ParameterInspectors
         {
-            get
-            {
-                return this.parameterInspectors;
-            }
+            get { return this.parameterInspectors; }
         }
         internal SynchronizedCollection<IParameterInspector> parameterInspectors;
     }
@@ -52,9 +57,7 @@ namespace System.ServiceModel.Dispatcher
         bool isFaultFormatterSetExplicit = false;
 
         public ClientOperation(ClientRuntime parent, string name, string action)
-            : this(parent, name, action, null)
-        {
-        }
+            : this(parent, name, action, null) { }
 
         public ClientOperation(ClientRuntime parent, string name, string action, string replyAction)
         {
@@ -121,7 +124,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-        
+
         public IClientMessageFormatter Formatter
         {
             get { return this.formatter; }
@@ -134,16 +137,18 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-        
+
         internal IClientFaultFormatter FaultFormatter
         {
-            get 
+            get
             {
                 if (this.faultFormatter == null)
                 {
-                    this.faultFormatter = new DataContractSerializerFaultFormatter(this.faultContractInfos);
+                    this.faultFormatter = new DataContractSerializerFaultFormatter(
+                        this.faultContractInfos
+                    );
                 }
-                return this.faultFormatter; 
+                return this.faultFormatter;
             }
             set
             {
@@ -158,10 +163,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool IsFaultFormatterSetExplicit
         {
-            get 
-            {
-                return this.isFaultFormatterSetExplicit; 
-            }
+            get { return this.isFaultFormatterSetExplicit; }
         }
 
         internal IClientMessageFormatter InternalFormatter
@@ -261,7 +263,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public MethodInfo TaskMethod 
+        public MethodInfo TaskMethod
         {
             get { return this.taskMethod; }
             set
@@ -271,10 +273,10 @@ namespace System.ServiceModel.Dispatcher
                     this.parent.InvalidateRuntime();
                     this.taskMethod = value;
                 }
-            } 
+            }
         }
 
-        public Type TaskTResult 
+        public Type TaskTResult
         {
             get { return this.taskTResult; }
             set
@@ -284,7 +286,7 @@ namespace System.ServiceModel.Dispatcher
                     this.parent.InvalidateRuntime();
                     this.taskTResult = value;
                 }
-            }  
+            }
         }
 
         internal bool IsSessionOpenNotificationEnabled
@@ -299,6 +301,5 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-
     }
 }

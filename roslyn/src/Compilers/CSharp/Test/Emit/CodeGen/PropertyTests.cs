@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [CompilerTrait(CompilerFeature.ExpressionBody)]
         public void ExpressionBodedProperty()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public int x;
@@ -29,7 +30,9 @@ class C
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var verifier = CompileAndVerify(compilation);
-            verifier.VerifyIL("C.X.get", @"
+            verifier.VerifyIL(
+                "C.X.get",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -37,8 +40,11 @@ class C
   IL_0001:  ldfld      ""int C.x""
   IL_0006:  ret
 }
-");
-            verifier.VerifyIL("C.X.set", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.X.set",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -47,7 +53,8 @@ class C
   IL_0002:  stfld      ""int C.x""
   IL_0007:  ret
 }
-");
+"
+            );
         }
     }
 }

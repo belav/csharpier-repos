@@ -20,11 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FirstBuiltInCompletionProvider()
-        {
-        }
+        public FirstBuiltInCompletionProvider() { }
 
-        public override Task ProvideCompletionsAsync(CompletionContext context)
-            => Task.CompletedTask;
+        public override Task ProvideCompletionsAsync(CompletionContext context) =>
+            Task.CompletedTask;
     }
 }

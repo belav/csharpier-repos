@@ -25,9 +25,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.Xml;
 using System.Data.SqlTypes;
+using System.Xml;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
@@ -244,6 +244,7 @@ namespace System.Data.Tests.SqlTypes
             SqlBinary testBinary = testByteArray;
             Assert.Equal((byte)15, testBinary[0]);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

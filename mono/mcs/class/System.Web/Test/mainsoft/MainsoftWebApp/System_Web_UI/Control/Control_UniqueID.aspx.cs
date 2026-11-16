@@ -30,71 +30,67 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-	public class Control_UniqueID
-		: GHTControlBase
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class Control_UniqueID : GHTControlBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			foreach (Type currentType in TypesToTest)
-			{
-				GHTHeader(currentType.ToString());
-				Test(currentType);
-			}
-			GHTTestEnd();
-		}
-	 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-		private void Test(Type ctrlType)
-		{
-			// Default value.
-			try 
-			{
-				GHTSubTestBegin(ctrlType, "Default value:", false);
-				AddToForm(TestedControl);
-				GHTSubTestAddResult(TestedControl.UniqueID);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            foreach (Type currentType in TypesToTest)
+            {
+                GHTHeader(currentType.ToString());
+                Test(currentType);
+            }
+            GHTTestEnd();
+        }
 
-		}
-		private void AddToForm(System.Web.UI.Control a_toAdd)
-		{
-			if (a_toAdd.Parent == null)
-				GHTActiveForm.Controls.Add(a_toAdd);
-			else
-				AddToForm(a_toAdd.Parent);
-		}
-     
-	}
+        private void Test(Type ctrlType)
+        {
+            // Default value.
+            try
+            {
+                GHTSubTestBegin(ctrlType, "Default value:", false);
+                AddToForm(TestedControl);
+                GHTSubTestAddResult(TestedControl.UniqueID);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
+        }
+
+        private void AddToForm(System.Web.UI.Control a_toAdd)
+        {
+            if (a_toAdd.Parent == null)
+                GHTActiveForm.Controls.Add(a_toAdd);
+            else
+                AddToForm(a_toAdd.Parent);
+        }
+    }
 }
-

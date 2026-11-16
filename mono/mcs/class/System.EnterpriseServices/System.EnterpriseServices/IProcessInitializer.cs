@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.IProcessInitializer.cs
 //
 // Author:  Mike Kestner (mkestner@ximian.com)
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,18 +30,18 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
+namespace System.EnterpriseServices
+{
+    [Guid("1113f52d-dc7f-4943-aed6-88d04027e32a")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport]
+    public interface IProcessInitializer
+    {
+        #region Methods
 
-	[Guid("1113f52d-dc7f-4943-aed6-88d04027e32a")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport]
-	public interface IProcessInitializer {
+        void Shutdown();
+        void Startup([In, MarshalAs(UnmanagedType.IUnknown)] object punkProcessControl);
 
-		#region Methods
-
-		void Shutdown ();
-		void Startup ([In, MarshalAs(UnmanagedType.IUnknown)] object punkProcessControl);
-
-		#endregion
-	}
+        #endregion
+    }
 }

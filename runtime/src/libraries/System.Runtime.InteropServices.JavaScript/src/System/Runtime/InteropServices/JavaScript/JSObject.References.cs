@@ -97,21 +97,29 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 if (jsObject.OwnerThreadId != Thread.CurrentThread.ManagedThreadId)
                 {
-                    throw new InvalidOperationException("The JavaScript object can be used only on the thread where it was created.");
+                    throw new InvalidOperationException(
+                        "The JavaScript object can be used only on the thread where it was created."
+                    );
                 }
             }
             else if (value is JSException jsException)
             {
-                if (jsException.jsException != null && jsException.jsException.OwnerThreadId != Thread.CurrentThread.ManagedThreadId)
+                if (
+                    jsException.jsException != null
+                    && jsException.jsException.OwnerThreadId != Thread.CurrentThread.ManagedThreadId
+                )
                 {
-                    throw new InvalidOperationException("The JavaScript object can be used only on the thread where it was created.");
+                    throw new InvalidOperationException(
+                        "The JavaScript object can be used only on the thread where it was created."
+                    );
                 }
             }
         }
 #endif
 
         /// <inheritdoc />
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is JSObject other && JSHandle == other.JSHandle;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is JSObject other && JSHandle == other.JSHandle;
 
         /// <inheritdoc />
         public override int GetHashCode() => (int)JSHandle;
@@ -131,16 +139,19 @@ namespace System.Runtime.InteropServices.JavaScript
             if (!_isDisposed)
             {
 #if FEATURE_WASM_THREADS
-                SynchronizationContext.Send(static (JSObject self) =>
-                {
-                    lock (self._thisLock)
+                SynchronizationContext.Send(
+                    static (JSObject self) =>
                     {
-                        JSHostImplementation.ReleaseCSOwnedObject(self.JSHandle);
-                        self._isDisposed = true;
-                        self.JSHandle = IntPtr.Zero;
-                        self.m_SynchronizationContext = null;
-                    } //lock
-                }, this);
+                        lock (self._thisLock)
+                        {
+                            JSHostImplementation.ReleaseCSOwnedObject(self.JSHandle);
+                            self._isDisposed = true;
+                            self.JSHandle = IntPtr.Zero;
+                            self.m_SynchronizationContext = null;
+                        } //lock
+                    },
+                    this
+                );
 #else
                 JSHostImplementation.ReleaseCSOwnedObject(JSHandle);
                 _isDisposed = true;

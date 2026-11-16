@@ -5,23 +5,24 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration.Internal;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration.Internal;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
+using System.Xml;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     [Flags]
-    internal enum ConfigurationValueFlags {
+    internal enum ConfigurationValueFlags
+    {
         Default = 0,
         Inherited = 1,
         Modified = 2,

@@ -35,26 +35,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         string Cci.INamedEntity.Name
         {
-            get
-            {
-                return _underlyingModule.MetadataName;
-            }
+            get { return _underlyingModule.MetadataName; }
         }
 
         bool Cci.IFileReference.HasMetadata
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         string Cci.IFileReference.FileName
         {
-            get
-            {
-                return _underlyingModule.Name;
-            }
+            get { return _underlyingModule.Name; }
         }
 
         ImmutableArray<byte> Cci.IFileReference.GetHashValue(AssemblyHashAlgorithm algorithmId)
@@ -64,13 +55,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.IAssemblyReference Cci.IModuleReference.GetContainingAssembly(EmitContext context)
         {
-            if (_moduleBeingBuilt.OutputKind.IsNetModule() &&
-                ReferenceEquals(_moduleBeingBuilt.SourceModule.ContainingAssembly, _underlyingModule.ContainingAssembly))
+            if (
+                _moduleBeingBuilt.OutputKind.IsNetModule()
+                && ReferenceEquals(
+                    _moduleBeingBuilt.SourceModule.ContainingAssembly,
+                    _underlyingModule.ContainingAssembly
+                )
+            )
             {
                 return null;
             }
 
-            return _moduleBeingBuilt.Translate(_underlyingModule.ContainingAssembly, context.Diagnostics);
+            return _moduleBeingBuilt.Translate(
+                _underlyingModule.ContainingAssembly,
+                context.Diagnostics
+            );
         }
 
         public override string ToString()

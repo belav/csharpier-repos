@@ -51,7 +51,7 @@ namespace System.Web.WebPages
                 absPath = VirtualPathUtility.ToAbsolute(absPath);
             }
             // We need to call this overload because it returns null if the path is not within the application root.
-            // The overload calls into MakeVirtualPathAppRelative(string virtualPath, string applicationPath, bool nullIfNotInApp), with 
+            // The overload calls into MakeVirtualPathAppRelative(string virtualPath, string applicationPath, bool nullIfNotInApp), with
             // nullIfNotInApp set to true.
             return VirtualPathUtility.ToAppRelative(absPath, appDomainAppVirtualPath) != null;
         }

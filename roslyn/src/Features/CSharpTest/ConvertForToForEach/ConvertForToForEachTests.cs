@@ -19,13 +19,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertForToForEach)]
     public class ConvertForToForEachTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertForToForEachCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertForToForEachCodeRefactoringProvider();
 
-        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(true, NotificationOption2.Silent);
+        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Silent
+        );
 
-        private OptionsCollection ImplicitTypeEverywhere()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ImplicitTypeEverywhere() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithSilent },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithSilent },
@@ -63,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -103,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -141,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -179,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -217,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -257,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -293,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -323,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                             Console.WriteLine(v);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -357,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -391,7 +405,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -425,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -445,7 +461,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -479,7 +496,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -499,7 +517,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -533,7 +552,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -567,7 +587,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -601,7 +622,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -635,7 +657,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -669,7 +692,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -689,7 +713,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -709,7 +734,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -729,7 +755,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -749,7 +776,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -769,7 +797,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -789,7 +818,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -809,7 +839,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -830,7 +861,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -850,7 +882,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -870,7 +903,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -890,7 +924,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -926,7 +961,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -963,7 +999,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1000,7 +1037,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1041,7 +1079,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1086,7 +1125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1106,7 +1146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1126,7 +1167,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1160,7 +1202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1194,7 +1237,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact]
@@ -1248,7 +1293,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact]
@@ -1302,7 +1349,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact]
@@ -1340,7 +1389,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         } // trivia 6
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1360,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1380,7 +1431,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1400,7 +1452,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1434,7 +1487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1468,7 +1522,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1509,7 +1564,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1549,7 +1605,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1589,7 +1646,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1609,163 +1667,170 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestDoesNotUseLocalFunctionName()
         {
             await TestInRegularAndScript1Async(
-    """
-    using System;
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        [||]for (int i = 0; i < array.Length; i++)
+                        {
+                            Console.WriteLine(array[i]);
+                        }
 
-            void v() { }
-        }
-    }
-    """,
-    """
-    using System;
+                        void v() { }
+                    }
+                }
+                """,
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v1|} in array)
-            {
-                Console.WriteLine(v1);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        foreach (string {|Rename:v1|} in array)
+                        {
+                            Console.WriteLine(v1);
+                        }
 
-            void v() { }
-        }
-    }
-    """);
+                        void v() { }
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
         public async Task TestUsesLocalFunctionParameterName()
         {
             await TestInRegularAndScript1Async(
-    """
-    using System;
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        [||]for (int i = 0; i < array.Length; i++)
+                        {
+                            Console.WriteLine(array[i]);
+                        }
 
-            void M(string v)
-            {
-            }
-        }
-    }
-    """,
-    """
-    using System;
+                        void M(string v)
+                        {
+                        }
+                    }
+                }
+                """,
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v|} in array)
-            {
-                Console.WriteLine(v);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        foreach (string {|Rename:v|} in array)
+                        {
+                            Console.WriteLine(v);
+                        }
 
-            void M(string v)
-            {
-            }
-        }
-    }
-    """);
+                        void M(string v)
+                        {
+                        }
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
         public async Task TestDoesNotUseLambdaParameterWithCSharpLessThan8()
         {
             await TestInRegularAndScript1Async(
-    """
-    using System;
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        [||]for (int i = 0; i < array.Length; i++)
+                        {
+                            Console.WriteLine(array[i]);
+                        }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """,
-    """
-    using System;
+                        Action<int> myLambda = v => { };
+                    }
+                }
+                """,
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v1|} in array)
-            {
-                Console.WriteLine(v1);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        foreach (string {|Rename:v1|} in array)
+                        {
+                            Console.WriteLine(v1);
+                        }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """, parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_3)));
+                        Action<int> myLambda = v => { };
+                    }
+                }
+                """,
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_3))
+            );
         }
 
         [Fact]
         public async Task TestUsesLambdaParameterNameInCSharp8()
         {
             await TestInRegularAndScript1Async(
-    """
-    using System;
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            [||]for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        [||]for (int i = 0; i < array.Length; i++)
+                        {
+                            Console.WriteLine(array[i]);
+                        }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """,
-    """
-    using System;
+                        Action<int> myLambda = v => { };
+                    }
+                }
+                """,
+                """
+                using System;
 
-    class C
-    {
-        void Test(string[] array)
-        {
-            foreach (string {|Rename:v|} in array)
-            {
-                Console.WriteLine(v);
-            }
+                class C
+                {
+                    void Test(string[] array)
+                    {
+                        foreach (string {|Rename:v|} in array)
+                        {
+                            Console.WriteLine(v);
+                        }
 
-            Action<int> myLambda = v => { };
-        }
-    }
-    """, parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp8)));
+                        Action<int> myLambda = v => { };
+                    }
+                }
+                """,
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp8))
+            );
         }
 
         [Fact]
@@ -1791,7 +1856,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36305")]
@@ -1816,7 +1882,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                     }
                 }
                 """,
-
                 """
                 using System;
                 using System.Collections.Generic;
@@ -1834,7 +1899,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
                     {
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

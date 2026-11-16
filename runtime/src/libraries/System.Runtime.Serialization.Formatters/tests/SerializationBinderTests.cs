@@ -15,13 +15,17 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void BindToName_NullDefaults()
         {
             var b = new TrackAllBindToTypes();
-            string assemblyName, typeName;
+            string assemblyName,
+                typeName;
             b.BindToName(typeof(string), out assemblyName, out typeName);
             Assert.Null(assemblyName);
             Assert.Null(typeName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void BindToType_AllValuesTracked()
         {
             var s = new MemoryStream();
@@ -39,7 +43,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         private class TrackAllBindToTypes : SerializationBinder
         {
-            public readonly List<KeyValuePair<string, string>> Binds = new List<KeyValuePair<string, string>>();
+            public readonly List<KeyValuePair<string, string>> Binds =
+                new List<KeyValuePair<string, string>>();
 
             public override Type BindToType(string assemblyName, string typeName)
             {

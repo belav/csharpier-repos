@@ -9,28 +9,39 @@ namespace System.Diagnostics
     /// Signifies that the attributed type has a visualizer which is pointed
     /// to by the parameter type name strings.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly,
+        AllowMultiple = true
+    )]
     public sealed class DebuggerVisualizerAttribute : Attribute
     {
         private Type? _target;
 
         public DebuggerVisualizerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string visualizerTypeName)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                string visualizerTypeName
+        )
         {
             VisualizerTypeName = visualizerTypeName;
         }
 
         public DebuggerVisualizerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string visualizerTypeName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string? visualizerObjectSourceTypeName)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                string visualizerTypeName,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                string? visualizerObjectSourceTypeName
+        )
         {
             VisualizerTypeName = visualizerTypeName;
             VisualizerObjectSourceTypeName = visualizerObjectSourceTypeName;
         }
 
         public DebuggerVisualizerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string visualizerTypeName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type visualizerObjectSource)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                string visualizerTypeName,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                Type visualizerObjectSource
+        )
         {
             ArgumentNullException.ThrowIfNull(visualizerObjectSource);
 
@@ -39,7 +50,8 @@ namespace System.Diagnostics
         }
 
         public DebuggerVisualizerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type visualizer)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type visualizer
+        )
         {
             ArgumentNullException.ThrowIfNull(visualizer);
 
@@ -48,7 +60,9 @@ namespace System.Diagnostics
 
         public DebuggerVisualizerAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type visualizer,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type visualizerObjectSource)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                Type visualizerObjectSource
+        )
         {
             ArgumentNullException.ThrowIfNull(visualizer);
             ArgumentNullException.ThrowIfNull(visualizerObjectSource);
@@ -59,7 +73,9 @@ namespace System.Diagnostics
 
         public DebuggerVisualizerAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type visualizer,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string? visualizerObjectSourceTypeName)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                string? visualizerObjectSourceTypeName
+        )
         {
             ArgumentNullException.ThrowIfNull(visualizer);
 

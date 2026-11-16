@@ -10,9 +10,13 @@ namespace System.ServiceModel.Configuration
     /// <summary>
     /// NetHttpWebSocketTransportSettingsElement for WebSocketTransportSettings
     /// </summary>
-    public sealed partial class NetHttpWebSocketTransportSettingsElement : WebSocketTransportSettingsElement
+    public sealed partial class NetHttpWebSocketTransportSettingsElement
+        : WebSocketTransportSettingsElement
     {
-        [ConfigurationProperty(ConfigurationStrings.TransportUsage, DefaultValue = NetHttpBindingDefaults.TransportUsage)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransportUsage,
+            DefaultValue = NetHttpBindingDefaults.TransportUsage
+        )]
         [ServiceModelEnumValidator(typeof(WebSocketTransportUsageHelper))]
         public override WebSocketTransportUsage TransportUsage
         {
@@ -20,7 +24,10 @@ namespace System.ServiceModel.Configuration
             set { base.TransportUsage = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SubProtocol, DefaultValue = WebSocketTransportSettings.SoapSubProtocol)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SubProtocol,
+            DefaultValue = WebSocketTransportSettings.SoapSubProtocol
+        )]
         [StringValidator(MinLength = 0)]
         public override string SubProtocol
         {

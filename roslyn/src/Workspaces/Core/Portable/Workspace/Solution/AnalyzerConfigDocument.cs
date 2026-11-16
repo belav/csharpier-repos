@@ -7,8 +7,6 @@ namespace Microsoft.CodeAnalysis
     public sealed class AnalyzerConfigDocument : TextDocument
     {
         internal AnalyzerConfigDocument(Project project, AnalyzerConfigDocumentState state)
-            : base(project, state, TextDocumentKind.AnalyzerConfigDocument)
-        {
-        }
+            : base(project, state, TextDocumentKind.AnalyzerConfigDocument) { }
     }
 }

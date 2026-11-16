@@ -45,21 +45,13 @@ public class HttpLoggingEndpointConventionBuilderTests
         var testConventionBuilder = new TestEndpointConventionBuilder();
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-                testConventionBuilder.WithHttpLogging(
-                    HttpLoggingFields.None,
-                    requestBodyLogLimit: -1
-                )
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            testConventionBuilder.WithHttpLogging(HttpLoggingFields.None, requestBodyLogLimit: -1)
         );
         Assert.Equal("requestBodyLogLimit", ex.ParamName);
 
-        ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-                testConventionBuilder.WithHttpLogging(
-                    HttpLoggingFields.None,
-                    responseBodyLogLimit: -1
-                )
+        ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            testConventionBuilder.WithHttpLogging(HttpLoggingFields.None, responseBodyLogLimit: -1)
         );
         Assert.Equal("responseBodyLogLimit", ex.ParamName);
     }

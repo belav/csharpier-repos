@@ -20,7 +20,10 @@ namespace System.Web.Http.Filters
         /// </summary>
         /// <param name="actionContext">The action context.</param>
         /// <param name="result">The current action result.</param>
-        public HttpAuthenticationChallengeContext(HttpActionContext actionContext, IHttpActionResult result)
+        public HttpAuthenticationChallengeContext(
+            HttpActionContext actionContext,
+            IHttpActionResult result
+        )
         {
             if (actionContext == null)
             {
@@ -47,10 +50,7 @@ namespace System.Web.Http.Filters
         /// </remarks>
         public IHttpActionResult Result
         {
-            get
-            {
-                return _result;
-            }
+            get { return _result; }
             set
             {
                 if (value == null)

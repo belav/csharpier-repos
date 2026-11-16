@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -26,17 +26,13 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
 namespace Microsoft.Build.Framework
 {
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
-	public sealed class OutputAttribute : Attribute
-	{
-		public OutputAttribute ()
-		{
-		}
-	}
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public sealed class OutputAttribute : Attribute
+    {
+        public OutputAttribute() { }
+    }
 }
-

@@ -29,7 +29,12 @@ namespace System.Diagnostics.Tracing
         /// <param name="name">The name.</param>
         /// <param name="eventSource">The event source.</param>
         /// <param name="totalValueProvider">The delegate to invoke to get the total value for this counter.</param>
-        public IncrementingPollingCounter(string name, EventSource eventSource, Func<double> totalValueProvider) : base(name, eventSource)
+        public IncrementingPollingCounter(
+            string name,
+            EventSource eventSource,
+            Func<double> totalValueProvider
+        )
+            : base(name, eventSource)
         {
             ArgumentNullException.ThrowIfNull(totalValueProvider);
 
@@ -37,7 +42,8 @@ namespace System.Diagnostics.Tracing
             Publish();
         }
 
-        public override string ToString() => $"IncrementingPollingCounter '{Name}' Increment {_increment}";
+        public override string ToString() =>
+            $"IncrementingPollingCounter '{Name}' Increment {_increment}";
 
         public TimeSpan DisplayRateTimeScale { get; set; }
         private double _increment;
@@ -59,29 +65,45 @@ namespace System.Diagnostics.Tracing
             }
             catch (Exception ex)
             {
-                ReportOutOfBandMessage($"ERROR: Exception during EventCounter {Name} getMetricFunction callback: " + ex.Message);
+                ReportOutOfBandMessage(
+                    $"ERROR: Exception during EventCounter {Name} getMetricFunction callback: "
+                        + ex.Message
+                );
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The DynamicDependency will preserve the properties of IncrementingCounterPayload")]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(IncrementingCounterPayload))]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The DynamicDependency will preserve the properties of IncrementingCounterPayload"
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicProperties,
+            typeof(IncrementingCounterPayload)
+        )]
         internal override void WritePayload(float intervalSec, int pollingIntervalMillisec)
         {
             UpdateMetric();
-            lock (this)     // Lock the counter
+            lock (this) // Lock the counter
             {
                 IncrementingCounterPayload payload = new IncrementingCounterPayload();
                 payload.Name = Name;
                 payload.DisplayName = DisplayName ?? "";
-                payload.DisplayRateTimeScale = (DisplayRateTimeScale == TimeSpan.Zero) ? "" : DisplayRateTimeScale.ToString("c");
+                payload.DisplayRateTimeScale =
+                    (DisplayRateTimeScale == TimeSpan.Zero)
+                        ? ""
+                        : DisplayRateTimeScale.ToString("c");
                 payload.IntervalSec = intervalSec;
                 payload.Series = $"Interval={pollingIntervalMillisec}"; // TODO: This may need to change when we support multi-session
                 payload.CounterType = "Sum";
                 payload.Metadata = GetMetadataString();
                 payload.Increment = _increment - _prevIncrement;
                 payload.DisplayUnits = DisplayUnits ?? "";
-                EventSource.Write("EventCounters", new EventSourceOptions() { Level = EventLevel.LogAlways }, new IncrementingPollingCounterPayloadType(payload));
+                EventSource.Write(
+                    "EventCounters",
+                    new EventSourceOptions() { Level = EventLevel.LogAlways },
+                    new IncrementingPollingCounterPayloadType(payload)
+                );
             }
         }
     }
@@ -92,7 +114,11 @@ namespace System.Diagnostics.Tracing
     [EventData]
     internal sealed class IncrementingPollingCounterPayloadType
     {
-        public IncrementingPollingCounterPayloadType(IncrementingCounterPayload payload) { Payload = payload; }
+        public IncrementingPollingCounterPayloadType(IncrementingCounterPayload payload)
+        {
+            Payload = payload;
+        }
+
         public IncrementingCounterPayload Payload { get; set; }
     }
 }

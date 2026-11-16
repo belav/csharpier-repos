@@ -80,7 +80,12 @@ namespace System.Xml.Xsl.XsltOld
 
         internal void CompileSingle(Compiler compiler)
         {
-            _matchKey = compiler.AddQuery("/", /*allowVars:*/false, /*allowKey:*/true, /*pattern*/true);
+            _matchKey = compiler.AddQuery(
+                "/", /*allowVars:*/
+                false, /*allowKey:*/
+                true, /*pattern*/
+                true
+            );
             _priority = Compiler.RootPriority;
 
             CompileOnceTemplate(compiler);
@@ -94,7 +99,12 @@ namespace System.Xml.Xsl.XsltOld
             if (Ref.Equal(name, compiler.Atoms.Match))
             {
                 Debug.Assert(_matchKey == Compiler.InvalidQueryKey);
-                _matchKey = compiler.AddQuery(value, /*allowVars:*/false, /*allowKey:*/true, /*pattern*/true);
+                _matchKey = compiler.AddQuery(
+                    value, /*allowVars:*/
+                    false, /*allowKey:*/
+                    true, /*pattern*/
+                    true
+                );
             }
             else if (Ref.Equal(name, compiler.Atoms.Name))
             {
@@ -138,10 +148,12 @@ namespace System.Xml.Xsl.XsltOld
             {
                 Debug.Assert(!(union.qy2 is UnionExpr), "only qy1 can be union");
                 TemplateAction copy = this.CloneWithoutName();
-                compiler.QueryStore.Add(new TheQuery(
-                    new CompiledXpathExpr(union.qy2, expr.Expression, false),
-                    theQuery._ScopeManager
-                ));
+                compiler.QueryStore.Add(
+                    new TheQuery(
+                        new CompiledXpathExpr(union.qy2, expr.Expression, false),
+                        theQuery._ScopeManager
+                    )
+                );
                 copy._matchKey = compiler.QueryStore.Count - 1;
                 copy._priority = union.qy2.XsltDefaultPriority;
                 compiler.AddTemplate(copy);
@@ -167,8 +179,10 @@ namespace System.Xml.Xsl.XsltOld
                 switch (input.NodeType)
                 {
                     case XPathNodeType.Element:
-                        if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl) &&
-                            Ref.Equal(input.LocalName, input.Atoms.Param))
+                        if (
+                            Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)
+                            && Ref.Equal(input.LocalName, input.Atoms.Param)
+                        )
                         {
                             compiler.PushNamespaceScope();
                             AddAction(compiler.CreateVariableAction(VariableType.LocalParameter));
@@ -187,8 +201,7 @@ namespace System.Xml.Xsl.XsltOld
                     default:
                         continue;
                 }
-            }
-            while (input.Advance());
+            } while (input.Advance());
         }
 
         //
@@ -216,6 +229,7 @@ namespace System.Xml.Xsl.XsltOld
                 _replaceNSAliasesDone = true;
             }
         }
+
         //
         // Execution
         //
@@ -240,7 +254,7 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         frame.Finished();
                     }
-                    break;                              // Allow children to run
+                    break; // Allow children to run
                 case ProcessingChildren:
                     frame.Finished();
                     break;

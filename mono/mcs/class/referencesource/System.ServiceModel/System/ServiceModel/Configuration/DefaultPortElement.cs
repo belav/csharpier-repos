@@ -9,9 +9,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class DefaultPortElement : ConfigurationElement
     {
-        public DefaultPortElement() 
-        {
-        }
+        public DefaultPortElement() { }
 
         public DefaultPortElement(DefaultPortElement other)
         {
@@ -19,7 +17,10 @@ namespace System.ServiceModel.Configuration
             this.Port = other.Port;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Scheme, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Scheme,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string Scheme
         {
@@ -34,7 +35,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Port, DefaultValue = 0, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Port,
+            DefaultValue = 0,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         [IntegerValidator(MinValue = IPEndPoint.MinPort, MaxValue = IPEndPoint.MaxPort)]
         public int Port
         {

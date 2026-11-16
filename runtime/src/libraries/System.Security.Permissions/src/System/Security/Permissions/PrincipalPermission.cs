@@ -9,9 +9,16 @@ using System.Threading;
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    public sealed class PrincipalPermission : IPermission, ISecurityEncodable, IUnrestrictedPermission
+    public sealed class PrincipalPermission
+        : IPermission,
+            ISecurityEncodable,
+            IUnrestrictedPermission
     {
         private IDRole[] _idArray;
 
@@ -50,7 +57,13 @@ namespace System.Security.Permissions
         {
             foreach (IDRole idRole in _idArray)
             {
-                if (idRole.ID == null || idRole.ID.Length != 0 || idRole.Role == null || idRole.Role.Length != 0 || idRole.Authenticated)
+                if (
+                    idRole.ID == null
+                    || idRole.ID.Length != 0
+                    || idRole.Role == null
+                    || idRole.Role.Length != 0
+                    || idRole.Authenticated
+                )
                     return false;
             }
             return true;
@@ -80,7 +93,10 @@ namespace System.Security.Permissions
             }
             else if (!VerifyType(target))
             {
-                throw new ArgumentException(SR.Format(SR.Argument_WrongType, GetType().FullName), nameof(target));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_WrongType, GetType().FullName),
+                    nameof(target)
+                );
             }
 
             PrincipalPermission operand = (PrincipalPermission)target;
@@ -99,9 +115,17 @@ namespace System.Security.Permissions
                 bool foundMatch = false;
                 foreach (IDRole operandIdRole in operand._idArray)
                 {
-                    if ((operandIdRole.Authenticated == idRole.Authenticated) &&
-                        (operandIdRole.ID == null || (idRole.ID != null && idRole.ID.Equals(operandIdRole.ID))) &&
-                        (operandIdRole.Role == null || (idRole.Role != null && idRole.Role.Equals(operandIdRole.Role))))
+                    if (
+                        (operandIdRole.Authenticated == idRole.Authenticated)
+                        && (
+                            operandIdRole.ID == null
+                            || (idRole.ID != null && idRole.ID.Equals(operandIdRole.ID))
+                        )
+                        && (
+                            operandIdRole.Role == null
+                            || (idRole.Role != null && idRole.Role.Equals(operandIdRole.Role))
+                        )
+                    )
                     {
                         foundMatch = true;
                         break;
@@ -123,7 +147,10 @@ namespace System.Security.Permissions
             }
             else if (!VerifyType(target))
             {
-                throw new ArgumentException(SR.Format(SR.Argument_WrongType, GetType().FullName), nameof(target));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_WrongType, GetType().FullName),
+                    nameof(target)
+                );
             }
             else if (IsUnrestricted())
             {
@@ -149,12 +176,20 @@ namespace System.Security.Permissions
                         bool newAuthenticated = operandIdRole.Authenticated;
                         bool addToNewIDRoles = false;
 
-                        if (operandIdRole.ID == null || idRole.ID == null || idRole.ID.Equals(operandIdRole.ID))
+                        if (
+                            operandIdRole.ID == null
+                            || idRole.ID == null
+                            || idRole.ID.Equals(operandIdRole.ID)
+                        )
                         {
                             newID = operandIdRole.ID ?? idRole.ID;
                             addToNewIDRoles = true;
                         }
-                        if (operandIdRole.Role == null || idRole.Role == null || idRole.Role.Equals(operandIdRole.Role))
+                        if (
+                            operandIdRole.Role == null
+                            || idRole.Role == null
+                            || idRole.Role.Equals(operandIdRole.Role)
+                        )
                         {
                             newRole = operandIdRole.Role ?? idRole.Role;
                             addToNewIDRoles = true;
@@ -179,7 +214,10 @@ namespace System.Security.Permissions
             }
             else if (!VerifyType(other))
             {
-                throw new ArgumentException(SR.Format(SR.Argument_WrongType, GetType().FullName), nameof(other));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_WrongType, GetType().FullName),
+                    nameof(other)
+                );
             }
 
             PrincipalPermission operand = (PrincipalPermission)other;
@@ -237,8 +275,17 @@ namespace System.Security.Permissions
                 {
                     return;
                 }
-                else if (principal.Identity.IsAuthenticated &&
-                         (idRole.ID == null || string.Equals(principal.Identity.Name, idRole.ID, StringComparison.OrdinalIgnoreCase)))
+                else if (
+                    principal.Identity.IsAuthenticated
+                    && (
+                        idRole.ID == null
+                        || string.Equals(
+                            principal.Identity.Name,
+                            idRole.ID,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
                 {
                     if (idRole.Role == null || principal.IsInRole(idRole.Role))
                         return;
@@ -253,7 +300,10 @@ namespace System.Security.Permissions
             SecurityElement root = new SecurityElement("IPermission");
 
             string typename = "System.Security.Permissions.PrincipalPermission";
-            root.AddAttribute("class", typename + ", " + GetType().Module.Assembly.FullName.Replace('\"', '\''));
+            root.AddAttribute(
+                "class",
+                typename + ", " + GetType().Module.Assembly.FullName.Replace('\"', '\'')
+            );
             root.AddAttribute("version", "1");
 
             if (_idArray != null)
@@ -274,7 +324,10 @@ namespace System.Security.Permissions
                 throw new ArgumentNullException(nameof(elem));
             }
 
-            if (elem.Tag == null || !elem.Tag.Equals("Permission") && !elem.Tag.Equals("IPermission"))
+            if (
+                elem.Tag == null
+                || !elem.Tag.Equals("Permission") && !elem.Tag.Equals("IPermission")
+            )
                 throw new ArgumentException(SR.Argument_NotAPermissionElement);
 
             string version = elem.Attribute("version");

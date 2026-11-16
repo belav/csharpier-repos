@@ -36,7 +36,10 @@ namespace System.ComponentModel.Composition.Hosting
             _reflectionContext = reflectionContext;
         }
 
-        public ApplicationCatalog(ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public ApplicationCatalog(
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
             Requires.NotNull(definitionOrigin, nameof(definitionOrigin));
@@ -84,7 +87,10 @@ namespace System.ComponentModel.Composition.Hosting
                             string? relativeSearchPath = AppDomain.CurrentDomain.RelativeSearchPath;
                             if (!string.IsNullOrEmpty(relativeSearchPath))
                             {
-                                string[] probingPaths = relativeSearchPath.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                                string[] probingPaths = relativeSearchPath.Split(
+                                    ';',
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
                                 foreach (var probingPath in probingPaths)
                                 {
                                     var path = Path.Combine(location, probingPath);
@@ -152,7 +158,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="DirectoryCatalog"/> has been disposed of.
         /// </exception>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             ThrowIfDisposed();
 
@@ -171,7 +179,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         private string GetDisplayName() =>
-            $"{GetType().Name} (Path=\"{AppDomain.CurrentDomain.BaseDirectory}\") (PrivateProbingPath=\"{AppDomain.CurrentDomain.RelativeSearchPath}\")";   // NOLOC
+            $"{GetType().Name} (Path=\"{AppDomain.CurrentDomain.BaseDirectory}\") (PrivateProbingPath=\"{AppDomain.CurrentDomain.RelativeSearchPath}\")"; // NOLOC
 
         /// <summary>
         ///     Returns a string representation of the directory catalog.

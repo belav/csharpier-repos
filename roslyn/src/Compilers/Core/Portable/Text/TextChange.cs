@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Text
     public readonly struct TextChange : IEquatable<TextChange>
     {
         /// <summary>
-        /// The original span of the changed text. 
+        /// The original span of the changed text.
         /// </summary>
         [DataMember(Order = 0)]
         public TextSpan Span { get; }
@@ -61,9 +61,8 @@ namespace Microsoft.CodeAnalysis.Text
 
         public bool Equals(TextChange other)
         {
-            return
-                EqualityComparer<TextSpan>.Default.Equals(this.Span, other.Span) &&
-                EqualityComparer<string>.Default.Equals(this.NewText, other.NewText);
+            return EqualityComparer<TextSpan>.Default.Equals(this.Span, other.Span)
+                && EqualityComparer<string>.Default.Equals(this.NewText, other.NewText);
         }
 
         public override int GetHashCode()
@@ -94,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// An empty set of changes.
         /// </summary>
-        public static IReadOnlyList<TextChange> NoChanges => SpecializedCollections.EmptyReadOnlyList<TextChange>();
+        public static IReadOnlyList<TextChange> NoChanges =>
+            SpecializedCollections.EmptyReadOnlyList<TextChange>();
 
         internal string GetDebuggerDisplay()
         {
@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Text
             {
                 null => "null",
                 { Length: < 10 } => $"\"{NewText}\"",
-                { Length: var length } => $"(NewLength = {length})"
+                { Length: var length } => $"(NewLength = {length})",
             };
             return $"new TextChange(new TextSpan({Span.Start}, {Span.Length}), {newTextDisplay})";
         }

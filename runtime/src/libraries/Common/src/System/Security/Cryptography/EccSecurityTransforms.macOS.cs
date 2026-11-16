@@ -12,7 +12,10 @@ namespace System.Security.Cryptography
 {
     internal sealed partial class EccSecurityTransforms
     {
-        private static ECParameters ExportParametersFromLegacyKey(SecKeyPair keys, bool includePrivateParameters)
+        private static ECParameters ExportParametersFromLegacyKey(
+            SecKeyPair keys,
+            bool includePrivateParameters
+        )
         {
             // Apple requires all private keys to be exported encrypted, but since we're trying to export
             // as parsed structures we will need to decrypt it for the user.
@@ -21,7 +24,8 @@ namespace System.Security.Cryptography
             byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                 includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                 exportPrivate: includePrivateParameters,
-                password: ExportPassword);
+                password: ExportPassword
+            );
 
             try
             {
@@ -30,7 +34,8 @@ namespace System.Security.Cryptography
                     EccKeyFormatHelper.ReadSubjectPublicKeyInfo(
                         keyBlob,
                         out _,
-                        out ECParameters key);
+                        out ECParameters key
+                    );
                     return key;
                 }
                 else
@@ -39,7 +44,8 @@ namespace System.Security.Cryptography
                         keyBlob,
                         (ReadOnlySpan<char>)ExportPassword,
                         out _,
-                        out ECParameters key);
+                        out ECParameters key
+                    );
                     return key;
                 }
             }
@@ -54,8 +60,17 @@ namespace System.Security.Cryptography
             using (SafeSecKeyRefHandle secPrivateKey = ImportLegacyPrivateKey(ref ecParameters))
             {
                 const string ExportPassword = "DotnetExportPassphrase";
-                byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(secPrivateKey, exportPrivate: true, password: ExportPassword);
-                EccKeyFormatHelper.ReadEncryptedPkcs8(keyBlob, (ReadOnlySpan<char>)ExportPassword, out _, out ecParameters);
+                byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
+                    secPrivateKey,
+                    exportPrivate: true,
+                    password: ExportPassword
+                );
+                EccKeyFormatHelper.ReadEncryptedPkcs8(
+                    keyBlob,
+                    (ReadOnlySpan<char>)ExportPassword,
+                    out _,
+                    out ecParameters
+                );
                 CryptographicOperations.ZeroMemory(keyBlob);
             }
         }

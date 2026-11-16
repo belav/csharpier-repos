@@ -29,6 +29,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// The project contains valid changes that require application of a delta.
         /// </summary>
-        ValidChanges
+        ValidChanges,
     }
 }

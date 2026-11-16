@@ -19,12 +19,12 @@ namespace System.Net.Http
         private const string Cookie = "Cookie";
 
         /// <summary>
-        /// Gets any cookie headers present in the request. Each <c>Cookie</c> header is 
+        /// Gets any cookie headers present in the request. Each <c>Cookie</c> header is
         /// represented as one <see cref="CookieHeaderValue"/> instance. A <see cref="CookieHeaderValue"/>
         /// contains information about the domain, path, and other cookie information as well as one or
         /// more <see cref="CookieState"/> instances. Each <see cref="CookieState"/> instance contains
-        /// a cookie name and whatever cookie state is associate with that name. The state is in the form of a 
-        /// <see cref="System.Collections.Specialized.NameValueCollection"/> which on the wire is encoded as HTML Form URL-encoded data. 
+        /// a cookie name and whatever cookie state is associate with that name. The state is in the form of a
+        /// <see cref="System.Collections.Specialized.NameValueCollection"/> which on the wire is encoded as HTML Form URL-encoded data.
         /// This representation allows for multiple related "cookies" to be carried within the same
         /// <c>Cookie</c> header while still providing separation between each cookie state. A sample
         /// <c>Cookie</c> header is shown below. In this example, there are two <see cref="CookieState"/>
@@ -72,7 +72,10 @@ namespace System.Net.Http
         /// <param name="headers">The request headers</param>
         /// <param name="name">The name of the <see cref="CookieState"/> to match.</param>
         /// <returns>A collection of <see cref="CookieHeaderValue"/> instances with a matching <see cref="CookieState"/>.</returns>
-        public static Collection<CookieHeaderValue> GetCookies(this HttpRequestHeaders headers, string name)
+        public static Collection<CookieHeaderValue> GetCookies(
+            this HttpRequestHeaders headers,
+            string name
+        )
         {
             if (name == null)
             {
@@ -80,7 +83,13 @@ namespace System.Net.Http
             }
 
             IEnumerable<CookieHeaderValue> cookieHeaderValues = GetCookies(headers);
-            CookieHeaderValue[] matches = cookieHeaderValues.Where(header => header.Cookies.Any(state => String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase))).ToArray();
+            CookieHeaderValue[] matches = cookieHeaderValues
+                .Where(header =>
+                    header.Cookies.Any(state =>
+                        String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase)
+                    )
+                )
+                .ToArray();
             return new Collection<CookieHeaderValue>(matches);
         }
     }

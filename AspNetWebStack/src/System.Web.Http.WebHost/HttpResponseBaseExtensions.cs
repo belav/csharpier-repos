@@ -8,10 +8,14 @@ namespace System.Web.Http.WebHost
 {
     internal static class HttpResponseBaseExtensions
     {
-        private static readonly bool _isSystemWebVersion451OrGreater = IsSystemWebVersion451OrGreater();
-        private static readonly bool _isClientDisconnectedTokenAvailable = IsClientDisconnectedTokenAvailable();
+        private static readonly bool _isSystemWebVersion451OrGreater =
+            IsSystemWebVersion451OrGreater();
+        private static readonly bool _isClientDisconnectedTokenAvailable =
+            IsClientDisconnectedTokenAvailable();
 
-        public static CancellationToken GetClientDisconnectedTokenWhenFixed(this HttpResponseBase response)
+        public static CancellationToken GetClientDisconnectedTokenWhenFixed(
+            this HttpResponseBase response
+        )
         {
             if (response == null)
             {

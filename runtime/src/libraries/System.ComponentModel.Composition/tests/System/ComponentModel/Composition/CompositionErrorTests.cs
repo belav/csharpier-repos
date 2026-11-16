@@ -37,7 +37,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_NullAsMessageArgument_ShouldSetMessagePropertyToEmptyString()
         {
-            var error = new CompositionError((string)null, ElementFactory.Create(), new Exception());
+            var error = new CompositionError(
+                (string)null,
+                ElementFactory.Create(),
+                new Exception()
+            );
 
             Assert.Equal("", error.Description);
         }
@@ -45,7 +49,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsMessageArgument_ShouldSetMessagePropertyToEmptyString()
         {
-            var error = new CompositionError(CompositionErrorId.Unknown, (string)null, ElementFactory.Create(), new Exception());
+            var error = new CompositionError(
+                CompositionErrorId.Unknown,
+                (string)null,
+                ElementFactory.Create(),
+                new Exception()
+            );
 
             Assert.Equal("", error.Description);
         }
@@ -106,7 +115,12 @@ namespace System.ComponentModel.Composition
 
             Assert.All(expectations, e =>
             {
-                var exception = new CompositionError(CompositionErrorId.Unknown, e, ElementFactory.Create(), new Exception());
+                var exception = new CompositionError(
+                    CompositionErrorId.Unknown,
+                    e,
+                    ElementFactory.Create(),
+                    new Exception()
+                );
                 Assert.Equal(e, exception.Description);
             });
         }
@@ -138,7 +152,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_NullAsExceptionArgument_ShouldSetExceptionPropertyToNull()
         {
-            var error = new CompositionError("Description", ElementFactory.Create(), (Exception)null);
+            var error = new CompositionError(
+                "Description",
+                ElementFactory.Create(),
+                (Exception)null
+            );
 
             Assert.Null(error.Exception);
         }
@@ -146,7 +164,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsExceptionArgument_ShouldSetExceptionPropertyToNull()
         {
-            var error = new CompositionError(CompositionErrorId.Unknown, "Description", ElementFactory.Create(), (Exception)null);
+            var error = new CompositionError(
+                CompositionErrorId.Unknown,
+                "Description",
+                ElementFactory.Create(),
+                (Exception)null
+            );
 
             Assert.Null(error.Exception);
         }
@@ -182,7 +205,12 @@ namespace System.ComponentModel.Composition
 
             Assert.All(expectations, e =>
             {
-                var error = new CompositionError(CompositionErrorId.Unknown, "Description", ElementFactory.Create(), e);
+                var error = new CompositionError(
+                    CompositionErrorId.Unknown,
+                    "Description",
+                    ElementFactory.Create(),
+                    e
+                );
                 Assert.Same(e, error.Exception);
             });
         }
@@ -214,7 +242,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_NullAsExceptionArgument_ShouldSetInnerExceptionPropertyToNull()
         {
-            var error = new CompositionError("Description", ElementFactory.Create(), (Exception)null);
+            var error = new CompositionError(
+                "Description",
+                ElementFactory.Create(),
+                (Exception)null
+            );
 
             Assert.Null(error.InnerException);
         }
@@ -222,7 +254,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsExceptionArgument_ShouldSetInnerExceptionPropertyToNull()
         {
-            var error = new CompositionError(CompositionErrorId.Unknown, "Description", ElementFactory.Create(), (Exception)null);
+            var error = new CompositionError(
+                CompositionErrorId.Unknown,
+                "Description",
+                ElementFactory.Create(),
+                (Exception)null
+            );
 
             Assert.Null(error.InnerException);
         }
@@ -278,7 +315,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_ShouldSetICompositionErrorIdPropertyToCompositionErrorIdUnknown()
         {
-            var error = new CompositionError("Description", ElementFactory.Create(), new Exception());
+            var error = new CompositionError(
+                "Description",
+                ElementFactory.Create(),
+                new Exception()
+            );
 
             Assert.Equal(CompositionErrorId.Unknown, error.Id);
         }
@@ -290,7 +331,12 @@ namespace System.ComponentModel.Composition
 
             Assert.All(expectations, e =>
             {
-                var error = new CompositionError(e, "Description", ElementFactory.Create(), new Exception());
+                var error = new CompositionError(
+                    e,
+                    "Description",
+                    ElementFactory.Create(),
+                    new Exception()
+                );
                 Assert.Equal(e, error.Id);
             });
         }
@@ -322,7 +368,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_NullAsElementArgument_ShouldSetElementPropertyToNull()
         {
-            var exception = new CompositionError("Description", (ICompositionElement)null, new Exception());
+            var exception = new CompositionError(
+                "Description",
+                (ICompositionElement)null,
+                new Exception()
+            );
 
             Assert.Null(exception.Element);
         }
@@ -330,7 +380,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsElementArgument_ShouldSetElementPropertyToNull()
         {
-            var exception = new CompositionError(CompositionErrorId.Unknown, "Description", (ICompositionElement)null, new Exception());
+            var exception = new CompositionError(
+                CompositionErrorId.Unknown,
+                "Description",
+                (ICompositionElement)null,
+                new Exception()
+            );
 
             Assert.Null(exception.Element);
         }
@@ -354,7 +409,11 @@ namespace System.ComponentModel.Composition
 
             Assert.All(expectations, e =>
             {
-                var exception = new CompositionError("Description", (ICompositionElement)e, new Exception());
+                var exception = new CompositionError(
+                    "Description",
+                    (ICompositionElement)e,
+                    new Exception()
+                );
                 Assert.Same(e, exception.Element);
             });
         }
@@ -366,7 +425,12 @@ namespace System.ComponentModel.Composition
 
             Assert.All(expectations, e =>
             {
-                var exception = new CompositionError(CompositionErrorId.Unknown, "Description", (ICompositionElement)e, new Exception());
+                var exception = new CompositionError(
+                    CompositionErrorId.Unknown,
+                    "Description",
+                    (ICompositionElement)e,
+                    new Exception()
+                );
                 Assert.Same(e, exception.Element);
             });
         }
@@ -385,30 +449,60 @@ namespace System.ComponentModel.Composition
 
         private static CompositionError CreateCompositionError()
         {
-            return CreateCompositionError(CompositionErrorId.Unknown, (string)null, (ICompositionElement)null, (Exception)null);
+            return CreateCompositionError(
+                CompositionErrorId.Unknown,
+                (string)null,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
         private static CompositionError CreateCompositionError(string message)
         {
-            return CreateCompositionError(CompositionErrorId.Unknown, message, (ICompositionElement)null, (Exception)null);
+            return CreateCompositionError(
+                CompositionErrorId.Unknown,
+                message,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
         private static CompositionError CreateCompositionError(CompositionErrorId id)
         {
-            return CreateCompositionError(id, (string)null, (ICompositionElement)null, (Exception)null);
+            return CreateCompositionError(
+                id,
+                (string)null,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
         private static CompositionError CreateCompositionError(Exception exception)
         {
-            return CreateCompositionError(CompositionErrorId.Unknown, (string)null, (ICompositionElement)null, exception);
+            return CreateCompositionError(
+                CompositionErrorId.Unknown,
+                (string)null,
+                (ICompositionElement)null,
+                exception
+            );
         }
 
         private static CompositionError CreateCompositionError(ICompositionElement element)
         {
-            return CreateCompositionError(CompositionErrorId.Unknown, (string)null, element, (Exception)null);
+            return CreateCompositionError(
+                CompositionErrorId.Unknown,
+                (string)null,
+                element,
+                (Exception)null
+            );
         }
 
-        private static CompositionError CreateCompositionError(CompositionErrorId id, string message, ICompositionElement element, Exception exception)
+        private static CompositionError CreateCompositionError(
+            CompositionErrorId id,
+            string message,
+            ICompositionElement element,
+            Exception exception
+        )
         {
             return new CompositionError(id, message, element, exception);
         }
@@ -430,7 +524,9 @@ namespace System.ComponentModel.Composition
             return error;
         }
 
-        private static CompositionError CreateCompositionErrorWithException(params string[] messages)
+        private static CompositionError CreateCompositionErrorWithException(
+            params string[] messages
+        )
         {
             Exception innerException = null;
             foreach (string message in messages.Skip(1).Reverse())
@@ -441,7 +537,10 @@ namespace System.ComponentModel.Composition
             return new CompositionError(messages[0], innerException);
         }
 
-        private static CompositionError CreateCompositionErrorWithCompositionException(string message1, string message2)
+        private static CompositionError CreateCompositionErrorWithCompositionException(
+            string message1,
+            string message2
+        )
         {
             var exception = CreateCompositionException(new Exception(message2));
 

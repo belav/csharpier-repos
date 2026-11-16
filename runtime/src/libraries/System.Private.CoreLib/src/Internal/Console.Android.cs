@@ -10,14 +10,22 @@ namespace Internal
     {
         public static unsafe void Write(string s)
         {
-            Interop.Logcat.AndroidLogPrint(Interop.Logcat.LogLevel.Debug, "DOTNET", s ?? string.Empty);
+            Interop.Logcat.AndroidLogPrint(
+                Interop.Logcat.LogLevel.Debug,
+                "DOTNET",
+                s ?? string.Empty
+            );
         }
 
         public static partial class Error
         {
             public static unsafe void Write(string s)
             {
-                Interop.Logcat.AndroidLogPrint(Interop.Logcat.LogLevel.Error, "DOTNET", s ?? string.Empty);
+                Interop.Logcat.AndroidLogPrint(
+                    Interop.Logcat.LogLevel.Error,
+                    "DOTNET",
+                    s ?? string.Empty
+                );
             }
         }
     }

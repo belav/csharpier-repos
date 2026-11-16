@@ -27,7 +27,13 @@ namespace System.Net.Http.Formatting
         /// considered a match if it matches a substring of the actual header value.</param>
         /// <param name="mediaType">The media type to use if <paramref name="headerName"/> and <paramref name="headerValue"/>
         /// is considered a match.</param>
-        public RequestHeaderMapping(string headerName, string headerValue, StringComparison valueComparison, bool isValueSubstring, string mediaType)
+        public RequestHeaderMapping(
+            string headerName,
+            string headerValue,
+            StringComparison valueComparison,
+            bool isValueSubstring,
+            string mediaType
+        )
             : base(mediaType)
         {
             Initialize(headerName, headerValue, valueComparison, isValueSubstring);
@@ -43,7 +49,13 @@ namespace System.Net.Http.Formatting
         /// considered a match if it matches a substring of the actual header value.</param>
         /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to use if <paramref name="headerName"/> and <paramref name="headerValue"/>
         /// is considered a match.</param>
-        public RequestHeaderMapping(string headerName, string headerValue, StringComparison valueComparison, bool isValueSubstring, MediaTypeHeaderValue mediaType)
+        public RequestHeaderMapping(
+            string headerName,
+            string headerValue,
+            StringComparison valueComparison,
+            bool isValueSubstring,
+            MediaTypeHeaderValue mediaType
+        )
             : base(mediaType)
         {
             Initialize(headerName, headerValue, valueComparison, isValueSubstring);
@@ -91,10 +103,22 @@ namespace System.Net.Http.Formatting
                 throw Error.ArgumentNull("request");
             }
 
-            return MatchHeaderValue(request, HeaderName, HeaderValue, HeaderValueComparison, IsValueSubstring);
+            return MatchHeaderValue(
+                request,
+                HeaderName,
+                HeaderValue,
+                HeaderValueComparison,
+                IsValueSubstring
+            );
         }
 
-        private static double MatchHeaderValue(HttpRequestMessage request, string headerName, string headerValue, StringComparison valueComparison, bool isValueSubstring)
+        private static double MatchHeaderValue(
+            HttpRequestMessage request,
+            string headerName,
+            string headerValue,
+            StringComparison valueComparison,
+            bool isValueSubstring
+        )
         {
             Contract.Assert(request != null, "request should not be null");
             Contract.Assert(headerName != null, "header name should not be null");
@@ -125,7 +149,12 @@ namespace System.Net.Http.Formatting
             return FormattingUtilities.NoMatch;
         }
 
-        private void Initialize(string headerName, string headerValue, StringComparison valueComparison, bool isValueSubstring)
+        private void Initialize(
+            string headerName,
+            string headerValue,
+            StringComparison valueComparison,
+            bool isValueSubstring
+        )
         {
             if (String.IsNullOrWhiteSpace(headerName))
             {

@@ -76,8 +76,8 @@ public class OpenApiOperationGeneratorTests
     {
         var unnamedParameter = Expression.Parameter(typeof(int));
         var lambda = Expression.Lambda(Expression.Block(), unnamedParameter);
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => GetOpenApiOperation(lambda.Compile())
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            GetOpenApiOperation(lambda.Compile())
         );
         Assert.Equal(
             "Encountered a parameter of type 'System.Runtime.CompilerServices.Closure' without a name. Parameters must have a name.",
@@ -201,20 +201,18 @@ public class OpenApiOperationGeneratorTests
             "object"
         );
         AssertJsonResponse(
-            GetOpenApiOperation(
-                () =>
-                    FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                        new InferredJsonClass()
-                    )
+            GetOpenApiOperation(() =>
+                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
+                    new InferredJsonClass()
+                )
             ),
             "object"
         );
         AssertJsonResponse(
-            GetOpenApiOperation(
-                () =>
-                    FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                        (IInferredJsonInterface)null
-                    )
+            GetOpenApiOperation(() =>
+                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
+                    (IInferredJsonInterface)null
+                )
             ),
             "object"
         );
@@ -247,11 +245,10 @@ public class OpenApiOperationGeneratorTests
         AssertVoid(GetOpenApiOperation(() => new ValueTask()));
         AssertVoid(GetOpenApiOperation(() => ValueTask.FromResult(default(FSharp.Core.Unit))));
         AssertVoid(
-            GetOpenApiOperation(
-                () =>
-                    FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                        default(FSharp.Core.Unit)
-                    )
+            GetOpenApiOperation(() =>
+                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
+                    default(FSharp.Core.Unit)
+                )
             )
         );
     }
@@ -262,7 +259,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(typeof(TimeSpan), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         var responses = operation.Responses;
@@ -288,7 +286,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(typeof(InferredJsonClass), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => Results.Ok(new InferredJsonClass())
+            () =>
+                Results.Ok(new InferredJsonClass())
         );
 
         Assert.Equal(2, operation.Responses.Count);
@@ -311,7 +310,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(typeof(TimeSpan), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(2, operation.Responses.Count);
@@ -329,7 +329,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(StatusCodes.Status100Continue)]
             [ProducesResponseType(StatusCodes.Status101SwitchingProtocols)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(2, operation.Responses.Count);
@@ -350,7 +351,8 @@ public class OpenApiOperationGeneratorTests
             [ProducesResponseType(StatusCodes.Status300MultipleChoices)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(5, operation.Responses.Count);
@@ -378,7 +380,8 @@ public class OpenApiOperationGeneratorTests
             [ProducesResponseType(46)]
             [ProducesResponseType(654)]
             [ProducesResponseType(1111)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(3, operation.Responses.Count);

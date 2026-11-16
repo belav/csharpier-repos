@@ -9,17 +9,20 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.ServiceModel;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
 
-    [ConfigurationCollection(typeof(PolicyImporterElement), AddItemName = ConfigurationStrings.Extension)]
-    public sealed class PolicyImporterElementCollection : ServiceModelEnhancedConfigurationElementCollection<PolicyImporterElement>
+    [ConfigurationCollection(
+        typeof(PolicyImporterElement),
+        AddItemName = ConfigurationStrings.Extension
+    )]
+    public sealed class PolicyImporterElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<PolicyImporterElement>
     {
-        public PolicyImporterElementCollection() : base(ConfigurationStrings.Extension)
-        {
-        }
+        public PolicyImporterElementCollection()
+            : base(ConfigurationStrings.Extension) { }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             if (element == null)
             {
@@ -32,7 +35,9 @@ namespace System.ServiceModel.Configuration
         internal void SetDefaults()
         {
             this.Add(new PolicyImporterElement(typeof(PrivacyNoticeBindingElementImporter)));
-            this.Add(new PolicyImporterElement(typeof(UseManagedPresentationBindingElementImporter)));
+            this.Add(
+                new PolicyImporterElement(typeof(UseManagedPresentationBindingElementImporter))
+            );
             this.Add(new PolicyImporterElement(typeof(TransactionFlowBindingElementImporter)));
             this.Add(new PolicyImporterElement(typeof(ReliableSessionBindingElementImporter)));
             this.Add(new PolicyImporterElement(typeof(SecurityBindingElementImporter)));
@@ -44,5 +49,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

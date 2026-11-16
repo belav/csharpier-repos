@@ -9,7 +9,7 @@ namespace System.Text.Json.Serialization.Converters
     /// Converter for <cref>System.Collections.Generic.List{TElement}</cref>.
     internal sealed class ListOfTConverter<TCollection, TElement>
         : IEnumerableDefaultConverter<TCollection, TElement>
-        where TCollection: List<TElement>
+        where TCollection : List<TElement>
     {
         internal override bool CanPopulate => true;
 
@@ -18,7 +18,11 @@ namespace System.Text.Json.Serialization.Converters
             ((TCollection)state.Current.ReturnValue!).Add(value);
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             if (state.ParentProperty?.TryGetPrePopulatedValue(ref state) == true)
             {
@@ -27,13 +31,20 @@ namespace System.Text.Json.Serialization.Converters
 
             if (state.Current.JsonTypeInfo.CreateObject == null)
             {
-                ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(state.Current.JsonTypeInfo.Type);
+                ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(
+                    state.Current.JsonTypeInfo.Type
+                );
             }
 
             state.Current.ReturnValue = state.Current.JsonTypeInfo.CreateObject();
         }
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             List<TElement> list = value;
 

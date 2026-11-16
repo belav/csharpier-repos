@@ -26,33 +26,31 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class BuildMessageEventArgs : BuildEventArgs {
-	
-		MessageImportance importance;
-		
-		protected BuildMessageEventArgs ()
-		{
-		}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class BuildMessageEventArgs : BuildEventArgs
+    {
+        MessageImportance importance;
 
-		public BuildMessageEventArgs (string message,
-					      string helpKeyword,
-					      string senderName,
-					      MessageImportance importance)
-			: base (message, helpKeyword, senderName)
-		{
-			this.importance = importance;
-		}
+        protected BuildMessageEventArgs() { }
 
-		public MessageImportance Importance {
-			get {
-				return importance;
-			}
-		}
-	}
+        public BuildMessageEventArgs(
+            string message,
+            string helpKeyword,
+            string senderName,
+            MessageImportance importance
+        )
+            : base(message, helpKeyword, senderName)
+        {
+            this.importance = importance;
+        }
+
+        public MessageImportance Importance
+        {
+            get { return importance; }
+        }
+    }
 }
-

@@ -16,8 +16,8 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Transactions;
 using System.Threading;
+using System.Transactions;
 
 #endregion
 
@@ -29,14 +29,14 @@ namespace System.Workflow.Runtime.Hosting
     internal enum Provider
     {
         SqlClient = 0,
-        OleDB = 1
+        OleDB = 1,
     }
 
     /// <summary>
-    /// Internal Database access abstraction to 
+    /// Internal Database access abstraction to
     /// - abstract the derived Out-of-box SharedConnectionInfo from all DB hosting services
     /// - provide uniform connection string management
-    /// - and support different database providers 
+    /// - and support different database providers
     /// </summary>
     internal sealed class DbResourceAllocator
     {
@@ -47,7 +47,7 @@ namespace System.Workflow.Runtime.Hosting
         Provider localProvider;
 
         /// <summary>
-        /// Initialize the object by getting the connection string from the parameter or 
+        /// Initialize the object by getting the connection string from the parameter or
         /// out of the configuration settings
         /// </summary>
         /// <param name="runtime"></param>
@@ -56,7 +56,8 @@ namespace System.Workflow.Runtime.Hosting
         internal DbResourceAllocator(
             WorkflowRuntime runtime,
             NameValueCollection parameters,
-            string connectionString)
+            string connectionString
+        )
         {
             // If connection string not specified in input, search the config sections
             if (String.IsNullOrEmpty(connectionString))
@@ -66,7 +67,13 @@ namespace System.Workflow.Runtime.Hosting
                     // First search in this service's parameters
                     foreach (string key in parameters.AllKeys)
                     {
-                        if (string.Compare(ConnectionStringToken, key, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare(
+                                ConnectionStringToken,
+                                key,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             connectionString = parameters[ConnectionStringToken];
                             break;
@@ -75,28 +82,40 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 if (String.IsNullOrEmpty(connectionString) && (runtime != null))
                 {
-                    NameValueConfigurationCollection commonConfigurationParameters = runtime.CommonParameters;
+                    NameValueConfigurationCollection commonConfigurationParameters =
+                        runtime.CommonParameters;
                     if (commonConfigurationParameters != null)
                     {
                         // Then scan for connection string in the common configuration parameters section
                         foreach (string key in commonConfigurationParameters.AllKeys)
                         {
-                            if (string.Compare(ConnectionStringToken, key, StringComparison.OrdinalIgnoreCase) == 0)
+                            if (
+                                string.Compare(
+                                    ConnectionStringToken,
+                                    key,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
+                            )
                             {
-                                connectionString = commonConfigurationParameters[ConnectionStringToken].Value;
+                                connectionString = commonConfigurationParameters[
+                                    ConnectionStringToken
+                                ].Value;
                                 break;
                             }
                         }
                     }
                 }
 
-                // If no connectionString parsed out of the params, inner layer throws 
+                // If no connectionString parsed out of the params, inner layer throws
                 //   System.ArgumentNullException: Connection string cannot be null or empty
                 //   Parameter name: connectionString
                 // But this API caller does not have connectionString param.
                 // So throw ArgumentException with the original message.
                 if (String.IsNullOrEmpty(connectionString))
-                    throw new ArgumentNullException(ConnectionStringToken, ExecutionStringManager.MissingConnectionString);
+                    throw new ArgumentNullException(
+                        ConnectionStringToken,
+                        ExecutionStringManager.MissingConnectionString
+                    );
             }
 
             Init(connectionString);
@@ -118,16 +137,30 @@ namespace System.Workflow.Runtime.Hosting
         /// Should be called after all hosting services are added to the WorkflowRuntime
         /// </summary>
         /// <param name="transactionService"></param>
-        internal void DetectSharedConnectionConflict(WorkflowCommitWorkBatchService transactionService)
+        internal void DetectSharedConnectionConflict(
+            WorkflowCommitWorkBatchService transactionService
+        )
         {
-            SharedConnectionWorkflowCommitWorkBatchService sharedConnectionTransactionService = transactionService as SharedConnectionWorkflowCommitWorkBatchService;
+            SharedConnectionWorkflowCommitWorkBatchService sharedConnectionTransactionService =
+                transactionService as SharedConnectionWorkflowCommitWorkBatchService;
             if (sharedConnectionTransactionService != null)
             {
-                if (String.Compare(sharedConnectionTransactionService.ConnectionString, this.connString, StringComparison.Ordinal) != 0)
-                    throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                        ExecutionStringManager.SharedConnectionStringSpecificationConflict, this.connString, sharedConnectionTransactionService.ConnectionString));
+                if (
+                    String.Compare(
+                        sharedConnectionTransactionService.ConnectionString,
+                        this.connString,
+                        StringComparison.Ordinal
+                    ) != 0
+                )
+                    throw new ArgumentException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.SharedConnectionStringSpecificationConflict,
+                            this.connString,
+                            sharedConnectionTransactionService.ConnectionString
+                        )
+                    );
             }
-
         }
 
         #region Get a connection
@@ -162,14 +195,18 @@ namespace System.Workflow.Runtime.Hosting
         }
 
         /// <summary>
-        /// Gets a connection enlisted to the transaction.  
+        /// Gets a connection enlisted to the transaction.
         /// If the transaction already has a connection attached to it, we return that,
         /// otherwise we create a new connection and enlist to the transaction
         /// </summary>
         /// <param name="transaction"></param>
         /// <param name="isNewConnection">output if we created a connection</param>
         /// <returns></returns>
-        internal DbConnection GetEnlistedConnection(WorkflowCommitWorkBatchService txSvc, Transaction transaction, out bool isNewConnection)
+        internal DbConnection GetEnlistedConnection(
+            WorkflowCommitWorkBatchService txSvc,
+            Transaction transaction,
+            out bool isNewConnection
+        )
         {
             DbConnection connection;
             SharedConnectionInfo connectionInfo = GetConnectionInfo(txSvc, transaction);
@@ -178,8 +215,10 @@ namespace System.Workflow.Runtime.Hosting
             {
                 connection = connectionInfo.DBConnection;
                 Debug.Assert((connection != null), "null connection");
-                Debug.Assert((connection.State == System.Data.ConnectionState.Open),
-                    "Invalid connection state " + connection.State + " for connection " + connection);
+                Debug.Assert(
+                    (connection.State == System.Data.ConnectionState.Open),
+                    "Invalid connection state " + connection.State + " for connection " + connection
+                );
 
                 isNewConnection = false;
             }
@@ -198,7 +237,10 @@ namespace System.Workflow.Runtime.Hosting
 
         #region Get Local Transaction
 
-        internal static DbTransaction GetLocalTransaction(WorkflowCommitWorkBatchService txSvc, Transaction transaction)
+        internal static DbTransaction GetLocalTransaction(
+            WorkflowCommitWorkBatchService txSvc,
+            Transaction transaction
+        )
         {
             DbTransaction localTransaction = null;
             SharedConnectionInfo connectionInfo = GetConnectionInfo(txSvc, transaction);
@@ -223,7 +265,12 @@ namespace System.Workflow.Runtime.Hosting
         {
             return NewCommand(null, dbConnection, null);
         }
-        internal static DbCommand NewCommand(string commandText, DbConnection dbConnection, DbTransaction transaction)
+
+        internal static DbCommand NewCommand(
+            string commandText,
+            DbConnection dbConnection,
+            DbTransaction transaction
+        )
         {
             DbCommand command = dbConnection.CreateCommand();
             command.CommandText = commandText;
@@ -252,7 +299,6 @@ namespace System.Workflow.Runtime.Hosting
             }
             else
             {
-
                 if (type == DbType.Int64)
                     return new OleDbParameter(parameterName, OleDbType.BigInt);
                 else
@@ -260,7 +306,11 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        internal DbParameter NewDbParameter(string parameterName, DbType type, ParameterDirection direction)
+        internal DbParameter NewDbParameter(
+            string parameterName,
+            DbType type,
+            ParameterDirection direction
+        )
         {
             DbParameter parameter = NewDbParameter(parameterName, type);
             parameter.Direction = direction;
@@ -290,13 +340,15 @@ namespace System.Workflow.Runtime.Hosting
             try
             {
                 // Open a connection to see if it's a valid connection string
-                using (DbConnection connection = this.OpenNewConnection(false))
-                {
-                }
+                using (DbConnection connection = this.OpenNewConnection(false)) { }
             }
             catch (Exception e)
             {
-                throw new ArgumentException(ExecutionStringManager.InvalidDbConnection, "connectionString", e);
+                throw new ArgumentException(
+                    ExecutionStringManager.InvalidDbConnection,
+                    "connectionString",
+                    e
+                );
             }
 
             // OLEDB connection pooling causes this exception in ExecuteInsertWorkflowInstance
@@ -308,8 +360,14 @@ namespace System.Workflow.Runtime.Hosting
 
         private void SetConnectionString(string connectionString)
         {
-            if (String.IsNullOrEmpty(connectionString) || String.IsNullOrEmpty(connectionString.Trim()))
-                throw new ArgumentNullException("connectionString", ExecutionStringManager.MissingConnectionString);
+            if (
+                String.IsNullOrEmpty(connectionString)
+                || String.IsNullOrEmpty(connectionString.Trim())
+            )
+                throw new ArgumentNullException(
+                    "connectionString",
+                    ExecutionStringManager.MissingConnectionString
+                );
 
             DbConnectionStringBuilder dcsb = new DbConnectionStringBuilder();
             dcsb.ConnectionString = connectionString;
@@ -326,6 +384,7 @@ namespace System.Workflow.Runtime.Hosting
             // We only support sqlclient, sql is the only data store our OOB services talk to.
             localProvider = Provider.SqlClient;
         }
+
         /*
         private void SetLocalProvider(string connectionString)
         {
@@ -333,7 +392,7 @@ namespace System.Workflow.Runtime.Hosting
             MatchCollection providers = Regex.Matches(connectionString, @"(^|;)\s*provider\s*=[^;$]*(;|$)", RegexOptions.IgnoreCase);
 
             // Cannot use DbConnectionStringBuilder because it selects the last provider, not the first one, by itself.
-            // A legal Sql connection string allows for multiple provider specification and 
+            // A legal Sql connection string allows for multiple provider specification and
             // selects the first provider
             if (providers.Count > 0)
             {
@@ -356,11 +415,15 @@ namespace System.Workflow.Runtime.Hosting
         }
         */
 
-        private static SharedConnectionInfo GetConnectionInfo(WorkflowCommitWorkBatchService txSvc, Transaction transaction)
+        private static SharedConnectionInfo GetConnectionInfo(
+            WorkflowCommitWorkBatchService txSvc,
+            Transaction transaction
+        )
         {
             SharedConnectionInfo connectionInfo = null;
 
-            SharedConnectionWorkflowCommitWorkBatchService scTxSvc = txSvc as SharedConnectionWorkflowCommitWorkBatchService;
+            SharedConnectionWorkflowCommitWorkBatchService scTxSvc =
+                txSvc as SharedConnectionWorkflowCommitWorkBatchService;
             if (scTxSvc != null)
             {
                 connectionInfo = scTxSvc.GetConnectionInfo(transaction);
@@ -369,12 +432,15 @@ namespace System.Workflow.Runtime.Hosting
                 // be sure to propate the error so durable services can cast to appropriate exception
                 if (connectionInfo == null)
                     throw new ArgumentException(
-                        String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InvalidTransaction));
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.InvalidTransaction
+                        )
+                    );
             }
             return connectionInfo;
         }
 
         #endregion Private Helpers
     }
-
 }

@@ -1565,9 +1565,8 @@ public class Http2TestBase
         {
             var message = Assert.Single(LogMessages, m => m.Exception is TException);
 
-            Assert.Contains(
-                expectedErrorMessage,
-                expected => message.Exception.Message.Contains(expected)
+            Assert.Contains(expectedErrorMessage, expected =>
+                message.Exception.Message.Contains(expected)
             );
         }
 
@@ -1592,9 +1591,8 @@ public class Http2TestBase
 
         if (expectedErrorMessage != null)
         {
-            Assert.Contains(
-                LogMessages,
-                m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false
+            Assert.Contains(LogMessages, m =>
+                m.Exception?.Message.Contains(expectedErrorMessage) ?? false
             );
         }
     }

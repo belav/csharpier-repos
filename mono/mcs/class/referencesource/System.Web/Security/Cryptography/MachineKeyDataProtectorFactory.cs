@@ -1,59 +1,79 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="MachineKeyDataProtectorFactory.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.Cryptography {
+namespace System.Web.Security.Cryptography
+{
     using System;
     using System.Security.Cryptography;
     using System.Web.Configuration;
 
     // Can create DataProtector instances from a given <machineKey> element
 
-    internal sealed class MachineKeyDataProtectorFactory : IDataProtectorFactory {
-
-        private static readonly Purpose _creationTestingPurpose = new Purpose("test-1", "test-2", "test-3");
+    internal sealed class MachineKeyDataProtectorFactory : IDataProtectorFactory
+    {
+        private static readonly Purpose _creationTestingPurpose = new Purpose(
+            "test-1",
+            "test-2",
+            "test-3"
+        );
 
         private Func<Purpose, DataProtector> _dataProtectorFactory;
         private readonly MachineKeySection _machineKeySection;
 
-        public MachineKeyDataProtectorFactory(MachineKeySection machineKeySection) {
+        public MachineKeyDataProtectorFactory(MachineKeySection machineKeySection)
+        {
             _machineKeySection = machineKeySection;
         }
 
-        public DataProtector GetDataProtector(Purpose purpose) {
-            if (_dataProtectorFactory == null) {
+        public DataProtector GetDataProtector(Purpose purpose)
+        {
+            if (_dataProtectorFactory == null)
+            {
                 _dataProtectorFactory = GetDataProtectorFactory();
             }
             return _dataProtectorFactory(purpose);
         }
 
-        private Func<Purpose, DataProtector> GetDataProtectorFactory() {
+        private Func<Purpose, DataProtector> GetDataProtectorFactory()
+        {
             string applicationName = _machineKeySection.ApplicationName;
             string dataProtectorTypeName = _machineKeySection.DataProtectorType;
 
-            Func<Purpose, DataProtector> factory = purpose => {
+            Func<Purpose, DataProtector> factory = purpose =>
+            {
                 // Since the custom implementation might depend on the impersonated
                 // identity, we must instantiate it under app-level impersonation.
-                using (new ApplicationImpersonationContext()) {
-                    return DataProtector.Create(dataProtectorTypeName, applicationName, purpose.PrimaryPurpose, purpose.SpecificPurposes);
+                using (new ApplicationImpersonationContext())
+                {
+                    return DataProtector.Create(
+                        dataProtectorTypeName,
+                        applicationName,
+                        purpose.PrimaryPurpose,
+                        purpose.SpecificPurposes
+                    );
                 }
             };
 
             // Invoke the factory once to make sure there aren't any configuration errors.
             Exception factoryCreationException = null;
-            try {
+            try
+            {
                 DataProtector dataProtector = factory(_creationTestingPurpose);
-                if (dataProtector != null) {
+                if (dataProtector != null)
+                {
                     IDisposable disposable = dataProtector as IDisposable;
-                    if (disposable != null) {
+                    if (disposable != null)
+                    {
                         disposable.Dispose();
                     }
                     return factory; // we know at this point the factory is good
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 factoryCreationException = ex;
             }
 
@@ -62,8 +82,10 @@ namespace System.Web.Security.Cryptography {
             throw ConfigUtil.MakeConfigurationErrorsException(
                 message: SR.GetString(SR.MachineKeyDataProtectorFactory_FactoryCreationFailed),
                 innerException: factoryCreationException, // can be null
-                configProperty: _machineKeySection.ElementInformation.Properties["dataProtectorType"]);
+                configProperty: _machineKeySection.ElementInformation.Properties[
+                    "dataProtectorType"
+                ]
+            );
         }
-
     }
 }

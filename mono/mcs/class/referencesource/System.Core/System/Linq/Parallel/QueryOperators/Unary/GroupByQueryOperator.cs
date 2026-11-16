@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -15,7 +15,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading;
-using IEnumerator=System.Collections.IEnumerator;
+using IEnumerator = System.Collections.IEnumerator;
 
 namespace System.Linq.Parallel
 {
@@ -29,10 +29,9 @@ namespace System.Linq.Parallel
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TGroupKey"></typeparam>
     /// <typeparam name="TElement"></typeparam>
-    internal sealed class GroupByQueryOperator<TSource, TGroupKey, TElement> :
-        UnaryQueryOperator<TSource, IGrouping<TGroupKey, TElement>>
+    internal sealed class GroupByQueryOperator<TSource, TGroupKey, TElement>
+        : UnaryQueryOperator<TSource, IGrouping<TGroupKey, TElement>>
     {
-
         private readonly Func<TSource, TGroupKey> m_keySelector; // Key selection function.
         private readonly Func<TSource, TElement> m_elementSelector; // Optional element selection function.
         private readonly IEqualityComparer<TGroupKey> m_keyComparer; // An optional key comparison object.
@@ -51,16 +50,20 @@ namespace System.Linq.Parallel
         //    elementSelector must be non null.
         //
 
-        internal GroupByQueryOperator(IEnumerable<TSource> child,
-                                      Func<TSource, TGroupKey> keySelector,
-                                      Func<TSource, TElement> elementSelector,
-                                      IEqualityComparer<TGroupKey> keyComparer)
-            :base(child)
+        internal GroupByQueryOperator(
+            IEnumerable<TSource> child,
+            Func<TSource, TGroupKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TGroupKey> keyComparer
+        )
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             Contract.Assert(keySelector != null, "need a selector function");
-            Contract.Assert(elementSelector != null ||
-                            typeof(TSource) == typeof(TElement), "need an element function if TSource!=TElement");
+            Contract.Assert(
+                elementSelector != null || typeof(TSource) == typeof(TElement),
+                "need an element function if TSource!=TElement"
+            );
 
             m_keySelector = keySelector;
             m_elementSelector = elementSelector;
@@ -70,15 +73,23 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient, 
-            bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // Hash-repartion the source stream
             if (Child.OutputOrdered)
             {
                 WrapPartitionedStreamHelperOrdered<TKey>(
                     ExchangeUtilities.HashRepartitionOrdered<TSource, TGroupKey, TKey>(
-                        inputStream, m_keySelector, m_keyComparer, null, settings.CancellationState.MergedCancellationToken),
+                        inputStream,
+                        m_keySelector,
+                        m_keyComparer,
+                        null,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
                     recipient,
                     settings.CancellationState.MergedCancellationToken
                 );
@@ -87,7 +98,12 @@ namespace System.Linq.Parallel
             {
                 WrapPartitionedStreamHelper<TKey, int>(
                     ExchangeUtilities.HashRepartition<TSource, TGroupKey, TKey>(
-                        inputStream, m_keySelector, m_keyComparer, null, settings.CancellationState.MergedCancellationToken),
+                        inputStream,
+                        m_keySelector,
+                        m_keyComparer,
+                        null,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
                     recipient,
                     settings.CancellationState.MergedCancellationToken
                 );
@@ -102,31 +118,44 @@ namespace System.Linq.Parallel
         private void WrapPartitionedStreamHelper<TIgnoreKey, TKey>(
             PartitionedStream<Pair<TSource, TGroupKey>, TKey> hashStream,
             IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             int partitionCount = hashStream.PartitionCount;
             PartitionedStream<IGrouping<TGroupKey, TElement>, TKey> outputStream =
-                new PartitionedStream<IGrouping<TGroupKey, TElement>, TKey>(partitionCount, hashStream.KeyComparer, OrdinalIndexState.Shuffled);
+                new PartitionedStream<IGrouping<TGroupKey, TElement>, TKey>(
+                    partitionCount,
+                    hashStream.KeyComparer,
+                    OrdinalIndexState.Shuffled
+                );
 
             // If there is no element selector, we return a special identity enumerator. Otherwise,
             // we return one that will apply the element selection function during enumeration.
- 
+
             for (int i = 0; i < partitionCount; i++)
             {
                 if (m_elementSelector == null)
                 {
                     Contract.Assert(typeof(TSource) == typeof(TElement));
 
-                    var enumerator = new GroupByIdentityQueryOperatorEnumerator<TSource, TGroupKey, TKey>(
-                        hashStream[i], m_keyComparer, cancellationToken);
+                    var enumerator = new GroupByIdentityQueryOperatorEnumerator<
+                        TSource,
+                        TGroupKey,
+                        TKey
+                    >(hashStream[i], m_keyComparer, cancellationToken);
 
-                    outputStream[i] = (QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TKey>)(object)enumerator;
-
+                    outputStream[i] =
+                        (QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TKey>)
+                            (object)enumerator;
                 }
                 else
                 {
-                    outputStream[i] = new GroupByElementSelectorQueryOperatorEnumerator<TSource, TGroupKey, TElement, TKey>(
-                        hashStream[i], m_keyComparer, m_elementSelector, cancellationToken);
+                    outputStream[i] = new GroupByElementSelectorQueryOperatorEnumerator<
+                        TSource,
+                        TGroupKey,
+                        TElement,
+                        TKey
+                    >(hashStream[i], m_keyComparer, m_elementSelector, cancellationToken);
                 }
             }
 
@@ -141,11 +170,16 @@ namespace System.Linq.Parallel
         private void WrapPartitionedStreamHelperOrdered<TKey>(
             PartitionedStream<Pair<TSource, TGroupKey>, TKey> hashStream,
             IPartitionedStreamRecipient<IGrouping<TGroupKey, TElement>> recipient,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             int partitionCount = hashStream.PartitionCount;
             PartitionedStream<IGrouping<TGroupKey, TElement>, TKey> outputStream =
-                new PartitionedStream<IGrouping<TGroupKey, TElement>, TKey>(partitionCount, hashStream.KeyComparer, OrdinalIndexState.Shuffled);
+                new PartitionedStream<IGrouping<TGroupKey, TElement>, TKey>(
+                    partitionCount,
+                    hashStream.KeyComparer,
+                    OrdinalIndexState.Shuffled
+                );
 
             // If there is no element selector, we return a special identity enumerator. Otherwise,
             // we return one that will apply the element selection function during enumeration.
@@ -157,27 +191,50 @@ namespace System.Linq.Parallel
                 {
                     Contract.Assert(typeof(TSource) == typeof(TElement));
 
-                    var enumerator = new OrderedGroupByIdentityQueryOperatorEnumerator<TSource, TGroupKey, TKey>(
-                        hashStream[i], m_keySelector, m_keyComparer, orderComparer, cancellationToken);
+                    var enumerator = new OrderedGroupByIdentityQueryOperatorEnumerator<
+                        TSource,
+                        TGroupKey,
+                        TKey
+                    >(
+                        hashStream[i],
+                        m_keySelector,
+                        m_keyComparer,
+                        orderComparer,
+                        cancellationToken
+                    );
 
-                    outputStream[i] = (QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TKey>)(object)enumerator;
-
+                    outputStream[i] =
+                        (QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TKey>)
+                            (object)enumerator;
                 }
                 else
                 {
-                    outputStream[i] = new OrderedGroupByElementSelectorQueryOperatorEnumerator<TSource, TGroupKey, TElement, TKey>(
-                        hashStream[i], m_keySelector, m_elementSelector, m_keyComparer, orderComparer,
-                        cancellationToken);
+                    outputStream[i] = new OrderedGroupByElementSelectorQueryOperatorEnumerator<
+                        TSource,
+                        TGroupKey,
+                        TElement,
+                        TKey
+                    >(
+                        hashStream[i],
+                        m_keySelector,
+                        m_elementSelector,
+                        m_keyComparer,
+                        orderComparer,
+                        cancellationToken
+                    );
                 }
             }
 
             recipient.Receive(outputStream);
         }
-        
+
         //-----------------------------------------------------------------------------------
-        // Override of the query operator base class's Open method. 
+        // Override of the query operator base class's Open method.
         //
-        internal override QueryResults<IGrouping<TGroupKey, TElement>> Open(QuerySettings settings, bool preferStriping)
+        internal override QueryResults<IGrouping<TGroupKey, TElement>> Open(
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             // We just open our child operator. Do not propagate the preferStriping value, but instead explicitly
             // set it to false. Regardless of whether the parent prefers striping or range partitioning, the output
@@ -186,24 +243,28 @@ namespace System.Linq.Parallel
             return new UnaryQueryOperatorResults(childResults, this, settings, false);
         }
 
-
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
         //
-        internal override IEnumerable<IGrouping<TGroupKey, TElement>> AsSequentialQuery(CancellationToken token)
+        internal override IEnumerable<IGrouping<TGroupKey, TElement>> AsSequentialQuery(
+            CancellationToken token
+        )
         {
-            IEnumerable<TSource> wrappedChild = CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token);
+            IEnumerable<TSource> wrappedChild = CancellableEnumerable.Wrap(
+                Child.AsSequentialQuery(token),
+                token
+            );
             if (m_elementSelector == null)
             {
                 Contract.Assert(typeof(TElement) == typeof(TSource));
-                return (IEnumerable<IGrouping<TGroupKey, TElement>>)(object)(wrappedChild.GroupBy(m_keySelector, m_keyComparer));
+                return (IEnumerable<IGrouping<TGroupKey, TElement>>)
+                    (object)(wrappedChild.GroupBy(m_keySelector, m_keyComparer));
             }
             else
             {
                 return wrappedChild.GroupBy(m_keySelector, m_elementSelector, m_keyComparer);
             }
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -216,7 +277,6 @@ namespace System.Linq.Parallel
         }
     }
 
-
     //---------------------------------------------------------------------------------------
     // The enumerator type responsible for grouping elements and yielding the key-value sets.
     //
@@ -224,10 +284,9 @@ namespace System.Linq.Parallel
     //     Just like the Join operator, this won't work properly at all if the analysis engine
     //     didn't choose to hash partition. We will simply not yield correct groupings.
     //
-    internal abstract class GroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey> :
-        QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TOrderKey>
+    internal abstract class GroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey>
+        : QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TOrderKey>
     {
-
         protected readonly QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> m_source; // The data source to enumerate.
         protected readonly IEqualityComparer<TGroupKey> m_keyComparer; // A key comparer.
         protected readonly CancellationToken m_cancellationToken;
@@ -245,7 +304,9 @@ namespace System.Linq.Parallel
 
         protected GroupByQueryOperatorEnumerator(
             QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
-            IEqualityComparer<TGroupKey> keyComparer, CancellationToken cancellationToken)
+            IEqualityComparer<TGroupKey> keyComparer,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(source != null);
 
@@ -260,7 +321,10 @@ namespace System.Linq.Parallel
         // just enumerate the key-set from the hash-table, retrieving groupings of key-elements.
         //
 
-        internal override bool MoveNext(ref IGrouping<TGroupKey, TElement> currentElement, ref TOrderKey currentKey)
+        internal override bool MoveNext(
+            ref IGrouping<TGroupKey, TElement> currentElement,
+            ref TOrderKey currentKey
+        )
         {
             Contract.Assert(m_source != null);
 
@@ -282,7 +346,8 @@ namespace System.Linq.Parallel
             if (++mutables.m_hashLookupIndex < mutables.m_hashLookup.Count)
             {
                 currentElement = new GroupByGrouping<TGroupKey, TElement>(
-                    mutables.m_hashLookup[mutables.m_hashLookupIndex]);
+                    mutables.m_hashLookup[mutables.m_hashLookupIndex]
+                );
                 return true;
             }
 
@@ -306,20 +371,19 @@ namespace System.Linq.Parallel
     // function.
     //
 
-    internal sealed class GroupByIdentityQueryOperatorEnumerator<TSource, TGroupKey, TOrderKey> :
-        GroupByQueryOperatorEnumerator<TSource, TGroupKey, TSource, TOrderKey>
+    internal sealed class GroupByIdentityQueryOperatorEnumerator<TSource, TGroupKey, TOrderKey>
+        : GroupByQueryOperatorEnumerator<TSource, TGroupKey, TSource, TOrderKey>
     {
-
         //---------------------------------------------------------------------------------------
         // Instantiates a new group by enumerator.
         //
 
         internal GroupByIdentityQueryOperatorEnumerator(
             QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
-            IEqualityComparer<TGroupKey> keyComparer, CancellationToken cancellationToken)
-            : base(source, keyComparer, cancellationToken)
-        {
-        }
+            IEqualityComparer<TGroupKey> keyComparer,
+            CancellationToken cancellationToken
+        )
+            : base(source, keyComparer, cancellationToken) { }
 
         //-----------------------------------------------------------------------------------
         // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
@@ -327,8 +391,10 @@ namespace System.Linq.Parallel
 
         protected override HashLookup<Wrapper<TGroupKey>, ListChunk<TSource>> BuildHashLookup()
         {
-            HashLookup<Wrapper<TGroupKey>, ListChunk<TSource>> hashlookup =
-                new HashLookup<Wrapper<TGroupKey>, ListChunk<TSource>>(new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
+            HashLookup<Wrapper<TGroupKey>, ListChunk<TSource>> hashlookup = new HashLookup<
+                Wrapper<TGroupKey>,
+                ListChunk<TSource>
+            >(new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
 
             Pair<TSource, TGroupKey> sourceElement = default(Pair<TSource, TGroupKey>);
             TOrderKey sourceKeyUnused = default(TOrderKey);
@@ -358,7 +424,6 @@ namespace System.Linq.Parallel
 
             return hashlookup;
         }
-
     }
 
     //---------------------------------------------------------------------------------------
@@ -366,10 +431,13 @@ namespace System.Linq.Parallel
     // element selection function.
     //
 
-    internal sealed class GroupByElementSelectorQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey> :
-        GroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey>
+    internal sealed class GroupByElementSelectorQueryOperatorEnumerator<
+        TSource,
+        TGroupKey,
+        TElement,
+        TOrderKey
+    > : GroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey>
     {
-
         private readonly Func<TSource, TElement> m_elementSelector; // Function to select elements.
 
         //---------------------------------------------------------------------------------------
@@ -378,8 +446,11 @@ namespace System.Linq.Parallel
 
         internal GroupByElementSelectorQueryOperatorEnumerator(
             QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
-            IEqualityComparer<TGroupKey> keyComparer, Func<TSource, TElement> elementSelector, CancellationToken cancellationToken) :
-            base(source, keyComparer, cancellationToken)
+            IEqualityComparer<TGroupKey> keyComparer,
+            Func<TSource, TElement> elementSelector,
+            CancellationToken cancellationToken
+        )
+            : base(source, keyComparer, cancellationToken)
         {
             Contract.Assert(elementSelector != null);
             m_elementSelector = elementSelector;
@@ -391,8 +462,10 @@ namespace System.Linq.Parallel
 
         protected override HashLookup<Wrapper<TGroupKey>, ListChunk<TElement>> BuildHashLookup()
         {
-            HashLookup<Wrapper<TGroupKey>, ListChunk<TElement>> hashlookup =
-                new HashLookup<Wrapper<TGroupKey>, ListChunk<TElement>>(new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
+            HashLookup<Wrapper<TGroupKey>, ListChunk<TElement>> hashlookup = new HashLookup<
+                Wrapper<TGroupKey>,
+                ListChunk<TElement>
+            >(new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
 
             Pair<TSource, TGroupKey> sourceElement = default(Pair<TSource, TGroupKey>);
             TOrderKey sourceKeyUnused = default(TOrderKey);
@@ -424,15 +497,17 @@ namespace System.Linq.Parallel
         }
     }
 
-
     //---------------------------------------------------------------------------------------
     // Ordered version of the GroupBy operator.
     //
 
-    internal abstract class OrderedGroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey> :
-        QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TOrderKey>
+    internal abstract class OrderedGroupByQueryOperatorEnumerator<
+        TSource,
+        TGroupKey,
+        TElement,
+        TOrderKey
+    > : QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TOrderKey>
     {
-
         protected readonly QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> m_source; // The data source to enumerate.
         private readonly Func<TSource, TGroupKey> m_keySelector; // The key selection routine.
         protected readonly IEqualityComparer<TGroupKey> m_keyComparer; // The key comparison routine.
@@ -450,9 +525,13 @@ namespace System.Linq.Parallel
         // Instantiates a new group by enumerator.
         //
 
-        protected OrderedGroupByQueryOperatorEnumerator(QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
-            Func<TSource, TGroupKey> keySelector, IEqualityComparer<TGroupKey> keyComparer, IComparer<TOrderKey> orderComparer,
-            CancellationToken cancellationToken)
+        protected OrderedGroupByQueryOperatorEnumerator(
+            QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
+            Func<TSource, TGroupKey> keySelector,
+            IEqualityComparer<TGroupKey> keyComparer,
+            IComparer<TOrderKey> orderComparer,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(source != null);
             Contract.Assert(keySelector != null);
@@ -470,7 +549,10 @@ namespace System.Linq.Parallel
         // just enumerate the key-set from the hash-table, retrieving groupings of key-elements.
         //
 
-        internal override bool MoveNext(ref IGrouping<TGroupKey, TElement> currentElement, ref TOrderKey currentKey)
+        internal override bool MoveNext(
+            ref IGrouping<TGroupKey, TElement> currentElement,
+            ref TOrderKey currentKey
+        )
         {
             Contract.Assert(m_source != null);
             Contract.Assert(m_keySelector != null);
@@ -525,34 +607,44 @@ namespace System.Linq.Parallel
             internal TOrderKey m_orderKey;
             internal OrderedGroupByGrouping<TGroupKey, TOrderKey, TElement> m_grouping;
 
-            internal GroupKeyData(TOrderKey orderKey, TGroupKey hashKey, IComparer<TOrderKey> orderComparer)
+            internal GroupKeyData(
+                TOrderKey orderKey,
+                TGroupKey hashKey,
+                IComparer<TOrderKey> orderComparer
+            )
             {
                 m_orderKey = orderKey;
-                m_grouping = new OrderedGroupByGrouping<TGroupKey, TOrderKey, TElement>(hashKey, orderComparer);
+                m_grouping = new OrderedGroupByGrouping<TGroupKey, TOrderKey, TElement>(
+                    hashKey,
+                    orderComparer
+                );
             }
         }
     }
-
 
     //---------------------------------------------------------------------------------------
     // A specialization of the ordered GroupBy enumerator for yielding elements with the identity
     // function.
     //
 
-    internal sealed class OrderedGroupByIdentityQueryOperatorEnumerator<TSource, TGroupKey, TOrderKey> :
-        OrderedGroupByQueryOperatorEnumerator<TSource, TGroupKey, TSource, TOrderKey>
+    internal sealed class OrderedGroupByIdentityQueryOperatorEnumerator<
+        TSource,
+        TGroupKey,
+        TOrderKey
+    > : OrderedGroupByQueryOperatorEnumerator<TSource, TGroupKey, TSource, TOrderKey>
     {
-
         //---------------------------------------------------------------------------------------
         // Instantiates a new group by enumerator.
         //
 
-        internal OrderedGroupByIdentityQueryOperatorEnumerator(QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
-            Func<TSource, TGroupKey> keySelector, IEqualityComparer<TGroupKey> keyComparer, IComparer<TOrderKey> orderComparer, 
-            CancellationToken cancellationToken)
-            : base(source, keySelector, keyComparer, orderComparer, cancellationToken)
-        {
-        }
+        internal OrderedGroupByIdentityQueryOperatorEnumerator(
+            QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
+            Func<TSource, TGroupKey> keySelector,
+            IEqualityComparer<TGroupKey> keyComparer,
+            IComparer<TOrderKey> orderComparer,
+            CancellationToken cancellationToken
+        )
+            : base(source, keySelector, keyComparer, orderComparer, cancellationToken) { }
 
         //-----------------------------------------------------------------------------------
         // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
@@ -560,8 +652,10 @@ namespace System.Linq.Parallel
 
         protected override HashLookup<Wrapper<TGroupKey>, GroupKeyData> BuildHashLookup()
         {
-            HashLookup<Wrapper<TGroupKey>, GroupKeyData> hashLookup = new HashLookup<Wrapper<TGroupKey>, GroupKeyData>(
-                new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
+            HashLookup<Wrapper<TGroupKey>, GroupKeyData> hashLookup = new HashLookup<
+                Wrapper<TGroupKey>,
+                GroupKeyData
+            >(new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
 
             Pair<TSource, TGroupKey> sourceElement = default(Pair<TSource, TGroupKey>);
             TOrderKey sourceOrderKey = default(TOrderKey);
@@ -570,7 +664,7 @@ namespace System.Linq.Parallel
             {
                 if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                     CancellationState.ThrowIfCanceled(m_cancellationToken);
-                
+
                 // Generate a key and place it into the hashtable.
                 Wrapper<TGroupKey> key = new Wrapper<TGroupKey>(sourceElement.Second);
 
@@ -590,7 +684,7 @@ namespace System.Linq.Parallel
 
                     hashLookup.Add(key, currentValue);
                 }
-                
+
                 Contract.Assert(currentValue != null);
 
                 currentValue.m_grouping.Add(sourceElement.First, sourceOrderKey);
@@ -611,20 +705,28 @@ namespace System.Linq.Parallel
     // element selection function.
     //
 
-    internal sealed class OrderedGroupByElementSelectorQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey> :
-        OrderedGroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey>
+    internal sealed class OrderedGroupByElementSelectorQueryOperatorEnumerator<
+        TSource,
+        TGroupKey,
+        TElement,
+        TOrderKey
+    > : OrderedGroupByQueryOperatorEnumerator<TSource, TGroupKey, TElement, TOrderKey>
     {
-
         private readonly Func<TSource, TElement> m_elementSelector; // Function to select elements.
 
         //---------------------------------------------------------------------------------------
         // Instantiates a new group by enumerator.
         //
 
-        internal OrderedGroupByElementSelectorQueryOperatorEnumerator(QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
-            Func<TSource, TGroupKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TGroupKey> keyComparer, IComparer<TOrderKey> orderComparer,
-            CancellationToken cancellationToken) :
-            base(source, keySelector, keyComparer, orderComparer, cancellationToken)
+        internal OrderedGroupByElementSelectorQueryOperatorEnumerator(
+            QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
+            Func<TSource, TGroupKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TGroupKey> keyComparer,
+            IComparer<TOrderKey> orderComparer,
+            CancellationToken cancellationToken
+        )
+            : base(source, keySelector, keyComparer, orderComparer, cancellationToken)
         {
             Contract.Assert(elementSelector != null);
             m_elementSelector = elementSelector;
@@ -636,8 +738,10 @@ namespace System.Linq.Parallel
 
         protected override HashLookup<Wrapper<TGroupKey>, GroupKeyData> BuildHashLookup()
         {
-            HashLookup<Wrapper<TGroupKey>, GroupKeyData> hashLookup = new HashLookup<Wrapper<TGroupKey>, GroupKeyData>(
-                new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
+            HashLookup<Wrapper<TGroupKey>, GroupKeyData> hashLookup = new HashLookup<
+                Wrapper<TGroupKey>,
+                GroupKeyData
+            >(new WrapperEqualityComparer<TGroupKey>(m_keyComparer));
 
             Pair<TSource, TGroupKey> sourceElement = default(Pair<TSource, TGroupKey>);
             TOrderKey sourceOrderKey = default(TOrderKey);
@@ -683,7 +787,6 @@ namespace System.Linq.Parallel
         }
     }
 
-
     //---------------------------------------------------------------------------------------
     // This little type implements the IGrouping<K,T> interface, and exposes a single
     // key-to-many-values mapping.
@@ -691,7 +794,6 @@ namespace System.Linq.Parallel
 
     internal class GroupByGrouping<TGroupKey, TElement> : IGrouping<TGroupKey, TElement>
     {
-
         private KeyValuePair<Wrapper<TGroupKey>, ListChunk<TElement>> m_keyValues; // A key value pair.
 
         //---------------------------------------------------------------------------------------
@@ -710,14 +812,11 @@ namespace System.Linq.Parallel
 
         TGroupKey IGrouping<TGroupKey, TElement>.Key
         {
-            get
-            {
-                return m_keyValues.Key.Value;
-            }
+            get { return m_keyValues.Key.Value; }
         }
 
         //---------------------------------------------------------------------------------------
-        // Access to value enumerators. 
+        // Access to value enumerators.
         //
 
         IEnumerator<TElement> IEnumerable<TElement>.GetEnumerator()
@@ -730,27 +829,24 @@ namespace System.Linq.Parallel
         {
             return ((IEnumerable<TElement>)this).GetEnumerator();
         }
-
     }
 
     /// <summary>
     /// An ordered version of the grouping data structure. Represents an ordered group of elements that
     /// have the same grouping key.
     /// </summary>
-    internal class OrderedGroupByGrouping<TGroupKey, TOrderKey, TElement> : IGrouping<TGroupKey, TElement>
+    internal class OrderedGroupByGrouping<TGroupKey, TOrderKey, TElement>
+        : IGrouping<TGroupKey, TElement>
     {
         private TGroupKey m_groupKey; // The group key for this grouping
         private GrowingArray<TElement> m_values; // Values in this group
         private GrowingArray<TOrderKey> m_orderKeys; // Order keys that correspond to the values
         private IComparer<TOrderKey> m_orderComparer; // Comparer for order keys
 
-
         /// <summary>
         /// Constructs a new grouping
         /// </summary>
-        internal OrderedGroupByGrouping(
-            TGroupKey groupKey,
-            IComparer<TOrderKey> orderComparer)
+        internal OrderedGroupByGrouping(TGroupKey groupKey, IComparer<TOrderKey> orderComparer)
         {
             m_groupKey = groupKey;
             m_values = new GrowingArray<TElement>();
@@ -763,16 +859,12 @@ namespace System.Linq.Parallel
         /// </summary>
         TGroupKey IGrouping<TGroupKey, TElement>.Key
         {
-            get
-            {
-                return m_groupKey;
-            }
+            get { return m_groupKey; }
         }
 
         IEnumerator<TElement> IEnumerable<TElement>.GetEnumerator()
         {
             Contract.Assert(m_values != null);
-
 
             int valueCount = m_values.Count;
             TElement[] valueArray = m_values.InternalArray;
@@ -810,9 +902,12 @@ namespace System.Linq.Parallel
             Contract.Assert(m_orderKeys != null);
 
             Array.Sort(
-                m_orderKeys.InternalArray, m_values.InternalArray, 
-                0, m_values.Count,
-                m_orderComparer);
+                m_orderKeys.InternalArray,
+                m_values.InternalArray,
+                0,
+                m_values.Count,
+                m_orderComparer
+            );
 
 #if DEBUG
             m_orderKeys = null; // Any future calls to Add() or DoneAdding() will fail

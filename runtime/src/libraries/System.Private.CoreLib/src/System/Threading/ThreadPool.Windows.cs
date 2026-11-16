@@ -11,7 +11,10 @@ namespace System.Threading
     public static partial class ThreadPool
     {
         internal static bool UseWindowsThreadPool { get; } =
-            AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.UseWindowsThreadPool", "DOTNET_ThreadPool_UseWindowsThreadPool");
+            AppContextConfigHelper.GetBooleanConfig(
+                "System.Threading.ThreadPool.UseWindowsThreadPool",
+                "DOTNET_ThreadPool_UseWindowsThreadPool"
+            );
 
 #pragma warning disable CA1823
         // The field should reflect what the property returns because the property can be stubbed by trimming,
@@ -22,8 +25,12 @@ namespace System.Threading
 #if NATIVEAOT
         private const bool IsWorkerTrackingEnabledInConfig = false;
 #else
-        private static readonly bool IsWorkerTrackingEnabledInConfig =
-            UseWindowsThreadPool ? false : AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.EnableWorkerTracking", "DOTNET_ThreadPool_EnableWorkerTracking");
+        private static readonly bool IsWorkerTrackingEnabledInConfig = UseWindowsThreadPool
+            ? false
+            : AppContextConfigHelper.GetBooleanConfig(
+                "System.Threading.ThreadPool.EnableWorkerTracking",
+                "DOTNET_ThreadPool_EnableWorkerTracking"
+            );
 #endif
 
         // Indicates whether the thread pool should yield the thread from the dispatch loop to the runtime periodically so that
@@ -37,22 +44,24 @@ namespace System.Threading
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
         public static unsafe bool UnsafeQueueNativeOverlapped(NativeOverlapped* overlapped) =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.UnsafeQueueNativeOverlapped(overlapped) :
-            UnsafeQueueNativeOverlappedPortableCore(overlapped);
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.UnsafeQueueNativeOverlapped(overlapped)
+                : UnsafeQueueNativeOverlappedPortableCore(overlapped);
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle) =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.BindHandle(osHandle) :
-            BindHandlePortableCore(osHandle);
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.BindHandle(osHandle)
+                : BindHandlePortableCore(osHandle);
 
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(SafeHandle osHandle) =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.BindHandle(osHandle) :
-            BindHandlePortableCore(osHandle);
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.BindHandle(osHandle)
+                : BindHandlePortableCore(osHandle);
 
 #if !CORECLR
         internal static bool EnsureConfigInitialized() => true;
@@ -67,17 +76,21 @@ namespace System.Threading
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void IncrementCompletedWorkItemCount() => WindowsThreadPool.IncrementCompletedWorkItemCount();
+        internal static void IncrementCompletedWorkItemCount() =>
+            WindowsThreadPool.IncrementCompletedWorkItemCount();
 
         internal static object GetOrCreateThreadLocalCompletionCountObject() =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.GetOrCreateThreadLocalCompletionCountObject() :
-            PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject();
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.GetOrCreateThreadLocalCompletionCountObject()
+                : PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject();
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.SetMaxThreads(workerThreads, completionPortThreads) :
-            PortableThreadPool.ThreadPoolInstance.SetMaxThreads(workerThreads, completionPortThreads);
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.SetMaxThreads(workerThreads, completionPortThreads)
+                : PortableThreadPool.ThreadPoolInstance.SetMaxThreads(
+                    workerThreads,
+                    completionPortThreads
+                );
 
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
         {
@@ -87,14 +100,20 @@ namespace System.Threading
             }
             else
             {
-                PortableThreadPool.ThreadPoolInstance.GetMaxThreads(out workerThreads, out completionPortThreads);
+                PortableThreadPool.ThreadPoolInstance.GetMaxThreads(
+                    out workerThreads,
+                    out completionPortThreads
+                );
             }
         }
 
         public static bool SetMinThreads(int workerThreads, int completionPortThreads) =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.SetMinThreads(workerThreads, completionPortThreads) :
-            PortableThreadPool.ThreadPoolInstance.SetMinThreads(workerThreads, completionPortThreads);
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.SetMinThreads(workerThreads, completionPortThreads)
+                : PortableThreadPool.ThreadPoolInstance.SetMinThreads(
+                    workerThreads,
+                    completionPortThreads
+                );
 
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
         {
@@ -104,7 +123,10 @@ namespace System.Threading
             }
             else
             {
-                PortableThreadPool.ThreadPoolInstance.GetMinThreads(out workerThreads, out completionPortThreads);
+                PortableThreadPool.ThreadPoolInstance.GetMinThreads(
+                    out workerThreads,
+                    out completionPortThreads
+                );
             }
         }
 
@@ -116,7 +138,10 @@ namespace System.Threading
             }
             else
             {
-                PortableThreadPool.ThreadPoolInstance.GetAvailableThreads(out workerThreads, out completionPortThreads);
+                PortableThreadPool.ThreadPoolInstance.GetAvailableThreads(
+                    out workerThreads,
+                    out completionPortThreads
+                );
             }
         }
 
@@ -134,15 +159,24 @@ namespace System.Threading
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool NotifyWorkItemComplete(object threadLocalCompletionCountObject, int currentTimeMs) =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs) :
-            PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs);
+        internal static bool NotifyWorkItemComplete(
+            object threadLocalCompletionCountObject,
+            int currentTimeMs
+        ) =>
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.NotifyWorkItemComplete(
+                    threadLocalCompletionCountObject,
+                    currentTimeMs
+                )
+                : PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
+                    threadLocalCompletionCountObject,
+                    currentTimeMs
+                );
 
         internal static bool NotifyThreadBlocked() =>
-            ThreadPool.UseWindowsThreadPool ?
-            WindowsThreadPool.NotifyThreadBlocked() :
-            PortableThreadPool.ThreadPoolInstance.NotifyThreadBlocked();
+            ThreadPool.UseWindowsThreadPool
+                ? WindowsThreadPool.NotifyThreadBlocked()
+                : PortableThreadPool.ThreadPoolInstance.NotifyThreadBlocked();
 
         internal static void NotifyThreadUnblocked()
         {
@@ -187,7 +221,9 @@ namespace System.Threading
         {
             get
             {
-                return ThreadPool.UseWindowsThreadPool ? WindowsThreadPool.ThreadCount : PortableThreadPool.ThreadPoolInstance.ThreadCount;
+                return ThreadPool.UseWindowsThreadPool
+                    ? WindowsThreadPool.ThreadCount
+                    : PortableThreadPool.ThreadPoolInstance.ThreadCount;
             }
         }
 
@@ -201,25 +237,42 @@ namespace System.Threading
         {
             get
             {
-                return ThreadPool.UseWindowsThreadPool ? WindowsThreadPool.CompletedWorkItemCount : PortableThreadPool.ThreadPoolInstance.CompletedWorkItemCount;
+                return ThreadPool.UseWindowsThreadPool
+                    ? WindowsThreadPool.CompletedWorkItemCount
+                    : PortableThreadPool.ThreadPoolInstance.CompletedWorkItemCount;
             }
         }
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle waitObject,
-             WaitOrTimerCallback callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle waitObject,
+            WaitOrTimerCallback callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             if (ThreadPool.UseWindowsThreadPool)
             {
-                return WindowsThreadPool.RegisterWaitForSingleObject(waitObject, callBack, state, millisecondsTimeOutInterval, executeOnlyOnce, flowExecutionContext);
+                return WindowsThreadPool.RegisterWaitForSingleObject(
+                    waitObject,
+                    callBack,
+                    state,
+                    millisecondsTimeOutInterval,
+                    executeOnlyOnce,
+                    flowExecutionContext
+                );
             }
             else
             {
-                return PortableThreadPool.RegisterWaitForSingleObject(waitObject, callBack, state, millisecondsTimeOutInterval, executeOnlyOnce, flowExecutionContext);
+                return PortableThreadPool.RegisterWaitForSingleObject(
+                    waitObject,
+                    callBack,
+                    state,
+                    millisecondsTimeOutInterval,
+                    executeOnlyOnce,
+                    flowExecutionContext
+                );
             }
         }
     }

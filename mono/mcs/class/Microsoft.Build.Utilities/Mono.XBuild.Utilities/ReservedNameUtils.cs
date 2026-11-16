@@ -31,152 +31,190 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 
-namespace Mono.XBuild.Utilities {
+namespace Mono.XBuild.Utilities
+{
+    internal static class ReservedNameUtils
+    {
+        static string[] reservedMetadataNames;
+        static Hashtable reservedMetadataHash;
 
-	internal static class ReservedNameUtils {
-	
-		static string[] reservedMetadataNames;
-		static Hashtable reservedMetadataHash;
-	
-		static ReservedNameUtils ()
-		{
-			reservedMetadataNames = new string [] {
-				"FullPath", "RootDir", "Filename", "Extension", "RelativeDir", "Directory",
-				"RecursiveDir", "Identity", "ModifiedTime", "CreatedTime", "AccessedTime"};
-			reservedMetadataHash = CollectionsUtil.CreateCaseInsensitiveHashtable (ReservedMetadataNameCount);
-			foreach (string s in reservedMetadataNames) {
-				reservedMetadataHash.Add (s, null);
-			}
-		}
-		
-		public static ICollection ReservedMetadataNames {
-			get {
-				return (ICollection) reservedMetadataNames.Clone ();
-			}
-		}
+        static ReservedNameUtils()
+        {
+            reservedMetadataNames = new string[]
+            {
+                "FullPath",
+                "RootDir",
+                "Filename",
+                "Extension",
+                "RelativeDir",
+                "Directory",
+                "RecursiveDir",
+                "Identity",
+                "ModifiedTime",
+                "CreatedTime",
+                "AccessedTime",
+            };
+            reservedMetadataHash = CollectionsUtil.CreateCaseInsensitiveHashtable(
+                ReservedMetadataNameCount
+            );
+            foreach (string s in reservedMetadataNames)
+            {
+                reservedMetadataHash.Add(s, null);
+            }
+        }
 
-		public static int ReservedMetadataNameCount {
-			get {
-				return reservedMetadataNames.Length;
-			}
-		}
+        public static ICollection ReservedMetadataNames
+        {
+            get { return (ICollection)reservedMetadataNames.Clone(); }
+        }
 
-		public static bool IsReservedMetadataName (string metadataName)
-		{
-			return reservedMetadataHash.Contains (metadataName);
-		}
+        public static int ReservedMetadataNameCount
+        {
+            get { return reservedMetadataNames.Length; }
+        }
 
-		public static string GetReservedMetadata (string itemSpec,
-						   string metadataName, IDictionary metadata)
-		{
-			if (metadataName == null)
-				throw new ArgumentNullException ();
+        public static bool IsReservedMetadataName(string metadataName)
+        {
+            return reservedMetadataHash.Contains(metadataName);
+        }
 
-			if (String.IsNullOrEmpty (itemSpec))
-				return String.Empty;
-		
-			switch (metadataName.ToLowerInvariant ()) {
-			case "fullpath":
-				var unescapedItemSpec = MSBuildUtils.Unescape (itemSpec);
-				return MSBuildUtils.Escape (Path.GetFullPath (unescapedItemSpec));
-			case "rootdir":
-				if (Path.IsPathRooted (itemSpec))
-					return Path.GetPathRoot (itemSpec);
-				else
-					return Path.GetPathRoot (Environment.CurrentDirectory);
-			case "filename":
-				return Path.GetFileNameWithoutExtension (itemSpec);
-			case "extension":
-				return Path.GetExtension (itemSpec);
-			case "relativedir":
-				return WithTrailingSlash (AbsoluteToRelativePath (Environment.CurrentDirectory, Path.GetDirectoryName (itemSpec)));
-			case "directory":
-				string fullpath = Path.GetFullPath (itemSpec);
-				return WithTrailingSlash (
-					 Path.GetDirectoryName (fullpath).Substring (Path.GetPathRoot (fullpath).Length));
-			case "recursivedir":
-				if (metadata != null && metadata.Contains ("RecursiveDir"))
-					return (string)metadata ["RecursiveDir"];
-				else
-					return String.Empty;
-			case "identity":
-				return itemSpec;
-			case "modifiedtime":
-				if (File.Exists (itemSpec))
-					return File.GetLastWriteTime (itemSpec).ToString ();
-				else if (Directory.Exists (itemSpec))
-					return Directory.GetLastWriteTime (itemSpec).ToString ();
-				else
-					return String.Empty;
-			case "createdtime":
-				if (File.Exists (itemSpec))
-					return File.GetCreationTime (itemSpec).ToString ();
-				else if (Directory.Exists (itemSpec))
-					return Directory.GetCreationTime (itemSpec).ToString ();
-				else
-					return String.Empty;
-			case "accessedtime":
-				if (File.Exists (itemSpec))
-					return File.GetLastAccessTime (itemSpec).ToString ();
-				else if (Directory.Exists (itemSpec))
-					return Directory.GetLastAccessTime (itemSpec).ToString ();
-				else
-					return String.Empty;
-			default:
-				throw new ArgumentException ("Invalid reserved metadata name");
-			}
-		}
+        public static string GetReservedMetadata(
+            string itemSpec,
+            string metadataName,
+            IDictionary metadata
+        )
+        {
+            if (metadataName == null)
+                throw new ArgumentNullException();
 
-		static string WithTrailingSlash (string path)
-		{
-			if (String.IsNullOrEmpty (path))
-				return String.Empty;
+            if (String.IsNullOrEmpty(itemSpec))
+                return String.Empty;
 
-			if (path.Length > 0)
-				return path + Path.DirectorySeparatorChar;
-			else
-				return path;
-		}
+            switch (metadataName.ToLowerInvariant())
+            {
+                case "fullpath":
+                    var unescapedItemSpec = MSBuildUtils.Unescape(itemSpec);
+                    return MSBuildUtils.Escape(Path.GetFullPath(unescapedItemSpec));
+                case "rootdir":
+                    if (Path.IsPathRooted(itemSpec))
+                        return Path.GetPathRoot(itemSpec);
+                    else
+                        return Path.GetPathRoot(Environment.CurrentDirectory);
+                case "filename":
+                    return Path.GetFileNameWithoutExtension(itemSpec);
+                case "extension":
+                    return Path.GetExtension(itemSpec);
+                case "relativedir":
+                    return WithTrailingSlash(
+                        AbsoluteToRelativePath(
+                            Environment.CurrentDirectory,
+                            Path.GetDirectoryName(itemSpec)
+                        )
+                    );
+                case "directory":
+                    string fullpath = Path.GetFullPath(itemSpec);
+                    return WithTrailingSlash(
+                        Path.GetDirectoryName(fullpath).Substring(Path.GetPathRoot(fullpath).Length)
+                    );
+                case "recursivedir":
+                    if (metadata != null && metadata.Contains("RecursiveDir"))
+                        return (string)metadata["RecursiveDir"];
+                    else
+                        return String.Empty;
+                case "identity":
+                    return itemSpec;
+                case "modifiedtime":
+                    if (File.Exists(itemSpec))
+                        return File.GetLastWriteTime(itemSpec).ToString();
+                    else if (Directory.Exists(itemSpec))
+                        return Directory.GetLastWriteTime(itemSpec).ToString();
+                    else
+                        return String.Empty;
+                case "createdtime":
+                    if (File.Exists(itemSpec))
+                        return File.GetCreationTime(itemSpec).ToString();
+                    else if (Directory.Exists(itemSpec))
+                        return Directory.GetCreationTime(itemSpec).ToString();
+                    else
+                        return String.Empty;
+                case "accessedtime":
+                    if (File.Exists(itemSpec))
+                        return File.GetLastAccessTime(itemSpec).ToString();
+                    else if (Directory.Exists(itemSpec))
+                        return Directory.GetLastAccessTime(itemSpec).ToString();
+                    else
+                        return String.Empty;
+                default:
+                    throw new ArgumentException("Invalid reserved metadata name");
+            }
+        }
 
-		readonly static char[] separators = { Path.DirectorySeparatorChar, Path.VolumeSeparatorChar, Path.AltDirectorySeparatorChar };
-		static string AbsoluteToRelativePath (string baseDirectoryPath, string absPath)
-		{
-			if (!Path.IsPathRooted (absPath))
-				return absPath;
+        static string WithTrailingSlash(string path)
+        {
+            if (String.IsNullOrEmpty(path))
+                return String.Empty;
 
-			absPath           = Path.GetFullPath (absPath);
-			baseDirectoryPath = Path.GetFullPath (baseDirectoryPath.TrimEnd (Path.DirectorySeparatorChar));
+            if (path.Length > 0)
+                return path + Path.DirectorySeparatorChar;
+            else
+                return path;
+        }
 
-			string[] bPath = baseDirectoryPath.Split (separators);
-			string[] aPath = absPath.Split (separators);
-			int indx = 0;
+        static readonly char[] separators =
+        {
+            Path.DirectorySeparatorChar,
+            Path.VolumeSeparatorChar,
+            Path.AltDirectorySeparatorChar,
+        };
 
-			for (; indx < System.Math.Min (bPath.Length, aPath.Length); indx++) {
-				if (!bPath[indx].Equals(aPath[indx]))
-					break;
-			}
+        static string AbsoluteToRelativePath(string baseDirectoryPath, string absPath)
+        {
+            if (!Path.IsPathRooted(absPath))
+                return absPath;
 
-			if (indx == 0) 
-				return absPath;
+            absPath = Path.GetFullPath(absPath);
+            baseDirectoryPath = Path.GetFullPath(
+                baseDirectoryPath.TrimEnd(Path.DirectorySeparatorChar)
+            );
 
-			StringBuilder result = new StringBuilder ();
+            string[] bPath = baseDirectoryPath.Split(separators);
+            string[] aPath = absPath.Split(separators);
+            int indx = 0;
 
-			for (int i = indx; i < bPath.Length; i++) {
-				result.Append ("..");
-				if (i + 1 < bPath.Length || aPath.Length - indx > 0)
-					result.Append (Path.DirectorySeparatorChar);
-			}
+            for (; indx < System.Math.Min(bPath.Length, aPath.Length); indx++)
+            {
+                if (!bPath[indx].Equals(aPath[indx]))
+                    break;
+            }
 
+            if (indx == 0)
+                return absPath;
 
-			result.Append (String.Join(Path.DirectorySeparatorChar.ToString(), aPath, indx, aPath.Length - indx));
-			if (result.Length == 0)
-				return ".";
-			return result.ToString ();
-		}
+            StringBuilder result = new StringBuilder();
 
-		static string RelativeToAbsolutePath (string baseDirectoryPath, string relPath)
-		{
-			return Path.GetFullPath (Path.Combine (baseDirectoryPath, relPath));
-		}
-	}
+            for (int i = indx; i < bPath.Length; i++)
+            {
+                result.Append("..");
+                if (i + 1 < bPath.Length || aPath.Length - indx > 0)
+                    result.Append(Path.DirectorySeparatorChar);
+            }
+
+            result.Append(
+                String.Join(
+                    Path.DirectorySeparatorChar.ToString(),
+                    aPath,
+                    indx,
+                    aPath.Length - indx
+                )
+            );
+            if (result.Length == 0)
+                return ".";
+            return result.ToString();
+        }
+
+        static string RelativeToAbsolutePath(string baseDirectoryPath, string relPath)
+        {
+            return Path.GetFullPath(Path.Combine(baseDirectoryPath, relPath));
+        }
+    }
 }

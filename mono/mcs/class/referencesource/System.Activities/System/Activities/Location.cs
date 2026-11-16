@@ -6,11 +6,11 @@ namespace System.Activities
 {
     using System;
     using System.Activities.Runtime;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Runtime.Serialization;
     using System.Runtime;
-    using System.Collections.Specialized;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [DebuggerDisplay("{Value}")]
@@ -18,25 +18,14 @@ namespace System.Activities
     {
         TemporaryResolutionData temporaryResolutionData;
 
-        protected Location()
-        {
-        }
+        protected Location() { }
 
-        public abstract Type LocationType
-        {
-            get;
-        }
+        public abstract Type LocationType { get; }
 
         public object Value
         {
-            get
-            {
-                return this.ValueCore;
-            }
-            set
-            {
-                this.ValueCore = value;
-            }
+            get { return this.ValueCore; }
+            set { this.ValueCore = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "temporaryResolutionData")]
@@ -48,10 +37,7 @@ namespace System.Activities
 
         internal virtual bool CanBeMapped
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         // When we are resolving an expression that resolves to a
@@ -63,32 +49,25 @@ namespace System.Activities
         // in CollapseTemporaryResolutionLocations().
         internal LocationEnvironment TemporaryResolutionEnvironment
         {
-            get
-            {
-                return this.temporaryResolutionData.TemporaryResolutionEnvironment;
-            }
+            get { return this.temporaryResolutionData.TemporaryResolutionEnvironment; }
         }
 
         internal bool BufferGetsOnCollapse
         {
-            get
-            {
-                return this.temporaryResolutionData.BufferGetsOnCollapse;
-            }
+            get { return this.temporaryResolutionData.BufferGetsOnCollapse; }
         }
 
-        protected abstract object ValueCore
-        {
-            get;
-            set;
-        }
+        protected abstract object ValueCore { get; set; }
 
-        internal void SetTemporaryResolutionData(LocationEnvironment resolutionEnvironment, bool bufferGetsOnCollapse)
+        internal void SetTemporaryResolutionData(
+            LocationEnvironment resolutionEnvironment,
+            bool bufferGetsOnCollapse
+        )
         {
             this.temporaryResolutionData = new TemporaryResolutionData
             {
                 TemporaryResolutionEnvironment = resolutionEnvironment,
-                BufferGetsOnCollapse = bufferGetsOnCollapse
+                BufferGetsOnCollapse = bufferGetsOnCollapse,
             };
         }
 
@@ -112,18 +91,10 @@ namespace System.Activities
         internal struct TemporaryResolutionData
         {
             [DataMember(EmitDefaultValue = false)]
-            public LocationEnvironment TemporaryResolutionEnvironment
-            {
-                get;
-                set;
-            }
+            public LocationEnvironment TemporaryResolutionEnvironment { get; set; }
 
             [DataMember(EmitDefaultValue = false)]
-            public bool BufferGetsOnCollapse
-            {
-                get;
-                set;
-            }
+            public bool BufferGetsOnCollapse { get; set; }
         }
 
         [DataContract]
@@ -141,10 +112,7 @@ namespace System.Activities
 
             public override Type LocationType
             {
-                get
-                {
-                    return this.innerLocation.LocationType;
-                }
+                get { return this.innerLocation.LocationType; }
             }
 
             protected override object ValueCore
@@ -208,54 +176,29 @@ namespace System.Activities
         T value;
 
         public Location()
-            : base()
-        {
-        }
+            : base() { }
 
         public override Type LocationType
         {
-            get
-            {
-                return typeof(T);
-            }
+            get { return typeof(T); }
         }
 
-        public virtual new T Value
+        public new virtual T Value
         {
-            get
-            {
-                return this.value;
-            }
-            set
-            {
-                this.value = value;
-            }
+            get { return this.value; }
+            set { this.value = value; }
         }
 
         internal T TypedValue
         {
-            get
-            {
-                return this.Value;
-            }
-
-            set
-            {
-                this.Value = value;
-            }
+            get { return this.Value; }
+            set { this.Value = value; }
         }
 
-        protected override sealed object ValueCore
+        protected sealed override object ValueCore
         {
-            get
-            {
-                return this.Value;
-            }
-
-            set
-            {
-                this.Value = TypeHelper.Convert<T>(value);
-            }
+            get { return this.Value; }
+            set { this.Value = TypeHelper.Convert<T>(value); }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "value")]
@@ -277,7 +220,10 @@ namespace System.Activities
 
         internal override object CreateDefaultValue()
         {
-            Fx.Assert(typeof(T).GetGenericTypeDefinition() == typeof(Location<>), "We should only be calling this with location subclasses.");
+            Fx.Assert(
+                typeof(T).GetGenericTypeDefinition() == typeof(Location<>),
+                "We should only be calling this with location subclasses."
+            );
 
             return Activator.CreateInstance<T>();
         }

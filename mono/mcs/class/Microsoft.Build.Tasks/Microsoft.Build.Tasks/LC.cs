@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DELCINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -33,92 +32,101 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class LC : ToolTaskExtension
-	{
-		public LC ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class LC : ToolTaskExtension
+    {
+        public LC() { }
 
-		protected internal override void AddCommandLineCommands (
-						CommandLineBuilderExtension commandLine)
-		{
-			if (Sources.Length == 0)
-				return;
+        protected internal override void AddCommandLineCommands(
+            CommandLineBuilderExtension commandLine
+        )
+        {
+            if (Sources.Length == 0)
+                return;
 
-			foreach (ITaskItem item in Sources)
-				commandLine.AppendSwitchIfNotNull ("--complist=", item.ItemSpec);
+            foreach (ITaskItem item in Sources)
+                commandLine.AppendSwitchIfNotNull("--complist=", item.ItemSpec);
 
-			commandLine.AppendSwitchIfNotNull ("--target=", LicenseTarget);
+            commandLine.AppendSwitchIfNotNull("--target=", LicenseTarget);
 
-			if (ReferencedAssemblies != null)
-				foreach (ITaskItem reference in ReferencedAssemblies)
-					commandLine.AppendSwitchIfNotNull ("--load=", reference.ItemSpec);
+            if (ReferencedAssemblies != null)
+                foreach (ITaskItem reference in ReferencedAssemblies)
+                    commandLine.AppendSwitchIfNotNull("--load=", reference.ItemSpec);
 
-			string outdir;
-			if (Bag ["OutputDirectory"] != null)
-				outdir = OutputDirectory;
-			else
-				outdir = ".";
+            string outdir;
+            if (Bag["OutputDirectory"] != null)
+                outdir = OutputDirectory;
+            else
+                outdir = ".";
 
-			commandLine.AppendSwitchIfNotNull ("--outdir=", outdir);
+            commandLine.AppendSwitchIfNotNull("--outdir=", outdir);
 
-			if (Bag ["NoLogo"] != null && NoLogo)
-				commandLine.AppendSwitch ("--nologo");
+            if (Bag["NoLogo"] != null && NoLogo)
+                commandLine.AppendSwitch("--nologo");
 
-			OutputLicense = new TaskItem (Path.Combine (OutputDirectory, LicenseTarget.ItemSpec + ".licenses"));
-		}
+            OutputLicense = new TaskItem(
+                Path.Combine(OutputDirectory, LicenseTarget.ItemSpec + ".licenses")
+            );
+        }
 
-		protected override string GenerateFullPathToTool ()
-		{
-			if (!string.IsNullOrEmpty (ToolPath))
-				return Path.Combine (ToolPath, ToolExe);
-			return ToolLocationHelper.GetPathToDotNetFrameworkFile (ToolExe, TargetDotNetFrameworkVersion.VersionLatest);
-		}
+        protected override string GenerateFullPathToTool()
+        {
+            if (!string.IsNullOrEmpty(ToolPath))
+                return Path.Combine(ToolPath, ToolExe);
+            return ToolLocationHelper.GetPathToDotNetFrameworkFile(
+                ToolExe,
+                TargetDotNetFrameworkVersion.VersionLatest
+            );
+        }
 
-		protected override bool ValidateParameters()
-		{
-			return Sources.Length > 0;
-		}
+        protected override bool ValidateParameters()
+        {
+            return Sources.Length > 0;
+        }
 
-		[Required]
-		public ITaskItem LicenseTarget {
-			get { return (ITaskItem) Bag ["LicenseTarget"]; }
-			set { Bag ["LicenseTarget"] = value; }
-		}
+        [Required]
+        public ITaskItem LicenseTarget
+        {
+            get { return (ITaskItem)Bag["LicenseTarget"]; }
+            set { Bag["LicenseTarget"] = value; }
+        }
 
-		public bool NoLogo {
-			get { return GetBoolParameterWithDefault ("NoLogo", false); }
-			set { Bag ["NoLogo"] = value; }
-		}
+        public bool NoLogo
+        {
+            get { return GetBoolParameterWithDefault("NoLogo", false); }
+            set { Bag["NoLogo"] = value; }
+        }
 
-		public string OutputDirectory {
-			get { return (string) Bag ["OutputDirectory"]; }
-			set { Bag ["OutputDirectory"] = value; }
-		}
+        public string OutputDirectory
+        {
+            get { return (string)Bag["OutputDirectory"]; }
+            set { Bag["OutputDirectory"] = value; }
+        }
 
-		[Output]
-		public ITaskItem OutputLicense {
-			get { return (ITaskItem) Bag ["OutputLicense"]; }
-			set { Bag ["OutputLicense"] = value; }
-		}
+        [Output]
+        public ITaskItem OutputLicense
+        {
+            get { return (ITaskItem)Bag["OutputLicense"]; }
+            set { Bag["OutputLicense"] = value; }
+        }
 
-		public ITaskItem[] ReferencedAssemblies {
-			get { return (ITaskItem[]) Bag ["ReferencedAssemblies"]; }
-			set { Bag ["ReferencedAssemblies"] = value; }
-		}
+        public ITaskItem[] ReferencedAssemblies
+        {
+            get { return (ITaskItem[])Bag["ReferencedAssemblies"]; }
+            set { Bag["ReferencedAssemblies"] = value; }
+        }
 
-		[Required]
-		public ITaskItem[] Sources {
-			get { return (ITaskItem[]) Bag ["Sources"]; }
-			set { Bag ["Sources"] = value; }
-		}
+        [Required]
+        public ITaskItem[] Sources
+        {
+            get { return (ITaskItem[])Bag["Sources"]; }
+            set { Bag["Sources"] = value; }
+        }
 
-		protected override string ToolName {
-			get {
-				return MSBuildUtils.RunningOnWindows ? "lc.bat" : "lc";
-			}
-		}
-	}
+        protected override string ToolName
+        {
+            get { return MSBuildUtils.RunningOnWindows ? "lc.bat" : "lc"; }
+        }
+    }
 }
-

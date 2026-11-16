@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
     [Trait(Traits.Feature, Traits.Features.CodeActionsMoveDeclarationNearReference)]
     public class ReverseForStatementTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpReverseForStatementCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpReverseForStatementCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMissingWithoutInitializer()
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -50,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -67,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -84,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -101,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -118,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -135,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -152,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -180,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -208,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -236,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -264,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -292,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -309,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -337,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -365,7 +382,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -393,7 +411,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -421,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -449,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -477,7 +498,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -505,7 +527,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -533,7 +556,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -561,7 +585,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -589,7 +614,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -606,7 +632,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -623,7 +650,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -640,7 +668,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -657,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -674,7 +704,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -691,7 +722,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -708,7 +740,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -725,7 +758,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -742,7 +776,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

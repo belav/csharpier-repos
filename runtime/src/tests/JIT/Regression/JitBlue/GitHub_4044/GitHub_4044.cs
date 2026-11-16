@@ -23,10 +23,12 @@ public class C
 
     static int Test1()
     {
-        try {
+        try
+        {
             return Test1Inner();
         }
-        catch {
+        catch
+        {
             return 1;
         }
     }
@@ -60,27 +62,33 @@ public class C
     }
 
     static int limit = 10;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Print1(int i)
     {
-        if (limit > 0) {
+        if (limit > 0)
+        {
             Console.Write(i.ToString());
             --limit;
         }
-        else {
+        else
+        {
             throw new Exception();
         }
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test2()
     {
-        int x = 1, y = 5;
-        try {
+        int x = 1,
+            y = 5;
+        try
+        {
             throw new Exception();
-        } catch when (Print2(Print2(0, --x), ++x) == 1) {
-        } catch {
+        }
+        catch when (Print2(Print2(0, --x), ++x) == 1) { }
+        catch
+        {
             // Need a PHI here for x that includes the decremented
             // value; doesn't happen if we don't realize that exceptions
             // at the first call to Print2 can reach here.
@@ -106,10 +114,12 @@ public class C
     {
         return Test3(0, 50);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test3(int x, int y) // must pass 50 for y
     {
-        try {
+        try
+        {
             throw new Exception();
         }
         // Need to make sure the increment to y is not
@@ -120,7 +130,10 @@ public class C
         // tree, but will still separate out ++y, creating
         // the bad reordering
         catch when (Ignore(Throw(x), ++y)) { }
-        catch { Print3(y); }
+        catch
+        {
+            Print3(y);
+        }
 
         return y - 50; // Caller should pass '50'
     }
@@ -129,26 +142,37 @@ public class C
     {
         return Test3b(new int[5], 50);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test3b(int[] x, int y)
     {
-        try {
+        try
+        {
             throw new Exception();
         }
         // Same as Test3 except that the tree which raises
         // an exception is the array access x[100] instead
         // of a call.
         catch when (Ignore(x[100], ++y)) { }
-        catch { Print3(y); }
+        catch
+        {
+            Print3(y);
+        }
 
         return y - 50; // Caller should pass '50'
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool Ignore(int a, int b) { return false; }
+    static bool Ignore(int a, int b)
+    {
+        return false;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int Throw(int n) { throw new Exception(); }
+    static int Throw(int n)
+    {
+        throw new Exception();
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Print3(int i)
@@ -173,7 +197,8 @@ public class C
     {
         bool b = box.Field;
 
-        try {
+        try
+        {
             throw e;
         }
         // This filter side-effects the heap and then throws an
@@ -181,22 +206,23 @@ public class C
         // sure we recognize the heap modification and don't think
         // we can value-number the load here the same as the load
         // on entry to the function.
-        catch when ((box.Field = true) && ((BoxedBool)null).Field) {
-        }
-        catch {
+        catch when ((box.Field = true) && ((BoxedBool)null).Field) { }
+        catch
+        {
             b = box.Field;
         }
 
-        if (b) {
+        if (b)
+        {
             Console.WriteLine("true");
         }
-        else {
+        else
+        {
             Console.WriteLine("false");
         }
 
         return (b ? 0 : 1);
     }
-
 
     static int Test5()
     {
@@ -208,7 +234,8 @@ public class C
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test5(int n)
     {
-        try {
+        try
+        {
             throw new Exception();
         }
         catch when (Filter5(ref n)) { }
@@ -228,7 +255,6 @@ public class C
         return (n != 0);
     }
 
-
     static int Test6()
     {
         int n = int.MaxValue - 3;
@@ -239,7 +265,8 @@ public class C
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test6(int n)
     {
-        try {
+        try
+        {
             throw new Exception();
         }
         catch when (Filter6(ref n)) { }
@@ -255,7 +282,8 @@ public class C
         //   jo throw_ovf
         // would incorrectly increment n by 4 rather than 2
         // on the path where the exception occurs.
-        checked {
+        checked
+        {
             n += 2;
             n += 2;
         }

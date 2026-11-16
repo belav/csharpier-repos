@@ -1,22 +1,22 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Drawing;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.Activities.Common;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Hosting;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Workflow.Activities.Common;
 
     [SRDescription(SR.DelayActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]
@@ -25,27 +25,43 @@ namespace System.Workflow.Activities
     [DefaultEvent("InitializeTimeoutDuration")]
     [ActivityValidator(typeof(DelayActivityValidator))]
     [SRCategory(SR.Standard)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class DelayActivity : Activity, IEventActivity, IActivityEventListener<QueueEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class DelayActivity
+        : Activity,
+            IEventActivity,
+            IActivityEventListener<QueueEventArgs>
     {
         #region Public Dependency Properties
-        public static readonly DependencyProperty InitializeTimeoutDurationEvent = DependencyProperty.Register("InitializeTimeoutDuration", typeof(EventHandler), typeof(DelayActivity));
-        public static readonly DependencyProperty TimeoutDurationProperty = DependencyProperty.Register("TimeoutDuration", typeof(TimeSpan), typeof(DelayActivity), new PropertyMetadata(new TimeSpan(0, 0, 0)));
+        public static readonly DependencyProperty InitializeTimeoutDurationEvent =
+            DependencyProperty.Register(
+                "InitializeTimeoutDuration",
+                typeof(EventHandler),
+                typeof(DelayActivity)
+            );
+        public static readonly DependencyProperty TimeoutDurationProperty =
+            DependencyProperty.Register(
+                "TimeoutDuration",
+                typeof(TimeSpan),
+                typeof(DelayActivity),
+                new PropertyMetadata(new TimeSpan(0, 0, 0))
+            );
         #endregion
         #region Private Dependency Properties
-        private static readonly DependencyProperty QueueNameProperty = DependencyProperty.Register("QueueName", typeof(IComparable), typeof(DelayActivity));
+        private static readonly DependencyProperty QueueNameProperty = DependencyProperty.Register(
+            "QueueName",
+            typeof(IComparable),
+            typeof(DelayActivity)
+        );
         #endregion
 
         #region Constructors
 
-        public DelayActivity()
-        {
-        }
+        public DelayActivity() { }
 
         public DelayActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -55,14 +71,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler InitializeTimeoutDuration
         {
-            add
-            {
-                base.AddHandler(InitializeTimeoutDurationEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(InitializeTimeoutDurationEvent, value);
-            }
+            add { base.AddHandler(InitializeTimeoutDurationEvent, value); }
+            remove { base.RemoveHandler(InitializeTimeoutDurationEvent, value); }
         }
         #endregion
 
@@ -72,14 +82,8 @@ namespace System.Workflow.Activities
         [TypeConverter(typeof(TimeoutDurationConverter))]
         public TimeSpan TimeoutDuration
         {
-            get
-            {
-                return (TimeSpan)base.GetValue(TimeoutDurationProperty);
-            }
-            set
-            {
-                base.SetValue(TimeoutDurationProperty, value);
-            }
+            get { return (TimeSpan)base.GetValue(TimeoutDurationProperty); }
+            set { base.SetValue(TimeoutDurationProperty, value); }
         }
         #endregion
 
@@ -93,7 +97,9 @@ namespace System.Workflow.Activities
             this.SetValue(QueueNameProperty, Guid.NewGuid());
         }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -125,7 +131,10 @@ namespace System.Workflow.Activities
             return ActivityExecutionStatus.Closed;
         }
 
-        protected sealed override ActivityExecutionStatus HandleFault(ActivityExecutionContext executionContext, Exception exception)
+        protected sealed override ActivityExecutionStatus HandleFault(
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -148,7 +157,10 @@ namespace System.Workflow.Activities
 
         private class DelayActivityValidator : ActivityValidator
         {
-            public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
+            public override ValidationErrorCollection Validate(
+                ValidationManager manager,
+                object obj
+            )
             {
                 ValidationErrorCollection errors = new ValidationErrorCollection();
 
@@ -158,7 +170,15 @@ namespace System.Workflow.Activities
 
                 if (delay.TimeoutDuration.Ticks < 0)
                 {
-                    errors.Add(new ValidationError(SR.GetString(SR.Error_NegativeValue, new object[] { delay.TimeoutDuration.ToString(), "TimeoutDuration" }), ErrorNumbers.Error_NegativeValue));
+                    errors.Add(
+                        new ValidationError(
+                            SR.GetString(
+                                SR.Error_NegativeValue,
+                                new object[] { delay.TimeoutDuration.ToString(), "TimeoutDuration" }
+                            ),
+                            ErrorNumbers.Error_NegativeValue
+                        )
+                    );
                 }
 
                 errors.AddRange(base.Validate(manager, obj));
@@ -169,30 +189,28 @@ namespace System.Workflow.Activities
 
         #region Private Implementation
         #region Runtime Data / Properties
-        static DependencyProperty SubscriptionIDProperty = DependencyProperty.Register("SubscriptionID", typeof(Guid), typeof(DelayActivity), new PropertyMetadata(Guid.NewGuid()));
-        static DependencyProperty IsInEventActivityModeProperty = DependencyProperty.Register("IsInEventActivityMode", typeof(bool), typeof(DelayActivity), new PropertyMetadata(false));
+        static DependencyProperty SubscriptionIDProperty = DependencyProperty.Register(
+            "SubscriptionID",
+            typeof(Guid),
+            typeof(DelayActivity),
+            new PropertyMetadata(Guid.NewGuid())
+        );
+        static DependencyProperty IsInEventActivityModeProperty = DependencyProperty.Register(
+            "IsInEventActivityMode",
+            typeof(bool),
+            typeof(DelayActivity),
+            new PropertyMetadata(false)
+        );
 
         private Guid SubscriptionID
         {
-            get
-            {
-                return (Guid)base.GetValue(DelayActivity.SubscriptionIDProperty);
-            }
-            set
-            {
-                base.SetValue(DelayActivity.SubscriptionIDProperty, value);
-            }
+            get { return (Guid)base.GetValue(DelayActivity.SubscriptionIDProperty); }
+            set { base.SetValue(DelayActivity.SubscriptionIDProperty, value); }
         }
         private bool IsInEventActivityMode
         {
-            get
-            {
-                return (bool)base.GetValue(DelayActivity.IsInEventActivityModeProperty);
-            }
-            set
-            {
-                base.SetValue(DelayActivity.IsInEventActivityModeProperty, value);
-            }
+            get { return (bool)base.GetValue(DelayActivity.IsInEventActivityModeProperty); }
+            set { base.SetValue(DelayActivity.IsInEventActivityModeProperty, value); }
         }
         #endregion
 
@@ -207,7 +225,12 @@ namespace System.Workflow.Activities
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
                 if (destinationType == typeof(string) && value is TimeSpan)
                 {
@@ -226,7 +249,11 @@ namespace System.Workflow.Activities
                 return base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value
+            )
             {
                 object parsedTimespan = TimeSpan.Zero;
                 string timeSpan = value as string;
@@ -237,7 +264,14 @@ namespace System.Workflow.Activities
                     {
                         parsedTimespan = TimeSpan.Parse(timeSpan, CultureInfo.InvariantCulture);
                         if (parsedTimespan != null && ((TimeSpan)parsedTimespan).Ticks < 0)
-                            throw new Exception(string.Format(System.Globalization.CultureInfo.CurrentCulture, SR.GetString(SR.Error_NegativeValue), value.ToString(), "TimeoutDuration"));
+                            throw new Exception(
+                                string.Format(
+                                    System.Globalization.CultureInfo.CurrentCulture,
+                                    SR.GetString(SR.Error_NegativeValue),
+                                    value.ToString(),
+                                    "TimeoutDuration"
+                                )
+                            );
                     }
                     catch
                     {
@@ -253,7 +287,9 @@ namespace System.Workflow.Activities
                 return true;
             }
 
-            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            public override StandardValuesCollection GetStandardValues(
+                ITypeDescriptorContext context
+            )
             {
                 ArrayList standardValuesCollection = new ArrayList();
                 standardValuesCollection.Add(new TimeSpan(0, 0, 0));
@@ -280,7 +316,10 @@ namespace System.Workflow.Activities
             ActivityExecutionContext context = sender as ActivityExecutionContext;
 
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             if (this.ExecutionStatus != ActivityExecutionStatus.Closed)
             {
@@ -295,7 +334,10 @@ namespace System.Workflow.Activities
         #endregion
 
         #region IEventActivity implementation
-        void IEventActivity.Subscribe(ActivityExecutionContext parentContext, IActivityEventListener<QueueEventArgs> parentEventHandler)
+        void IEventActivity.Subscribe(
+            ActivityExecutionContext parentContext,
+            IActivityEventListener<QueueEventArgs> parentEventHandler
+        )
         {
             if (parentContext == null)
                 throw new ArgumentNullException("parentContext");
@@ -311,7 +353,11 @@ namespace System.Workflow.Activities
             WorkflowQueuingService qService = parentContext.GetService<WorkflowQueuingService>();
 
             IComparable queueName = ((IEventActivity)this).QueueName;
-            TimerEventSubscription timerSub = new TimerEventSubscription((Guid)queueName, this.WorkflowInstanceId, timeOut);
+            TimerEventSubscription timerSub = new TimerEventSubscription(
+                (Guid)queueName,
+                this.WorkflowInstanceId,
+                timeOut
+            );
             WorkflowQueue queue = qService.CreateWorkflowQueue(queueName, false);
 
             queue.RegisterForQueueItemAvailable(parentEventHandler, this.QualifiedName);
@@ -321,12 +367,19 @@ namespace System.Workflow.Activities
             while (root.Parent != null)
                 root = root.Parent;
 
-            TimerEventSubscriptionCollection timers = (TimerEventSubscriptionCollection)root.GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
-            Debug.Assert(timers != null, "TimerEventSubscriptionCollection on root activity should never be null, but it was");
+            TimerEventSubscriptionCollection timers = (TimerEventSubscriptionCollection)
+                root.GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
+            Debug.Assert(
+                timers != null,
+                "TimerEventSubscriptionCollection on root activity should never be null, but it was"
+            );
             timers.Add(timerSub);
         }
 
-        void IEventActivity.Unsubscribe(ActivityExecutionContext parentContext, IActivityEventListener<QueueEventArgs> parentEventHandler)
+        void IEventActivity.Unsubscribe(
+            ActivityExecutionContext parentContext,
+            IActivityEventListener<QueueEventArgs> parentEventHandler
+        )
         {
             if (parentContext == null)
                 throw new ArgumentNullException("parentContext");
@@ -350,12 +403,16 @@ namespace System.Workflow.Activities
                 wfQueue.Dequeue();
 
             // WinOE Bug 16929: In the case of dynamic update, if this activity is being removed,
-            // we can not trace back to the root activity from "this".  
+            // we can not trace back to the root activity from "this".
             Activity root = parentContext.Activity;
             while (root.Parent != null)
                 root = root.Parent;
-            TimerEventSubscriptionCollection timers = (TimerEventSubscriptionCollection)root.GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
-            Debug.Assert(timers != null, "TimerEventSubscriptionCollection on root activity should never be null, but it was");
+            TimerEventSubscriptionCollection timers = (TimerEventSubscriptionCollection)
+                root.GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
+            Debug.Assert(
+                timers != null,
+                "TimerEventSubscriptionCollection on root activity should never be null, but it was"
+            );
             timers.Remove(this.SubscriptionID);
 
             if (wfQueue != null)
@@ -369,10 +426,7 @@ namespace System.Workflow.Activities
 
         IComparable IEventActivity.QueueName
         {
-            get
-            {
-                return (IComparable)this.GetValue(QueueNameProperty);
-            }
+            get { return (IComparable)this.GetValue(QueueNameProperty); }
         }
 
         #endregion

@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesignerLoaderHost.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel.Design.Serialization {
-
+namespace System.ComponentModel.Design.Serialization
+{
     using System;
     using System.Collections;
     using System.ComponentModel.Design;
@@ -18,17 +18,17 @@ namespace System.ComponentModel.Design.Serialization {
     ///     the designer host.  However, the loader must inform the designer host that
     ///     it wishes to invoke a load or reload.
     /// </devdoc>
-    public interface IDesignerLoaderHost : IDesignerHost {
-    
+    public interface IDesignerLoaderHost : IDesignerHost
+    {
         /// <devdoc>
-        ///     This is called by the designer loader to indicate that the load has 
+        ///     This is called by the designer loader to indicate that the load has
         ///     terminated.  If there were errors, they should be passed in the errorCollection
         ///     as a collection of exceptions (if they are not exceptions the designer
         ///     loader host may just call ToString on them).  If the load was successful then
         ///     errorCollection should either be null or contain an empty collection.
         /// </devdoc>
         void EndLoad(string baseClassName, bool successful, ICollection errorCollection);
-    
+
         /// <devdoc>
         ///     This is called by the designer loader when it wishes to reload the
         ///     design document.  The reload will happen immediately so the caller
@@ -45,10 +45,9 @@ namespace System.ComponentModel.Design.Serialization {
     ///     CanReloadWithErrors - specifies whether it is possible to reload with errors. There are certain
     ///                           scenarios where errors cannot be ignored.
     /// </devdoc>
-    public interface IDesignerLoaderHost2 : IDesignerLoaderHost {
-         bool IgnoreErrorsDuringReload{ get; set;}
-         bool CanReloadWithErrors{ get; set;}
+    public interface IDesignerLoaderHost2 : IDesignerLoaderHost
+    {
+        bool IgnoreErrorsDuringReload { get; set; }
+        bool CanReloadWithErrors { get; set; }
     }
-
 }
-

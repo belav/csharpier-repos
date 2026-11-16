@@ -24,6 +24,7 @@ public struct S1
 public class Runtime_66242
 {
     public static short s_3;
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -14,8 +14,6 @@ namespace System.Runtime.CompilerServices
     public sealed class RequiresLocationAttribute : Attribute
     {
         /// <summary>Initializes the attribute.</summary>
-        public RequiresLocationAttribute()
-        {
-        }
+        public RequiresLocationAttribute() { }
     }
 }

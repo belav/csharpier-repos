@@ -22,7 +22,9 @@ namespace Internal.IL
 
                 if (ILOpcodeHasToken(opcode))
                 {
-                    Debug.Assert((offsetAfter - offsetBefore) == 5 || (offsetAfter - offsetBefore) == 6);
+                    Debug.Assert(
+                        (offsetAfter - offsetBefore) == 5 || (offsetAfter - offsetBefore) == 6
+                    );
 
                     var tokenSpan = ilStream.AsSpan(checked(offsetAfter - 4), 4);
 

@@ -1,11 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-using System.Threading;
 using System;
 using System.IO;
-
+using System.Threading;
 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
@@ -16,15 +14,13 @@ using System.IO;
  *      Differs from thdtree in a way that the nodes of the binary trees grow during the lifetime.
  */
 
-
-
 namespace DefaultNamespace
 {
     public enum TreeType
     {
         Normal,
         Growing,
-        Living
+        Living,
     }
 
     public class Node
@@ -69,7 +65,6 @@ namespace DefaultNamespace
         }
     }
 
-
     public class BinTree
     {
         internal Node m_pRoot;
@@ -83,13 +78,11 @@ namespace DefaultNamespace
             m_Random = new Random();
         }
 
-
         public void Empty(int ThreadId)
         {
             Console.Out.WriteLine("Thread " + ThreadId + ": Tree Empty");
             m_pRoot = null;
         }
-
 
         public void AddNodes(int howMany, int ThreadId)
         {
@@ -97,9 +90,10 @@ namespace DefaultNamespace
             {
                 m_pRoot = Insert(m_pRoot, m_Random.Next(100));
             }
-            Console.Out.WriteLine("Thread " + ThreadId + " Added: " + howMany + " Nodes: " + GC.GetTotalMemory(false));
+            Console.Out.WriteLine(
+                "Thread " + ThreadId + " Added: " + howMany + " Nodes: " + GC.GetTotalMemory(false)
+            );
         }
-
 
         public void DeleteNodes(int howMany, int ThreadId)
         {
@@ -107,17 +101,23 @@ namespace DefaultNamespace
             {
                 m_pRoot = Delete(m_pRoot, m_Random.Next(100));
             }
-            Console.Out.WriteLine("Thread " + ThreadId + " Deleted: " + howMany + " Nodes: " + GC.GetTotalMemory(false));
+            Console.Out.WriteLine(
+                "Thread "
+                    + ThreadId
+                    + " Deleted: "
+                    + howMany
+                    + " Nodes: "
+                    + GC.GetTotalMemory(false)
+            );
         }
-
 
         public Node Insert(Node root, int element)
         {
-            if (root == null)                                            //if is NULL make a new node
-            {                                                           //and copy number to the new node
-                root = new Node();                                        //make new node
-                root.m_data = element;                                  //copy number
-                root.m_pLeft = null;                                     //set the children to NULL
+            if (root == null) //if is NULL make a new node
+            { //and copy number to the new node
+                root = new Node(); //make new node
+                root.m_data = element; //copy number
+                root.m_pLeft = null; //set the children to NULL
                 root.m_pRight = null;
             }
             else if (element < root.m_data)
@@ -141,19 +141,18 @@ namespace DefaultNamespace
             return root;
         }
 
-
         public Node Delete(Node root, int element)
         {
             Node temp = null;
 
             if (root == null)
             {
-                return null;                                                //Node not found
+                return null; //Node not found
             }
-            else if (element == root.m_data)                                 //if it was the first data (node)
+            else if (element == root.m_data) //if it was the first data (node)
             {
-                if (root.m_pRight == null)                                       //check if it has right child.
-                {                                                           //If it has no right child
+                if (root.m_pRight == null) //check if it has right child.
+                { //If it has no right child
                     return root.m_pLeft;
                 }
 
@@ -163,7 +162,8 @@ namespace DefaultNamespace
                 }
                 else
                 {
-                    for (temp = root.m_pLeft; temp.m_pRight != null; temp = temp.m_pRight) ;
+                    for (temp = root.m_pLeft; temp.m_pRight != null; temp = temp.m_pRight)
+                        ;
                     root.m_data = temp.m_data;
                     root.m_pLeft = Delete(root.m_pLeft, temp.m_data);
                 }
@@ -208,7 +208,7 @@ namespace DefaultNamespace
         }
 
         public void ThreadStart()
-        {                                           //All threads start here
+        { //All threads start here
             for (int i = 0; i < mA_Count.Length; i++)
             {
                 if (mA_Count[i] == 0)
@@ -249,7 +249,7 @@ namespace DefaultNamespace
             TreeThread Mv_TreeThread;
             for (int i = 0; i < iNofThread; i++)
             {
-                Mv_TreeThread = new TreeThread(i, TreeType.Growing, count);              //Each treethread object launches a thread
+                Mv_TreeThread = new TreeThread(i, TreeType.Growing, count); //Each treethread object launches a thread
             }
             return 100;
         }

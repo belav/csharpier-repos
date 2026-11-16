@@ -9,8 +9,8 @@ namespace System.Configuration
         private int _maxLength = int.MaxValue;
         private int _minLength;
 
-        public override ConfigurationValidatorBase ValidatorInstance
-            => new StringValidator(_minLength, _maxLength, InvalidCharacters);
+        public override ConfigurationValidatorBase ValidatorInstance =>
+            new StringValidator(_minLength, _maxLength, InvalidCharacters);
 
         public int MinLength
         {
@@ -18,7 +18,10 @@ namespace System.Configuration
             set
             {
                 if (_maxLength < value)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Validator_min_greater_than_max);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Validator_min_greater_than_max
+                    );
 
                 _minLength = value;
             }
@@ -30,7 +33,10 @@ namespace System.Configuration
             set
             {
                 if (_minLength > value)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Validator_min_greater_than_max);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Validator_min_greater_than_max
+                    );
 
                 _maxLength = value;
             }

@@ -24,20 +24,27 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     [TestService]
     internal partial class ExtractInterfaceDialogInProcess
     {
-        private async Task<ExtractInterfaceDialog?> TryGetDialogAsync(CancellationToken cancellationToken)
+        private async Task<ExtractInterfaceDialog?> TryGetDialogAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<ExtractInterfaceDialog>().SingleOrDefault();
         }
 
-        private async Task ClickAsync(Func<ExtractInterfaceDialog, ButtonBase> buttonAccessor, CancellationToken cancellationToken)
+        private async Task ClickAsync(
+            Func<ExtractInterfaceDialog, ButtonBase> buttonAccessor,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var dialog = await TryGetDialogAsync(cancellationToken);
             AssertEx.NotNull(dialog);
 
-            Contract.ThrowIfFalse(await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory));
+            Contract.ThrowIfFalse(
+                await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory)
+            );
         }
 
         public async Task VerifyOpenAsync(CancellationToken cancellationToken)
@@ -82,13 +89,19 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task<string> GetTargetFileNameAsync(CancellationToken cancellationToken)
@@ -101,7 +114,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             return dialog.DestinationControl.fileNameTextBox.Text;
         }
 
-        public async Task<ImmutableArray<SymbolViewModel<ISymbol>>> GetSelectedItemsAsync(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<SymbolViewModel<ISymbol>>> GetSelectedItemsAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -112,14 +127,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             var comListItems = memberSelectionList.Items;
             var listItems = Enumerable.Range(0, comListItems.Count).Select(comListItems.GetItemAt);
 
-            return listItems.Cast<SymbolViewModel<ISymbol>>()
+            return listItems
+                .Cast<SymbolViewModel<ISymbol>>()
                 .Where(viewModel => viewModel.IsChecked)
                 .ToImmutableArray();
         }
 
         public async Task ClickDeselectAllAsync(CancellationToken cancellationToken)
         {
-            await ClickAsync(dialog => dialog.GetTestAccessor().DeselectAllButton, cancellationToken);
+            await ClickAsync(
+                dialog => dialog.GetTestAccessor().DeselectAllButton,
+                cancellationToken
+            );
         }
 
         public async Task ClickSelectAllAsync(CancellationToken cancellationToken)
@@ -129,7 +148,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
         public async Task SelectSameFileAsync(CancellationToken cancellationToken)
         {
-            await ClickAsync(dialog => dialog.GetTestAccessor().DestinationCurrentFileSelectionRadioButton, cancellationToken);
+            await ClickAsync(
+                dialog => dialog.GetTestAccessor().DestinationCurrentFileSelectionRadioButton,
+                cancellationToken
+            );
         }
 
         public async Task ToggleItemAsync(string item, CancellationToken cancellationToken)

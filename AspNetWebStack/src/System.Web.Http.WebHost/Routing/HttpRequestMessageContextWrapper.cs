@@ -13,7 +13,10 @@ namespace System.Web.Http.WebHost.Routing
         // Using Hashtable to be consistent with HttpContext.Items
         private Hashtable _items;
 
-        public HttpRequestMessageContextWrapper(string virtualPathRoot, HttpRequestMessage httpRequest)
+        public HttpRequestMessageContextWrapper(
+            string virtualPathRoot,
+            HttpRequestMessage httpRequest
+        )
         {
             _httpWrapper = new HttpRequestMessageWrapper(virtualPathRoot, httpRequest);
             _items = new Hashtable();

@@ -12,6 +12,5 @@ public class TestWebHostBuilder
 
     public IServiceProvider Services { get; }
 
-    public TestWebHost Build()
-        => new(Services);
+    public TestWebHost Build() => new(Services);
 }

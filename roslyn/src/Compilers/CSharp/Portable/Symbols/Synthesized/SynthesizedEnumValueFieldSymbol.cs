@@ -5,8 +5,8 @@
 #nullable disable
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp.Emit;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
@@ -17,9 +17,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SynthesizedEnumValueFieldSymbol : SynthesizedFieldSymbolBase
     {
         public SynthesizedEnumValueFieldSymbol(SourceNamedTypeSymbol containingEnum)
-            : base(containingEnum, WellKnownMemberNames.EnumBackingFieldName, isPublic: true, isReadOnly: false, isStatic: false)
-        {
-        }
+            : base(
+                containingEnum,
+                WellKnownMemberNames.EnumBackingFieldName,
+                isPublic: true,
+                isReadOnly: false,
+                isStatic: false
+            ) { }
 
         internal override bool SuppressDynamicAttribute
         {
@@ -28,14 +32,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override RefKind RefKind => RefKind.None;
 
-        public override ImmutableArray<CustomModifier> RefCustomModifiers => ImmutableArray<CustomModifier>.Empty;
+        public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray<CustomModifier>.Empty;
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
-            return TypeWithAnnotations.Create(((SourceNamedTypeSymbol)ContainingType).EnumUnderlyingType);
+            return TypeWithAnnotations.Create(
+                ((SourceNamedTypeSymbol)ContainingType).EnumUnderlyingType
+            );
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             // no attributes should be emitted
         }

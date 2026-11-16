@@ -7,7 +7,10 @@ namespace System.Security.Cryptography
 {
     internal abstract partial class AsnFormatter
     {
-        internal static AsnFormatter Instance { get { return s_instance; } }
+        internal static AsnFormatter Instance
+        {
+            get { return s_instance; }
+        }
 
         public string Format(Oid? oid, byte[] rawData, bool multiLine)
         {

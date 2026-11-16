@@ -75,7 +75,10 @@ namespace System.Xml.Xsl.XsltOld
                         frame.State = ContentsCopy;
                         if (frame.Node!.NodeType == XPathNodeType.Element)
                         {
-                            processor.PushActionFrame(CopyNamespacesAction.GetAction(), frame.NodeSet);
+                            processor.PushActionFrame(
+                                CopyNamespacesAction.GetAction(),
+                                frame.NodeSet
+                            );
                             break;
                         }
                         continue;

@@ -14,7 +14,11 @@ namespace System.ComponentModel.Tests
 
         public override IEnumerable<ConvertTest> ConvertFromTestData()
         {
-            yield return ConvertTest.Valid("  1000.00:00:00  ", new TimeSpan(1000, 0, 0, 0, 0), CultureInfo.InvariantCulture);
+            yield return ConvertTest.Valid(
+                "  1000.00:00:00  ",
+                new TimeSpan(1000, 0, 0, 0, 0),
+                CultureInfo.InvariantCulture
+            );
             yield return ConvertTest.Valid("1000", new TimeSpan(1000, 0, 0, 0, 0));
 
             yield return ConvertTest.Throws<FormatException>("invalid");
@@ -33,7 +37,10 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid(
                 timeSpan,
                 new InstanceDescriptor(
-                    typeof(TimeSpan).GetMethod(nameof(TimeSpan.Parse), new Type[] { typeof(string) }),
+                    typeof(TimeSpan).GetMethod(
+                        nameof(TimeSpan.Parse),
+                        new Type[] { typeof(string) }
+                    ),
                     new object[] { timeSpan.ToString() }
                 )
             );
@@ -46,7 +53,9 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void ConvertTo_InvalidValue_ThrowsNotSupportedException(Type destinationType)
         {
-            Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(new object(), destinationType));
+            Assert.Throws<NotSupportedException>(() =>
+                Converter.ConvertTo(new object(), destinationType)
+            );
         }
     }
 }

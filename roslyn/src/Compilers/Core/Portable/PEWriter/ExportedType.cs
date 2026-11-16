@@ -10,7 +10,7 @@ namespace Microsoft.Cci
     internal readonly struct ExportedType
     {
         /// <summary>
-        /// The target type reference. 
+        /// The target type reference.
         /// </summary>
         public readonly ITypeReference Type;
 
@@ -21,7 +21,7 @@ namespace Microsoft.Cci
         public readonly bool IsForwarder;
 
         /// <summary>
-        /// If <see cref="Type"/> is a nested type defined in a linked netmodule, 
+        /// If <see cref="Type"/> is a nested type defined in a linked netmodule,
         /// the index of the <see cref="ExportedType"/> entry that represents the enclosing type.
         /// </summary>
         public readonly int ParentIndex;

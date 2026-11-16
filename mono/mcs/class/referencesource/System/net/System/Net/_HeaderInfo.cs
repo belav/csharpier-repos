@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-
+namespace System.Net
+{
     internal delegate string[] HeaderParser(string value);
 
-    internal class HeaderInfo {
-
+    internal class HeaderInfo
+    {
         internal readonly bool IsRequestRestricted;
         internal readonly bool IsResponseRestricted;
         internal readonly HeaderParser Parser;
@@ -23,7 +23,14 @@ namespace System.Net {
         internal readonly string HeaderName;
         internal readonly bool AllowMultiValues;
 
-        internal HeaderInfo(string name, bool requestRestricted, bool responseRestricted, bool multi, HeaderParser p) {
+        internal HeaderInfo(
+            string name,
+            bool requestRestricted,
+            bool responseRestricted,
+            bool multi,
+            HeaderParser p
+        )
+        {
             HeaderName = name;
             IsRequestRestricted = requestRestricted;
             IsResponseRestricted = responseRestricted;

@@ -9,17 +9,21 @@ namespace CollectibleAssembly
     {
         public object ClassAsCtorArgument { get; set; }
 
-        public ClassToCreate(ClassAsCtorArgument obj) { ClassAsCtorArgument = obj; }
+        public ClassToCreate(ClassAsCtorArgument obj)
+        {
+            ClassAsCtorArgument = obj;
+        }
 
         public static object Create(ServiceProvider provider)
         {
             // Both the type to create (ClassToCreate) and the ctor's arg type (ClassAsCtorArgument) are
             // located in this assembly, so both types need to be GC'd for this assembly to be collected.
-            return ActivatorUtilities.CreateInstance<ClassToCreate>(provider, new ClassAsCtorArgument());
+            return ActivatorUtilities.CreateInstance<ClassToCreate>(
+                provider,
+                new ClassAsCtorArgument()
+            );
         }
     }
 
-    public class ClassAsCtorArgument
-    {
-    }
+    public class ClassAsCtorArgument { }
 }

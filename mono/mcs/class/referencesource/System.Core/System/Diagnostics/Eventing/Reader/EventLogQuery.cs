@@ -1,37 +1,36 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventLogQuery
 **
-** Purpose: 
+** Purpose:
 ** This public class allows a user to define events of interest.
 ** An instance of this class is passed to an EventReader to actually
-** obtain the EventRecords.   The EventLogQuery can be as 
+** obtain the EventRecords.   The EventLogQuery can be as
 ** simple specifying that all events are of interest, or it can contain
-** query / xpath expressions that indicate exactly what characteristics 
-** events should have. 
+** query / xpath expressions that indicate exactly what characteristics
+** events should have.
 **
 ============================================================*/
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
-    /// Allows a user to define events of interest. An instance of this 
-    /// class is passed to an EventReader to actually obtain the EventRecords.   
-    /// The EventLogQuery can be as simple specifying that all events are of 
+    /// Allows a user to define events of interest. An instance of this
+    /// class is passed to an EventReader to actually obtain the EventRecords.
+    /// The EventLogQuery can be as simple specifying that all events are of
     /// interest, or it can contain query / xpath expressions that indicate exactly
-    /// what characteristics events should have. 
+    /// what characteristics events should have.
     /// </summary>
-    public class EventLogQuery {
-
+    public class EventLogQuery
+    {
         private string query;
         private string path;
         private EventLogSession session;
@@ -40,68 +39,56 @@ namespace System.Diagnostics.Eventing.Reader {
         private bool reverseDirection = false;
 
         public EventLogQuery(string path, PathType pathType)
-            : this(path, pathType, null) {
-        }
+            : this(path, pathType, null) { }
 
-        public EventLogQuery(string path, PathType pathType, string query) {
-
+        public EventLogQuery(string path, PathType pathType, string query)
+        {
             this.session = EventLogSession.GlobalSession;
-            this.path = path;   // can be null
+            this.path = path; // can be null
             this.pathType = pathType;
 
-            if (query == null) {
+            if (query == null)
+            {
                 if (path == null)
                     throw new ArgumentNullException("path");
             }
-            else {
+            else
+            {
                 this.query = query;
             }
         }
 
-        public EventLogSession Session {
-            get {
-                return this.session;
-            }
-            set {
-                this.session = value;
-            }
+        public EventLogSession Session
+        {
+            get { return this.session; }
+            set { this.session = value; }
         }
 
-        public bool TolerateQueryErrors {
-            get {
-                return this.tolerateErrors;
-            }
-            set {
-                this.tolerateErrors = value;
-            }
+        public bool TolerateQueryErrors
+        {
+            get { return this.tolerateErrors; }
+            set { this.tolerateErrors = value; }
         }
 
-        public bool ReverseDirection {
-            get {
-                return this.reverseDirection;
-            }
-            set {
-                this.reverseDirection = value;
-            }
+        public bool ReverseDirection
+        {
+            get { return this.reverseDirection; }
+            set { this.reverseDirection = value; }
         }
 
-        internal string Path {
-            get {
-                return this.path;
-            }
+        internal string Path
+        {
+            get { return this.path; }
         }
 
-        internal PathType ThePathType {
-            get {
-                return this.pathType;
-            }
+        internal PathType ThePathType
+        {
+            get { return this.pathType; }
         }
 
-        internal string Query {
-            get {
-                return this.query;
-            }
+        internal string Query
+        {
+            get { return this.query; }
         }
-
     }
 }

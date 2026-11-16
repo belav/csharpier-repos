@@ -25,19 +25,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
-
-	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
-	[Guid ("0D593FC0-E3F1-4dad-A674-7EA4D327F79B")]
-	[ComVisible (true)]
-	public interface IProductBuilderCollection {
-		
-		void Add (ProductBuilder builder);
-	}
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid("0D593FC0-E3F1-4dad-A674-7EA4D327F79B")]
+    [ComVisible(true)]
+    public interface IProductBuilderCollection
+    {
+        void Add(ProductBuilder builder);
+    }
 }
-

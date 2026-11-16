@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 #nullable enable
@@ -14,7 +13,8 @@ namespace ILCompiler.Dataflow
     {
         private readonly Dictionary<TypeSystemEntity, HashSet<TypeSystemEntity>> _callGraph;
 
-        public CompilerGeneratedCallGraph() => _callGraph = new Dictionary<TypeSystemEntity, HashSet<TypeSystemEntity>>();
+        public CompilerGeneratedCallGraph() =>
+            _callGraph = new Dictionary<TypeSystemEntity, HashSet<TypeSystemEntity>>();
 
         private void TrackCallInternal(TypeSystemEntity fromMember, TypeSystemEntity toMember)
         {

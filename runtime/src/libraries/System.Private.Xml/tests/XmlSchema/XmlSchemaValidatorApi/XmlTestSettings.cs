@@ -31,6 +31,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             return Path.Combine(GetDataPath(), "XmlSchema", "TestFiles", "TestData");
         }
+
         public static string GetStandardPath()
         {
             return Path.Combine(GetDataPath(), "XmlSchema", "TestFiles", "StandardTests");

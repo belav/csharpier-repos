@@ -115,34 +115,57 @@ namespace System.Diagnostics.PerformanceData
             {
                 if (_instance._counterSet._provider == null)
                 {
-                    throw new ArgumentException(SR.Format(SR.Perflib_Argument_ProviderNotFound, _instance._counterSet._providerGuid), "ProviderGuid");
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Perflib_Argument_ProviderNotFound,
+                            _instance._counterSet._providerGuid
+                        ),
+                        "ProviderGuid"
+                    );
                 }
                 if (_instance._counterSet._provider._hProvider.IsInvalid)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Perflib_InvalidOperation_NoActiveProvider, _instance._counterSet._providerGuid));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.Perflib_InvalidOperation_NoActiveProvider,
+                            _instance._counterSet._providerGuid
+                        )
+                    );
                 }
 
-                _dataBlock = (byte*)Marshal.AllocHGlobal(_instance._counterSet._idToCounter.Count * sizeof(long));
+                _dataBlock = (byte*)
+                    Marshal.AllocHGlobal(_instance._counterSet._idToCounter.Count * sizeof(long));
                 if (_dataBlock == null)
                 {
-                    throw new InsufficientMemoryException(SR.Format(SR.Perflib_InsufficientMemory_InstanceCounterBlock, _instance._counterSet._counterSet, _instance._instName));
+                    throw new InsufficientMemoryException(
+                        SR.Format(
+                            SR.Perflib_InsufficientMemory_InstanceCounterBlock,
+                            _instance._counterSet._counterSet,
+                            _instance._instName
+                        )
+                    );
                 }
 
                 int CounterOffset = 0;
 
-                foreach (KeyValuePair<int, CounterType> CounterDef in _instance._counterSet._idToCounter)
+                foreach (
+                    KeyValuePair<int, CounterType> CounterDef in _instance._counterSet._idToCounter
+                )
                 {
-                    CounterData thisCounterData = new CounterData((long*)(_dataBlock + CounterOffset * sizeof(long)));
+                    CounterData thisCounterData = new CounterData(
+                        (long*)(_dataBlock + CounterOffset * sizeof(long))
+                    );
 
                     _counters.Add(CounterDef.Key, thisCounterData);
 
                     // ArgumentNullException - CounterName is NULL
                     // ArgumentException - CounterName already exists.
                     uint Status = Interop.PerfCounter.PerfSetCounterRefValue(
-                                    _instance._counterSet._provider._hProvider,
-                                    _instance._nativeInst,
-                                    (uint)CounterDef.Key,
-                                    (void*)(_dataBlock + CounterOffset * sizeof(long)));
+                        _instance._counterSet._provider._hProvider,
+                        _instance._nativeInst,
+                        (uint)CounterDef.Key,
+                        (void*)(_dataBlock + CounterOffset * sizeof(long))
+                    );
                     if (Status != (uint)Interop.Errors.ERROR_SUCCESS)
                     {
                         DisposeCore();
@@ -150,7 +173,14 @@ namespace System.Diagnostics.PerformanceData
                         // ERROR_INVALID_PARAMETER or ERROR_NOT_FOUND
                         throw Status switch
                         {
-                            (uint)Interop.Errors.ERROR_NOT_FOUND => new InvalidOperationException(SR.Format(SR.Perflib_InvalidOperation_CounterRefValue, _instance._counterSet._counterSet, CounterDef.Key, _instance._instName)),
+                            (uint)Interop.Errors.ERROR_NOT_FOUND => new InvalidOperationException(
+                                SR.Format(
+                                    SR.Perflib_InvalidOperation_CounterRefValue,
+                                    _instance._counterSet._counterSet,
+                                    CounterDef.Key,
+                                    _instance._instName
+                                )
+                            ),
 
                             _ => new Win32Exception((int)Status),
                         };

@@ -20,15 +20,13 @@ namespace System.ServiceProcess
 
         public int SessionId { get; }
 
-        public override int GetHashCode() =>
-            (int)Reason ^ SessionId;
+        public override int GetHashCode() => (int)Reason ^ SessionId;
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is SessionChangeDescription other && Equals(other);
 
         public bool Equals(SessionChangeDescription changeDescription) =>
-            (Reason == changeDescription.Reason) &&
-            (SessionId == changeDescription.SessionId);
+            (Reason == changeDescription.Reason) && (SessionId == changeDescription.SessionId);
 
         public static bool operator ==(SessionChangeDescription a, SessionChangeDescription b) =>
             a.Equals(b);

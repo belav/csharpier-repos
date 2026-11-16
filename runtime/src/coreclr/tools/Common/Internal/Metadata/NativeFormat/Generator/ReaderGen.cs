@@ -11,15 +11,15 @@
 class ReaderGen : CsWriter
 {
     public ReaderGen(string fileName)
-        : base(fileName)
-    {
-    }
+        : base(fileName) { }
 
     public void EmitSource()
     {
         WriteLine("#pragma warning disable 649");
         WriteLine("#pragma warning disable 169");
-        WriteLine("#pragma warning disable 282 // There is no defined ordering between fields in multiple declarations of partial class or struct");
+        WriteLine(
+            "#pragma warning disable 282 // There is no defined ordering between fields in multiple declarations of partial class or struct"
+        );
         WriteLine("#pragma warning disable CA1066 // IEquatable<T> implementations aren't used");
         WriteLine("#pragma warning disable CA1822");
         WriteLine("#pragma warning disable IDE0059");
@@ -42,7 +42,7 @@ class ReaderGen : CsWriter
             EmitRecord(record);
             EmitHandle(record);
         }
-        
+
         foreach (var typeName in SchemaDef.TypeNamesWithCollectionTypes)
         {
             EmitCollection(typeName + "HandleCollection", typeName + "Handle");
@@ -139,7 +139,9 @@ class ReaderGen : CsWriter
 
         OpenScope($"internal {handleName}(int value)");
         WriteLine("HandleType hType = (HandleType)(value >> 24);");
-        WriteLine($"Debug.Assert(hType == 0 || hType == HandleType.{record.Name} || hType == HandleType.Null);");
+        WriteLine(
+            $"Debug.Assert(hType == 0 || hType == HandleType.{record.Name} || hType == HandleType.Null);"
+        );
         WriteLine($"_value = (value & 0x00FFFFFF) | (((int)HandleType.{record.Name}) << 24);");
         WriteLine("_Validate();");
         CloseScope();
@@ -278,7 +280,9 @@ class ReaderGen : CsWriter
             {
                 if ((member.Flags & MemberDefFlags.NotPersisted) != 0)
                     continue;
-                WriteLine($"offset = _streamReader.Read(offset, out record.{member.GetMemberFieldName()});");
+                WriteLine(
+                    $"offset = _streamReader.Read(offset, out record.{member.GetMemberFieldName()});"
+                );
             }
             WriteLine("return record;");
             CloseScope($"Get{record.Name}");

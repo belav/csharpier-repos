@@ -27,56 +27,65 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace MonoTests.System.Configuration.Util {
-	
-	public static class TestUtil {
+namespace MonoTests.System.Configuration.Util
+{
+    public static class TestUtil
+    {
+        public static void RunWithTempFile(Action<string> action)
+        {
+            var filename = Path.GetTempFileName();
 
-		public static void RunWithTempFile (Action<string> action)
-		{
-			var filename = Path.GetTempFileName ();
-			
-			try {
-				File.Delete (filename);
-				action (filename);
-			} finally {
-				if (File.Exists (filename))
-					File.Delete (filename);
-			}
-		}
+            try
+            {
+                File.Delete(filename);
+                action(filename);
+            }
+            finally
+            {
+                if (File.Exists(filename))
+                    File.Delete(filename);
+            }
+        }
 
-		// Action<T1,T2> doesn't exist in .NET 2.0
-		public delegate void MyAction<T1,T2> (T1 t1, T2 t2);
+        // Action<T1,T2> doesn't exist in .NET 2.0
+        public delegate void MyAction<T1, T2>(T1 t1, T2 t2);
 
-		public static void RunWithTempFiles (MyAction<string,string> action)
-		{
-			var file1 = Path.GetTempFileName ();
-			var file2 = Path.GetTempFileName ();
-			
-			try {
-				File.Delete (file1);
-				File.Delete (file2);
-				action (file1, file2);
-			} finally {
-				if (File.Exists (file1))
-					File.Delete (file1);
-				if (File.Exists (file2))
-					File.Delete (file2);
-			}
-		}
+        public static void RunWithTempFiles(MyAction<string, string> action)
+        {
+            var file1 = Path.GetTempFileName();
+            var file2 = Path.GetTempFileName();
 
-		public static string ThisApplicationPath {
-			get {
-				var asm = Assembly.GetEntryAssembly ();
-				return asm.Location;
-			}
-		}
+            try
+            {
+                File.Delete(file1);
+                File.Delete(file2);
+                action(file1, file2);
+            }
+            finally
+            {
+                if (File.Exists(file1))
+                    File.Delete(file1);
+                if (File.Exists(file2))
+                    File.Delete(file2);
+            }
+        }
 
-		public static string ThisConfigFileName {
-			get {
-				var exe = Path.GetFileName (ThisApplicationPath);
-				return exe + ".config";
-			}
-		}
-	}
+        public static string ThisApplicationPath
+        {
+            get
+            {
+                var asm = Assembly.GetEntryAssembly();
+                return asm.Location;
+            }
+        }
+
+        public static string ThisConfigFileName
+        {
+            get
+            {
+                var exe = Path.GetFileName(ThisApplicationPath);
+                return exe + ".config";
+            }
+        }
+    }
 }
-

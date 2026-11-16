@@ -29,8 +29,13 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            var csFilePath = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            var csFilePath = Path.Combine(
+                roslynRoot,
+                @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs"
+            );
 
             if (!File.Exists(csFilePath))
                 throw new FileNotFoundException(csFilePath);
@@ -69,7 +74,9 @@ namespace IdeCoreBenchmarks
         private SyntaxNode WithSimpleEditAtBeginning()
         {
             var addedText = "using System.IO;";
-            var newText = _text.WithChanges(new TextChange(new TextSpan(0, addedText.Length), addedText));
+            var newText = _text.WithChanges(
+                new TextChange(new TextSpan(0, addedText.Length), addedText)
+            );
             var newTree = _tree.WithChangedText(newText);
             var newRoot = newTree.GetRoot();
             return newRoot;
@@ -78,7 +85,12 @@ namespace IdeCoreBenchmarks
         private SyntaxNode WithSimpleEditInTheEnd()
         {
             var addedText = "class HelloWorld { }";
-            var newText = _text.WithChanges(new TextChange(new TextSpan(_text.Length - addedText.Length, addedText.Length), addedText));
+            var newText = _text.WithChanges(
+                new TextChange(
+                    new TextSpan(_text.Length - addedText.Length, addedText.Length),
+                    addedText
+                )
+            );
             var newTree = _tree.WithChangedText(newText);
             var newRoot = newTree.GetRoot();
             return newRoot;
@@ -88,40 +100,70 @@ namespace IdeCoreBenchmarks
         public void SimpleEditAtMiddle()
         {
             var newRoot = WithSimpleEditAtMiddle();
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, newRoot, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                newRoot,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void DestabalizingEditAtMiddle()
         {
             var newRoot = WithDestabalizingEditAtMiddle();
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, newRoot, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                newRoot,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void SimpleEditAtMiddle_NoParse()
         {
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, _rootWithSimpleEdit, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                _rootWithSimpleEdit,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void DestabalizingEditAtMiddle_NoParse()
         {
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, _rootWithComplexEdit, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                _rootWithComplexEdit,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void SimpleEditAtTheBeginning()
         {
             var newRoot = WithSimpleEditAtBeginning();
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, newRoot, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                newRoot,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
 
         [Benchmark]
         public void SimpleEditorInTheEnd()
         {
             var newRoot = WithSimpleEditInTheEnd();
-            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(_root, newRoot, TimeSpan.MaxValue, CancellationToken.None);
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                _root,
+                newRoot,
+                TimeSpan.MaxValue,
+                CancellationToken.None
+            );
         }
     }
 }

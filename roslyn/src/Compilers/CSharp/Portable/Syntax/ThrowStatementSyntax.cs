@@ -8,8 +8,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class ThrowStatementSyntax
     {
-        public ThrowStatementSyntax Update(SyntaxToken throwKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken)
-            => Update(AttributeLists, throwKeyword, expression, semicolonToken);
+        public ThrowStatementSyntax Update(
+            SyntaxToken throwKeyword,
+            ExpressionSyntax expression,
+            SyntaxToken semicolonToken
+        ) => Update(AttributeLists, throwKeyword, expression, semicolonToken);
     }
 }
 
@@ -17,8 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static ThrowStatementSyntax ThrowStatement(SyntaxToken throwKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken)
-            => ThrowStatement(attributeLists: default, throwKeyword, expression, semicolonToken);
+        public static ThrowStatementSyntax ThrowStatement(
+            SyntaxToken throwKeyword,
+            ExpressionSyntax expression,
+            SyntaxToken semicolonToken
+        ) => ThrowStatement(attributeLists: default, throwKeyword, expression, semicolonToken);
     }
 }
-

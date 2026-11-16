@@ -23,7 +23,8 @@ namespace System.Linq.Parallel
     /// <typeparam name="TRightInput"></typeparam>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
-    internal sealed class GroupJoinQueryOperator<TLeftInput, TRightInput, TKey, TOutput> : BinaryQueryOperator<TLeftInput, TRightInput, TOutput>
+    internal sealed class GroupJoinQueryOperator<TLeftInput, TRightInput, TKey, TOutput>
+        : BinaryQueryOperator<TLeftInput, TRightInput, TOutput>
     {
         private readonly Func<TLeftInput, TKey> _leftKeySelector; // The key selection routine for the outer (left) data source.
         private readonly Func<TRightInput, TKey> _rightKeySelector; // The key selection routine for the inner (right) data source.
@@ -34,11 +35,14 @@ namespace System.Linq.Parallel
         // Constructs a new join operator.
         //
 
-        internal GroupJoinQueryOperator(ParallelQuery<TLeftInput> left, ParallelQuery<TRightInput> right,
-                                        Func<TLeftInput, TKey> leftKeySelector,
-                                        Func<TRightInput, TKey> rightKeySelector,
-                                        Func<TLeftInput, IEnumerable<TRightInput>, TOutput> resultSelector,
-                                        IEqualityComparer<TKey>? keyComparer)
+        internal GroupJoinQueryOperator(
+            ParallelQuery<TLeftInput> left,
+            ParallelQuery<TRightInput> right,
+            Func<TLeftInput, TKey> leftKeySelector,
+            Func<TRightInput, TKey> rightKeySelector,
+            Func<TLeftInput, IEnumerable<TRightInput>, TOutput> resultSelector,
+            IEqualityComparer<TKey>? keyComparer
+        )
             : base(left, right)
         {
             Debug.Assert(left != null && right != null, "child data sources cannot be null");
@@ -69,8 +73,12 @@ namespace System.Linq.Parallel
         }
 
         public override void WrapPartitionedStream<TLeftKey, TRightKey>(
-            PartitionedStream<TLeftInput, TLeftKey> leftStream, PartitionedStream<TRightInput, TRightKey> rightStream,
-            IPartitionedStreamRecipient<TOutput> outputRecipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TLeftInput, TLeftKey> leftStream,
+            PartitionedStream<TRightInput, TRightKey> rightStream,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             Debug.Assert(rightStream.PartitionCount == leftStream.PartitionCount);
             int partitionCount = leftStream.PartitionCount;
@@ -78,14 +86,34 @@ namespace System.Linq.Parallel
             if (LeftChild.OutputOrdered)
             {
                 WrapPartitionedStreamHelper<TLeftKey, TRightKey>(
-                    ExchangeUtilities.HashRepartitionOrdered(leftStream, _leftKeySelector, _keyComparer, null, settings.CancellationState.MergedCancellationToken),
-                    rightStream, outputRecipient, partitionCount, settings.CancellationState.MergedCancellationToken);
+                    ExchangeUtilities.HashRepartitionOrdered(
+                        leftStream,
+                        _leftKeySelector,
+                        _keyComparer,
+                        null,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
+                    rightStream,
+                    outputRecipient,
+                    partitionCount,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
             else
             {
                 WrapPartitionedStreamHelper<int, TRightKey>(
-                    ExchangeUtilities.HashRepartition(leftStream, _leftKeySelector, _keyComparer, null, settings.CancellationState.MergedCancellationToken),
-                    rightStream, outputRecipient, partitionCount, settings.CancellationState.MergedCancellationToken);
+                    ExchangeUtilities.HashRepartition(
+                        leftStream,
+                        _leftKeySelector,
+                        _keyComparer,
+                        null,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
+                    rightStream,
+                    outputRecipient,
+                    partitionCount,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
         }
 
@@ -95,72 +123,143 @@ namespace System.Linq.Parallel
         //
 
         private void WrapPartitionedStreamHelper<TLeftKey, TRightKey>(
-            PartitionedStream<Pair<TLeftInput, TKey>, TLeftKey> leftHashStream, PartitionedStream<TRightInput, TRightKey> rightPartitionedStream,
-            IPartitionedStreamRecipient<TOutput> outputRecipient, int partitionCount, CancellationToken cancellationToken)
+            PartitionedStream<Pair<TLeftInput, TKey>, TLeftKey> leftHashStream,
+            PartitionedStream<TRightInput, TRightKey> rightPartitionedStream,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            int partitionCount,
+            CancellationToken cancellationToken
+        )
         {
             if (RightChild.OutputOrdered)
             {
-                PartitionedStream<Pair<TRightInput, TKey>, TRightKey> rePartitionedRightStream = ExchangeUtilities.HashRepartitionOrdered(
-                    rightPartitionedStream, _rightKeySelector, _keyComparer, null, cancellationToken);
+                PartitionedStream<Pair<TRightInput, TKey>, TRightKey> rePartitionedRightStream =
+                    ExchangeUtilities.HashRepartitionOrdered(
+                        rightPartitionedStream,
+                        _rightKeySelector,
+                        _keyComparer,
+                        null,
+                        cancellationToken
+                    );
 
-                HashLookupBuilder<IEnumerable<TRightInput>, Pair<bool, TRightKey>, TKey>[] rightLookupBuilders =
-                    new HashLookupBuilder<IEnumerable<TRightInput>, Pair<bool, TRightKey>, TKey>[partitionCount];
+                HashLookupBuilder<
+                    IEnumerable<TRightInput>,
+                    Pair<bool, TRightKey>,
+                    TKey
+                >[] rightLookupBuilders = new HashLookupBuilder<
+                    IEnumerable<TRightInput>,
+                    Pair<bool, TRightKey>,
+                    TKey
+                >[partitionCount];
                 for (int i = 0; i < partitionCount; i++)
                 {
-                    rightLookupBuilders[i] = new OrderedGroupJoinHashLookupBuilder<TRightInput, TRightKey, TKey>(
-                        rePartitionedRightStream[i], _keyComparer, rePartitionedRightStream.KeyComparer);
+                    rightLookupBuilders[i] = new OrderedGroupJoinHashLookupBuilder<
+                        TRightInput,
+                        TRightKey,
+                        TKey
+                    >(
+                        rePartitionedRightStream[i],
+                        _keyComparer,
+                        rePartitionedRightStream.KeyComparer
+                    );
                 }
 
-                WrapPartitionedStreamHelper<TLeftKey, Pair<bool, TRightKey>>(leftHashStream, rightLookupBuilders,
-                    CreateComparer(rightPartitionedStream.KeyComparer), outputRecipient, partitionCount, cancellationToken);
+                WrapPartitionedStreamHelper<TLeftKey, Pair<bool, TRightKey>>(
+                    leftHashStream,
+                    rightLookupBuilders,
+                    CreateComparer(rightPartitionedStream.KeyComparer),
+                    outputRecipient,
+                    partitionCount,
+                    cancellationToken
+                );
             }
             else
             {
-                PartitionedStream<Pair<TRightInput, TKey>, int> rePartitionedRightStream = ExchangeUtilities.HashRepartition(
-                    rightPartitionedStream, _rightKeySelector, _keyComparer, null, cancellationToken);
+                PartitionedStream<Pair<TRightInput, TKey>, int> rePartitionedRightStream =
+                    ExchangeUtilities.HashRepartition(
+                        rightPartitionedStream,
+                        _rightKeySelector,
+                        _keyComparer,
+                        null,
+                        cancellationToken
+                    );
 
                 HashLookupBuilder<IEnumerable<TRightInput>, int, TKey>[] rightLookupBuilders =
                     new HashLookupBuilder<IEnumerable<TRightInput>, int, TKey>[partitionCount];
                 for (int i = 0; i < partitionCount; i++)
                 {
                     rightLookupBuilders[i] = new GroupJoinHashLookupBuilder<TRightInput, int, TKey>(
-                        rePartitionedRightStream[i], _keyComparer);
+                        rePartitionedRightStream[i],
+                        _keyComparer
+                    );
                 }
 
-                WrapPartitionedStreamHelper<TLeftKey, int>(leftHashStream, rightLookupBuilders,
-                    null, outputRecipient, partitionCount, cancellationToken);
+                WrapPartitionedStreamHelper<TLeftKey, int>(
+                    leftHashStream,
+                    rightLookupBuilders,
+                    null,
+                    outputRecipient,
+                    partitionCount,
+                    cancellationToken
+                );
             }
         }
 
         private void WrapPartitionedStreamHelper<TLeftKey, TRightKey>(
             PartitionedStream<Pair<TLeftInput, TKey>, TLeftKey> leftHashStream,
             HashLookupBuilder<IEnumerable<TRightInput>, TRightKey, TKey>[] rightLookupBuilders,
-            IComparer<TRightKey>? rightKeyComparer, IPartitionedStreamRecipient<TOutput> outputRecipient,
-            int partitionCount, CancellationToken cancellationToken)
+            IComparer<TRightKey>? rightKeyComparer,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            int partitionCount,
+            CancellationToken cancellationToken
+        )
         {
             if (RightChild.OutputOrdered && LeftChild.OutputOrdered)
             {
-                PairOutputKeyBuilder<TLeftKey, TRightKey> outputKeyBuilder = new PairOutputKeyBuilder<TLeftKey, TRightKey>();
-                IComparer<Pair<TLeftKey, TRightKey>> outputKeyComparer = new PairComparer<TLeftKey, TRightKey>(leftHashStream.KeyComparer, rightKeyComparer);
+                PairOutputKeyBuilder<TLeftKey, TRightKey> outputKeyBuilder =
+                    new PairOutputKeyBuilder<TLeftKey, TRightKey>();
+                IComparer<Pair<TLeftKey, TRightKey>> outputKeyComparer = new PairComparer<
+                    TLeftKey,
+                    TRightKey
+                >(leftHashStream.KeyComparer, rightKeyComparer);
 
-                WrapPartitionedStreamHelper<TLeftKey, TRightKey, Pair<TLeftKey, TRightKey>>(leftHashStream, rightLookupBuilders,
-                    outputKeyBuilder, outputKeyComparer, outputRecipient, partitionCount, cancellationToken);
+                WrapPartitionedStreamHelper<TLeftKey, TRightKey, Pair<TLeftKey, TRightKey>>(
+                    leftHashStream,
+                    rightLookupBuilders,
+                    outputKeyBuilder,
+                    outputKeyComparer,
+                    outputRecipient,
+                    partitionCount,
+                    cancellationToken
+                );
             }
             else
             {
-                LeftKeyOutputKeyBuilder<TLeftKey, TRightKey> outputKeyBuilder = new LeftKeyOutputKeyBuilder<TLeftKey, TRightKey>();
+                LeftKeyOutputKeyBuilder<TLeftKey, TRightKey> outputKeyBuilder =
+                    new LeftKeyOutputKeyBuilder<TLeftKey, TRightKey>();
 
-                WrapPartitionedStreamHelper<TLeftKey, TRightKey, TLeftKey>(leftHashStream, rightLookupBuilders,
-                    outputKeyBuilder, leftHashStream.KeyComparer, outputRecipient, partitionCount, cancellationToken);
+                WrapPartitionedStreamHelper<TLeftKey, TRightKey, TLeftKey>(
+                    leftHashStream,
+                    rightLookupBuilders,
+                    outputKeyBuilder,
+                    leftHashStream.KeyComparer,
+                    outputRecipient,
+                    partitionCount,
+                    cancellationToken
+                );
             }
         }
 
-        private static PairComparer<bool, TRightKey> CreateComparer<TRightKey>(IComparer<TRightKey> comparer)
+        private static PairComparer<bool, TRightKey> CreateComparer<TRightKey>(
+            IComparer<TRightKey> comparer
+        )
         {
             return CreateComparer(Comparer<bool>.Default, comparer);
         }
 
-        private static PairComparer<TLeftKey, TRightKey> CreateComparer<TLeftKey, TRightKey>(IComparer<TLeftKey> leftKeyComparer, IComparer<TRightKey> rightKeyComparer)
+        private static PairComparer<TLeftKey, TRightKey> CreateComparer<TLeftKey, TRightKey>(
+            IComparer<TLeftKey> leftKeyComparer,
+            IComparer<TRightKey> rightKeyComparer
+        )
         {
             return new PairComparer<TLeftKey, TRightKey>(leftKeyComparer, rightKeyComparer);
         }
@@ -168,16 +267,35 @@ namespace System.Linq.Parallel
         private void WrapPartitionedStreamHelper<TLeftKey, TRightKey, TOutputKey>(
             PartitionedStream<Pair<TLeftInput, TKey>, TLeftKey> leftHashStream,
             HashLookupBuilder<IEnumerable<TRightInput>, TRightKey, TKey>[] rightLookupBuilders,
-            HashJoinOutputKeyBuilder<TLeftKey, TRightKey, TOutputKey> outputKeyBuilder, IComparer<TOutputKey> outputKeyComparer,
-            IPartitionedStreamRecipient<TOutput> outputRecipient, int partitionCount, CancellationToken cancellationToken)
+            HashJoinOutputKeyBuilder<TLeftKey, TRightKey, TOutputKey> outputKeyBuilder,
+            IComparer<TOutputKey> outputKeyComparer,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            int partitionCount,
+            CancellationToken cancellationToken
+        )
         {
-            PartitionedStream<TOutput, TOutputKey> outputStream = new PartitionedStream<TOutput, TOutputKey>(
-                partitionCount, outputKeyComparer, OrdinalIndexState);
+            PartitionedStream<TOutput, TOutputKey> outputStream = new PartitionedStream<
+                TOutput,
+                TOutputKey
+            >(partitionCount, outputKeyComparer, OrdinalIndexState);
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new HashJoinQueryOperatorEnumerator<TLeftInput, TLeftKey, IEnumerable<TRightInput>, TRightKey, TKey, TOutput, TOutputKey>(
-                    leftHashStream[i], rightLookupBuilders[i], _resultSelector, outputKeyBuilder, cancellationToken);
+                outputStream[i] = new HashJoinQueryOperatorEnumerator<
+                    TLeftInput,
+                    TLeftKey,
+                    IEnumerable<TRightInput>,
+                    TRightKey,
+                    TKey,
+                    TOutput,
+                    TOutputKey
+                >(
+                    leftHashStream[i],
+                    rightLookupBuilders[i],
+                    _resultSelector,
+                    outputKeyBuilder,
+                    cancellationToken
+                );
             }
 
             outputRecipient.Receive(outputStream);
@@ -189,12 +307,22 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TOutput> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TLeftInput> wrappedLeftChild = CancellableEnumerable.Wrap(LeftChild.AsSequentialQuery(token), token);
-            IEnumerable<TRightInput> wrappedRightChild = CancellableEnumerable.Wrap(RightChild.AsSequentialQuery(token), token);
+            IEnumerable<TLeftInput> wrappedLeftChild = CancellableEnumerable.Wrap(
+                LeftChild.AsSequentialQuery(token),
+                token
+            );
+            IEnumerable<TRightInput> wrappedRightChild = CancellableEnumerable.Wrap(
+                RightChild.AsSequentialQuery(token),
+                token
+            );
 
-            return wrappedLeftChild
-                .GroupJoin(
-                wrappedRightChild, _leftKeySelector, _rightKeySelector, _resultSelector, _keyComparer);
+            return wrappedLeftChild.GroupJoin(
+                wrappedRightChild,
+                _leftKeySelector,
+                _rightKeySelector,
+                _resultSelector,
+                _keyComparer
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -214,12 +342,16 @@ namespace System.Linq.Parallel
     /// <typeparam name="TElement"></typeparam>
     /// <typeparam name="TOrderKey"></typeparam>
     /// <typeparam name="THashKey"></typeparam>
-    internal sealed class GroupJoinHashLookupBuilder<TElement, TOrderKey, THashKey> : HashLookupBuilder<IEnumerable<TElement>, int, THashKey>
+    internal sealed class GroupJoinHashLookupBuilder<TElement, TOrderKey, THashKey>
+        : HashLookupBuilder<IEnumerable<TElement>, int, THashKey>
     {
         private readonly QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> _dataSource; // data source. For building.
         private readonly IEqualityComparer<THashKey>? _keyComparer; // An optional key comparison object.
 
-        internal GroupJoinHashLookupBuilder(QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> dataSource, IEqualityComparer<THashKey>? keyComparer)
+        internal GroupJoinHashLookupBuilder(
+            QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> dataSource,
+            IEqualityComparer<THashKey>? keyComparer
+        )
         {
             Debug.Assert(dataSource != null);
 
@@ -227,15 +359,19 @@ namespace System.Linq.Parallel
             _keyComparer = keyComparer;
         }
 
-        public override HashJoinHashLookup<THashKey, IEnumerable<TElement>, int> BuildHashLookup(CancellationToken cancellationToken)
+        public override HashJoinHashLookup<THashKey, IEnumerable<TElement>, int> BuildHashLookup(
+            CancellationToken cancellationToken
+        )
         {
-            HashLookup<THashKey, ListChunk<TElement>> lookup = new HashLookup<THashKey, ListChunk<TElement>>(_keyComparer);
+            HashLookup<THashKey, ListChunk<TElement>> lookup = new HashLookup<
+                THashKey,
+                ListChunk<TElement>
+            >(_keyComparer);
             GroupJoinBaseHashBuilder baseHashBuilder = new GroupJoinBaseHashBuilder(lookup);
 
             BuildBaseHashLookup(_dataSource, baseHashBuilder, cancellationToken);
 
             return new GroupJoinHashLookup(lookup);
-
         }
 
         /// <summary>
@@ -276,18 +412,19 @@ namespace System.Linq.Parallel
         ///
         /// The order key is a dummy value since we are unordered.
         /// </summary>
-        private sealed class GroupJoinHashLookup : GroupJoinHashLookup<THashKey, TElement, ListChunk<TElement>, int>
+        private sealed class GroupJoinHashLookup
+            : GroupJoinHashLookup<THashKey, TElement, ListChunk<TElement>, int>
         {
             private const int OrderKey = unchecked((int)0xdeadbeef);
 
             internal GroupJoinHashLookup(HashLookup<THashKey, ListChunk<TElement>> lookup)
-                : base(lookup)
-            {
-            }
+                : base(lookup) { }
 
             protected override int EmptyValueKey => OrderKey;
 
-            protected override Pair<IEnumerable<TElement>, int> CreateValuePair(ListChunk<TElement> baseValue)
+            protected override Pair<IEnumerable<TElement>, int> CreateValuePair(
+                ListChunk<TElement> baseValue
+            )
             {
                 return new Pair<IEnumerable<TElement>, int>(baseValue, OrderKey);
             }
@@ -300,7 +437,8 @@ namespace System.Linq.Parallel
     /// <typeparam name="TElement"></typeparam>
     /// <typeparam name="TOrderKey"></typeparam>
     /// <typeparam name="THashKey"></typeparam>
-    internal sealed class OrderedGroupJoinHashLookupBuilder<TElement, TOrderKey, THashKey> : HashLookupBuilder<IEnumerable<TElement>, Pair<bool, TOrderKey>, THashKey>
+    internal sealed class OrderedGroupJoinHashLookupBuilder<TElement, TOrderKey, THashKey>
+        : HashLookupBuilder<IEnumerable<TElement>, Pair<bool, TOrderKey>, THashKey>
     {
         private readonly QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> _dataSource; // data source. For building.
         private readonly IEqualityComparer<THashKey>? _keyComparer; // An optional key comparison object.
@@ -309,7 +447,8 @@ namespace System.Linq.Parallel
         internal OrderedGroupJoinHashLookupBuilder(
             QueryOperatorEnumerator<Pair<TElement, THashKey>, TOrderKey> dataSource,
             IEqualityComparer<THashKey>? keyComparer,
-            IComparer<TOrderKey> orderKeyComparer)
+            IComparer<TOrderKey> orderKeyComparer
+        )
         {
             Debug.Assert(dataSource != null);
 
@@ -318,10 +457,19 @@ namespace System.Linq.Parallel
             _orderKeyComparer = orderKeyComparer;
         }
 
-        public override HashJoinHashLookup<THashKey, IEnumerable<TElement>, Pair<bool, TOrderKey>> BuildHashLookup(CancellationToken cancellationToken)
+        public override HashJoinHashLookup<
+            THashKey,
+            IEnumerable<TElement>,
+            Pair<bool, TOrderKey>
+        > BuildHashLookup(CancellationToken cancellationToken)
         {
-            HashLookup<THashKey, GroupKeyData> lookup = new HashLookup<THashKey, GroupKeyData>(_keyComparer);
-            OrderedGroupJoinBaseHashBuilder baseHashBuilder = new OrderedGroupJoinBaseHashBuilder(lookup, _orderKeyComparer);
+            HashLookup<THashKey, GroupKeyData> lookup = new HashLookup<THashKey, GroupKeyData>(
+                _keyComparer
+            );
+            OrderedGroupJoinBaseHashBuilder baseHashBuilder = new OrderedGroupJoinBaseHashBuilder(
+                lookup,
+                _orderKeyComparer
+            );
 
             BuildBaseHashLookup(_dataSource, baseHashBuilder, cancellationToken);
 
@@ -331,7 +479,6 @@ namespace System.Linq.Parallel
             }
 
             return new OrderedGroupJoinHashLookup(lookup);
-
         }
 
         /// <summary>
@@ -342,14 +489,16 @@ namespace System.Linq.Parallel
         /// <remarks>
         /// The least order key in the list is chosen to represent the list
         /// </remarks>
-        private readonly struct OrderedGroupJoinBaseHashBuilder : IBaseHashBuilder<TElement, TOrderKey>
+        private readonly struct OrderedGroupJoinBaseHashBuilder
+            : IBaseHashBuilder<TElement, TOrderKey>
         {
             private readonly HashLookup<THashKey, GroupKeyData> _base;
             private readonly IComparer<TOrderKey> _orderKeyComparer;
 
             public OrderedGroupJoinBaseHashBuilder(
                 HashLookup<THashKey, GroupKeyData> baseLookup,
-                IComparer<TOrderKey> orderKeyComparer)
+                IComparer<TOrderKey> orderKeyComparer
+            )
             {
                 Debug.Assert(baseLookup != null);
 
@@ -384,18 +533,23 @@ namespace System.Linq.Parallel
         ///
         /// The order key is wrapped so that empty lists can be treated as less than all non-empty lists.
         /// </summary>
-        private sealed class OrderedGroupJoinHashLookup : GroupJoinHashLookup<THashKey, TElement, GroupKeyData, Pair<bool, TOrderKey>>
+        private sealed class OrderedGroupJoinHashLookup
+            : GroupJoinHashLookup<THashKey, TElement, GroupKeyData, Pair<bool, TOrderKey>>
         {
             internal OrderedGroupJoinHashLookup(HashLookup<THashKey, GroupKeyData> lookup)
-                : base(lookup)
-            {
-            }
+                : base(lookup) { }
 
-            protected override Pair<bool, TOrderKey> EmptyValueKey => default(Pair<bool, TOrderKey>);
+            protected override Pair<bool, TOrderKey> EmptyValueKey =>
+                default(Pair<bool, TOrderKey>);
 
-            protected override Pair<IEnumerable<TElement>, Pair<bool, TOrderKey>> CreateValuePair(GroupKeyData baseValue)
+            protected override Pair<IEnumerable<TElement>, Pair<bool, TOrderKey>> CreateValuePair(
+                GroupKeyData baseValue
+            )
             {
-                return new Pair<IEnumerable<TElement>, Pair<bool, TOrderKey>>(baseValue._grouping, Wrap(baseValue._orderKey));
+                return new Pair<IEnumerable<TElement>, Pair<bool, TOrderKey>>(
+                    baseValue._grouping,
+                    Wrap(baseValue._orderKey)
+                );
             }
 
             private static Pair<bool, TOrderKey> Wrap(TOrderKey orderKey)
@@ -412,10 +566,17 @@ namespace System.Linq.Parallel
             internal TOrderKey _orderKey;
             internal OrderedGroupByGrouping<THashKey, TOrderKey, TElement> _grouping;
 
-            internal GroupKeyData(TOrderKey orderKey, THashKey hashKey, IComparer<TOrderKey> orderComparer)
+            internal GroupKeyData(
+                TOrderKey orderKey,
+                THashKey hashKey,
+                IComparer<TOrderKey> orderComparer
+            )
             {
                 _orderKey = orderKey;
-                _grouping = new OrderedGroupByGrouping<THashKey, TOrderKey, TElement>(hashKey, orderComparer);
+                _grouping = new OrderedGroupByGrouping<THashKey, TOrderKey, TElement>(
+                    hashKey,
+                    orderComparer
+                );
             }
         }
     }
@@ -425,7 +586,8 @@ namespace System.Linq.Parallel
     ///
     /// Since GroupJoin operations always match, if no matching elements exist, an empty enumerable is returned.
     /// </summary>
-    internal abstract class GroupJoinHashLookup<THashKey, TElement, TBaseElement, TOrderKey> : HashJoinHashLookup<THashKey, IEnumerable<TElement>, TOrderKey>
+    internal abstract class GroupJoinHashLookup<THashKey, TElement, TBaseElement, TOrderKey>
+        : HashJoinHashLookup<THashKey, IEnumerable<TElement>, TOrderKey>
     {
         private readonly HashLookup<THashKey, TBaseElement> _base;
 
@@ -436,10 +598,16 @@ namespace System.Linq.Parallel
             _base = baseLookup;
         }
 
-        public override bool TryGetValue(THashKey key, ref HashLookupValueList<IEnumerable<TElement>, TOrderKey> value)
+        public override bool TryGetValue(
+            THashKey key,
+            ref HashLookupValueList<IEnumerable<TElement>, TOrderKey> value
+        )
         {
             Pair<IEnumerable<TElement>, TOrderKey> valueList = GetValueList(key);
-            value = new HashLookupValueList<IEnumerable<TElement>, TOrderKey>(valueList.First, valueList.Second);
+            value = new HashLookupValueList<IEnumerable<TElement>, TOrderKey>(
+                valueList.First,
+                valueList.Second
+            );
             return true;
         }
 
@@ -452,11 +620,16 @@ namespace System.Linq.Parallel
             }
             else
             {
-                return new Pair<IEnumerable<TElement>, TOrderKey>(ParallelEnumerable.Empty<TElement>(), EmptyValueKey);
+                return new Pair<IEnumerable<TElement>, TOrderKey>(
+                    ParallelEnumerable.Empty<TElement>(),
+                    EmptyValueKey
+                );
             }
         }
 
-        protected abstract Pair<IEnumerable<TElement>, TOrderKey> CreateValuePair(TBaseElement baseValue);
+        protected abstract Pair<IEnumerable<TElement>, TOrderKey> CreateValuePair(
+            TBaseElement baseValue
+        );
         protected abstract TOrderKey EmptyValueKey { get; }
     }
 }

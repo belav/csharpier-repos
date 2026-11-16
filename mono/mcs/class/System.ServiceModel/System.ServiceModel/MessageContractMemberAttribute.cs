@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,32 +30,38 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-	public abstract class MessageContractMemberAttribute : Attribute
-	{
-		bool has_protection_level;
-		string name, ns;
-		ProtectionLevel protection_level;
+    public abstract class MessageContractMemberAttribute : Attribute
+    {
+        bool has_protection_level;
+        string name,
+            ns;
+        ProtectionLevel protection_level;
 
-		public bool HasProtectionLevel {
-			get { return has_protection_level; }
-		}
+        public bool HasProtectionLevel
+        {
+            get { return has_protection_level; }
+        }
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        public string Namespace
+        {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		public ProtectionLevel ProtectionLevel {
-			get { return protection_level; }
-			set {
-				has_protection_level = true;
-				protection_level = value;
-			}
-		}
-	}
+        public ProtectionLevel ProtectionLevel
+        {
+            get { return protection_level; }
+            set
+            {
+                has_protection_level = true;
+                protection_level = value;
+            }
+        }
+    }
 }

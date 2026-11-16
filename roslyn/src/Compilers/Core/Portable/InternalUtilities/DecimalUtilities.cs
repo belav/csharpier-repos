@@ -11,7 +11,14 @@ namespace Roslyn.Utilities
             return unchecked((byte)(decimal.GetBits(value)[3] >> 16));
         }
 
-        public static void GetBits(this decimal value, out bool isNegative, out byte scale, out uint low, out uint mid, out uint high)
+        public static void GetBits(
+            this decimal value,
+            out bool isNegative,
+            out byte scale,
+            out uint low,
+            out uint mid,
+            out uint high
+        )
         {
             int[] bits = decimal.GetBits(value);
 

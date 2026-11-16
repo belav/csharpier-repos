@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Authz
     {
-        [LibraryImport(Libraries.Authz, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Authz,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool AuthzInitializeResourceManager(
             int flags,
@@ -16,7 +20,8 @@ internal static partial class Interop
             IntPtr pfnComputeDynamicGroups,
             IntPtr pfnFreeDynamicGroups,
             string name,
-            out IntPtr rm);
+            out IntPtr rm
+        );
 
         [LibraryImport(Libraries.Authz)]
         [return: MarshalAs(UnmanagedType.Bool)]

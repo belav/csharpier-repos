@@ -6,7 +6,8 @@ namespace System.ServiceModel
     using System.Collections.Generic;
     using System.Threading;
 
-    class SynchronizedDisposablePool<T> where T : class, IDisposable
+    class SynchronizedDisposablePool<T>
+        where T : class, IDisposable
     {
         List<T> items;
         int maxCount;

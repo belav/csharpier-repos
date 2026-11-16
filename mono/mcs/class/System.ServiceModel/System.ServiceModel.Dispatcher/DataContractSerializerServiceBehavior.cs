@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,46 +28,57 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ServiceModel.Description;
+using System.Text;
 
 namespace System.ServiceModel.Dispatcher
 {
-	class DataContractSerializerServiceBehavior : IEndpointBehavior
-	{
-		public bool IgnoreExtensionDataObject {
-			get;
-			set;
-		}
+    class DataContractSerializerServiceBehavior : IEndpointBehavior
+    {
+        public bool IgnoreExtensionDataObject { get; set; }
 
-		public int MaxItemsInObjectGraph {
-			get;
-			set;
-		}
+        public int MaxItemsInObjectGraph { get; set; }
 
-		public DataContractSerializerServiceBehavior (bool ignoreExtensionDataObject, int maxItemsInObjectGraph) {
-			IgnoreExtensionDataObject = ignoreExtensionDataObject;
-			MaxItemsInObjectGraph = maxItemsInObjectGraph;
-		}
+        public DataContractSerializerServiceBehavior(
+            bool ignoreExtensionDataObject,
+            int maxItemsInObjectGraph
+        )
+        {
+            IgnoreExtensionDataObject = ignoreExtensionDataObject;
+            MaxItemsInObjectGraph = maxItemsInObjectGraph;
+        }
 
-		#region IEndpointBehavior Members
+        #region IEndpointBehavior Members
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            System.ServiceModel.Channels.BindingParameterCollection parameters
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint, EndpointDispatcher dispatcher) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher dispatcher
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint, ClientRuntime behavior) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint) {
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
+        {
+            throw new NotImplementedException();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

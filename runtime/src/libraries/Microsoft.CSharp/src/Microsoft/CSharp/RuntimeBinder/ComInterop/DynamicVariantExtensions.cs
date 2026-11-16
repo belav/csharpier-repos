@@ -54,29 +54,68 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             switch (tc)
             {
-                case TypeCode.Empty: break;
-                case TypeCode.Object: variant = ComVariant.CreateRaw(VarEnum.VT_UNKNOWN, Marshal.GetIUnknownForObject(value)); break;
-                case TypeCode.DBNull: variant = ComVariant.Null; break;
-                case TypeCode.Boolean: variant = ComVariant.Create<bool>(value.ToBoolean(ci)); break;
-                case TypeCode.Char: variant = ComVariant.Create<ushort>(value.ToChar(ci)); break;
-                case TypeCode.SByte: variant = ComVariant.Create<sbyte>(value.ToSByte(ci)); break;
-                case TypeCode.Byte: variant = ComVariant.Create<byte>(value.ToByte(ci)); break;
-                case TypeCode.Int16: variant = ComVariant.Create(value.ToInt16(ci)); break;
-                case TypeCode.UInt16: variant = ComVariant.Create(value.ToUInt16(ci)); break;
-                case TypeCode.Int32: variant = ComVariant.Create(value.ToInt32(ci)); break;
-                case TypeCode.UInt32: variant = ComVariant.Create(value.ToUInt32(ci)); break;
-                case TypeCode.Int64: variant = ComVariant.Create(value.ToInt64(ci)); break;
-                case TypeCode.UInt64: variant = ComVariant.Create(value.ToInt64(ci)); break;
-                case TypeCode.Single: variant = ComVariant.Create(value.ToSingle(ci)); break;
-                case TypeCode.Double: variant = ComVariant.Create(value.ToDouble(ci)); break;
-                case TypeCode.Decimal: variant = ComVariant.Create(value.ToDecimal(ci)); break;
-                case TypeCode.DateTime: variant = ComVariant.Create(value.ToDateTime(ci)); break;
-                case TypeCode.String: variant = ComVariant.Create(new BStrWrapper(value.ToString(ci))); break;
+                case TypeCode.Empty:
+                    break;
+                case TypeCode.Object:
+                    variant = ComVariant.CreateRaw(
+                        VarEnum.VT_UNKNOWN,
+                        Marshal.GetIUnknownForObject(value)
+                    );
+                    break;
+                case TypeCode.DBNull:
+                    variant = ComVariant.Null;
+                    break;
+                case TypeCode.Boolean:
+                    variant = ComVariant.Create<bool>(value.ToBoolean(ci));
+                    break;
+                case TypeCode.Char:
+                    variant = ComVariant.Create<ushort>(value.ToChar(ci));
+                    break;
+                case TypeCode.SByte:
+                    variant = ComVariant.Create<sbyte>(value.ToSByte(ci));
+                    break;
+                case TypeCode.Byte:
+                    variant = ComVariant.Create<byte>(value.ToByte(ci));
+                    break;
+                case TypeCode.Int16:
+                    variant = ComVariant.Create(value.ToInt16(ci));
+                    break;
+                case TypeCode.UInt16:
+                    variant = ComVariant.Create(value.ToUInt16(ci));
+                    break;
+                case TypeCode.Int32:
+                    variant = ComVariant.Create(value.ToInt32(ci));
+                    break;
+                case TypeCode.UInt32:
+                    variant = ComVariant.Create(value.ToUInt32(ci));
+                    break;
+                case TypeCode.Int64:
+                    variant = ComVariant.Create(value.ToInt64(ci));
+                    break;
+                case TypeCode.UInt64:
+                    variant = ComVariant.Create(value.ToInt64(ci));
+                    break;
+                case TypeCode.Single:
+                    variant = ComVariant.Create(value.ToSingle(ci));
+                    break;
+                case TypeCode.Double:
+                    variant = ComVariant.Create(value.ToDouble(ci));
+                    break;
+                case TypeCode.Decimal:
+                    variant = ComVariant.Create(value.ToDecimal(ci));
+                    break;
+                case TypeCode.DateTime:
+                    variant = ComVariant.Create(value.ToDateTime(ci));
+                    break;
+                case TypeCode.String:
+                    variant = ComVariant.Create(new BStrWrapper(value.ToString(ci)));
+                    break;
 
                 default:
                     throw new NotSupportedException();
             }
         }
+
         // VT_I1
 
         public static void SetAsByrefI1(ref this ComVariant variant, ref sbyte value)
@@ -217,10 +256,17 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             variant.SetAsByref(ref value, VarEnum.VT_DISPATCH);
         }
 
-        private static unsafe void SetAsByref<T>(ref this ComVariant variant, ref T value, VarEnum type)
+        private static unsafe void SetAsByref<T>(
+            ref this ComVariant variant,
+            ref T value,
+            VarEnum type
+        )
         {
             Debug.Assert(variant.VarType == VarEnum.VT_EMPTY); // The setter can only be called once as VariantClear might be needed otherwise
-            variant = ComVariant.CreateRaw(type | VarEnum.VT_BYREF, (nint)Unsafe.AsPointer(ref value));
+            variant = ComVariant.CreateRaw(
+                type | VarEnum.VT_BYREF,
+                (nint)Unsafe.AsPointer(ref value)
+            );
         }
 
         public static void SetAsByrefVariant(ref this ComVariant variant, ref ComVariant value)
@@ -236,7 +282,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         // constructs a ByRef variant to pass contents of another variant ByRef.
-        public static unsafe void SetAsByrefVariantIndirect(ref this ComVariant variant, ref ComVariant value)
+        public static unsafe void SetAsByrefVariantIndirect(
+            ref this ComVariant variant,
+            ref ComVariant value
+        )
         {
             Debug.Assert(variant.VarType == VarEnum.VT_EMPTY); // The setter can only be called once as VariantClear might be needed otherwise
             Debug.Assert((value.VarType & VarEnum.VT_BYREF) == 0, "double indirection");
@@ -251,14 +300,23 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 case VarEnum.VT_RECORD:
                     // VT_RECORD's are weird in that regardless of is the VT_BYREF flag is set or not
                     // they have the same internal representation.
-                    variant = ComVariant.CreateRaw(value.VarType | VarEnum.VT_BYREF, value.GetRawDataRef<Record>());
+                    variant = ComVariant.CreateRaw(
+                        value.VarType | VarEnum.VT_BYREF,
+                        value.GetRawDataRef<Record>()
+                    );
                     break;
                 case VarEnum.VT_DECIMAL:
                     // The DECIMAL value in an OLE Variant is stored at the start of the structure.
-                    variant = ComVariant.CreateRaw(value.VarType | VarEnum.VT_BYREF, (nint)Unsafe.AsPointer(ref value));
+                    variant = ComVariant.CreateRaw(
+                        value.VarType | VarEnum.VT_BYREF,
+                        (nint)Unsafe.AsPointer(ref value)
+                    );
                     break;
                 default:
-                    variant = ComVariant.CreateRaw(value.VarType | VarEnum.VT_BYREF, (nint)Unsafe.AsPointer(ref value.GetRawDataRef<nint>()));
+                    variant = ComVariant.CreateRaw(
+                        value.VarType | VarEnum.VT_BYREF,
+                        (nint)Unsafe.AsPointer(ref value.GetRawDataRef<nint>())
+                    );
                     break;
             }
         }
@@ -267,32 +325,54 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             switch (varType)
             {
-                case VarEnum.VT_I1: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI1));
-                case VarEnum.VT_I2: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI2));
-                case VarEnum.VT_I4: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI4));
-                case VarEnum.VT_I8: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI8));
-                case VarEnum.VT_UI1: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi1));
-                case VarEnum.VT_UI2: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi2));
-                case VarEnum.VT_UI4: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi4));
-                case VarEnum.VT_UI8: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi8));
-                case VarEnum.VT_INT: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefInt));
-                case VarEnum.VT_UINT: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUint));
-                case VarEnum.VT_BOOL: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefBool));
-                case VarEnum.VT_ERROR: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefError));
-                case VarEnum.VT_R4: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefR4));
-                case VarEnum.VT_R8: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefR8));
-                case VarEnum.VT_DECIMAL: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefDecimal));
-                case VarEnum.VT_CY: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefCy));
-                case VarEnum.VT_DATE: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefDate));
-                case VarEnum.VT_BSTR: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefBstr));
-                case VarEnum.VT_UNKNOWN: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUnknown));
-                case VarEnum.VT_DISPATCH: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefDispatch));
+                case VarEnum.VT_I1:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI1));
+                case VarEnum.VT_I2:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI2));
+                case VarEnum.VT_I4:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI4));
+                case VarEnum.VT_I8:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefI8));
+                case VarEnum.VT_UI1:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi1));
+                case VarEnum.VT_UI2:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi2));
+                case VarEnum.VT_UI4:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi4));
+                case VarEnum.VT_UI8:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUi8));
+                case VarEnum.VT_INT:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefInt));
+                case VarEnum.VT_UINT:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUint));
+                case VarEnum.VT_BOOL:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefBool));
+                case VarEnum.VT_ERROR:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefError));
+                case VarEnum.VT_R4:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefR4));
+                case VarEnum.VT_R8:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefR8));
+                case VarEnum.VT_DECIMAL:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefDecimal));
+                case VarEnum.VT_CY:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefCy));
+                case VarEnum.VT_DATE:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefDate));
+                case VarEnum.VT_BSTR:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefBstr));
+                case VarEnum.VT_UNKNOWN:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefUnknown));
+                case VarEnum.VT_DISPATCH:
+                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefDispatch));
 
                 case VarEnum.VT_VARIANT:
                     return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefVariant));
                 case VarEnum.VT_RECORD:
                 case VarEnum.VT_ARRAY:
-                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetAsByrefVariantIndirect));
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetAsByrefVariantIndirect)
+                    );
 
                 default:
                     throw new NotSupportedException();
@@ -386,7 +466,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         public static void SetDispatch(this ref ComVariant variant, object value)
         {
-            variant = ComVariant.CreateRaw(VarEnum.VT_DISPATCH, Marshal.GetIDispatchForObject(value));
+            variant = ComVariant.CreateRaw(
+                VarEnum.VT_DISPATCH,
+                Marshal.GetIDispatchForObject(value)
+            );
         }
 
         public static void SetError(this ref ComVariant variant, int value)
@@ -412,31 +495,135 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             switch (varType)
             {
-                case VarEnum.VT_I1: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetI1), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_I2: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetI2), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_I4: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetI4), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_I8: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetI8), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_UI1: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetUi1), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_UI2: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetUi2), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_UI4: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetUi4), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_UI8: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetUi8), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_INT: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetInt), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_UINT: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetUint), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_BOOL: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetBool), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_ERROR: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetError), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_R4: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetR4), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_R8: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetR8), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_DECIMAL: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetDecimal), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_CY: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetCy), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_DATE: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetDate), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_BSTR: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetBstr), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_UNKNOWN: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetUnknown), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                case VarEnum.VT_DISPATCH: return typeof(DynamicVariantExtensions).GetMethod(nameof(SetDispatch), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                case VarEnum.VT_I1:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetI1),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_I2:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetI2),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_I4:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetI4),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_I8:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetI8),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_UI1:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetUi1),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_UI2:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetUi2),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_UI4:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetUi4),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_UI8:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetUi8),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_INT:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetInt),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_UINT:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetUint),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_BOOL:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetBool),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_ERROR:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetError),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_R4:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetR4),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_R8:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetR8),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_DECIMAL:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetDecimal),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_CY:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetCy),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_DATE:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetDate),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_BSTR:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetBstr),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_UNKNOWN:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetUnknown),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
+                case VarEnum.VT_DISPATCH:
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetDispatch),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
 
                 case VarEnum.VT_VARIANT:
                 case VarEnum.VT_RECORD:
                 case VarEnum.VT_ARRAY:
-                    return typeof(DynamicVariantExtensions).GetMethod(nameof(SetVariant), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    return typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(SetVariant),
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Static
+                    );
 
                 default:
                     throw new NotSupportedException();

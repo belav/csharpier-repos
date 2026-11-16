@@ -7,7 +7,7 @@ public class NullableEnumToNullableValueType
         public enum DummyTypes : int
         {
             Foo = 1,
-            Bar = 2
+            Bar = 2,
         }
 
         public class DummySource
@@ -20,10 +20,11 @@ public class NullableEnumToNullableValueType
             public int? Dummy { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<DummySource, DummyDestination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<DummySource, DummyDestination>();
+            });
 
         [Fact]
         public void Should_map_null_enum_to_nullable_base_type()
@@ -34,5 +35,5 @@ public class NullableEnumToNullableValueType
 
             destination.Dummy.ShouldBeNull();
         }
-    } 
+    }
 }

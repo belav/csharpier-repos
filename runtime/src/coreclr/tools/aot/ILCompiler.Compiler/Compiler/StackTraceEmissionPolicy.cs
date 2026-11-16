@@ -32,8 +32,13 @@ namespace ILCompiler
         {
             MethodStackTraceVisibilityFlags result = 0;
 
-            if (method.HasCustomAttribute("System.Diagnostics", "StackTraceHiddenAttribute")
-                || (method.OwningType is MetadataType mdType && mdType.HasCustomAttribute("System.Diagnostics", "StackTraceHiddenAttribute")))
+            if (
+                method.HasCustomAttribute("System.Diagnostics", "StackTraceHiddenAttribute")
+                || (
+                    method.OwningType is MetadataType mdType
+                    && mdType.HasCustomAttribute("System.Diagnostics", "StackTraceHiddenAttribute")
+                )
+            )
             {
                 result |= MethodStackTraceVisibilityFlags.IsHidden;
             }

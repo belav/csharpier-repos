@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
         public async Task TestAddIntoHiddenRegionWithModernSpanMapper(TestHost host)
         {
             await TestAsync(
-    @"#line hidden
+                @"#line hidden
 using System.Collections.Generic;
 #line default
 
@@ -30,7 +30,7 @@ class Program
         [|DateTime|] d;
     }
 }",
-    @"#line hidden
+                @"#line hidden
 using System;
 using System.Collections.Generic;
 #line default
@@ -41,7 +41,9 @@ class Program
     {
         DateTime d;
     }
-}", host);
+}",
+                host
+            );
         }
 
         private protected override IDocumentServiceProvider GetDocumentServiceProvider()

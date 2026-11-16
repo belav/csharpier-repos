@@ -13,7 +13,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 /// </remarks>
 public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5> : EventDefinitionBase
 {
-    private readonly Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, Exception?> _logAction;
+    private readonly Action<
+        ILogger,
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        Exception?
+    > _logAction;
 
     /// <summary>
     ///     Creates an event definition instance.
@@ -30,7 +38,11 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5> : Even
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        Func<LogLevel, Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, Exception?>> logActionFunc)
+        Func<
+            LogLevel,
+            Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, Exception?>
+        > logActionFunc
+    )
         : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
@@ -51,7 +63,8 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5> : Even
         TParam2 arg2,
         TParam3 arg3,
         TParam4 arg4,
-        TParam5 arg5)
+        TParam5 arg5
+    )
     {
         var extractor = new MessageExtractingLogger();
         _logAction(extractor, arg1, arg2, arg3, arg4, arg5, null);
@@ -74,7 +87,8 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5> : Even
         TParam2 arg2,
         TParam3 arg3,
         TParam4 arg4,
-        TParam5 arg5)
+        TParam5 arg5
+    )
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)

@@ -38,41 +38,49 @@ using System.Xml;
 
 namespace MonoTests.System.Data.Connected
 {
-	class ProviderTestsConfigurationHandler : IConfigurationSectionHandler
-	{
-		public object Create (object parent, object configContext, XmlNode section)
-		{
-			Hashtable engines = new Hashtable ();
+    class ProviderTestsConfigurationHandler : IConfigurationSectionHandler
+    {
+        public object Create(object parent, object configContext, XmlNode section)
+        {
+            Hashtable engines = new Hashtable();
 
-			foreach (XmlNode engineNode in section.SelectNodes ("engines/engine")) {
-				EngineConfig engine = EngineConfig.FromXml (engineNode);
-				if (engines.Contains (engine.Name)) {
-					string msg = string.Format (CultureInfo.InvariantCulture,
-						"A engine with name '{0}' already exists.",
-						engine.Name);
-					throw new ConfigurationErrorsException (msg, engineNode);
-				}
-				engines.Add (engine.Name, engine);
-			}
+            foreach (XmlNode engineNode in section.SelectNodes("engines/engine"))
+            {
+                EngineConfig engine = EngineConfig.FromXml(engineNode);
+                if (engines.Contains(engine.Name))
+                {
+                    string msg = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "A engine with name '{0}' already exists.",
+                        engine.Name
+                    );
+                    throw new ConfigurationErrorsException(msg, engineNode);
+                }
+                engines.Add(engine.Name, engine);
+            }
 
-			Hashtable connections = new Hashtable ();
+            Hashtable connections = new Hashtable();
 
-			foreach (XmlNode connNode in section.SelectNodes ("connections/connection")) {
-				ConnectionConfig conn = ConnectionConfig.FromXml (connNode, engines);
-				if (connections.Contains (conn.Name)) {
-					string msg = string.Format (CultureInfo.InvariantCulture,
-						"A connection with name '{0}' already exists.",
-						conn.Name);
-					throw new ConfigurationErrorsException (msg, connNode);
-				}
-				connections.Add (conn.Name, conn);
-			}
+            foreach (XmlNode connNode in section.SelectNodes("connections/connection"))
+            {
+                ConnectionConfig conn = ConnectionConfig.FromXml(connNode, engines);
+                if (connections.Contains(conn.Name))
+                {
+                    string msg = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "A connection with name '{0}' already exists.",
+                        conn.Name
+                    );
+                    throw new ConfigurationErrorsException(msg, connNode);
+                }
+                connections.Add(conn.Name, conn);
+            }
 
-			ConnectionConfig [] c = new ConnectionConfig [connections.Count];
-			connections.Values.CopyTo (c, 0);
-			return c;
-		}
-	}
+            ConnectionConfig[] c = new ConnectionConfig[connections.Count];
+            connections.Values.CopyTo(c, 0);
+            return c;
+        }
+    }
 }
 
 #endif

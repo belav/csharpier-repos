@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>LadiPro</OWNER>
@@ -19,9 +19,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 #else
     [StructLayout(LayoutKind.Explicit, Size = 20)]
 #endif
-    internal unsafe struct HSTRING_HEADER
-    {
-    }
+    internal unsafe struct HSTRING_HEADER { }
 
     internal static class UnsafeNativeMethods
     {
@@ -36,7 +34,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static extern bool RoOriginateLanguageException(int error, [MarshalAs(UnmanagedType.HString)]string message, IntPtr languageException);
+        internal static extern bool RoOriginateLanguageException(
+            int error,
+            [MarshalAs(UnmanagedType.HString)] string message,
+            IntPtr languageException
+        );
 
         [DllImport("api-ms-win-core-winrt-error-l1-1-1.dll", PreserveSig = false)]
         [SecurityCritical]
@@ -44,33 +46,52 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
         internal static extern void RoReportUnhandledError(IRestrictedErrorInfo error);
 
-        [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "api-ms-win-core-winrt-string-l1-1-0.dll",
+            CallingConvention = CallingConvention.StdCall
+        )]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static unsafe extern int WindowsCreateString([MarshalAs(UnmanagedType.LPWStr)] string sourceString,
-                                                              int length,
-                                                              [Out] IntPtr *hstring);
+        internal static extern unsafe int WindowsCreateString(
+            [MarshalAs(UnmanagedType.LPWStr)] string sourceString,
+            int length,
+            [Out] IntPtr* hstring
+        );
 
-        [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "api-ms-win-core-winrt-string-l1-1-0.dll",
+            CallingConvention = CallingConvention.StdCall
+        )]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static unsafe extern int WindowsCreateStringReference(char *sourceString,
-                                                                       int length,
-                                                                       [Out] HSTRING_HEADER *hstringHeader,
-                                                                       [Out] IntPtr *hstring);
+        internal static extern unsafe int WindowsCreateStringReference(
+            char* sourceString,
+            int length,
+            [Out] HSTRING_HEADER* hstringHeader,
+            [Out] IntPtr* hstring
+        );
 
-        [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "api-ms-win-core-winrt-string-l1-1-0.dll",
+            CallingConvention = CallingConvention.StdCall
+        )]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
         internal static extern int WindowsDeleteString(IntPtr hstring);
 
-        [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "api-ms-win-core-winrt-string-l1-1-0.dll",
+            CallingConvention = CallingConvention.StdCall
+        )]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static unsafe extern char* WindowsGetStringRawBuffer(IntPtr hstring, [Out] uint *length);
+        internal static extern unsafe char* WindowsGetStringRawBuffer(
+            IntPtr hstring,
+            [Out] uint* length
+        );
     }
 }

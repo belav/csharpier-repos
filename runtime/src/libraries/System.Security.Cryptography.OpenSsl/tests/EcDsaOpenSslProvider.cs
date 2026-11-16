@@ -48,10 +48,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
         public bool ExplicitCurvesSupported
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 

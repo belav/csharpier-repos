@@ -16,9 +16,7 @@ namespace System.Activities.Runtime
     {
         List<MappableLocation> mappableLocations;
 
-        public MappableObjectManager()
-        {
-        }
+        public MappableObjectManager() { }
 
         public int Count
         {
@@ -47,17 +45,33 @@ namespace System.Activities.Runtime
             if (this.mappableLocations != null && this.mappableLocations.Count > 0)
             {
                 result = new Dictionary<string, LocationInfo>(this.mappableLocations.Count);
-                for (int locationIndex = 0; locationIndex < this.mappableLocations.Count; locationIndex++)
+                for (
+                    int locationIndex = 0;
+                    locationIndex < this.mappableLocations.Count;
+                    locationIndex++
+                )
                 {
                     MappableLocation mappableLocation = this.mappableLocations[locationIndex];
-                    result.Add(mappableLocation.MappingKeyName, new LocationInfo(mappableLocation.Name, mappableLocation.OwnerDisplayName, mappableLocation.Location.Value));
+                    result.Add(
+                        mappableLocation.MappingKeyName,
+                        new LocationInfo(
+                            mappableLocation.Name,
+                            mappableLocation.OwnerDisplayName,
+                            mappableLocation.Location.Value
+                        )
+                    );
                 }
             }
 
             return result;
         }
 
-        public void Register(Location location, Activity activity, LocationReference locationOwner, ActivityInstance activityInstance)
+        public void Register(
+            Location location,
+            Activity activity,
+            LocationReference locationOwner,
+            ActivityInstance activityInstance
+        )
         {
             Fx.Assert(location.CanBeMapped, "should only register mappable locations");
 
@@ -66,7 +80,9 @@ namespace System.Activities.Runtime
                 this.mappableLocations = new List<MappableLocation>();
             }
 
-            this.mappableLocations.Add(new MappableLocation(locationOwner, activity, activityInstance, location));
+            this.mappableLocations.Add(
+                new MappableLocation(locationOwner, activity, activityInstance, location)
+            );
         }
 
         public void Unregister(Location location)
@@ -82,7 +98,10 @@ namespace System.Activities.Runtime
                     break;
                 }
             }
-            Fx.Assert(this.mappableLocations.Count == mappedLocationsCount - 1, "can only unregister locations that have been registered");
+            Fx.Assert(
+                this.mappableLocations.Count == mappedLocationsCount - 1,
+                "can only unregister locations that have been registered"
+            );
         }
 
         [DataContract]
@@ -93,60 +112,47 @@ namespace System.Activities.Runtime
             string ownerDisplayName;
             Location location;
 
-            public MappableLocation(LocationReference locationOwner, Activity activity, ActivityInstance activityInstance, Location location)
+            public MappableLocation(
+                LocationReference locationOwner,
+                Activity activity,
+                ActivityInstance activityInstance,
+                Location location
+            )
             {
                 this.Name = locationOwner.Name;
                 this.OwnerDisplayName = activity.DisplayName;
                 this.Location = location;
-                this.MappingKeyName = string.Format(CultureInfo.InvariantCulture, "activity.{0}-{1}_{2}", activity.Id, locationOwner.Id, activityInstance.Id);
+                this.MappingKeyName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "activity.{0}-{1}_{2}",
+                    activity.Id,
+                    locationOwner.Id,
+                    activityInstance.Id
+                );
             }
-            
+
             internal string MappingKeyName
             {
-                get
-                {
-                    return this.mappingKeyName;
-                }
-                private set
-                {
-                    this.mappingKeyName = value;
-                }
+                get { return this.mappingKeyName; }
+                private set { this.mappingKeyName = value; }
             }
-            
+
             public string Name
             {
-                get
-                {
-                    return this.name;
-                }
-                private set
-                {
-                    this.name = value;
-                }
+                get { return this.name; }
+                private set { this.name = value; }
             }
-                        
+
             public string OwnerDisplayName
             {
-                get
-                {
-                    return this.ownerDisplayName;
-                }
-                private set
-                {
-                    this.ownerDisplayName = value;
-                }
+                get { return this.ownerDisplayName; }
+                private set { this.ownerDisplayName = value; }
             }
-            
+
             internal Location Location
             {
-                get
-                {
-                    return this.location;
-                }
-                private set
-                {
-                    this.location = value;
-                }
+                get { return this.location; }
+                private set { this.location = value; }
             }
 
             [DataMember(Name = "MappingKeyName")]

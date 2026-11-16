@@ -15,7 +15,7 @@ class TailCallStructPassingSimple
 {
     // Simple tail call candidate that would be ignored on Arm64 and amd64 Unix
     // due to https://github.com/dotnet/coreclr/issues/2666
-    public static int ImplicitTailCallTenByteStruct(A a, int count=1000)
+    public static int ImplicitTailCallTenByteStruct(A a, int count = 1000)
     {
         if (count-- == 0)
         {
@@ -34,5 +34,5 @@ class TailCallStructPassingSimple
 
         int ret = ImplicitTailCallTenByteStruct(temp);
         return (ret == 100) ? 0 : ret;
-    } 
+    }
 }

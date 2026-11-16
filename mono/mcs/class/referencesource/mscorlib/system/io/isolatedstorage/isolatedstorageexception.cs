@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
  *
  * Class:  IsolatedStorageException
-// 
+//
 // <OWNER>Microsoft</OWNER>
  *
  *
@@ -15,18 +15,19 @@
  * Date:  Feb 15, 2000
  *
  ===========================================================*/
-namespace System.IO.IsolatedStorage {
-
+namespace System.IO.IsolatedStorage
+{
     using System;
     using System.Runtime.Serialization;
+
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class IsolatedStorageException : Exception
     {
-
 #if FEATURE_CORECLR
         internal Exception m_UnderlyingException;
-#endif 
+#endif
+
         public IsolatedStorageException()
             : base(Environment.GetResourceString("IsolatedStorage_Exception"))
         {
@@ -45,7 +46,7 @@ namespace System.IO.IsolatedStorage {
             SetErrorCode(__HResults.COR_E_ISOSTORE);
         }
 
-        protected IsolatedStorageException(SerializationInfo info, StreamingContext context) : base (info, context) {
-        }
+        protected IsolatedStorageException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

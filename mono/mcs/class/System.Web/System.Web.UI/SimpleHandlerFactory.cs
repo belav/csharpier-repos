@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,19 +33,19 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-	class SimpleHandlerFactory : IHttpHandlerFactory
-	{
-		public virtual IHttpHandler GetHandler (HttpContext context,
-							string requestType,
-							string virtualPath,
-							string path)
-		{
-			return BuildManager.CreateInstanceFromVirtualPath (virtualPath, typeof (IHttpHandler)) as IHttpHandler;
-		}
+    class SimpleHandlerFactory : IHttpHandlerFactory
+    {
+        public virtual IHttpHandler GetHandler(
+            HttpContext context,
+            string requestType,
+            string virtualPath,
+            string path
+        )
+        {
+            return BuildManager.CreateInstanceFromVirtualPath(virtualPath, typeof(IHttpHandler))
+                as IHttpHandler;
+        }
 
-		public virtual void ReleaseHandler (IHttpHandler handler)
-		{
-		}
-	}
+        public virtual void ReleaseHandler(IHttpHandler handler) { }
+    }
 }
-

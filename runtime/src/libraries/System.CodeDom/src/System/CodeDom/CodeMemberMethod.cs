@@ -5,7 +5,8 @@ namespace System.CodeDom
 {
     public class CodeMemberMethod : CodeTypeMember
     {
-        private readonly CodeParameterDeclarationExpressionCollection _parameters = new CodeParameterDeclarationExpressionCollection();
+        private readonly CodeParameterDeclarationExpressionCollection _parameters =
+            new CodeParameterDeclarationExpressionCollection();
         private readonly CodeStatementCollection _statements = new CodeStatementCollection();
         private CodeTypeReference _returnType;
         private CodeTypeReferenceCollection _implementationTypes;
@@ -73,8 +74,10 @@ namespace System.CodeDom
             }
         }
 
-        public CodeAttributeDeclarationCollection ReturnTypeCustomAttributes => _returnAttributes ??= new CodeAttributeDeclarationCollection();
+        public CodeAttributeDeclarationCollection ReturnTypeCustomAttributes =>
+            _returnAttributes ??= new CodeAttributeDeclarationCollection();
 
-        public CodeTypeParameterCollection TypeParameters => _typeParameters ??= new CodeTypeParameterCollection();
+        public CodeTypeParameterCollection TypeParameters =>
+            _typeParameters ??= new CodeTypeParameterCollection();
     }
 }

@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
     internal enum FixAllKind
     {
         CodeFix,
-        Refactoring
+        Refactoring,
     }
 }

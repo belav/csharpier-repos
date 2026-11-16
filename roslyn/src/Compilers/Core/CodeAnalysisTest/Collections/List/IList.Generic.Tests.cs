@@ -45,12 +45,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        )
         {
             foreach (var item in base.GetModifyEnumerables(operations))
                 yield return item;
 
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Insert) == ModifyOperation.Insert)
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Insert) == ModifyOperation.Insert
+            )
             {
                 yield return (IEnumerable<T> enumerable) =>
                 {
@@ -63,7 +68,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     return false;
                 };
             }
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Overwrite) == ModifyOperation.Overwrite)
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Overwrite) == ModifyOperation.Overwrite
+            )
             {
                 yield return (IEnumerable<T> enumerable) =>
                 {
@@ -76,7 +84,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     return false;
                 };
             }
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Remove) == ModifyOperation.Remove)
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Remove) == ModifyOperation.Remove
+            )
             {
                 yield return (IEnumerable<T> enumerable) =>
                 {
@@ -99,9 +110,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override ICollection<T> GenericICollectionFactory() => GenericIListFactory();
 
-        protected override ICollection<T> GenericICollectionFactory(int count) => GenericIListFactory(count);
+        protected override ICollection<T> GenericICollectionFactory(int count) =>
+            GenericIListFactory(count);
 
-        protected virtual Type IList_Generic_Item_InvalidIndex_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected virtual Type IList_Generic_Item_InvalidIndex_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
 
@@ -147,7 +160,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
                 Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[-1] = validAdd);
-                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[int.MinValue] = validAdd);
+                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () =>
+                    list[int.MinValue] = validAdd
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -160,8 +175,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
-                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[count] = validAdd);
-                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[count + 1] = validAdd);
+                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () =>
+                    list[count] = validAdd
+                );
+                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () =>
+                    list[count + 1] = validAdd
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -385,9 +404,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     list.Add(duplicate);
                 List<T> expectedList = list.ToList();
 
-                Assert.All(Enumerable.Range(0, count), (index =>
-                    Assert.Equal(index, list.IndexOf(expectedList[index]))
-                ));
+                Assert.All(
+                    Enumerable.Range(0, count),
+                    (index => Assert.Equal(index, list.IndexOf(expectedList[index])))
+                );
             }
         }
 
@@ -404,7 +424,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, validAdd));
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(int.MinValue, validAdd));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.Insert(int.MinValue, validAdd)
+                );
                 Assert.Equal(count, list.Count);
             }
         }
@@ -536,7 +558,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IList_Generic_RemoveAt_NegativeIndex_ThrowsArgumentOutOfRangeException(int count)
+        public void IList_Generic_RemoveAt_NegativeIndex_ThrowsArgumentOutOfRangeException(
+            int count
+        )
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
@@ -550,7 +574,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IList_Generic_RemoveAt_IndexGreaterThanListCount_ThrowsArgumentOutOfRangeException(int count)
+        public void IList_Generic_RemoveAt_IndexGreaterThanListCount_ThrowsArgumentOutOfRangeException(
+            int count
+        )
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
@@ -620,7 +646,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
                 using (IEnumerator<T> enumerator = collection.GetEnumerator())
                 {
-                    while (enumerator.MoveNext()) ; // Go to end of enumerator
+                    while (enumerator.MoveNext())
+                        ; // Go to end of enumerator
 
                     T? current = default(T);
                     if (Enumerator_Current_UndefinedOperation_Throws)

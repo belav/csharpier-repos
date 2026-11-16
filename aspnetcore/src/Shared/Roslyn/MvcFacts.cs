@@ -15,10 +15,9 @@ internal static class MvcFacts
     )
     {
         type = type ?? throw new ArgumentNullException(nameof(type));
-        controllerAttribute =
-            controllerAttribute ?? throw new ArgumentNullException(nameof(controllerAttribute));
-        nonControllerAttribute =
-            nonControllerAttribute
+        controllerAttribute = controllerAttribute
+            ?? throw new ArgumentNullException(nameof(controllerAttribute));
+        nonControllerAttribute = nonControllerAttribute
             ?? throw new ArgumentNullException(nameof(nonControllerAttribute));
 
         if (type.TypeKind != TypeKind.Class)
@@ -70,8 +69,8 @@ internal static class MvcFacts
     )
     {
         method = method ?? throw new ArgumentNullException(nameof(method));
-        nonActionAttribute =
-            nonActionAttribute ?? throw new ArgumentNullException(nameof(nonActionAttribute));
+        nonActionAttribute = nonActionAttribute
+            ?? throw new ArgumentNullException(nameof(nonActionAttribute));
 
         if (method.MethodKind != MethodKind.Ordinary)
         {

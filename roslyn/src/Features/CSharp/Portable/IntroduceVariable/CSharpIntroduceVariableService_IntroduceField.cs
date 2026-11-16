@@ -23,40 +23,80 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             ExpressionSyntax expression,
             bool allOccurrences,
             bool isConstant,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var oldTypeDeclaration = expression.GetAncestorOrThis<TypeDeclarationSyntax>();
 
-            var oldType = oldTypeDeclaration != null
-                ? document.SemanticModel.GetDeclaredSymbol(oldTypeDeclaration, cancellationToken)
-                : document.SemanticModel.Compilation.ScriptClass;
-            var newNameToken = GenerateUniqueFieldName(document, expression, isConstant, cancellationToken);
-            var typeDisplayString = oldType.ToMinimalDisplayString(document.SemanticModel, expression.SpanStart);
+            var oldType =
+                oldTypeDeclaration != null
+                    ? document.SemanticModel.GetDeclaredSymbol(
+                        oldTypeDeclaration,
+                        cancellationToken
+                    )
+                    : document.SemanticModel.Compilation.ScriptClass;
+            var newNameToken = GenerateUniqueFieldName(
+                document,
+                expression,
+                isConstant,
+                cancellationToken
+            );
+            var typeDisplayString = oldType.ToMinimalDisplayString(
+                document.SemanticModel,
+                expression.SpanStart
+            );
 
-            var newQualifiedName = oldTypeDeclaration != null
-                ? SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.ParseName(typeDisplayString), SyntaxFactory.IdentifierName(newNameToken))
-                : (ExpressionSyntax)SyntaxFactory.IdentifierName(newNameToken);
+            var newQualifiedName =
+                oldTypeDeclaration != null
+                    ? SyntaxFactory.MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        SyntaxFactory.ParseName(typeDisplayString),
+                        SyntaxFactory.IdentifierName(newNameToken)
+                    )
+                    : (ExpressionSyntax)SyntaxFactory.IdentifierName(newNameToken);
 
             newQualifiedName = newQualifiedName.WithAdditionalAnnotations(Simplifier.Annotation);
 
-            var newFieldDeclaration = SyntaxFactory.FieldDeclaration(
-                default,
-                MakeFieldModifiers(isConstant, inScript: oldType.IsScriptClass),
-                SyntaxFactory.VariableDeclaration(
-                    GetTypeSymbol(document, expression, cancellationToken).GenerateTypeSyntax(),
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.VariableDeclarator(
-                            newNameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
-                            null,
-                            SyntaxFactory.EqualsValueClause(expression.WithoutTrivia()))))).WithAdditionalAnnotations(Formatter.Annotation);
+            var newFieldDeclaration = SyntaxFactory
+                .FieldDeclaration(
+                    default,
+                    MakeFieldModifiers(isConstant, inScript: oldType.IsScriptClass),
+                    SyntaxFactory.VariableDeclaration(
+                        GetTypeSymbol(document, expression, cancellationToken).GenerateTypeSyntax(),
+                        SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.VariableDeclarator(
+                                newNameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
+                                null,
+                                SyntaxFactory.EqualsValueClause(expression.WithoutTrivia())
+                            )
+                        )
+                    )
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             if (oldTypeDeclaration != null)
             {
                 var newTypeDeclaration = Rewrite(
-                    document, expression, newQualifiedName, document, oldTypeDeclaration, allOccurrences, cancellationToken);
+                    document,
+                    expression,
+                    newQualifiedName,
+                    document,
+                    oldTypeDeclaration,
+                    allOccurrences,
+                    cancellationToken
+                );
 
-                var insertionIndex = GetFieldInsertionIndex(isConstant, oldTypeDeclaration, newTypeDeclaration, cancellationToken);
-                var finalTypeDeclaration = InsertMember(newTypeDeclaration, newFieldDeclaration, insertionIndex);
+                var insertionIndex = GetFieldInsertionIndex(
+                    isConstant,
+                    oldTypeDeclaration,
+                    newTypeDeclaration,
+                    cancellationToken
+                );
+                var finalTypeDeclaration = InsertMember(
+                    newTypeDeclaration,
+                    newFieldDeclaration,
+                    insertionIndex
+                );
 
                 var newRoot = document.Root.ReplaceNode(oldTypeDeclaration, finalTypeDeclaration);
                 return Task.FromResult(document.Document.WithSyntaxRoot(newRoot));
@@ -65,23 +105,41 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             {
                 var oldCompilationUnit = (CompilationUnitSyntax)document.Root;
                 var newCompilationUnit = Rewrite(
-                    document, expression, newQualifiedName, document, oldCompilationUnit, allOccurrences, cancellationToken);
+                    document,
+                    expression,
+                    newQualifiedName,
+                    document,
+                    oldCompilationUnit,
+                    allOccurrences,
+                    cancellationToken
+                );
 
                 var insertionIndex = isConstant
-                    ? DetermineConstantInsertPosition(oldCompilationUnit.Members, newCompilationUnit.Members)
-                    : DetermineFieldInsertPosition(oldCompilationUnit.Members, newCompilationUnit.Members);
+                    ? DetermineConstantInsertPosition(
+                        oldCompilationUnit.Members,
+                        newCompilationUnit.Members
+                    )
+                    : DetermineFieldInsertPosition(
+                        oldCompilationUnit.Members,
+                        newCompilationUnit.Members
+                    );
 
-                var newRoot = newCompilationUnit.WithMembers(newCompilationUnit.Members.Insert(insertionIndex, newFieldDeclaration));
+                var newRoot = newCompilationUnit.WithMembers(
+                    newCompilationUnit.Members.Insert(insertionIndex, newFieldDeclaration)
+                );
                 return Task.FromResult(document.Document.WithSyntaxRoot(newRoot));
             }
         }
 
-        protected override int DetermineConstantInsertPosition(TypeDeclarationSyntax oldType, TypeDeclarationSyntax newType)
-            => DetermineConstantInsertPosition(oldType.Members, newType.Members);
+        protected override int DetermineConstantInsertPosition(
+            TypeDeclarationSyntax oldType,
+            TypeDeclarationSyntax newType
+        ) => DetermineConstantInsertPosition(oldType.Members, newType.Members);
 
         protected static int DetermineConstantInsertPosition(
             SyntaxList<MemberDeclarationSyntax> oldMembers,
-            SyntaxList<MemberDeclarationSyntax> newMembers)
+            SyntaxList<MemberDeclarationSyntax> newMembers
+        )
         {
             // 1) Place the constant after the last constant.
             //
@@ -100,7 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             }
             else
             {
-                var firstFieldIndex = oldMembers.IndexOf(member => member is FieldDeclarationSyntax);
+                var firstFieldIndex = oldMembers.IndexOf(member =>
+                    member is FieldDeclarationSyntax
+                );
                 if (firstFieldIndex >= 0)
                 {
                     index = firstFieldIndex;
@@ -116,12 +176,15 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             return index;
         }
 
-        protected override int DetermineFieldInsertPosition(TypeDeclarationSyntax oldType, TypeDeclarationSyntax newType)
-            => DetermineFieldInsertPosition(oldType.Members, newType.Members);
+        protected override int DetermineFieldInsertPosition(
+            TypeDeclarationSyntax oldType,
+            TypeDeclarationSyntax newType
+        ) => DetermineFieldInsertPosition(oldType.Members, newType.Members);
 
         protected static int DetermineFieldInsertPosition(
             SyntaxList<MemberDeclarationSyntax> oldMembers,
-            SyntaxList<MemberDeclarationSyntax> newMembers)
+            SyntaxList<MemberDeclarationSyntax> newMembers
+        )
         {
             // 1) Place the constant after the last field.
             //
@@ -155,10 +218,13 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             return index;
         }
 
-        private static bool IsConstantField(MemberDeclarationSyntax member)
-            => member is FieldDeclarationSyntax field && field.Modifiers.Any(SyntaxKind.ConstKeyword);
+        private static bool IsConstantField(MemberDeclarationSyntax member) =>
+            member is FieldDeclarationSyntax field && field.Modifiers.Any(SyntaxKind.ConstKeyword);
 
-        protected static int DetermineFirstChange(SyntaxList<MemberDeclarationSyntax> oldMembers, SyntaxList<MemberDeclarationSyntax> newMembers)
+        protected static int DetermineFirstChange(
+            SyntaxList<MemberDeclarationSyntax> oldMembers,
+            SyntaxList<MemberDeclarationSyntax> newMembers
+        )
         {
             for (var i = 0; i < oldMembers.Count; i++)
             {
@@ -174,25 +240,37 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected static TypeDeclarationSyntax InsertMember(
             TypeDeclarationSyntax typeDeclaration,
             MemberDeclarationSyntax memberDeclaration,
-            int index)
+            int index
+        )
         {
             return typeDeclaration.WithMembers(
-                typeDeclaration.Members.Insert(index, memberDeclaration));
+                typeDeclaration.Members.Insert(index, memberDeclaration)
+            );
         }
 
         private static SyntaxTokenList MakeFieldModifiers(bool isConstant, bool inScript)
         {
             if (isConstant)
             {
-                return SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ConstKeyword));
+                return SyntaxFactory.TokenList(
+                    SyntaxFactory.Token(SyntaxKind.PrivateKeyword),
+                    SyntaxFactory.Token(SyntaxKind.ConstKeyword)
+                );
             }
             else if (inScript)
             {
-                return SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
+                return SyntaxFactory.TokenList(
+                    SyntaxFactory.Token(SyntaxKind.PrivateKeyword),
+                    SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)
+                );
             }
             else
             {
-                return SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
+                return SyntaxFactory.TokenList(
+                    SyntaxFactory.Token(SyntaxKind.PrivateKeyword),
+                    SyntaxFactory.Token(SyntaxKind.StaticKeyword),
+                    SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)
+                );
             }
         }
     }

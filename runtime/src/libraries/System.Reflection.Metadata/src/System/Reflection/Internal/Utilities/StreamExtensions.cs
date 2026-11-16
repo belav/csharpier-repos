@@ -65,9 +65,7 @@ namespace System.Reflection.Internal
             {
                 // Note: Don't attempt to save state in-between calls to .Read as it would
                 // require a possibly massive intermediate buffer array
-                bytesRead = stream.Read(buffer,
-                                        offset + totalBytesRead,
-                                        count - totalBytesRead);
+                bytesRead = stream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
                 if (bytesRead == 0)
                 {
                     break;
@@ -79,7 +77,8 @@ namespace System.Reflection.Internal
 #if NETCOREAPP
         internal static int TryReadAll(this Stream stream, Span<byte> buffer)
 #if NET7_0_OR_GREATER
-            => stream.ReadAtLeast(buffer, buffer.Length, throwOnEndOfStream: false);
+            =>
+            stream.ReadAtLeast(buffer, buffer.Length, throwOnEndOfStream: false);
 #else
         {
             int totalBytesRead = 0;

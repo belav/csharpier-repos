@@ -180,8 +180,7 @@ public class TestDocument
 
                 case RenderTreeEditType.StepOut:
                 {
-                    parent =
-                        parent.Parent
+                    parent = parent.Parent
                         ?? throw new InvalidOperationException($"Cannot step out of {parent}");
                     currentDepth--;
                     childIndexAtCurrentDepth = currentDepth == 0 ? childIndex : 0; // The childIndex is only ever nonzero at zero depth

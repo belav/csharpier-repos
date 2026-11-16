@@ -46,16 +46,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     exportedValue = _member.GetValue(instance);
                 }
                 catch (TargetInvocationException exception)
-                {   // Member threw an exception. Avoid letting this
+                { // Member threw an exception. Avoid letting this
                     // leak out as a 'raw' unhandled exception, instead,
                     // we'll add some context and rethrow.
 
                     throw new ComposablePartException(
                         SR.Format(
                             SR.ReflectionModel_ExportThrewException,
-                            _member.GetDisplayName()),
+                            _member.GetDisplayName()
+                        ),
                         Definition.ToElement(),
-                        exception.InnerException);
+                        exception.InnerException
+                    );
                 }
                 catch (TargetParameterCountException exception)
                 {
@@ -63,11 +65,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     // this is not supported in MEF currently.  Ideally we would validate against it, however, we already shipped
                     // so we will turn it into a ComposablePartException instead, that they should already be prepared for
                     throw new ComposablePartException(
-                        SR.Format(
-                        SR.ExportNotValidOnIndexers,
-                        _member.GetDisplayName()),
+                        SR.Format(SR.ExportNotValidOnIndexers, _member.GetDisplayName()),
                         Definition.ToElement(),
-                        exception.InnerException);
+                        exception.InnerException
+                    );
                 }
 
                 lock (@lock)
@@ -88,13 +89,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private void EnsureReadable()
         {
             if (!_member.CanRead)
-            {   // Property does not have a getter
-
+            { // Property does not have a getter
                 throw new ComposablePartException(
-                    SR.Format(
-                        SR.ReflectionModel_ExportNotReadable,
-                        _member.GetDisplayName()),
-                    Definition.ToElement());
+                    SR.Format(SR.ReflectionModel_ExportNotReadable, _member.GetDisplayName()),
+                    Definition.ToElement()
+                );
             }
         }
     }

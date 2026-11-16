@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -14,11 +14,11 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Permissions;
 using System.Threading;
-using System.Diagnostics.Contracts;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Threading
 {
@@ -35,10 +35,10 @@ namespace System.Threading
     //     }
     //
     // Internally it just maintains a counter that is used to decide when to yield, etc.
-    // 
+    //
     // A common usage is to spin before blocking. In those cases, the NextSpinWillYield
     // property allows a user to decide to fall back to waiting once it returns true:
-    // 
+    //
     //     void f() {
     //         SpinWait wait = new SpinWait();
     //         while (!p) {
@@ -54,7 +54,7 @@ namespace System.Threading
     /// <remarks>
     /// <para>
     /// <see cref="SpinWait"/> encapsulates common spinning logic. On single-processor machines, yields are
-    /// always used instead of busy waits, and on computers with Intel™ processors employing Hyper-Threading™
+    /// always used instead of busy waits, and on computers with Intelï¿½ processors employing Hyper-Threadingï¿½
     /// technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of
     /// spinning and true yielding.
     /// </para>
@@ -75,7 +75,6 @@ namespace System.Threading
     [HostProtection(Synchronization = true, ExternalThreading = true)]
     public struct SpinWait
     {
-
         // These constants determine the frequency of yields versus spinning. The
         // numbers may seem fairly arbitrary, but were derived with at least some
         // thought in the design document.  I fully expect they will need to change
@@ -139,13 +138,21 @@ namespace System.Threading
 #if !FEATURE_PAL && !FEATURE_CORECLR   // PAL doesn't support  eventing, and we don't compile CDS providers for Coreclr
                 CdsSyncEtwBCLProvider.Log.SpinWait_NextSpinWillYield();
 #endif
-                int yieldsSoFar = (m_count >= YIELD_THRESHOLD ? m_count - YIELD_THRESHOLD : m_count);
+                int yieldsSoFar = (
+                    m_count >= YIELD_THRESHOLD ? m_count - YIELD_THRESHOLD : m_count
+                );
 
-                if ((yieldsSoFar % SLEEP_1_EVERY_HOW_MANY_TIMES) == (SLEEP_1_EVERY_HOW_MANY_TIMES - 1))
+                if (
+                    (yieldsSoFar % SLEEP_1_EVERY_HOW_MANY_TIMES)
+                    == (SLEEP_1_EVERY_HOW_MANY_TIMES - 1)
+                )
                 {
                     Thread.Sleep(1);
                 }
-                else if ((yieldsSoFar % SLEEP_0_EVERY_HOW_MANY_TIMES) == (SLEEP_0_EVERY_HOW_MANY_TIMES - 1))
+                else if (
+                    (yieldsSoFar % SLEEP_0_EVERY_HOW_MANY_TIMES)
+                    == (SLEEP_0_EVERY_HOW_MANY_TIMES - 1)
+                )
                 {
                     Thread.Sleep(0);
                 }
@@ -200,7 +207,7 @@ namespace System.Threading
         public static void SpinUntil(Func<bool> condition)
         {
 #if DEBUG
-            bool result = 
+            bool result =
 #endif
             SpinUntil(condition, Timeout.Infinite);
 #if DEBUG
@@ -213,7 +220,7 @@ namespace System.Threading
         /// </summary>
         /// <param name="condition">A delegate to be executed over and over until it returns true.</param>
         /// <param name="timeout">
-        /// A <see cref="TimeSpan"/> that represents the number of milliseconds to wait, 
+        /// A <see cref="TimeSpan"/> that represents the number of milliseconds to wait,
         /// or a TimeSpan that represents -1 milliseconds to wait indefinitely.</param>
         /// <returns>True if the condition is satisfied within the timeout; otherwise, false</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="condition"/> argument is null.</exception>
@@ -227,7 +234,10 @@ namespace System.Threading
             if (totalMilliseconds < -1 || totalMilliseconds > Int32.MaxValue)
             {
                 throw new System.ArgumentOutOfRangeException(
-                    "timeout", timeout, Environment.GetResourceString("SpinWait_SpinUntil_TimeoutWrong"));
+                    "timeout",
+                    timeout,
+                    Environment.GetResourceString("SpinWait_SpinUntil_TimeoutWrong")
+                );
             }
 
             // Call wait with the timeout milliseconds
@@ -249,11 +259,17 @@ namespace System.Threading
             if (millisecondsTimeout < Timeout.Infinite)
             {
                 throw new ArgumentOutOfRangeException(
-                   "millisecondsTimeout", millisecondsTimeout, Environment.GetResourceString("SpinWait_SpinUntil_TimeoutWrong"));
+                    "millisecondsTimeout",
+                    millisecondsTimeout,
+                    Environment.GetResourceString("SpinWait_SpinUntil_TimeoutWrong")
+                );
             }
             if (condition == null)
             {
-                throw new ArgumentNullException("condition", Environment.GetResourceString("SpinWait_SpinUntil_ArgumentNull"));
+                throw new ArgumentNullException(
+                    "condition",
+                    Environment.GetResourceString("SpinWait_SpinUntil_ArgumentNull")
+                );
             }
             uint startTime = 0;
             if (millisecondsTimeout != 0 && millisecondsTimeout != Timeout.Infinite)
@@ -279,12 +295,9 @@ namespace System.Threading
                 }
             }
             return true;
-
         }
         #endregion
-
     }
-
 
     /// <summary>
     /// A helper class to get the number of processors, it updates the numbers of processors every sampling interval.
@@ -298,21 +311,31 @@ namespace System.Threading
         /// <summary>
         /// Gets the number of available processors
         /// </summary>
-        [SuppressMessage("Microsoft.Concurrency", "CA8001", Justification = "Reviewed for thread safety")]
+        [SuppressMessage(
+            "Microsoft.Concurrency",
+            "CA8001",
+            Justification = "Reviewed for thread safety"
+        )]
         internal static int ProcessorCount
         {
             get
             {
                 int now = Environment.TickCount;
                 int procCount = s_processorCount;
-                if (procCount == 0 || (now - s_lastProcessorCountRefreshTicks) >= PROCESSOR_COUNT_REFRESH_INTERVAL_MS)
+                if (
+                    procCount == 0
+                    || (now - s_lastProcessorCountRefreshTicks)
+                        >= PROCESSOR_COUNT_REFRESH_INTERVAL_MS
+                )
                 {
                     s_processorCount = procCount = Environment.ProcessorCount;
                     s_lastProcessorCountRefreshTicks = now;
                 }
 
-                Contract.Assert(procCount > 0 && procCount <= 64,
-                    "Processor count not within the expected range (1 - 64).");
+                Contract.Assert(
+                    procCount > 0 && procCount <= 64,
+                    "Processor count not within the expected range (1 - 64)."
+                );
 
                 return procCount;
             }
@@ -363,7 +386,8 @@ namespace System.Threading
             }
 
             // Subtract the elapsed time from the current wait time
-            int currentWaitTimeout = originalWaitMillisecondsTimeout - (int)elapsedMilliseconds; ;
+            int currentWaitTimeout = originalWaitMillisecondsTimeout - (int)elapsedMilliseconds;
+            ;
             if (currentWaitTimeout <= 0)
             {
                 return 0;
@@ -372,5 +396,4 @@ namespace System.Threading
             return currentWaitTimeout;
         }
     }
-
 }

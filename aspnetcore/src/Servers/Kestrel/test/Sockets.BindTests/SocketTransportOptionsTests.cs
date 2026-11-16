@@ -33,13 +33,10 @@ public class SocketTransportOptionsTests : LoggedTestBase
             return SocketTransportOptions.CreateDefaultBoundListenSocket(endpoint);
         }
 
-        using var host = CreateWebHost(
-            endpointToTest,
-            options =>
-            {
-                options.CreateBoundListenSocket = CreateListenSocket;
-            }
-        );
+        using var host = CreateWebHost(endpointToTest, options =>
+        {
+            options.CreateBoundListenSocket = CreateListenSocket;
+        });
 
         await host.StartAsync();
         Assert.True(

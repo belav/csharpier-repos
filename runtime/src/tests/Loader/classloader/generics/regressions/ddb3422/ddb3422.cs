@@ -8,20 +8,23 @@ using Xunit;
 
 public interface IFoo { }
 
-public interface IGenericBase<T> {
-  void M<U>() where U : IGenericBase<T>;
+public interface IGenericBase<T>
+{
+    void M<U>()
+        where U : IGenericBase<T>;
 }
 
-public abstract class GenericBase<T> : IGenericBase<T> {
-  public virtual void M<U>() where U : IGenericBase<T> { }
+public abstract class GenericBase<T> : IGenericBase<T>
+{
+    public virtual void M<U>()
+        where U : IGenericBase<T> { }
 }
 
-public class Derived : GenericBase<IFoo>, IGenericBase<IFoo> {
-// If this line is re-added, the dll verifies
-//   public override void M<Z>() { }
+public class Derived : GenericBase<IFoo>, IGenericBase<IFoo>
+{
+    // If this line is re-added, the dll verifies
+    //   public override void M<Z>() { }
 
     [Fact]
-    public static void TestEntryPoint()
-    {
-    }
+    public static void TestEntryPoint() { }
 }

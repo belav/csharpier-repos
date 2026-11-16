@@ -40,15 +40,12 @@ public class RedisDependencyInjectionExtensionsTests
         Assert.NotNull(options.Value);
         Assert.NotNull(options.Value.Configuration);
         Assert.Equal(password, options.Value.Configuration.Password);
-        Assert.Collection(
-            options.Value.Configuration.EndPoints,
-            endpoint =>
-            {
-                var dnsEndpoint = Assert.IsType<DnsEndPoint>(endpoint);
-                Assert.Equal(host, dnsEndpoint.Host);
-                Assert.Equal(port, dnsEndpoint.Port);
-            }
-        );
+        Assert.Collection(options.Value.Configuration.EndPoints, endpoint =>
+        {
+            var dnsEndpoint = Assert.IsType<DnsEndPoint>(endpoint);
+            Assert.Equal(host, dnsEndpoint.Host);
+            Assert.Equal(port, dnsEndpoint.Port);
+        });
         Assert.Equal(useSsl, options.Value.Configuration.Ssl);
     }
 }

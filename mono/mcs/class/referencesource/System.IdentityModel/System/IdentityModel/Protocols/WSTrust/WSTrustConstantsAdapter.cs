@@ -17,18 +17,12 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         internal static WSTrustFeb2005ConstantsAdapter TrustFeb2005
         {
-            get
-            {
-                return WSTrustFeb2005ConstantsAdapter.Instance;
-            }
+            get { return WSTrustFeb2005ConstantsAdapter.Instance; }
         }
 
         internal static WSTrust13ConstantsAdapter Trust13
         {
-            get
-            {
-                return WSTrust13ConstantsAdapter.Instance;
-            }
+            get { return WSTrust13ConstantsAdapter.Instance; }
         }
 
         internal string NamespaceURI
@@ -43,10 +37,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             set { this.prefix = value; }
         }
 
-        internal abstract WSTrustActions Actions
-        {
-            get;
-        }
+        internal abstract WSTrustActions Actions { get; }
 
         internal virtual WSTrustAttributeNames Attributes
         {
@@ -61,10 +52,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
         }
 
-        internal abstract WSTrustComputedKeyAlgorithm ComputedKeyAlgorithm
-        {
-            get;
-        }
+        internal abstract WSTrustComputedKeyAlgorithm ComputedKeyAlgorithm { get; }
 
         internal virtual WSTrustElementNames Elements
         {
@@ -92,15 +80,9 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
         }
 
-        internal abstract WSTrustRequestTypes RequestTypes
-        {
-            get;
-        }
+        internal abstract WSTrustRequestTypes RequestTypes { get; }
 
-        internal abstract WSTrustKeyTypes KeyTypes
-        {
-            get;
-        }
+        internal abstract WSTrustKeyTypes KeyTypes { get; }
 
         internal static WSTrustConstantsAdapter GetConstantsAdapter(string ns)
         {
@@ -118,89 +100,29 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         internal abstract class WSTrustActions
         {
-            internal string Cancel
-            {
-                get;
+            internal string Cancel { get; set; }
 
-                set;
-            }
+            internal string CancelResponse { get; set; }
 
-            internal string CancelResponse
-            {
-                get;
+            internal string Issue { get; set; }
 
-                set;
-            }
+            internal string IssueResponse { get; set; }
 
-            internal string Issue
-            {
-                get;
+            internal string Renew { get; set; }
 
-                set;
-            }
+            internal string RenewResponse { get; set; }
 
-            internal string IssueResponse
-            {
-                get;
+            internal string RequestSecurityContextToken { get; set; }
 
-                set;
-            }
+            internal string RequestSecurityContextTokenCancel { get; set; }
 
-            internal string Renew
-            {
-                get;
+            internal string RequestSecurityContextTokenResponse { get; set; }
 
-                set;
-            }
+            internal string RequestSecurityContextTokenResponseCancel { get; set; }
 
-            internal string RenewResponse
-            {
-                get;
+            internal string Validate { get; set; }
 
-                set;
-            }
-
-            internal string RequestSecurityContextToken
-            {
-                get;
-
-                set;
-            }
-
-            internal string RequestSecurityContextTokenCancel
-            {
-                get;
-
-                set;
-            }
-
-            internal string RequestSecurityContextTokenResponse
-            {
-                get;
-
-                set;
-            }
-
-            internal string RequestSecurityContextTokenResponseCancel
-            {
-                get;
-
-                set;
-            }
-
-            internal string Validate
-            {
-                get;
-
-                set;
-            }
-
-            internal string ValidateResponse
-            {
-                get;
-
-                set;
-            }
+            internal string ValidateResponse { get; set; }
         }
 
         internal class WSTrustAttributeNames
@@ -251,30 +173,33 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         internal abstract class WSTrustComputedKeyAlgorithm
         {
-            internal string Psha1
-            {
-                get;
-
-                set;
-            }
+            internal string Psha1 { get; set; }
         }
 
         internal class WSTrustElementNames
         {
             private string allowPostdating = WSTrustFeb2005Constants.ElementNames.AllowPostdating;
-            private string authenticationType = WSTrustFeb2005Constants.ElementNames.AuthenticationType;
+            private string authenticationType = WSTrustFeb2005Constants
+                .ElementNames
+                .AuthenticationType;
             private string binarySecret = WSTrustFeb2005Constants.ElementNames.BinarySecret;
             private string binaryExchange = WSTrustFeb2005Constants.ElementNames.BinaryExchange;
             private string cancelTarget = WSTrustFeb2005Constants.ElementNames.CancelTarget;
             private string claims = WSTrustFeb2005Constants.ElementNames.Claims;
             private string computedKey = WSTrustFeb2005Constants.ElementNames.ComputedKey;
-            private string computedKeyAlgorithm = WSTrustFeb2005Constants.ElementNames.ComputedKeyAlgorithm;
-            private string canonicalizationAlgorithm = WSTrustFeb2005Constants.ElementNames.CanonicalizationAlgorithm;
+            private string computedKeyAlgorithm = WSTrustFeb2005Constants
+                .ElementNames
+                .ComputedKeyAlgorithm;
+            private string canonicalizationAlgorithm = WSTrustFeb2005Constants
+                .ElementNames
+                .CanonicalizationAlgorithm;
             private string code = WSTrustFeb2005Constants.ElementNames.Code;
             private string delegatable = WSTrustFeb2005Constants.ElementNames.Delegatable;
             private string delegateTo = WSTrustFeb2005Constants.ElementNames.DelegateTo;
             private string encryption = WSTrustFeb2005Constants.ElementNames.Encryption;
-            private string encryptionAlgorithm = WSTrustFeb2005Constants.ElementNames.EncryptionAlgorithm;
+            private string encryptionAlgorithm = WSTrustFeb2005Constants
+                .ElementNames
+                .EncryptionAlgorithm;
             private string encryptWith = WSTrustFeb2005Constants.ElementNames.EncryptWith;
             private string entropy = WSTrustFeb2005Constants.ElementNames.Entropy;
             private string forwardable = WSTrustFeb2005Constants.ElementNames.Forwardable;
@@ -290,18 +215,36 @@ namespace System.IdentityModel.Protocols.WSTrust
             private string reason = WSTrustFeb2005Constants.ElementNames.Reason;
             private string renewing = WSTrustFeb2005Constants.ElementNames.Renewing;
             private string renewTarget = WSTrustFeb2005Constants.ElementNames.RenewTarget;
-            private string requestedAttachedReference = WSTrustFeb2005Constants.ElementNames.RequestedAttachedReference;
-            private string requestedProofToken = WSTrustFeb2005Constants.ElementNames.RequestedProofToken;
-            private string requestedSecurityToken = WSTrustFeb2005Constants.ElementNames.RequestedSecurityToken;
-            private string requestedTokenCancelled = WSTrustFeb2005Constants.ElementNames.RequestedTokenCancelled;
-            private string requestedUnattachedReference = WSTrustFeb2005Constants.ElementNames.RequestedUnattachedReference;
+            private string requestedAttachedReference = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestedAttachedReference;
+            private string requestedProofToken = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestedProofToken;
+            private string requestedSecurityToken = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestedSecurityToken;
+            private string requestedTokenCancelled = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestedTokenCancelled;
+            private string requestedUnattachedReference = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestedUnattachedReference;
             private string requestKeySize = WSTrustFeb2005Constants.ElementNames.RequestKeySize;
-            private string requestSecurityToken = WSTrustFeb2005Constants.ElementNames.RequestSecurityToken;
-            private string requestSecurityTokenResponse = WSTrustFeb2005Constants.ElementNames.RequestSecurityTokenResponse;
+            private string requestSecurityToken = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestSecurityToken;
+            private string requestSecurityTokenResponse = WSTrustFeb2005Constants
+                .ElementNames
+                .RequestSecurityTokenResponse;
             private string requestType = WSTrustFeb2005Constants.ElementNames.RequestType;
-            private string securityContextToken = WSTrustFeb2005Constants.ElementNames.SecurityContextToken;
+            private string securityContextToken = WSTrustFeb2005Constants
+                .ElementNames
+                .SecurityContextToken;
             private string signWith = WSTrustFeb2005Constants.ElementNames.SignWith;
-            private string signatureAlgorithm = WSTrustFeb2005Constants.ElementNames.SignatureAlgorithm;
+            private string signatureAlgorithm = WSTrustFeb2005Constants
+                .ElementNames
+                .SignatureAlgorithm;
             private string status = WSTrustFeb2005Constants.ElementNames.Status;
             private string tokenType = WSTrustFeb2005Constants.ElementNames.TokenType;
             private string useKey = WSTrustFeb2005Constants.ElementNames.UseKey;
@@ -529,57 +472,22 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         internal abstract class WSTrustRequestTypes
         {
-            internal string Cancel
-            {
-                get;
-                
-                set;
-            }
+            internal string Cancel { get; set; }
 
-            internal string Issue
-            {
-                get;
+            internal string Issue { get; set; }
 
-                set;
-            }
+            internal string Renew { get; set; }
 
-            internal string Renew
-            {
-                get;
-
-                set;
-            }
-
-            internal string Validate
-            {
-                get;
-
-                set;
-            }
+            internal string Validate { get; set; }
         }
 
         internal abstract class WSTrustKeyTypes
         {
-            internal string Asymmetric
-            {
-                get;
+            internal string Asymmetric { get; set; }
 
-                set;
-            }
+            internal string Bearer { get; set; }
 
-            internal string Bearer
-            {
-                get;
-
-                set;
-            }
-
-            internal string Symmetric
-            {
-                get;
-
-                set;
-            }
+            internal string Symmetric { get; set; }
         }
 
         internal class FaultCodeValues

@@ -24,7 +24,6 @@
 //
 
 using System.IO;
-
 using Xunit;
 
 namespace System.Data.Tests

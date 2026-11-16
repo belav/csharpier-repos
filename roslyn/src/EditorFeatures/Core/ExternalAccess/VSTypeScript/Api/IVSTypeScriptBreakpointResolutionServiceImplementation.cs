@@ -11,8 +11,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptBreakpointResolutionServiceImplementation
     {
-        Task<VSTypeScriptBreakpointResolutionResultWrapper> ResolveBreakpointAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken = default);
+        Task<VSTypeScriptBreakpointResolutionResultWrapper> ResolveBreakpointAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken = default
+        );
 
-        Task<IEnumerable<VSTypeScriptBreakpointResolutionResultWrapper>> ResolveBreakpointsAsync(Solution solution, string name, CancellationToken cancellationToken = default);
+        Task<IEnumerable<VSTypeScriptBreakpointResolutionResultWrapper>> ResolveBreakpointsAsync(
+            Solution solution,
+            string name,
+            CancellationToken cancellationToken = default
+        );
     }
 }

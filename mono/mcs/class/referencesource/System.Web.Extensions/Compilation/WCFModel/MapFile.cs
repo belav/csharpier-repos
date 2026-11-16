@@ -26,22 +26,19 @@ namespace Microsoft.VSDesigner.WCFModel
 
         /// <summary>
         /// Errors encountered during load
-        /// </summary>        
+        /// </summary>
         public IEnumerable<ProxyGenerationError> LoadErrors
         {
             get
             {
                 return _loadErrors != null ? _loadErrors : Enumerable.Empty<ProxyGenerationError>();
             }
-            internal set
-            {
-                _loadErrors = new List<ProxyGenerationError>(value);
-            }
+            internal set { _loadErrors = new List<ProxyGenerationError>(value); }
         }
 
         /// <summary>
         /// Unique ID of the reference group.  It is a GUID string.
-        /// </summary>        
+        /// </summary>
         public abstract string ID { get; set; }
 
         /// <summary>

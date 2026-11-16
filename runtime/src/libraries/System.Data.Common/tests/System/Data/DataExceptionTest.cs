@@ -38,8 +38,12 @@ namespace System.Data.Tests
         private class CustomDataException : DataException
         {
             public CustomDataException() { }
-            public CustomDataException(string message) : base(message) { }
-            public CustomDataException(string message, Exception innerException) : base(message, innerException) { }
+
+            public CustomDataException(string message)
+                : base(message) { }
+
+            public CustomDataException(string message, Exception innerException)
+                : base(message, innerException) { }
         }
     }
 }

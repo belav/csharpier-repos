@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <remarks>
     /// Adds calls to well-known instrumentation helpers defined by <see cref="WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker"/> to the bodies of instrumented methods.
     /// These allow tracing method entries, returns and writes to user-defined local variables and parameters.
-    /// 
+    ///
     /// The instrumenter also adds the ability to stitch calls to MoveNext methods of a state machine that are executed as continuations of the same instance of the state machine
     /// but potentially from multiple different threads.
     ///
@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// 1) <see cref="BoundBlockInstrumentation"/>
     ///    This node is attached to a <see cref="BoundBlock"/> that represents the lowered body of an instrumented method, lambda or local function.
     ///    It defines a local variable used to store instrumentation context and prologue and epilogue.
-    ///    
+    ///
     ///    <see cref="BoundBlock"/> with block instrumentation is eventually lowered to:
     ///    <code>
     ///    [[prologue]]
@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///    </code>
     ///
     ///    Where Xyz is a combination of <c>StateMachine</c> and either <c>Method</c> or <c>Lambda</c>, and $ids is the corresponding set of arguments identifying the context.
-    ///    LogXyzEntry methods are static factory methods for <see cref="WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker"/>. 
-    ///    
+    ///    LogXyzEntry methods are static factory methods for <see cref="WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker"/>.
+    ///
     ///    The tracker type is a <c>ref struct</c>. It can only be allocated on the stack and accessed only directly from the declaring method (no lifting).
     ///    For member methods $ids is a single argument that is the method token.
     ///    For lambdas and local functions the token of the lambda method is passed in addition to the containing method token. This allows the logger to determine which lambda belongs to which method,
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///    For state machines, the state machine instance id is passed. The instance id is stored on a new synthesized field of the state machine type added by the instrumentation that
     ///    is initialized to a unique number when the state machine type is instantiated. The number is provided by
     ///    <see cref="WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__GetNewStateMachineInstanceId"/>.
-    ///    
+    ///
     ///    The epilogue is simply:
     ///    <code>
     ///    $context.LogReturn();
@@ -68,13 +68,13 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///    This node represents a reference to a synthesized state machine instance id field of the state machine. Lowered to a field read during state machine lowering.
     ///
     /// 3) <see cref="BoundParameterId"/>/<see cref="BoundLocalId"/>
-    ///    Represents id of a user-defined parameter/local. Emitted as ldc.i4 of either the parameter/local ordinal if the variable was not lifted, 
+    ///    Represents id of a user-defined parameter/local. Emitted as ldc.i4 of either the parameter/local ordinal if the variable was not lifted,
     ///    or the token of its hoisted field.
     ///
     /// Each local variable write is followed by a call to one of the <c>LogLocalStoreXyz</c> or <c>LogParameterStoreXyz</c> instance methods on <c>$context</c>.
     /// Writes to locals passed to a function call site by-ref are logged after the call returns.
     /// <c>LogParameterStoreXyz</c> are emitted on explicit parameter assignment and also at the beginning of a method with parameters to log their initial values.
-    /// 
+    ///
     /// The loggers are specialized to handle all kinds of variable types efficiently (without boxing).
     /// Specialized loggers are also used to track local variable aliases via ref assignments.
     /// </remarks>
@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol contextType,
             SyntheticBoundNodeFactory factory,
             BindingDiagnosticBag diagnostics,
-            Instrumenter previous)
+            Instrumenter previous
+        )
             : base(previous)
         {
             _scope = scope;
@@ -141,13 +142,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             _diagnostics = diagnostics;
         }
 
-        protected override CompoundInstrumenter WithPreviousImpl(Instrumenter previous)
-            => new LocalStateTracingInstrumenter(
+        protected override CompoundInstrumenter WithPreviousImpl(Instrumenter previous) =>
+            new LocalStateTracingInstrumenter(
                 _scope,
                 _contextType,
                 _factory,
                 _diagnostics,
-                previous);
+                previous
+            );
 
         public static bool TryCreate(
             MethodSymbol method,
@@ -155,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntheticBoundNodeFactory factory,
             BindingDiagnosticBag diagnostics,
             Instrumenter previous,
-            [NotNullWhen(true)] out LocalStateTracingInstrumenter? instrumenter)
+            [NotNullWhen(true)] out LocalStateTracingInstrumenter? instrumenter
+        )
         {
             instrumenter = null;
 
@@ -167,19 +170,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // Method has no user-defined body
-            if (method is SourceMemberMethodSymbol { Bodies: { arrowBody: null, blockBody: null } } and not SynthesizedSimpleProgramEntryPointSymbol)
+            if (
+                method
+                is SourceMemberMethodSymbol { Bodies: { arrowBody: null, blockBody: null } }
+                    and not SynthesizedSimpleProgramEntryPointSymbol
+            )
             {
                 return false;
             }
 
-            var contextType = factory.Compilation.GetWellKnownType(WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker);
+            var contextType = factory.Compilation.GetWellKnownType(
+                WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker
+            );
             if (IsSameOrNestedType(method.ContainingType, contextType))
             {
                 return false;
             }
 
-            var scope = new Scope(factory.SynthesizedLocal(contextType, methodBody.Syntax, kind: SynthesizedLocalKind.LocalStoreTracker));
-            instrumenter = new LocalStateTracingInstrumenter(scope, contextType, factory, diagnostics, previous);
+            var scope = new Scope(
+                factory.SynthesizedLocal(
+                    contextType,
+                    methodBody.Syntax,
+                    kind: SynthesizedLocalKind.LocalStoreTracker
+                )
+            );
+            instrumenter = new LocalStateTracingInstrumenter(
+                scope,
+                contextType,
+                factory,
+                diagnostics,
+                previous
+            );
             return true;
         }
 
@@ -201,51 +222,65 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private MethodSymbol? GetLocalOrParameterStoreLogger(TypeSymbol variableType, Symbol targetSymbol, bool? refAssignmentSourceIsLocal, SyntaxNode syntax)
+        private MethodSymbol? GetLocalOrParameterStoreLogger(
+            TypeSymbol variableType,
+            Symbol targetSymbol,
+            bool? refAssignmentSourceIsLocal,
+            SyntaxNode syntax
+        )
         {
-            var enumDelta = (targetSymbol.Kind == SymbolKind.Parameter) ?
-                WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogParameterStoreBoolean - WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreBoolean : 0;
+            var enumDelta =
+                (targetSymbol.Kind == SymbolKind.Parameter)
+                    ? WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogParameterStoreBoolean
+                        - WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreBoolean
+                    : 0;
 
             WellKnownMember? overloadOpt = refAssignmentSourceIsLocal switch
             {
-                true => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreLocalAlias,
-                false => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreParameterAlias,
+                true =>
+                    WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreLocalAlias,
+                false =>
+                    WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreParameterAlias,
                 null => variableType.EnumUnderlyingTypeOrSelf().SpecialType switch
                 {
-                    SpecialType.System_Boolean
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreBoolean,
-                    SpecialType.System_SByte or SpecialType.System_Byte
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreByte,
-                    SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUInt16,
-                    SpecialType.System_Int32 or SpecialType.System_UInt32
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUInt32,
-                    SpecialType.System_Int64 or SpecialType.System_UInt64
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUInt64,
-                    SpecialType.System_Single
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreSingle,
-                    SpecialType.System_Double
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreDouble,
-                    SpecialType.System_Decimal
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreDecimal,
-                    SpecialType.System_String
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreString,
-                    _ when variableType.IsPointerOrFunctionPointer()
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStorePointer,
-                    _ when !variableType.IsManagedTypeNoUseSiteDiagnostics
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUnmanaged,
-                    _ when variableType.IsRefLikeType && !hasOverriddenToString(variableType)
-                        => null, // not possible to invoke ToString on ref struct that doesn't override it
+                    SpecialType.System_Boolean =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreBoolean,
+                    SpecialType.System_SByte or SpecialType.System_Byte =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreByte,
+                    SpecialType.System_Int16
+                    or SpecialType.System_UInt16
+                    or SpecialType.System_Char =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUInt16,
+                    SpecialType.System_Int32 or SpecialType.System_UInt32 =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUInt32,
+                    SpecialType.System_Int64 or SpecialType.System_UInt64 =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUInt64,
+                    SpecialType.System_Single =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreSingle,
+                    SpecialType.System_Double =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreDouble,
+                    SpecialType.System_Decimal =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreDecimal,
+                    SpecialType.System_String =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreString,
+                    _ when variableType.IsPointerOrFunctionPointer() =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStorePointer,
+                    _ when !variableType.IsManagedTypeNoUseSiteDiagnostics =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreUnmanaged,
+                    _ when variableType.IsRefLikeType && !hasOverriddenToString(variableType) =>
+                        null, // not possible to invoke ToString on ref struct that doesn't override it
                     _ when variableType.TypeKind is TypeKind.Struct
                         // we'll emit ToString constrained virtcall to avoid boxing the struct
                         => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreString,
-                    _
-                        => WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreObject,
-                }
+                    _ =>
+                        WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreObject,
+                },
             };
 
-            static bool hasOverriddenToString(TypeSymbol variableType)
-                => variableType.GetMembers(WellKnownMemberNames.ObjectToString).Any(m => m.GetOverriddenMember() is not null);
+            static bool hasOverriddenToString(TypeSymbol variableType) =>
+                variableType
+                    .GetMembers(WellKnownMemberNames.ObjectToString)
+                    .Any(m => m.GetOverriddenMember() is not null);
 
             if (!overloadOpt.HasValue)
             {
@@ -254,7 +289,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // LogLocalStoreLocalAlias does not have a corresponding parameter version,
             // since it is not possible to assign address of a local to a by-ref parameter.
-            Debug.Assert(enumDelta == 0 || overloadOpt.Value != WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreLocalAlias);
+            Debug.Assert(
+                enumDelta == 0
+                    || overloadOpt.Value
+                        != WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLocalStoreLocalAlias
+            );
 
             var overload = overloadOpt.Value + enumDelta;
 
@@ -263,8 +302,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             return symbol;
         }
 
-        private MethodSymbol? GetWellKnownMethodSymbol(WellKnownMember overload, SyntaxNode syntax)
-            => (MethodSymbol?)Binder.GetWellKnownTypeMember(_factory.Compilation, overload, _diagnostics, syntax: syntax, isOptional: false);
+        private MethodSymbol? GetWellKnownMethodSymbol(
+            WellKnownMember overload,
+            SyntaxNode syntax
+        ) =>
+            (MethodSymbol?)
+                Binder.GetWellKnownTypeMember(
+                    _factory.Compilation,
+                    overload,
+                    _diagnostics,
+                    syntax: syntax,
+                    isOptional: false
+                );
 
         public override void PreInstrumentBlock(BoundBlock original, LocalRewriter rewriter)
         {
@@ -272,13 +321,33 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (rewriter.CurrentLambdaBody == original)
             {
-                _scope.Open(_factory.SynthesizedLocal(_contextType, original.Syntax, kind: SynthesizedLocalKind.LocalStoreTracker));
+                _scope.Open(
+                    _factory.SynthesizedLocal(
+                        _contextType,
+                        original.Syntax,
+                        kind: SynthesizedLocalKind.LocalStoreTracker
+                    )
+                );
             }
         }
 
-        public override void InstrumentBlock(BoundBlock original, LocalRewriter rewriter, ref TemporaryArray<LocalSymbol> additionalLocals, out BoundStatement? prologue, out BoundStatement? epilogue, out BoundBlockInstrumentation? instrumentation)
+        public override void InstrumentBlock(
+            BoundBlock original,
+            LocalRewriter rewriter,
+            ref TemporaryArray<LocalSymbol> additionalLocals,
+            out BoundStatement? prologue,
+            out BoundStatement? epilogue,
+            out BoundBlockInstrumentation? instrumentation
+        )
         {
-            base.InstrumentBlock(original, rewriter, ref additionalLocals, out var previousPrologue, out epilogue, out instrumentation);
+            base.InstrumentBlock(
+                original,
+                rewriter,
+                ref additionalLocals,
+                out var previousPrologue,
+                out epilogue,
+                out instrumentation
+            );
 
             var isMethodBody = rewriter.CurrentMethodBody == original;
             var isLambdaBody = rewriter.CurrentLambdaBody == original;
@@ -293,9 +362,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(_factory.TopLevelMethod is not null);
             Debug.Assert(_factory.CurrentFunction is not null);
 
-            var isStateMachine = _factory.CurrentFunction.IsAsync || _factory.CurrentFunction.IsIterator;
+            var isStateMachine =
+                _factory.CurrentFunction.IsAsync || _factory.CurrentFunction.IsIterator;
 
-            var prologueBuilder = ArrayBuilder<BoundStatement>.GetInstance(_factory.CurrentFunction.ParameterCount);
+            var prologueBuilder = ArrayBuilder<BoundStatement>.GetInstance(
+                _factory.CurrentFunction.ParameterCount
+            );
 
             foreach (var parameter in _factory.CurrentFunction.Parameters)
             {
@@ -304,11 +376,30 @@ namespace Microsoft.CodeAnalysis.CSharp
                     continue;
                 }
 
-                var parameterLogger = GetLocalOrParameterStoreLogger(parameter.Type, parameter, refAssignmentSourceIsLocal: null, _factory.Syntax);
+                var parameterLogger = GetLocalOrParameterStoreLogger(
+                    parameter.Type,
+                    parameter,
+                    refAssignmentSourceIsLocal: null,
+                    _factory.Syntax
+                );
                 if (parameterLogger != null)
                 {
-                    prologueBuilder.Add(_factory.ExpressionStatement(_factory.Call(receiver: _factory.Local(_scope.ContextVariable), parameterLogger,
-                        MakeStoreLoggerArguments(parameterLogger.Parameters[0], parameter, parameter.Type, _factory.Parameter(parameter), refAssignmentSourceIndex: null, _factory.Literal((ushort)parameter.Ordinal)))));
+                    prologueBuilder.Add(
+                        _factory.ExpressionStatement(
+                            _factory.Call(
+                                receiver: _factory.Local(_scope.ContextVariable),
+                                parameterLogger,
+                                MakeStoreLoggerArguments(
+                                    parameterLogger.Parameters[0],
+                                    parameter,
+                                    parameter.Type,
+                                    _factory.Parameter(parameter),
+                                    refAssignmentSourceIndex: null,
+                                    _factory.Literal((ushort)parameter.Ordinal)
+                                )
+                            )
+                        )
+                    );
                 }
             }
 
@@ -321,27 +412,59 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var (entryOverload, entryArgs) = (isLambdaBody, isStateMachine) switch
             {
-                (isLambdaBody: false, isStateMachine: false) =>
-                    (WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogMethodEntry,
-                    new[] { _factory.MethodDefIndex(_factory.TopLevelMethod) }),
-                (isLambdaBody: true, isStateMachine: false) =>
-                    (WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLambdaEntry,
-                    new[] { _factory.MethodDefIndex(_factory.TopLevelMethod), _factory.MethodDefIndex(_factory.CurrentFunction) }),
-                (isLambdaBody: false, isStateMachine: true) =>
-                    (WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogStateMachineMethodEntry,
-                    new[] { _factory.MethodDefIndex(_factory.TopLevelMethod), _factory.StateMachineInstanceId() }),
-                (isLambdaBody: true, isStateMachine: true) =>
-                    (WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogStateMachineLambdaEntry,
-                    new[] { _factory.MethodDefIndex(_factory.TopLevelMethod), _factory.MethodDefIndex(_factory.CurrentFunction), _factory.StateMachineInstanceId() }),
+                (isLambdaBody: false, isStateMachine: false) => (
+                    WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogMethodEntry,
+                    new[] { _factory.MethodDefIndex(_factory.TopLevelMethod) }
+                ),
+                (isLambdaBody: true, isStateMachine: false) => (
+                    WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogLambdaEntry,
+                    new[]
+                    {
+                        _factory.MethodDefIndex(_factory.TopLevelMethod),
+                        _factory.MethodDefIndex(_factory.CurrentFunction),
+                    }
+                ),
+                (isLambdaBody: false, isStateMachine: true) => (
+                    WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogStateMachineMethodEntry,
+                    new[]
+                    {
+                        _factory.MethodDefIndex(_factory.TopLevelMethod),
+                        _factory.StateMachineInstanceId(),
+                    }
+                ),
+                (isLambdaBody: true, isStateMachine: true) => (
+                    WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogStateMachineLambdaEntry,
+                    new[]
+                    {
+                        _factory.MethodDefIndex(_factory.TopLevelMethod),
+                        _factory.MethodDefIndex(_factory.CurrentFunction),
+                        _factory.StateMachineInstanceId(),
+                    }
+                ),
             };
 
             var entryLogger = GetWellKnownMethodSymbol(entryOverload, _factory.Syntax);
-            var instrumentationPrologue = (entryLogger != null) ?
-                _factory.Assignment(_factory.Local(_scope.ContextVariable), _factory.Call(receiver: null, entryLogger, entryArgs)) : _factory.NoOp(NoOpStatementFlavor.Default);
+            var instrumentationPrologue =
+                (entryLogger != null)
+                    ? _factory.Assignment(
+                        _factory.Local(_scope.ContextVariable),
+                        _factory.Call(receiver: null, entryLogger, entryArgs)
+                    )
+                    : _factory.NoOp(NoOpStatementFlavor.Default);
 
-            var returnLogger = GetWellKnownMethodSymbol(WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogReturn, _factory.Syntax);
-            var instrumentationEpilogue = (returnLogger != null) ?
-                _factory.ExpressionStatement(_factory.Call(receiver: _factory.Local(_scope.ContextVariable), returnLogger)) : _factory.NoOp(NoOpStatementFlavor.Default);
+            var returnLogger = GetWellKnownMethodSymbol(
+                WellKnownMember.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker__LogReturn,
+                _factory.Syntax
+            );
+            var instrumentationEpilogue =
+                (returnLogger != null)
+                    ? _factory.ExpressionStatement(
+                        _factory.Call(
+                            receiver: _factory.Local(_scope.ContextVariable),
+                            returnLogger
+                        )
+                    )
+                    : _factory.NoOp(NoOpStatementFlavor.Default);
 
             // currently don't need to compose multiple instrumentations
             Debug.Assert(instrumentation is null);
@@ -350,14 +473,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _factory.Syntax,
                 _scope.ContextVariable,
                 instrumentationPrologue,
-                instrumentationEpilogue);
+                instrumentationEpilogue
+            );
 
             _scope.Close(isMethodBody);
         }
 
-        public override BoundExpression InstrumentUserDefinedLocalAssignment(BoundAssignmentOperator original)
+        public override BoundExpression InstrumentUserDefinedLocalAssignment(
+            BoundAssignmentOperator original
+        )
         {
-            Debug.Assert(original.Left is BoundLocal { LocalSymbol.SynthesizedKind: SynthesizedLocalKind.UserDefined } or BoundParameter);
+            Debug.Assert(
+                original.Left
+                    is BoundLocal { LocalSymbol.SynthesizedKind: SynthesizedLocalKind.UserDefined }
+                        or BoundParameter
+            );
 
             var assignment = base.InstrumentUserDefinedLocalAssignment(original);
 
@@ -365,7 +495,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? refAssignmentSourceIndex;
             if (original.IsRef)
             {
-                if (original.Right is BoundLocal { LocalSymbol.SynthesizedKind: SynthesizedLocalKind.UserDefined } rightLocal)
+                if (
+                    original.Right is BoundLocal
+                    {
+                        LocalSymbol.SynthesizedKind: SynthesizedLocalKind.UserDefined
+                    } rightLocal
+                )
                 {
                     refAssignmentSourceIsLocal = true;
                     refAssignmentSourceIndex = _factory.LocalId(rightLocal.LocalSymbol);
@@ -387,28 +522,56 @@ namespace Microsoft.CodeAnalysis.CSharp
                 refAssignmentSourceIndex = null;
             }
 
-            if (!TryGetLocalOrParameterInfo(original.Left, out var targetSymbol, out var targetType, out var targetIndex))
+            if (
+                !TryGetLocalOrParameterInfo(
+                    original.Left,
+                    out var targetSymbol,
+                    out var targetType,
+                    out var targetIndex
+                )
+            )
             {
                 // Must be local or parameter
                 throw ExceptionUtilities.UnexpectedValue(original.Left);
             }
 
-            var logger = GetLocalOrParameterStoreLogger(targetType, targetSymbol, refAssignmentSourceIsLocal, original.Syntax);
+            var logger = GetLocalOrParameterStoreLogger(
+                targetType,
+                targetSymbol,
+                refAssignmentSourceIsLocal,
+                original.Syntax
+            );
             if (logger is null)
             {
                 return assignment;
             }
 
-            return _factory.Sequence(new[]
-            {
-                _factory.Call(
-                    receiver: _factory.Local(_scope.ContextVariable),
-                    logger,
-                    MakeStoreLoggerArguments(logger.Parameters[0], targetSymbol, targetType, assignment, refAssignmentSourceIndex, targetIndex))
-            }, VariableRead(targetSymbol));
+            return _factory.Sequence(
+                new[]
+                {
+                    _factory.Call(
+                        receiver: _factory.Local(_scope.ContextVariable),
+                        logger,
+                        MakeStoreLoggerArguments(
+                            logger.Parameters[0],
+                            targetSymbol,
+                            targetType,
+                            assignment,
+                            refAssignmentSourceIndex,
+                            targetIndex
+                        )
+                    ),
+                },
+                VariableRead(targetSymbol)
+            );
         }
 
-        private bool TryGetLocalOrParameterInfo(BoundNode node, [NotNullWhen(true)] out Symbol? symbol, [NotNullWhen(true)] out TypeSymbol? type, [NotNullWhen(true)] out BoundExpression? indexExpression)
+        private bool TryGetLocalOrParameterInfo(
+            BoundNode node,
+            [NotNullWhen(true)] out Symbol? symbol,
+            [NotNullWhen(true)] out TypeSymbol? type,
+            [NotNullWhen(true)] out BoundExpression? indexExpression
+        )
         {
             if (node is BoundLocal { LocalSymbol: var localSymbol })
             {
@@ -440,11 +603,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol targetType,
             BoundExpression value,
             BoundExpression? refAssignmentSourceIndex,
-            BoundExpression index)
+            BoundExpression index
+        )
         {
             if (refAssignmentSourceIndex != null)
             {
-                return ImmutableArray.Create(_factory.Sequence(new[] { value }, refAssignmentSourceIndex), index);
+                return ImmutableArray.Create(
+                    _factory.Sequence(new[] { value }, refAssignmentSourceIndex),
+                    index
+                );
             }
 
             Debug.Assert(parameter.RefKind == RefKind.None);
@@ -454,16 +621,36 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // address of assigned value to be passed to LogStore*Unmanaged:
                 Debug.Assert(!parameter.Type.IsManagedTypeNoUseSiteDiagnostics);
 
-                var addressOf = value is BoundLocal or BoundParameter ?
-                    (BoundExpression)new BoundAddressOfOperator(_factory.Syntax, value, isManaged: false, parameter.Type) :
-                    _factory.Sequence(new[] { value }, new BoundAddressOfOperator(_factory.Syntax, VariableRead(targetSymbol), isManaged: false, parameter.Type));
+                var addressOf = value is BoundLocal or BoundParameter
+                    ? (BoundExpression)
+                        new BoundAddressOfOperator(
+                            _factory.Syntax,
+                            value,
+                            isManaged: false,
+                            parameter.Type
+                        )
+                    : _factory.Sequence(
+                        new[] { value },
+                        new BoundAddressOfOperator(
+                            _factory.Syntax,
+                            VariableRead(targetSymbol),
+                            isManaged: false,
+                            parameter.Type
+                        )
+                    );
 
                 return ImmutableArray.Create(addressOf, _factory.Sizeof(targetType), index);
             }
 
-            if (parameter.Type.SpecialType == SpecialType.System_String && targetType.SpecialType != SpecialType.System_String)
+            if (
+                parameter.Type.SpecialType == SpecialType.System_String
+                && targetType.SpecialType != SpecialType.System_String
+            )
             {
-                var toStringMethod = GetWellKnownMethodSymbol(WellKnownMember.System_Object__ToString, value.Syntax);
+                var toStringMethod = GetWellKnownMethodSymbol(
+                    WellKnownMember.System_Object__ToString,
+                    value.Syntax
+                );
 
                 BoundExpression toString;
                 if (toStringMethod is null)
@@ -484,12 +671,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ImmutableArray.Create(_factory.Convert(parameter.Type, value), index);
         }
 
-        private BoundExpression VariableRead(Symbol localOrParameterSymbol)
-            => localOrParameterSymbol switch
+        private BoundExpression VariableRead(Symbol localOrParameterSymbol) =>
+            localOrParameterSymbol switch
             {
                 LocalSymbol local => _factory.Local(local),
                 ParameterSymbol param => _factory.Parameter(param),
-                _ => throw ExceptionUtilities.UnexpectedValue(localOrParameterSymbol)
+                _ => throw ExceptionUtilities.UnexpectedValue(localOrParameterSymbol),
             };
 
         public override void InstrumentCatchBlock(
@@ -499,7 +686,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref BoundExpression? rewrittenFilter,
             ref BoundBlock rewrittenBody,
             ref TypeSymbol? rewrittenType,
-            SyntheticBoundNodeFactory factory)
+            SyntheticBoundNodeFactory factory
+        )
         {
             base.InstrumentCatchBlock(
                 original,
@@ -508,14 +696,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref rewrittenFilter,
                 ref rewrittenBody,
                 ref rewrittenType,
-                factory);
+                factory
+            );
 
             if (original.WasCompilerGenerated)
             {
                 return;
             }
 
-            var targetSymbol = original.Locals.FirstOrDefault(l => l.SynthesizedKind == SynthesizedLocalKind.UserDefined);
+            var targetSymbol = original.Locals.FirstOrDefault(l =>
+                l.SynthesizedKind == SynthesizedLocalKind.UserDefined
+            );
             if (targetSymbol is null)
             {
                 return;
@@ -524,7 +715,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var targetType = targetSymbol.Type;
             var targetIndex = _factory.LocalId(targetSymbol);
 
-            var logger = GetLocalOrParameterStoreLogger(targetType, targetSymbol, refAssignmentSourceIsLocal: null, original.Syntax);
+            var logger = GetLocalOrParameterStoreLogger(
+                targetType,
+                targetSymbol,
+                refAssignmentSourceIsLocal: null,
+                original.Syntax
+            );
             if (logger is null)
             {
                 return;
@@ -534,24 +730,62 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _factory.Call(
                     receiver: _factory.Local(_scope.ContextVariable),
                     logger,
-                    MakeStoreLoggerArguments(logger.Parameters[0], targetSymbol, targetType, VariableRead(targetSymbol), refAssignmentSourceIndex: null, targetIndex)));
+                    MakeStoreLoggerArguments(
+                        logger.Parameters[0],
+                        targetSymbol,
+                        targetType,
+                        VariableRead(targetSymbol),
+                        refAssignmentSourceIndex: null,
+                        targetIndex
+                    )
+                )
+            );
 
             rewrittenFilterPrologue = _factory.StatementList(
-                (rewrittenFilterPrologue != null) ?
-                    ImmutableArray.Create<BoundStatement>(logCallStatement, rewrittenFilterPrologue) :
-                    ImmutableArray.Create<BoundStatement>(logCallStatement));
+                (rewrittenFilterPrologue != null)
+                    ? ImmutableArray.Create<BoundStatement>(
+                        logCallStatement,
+                        rewrittenFilterPrologue
+                    )
+                    : ImmutableArray.Create<BoundStatement>(logCallStatement)
+            );
         }
 
-        public override BoundExpression InstrumentCall(BoundCall original, BoundExpression rewritten)
-            => InstrumentCall(base.InstrumentCall(original, rewritten), original.Arguments, original.ArgumentRefKindsOpt);
+        public override BoundExpression InstrumentCall(
+            BoundCall original,
+            BoundExpression rewritten
+        ) =>
+            InstrumentCall(
+                base.InstrumentCall(original, rewritten),
+                original.Arguments,
+                original.ArgumentRefKindsOpt
+            );
 
-        public override BoundExpression InstrumentObjectCreationExpression(BoundObjectCreationExpression original, BoundExpression rewritten)
-            => InstrumentCall(base.InstrumentObjectCreationExpression(original, rewritten), original.Arguments, original.ArgumentRefKindsOpt);
+        public override BoundExpression InstrumentObjectCreationExpression(
+            BoundObjectCreationExpression original,
+            BoundExpression rewritten
+        ) =>
+            InstrumentCall(
+                base.InstrumentObjectCreationExpression(original, rewritten),
+                original.Arguments,
+                original.ArgumentRefKindsOpt
+            );
 
-        public override BoundExpression InstrumentFunctionPointerInvocation(BoundFunctionPointerInvocation original, BoundExpression rewritten)
-            => InstrumentCall(base.InstrumentFunctionPointerInvocation(original, rewritten), original.Arguments, original.ArgumentRefKindsOpt);
+        public override BoundExpression InstrumentFunctionPointerInvocation(
+            BoundFunctionPointerInvocation original,
+            BoundExpression rewritten
+        ) =>
+            InstrumentCall(
+                base.InstrumentFunctionPointerInvocation(original, rewritten),
+                original.Arguments,
+                original.ArgumentRefKindsOpt
+            );
 
-        private BoundExpression InstrumentCall(BoundExpression invocation, ImmutableArray<BoundExpression> arguments, ImmutableArray<RefKind> refKinds)
+        private BoundExpression InstrumentCall(
+            BoundExpression invocation,
+            ImmutableArray<BoundExpression> arguments,
+            ImmutableArray<RefKind> refKinds
+        )
         {
             Debug.Assert(refKinds.IsDefault || arguments.Length == refKinds.Length);
             Debug.Assert(invocation.Type is not null);
@@ -582,33 +816,63 @@ namespace Microsoft.CodeAnalysis.CSharp
                     continue;
                 }
 
-                if (!TryGetLocalOrParameterInfo(arguments[i], out var targetSymbol, out var targetType, out var targetIndex))
+                if (
+                    !TryGetLocalOrParameterInfo(
+                        arguments[i],
+                        out var targetSymbol,
+                        out var targetType,
+                        out var targetIndex
+                    )
+                )
                 {
                     // not a local or parameter
                     continue;
                 }
 
-                var logger = GetLocalOrParameterStoreLogger(targetType, targetSymbol, refAssignmentSourceIsLocal: null, invocation.Syntax);
+                var logger = GetLocalOrParameterStoreLogger(
+                    targetType,
+                    targetSymbol,
+                    refAssignmentSourceIsLocal: null,
+                    invocation.Syntax
+                );
                 if (logger is null)
                 {
                     continue;
                 }
 
-                builder.Add(_factory.Call(
-                    receiver: _factory.Local(_scope.ContextVariable),
-                    logger,
-                    MakeStoreLoggerArguments(logger.Parameters[0], targetSymbol, targetType, VariableRead(targetSymbol), refAssignmentSourceIndex: null, targetIndex)));
+                builder.Add(
+                    _factory.Call(
+                        receiver: _factory.Local(_scope.ContextVariable),
+                        logger,
+                        MakeStoreLoggerArguments(
+                            logger.Parameters[0],
+                            targetSymbol,
+                            targetType,
+                            VariableRead(targetSymbol),
+                            refAssignmentSourceIndex: null,
+                            targetIndex
+                        )
+                    )
+                );
             }
 
             if (temp != null)
             {
-                return _factory.Sequence(ImmutableArray.Create(temp.LocalSymbol), builder.ToImmutableAndFree(), temp);
+                return _factory.Sequence(
+                    ImmutableArray.Create(temp.LocalSymbol),
+                    builder.ToImmutableAndFree(),
+                    temp
+                );
             }
 
             // The call is void returning.
             var lastExpression = builder.Last();
             builder.RemoveLast();
-            return _factory.Sequence(ImmutableArray<LocalSymbol>.Empty, builder.ToImmutableAndFree(), lastExpression);
+            return _factory.Sequence(
+                ImmutableArray<LocalSymbol>.Empty,
+                builder.ToImmutableAndFree(),
+                lastExpression
+            );
         }
     }
 }

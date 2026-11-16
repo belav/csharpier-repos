@@ -34,76 +34,177 @@ using System.Collections;
 
 namespace MonoTests.System.Reflection.VisibilityTypes
 {
-	[TestFixture]
-	public class VisibilityTests
-	{
-		static void DoesNotContain (IEnumerable collection, object val)
-		{
-			 Assert.That(collection, Has.No.Member(val));
-		}
+    [TestFixture]
+    public class VisibilityTests
+    {
+        static void DoesNotContain(IEnumerable collection, object val)
+        {
+            Assert.That(collection, Has.No.Member(val));
+        }
 
-		static void Contains (IEnumerable collection, object val)
-		{
-			 Assert.That(collection, Has.Member(val));
-		}
+        static void Contains(IEnumerable collection, object val)
+        {
+            Assert.That(collection, Has.Member(val));
+        }
 
-		[Test]
-		public void TestsExportedTypes ()
-		{
-			var types = typeof (VisibilityTests).Assembly.GetExportedTypes ();
+        [Test]
+        public void TestsExportedTypes()
+        {
+            var types = typeof(VisibilityTests).Assembly.GetExportedTypes();
 
-			// Test visibility means that the class is public by applying and on the 'public' visibility of the nested items.
-			DoesNotContain (types, typeof (InternalClass));
-			Contains (types, typeof (PublicClass));
+            // Test visibility means that the class is public by applying and on the 'public' visibility of the nested items.
+            DoesNotContain(types, typeof(InternalClass));
+            Contains(types, typeof(PublicClass));
 
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+InternalNested", true));
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PrivateNested", true));
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+ProtectedNested", true));
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PublicNested", true));
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+InternalNested",
+                    true
+                )
+            );
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PrivateNested",
+                    true
+                )
+            );
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+ProtectedNested",
+                    true
+                )
+            );
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PublicNested",
+                    true
+                )
+            );
 
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+InternalNested", true));
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PrivateNested", true));
-			DoesNotContain (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+ProtectedNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PublicNested", true));
-		}
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+InternalNested",
+                    true
+                )
+            );
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PrivateNested",
+                    true
+                )
+            );
+            DoesNotContain(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+ProtectedNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PublicNested",
+                    true
+                )
+            );
+        }
 
-		[Test]
-		public void TestsModuleTypes ()
-		{
-			var types = typeof (VisibilityTests).Module.GetTypes ();
+        [Test]
+        public void TestsModuleTypes()
+        {
+            var types = typeof(VisibilityTests).Module.GetTypes();
 
-			// Test that all the types defined exist.
-			Contains (types, typeof (InternalClass));
-			Contains (types, typeof (PublicClass));
+            // Test that all the types defined exist.
+            Contains(types, typeof(InternalClass));
+            Contains(types, typeof(PublicClass));
 
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+InternalNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PrivateNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+ProtectedNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PublicNested", true));
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+InternalNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PrivateNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+ProtectedNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+InternalClass+PublicNested",
+                    true
+                )
+            );
 
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+InternalNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PrivateNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+ProtectedNested", true));
-			Contains (types, Type.GetType ("MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PublicNested", true));
-		}
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+InternalNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PrivateNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+ProtectedNested",
+                    true
+                )
+            );
+            Contains(
+                types,
+                Type.GetType(
+                    "MonoTests.System.Reflection.VisibilityTypes.VisibilityTests+PublicClass+PublicNested",
+                    true
+                )
+            );
+        }
 
-		class InternalClass
-		{
-			internal class InternalNested {}
-			private class PrivateNested {}
-			protected class ProtectedNested {}
-			public class PublicNested {}
-		}
+        class InternalClass
+        {
+            internal class InternalNested { }
 
-		public class PublicClass
-		{
-			internal class InternalNested {}
-			private class PrivateNested {}
-			protected class ProtectedNested {}
-			public class PublicNested {}
-		}
-	}
+            private class PrivateNested { }
+
+            protected class ProtectedNested { }
+
+            public class PublicNested { }
+        }
+
+        public class PublicClass
+        {
+            internal class InternalNested { }
+
+            private class PrivateNested { }
+
+            protected class ProtectedNested { }
+
+            public class PublicNested { }
+        }
+    }
 }
 
 #endif
-

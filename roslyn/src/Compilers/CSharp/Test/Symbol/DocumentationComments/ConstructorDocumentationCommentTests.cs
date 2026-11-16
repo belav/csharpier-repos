@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public ConstructorDocumentationCommentTests()
         {
-            _compilation = CreateCompilationWithMscorlib40AndDocumentationComments(@"namespace Acme
+            _compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                @"namespace Acme
 {
 	class Widget: IProcess
 	{
@@ -36,49 +37,69 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public Widget(string s) {...}
 	}
 }
-");
+"
+            );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace.GetMembers("Acme").Single();
+            _acmeNamespace = (NamespaceSymbol)
+                _compilation.GlobalNamespace.GetMembers("Acme").Single();
             _widgetClass = _acmeNamespace.GetTypeMembers("Widget").Single();
         }
 
         [Fact]
         public void TestStaticConstructor()
         {
-            var staticConstructorSymbol = _widgetClass.GetMembers(WellKnownMemberNames.StaticConstructorName).Single();
-            Assert.Equal("M:Acme.Widget.#cctor", staticConstructorSymbol.GetDocumentationCommentId());
+            var staticConstructorSymbol = _widgetClass
+                .GetMembers(WellKnownMemberNames.StaticConstructorName)
+                .Single();
             Assert.Equal(
-@"<member name=""M:Acme.Widget.#cctor"">
+                "M:Acme.Widget.#cctor",
+                staticConstructorSymbol.GetDocumentationCommentId()
+            );
+            Assert.Equal(
+                @"<member name=""M:Acme.Widget.#cctor"">
     <summary>Static Constructor</summary>
 </member>
-", staticConstructorSymbol.GetDocumentationCommentXml());
+",
+                staticConstructorSymbol.GetDocumentationCommentXml()
+            );
         }
 
         [Fact]
         public void TestConstructor()
         {
-            var constructorSymbol = _widgetClass.InstanceConstructors.Single(c => !c.IsStatic && c.Parameters.Length == 0);
+            var constructorSymbol = _widgetClass.InstanceConstructors.Single(c =>
+                !c.IsStatic && c.Parameters.Length == 0
+            );
             Assert.Equal("M:Acme.Widget.#ctor", constructorSymbol.GetDocumentationCommentId());
             Assert.Equal(
-@"<member name=""M:Acme.Widget.#ctor"">
+                @"<member name=""M:Acme.Widget.#ctor"">
     <summary>Instance Constructor</summary> 
 </member>
-", constructorSymbol.GetDocumentationCommentXml());
+",
+                constructorSymbol.GetDocumentationCommentXml()
+            );
         }
 
         [Fact]
         public void TestConstructorWithParameter()
         {
-            var parameterizedConstructorSymbol = _widgetClass.InstanceConstructors.Single(c => !c.IsStatic && c.Parameters.Length == 1);
-            Assert.Equal("M:Acme.Widget.#ctor(System.String)", parameterizedConstructorSymbol.GetDocumentationCommentId());
+            var parameterizedConstructorSymbol = _widgetClass.InstanceConstructors.Single(c =>
+                !c.IsStatic && c.Parameters.Length == 1
+            );
             Assert.Equal(
-@"<member name=""M:Acme.Widget.#ctor(System.String)"">
+                "M:Acme.Widget.#ctor(System.String)",
+                parameterizedConstructorSymbol.GetDocumentationCommentId()
+            );
+            Assert.Equal(
+                @"<member name=""M:Acme.Widget.#ctor(System.String)"">
     <summary>
     Parameterized Constructor
     </summary>
     <param name=""s"">s, the string argument</param>
 </member>
-", parameterizedConstructorSymbol.GetDocumentationCommentXml());
+",
+                parameterizedConstructorSymbol.GetDocumentationCommentXml()
+            );
         }
     }
 }

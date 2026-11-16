@@ -13,6 +13,6 @@ namespace System.Net.Http
         /// <summary>
         /// Sends keep alive ping for whole connection lifetime.
         /// </summary>
-        Always
+        Always,
     }
 }

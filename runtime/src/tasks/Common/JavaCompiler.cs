@@ -15,15 +15,22 @@ internal sealed class JavaCompiler
         TaskLoggingHelper logger,
         AndroidSdkHelper androidSdk,
         string workingDir,
-        string javaVersion = "1.8")
+        string javaVersion = "1.8"
+    )
     {
-        _javaCompilerArgs = $"-classpath src -bootclasspath {androidSdk.AndroidJarPath} -source {javaVersion} -target {javaVersion}";
+        _javaCompilerArgs =
+            $"-classpath src -bootclasspath {androidSdk.AndroidJarPath} -source {javaVersion} -target {javaVersion}";
         _workingDir = workingDir;
         _logger = logger;
     }
 
     public void Compile(string javaSourceFile, string outputDir)
     {
-        Utils.RunProcess(_logger, "javac", $"{_javaCompilerArgs} -d {outputDir} {javaSourceFile}", workingDir: _workingDir);
+        Utils.RunProcess(
+            _logger,
+            "javac",
+            $"{_javaCompilerArgs} -d {outputDir} {javaSourceFile}",
+            workingDir: _workingDir
+        );
     }
 }

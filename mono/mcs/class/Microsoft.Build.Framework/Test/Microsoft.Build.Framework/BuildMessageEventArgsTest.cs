@@ -28,24 +28,26 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
-	[TestFixture]
-	public class BuildMessageEventArgsTest {
-		[Test]
-		public void AssignmentTest ()
-		{
-			BuildMessageEventArgs bmea;
-			string message = "message";
-			string helpKeyword = "helpKeyword";
-			string senderName = "senderName";
-			MessageImportance messageImportance = MessageImportance.High;
-			
-			bmea = new BuildMessageEventArgs (message, helpKeyword, senderName, messageImportance);
-			
-			Assert.AreEqual (message, bmea.Message, "Message");
-			Assert.AreEqual (helpKeyword, bmea.HelpKeyword, "HelpKeyword");
-			Assert.AreEqual (senderName, bmea.SenderName, "SenderName");
-			Assert.AreEqual (messageImportance, bmea.Importance, "Importance");
-		}
-	}
+namespace MonoTests.Microsoft.Build.Framework
+{
+    [TestFixture]
+    public class BuildMessageEventArgsTest
+    {
+        [Test]
+        public void AssignmentTest()
+        {
+            BuildMessageEventArgs bmea;
+            string message = "message";
+            string helpKeyword = "helpKeyword";
+            string senderName = "senderName";
+            MessageImportance messageImportance = MessageImportance.High;
+
+            bmea = new BuildMessageEventArgs(message, helpKeyword, senderName, messageImportance);
+
+            Assert.AreEqual(message, bmea.Message, "Message");
+            Assert.AreEqual(helpKeyword, bmea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(senderName, bmea.SenderName, "SenderName");
+            Assert.AreEqual(messageImportance, bmea.Importance, "Importance");
+        }
+    }
 }

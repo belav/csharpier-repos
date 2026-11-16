@@ -27,15 +27,15 @@ public class SqlServerConfigPatternsTest
         {
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .EnableServiceProviderCaching(false)
-                    .UseSqlServer(
-                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                        b => b.ApplyConfiguration());
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b =>
+                        b.ApplyConfiguration()
+                    );
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -49,8 +49,12 @@ public class SqlServerConfigPatternsTest
                 using var context = new NorthwindContext(
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
-                        .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration())
-                        .Options);
+                        .UseSqlServer(
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                            b => b.ApplyConfiguration()
+                        )
+                        .Options
+                );
                 Assert.Equal(91, await context.Customers.CountAsync());
             }
         }
@@ -58,14 +62,12 @@ public class SqlServerConfigPatternsTest
         private class NorthwindContext : DbContext
         {
             public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -77,10 +79,14 @@ public class SqlServerConfigPatternsTest
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var context = new NorthwindContext(
-                    new DbContextOptionsBuilder().UseInternalServiceProvider(
-                        new ServiceCollection()
-                            .AddEntityFrameworkSqlServer()
-                            .BuildServiceProvider(validateScopes: true)).Options);
+                    new DbContextOptionsBuilder()
+                        .UseInternalServiceProvider(
+                            new ServiceCollection()
+                                .AddEntityFrameworkSqlServer()
+                                .BuildServiceProvider(validateScopes: true)
+                        )
+                        .Options
+                );
                 Assert.Equal(91, await context.Customers.CountAsync());
             }
         }
@@ -88,18 +94,18 @@ public class SqlServerConfigPatternsTest
         private class NorthwindContext : DbContext
         {
             public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration());
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer(
+                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                    b => b.ApplyConfiguration()
+                );
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -112,11 +118,17 @@ public class SqlServerConfigPatternsTest
             {
                 using var context = new NorthwindContext(
                     new DbContextOptionsBuilder()
-                        .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration())
+                        .UseSqlServer(
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                            b => b.ApplyConfiguration()
+                        )
                         .UseInternalServiceProvider(
                             new ServiceCollection()
                                 .AddEntityFrameworkSqlServer()
-                                .BuildServiceProvider(validateScopes: true)).Options);
+                                .BuildServiceProvider(validateScopes: true)
+                        )
+                        .Options
+                );
                 Assert.Equal(91, await context.Customers.CountAsync());
             }
         }
@@ -124,14 +136,12 @@ public class SqlServerConfigPatternsTest
         private class NorthwindContext : DbContext
         {
             public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -144,30 +154,34 @@ public class SqlServerConfigPatternsTest
             {
                 Assert.Equal(
                     CoreStrings.NoProviderConfigured,
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
                         {
                             using var context = new NorthwindContext(
-                                new DbContextOptionsBuilder().UseInternalServiceProvider(
-                                    new ServiceCollection()
-                                        .AddEntityFrameworkSqlServer()
-                                        .BuildServiceProvider(validateScopes: true)).Options);
+                                new DbContextOptionsBuilder()
+                                    .UseInternalServiceProvider(
+                                        new ServiceCollection()
+                                            .AddEntityFrameworkSqlServer()
+                                            .BuildServiceProvider(validateScopes: true)
+                                    )
+                                    .Options
+                            );
                             Assert.Equal(91, context.Customers.Count());
-                        }).Message);
+                        })
+                        .Message
+                );
             }
         }
 
         private class NorthwindContext : DbContext
         {
             public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -180,12 +194,14 @@ public class SqlServerConfigPatternsTest
             {
                 Assert.Equal(
                     CoreStrings.NoProviderConfigured,
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
                         {
                             using var context = new NorthwindContext();
                             Assert.Equal(91, context.Customers.Count());
-                        }).Message);
+                        })
+                        .Message
+                );
             }
         }
 
@@ -193,11 +209,11 @@ public class SqlServerConfigPatternsTest
         {
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.EnableServiceProviderCaching(false);
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.EnableServiceProviderCaching(false);
         }
     }
 
@@ -214,32 +230,36 @@ public class SqlServerConfigPatternsTest
             {
                 Assert.Equal(
                     CoreStrings.NoProviderConfigured,
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
                         {
                             using var context = new NorthwindContext(
                                 new DbContextOptionsBuilder()
-                                    .UseInternalServiceProvider(serviceProvider).Options);
+                                    .UseInternalServiceProvider(serviceProvider)
+                                    .Options
+                            );
                             Assert.Equal(91, context.Customers.Count());
-                        }).Message);
+                        })
+                        .Message
+                );
             }
         }
 
         private class NorthwindContext : DbContext
         {
             public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration());
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer(
+                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                    b => b.ApplyConfiguration()
+                );
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -252,7 +272,9 @@ public class SqlServerConfigPatternsTest
                 .AddEntityFrameworkSqlServer()
                 .AddTransient<NorthwindContext>()
                 .AddTransient<MyController>()
-                .AddSingleton(p => new DbContextOptionsBuilder().UseInternalServiceProvider(p).Options)
+                .AddSingleton(p =>
+                    new DbContextOptionsBuilder().UseInternalServiceProvider(p).Options
+                )
                 .BuildServiceProvider(validateScopes: true);
 
             using (SqlServerTestStore.GetNorthwindStore())
@@ -272,8 +294,8 @@ public class SqlServerConfigPatternsTest
                 _context = context;
             }
 
-            public async Task TestAsync()
-                => Assert.Equal(91, await _context.Customers.CountAsync());
+            public async Task TestAsync() =>
+                Assert.Equal(91, await _context.Customers.CountAsync());
         }
 
         private class NorthwindContext : DbContext
@@ -286,12 +308,14 @@ public class SqlServerConfigPatternsTest
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration());
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer(
+                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                    b => b.ApplyConfiguration()
+                );
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -306,8 +330,13 @@ public class SqlServerConfigPatternsTest
                 .AddSingleton(
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
-                        .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration())
-                        .Options).BuildServiceProvider(validateScopes: true);
+                        .UseSqlServer(
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                            b => b.ApplyConfiguration()
+                        )
+                        .Options
+                )
+                .BuildServiceProvider(validateScopes: true);
 
             using (SqlServerTestStore.GetNorthwindStore())
             {
@@ -326,8 +355,8 @@ public class SqlServerConfigPatternsTest
                 _context = context;
             }
 
-            public async Task TestAsync()
-                => Assert.Equal(91, await _context.Customers.CountAsync());
+            public async Task TestAsync() =>
+                Assert.Equal(91, await _context.Customers.CountAsync());
         }
 
         private class NorthwindContext : DbContext
@@ -340,8 +369,8 @@ public class SqlServerConfigPatternsTest
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -355,8 +384,12 @@ public class SqlServerConfigPatternsTest
                 using var context = new NorthwindContext(
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
-                        .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration())
-                        .Options);
+                        .UseSqlServer(
+                            SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
+                            b => b.ApplyConfiguration()
+                        )
+                        .Options
+                );
                 Assert.Equal(91, await context.Customers.CountAsync());
             }
         }
@@ -364,14 +397,12 @@ public class SqlServerConfigPatternsTest
         private class NorthwindContext : DbContext
         {
             public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -382,7 +413,9 @@ public class SqlServerConfigPatternsTest
         {
             using (SqlServerTestStore.GetNorthwindStore())
             {
-                using var context = new NorthwindContext(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString);
+                using var context = new NorthwindContext(
+                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                );
                 Assert.Equal(91, await context.Customers.CountAsync());
             }
         }
@@ -398,13 +431,13 @@ public class SqlServerConfigPatternsTest
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .EnableServiceProviderCaching(false)
                     .UseSqlServer(_connectionString, b => b.ApplyConfiguration());
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -447,13 +480,15 @@ public class SqlServerConfigPatternsTest
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .UseInternalServiceProvider(_serviceProvider)
-                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b => b.ApplyConfiguration());
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b =>
+                        b.ApplyConfiguration()
+                    );
         }
     }
 
@@ -480,8 +515,8 @@ public class SqlServerConfigPatternsTest
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .EnableServiceProviderCaching(false)
                     .UseSqlServer(
                         @"Server=test.database.windows.net:4040;Database=Test;ConnectRetryCount=0",
@@ -491,10 +526,11 @@ public class SqlServerConfigPatternsTest
                             {
                                 a.UseAzureSqlDefaults(false);
                             }
-                        });
+                        }
+                    );
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -508,11 +544,15 @@ public class SqlServerConfigPatternsTest
             using var context = new NorthwindContext(configured);
             if (configured)
             {
-                Assert.IsType<SqlServerRetryingExecutionStrategy>(context.Database.CreateExecutionStrategy());
+                Assert.IsType<SqlServerRetryingExecutionStrategy>(
+                    context.Database.CreateExecutionStrategy()
+                );
             }
             else
             {
-                Assert.IsType<SqlServerExecutionStrategy>(context.Database.CreateExecutionStrategy());
+                Assert.IsType<SqlServerExecutionStrategy>(
+                    context.Database.CreateExecutionStrategy()
+                );
             }
         }
 
@@ -527,21 +567,19 @@ public class SqlServerConfigPatternsTest
 
             public DbSet<Customer> Customers { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .EnableServiceProviderCaching(false)
-                    .UseSqlServer(
-                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                        a =>
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, a =>
+                    {
+                        if (_isAzure)
                         {
-                            if (_isAzure)
-                            {
-                                a.UseAzureSqlDefaults();
-                            }
-                        });
+                            a.UseAzureSqlDefaults();
+                        }
+                    });
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => ConfigureModel(modelBuilder);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                ConfigureModel(modelBuilder);
         }
     }
 
@@ -557,11 +595,10 @@ public class SqlServerConfigPatternsTest
         // ReSharper restore UnusedMember.Local
     }
 
-    private static void ConfigureModel(ModelBuilder builder)
-        => builder.Entity<Customer>(
-            b =>
-            {
-                b.HasKey(c => c.CustomerID);
-                b.ToTable("Customers");
-            });
+    private static void ConfigureModel(ModelBuilder builder) =>
+        builder.Entity<Customer>(b =>
+        {
+            b.HasKey(c => c.CustomerID);
+            b.ToTable("Customers");
+        });
 }

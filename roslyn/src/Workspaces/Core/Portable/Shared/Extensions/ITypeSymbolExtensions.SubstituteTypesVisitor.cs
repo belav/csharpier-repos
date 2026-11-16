@@ -22,14 +22,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             internal SubstituteTypesVisitor(
                 IDictionary<TType1, TType2> map,
-                ITypeGenerator typeGenerator)
+                ITypeGenerator typeGenerator
+            )
             {
                 _map = map;
                 _typeGenerator = typeGenerator;
             }
 
-            public override ITypeSymbol DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override ITypeSymbol DefaultVisit(ISymbol node) =>
+                throw new NotImplementedException();
 
             private ITypeSymbol VisitType(ITypeSymbol symbol)
             {
@@ -41,11 +42,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return symbol;
             }
 
-            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol)
-                => VisitType(symbol);
+            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol) =>
+                VisitType(symbol);
 
-            public override ITypeSymbol VisitTypeParameter(ITypeParameterSymbol symbol)
-                => VisitType(symbol);
+            public override ITypeSymbol VisitTypeParameter(ITypeParameterSymbol symbol) =>
+                VisitType(symbol);
 
             public override ITypeSymbol VisitFunctionPointerType(IFunctionPointerTypeSymbol symbol)
             {
@@ -80,7 +81,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // If our containing type changed, then find us again in the new containing type.
                 if (!Equals(updatedContainingType, symbol.ContainingType))
                 {
-                    symbol = updatedContainingType.GetTypeMembers(symbol.Name, symbol.Arity).First(m => m.TypeKind == symbol.TypeKind);
+                    symbol = updatedContainingType
+                        .GetTypeMembers(symbol.Name, symbol.Arity)
+                        .First(m => m.TypeKind == symbol.TypeKind);
                 }
 
                 var substitutedArguments = symbol.TypeArguments.Select(t => t.Accept(this));
@@ -89,7 +92,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return symbol;
                 }
 
-                return _typeGenerator.Construct(symbol.OriginalDefinition, substitutedArguments.ToArray()).WithNullableAnnotation(symbol.NullableAnnotation);
+                return _typeGenerator
+                    .Construct(symbol.OriginalDefinition, substitutedArguments.ToArray())
+                    .WithNullableAnnotation(symbol.NullableAnnotation);
             }
 
             public override ITypeSymbol VisitArrayType(IArrayTypeSymbol symbol)

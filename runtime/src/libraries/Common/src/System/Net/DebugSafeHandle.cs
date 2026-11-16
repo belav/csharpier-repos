@@ -14,12 +14,14 @@ namespace System.Net
     {
         private string? _trace;
 
-        protected DebugSafeHandle(bool ownsHandle) : base(ownsHandle)
+        protected DebugSafeHandle(bool ownsHandle)
+            : base(ownsHandle)
         {
             Trace();
         }
 
-        protected DebugSafeHandle(IntPtr invalidValue, bool ownsHandle) : base(ownsHandle)
+        protected DebugSafeHandle(IntPtr invalidValue, bool ownsHandle)
+            : base(ownsHandle)
         {
             SetHandle(invalidValue);
             Trace();
@@ -27,12 +29,16 @@ namespace System.Net
 
         private void Trace()
         {
-            _trace = "WARNING! GC-ed  >>" + this.GetType().ToString() + "<< (should be explicitly closed) \r\n";
+            _trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().ToString()
+                + "<< (should be explicitly closed) \r\n";
         }
 
         ~DebugSafeHandle()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, _trace);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, _trace);
         }
     }
 #endif // DEBUG

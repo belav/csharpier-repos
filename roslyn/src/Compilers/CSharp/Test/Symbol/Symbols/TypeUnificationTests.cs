@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestNoTypeParameters()
         {
             var text =
-@"
+                @"
 enum E
 {
     Element,
@@ -103,7 +103,7 @@ class C
         public void TestJustTypeParameter()
         {
             var text =
-@"
+                @"
 class C<T, U>
 {
     //atomic
@@ -188,7 +188,7 @@ class C<T, U>
         public void TestArrayTypes()
         {
             var text =
-@"
+                @"
 class C<T>
 {
     int[] a1;
@@ -224,7 +224,7 @@ class C<T>
         public void TestNamedTypes()
         {
             var text =
-@"
+                @"
 class C<W, X>
 {
     C<int, short> g1;
@@ -274,7 +274,7 @@ class D<T>
         public void TestNestedNamedTypes()
         {
             var text =
-@"
+                @"
 class C<X, Y>
 {
     L<int>.M<short> g1;
@@ -323,7 +323,7 @@ public class L<T>
         public void TestOccursCheck()
         {
             var text =
-@"
+                @"
 class C<T>
 {
     T contained;
@@ -345,7 +345,7 @@ class C<T>
         public void TestRecursiveCases()
         {
             var text =
-@"
+                @"
 class C<W, X, Y, Z>
 {
     L<L<X[]>.M<Y>[]>.M<L<Y[,]>.M<X[]>[,]> t1;
@@ -408,7 +408,7 @@ public class L<T>
         public void SubstituteWithOtherTypeParameter()
         {
             var text =
-@"interface IA<T, U>
+                @"interface IA<T, U>
 {
 }
 interface IB<T, U> : IA<U, object>, IA<T, U>
@@ -417,8 +417,15 @@ interface IB<T, U> : IA<U, object>, IA<T, U>
             var comp = CreateCompilation(text);
             var type = comp.GetMember<NamedTypeSymbol>("IB");
             AssertCanUnify(type.Interfaces()[0], type.Interfaces()[1]);
-            DiagnosticsUtils.VerifyErrorCodes(comp.GetDiagnostics(),
-                new ErrorDescription { Code = (int)ErrorCode.ERR_UnifyingInterfaceInstantiations, Line = 4, Column = 11 });
+            DiagnosticsUtils.VerifyErrorCodes(
+                comp.GetDiagnostics(),
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_UnifyingInterfaceInstantiations,
+                    Line = 4,
+                    Column = 11,
+                }
+            );
         }
 
         private static void AssertCanUnify(TypeSymbol t1, TypeSymbol t2)

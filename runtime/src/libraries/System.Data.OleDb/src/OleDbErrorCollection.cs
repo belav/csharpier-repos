@@ -15,7 +15,9 @@ namespace System.Data.OleDb
         internal OleDbErrorCollection(UnsafeNativeMethods.IErrorInfo? errorInfo)
         {
             ArrayList items = new ArrayList();
-            UnsafeNativeMethods.IErrorRecords? errorRecords = (errorInfo as UnsafeNativeMethods.IErrorRecords);
+            UnsafeNativeMethods.IErrorRecords? errorRecords = (
+                errorInfo as UnsafeNativeMethods.IErrorRecords
+            );
             if (null != errorRecords)
             {
                 int recordCount = errorRecords.GetRecordCount();
@@ -50,10 +52,7 @@ namespace System.Data.OleDb
 
         public OleDbError this[int index]
         {
-            get
-            {
-                return (this.items[index] as OleDbError)!;
-            }
+            get { return (this.items[index] as OleDbError)!; }
         }
 
         internal void AddRange(ICollection c)

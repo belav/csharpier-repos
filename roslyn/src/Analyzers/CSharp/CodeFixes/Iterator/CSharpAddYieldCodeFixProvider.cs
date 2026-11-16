@@ -21,7 +21,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ChangeToYield), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ChangeToYield
+        ),
+        Shared
+    ]
     internal class CSharpAddYieldCodeFixProvider : AbstractIteratorCodeFixProvider
     {
         /// <summary>
@@ -35,17 +41,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         private const string CS0266 = nameof(CS0266);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpAddYieldCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpAddYieldCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
             get { return ImmutableArray.Create(CS0029, CS0266); }
         }
 
-        protected override async Task<CodeAction?> GetCodeFixAsync(SyntaxNode root, SyntaxNode node, Document document, Diagnostic diagnostics, CancellationToken cancellationToken)
+        protected override async Task<CodeAction?> GetCodeFixAsync(
+            SyntaxNode root,
+            SyntaxNode node,
+            Document document,
+            Diagnostic diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             // Check if node is return statement
             if (node is not ReturnStatementSyntax returnStatement)
@@ -53,31 +67,44 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 return null;
             }
 
-            var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!TryGetMethodReturnType(node, model, cancellationToken, out var methodReturnType))
             {
                 return null;
             }
 
-            if (!TryGetExpressionType(model, returnStatement.Expression, out var returnExpressionType))
+            if (
+                !TryGetExpressionType(
+                    model,
+                    returnStatement.Expression,
+                    out var returnExpressionType
+                )
+            )
             {
                 return null;
             }
 
             var typeArguments = methodReturnType.GetAllTypeArguments();
 
-            var shouldOfferYieldReturn = typeArguments.Length != 1
-                ? IsCorrectTypeForYieldReturn(methodReturnType, model)
-                : IsCorrectTypeForYieldReturn(typeArguments.Single(), returnExpressionType, methodReturnType, model);
+            var shouldOfferYieldReturn =
+                typeArguments.Length != 1
+                    ? IsCorrectTypeForYieldReturn(methodReturnType, model)
+                    : IsCorrectTypeForYieldReturn(
+                        typeArguments.Single(),
+                        returnExpressionType,
+                        methodReturnType,
+                        model
+                    );
 
             if (!shouldOfferYieldReturn)
             {
                 return null;
             }
 
-            var yieldStatement = SyntaxFactory.YieldStatement(
-                    SyntaxKind.YieldReturnStatement,
-                    returnStatement.Expression)
+            var yieldStatement = SyntaxFactory
+                .YieldStatement(SyntaxKind.YieldReturnStatement, returnStatement.Expression)
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             root = root.ReplaceNode(returnStatement, yieldStatement);
@@ -85,11 +112,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             return CodeAction.Create(
                 CSharpCodeFixesResources.Replace_return_with_yield_return,
                 _ => Task.FromResult(document.WithSyntaxRoot(root)),
-                nameof(CSharpCodeFixesResources.Replace_return_with_yield_return));
+                nameof(CSharpCodeFixesResources.Replace_return_with_yield_return)
+            );
         }
 
         private static bool TryGetExpressionType(
-            SemanticModel model, ExpressionSyntax? expression, [NotNullWhen(true)] out ITypeSymbol? returnExpressionType)
+            SemanticModel model,
+            ExpressionSyntax? expression,
+            [NotNullWhen(true)] out ITypeSymbol? returnExpressionType
+        )
         {
             if (expression == null)
             {
@@ -103,8 +134,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         }
 
         private static bool TryGetMethodReturnType(
-            SyntaxNode node, SemanticModel model, CancellationToken cancellationToken,
-            [NotNullWhen(true)] out ITypeSymbol? methodReturnType)
+            SyntaxNode node,
+            SemanticModel model,
+            CancellationToken cancellationToken,
+            [NotNullWhen(true)] out ITypeSymbol? methodReturnType
+        )
         {
             methodReturnType = null;
             var symbol = model.GetEnclosingSymbol(node.Span.Start, cancellationToken);
@@ -117,17 +151,32 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             return methodReturnType != null;
         }
 
-        private static bool IsCorrectTypeForYieldReturn(ITypeSymbol typeArgument, ITypeSymbol returnExpressionType, ITypeSymbol methodReturnType, SemanticModel model)
+        private static bool IsCorrectTypeForYieldReturn(
+            ITypeSymbol typeArgument,
+            ITypeSymbol returnExpressionType,
+            ITypeSymbol methodReturnType,
+            SemanticModel model
+        )
         {
-            var ienumerableSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerable).FullName!);
-            var ienumeratorSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerator).FullName!);
-            var ienumerableGenericSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerable<>).FullName!);
-            var ienumeratorGenericSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerator<>).FullName!);
+            var ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerable).FullName!
+            );
+            var ienumeratorSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerator).FullName!
+            );
+            var ienumerableGenericSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerable<>).FullName!
+            );
+            var ienumeratorGenericSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerator<>).FullName!
+            );
 
-            if (ienumerableGenericSymbol == null ||
-                ienumerableSymbol == null ||
-                ienumeratorGenericSymbol == null ||
-                ienumeratorSymbol == null)
+            if (
+                ienumerableGenericSymbol == null
+                || ienumerableSymbol == null
+                || ienumeratorGenericSymbol == null
+                || ienumeratorSymbol == null
+            )
             {
                 return false;
             }
@@ -140,10 +189,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 return false;
             }
 
-            if (!(methodReturnType.Equals(ienumerableGenericSymbol) ||
-                  methodReturnType.Equals(ienumerableSymbol) ||
-                  methodReturnType.Equals(ienumeratorGenericSymbol) ||
-                  methodReturnType.Equals(ienumeratorSymbol)))
+            if (
+                !(
+                    methodReturnType.Equals(ienumerableGenericSymbol)
+                    || methodReturnType.Equals(ienumerableSymbol)
+                    || methodReturnType.Equals(ienumeratorGenericSymbol)
+                    || methodReturnType.Equals(ienumeratorSymbol)
+                )
+            )
             {
                 return false;
             }
@@ -151,7 +204,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             return true;
         }
 
-        private static bool CanConvertTypes(ITypeSymbol typeArgument, ITypeSymbol returnExpressionType, SemanticModel model)
+        private static bool CanConvertTypes(
+            ITypeSymbol typeArgument,
+            ITypeSymbol returnExpressionType,
+            SemanticModel model
+        )
         {
             // return false if there is no conversion for the top level type
             if (!model.Compilation.ClassifyConversion(typeArgument, returnExpressionType).Exists)
@@ -164,9 +221,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             var rightArguments = returnExpressionType.GetTypeArguments();
 
             // If we have a mismatch in the number of type arguments we can immediately return as there is no way the types are convertible
-            if (leftArguments != null &&
-                rightArguments != null &&
-                leftArguments.Length != rightArguments.Length)
+            if (
+                leftArguments != null
+                && rightArguments != null
+                && leftArguments.Length != rightArguments.Length
+            )
             {
                 return false;
             }
@@ -190,19 +249,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             return true;
         }
 
-        private static bool IsCorrectTypeForYieldReturn(ITypeSymbol methodReturnType, SemanticModel model)
+        private static bool IsCorrectTypeForYieldReturn(
+            ITypeSymbol methodReturnType,
+            SemanticModel model
+        )
         {
-            var ienumerableSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerable).FullName!);
-            var ienumeratorSymbol = model.Compilation.GetTypeByMetadataName(typeof(IEnumerator).FullName!);
+            var ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerable).FullName!
+            );
+            var ienumeratorSymbol = model.Compilation.GetTypeByMetadataName(
+                typeof(IEnumerator).FullName!
+            );
 
-            if (ienumerableSymbol == null ||
-                    ienumeratorSymbol == null)
+            if (ienumerableSymbol == null || ienumeratorSymbol == null)
             {
                 return false;
             }
 
-            if (!(methodReturnType.Equals(ienumerableSymbol) ||
-                  methodReturnType.Equals(ienumeratorSymbol)))
+            if (
+                !(
+                    methodReturnType.Equals(ienumerableSymbol)
+                    || methodReturnType.Equals(ienumeratorSymbol)
+                )
+            )
             {
                 return false;
             }
@@ -211,7 +280,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
         }
 
         protected override bool TryGetNode(
-            SyntaxNode root, TextSpan span, [NotNullWhen(true)] out SyntaxNode? node)
+            SyntaxNode root,
+            TextSpan span,
+            [NotNullWhen(true)] out SyntaxNode? node
+        )
         {
             node = null;
             var ancestors = root.FindToken(span.Start).GetAncestors<SyntaxNode>();
@@ -220,7 +292,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 return false;
             }
 
-            node = ancestors.FirstOrDefault(n => n.Span.Contains(span) && n != root && n.IsKind(SyntaxKind.ReturnStatement));
+            node = ancestors.FirstOrDefault(n =>
+                n.Span.Contains(span) && n != root && n.IsKind(SyntaxKind.ReturnStatement)
+            );
             return node != null;
         }
     }

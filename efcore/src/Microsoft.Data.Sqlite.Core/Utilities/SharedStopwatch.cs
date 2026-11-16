@@ -36,6 +36,5 @@ internal readonly struct SharedStopwatch
         return StartNewCore();
     }
 
-    private static SharedStopwatch StartNewCore()
-        => new SharedStopwatch(Stopwatch.Elapsed);
+    private static SharedStopwatch StartNewCore() => new SharedStopwatch(Stopwatch.Elapsed);
 }

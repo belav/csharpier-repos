@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,44 +26,45 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Net;
 using System.Security;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 
-namespace MonoTests.System.Net {
-	
-	[TestFixture]
-	[Category ("CAS")]
+namespace MonoTests.System.Net
+{
+    [TestFixture]
+    [Category("CAS")]
 #if MOBILE
-	[Ignore ("CAS is not supported and parts will be linked away")]
+    [Ignore("CAS is not supported and parts will be linked away")]
 #endif
-	public class WebPermissionTest {
+    public class WebPermissionTest
+    {
+        [Test]
+        public void Serialization()
+        {
+            string result1 =
+                "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n"
+                + "version=\"1\">\n"
+                + "<ConnectAccess>\n"
+                + "<URI uri=\"Hello\"/>\n"
+                + "</ConnectAccess>\n"
+                + "</IPermission>\n";
 
-		[Test]
-		public void Serialization ()
-		{
-			string result1 = "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n" + 
-"version=\"1\">\n" + 
-"<ConnectAccess>\n" + 
-"<URI uri=\"Hello\"/>\n" + 
-"</ConnectAccess>\n" + 
-"</IPermission>\n";
+            string result2 =
+                "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n"
+                + "version=\"1\">\n"
+                + "<AcceptAccess>\n"
+                + "<URI uri=\"Hello\"/>\n"
+                + "</AcceptAccess>\n"
+                + "</IPermission>\n";
+            WebPermission pp = new WebPermission(NetworkAccess.Connect, "Hello");
+            Assert.AreEqual(result1, pp.ToXml().ToString().Replace("\r", ""));
 
-			string result2 = "<IPermission class=\"System.Net.WebPermission, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\n" + 
-"version=\"1\">\n" + 
-"<AcceptAccess>\n" + 
-"<URI uri=\"Hello\"/>\n" + 
-"</AcceptAccess>\n" + 
-"</IPermission>\n";
-			WebPermission pp = new WebPermission (NetworkAccess.Connect, "Hello");
-			Assert.AreEqual (result1, pp.ToXml ().ToString ().Replace ("\r", ""));
-			
-			pp = new WebPermission (NetworkAccess.Accept, "Hello");
-			Assert.AreEqual (result2, pp.ToXml ().ToString ().Replace ("\r", ""));
-		}
-
-	}
+            pp = new WebPermission(NetworkAccess.Accept, "Hello");
+            Assert.AreEqual(result2, pp.ToXml().ToString().Replace("\r", ""));
+        }
+    }
 }

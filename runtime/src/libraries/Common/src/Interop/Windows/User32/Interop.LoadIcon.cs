@@ -16,6 +16,8 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hInst, IntPtr iconId);
+            HandleRef hInst,
+            IntPtr iconId
+        );
     }
 }

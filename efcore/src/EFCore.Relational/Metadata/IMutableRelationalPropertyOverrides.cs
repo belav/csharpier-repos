@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public interface IMutableRelationalPropertyOverrides : IReadOnlyRelationalPropertyOverrides, IMutableAnnotatable
+public interface IMutableRelationalPropertyOverrides
+    : IReadOnlyRelationalPropertyOverrides,
+        IMutableAnnotatable
 {
     /// <summary>
     ///     Gets the property that the overrides are for.

@@ -11,14 +11,19 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
     /// <summary>
     /// Base class for "if" and "while" snippet providers
     /// </summary>
-    internal abstract class AbstractConditionalBlockSnippetProvider : AbstractInlineStatementSnippetProvider
+    internal abstract class AbstractConditionalBlockSnippetProvider
+        : AbstractInlineStatementSnippetProvider
     {
         protected abstract SyntaxNode GetCondition(SyntaxNode node);
 
-        protected override bool IsValidAccessingType(ITypeSymbol type, Compilation compilation)
-            => type.SpecialType == SpecialType.System_Boolean;
+        protected override bool IsValidAccessingType(ITypeSymbol type, Compilation compilation) =>
+            type.SpecialType == SpecialType.System_Boolean;
 
-        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(SyntaxNode node, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
+        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(
+            SyntaxNode node,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
             if (ConstructedFromInlineExpression)
                 return ImmutableArray<SnippetPlaceholder>.Empty;

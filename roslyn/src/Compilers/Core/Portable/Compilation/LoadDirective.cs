@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis
         {
             RoslynDebug.Assert((resolvedPath != null) || !diagnostics.IsEmpty);
             RoslynDebug.Assert(!diagnostics.IsDefault);
-            RoslynDebug.Assert(diagnostics.IsEmpty || diagnostics.All(d => d.Severity == DiagnosticSeverity.Error));
+            RoslynDebug.Assert(
+                diagnostics.IsEmpty || diagnostics.All(d => d.Severity == DiagnosticSeverity.Error)
+            );
 
             ResolvedPath = resolvedPath;
             Diagnostics = diagnostics;
@@ -27,8 +29,8 @@ namespace Microsoft.CodeAnalysis
 
         public bool Equals(LoadDirective other)
         {
-            return this.ResolvedPath == other.ResolvedPath &&
-                this.Diagnostics.SequenceEqual(other.Diagnostics);
+            return this.ResolvedPath == other.ResolvedPath
+                && this.Diagnostics.SequenceEqual(other.Diagnostics);
         }
 
         public override bool Equals(object? obj)
@@ -38,7 +40,10 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.Diagnostics.GetHashCode(), this.ResolvedPath?.GetHashCode() ?? 0);
+            return Hash.Combine(
+                this.Diagnostics.GetHashCode(),
+                this.ResolvedPath?.GetHashCode() ?? 0
+            );
         }
     }
 }

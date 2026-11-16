@@ -32,11 +32,7 @@ namespace System.Web.Razor.Test.Parser
         public void ConstructorCopiesBasicValuesFromBlockBuilder()
         {
             // Arrange
-            BlockBuilder builder = new BlockBuilder()
-            {
-                Name = "Foo",
-                Type = BlockType.Helper
-            };
+            BlockBuilder builder = new BlockBuilder() { Name = "Foo", Type = BlockType.Helper };
 
             // Act
             Block actual = builder.Build();
@@ -54,7 +50,7 @@ namespace System.Web.Razor.Test.Parser
             BlockBuilder builder = new BlockBuilder()
             {
                 Type = BlockType.Helper,
-                CodeGenerator = expected
+                CodeGenerator = expected,
             };
 
             // Act
@@ -69,10 +65,7 @@ namespace System.Web.Razor.Test.Parser
         {
             // Arrange
             Span expected = new SpanBuilder() { Kind = SpanKind.Code }.Build();
-            BlockBuilder builder = new BlockBuilder()
-            {
-                Type = BlockType.Functions
-            };
+            BlockBuilder builder = new BlockBuilder() { Type = BlockType.Functions };
             builder.Children.Add(expected);
 
             // Act
@@ -89,11 +82,16 @@ namespace System.Web.Razor.Test.Parser
             var factory = SpanFactory.CreateCsHtml();
             Block block = new MarkupBlock(
                 factory.Markup("Foo "),
-                new StatementBlock(
-                    factory.CodeTransition(),
-                    factory.Code("bar").AsStatement()),
-                factory.Markup(" Baz"));
-            TextChange change = new TextChange(128, 1, new StringTextBuffer("Foo @bar Baz"), 1, new StringTextBuffer("Foo @bor Baz"));
+                new StatementBlock(factory.CodeTransition(), factory.Code("bar").AsStatement()),
+                factory.Markup(" Baz")
+            );
+            TextChange change = new TextChange(
+                128,
+                1,
+                new StringTextBuffer("Foo @bar Baz"),
+                1,
+                new StringTextBuffer("Foo @bor Baz")
+            );
 
             // Act
             Span actual = block.LocateOwner(change);
@@ -109,11 +107,16 @@ namespace System.Web.Razor.Test.Parser
             var factory = SpanFactory.CreateCsHtml();
             Block block = new MarkupBlock(
                 factory.Markup("Foo "),
-                new StatementBlock(
-                    factory.CodeTransition(),
-                    factory.Code("bar").AsStatement()),
-                factory.Markup(" Baz"));
-            TextChange change = new TextChange(4, 10, new StringTextBuffer("Foo @bar Baz"), 10, new StringTextBuffer("Foo @bor Baz"));
+                new StatementBlock(factory.CodeTransition(), factory.Code("bar").AsStatement()),
+                factory.Markup(" Baz")
+            );
+            TextChange change = new TextChange(
+                4,
+                10,
+                new StringTextBuffer("Foo @bar Baz"),
+                10,
+                new StringTextBuffer("Foo @bor Baz")
+            );
 
             // Act
             Span actual = block.LocateOwner(change);

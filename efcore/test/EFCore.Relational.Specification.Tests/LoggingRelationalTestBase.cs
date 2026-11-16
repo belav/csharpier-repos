@@ -12,92 +12,117 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
     where TExtension : RelationalOptionsExtension, new()
 {
     [ConditionalFact]
-    public void Logs_context_initialization_max_batch_size()
-        => Assert.Equal(
+    public void Logs_context_initialization_max_batch_size() =>
+        Assert.Equal(
             ExpectedMessage("MaxBatchSize=10 " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s, b => b.MaxBatchSize(10))));
+            ActualMessage(s => CreateOptionsBuilder(s, b => b.MaxBatchSize(10)))
+        );
 
     [ConditionalFact]
-    public void Logs_context_initialization_command_timeout()
-        => Assert.Equal(
+    public void Logs_context_initialization_command_timeout() =>
+        Assert.Equal(
             ExpectedMessage("CommandTimeout=10 " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s, b => b.CommandTimeout(10))));
+            ActualMessage(s => CreateOptionsBuilder(s, b => b.CommandTimeout(10)))
+        );
 
     [ConditionalFact]
-    public void Logs_context_initialization_relational_nulls()
-        => Assert.Equal(
+    public void Logs_context_initialization_relational_nulls() =>
+        Assert.Equal(
             ExpectedMessage("UseRelationalNulls " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s, b => b.UseRelationalNulls())));
+            ActualMessage(s => CreateOptionsBuilder(s, b => b.UseRelationalNulls()))
+        );
 
     [ConditionalFact]
-    public void Logs_context_initialization_migrations_assembly()
-        => Assert.Equal(
+    public void Logs_context_initialization_migrations_assembly() =>
+        Assert.Equal(
             ExpectedMessage("MigrationsAssembly=A.B.C " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsAssembly("A.B.C"))));
+            ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsAssembly("A.B.C")))
+        );
 
     [ConditionalFact]
-    public void Logs_context_initialization_migrations_history_table()
-        => Assert.Equal(
+    public void Logs_context_initialization_migrations_history_table() =>
+        Assert.Equal(
             ExpectedMessage("MigrationsHistoryTable=MyHistory " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory"))));
+            ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory")))
+        );
 
     [ConditionalFact]
-    public void Logs_context_initialization_migrations_history_table_schema()
-        => Assert.Equal(
+    public void Logs_context_initialization_migrations_history_table_schema() =>
+        Assert.Equal(
             ExpectedMessage("MigrationsHistoryTable=mySchema.MyHistory " + DefaultOptions),
-            ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory", "mySchema"))));
+            ActualMessage(s =>
+                CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory", "mySchema"))
+            )
+        );
 
     [ConditionalFact]
     public virtual void IndexPropertiesBothMappedAndNotMappedToTable_throws_by_default()
     {
-        using var context = new IndexPropertiesBothMappedAndNotMappedToTableContext(CreateOptionsBuilder(new ServiceCollection()));
+        using var context = new IndexPropertiesBothMappedAndNotMappedToTableContext(
+            CreateOptionsBuilder(new ServiceCollection())
+        );
 
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable.ToString(),
-                RelationalResources.LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(CreateTestLogger())
+                RelationalResources
+                    .LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(CreateTestLogger())
                     .GenerateMessage(nameof(Cat), "{'Name', 'Identity'}", nameof(Cat.Identity)),
-                "RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+                "RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable"
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     protected class IndexPropertiesBothMappedAndNotMappedToTableContext : DbContext
     {
-        public IndexPropertiesBothMappedAndNotMappedToTableContext(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder.Options)
-        {
-        }
+        public IndexPropertiesBothMappedAndNotMappedToTableContext(
+            DbContextOptionsBuilder optionsBuilder
+        )
+            : base(optionsBuilder.Options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Animal>();
-            modelBuilder.Entity<Cat>().ToTable((string)null).HasIndex(nameof(Animal.Name), nameof(Cat.Identity));
+            modelBuilder
+                .Entity<Cat>()
+                .ToTable((string)null)
+                .HasIndex(nameof(Animal.Name), nameof(Cat.Identity));
         }
     }
 
     [ConditionalFact]
     public virtual void UnnamedIndexPropertiesMappedToNonOverlappingTables_throws_by_default()
     {
-        using var context = new UnnamedIndexPropertiesMappedToNonOverlappingTablesContext(CreateOptionsBuilder(new ServiceCollection()));
+        using var context = new UnnamedIndexPropertiesMappedToNonOverlappingTablesContext(
+            CreateOptionsBuilder(new ServiceCollection())
+        );
 
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 RelationalEventId.IndexPropertiesMappedToNonOverlappingTables.ToString(),
-                RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(CreateTestLogger())
+                RelationalResources
+                    .LogUnnamedIndexPropertiesMappedToNonOverlappingTables(CreateTestLogger())
                     .GenerateMessage(
-                        nameof(Cat), "{'Name', 'Identity'}", nameof(Animal.Name), "{'Animals'}", nameof(Cat.Identity), "{'Cats'}"),
-                "RelationalEventId.IndexPropertiesMappedToNonOverlappingTables"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+                        nameof(Cat),
+                        "{'Name', 'Identity'}",
+                        nameof(Animal.Name),
+                        "{'Animals'}",
+                        nameof(Cat.Identity),
+                        "{'Cats'}"
+                    ),
+                "RelationalEventId.IndexPropertiesMappedToNonOverlappingTables"
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     protected class UnnamedIndexPropertiesMappedToNonOverlappingTablesContext : DbContext
     {
-        public UnnamedIndexPropertiesMappedToNonOverlappingTablesContext(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder.Options)
-        {
-        }
+        public UnnamedIndexPropertiesMappedToNonOverlappingTablesContext(
+            DbContextOptionsBuilder optionsBuilder
+        )
+            : base(optionsBuilder.Options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -110,47 +135,63 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
     [ConditionalFact]
     public virtual void ForeignKeyPropertiesMappedToUnrelatedTables_throws_by_default()
     {
-        using var context = new ForeignKeyPropertiesMappedToUnrelatedTablesContext(CreateOptionsBuilder(new ServiceCollection()));
+        using var context = new ForeignKeyPropertiesMappedToUnrelatedTablesContext(
+            CreateOptionsBuilder(new ServiceCollection())
+        );
 
-        var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(CreateTestLogger());
+        var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(
+            CreateTestLogger()
+        );
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables.ToString(),
-                definition
-                    .GenerateMessage(
-                        l => l.Log(
-                            definition.Level,
-                            definition.EventId,
-                            definition.MessageFormat,
-                            "{'FavoritePersonId'}", nameof(Cat), nameof(Person), "{'FavoritePersonId'}", nameof(Cat), "{'Id'}",
-                            nameof(Person))),
-                "RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+                definition.GenerateMessage(l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        "{'FavoritePersonId'}",
+                        nameof(Cat),
+                        nameof(Person),
+                        "{'FavoritePersonId'}",
+                        nameof(Cat),
+                        "{'Id'}",
+                        nameof(Person)
+                    )
+                ),
+                "RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables"
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     protected class ForeignKeyPropertiesMappedToUnrelatedTablesContext : DbContext
     {
-        public ForeignKeyPropertiesMappedToUnrelatedTablesContext(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder.Options)
-        {
-        }
+        public ForeignKeyPropertiesMappedToUnrelatedTablesContext(
+            DbContextOptionsBuilder optionsBuilder
+        )
+            : base(optionsBuilder.Options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Animal>()
+            modelBuilder
+                .Entity<Animal>()
                 .Ignore(a => a.FavoritePerson)
                 .Property<int>("FavoritePersonId");
-            modelBuilder.Entity<Cat>().ToTable("Cat")
-                .HasOne<Person>().WithMany()
+            modelBuilder
+                .Entity<Cat>()
+                .ToTable("Cat")
+                .HasOne<Person>()
+                .WithMany()
                 .HasForeignKey("FavoritePersonId");
         }
     }
 
     protected abstract DbContextOptionsBuilder CreateOptionsBuilder(
         IServiceCollection services,
-        Action<RelationalDbContextOptionsBuilder<TBuilder, TExtension>> relationalAction);
+        Action<RelationalDbContextOptionsBuilder<TBuilder, TExtension>> relationalAction
+    );
 
-    protected override DbContextOptionsBuilder CreateOptionsBuilder(IServiceCollection services)
-        => CreateOptionsBuilder(services, null);
+    protected override DbContextOptionsBuilder CreateOptionsBuilder(IServiceCollection services) =>
+        CreateOptionsBuilder(services, null);
 }

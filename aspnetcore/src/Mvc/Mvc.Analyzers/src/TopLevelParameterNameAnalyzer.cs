@@ -237,8 +237,7 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
 
             // Look for the binder type being specified in the constructor. This would match
             // [ModelBinder(typeof(SomeBinder))]
-            var constructorParameters =
-                attribute.AttributeConstructor?.Parameters
+            var constructorParameters = attribute.AttributeConstructor?.Parameters
                 ?? ImmutableArray<IParameterSymbol>.Empty;
             for (var i = 0; i < constructorParameters.Length; i++)
             {

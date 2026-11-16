@@ -19,13 +19,22 @@ namespace System.ServiceModel.Discovery
         AsyncCallback onSendCompletedCallback;
         AsyncCallback onCloseCompletedCallback;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int currentSendIndex;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         long completesCounter;
-        
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         long sendCompletesCounter;
 
         bool cancelled;
@@ -33,17 +42,31 @@ namespace System.ServiceModel.Discovery
         [Fx.Tag.SynchronizationObject()]
         object thisLock;
 
-        protected RandomDelaySendsAsyncResult(int numSends, TimeSpan maxDelay, AsyncCallback callback, object state)
-            : this(numSends, maxDelay, null, callback, state)
-        {
-        }
+        protected RandomDelaySendsAsyncResult(
+            int numSends,
+            TimeSpan maxDelay,
+            AsyncCallback callback,
+            object state
+        )
+            : this(numSends, maxDelay, null, callback, state) { }
 
-        protected RandomDelaySendsAsyncResult(int numSends, TimeSpan maxDelay, ICommunicationObject channel, AsyncCallback callback, object state)
-            : this(numSends, maxDelay, channel, null, callback, state)
-        {
-        }
+        protected RandomDelaySendsAsyncResult(
+            int numSends,
+            TimeSpan maxDelay,
+            ICommunicationObject channel,
+            AsyncCallback callback,
+            object state
+        )
+            : this(numSends, maxDelay, channel, null, callback, state) { }
 
-        protected RandomDelaySendsAsyncResult(int numSends, TimeSpan maxDelay, ICommunicationObject channel, Random random, AsyncCallback callback, object state)
+        protected RandomDelaySendsAsyncResult(
+            int numSends,
+            TimeSpan maxDelay,
+            ICommunicationObject channel,
+            Random random,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             Fx.Assert(numSends > 0, "The numSends must be positive.");
@@ -54,7 +77,9 @@ namespace System.ServiceModel.Discovery
             this.channel = channel;
             if (this.channel != null)
             {
-                this.onCloseCompletedCallback = Fx.ThunkCallback(new AsyncCallback(OnCloseCompleted));
+                this.onCloseCompletedCallback = Fx.ThunkCallback(
+                    new AsyncCallback(OnCloseCompleted)
+                );
             }
             this.numSends = numSends;
             this.maxDelay = maxDelay;
@@ -102,13 +127,25 @@ namespace System.ServiceModel.Discovery
 
         void StartZeroDelay()
         {
-            for (this.currentSendIndex = 0; this.currentSendIndex < this.numSends; this.currentSendIndex++)
+            for (
+                this.currentSendIndex = 0;
+                this.currentSendIndex < this.numSends;
+                this.currentSendIndex++
+            )
             {
-                IAsyncResult result = OnBeginSend(this.currentSendIndex, this.timeoutHelper.RemainingTime(), this.onSendCompletedCallback, null);
+                IAsyncResult result = OnBeginSend(
+                    this.currentSendIndex,
+                    this.timeoutHelper.RemainingTime(),
+                    this.onSendCompletedCallback,
+                    null
+                );
                 if (result.CompletedSynchronously)
                 {
                     OnEndSend(result);
-                    if (Threading.Interlocked.Increment(ref this.sendCompletesCounter) == this.numSends)
+                    if (
+                        Threading.Interlocked.Increment(ref this.sendCompletesCounter)
+                        == this.numSends
+                    )
                     {
                         CompleteSends(true);
                     }
@@ -131,7 +168,12 @@ namespace System.ServiceModel.Discovery
             bool compeletedSynchronously = false;
             try
             {
-                result = OnBeginSend(index, this.timeoutHelper.RemainingTime(), this.onSendCompletedCallback, null);
+                result = OnBeginSend(
+                    index,
+                    this.timeoutHelper.RemainingTime(),
+                    this.onSendCompletedCallback,
+                    null
+                );
                 if (result.CompletedSynchronously)
                 {
                     compeletedSynchronously = true;
@@ -154,7 +196,10 @@ namespace System.ServiceModel.Discovery
             {
                 if (compeletedSynchronously)
                 {
-                    if (Threading.Interlocked.Increment(ref this.sendCompletesCounter) == this.numSends)
+                    if (
+                        Threading.Interlocked.Increment(ref this.sendCompletesCounter)
+                        == this.numSends
+                    )
                     {
                         CompleteSends(false);
                     }
@@ -192,7 +237,10 @@ namespace System.ServiceModel.Discovery
                 }
                 else
                 {
-                    if (Threading.Interlocked.Increment(ref this.sendCompletesCounter) == this.numSends)
+                    if (
+                        Threading.Interlocked.Increment(ref this.sendCompletesCounter)
+                        == this.numSends
+                    )
                     {
                         CompleteSends(false);
                     }
@@ -208,7 +256,11 @@ namespace System.ServiceModel.Discovery
             {
                 try
                 {
-                    IAsyncResult result = this.channel.BeginClose(this.timeoutHelper.RemainingTime(), onCloseCompletedCallback, null);
+                    IAsyncResult result = this.channel.BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        onCloseCompletedCallback,
+                        null
+                    );
                     if (result.CompletedSynchronously)
                     {
                         this.channel.EndClose(result);
@@ -318,7 +370,12 @@ namespace System.ServiceModel.Discovery
             return (long)(ticks * randomGenerator.NextDouble());
         }
 
-        protected abstract IAsyncResult OnBeginSend(int index, TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginSend(
+            int index,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void OnEndSend(IAsyncResult result);
     }
 }

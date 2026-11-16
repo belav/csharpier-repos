@@ -23,7 +23,6 @@ namespace System.ComponentModel.Composition
             }
 
             public override TypeInfo MapType(TypeInfo type)
-
             {
                 return type;
             }

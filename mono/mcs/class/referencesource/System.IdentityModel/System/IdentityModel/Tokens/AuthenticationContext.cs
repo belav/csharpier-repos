@@ -12,10 +12,10 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     public class AuthenticationContext
     {
-        Collection<string> _authorities; 
+        Collection<string> _authorities;
         string _contextClass;
         string _contextDeclaration;
-        
+
         /// <summary>
         /// Creates an instance of AuthenticationContext.
         /// </summary>

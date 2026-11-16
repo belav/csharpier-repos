@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SourceGenerators
@@ -55,8 +55,7 @@ namespace SourceGenerators
                 AddIndentation();
                 AppendSpan(_sb, nextLine);
                 _sb.AppendLine();
-            }
-            while (!isFinalLine);
+            } while (!isFinalLine);
         }
 
         public void WriteLine() => _sb.AppendLine();
@@ -73,10 +72,13 @@ namespace SourceGenerators
             _indentation = 0;
         }
 
-        private void AddIndentation()
-            => _sb.Append(IndentationChar, CharsPerIndentation * _indentation);
+        private void AddIndentation() =>
+            _sb.Append(IndentationChar, CharsPerIndentation * _indentation);
 
-        private static ReadOnlySpan<char> GetNextLine(ref ReadOnlySpan<char> remainingText, out bool isFinalLine)
+        private static ReadOnlySpan<char> GetNextLine(
+            ref ReadOnlySpan<char> remainingText,
+            out bool isFinalLine
+        )
         {
             if (remainingText.IsEmpty)
             {

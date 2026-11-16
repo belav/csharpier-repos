@@ -5,20 +5,22 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Security.Cryptography.X509Certificates;
 
     public sealed partial class X509CertificateTrustedIssuerElement : ConfigurationElement
     {
-        public X509CertificateTrustedIssuerElement()
-        {
-        }
+        public X509CertificateTrustedIssuerElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.FindValue, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.FindValue,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string FindValue
         {
@@ -33,7 +35,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreLocation, DefaultValue = X509CertificateRecipientServiceCredential.DefaultStoreLocation, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreLocation,
+            DefaultValue = X509CertificateRecipientServiceCredential.DefaultStoreLocation,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreLocation))]
         public StoreLocation StoreLocation
         {
@@ -41,7 +47,11 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreLocation] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreName, DefaultValue = X509CertificateRecipientServiceCredential.DefaultStoreName, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreName,
+            DefaultValue = X509CertificateRecipientServiceCredential.DefaultStoreName,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreName))]
         public StoreName StoreName
         {
@@ -49,7 +59,11 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreName] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.X509FindType, DefaultValue = X509CertificateRecipientServiceCredential.DefaultFindType, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.X509FindType,
+            DefaultValue = X509CertificateRecipientServiceCredential.DefaultFindType,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StandardRuntimeEnumValidator(typeof(X509FindType))]
         public X509FindType X509FindType
         {
@@ -61,7 +75,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -75,6 +91,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

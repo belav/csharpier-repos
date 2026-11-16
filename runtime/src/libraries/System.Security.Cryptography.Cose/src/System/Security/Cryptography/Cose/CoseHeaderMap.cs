@@ -11,11 +11,14 @@ namespace System.Security.Cryptography.Cose
     /// <summary>
     /// Represents a collection of header parameters of a COSE message.
     /// </summary>
-    public sealed class CoseHeaderMap : IDictionary<CoseHeaderLabel, CoseHeaderValue>, IReadOnlyDictionary<CoseHeaderLabel, CoseHeaderValue>
+    public sealed class CoseHeaderMap
+        : IDictionary<CoseHeaderLabel, CoseHeaderValue>,
+            IReadOnlyDictionary<CoseHeaderLabel, CoseHeaderValue>
     {
         private static readonly CoseHeaderMap s_emptyMap = new CoseHeaderMap(isReadOnly: true);
 
-        private readonly Dictionary<CoseHeaderLabel, CoseHeaderValue> _headerParameters = new Dictionary<CoseHeaderLabel, CoseHeaderValue>();
+        private readonly Dictionary<CoseHeaderLabel, CoseHeaderValue> _headerParameters =
+            new Dictionary<CoseHeaderLabel, CoseHeaderValue>();
 
         /// <summary>
         /// Gets a value that indicates whether the header map is read-only.
@@ -27,14 +30,17 @@ namespace System.Security.Cryptography.Cose
         /// <summary>
         /// Initializes a new instance of the <see cref="CoseHeaderMap"/> class.
         /// </summary>
-        public CoseHeaderMap() : this(isReadOnly: false) { }
+        public CoseHeaderMap()
+            : this(isReadOnly: false) { }
 
         private CoseHeaderMap(bool isReadOnly)
         {
             IsReadOnly = isReadOnly;
         }
 
-        private ICollection<KeyValuePair<CoseHeaderLabel, CoseHeaderValue>> HeaderParametersAsCollection => _headerParameters;
+        private ICollection<
+            KeyValuePair<CoseHeaderLabel, CoseHeaderValue>
+        > HeaderParametersAsCollection => _headerParameters;
 
         /// <summary>
         /// Gets a collection containing the labels in the header map.
@@ -55,10 +61,12 @@ namespace System.Security.Cryptography.Cose
         public int Count => _headerParameters.Count;
 
         /// <inheritdoc/>
-        IEnumerable<CoseHeaderLabel> IReadOnlyDictionary<CoseHeaderLabel, CoseHeaderValue>.Keys => _headerParameters.Keys;
+        IEnumerable<CoseHeaderLabel> IReadOnlyDictionary<CoseHeaderLabel, CoseHeaderValue>.Keys =>
+            _headerParameters.Keys;
 
         /// <inheritdoc/>
-        IEnumerable<CoseHeaderValue> IReadOnlyDictionary<CoseHeaderLabel, CoseHeaderValue>.Values => _headerParameters.Values;
+        IEnumerable<CoseHeaderValue> IReadOnlyDictionary<CoseHeaderLabel, CoseHeaderValue>.Values =>
+            _headerParameters.Values;
 
         /// <summary>
         /// Gets or sets the value associated with the specified label.
@@ -86,7 +94,8 @@ namespace System.Security.Cryptography.Cose
         /// <returns>The value associated with the specified label, as a signed integer.</returns>
         /// <exception cref="InvalidOperationException">The value could not be decoded as a 32-bit signed integer.</exception>
         /// <exception cref="KeyNotFoundException"><paramref name="label"/> is not found.</exception>
-        public int GetValueAsInt32(CoseHeaderLabel label) => _headerParameters[label].GetValueAsInt32();
+        public int GetValueAsInt32(CoseHeaderLabel label) =>
+            _headerParameters[label].GetValueAsInt32();
 
         /// <summary>
         /// Gets the value associated with the specified label, as a text string.
@@ -95,7 +104,8 @@ namespace System.Security.Cryptography.Cose
         /// <returns>The value associated with the specified label, as a text string.</returns>
         /// <exception cref="InvalidOperationException">The value could not be decoded as text string.</exception>
         /// <exception cref="KeyNotFoundException"><paramref name="label"/> is not found.</exception>
-        public string GetValueAsString(CoseHeaderLabel label) => _headerParameters[label].GetValueAsString();
+        public string GetValueAsString(CoseHeaderLabel label) =>
+            _headerParameters[label].GetValueAsString();
 
         /// <summary>
         /// Gets the value associated with the specified label, as a byte string.
@@ -103,7 +113,8 @@ namespace System.Security.Cryptography.Cose
         /// <param name="label">The label of the value to get.</param>
         /// <returns>The value associated with the specified label, as a byte string.</returns>
         /// <exception cref="InvalidOperationException">The value could not be decoded as byte string.</exception>
-        public byte[] GetValueAsBytes(CoseHeaderLabel label) => _headerParameters[label].GetValueAsBytes();
+        public byte[] GetValueAsBytes(CoseHeaderLabel label) =>
+            _headerParameters[label].GetValueAsBytes();
 
         /// <summary>
         /// Gets the value associated with the specified label, as a byte string.
@@ -114,7 +125,8 @@ namespace System.Security.Cryptography.Cose
         /// <exception cref="ArgumentException"><paramref name="destination"/> is too small to hold the value.</exception>
         /// <exception cref="InvalidOperationException">The value could not be decoded as byte string.</exception>
         /// <exception cref="KeyNotFoundException"><paramref name="label"/> is not found.</exception>
-        public int GetValueAsBytes(CoseHeaderLabel label, Span<byte> destination) => _headerParameters[label].GetValueAsBytes(destination);
+        public int GetValueAsBytes(CoseHeaderLabel label, Span<byte> destination) =>
+            _headerParameters[label].GetValueAsBytes(destination);
 
         /// <summary>
         /// Adds the specified key and value to the dictionary.
@@ -136,7 +148,8 @@ namespace System.Security.Cryptography.Cose
         /// <param name="item">The label (key) and value to add to the header map.</param>
         /// <exception cref="InvalidOperationException">The header map is read-only.</exception>
         /// <exception cref="ArgumentException"><paramref name="item"/>'s value is not a valid CBOR value.</exception>
-        public void Add(KeyValuePair<CoseHeaderLabel, CoseHeaderValue> item) => Add(item.Key, item.Value);
+        public void Add(KeyValuePair<CoseHeaderLabel, CoseHeaderValue> item) =>
+            Add(item.Key, item.Value);
 
         /// <summary>
         /// Adds the specified label and value to the header map.
@@ -144,7 +157,8 @@ namespace System.Security.Cryptography.Cose
         /// <param name="label">The label for the header to add.</param>
         /// <param name="value">The value of the header to add.</param>
         /// <exception cref="InvalidOperationException">The header map is read-only.</exception>
-        public void Add(CoseHeaderLabel label, int value) => Add(label, CoseHeaderValue.FromInt32(value));
+        public void Add(CoseHeaderLabel label, int value) =>
+            Add(label, CoseHeaderValue.FromInt32(value));
 
         /// <summary>
         /// Adds the specified label and value to the header map.
@@ -152,19 +166,8 @@ namespace System.Security.Cryptography.Cose
         /// <param name="label">The label for the header to add.</param>
         /// <param name="value">The value of the header to add.</param>
         /// <exception cref="InvalidOperationException">The header map is read-only.</exception>
-        public void Add(CoseHeaderLabel label, string value) => Add(label, CoseHeaderValue.FromString(value));
-
-        /// <summary>
-        /// Adds the specified label and value to the header map.
-        /// </summary>
-        /// <param name="label">The label for the header to add.</param>
-        /// <param name="value">The value of the header to add.</param>
-        /// <exception cref="InvalidOperationException">The header map is read-only.</exception>
-        /// <remarks>
-        /// <paramref name="value"/> does not need to contain a valid CBOR-encoded value, as it will be encoded as a CBOR byte string.
-        /// To specify a CBOR-encoded value directly, see <see cref="CoseHeaderValue.FromEncodedValue(ReadOnlySpan{byte})"/> and <see cref="Add(CoseHeaderLabel, CoseHeaderValue)"/>.
-        /// </remarks>
-        public void Add(CoseHeaderLabel label, byte[] value) => Add(label, CoseHeaderValue.FromBytes(value));
+        public void Add(CoseHeaderLabel label, string value) =>
+            Add(label, CoseHeaderValue.FromString(value));
 
         /// <summary>
         /// Adds the specified label and value to the header map.
@@ -176,13 +179,28 @@ namespace System.Security.Cryptography.Cose
         /// <paramref name="value"/> does not need to contain a valid CBOR-encoded value, as it will be encoded as a CBOR byte string.
         /// To specify a CBOR-encoded value directly, see <see cref="CoseHeaderValue.FromEncodedValue(ReadOnlySpan{byte})"/> and <see cref="Add(CoseHeaderLabel, CoseHeaderValue)"/>.
         /// </remarks>
-        public void Add(CoseHeaderLabel label, ReadOnlySpan<byte> value) => Add(label, CoseHeaderValue.FromBytes(value));
+        public void Add(CoseHeaderLabel label, byte[] value) =>
+            Add(label, CoseHeaderValue.FromBytes(value));
+
+        /// <summary>
+        /// Adds the specified label and value to the header map.
+        /// </summary>
+        /// <param name="label">The label for the header to add.</param>
+        /// <param name="value">The value of the header to add.</param>
+        /// <exception cref="InvalidOperationException">The header map is read-only.</exception>
+        /// <remarks>
+        /// <paramref name="value"/> does not need to contain a valid CBOR-encoded value, as it will be encoded as a CBOR byte string.
+        /// To specify a CBOR-encoded value directly, see <see cref="CoseHeaderValue.FromEncodedValue(ReadOnlySpan{byte})"/> and <see cref="Add(CoseHeaderLabel, CoseHeaderValue)"/>.
+        /// </remarks>
+        public void Add(CoseHeaderLabel label, ReadOnlySpan<byte> value) =>
+            Add(label, CoseHeaderValue.FromBytes(value));
 
         /// <inheritdoc/>
         public bool ContainsKey(CoseHeaderLabel key) => _headerParameters.ContainsKey(key);
 
         /// <inheritdoc/>
-        public bool TryGetValue(CoseHeaderLabel key, out CoseHeaderValue value) => _headerParameters.TryGetValue(key, out value);
+        public bool TryGetValue(CoseHeaderLabel key, out CoseHeaderValue value) =>
+            _headerParameters.TryGetValue(key, out value);
 
         /// <summary>
         /// Removes all labels and values from the header map.
@@ -195,20 +213,21 @@ namespace System.Security.Cryptography.Cose
         }
 
         /// <inheritdoc/>
-        public bool Contains(KeyValuePair<CoseHeaderLabel, CoseHeaderValue> item)
-            => HeaderParametersAsCollection.Contains(item);
+        public bool Contains(KeyValuePair<CoseHeaderLabel, CoseHeaderValue> item) =>
+            HeaderParametersAsCollection.Contains(item);
 
         /// <inheritdoc/>
-        public void CopyTo(KeyValuePair<CoseHeaderLabel, CoseHeaderValue>[] array, int arrayIndex)
-            => HeaderParametersAsCollection.CopyTo(array, arrayIndex);
+        public void CopyTo(
+            KeyValuePair<CoseHeaderLabel, CoseHeaderValue>[] array,
+            int arrayIndex
+        ) => HeaderParametersAsCollection.CopyTo(array, arrayIndex);
 
         /// <inheritdoc/>
-        public IEnumerator<KeyValuePair<CoseHeaderLabel, CoseHeaderValue>> GetEnumerator()
-            => _headerParameters.GetEnumerator();
+        public IEnumerator<KeyValuePair<CoseHeaderLabel, CoseHeaderValue>> GetEnumerator() =>
+            _headerParameters.GetEnumerator();
 
         /// <inheritdoc/>
-        IEnumerator IEnumerable.GetEnumerator()
-            => _headerParameters.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _headerParameters.GetEnumerator();
 
         /// <summary>
         /// Removes the value with the specified label from the header map.
@@ -238,7 +257,9 @@ namespace System.Security.Cryptography.Cose
         {
             if (IsReadOnly)
             {
-                throw new InvalidOperationException(SR.CoseHeaderMapDecodedMapIsReadOnlyCannotSetValue);
+                throw new InvalidOperationException(
+                    SR.CoseHeaderMapDecodedMapIsReadOnlyCannotSetValue
+                );
             }
         }
 
@@ -257,11 +278,19 @@ namespace System.Security.Cryptography.Cose
                     switch (label.LabelAsInt32)
                     {
                         case KnownHeaders.Alg:
-                            if (initialState != CborReaderState.NegativeInteger &&
-                                initialState != CborReaderState.UnsignedInteger &&
-                                initialState != CborReaderState.TextString)
+                            if (
+                                initialState != CborReaderState.NegativeInteger
+                                && initialState != CborReaderState.UnsignedInteger
+                                && initialState != CborReaderState.TextString
+                            )
                             {
-                                throw new ArgumentException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label.LabelName), nameof(value));
+                                throw new ArgumentException(
+                                    SR.Format(
+                                        SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue,
+                                        label.LabelName
+                                    ),
+                                    nameof(value)
+                                );
                             }
                             reader.SkipValue();
                             break;
@@ -277,7 +306,10 @@ namespace System.Security.Cryptography.Cose
                                     reader.ReadEndArray();
                                     break;
                                 }
-                                else if (state == CborReaderState.UnsignedInteger || state == CborReaderState.NegativeInteger)
+                                else if (
+                                    state == CborReaderState.UnsignedInteger
+                                    || state == CborReaderState.NegativeInteger
+                                )
                                 {
                                     reader.ReadInt32();
                                 }
@@ -287,28 +319,51 @@ namespace System.Security.Cryptography.Cose
                                 }
                                 else
                                 {
-                                    throw new ArgumentException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label.LabelName), nameof(value));
+                                    throw new ArgumentException(
+                                        SR.Format(
+                                            SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue,
+                                            label.LabelName
+                                        ),
+                                        nameof(value)
+                                    );
                                 }
                                 isEmpty = false;
                             }
 
                             if (isEmpty)
                             {
-                                throw new ArgumentException(SR.CriticalHeadersMustBeArrayOfAtLeastOne, nameof(value));
+                                throw new ArgumentException(
+                                    SR.CriticalHeadersMustBeArrayOfAtLeastOne,
+                                    nameof(value)
+                                );
                             }
                             break;
                         case KnownHeaders.ContentType:
-                            if (initialState != CborReaderState.TextString &&
-                                initialState != CborReaderState.UnsignedInteger)
+                            if (
+                                initialState != CborReaderState.TextString
+                                && initialState != CborReaderState.UnsignedInteger
+                            )
                             {
-                                throw new ArgumentException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label.LabelName), nameof(value));
+                                throw new ArgumentException(
+                                    SR.Format(
+                                        SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue,
+                                        label.LabelName
+                                    ),
+                                    nameof(value)
+                                );
                             }
                             reader.SkipValue();
                             break;
                         case KnownHeaders.Kid:
                             if (initialState != CborReaderState.ByteString)
                             {
-                                throw new ArgumentException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label.LabelName), nameof(value));
+                                throw new ArgumentException(
+                                    SR.Format(
+                                        SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue,
+                                        label.LabelName
+                                    ),
+                                    nameof(value)
+                                );
                             }
                             reader.SkipValue();
                             break;
@@ -325,11 +380,20 @@ namespace System.Security.Cryptography.Cose
             }
             catch (Exception ex) when (ex is CborContentException or InvalidOperationException)
             {
-                throw new ArgumentException(SR.Format(SR.CoseHeaderMapArgumentCoseHeaderValueIncorrect, label.LabelName), nameof(value), ex);
+                throw new ArgumentException(
+                    SR.Format(SR.CoseHeaderMapArgumentCoseHeaderValueIncorrect, label.LabelName),
+                    nameof(value),
+                    ex
+                );
             }
         }
 
-        internal static int Encode(CoseHeaderMap? map, Span<byte> destination, bool isProtected = false, int? algHeaderValueToSlip = null)
+        internal static int Encode(
+            CoseHeaderMap? map,
+            Span<byte> destination,
+            bool isProtected = false,
+            int? algHeaderValueToSlip = null
+        )
         {
             map ??= s_emptyMap;
             bool shouldSlipAlgHeader = algHeaderValueToSlip.HasValue;

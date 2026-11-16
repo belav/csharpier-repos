@@ -14,13 +14,16 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    // This 
+    // This
     internal class ReflectionComposablePart : ComposablePart, ICompositionElement
     {
         private readonly ReflectionComposablePartDefinition _definition;
-        private readonly Dictionary<ImportDefinition, object> _importValues = new Dictionary<ImportDefinition, object>();
-        private readonly Dictionary<ImportDefinition, ImportingItem> _importsCache = new Dictionary<ImportDefinition, ImportingItem>();
-        private readonly Dictionary<int, ExportingMember> _exportsCache = new Dictionary<int, ExportingMember>();
+        private readonly Dictionary<ImportDefinition, object> _importValues =
+            new Dictionary<ImportDefinition, object>();
+        private readonly Dictionary<ImportDefinition, ImportingItem> _importsCache =
+            new Dictionary<ImportDefinition, ImportingItem>();
+        private readonly Dictionary<int, ExportingMember> _exportsCache =
+            new Dictionary<int, ExportingMember>();
         private bool _invokeImportsSatisfied = true;
         private bool _invokingImportsSatisfied = false;
         private bool _initialCompositionComplete = false;
@@ -34,7 +37,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             this._definition = definition;
         }
 
-        public ReflectionComposablePart(ReflectionComposablePartDefinition definition, object attributedPart)
+        public ReflectionComposablePart(
+            ReflectionComposablePartDefinition definition,
+            object attributedPart
+        )
         {
             Requires.NotNull(definition, "definition");
             Requires.NotNull(attributedPart, "attributedPart");
@@ -48,9 +54,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             this._cachedInstance = attributedPart;
         }
 
-        protected virtual void EnsureRunning()
-        {
-        }
+        protected virtual void EnsureRunning() { }
 
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Contracts", "CC1053")]
@@ -59,9 +63,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             this.EnsureRunning();
         }
 
-        protected virtual void ReleaseInstanceIfNecessary(object instance)
-        {
-        }
+        protected virtual void ReleaseInstanceIfNecessary(object instance) { }
 
         protected object CachedInstance
         {
@@ -76,10 +78,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public ReflectionComposablePartDefinition Definition
         {
-            get 
+            get
             {
                 this.RequiresRunning();
-                return this._definition; 
+                return this._definition;
             }
         }
 
@@ -140,7 +142,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 member = GetExportingMemberFromDefinition(definition);
                 if (member == null)
                 {
-                    throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart("definition");
+                    throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(
+                        "definition"
+                    );
                 }
                 this.EnsureGettable();
             }
@@ -152,7 +156,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             this.RequiresRunning();
             Requires.NotNull(definition, "definition");
-            Requires.NotNull(exports, "exports");;
+            Requires.NotNull(exports, "exports");
+            ;
 
             ImportingItem item = GetImportingItemFromDefinition(definition);
             if (item == null)
@@ -193,8 +198,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             object instance = null;
             if (member.RequiresInstance)
-            {   // Only activate the instance if we actually need to
-
+            { // Only activate the instance if we actually need to
                 instance = this.GetInstanceActivatingIfNeeded();
             }
 
@@ -235,10 +239,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     if (constructor == null)
                     {
                         throw new ComposablePartException(
-                            String.Format(CultureInfo.CurrentCulture,
+                            String.Format(
+                                CultureInfo.CurrentCulture,
                                 Strings.ReflectionModel_PartConstructorMissing,
-                                this.Definition.GetPartType().FullName),
-                            this.Definition.ToElement());
+                                this.Definition.GetPartType().FullName
+                            ),
+                            this.Definition.ToElement()
+                        );
                     }
                     arguments = this.GetConstructorArguments();
                 }
@@ -270,26 +277,35 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private object[] GetConstructorArguments()
         {
-            ReflectionParameterImportDefinition[] parameterImports = this.ImportDefinitions.OfType<ReflectionParameterImportDefinition>().ToArray();
+            ReflectionParameterImportDefinition[] parameterImports = this
+                .ImportDefinitions.OfType<ReflectionParameterImportDefinition>()
+                .ToArray();
             object[] arguments = new object[parameterImports.Length];
 
             this.UseImportedValues(
                 parameterImports,
                 (import, definition, value) =>
                 {
-                    if (definition.Cardinality == ImportCardinality.ZeroOrMore && !import.ImportType.IsAssignableCollectionType)
+                    if (
+                        definition.Cardinality == ImportCardinality.ZeroOrMore
+                        && !import.ImportType.IsAssignableCollectionType
+                    )
                     {
                         throw new ComposablePartException(
-                            String.Format(CultureInfo.CurrentCulture,
+                            String.Format(
+                                CultureInfo.CurrentCulture,
                                 Strings.ReflectionModel_ImportManyOnParameterCanOnlyBeAssigned,
                                 this.Definition.GetPartType().FullName,
-                                definition.ImportingLazyParameter.Value.Name),
-                            this.Definition.ToElement());
+                                definition.ImportingLazyParameter.Value.Name
+                            ),
+                            this.Definition.ToElement()
+                        );
                     }
 
                     arguments[definition.ImportingLazyParameter.Value.Position] = value;
                 },
-                true);
+                true
+            );
 
             return arguments;
         }
@@ -304,7 +320,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 return true;
             }
 
-            // If we have any instance exports, then we also 
+            // If we have any instance exports, then we also
             // need activation.
             return this.ExportDefinitions.Any(definition =>
             {
@@ -317,7 +333,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         // this is called under a lock
         private void EnsureGettable()
         {
-            // If we're already composed then we know that 
+            // If we're already composed then we know that
             // all pre-req imports have been satisfied
             if (_initialCompositionComplete)
             {
@@ -325,13 +341,21 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
 
             // Make sure all pre-req imports have been set
-            foreach (ImportDefinition definition in ImportDefinitions.Where(definition => definition.IsPrerequisite))
+            foreach (
+                ImportDefinition definition in ImportDefinitions.Where(definition =>
+                    definition.IsPrerequisite
+                )
+            )
             {
                 if (!this._importValues.ContainsKey(definition))
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                            Strings.InvalidOperation_GetExportedValueBeforePrereqImportSet,
-                                                            definition.ToElement().DisplayName));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Strings.InvalidOperation_GetExportedValueBeforePrereqImportSet,
+                            definition.ToElement().DisplayName
+                        )
+                    );
                 }
             }
         }
@@ -342,7 +366,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (this._initialCompositionComplete && !definition.IsRecomposable)
                 {
-                    throw new InvalidOperationException(Strings.InvalidOperation_DefinitionCannotBeRecomposed);
+                    throw new InvalidOperationException(
+                        Strings.InvalidOperation_DefinitionCannotBeRecomposed
+                    );
                 }
             }
         }
@@ -351,7 +377,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Requires.NullOrNotNullElements(exports, "exports");
 
-            ExportCardinalityCheckResult result = ExportServices.CheckCardinality(definition, exports);
+            ExportCardinalityCheckResult result = ExportServices.CheckCardinality(
+                definition,
+                exports
+            );
 
             switch (result)
             {
@@ -368,7 +397,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         private object CreateInstance(ConstructorInfo constructor, object[] arguments)
-        { 
+        {
             Exception exception = null;
             object instance = null;
 
@@ -376,23 +405,26 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 instance = constructor.SafeInvoke(arguments);
             }
-            catch (TypeInitializationException ex) 
-            { 
-                exception = ex; 
+            catch (TypeInitializationException ex)
+            {
+                exception = ex;
             }
             catch (TargetInvocationException ex)
             {
                 exception = ex.InnerException;
             }
-            
+
             if (exception != null)
             {
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_PartConstructorThrewException,
-                        Definition.GetPartType().FullName),
+                        Definition.GetPartType().FullName
+                    ),
                     Definition.ToElement(),
-                    exception);
+                    exception
+                );
             }
 
             return instance;
@@ -400,7 +432,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private void SetNonPrerequisiteImports()
         {
-            IEnumerable<ImportDefinition> members = this.ImportDefinitions.Where(import => !import.IsPrerequisite);
+            IEnumerable<ImportDefinition> members = this.ImportDefinitions.Where(import =>
+                !import.IsPrerequisite
+            );
 
             // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative composition
             this.UseImportedValues(members, SetExportedValueForImport, false);
@@ -408,13 +442,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private void SetPrerequisiteImports()
         {
-            IEnumerable<ImportDefinition> members = this.ImportDefinitions.Where(import => import.IsPrerequisite);
+            IEnumerable<ImportDefinition> members = this.ImportDefinitions.Where(import =>
+                import.IsPrerequisite
+            );
 
             // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative composition
             this.UseImportedValues(members, SetExportedValueForImport, false);
         }
 
-        private void SetExportedValueForImport(ImportingItem import, ImportDefinition definition, object value)
+        private void SetExportedValueForImport(
+            ImportingItem import,
+            ImportDefinition definition,
+            object value
+        )
         {
             ImportingMember importMember = (ImportingMember)import;
 
@@ -423,7 +463,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             importMember.SetExportedValue(instance, value);
         }
 
-        private void UseImportedValues<TImportDefinition>(IEnumerable<TImportDefinition> definitions, Action<ImportingItem, TImportDefinition, object> useImportValue, bool errorIfMissing)
+        private void UseImportedValues<TImportDefinition>(
+            IEnumerable<TImportDefinition> definitions,
+            Action<ImportingItem, TImportDefinition, object> useImportValue,
+            bool errorIfMissing
+        )
             where TImportDefinition : ImportDefinition
         {
             var result = CompositionResult.SucceededResult;
@@ -446,7 +490,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                             CompositionErrorId.ImportNotSetOnPart,
                             Strings.ImportNotSetOnPart,
                             this.Definition.GetPartType().FullName,
-                            definition.ToString());
+                            definition.ToString()
+                        );
                         result = result.MergeError(error);
                         continue;
                     }
@@ -482,12 +527,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             if (this._invokeImportsSatisfied && !this._invokingImportsSatisfied)
             {
-                IPartImportsSatisfiedNotification notify = this.GetInstanceActivatingIfNeeded() as IPartImportsSatisfiedNotification;
+                IPartImportsSatisfiedNotification notify =
+                    this.GetInstanceActivatingIfNeeded() as IPartImportsSatisfiedNotification;
                 if (notify != null)
                 {
                     try
                     {
-                        // Reentrancy on composition notifications is allowed, so set this first to avoid 
+                        // Reentrancy on composition notifications is allowed, so set this first to avoid
                         // an infinte loop of notifications.
                         this._invokingImportsSatisfied = true;
 
@@ -496,11 +542,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     catch (Exception exception)
                     {
                         throw new ComposablePartException(
-                            String.Format(CultureInfo.CurrentCulture,
+                            String.Format(
+                                CultureInfo.CurrentCulture,
                                 Strings.ReflectionModel_PartOnImportsSatisfiedThrewException,
-                                Definition.GetPartType().FullName),
+                                Definition.GetPartType().FullName
+                            ),
                             Definition.ToElement(),
-                            exception);
+                            exception
+                        );
                     }
                     finally
                     {
@@ -516,7 +565,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private ExportingMember GetExportingMemberFromDefinition(ExportDefinition definition)
         {
             ExportingMember result;
-            ReflectionMemberExportDefinition reflectionExport = definition as ReflectionMemberExportDefinition;
+            ReflectionMemberExportDefinition reflectionExport =
+                definition as ReflectionMemberExportDefinition;
             if (reflectionExport == null)
             {
                 return null;
@@ -552,7 +602,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static ImportingItem GetImportingItem(ImportDefinition definition)
         {
-            ReflectionImportDefinition reflectionDefinition = definition as ReflectionImportDefinition;
+            ReflectionImportDefinition reflectionDefinition =
+                definition as ReflectionImportDefinition;
             if (reflectionDefinition != null)
             {
                 return reflectionDefinition.ToImportingItem();
@@ -564,7 +615,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static ExportingMember GetExportingMember(ExportDefinition definition)
         {
-            ReflectionMemberExportDefinition exportDefinition = definition as ReflectionMemberExportDefinition;
+            ReflectionMemberExportDefinition exportDefinition =
+                definition as ReflectionMemberExportDefinition;
             if (exportDefinition != null)
             {
                 return exportDefinition.ToExportingMember();

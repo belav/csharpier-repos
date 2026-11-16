@@ -2,19 +2,17 @@
 
 namespace Test
 {
-	using System;
+    using System;
 
-	/// <summary>Documentation Text</summary>
-	public delegate void FirstTestDelegate<T> (T obj) where T : Exception;
+    /// <summary>Documentation Text</summary>
+    public delegate void FirstTestDelegate<T>(T obj)
+        where T : Exception;
 
-	/// <summary>test</summary>
-	public interface TestInterface { }
+    /// <summary>test</summary>
+    public interface TestInterface { }
 }
 
 class A
 {
-	static void Main ()
-	{
-	}
+    static void Main() { }
 }
-

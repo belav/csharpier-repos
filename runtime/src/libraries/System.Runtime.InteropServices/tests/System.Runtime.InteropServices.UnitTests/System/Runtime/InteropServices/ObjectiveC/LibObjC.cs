@@ -3,9 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Xunit;
-
 using static System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal;
 
 namespace System.Runtime.InteropServices.Tests
@@ -28,7 +26,11 @@ namespace System.Runtime.InteropServices.Tests
         public static extern IntPtr objc_msgSendSuper(IntPtr super, IntPtr selector);
 
         [DllImport(LibName)]
-        public static extern void objc_msgSendSuper_stret(out IntPtr ret, IntPtr super, IntPtr selector);
+        public static extern void objc_msgSendSuper_stret(
+            out IntPtr ret,
+            IntPtr super,
+            IntPtr selector
+        );
 
         [DllImport(LibName)]
         public static extern IntPtr objc_getClass(string className);
@@ -48,10 +50,14 @@ namespace System.Runtime.InteropServices.Tests
         {
             // The objc_msgSend_fpret, objc_msgSend_stret, and objc_msgSendSuper_stret exports
             // are not present on the ARM64 platform.
-            if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64
-                && (msgSend == MessageSendFunction.MsgSendFpret
+            if (
+                RuntimeInformation.ProcessArchitecture == Architecture.Arm64
+                && (
+                    msgSend == MessageSendFunction.MsgSendFpret
                     || msgSend == MessageSendFunction.MsgSendStret
-                    || msgSend == MessageSendFunction.MsgSendSuperStret))
+                    || msgSend == MessageSendFunction.MsgSendSuperStret
+                )
+            )
             {
                 return false;
             }
@@ -82,7 +88,9 @@ namespace System.Runtime.InteropServices.Tests
                     return ret;
                 }
                 default:
-                    throw new ArgumentException($"Unknown {nameof(MessageSendFunction)}: {msgSend}");
+                    throw new ArgumentException(
+                        $"Unknown {nameof(MessageSendFunction)}: {msgSend}"
+                    );
             }
         }
     }

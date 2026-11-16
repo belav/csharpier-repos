@@ -4,19 +4,23 @@
 
 namespace System.Runtime.Serialization.Json
 {
+    using System.Security;
     using System.Threading;
     using System.Xml;
-    using System.Security;
 
     class JsonCollectionDataContract : JsonDataContract
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         JsonCollectionDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         public JsonCollectionDataContract(CollectionDataContract traditionalDataContract)
             : base(new JsonCollectionDataContractCriticalHelper(traditionalDataContract))
@@ -26,8 +30,10 @@ namespace System.Runtime.Serialization.Json
 
         internal JsonFormatCollectionReaderDelegate JsonFormatReaderDelegate
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical JsonFormatReaderDelegate property.",
-                Safe = "JsonFormatReaderDelegate only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical JsonFormatReaderDelegate property.",
+                Safe = "JsonFormatReaderDelegate only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -39,9 +45,15 @@ namespace System.Runtime.Serialization.Json
                         {
                             if (TraditionalCollectionDataContract.IsReadOnlyContract)
                             {
-                                DataContract.ThrowInvalidDataContractException(TraditionalCollectionDataContract.DeserializationExceptionMessage, null /*type*/);
+                                DataContract.ThrowInvalidDataContractException(
+                                    TraditionalCollectionDataContract.DeserializationExceptionMessage,
+                                    null /*type*/
+                                );
                             }
-                            JsonFormatCollectionReaderDelegate tempDelegate = new JsonFormatReaderGenerator().GenerateCollectionReader(TraditionalCollectionDataContract);
+                            JsonFormatCollectionReaderDelegate tempDelegate =
+                                new JsonFormatReaderGenerator().GenerateCollectionReader(
+                                    TraditionalCollectionDataContract
+                                );
                             Thread.MemoryBarrier();
                             helper.JsonFormatReaderDelegate = tempDelegate;
                         }
@@ -53,8 +65,10 @@ namespace System.Runtime.Serialization.Json
 
         internal JsonFormatGetOnlyCollectionReaderDelegate JsonFormatGetOnlyReaderDelegate
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical JsonFormatGetOnlyReaderDelegate property.",
-                Safe = "JsonFormatGetOnlyReaderDelegate only needs to be protected for write; initialized in getter if null.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical JsonFormatGetOnlyReaderDelegate property.",
+                Safe = "JsonFormatGetOnlyReaderDelegate only needs to be protected for write; initialized in getter if null."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -65,15 +79,37 @@ namespace System.Runtime.Serialization.Json
                         if (helper.JsonFormatGetOnlyReaderDelegate == null)
                         {
                             CollectionKind kind = this.TraditionalCollectionDataContract.Kind;
-                            if (this.TraditionalDataContract.UnderlyingType.IsInterface && (kind == CollectionKind.Enumerable || kind == CollectionKind.Collection || kind == CollectionKind.GenericEnumerable))
+                            if (
+                                this.TraditionalDataContract.UnderlyingType.IsInterface
+                                && (
+                                    kind == CollectionKind.Enumerable
+                                    || kind == CollectionKind.Collection
+                                    || kind == CollectionKind.GenericEnumerable
+                                )
+                            )
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.GetOnlyCollectionMustHaveAddMethod, DataContract.GetClrTypeFullName(this.TraditionalDataContract.UnderlyingType))));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidDataContractException(
+                                        SR.GetString(
+                                            SR.GetOnlyCollectionMustHaveAddMethod,
+                                            DataContract.GetClrTypeFullName(
+                                                this.TraditionalDataContract.UnderlyingType
+                                            )
+                                        )
+                                    )
+                                );
                             }
                             if (TraditionalCollectionDataContract.IsReadOnlyContract)
                             {
-                                DataContract.ThrowInvalidDataContractException(TraditionalCollectionDataContract.DeserializationExceptionMessage, null /*type*/);
+                                DataContract.ThrowInvalidDataContractException(
+                                    TraditionalCollectionDataContract.DeserializationExceptionMessage,
+                                    null /*type*/
+                                );
                             }
-                            JsonFormatGetOnlyCollectionReaderDelegate tempDelegate = new JsonFormatReaderGenerator().GenerateGetOnlyCollectionReader(TraditionalCollectionDataContract);
+                            JsonFormatGetOnlyCollectionReaderDelegate tempDelegate =
+                                new JsonFormatReaderGenerator().GenerateGetOnlyCollectionReader(
+                                    TraditionalCollectionDataContract
+                                );
                             Thread.MemoryBarrier();
                             helper.JsonFormatGetOnlyReaderDelegate = tempDelegate;
                         }
@@ -85,8 +121,10 @@ namespace System.Runtime.Serialization.Json
 
         internal JsonFormatCollectionWriterDelegate JsonFormatWriterDelegate
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical JsonFormatWriterDelegate property.",
-                Safe = "JsonFormatWriterDelegate only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical JsonFormatWriterDelegate property.",
+                Safe = "JsonFormatWriterDelegate only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -96,7 +134,10 @@ namespace System.Runtime.Serialization.Json
                     {
                         if (helper.JsonFormatWriterDelegate == null)
                         {
-                            JsonFormatCollectionWriterDelegate tempDelegate = new JsonFormatWriterGenerator().GenerateCollectionWriter(TraditionalCollectionDataContract);
+                            JsonFormatCollectionWriterDelegate tempDelegate =
+                                new JsonFormatWriterGenerator().GenerateCollectionWriter(
+                                    TraditionalCollectionDataContract
+                                );
                             Thread.MemoryBarrier();
                             helper.JsonFormatWriterDelegate = tempDelegate;
                         }
@@ -108,39 +149,63 @@ namespace System.Runtime.Serialization.Json
 
         CollectionDataContract TraditionalCollectionDataContract
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical TraditionalCollectionDataContract property.",
-                Safe = "TraditionalCollectionDataContract only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical TraditionalCollectionDataContract property.",
+                Safe = "TraditionalCollectionDataContract only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.TraditionalCollectionDataContract; }
         }
 
-        public override object ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public override object ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             jsonReader.Read();
             object o = null;
             if (context.IsGetOnlyCollection)
             {
-                // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset. 
+                // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
                 context.IsGetOnlyCollection = false;
-                JsonFormatGetOnlyReaderDelegate(jsonReader, context, XmlDictionaryString.Empty, JsonGlobals.itemDictionaryString, TraditionalCollectionDataContract);
+                JsonFormatGetOnlyReaderDelegate(
+                    jsonReader,
+                    context,
+                    XmlDictionaryString.Empty,
+                    JsonGlobals.itemDictionaryString,
+                    TraditionalCollectionDataContract
+                );
             }
             else
             {
-                o = JsonFormatReaderDelegate(jsonReader, context, XmlDictionaryString.Empty, JsonGlobals.itemDictionaryString, TraditionalCollectionDataContract);
+                o = JsonFormatReaderDelegate(
+                    jsonReader,
+                    context,
+                    XmlDictionaryString.Empty,
+                    JsonGlobals.itemDictionaryString,
+                    TraditionalCollectionDataContract
+                );
             }
             jsonReader.ReadEndElement();
             return o;
         }
 
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
-            // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset. 
+            // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
             context.IsGetOnlyCollection = false;
             JsonFormatWriterDelegate(jsonWriter, obj, context, TraditionalCollectionDataContract);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for (de)serializing types."
-            + "Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for (de)serializing types."
+                + "Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
 #pragma warning disable 618 // have not moved to the v4 security model yet
         [SecurityCritical(SecurityCriticalScope.Everything)]
@@ -153,7 +218,9 @@ namespace System.Runtime.Serialization.Json
             JsonFormatCollectionWriterDelegate jsonFormatWriterDelegate;
             CollectionDataContract traditionalCollectionDataContract;
 
-            public JsonCollectionDataContractCriticalHelper(CollectionDataContract traditionalDataContract)
+            public JsonCollectionDataContractCriticalHelper(
+                CollectionDataContract traditionalDataContract
+            )
                 : base(traditionalDataContract)
             {
                 this.traditionalCollectionDataContract = traditionalDataContract;
@@ -181,7 +248,6 @@ namespace System.Runtime.Serialization.Json
             {
                 get { return this.traditionalCollectionDataContract; }
             }
-
         }
     }
 }

@@ -106,8 +106,8 @@ internal sealed class SniOptionsSelector
                 HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(cert2, logger);
             }
 
-            var clientCertificateMode =
-                sniConfig.ClientCertificateMode ?? fallbackHttpsOptions.ClientCertificateMode;
+            var clientCertificateMode = sniConfig.ClientCertificateMode
+                ?? fallbackHttpsOptions.ClientCertificateMode;
 
             if (clientCertificateMode != ClientCertificateMode.NoCertificate)
             {

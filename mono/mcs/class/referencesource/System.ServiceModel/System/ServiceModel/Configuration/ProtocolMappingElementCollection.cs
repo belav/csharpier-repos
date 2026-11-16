@@ -9,12 +9,15 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    [ConfigurationCollection(typeof(ProtocolMappingElement), AddItemName = ConfigurationStrings.Add)]
-    public sealed class ProtocolMappingElementCollection : ServiceModelEnhancedConfigurationElementCollection<ProtocolMappingElement>
+    [ConfigurationCollection(
+        typeof(ProtocolMappingElement),
+        AddItemName = ConfigurationStrings.Add
+    )]
+    public sealed class ProtocolMappingElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ProtocolMappingElement>
     {
         public ProtocolMappingElementCollection()
-            : base(ConfigurationStrings.Add)
-        { }
+            : base(ConfigurationStrings.Add) { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -28,5 +31,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

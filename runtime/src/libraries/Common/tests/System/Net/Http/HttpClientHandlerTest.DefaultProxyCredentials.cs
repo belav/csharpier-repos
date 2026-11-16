@@ -14,14 +14,14 @@ using Xunit.Abstractions;
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
     public abstract class HttpClientHandler_DefaultProxyCredentials_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_DefaultProxyCredentials_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_DefaultProxyCredentials_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void Default_Get_Null()
@@ -55,28 +55,48 @@ namespace System.Net.Http.Functional.Tests
         {
             var explicitProxyCreds = new NetworkCredential("rightusername", "rightpassword");
             var defaultSystemProxyCreds = new NetworkCredential("wrongusername", "wrongpassword");
-            string expectCreds = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes($"{explicitProxyCreds.UserName}:{explicitProxyCreds.Password}"));
+            string expectCreds =
+                "Basic "
+                + Convert.ToBase64String(
+                    Encoding.UTF8.GetBytes(
+                        $"{explicitProxyCreds.UserName}:{explicitProxyCreds.Password}"
+                    )
+                );
 
-            await LoopbackServer.CreateClientAndServerAsync(async proxyUrl =>
-            {
-                using (HttpClientHandler handler = CreateHttpClientHandler())
-                using (HttpClient client = CreateHttpClient(handler))
+            await LoopbackServer.CreateClientAndServerAsync(
+                async proxyUrl =>
                 {
-                    handler.Proxy = new UseSpecifiedUriWebProxy(proxyUrl, explicitProxyCreds);
-                    handler.DefaultProxyCredentials = defaultSystemProxyCreds;
-                    using (HttpResponseMessage response = await client.GetAsync("http://notatrealserver.com/")) // URL does not matter
+                    using (HttpClientHandler handler = CreateHttpClientHandler())
+                    using (HttpClient client = CreateHttpClient(handler))
                     {
-                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                        handler.Proxy = new UseSpecifiedUriWebProxy(proxyUrl, explicitProxyCreds);
+                        handler.DefaultProxyCredentials = defaultSystemProxyCreds;
+                        using (
+                            HttpResponseMessage response = await client.GetAsync(
+                                "http://notatrealserver.com/"
+                            )
+                        ) // URL does not matter
+                        {
+                            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                        }
                     }
-                }
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync(
-                    HttpStatusCode.ProxyAuthenticationRequired, "Proxy-Authenticate: Basic\r\n");
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync(
+                        HttpStatusCode.ProxyAuthenticationRequired,
+                        "Proxy-Authenticate: Basic\r\n"
+                    );
 
-                List<string> headers = await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
-                Assert.Equal(expectCreds, LoopbackServer.GetRequestHeaderValue(headers, "Proxy-Authorization"));
-            });
+                    List<string> headers = await server.AcceptConnectionSendResponseAndCloseAsync(
+                        HttpStatusCode.OK
+                    );
+                    Assert.Equal(
+                        expectCreds,
+                        LoopbackServer.GetRequestHeaderValue(headers, "Proxy-Authorization")
+                    );
+                }
+            );
         }
 
 #if !WINHTTPHANDLER_TEST
@@ -88,62 +108,101 @@ namespace System.Net.Http.Functional.Tests
         {
             const string ExpectedUsername = "rightusername";
             const string ExpectedPassword = "rightpassword";
-            LoopbackServer.Options options = new LoopbackServer.Options { IsProxy = true, Username = ExpectedUsername, Password = ExpectedPassword };
-
-            await LoopbackServer.CreateClientAndServerAsync(uri => Task.Run(() =>
+            LoopbackServer.Options options = new LoopbackServer.Options
             {
-                var psi = new ProcessStartInfo();
-                psi.Environment.Add("http_proxy", $"http://{uri.Host}:{uri.Port}");
+                IsProxy = true,
+                Username = ExpectedUsername,
+                Password = ExpectedPassword,
+            };
 
-                RemoteExecutor.Invoke(async (useProxyString, useVersionString, uriString) =>
-                {
-                    using (HttpClientHandler handler = CreateHttpClientHandler(useVersionString))
-                    using (HttpClient client = CreateHttpClient(handler, useVersionString))
+            await LoopbackServer.CreateClientAndServerAsync(
+                uri =>
+                    Task.Run(() =>
                     {
-                        var creds = new NetworkCredential(ExpectedUsername, ExpectedPassword);
-                        handler.DefaultProxyCredentials = creds;
-                        handler.UseProxy = bool.Parse(useProxyString);
+                        var psi = new ProcessStartInfo();
+                        psi.Environment.Add("http_proxy", $"http://{uri.Host}:{uri.Port}");
 
-                        HttpResponseMessage response = await client.GetAsync(uriString);
-                        // Correctness of user and password is done in server part.
-                        Assert.True(response.StatusCode == HttpStatusCode.OK);
-                    };
-                }, useProxy.ToString(), UseVersion.ToString(),
-                    // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
-                   useProxy ? Configuration.Http.RemoteEchoServer.ToString() : uri.ToString(),
-                   new RemoteInvokeOptions { StartInfo = psi }).Dispose();
-            }),
-            server => server.AcceptConnectionAsync(async connection =>
-            {
-                const string headerName = "Proxy-Authorization";
-                List<string> lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
+                        RemoteExecutor
+                            .Invoke(
+                                async (useProxyString, useVersionString, uriString) =>
+                                {
+                                    using (
+                                        HttpClientHandler handler = CreateHttpClientHandler(
+                                            useVersionString
+                                        )
+                                    )
+                                    using (
+                                        HttpClient client = CreateHttpClient(
+                                            handler,
+                                            useVersionString
+                                        )
+                                    )
+                                    {
+                                        var creds = new NetworkCredential(
+                                            ExpectedUsername,
+                                            ExpectedPassword
+                                        );
+                                        handler.DefaultProxyCredentials = creds;
+                                        handler.UseProxy = bool.Parse(useProxyString);
 
-                // First request should not have proxy credentials in either case.
-                for (int i = 1; i < lines.Count; i++)
-                {
-                    Assert.False(lines[i].StartsWith(headerName));
-                }
-
-                if (useProxy)
-                {
-                    // Reject request and wait for authenticated one.
-                    await connection.SendResponseAsync(HttpStatusCode.ProxyAuthenticationRequired, "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n").ConfigureAwait(false);
-
-                    lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
-                    bool valid = false;
-                    for (int i = 1; i < lines.Count; i++)
+                                        HttpResponseMessage response = await client.GetAsync(
+                                            uriString
+                                        );
+                                        // Correctness of user and password is done in server part.
+                                        Assert.True(response.StatusCode == HttpStatusCode.OK);
+                                    }
+                                    ;
+                                },
+                                useProxy.ToString(),
+                                UseVersion.ToString(),
+                                // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
+                                useProxy
+                                    ? Configuration.Http.RemoteEchoServer.ToString()
+                                    : uri.ToString(),
+                                new RemoteInvokeOptions { StartInfo = psi }
+                            )
+                            .Dispose();
+                    }),
+                server =>
+                    server.AcceptConnectionAsync(async connection =>
                     {
-                        if (lines[i].StartsWith(headerName))
+                        const string headerName = "Proxy-Authorization";
+                        List<string> lines = await connection
+                            .ReadRequestHeaderAsync()
+                            .ConfigureAwait(false);
+
+                        // First request should not have proxy credentials in either case.
+                        for (int i = 1; i < lines.Count; i++)
                         {
-                            valid = LoopbackServer.IsBasicAuthTokenValid(lines[i], options);
+                            Assert.False(lines[i].StartsWith(headerName));
                         }
-                    }
 
-                    Assert.True(valid);
-                }
+                        if (useProxy)
+                        {
+                            // Reject request and wait for authenticated one.
+                            await connection
+                                .SendResponseAsync(
+                                    HttpStatusCode.ProxyAuthenticationRequired,
+                                    "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n"
+                                )
+                                .ConfigureAwait(false);
 
-                await connection.SendResponseAsync(HttpStatusCode.OK).ConfigureAwait(false);
-            }));
+                            lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
+                            bool valid = false;
+                            for (int i = 1; i < lines.Count; i++)
+                            {
+                                if (lines[i].StartsWith(headerName))
+                                {
+                                    valid = LoopbackServer.IsBasicAuthTokenValid(lines[i], options);
+                                }
+                            }
+
+                            Assert.True(valid);
+                        }
+
+                        await connection.SendResponseAsync(HttpStatusCode.OK).ConfigureAwait(false);
+                    })
+            );
         }
 #endif
 
@@ -159,8 +218,13 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
             {
-                handler.DefaultProxyCredentials = new NetworkCredential("UsernameNotUsed", "PasswordNotUsed");
-                HttpResponseMessage response = await client.GetAsync(Configuration.Http.RemoteEchoServer);
+                handler.DefaultProxyCredentials = new NetworkCredential(
+                    "UsernameNotUsed",
+                    "PasswordNotUsed"
+                );
+                HttpResponseMessage response = await client.GetAsync(
+                    Configuration.Http.RemoteEchoServer
+                );
 
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }

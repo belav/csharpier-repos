@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
     {
         private readonly Symbols.FunctionPointerTypeSymbol _underlying;
 
-        public FunctionPointerTypeSymbol(Symbols.FunctionPointerTypeSymbol underlying, CodeAnalysis.NullableAnnotation nullableAnnotation)
+        public FunctionPointerTypeSymbol(
+            Symbols.FunctionPointerTypeSymbol underlying,
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
             : base(nullableAnnotation)
         {
             RoslynDebug.Assert(underlying is object);
@@ -20,11 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         public IMethodSymbol Signature => _underlying.Signature.GetPublicSymbol();
         internal override Symbols.TypeSymbol UnderlyingTypeSymbol => _underlying;
-        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol => _underlying;
+        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol =>
+            _underlying;
         internal override CSharp.Symbol UnderlyingSymbol => _underlying;
 
-        protected override void Accept(SymbolVisitor visitor)
-            => visitor.VisitFunctionPointerType(this);
+        protected override void Accept(SymbolVisitor visitor) =>
+            visitor.VisitFunctionPointerType(this);
 
         protected override TResult? Accept<TResult>(SymbolVisitor<TResult> visitor)
             where TResult : default
@@ -32,12 +36,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitFunctionPointerType(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitFunctionPointerType(this, argument);
         }
 
-        protected override ITypeSymbol WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected override ITypeSymbol WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);

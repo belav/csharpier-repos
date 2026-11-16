@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -24,15 +24,28 @@ namespace System.SpanTests
             ReadOnlySpan<uint> span = new ReadOnlySpan<uint>(a);
             ReadOnlySpan<byte> asBytes = MemoryMarshal.AsBytes<uint>(span);
 
-            Assert.True(Unsafe.AreSame(ref Unsafe.As<uint, byte>(ref Unsafe.AsRef(in MemoryMarshal.GetReference(span))), ref Unsafe.AsRef(in MemoryMarshal.GetReference(asBytes))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref Unsafe.As<uint, byte>(
+                        ref Unsafe.AsRef(in MemoryMarshal.GetReference(span))
+                    ),
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(asBytes))
+                )
+            );
             asBytes.Validate<byte>(0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88);
         }
 
         [Fact]
         public static void ReadOnlySpan_AsBytesContainsReferences()
         {
-            ReadOnlySpan<TestHelpers.StructWithReferences> span = new ReadOnlySpan<TestHelpers.StructWithReferences>(Array.Empty<TestHelpers.StructWithReferences>());
-            TestHelpers.AssertThrows<ArgumentException, TestHelpers.StructWithReferences>(span, (_span) => MemoryMarshal.AsBytes(_span).DontBox());
+            ReadOnlySpan<TestHelpers.StructWithReferences> span =
+                new ReadOnlySpan<TestHelpers.StructWithReferences>(
+                    Array.Empty<TestHelpers.StructWithReferences>()
+                );
+            TestHelpers.AssertThrows<ArgumentException, TestHelpers.StructWithReferences>(
+                span,
+                (_span) => MemoryMarshal.AsBytes(_span).DontBox()
+            );
         }
     }
 }

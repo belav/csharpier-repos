@@ -19,10 +19,7 @@ namespace System
 
         internal IntPtr Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         public int MDStreamVersion
@@ -65,38 +62,74 @@ namespace System
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public RuntimeTypeHandle ResolveTypeHandle(int typeToken, RuntimeTypeHandle[]? typeInstantiationContext, RuntimeTypeHandle[]? methodInstantiationContext)
+        public RuntimeTypeHandle ResolveTypeHandle(
+            int typeToken,
+            RuntimeTypeHandle[]? typeInstantiationContext,
+            RuntimeTypeHandle[]? methodInstantiationContext
+        )
         {
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, SR.Arg_InvalidHandle);
-            IntPtr res = RuntimeModule.ResolveTypeToken(value, typeToken, ptrs_from_handles(typeInstantiationContext), ptrs_from_handles(methodInstantiationContext), out _);
+            IntPtr res = RuntimeModule.ResolveTypeToken(
+                value,
+                typeToken,
+                ptrs_from_handles(typeInstantiationContext),
+                ptrs_from_handles(methodInstantiationContext),
+                out _
+            );
             if (res == IntPtr.Zero)
-                throw new TypeLoadException(SR.Format(SR.ClassLoad_General_Hex, typeToken, value.ToInt64()));
+                throw new TypeLoadException(
+                    SR.Format(SR.ClassLoad_General_Hex, typeToken, value.ToInt64())
+                );
             else
                 return new RuntimeTypeHandle(res);
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public RuntimeMethodHandle ResolveMethodHandle(int methodToken, RuntimeTypeHandle[]? typeInstantiationContext, RuntimeTypeHandle[]? methodInstantiationContext)
+        public RuntimeMethodHandle ResolveMethodHandle(
+            int methodToken,
+            RuntimeTypeHandle[]? typeInstantiationContext,
+            RuntimeTypeHandle[]? methodInstantiationContext
+        )
         {
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, SR.Arg_InvalidHandle);
-            IntPtr res = RuntimeModule.ResolveMethodToken(value, methodToken, ptrs_from_handles(typeInstantiationContext), ptrs_from_handles(methodInstantiationContext), out _);
+            IntPtr res = RuntimeModule.ResolveMethodToken(
+                value,
+                methodToken,
+                ptrs_from_handles(typeInstantiationContext),
+                ptrs_from_handles(methodInstantiationContext),
+                out _
+            );
             if (res == IntPtr.Zero)
-                throw new Exception(SR.Format(SR.ClassLoad_General_Hex, methodToken, value.ToInt64()));
+                throw new Exception(
+                    SR.Format(SR.ClassLoad_General_Hex, methodToken, value.ToInt64())
+                );
             else
                 return new RuntimeMethodHandle(res);
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public RuntimeFieldHandle ResolveFieldHandle(int fieldToken, RuntimeTypeHandle[]? typeInstantiationContext, RuntimeTypeHandle[]? methodInstantiationContext)
+        public RuntimeFieldHandle ResolveFieldHandle(
+            int fieldToken,
+            RuntimeTypeHandle[]? typeInstantiationContext,
+            RuntimeTypeHandle[]? methodInstantiationContext
+        )
         {
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, SR.Arg_InvalidHandle);
 
-            IntPtr res = RuntimeModule.ResolveFieldToken(value, fieldToken, ptrs_from_handles(typeInstantiationContext), ptrs_from_handles(methodInstantiationContext), out _);
+            IntPtr res = RuntimeModule.ResolveFieldToken(
+                value,
+                fieldToken,
+                ptrs_from_handles(typeInstantiationContext),
+                ptrs_from_handles(methodInstantiationContext),
+                out _
+            );
             if (res == IntPtr.Zero)
-                throw new Exception(SR.Format(SR.ClassLoad_General_Hex, fieldToken, value.ToInt64()));
+                throw new Exception(
+                    SR.Format(SR.ClassLoad_General_Hex, fieldToken, value.ToInt64())
+                );
             else
                 return new RuntimeFieldHandle(res);
         }

@@ -21,12 +21,14 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     {
         TestServices ITextViewWindowVerifierInProcess.TestServices => TestServices;
 
-        ITextViewWindowInProcess ITextViewWindowVerifierInProcess.TextViewWindow => TestServices.Editor;
+        ITextViewWindowInProcess ITextViewWindowVerifierInProcess.TextViewWindow =>
+            TestServices.Editor;
 
         public async Task CurrentLineTextAsync(
             string expectedText,
             bool assertCaretPosition = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (assertCaretPosition)
             {
@@ -41,12 +43,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private async Task CurrentLineTextAndAssertCaretPositionAsync(
             string expectedText,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var expectedCaretIndex = expectedText.IndexOf("$$");
             if (expectedCaretIndex < 0)
             {
-                throw new ArgumentException("Expected caret position to be specified with $$", nameof(expectedText));
+                throw new ArgumentException(
+                    "Expected caret position to be specified with $$",
+                    nameof(expectedText)
+                );
             }
 
             var expectedCaretMarkupEndIndex = expectedCaretIndex + "$$".Length;
@@ -55,21 +61,28 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var expectedTextAfterCaret = expectedText[expectedCaretMarkupEndIndex..];
 
             var lineText = await TestServices.Editor.GetCurrentLineTextAsync(cancellationToken);
-            var lineTextBeforeCaret = await TestServices.Editor.GetLineTextBeforeCaretAsync(cancellationToken);
-            var lineTextAfterCaret = await TestServices.Editor.GetLineTextAfterCaretAsync(cancellationToken);
+            var lineTextBeforeCaret = await TestServices.Editor.GetLineTextBeforeCaretAsync(
+                cancellationToken
+            );
+            var lineTextAfterCaret = await TestServices.Editor.GetLineTextAfterCaretAsync(
+                cancellationToken
+            );
 
             Assert.Equal(expectedTextBeforeCaret, lineTextBeforeCaret);
             Assert.Equal(expectedTextAfterCaret, lineTextAfterCaret);
-            Assert.Equal(expectedTextBeforeCaret.Length + expectedTextAfterCaret.Length, lineText.Length);
+            Assert.Equal(
+                expectedTextBeforeCaret.Length + expectedTextAfterCaret.Length,
+                lineText.Length
+            );
         }
 
-        public async Task TextEqualsAsync(
-            string expectedText,
-            CancellationToken cancellationToken)
+        public async Task TextEqualsAsync(string expectedText, CancellationToken cancellationToken)
         {
             var view = await TestServices.Editor.GetActiveTextViewAsync(cancellationToken);
             var editorText = view.TextSnapshot.GetText();
-            var caretPosition = (await TestServices.Editor.GetCaretPositionAsync(cancellationToken)).BufferPosition.Position;
+            var caretPosition = (await TestServices.Editor.GetCaretPositionAsync(cancellationToken))
+                .BufferPosition
+                .Position;
             editorText = editorText.Insert(caretPosition, "$$");
             AssertEx.EqualOrDiff(expectedText, editorText);
         }
@@ -77,7 +90,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         public async Task TextContainsAsync(
             string expectedText,
             bool assertCaretPosition = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (assertCaretPosition)
             {
@@ -93,12 +107,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private async Task TextContainsAndAssertCaretPositionAsync(
             string expectedText,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var caretStartIndex = expectedText.IndexOf("$$");
             if (caretStartIndex < 0)
             {
-                throw new ArgumentException("Expected caret position to be specified with $$", nameof(expectedText));
+                throw new ArgumentException(
+                    "Expected caret position to be specified with $$",
+                    nameof(expectedText)
+                );
             }
 
             var caretEndIndex = caretStartIndex + "$$".Length;
@@ -114,21 +132,44 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             var index = editorText.IndexOf(expectedTextWithoutCaret);
 
-            var caretPosition = (await TestServices.Editor.GetCaretPositionAsync(cancellationToken)).BufferPosition.Position;
+            var caretPosition = (await TestServices.Editor.GetCaretPositionAsync(cancellationToken))
+                .BufferPosition
+                .Position;
             Assert.Equal(caretStartIndex + index, caretPosition);
         }
 
-        public async Task CaretPositionAsync(int expectedCaretPosition, CancellationToken cancellationToken)
+        public async Task CaretPositionAsync(
+            int expectedCaretPosition,
+            CancellationToken cancellationToken
+        )
         {
-            Assert.Equal(expectedCaretPosition, (await TestServices.Editor.GetCaretPositionAsync(cancellationToken)).BufferPosition.Position);
+            Assert.Equal(
+                expectedCaretPosition,
+                (await TestServices.Editor.GetCaretPositionAsync(cancellationToken))
+                    .BufferPosition
+                    .Position
+            );
         }
 
         public async Task ErrorTagsAsync(
-            (string errorType, TextSpan textSpan, string taggedText, string tooltipText)[] expectedTags, CancellationToken cancellationToken)
+            (
+                string errorType,
+                TextSpan textSpan,
+                string taggedText,
+                string tooltipText
+            )[] expectedTags,
+            CancellationToken cancellationToken
+        )
         {
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy, FeatureAttribute.DiagnosticService, FeatureAttribute.ErrorSquiggles],
-                cancellationToken);
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles,
+                ],
+                cancellationToken
+            );
 
             var actualTags = await TestServices.Editor.GetErrorTagsAsync(cancellationToken);
             Assert.Equal(expectedTags.Length, actualTags.Length);

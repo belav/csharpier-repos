@@ -28,9 +28,7 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder{TContext}" /> class with no options set.
     /// </summary>
     public DbContextOptionsBuilder()
-        : this(new DbContextOptions<TContext>())
-    {
-    }
+        : this(new DbContextOptions<TContext>()) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder{TContext}" /> class to further configure
@@ -38,15 +36,13 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </summary>
     /// <param name="options">The options to be configured.</param>
     public DbContextOptionsBuilder(DbContextOptions<TContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     /// <summary>
     ///     Gets the options being configured.
     /// </summary>
-    public new virtual DbContextOptions<TContext> Options
-        => (DbContextOptions<TContext>)base.Options;
+    public new virtual DbContextOptions<TContext> Options =>
+        (DbContextOptions<TContext>)base.Options;
 
     /// <summary>
     ///     Sets the model to be used for the context. If the model is set, then <see cref="DbContext.OnModelCreating(ModelBuilder)" />
@@ -63,8 +59,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///     </para>
     /// </remarks>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseModel(IModel model)
-        => (DbContextOptionsBuilder<TContext>)base.UseModel(model);
+    public new virtual DbContextOptionsBuilder<TContext> UseModel(IModel model) =>
+        (DbContextOptionsBuilder<TContext>)base.UseModel(model);
 
     /// <summary>
     ///     Sets the <see cref="ILoggerFactory" /> that will be used to create <see cref="ILogger" /> instances
@@ -88,8 +84,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="loggerFactory">The logger factory to be used.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseLoggerFactory(ILoggerFactory? loggerFactory)
-        => (DbContextOptionsBuilder<TContext>)base.UseLoggerFactory(loggerFactory);
+    public new virtual DbContextOptionsBuilder<TContext> UseLoggerFactory(
+        ILoggerFactory? loggerFactory
+    ) => (DbContextOptionsBuilder<TContext>)base.UseLoggerFactory(loggerFactory);
 
     /// <summary>
     ///     Logs using the supplied action. For example, use <c>optionsBuilder.LogTo(Console.WriteLine)</c> to
@@ -122,8 +119,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     public new virtual DbContextOptionsBuilder<TContext> LogTo(
         Action<string> action,
         LogLevel minimumLevel = LogLevel.Debug,
-        DbContextLoggerOptions? options = null)
-        => (DbContextOptionsBuilder<TContext>)base.LogTo(action, minimumLevel, options);
+        DbContextLoggerOptions? options = null
+    ) => (DbContextOptionsBuilder<TContext>)base.LogTo(action, minimumLevel, options);
 
     /// <summary>
     ///     Logs the specified events using the supplied action. For example, use
@@ -156,8 +153,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
         Action<string> action,
         IEnumerable<EventId> events,
         LogLevel minimumLevel = LogLevel.Debug,
-        DbContextLoggerOptions? options = null)
-        => (DbContextOptionsBuilder<TContext>)base.LogTo(action, events, minimumLevel, options);
+        DbContextLoggerOptions? options = null
+    ) => (DbContextOptionsBuilder<TContext>)base.LogTo(action, events, minimumLevel, options);
 
     /// <summary>
     ///     Logs all events in the specified categories using the supplied action. For example, use
@@ -190,8 +187,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
         Action<string> action,
         IEnumerable<string> categories,
         LogLevel minimumLevel = LogLevel.Debug,
-        DbContextLoggerOptions? options = null)
-        => (DbContextOptionsBuilder<TContext>)base.LogTo(action, categories, minimumLevel, options);
+        DbContextLoggerOptions? options = null
+    ) => (DbContextOptionsBuilder<TContext>)base.LogTo(action, categories, minimumLevel, options);
 
     /// <summary>
     ///     Logs events filtered by a supplied custom filter delegate. The filter should return true to
@@ -220,8 +217,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     public new virtual DbContextOptionsBuilder<TContext> LogTo(
         Action<string> action,
         Func<EventId, LogLevel, bool> filter,
-        DbContextLoggerOptions? options = null)
-        => (DbContextOptionsBuilder<TContext>)base.LogTo(action, filter, options);
+        DbContextLoggerOptions? options = null
+    ) => (DbContextOptionsBuilder<TContext>)base.LogTo(action, filter, options);
 
     /// <summary>
     ///     Logs events to a custom logger delegate filtered by a custom filter delegate. The filter should return true to
@@ -248,8 +245,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     // Filter comes first, logger second, otherwise it's hard to get the correct overload to resolve
     public new virtual DbContextOptionsBuilder<TContext> LogTo(
         Func<EventId, LogLevel, bool> filter,
-        Action<EventData> logger)
-        => (DbContextOptionsBuilder<TContext>)base.LogTo(filter, logger);
+        Action<EventData> logger
+    ) => (DbContextOptionsBuilder<TContext>)base.LogTo(filter, logger);
 
     /// <summary>
     ///     Disables concurrency detection, which detects many cases of erroneous concurrent usage of a <see cref="DbContext" />
@@ -273,8 +270,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///     </para>
     /// </remarks>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> EnableThreadSafetyChecks(bool checksEnabled = true)
-        => (DbContextOptionsBuilder<TContext>)base.EnableThreadSafetyChecks(checksEnabled);
+    public new virtual DbContextOptionsBuilder<TContext> EnableThreadSafetyChecks(
+        bool checksEnabled = true
+    ) => (DbContextOptionsBuilder<TContext>)base.EnableThreadSafetyChecks(checksEnabled);
 
     /// <summary>
     ///     Enables detailed errors when handling data value exceptions that occur during processing of store query results. Such errors
@@ -299,8 +297,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///     </para>
     /// </remarks>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> EnableDetailedErrors(bool detailedErrorsEnabled = true)
-        => (DbContextOptionsBuilder<TContext>)base.EnableDetailedErrors(detailedErrorsEnabled);
+    public new virtual DbContextOptionsBuilder<TContext> EnableDetailedErrors(
+        bool detailedErrorsEnabled = true
+    ) => (DbContextOptionsBuilder<TContext>)base.EnableDetailedErrors(detailedErrorsEnabled);
 
     /// <summary>
     ///     Sets the <see cref="IMemoryCache" /> to be used for query caching by this context.
@@ -323,8 +322,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="memoryCache">The memory cache to be used.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseMemoryCache(IMemoryCache? memoryCache)
-        => (DbContextOptionsBuilder<TContext>)base.UseMemoryCache(memoryCache);
+    public new virtual DbContextOptionsBuilder<TContext> UseMemoryCache(
+        IMemoryCache? memoryCache
+    ) => (DbContextOptionsBuilder<TContext>)base.UseMemoryCache(memoryCache);
 
     /// <summary>
     ///     Sets the <see cref="IServiceProvider" /> that the context should resolve all of its services from. EF will
@@ -348,8 +348,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="serviceProvider">The service provider to be used.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseInternalServiceProvider(IServiceProvider? serviceProvider)
-        => (DbContextOptionsBuilder<TContext>)base.UseInternalServiceProvider(serviceProvider);
+    public new virtual DbContextOptionsBuilder<TContext> UseInternalServiceProvider(
+        IServiceProvider? serviceProvider
+    ) => (DbContextOptionsBuilder<TContext>)base.UseInternalServiceProvider(serviceProvider);
 
     /// <summary>
     ///     Sets the <see cref="IServiceProvider" /> from which application services will be obtained. This
@@ -362,8 +363,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="serviceProvider">The service provider to be used.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseApplicationServiceProvider(IServiceProvider? serviceProvider)
-        => (DbContextOptionsBuilder<TContext>)base.UseApplicationServiceProvider(serviceProvider);
+    public new virtual DbContextOptionsBuilder<TContext> UseApplicationServiceProvider(
+        IServiceProvider? serviceProvider
+    ) => (DbContextOptionsBuilder<TContext>)base.UseApplicationServiceProvider(serviceProvider);
 
     /// <summary>
     ///     Sets the root <see cref="IServiceProvider" /> from which singleton application services can be obtained from singleton
@@ -380,8 +382,11 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="rootServiceProvider">The service provider to be used.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseRootApplicationServiceProvider(IServiceProvider? rootServiceProvider)
-        => (DbContextOptionsBuilder<TContext>)base.UseRootApplicationServiceProvider(rootServiceProvider);
+    public new virtual DbContextOptionsBuilder<TContext> UseRootApplicationServiceProvider(
+        IServiceProvider? rootServiceProvider
+    ) =>
+        (DbContextOptionsBuilder<TContext>)
+            base.UseRootApplicationServiceProvider(rootServiceProvider);
 
     /// <summary>
     ///     Resolves the root <see cref="IServiceProvider" /> from from the scoped application service provider. The root provider can
@@ -397,8 +402,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///     </para>
     /// </remarks>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> UseRootApplicationServiceProvider()
-        => (DbContextOptionsBuilder<TContext>)base.UseRootApplicationServiceProvider();
+    public new virtual DbContextOptionsBuilder<TContext> UseRootApplicationServiceProvider() =>
+        (DbContextOptionsBuilder<TContext>)base.UseRootApplicationServiceProvider();
 
     /// <summary>
     ///     Enables application data to be included in exception messages, logging, etc. This can include the
@@ -419,8 +424,11 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///     </para>
     /// </remarks>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> EnableSensitiveDataLogging(bool sensitiveDataLoggingEnabled = true)
-        => (DbContextOptionsBuilder<TContext>)base.EnableSensitiveDataLogging(sensitiveDataLoggingEnabled);
+    public new virtual DbContextOptionsBuilder<TContext> EnableSensitiveDataLogging(
+        bool sensitiveDataLoggingEnabled = true
+    ) =>
+        (DbContextOptionsBuilder<TContext>)
+            base.EnableSensitiveDataLogging(sensitiveDataLoggingEnabled);
 
     /// <summary>
     ///     Enables or disables caching of internal service providers. Disabling caching can
@@ -438,8 +446,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="cacheServiceProvider">If <see langword="true" />, then the internal service provider is cached.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> EnableServiceProviderCaching(bool cacheServiceProvider = true)
-        => (DbContextOptionsBuilder<TContext>)base.EnableServiceProviderCaching(cacheServiceProvider);
+    public new virtual DbContextOptionsBuilder<TContext> EnableServiceProviderCaching(
+        bool cacheServiceProvider = true
+    ) => (DbContextOptionsBuilder<TContext>)base.EnableServiceProviderCaching(cacheServiceProvider);
 
     /// <summary>
     ///     Sets the tracking behavior for LINQ queries run against the context. Disabling change tracking
@@ -463,8 +472,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     ///         <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public new virtual DbContextOptionsBuilder<TContext> UseQueryTrackingBehavior(QueryTrackingBehavior queryTrackingBehavior)
-        => (DbContextOptionsBuilder<TContext>)base.UseQueryTrackingBehavior(queryTrackingBehavior);
+    public new virtual DbContextOptionsBuilder<TContext> UseQueryTrackingBehavior(
+        QueryTrackingBehavior queryTrackingBehavior
+    ) => (DbContextOptionsBuilder<TContext>)base.UseQueryTrackingBehavior(queryTrackingBehavior);
 
     /// <summary>
     ///     Configures the runtime behavior of warnings generated by Entity Framework. You can set a default
@@ -492,8 +502,10 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public new virtual DbContextOptionsBuilder<TContext> ConfigureWarnings(
-        Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction)
-        => (DbContextOptionsBuilder<TContext>)base.ConfigureWarnings(warningsConfigurationBuilderAction);
+        Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction
+    ) =>
+        (DbContextOptionsBuilder<TContext>)
+            base.ConfigureWarnings(warningsConfigurationBuilderAction);
 
     /// <summary>
     ///     Replaces all internal Entity Framework implementations of a service contract with a different
@@ -517,8 +529,8 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// <typeparam name="TImplementation">The new implementation type for the service.</typeparam>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public new virtual DbContextOptionsBuilder<TContext> ReplaceService<TService, TImplementation>()
-        where TImplementation : TService
-        => (DbContextOptionsBuilder<TContext>)base.ReplaceService<TService, TImplementation>();
+        where TImplementation : TService =>
+        (DbContextOptionsBuilder<TContext>)base.ReplaceService<TService, TImplementation>();
 
     /// <summary>
     ///     Replaces the internal Entity Framework implementation of a specific implementation of a service contract
@@ -546,10 +558,15 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// <typeparam name="TCurrentImplementation">The current implementation type for the service.</typeparam>
     /// <typeparam name="TNewImplementation">The new implementation type for the service.</typeparam>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> ReplaceService<TService, TCurrentImplementation, TNewImplementation>()
+    public new virtual DbContextOptionsBuilder<TContext> ReplaceService<
+        TService,
+        TCurrentImplementation,
+        TNewImplementation
+    >()
         where TCurrentImplementation : TService
-        where TNewImplementation : TService
-        => (DbContextOptionsBuilder<TContext>)base.ReplaceService<TService, TCurrentImplementation, TNewImplementation>();
+        where TNewImplementation : TService =>
+        (DbContextOptionsBuilder<TContext>)
+            base.ReplaceService<TService, TCurrentImplementation, TNewImplementation>();
 
     /// <summary>
     ///     Adds <see cref="IInterceptor" /> instances to those registered on the context.
@@ -580,8 +597,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="interceptors">The interceptors to add.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> AddInterceptors(IEnumerable<IInterceptor> interceptors)
-        => (DbContextOptionsBuilder<TContext>)base.AddInterceptors(interceptors);
+    public new virtual DbContextOptionsBuilder<TContext> AddInterceptors(
+        IEnumerable<IInterceptor> interceptors
+    ) => (DbContextOptionsBuilder<TContext>)base.AddInterceptors(interceptors);
 
     /// <summary>
     ///     Adds <see cref="IInterceptor" /> instances to those registered on the context.
@@ -608,8 +626,9 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="interceptors">The interceptors to add.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> AddInterceptors(params IInterceptor[] interceptors)
-        => (DbContextOptionsBuilder<TContext>)base.AddInterceptors(interceptors);
+    public new virtual DbContextOptionsBuilder<TContext> AddInterceptors(
+        params IInterceptor[] interceptors
+    ) => (DbContextOptionsBuilder<TContext>)base.AddInterceptors(interceptors);
 
     /// <summary>
     ///     Configures how long EF Core will cache logging configuration in certain high-performance paths. This makes
@@ -627,6 +646,7 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
     /// </remarks>
     /// <param name="timeSpan">The maximum time period over which to skip logging checks before checking again.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual DbContextOptionsBuilder<TContext> ConfigureLoggingCacheTime(TimeSpan timeSpan)
-        => (DbContextOptionsBuilder<TContext>)base.ConfigureLoggingCacheTime(timeSpan);
+    public new virtual DbContextOptionsBuilder<TContext> ConfigureLoggingCacheTime(
+        TimeSpan timeSpan
+    ) => (DbContextOptionsBuilder<TContext>)base.ConfigureLoggingCacheTime(timeSpan);
 }

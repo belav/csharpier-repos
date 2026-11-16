@@ -22,7 +22,11 @@ public class InitializeHandler<TRequest, TResponse, TRequestContext>
 
     public bool RequiresLSPSolution => false;
 
-    public Task<TResponse> HandleRequestAsync(TRequest request, TRequestContext context, CancellationToken cancellationToken)
+    public Task<TResponse> HandleRequestAsync(
+        TRequest request,
+        TRequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         _capabilitiesManager.SetInitializeParams(request);
 

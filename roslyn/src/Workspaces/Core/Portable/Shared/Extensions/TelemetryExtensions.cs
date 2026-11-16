@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class TelemetryExtensions
     {
-        public static Guid GetTelemetryId(this Type type, short scope = 0, string? additionalSuffixString = null)
+        public static Guid GetTelemetryId(
+            this Type type,
+            short scope = 0,
+            string? additionalSuffixString = null
+        )
         {
             type = GetTypeForTelemetry(type);
             Contract.ThrowIfNull(type.FullName);
@@ -28,18 +32,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var suffixBytes = BitConverter.GetBytes(suffix).Concat(new byte[4]).ToArray();
 
             // Generate additional suffix to add to the Guid.
-            var additionalSuffix = (short)(additionalSuffixString != null
-                ? Hash.GetFNVHashCode(additionalSuffixString)
-                : 0);
+            var additionalSuffix = (short)(
+                additionalSuffixString != null ? Hash.GetFNVHashCode(additionalSuffixString) : 0
+            );
 
             return new Guid(0, scope, additionalSuffix, suffixBytes);
         }
 
-        public static Type GetTypeForTelemetry(this Type type)
-            => type.IsConstructedGenericType ? type.GetGenericTypeDefinition() : type;
+        public static Type GetTypeForTelemetry(this Type type) =>
+            type.IsConstructedGenericType ? type.GetGenericTypeDefinition() : type;
 
-        public static short GetScopeIdForTelemetry(this FixAllScope scope)
-            => scope switch
+        public static short GetScopeIdForTelemetry(this FixAllScope scope) =>
+            scope switch
             {
                 FixAllScope.Document => 1,
                 FixAllScope.Project => 2,
@@ -53,7 +57,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static string GetTelemetryDiagnosticID(this Diagnostic diagnostic)
         {
             // we log diagnostic id as it is if it is from us
-            if (diagnostic.Descriptor.ImmutableCustomTags().Any(static t => t == WellKnownDiagnosticTags.Telemetry))
+            if (
+                diagnostic
+                    .Descriptor.ImmutableCustomTags()
+                    .Any(static t => t == WellKnownDiagnosticTags.Telemetry)
+            )
             {
                 return diagnostic.Id;
             }

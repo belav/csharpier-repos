@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.Xml.cs 
+// Tests for System.Web.UI.WebControls.Xml.cs
 //
 // Author:
 //	Miguel de Icaza (miguel@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,49 +28,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-using System.Xml.Xsl;
 using System.Xml.XPath;
+using System.Xml.Xsl;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	class XmlPoker : Xml {
-		public XmlPoker ()
-		{
-		}
-		
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+    class XmlPoker : Xml
+    {
+        public XmlPoker() { }
 
-		public void LoadState (object o)
-		{
-			LoadViewState (o);
-		}
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-		public void DoRender (HtmlTextWriter output)
-		{
-			Render (output);
-		}
+        public void LoadState(object o)
+        {
+            LoadViewState(o);
+        }
 
-		public void DoAdd (object o)
-		{
-			AddParsedSubObject (o);
-		}
-	}
-	
-	
-	[TestFixture]	
-	public class XmlTest {
+        public void DoRender(HtmlTextWriter output)
+        {
+            Render(output);
+        }
 
+        public void DoAdd(object o)
+        {
+            AddParsedSubObject(o);
+        }
+    }
+
+    [TestFixture]
+    public class XmlTest
+    {
 #if false
 		public void Label_ViewState ()
 		{
@@ -100,332 +98,352 @@ namespace MonoTests.System.Web.UI.WebControls
 		}
 #endif
 
-		[SetUp] public void Xml_Setup ()
-		{
-			if (File.Exists ("test.xml")) File.Delete ("test.xml");
-			
-			using (FileStream f = File.OpenWrite ("test.xml")){
-				StreamWriter sw = new StreamWriter (f);
-				sw.WriteLine ("<?xml version=\"1.0\"?><testfile></testfile>");
-			}
+        [SetUp]
+        public void Xml_Setup()
+        {
+            if (File.Exists("test.xml"))
+                File.Delete("test.xml");
 
-			if (File.Exists ("test.xsl")) File.Delete ("test.xsl");
-			
-			using (FileStream f = File.OpenWrite ("test.xsl")){
-				StreamWriter sw = new StreamWriter (f);
-				sw.WriteLine ("<xsl:stylesheet version='1.0' " + 
-					      "xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>" +
-					      "<xsl:template match=\"*\">" +
-					      "<xsl:copy-of select=\".\"/>" +
-					      "</xsl:template>" +
-					      "</xsl:stylesheet>");
+            using (FileStream f = File.OpenWrite("test.xml"))
+            {
+                StreamWriter sw = new StreamWriter(f);
+                sw.WriteLine("<?xml version=\"1.0\"?><testfile></testfile>");
+            }
 
-			}
-		}
-		
-		[TearDown] public void Xml_TearDown ()
-		{
-			if (File.Exists ("test.xml")) File.Delete ("test.xml");
-			if (File.Exists ("test.xsl")) File.Delete ("test.xsl");
-		}
-		
-		[Test] public void Xml_Values ()
-		{
-			Xml xml = new Xml ();
+            if (File.Exists("test.xsl"))
+                File.Delete("test.xsl");
 
-			Assert.AreEqual ("", xml.DocumentContent, "V1");
-			Assert.AreEqual (null, xml.Document, "V2");
-			Assert.AreEqual ("", xml.DocumentSource, "V3");
-			
-			Assert.AreEqual (null, xml.Transform, "V4");
-			Assert.AreEqual (null, xml.TransformArgumentList, "V5");
-			Assert.AreEqual ("", xml.TransformSource, "V6");
+            using (FileStream f = File.OpenWrite("test.xsl"))
+            {
+                StreamWriter sw = new StreamWriter(f);
+                sw.WriteLine(
+                    "<xsl:stylesheet version='1.0' "
+                        + "xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>"
+                        + "<xsl:template match=\"*\">"
+                        + "<xsl:copy-of select=\".\"/>"
+                        + "</xsl:template>"
+                        + "</xsl:stylesheet>"
+                );
+            }
+        }
 
-			// Check that assignments to null, are mapped back into ""
-			xml.DocumentContent = null;
-			Assert.AreEqual ("", xml.DocumentContent, "V7");
-			
-			xml.TransformSource = null;
-			Assert.AreEqual ("", xml.TransformSource, "V8");
+        [TearDown]
+        public void Xml_TearDown()
+        {
+            if (File.Exists("test.xml"))
+                File.Delete("test.xml");
+            if (File.Exists("test.xsl"))
+                File.Delete("test.xsl");
+        }
 
-			Assert.AreEqual (null, xml.Transform, "V9");
-			Assert.AreEqual (false, xml.EnableTheming, "EnableTheming");
-			Assert.AreEqual (String.Empty, xml.SkinID, "SkinID");
-			Assert.AreEqual (null, xml.XPathNavigator, "XPathNavigator");
-		}
+        [Test]
+        public void Xml_Values()
+        {
+            Xml xml = new Xml();
 
-		// Tests that invalid documents can be set before rendering.
-		[Test] 
-		public void Xml_InvalidDocument ()
-		{
-			Xml xml = new Xml ();
-			xml.DocumentContent = "Hey";
-			Assert.AreEqual ("Hey", xml.DocumentContent);
-			xml.DocumentContent = "<hey></hey>";
-			Assert.AreEqual ("<hey></hey>", xml.DocumentContent);
+            Assert.AreEqual("", xml.DocumentContent, "V1");
+            Assert.AreEqual(null, xml.Document, "V2");
+            Assert.AreEqual("", xml.DocumentSource, "V3");
 
-			xml.TransformSource = "test.xsl";
-			Assert.AreEqual (null, xml.Transform, "ID");
-		}
+            Assert.AreEqual(null, xml.Transform, "V4");
+            Assert.AreEqual(null, xml.TransformArgumentList, "V5");
+            Assert.AreEqual("", xml.TransformSource, "V6");
 
-		[Test] public void Xml_RenderEmpty ()
-		{
-			XmlPoker xml = new XmlPoker ();
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter hw = new HtmlTextWriter (sw);
-			
-			xml.DoRender (hw);
-			Assert.AreEqual ("", sw.ToString (), "RE1");
-		}
-		
-		[Test] public void Xml_SourcePrecedence ()
-		{
-			XmlPoker xml = new XmlPoker ();
-			xml.DocumentContent = "<content></content>";
+            // Check that assignments to null, are mapped back into ""
+            xml.DocumentContent = null;
+            Assert.AreEqual("", xml.DocumentContent, "V7");
 
-			XmlDocument xml_doc = new XmlDocument ();
-			xml_doc.LoadXml ("<document></document>");
-			
-			xml.Document = xml_doc;
+            xml.TransformSource = null;
+            Assert.AreEqual("", xml.TransformSource, "V8");
 
-			//
-			// Can not check the precendece for the file backend
-			// because it requires a complete setup to check for the
-			// file access permission to it (Control.MapPathSecure)
-			//
-			// xml.DocumentSource = "test.xml";
-			//
+            Assert.AreEqual(null, xml.Transform, "V9");
+            Assert.AreEqual(false, xml.EnableTheming, "EnableTheming");
+            Assert.AreEqual(String.Empty, xml.SkinID, "SkinID");
+            Assert.AreEqual(null, xml.XPathNavigator, "XPathNavigator");
+        }
 
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter hw = new HtmlTextWriter (sw);
-			xml.DoRender (hw);
+        // Tests that invalid documents can be set before rendering.
+        [Test]
+        public void Xml_InvalidDocument()
+        {
+            Xml xml = new Xml();
+            xml.DocumentContent = "Hey";
+            Assert.AreEqual("Hey", xml.DocumentContent);
+            xml.DocumentContent = "<hey></hey>";
+            Assert.AreEqual("<hey></hey>", xml.DocumentContent);
 
-			Assert.AreEqual ("<?xml version=\"1.0\" encoding=\"utf-16\"?><document></document>",
-					 sw.ToString (), "SP1");
+            xml.TransformSource = "test.xsl";
+            Assert.AreEqual(null, xml.Transform, "ID");
+        }
 
-			// Now compare the inline XML
-			xml.DocumentContent = "<content></content>";
-			sw = new StringWriter ();
-			hw = new HtmlTextWriter (sw);
-			xml.DoRender (hw);
-			Assert.AreEqual ("<?xml version=\"1.0\" encoding=\"utf-16\"?><content></content>",
-					 sw.ToString (), "SP1");
-		}
+        [Test]
+        public void Xml_RenderEmpty()
+        {
+            XmlPoker xml = new XmlPoker();
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
 
-		[Test]
-		public void Xml_SourcePrecedence_2 () 
-		{
-			XmlPoker xml = new XmlPoker ();
+            xml.DoRender(hw);
+            Assert.AreEqual("", sw.ToString(), "RE1");
+        }
 
-			XmlDocument xml_doc = new XmlDocument ();
-			xml_doc.LoadXml ("<document></document>");
+        [Test]
+        public void Xml_SourcePrecedence()
+        {
+            XmlPoker xml = new XmlPoker();
+            xml.DocumentContent = "<content></content>";
 
-			xml.Document = xml_doc;
+            XmlDocument xml_doc = new XmlDocument();
+            xml_doc.LoadXml("<document></document>");
 
-			XmlDocument xml_navigator_doc = new XmlDocument ();
-			xml_navigator_doc.LoadXml ("<navigator></navigator>");
+            xml.Document = xml_doc;
 
-			xml.XPathNavigator = xml_navigator_doc.CreateNavigator ();
+            //
+            // Can not check the precendece for the file backend
+            // because it requires a complete setup to check for the
+            // file access permission to it (Control.MapPathSecure)
+            //
+            // xml.DocumentSource = "test.xml";
+            //
 
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter hw = new HtmlTextWriter (sw);
-			xml.DoRender (hw);
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            xml.DoRender(hw);
 
-			Assert.AreEqual ("<?xml version=\"1.0\" encoding=\"utf-16\"?><navigator></navigator>",
-					 sw.ToString (), "Xml_SourcePrecedence_2");
+            Assert.AreEqual(
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><document></document>",
+                sw.ToString(),
+                "SP1"
+            );
 
-		}
+            // Now compare the inline XML
+            xml.DocumentContent = "<content></content>";
+            sw = new StringWriter();
+            hw = new HtmlTextWriter(sw);
+            xml.DoRender(hw);
+            Assert.AreEqual(
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><content></content>",
+                sw.ToString(),
+                "SP1"
+            );
+        }
 
-		[Test] public void Xml_DefaultTrasnform ()
-		{
-			XmlPoker xml = new XmlPoker ();
+        [Test]
+        public void Xml_SourcePrecedence_2()
+        {
+            XmlPoker xml = new XmlPoker();
 
-			// For the actual transform, I was lazy, but
-			// xsp's web_xml.aspx works.
-		}
+            XmlDocument xml_doc = new XmlDocument();
+            xml_doc.LoadXml("<document></document>");
 
-		[ExpectedException(typeof (HttpException))]
-		[Test] public void Xml_InsertInvalid ()
-		{
-			XmlPoker xml = new XmlPoker ();
+            xml.Document = xml_doc;
 
-			xml.DoAdd ("hello");
-		}
+            XmlDocument xml_navigator_doc = new XmlDocument();
+            xml_navigator_doc.LoadXml("<navigator></navigator>");
 
-		[ExpectedException(typeof (NullReferenceException))]
-		[Test] public void Xml_InsertInvalid2 ()
-		{
-			XmlPoker xml = new XmlPoker ();
+            xml.XPathNavigator = xml_navigator_doc.CreateNavigator();
 
-			xml.DoAdd (null);
-		}
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            xml.DoRender(hw);
 
-		[Test] public void Xml_InsertValid ()
-		{
-			XmlPoker xml = new XmlPoker ();
+            Assert.AreEqual(
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><navigator></navigator>",
+                sw.ToString(),
+                "Xml_SourcePrecedence_2"
+            );
+        }
 
-			xml.DoAdd (new LiteralControl ("<test></test>"));
-		}
+        [Test]
+        public void Xml_DefaultTrasnform()
+        {
+            XmlPoker xml = new XmlPoker();
 
-		class CustomXPathNavigator : XPathNavigator
-		{
-			public override string BaseURI
-			{
-				get { return "Test"; }
-			}
+            // For the actual transform, I was lazy, but
+            // xsp's web_xml.aspx works.
+        }
 
-			#region fake
-			public override XPathNavigator Clone ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+        [ExpectedException(typeof(HttpException))]
+        [Test]
+        public void Xml_InsertInvalid()
+        {
+            XmlPoker xml = new XmlPoker();
 
-			public override bool IsEmptyElement
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            xml.DoAdd("hello");
+        }
 
-			public override bool IsSamePosition (XPathNavigator other)
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+        [ExpectedException(typeof(NullReferenceException))]
+        [Test]
+        public void Xml_InsertInvalid2()
+        {
+            XmlPoker xml = new XmlPoker();
 
-			public override string LocalName
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            xml.DoAdd(null);
+        }
 
-			public override bool MoveTo (XPathNavigator other)
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+        [Test]
+        public void Xml_InsertValid()
+        {
+            XmlPoker xml = new XmlPoker();
 
-			public override bool MoveToFirstAttribute ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            xml.DoAdd(new LiteralControl("<test></test>"));
+        }
 
-			public override bool MoveToFirstChild ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+        class CustomXPathNavigator : XPathNavigator
+        {
+            public override string BaseURI
+            {
+                get { return "Test"; }
+            }
 
-			public override bool MoveToFirstNamespace (XPathNamespaceScope namespaceScope)
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            #region fake
+            public override XPathNavigator Clone()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override bool MoveToId (string id)
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            public override bool IsEmptyElement
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-			public override bool MoveToNext ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            public override bool IsSamePosition(XPathNavigator other)
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override bool MoveToNextAttribute ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            public override string LocalName
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-			public override bool MoveToNextNamespace (XPathNamespaceScope namespaceScope)
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            public override bool MoveTo(XPathNavigator other)
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override bool MoveToParent ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            public override bool MoveToFirstAttribute()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override bool MoveToPrevious ()
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
+            public override bool MoveToFirstChild()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override string Name
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override XmlNameTable NameTable
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            public override bool MoveToId(string id)
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override string NamespaceURI
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            public override bool MoveToNext()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override XPathNodeType NodeType
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            public override bool MoveToNextAttribute()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override string Prefix
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
+            public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-			public override string Value
-			{
-				get { throw new Exception ("The method or operation is not implemented."); }
-			}
-			#endregion
-		}
+            public override bool MoveToParent()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-		[Test]
-		public void XPathNavigable_1 ()
-		{
-			Xml xml = new Xml ();
-			XmlDocument doc = new XmlDocument ();
-			xml.XPathNavigator = doc.CreateNavigator ();
-			Assert.IsNotNull (xml.XPathNavigator);
-		}
+            public override bool MoveToPrevious()
+            {
+                throw new Exception("The method or operation is not implemented.");
+            }
 
-		
-		[Test]
-		public void XPathNavigable_2 ()
-		{
-			Xml xml = new Xml ();
-			xml.XPathNavigator = new CustomXPathNavigator();
-			Assert.AreEqual ("Test", xml.XPathNavigator.BaseURI, "XPathNavigable_2");
-		}
+            public override string Name
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-		[Test]
-		public void XPathNavigatorInstance_1 () 
-		{
-			Xml xml = new Xml ();
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml ("<document></document>");
+            public override XmlNameTable NameTable
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-			xml.Document = doc;
+            public override string NamespaceURI
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-			XPathNavigator nav1 = xml.XPathNavigator;
+            public override XPathNodeType NodeType
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-			Assert.IsNull (nav1, "XPathNavigatorInstance_1");
-		}
+            public override string Prefix
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void Focus ()
-		{
-			Xml xml = new Xml ();
-			xml.Focus ();
-		}
-		
+            public override string Value
+            {
+                get { throw new Exception("The method or operation is not implemented."); }
+            }
+            #endregion
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void SkinID ()
-		{
-			Xml xml = new Xml ();
-			xml.SkinID = "Fake";
-		}
-	}
+        [Test]
+        public void XPathNavigable_1()
+        {
+            Xml xml = new Xml();
+            XmlDocument doc = new XmlDocument();
+            xml.XPathNavigator = doc.CreateNavigator();
+            Assert.IsNotNull(xml.XPathNavigator);
+        }
+
+        [Test]
+        public void XPathNavigable_2()
+        {
+            Xml xml = new Xml();
+            xml.XPathNavigator = new CustomXPathNavigator();
+            Assert.AreEqual("Test", xml.XPathNavigator.BaseURI, "XPathNavigable_2");
+        }
+
+        [Test]
+        public void XPathNavigatorInstance_1()
+        {
+            Xml xml = new Xml();
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml("<document></document>");
+
+            xml.Document = doc;
+
+            XPathNavigator nav1 = xml.XPathNavigator;
+
+            Assert.IsNull(nav1, "XPathNavigatorInstance_1");
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void Focus()
+        {
+            Xml xml = new Xml();
+            xml.Focus();
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void SkinID()
+        {
+            Xml xml = new Xml();
+            xml.SkinID = "Fake";
+        }
+    }
 }
-
-		

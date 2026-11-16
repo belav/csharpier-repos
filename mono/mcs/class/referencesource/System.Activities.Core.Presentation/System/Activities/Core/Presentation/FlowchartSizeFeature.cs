@@ -20,8 +20,18 @@ namespace System.Activities.Core.Presentation
         {
             get
             {
-                yield return new AttachedPropertyInfo<Nullable<double>> { IsBrowsable = false, PropertyName = WidthPropertyName, DefaultValue = DefaultWidth };
-                yield return new AttachedPropertyInfo<Nullable<double>> { IsBrowsable = false, PropertyName = HeightPropertyName, DefaultValue = DefaultHeight };
+                yield return new AttachedPropertyInfo<Nullable<double>>
+                {
+                    IsBrowsable = false,
+                    PropertyName = WidthPropertyName,
+                    DefaultValue = DefaultWidth,
+                };
+                yield return new AttachedPropertyInfo<Nullable<double>>
+                {
+                    IsBrowsable = false,
+                    PropertyName = HeightPropertyName,
+                    DefaultValue = DefaultHeight,
+                };
             }
         }
     }

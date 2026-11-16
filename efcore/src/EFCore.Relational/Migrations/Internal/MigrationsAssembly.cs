@@ -27,14 +27,16 @@ public class MigrationsAssembly : IMigrationsAssembly
         ICurrentDbContext currentContext,
         IDbContextOptions options,
         IMigrationsIdGenerator idGenerator,
-        IDiagnosticsLogger<DbLoggerCategory.Migrations> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Migrations> logger
+    )
     {
         _contextType = currentContext.Context.GetType();
 
         var assemblyName = RelationalOptionsExtension.Extract(options).MigrationsAssembly;
-        Assembly = assemblyName == null
-            ? _contextType.Assembly
-            : Assembly.Load(new AssemblyName(assemblyName));
+        Assembly =
+            assemblyName == null
+                ? _contextType.Assembly
+                : Assembly.Load(new AssemblyName(assemblyName));
 
         _idGenerator = idGenerator;
         _logger = logger;
@@ -54,13 +56,14 @@ public class MigrationsAssembly : IMigrationsAssembly
             {
                 var result = new SortedList<string, TypeInfo>();
 
-                var items
-                    = from t in Assembly.GetConstructibleTypes()
-                      where t.IsSubclassOf(typeof(Migration))
-                          && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == _contextType
-                      let id = t.GetCustomAttribute<MigrationAttribute>()?.Id
-                      orderby id
-                      select (id, t);
+                var items =
+                    from t in Assembly.GetConstructibleTypes()
+                    where
+                        t.IsSubclassOf(typeof(Migration))
+                        && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == _contextType
+                    let id = t.GetCustomAttribute<MigrationAttribute>()?.Id
+                    orderby id
+                    select (id, t);
 
                 foreach (var (id, t) in items)
                 {
@@ -87,13 +90,14 @@ public class MigrationsAssembly : IMigrationsAssembly
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ModelSnapshot? ModelSnapshot
-        => _modelSnapshot
-            ??= (from t in Assembly.GetConstructibleTypes()
-                 where t.IsSubclassOf(typeof(ModelSnapshot))
-                     && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == _contextType
-                 select (ModelSnapshot)Activator.CreateInstance(t.AsType())!)
-            .FirstOrDefault();
+    public virtual ModelSnapshot? ModelSnapshot =>
+        _modelSnapshot ??= (
+            from t in Assembly.GetConstructibleTypes()
+            where
+                t.IsSubclassOf(typeof(ModelSnapshot))
+                && t.GetCustomAttribute<DbContextAttribute>()?.ContextType == _contextType
+            select (ModelSnapshot)Activator.CreateInstance(t.AsType())!
+        ).FirstOrDefault();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -109,13 +113,19 @@ public class MigrationsAssembly : IMigrationsAssembly
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string? FindMigrationId(string nameOrId)
-        => Migrations.Keys
-            .Where(
+    public virtual string? FindMigrationId(string nameOrId) =>
+        Migrations
+            .Keys.Where(
                 _idGenerator.IsValidId(nameOrId)
                     // ReSharper disable once ImplicitlyCapturedClosure
                     ? id => string.Equals(id, nameOrId, StringComparison.OrdinalIgnoreCase)
-                    : id => string.Equals(_idGenerator.GetName(id), nameOrId, StringComparison.OrdinalIgnoreCase))
+                    : id =>
+                        string.Equals(
+                            _idGenerator.GetName(id),
+                            nameOrId,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+            )
             .FirstOrDefault();
 
     /// <summary>

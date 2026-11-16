@@ -36,8 +36,7 @@ public interface IDatabaseProvider
     ///     The value of the <see cref="AssemblyInformationalVersionAttribute.InformationalVersion" />
     ///     for the database provider assembly.
     /// </summary>
-    string? Version
-        => null;
+    string? Version => null;
 
     /// <summary>
     ///     Gets a value indicating whether this database provider has been configured for a given context.

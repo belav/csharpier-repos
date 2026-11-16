@@ -7,21 +7,15 @@ public class SponsorDetails
 {
     public class SponsorDetailsProxy : SponsorDetails, IF1Proxy
     {
-        public SponsorDetailsProxy(
-            int days,
-            decimal space)
-            : base(days, space)
-        {
-        }
+        public SponsorDetailsProxy(int days, decimal space)
+            : base(days, space) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
         public bool InitializedCalled { get; set; }
     }
 
-    public SponsorDetails()
-    {
-    }
+    public SponsorDetails() { }
 
     private SponsorDetails(int days, decimal space)
     {

@@ -8,16 +8,18 @@ namespace System.ServiceModel.Channels
     {
         Anonymous,
         NonAnonymous,
-        Mixed
+        Mixed,
     }
 
     static class SupportedAddressingModeHelper
     {
         internal static bool IsDefined(SupportedAddressingMode value)
         {
-            return (value == SupportedAddressingMode.Anonymous ||
-                value == SupportedAddressingMode.NonAnonymous ||
-                value == SupportedAddressingMode.Mixed);
+            return (
+                value == SupportedAddressingMode.Anonymous
+                || value == SupportedAddressingMode.NonAnonymous
+                || value == SupportedAddressingMode.Mixed
+            );
         }
     }
 }

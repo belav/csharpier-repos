@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal partial class Binder
     {
-        private BoundExpression BindWithExpression(WithExpressionSyntax syntax, BindingDiagnosticBag diagnostics)
+        private BoundExpression BindWithExpression(
+            WithExpressionSyntax syntax,
+            BindingDiagnosticBag diagnostics
+        )
         {
             MessageID.IDS_FeatureRecords.CheckFeatureAvailability(diagnostics, syntax.WithKeyword);
 
@@ -33,17 +36,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (receiverType.IsAnonymousType && !receiverType.IsDelegateType())
             {
-                CheckFeatureAvailability(syntax, MessageID.IDS_FeatureWithOnAnonymousTypes, diagnostics);
+                CheckFeatureAvailability(
+                    syntax,
+                    MessageID.IDS_FeatureWithOnAnonymousTypes,
+                    diagnostics
+                );
             }
             else if (!receiverType.IsErrorType())
             {
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(diagnostics);
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
+                    diagnostics
+                );
 
-                cloneMethod = SynthesizedRecordClone.FindValidCloneMethod(receiverType is TypeParameterSymbol typeParameter ? typeParameter.EffectiveBaseClass(ref useSiteInfo) : receiverType, ref useSiteInfo);
+                cloneMethod = SynthesizedRecordClone.FindValidCloneMethod(
+                    receiverType is TypeParameterSymbol typeParameter
+                        ? typeParameter.EffectiveBaseClass(ref useSiteInfo)
+                        : receiverType,
+                    ref useSiteInfo
+                );
                 if (cloneMethod is null)
                 {
                     hasErrors = true;
-                    diagnostics.Add(ErrorCode.ERR_CannotClone, syntax.Expression.Location, receiverType);
+                    diagnostics.Add(
+                        ErrorCode.ERR_CannotClone,
+                        syntax.Expression.Location,
+                        receiverType
+                    );
                 }
                 else
                 {
@@ -58,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 receiverType,
                 syntax.Expression,
                 isForNewInstance: true,
-                diagnostics);
+                diagnostics
+            );
 
             // N.B. Since we don't parse nested initializers in syntax there should be no extra
             // errors we need to check for here.
@@ -69,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 cloneMethod,
                 initializer,
                 receiverType,
-                hasErrors: hasErrors);
+                hasErrors: hasErrors
+            );
         }
     }
 }

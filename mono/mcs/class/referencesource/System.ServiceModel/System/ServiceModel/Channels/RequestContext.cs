@@ -16,8 +16,17 @@ namespace System.ServiceModel.Channels
 
         public abstract void Reply(Message message);
         public abstract void Reply(Message message, TimeSpan timeout);
-        public abstract IAsyncResult BeginReply(Message message, AsyncCallback callback, object state);
-        public abstract IAsyncResult BeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        );
+        public abstract IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         public abstract void EndReply(IAsyncResult result);
 
         void IDisposable.Dispose()
@@ -25,8 +34,6 @@ namespace System.ServiceModel.Channels
             this.Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
     }
 }

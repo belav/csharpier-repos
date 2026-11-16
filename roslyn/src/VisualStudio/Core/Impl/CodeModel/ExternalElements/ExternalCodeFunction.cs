@@ -15,26 +15,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeFunction))]
-    public sealed class ExternalCodeFunction : AbstractExternalCodeMember, ICodeElementContainer<ExternalCodeParameter>, EnvDTE.CodeFunction, EnvDTE80.CodeFunction2
+    public sealed class ExternalCodeFunction
+        : AbstractExternalCodeMember,
+            ICodeElementContainer<ExternalCodeParameter>,
+            EnvDTE.CodeFunction,
+            EnvDTE80.CodeFunction2
     {
-        internal static EnvDTE.CodeFunction Create(CodeModelState state, ProjectId projectId, IMethodSymbol symbol)
+        internal static EnvDTE.CodeFunction Create(
+            CodeModelState state,
+            ProjectId projectId,
+            IMethodSymbol symbol
+        )
         {
             var element = new ExternalCodeFunction(state, projectId, symbol);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
         }
 
-        private ExternalCodeFunction(CodeModelState state, ProjectId projectId, IMethodSymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+        private ExternalCodeFunction(
+            CodeModelState state,
+            ProjectId projectId,
+            IMethodSymbol symbol
+        )
+            : base(state, projectId, symbol) { }
 
         private IMethodSymbol MethodSymbol
         {
             get { return (IMethodSymbol)LookupSymbol(); }
         }
 
-        EnvDTE.CodeElements ICodeElementContainer<ExternalCodeParameter>.GetCollection()
-            => this.Parameters;
+        EnvDTE.CodeElements ICodeElementContainer<ExternalCodeParameter>.GetCollection() =>
+            this.Parameters;
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -70,14 +80,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                 var symbol = (IMethodSymbol)LookupSymbol();
 
                 // Only methods and constructors can be overloaded
-                if (symbol.MethodKind is not MethodKind.Ordinary and
-                    not MethodKind.Constructor)
+                if (symbol.MethodKind is not MethodKind.Ordinary and not MethodKind.Constructor)
                 {
                     return false;
                 }
 
-                var methodsOfName = symbol.ContainingType.GetMembers(symbol.Name)
-                                                         .Where(m => m.Kind == SymbolKind.Method);
+                var methodsOfName = symbol
+                    .ContainingType.GetMembers(symbol.Name)
+                    .Where(m => m.Kind == SymbolKind.Method);
 
                 return methodsOfName.Count() > 1;
             }
@@ -85,10 +95,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         public EnvDTE.CodeElements Overloads
         {
-            get
-            {
-                return ExternalOverloadsCollection.Create(this.State, this, this.ProjectId);
-            }
+            get { return ExternalOverloadsCollection.Create(this.State, this, this.ProjectId); }
         }
 
         public EnvDTE.CodeTypeRef Type
@@ -96,13 +103,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             get
             {
                 // TODO: What if ReturnType is null?
-                return CodeTypeRef.Create(this.State, this, this.ProjectId, MethodSymbol.ReturnType);
+                return CodeTypeRef.Create(
+                    this.State,
+                    this,
+                    this.ProjectId,
+                    MethodSymbol.ReturnType
+                );
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool IsGeneric
@@ -146,11 +154,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
                 return result;
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
     }
 }

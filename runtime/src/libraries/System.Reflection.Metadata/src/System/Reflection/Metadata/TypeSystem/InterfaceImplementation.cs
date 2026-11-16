@@ -12,7 +12,10 @@ namespace System.Reflection.Metadata
         // Workaround: JIT doesn't generate good code for nested structures, so use RowId.
         private readonly int _rowId;
 
-        internal InterfaceImplementation(MetadataReader reader, InterfaceImplementationHandle handle)
+        internal InterfaceImplementation(
+            MetadataReader reader,
+            InterfaceImplementationHandle handle
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!handle.IsNil);
@@ -25,7 +28,6 @@ namespace System.Reflection.Metadata
         {
             get { return InterfaceImplementationHandle.FromRowId(_rowId); }
         }
-
 
         /// <summary>
         /// The interface that is implemented

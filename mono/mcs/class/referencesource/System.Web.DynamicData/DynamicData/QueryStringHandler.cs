@@ -4,14 +4,23 @@ using System.Globalization;
 using System.Text;
 using System.Web.Resources;
 
-namespace System.Web.DynamicData {
-    internal static class QueryStringHandler {
-
-        public static string AddFiltersToPath(string virtualPath, IDictionary<string, object> filters) {
+namespace System.Web.DynamicData
+{
+    internal static class QueryStringHandler
+    {
+        public static string AddFiltersToPath(
+            string virtualPath,
+            IDictionary<string, object> filters
+        )
+        {
             if (String.IsNullOrEmpty(virtualPath))
                 throw new ArgumentException(
-                    String.Format(CultureInfo.CurrentCulture, DynamicDataResources.QueryStringHandler_VirtualPathCannotBeEmpty),
-                    "virtualPath");
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DynamicDataResources.QueryStringHandler_VirtualPathCannotBeEmpty
+                    ),
+                    "virtualPath"
+                );
 
             if (filters == null)
                 throw new ArgumentNullException("filters");
@@ -21,11 +30,17 @@ namespace System.Web.DynamicData {
                 return virtualPath;
 
             StringBuilder result = new StringBuilder(virtualPath);
-            if (!virtualPath.Contains("?")) {
+            if (!virtualPath.Contains("?"))
+            {
                 result.Append('?');
             }
-            else {
-                if (!virtualPath.EndsWith("?", StringComparison.Ordinal) && !virtualPath.EndsWith("&", StringComparison.Ordinal)) {
+            else
+            {
+                if (
+                    !virtualPath.EndsWith("?", StringComparison.Ordinal)
+                    && !virtualPath.EndsWith("&", StringComparison.Ordinal)
+                )
+                {
                     result.Append('&');
                 }
             }
@@ -35,15 +50,19 @@ namespace System.Web.DynamicData {
             return result.ToString();
         }
 
-        private static string ConcatenateQueryStringElements(IDictionary<string, object> parameters) {
-            if (parameters.Count == 0) {
+        private static string ConcatenateQueryStringElements(IDictionary<string, object> parameters)
+        {
+            if (parameters.Count == 0)
+            {
                 return String.Empty;
             }
 
             StringBuilder result = new StringBuilder();
             bool firstParam = true;
-            foreach (String s in parameters.Keys) {
-                if (!String.IsNullOrEmpty(s)) {
+            foreach (String s in parameters.Keys)
+            {
+                if (!String.IsNullOrEmpty(s))
+                {
                     string key = SanitizeParameterComponent(s);
                     string value = SanitizeParameterComponent(parameters[s]);
 
@@ -60,7 +79,8 @@ namespace System.Web.DynamicData {
             return result.ToString();
         }
 
-        private static string SanitizeParameterComponent(object value) {
+        private static string SanitizeParameterComponent(object value)
+        {
             if (value == null)
                 return String.Empty;
 

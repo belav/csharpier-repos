@@ -19,12 +19,19 @@ namespace BrowserDebugProxy
 {
     internal static class MemberObjectsExplorer
     {
-        private static bool IsACollectionType(string typeName)
-            => typeName is not null &&
-                    (typeName.StartsWith("System.Collections.Generic", StringComparison.Ordinal) ||
-                    typeName.EndsWith("[]", StringComparison.Ordinal));
+        private static bool IsACollectionType(string typeName) =>
+            typeName is not null
+            && (
+                typeName.StartsWith("System.Collections.Generic", StringComparison.Ordinal)
+                || typeName.EndsWith("[]", StringComparison.Ordinal)
+            );
 
-        private static string GetNamePrefixForValues(string memberName, string typeName, bool isOwn, DebuggerBrowsableState? state)
+        private static string GetNamePrefixForValues(
+            string memberName,
+            string typeName,
+            bool isOwn,
+            DebuggerBrowsableState? state
+        )
         {
             if (isOwn || state != DebuggerBrowsableState.RootHidden)
                 return memberName;
@@ -45,7 +52,8 @@ namespace BrowserDebugProxy
             bool isOwn,
             int parentTypeId,
             GetObjectCommandOptions getObjectOptions,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
             var fieldValue = await sdbHelper.ValueCreator.ReadAsVariableValue(
                 reader,
@@ -53,7 +61,8 @@ namespace BrowserDebugProxy
                 token,
                 isOwn: isOwn,
                 field.TypeId,
-                getObjectOptions.HasFlag(GetObjectCommandOptions.ForDebuggerDisplayAttribute));
+                getObjectOptions.HasFlag(GetObjectCommandOptions.ForDebuggerDisplayAttribute)
+            );
 
             var typeFieldsBrowsableInfo = typeInfo?.Info?.DebuggerBrowsableFields;
             var typePropertiesBrowsableInfo = typeInfo?.Info?.DebuggerBrowsableProperties;
@@ -64,8 +73,11 @@ namespace BrowserDebugProxy
                 typePropertiesBrowsableInfo.TryGetValue(field.Name, out state);
             }
             fieldValue[InternalUseFieldName.State.Name] = state?.ToString();
-            fieldValue[InternalUseFieldName.Section.Name] = field.Attributes.HasFlag(FieldAttributes.Private)
-                ? "private" : "result";
+            fieldValue[InternalUseFieldName.Section.Name] = field.Attributes.HasFlag(
+                FieldAttributes.Private
+            )
+                ? "private"
+                : "result";
 
             if (field.IsBackingField)
             {
@@ -83,15 +95,20 @@ namespace BrowserDebugProxy
                 command_params_writer_to_set.Write(field.Id);
                 var (data, length) = command_params_writer_to_set.ToBase64();
 
-                fieldValue.Add("set", JObject.FromObject(new
-                {
-                    commandSet = CommandSet.ObjectRef,
-                    command = CmdObject.RefSetValues,
-                    buffer = data,
-                    valtype = fieldValueType,
-                    length = length,
-                    id = MonoSDBHelper.GetNewId()
-                }));
+                fieldValue.Add(
+                    "set",
+                    JObject.FromObject(
+                        new
+                        {
+                            commandSet = CommandSet.ObjectRef,
+                            command = CmdObject.RefSetValues,
+                            buffer = data,
+                            valtype = fieldValueType,
+                            length = length,
+                            id = MonoSDBHelper.GetNewId(),
+                        }
+                    )
+                );
             }
 
             return fieldValue;
@@ -104,7 +121,8 @@ namespace BrowserDebugProxy
             string rootTypeName,
             GetObjectCommandOptions getCommandOptions,
             bool includeStatic,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
             var rootValue = root?["value"] ?? root["get"];
 
@@ -115,7 +133,12 @@ namespace BrowserDebugProxy
             if (type != "object" && type != "function")
                 return new JArray();
 
-            if (!DotnetObjectId.TryParse(rootValue?["objectId"]?.Value<string>(), out DotnetObjectId rootObjectId))
+            if (
+                !DotnetObjectId.TryParse(
+                    rootValue?["objectId"]?.Value<string>(),
+                    out DotnetObjectId rootObjectId
+                )
+            )
                 throw new Exception($"Cannot parse object id from {root} for {rootNamePrefix}");
 
             // if it's an accessor
@@ -134,9 +157,23 @@ namespace BrowserDebugProxy
                     var valType = sdbHelper.GetValueTypeClass(rootObjectId.Value);
                     if (valType == null || valType.IsEnum)
                         return new JArray();
-                    members = await valType.GetMemberValues(sdbHelper, getCommandOptions, false, includeStatic, token);
+                    members = await valType.GetMemberValues(
+                        sdbHelper,
+                        getCommandOptions,
+                        false,
+                        includeStatic,
+                        token
+                    );
                 }
-                else members = await GetObjectMemberValues(sdbHelper, rootObjectId.Value, getCommandOptions, token, false, includeStatic);
+                else
+                    members = await GetObjectMemberValues(
+                        sdbHelper,
+                        rootObjectId.Value,
+                        getCommandOptions,
+                        token,
+                        false,
+                        includeStatic
+                    );
 
                 if (!IsACollectionType(rootTypeName))
                 {
@@ -152,9 +189,14 @@ namespace BrowserDebugProxy
                     var memberNamedItems = members
                         .Where(m => m["name"]?.Value<string>() == "Items")
                         .FirstOrDefault();
-                    if (memberNamedItems is not null &&
-                        DotnetObjectId.TryParse(memberNamedItems["value"]?["objectId"]?.Value<string>(), out DotnetObjectId itemsObjectId) &&
-                        itemsObjectId.Scheme == "array")
+                    if (
+                        memberNamedItems is not null
+                        && DotnetObjectId.TryParse(
+                            memberNamedItems["value"]?["objectId"]?.Value<string>(),
+                            out DotnetObjectId itemsObjectId
+                        )
+                        && itemsObjectId.Scheme == "array"
+                    )
                     {
                         rootObjectId = itemsObjectId;
                     }
@@ -179,7 +221,15 @@ namespace BrowserDebugProxy
             async Task<JArray> GetRootHiddenChildrenForProperty()
             {
                 var resMethod = await sdbHelper.InvokeMethod(rootObjectId, token);
-                return await GetRootHiddenChildren(sdbHelper, resMethod, rootNamePrefix, rootTypeName, getCommandOptions, includeStatic, token);
+                return await GetRootHiddenChildren(
+                    sdbHelper,
+                    resMethod,
+                    rootNamePrefix,
+                    rootTypeName,
+                    getCommandOptions,
+                    includeStatic,
+                    token
+                );
             }
         }
 
@@ -189,10 +239,25 @@ namespace BrowserDebugProxy
             GetObjectCommandOptions getObjectOptions,
             CancellationToken token,
             bool sortByAccessLevel = false,
-            bool includeStatic = false)
-            => dotnetObjectId.IsValueType
-                    ? GetValueTypeMemberValues(sdbHelper, dotnetObjectId.Value, getObjectOptions, token, sortByAccessLevel, includeStatic)
-                    : GetObjectMemberValues(sdbHelper, dotnetObjectId.Value, getObjectOptions, token, sortByAccessLevel, includeStatic);
+            bool includeStatic = false
+        ) =>
+            dotnetObjectId.IsValueType
+                ? GetValueTypeMemberValues(
+                    sdbHelper,
+                    dotnetObjectId.Value,
+                    getObjectOptions,
+                    token,
+                    sortByAccessLevel,
+                    includeStatic
+                )
+                : GetObjectMemberValues(
+                    sdbHelper,
+                    dotnetObjectId.Value,
+                    getObjectOptions,
+                    token,
+                    sortByAccessLevel,
+                    includeStatic
+                );
 
         public static async Task<JArray> ExpandFieldValues(
             MonoSDBHelper sdbHelper,
@@ -203,7 +268,8 @@ namespace BrowserDebugProxy
             GetObjectCommandOptions getCommandOptions,
             bool isOwn,
             bool includeStatic,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
             JArray fieldValues = new JArray();
             if (fields.Count == 0)
@@ -218,8 +284,16 @@ namespace BrowserDebugProxy
             foreach (var field in fields)
                 commandParamsWriter.Write(field.Id);
             MonoBinaryReader retDebuggerCmdReader = id.IsValueType
-                                                    ? await sdbHelper.SendDebuggerAgentCommand(CmdType.GetValues, commandParamsWriter, token) :
-                                                    await sdbHelper.SendDebuggerAgentCommand(CmdObject.RefGetValues, commandParamsWriter, token);
+                ? await sdbHelper.SendDebuggerAgentCommand(
+                    CmdType.GetValues,
+                    commandParamsWriter,
+                    token
+                )
+                : await sdbHelper.SendDebuggerAgentCommand(
+                    CmdObject.RefGetValues,
+                    commandParamsWriter,
+                    token
+                );
 
             var typeInfo = await sdbHelper.GetTypeInfo(containerTypeId, token);
 
@@ -230,14 +304,34 @@ namespace BrowserDebugProxy
                 int valtype = retDebuggerCmdReader.ReadByte();
                 retDebuggerCmdReader.BaseStream.Position = initialPos;
 
-                JObject fieldValue = await ReadFieldValue(sdbHelper, retDebuggerCmdReader, field, id.Value, typeInfo, valtype, isOwn, parentTypeId, getCommandOptions, token);
+                JObject fieldValue = await ReadFieldValue(
+                    sdbHelper,
+                    retDebuggerCmdReader,
+                    field,
+                    id.Value,
+                    typeInfo,
+                    valtype,
+                    isOwn,
+                    parentTypeId,
+                    getCommandOptions,
+                    token
+                );
                 numFieldsRead++;
 
-                if (typeInfo.Info.IsNonUserCode && getCommandOptions.HasFlag(GetObjectCommandOptions.JustMyCode) && field.Attributes.HasFlag(FieldAttributes.Private))
+                if (
+                    typeInfo.Info.IsNonUserCode
+                    && getCommandOptions.HasFlag(GetObjectCommandOptions.JustMyCode)
+                    && field.Attributes.HasFlag(FieldAttributes.Private)
+                )
                     continue;
 
-                if (!Enum.TryParse(fieldValue[InternalUseFieldName.State.Name].Value<string>(), out DebuggerBrowsableState fieldState)
-                    || fieldState == DebuggerBrowsableState.Collapsed)
+                if (
+                    !Enum.TryParse(
+                        fieldValue[InternalUseFieldName.State.Name].Value<string>(),
+                        out DebuggerBrowsableState fieldState
+                    )
+                    || fieldState == DebuggerBrowsableState.Collapsed
+                )
                 {
                     fieldValues.Add(fieldValue);
                     continue;
@@ -248,27 +342,59 @@ namespace BrowserDebugProxy
 
                 string namePrefix = field.Name;
                 string containerTypeName = await sdbHelper.GetTypeName(containerTypeId, token);
-                namePrefix = GetNamePrefixForValues(field.Name, containerTypeName, isOwn, fieldState);
+                namePrefix = GetNamePrefixForValues(
+                    field.Name,
+                    containerTypeName,
+                    isOwn,
+                    fieldState
+                );
                 string typeName = await sdbHelper.GetTypeName(field.TypeId, token);
 
                 var enumeratedValues = await GetRootHiddenChildren(
-                    sdbHelper, fieldValue, namePrefix, typeName, getCommandOptions, includeStatic, token);
+                    sdbHelper,
+                    fieldValue,
+                    namePrefix,
+                    typeName,
+                    getCommandOptions,
+                    includeStatic,
+                    token
+                );
                 if (enumeratedValues != null)
                     fieldValues.AddRange(enumeratedValues);
             }
 
             if (numFieldsRead != fields.Count)
-                throw new Exception($"Bug: Got {numFieldsRead} instead of expected {fields.Count} field values");
+                throw new Exception(
+                    $"Bug: Got {numFieldsRead} instead of expected {fields.Count} field values"
+                );
 
             return fieldValues;
         }
 
         public static Task<GetMembersResult> GetValueTypeMemberValues(
-            MonoSDBHelper sdbHelper, int valueTypeId, GetObjectCommandOptions getCommandOptions, CancellationToken token, bool sortByAccessLevel = false, bool includeStatic = false)
+            MonoSDBHelper sdbHelper,
+            int valueTypeId,
+            GetObjectCommandOptions getCommandOptions,
+            CancellationToken token,
+            bool sortByAccessLevel = false,
+            bool includeStatic = false
+        )
         {
-            return sdbHelper.ValueCreator.TryGetValueTypeById(valueTypeId, out ValueTypeClass valueType)
-                ? valueType.GetMemberValues(sdbHelper, getCommandOptions, sortByAccessLevel, includeStatic, token)
-                : throw new ArgumentException($"Could not find any valuetype with id: {valueTypeId}", nameof(valueTypeId));
+            return sdbHelper.ValueCreator.TryGetValueTypeById(
+                valueTypeId,
+                out ValueTypeClass valueType
+            )
+                ? valueType.GetMemberValues(
+                    sdbHelper,
+                    getCommandOptions,
+                    sortByAccessLevel,
+                    includeStatic,
+                    token
+                )
+                : throw new ArgumentException(
+                    $"Could not find any valuetype with id: {valueTypeId}",
+                    nameof(valueTypeId)
+                );
         }
 
         public static async Task<JArray> GetExpandedMemberValues(
@@ -278,15 +404,23 @@ namespace BrowserDebugProxy
             JObject value,
             DebuggerBrowsableState? state,
             bool includeStatic,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
             if (state is DebuggerBrowsableState.RootHidden)
             {
                 if (MonoSDBHelper.IsPrimitiveType(typeName))
                     return GetHiddenElement();
 
-                return await GetRootHiddenChildren(sdbHelper, value, namePrefix, typeName, GetObjectCommandOptions.None, includeStatic, token);
-
+                return await GetRootHiddenChildren(
+                    sdbHelper,
+                    value,
+                    namePrefix,
+                    typeName,
+                    GetObjectCommandOptions.None,
+                    includeStatic,
+                    token
+                );
             }
             else if (state is DebuggerBrowsableState.Never)
             {
@@ -314,7 +448,8 @@ namespace BrowserDebugProxy
             CancellationToken token,
             Dictionary<string, JObject> allMembers,
             bool includeStatic,
-            int parentTypeId = -1)
+            int parentTypeId = -1
+        )
         {
             using var retDebuggerCmdReader = await sdbHelper.GetTypePropertiesReader(typeId, token);
             if (retDebuggerCmdReader == null)
@@ -339,39 +474,72 @@ namespace BrowserDebugProxy
                 if (!includeStatic && isStatic)
                     continue;
 
-                MethodInfoWithDebugInformation getterInfo = await sdbHelper.GetMethodInfo(getMethodId, token);
+                MethodInfoWithDebugInformation getterInfo = await sdbHelper.GetMethodInfo(
+                    getMethodId,
+                    token
+                );
                 MethodAttributes getterAttrs = getterInfo.Info.Attributes;
-                MethodAttributes getterMemberAccessAttrs = getterAttrs & MethodAttributes.MemberAccessMask;
+                MethodAttributes getterMemberAccessAttrs =
+                    getterAttrs & MethodAttributes.MemberAccessMask;
                 MethodAttributes vtableLayout = getterAttrs & MethodAttributes.VtableLayoutMask;
 
-                if (typeInfo.Info.IsNonUserCode && getCommandOptions.HasFlag(GetObjectCommandOptions.JustMyCode) && getterMemberAccessAttrs == MethodAttributes.Private)
+                if (
+                    typeInfo.Info.IsNonUserCode
+                    && getCommandOptions.HasFlag(GetObjectCommandOptions.JustMyCode)
+                    && getterMemberAccessAttrs == MethodAttributes.Private
+                )
                     continue;
 
-                bool isNewSlot = (vtableLayout & MethodAttributes.NewSlot) == MethodAttributes.NewSlot;
+                bool isNewSlot =
+                    (vtableLayout & MethodAttributes.NewSlot) == MethodAttributes.NewSlot;
 
-                typePropertiesBrowsableInfo.TryGetValue(propName, out DebuggerBrowsableState? state);
+                typePropertiesBrowsableInfo.TryGetValue(
+                    propName,
+                    out DebuggerBrowsableState? state
+                );
 
                 // handle parents' members:
                 if (!allMembers.TryGetValue(propName, out JObject existingMember))
                 {
                     // new member
-                    await AddProperty(getMethodId, parentTypeId, state, propName, getterMemberAccessAttrs, isStatic, isNewSlot: isNewSlot);
+                    await AddProperty(
+                        getMethodId,
+                        parentTypeId,
+                        state,
+                        propName,
+                        getterMemberAccessAttrs,
+                        isStatic,
+                        isNewSlot: isNewSlot
+                    );
                     continue;
                 }
 
-                bool isExistingMemberABackingField = existingMember[InternalUseFieldName.IsBackingField.Name]?.Value<bool>() == true;
+                bool isExistingMemberABackingField =
+                    existingMember[InternalUseFieldName.IsBackingField.Name]?.Value<bool>() == true;
                 if (isOwn && !isExistingMemberABackingField)
                 {
                     // repeated propname on the same type! cannot happen
-                    throw new Exception($"Internal Error: should not happen. propName: {propName}. Existing all members: {string.Join(",", allMembers.Keys)}");
+                    throw new Exception(
+                        $"Internal Error: should not happen. propName: {propName}. Existing all members: {string.Join(",", allMembers.Keys)}"
+                    );
                 }
 
-                bool isExistingMemberABackingFieldOwnedByThisType = isExistingMemberABackingField && existingMember[InternalUseFieldName.Owner.Name]?.Value<string>() == typeName;
-                if (isExistingMemberABackingField && (isOwn || isExistingMemberABackingFieldOwnedByThisType))
+                bool isExistingMemberABackingFieldOwnedByThisType =
+                    isExistingMemberABackingField
+                    && existingMember[InternalUseFieldName.Owner.Name]?.Value<string>() == typeName;
+                if (
+                    isExistingMemberABackingField
+                    && (isOwn || isExistingMemberABackingFieldOwnedByThisType)
+                )
                 {
                     // this is the property corresponding to the backing field in *this* type
                     // `isOwn` would mean that this is the first type that we are looking at
-                    await UpdateBackingFieldWithPropertyAttributes(existingMember, propName, getterMemberAccessAttrs, state);
+                    await UpdateBackingFieldWithPropertyAttributes(
+                        existingMember,
+                        propName,
+                        getterMemberAccessAttrs,
+                        state
+                    );
                     continue;
                 }
 
@@ -379,9 +547,16 @@ namespace BrowserDebugProxy
                 if (isNewSlot)
                 {
                     // this has `new` keyword if it is newSlot but direct child was not a newSlot:
-                    var child = allMembers.FirstOrDefault(
-                        kvp => (kvp.Key == propName || kvp.Key.StartsWith($"{propName} (")) && kvp.Value[InternalUseFieldName.ParentTypeId.Name]?.Value<int>() == typeId).Value;
-                    bool wasOverriddenByDerivedType = child != null && child[InternalUseFieldName.IsNewSlot.Name]?.Value<bool>() != true;
+                    var child = allMembers
+                        .FirstOrDefault(kvp =>
+                            (kvp.Key == propName || kvp.Key.StartsWith($"{propName} ("))
+                            && kvp.Value[InternalUseFieldName.ParentTypeId.Name]?.Value<int>()
+                                == typeId
+                        )
+                        .Value;
+                    bool wasOverriddenByDerivedType =
+                        child != null
+                        && child[InternalUseFieldName.IsNewSlot.Name]?.Value<bool>() != true;
                     if (wasOverriddenByDerivedType)
                     {
                         /*
@@ -406,26 +581,50 @@ namespace BrowserDebugProxy
                  * want to show *both* the members
                  */
 
-                JObject backingFieldForHiddenProp = allMembers.GetValueOrDefault(overriddenOrHiddenPropName);
-                if (backingFieldForHiddenProp is null || backingFieldForHiddenProp[InternalUseFieldName.IsBackingField.Name]?.Value<bool>() != true)
+                JObject backingFieldForHiddenProp = allMembers.GetValueOrDefault(
+                    overriddenOrHiddenPropName
+                );
+                if (
+                    backingFieldForHiddenProp is null
+                    || backingFieldForHiddenProp[InternalUseFieldName.IsBackingField.Name]
+                        ?.Value<bool>() != true
+                )
                 {
                     // hiding with a non-auto property, so nothing to adjust
                     // add the new property
-                    await AddProperty(getMethodId, parentTypeId, state, overriddenOrHiddenPropName, getterMemberAccessAttrs, isStatic, isNewSlot: isNewSlot);
+                    await AddProperty(
+                        getMethodId,
+                        parentTypeId,
+                        state,
+                        overriddenOrHiddenPropName,
+                        getterMemberAccessAttrs,
+                        isStatic,
+                        isNewSlot: isNewSlot
+                    );
                     continue;
                 }
 
-                await UpdateBackingFieldWithPropertyAttributes(backingFieldForHiddenProp, overriddenOrHiddenPropName, getterMemberAccessAttrs, state);
+                await UpdateBackingFieldWithPropertyAttributes(
+                    backingFieldForHiddenProp,
+                    overriddenOrHiddenPropName,
+                    getterMemberAccessAttrs,
+                    state
+                );
             }
 
             return allMembers;
 
-            async Task UpdateBackingFieldWithPropertyAttributes(JObject backingField, string autoPropName, MethodAttributes getterMemberAccessAttrs, DebuggerBrowsableState? state)
+            async Task UpdateBackingFieldWithPropertyAttributes(
+                JObject backingField,
+                string autoPropName,
+                MethodAttributes getterMemberAccessAttrs,
+                DebuggerBrowsableState? state
+            )
             {
                 backingField[InternalUseFieldName.Section.Name] = getterMemberAccessAttrs switch
                 {
                     MethodAttributes.Private => "private",
-                    _ => "result"
+                    _ => "result",
                 };
                 backingField[InternalUseFieldName.State.Name] = state?.ToString();
 
@@ -435,7 +634,14 @@ namespace BrowserDebugProxy
                 string namePrefix = GetNamePrefixForValues(autoPropName, typeName, isOwn, state);
                 string backingPropTypeName = backingField["value"]?["className"]?.Value<string>();
                 var expanded = await GetExpandedMemberValues(
-                    sdbHelper, backingPropTypeName, namePrefix, backingField, state, includeStatic, token);
+                    sdbHelper,
+                    backingPropTypeName,
+                    namePrefix,
+                    backingField,
+                    state,
+                    includeStatic,
+                    token
+                );
                 backingField.Remove();
                 allMembers.Remove(autoPropName);
                 foreach (JObject evalue in expanded)
@@ -449,31 +655,53 @@ namespace BrowserDebugProxy
                 string propNameWithSufix,
                 MethodAttributes getterAttrs,
                 bool isPropertyStatic,
-                bool isNewSlot)
+                bool isNewSlot
+            )
             {
                 string returnTypeName = await sdbHelper.GetReturnType(getMethodId, token);
                 JObject propRet = null;
-                if (getCommandOptions.HasFlag(GetObjectCommandOptions.AutoExpandable) || getCommandOptions.HasFlag(GetObjectCommandOptions.ForDebuggerProxyAttribute) || (state is DebuggerBrowsableState.RootHidden && IsACollectionType(returnTypeName)))
+                if (
+                    getCommandOptions.HasFlag(GetObjectCommandOptions.AutoExpandable)
+                    || getCommandOptions.HasFlag(GetObjectCommandOptions.ForDebuggerProxyAttribute)
+                    || (
+                        state is DebuggerBrowsableState.RootHidden
+                        && IsACollectionType(returnTypeName)
+                    )
+                )
                 {
                     try
                     {
-                        propRet = await sdbHelper.InvokeMethod(getterParamsBuffer, getMethodId, token, name: propNameWithSufix, isPropertyStatic && !isValueType);
+                        propRet = await sdbHelper.InvokeMethod(
+                            getterParamsBuffer,
+                            getMethodId,
+                            token,
+                            name: propNameWithSufix,
+                            isPropertyStatic && !isValueType
+                        );
                     }
                     catch (Exception)
                     {
-                        propRet = GetNotAutoExpandableObject(getMethodId, propNameWithSufix, isPropertyStatic);
+                        propRet = GetNotAutoExpandableObject(
+                            getMethodId,
+                            propNameWithSufix,
+                            isPropertyStatic
+                        );
                     }
                 }
                 else
                 {
-                    propRet = GetNotAutoExpandableObject(getMethodId, propNameWithSufix, isPropertyStatic);
+                    propRet = GetNotAutoExpandableObject(
+                        getMethodId,
+                        propNameWithSufix,
+                        isPropertyStatic
+                    );
                 }
 
                 propRet["isOwn"] = isOwn;
                 propRet[InternalUseFieldName.Section.Name] = getterAttrs switch
                 {
                     MethodAttributes.Private => "private",
-                    _ => "result"
+                    _ => "result",
                 };
                 propRet[InternalUseFieldName.State.Name] = state?.ToString();
                 if (parentTypeId != -1)
@@ -482,9 +710,21 @@ namespace BrowserDebugProxy
                     propRet[InternalUseFieldName.IsNewSlot.Name] = isNewSlot;
                 }
 
-                string namePrefix = GetNamePrefixForValues(propNameWithSufix, typeName, isOwn, state);
+                string namePrefix = GetNamePrefixForValues(
+                    propNameWithSufix,
+                    typeName,
+                    isOwn,
+                    state
+                );
                 var expandedMembers = await GetExpandedMemberValues(
-                    sdbHelper, returnTypeName, namePrefix, propRet, state, includeStatic, token);
+                    sdbHelper,
+                    returnTypeName,
+                    namePrefix,
+                    propRet,
+                    state,
+                    includeStatic,
+                    token
+                );
                 foreach (var member in expandedMembers)
                 {
                     var key = member["name"]?.Value<string>();
@@ -497,25 +737,29 @@ namespace BrowserDebugProxy
 
             JObject GetNotAutoExpandableObject(int methodId, string propertyName, bool isStatic)
             {
-                JObject methodIdArgs = JObject.FromObject(new
-                {
-                    isStatic = isStatic,
-                    containerId = isStatic ? typeId : objectId.Value,
-                    isValueType = isValueType,
-                    methodId = methodId
-                });
-
-                return JObject.FromObject(new
-                {
-                    get = new
+                JObject methodIdArgs = JObject.FromObject(
+                    new
                     {
-                        type = "function",
-                        objectId = $"dotnet:method:{methodIdArgs.ToString(Newtonsoft.Json.Formatting.None)}",
-                        className = "Function",
-                        description = "get " + propertyName + " ()"
-                    },
-                    name = propertyName
-                });
+                        isStatic = isStatic,
+                        containerId = isStatic ? typeId : objectId.Value,
+                        isValueType = isValueType,
+                        methodId = methodId,
+                    }
+                );
+
+                return JObject.FromObject(
+                    new
+                    {
+                        get = new
+                        {
+                            type = "function",
+                            objectId = $"dotnet:method:{methodIdArgs.ToString(Newtonsoft.Json.Formatting.None)}",
+                            className = "Function",
+                            description = "get " + propertyName + " ()",
+                        },
+                        name = propertyName,
+                    }
+                );
             }
         }
 
@@ -525,33 +769,44 @@ namespace BrowserDebugProxy
             GetObjectCommandOptions getCommandType,
             CancellationToken token,
             bool sortByAccessLevel = false,
-            bool includeStatic = false)
+            bool includeStatic = false
+        )
         {
             if (await sdbHelper.IsDelegate(objectId, token))
             {
                 var description = await sdbHelper.GetDelegateMethodDescription(objectId, token);
-                var objValues = JObject.FromObject(new
-                {
-                    value = new
+                var objValues = JObject.FromObject(
+                    new
                     {
-                        type = "symbol",
-                        value = description,
-                        description
-                    },
-                    name = "Target"
-                });
+                        value = new
+                        {
+                            type = "symbol",
+                            value = description,
+                            description,
+                        },
+                        name = "Target",
+                    }
+                );
 
                 return GetMembersResult.FromValues(new List<JObject>() { objValues });
             }
 
             // 1
-            var typeIdsIncludingParents = await sdbHelper.GetTypeIdsForObject(objectId, true, token);
+            var typeIdsIncludingParents = await sdbHelper.GetTypeIdsForObject(
+                objectId,
+                true,
+                token
+            );
 
             // 2
             if (!getCommandType.HasFlag(GetObjectCommandOptions.ForDebuggerDisplayAttribute))
             {
-                GetMembersResult debuggerProxy = await sdbHelper.GetValuesFromDebuggerProxyAttributeForObject(
-                    objectId, typeIdsIncludingParents[0], token);
+                GetMembersResult debuggerProxy =
+                    await sdbHelper.GetValuesFromDebuggerProxyAttributeForObject(
+                        objectId,
+                        typeIdsIncludingParents[0],
+                        token
+                    );
                 if (debuggerProxy != null)
                     return debuggerProxy;
             }
@@ -560,7 +815,8 @@ namespace BrowserDebugProxy
             DotnetObjectId id = new DotnetObjectId("object", objectId);
             using var commandParamsObjWriter = new MonoBinaryWriter();
             commandParamsObjWriter.WriteObj(id, sdbHelper);
-            ArraySegment<byte> getPropertiesParamBuffer = commandParamsObjWriter.GetParameterBuffer();
+            ArraySegment<byte> getPropertiesParamBuffer =
+                commandParamsObjWriter.GetParameterBuffer();
 
             var allMembers = new Dictionary<string, JObject>();
             int typeIdsCnt = typeIdsIncludingParents.Count;
@@ -573,14 +829,28 @@ namespace BrowserDebugProxy
                 // 0th id is for the object itself, and then its ancestors
                 bool isOwn = i == 0;
 
-                IReadOnlyList<FieldTypeClass> thisTypeFields = await sdbHelper.GetTypeFields(typeId, token);
+                IReadOnlyList<FieldTypeClass> thisTypeFields = await sdbHelper.GetTypeFields(
+                    typeId,
+                    token
+                );
                 if (!includeStatic)
-                    thisTypeFields = thisTypeFields.Where(f => !f.Attributes.HasFlag(FieldAttributes.Static)).ToList();
+                    thisTypeFields = thisTypeFields
+                        .Where(f => !f.Attributes.HasFlag(FieldAttributes.Static))
+                        .ToList();
 
                 if (thisTypeFields.Count > 0)
                 {
                     var allFields = await ExpandFieldValues(
-                        sdbHelper, id, typeId, parentTypeId, thisTypeFields, getCommandType, isOwn, includeStatic, token);
+                        sdbHelper,
+                        id,
+                        typeId,
+                        parentTypeId,
+                        thisTypeFields,
+                        getCommandType,
+                        isOwn,
+                        includeStatic,
+                        token
+                    );
 
                     if (getCommandType.HasFlag(GetObjectCommandOptions.AccessorPropertiesOnly))
                     {
@@ -606,7 +876,8 @@ namespace BrowserDebugProxy
                     token,
                     allMembers,
                     includeStatic,
-                    parentTypeId);
+                    parentTypeId
+                );
 
                 // ownProperties
                 // Note: ownProperties should mean that we return members of the klass itself,
@@ -620,7 +891,12 @@ namespace BrowserDebugProxy
 
             return GetMembersResult.FromValues(allMembers.Values, sortByAccessLevel);
 
-            static void AddOnlyNewFieldValuesByNameTo(JArray namedValues, IDictionary<string, JObject> valuesDict, string typeName, bool isOwn)
+            static void AddOnlyNewFieldValuesByNameTo(
+                JArray namedValues,
+                IDictionary<string, JObject> valuesDict,
+                string typeName,
+                bool isOwn
+            )
             {
                 foreach (var item in namedValues)
                 {
@@ -637,7 +913,9 @@ namespace BrowserDebugProxy
                     }
 
                     if (isOwn)
-                        throw new Exception($"Internal Error: found an existing member on own type. item: {item}, typeName: {typeName}");
+                        throw new Exception(
+                            $"Internal Error: found an existing member on own type. item: {item}, typeName: {typeName}"
+                        );
 
                     var parentSuffix = typeName.Split('.')[^1];
                     var parentMemberName = $"{name} ({parentSuffix})";
@@ -646,21 +924,18 @@ namespace BrowserDebugProxy
                 }
             }
         }
-
     }
 
     internal sealed class GetMembersResult
     {
         // public / protected / internal:
         public JArray Result { get; set; }
+
         // private:
         public JArray PrivateMembers { get; set; }
 
-        public JObject JObject => JObject.FromObject(new
-        {
-            result = Result,
-            privateProperties = PrivateMembers
-        });
+        public JObject JObject =>
+            JObject.FromObject(new { result = Result, privateProperties = PrivateMembers });
 
         public GetMembersResult()
         {
@@ -702,10 +977,15 @@ namespace BrowserDebugProxy
             }
         }
 
-        public static GetMembersResult FromValues(IEnumerable<JToken> values, bool splitMembersByAccessLevel = false) =>
-            FromValues(new JArray(values), splitMembersByAccessLevel);
+        public static GetMembersResult FromValues(
+            IEnumerable<JToken> values,
+            bool splitMembersByAccessLevel = false
+        ) => FromValues(new JArray(values), splitMembersByAccessLevel);
 
-        public static GetMembersResult FromValues(JArray values, bool splitMembersByAccessLevel = false)
+        public static GetMembersResult FromValues(
+            JArray values,
+            bool splitMembersByAccessLevel = false
+        )
         {
             GetMembersResult result = new();
             if (splitMembersByAccessLevel)
@@ -740,11 +1020,12 @@ namespace BrowserDebugProxy
             }
         }
 
-        public GetMembersResult Clone() => new GetMembersResult()
-        {
-            Result = (JArray)Result.DeepClone(),
-            PrivateMembers = (JArray)PrivateMembers.DeepClone(),
-        };
+        public GetMembersResult Clone() =>
+            new GetMembersResult()
+            {
+                Result = (JArray)Result.DeepClone(),
+                PrivateMembers = (JArray)PrivateMembers.DeepClone(),
+            };
 
         public IEnumerable<JToken> Where(Func<JToken, bool> predicate)
         {
@@ -764,9 +1045,8 @@ namespace BrowserDebugProxy
             }
         }
 
-        internal JToken FirstOrDefault(Func<JToken, bool> p)
-            => Result.FirstOrDefault(p)
-            ?? PrivateMembers.FirstOrDefault(p);
+        internal JToken FirstOrDefault(Func<JToken, bool> p) =>
+            Result.FirstOrDefault(p) ?? PrivateMembers.FirstOrDefault(p);
 
         internal JArray Flatten()
         {
@@ -775,6 +1055,7 @@ namespace BrowserDebugProxy
             result.AddRange(PrivateMembers);
             return result;
         }
+
         public override string ToString() => $"{JObject}\n";
     }
 }

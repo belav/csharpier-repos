@@ -8,14 +8,14 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-using System.Data.Entity.Design.PluralizationServices;
-using System.Data.Metadata.Edm;
-using System.IO;
-using System.Data.Entity.Design.SsdlGenerator;
 using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.PluralizationServices;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace System.Data.Entity.Design
 {
@@ -24,11 +24,7 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// user might set the service to null, so we have to check the null when using this property
         /// </summary>
-        internal PluralizationService Service
-        {
-            get;
-            set;
-        }
+        internal PluralizationService Service { get; set; }
 
         /// <summary>
         /// Handler for pluralization service in Entity Design
@@ -55,8 +51,9 @@ namespace System.Data.Entity.Design
         {
             if (this.Service != null)
             {
-                return toEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many ?
-                    this.Service.Pluralize(storeTableName) : this.Service.Singularize(storeTableName);
+                return toEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many
+                    ? this.Service.Pluralize(storeTableName)
+                    : this.Service.Singularize(storeTableName);
             }
             else
             {

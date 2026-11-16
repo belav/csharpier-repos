@@ -12,7 +12,7 @@ namespace System.IdentityModel.Tokens
     /// Represents the SubjectLocality element specified in [Saml2Core, 2.7.2.1].
     /// </summary>
     /// <remarks>
-    /// This element is entirely advisory, since both of these fields are quite 
+    /// This element is entirely advisory, since both of these fields are quite
     /// easily "spoofed". [Saml2Core, 2.7.2.1]
     /// </remarks>
     public class Saml2SubjectLocality
@@ -23,9 +23,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes an instance of <see cref="Saml2SubjectLocality"/>.
         /// </summary>
-        public Saml2SubjectLocality()
-        {
-        }
+        public Saml2SubjectLocality() { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Saml2SubjectLocality"/> from an address and DNS name.
@@ -49,7 +47,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the DNS name of the system from which the principal identified by the 
+        /// Gets or sets the DNS name of the system from which the principal identified by the
         /// subject was authenticated. [Saml2Core, 2.7.2.1]
         /// </summary>
         public string DnsName

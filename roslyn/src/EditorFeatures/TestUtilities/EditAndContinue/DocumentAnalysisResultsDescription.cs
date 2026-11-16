@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             ActiveStatementsDescription? activeStatements = null,
             SemanticEditDescription[]? semanticEdits = null,
             SequencePointUpdates[]? lineEdits = null,
-            RudeEditDiagnosticDescription[]? diagnostics = null)
+            RudeEditDiagnosticDescription[]? diagnostics = null
+        )
         {
             // The test must validate semantic edits, lineEdits, diagnostics or all of the above.
             // If neither is specified then assume the expectation is that

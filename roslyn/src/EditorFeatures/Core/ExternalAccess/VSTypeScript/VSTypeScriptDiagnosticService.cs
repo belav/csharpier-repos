@@ -3,13 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Immutable;
+using System.Composition;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Composition;
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.Host.Mef;
-using Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
+using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
@@ -17,28 +17,49 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [Export(typeof(IVSTypeScriptDiagnosticService)), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class VSTypeScriptDiagnosticService(IDiagnosticService service, IGlobalOptionService globalOptions) : IVSTypeScriptDiagnosticService
+    internal sealed class VSTypeScriptDiagnosticService(
+        IDiagnosticService service,
+        IGlobalOptionService globalOptions
+    ) : IVSTypeScriptDiagnosticService
     {
         private readonly IDiagnosticService _service = service;
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
-        public async Task<ImmutableArray<VSTypeScriptDiagnosticData>> GetPushDiagnosticsAsync(Workspace workspace, ProjectId projectId, DocumentId documentId, object id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<VSTypeScriptDiagnosticData>> GetPushDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId projectId,
+            DocumentId documentId,
+            object id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        )
         {
             // this is the TS entrypoint to get push diagnostics.  Only return diagnostics if we're actually in push-mode.
             var diagnosticMode = _globalOptions.GetDiagnosticMode();
             if (diagnosticMode != DiagnosticMode.SolutionCrawlerPush)
                 return ImmutableArray<VSTypeScriptDiagnosticData>.Empty;
 
-            var result = await _service.GetDiagnosticsAsync(workspace, projectId, documentId, id, includeSuppressedDiagnostics, cancellationToken).ConfigureAwait(false);
+            var result = await _service
+                .GetDiagnosticsAsync(
+                    workspace,
+                    projectId,
+                    documentId,
+                    id,
+                    includeSuppressedDiagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result.SelectAsArray(data => new VSTypeScriptDiagnosticData(data));
         }
 
         [Obsolete]
-        public IDisposable RegisterDiagnosticsUpdatedEventHandler(Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action)
-            => new EventHandlerWrapper(_service, action);
+        public IDisposable RegisterDiagnosticsUpdatedEventHandler(
+            Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action
+        ) => new EventHandlerWrapper(_service, action);
 
-        public IDisposable RegisterDiagnosticsUpdatedEventHandler(Action<ImmutableArray<VSTypeScriptDiagnosticsUpdatedArgsWrapper>> action)
-            => new EventHandlerWrapper(_service, action);
+        public IDisposable RegisterDiagnosticsUpdatedEventHandler(
+            Action<ImmutableArray<VSTypeScriptDiagnosticsUpdatedArgsWrapper>> action
+        ) => new EventHandlerWrapper(_service, action);
 
         private sealed class EventHandlerWrapper : IDisposable
         {
@@ -46,7 +67,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             private readonly EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>> _handler;
 
             [Obsolete]
-            internal EventHandlerWrapper(IDiagnosticService service, Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action)
+            internal EventHandlerWrapper(
+                IDiagnosticService service,
+                Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action
+            )
             {
                 _service = service;
                 _handler = (sender, argsCollection) =>
@@ -57,12 +81,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 _service.DiagnosticsUpdated += _handler;
             }
 
-            internal EventHandlerWrapper(IDiagnosticService service, Action<ImmutableArray<VSTypeScriptDiagnosticsUpdatedArgsWrapper>> action)
+            internal EventHandlerWrapper(
+                IDiagnosticService service,
+                Action<ImmutableArray<VSTypeScriptDiagnosticsUpdatedArgsWrapper>> action
+            )
             {
                 _service = service;
                 _handler = (sender, argsCollection) =>
                 {
-                    action(ImmutableArray.CreateRange(argsCollection, static args => new VSTypeScriptDiagnosticsUpdatedArgsWrapper(args)));
+                    action(
+                        ImmutableArray.CreateRange(
+                            argsCollection,
+                            static args => new VSTypeScriptDiagnosticsUpdatedArgsWrapper(args)
+                        )
+                    );
                 };
                 _service.DiagnosticsUpdated += _handler;
             }

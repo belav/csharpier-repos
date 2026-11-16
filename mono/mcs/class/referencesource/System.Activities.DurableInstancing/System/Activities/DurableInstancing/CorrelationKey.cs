@@ -9,41 +9,34 @@ namespace System.Activities.DurableInstancing
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
+    using System.Runtime.DurableInstancing;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Serialization;
-    using System.Runtime.DurableInstancing;
 
     sealed class CorrelationKey
     {
-        public CorrelationKey(Guid keyId) 
-            : this(keyId, null, InstanceEncodingOption.None)
-        {
-        }
+        public CorrelationKey(Guid keyId)
+            : this(keyId, null, InstanceEncodingOption.None) { }
 
-        public CorrelationKey(Guid keyId, IDictionary<XName, InstanceValue> keyMetadata, InstanceEncodingOption encodingOption)
+        public CorrelationKey(
+            Guid keyId,
+            IDictionary<XName, InstanceValue> keyMetadata,
+            InstanceEncodingOption encodingOption
+        )
         {
             this.KeyId = keyId;
-            this.BinaryData = SerializationUtilities.SerializeKeyMetadata(keyMetadata, encodingOption);
+            this.BinaryData = SerializationUtilities.SerializeKeyMetadata(
+                keyMetadata,
+                encodingOption
+            );
         }
 
-        public Guid KeyId
-        {
-            get;
-            set;
-        }
+        public Guid KeyId { get; set; }
 
-        public long StartPosition
-        {
-            get;
-            set;
-        }
+        public long StartPosition { get; set; }
 
-        public ArraySegment<byte> BinaryData
-        {
-            get;
-            set;
-        }
+        public ArraySegment<byte> BinaryData { get; set; }
 
         public void SerializeToXmlElement(XmlWriter xmlWriter)
         {
@@ -52,8 +45,14 @@ namespace System.Activities.DurableInstancing
 
             if (this.BinaryData.Array != null)
             {
-                xmlWriter.WriteAttributeString("StartPosition", this.StartPosition.ToString(CultureInfo.InvariantCulture));
-                xmlWriter.WriteAttributeString("BinaryLength", this.BinaryData.Count.ToString(CultureInfo.InvariantCulture));
+                xmlWriter.WriteAttributeString(
+                    "StartPosition",
+                    this.StartPosition.ToString(CultureInfo.InvariantCulture)
+                );
+                xmlWriter.WriteAttributeString(
+                    "BinaryLength",
+                    this.BinaryData.Count.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             xmlWriter.WriteEndElement();
@@ -80,7 +79,10 @@ namespace System.Activities.DurableInstancing
             return result;
         }
 
-        public static List<CorrelationKey> BuildKeyList(IDictionary<Guid, IDictionary<XName, InstanceValue>> keys, InstanceEncodingOption encodingOption)
+        public static List<CorrelationKey> BuildKeyList(
+            IDictionary<Guid, IDictionary<XName, InstanceValue>> keys,
+            InstanceEncodingOption encodingOption
+        )
         {
             List<CorrelationKey> result = new List<CorrelationKey>();
 
@@ -88,7 +90,9 @@ namespace System.Activities.DurableInstancing
             {
                 foreach (KeyValuePair<Guid, IDictionary<XName, InstanceValue>> keyValuePair in keys)
                 {
-                    result.Add(new CorrelationKey(keyValuePair.Key, keyValuePair.Value, encodingOption));
+                    result.Add(
+                        new CorrelationKey(keyValuePair.Key, keyValuePair.Value, encodingOption)
+                    );
                 }
             }
 

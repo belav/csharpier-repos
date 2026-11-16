@@ -3,7 +3,7 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
-using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -12,8 +12,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System;
-
+using Microsoft.Win32;
 #if !ES_BUILD_AGAINST_DOTNET_V35
 using Contract = System.Diagnostics.Contracts.Contract;
 #else
@@ -21,7 +20,7 @@ using Contract = Microsoft.Diagnostics.Contracts.Internal.Contract;
 #endif
 
 #if ES_BUILD_AGAINST_DOTNET_V35
-using Microsoft.Internal;       // for Tuple (can't define alias for open generic types so we "use" the whole namespace)
+using Microsoft.Internal; // for Tuple (can't define alias for open generic types so we "use" the whole namespace)
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -34,15 +33,15 @@ namespace System.Diagnostics.Tracing
     internal enum ControllerCommand
     {
         // Strictly Positive numbers are for provider-specific commands, negative number are for 'shared' commands. 256
-        // The first 256 negative numbers are reserved for the framework.  
-        Update = 0,                 // Not used by EventPrividerBase.  
+        // The first 256 negative numbers are reserved for the framework.
+        Update = 0, // Not used by EventPrividerBase.
         SendManifest = -1,
         Enable = -2,
         Disable = -3,
     };
 
     /// <summary>
-    /// Only here because System.Diagnostics.EventProvider needs one more extensibility hook (when it gets a 
+    /// Only here because System.Diagnostics.EventProvider needs one more extensibility hook (when it gets a
     /// controller callback)
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
@@ -50,8 +49,8 @@ namespace System.Diagnostics.Tracing
     {
         // This is the windows EVENT_DATA_DESCRIPTOR structure.  We expose it because this is what
         // subclasses of EventProvider use when creating efficient (but unsafe) version of
-        // EventWrite.   We do make it a nested type because we really don't expect anyone to use 
-        // it except subclasses (and then only rarely).  
+        // EventWrite.   We do make it a nested type because we really don't expect anyone to use
+        // it except subclasses (and then only rarely).
         public struct EventData
         {
             internal unsafe ulong Ptr;
@@ -62,33 +61,36 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// A struct characterizing ETW sessions (identified by the etwSessionId) as
         /// activity-tracing-aware or legacy. A session that's activity-tracing-aware
-        /// has specified one non-zero bit in the reserved range 44-47 in the 
+        /// has specified one non-zero bit in the reserved range 44-47 in the
         /// 'allKeywords' value it passed in for a specific EventProvider.
         /// </summary>
         public struct SessionInfo
         {
-            internal int sessionIdBit;      // the index of the bit used for tracing in the "reserved" field of AllKeywords
-            internal int etwSessionId;      // the machine-wide ETW session ID
+            internal int sessionIdBit; // the index of the bit used for tracing in the "reserved" field of AllKeywords
+            internal int etwSessionId; // the machine-wide ETW session ID
 
             internal SessionInfo(int sessionIdBit_, int etwSessionId_)
-            { sessionIdBit = sessionIdBit_; etwSessionId = etwSessionId_; }
+            {
+                sessionIdBit = sessionIdBit_;
+                etwSessionId = etwSessionId_;
+            }
         }
 
         private static bool m_setInformationMissing;
 
         [SecurityCritical]
-        UnsafeNativeMethods.ManifestEtw.EtwEnableCallback m_etwCallback;     // Trace Callback function
-        private long m_regHandle;                        // Trace Registration Handle
-        private byte m_level;                            // Tracing Level
-        private long m_anyKeywordMask;                   // Trace Enable Flags
-        private long m_allKeywordMask;                   // Match all keyword
-        private List<SessionInfo> m_liveSessions;        // current live sessions (Tuple<sessionIdBit, etwSessionId>)
-        private bool m_enabled;                          // Enabled flag from Trace callback
-        private Guid m_providerId;                       // Control Guid 
-        internal bool m_disposed;                        // when true provider has unregistered
+        UnsafeNativeMethods.ManifestEtw.EtwEnableCallback m_etwCallback; // Trace Callback function
+        private long m_regHandle; // Trace Registration Handle
+        private byte m_level; // Tracing Level
+        private long m_anyKeywordMask; // Trace Enable Flags
+        private long m_allKeywordMask; // Match all keyword
+        private List<SessionInfo> m_liveSessions; // current live sessions (Tuple<sessionIdBit, etwSessionId>)
+        private bool m_enabled; // Enabled flag from Trace callback
+        private Guid m_providerId; // Control Guid
+        internal bool m_disposed; // when true provider has unregistered
 
         [ThreadStatic]
-        private static WriteEventErrorCode s_returnCode; // The last return code 
+        private static WriteEventErrorCode s_returnCode; // The last return code
 
         private const int s_basicTypeAllocationBufferSize = 16;
         private const int s_etwMaxNumberArguments = 128;
@@ -106,7 +108,7 @@ namespace System.Diagnostics.Tracing
             EventTooBig = 2,
             NullInput = 3,
             TooManyArgs = 4,
-            Other = 5, 
+            Other = 5,
         };
 
         // <SecurityKernel Critical="True" Ring="1">
@@ -114,14 +116,18 @@ namespace System.Diagnostics.Tracing
         // </SecurityKernel>
         /// <summary>
         /// Constructs a new EventProvider.  This causes the class to be registered with the OS and
-        /// if an ETW controller turns on the logging then logging will start. 
+        /// if an ETW controller turns on the logging then logging will start.
         /// </summary>
         /// <param name="providerGuid">The GUID that identifies this provider to the system.</param>
         [System.Security.SecurityCritical]
 #pragma warning disable 618
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
 #pragma warning restore 618
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "guid")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "guid"
+        )]
         protected EventProvider(Guid providerGuid)
         {
             m_providerId = providerGuid;
@@ -131,14 +137,12 @@ namespace System.Diagnostics.Tracing
             Register(providerGuid);
         }
 
-        internal EventProvider()
-        {
-        }
+        internal EventProvider() { }
 
         /// <summary>
         /// This method registers the controlGuid of this class with ETW. We need to be running on
-        /// Vista or above. If not a PlatformNotSupported exception will be thrown. If for some 
-        /// reason the ETW Register call failed a NotSupported exception will be thrown. 
+        /// Vista or above. If not a PlatformNotSupported exception will be thrown. If for some
+        /// reason the ETW Register call failed a NotSupported exception will be thrown.
         /// </summary>
         // <SecurityKernel Critical="True" Ring="0">
         // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventRegister(System.Guid&,Microsoft.Win32.UnsafeNativeMethods.ManifestEtw+EtwEnableCallback,System.Void*,System.Int64&):System.UInt32" />
@@ -150,9 +154,11 @@ namespace System.Diagnostics.Tracing
         {
             m_providerId = providerGuid;
             uint status;
-            m_etwCallback = new UnsafeNativeMethods.ManifestEtw.EtwEnableCallback(EtwEnableCallBack);
+            m_etwCallback = new UnsafeNativeMethods.ManifestEtw.EtwEnableCallback(
+                EtwEnableCallBack
+            );
 
-            status = EventRegister(ref m_providerId, m_etwCallback); 
+            status = EventRegister(ref m_providerId, m_etwCallback);
             if (status != 0)
             {
                 throw new ArgumentException(Win32Native.GetMessage(unchecked((int)status)));
@@ -163,7 +169,8 @@ namespace System.Diagnostics.Tracing
         internal unsafe int SetInformation(
             UnsafeNativeMethods.ManifestEtw.EVENT_INFO_CLASS eventInfoClass,
             void* data,
-            int dataSize)
+            int dataSize
+        )
         {
             int status = UnsafeNativeMethods.ManifestEtw.ERROR_NOT_SUPPORTED;
 
@@ -175,7 +182,8 @@ namespace System.Diagnostics.Tracing
                         m_regHandle,
                         eventInfoClass,
                         data,
-                        dataSize);
+                        dataSize
+                    );
                 }
                 catch (TypeLoadException)
                 {
@@ -187,7 +195,7 @@ namespace System.Diagnostics.Tracing
         }
 
         //
-        // implement Dispose Pattern to early deregister from ETW insted of waiting for 
+        // implement Dispose Pattern to early deregister from ETW insted of waiting for
         // the finalizer to call deregistration.
         // Once the user is done with the provider it needs to call Close() or Dispose()
         // If neither are called the finalizer will unregister the provider anyway
@@ -205,7 +213,7 @@ namespace System.Diagnostics.Tracing
         protected virtual void Dispose(bool disposing)
         {
             //
-            // explicit cleanup is done by calling Dispose with true from 
+            // explicit cleanup is done by calling Dispose with true from
             // Dispose() or Close(). The disposing arguement is ignored because there
             // are no unmanaged resources.
             // The finalizer calls Dispose with false.
@@ -214,12 +222,13 @@ namespace System.Diagnostics.Tracing
             //
             // check if the object has been allready disposed
             //
-            if (m_disposed) return;
+            if (m_disposed)
+                return;
 
-            // Disable the provider.  
+            // Disable the provider.
             m_enabled = false;
 
-            // Do most of the work under a lock to avoid shutdown ----.  
+            // Do most of the work under a lock to avoid shutdown ----.
             lock (EventListener.EventListenersLock)
             {
                 // Double check
@@ -233,7 +242,7 @@ namespace System.Diagnostics.Tracing
 
         /// <summary>
         /// This method deregisters the controlGuid of this class with ETW.
-        /// 
+        ///
         /// </summary>
         public virtual void Close()
         {
@@ -251,8 +260,15 @@ namespace System.Diagnostics.Tracing
         // <SecurityKernel Critical="True" Ring="0">
         // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventUnregister(System.Int64):System.Int32" />
         // </SecurityKernel>
-        // 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "Microsoft.Win32.UnsafeNativeMethods.ManifestEtw.EventUnregister(System.Int64)"), System.Security.SecurityCritical]
+        //
+        [
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Usage",
+                "CA1806:DoNotIgnoreMethodResults",
+                MessageId = "Microsoft.Win32.UnsafeNativeMethods.ManifestEtw.EventUnregister(System.Int64)"
+            ),
+            System.Security.SecurityCritical
+        ]
         private unsafe void Deregister()
         {
             //
@@ -273,16 +289,16 @@ namespace System.Diagnostics.Tracing
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         unsafe void EtwEnableCallBack(
-                        [In] ref System.Guid sourceId,
-                        [In] int controlCode,
-                        [In] byte setLevel,
-                        [In] long anyKeyword,
-                        [In] long allKeyword,
-                        [In] UnsafeNativeMethods.ManifestEtw.EVENT_FILTER_DESCRIPTOR* filterData,
-                        [In] void* callbackContext
-                        )
+            [In] ref System.Guid sourceId,
+            [In] int controlCode,
+            [In] byte setLevel,
+            [In] long anyKeyword,
+            [In] long allKeyword,
+            [In] UnsafeNativeMethods.ManifestEtw.EVENT_FILTER_DESCRIPTOR* filterData,
+            [In] void* callbackContext
+        )
         {
-            // This is an optional callback API. We will therefore ignore any failures that happen as a 
+            // This is an optional callback API. We will therefore ignore any failures that happen as a
             // result of turning on this provider as to not crash the app.
             // EventSource has code to validate whther initialization it expected to occur actually occurred
             try
@@ -292,7 +308,10 @@ namespace System.Diagnostics.Tracing
                 byte[] data;
                 int keyIndex;
                 bool skipFinalOnControllerCommand = false;
-                if (controlCode == UnsafeNativeMethods.ManifestEtw.EVENT_CONTROL_CODE_ENABLE_PROVIDER)
+                if (
+                    controlCode
+                    == UnsafeNativeMethods.ManifestEtw.EVENT_CONTROL_CODE_ENABLE_PROVIDER
+                )
                 {
                     m_enabled = true;
                     m_level = setLevel;
@@ -307,7 +326,7 @@ namespace System.Diagnostics.Tracing
                         bool bEnabling = session.Item2;
 
                         skipFinalOnControllerCommand = true;
-                        args = null;                                // reinitialize args for every session...
+                        args = null; // reinitialize args for every session...
 
                         // if we get more than one session changed we have no way
                         // of knowing which one "filterData" belongs to
@@ -315,8 +334,16 @@ namespace System.Diagnostics.Tracing
                             filterData = null;
 
                         // read filter data only when a session is being *added*
-                        if (bEnabling &&
-                            GetDataFromController(etwSessionId, filterData, out command, out data, out keyIndex))
+                        if (
+                            bEnabling
+                            && GetDataFromController(
+                                etwSessionId,
+                                filterData,
+                                out command,
+                                out data,
+                                out keyIndex
+                            )
+                        )
                         {
                             args = new Dictionary<string, string>(4);
                             while (keyIndex < data.Length)
@@ -326,8 +353,16 @@ namespace System.Diagnostics.Tracing
                                 int valueEnd = FindNull(data, valueIdx);
                                 if (valueEnd < data.Length)
                                 {
-                                    string key = System.Text.Encoding.UTF8.GetString(data, keyIndex, keyEnd - keyIndex);
-                                    string value = System.Text.Encoding.UTF8.GetString(data, valueIdx, valueEnd - valueIdx);
+                                    string key = System.Text.Encoding.UTF8.GetString(
+                                        data,
+                                        keyIndex,
+                                        keyEnd - keyIndex
+                                    );
+                                    string value = System.Text.Encoding.UTF8.GetString(
+                                        data,
+                                        valueIdx,
+                                        valueEnd - valueIdx
+                                    );
                                     args[key] = value;
                                 }
                                 keyIndex = valueEnd + 1;
@@ -335,10 +370,18 @@ namespace System.Diagnostics.Tracing
                         }
 
                         // execute OnControllerCommand once for every session that has changed.
-                        OnControllerCommand(command, args, (bEnabling ? sessionChanged : -sessionChanged), etwSessionId);
+                        OnControllerCommand(
+                            command,
+                            args,
+                            (bEnabling ? sessionChanged : -sessionChanged),
+                            etwSessionId
+                        );
                     }
                 }
-                else if (controlCode == UnsafeNativeMethods.ManifestEtw.EVENT_CONTROL_CODE_DISABLE_PROVIDER)
+                else if (
+                    controlCode
+                    == UnsafeNativeMethods.ManifestEtw.EVENT_CONTROL_CODE_DISABLE_PROVIDER
+                )
                 {
                     m_enabled = false;
                     m_level = 0;
@@ -346,12 +389,14 @@ namespace System.Diagnostics.Tracing
                     m_allKeywordMask = 0;
                     m_liveSessions = null;
                 }
-                else if (controlCode == UnsafeNativeMethods.ManifestEtw.EVENT_CONTROL_CODE_CAPTURE_STATE)
+                else if (
+                    controlCode == UnsafeNativeMethods.ManifestEtw.EVENT_CONTROL_CODE_CAPTURE_STATE
+                )
                 {
                     command = ControllerCommand.SendManifest;
                 }
                 else
-                    return;     // per spec you ignore commands you don't recognise.  
+                    return; // per spec you ignore commands you don't recognise.
 
                 if (!skipFinalOnControllerCommand)
                     OnControllerCommand(command, args, 0, 0);
@@ -364,12 +409,30 @@ namespace System.Diagnostics.Tracing
         }
 
         // New in CLR4.0
-        protected virtual void OnControllerCommand(ControllerCommand command, IDictionary<string, string> arguments, int sessionId, int etwSessionId) { }
-        protected EventLevel Level { get { return (EventLevel)m_level; } set { m_level = (byte)value; } }
-        protected EventKeywords MatchAnyKeyword { get { return (EventKeywords)m_anyKeywordMask; } set { m_anyKeywordMask = unchecked((long)value); } }
-        protected EventKeywords MatchAllKeyword { get { return (EventKeywords)m_allKeywordMask; } set { m_allKeywordMask = unchecked((long)value); } }
+        protected virtual void OnControllerCommand(
+            ControllerCommand command,
+            IDictionary<string, string> arguments,
+            int sessionId,
+            int etwSessionId
+        ) { }
 
-        static private int FindNull(byte[] buffer, int idx)
+        protected EventLevel Level
+        {
+            get { return (EventLevel)m_level; }
+            set { m_level = (byte)value; }
+        }
+        protected EventKeywords MatchAnyKeyword
+        {
+            get { return (EventKeywords)m_anyKeywordMask; }
+            set { m_anyKeywordMask = unchecked((long)value); }
+        }
+        protected EventKeywords MatchAllKeyword
+        {
+            get { return (EventKeywords)m_allKeywordMask; }
+            set { m_allKeywordMask = unchecked((long)value); }
+        }
+
+        private static int FindNull(byte[] buffer, int idx)
         {
             while (idx < buffer.Length && buffer[idx] != 0)
                 idx++;
@@ -391,23 +454,28 @@ namespace System.Diagnostics.Tracing
         {
             List<SessionInfo> liveSessionList = null;
 
-            GetSessionInfo((Action<int, long>)
-                ((etwSessionId, matchAllKeywords) => 
-                    GetSessionInfoCallback(etwSessionId, matchAllKeywords, ref liveSessionList)));
+            GetSessionInfo(
+                (Action<int, long>)(
+                    (etwSessionId, matchAllKeywords) =>
+                        GetSessionInfoCallback(etwSessionId, matchAllKeywords, ref liveSessionList)
+                )
+            );
 
-            List<Tuple<SessionInfo, bool>> changedSessionList = new List<Tuple<SessionInfo, bool>>();
+            List<Tuple<SessionInfo, bool>> changedSessionList =
+                new List<Tuple<SessionInfo, bool>>();
 
             // first look for sessions that have gone away (or have changed)
             // (present in the m_liveSessions but not in the new liveSessionList)
             if (m_liveSessions != null)
             {
-                foreach(SessionInfo s in m_liveSessions)
+                foreach (SessionInfo s in m_liveSessions)
                 {
                     int idx;
-                    if ((idx = IndexOfSessionInList(liveSessionList, s.etwSessionId)) < 0 ||
-                        (liveSessionList[idx].sessionIdBit != s.sessionIdBit))
+                    if (
+                        (idx = IndexOfSessionInList(liveSessionList, s.etwSessionId)) < 0
+                        || (liveSessionList[idx].sessionIdBit != s.sessionIdBit)
+                    )
                         changedSessionList.Add(Tuple.Create(s, false));
-                        
                 }
             }
             // next look for sessions that were created since the last callback  (or have changed)
@@ -417,8 +485,10 @@ namespace System.Diagnostics.Tracing
                 foreach (SessionInfo s in liveSessionList)
                 {
                     int idx;
-                    if ((idx = IndexOfSessionInList(m_liveSessions, s.etwSessionId)) < 0 ||
-                        (m_liveSessions[idx].sessionIdBit != s.sessionIdBit))
+                    if (
+                        (idx = IndexOfSessionInList(m_liveSessions, s.etwSessionId)) < 0
+                        || (m_liveSessions[idx].sessionIdBit != s.sessionIdBit)
+                    )
                         changedSessionList.Add(Tuple.Create(s, true));
                 }
             }
@@ -428,16 +498,19 @@ namespace System.Diagnostics.Tracing
             return changedSessionList;
         }
 
-
         /// <summary>
-        /// This method is the callback used by GetSessions() when it calls into GetSessionInfo(). 
-        /// It updates a List{SessionInfo} based on the etwSessionId and matchAllKeywords that 
+        /// This method is the callback used by GetSessions() when it calls into GetSessionInfo().
+        /// It updates a List{SessionInfo} based on the etwSessionId and matchAllKeywords that
         /// GetSessionInfo() passes in.
         /// </summary>
-        private static void GetSessionInfoCallback(int etwSessionId, long matchAllKeywords,
-                                ref List<SessionInfo> sessionList)
+        private static void GetSessionInfoCallback(
+            int etwSessionId,
+            long matchAllKeywords,
+            ref List<SessionInfo> sessionList
+        )
         {
-            uint sessionIdBitMask = (uint)SessionMask.FromEventKeywords(unchecked((ulong)matchAllKeywords));
+            uint sessionIdBitMask = (uint)
+                SessionMask.FromEventKeywords(unchecked((ulong)matchAllKeywords));
             // an ETW controller that specifies more than the mandated bit for our EventSource
             // will be ignored...
             if (bitcount(sessionIdBitMask) > 1)
@@ -449,24 +522,24 @@ namespace System.Diagnostics.Tracing
             if (bitcount(sessionIdBitMask) == 1)
             {
                 // activity-tracing-aware etw session
-                sessionList.Add(new SessionInfo(bitindex(sessionIdBitMask)+1, etwSessionId));
+                sessionList.Add(new SessionInfo(bitindex(sessionIdBitMask) + 1, etwSessionId));
             }
             else
             {
                 // legacy etw session
-                sessionList.Add(new SessionInfo(bitcount((uint)SessionMask.All)+1, etwSessionId));
+                sessionList.Add(new SessionInfo(bitcount((uint)SessionMask.All) + 1, etwSessionId));
             }
         }
 
         /// <summary>
-        /// This method enumerates over all active ETW sessions that have enabled 'this.m_Guid' 
+        /// This method enumerates over all active ETW sessions that have enabled 'this.m_Guid'
         /// for the current process ID, calling 'action' for each session, and passing it the
         /// ETW session and the 'AllKeywords' the session enabled for the current provider.
         /// </summary>
         [System.Security.SecurityCritical]
         private unsafe void GetSessionInfo(Action<int, long> action)
         {
-            int buffSize = 256;     // An initial guess that probably works most of the time.  
+            int buffSize = 256; // An initial guess that probably works most of the time.
             byte* buffer;
             for (; ; )
             {
@@ -476,33 +549,46 @@ namespace System.Diagnostics.Tracing
 
                 fixed (Guid* provider = &m_providerId)
                 {
-                    hr = UnsafeNativeMethods.ManifestEtw.EnumerateTraceGuidsEx(UnsafeNativeMethods.ManifestEtw.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
-                        provider, sizeof(Guid), buffer, buffSize, ref buffSize);
+                    hr = UnsafeNativeMethods.ManifestEtw.EnumerateTraceGuidsEx(
+                        UnsafeNativeMethods.ManifestEtw.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
+                        provider,
+                        sizeof(Guid),
+                        buffer,
+                        buffSize,
+                        ref buffSize
+                    );
                 }
                 if (hr == 0)
                     break;
-                if (hr != 122 /* ERROR_INSUFFICIENT_BUFFER */)
+                if (
+                    hr != 122 /* ERROR_INSUFFICIENT_BUFFER */
+                )
                     return;
             }
 
             var providerInfos = (UnsafeNativeMethods.ManifestEtw.TRACE_GUID_INFO*)buffer;
-            var providerInstance = (UnsafeNativeMethods.ManifestEtw.TRACE_PROVIDER_INSTANCE_INFO*)&providerInfos[1];
+            var providerInstance = (UnsafeNativeMethods.ManifestEtw.TRACE_PROVIDER_INSTANCE_INFO*)
+                &providerInfos[1];
             int processId = unchecked((int)Win32Native.GetCurrentProcessId());
             // iterate over the instances of the EventProvider in all processes
             for (int i = 0; i < providerInfos->InstanceCount; i++)
             {
                 if (providerInstance->Pid == processId)
                 {
-                    var enabledInfos = (UnsafeNativeMethods.ManifestEtw.TRACE_ENABLE_INFO*)&providerInstance[1];
+                    var enabledInfos = (UnsafeNativeMethods.ManifestEtw.TRACE_ENABLE_INFO*)
+                        &providerInstance[1];
                     // iterate over the list of active ETW sessions "listening" to the current provider
                     for (int j = 0; j < providerInstance->EnableCount; j++)
                         action(enabledInfos[j].LoggerId, enabledInfos[j].MatchAllKeyword);
                 }
                 if (providerInstance->NextOffset == 0)
                     break;
-                Contract.Assert(0 <= providerInstance->NextOffset && providerInstance->NextOffset < buffSize);
+                Contract.Assert(
+                    0 <= providerInstance->NextOffset && providerInstance->NextOffset < buffSize
+                );
                 var structBase = (byte*)providerInstance;
-                providerInstance = (UnsafeNativeMethods.ManifestEtw.TRACE_PROVIDER_INSTANCE_INFO*)&structBase[providerInstance->NextOffset];
+                providerInstance = (UnsafeNativeMethods.ManifestEtw.TRACE_PROVIDER_INSTANCE_INFO*)
+                    &structBase[providerInstance->NextOffset];
             }
         }
 
@@ -520,7 +606,7 @@ namespace System.Diagnostics.Tracing
                 if (sessions[i].etwSessionId == etwSessionId)
                     return i;
 
-            return -1;    
+            return -1;
         }
 
         /// <summary>
@@ -529,31 +615,38 @@ namespace System.Diagnostics.Tracing
         /// at the time the controller issues the command.  To allow for providers to activate after the
         /// controller issued a command, we also check the registry and use that to get the data.  The function
         /// returns an array of bytes representing the data, the index into that byte array where the data
-        /// starts, and the command being issued associated with that data.  
+        /// starts, and the command being issued associated with that data.
         /// </summary>
         [System.Security.SecurityCritical]
-        private unsafe bool GetDataFromController(int etwSessionId, 
-                UnsafeNativeMethods.ManifestEtw.EVENT_FILTER_DESCRIPTOR* filterData, out ControllerCommand command, out byte[] data, out int dataStart)
+        private unsafe bool GetDataFromController(
+            int etwSessionId,
+            UnsafeNativeMethods.ManifestEtw.EVENT_FILTER_DESCRIPTOR* filterData,
+            out ControllerCommand command,
+            out byte[] data,
+            out int dataStart
+        )
         {
             data = null;
             dataStart = 0;
             if (filterData == null)
             {
 #if !ES_BUILD_PCL
-                string regKey = @"\Microsoft\Windows\CurrentVersion\Winevt\Publishers\{" + m_providerId + "}";
+                string regKey =
+                    @"\Microsoft\Windows\CurrentVersion\Winevt\Publishers\{" + m_providerId + "}";
                 if (System.Runtime.InteropServices.Marshal.SizeOf(typeof(IntPtr)) == 8)
                     regKey = @"HKEY_LOCAL_MACHINE\Software" + @"\Wow6432Node" + regKey;
                 else
                     regKey = @"HKEY_LOCAL_MACHINE\Software" + regKey;
 
-                string valueName = "ControllerData_Session_" + etwSessionId.ToString(CultureInfo.InvariantCulture);
+                string valueName =
+                    "ControllerData_Session_" + etwSessionId.ToString(CultureInfo.InvariantCulture);
 
                 // we need to assert this permission for partial trust scenarios
                 (new RegistryPermission(RegistryPermissionAccess.Read, regKey)).Assert();
                 data = Microsoft.Win32.Registry.GetValue(regKey, valueName, null) as byte[];
                 if (data != null)
                 {
-                    // We only used the persisted data from the registry for updates.   
+                    // We only used the persisted data from the registry for updates.
                     command = ControllerCommand.Update;
                     return true;
                 }
@@ -566,7 +659,7 @@ namespace System.Diagnostics.Tracing
                     data = new byte[filterData->Size];
                     Marshal.Copy((IntPtr)filterData->Ptr, data, 0, data.Length);
                 }
-                command = (ControllerCommand) filterData->Type;
+                command = (ControllerCommand)filterData->Type;
                 return true;
             }
 
@@ -602,17 +695,19 @@ namespace System.Diagnostics.Tracing
             }
 
             // This also covers the case of Level == 0.
-            if ((level <= m_level) ||
-                (m_level == 0))
+            if ((level <= m_level) || (m_level == 0))
             {
-
                 //
                 // Check if Keyword is enabled
                 //
 
-                if ((keywords == 0) ||
-                    (((keywords & m_anyKeywordMask) != 0) &&
-                     ((keywords & m_allKeywordMask) == m_allKeywordMask)))
+                if (
+                    (keywords == 0)
+                    || (
+                        ((keywords & m_anyKeywordMask) != 0)
+                        && ((keywords & m_allKeywordMask) == m_allKeywordMask)
+                    )
+                )
                 {
                     return true;
                 }
@@ -623,10 +718,15 @@ namespace System.Diagnostics.Tracing
 
         // There's a small window of time in EventSource code where m_provider is non-null but the
         // m_regHandle has not been set yet. This method allows EventSource to check if this is the case...
-        internal bool IsValid() 
-        { return m_regHandle != 0; }
+        internal bool IsValid()
+        {
+            return m_regHandle != 0;
+        }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate"
+        )]
         public static WriteEventErrorCode GetLastWriteEventError()
         {
             return s_returnCode;
@@ -670,13 +770,18 @@ namespace System.Diagnostics.Tracing
         // <UsesUnsafeCode Name="Parameter dataBuffer of type: Byte*" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
-        private static unsafe object EncodeObject(ref object data, ref EventData* dataDescriptor, ref byte* dataBuffer, ref uint totalEventSize)
+        private static unsafe object EncodeObject(
+            ref object data,
+            ref EventData* dataDescriptor,
+            ref byte* dataBuffer,
+            ref uint totalEventSize
+        )
         /*++
 
         Routine Description:
 
            This routine is used by WriteEvent to unbox the object type and
-           to fill the passed in ETW data descriptor. 
+           to fill the passed in ETW data descriptor.
 
         Arguments:
 
@@ -833,7 +938,7 @@ namespace System.Diagnostics.Tracing
             {
                 const long UTCMinTicks = 504911232000000000;
                 long dateTimeTicks = 0;
-                // We cannot translate dates sooner than 1/1/1601 in UTC. 
+                // We cannot translate dates sooner than 1/1/1601 in UTC.
                 // To avoid getting an ArgumentOutOfRangeException we compare with 1/1/1601 DateTime ticks
                 if (((DateTime)data).Ticks > UTCMinTicks)
                     dateTimeTicks = ((DateTime)data).ToFileTimeUtc();
@@ -888,13 +993,13 @@ namespace System.Diagnostics.Tracing
         /// WriteEvent, method to write a parameters with event schema properties
         /// </summary>
         /// <param name="eventDescriptor">
-        /// Event Descriptor for this event. 
+        /// Event Descriptor for this event.
         /// </param>
         /// <param name="childActivityID">
-        /// childActivityID is marked as 'related' to the current activity ID. 
+        /// childActivityID is marked as 'related' to the current activity ID.
         /// </param>
         /// <param name="eventPayload">
-        /// Payload for the ETW event. 
+        /// Payload for the ETW event.
         /// </param>
         // <SecurityKernel Critical="True" Ring="0">
         // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventWrite(System.Int64,EventDescriptor&,System.UInt32,System.Void*):System.UInt32" />
@@ -913,10 +1018,22 @@ namespace System.Diagnostics.Tracing
         // <UsesUnsafeCode Name="Local v7 of type: Char*" />
         // <ReferencesCritical Name="Method: EncodeObject(Object&, EventData*, Byte*):String" Ring="1" />
         // </SecurityKernel>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Performance-critical code")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "Performance-critical code"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1045:DoNotPassTypesByReference"
+        )]
         [System.Security.SecurityCritical]
-        internal unsafe bool WriteEvent(ref EventDescriptor eventDescriptor, Guid* activityID, Guid* childActivityID, params object[] eventPayload)
+        internal unsafe bool WriteEvent(
+            ref EventDescriptor eventDescriptor,
+            Guid* activityID,
+            Guid* childActivityID,
+            params object[] eventPayload
+        )
         {
             int status = 0;
 
@@ -940,11 +1057,12 @@ namespace System.Diagnostics.Tracing
                     List<object> dataRefObj = new List<object>(s_etwAPIMaxRefObjCount);
                     EventData* userData = stackalloc EventData[2 * argCount];
                     EventData* userDataPtr = (EventData*)userData;
-                    byte* dataBuffer = stackalloc byte[s_basicTypeAllocationBufferSize * 2 * argCount]; // Assume 16 chars for non-string argument
+                    byte* dataBuffer =
+                        stackalloc byte[s_basicTypeAllocationBufferSize * 2 * argCount]; // Assume 16 chars for non-string argument
                     byte* currentBuffer = dataBuffer;
 
                     //
-                    // The loop below goes through all the arguments and fills in the data 
+                    // The loop below goes through all the arguments and fills in the data
                     // descriptors. For strings save the location in the dataString array.
                     // Calculates the total size of the event by adding the data descriptor
                     // size value set in EncodeObject method.
@@ -955,7 +1073,12 @@ namespace System.Diagnostics.Tracing
                         if (eventPayload[index] != null)
                         {
                             object supportedRefObj;
-                            supportedRefObj = EncodeObject(ref eventPayload[index], ref userDataPtr, ref currentBuffer, ref totalEventSize);
+                            supportedRefObj = EncodeObject(
+                                ref eventPayload[index],
+                                ref userDataPtr,
+                                ref currentBuffer,
+                                ref totalEventSize
+                            );
 
                             if (supportedRefObj != null)
                             {
@@ -963,7 +1086,10 @@ namespace System.Diagnostics.Tracing
                                 int idx = (int)(userDataPtr - userData - 1);
                                 if (!(supportedRefObj is string))
                                 {
-                                    if (eventPayload.Length + idx + 1 - index > s_etwMaxNumberArguments)
+                                    if (
+                                        eventPayload.Length + idx + 1 - index
+                                        > s_etwMaxNumberArguments
+                                    )
                                     {
                                         s_returnCode = WriteEventErrorCode.TooManyArgs;
                                         return false;
@@ -1003,12 +1129,20 @@ namespace System.Diagnostics.Tracing
                             dataRefObj.Add(null);
                             ++refObjIndex;
                         }
-                        
+
                         //
-                        // now fix any string arguments and set the pointer on the data descriptor 
+                        // now fix any string arguments and set the pointer on the data descriptor
                         //
-                        fixed (char* v0 = (string)dataRefObj[0], v1 = (string)dataRefObj[1], v2 = (string)dataRefObj[2], v3 = (string)dataRefObj[3],
-                                v4 = (string)dataRefObj[4], v5 = (string)dataRefObj[5], v6 = (string)dataRefObj[6], v7 = (string)dataRefObj[7])
+                        fixed (
+                            char* v0 = (string)dataRefObj[0],
+                                v1 = (string)dataRefObj[1],
+                                v2 = (string)dataRefObj[2],
+                                v3 = (string)dataRefObj[3],
+                                v4 = (string)dataRefObj[4],
+                                v5 = (string)dataRefObj[5],
+                                v6 = (string)dataRefObj[6],
+                                v7 = (string)dataRefObj[7]
+                        )
                         {
                             userDataPtr = (EventData*)userData;
                             if (dataRefObj[0] != null)
@@ -1044,7 +1178,14 @@ namespace System.Diagnostics.Tracing
                                 userDataPtr[refObjPosition[7]].Ptr = (ulong)v7;
                             }
 
-                            status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(m_regHandle, ref eventDescriptor, activityID, childActivityID, argCount, userData);
+                            status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                                m_regHandle,
+                                ref eventDescriptor,
+                                activityID,
+                                childActivityID,
+                                argCount,
+                                userData
+                            );
                         }
                     }
                     else
@@ -1070,7 +1211,14 @@ namespace System.Diagnostics.Tracing
                             }
                         }
 
-                        status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(m_regHandle, ref eventDescriptor, activityID, childActivityID, argCount, userData);
+                        status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                            m_regHandle,
+                            ref eventDescriptor,
+                            activityID,
+                            childActivityID,
+                            argCount,
+                            userData
+                        );
 
                         for (int i = 0; i < refObjIndex; ++i)
                         {
@@ -1093,14 +1241,14 @@ namespace System.Diagnostics.Tracing
         /// WriteEvent, method to be used by generated code on a derived class
         /// </summary>
         /// <param name="eventDescriptor">
-        /// Event Descriptor for this event. 
+        /// Event Descriptor for this event.
         /// </param>
         /// <param name="childActivityID">
         /// If this event is generating a child activity (WriteEventTransfer related activity) this is child activity
-        /// This can be null for events that do not generate a child activity.  
+        /// This can be null for events that do not generate a child activity.
         /// </param>
         /// <param name="dataCount">
-        /// number of event descriptors 
+        /// number of event descriptors
         /// </param>
         /// <param name="data">
         /// pointer  do the event data
@@ -1108,20 +1256,38 @@ namespace System.Diagnostics.Tracing
         // <SecurityKernel Critical="True" Ring="0">
         // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventWrite(System.Int64,EventDescriptor&,System.UInt32,System.Void*):System.UInt32" />
         // </SecurityKernel>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1045:DoNotPassTypesByReference"
+        )]
         [System.Security.SecurityCritical]
-        internal unsafe protected bool WriteEvent(ref EventDescriptor eventDescriptor, Guid* activityID, Guid* childActivityID, int dataCount, IntPtr data)
+        protected internal unsafe bool WriteEvent(
+            ref EventDescriptor eventDescriptor,
+            Guid* activityID,
+            Guid* childActivityID,
+            int dataCount,
+            IntPtr data
+        )
         {
             if (childActivityID != null)
             {
                 // activity transfers are supported only for events that specify the Send or Receive opcode
-                Contract.Assert((EventOpcode)eventDescriptor.Opcode == EventOpcode.Send ||
-                                (EventOpcode)eventDescriptor.Opcode == EventOpcode.Receive ||
-                                (EventOpcode)eventDescriptor.Opcode == EventOpcode.Start ||
-                                (EventOpcode)eventDescriptor.Opcode == EventOpcode.Stop);
+                Contract.Assert(
+                    (EventOpcode)eventDescriptor.Opcode == EventOpcode.Send
+                        || (EventOpcode)eventDescriptor.Opcode == EventOpcode.Receive
+                        || (EventOpcode)eventDescriptor.Opcode == EventOpcode.Start
+                        || (EventOpcode)eventDescriptor.Opcode == EventOpcode.Stop
+                );
             }
 
-            int status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(m_regHandle, ref eventDescriptor, activityID, childActivityID, dataCount, (EventData*)data);
+            int status = UnsafeNativeMethods.ManifestEtw.EventWriteTransferWrapper(
+                m_regHandle,
+                ref eventDescriptor,
+                activityID,
+                childActivityID,
+                dataCount,
+                (EventData*)data
+            );
 
             if (status != 0)
             {
@@ -1131,14 +1297,18 @@ namespace System.Diagnostics.Tracing
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1045:DoNotPassTypesByReference"
+        )]
         [System.Security.SecurityCritical]
         internal unsafe bool WriteEventRaw(
             ref EventDescriptor eventDescriptor,
             Guid* activityID,
             Guid* relatedActivityID,
             int dataCount,
-            IntPtr data)
+            IntPtr data
+        )
         {
             int status;
 
@@ -1148,7 +1318,8 @@ namespace System.Diagnostics.Tracing
                 activityID,
                 relatedActivityID,
                 dataCount,
-                (EventData*)data);
+                (EventData*)data
+            );
 
             if (status != 0)
             {
@@ -1158,15 +1329,22 @@ namespace System.Diagnostics.Tracing
             return true;
         }
 
-
         // These are look-alikes to the Manifest based ETW OS APIs that have been shimmed to work
-        // either with Manifest ETW or Classic ETW (if Manifest based ETW is not available).  
+        // either with Manifest ETW or Classic ETW (if Manifest based ETW is not available).
         [SecurityCritical]
-        private unsafe uint EventRegister(ref Guid providerId, UnsafeNativeMethods.ManifestEtw.EtwEnableCallback enableCallback)
+        private unsafe uint EventRegister(
+            ref Guid providerId,
+            UnsafeNativeMethods.ManifestEtw.EtwEnableCallback enableCallback
+        )
         {
             m_providerId = providerId;
             m_etwCallback = enableCallback;
-            return UnsafeNativeMethods.ManifestEtw.EventRegister(ref providerId, enableCallback, null, ref m_regHandle);
+            return UnsafeNativeMethods.ManifestEtw.EventRegister(
+                ref providerId,
+                enableCallback,
+                null,
+                ref m_regHandle
+            );
         }
 
         [SecurityCritical]
@@ -1177,14 +1355,16 @@ namespace System.Diagnostics.Tracing
             return status;
         }
 
-        static int[] nibblebits = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+        static int[] nibblebits = { 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4 };
+
         private static int bitcount(uint n)
         {
             int count = 0;
-            for(; n != 0; n = n >> 4)
+            for (; n != 0; n = n >> 4)
                 count += nibblebits[n & 0x0f];
             return count;
         }
+
         private static int bitindex(uint n)
         {
             Contract.Assert(bitcount(n) == 1);

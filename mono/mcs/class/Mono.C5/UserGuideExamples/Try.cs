@@ -21,8 +21,8 @@
 
 // C5 example: various tests 2005 and later
 
-// Compile with 
-//   csc /r:C5.dll Try.cs 
+// Compile with
+//   csc /r:C5.dll Try.cs
 
 using System;
 using System.Text;
@@ -31,49 +31,49 @@ using SCG = System.Collections.Generic;
 
 namespace Try
 {
-  class MyTest
-  {
-    public static void Main(String[] args)
+    class MyTest
     {
-      SCG.IEqualityComparer<int> natural = EquatableEqualityComparer<int>.Default;
-      SCG.IEqualityComparer<int> c5comp = EqualityComparer<int>.Default;
-      int count = int.Parse(args[0]);
-      {
-        bool res = false;
-        Timer t = new Timer();
-        for (int i = count; i > 0; i--)
+        public static void Main(String[] args)
         {
-          res = natural.Equals(4, 5);
+            SCG.IEqualityComparer<int> natural = EquatableEqualityComparer<int>.Default;
+            SCG.IEqualityComparer<int> c5comp = EqualityComparer<int>.Default;
+            int count = int.Parse(args[0]);
+            {
+                bool res = false;
+                Timer t = new Timer();
+                for (int i = count; i > 0; i--)
+                {
+                    res = natural.Equals(4, 5);
+                }
+                Console.WriteLine("Time = {0} ns/comparison\n", t.Check() * 1E9 / count);
+            }
+            {
+                bool res = false;
+                Timer t = new Timer();
+                for (int i = count; i > 0; i--)
+                {
+                    res = c5comp.Equals(4, 5);
+                }
+                Console.WriteLine("Time = {0} ns/comparison\n", t.Check() * 1E9 / count);
+            }
         }
-        Console.WriteLine("Time = {0} ns/comparison\n", t.Check() * 1E9 / count);
-      }
-      {
-        bool res = false;
-        Timer t = new Timer();
-        for (int i = count; i > 0; i--)
+    }
+
+    // Crude timing utility ----------------------------------------
+
+    public class Timer
+    {
+        private DateTime start;
+
+        public Timer()
         {
-          res = c5comp.Equals(4, 5);
+            start = DateTime.Now;
         }
-        Console.WriteLine("Time = {0} ns/comparison\n", t.Check() * 1E9 / count);
-      }
+
+        public double Check()
+        {
+            TimeSpan dur = DateTime.Now - start;
+            return dur.TotalSeconds;
+        }
     }
-  }
-
-  // Crude timing utility ----------------------------------------
-
-  public class Timer
-  {
-    private DateTime start;
-
-    public Timer()
-    {
-      start = DateTime.Now;
-    }
-
-    public double Check()
-    {
-      TimeSpan dur = DateTime.Now - start;
-      return dur.TotalSeconds;
-    }
-  }
 }

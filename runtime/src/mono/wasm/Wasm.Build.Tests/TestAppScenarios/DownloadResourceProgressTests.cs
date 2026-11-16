@@ -15,10 +15,11 @@ namespace Wasm.Build.Tests.TestAppScenarios;
 
 public class DownloadResourceProgressTests : AppTestBase
 {
-    public DownloadResourceProgressTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+    public DownloadResourceProgressTests(
+        ITestOutputHelper output,
+        SharedBuildPerTestClassFixture buildContext
+    )
+        : base(output, buildContext) { }
 
     [Theory]
     [InlineData(false)]
@@ -28,11 +29,16 @@ public class DownloadResourceProgressTests : AppTestBase
         CopyTestAsset("WasmBasicTestApp", $"DownloadResourceProgressTests_{failAssemblyDownload}");
         PublishProject("Debug");
 
-        var result = await RunSdkStyleApp(new(
-            Configuration: "Debug",
-            TestScenario: "DownloadResourceProgressTest",
-            BrowserQueryString: new Dictionary<string, string> { ["failAssemblyDownload"] = failAssemblyDownload.ToString().ToLowerInvariant() }
-        ));
+        var result = await RunSdkStyleApp(
+            new(
+                Configuration: "Debug",
+                TestScenario: "DownloadResourceProgressTest",
+                BrowserQueryString: new Dictionary<string, string>
+                {
+                    ["failAssemblyDownload"] = failAssemblyDownload.ToString().ToLowerInvariant(),
+                }
+            )
+        );
         Assert.True(
             result.TestOutput.Any(m => m.Contains("DownloadResourceProgress: Finished")),
             "The download progress test didn't emit expected error message"
@@ -48,7 +54,9 @@ public class DownloadResourceProgressTests : AppTestBase
             "The download progress test did emit unexpected message about second download retry"
         );
         Assert.True(
-            result.TestOutput.Any(m => m.Contains("Throw error instead of downloading resource") == failAssemblyDownload),
+            result.TestOutput.Any(m =>
+                m.Contains("Throw error instead of downloading resource") == failAssemblyDownload
+            ),
             failAssemblyDownload
                 ? "The download progress test didn't emit expected message about failing download"
                 : "The download progress test did emit unexpected message about failing download"

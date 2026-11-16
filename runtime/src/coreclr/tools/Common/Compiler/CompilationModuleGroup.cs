@@ -11,10 +11,12 @@ namespace ILCompiler
         /// If true, "type" is in the set of input assemblies being compiled
         /// </summary>
         public abstract bool ContainsType(TypeDesc type);
+
         /// <summary>
         /// If true, "method" is in the set of input assemblies being compiled
         /// </summary>
         public abstract bool ContainsMethodBody(MethodDesc method, bool unboxingStub);
+
         /// <summary>
         /// Decide whether a given call may get inlined by JIT.
         /// </summary>

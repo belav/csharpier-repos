@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Cryptography;
-
 using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace System.Security.Cryptography

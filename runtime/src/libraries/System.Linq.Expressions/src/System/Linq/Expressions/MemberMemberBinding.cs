@@ -52,9 +52,7 @@ namespace System.Linq.Expressions
             return Expression.MemberBind(Member, bindings!);
         }
 
-        internal override void ValidateAsDefinedHere(int index)
-        {
-        }
+        internal override void ValidateAsDefinedHere(int index) { }
     }
 
     public partial class Expression
@@ -65,7 +63,10 @@ namespace System.Linq.Expressions
         /// <param name="member">The <see cref="MemberInfo"/> to set the <see cref="MemberBinding.Member"/> property equal to.</param>
         /// <param name="bindings">An array of <see cref="MemberBinding"/> objects to use to populate the <see cref="MemberMemberBinding.Bindings"/> collection.</param>
         /// <returns>A <see cref="MemberMemberBinding"/> that has the <see cref="MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/> and the <see cref="MemberBinding.Member"/> and <see cref="MemberMemberBinding.Bindings"/> properties set to the specified values.</returns>
-        public static MemberMemberBinding MemberBind(MemberInfo member, params MemberBinding[] bindings)
+        public static MemberMemberBinding MemberBind(
+            MemberInfo member,
+            params MemberBinding[] bindings
+        )
         {
             return MemberBind(member, (IEnumerable<MemberBinding>)bindings);
         }
@@ -76,7 +77,10 @@ namespace System.Linq.Expressions
         /// <param name="member">The <see cref="MemberInfo"/> to set the <see cref="MemberBinding.Member"/> property equal to.</param>
         /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/> objects to use to populate the <see cref="MemberMemberBinding.Bindings"/> collection.</param>
         /// <returns>A <see cref="MemberMemberBinding"/> that has the <see cref="MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/> and the <see cref="MemberBinding.Member"/> and <see cref="MemberMemberBinding.Bindings"/> properties set to the specified values.</returns>
-        public static MemberMemberBinding MemberBind(MemberInfo member, IEnumerable<MemberBinding> bindings)
+        public static MemberMemberBinding MemberBind(
+            MemberInfo member,
+            IEnumerable<MemberBinding> bindings
+        )
         {
             ArgumentNullException.ThrowIfNull(member);
             ArgumentNullException.ThrowIfNull(bindings);
@@ -98,7 +102,10 @@ namespace System.Linq.Expressions
         /// and <see cref="MemberMemberBinding.Bindings"/> properties set to the specified values.
         /// </returns>
         [RequiresUnreferencedCode(PropertyFromAccessorRequiresUnreferencedCode)]
-        public static MemberMemberBinding MemberBind(MethodInfo propertyAccessor, params MemberBinding[] bindings)
+        public static MemberMemberBinding MemberBind(
+            MethodInfo propertyAccessor,
+            params MemberBinding[] bindings
+        )
         {
             return MemberBind(propertyAccessor, (IEnumerable<MemberBinding>)bindings);
         }
@@ -114,13 +121,19 @@ namespace System.Linq.Expressions
         /// and <see cref="MemberMemberBinding.Bindings"/> properties set to the specified values.
         /// </returns>
         [RequiresUnreferencedCode(PropertyFromAccessorRequiresUnreferencedCode)]
-        public static MemberMemberBinding MemberBind(MethodInfo propertyAccessor, IEnumerable<MemberBinding> bindings)
+        public static MemberMemberBinding MemberBind(
+            MethodInfo propertyAccessor,
+            IEnumerable<MemberBinding> bindings
+        )
         {
             ArgumentNullException.ThrowIfNull(propertyAccessor);
             return MemberBind(GetProperty(propertyAccessor, nameof(propertyAccessor)), bindings);
         }
 
-        private static void ValidateGettableFieldOrPropertyMember(MemberInfo member, out Type memberType)
+        private static void ValidateGettableFieldOrPropertyMember(
+            MemberInfo member,
+            out Type memberType
+        )
         {
             Type? decType = member.DeclaringType;
             if (decType == null)
@@ -150,7 +163,10 @@ namespace System.Linq.Expressions
             }
         }
 
-        private static void ValidateMemberInitArgs(Type type, ReadOnlyCollection<MemberBinding> bindings)
+        private static void ValidateMemberInitArgs(
+            Type type,
+            ReadOnlyCollection<MemberBinding> bindings
+        )
         {
             for (int i = 0, n = bindings.Count; i < n; i++)
             {

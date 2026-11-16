@@ -16,6 +16,7 @@ namespace System.Data.Metadata.Edm
     {
         // types in "this" assembly
         private readonly List<EdmType> _typesInAssembly = new List<EdmType>();
+
         // other assemblies referenced by types we care about in "this" assembly
         private readonly List<Assembly> _closureAssemblies = new List<Assembly>();
 
@@ -23,7 +24,7 @@ namespace System.Data.Metadata.Edm
         {
             get { return _typesInAssembly; }
         }
-        
+
         internal override IList<Assembly> ClosureAssemblies
         {
             get { return _closureAssemblies; }

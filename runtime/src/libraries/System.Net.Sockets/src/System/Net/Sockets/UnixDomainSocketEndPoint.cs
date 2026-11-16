@@ -25,8 +25,7 @@ namespace System.Net.Sockets
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="path"/> is of an invalid length for use with domain sockets on this platform. The length must be between 1 and the allowed native path length.</exception>
         /// <exception cref="PlatformNotSupportedException">The current OS does not support Unix Domain Sockets.</exception>
         public UnixDomainSocketEndPoint(string path)
-            : this(path, null)
-        { }
+            : this(path, null) { }
 
         private UnixDomainSocketEndPoint(string path, string? boundFileName)
         {
@@ -47,8 +46,10 @@ namespace System.Net.Sockets
             if (path.Length == 0 || bufferLength > s_nativePathLength)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(path), path,
-                    SR.Format(SR.ArgumentOutOfRange_PathLengthInvalid, path, s_nativePathLength));
+                    nameof(path),
+                    path,
+                    SR.Format(SR.ArgumentOutOfRange_PathLengthInvalid, path, s_nativePathLength)
+                );
             }
 
             _path = path;
@@ -112,7 +113,8 @@ namespace System.Net.Sockets
         /// <summary>Creates an <see cref="EndPoint"/> instance from a <see cref="SocketAddress"/> instance.</summary>
         /// <param name="socketAddress">The socket address that serves as the endpoint for a connection.</param>
         /// <returns>A new <see cref="EndPoint"/> instance that is initialized from the specified <see cref="SocketAddress"/> instance.</returns>
-        public override EndPoint Create(SocketAddress socketAddress) => new UnixDomainSocketEndPoint(socketAddress.Buffer.Span.Slice(0, socketAddress.Size));
+        public override EndPoint Create(SocketAddress socketAddress) =>
+            new UnixDomainSocketEndPoint(socketAddress.Buffer.Span.Slice(0, socketAddress.Size));
 
         /// <summary>Gets the address family to which the endpoint belongs.</summary>
         /// <value>One of the <see cref="AddressFamily"/> values.</value>
@@ -136,8 +138,8 @@ namespace System.Net.Sockets
         /// <summary>Determines whether the specified <see cref="object"/> is equal to the current <see cref="UnixDomainSocketEndPoint"/>.</summary>
         /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="UnixDomainSocketEndPoint"/>.</param>
         /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current <see cref="UnixDomainSocketEndPoint"/>; otherwise, <see langword="false"/>.</returns>
-        public override bool Equals([NotNullWhen(true)] object? obj)
-            => obj is UnixDomainSocketEndPoint ep && _path == ep._path;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is UnixDomainSocketEndPoint ep && _path == ep._path;
 
         /// <summary>Returns a hash value for a <see cref="UnixDomainSocketEndPoint"/> instance.</summary>
         /// <returns>An integer hash value.</returns>
@@ -165,6 +167,7 @@ namespace System.Net.Sockets
 
         private static bool IsAbstract(string path) => path.Length > 0 && path[0] == '\0';
 
-        private static bool IsAbstract(byte[] encodedPath) => encodedPath.Length > 0 && encodedPath[0] == 0;
+        private static bool IsAbstract(byte[] encodedPath) =>
+            encodedPath.Length > 0 && encodedPath[0] == 0;
     }
 }

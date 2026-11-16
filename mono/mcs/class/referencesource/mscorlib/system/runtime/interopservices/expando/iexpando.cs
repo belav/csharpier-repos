@@ -1,26 +1,26 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 //
-// IExpando is an interface which allows Objects implemeningt this interface 
-//    support the ability to modify the object by adding and removing members, 
+// IExpando is an interface which allows Objects implemeningt this interface
+//    support the ability to modify the object by adding and removing members,
 //    represented by MemberInfo objects.
 //
 // <EMAIL>Author: darylo</EMAIL>
 // Date: March 98
 //
 // The IExpando Interface.
-namespace System.Runtime.InteropServices.Expando {
-    
+namespace System.Runtime.InteropServices.Expando
+{
     using System;
     using System.Reflection;
 
     [Guid("AFBF15E6-C37C-11d2-B88E-00A0C9B471B8")]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IExpando : IReflect
     {
         // Add a new Field to the reflection object.  The field has
@@ -31,9 +31,9 @@ namespace System.Runtime.InteropServices.Expando {
         // name as its name.
         PropertyInfo AddProperty(String name);
 
-        // Add a new Method to the reflection object.  The method has 
+        // Add a new Method to the reflection object.  The method has
         // name as its name and method is a delegate
-        // to the method.  
+        // to the method.
         MethodInfo AddMethod(String name, Delegate method);
 
         // Removes the specified member.

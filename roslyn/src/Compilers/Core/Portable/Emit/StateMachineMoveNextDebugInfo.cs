@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Emit
     internal abstract class StateMachineMoveNextBodyDebugInfo
     {
         /// <summary>
-        ///  Original async/iterator method transformed into MoveNext() 
+        ///  Original async/iterator method transformed into MoveNext()
         /// </summary>
         public readonly Cci.IMethodDefinition KickoffMethod;
 

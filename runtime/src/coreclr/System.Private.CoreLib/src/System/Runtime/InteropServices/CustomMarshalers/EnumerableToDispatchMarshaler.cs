@@ -9,17 +9,15 @@ namespace System.Runtime.InteropServices.CustomMarshalers
     [SupportedOSPlatform("windows")]
     internal sealed class EnumerableToDispatchMarshaler : ICustomMarshaler
     {
-        private static readonly EnumerableToDispatchMarshaler s_enumerableToDispatchMarshaler = new EnumerableToDispatchMarshaler();
+        private static readonly EnumerableToDispatchMarshaler s_enumerableToDispatchMarshaler =
+            new EnumerableToDispatchMarshaler();
 
-        public static ICustomMarshaler GetInstance(string? cookie) => s_enumerableToDispatchMarshaler;
+        public static ICustomMarshaler GetInstance(string? cookie) =>
+            s_enumerableToDispatchMarshaler;
 
-        private EnumerableToDispatchMarshaler()
-        {
-        }
+        private EnumerableToDispatchMarshaler() { }
 
-        public void CleanUpManagedData(object ManagedObj)
-        {
-        }
+        public void CleanUpManagedData(object ManagedObj) { }
 
         public void CleanUpNativeData(IntPtr pNativeData)
         {
@@ -45,7 +43,10 @@ namespace System.Runtime.InteropServices.CustomMarshalers
 
             object comObject = Marshal.GetObjectForIUnknown(pNativeData);
 
-            return ComDataHelpers.GetOrCreateManagedViewFromComData<object, EnumerableViewOfDispatch>(comObject, obj => new EnumerableViewOfDispatch(obj));
+            return ComDataHelpers.GetOrCreateManagedViewFromComData<
+                object,
+                EnumerableViewOfDispatch
+            >(comObject, obj => new EnumerableViewOfDispatch(obj));
         }
     }
 }

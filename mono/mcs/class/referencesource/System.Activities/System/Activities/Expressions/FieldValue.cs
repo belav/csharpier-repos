@@ -15,18 +15,10 @@ namespace System.Activities.Expressions
         bool isOperationFunctionStatic;
 
         [DefaultValue(null)]
-        public string FieldName
-        {
-            get;
-            set;
-        }
+        public string FieldName { get; set; }
 
         [DefaultValue(null)]
-        public InArgument<TOperand> Operand
-        {
-            get;
-            set;
-        }
+        public InArgument<TOperand> Operand { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -34,12 +26,16 @@ namespace System.Activities.Expressions
 
             if (typeof(TOperand).IsEnum)
             {
-                metadata.AddValidationError(SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName)
+                );
             }
 
             if (string.IsNullOrEmpty(this.FieldName))
             {
-                metadata.AddValidationError(SR.ActivityPropertyMustBeSet("FieldName", this.DisplayName));
+                metadata.AddValidationError(
+                    SR.ActivityPropertyMustBeSet("FieldName", this.DisplayName)
+                );
             }
             else
             {
@@ -49,15 +45,25 @@ namespace System.Activities.Expressions
 
                 if (fieldInfo == null)
                 {
-                    metadata.AddValidationError(SR.MemberNotFound(this.FieldName, typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.MemberNotFound(this.FieldName, typeof(TOperand).Name)
+                    );
                 }
                 else
                 {
                     this.isOperationFunctionStatic = fieldInfo.IsStatic;
-                    isRequired = !this.isOperationFunctionStatic;                    
+                    isRequired = !this.isOperationFunctionStatic;
 
                     ValidationError validationError;
-                    if (!MemberExpressionHelper.TryGenerateLinqDelegate(this.FieldName, true, this.isOperationFunctionStatic, out this.operationFunction, out validationError))
+                    if (
+                        !MemberExpressionHelper.TryGenerateLinqDelegate(
+                            this.FieldName,
+                            true,
+                            this.isOperationFunctionStatic,
+                            out this.operationFunction,
+                            out validationError
+                        )
+                    )
                     {
                         metadata.AddValidationError(validationError);
                     }
@@ -72,7 +78,11 @@ namespace System.Activities.Expressions
 
             if (!this.isOperationFunctionStatic && operandValue == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)
+                    )
+                );
             }
 
             return this.operationFunction(operandValue);

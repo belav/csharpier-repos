@@ -2,18 +2,18 @@ using System;
 
 public class Test
 {
-	public static void Main ()
-	{
-		SimpleStruct <string> s = new SimpleStruct <string> ();
-	}
+    public static void Main()
+    {
+        SimpleStruct<string> s = new SimpleStruct<string>();
+    }
 }
 
-public struct SimpleStruct <T>
+public struct SimpleStruct<T>
 {
-	T data;
+    T data;
 
-	public SimpleStruct (T data)
-	{
-		this.data = data;
-	}
+    public SimpleStruct(T data)
+    {
+        this.data = data;
+    }
 }

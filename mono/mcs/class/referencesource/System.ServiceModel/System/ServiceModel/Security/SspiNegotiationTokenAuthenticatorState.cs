@@ -3,17 +3,17 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
-    using System.Security.Principal;
+    using System.Net;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-    using System.Collections.Generic;
+    using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Runtime.Serialization;
-    using System.Net;
-    using System.Diagnostics;
 
     class SspiNegotiationTokenAuthenticatorState : NegotiationTokenAuthenticatorState
     {
@@ -37,66 +37,36 @@ namespace System.ServiceModel.Security
 
         public ISspiNegotiation SspiNegotiation
         {
-            get
-            {
-                return this.sspiNegotiation;
-            }
+            get { return this.sspiNegotiation; }
         }
 
         internal int RequestedKeySize
         {
-            get
-            {
-                return this.requestedKeySize;
-            }
-            set
-            {
-                this.requestedKeySize = value;
-            }
+            get { return this.requestedKeySize; }
+            set { this.requestedKeySize = value; }
         }
 
         internal HashAlgorithm NegotiationDigest
         {
-            get
-            {
-                return this.negotiationDigest;
-            }
+            get { return this.negotiationDigest; }
         }
 
         internal string Context
         {
-            get
-            {
-                return this.context;
-            }
-            set
-            {
-                this.context = value;
-            }
+            get { return this.context; }
+            set { this.context = value; }
         }
 
         internal EndpointAddress AppliesTo
         {
-            get
-            {
-                return this.appliesTo;
-            }
-            set
-            {
-                this.appliesTo = value;
-            }
+            get { return this.appliesTo; }
+            set { this.appliesTo = value; }
         }
 
         internal DataContractSerializer AppliesToSerializer
         {
-            get
-            {
-                return this.appliesToSerializer;
-            }
-            set
-            {
-                this.appliesToSerializer = value;
-            }
+            get { return this.appliesToSerializer; }
+            set { this.appliesToSerializer = value; }
         }
 
         public override string GetRemoteIdentityName()
@@ -117,7 +87,6 @@ namespace System.ServiceModel.Security
                     if (this.sspiNegotiation != null)
                     {
                         this.sspiNegotiation.Dispose();
-
                     }
                     if (this.negotiationDigest != null)
                     {

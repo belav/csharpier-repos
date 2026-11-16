@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -26,7 +26,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TSource"></typeparam>
     internal sealed class FirstQueryOperator<TSource> : UnaryQueryOperator<TSource, TSource>
     {
-
         private readonly Func<TSource, bool> m_predicate; // The optional predicate used during the search.
         private readonly bool m_prematureMergeNeeded; // Whether to prematurely merge the input of this operator.
 
@@ -38,11 +37,13 @@ namespace System.Linq.Parallel
         //
 
         internal FirstQueryOperator(IEnumerable<TSource> child, Func<TSource, bool> predicate)
-            :base(child)
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             m_predicate = predicate;
-            m_prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing);
+            m_prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(
+                OrdinalIndexState.Increasing
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -57,13 +58,23 @@ namespace System.Linq.Parallel
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
-        internal override void  WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
+        internal override void WrapPartitionedStream<TKey>(
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // If the index is not at least increasing, we need to reindex.
             if (m_prematureMergeNeeded)
             {
-                ListQueryResults<TSource> listResults = ExecuteAndCollectResults(inputStream, inputStream.PartitionCount, Child.OutputOrdered, preferStriping, settings);
+                ListQueryResults<TSource> listResults = ExecuteAndCollectResults(
+                    inputStream,
+                    inputStream.PartitionCount,
+                    Child.OutputOrdered,
+                    preferStriping,
+                    settings
+                );
                 WrapHelper<int>(listResults.GetPartitionedStream(), recipient, settings);
             }
             else
@@ -73,7 +84,10 @@ namespace System.Linq.Parallel
         }
 
         private void WrapHelper<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
 
@@ -82,18 +96,26 @@ namespace System.Linq.Parallel
             CountdownEvent sharedBarrier = new CountdownEvent(partitionCount);
 
             PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Shuffled
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
                 outputStream[i] = new FirstQueryOperatorEnumerator<TKey>(
-                    inputStream[i], m_predicate, operatorState, sharedBarrier, 
-                    settings.CancellationState.MergedCancellationToken, inputStream.KeyComparer, i);
+                    inputStream[i],
+                    m_predicate,
+                    operatorState,
+                    sharedBarrier,
+                    settings.CancellationState.MergedCancellationToken,
+                    inputStream.KeyComparer,
+                    i
+                );
             }
 
             recipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -101,7 +123,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            Contract.Assert(false, "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First().");
+            Contract.Assert(
+                false,
+                "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()."
+            );
             throw new NotSupportedException();
         }
 
@@ -121,7 +146,6 @@ namespace System.Linq.Parallel
 
         class FirstQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, int>
         {
-
             private QueryOperatorEnumerator<TSource, TKey> m_source; // The data source to enumerate.
             private Func<TSource, bool> m_predicate; // The optional predicate used during the search.
             private bool m_alreadySearched; // Set once the enumerator has performed the search.
@@ -138,9 +162,14 @@ namespace System.Linq.Parallel
             //
 
             internal FirstQueryOperatorEnumerator(
-                QueryOperatorEnumerator<TSource, TKey> source, Func<TSource, bool> predicate,
-                FirstQueryOperatorState<TKey> operatorState, CountdownEvent sharedBarrier, CancellationToken cancellationToken,
-                IComparer<TKey> keyComparer, int partitionId)
+                QueryOperatorEnumerator<TSource, TKey> source,
+                Func<TSource, bool> predicate,
+                FirstQueryOperatorState<TKey> operatorState,
+                CountdownEvent sharedBarrier,
+                CancellationToken cancellationToken,
+                IComparer<TKey> keyComparer,
+                int partitionId
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(operatorState != null);
@@ -191,7 +220,11 @@ namespace System.Linq.Parallel
 
                             lock (m_operatorState)
                             {
-                                if (m_operatorState.m_partitionId == -1 || m_keyComparer.Compare(candidateKey, m_operatorState.m_key) < 0)
+                                if (
+                                    m_operatorState.m_partitionId == -1
+                                    || m_keyComparer.Compare(candidateKey, m_operatorState.m_key)
+                                        < 0
+                                )
                                 {
                                     m_operatorState.m_key = candidateKey;
                                     m_operatorState.m_partitionId = m_partitionId;

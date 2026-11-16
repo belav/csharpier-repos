@@ -58,17 +58,21 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Impl;
 using RabbitMQ.Util;
 
-namespace RabbitMQ.Client.Impl {
-    public abstract class AbstractProtocolBase: IProtocol {
+namespace RabbitMQ.Client.Impl
+{
+    public abstract class AbstractProtocolBase : IProtocol
+    {
         public abstract int MajorVersion { get; }
         public abstract int MinorVersion { get; }
         public abstract string ApiName { get; }
         public abstract int DefaultPort { get; }
 
         public abstract IFrameHandler CreateFrameHandler(AmqpTcpEndpoint endpoint);
-        public abstract IConnection CreateConnection(ConnectionFactory factory,
-                                                     bool insist,
-                                                     IFrameHandler frameHandler);
+        public abstract IConnection CreateConnection(
+            ConnectionFactory factory,
+            bool insist,
+            IFrameHandler frameHandler
+        );
         public abstract IModel CreateModel(ISession session);
 
         public abstract MethodBase DecodeMethodFrom(NetworkBinaryReader reader);
@@ -76,39 +80,45 @@ namespace RabbitMQ.Client.Impl {
 
         ///<summary>Used when a connection is being quiesced because
         ///of a HardProtocolException or Application initiated shutdown</summary>
-        public abstract void CreateConnectionClose(ushort reasonCode,
-                                                   string reasonText,
-                                                   out Command request,
-                                                   out int replyClassId,
-                                                   out int replyMethodId);
+        public abstract void CreateConnectionClose(
+            ushort reasonCode,
+            string reasonText,
+            out Command request,
+            out int replyClassId,
+            out int replyMethodId
+        );
 
         ///<summary>Used when a channel is being quiesced because of a
         ///SoftProtocolException.</summary>
-        public abstract void CreateChannelClose(ushort reasonCode,
-                                                   string reasonText,
-                                                   out Command request,
-                                                   out int replyClassId,
-                                                   out int replyMethodId);
-                                                   
+        public abstract void CreateChannelClose(
+            ushort reasonCode,
+            string reasonText,
+            out Command request,
+            out int replyClassId,
+            out int replyMethodId
+        );
+
         ///<summary>Used in the quiescing session to determine if the command
         ///is allowed to be sent.</summary>
-        public abstract bool CanSendWhileClosed(Command cmd); 
+        public abstract bool CanSendWhileClosed(Command cmd);
 
-        public AmqpVersion Version {
-            get {
-                return new AmqpVersion(MajorVersion, MinorVersion);
-            }
+        public AmqpVersion Version
+        {
+            get { return new AmqpVersion(MajorVersion, MinorVersion); }
         }
 
-	    public override string ToString() {
-	        return Version.ToString();
-	    }
+        public override string ToString()
+        {
+            return Version.ToString();
+        }
 
-        public override bool Equals(object obj) {
+        public override bool Equals(object obj)
+        {
             return (GetType() == obj.GetType());
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return GetType().GetHashCode();
         }
     }

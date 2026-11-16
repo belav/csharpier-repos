@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -13,7 +13,11 @@ using System;
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
     // DefaultInterfaceAttribute marks a WinRT class (or interface group) that has its default interface specified.
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class DefaultInterfaceAttribute : Attribute
     {
         private Type m_defaultInterface;
@@ -35,21 +39,37 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // not have a built in syntax to mark tdWindowsRuntime.   These two assemblies are special as they
     // implement the CLR's support for WinRT, so this type is internal as marking tdWindowsRuntime should
     // generally be done via winmdexp for user code.
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Delegate, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
+            | AttributeTargets.Struct
+            | AttributeTargets.Delegate,
+        Inherited = false
+    )]
     [System.Runtime.CompilerServices.FriendAccessAllowed]
     internal sealed class WindowsRuntimeImportAttribute : Attribute
     {
-        public WindowsRuntimeImportAttribute()
-        { }
+        public WindowsRuntimeImportAttribute() { }
     }
 
     // This attribute is applied to class interfaces in a generated projection assembly.  It is used by Visual Studio
     // and other tools to find out what version of a component (eg. Windows) a WinRT class began to implement
     // a particular interfaces.
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        Inherited = false,
+        AllowMultiple = true
+    )]
     public sealed class InterfaceImplementedInVersionAttribute : Attribute
     {
-        public InterfaceImplementedInVersionAttribute(Type interfaceType, byte majorVersion, byte minorVersion, byte buildVersion, byte revisionVersion)
+        public InterfaceImplementedInVersionAttribute(
+            Type interfaceType,
+            byte majorVersion,
+            byte minorVersion,
+            byte buildVersion,
+            byte revisionVersion
+        )
         {
             m_interfaceType = interfaceType;
             m_majorVersion = majorVersion;
@@ -94,25 +114,28 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false, AllowMultiple = false)]
     public sealed class ReadOnlyArrayAttribute : Attribute
     {
-        public ReadOnlyArrayAttribute() {}
+        public ReadOnlyArrayAttribute() { }
     }
 
     // Applies to write-only array parameters
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false, AllowMultiple = false)]
     public sealed class WriteOnlyArrayAttribute : Attribute
     {
-        public WriteOnlyArrayAttribute() {}
+        public WriteOnlyArrayAttribute() { }
     }
 
-
-
-    // This attribute is applied on the return value to specify the name of the return value. 
+    // This attribute is applied on the return value to specify the name of the return value.
     // In WindowsRuntime all parameters including return value need to have unique names.
     // This is essential in JS as one of the ways to get at the results of a method in JavaScript is via a Dictionary object keyed by parameter name.
-    [AttributeUsage(AttributeTargets.ReturnValue | AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.ReturnValue | AttributeTargets.Delegate,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class ReturnValueNameAttribute : Attribute
     {
         private string m_Name;
+
         public ReturnValueNameAttribute(string name)
         {
             m_Name = name;
@@ -123,5 +146,4 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             get { return m_Name; }
         }
     }
-
 }

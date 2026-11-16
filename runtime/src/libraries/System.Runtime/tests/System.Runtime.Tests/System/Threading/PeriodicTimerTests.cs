@@ -12,8 +12,12 @@ namespace System.Threading.Tests
         [Fact]
         public void Ctor_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () => new PeriodicTimer(TimeSpan.Zero));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () => new PeriodicTimer(TimeSpan.FromMilliseconds(uint.MaxValue)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                new PeriodicTimer(TimeSpan.Zero)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                new PeriodicTimer(TimeSpan.FromMilliseconds(uint.MaxValue))
+            );
         }
 
         [Theory]
@@ -29,11 +33,17 @@ namespace System.Threading.Tests
         public void Period_InvalidArguments_Throws()
         {
             PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromMilliseconds(1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => timer.Period = TimeSpan.Zero);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => timer.Period = TimeSpan.FromMilliseconds(uint.MaxValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                timer.Period = TimeSpan.Zero
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                timer.Period = TimeSpan.FromMilliseconds(uint.MaxValue)
+            );
 
             timer.Dispose();
-            Assert.Throws<ObjectDisposedException>(() => timer.Period = TimeSpan.FromMilliseconds(100));
+            Assert.Throws<ObjectDisposedException>(() =>
+                timer.Period = TimeSpan.FromMilliseconds(100)
+            );
         }
 
         [Fact]
@@ -48,7 +58,9 @@ namespace System.Threading.Tests
             timer.Period = TimeSpan.FromDays(1);
             Assert.Equal(TimeSpan.FromDays(1), timer.Period);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => timer.Period = TimeSpan.Zero);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                timer.Period = TimeSpan.Zero
+            );
             Assert.Equal(TimeSpan.FromDays(1), timer.Period);
         }
 
@@ -108,11 +120,13 @@ namespace System.Threading.Tests
         {
             using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(uint.MaxValue - 1));
 
-            _ = Task.Run(async delegate
-            {
-                await Task.Delay(1);
-                timer.Dispose();
-            });
+            _ = Task.Run(
+                async delegate
+                {
+                    await Task.Delay(1);
+                    timer.Dispose();
+                }
+            );
 
             Assert.False(await timer.WaitForNextTickAsync());
         }
@@ -127,13 +141,16 @@ namespace System.Threading.Tests
                 Assert.True(await timer.WaitForNextTickAsync());
             }
 
-            _ = Task.Run(async delegate
-            {
-                await Task.Delay(1);
-                timer.Dispose();
-            });
+            _ = Task.Run(
+                async delegate
+                {
+                    await Task.Delay(1);
+                    timer.Dispose();
+                }
+            );
 
-            while (await timer.WaitForNextTickAsync());
+            while (await timer.WaitForNextTickAsync())
+                ;
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
@@ -221,7 +238,10 @@ namespace System.Threading.Tests
 
             ValueTask<bool> task = timer.WaitForNextTickAsync(cts.Token);
             Assert.True(task.IsCanceled);
-            Assert.Equal(cts.Token, Assert.ThrowsAny<OperationCanceledException>(() => task.Result).CancellationToken);
+            Assert.Equal(
+                cts.Token,
+                Assert.ThrowsAny<OperationCanceledException>(() => task.Result).CancellationToken
+            );
         }
 
         [Fact]
@@ -234,7 +254,10 @@ namespace System.Threading.Tests
             ValueTask<bool> task = timer.WaitForNextTickAsync(cts.Token);
             cts.Cancel();
 
-            Assert.Equal(cts.Token, Assert.ThrowsAny<OperationCanceledException>(() => task.Result).CancellationToken);
+            Assert.Equal(
+                cts.Token,
+                Assert.ThrowsAny<OperationCanceledException>(() => task.Result).CancellationToken
+            );
         }
 
         [Fact]
@@ -262,13 +285,22 @@ namespace System.Threading.Tests
             Assert.True(await timer.WaitForNextTickAsync());
         }
 
-        private static void WaitForTimerToBeCollected(WeakReference<PeriodicTimer> timer, bool expected)
+        private static void WaitForTimerToBeCollected(
+            WeakReference<PeriodicTimer> timer,
+            bool expected
+        )
         {
-            Assert.Equal(expected, SpinWait.SpinUntil(() =>
-            {
-                GC.Collect();
-                return !timer.TryGetTarget(out _);
-            }, TimeSpan.FromSeconds(expected ? 5 : 0.5)));
+            Assert.Equal(
+                expected,
+                SpinWait.SpinUntil(
+                    () =>
+                    {
+                        GC.Collect();
+                        return !timer.TryGetTarget(out _);
+                    },
+                    TimeSpan.FromSeconds(expected ? 5 : 0.5)
+                )
+            );
         }
     }
 }

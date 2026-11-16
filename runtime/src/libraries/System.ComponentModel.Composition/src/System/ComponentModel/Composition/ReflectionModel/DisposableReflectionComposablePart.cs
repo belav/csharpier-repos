@@ -10,9 +10,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private volatile int _isDisposed;
 
         public DisposableReflectionComposablePart(ReflectionComposablePartDefinition definition)
-            : base(definition)
-        {
-        }
+            : base(definition) { }
 
         protected override void ReleaseInstanceIfNecessary(object? instance)
         {

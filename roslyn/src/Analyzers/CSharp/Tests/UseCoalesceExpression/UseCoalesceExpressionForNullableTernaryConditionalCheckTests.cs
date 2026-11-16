@@ -16,16 +16,21 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCoalesceExpression)]
-    public class UseCoalesceExpressionForNullableTernaryConditionalCheckTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UseCoalesceExpressionForNullableTernaryConditionalCheckTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseCoalesceExpressionForNullableTernaryConditionalCheckTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public UseCoalesceExpressionForNullableTernaryConditionalCheckTests(
+            ITestOutputHelper logger
+        )
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticAnalyzer(),
-                new UseCoalesceExpressionForNullableTernaryConditionalCheckCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticAnalyzer(),
+                new UseCoalesceExpressionForNullableTernaryConditionalCheckCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestOnLeft_Equals()
@@ -52,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var z = x ?? y ;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -80,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var z = x ?? y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -108,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var z = (x + y) ?? y ;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -136,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var z = x ?? y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -166,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var z2 = x ?? y ;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -194,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var w = x ?? y.ToString(z ?? y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -222,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         var w = x ?? y ?? z;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17028")]
@@ -252,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         Expression<Func<int>> e = () => {|Warning:x ?? y|} ;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69087")]
@@ -269,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         object z = [||]x.HasValue ? x.Value : "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69087")]
@@ -297,7 +311,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                         object z = x ?? 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69087")]
@@ -313,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                     public string InterpolatedText => $"{([||]Index.HasValue ? Index.Value : "???")}: rest of the text";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69087")]
@@ -339,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                     public string InterpolatedText => $"{(Index ?? 0)}: rest of the text";
                 }
-                """);
+                """
+            );
         }
     }
 }

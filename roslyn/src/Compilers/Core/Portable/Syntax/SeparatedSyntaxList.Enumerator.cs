@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis
         // Public struct enumerator
         // Only implements enumerator pattern as used by foreach
         // Does not implement IEnumerator. Doing so would require the struct to implement IDisposable too.
-        [SuppressMessage("Performance", "CA1067", Justification = "Equality not actually implemented")]
+        [SuppressMessage(
+            "Performance",
+            "CA1067",
+            Justification = "Equality not actually implemented"
+        )]
         public struct Enumerator
         {
             private readonly SeparatedSyntaxList<TNode> _list;
@@ -40,10 +44,7 @@ namespace Microsoft.CodeAnalysis
 
             public TNode Current
             {
-                get
-                {
-                    return _list[_index];
-                }
+                get { return _list[_index]; }
             }
 
             public void Reset()
@@ -74,23 +75,15 @@ namespace Microsoft.CodeAnalysis
 
             public TNode Current
             {
-                get
-                {
-                    return _e.Current;
-                }
+                get { return _e.Current; }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return _e.Current;
-                }
+                get { return _e.Current; }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

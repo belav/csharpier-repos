@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json.Serialization.Metadata;
 using System.Text.Json.Serialization.Tests.Schemas.OrderPayload;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization.Metadata;
 using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
@@ -15,26 +15,40 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task WriteNullArgumentFail()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await JsonSerializer.SerializeAsync((Stream)null, 1));
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await JsonSerializer.SerializeAsync((Stream)null, 1, typeof(int)));
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync((Stream)null, 1)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync((Stream)null, 1, typeof(int))
+            );
             Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize((Stream)null, 1));
-            Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize((Stream)null, 1, typeof(int)));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize((Stream)null, 1, typeof(int))
+            );
         }
 
         [Fact]
         public async Task VerifyValueFail()
         {
             MemoryStream stream = new MemoryStream();
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await JsonSerializer.SerializeAsync(stream, "", (Type)null));
-            Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(stream, "", (Type)null));
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync(stream, "", (Type)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(stream, "", (Type)null)
+            );
         }
 
         [Fact]
         public async Task VerifyTypeFail()
         {
             MemoryStream stream = new MemoryStream();
-            await Assert.ThrowsAsync<ArgumentException>(async () => await JsonSerializer.SerializeAsync(stream, 1, typeof(string)));
-            Assert.Throws<ArgumentException>(() => JsonSerializer.Serialize(stream, 1, typeof(string)));
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+                await JsonSerializer.SerializeAsync(stream, 1, typeof(string))
+            );
+            Assert.Throws<ArgumentException>(() =>
+                JsonSerializer.Serialize(stream, 1, typeof(string))
+            );
         }
 
         [Fact]
@@ -55,7 +69,10 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        [SkipOnCoreClr("https://github.com/dotnet/runtime/issues/45464", ~RuntimeConfiguration.Release)]
+        [SkipOnCoreClr(
+            "https://github.com/dotnet/runtime/issues/45464",
+            ~RuntimeConfiguration.Release
+        )]
         public async Task RoundTripAsync()
         {
             byte[] buffer;
@@ -75,7 +92,6 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-
         public async Task RoundTripLargeJsonViaJsonElementAsync()
         {
             // Generating tailored json
@@ -102,7 +118,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task RoundTripLargeJsonViaPocoAsync()
         {
-            byte[] array = JsonSerializer.Deserialize<byte[]>(JsonSerializer.Serialize(new byte[11056]));
+            byte[] array = JsonSerializer.Deserialize<byte[]>(
+                JsonSerializer.Serialize(new byte[11056])
+            );
             var ms = new MemoryStream();
 
             await Serializer.SerializeWrapper(ms, array, array.GetType());
@@ -113,7 +131,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 // Will likely default to 4K due to buffer pooling.
-                DefaultBufferSize = 1
+                DefaultBufferSize = 1,
             };
 
             {
@@ -139,10 +157,13 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 // Will likely default to 4K due to buffer pooling.
-                DefaultBufferSize = 1
+                DefaultBufferSize = 1,
             };
 
-            LargeDataTestClass obj = await Serializer.DeserializeWrapper<LargeDataTestClass>(stream, options);
+            LargeDataTestClass obj = await Serializer.DeserializeWrapper<LargeDataTestClass>(
+                stream,
+                options
+            );
             // Must be changed if the test classes change; may be > since last read may not have filled buffer.
             Assert.InRange(stream.TestRequestedReadBytesCount, 551368, int.MaxValue);
 
@@ -159,10 +180,7 @@ namespace System.Text.Json.Serialization.Tests
         public async Task WritePrimitivesAsync()
         {
             MemoryStream stream = new MemoryStream();
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                DefaultBufferSize = 1
-            };
+            JsonSerializerOptions options = new JsonSerializerOptions { DefaultBufferSize = 1 };
 
             await Serializer.SerializeWrapper(stream, 1, options);
             string jsonSerialized = Encoding.UTF8.GetString(stream.ToArray());
@@ -176,7 +194,8 @@ namespace System.Text.Json.Serialization.Tests
             public virtual string Abstract { get; set; }
             public virtual DateTimeOffset? StartTime { get; set; }
             public virtual DateTimeOffset? EndTime { get; set; }
-            public TimeSpan Duration => EndTime?.Subtract(StartTime ?? EndTime ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
+            public TimeSpan Duration =>
+                EndTime?.Subtract(StartTime ?? EndTime ?? DateTimeOffset.MinValue) ?? TimeSpan.Zero;
             public int? TrackId { get; set; }
         }
 
@@ -225,22 +244,20 @@ namespace System.Text.Json.Serialization.Tests
                     StartTime = new DateTime(i, DateTimeKind.Utc),
                     EndTime = new DateTime(i * 10000, DateTimeKind.Utc),
                     TrackId = i,
-                    Track = new Track()
-                    {
-                        Id = i,
-                        Name = new string('N', i),
-                    },
+                    Track = new Track() { Id = i, Name = new string('N', i) },
                 };
 
                 for (int j = 0; j < 5; j++)
                 {
-                    response.Speakers.Add(new Speaker()
-                    {
-                        Bio = new string('B', 50),
-                        Id = j,
-                        Name = new string('N', i),
-                        WebSite = new string('W', 20),
-                    });
+                    response.Speakers.Add(
+                        new Speaker()
+                        {
+                            Bio = new string('B', 50),
+                            Id = j,
+                            Name = new string('N', i),
+                            WebSite = new string('W', 20),
+                        }
+                    );
                 }
 
                 list.Add(response);
@@ -259,7 +276,9 @@ namespace System.Text.Json.Serialization.Tests
 
             // Sync case.
             {
-                List<SessionResponse> deserializedList = JsonSerializer.Deserialize<List<SessionResponse>>(json, options);
+                List<SessionResponse> deserializedList = JsonSerializer.Deserialize<
+                    List<SessionResponse>
+                >(json, options);
                 Assert.Equal(SessionResponseCount, deserializedList.Count);
 
                 string jsonSerialized = JsonSerializer.Serialize(deserializedList, options);
@@ -274,7 +293,9 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(json, jsonSerialized);
 
                 memoryStream.Position = 0;
-                List<SessionResponse> deserializedList = await Serializer.DeserializeWrapper<List<SessionResponse>>(memoryStream, options);
+                List<SessionResponse> deserializedList = await Serializer.DeserializeWrapper<
+                    List<SessionResponse>
+                >(memoryStream, options);
                 Assert.Equal(SessionResponseCount, deserializedList.Count);
             }
         }
@@ -288,21 +309,28 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(10, false, false)]
         [InlineData(100, false, false)]
         [InlineData(1000, false, false)]
-        public async Task VeryLargeJsonFileTest(int payloadSize, bool ignoreNull, bool writeIndented)
+        public async Task VeryLargeJsonFileTest(
+            int payloadSize,
+            bool ignoreNull,
+            bool writeIndented
+        )
         {
             List<Order> list = Order.PopulateLargeObject(payloadSize);
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 IgnoreNullValues = ignoreNull,
-                WriteIndented = writeIndented
+                WriteIndented = writeIndented,
             };
 
             string json = JsonSerializer.Serialize(list, options);
 
             // Sync case.
             {
-                List<Order> deserializedList = JsonSerializer.Deserialize<List<Order>>(json, options);
+                List<Order> deserializedList = JsonSerializer.Deserialize<List<Order>>(
+                    json,
+                    options
+                );
                 Assert.Equal(payloadSize, deserializedList.Count);
 
                 string jsonSerialized = JsonSerializer.Serialize(deserializedList, options);
@@ -317,7 +345,10 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(json, jsonSerialized);
 
                 memoryStream.Position = 0;
-                List<Order> deserializedList = await Serializer.DeserializeWrapper<List<Order>>(memoryStream, options);
+                List<Order> deserializedList = await Serializer.DeserializeWrapper<List<Order>>(
+                    memoryStream,
+                    options
+                );
                 Assert.Equal(payloadSize, deserializedList.Count);
             }
         }
@@ -332,14 +363,18 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(4, false, false)]
         [InlineData(8, false, false)]
         [InlineData(16, false, false)] // This results a reader\writer depth of 324 which currently works on all test platforms.
-        public async Task DeepNestedJsonFileTest(int depthFactor, bool ignoreNull, bool writeIndented)
+        public async Task DeepNestedJsonFileTest(
+            int depthFactor,
+            bool ignoreNull,
+            bool writeIndented
+        )
         {
             const int ListLength = 10;
 
             int length = ListLength * depthFactor;
             List<Order>[] orders = new List<Order>[length];
             orders[0] = Order.PopulateLargeObject(1);
-            for (int i = 1; i < length; i++ )
+            for (int i = 1; i < length; i++)
             {
                 orders[i] = Order.PopulateLargeObject(1);
                 orders[i - 1][0].RelatedOrder = orders[i];
@@ -349,13 +384,16 @@ namespace System.Text.Json.Serialization.Tests
             {
                 MaxDepth = (ListLength * depthFactor * 2) + 4, // Order-to-RelatedOrder has a depth of 2.
                 IgnoreNullValues = ignoreNull,
-                WriteIndented = writeIndented
+                WriteIndented = writeIndented,
             };
             string json = JsonSerializer.Serialize(orders[0], options);
 
             // Sync case.
             {
-                List<Order> deserializedList = JsonSerializer.Deserialize<List<Order>>(json, options);
+                List<Order> deserializedList = JsonSerializer.Deserialize<List<Order>>(
+                    json,
+                    options
+                );
 
                 string jsonSerialized = JsonSerializer.Serialize(deserializedList, options);
                 Assert.Equal(json, jsonSerialized);
@@ -369,7 +407,10 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(json, jsonSerialized);
 
                 memoryStream.Position = 0;
-                List<Order> deserializedList = await Serializer.DeserializeWrapper<List<Order>>(memoryStream, options);
+                List<Order> deserializedList = await Serializer.DeserializeWrapper<List<Order>>(
+                    memoryStream,
+                    options
+                );
             }
         }
 
@@ -389,10 +430,7 @@ namespace System.Text.Json.Serialization.Tests
                 orders[i - 1][0].RelatedOrder = orders[i];
             }
 
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true
-            };
+            JsonSerializerOptions options = new JsonSerializerOptions() { IgnoreNullValues = true };
 
             // Ensure no exception for default settings (MaxDepth=64) and no cycle.
             JsonSerializer.Serialize(orders[0], options);
@@ -400,11 +438,13 @@ namespace System.Text.Json.Serialization.Tests
             // Create a cycle.
             orders[length - 1][0].RelatedOrder = orders[0];
 
-            Assert.Throws<JsonException> (() => JsonSerializer.Serialize(orders[0], options));
+            Assert.Throws<JsonException>(() => JsonSerializer.Serialize(orders[0], options));
 
             using (var memoryStream = new MemoryStream())
             {
-                await Assert.ThrowsAsync<JsonException>(async () => await Serializer.SerializeWrapper(memoryStream, orders[0], options));
+                await Assert.ThrowsAsync<JsonException>(async () =>
+                    await Serializer.SerializeWrapper(memoryStream, orders[0], options)
+                );
             }
         }
 
@@ -422,14 +462,14 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             var instrumentedResolver = new PocoWithInstrumentedFastPath.Context(
-                new JsonSerializerOptions
-                {
-                    DefaultBufferSize = defaultBufferSize,
-                });
+                new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+            );
 
             // The current implementation uses a heuristic
             int smallValueThreshold = defaultBufferSize / 2;
-            PocoWithInstrumentedFastPath smallValue = CreateValueWithSerializationSize(smallValueThreshold);
+            PocoWithInstrumentedFastPath smallValue = CreateValueWithSerializationSize(
+                smallValueThreshold
+            );
 
             var stream = new MemoryStream();
 
@@ -450,7 +490,11 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             // Polymorphic serialization should use the fast path
-            await Serializer.SerializeWrapper(stream, (object)smallValue, instrumentedResolver.Options);
+            await Serializer.SerializeWrapper(
+                stream,
+                (object)smallValue,
+                instrumentedResolver.Options
+            );
             stream.Position = 0;
             Assert.Equal(11, instrumentedResolver.FastPathInvocationCount);
 
@@ -468,10 +512,18 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(12, instrumentedResolver.FastPathInvocationCount);
             }
 
-            static PocoWithInstrumentedFastPath CreateValueWithSerializationSize(int targetSerializationSize)
+            static PocoWithInstrumentedFastPath CreateValueWithSerializationSize(
+                int targetSerializationSize
+            )
             {
                 int objectSerializationPaddingSize = """{"Value":""}""".Length; // 12
-                return new PocoWithInstrumentedFastPath { Value = new string('a', targetSerializationSize - objectSerializationPaddingSize) };
+                return new PocoWithInstrumentedFastPath
+                {
+                    Value = new string(
+                        'a',
+                        targetSerializationSize - objectSerializationPaddingSize
+                    ),
+                };
             }
         }
 
@@ -483,39 +535,52 @@ namespace System.Text.Json.Serialization.Tests
             {
                 public int FastPathInvocationCount { get; private set; }
 
-                public Context(JsonSerializerOptions options) : base(options)
-                { }
+                public Context(JsonSerializerOptions options)
+                    : base(options) { }
 
                 protected override JsonSerializerOptions? GeneratedSerializerOptions => Options;
+
                 public override JsonTypeInfo? GetTypeInfo(Type type) => GetTypeInfo(type, Options);
 
                 public JsonTypeInfo? GetTypeInfo(Type type, JsonSerializerOptions options)
                 {
                     if (type == typeof(string))
                     {
-                        return JsonMetadataServices.CreateValueInfo<string>(options, JsonMetadataServices.StringConverter);
+                        return JsonMetadataServices.CreateValueInfo<string>(
+                            options,
+                            JsonMetadataServices.StringConverter
+                        );
                     }
 
                     if (type == typeof(object))
                     {
-                        return JsonMetadataServices.CreateValueInfo<object>(options, JsonMetadataServices.ObjectConverter);
+                        return JsonMetadataServices.CreateValueInfo<object>(
+                            options,
+                            JsonMetadataServices.ObjectConverter
+                        );
                     }
 
                     if (type == typeof(PocoWithInstrumentedFastPath))
                     {
-                        return JsonMetadataServices.CreateObjectInfo<PocoWithInstrumentedFastPath>(options,
+                        return JsonMetadataServices.CreateObjectInfo<PocoWithInstrumentedFastPath>(
+                            options,
                             new JsonObjectInfoValues<PocoWithInstrumentedFastPath>
                             {
-                                PropertyMetadataInitializer = _ => new JsonPropertyInfo[1]
-                                {
-                                    JsonMetadataServices.CreatePropertyInfo<string>(options,
-                                        new JsonPropertyInfoValues<string>
-                                        {
-                                            DeclaringType = typeof(PocoWithInstrumentedFastPath),
-                                            PropertyName = "Value",
-                                            Getter = obj => ((PocoWithInstrumentedFastPath)obj).Value,
-                                        })
-                                },
+                                PropertyMetadataInitializer = _ =>
+                                    new JsonPropertyInfo[1]
+                                    {
+                                        JsonMetadataServices.CreatePropertyInfo<string>(
+                                            options,
+                                            new JsonPropertyInfoValues<string>
+                                            {
+                                                DeclaringType =
+                                                    typeof(PocoWithInstrumentedFastPath),
+                                                PropertyName = "Value",
+                                                Getter = obj =>
+                                                    ((PocoWithInstrumentedFastPath)obj).Value,
+                                            }
+                                        ),
+                                    },
 
                                 SerializeHandler = (writer, value) =>
                                 {
@@ -523,8 +588,9 @@ namespace System.Text.Json.Serialization.Tests
                                     writer.WriteString("Value", value.Value);
                                     writer.WriteEndObject();
                                     FastPathInvocationCount++;
-                                }
-                            });
+                                },
+                            }
+                        );
                     }
 
                     return null;
@@ -541,12 +607,14 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(65536)]
         public async Task FlushThresholdTest(int bufferSize)
         {
-            // bufferSize * 0.9 is the threshold size from codebase, subtract 2 for [" characters, then create a 
-            // string containing (threshold - 2) amount of char 'a' which when written into output buffer produces buffer 
-            // which size equal to or very close to threshold size, then adding the string to the list, then adding a big 
+            // bufferSize * 0.9 is the threshold size from codebase, subtract 2 for [" characters, then create a
+            // string containing (threshold - 2) amount of char 'a' which when written into output buffer produces buffer
+            // which size equal to or very close to threshold size, then adding the string to the list, then adding a big
             // object to the list which changes depth of written json and should cause buffer flush
             int thresholdSize = (int)(bufferSize * 0.9 - 2);
-            FlushThresholdTestClass serializeObject = new FlushThresholdTestClass(GenerateListOfSize(bufferSize));
+            FlushThresholdTestClass serializeObject = new FlushThresholdTestClass(
+                GenerateListOfSize(bufferSize)
+            );
             List<object> list = new List<object>();
             string stringOfThresholdSize = new string('a', thresholdSize);
             list.Add(stringOfThresholdSize);
@@ -563,17 +631,21 @@ namespace System.Text.Json.Serialization.Tests
                 string jsonSerialized = Encoding.UTF8.GetString(memoryStream.ToArray());
                 Assert.Equal(json, jsonSerialized);
 
-                List<object> deserializedList = JsonSerializer.Deserialize<List<object>>(json, options);
+                List<object> deserializedList = JsonSerializer.Deserialize<List<object>>(
+                    json,
+                    options
+                );
                 Assert.Equal(stringOfThresholdSize, ((JsonElement)deserializedList[0]).GetString());
-                JsonElement obj = (JsonElement)deserializedList[1];             
+                JsonElement obj = (JsonElement)deserializedList[1];
                 Assert.Equal(stringOfThresholdSize, obj.GetProperty("StringProperty").GetString());
             }
         }
 
-        private class FlushThresholdTestClass 
+        private class FlushThresholdTestClass
         {
             public string StringProperty { get; set; }
             public List<int> ListOfInts { get; set; }
+
             public FlushThresholdTestClass(List<int> list)
             {
                 ListOfInts = list;
@@ -595,9 +667,15 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly MemoryStream _stream;
 
-        public TestStream(int capacity) { _stream = new MemoryStream(capacity); }
+        public TestStream(int capacity)
+        {
+            _stream = new MemoryStream(capacity);
+        }
 
-        public TestStream(byte[] buffer) { _stream = new MemoryStream(buffer); }
+        public TestStream(byte[] buffer)
+        {
+            _stream = new MemoryStream(buffer);
+        }
 
         public int TestFlushCount { get; private set; }
 
@@ -629,11 +707,17 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+
         public override void SetLength(long value) => _stream.SetLength(value);
+
         public override bool CanRead => _stream.CanRead;
         public override bool CanSeek => _stream.CanSeek;
         public override bool CanWrite => _stream.CanWrite;
         public override long Length => _stream.Length;
-        public override long Position { get => _stream.Position; set => _stream.Position = value; }
+        public override long Position
+        {
+            get => _stream.Position;
+            set => _stream.Position = value;
+        }
     }
 }

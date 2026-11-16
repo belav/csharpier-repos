@@ -8,9 +8,7 @@ namespace System.IdentityModel.Configuration
 {
     public sealed partial class IssuerNameRegistryElement : ConfigurationElementInterceptor
     {
-        public IssuerNameRegistryElement()
-        {
-        }
+        public IssuerNameRegistryElement() { }
 
         internal IssuerNameRegistryElement(string type)
         {
@@ -24,7 +22,10 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return (ElementInformation.Properties[ConfigurationStrings.Type].ValueOrigin != PropertyValueOrigin.Default) || ((ChildNodes != null) && (ChildNodes.Count > 0));
+                return (
+                        ElementInformation.Properties[ConfigurationStrings.Type].ValueOrigin
+                        != PropertyValueOrigin.Default
+                    ) || ((ChildNodes != null) && (ChildNodes.Count > 0));
             }
         }
 

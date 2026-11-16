@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,50 +28,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Reflection;
 using System.Collections.Specialized;
+using System.Reflection;
 
 #pragma warning disable 618
 
 namespace System.Configuration
 {
-	public class AppSettingsReader
-	{
-		NameValueCollection appSettings;
+    public class AppSettingsReader
+    {
+        NameValueCollection appSettings;
 
-		public AppSettingsReader ()
-		{
-			appSettings = ConfigurationSettings.AppSettings;
-		}
+        public AppSettingsReader()
+        {
+            appSettings = ConfigurationSettings.AppSettings;
+        }
 
-		public object GetValue (string key, Type type)
-		{
-			if (key == null)
-				throw new ArgumentNullException ("key");
+        public object GetValue(string key, Type type)
+        {
+            if (key == null)
+                throw new ArgumentNullException("key");
 
-			if (type == null)
-				throw new ArgumentNullException ("type");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
-			string value = appSettings [key];
-			if (value == null)
-				throw new InvalidOperationException ("'" + key + "' could not be found.");
+            string value = appSettings[key];
+            if (value == null)
+                throw new InvalidOperationException("'" + key + "' could not be found.");
 
-			if (type == typeof (string))
-				return value;
-			
-			MethodInfo parse = type.GetMethod ("Parse", new Type [] {typeof (string)});
-			if (parse == null)
-				throw new InvalidOperationException ("Type " + type + " does not have a Parse method");
+            if (type == typeof(string))
+                return value;
 
-			object result = null;
-			try {
-				result = parse.Invoke (null, new object [] {value});
-			} catch (Exception e) {
-				throw new InvalidOperationException ("Parse error.", e);
-			}
+            MethodInfo parse = type.GetMethod("Parse", new Type[] { typeof(string) });
+            if (parse == null)
+                throw new InvalidOperationException(
+                    "Type " + type + " does not have a Parse method"
+                );
 
-			return result;
-		}
-	}
+            object result = null;
+            try
+            {
+                result = parse.Invoke(null, new object[] { value });
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException("Parse error.", e);
+            }
+
+            return result;
+        }
+    }
 }
-

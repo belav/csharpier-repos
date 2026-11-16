@@ -6,6 +6,7 @@
 
 using System;
 using Xunit;
+
 public class testout1
 {
     static int static_field_int;
@@ -14,14 +15,17 @@ public class testout1
     int mfi;
     bool mfb_false;
     bool mfb_true;
+
     static int simple_func_int()
     {
         return 17;
     }
+
     static bool func_sb_true()
     {
         return true;
     }
+
     static bool func_sb_false()
     {
         return false;
@@ -74,6 +78,7 @@ public class testout1
         Sum += (true ? local_int : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_1()
     {
         int Sum = 0;
@@ -121,6 +126,7 @@ public class testout1
         Sum += (true ? t1_i.mfi : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_2()
     {
         int Sum = 0;
@@ -168,6 +174,7 @@ public class testout1
         Sum += (true ? ab[index - 1] : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_3()
     {
         int Sum = 0;
@@ -215,6 +222,7 @@ public class testout1
         Sum += (false ? -5 : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_4()
     {
         int Sum = 0;
@@ -262,6 +270,7 @@ public class testout1
         Sum += (false ? t1_i.mfi : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_5()
     {
         int Sum = 0;
@@ -309,6 +318,7 @@ public class testout1
         Sum += (false ? ab[index] : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_6()
     {
         int Sum = 0;
@@ -356,6 +366,7 @@ public class testout1
         Sum += (lb_true ? -5 : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_7()
     {
         int Sum = 0;
@@ -403,6 +414,7 @@ public class testout1
         Sum += (lb_true ? static_field_int : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_8()
     {
         int Sum = 0;
@@ -450,6 +462,7 @@ public class testout1
         Sum += (lb_true ? ab[index] : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_9()
     {
         int Sum = 0;
@@ -497,6 +510,7 @@ public class testout1
         Sum += (lb_false ? 3 : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_10()
     {
         int Sum = 0;
@@ -544,6 +558,7 @@ public class testout1
         Sum += (lb_false ? static_field_int : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_11()
     {
         int Sum = 0;
@@ -591,6 +606,7 @@ public class testout1
         Sum += (lb_false ? simple_func_int() : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_12()
     {
         int Sum = 0;
@@ -638,6 +654,7 @@ public class testout1
         Sum += (sfb_true ? 3 : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_13()
     {
         int Sum = 0;
@@ -685,6 +702,7 @@ public class testout1
         Sum += (sfb_true ? local_int : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_14()
     {
         int Sum = 0;
@@ -732,6 +750,7 @@ public class testout1
         Sum += (sfb_true ? simple_func_int() : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_15()
     {
         int Sum = 0;
@@ -779,6 +798,7 @@ public class testout1
         Sum += (sfb_true ? ab[index - 1] : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_16()
     {
         int Sum = 0;
@@ -826,6 +846,7 @@ public class testout1
         Sum += (sfb_false ? local_int : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_17()
     {
         int Sum = 0;
@@ -873,6 +894,7 @@ public class testout1
         Sum += (sfb_false ? t1_i.mfi : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_18()
     {
         int Sum = 0;
@@ -920,6 +942,7 @@ public class testout1
         Sum += (sfb_false ? ab[index - 1] : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_19()
     {
         int Sum = 0;
@@ -967,6 +990,7 @@ public class testout1
         Sum += (t1_i.mfb_true ? -5 : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_20()
     {
         int Sum = 0;
@@ -1014,6 +1038,7 @@ public class testout1
         Sum += (t1_i.mfb_true ? t1_i.mfi : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_21()
     {
         int Sum = 0;
@@ -1061,6 +1086,7 @@ public class testout1
         Sum += (t1_i.mfb_true ? ab[index] : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_22()
     {
         int Sum = 0;
@@ -1108,6 +1134,7 @@ public class testout1
         Sum += (t1_i.mfb_false ? -5 : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_23()
     {
         int Sum = 0;
@@ -1155,6 +1182,7 @@ public class testout1
         Sum += (t1_i.mfb_false ? static_field_int : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_24()
     {
         int Sum = 0;
@@ -1202,6 +1230,7 @@ public class testout1
         Sum += (t1_i.mfb_false ? ab[index] : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_25()
     {
         int Sum = 0;
@@ -1249,6 +1278,7 @@ public class testout1
         Sum += (func_sb_true() ? 3 : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_26()
     {
         int Sum = 0;
@@ -1296,6 +1326,7 @@ public class testout1
         Sum += (func_sb_true() ? static_field_int : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_27()
     {
         int Sum = 0;
@@ -1343,6 +1374,7 @@ public class testout1
         Sum += (func_sb_true() ? simple_func_int() : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_28()
     {
         int Sum = 0;
@@ -1390,6 +1422,7 @@ public class testout1
         Sum += (func_sb_false() ? 3 : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_29()
     {
         int Sum = 0;
@@ -1437,6 +1470,7 @@ public class testout1
         Sum += (func_sb_false() ? local_int : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_30()
     {
         int Sum = 0;
@@ -1484,6 +1518,7 @@ public class testout1
         Sum += (func_sb_false() ? simple_func_int() : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_31()
     {
         int Sum = 0;
@@ -1531,6 +1566,7 @@ public class testout1
         Sum += (func_sb_false() ? ab[index - 1] : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_32()
     {
         int Sum = 0;
@@ -1578,6 +1614,7 @@ public class testout1
         Sum += (ab_true[index] ? local_int : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_33()
     {
         int Sum = 0;
@@ -1625,6 +1662,7 @@ public class testout1
         Sum += (ab_true[index] ? t1_i.mfi : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_34()
     {
         int Sum = 0;
@@ -1672,6 +1710,7 @@ public class testout1
         Sum += (ab_true[index] ? ab[index - 1] : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_35()
     {
         int Sum = 0;
@@ -1719,6 +1758,7 @@ public class testout1
         Sum += (ab_false[index] ? -5 : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_36()
     {
         int Sum = 0;
@@ -1766,6 +1806,7 @@ public class testout1
         Sum += (ab_false[index] ? t1_i.mfi : static_field_int);
         return Sum;
     }
+
     static int Sub_Funclet_37()
     {
         int Sum = 0;
@@ -1813,6 +1854,7 @@ public class testout1
         Sum += (ab_false[index] ? ab[index] : ab[index - 1]);
         return Sum;
     }
+
     static int Sub_Funclet_38()
     {
         int Sum = 0;
@@ -1848,6 +1890,7 @@ public class testout1
         Sum += (ab_false[index] ? ab[index - 1] : ab[index - 1]);
         return Sum;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

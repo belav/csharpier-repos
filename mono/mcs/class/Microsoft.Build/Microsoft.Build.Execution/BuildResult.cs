@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,71 +31,83 @@ using System.Linq;
 
 namespace Microsoft.Build.Execution
 {
-	public class BuildResult
-	{
-		public BuildResult ()
-		{
-			ResultsByTarget = new Dictionary<string, TargetResult> ();
-		}
-		
-		public void AddResultsForTarget (string target, TargetResult result)
-		{
-			ResultsByTarget.Add (target, result);
-		}
+    public class BuildResult
+    {
+        public BuildResult()
+        {
+            ResultsByTarget = new Dictionary<string, TargetResult>();
+        }
 
-		public bool HasResultsForTarget (string target)
-		{
-			return ResultsByTarget.ContainsKey (target);
-		}
+        public void AddResultsForTarget(string target, TargetResult result)
+        {
+            ResultsByTarget.Add(target, result);
+        }
 
-		public void MergeResults (BuildResult results)
-		{
-			if (ConfigurationId != results.ConfigurationId)
-				throw new InvalidOperationException ("Argument BuildResults have inconsistent ConfigurationId.");
-			if (GlobalRequestId != results.GlobalRequestId)
-				throw new InvalidOperationException ("Argument BuildResults have inconsistent GlobalRequestId.");
-			if (NodeRequestId != results.NodeRequestId)
-				throw new InvalidOperationException ("Argument BuildResults have inconsistent NodeRequestId.");
-			if (ParentGlobalRequestId != results.ParentGlobalRequestId)
-				throw new InvalidOperationException ("Argument BuildResults have inconsistent ParentGlobalRequestId.");
-			if (SubmissionId != results.SubmissionId)
-				throw new InvalidOperationException ("Argument BuildResults have inconsistent SubmissionId.");
-			
-			CircularDependency |= results.CircularDependency;
-			Exception = Exception ?? results.Exception;
-			foreach (var p in results.ResultsByTarget)
-				ResultsByTarget.Add (p.Key, p.Value);
-		}
+        public bool HasResultsForTarget(string target)
+        {
+            return ResultsByTarget.ContainsKey(target);
+        }
 
-		public bool CircularDependency { get; internal set; }
+        public void MergeResults(BuildResult results)
+        {
+            if (ConfigurationId != results.ConfigurationId)
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent ConfigurationId."
+                );
+            if (GlobalRequestId != results.GlobalRequestId)
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent GlobalRequestId."
+                );
+            if (NodeRequestId != results.NodeRequestId)
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent NodeRequestId."
+                );
+            if (ParentGlobalRequestId != results.ParentGlobalRequestId)
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent ParentGlobalRequestId."
+                );
+            if (SubmissionId != results.SubmissionId)
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent SubmissionId."
+                );
 
-		public int ConfigurationId { get; internal set; }
+            CircularDependency |= results.CircularDependency;
+            Exception = Exception ?? results.Exception;
+            foreach (var p in results.ResultsByTarget)
+                ResultsByTarget.Add(p.Key, p.Value);
+        }
 
-		public Exception Exception { get; set; }
+        public bool CircularDependency { get; internal set; }
 
-		public int GlobalRequestId { get; internal set; }
+        public int ConfigurationId { get; internal set; }
 
-		public ITargetResult this [string target] {
-			get { return ResultsByTarget [target]; }
-		}
+        public Exception Exception { get; set; }
 
-		public int NodeRequestId { get; internal set; }
+        public int GlobalRequestId { get; internal set; }
 
-		BuildResultCode? overall_result;
-		public BuildResultCode OverallResult {
-			get {
-				if (overall_result == null)
-					throw new InvalidOperationException ("Build has not finished");
-				return overall_result.Value;
-			}
-			internal set { overall_result = value; }
-		}
+        public ITargetResult this[string target]
+        {
+            get { return ResultsByTarget[target]; }
+        }
 
-		public int ParentGlobalRequestId { get; internal set; }
+        public int NodeRequestId { get; internal set; }
 
-		public IDictionary<string, TargetResult> ResultsByTarget { get; private set; }
+        BuildResultCode? overall_result;
+        public BuildResultCode OverallResult
+        {
+            get
+            {
+                if (overall_result == null)
+                    throw new InvalidOperationException("Build has not finished");
+                return overall_result.Value;
+            }
+            internal set { overall_result = value; }
+        }
 
-		public int SubmissionId { get; internal set; }
-	}
+        public int ParentGlobalRequestId { get; internal set; }
+
+        public IDictionary<string, TargetResult> ResultsByTarget { get; private set; }
+
+        public int SubmissionId { get; internal set; }
+    }
 }
-

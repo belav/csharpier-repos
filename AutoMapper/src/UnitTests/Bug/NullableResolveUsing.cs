@@ -8,15 +8,18 @@ public class NullableResolveUsing : AutoMapperSpecBase
     {
         public decimal? Number { get; set; }
     }
+
     class Destination
     {
         public decimal? OddNumber { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>().ForMember(d => d.OddNumber, o => o.MapFrom(s => s.Number));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.OddNumber, o => o.MapFrom(s => s.Number));
+        });
 
     protected override void Because_of()
     {

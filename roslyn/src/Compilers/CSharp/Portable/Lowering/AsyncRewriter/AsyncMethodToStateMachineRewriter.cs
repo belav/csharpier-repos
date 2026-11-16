@@ -76,8 +76,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<StateMachineStateDebugInfo> stateMachineStateDebugInfoBuilder,
             VariableSlotAllocator? slotAllocatorOpt,
             int nextFreeHoistedLocalSlot,
-            BindingDiagnosticBag diagnostics)
-            : base(F, method, state, instanceIdField, hoistedVariables, nonReusableLocalProxies, synthesizedLocalOrdinals, stateMachineStateDebugInfoBuilder, slotAllocatorOpt, nextFreeHoistedLocalSlot, diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                F,
+                method,
+                state,
+                instanceIdField,
+                hoistedVariables,
+                nonReusableLocalProxies,
+                synthesizedLocalOrdinals,
+                stateMachineStateDebugInfoBuilder,
+                slotAllocatorOpt,
+                nextFreeHoistedLocalSlot,
+                diagnostics
+            )
         {
             _method = method;
             _asyncMethodBuilderMemberCollection = asyncMethodBuilderMemberCollection;
@@ -86,11 +99,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             _exitLabel = F.GenerateLabel("exitLabel");
 
             _exprRetValue = method.IsAsyncEffectivelyReturningGenericTask(F.Compilation)
-                ? F.SynthesizedLocal(asyncMethodBuilderMemberCollection.ResultType, syntax: F.Syntax, kind: SynthesizedLocalKind.AsyncMethodReturnValue)
+                ? F.SynthesizedLocal(
+                    asyncMethodBuilderMemberCollection.ResultType,
+                    syntax: F.Syntax,
+                    kind: SynthesizedLocalKind.AsyncMethodReturnValue
+                )
                 : null;
 
             _dynamicFactory = new LoweredDynamicOperationFactory(F, methodOrdinal);
-            _awaiterFields = new Dictionary<TypeSymbol, FieldSymbol>(Symbols.SymbolEqualityComparer.IgnoringDynamicTupleNamesAndNullability);
+            _awaiterFields = new Dictionary<TypeSymbol, FieldSymbol>(
+                Symbols.SymbolEqualityComparer.IgnoringDynamicTupleNamesAndNullability
+            );
             _nextAwaiterId = slotAllocatorOpt?.PreviousAwaiterSlotCount ?? 0;
 
             _placeholderMap = new Dictionary<BoundValuePlaceholderBase, BoundExpression>();
@@ -109,24 +128,40 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!_awaiterFields.TryGetValue(awaiterType, out result))
             {
                 int slotIndex;
-                if (slotAllocatorOpt == null || !slotAllocatorOpt.TryGetPreviousAwaiterSlotIndex(F.ModuleBuilderOpt.Translate(awaiterType, F.Syntax, F.Diagnostics.DiagnosticBag), F.Diagnostics.DiagnosticBag, out slotIndex))
+                if (
+                    slotAllocatorOpt == null
+                    || !slotAllocatorOpt.TryGetPreviousAwaiterSlotIndex(
+                        F.ModuleBuilderOpt.Translate(
+                            awaiterType,
+                            F.Syntax,
+                            F.Diagnostics.DiagnosticBag
+                        ),
+                        F.Diagnostics.DiagnosticBag,
+                        out slotIndex
+                    )
+                )
                 {
                     slotIndex = _nextAwaiterId++;
                 }
 
                 string fieldName = GeneratedNames.AsyncAwaiterFieldName(slotIndex);
-                result = F.StateMachineField(awaiterType, fieldName, SynthesizedLocalKind.AwaiterField, slotIndex);
+                result = F.StateMachineField(
+                    awaiterType,
+                    fieldName,
+                    SynthesizedLocalKind.AwaiterField,
+                    slotIndex
+                );
                 _awaiterFields.Add(awaiterType, result);
             }
 
             return result;
         }
 
-        protected sealed override string EncMissingStateMessage
-            => CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod;
+        protected sealed override string EncMissingStateMessage =>
+            CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod;
 
-        protected sealed override StateMachineState FirstIncreasingResumableState
-            => StateMachineState.FirstResumableAsyncState;
+        protected sealed override StateMachineState FirstIncreasingResumableState =>
+            StateMachineState.FirstResumableAsyncState;
 
         /// <summary>
         /// Generate the body for <c>MoveNext()</c>.
@@ -145,24 +180,31 @@ namespace Microsoft.CodeAnalysis.CSharp
             bodyBuilder.Add(F.Assignment(F.Local(cachedState), F.Field(F.This(), stateField)));
             bodyBuilder.Add(CacheThisIfNeeded());
 
-            var exceptionLocal = F.SynthesizedLocal(F.WellKnownType(WellKnownType.System_Exception));
+            var exceptionLocal = F.SynthesizedLocal(
+                F.WellKnownType(WellKnownType.System_Exception)
+            );
             bodyBuilder.Add(
                 GenerateTopLevelTry(
-                    F.Block(ImmutableArray<LocalSymbol>.Empty,
+                    F.Block(
+                        ImmutableArray<LocalSymbol>.Empty,
                         // switch (state) ...
                         F.HiddenSequencePoint(),
                         Dispatch(isOutermost: true),
                         // [body]
                         rewrittenBody
                     ),
-                    F.CatchBlocks(GenerateExceptionHandling(exceptionLocal, rootScopeHoistedLocals)))
-                );
+                    F.CatchBlocks(GenerateExceptionHandling(exceptionLocal, rootScopeHoistedLocals))
+                )
+            );
 
             // ReturnLabel (for the rewritten return expressions in the user's method body)
             bodyBuilder.Add(F.Label(_exprReturnLabel));
 
             // this.state = finishedState
-            var stateDone = F.Assignment(F.Field(F.This(), stateField), F.Literal(StateMachineState.FinishedState));
+            var stateDone = F.Assignment(
+                F.Field(F.This(), stateField),
+                F.Literal(StateMachineState.FinishedState)
+            );
             var block = body.Syntax as BlockSyntax;
             if (block == null)
             {
@@ -171,7 +213,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                bodyBuilder.Add(F.SequencePointWithSpan(block, block.CloseBraceToken.Span, stateDone));
+                bodyBuilder.Add(
+                    F.SequencePointWithSpan(block, block.CloseBraceToken.Span, stateDone)
+                );
                 bodyBuilder.Add(F.HiddenSequencePoint());
                 // The remaining code is hidden to hide the fact that it can run concurrently with the task's continuation
             }
@@ -188,15 +232,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var locals = ArrayBuilder<LocalSymbol>.GetInstance();
             locals.Add(cachedState);
-            if ((object)cachedThis != null) locals.Add(cachedThis);
-            if ((object)_exprRetValue != null) locals.Add(_exprRetValue);
+            if ((object)cachedThis != null)
+                locals.Add(cachedThis);
+            if ((object)_exprRetValue != null)
+                locals.Add(_exprRetValue);
 
-            var newBody =
-                F.SequencePoint(
-                    body.Syntax,
-                    F.Block(
-                        locals.ToImmutableAndFree(),
-                        newStatements));
+            var newBody = F.SequencePoint(
+                body.Syntax,
+                F.Block(locals.ToImmutableAndFree(), newStatements)
+            );
 
             if (rootScopeHoistedLocals.Length > 0)
             {
@@ -208,14 +252,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 newBody = F.Block(
                     ImmutableArray.Create(instrumentation.Local),
                     instrumentation.Prologue,
-                    F.Try(F.Block(newBody), ImmutableArray<BoundCatchBlock>.Empty, F.Block(instrumentation.Epilogue)));
+                    F.Try(
+                        F.Block(newBody),
+                        ImmutableArray<BoundCatchBlock>.Empty,
+                        F.Block(instrumentation.Epilogue)
+                    )
+                );
             }
 
             F.CloseMethod(newBody);
         }
 
-        protected virtual BoundStatement GenerateTopLevelTry(BoundBlock tryBlock, ImmutableArray<BoundCatchBlock> catchBlocks)
-            => F.Try(tryBlock, catchBlocks);
+        protected virtual BoundStatement GenerateTopLevelTry(
+            BoundBlock tryBlock,
+            ImmutableArray<BoundCatchBlock> catchBlocks
+        ) => F.Try(tryBlock, catchBlocks);
 
         protected virtual BoundStatement GenerateSetResultCall()
         {
@@ -226,10 +277,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _asyncMethodBuilderMemberCollection.SetResult,
                     _method.IsAsyncEffectivelyReturningGenericTask(F.Compilation)
                         ? ImmutableArray.Create<BoundExpression>(F.Local(_exprRetValue))
-                        : ImmutableArray<BoundExpression>.Empty));
+                        : ImmutableArray<BoundExpression>.Empty
+                )
+            );
         }
 
-        protected BoundCatchBlock GenerateExceptionHandling(LocalSymbol exceptionLocal, ImmutableArray<StateMachineFieldSymbol> hoistedLocals)
+        protected BoundCatchBlock GenerateExceptionHandling(
+            LocalSymbol exceptionLocal,
+            ImmutableArray<StateMachineFieldSymbol> hoistedLocals
+        )
         {
             // catch (Exception ex)
             // {
@@ -243,8 +299,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // }
 
             // _state = finishedState;
-            BoundStatement assignFinishedState =
-                F.ExpressionStatement(F.AssignmentExpression(F.Field(F.This(), stateField), F.Literal(StateMachineState.FinishedState)));
+            BoundStatement assignFinishedState = F.ExpressionStatement(
+                F.AssignmentExpression(
+                    F.Field(F.This(), stateField),
+                    F.Literal(StateMachineState.FinishedState)
+                )
+            );
 
             // builder.SetException(ex);  OR  if (this.combinedTokens != null) this.combinedTokens.Dispose(); _promiseOfValueOrEnd.SetException(ex);
             BoundStatement callSetException = GenerateSetExceptionCall(exceptionLocal);
@@ -260,11 +320,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     assignFinishedState, // _state = finishedState;
                     GenerateHoistedLocalsCleanup(hoistedLocals),
                     callSetException, // builder.SetException(ex);  OR  _promiseOfValueOrEnd.SetException(ex);
-                    GenerateReturn(false)), // return;
-                isSynthesizedAsyncCatchAll: true);
+                    GenerateReturn(false)
+                ), // return;
+                isSynthesizedAsyncCatchAll: true
+            );
         }
 
-        protected BoundStatement GenerateHoistedLocalsCleanup(ImmutableArray<StateMachineFieldSymbol> hoistedLocals)
+        protected BoundStatement GenerateHoistedLocalsCleanup(
+            ImmutableArray<StateMachineFieldSymbol> hoistedLocals
+        )
         {
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
 
@@ -272,7 +336,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // so that they can be collected by GC if needed
             foreach (var hoistedLocal in hoistedLocals)
             {
-                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(F.Diagnostics, F.Compilation.Assembly);
+                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                    F.Diagnostics,
+                    F.Compilation.Assembly
+                );
                 var isManagedType = hoistedLocal.Type.IsManagedType(ref useSiteInfo);
                 F.Diagnostics.Add(hoistedLocal.GetFirstLocationOrNone(), useSiteInfo);
                 if (!isManagedType)
@@ -280,7 +347,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     continue;
                 }
 
-                builder.Add(F.Assignment(F.Field(F.This(), hoistedLocal), F.NullOrDefault(hoistedLocal.Type)));
+                builder.Add(
+                    F.Assignment(
+                        F.Field(F.This(), hoistedLocal),
+                        F.NullOrDefault(hoistedLocal.Type)
+                    )
+                );
             }
 
             return F.Block(builder.ToImmutableAndFree());
@@ -295,7 +367,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 F.Call(
                     F.Field(F.This(), _asyncMethodBuilderField),
                     _asyncMethodBuilderMemberCollection.SetException,
-                    F.Local(exceptionLocal)));
+                    F.Local(exceptionLocal)
+                )
+            );
         }
 
         protected sealed override BoundStatement GenerateReturn(bool finished)
@@ -305,21 +379,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         #region Visitors
 
-        protected virtual BoundStatement VisitBody(BoundStatement body)
-            => (BoundStatement)Visit(body);
+        protected virtual BoundStatement VisitBody(BoundStatement body) =>
+            (BoundStatement)Visit(body);
 
         public sealed override BoundNode VisitExpressionStatement(BoundExpressionStatement node)
         {
             if (node.Expression.Kind == BoundKind.AwaitExpression)
             {
-                return VisitAwaitExpression((BoundAwaitExpression)node.Expression, resultPlace: null);
+                return VisitAwaitExpression(
+                    (BoundAwaitExpression)node.Expression,
+                    resultPlace: null
+                );
             }
             else if (node.Expression.Kind == BoundKind.AssignmentOperator)
             {
                 var expression = (BoundAssignmentOperator)node.Expression;
                 if (expression.Right.Kind == BoundKind.AwaitExpression)
                 {
-                    return VisitAwaitExpression((BoundAwaitExpression)expression.Right, resultPlace: expression.Left);
+                    return VisitAwaitExpression(
+                        (BoundAwaitExpression)expression.Right,
+                        resultPlace: expression.Left
+                    );
                 }
             }
 
@@ -339,7 +419,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return node;
         }
 
-        private BoundBlock VisitAwaitExpression(BoundAwaitExpression node, BoundExpression resultPlace)
+        private BoundBlock VisitAwaitExpression(
+            BoundAwaitExpression node,
+            BoundExpression resultPlace
+        )
         {
             var expression = (BoundExpression)Visit(node.Expression);
             var awaitablePlaceholder = node.AwaitableInfo.AwaitableInstancePlaceholder;
@@ -349,13 +432,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _placeholderMap.Add(awaitablePlaceholder, expression);
             }
 
-            var getAwaiter = node.AwaitableInfo.IsDynamic ?
-                MakeCallMaybeDynamic(expression, null, WellKnownMemberNames.GetAwaiter) :
-                (BoundExpression)Visit(node.AwaitableInfo.GetAwaiter);
+            var getAwaiter = node.AwaitableInfo.IsDynamic
+                ? MakeCallMaybeDynamic(expression, null, WellKnownMemberNames.GetAwaiter)
+                : (BoundExpression)Visit(node.AwaitableInfo.GetAwaiter);
 
             resultPlace = (BoundExpression)Visit(resultPlace);
             MethodSymbol getResult = VisitMethodSymbol(node.AwaitableInfo.GetResult);
-            MethodSymbol isCompletedMethod = ((object)node.AwaitableInfo.IsCompleted != null) ? VisitMethodSymbol(node.AwaitableInfo.IsCompleted.GetMethod) : null;
+            MethodSymbol isCompletedMethod =
+                ((object)node.AwaitableInfo.IsCompleted != null)
+                    ? VisitMethodSymbol(node.AwaitableInfo.IsCompleted.GetMethod)
+                    : null;
             TypeSymbol type = VisitType(node.Type);
 
             if (awaitablePlaceholder != null)
@@ -365,40 +451,49 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // The awaiter temp facilitates EnC method remapping and thus have to be long-lived.
             // It transfers the awaiter objects from the old version of the MoveNext method to the new one.
-            Debug.Assert(node.Syntax.IsKind(SyntaxKind.AwaitExpression) || node.WasCompilerGenerated);
+            Debug.Assert(
+                node.Syntax.IsKind(SyntaxKind.AwaitExpression) || node.WasCompilerGenerated
+            );
 
-            var awaiterTemp = F.SynthesizedLocal(getAwaiter.Type, syntax: node.Syntax, kind: SynthesizedLocalKind.Awaiter);
+            var awaiterTemp = F.SynthesizedLocal(
+                getAwaiter.Type,
+                syntax: node.Syntax,
+                kind: SynthesizedLocalKind.Awaiter
+            );
             var awaitIfIncomplete = F.Block(
-                    // temp $awaiterTemp = <expr>.GetAwaiter();
-                    F.Assignment(
-                        F.Local(awaiterTemp),
-                        getAwaiter),
-
-                    // hidden sequence point facilitates EnC method remapping, see explanation on SynthesizedLocalKind.Awaiter:
-                    F.HiddenSequencePoint(),
-
-                    // if(!($awaiterTemp.IsCompleted)) { ... }
-                    F.If(
-                        condition: F.Not(GenerateGetIsCompleted(awaiterTemp, isCompletedMethod)),
-                        thenClause: GenerateAwaitForIncompleteTask(awaiterTemp, node.DebugInfo)));
+                // temp $awaiterTemp = <expr>.GetAwaiter();
+                F.Assignment(F.Local(awaiterTemp), getAwaiter),
+                // hidden sequence point facilitates EnC method remapping, see explanation on SynthesizedLocalKind.Awaiter:
+                F.HiddenSequencePoint(),
+                // if(!($awaiterTemp.IsCompleted)) { ... }
+                F.If(
+                    condition: F.Not(GenerateGetIsCompleted(awaiterTemp, isCompletedMethod)),
+                    thenClause: GenerateAwaitForIncompleteTask(awaiterTemp, node.DebugInfo)
+                )
+            );
             BoundExpression getResultCall = MakeCallMaybeDynamic(
                 F.Local(awaiterTemp),
                 getResult,
                 WellKnownMemberNames.GetResult,
-                resultsDiscarded: resultPlace == null);
+                resultsDiscarded: resultPlace == null
+            );
 
             // [$resultPlace = ] $awaiterTemp.GetResult();
-            BoundStatement getResultStatement = resultPlace != null && !type.IsVoidType() ?
-                F.Assignment(resultPlace, getResultCall) :
-                F.ExpressionStatement(getResultCall);
+            BoundStatement getResultStatement =
+                resultPlace != null && !type.IsVoidType()
+                    ? F.Assignment(resultPlace, getResultCall)
+                    : F.ExpressionStatement(getResultCall);
 
             return F.Block(
                 ImmutableArray.Create(awaiterTemp),
                 awaitIfIncomplete,
-                getResultStatement);
+                getResultStatement
+            );
         }
 
-        public override BoundNode VisitAwaitableValuePlaceholder(BoundAwaitableValuePlaceholder node)
+        public override BoundNode VisitAwaitableValuePlaceholder(
+            BoundAwaitableValuePlaceholder node
+        )
         {
             return _placeholderMap[node];
         }
@@ -407,7 +502,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiver,
             MethodSymbol methodSymbol = null,
             string methodName = null,
-            bool resultsDiscarded = false)
+            bool resultsDiscarded = false
+        )
         {
             if ((object)methodSymbol != null)
             {
@@ -421,39 +517,59 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // dynamic:
             Debug.Assert(methodName != null);
-            return _dynamicFactory.MakeDynamicMemberInvocation(
-                methodName,
-                receiver,
-                typeArgumentsWithAnnotations: ImmutableArray<TypeWithAnnotations>.Empty,
-                loweredArguments: ImmutableArray<BoundExpression>.Empty,
-                argumentNames: ImmutableArray<string>.Empty,
-                refKinds: ImmutableArray<RefKind>.Empty,
-                hasImplicitReceiver: false,
-                resultDiscarded: resultsDiscarded).ToExpression();
+            return _dynamicFactory
+                .MakeDynamicMemberInvocation(
+                    methodName,
+                    receiver,
+                    typeArgumentsWithAnnotations: ImmutableArray<TypeWithAnnotations>.Empty,
+                    loweredArguments: ImmutableArray<BoundExpression>.Empty,
+                    argumentNames: ImmutableArray<string>.Empty,
+                    refKinds: ImmutableArray<RefKind>.Empty,
+                    hasImplicitReceiver: false,
+                    resultDiscarded: resultsDiscarded
+                )
+                .ToExpression();
         }
 
-        private BoundExpression GenerateGetIsCompleted(LocalSymbol awaiterTemp, MethodSymbol getIsCompletedMethod)
+        private BoundExpression GenerateGetIsCompleted(
+            LocalSymbol awaiterTemp,
+            MethodSymbol getIsCompletedMethod
+        )
         {
             if (awaiterTemp.Type.IsDynamic())
             {
-                return _dynamicFactory.MakeDynamicConversion(
-                    _dynamicFactory.MakeDynamicGetMember(
-                        F.Local(awaiterTemp),
-                        WellKnownMemberNames.IsCompleted,
-                        false).ToExpression(),
-                    isExplicit: true,
-                    isArrayIndex: false,
-                    isChecked: false,
-                    resultType: F.SpecialType(SpecialType.System_Boolean)).ToExpression();
+                return _dynamicFactory
+                    .MakeDynamicConversion(
+                        _dynamicFactory
+                            .MakeDynamicGetMember(
+                                F.Local(awaiterTemp),
+                                WellKnownMemberNames.IsCompleted,
+                                false
+                            )
+                            .ToExpression(),
+                        isExplicit: true,
+                        isArrayIndex: false,
+                        isChecked: false,
+                        resultType: F.SpecialType(SpecialType.System_Boolean)
+                    )
+                    .ToExpression();
             }
 
             return F.Call(F.Local(awaiterTemp), getIsCompletedMethod);
         }
 
-        private BoundBlock GenerateAwaitForIncompleteTask(LocalSymbol awaiterTemp, BoundAwaitExpressionDebugInfo debugInfo)
+        private BoundBlock GenerateAwaitForIncompleteTask(
+            LocalSymbol awaiterTemp,
+            BoundAwaitExpressionDebugInfo debugInfo
+        )
         {
             var awaitSyntax = awaiterTemp.GetDeclaratorSyntax();
-            AddResumableState(awaitSyntax, debugInfo.AwaitId, out StateMachineState stateNumber, out GeneratedLabelSymbol resumeLabel);
+            AddResumableState(
+                awaitSyntax,
+                debugInfo.AwaitId,
+                out StateMachineState stateNumber,
+                out GeneratedLabelSymbol resumeLabel
+            );
 
             TypeSymbol awaiterFieldType = awaiterTemp.Type.IsVerifierReference()
                 ? F.SpecialType(SpecialType.System_Object)
@@ -465,58 +581,82 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             blockBuilder.Add(
                 // this.state = cachedState = stateForLabel
-                GenerateSetBothStates(stateNumber));
+                GenerateSetBothStates(stateNumber)
+            );
 
             blockBuilder.Add(
-                    // Emit await yield point to be injected into PDB
-                    F.NoOp(NoOpStatementFlavor.AwaitYieldPoint));
+                // Emit await yield point to be injected into PDB
+                F.NoOp(NoOpStatementFlavor.AwaitYieldPoint)
+            );
 
             blockBuilder.Add(
-                    // this.<>t__awaiter = $awaiterTemp
-                    F.Assignment(
+                // this.<>t__awaiter = $awaiterTemp
+                F.Assignment(
                     F.Field(F.This(), awaiterField),
-                    (TypeSymbol.Equals(awaiterField.Type, awaiterTemp.Type, TypeCompareKind.ConsiderEverything2))
+                    (
+                        TypeSymbol.Equals(
+                            awaiterField.Type,
+                            awaiterTemp.Type,
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                    )
                         ? F.Local(awaiterTemp)
-                        : F.Convert(awaiterFieldType, F.Local(awaiterTemp))));
-
-            blockBuilder.Add(awaiterTemp.Type.IsDynamic()
-                ? GenerateAwaitOnCompletedDynamic(awaiterTemp)
-                : GenerateAwaitOnCompleted(awaiterTemp.Type, awaiterTemp));
+                        : F.Convert(awaiterFieldType, F.Local(awaiterTemp))
+                )
+            );
 
             blockBuilder.Add(
-                GenerateReturn(false));
+                awaiterTemp.Type.IsDynamic()
+                    ? GenerateAwaitOnCompletedDynamic(awaiterTemp)
+                    : GenerateAwaitOnCompleted(awaiterTemp.Type, awaiterTemp)
+            );
+
+            blockBuilder.Add(GenerateReturn(false));
 
             if (F.Compilation.Options.EnableEditAndContinue)
             {
                 for (int i = 0; i < debugInfo.ReservedStateMachineCount; i++)
                 {
-                    AddResumableState(awaitSyntax, new AwaitDebugId((byte)(debugInfo.AwaitId.RelativeStateOrdinal + 1 + i)), out _, out var dummyResumeLabel);
+                    AddResumableState(
+                        awaitSyntax,
+                        new AwaitDebugId((byte)(debugInfo.AwaitId.RelativeStateOrdinal + 1 + i)),
+                        out _,
+                        out var dummyResumeLabel
+                    );
                     blockBuilder.Add(F.Label(dummyResumeLabel));
                 }
             }
 
-            blockBuilder.Add(
-                F.Label(resumeLabel));
+            blockBuilder.Add(F.Label(resumeLabel));
 
             blockBuilder.Add(
-                    // Emit await resume point to be injected into PDB
-                    F.NoOp(NoOpStatementFlavor.AwaitResumePoint));
+                // Emit await resume point to be injected into PDB
+                F.NoOp(NoOpStatementFlavor.AwaitResumePoint)
+            );
 
             blockBuilder.Add(
-                    // $awaiterTemp = this.<>t__awaiter   or   $awaiterTemp = (AwaiterType)this.<>t__awaiter
-                    // $this.<>t__awaiter = null;
-                    F.Assignment(
+                // $awaiterTemp = this.<>t__awaiter   or   $awaiterTemp = (AwaiterType)this.<>t__awaiter
+                // $this.<>t__awaiter = null;
+                F.Assignment(
                     F.Local(awaiterTemp),
-                    TypeSymbol.Equals(awaiterTemp.Type, awaiterField.Type, TypeCompareKind.ConsiderEverything2)
+                    TypeSymbol.Equals(
+                        awaiterTemp.Type,
+                        awaiterField.Type,
+                        TypeCompareKind.ConsiderEverything2
+                    )
                         ? F.Field(F.This(), awaiterField)
-                        : F.Convert(awaiterTemp.Type, F.Field(F.This(), awaiterField))));
+                        : F.Convert(awaiterTemp.Type, F.Field(F.This(), awaiterField))
+                )
+            );
 
             blockBuilder.Add(
-                F.Assignment(F.Field(F.This(), awaiterField), F.NullOrDefault(awaiterField.Type)));
+                F.Assignment(F.Field(F.This(), awaiterField), F.NullOrDefault(awaiterField.Type))
+            );
 
             blockBuilder.Add(
-                    // this.state = cachedState = NotStartedStateMachine
-                    GenerateSetBothStates(StateMachineState.NotStartedOrRunningState));
+                // this.state = cachedState = NotStartedStateMachine
+                GenerateSetBothStates(StateMachineState.NotStartedOrRunningState)
+            );
 
             return F.Block(blockBuilder.ToImmutableAndFree());
         }
@@ -539,22 +679,31 @@ namespace Microsoft.CodeAnalysis.CSharp
             //  free $criticalNotifyCompletedTemp
 
             var criticalNotifyCompletedTemp = F.SynthesizedLocal(
-                F.WellKnownType(WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion),
-                null);
+                F.WellKnownType(
+                    WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
+                ),
+                null
+            );
 
             var notifyCompletionTemp = F.SynthesizedLocal(
                 F.WellKnownType(WellKnownType.System_Runtime_CompilerServices_INotifyCompletion),
-                null);
+                null
+            );
 
-            LocalSymbol thisTemp = (F.CurrentType.TypeKind == TypeKind.Class) ? F.SynthesizedLocal(F.CurrentType) : null;
+            LocalSymbol thisTemp =
+                (F.CurrentType.TypeKind == TypeKind.Class)
+                    ? F.SynthesizedLocal(F.CurrentType)
+                    : null;
 
             var blockBuilder = ArrayBuilder<BoundStatement>.GetInstance();
 
             blockBuilder.Add(
                 F.Assignment(
                     F.Local(criticalNotifyCompletedTemp),
-                        // Use reference conversion rather than dynamic conversion:
-                        F.As(F.Local(awaiterTemp), criticalNotifyCompletedTemp.Type)));
+                    // Use reference conversion rather than dynamic conversion:
+                    F.As(F.Local(awaiterTemp), criticalNotifyCompletedTemp.Type)
+                )
+            );
 
             if (thisTemp != null)
             {
@@ -563,86 +712,138 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             blockBuilder.Add(
                 F.If(
-                    condition: F.ObjectEqual(F.Local(criticalNotifyCompletedTemp), F.Null(criticalNotifyCompletedTemp.Type)),
-
+                    condition: F.ObjectEqual(
+                        F.Local(criticalNotifyCompletedTemp),
+                        F.Null(criticalNotifyCompletedTemp.Type)
+                    ),
                     thenClause: F.Block(
                         ImmutableArray.Create(notifyCompletionTemp),
                         F.Assignment(
                             F.Local(notifyCompletionTemp),
-                                // Use reference conversion rather than dynamic conversion:
-                                F.Convert(notifyCompletionTemp.Type, F.Local(awaiterTemp), Conversion.ExplicitReference)),
+                            // Use reference conversion rather than dynamic conversion:
+                            F.Convert(
+                                notifyCompletionTemp.Type,
+                                F.Local(awaiterTemp),
+                                Conversion.ExplicitReference
+                            )
+                        ),
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
                                 _asyncMethodBuilderMemberCollection.AwaitOnCompleted.Construct(
                                     notifyCompletionTemp.Type,
-                                    F.This().Type),
-                                F.Local(notifyCompletionTemp), F.This(thisTemp))),
+                                    F.This().Type
+                                ),
+                                F.Local(notifyCompletionTemp),
+                                F.This(thisTemp)
+                            )
+                        ),
                         F.Assignment(
                             F.Local(notifyCompletionTemp),
-                            F.NullOrDefault(notifyCompletionTemp.Type))),
-
+                            F.NullOrDefault(notifyCompletionTemp.Type)
+                        )
+                    ),
                     elseClauseOpt: F.Block(
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
                                 _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted.Construct(
                                     criticalNotifyCompletedTemp.Type,
-                                    F.This().Type),
-                                F.Local(criticalNotifyCompletedTemp), F.This(thisTemp))))));
+                                    F.This().Type
+                                ),
+                                F.Local(criticalNotifyCompletedTemp),
+                                F.This(thisTemp)
+                            )
+                        )
+                    )
+                )
+            );
 
             blockBuilder.Add(
                 F.Assignment(
                     F.Local(criticalNotifyCompletedTemp),
-                    F.NullOrDefault(criticalNotifyCompletedTemp.Type)));
+                    F.NullOrDefault(criticalNotifyCompletedTemp.Type)
+                )
+            );
 
             return F.Block(
                 SingletonOrPair(criticalNotifyCompletedTemp, thisTemp),
-                blockBuilder.ToImmutableAndFree());
+                blockBuilder.ToImmutableAndFree()
+            );
         }
 
-        private BoundStatement GenerateAwaitOnCompleted(TypeSymbol loweredAwaiterType, LocalSymbol awaiterTemp)
+        private BoundStatement GenerateAwaitOnCompleted(
+            TypeSymbol loweredAwaiterType,
+            LocalSymbol awaiterTemp
+        )
         {
             // this.builder.AwaitOnCompleted<TAwaiter,TSM>(ref $awaiterTemp, ref this)
             //    or
             // this.builder.AwaitOnCompleted<TAwaiter,TSM>(ref $awaiterArrayTemp[0], ref this)
 
-            LocalSymbol thisTemp = (F.CurrentType.TypeKind == TypeKind.Class) ? F.SynthesizedLocal(F.CurrentType) : null;
+            LocalSymbol thisTemp =
+                (F.CurrentType.TypeKind == TypeKind.Class)
+                    ? F.SynthesizedLocal(F.CurrentType)
+                    : null;
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            var useUnsafeOnCompleted = F.Compilation.Conversions.ClassifyImplicitConversionFromType(
-                loweredAwaiterType,
-                F.Compilation.GetWellKnownType(WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion),
-                ref discardedUseSiteInfo).IsImplicit;
+            var useUnsafeOnCompleted = F
+                .Compilation.Conversions.ClassifyImplicitConversionFromType(
+                    loweredAwaiterType,
+                    F.Compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
+                    ),
+                    ref discardedUseSiteInfo
+                )
+                .IsImplicit;
 
-            var onCompleted = (useUnsafeOnCompleted ?
-                _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted :
-                _asyncMethodBuilderMemberCollection.AwaitOnCompleted).Construct(loweredAwaiterType, F.This().Type);
+            var onCompleted = (
+                useUnsafeOnCompleted
+                    ? _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted
+                    : _asyncMethodBuilderMemberCollection.AwaitOnCompleted
+            ).Construct(loweredAwaiterType, F.This().Type);
             if (_asyncMethodBuilderMemberCollection.CheckGenericMethodConstraints)
             {
-                onCompleted.CheckConstraints(new ConstraintsHelper.CheckConstraintsArgs(F.Compilation, F.Compilation.Conversions, includeNullability: false, F.Syntax.Location, this.Diagnostics));
+                onCompleted.CheckConstraints(
+                    new ConstraintsHelper.CheckConstraintsArgs(
+                        F.Compilation,
+                        F.Compilation.Conversions,
+                        includeNullability: false,
+                        F.Syntax.Location,
+                        this.Diagnostics
+                    )
+                );
             }
 
-            BoundExpression result =
-                F.Call(
-                    F.Field(F.This(), _asyncMethodBuilderField),
-                    onCompleted,
-                    F.Local(awaiterTemp), F.This(thisTemp));
+            BoundExpression result = F.Call(
+                F.Field(F.This(), _asyncMethodBuilderField),
+                onCompleted,
+                F.Local(awaiterTemp),
+                F.This(thisTemp)
+            );
 
             if (thisTemp != null)
             {
                 result = F.Sequence(
                     ImmutableArray.Create(thisTemp),
-                    ImmutableArray.Create<BoundExpression>(F.AssignmentExpression(F.Local(thisTemp), F.This())),
-                    result);
+                    ImmutableArray.Create<BoundExpression>(
+                        F.AssignmentExpression(F.Local(thisTemp), F.This())
+                    ),
+                    result
+                );
             }
 
             return F.ExpressionStatement(result);
         }
 
-        private static ImmutableArray<LocalSymbol> SingletonOrPair(LocalSymbol first, LocalSymbol secondOpt)
+        private static ImmutableArray<LocalSymbol> SingletonOrPair(
+            LocalSymbol first,
+            LocalSymbol secondOpt
+        )
         {
-            return (secondOpt == null) ? ImmutableArray.Create(first) : ImmutableArray.Create(first, secondOpt);
+            return (secondOpt == null)
+                ? ImmutableArray.Create(first)
+                : ImmutableArray.Create(first, secondOpt);
         }
 
         public sealed override BoundNode VisitReturnStatement(BoundReturnStatement node)
@@ -651,8 +852,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(_method.IsAsyncEffectivelyReturningGenericTask(F.Compilation));
                 return F.Block(
-                    F.Assignment(F.Local(_exprRetValue), (BoundExpression)Visit(node.ExpressionOpt)),
-                    F.Goto(_exprReturnLabel));
+                    F.Assignment(
+                        F.Local(_exprRetValue),
+                        (BoundExpression)Visit(node.ExpressionOpt)
+                    ),
+                    F.Goto(_exprReturnLabel)
+                );
             }
 
             return F.Goto(_exprReturnLabel);

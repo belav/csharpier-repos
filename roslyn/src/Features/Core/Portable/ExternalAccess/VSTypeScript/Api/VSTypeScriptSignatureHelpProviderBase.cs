@@ -14,12 +14,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     /// </summary>
     internal abstract class VSTypeScriptSignatureHelpProviderBase : ISignatureHelpProvider
     {
-        Task<SignatureHelpItems?> ISignatureHelpProvider.GetItemsAsync(Document document, int position, SignatureHelpTriggerInfo triggerInfo, SignatureHelpOptions options, CancellationToken cancellationToken)
-            => GetItemsAsync(document, position, triggerInfo, cancellationToken);
+        Task<SignatureHelpItems?> ISignatureHelpProvider.GetItemsAsync(
+            Document document,
+            int position,
+            SignatureHelpTriggerInfo triggerInfo,
+            SignatureHelpOptions options,
+            CancellationToken cancellationToken
+        ) => GetItemsAsync(document, position, triggerInfo, cancellationToken);
 
         public abstract bool IsTriggerCharacter(char ch);
         public abstract bool IsRetriggerCharacter(char ch);
 
-        protected abstract Task<SignatureHelpItems?> GetItemsAsync(Document document, int position, SignatureHelpTriggerInfo triggerInfo, CancellationToken cancellationToken);
+        protected abstract Task<SignatureHelpItems?> GetItemsAsync(
+            Document document,
+            int position,
+            SignatureHelpTriggerInfo triggerInfo,
+            CancellationToken cancellationToken
+        );
     }
 }

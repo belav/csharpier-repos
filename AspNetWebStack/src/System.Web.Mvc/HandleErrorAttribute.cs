@@ -7,8 +7,16 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is AllowMultiple = true and users might want to override behavior.")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "This attribute is AllowMultiple = true and users might want to override behavior."
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public class HandleErrorAttribute : FilterAttribute, IExceptionFilter
     {
         private const string DefaultView = "Error";
@@ -30,8 +38,13 @@ namespace System.Web.Mvc
                 }
                 if (!typeof(Exception).IsAssignableFrom(value))
                 {
-                    throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                              MvcResources.ExceptionViewAttribute_NonExceptionType, value.FullName));
+                    throw new ArgumentException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.ExceptionViewAttribute_NonExceptionType,
+                            value.FullName
+                        )
+                    );
                 }
 
                 _exceptionType = value;
@@ -89,13 +102,17 @@ namespace System.Web.Mvc
 
             string controllerName = (string)filterContext.RouteData.Values["controller"];
             string actionName = (string)filterContext.RouteData.Values["action"];
-            HandleErrorInfo model = new HandleErrorInfo(filterContext.Exception, controllerName, actionName);
+            HandleErrorInfo model = new HandleErrorInfo(
+                filterContext.Exception,
+                controllerName,
+                actionName
+            );
             filterContext.Result = new ViewResult
             {
                 ViewName = View,
                 MasterName = Master,
                 ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
-                TempData = filterContext.Controller.TempData
+                TempData = filterContext.Controller.TempData,
             };
             filterContext.ExceptionHandled = true;
             filterContext.HttpContext.Response.Clear();

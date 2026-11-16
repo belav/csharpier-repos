@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="BaseValidator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
@@ -29,14 +29,26 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator"]/*' />
     [
-        DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign),
+        DataBindingHandler(
+            "System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign
+        ),
         DefaultProperty("ErrorMessage"),
         Designer(typeof(System.Web.UI.Design.MobileControls.BaseValidatorDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerValidatorAdapter)),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerValidatorAdapter)
+        ),
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public abstract class BaseValidator : TextControl, IValidator
     {
         private WebCntrls.BaseValidator _webBaseValidator;
@@ -64,7 +76,7 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                return 0;   // validators are not generally visible
+                return 0; // validators are not generally visible
             }
         }
 
@@ -81,7 +93,8 @@ namespace System.Web.UI.MobileControls
             return null;
         }
 
-        protected override Style CreateStyle() {
+        protected override Style CreateStyle()
+        {
             Style style = new Style();
             style.StyleReference = Constants.ErrorStyle;
 
@@ -118,14 +131,8 @@ namespace System.Web.UI.MobileControls
             // error message since IsValid is false and persisted, while the
             // expected behavior is the validator's state on Form1 is reset
             // to true so no error message will be shown.
-            get
-            {
-                return _isValid;
-            }
-            set
-            {
-                _isValid = value;
-            }
+            get { return _isValid; }
+            set { _isValid = value; }
         }
 
         /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.ErrorMessage"]/*' />
@@ -137,14 +144,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String ErrorMessage
         {
-            get
-            {
-                return _webBaseValidator.ErrorMessage;
-            }
-            set
-            {
-                _webBaseValidator.ErrorMessage = value;
-            }
+            get { return _webBaseValidator.ErrorMessage; }
+            set { _webBaseValidator.ErrorMessage = value; }
         }
 
         /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.ControlToValidate"]/*' />
@@ -153,18 +154,14 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Behavior),
             MobileSysDescription(SR.BaseValidator_ControlToValidate),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.ValidatedMobileControlConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.ValidatedMobileControlConverter)
+            )
         ]
         public String ControlToValidate
         {
-            get
-            {
-                return _webBaseValidator.ControlToValidate;
-            }
-            set
-            {
-                _webBaseValidator.ControlToValidate = value;
-            }
+            get { return _webBaseValidator.ControlToValidate; }
+            set { _webBaseValidator.ControlToValidate = value; }
         }
 
         /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.Display"]/*' />
@@ -176,31 +173,17 @@ namespace System.Web.UI.MobileControls
         ]
         public ValidatorDisplay Display
         {
-            get
-            {
-                return _webBaseValidator.Display;
-            }
-            set
-            {
-                _webBaseValidator.Display = value;
-            }
+            get { return _webBaseValidator.Display; }
+            set { _webBaseValidator.Display = value; }
         }
 
         // Designer needs to know the correct default value in order to persist it correctly.
         /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.StyleReference"]/*' />
-        [
-            DefaultValue(Constants.ErrorStyle)
-        ]
+        [DefaultValue(Constants.ErrorStyle)]
         public override String StyleReference
         {
-            get
-            {
-                return base.StyleReference;
-            }
-            set
-            {
-                base.StyleReference = value;
-            }
+            get { return base.StyleReference; }
+            set { base.StyleReference = value; }
         }
 
         /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.OnInit"]/*' />
@@ -215,11 +198,13 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.OnPreRender"]/*' />
         protected override void OnPreRender(EventArgs e)
         {
-            if(this.Form == MobilePage.ActiveForm)
+            if (this.Form == MobilePage.ActiveForm)
             {
                 bool isValid = ControlPropertiesValid();
-                Debug.Assert(isValid,
-                    "Exception should have been thrown instead of returning false!");
+                Debug.Assert(
+                    isValid,
+                    "Exception should have been thrown instead of returning false!"
+                );
             }
             base.OnPreRender(e);
         }
@@ -245,7 +230,7 @@ namespace System.Web.UI.MobileControls
                 idBuffer = ID;
                 ID = _webBaseValidator.ID;
                 _webBaseValidator.ID = idBuffer;
-                
+
                 try
                 {
                     _webBaseValidator.Validate();
@@ -303,8 +288,9 @@ namespace System.Web.UI.MobileControls
             String controlToValidate = ControlToValidate;
             if (controlToValidate.Length == 0)
             {
-                throw new ArgumentException(SR.GetString(
-                    SR.BaseValidator_ControlToValidateBlank, ID));
+                throw new ArgumentException(
+                    SR.GetString(SR.BaseValidator_ControlToValidateBlank, ID)
+                );
             }
 
             // Check that the property points to a valid control.
@@ -320,16 +306,18 @@ namespace System.Web.UI.MobileControls
             Control control = NamingContainer.FindControl(name);
             if (control == null)
             {
-                throw new ArgumentException(SR.GetString(
-                    SR.BaseValidator_ControlNotFound, name, propertyName, ID));
+                throw new ArgumentException(
+                    SR.GetString(SR.BaseValidator_ControlNotFound, name, propertyName, ID)
+                );
             }
 
             // Get its validation property
             PropertyDescriptor prop = WebCntrls.BaseValidator.GetValidationProperty(control);
             if (prop == null)
             {
-                throw new ArgumentException(SR.GetString(
-                    SR.BaseValidator_BadControlType, name, propertyName, ID));
+                throw new ArgumentException(
+                    SR.GetString(SR.BaseValidator_BadControlType, name, propertyName, ID)
+                );
             }
         }
 

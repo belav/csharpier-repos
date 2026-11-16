@@ -29,7 +29,8 @@ namespace System.Runtime.CompilerServices
         /// <param name="stateMachine">The state machine instance, passed by reference.</param>
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine =>
+        public void Start<TStateMachine>(ref TStateMachine stateMachine)
+            where TStateMachine : IAsyncStateMachine =>
             AsyncMethodBuilderCore.Start(ref stateMachine);
 
         /// <summary>Associates the builder with the state machine it represents.</summary>
@@ -47,10 +48,16 @@ namespace System.Runtime.CompilerServices
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
-            ref TAwaiter awaiter, ref TStateMachine stateMachine)
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>
         /// Schedules the specified state machine to be pushed forward when the specified awaiter completes.
@@ -61,10 +68,16 @@ namespace System.Runtime.CompilerServices
         /// <param name="stateMachine">The state machine.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
-            ref TAwaiter awaiter, ref TStateMachine stateMachine)
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>Gets the <see cref="Threading.Tasks.Task"/> for this builder.</summary>
         /// <returns>The <see cref="Threading.Tasks.Task"/> representing the builder's asynchronous operation.</returns>
@@ -127,7 +140,10 @@ namespace System.Runtime.CompilerServices
         /// true to enable notification; false to disable a previously set notification.
         /// </param>
         internal void SetNotificationForWaitCompletion(bool enabled) =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.SetNotificationForWaitCompletion(enabled, ref m_task);
+            AsyncTaskMethodBuilder<VoidTaskResult>.SetNotificationForWaitCompletion(
+                enabled,
+                ref m_task
+            );
 
         /// <summary>
         /// Gets an object that may be used to uniquely identify this builder to the debugger.

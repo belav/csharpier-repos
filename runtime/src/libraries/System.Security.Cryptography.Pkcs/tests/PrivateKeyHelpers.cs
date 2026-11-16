@@ -10,8 +10,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             if (rsa is RSACng rsaCng)
             {
                 const CngExportPolicies Exportability =
-                    CngExportPolicies.AllowExport |
-                    CngExportPolicies.AllowPlaintextExport;
+                    CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
 
                 if ((rsaCng.Key.ExportPolicy & Exportability) == CngExportPolicies.AllowExport)
                 {
@@ -24,8 +23,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new PbeParameters(
                                 PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                                 HashAlgorithmName.SHA1,
-                                2048)),
-                        out _);
+                                2048
+                            )
+                        ),
+                        out _
+                    );
                     return copy;
                 }
             }
@@ -38,8 +40,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             if (dsa is DSACng dsaCng)
             {
                 const CngExportPolicies Exportability =
-                    CngExportPolicies.AllowExport |
-                    CngExportPolicies.AllowPlaintextExport;
+                    CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
 
                 if ((dsaCng.Key.ExportPolicy & Exportability) == CngExportPolicies.AllowExport)
                 {
@@ -52,8 +53,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new PbeParameters(
                                 PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                                 HashAlgorithmName.SHA1,
-                                2048)),
-                        out _);
+                                2048
+                            )
+                        ),
+                        out _
+                    );
                     return copy;
                 }
             }
@@ -66,8 +70,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             if (ecdsa is ECDsaCng dsaCng)
             {
                 const CngExportPolicies Exportability =
-                    CngExportPolicies.AllowExport |
-                    CngExportPolicies.AllowPlaintextExport;
+                    CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
 
                 if ((dsaCng.Key.ExportPolicy & Exportability) == CngExportPolicies.AllowExport)
                 {
@@ -80,8 +83,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             new PbeParameters(
                                 PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                                 HashAlgorithmName.SHA1,
-                                2048)),
-                        out _);
+                                2048
+                            )
+                        ),
+                        out _
+                    );
                     return copy;
                 }
             }

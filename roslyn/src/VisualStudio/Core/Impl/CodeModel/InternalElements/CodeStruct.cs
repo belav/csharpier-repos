@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeStruct(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeStruct)ComAggregate.CreateAggregatedObject(element);
@@ -33,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeStruct(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeStruct)ComAggregate.CreateAggregatedObject(element);
@@ -43,19 +45,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeStruct(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -70,7 +70,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var symbol = LookupSymbol();
                 return symbol.IsAbstract;
             }
-
             set
             {
                 // TODO: Fix -- C# will actually allow the user to set an abstract modifier on a struct. VB throws E_NOTIMPL
@@ -83,15 +82,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return PartialTypeCollection.Create(State, this); }
         }
 
-        public EnvDTE.CodeClass AddClass(string name, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeClass AddClass(
+            string name,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddClass(LookupNode(), name, position, bases, implementedInterfaces, access);
+                return FileCodeModel.AddClass(
+                    LookupNode(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeDelegate AddDelegate(string name, object type, object position, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeDelegate AddDelegate(
+            string name,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -99,7 +116,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE.CodeEnum AddEnum(string name, object position, object bases, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeEnum AddEnum(
+            string name,
+            object position,
+            object bases,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -107,15 +129,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE80.CodeEvent AddEvent(string name, string fullDelegateName, bool createPropertyStyleEvent, object position, EnvDTE.vsCMAccess access)
+        public EnvDTE80.CodeEvent AddEvent(
+            string name,
+            string fullDelegateName,
+            bool createPropertyStyleEvent,
+            object position,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddEvent(LookupNode(), name, fullDelegateName, createPropertyStyleEvent, position, access);
+                return FileCodeModel.AddEvent(
+                    LookupNode(),
+                    name,
+                    fullDelegateName,
+                    createPropertyStyleEvent,
+                    position,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeFunction AddFunction(string name, EnvDTE.vsCMFunction kind, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeFunction AddFunction(
+            string name,
+            EnvDTE.vsCMFunction kind,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -123,23 +165,56 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE.CodeProperty AddProperty(string getterName, string putterName, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeProperty AddProperty(
+            string getterName,
+            string putterName,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddProperty(LookupNode(), getterName, putterName, type, position, access);
+                return FileCodeModel.AddProperty(
+                    LookupNode(),
+                    getterName,
+                    putterName,
+                    type,
+                    position,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeStruct AddStruct(string name, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeStruct AddStruct(
+            string name,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddStruct(LookupNode(), name, position, bases, implementedInterfaces, access);
+                return FileCodeModel.AddStruct(
+                    LookupNode(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
             });
         }
 
-        public EnvDTE.CodeVariable AddVariable(string name, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeVariable AddVariable(
+            string name,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {

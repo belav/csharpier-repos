@@ -23,7 +23,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.ComponentModel;
 using Xunit;
 
@@ -120,7 +119,6 @@ namespace System.Data.Tests
                 Assert.True(ib.IsSorted);
                 Assert.NotNull(ib.SortProperty);
                 Assert.Equal(ListSortDirection.Descending, ib.SortDirection);
-
 
                 _args = null;
                 dv.Sort = null;

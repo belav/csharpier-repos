@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // WindowsPrincipal.cs
@@ -16,43 +16,44 @@ namespace System.Security.Principal
 {
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
+    using Hashtable = System.Collections.Hashtable;
 #if !FEATURE_CORECLR
     using System.Runtime.Serialization;
     using System.Security.Claims;
     using System.Collections.Generic;
 #endif
-    using System.Security.Permissions;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
-    using Hashtable = System.Collections.Hashtable;
-
 
     [Serializable]
     [ComVisible(true)]
-    public enum WindowsBuiltInRole {
-        Administrator   = 0x220,
-        User            = 0x221,
-        Guest           = 0x222,
-        PowerUser       = 0x223,
+    public enum WindowsBuiltInRole
+    {
+        Administrator = 0x220,
+        User = 0x221,
+        Guest = 0x222,
+        PowerUser = 0x223,
         AccountOperator = 0x224,
-        SystemOperator  = 0x225,
-        PrintOperator   = 0x226,
-        BackupOperator  = 0x227,
-        Replicator      = 0x228
+        SystemOperator = 0x225,
+        PrintOperator = 0x226,
+        BackupOperator = 0x227,
+        Replicator = 0x228,
     }
 
     [Serializable]
-    [HostProtection(SecurityInfrastructure=true)]
+    [HostProtection(SecurityInfrastructure = true)]
     [ComVisible(true)]
-
 #if !FEATURE_CORECLR
-    public class WindowsPrincipal : ClaimsPrincipal {
+    public class WindowsPrincipal : ClaimsPrincipal
+    {
 #else
-    public class WindowsPrincipal : IPrincipal {
+    public class WindowsPrincipal : IPrincipal
+    {
 #endif
         private WindowsIdentity m_identity = null;
 
-        // Following 3 fields are present purely for serialization compatability with Everett: not used in Whidbey        
+        // Following 3 fields are present purely for serialization compatability with Everett: not used in Whidbey
 #pragma warning disable 169
         private String[] m_roles;
         private Hashtable m_rolesTable;
@@ -63,12 +64,11 @@ namespace System.Security.Principal
         // Constructors.
         //
 
-        private WindowsPrincipal () {}
+        private WindowsPrincipal() { }
 
-        public WindowsPrincipal (WindowsIdentity ntIdentity) 
-
+        public WindowsPrincipal(WindowsIdentity ntIdentity)
 #if !FEATURE_CORECLR
-            : base (ntIdentity) 
+            : base(ntIdentity)
 #endif
         {
             if (ntIdentity == null)
@@ -112,13 +112,13 @@ namespace System.Security.Principal
         // Properties.
         //
 #if !FEATURE_CORECLR
-        public override IIdentity Identity {
+        public override IIdentity Identity
+        {
 #else
-        public virtual IIdentity Identity {
+        public virtual IIdentity Identity
+        {
 #endif
-            get {
-                return m_identity;
-            }
+            get { return m_identity; }
         }
 
         //
@@ -128,9 +128,11 @@ namespace System.Security.Principal
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
 #if !FEATURE_CORECLR
-        public override bool IsInRole (string role) {
+        public override bool IsInRole(string role)
+        {
 #else
-        public virtual bool IsInRole (string role) {
+        public virtual bool IsInRole(string role)
+        {
 #endif
             if (role == null || role.Length == 0)
                 return false;
@@ -138,13 +140,19 @@ namespace System.Security.Principal
             NTAccount ntAccount = new NTAccount(role);
             IdentityReferenceCollection source = new IdentityReferenceCollection(1);
             source.Add(ntAccount);
-            IdentityReferenceCollection target = NTAccount.Translate(source, typeof(SecurityIdentifier), false);
+            IdentityReferenceCollection target = NTAccount.Translate(
+                source,
+                typeof(SecurityIdentifier),
+                false
+            );
 
             SecurityIdentifier sid = target[0] as SecurityIdentifier;
 
 #if !FEATURE_CORECLR
-            if (sid != null) {
-                if ( IsInRole(sid) ) {
+            if (sid != null)
+            {
+                if (IsInRole(sid))
+                {
                     return true;
                 }
             }
@@ -171,13 +179,13 @@ namespace System.Security.Principal
                 foreach (ClaimsIdentity identity in Identities)
                 {
                     WindowsIdentity wi = identity as WindowsIdentity;
-                    if ( wi!=null)
+                    if (wi != null)
                     {
                         foreach (Claim claim in wi.UserClaims)
                         {
                             yield return claim;
                         }
-                    }   
+                    }
                 }
             }
         }
@@ -204,17 +212,25 @@ namespace System.Security.Principal
             }
         }
 #endif
-        public virtual bool IsInRole (WindowsBuiltInRole role) {
+
+        public virtual bool IsInRole(WindowsBuiltInRole role)
+        {
             if (role < WindowsBuiltInRole.Administrator || role > WindowsBuiltInRole.Replicator)
-                throw new ArgumentException(Environment.GetResourceString("Arg_EnumIllegalVal", (int)role), "role");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_EnumIllegalVal", (int)role),
+                    "role"
+                );
             Contract.EndContractBlock();
 
-            return IsInRole((int) role);
+            return IsInRole((int)role);
         }
 
-        public virtual bool IsInRole (int rid) {
-            SecurityIdentifier sid = new SecurityIdentifier(IdentifierAuthority.NTAuthority, 
-                                                            new int[] {Win32Native.SECURITY_BUILTIN_DOMAIN_RID, rid});
+        public virtual bool IsInRole(int rid)
+        {
+            SecurityIdentifier sid = new SecurityIdentifier(
+                IdentifierAuthority.NTAuthority,
+                new int[] { Win32Native.SECURITY_BUILTIN_DOMAIN_RID, rid }
+            );
 
             return IsInRole(sid);
         }
@@ -224,9 +240,10 @@ namespace System.Security.Principal
         // The aformentioned overloads remain in this class since we do not want to introduce a
         // breaking change. However, this method should be used in all new applications and we should document this.
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ComVisible(false)]
-        public virtual bool IsInRole (SecurityIdentifier sid) {
+        public virtual bool IsInRole(SecurityIdentifier sid)
+        {
             if (sid == null)
                 throw new ArgumentNullException("sid");
             Contract.EndContractBlock();
@@ -237,21 +254,36 @@ namespace System.Security.Principal
 
             // CheckTokenMembership expects an impersonation token
             SafeAccessTokenHandle token = SafeAccessTokenHandle.InvalidHandle;
-            if (m_identity.ImpersonationLevel == TokenImpersonationLevel.None) {
-                if (!Win32Native.DuplicateTokenEx(m_identity.AccessToken,
-                                                  (uint) TokenAccessLevels.Query,
-                                                  IntPtr.Zero,
-                                                  (uint) TokenImpersonationLevel.Identification,
-                                                  (uint) TokenType.TokenImpersonation,
-                                                  ref token))
-                    throw new SecurityException(Win32Native.GetMessage(Marshal.GetLastWin32Error()));
+            if (m_identity.ImpersonationLevel == TokenImpersonationLevel.None)
+            {
+                if (
+                    !Win32Native.DuplicateTokenEx(
+                        m_identity.AccessToken,
+                        (uint)TokenAccessLevels.Query,
+                        IntPtr.Zero,
+                        (uint)TokenImpersonationLevel.Identification,
+                        (uint)TokenType.TokenImpersonation,
+                        ref token
+                    )
+                )
+                    throw new SecurityException(
+                        Win32Native.GetMessage(Marshal.GetLastWin32Error())
+                    );
             }
 
             bool isMember = false;
             // CheckTokenMembership will check if the SID is both present and enabled in the access token.
-            if (!Win32Native.CheckTokenMembership((m_identity.ImpersonationLevel != TokenImpersonationLevel.None ? m_identity.AccessToken : token),
-                                                  sid.BinaryForm,
-                                                  ref isMember))
+            if (
+                !Win32Native.CheckTokenMembership(
+                    (
+                        m_identity.ImpersonationLevel != TokenImpersonationLevel.None
+                            ? m_identity.AccessToken
+                            : token
+                    ),
+                    sid.BinaryForm,
+                    ref isMember
+                )
+            )
                 throw new SecurityException(Win32Native.GetMessage(Marshal.GetLastWin32Error()));
 
             token.Dispose();

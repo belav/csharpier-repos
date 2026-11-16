@@ -17,8 +17,11 @@ namespace System.Web.Http.Owin
         public void AttributeUsageValidOn_IsClassOrMethod()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                typeof(HostAuthenticationAttribute), typeof(AttributeUsageAttribute));
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(HostAuthenticationAttribute),
+                    typeof(AttributeUsageAttribute)
+                );
 
             // Assert
             Assert.NotNull(usage);
@@ -29,8 +32,11 @@ namespace System.Web.Http.Owin
         public void AttributeUsageAllowMultiple_IsTrue()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                typeof(HostAuthenticationAttribute), typeof(AttributeUsageAttribute));
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(HostAuthenticationAttribute),
+                    typeof(AttributeUsageAttribute)
+                );
 
             // Assert
             Assert.NotNull(usage);
@@ -44,7 +50,13 @@ namespace System.Web.Http.Owin
             IAuthenticationFilter innerFilter = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { var ignore = CreateProductUnderTest(innerFilter); }, "innerFilter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    var ignore = CreateProductUnderTest(innerFilter);
+                },
+                "innerFilter"
+            );
         }
 
         [Fact]
@@ -82,8 +94,12 @@ namespace System.Web.Http.Owin
             Task expectedTask = CreateTask();
             HttpAuthenticationContext context = CreateAuthenticationContext();
             CancellationToken cancellationToken = CreateCancellationToken();
-            Mock<IAuthenticationFilter> spyMock = new Mock<IAuthenticationFilter>(MockBehavior.Strict);
-            spyMock.Setup(f => f.AuthenticateAsync(context, cancellationToken)).Returns(expectedTask);
+            Mock<IAuthenticationFilter> spyMock = new Mock<IAuthenticationFilter>(
+                MockBehavior.Strict
+            );
+            spyMock
+                .Setup(f => f.AuthenticateAsync(context, cancellationToken))
+                .Returns(expectedTask);
             IAuthenticationFilter spy = spyMock.Object;
             IAuthenticationFilter product = CreateProductUnderTest(spy);
 
@@ -101,7 +117,9 @@ namespace System.Web.Http.Owin
             Task expectedTask = CreateTask();
             HttpAuthenticationChallengeContext context = CreateChallengeContext();
             CancellationToken cancellationToken = CreateCancellationToken();
-            Mock<IAuthenticationFilter> spyMock = new Mock<IAuthenticationFilter>(MockBehavior.Strict);
+            Mock<IAuthenticationFilter> spyMock = new Mock<IAuthenticationFilter>(
+                MockBehavior.Strict
+            );
             spyMock.Setup(f => f.ChallengeAsync(context, cancellationToken)).Returns(expectedTask);
             IAuthenticationFilter spy = spyMock.Object;
             IAuthenticationFilter product = CreateProductUnderTest(spy);
@@ -120,8 +138,13 @@ namespace System.Web.Http.Owin
             string authenticationType = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { var ignore = CreateProductUnderTest(authenticationType); },
-                "authenticationType");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    var ignore = CreateProductUnderTest(authenticationType);
+                },
+                "authenticationType"
+            );
         }
 
         [Fact]
@@ -129,13 +152,17 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             string expectedAuthenticationType = "Ignore";
-            HostAuthenticationAttribute product = CreateProductUnderTest(expectedAuthenticationType);
+            HostAuthenticationAttribute product = CreateProductUnderTest(
+                expectedAuthenticationType
+            );
 
             // Act
             IAuthenticationFilter innerFilter = product.InnerFilter;
 
             // Assert
-            HostAuthenticationFilter typedInnerFilter = Assert.IsType<HostAuthenticationFilter>(innerFilter);
+            HostAuthenticationFilter typedInnerFilter = Assert.IsType<HostAuthenticationFilter>(
+                innerFilter
+            );
             Assert.Same(expectedAuthenticationType, typedInnerFilter.AuthenticationType);
         }
 
@@ -144,7 +171,9 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             string expectedAuthenticationType = "Ignore";
-            HostAuthenticationAttribute product = CreateProductUnderTest(expectedAuthenticationType);
+            HostAuthenticationAttribute product = CreateProductUnderTest(
+                expectedAuthenticationType
+            );
 
             // Act
             string authenticationType = product.AuthenticationType;
@@ -165,7 +194,10 @@ namespace System.Web.Http.Owin
 
         private static HttpAuthenticationChallengeContext CreateChallengeContext()
         {
-            return new HttpAuthenticationChallengeContext(new HttpActionContext(), CreateDummyActionResult());
+            return new HttpAuthenticationChallengeContext(
+                new HttpActionContext(),
+                CreateDummyActionResult()
+            );
         }
 
         private static IHttpActionResult CreateDummyActionResult()
@@ -188,7 +220,9 @@ namespace System.Web.Http.Owin
             return new HostAuthenticationAttribute(authenticationType);
         }
 
-        private static HostAuthenticationAttribute CreateProductUnderTest(IAuthenticationFilter innerFilter)
+        private static HostAuthenticationAttribute CreateProductUnderTest(
+            IAuthenticationFilter innerFilter
+        )
         {
             return new HostAuthenticationAttribute(innerFilter);
         }

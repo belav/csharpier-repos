@@ -39,8 +39,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     }
 
     /// <inheritdoc />
-    DbContextOptionsBuilder ICosmosDbContextOptionsBuilderInfrastructure.OptionsBuilder
-        => _optionsBuilder;
+    DbContextOptionsBuilder ICosmosDbContextOptionsBuilderInfrastructure.OptionsBuilder =>
+        _optionsBuilder;
 
     /// <summary>
     ///     Configures the context to use the provided <see cref="IExecutionStrategy" />.
@@ -51,8 +51,13 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     /// </remarks>
     /// <param name="getExecutionStrategy">A function that returns a new instance of an execution strategy.</param>
     public virtual CosmosDbContextOptionsBuilder ExecutionStrategy(
-        Func<ExecutionStrategyDependencies, IExecutionStrategy> getExecutionStrategy)
-        => WithOption(e => e.WithExecutionStrategyFactory(Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))));
+        Func<ExecutionStrategyDependencies, IExecutionStrategy> getExecutionStrategy
+    ) =>
+        WithOption(e =>
+            e.WithExecutionStrategyFactory(
+                Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))
+            )
+        );
 
     /// <summary>
     ///     Configures the context to use the provided geo-replicated region.
@@ -62,8 +67,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="region">Azure Cosmos DB region name.</param>
-    public virtual CosmosDbContextOptionsBuilder Region(string region)
-        => WithOption(e => e.WithRegion(Check.NotNull(region, nameof(region))));
+    public virtual CosmosDbContextOptionsBuilder Region(string region) =>
+        WithOption(e => e.WithRegion(Check.NotNull(region, nameof(region))));
 
     /// <summary>
     ///     Configures the context to use the provided preferred regions for geo-replicated database accounts.
@@ -73,8 +78,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="regions">A list of Azure Cosmos DB region names.</param>
-    public virtual CosmosDbContextOptionsBuilder PreferredRegions(IReadOnlyList<string> regions)
-        => WithOption(e => e.WithPreferredRegions(Check.NotNull(regions, nameof(regions))));
+    public virtual CosmosDbContextOptionsBuilder PreferredRegions(IReadOnlyList<string> regions) =>
+        WithOption(e => e.WithPreferredRegions(Check.NotNull(regions, nameof(regions))));
 
     /// <summary>
     ///     Limits the operations to the provided endpoint.
@@ -84,8 +89,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="enable"><see langword="true" /> to limit the operations to the provided endpoint.</param>
-    public virtual CosmosDbContextOptionsBuilder LimitToEndpoint(bool enable = true)
-        => WithOption(e => e.WithLimitToEndpoint(Check.NotNull(enable, nameof(enable))));
+    public virtual CosmosDbContextOptionsBuilder LimitToEndpoint(bool enable = true) =>
+        WithOption(e => e.WithLimitToEndpoint(Check.NotNull(enable, nameof(enable))));
 
     /// <summary>
     ///     Configures the context to use a specific <see cref="HttpClient" /> factory.
@@ -104,8 +109,12 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     </para>
     /// </remarks>
     /// <param name="httpClientFactory">A function that returns an <see cref="HttpClient" />.</param>
-    public virtual CosmosDbContextOptionsBuilder HttpClientFactory(Func<HttpClient>? httpClientFactory)
-        => WithOption(e => e.WithHttpClientFactory(Check.NotNull(httpClientFactory, nameof(httpClientFactory))));
+    public virtual CosmosDbContextOptionsBuilder HttpClientFactory(
+        Func<HttpClient>? httpClientFactory
+    ) =>
+        WithOption(e =>
+            e.WithHttpClientFactory(Check.NotNull(httpClientFactory, nameof(httpClientFactory)))
+        );
 
     /// <summary>
     ///     Configures the context to use the provided connection mode.
@@ -115,8 +124,10 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="connectionMode">Azure Cosmos DB connection mode.</param>
-    public virtual CosmosDbContextOptionsBuilder ConnectionMode(ConnectionMode connectionMode)
-        => WithOption(e => e.WithConnectionMode(Check.NotNull(connectionMode, nameof(connectionMode))));
+    public virtual CosmosDbContextOptionsBuilder ConnectionMode(ConnectionMode connectionMode) =>
+        WithOption(e =>
+            e.WithConnectionMode(Check.NotNull(connectionMode, nameof(connectionMode)))
+        );
 
     /// <summary>
     ///     Configures the proxy information used for web requests.
@@ -126,8 +137,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="proxy">The proxy information used for web requests.</param>
-    public virtual CosmosDbContextOptionsBuilder WebProxy(IWebProxy proxy)
-        => WithOption(e => e.WithWebProxy(Check.NotNull(proxy, nameof(proxy))));
+    public virtual CosmosDbContextOptionsBuilder WebProxy(IWebProxy proxy) =>
+        WithOption(e => e.WithWebProxy(Check.NotNull(proxy, nameof(proxy))));
 
     /// <summary>
     ///     Configures the timeout when connecting to the Azure Cosmos DB service.
@@ -138,8 +149,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="timeout">Request timeout.</param>
-    public virtual CosmosDbContextOptionsBuilder RequestTimeout(TimeSpan timeout)
-        => WithOption(e => e.WithRequestTimeout(Check.NotNull(timeout, nameof(timeout))));
+    public virtual CosmosDbContextOptionsBuilder RequestTimeout(TimeSpan timeout) =>
+        WithOption(e => e.WithRequestTimeout(Check.NotNull(timeout, nameof(timeout))));
 
     /// <summary>
     ///     Configures the amount of time allowed for trying to establish a connection.
@@ -149,8 +160,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="timeout">Open TCP connection timeout.</param>
-    public virtual CosmosDbContextOptionsBuilder OpenTcpConnectionTimeout(TimeSpan timeout)
-        => WithOption(e => e.WithOpenTcpConnectionTimeout(Check.NotNull(timeout, nameof(timeout))));
+    public virtual CosmosDbContextOptionsBuilder OpenTcpConnectionTimeout(TimeSpan timeout) =>
+        WithOption(e => e.WithOpenTcpConnectionTimeout(Check.NotNull(timeout, nameof(timeout))));
 
     /// <summary>
     ///     Configures the amount of idle time after which unused connections are closed.
@@ -160,8 +171,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="timeout">Idle connection timeout.</param>
-    public virtual CosmosDbContextOptionsBuilder IdleTcpConnectionTimeout(TimeSpan timeout)
-        => WithOption(e => e.WithIdleTcpConnectionTimeout(Check.NotNull(timeout, nameof(timeout))));
+    public virtual CosmosDbContextOptionsBuilder IdleTcpConnectionTimeout(TimeSpan timeout) =>
+        WithOption(e => e.WithIdleTcpConnectionTimeout(Check.NotNull(timeout, nameof(timeout))));
 
     /// <summary>
     ///     Configures the maximum number of concurrent connections allowed for the target service endpoint
@@ -172,8 +183,14 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="connectionLimit">The maximum number of concurrent connections allowed.</param>
-    public virtual CosmosDbContextOptionsBuilder GatewayModeMaxConnectionLimit(int connectionLimit)
-        => WithOption(e => e.WithGatewayModeMaxConnectionLimit(Check.NotNull(connectionLimit, nameof(connectionLimit))));
+    public virtual CosmosDbContextOptionsBuilder GatewayModeMaxConnectionLimit(
+        int connectionLimit
+    ) =>
+        WithOption(e =>
+            e.WithGatewayModeMaxConnectionLimit(
+                Check.NotNull(connectionLimit, nameof(connectionLimit))
+            )
+        );
 
     /// <summary>
     ///     Configures the maximum number of TCP connections that may be opened to each Cosmos DB back-end.
@@ -185,8 +202,14 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="connectionLimit">The maximum number of TCP connections that may be opened to each Cosmos DB back-end.</param>
-    public virtual CosmosDbContextOptionsBuilder MaxTcpConnectionsPerEndpoint(int connectionLimit)
-        => WithOption(e => e.WithMaxTcpConnectionsPerEndpoint(Check.NotNull(connectionLimit, nameof(connectionLimit))));
+    public virtual CosmosDbContextOptionsBuilder MaxTcpConnectionsPerEndpoint(
+        int connectionLimit
+    ) =>
+        WithOption(e =>
+            e.WithMaxTcpConnectionsPerEndpoint(
+                Check.NotNull(connectionLimit, nameof(connectionLimit))
+            )
+        );
 
     /// <summary>
     ///     Configures the number of requests allowed simultaneously over a single TCP connection.
@@ -197,8 +220,10 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="requestLimit">The number of requests allowed simultaneously over a single TCP connection.</param>
-    public virtual CosmosDbContextOptionsBuilder MaxRequestsPerTcpConnection(int requestLimit)
-        => WithOption(e => e.WithMaxRequestsPerTcpConnection(Check.NotNull(requestLimit, nameof(requestLimit))));
+    public virtual CosmosDbContextOptionsBuilder MaxRequestsPerTcpConnection(int requestLimit) =>
+        WithOption(e =>
+            e.WithMaxRequestsPerTcpConnection(Check.NotNull(requestLimit, nameof(requestLimit)))
+        );
 
     /// <summary>
     ///     Sets the boolean to only return the headers and status code in the Cosmos DB response for write item operation
@@ -210,8 +235,9 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
     /// </remarks>
     /// <param name="enabled"><see langword="false" /> to have null resource</param>
-    public virtual CosmosDbContextOptionsBuilder ContentResponseOnWriteEnabled(bool enabled = true)
-        => WithOption(e => e.ContentResponseOnWriteEnabled(Check.NotNull(enabled, nameof(enabled))));
+    public virtual CosmosDbContextOptionsBuilder ContentResponseOnWriteEnabled(
+        bool enabled = true
+    ) => WithOption(e => e.ContentResponseOnWriteEnabled(Check.NotNull(enabled, nameof(enabled))));
 
     /// <summary>
     ///     Sets an option by cloning the extension used to store the settings. This ensures the builder
@@ -219,10 +245,16 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     /// </summary>
     /// <param name="setAction">An action to set the option.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    protected virtual CosmosDbContextOptionsBuilder WithOption(Func<CosmosOptionsExtension, CosmosOptionsExtension> setAction)
+    protected virtual CosmosDbContextOptionsBuilder WithOption(
+        Func<CosmosOptionsExtension, CosmosOptionsExtension> setAction
+    )
     {
         ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(
-            setAction(_optionsBuilder.Options.FindExtension<CosmosOptionsExtension>() ?? new CosmosOptionsExtension()));
+            setAction(
+                _optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
+                    ?? new CosmosOptionsExtension()
+            )
+        );
 
         return this;
     }
@@ -234,8 +266,7 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -243,16 +274,14 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

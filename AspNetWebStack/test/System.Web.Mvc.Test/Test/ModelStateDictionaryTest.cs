@@ -36,7 +36,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { dictionary.AddModelError(null, (string)null); }, "key");
+                delegate
+                {
+                    dictionary.AddModelError(null, (string)null);
+                },
+                "key"
+            );
         }
 
         [Fact]
@@ -64,7 +69,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ModelStateDictionary((ModelStateDictionary)null); }, "dictionary");
+                delegate
+                {
+                    new ModelStateDictionary((ModelStateDictionary)null);
+                },
+                "dictionary"
+            );
         }
 
         [Fact]
@@ -73,7 +83,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelStateDictionary oldDictionary = new ModelStateDictionary()
             {
-                { "foo", new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("bar", "bar") } }
+                {
+                    "foo",
+                    new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("bar", "bar") }
+                },
             };
 
             // Act
@@ -107,8 +120,15 @@ namespace System.Web.Mvc.Test
                 Creator = () => new ModelStateDictionary(),
                 Comparer = StringComparer.OrdinalIgnoreCase,
                 SampleKeys = new string[] { "foo", "bar", "baz", "quux", "QUUX" },
-                SampleValues = new ModelState[] { new ModelState(), new ModelState(), new ModelState(), new ModelState(), new ModelState() },
-                ThrowOnKeyNotFound = false
+                SampleValues = new ModelState[]
+                {
+                    new ModelState(),
+                    new ModelState(),
+                    new ModelState(),
+                    new ModelState(),
+                    new ModelState(),
+                },
+                ThrowOnKeyNotFound = false,
             };
 
             // Act & assert
@@ -123,24 +143,42 @@ namespace System.Web.Mvc.Test
             BinaryFormatter formatter = new BinaryFormatter();
 
             ModelStateDictionary originalDict = new ModelStateDictionary();
-            originalDict.AddModelError("foo", new InvalidOperationException("Some invalid operation."));
-            originalDict.AddModelError("foo", new InvalidOperationException("Some other invalid operation."));
+            originalDict.AddModelError(
+                "foo",
+                new InvalidOperationException("Some invalid operation.")
+            );
+            originalDict.AddModelError(
+                "foo",
+                new InvalidOperationException("Some other invalid operation.")
+            );
             originalDict.AddModelError("bar", "Some exception text.");
-            originalDict.SetModelValue("baz", new ValueProviderResult("rawValue", "attemptedValue", CultureInfo.GetCultureInfo("fr-FR")));
+            originalDict.SetModelValue(
+                "baz",
+                new ValueProviderResult(
+                    "rawValue",
+                    "attemptedValue",
+                    CultureInfo.GetCultureInfo("fr-FR")
+                )
+            );
 
             // Act
             formatter.Serialize(stream, originalDict);
             stream.Position = 0;
-            ModelStateDictionary deserializedDict = formatter.Deserialize(stream) as ModelStateDictionary;
+            ModelStateDictionary deserializedDict =
+                formatter.Deserialize(stream) as ModelStateDictionary;
 
             // Assert
             Assert.NotNull(deserializedDict);
             Assert.Equal(3, deserializedDict.Count);
 
             ModelState foo = deserializedDict["FOO"];
-            InvalidOperationException exception0 = Assert.IsType<InvalidOperationException>(foo.Errors[0].Exception);
+            InvalidOperationException exception0 = Assert.IsType<InvalidOperationException>(
+                foo.Errors[0].Exception
+            );
             Assert.Equal("Some invalid operation.", exception0.Message);
-            InvalidOperationException exception1 = Assert.IsType<InvalidOperationException>(foo.Errors[1].Exception);
+            InvalidOperationException exception1 = Assert.IsType<InvalidOperationException>(
+                foo.Errors[1].Exception
+            );
             Assert.Equal("Some other invalid operation.", exception1.Message);
 
             ModelState bar = deserializedDict["BAR"];
@@ -199,7 +237,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelStateDictionary msd = new ModelStateDictionary()
             {
-                { "foo", new ModelState() { Value = new ValueProviderResult(null, null, null) } }
+                {
+                    "foo",
+                    new ModelState() { Value = new ValueProviderResult(null, null, null) }
+                },
             };
 
             // Act
@@ -217,19 +258,30 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { msd.IsValidField(null); }, "key");
+                delegate
+                {
+                    msd.IsValidField(null);
+                },
+                "key"
+            );
         }
 
         [Fact]
         public void IsValidPropertyReturnsFalseIfErrors()
         {
             // Arrange
-            ModelState errorState = new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("quux", "quux") };
+            ModelState errorState = new ModelState()
+            {
+                Value = HtmlHelperTest.GetValueProviderResult("quux", "quux"),
+            };
             errorState.Errors.Add("some error");
             ModelStateDictionary dictionary = new ModelStateDictionary()
             {
-                { "foo", new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("bar", "bar") } },
-                { "baz", errorState }
+                {
+                    "foo",
+                    new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("bar", "bar") }
+                },
+                { "baz", errorState },
             };
 
             // Act
@@ -245,8 +297,17 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelStateDictionary dictionary = new ModelStateDictionary()
             {
-                { "foo", new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("bar", "bar") } },
-                { "baz", new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("quux", "bar") } }
+                {
+                    "foo",
+                    new ModelState() { Value = HtmlHelperTest.GetValueProviderResult("bar", "bar") }
+                },
+                {
+                    "baz",
+                    new ModelState()
+                    {
+                        Value = HtmlHelperTest.GetValueProviderResult("quux", "bar"),
+                    }
+                },
             };
 
             // Act
@@ -260,8 +321,14 @@ namespace System.Web.Mvc.Test
         public void MergeCopiesDictionaryEntries()
         {
             // Arrange
-            ModelStateDictionary fooDict = new ModelStateDictionary() { { "foo", new ModelState() } };
-            ModelStateDictionary barDict = new ModelStateDictionary() { { "bar", new ModelState() } };
+            ModelStateDictionary fooDict = new ModelStateDictionary()
+            {
+                { "foo", new ModelState() },
+            };
+            ModelStateDictionary barDict = new ModelStateDictionary()
+            {
+                { "bar", new ModelState() },
+            };
 
             // Act
             fooDict.Merge(barDict);
@@ -275,7 +342,10 @@ namespace System.Web.Mvc.Test
         public void MergeDoesNothingIfParameterIsNull()
         {
             // Arrange
-            ModelStateDictionary fooDict = new ModelStateDictionary() { { "foo", new ModelState() } };
+            ModelStateDictionary fooDict = new ModelStateDictionary()
+            {
+                { "foo", new ModelState() },
+            };
 
             // Act
             fooDict.Merge(null);
@@ -292,7 +362,10 @@ namespace System.Web.Mvc.Test
             ModelStateDictionary dictionary = new ModelStateDictionary();
 
             // Act
-            dictionary.SetModelValue("some key", HtmlHelperTest.GetValueProviderResult("some value", "some value"));
+            dictionary.SetModelValue(
+                "some key",
+                HtmlHelperTest.GetValueProviderResult("some value", "some value")
+            );
 
             // Assert
             Assert.Single(dictionary);
@@ -311,7 +384,10 @@ namespace System.Web.Mvc.Test
             Exception ex = new Exception();
 
             // Act
-            dictionary.SetModelValue("some key", HtmlHelperTest.GetValueProviderResult("some value", "some value"));
+            dictionary.SetModelValue(
+                "some key",
+                HtmlHelperTest.GetValueProviderResult("some value", "some value")
+            );
 
             // Assert
             Assert.Single(dictionary);

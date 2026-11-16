@@ -23,8 +23,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         [MemberData(nameof(TestCases))]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWasmThreadingSupported))] // this test only makes sense with ST TimerQueue
-        public async Task TestTimers(int[] timeouts, int? expectedSetCounter, int? expectedSetCounterAfterCleanUp, int? expectedHitCount)
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWasmThreadingSupported)
+        )] // this test only makes sense with ST TimerQueue
+        public async Task TestTimers(
+            int[] timeouts,
+            int? expectedSetCounter,
+            int? expectedSetCounterAfterCleanUp,
+            int? expectedHitCount
+        )
         {
             int wasCalled = 0;
             Timer[] timers = new Timer[timeouts.Length];
@@ -40,21 +48,28 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 {
                     int index = i;
                     TimersJS.Log($"Registering {index} delay {timeouts[i]}");
-                    timers[i] = new Timer((_) =>
-                    {
-                        TimersJS.Log($"In timer{index}");
-                        wasCalled++;
-                    }, null, timeouts[i], 0);
+                    timers[i] = new Timer(
+                        (_) =>
+                        {
+                            TimersJS.Log($"In timer{index}");
+                            wasCalled++;
+                        },
+                        null,
+                        timeouts[i],
+                        0
+                    );
                 }
 
                 var setCounter = TimersJS.GetRegisterCount();
                 Assert.True(0 == wasCalled, $"wasCalled: {wasCalled}");
-                Assert.True((expectedSetCounter ?? timeouts.Length) == setCounter, $"setCounter: actual {setCounter} expected {expectedSetCounter}");
-
+                Assert.True(
+                    (expectedSetCounter ?? timeouts.Length) == setCounter,
+                    $"setCounter: actual {setCounter} expected {expectedSetCounter}"
+                );
             }
             finally
             {
-                // the test is quite sensitive to timing and order of execution. 
+                // the test is quite sensitive to timing and order of execution.
                 // Here we are giving time to our timers to finish.
                 var afterLastTimer = timeouts.Length == 0 ? 500 : 500 + timeouts.Max();
 
@@ -64,18 +79,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 TimersJS.Log("cleanup");
                 TimersJS.Cleanup();
 
-                Assert.True(timeouts.Length == wasCalled, $"wasCalled: actual {wasCalled} expected {timeouts.Length}");
+                Assert.True(
+                    timeouts.Length == wasCalled,
+                    $"wasCalled: actual {wasCalled} expected {timeouts.Length}"
+                );
 
                 if (expectedSetCounterAfterCleanUp != null)
                 {
                     var setCounter = TimersJS.GetRegisterCount();
-                    Assert.True(expectedSetCounterAfterCleanUp.Value == setCounter, $"setCounter: actual {setCounter} expected {expectedSetCounterAfterCleanUp.Value}");
+                    Assert.True(
+                        expectedSetCounterAfterCleanUp.Value == setCounter,
+                        $"setCounter: actual {setCounter} expected {expectedSetCounterAfterCleanUp.Value}"
+                    );
                 }
 
                 if (expectedHitCount != null)
                 {
                     var hitCounter = TimersJS.GetHitCount();
-                    Assert.True(expectedHitCount == hitCounter, $"hitCounter: actual {hitCounter} expected {expectedHitCount}");
+                    Assert.True(
+                        expectedHitCount == hitCounter,
+                        $"hitCounter: actual {hitCounter} expected {expectedHitCount}"
+                    );
                 }
 
                 for (int i = 0; i < timeouts.Length; i++)
@@ -86,6 +110,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         static JSObject _module;
+
         public async Task InitializeAsync()
         {
             if (_module == null)
@@ -113,6 +138,5 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         [JSImport("getHitCount", "Timers")]
         public static partial int GetHitCount();
-
     }
 }

@@ -14,7 +14,11 @@ namespace System.Collections.Tests
         protected override bool DefaultValueAllowed => false;
         protected override bool DuplicateValuesAllowed => false;
         protected override bool IsReadOnly => true;
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)=> new List<ModifyEnumerable>();
+
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
+
         protected override ICollection<string> GenericICollectionFactory()
         {
             return new SortedDictionary<string, string>().Keys;
@@ -41,7 +45,9 @@ namespace System.Collections.Tests
         [Fact]
         public void SortedDictionary_Generic_KeyCollection_Constructor_NullDictionary()
         {
-            Assert.Throws<ArgumentNullException>(() => new SortedDictionary<string, string>.KeyCollection(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new SortedDictionary<string, string>.KeyCollection(null)
+            );
         }
 
         [Theory]
@@ -63,12 +69,20 @@ namespace System.Collections.Tests
         protected override bool IsReadOnly => true;
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
+
         protected override ICollection NonGenericICollectionFactory()
         {
             return (ICollection)(new SortedDictionary<string, string>().Keys);
         }
-        protected override bool SupportsSerialization { get { return false; } }
+
+        protected override bool SupportsSerialization
+        {
+            get { return false; }
+        }
 
         protected override ICollection NonGenericICollectionFactory(int count)
         {
@@ -104,7 +118,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void SortedDictionary_Generic_KeyCollection_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(int count)
+        public void SortedDictionary_Generic_KeyCollection_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(
+            int count
+        )
         {
             ICollection collection = NonGenericICollectionFactory(count);
             string[] array = new string[count];

@@ -11,6 +11,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         Default,
         MssV1,
         W3cV1,
-        KeyValuePairs
+        KeyValuePairs,
     }
 }

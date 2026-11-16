@@ -20,9 +20,7 @@ public class OriginalPropertyValues : EntryPropertyValues
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public OriginalPropertyValues(InternalEntityEntry internalEntry)
-        : base(internalEntry)
-    {
-    }
+        : base(internalEntry) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,8 +28,8 @@ public class OriginalPropertyValues : EntryPropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override TValue GetValue<TValue>(string propertyName)
-        => InternalEntry.GetOriginalValue<TValue>(InternalEntry.EntityType.GetProperty(propertyName));
+    public override TValue GetValue<TValue>(string propertyName) =>
+        InternalEntry.GetOriginalValue<TValue>(InternalEntry.EntityType.GetProperty(propertyName));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,8 +37,10 @@ public class OriginalPropertyValues : EntryPropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override TValue GetValue<TValue>(IProperty property)
-        => InternalEntry.GetOriginalValue<TValue>(InternalEntry.EntityType.CheckPropertyBelongsToType(property));
+    public override TValue GetValue<TValue>(IProperty property) =>
+        InternalEntry.GetOriginalValue<TValue>(
+            InternalEntry.EntityType.CheckPropertyBelongsToType(property)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,8 +48,8 @@ public class OriginalPropertyValues : EntryPropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override void SetValueInternal(IProperty property, object? value)
-        => InternalEntry.SetOriginalValue(property, value);
+    protected override void SetValueInternal(IProperty property, object? value) =>
+        InternalEntry.SetOriginalValue(property, value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -57,6 +57,6 @@ public class OriginalPropertyValues : EntryPropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override object? GetValueInternal(IProperty property)
-        => InternalEntry.GetOriginalValue(property);
+    protected override object? GetValueInternal(IProperty property) =>
+        InternalEntry.GetOriginalValue(property);
 }

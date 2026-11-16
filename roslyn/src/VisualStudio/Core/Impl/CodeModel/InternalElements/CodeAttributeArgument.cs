@@ -18,7 +18,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeAttributeArgument))]
     public sealed class CodeAttributeArgument : AbstractCodeElement, EnvDTE80.CodeAttributeArgument
     {
-        internal static EnvDTE80.CodeAttributeArgument Create(CodeModelState state, CodeAttribute parent, int index)
+        internal static EnvDTE80.CodeAttributeArgument Create(
+            CodeModelState state,
+            CodeAttribute parent,
+            int index
+        )
         {
             Debug.Assert(parent != null);
             Debug.Assert(index >= 0);
@@ -37,8 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             _index = index;
         }
 
-        protected override EnvDTE.CodeElements GetCollection()
-            => GetCollection<CodeAttributeArgument>(this.Parent);
+        protected override EnvDTE.CodeElements GetCollection() =>
+            GetCollection<CodeAttributeArgument>(this.Parent);
 
         internal override SyntaxNode LookupNode()
         {
@@ -60,7 +64,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 return false;
             }
 
-            if (!CodeModelService.TryGetAttributeArgumentNode(attributeNode, _index, out var attributeArgumentNode))
+            if (
+                !CodeModelService.TryGetAttributeArgumentNode(
+                    attributeNode,
+                    _index,
+                    out var attributeArgumentNode
+                )
+            )
             {
                 return false;
             }
@@ -96,18 +106,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public string Value
         {
-            get
-            {
-                return CodeModelService.GetAttributeArgumentValue(LookupNode());
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return CodeModelService.GetAttributeArgumentValue(LookupNode()); }
+            set { throw new NotImplementedException(); }
         }
 
-        public new void Delete()
-            => base.Delete();
+        public new void Delete() => base.Delete();
     }
 }

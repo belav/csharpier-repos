@@ -52,22 +52,55 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertTokens("false", Token(SyntaxKind.IdentifierToken, "false"));
 
             AssertTokens("&#103;lobal", Token(SyntaxKind.IdentifierToken, "&#103;lobal", "global"));
-            AssertTokens("&#111;perator", Token(SyntaxKind.IdentifierToken, "&#111;perator", "operator"));
-            AssertTokens("&#101;xplicit", Token(SyntaxKind.IdentifierToken, "&#101;xplicit", "explicit"));
-            AssertTokens("&#105;mplicit", Token(SyntaxKind.IdentifierToken, "&#105;mplicit", "implicit"));
+            AssertTokens(
+                "&#111;perator",
+                Token(SyntaxKind.IdentifierToken, "&#111;perator", "operator")
+            );
+            AssertTokens(
+                "&#101;xplicit",
+                Token(SyntaxKind.IdentifierToken, "&#101;xplicit", "explicit")
+            );
+            AssertTokens(
+                "&#105;mplicit",
+                Token(SyntaxKind.IdentifierToken, "&#105;mplicit", "implicit")
+            );
             AssertTokens("&#114;ef", Token(SyntaxKind.IdentifierToken, "&#114;ef", "ref"));
             AssertTokens("&#111;ut", Token(SyntaxKind.IdentifierToken, "&#111;ut", "out"));
             AssertTokens("&#116;rue", Token(SyntaxKind.IdentifierToken, "&#116;rue", "true"));
             AssertTokens("&#102;alse", Token(SyntaxKind.IdentifierToken, "&#102;alse", "false"));
 
-            AssertTokens("&#103;loba&#108;", Token(SyntaxKind.IdentifierToken, "&#103;loba&#108;", "global"));
-            AssertTokens("&#111;perato&#114;", Token(SyntaxKind.IdentifierToken, "&#111;perato&#114;", "operator"));
-            AssertTokens("&#101;xplici&#116;", Token(SyntaxKind.IdentifierToken, "&#101;xplici&#116;", "explicit"));
-            AssertTokens("&#105;mplici&#116;", Token(SyntaxKind.IdentifierToken, "&#105;mplici&#116;", "implicit"));
-            AssertTokens("&#114;e&#102;", Token(SyntaxKind.IdentifierToken, "&#114;e&#102;", "ref"));
-            AssertTokens("&#111;u&#116;", Token(SyntaxKind.IdentifierToken, "&#111;u&#116;", "out"));
-            AssertTokens("&#116;ru&#101;", Token(SyntaxKind.IdentifierToken, "&#116;ru&#101;", "true"));
-            AssertTokens("&#102;als&#101;", Token(SyntaxKind.IdentifierToken, "&#102;als&#101;", "false"));
+            AssertTokens(
+                "&#103;loba&#108;",
+                Token(SyntaxKind.IdentifierToken, "&#103;loba&#108;", "global")
+            );
+            AssertTokens(
+                "&#111;perato&#114;",
+                Token(SyntaxKind.IdentifierToken, "&#111;perato&#114;", "operator")
+            );
+            AssertTokens(
+                "&#101;xplici&#116;",
+                Token(SyntaxKind.IdentifierToken, "&#101;xplici&#116;", "explicit")
+            );
+            AssertTokens(
+                "&#105;mplici&#116;",
+                Token(SyntaxKind.IdentifierToken, "&#105;mplici&#116;", "implicit")
+            );
+            AssertTokens(
+                "&#114;e&#102;",
+                Token(SyntaxKind.IdentifierToken, "&#114;e&#102;", "ref")
+            );
+            AssertTokens(
+                "&#111;u&#116;",
+                Token(SyntaxKind.IdentifierToken, "&#111;u&#116;", "out")
+            );
+            AssertTokens(
+                "&#116;ru&#101;",
+                Token(SyntaxKind.IdentifierToken, "&#116;ru&#101;", "true")
+            );
+            AssertTokens(
+                "&#102;als&#101;",
+                Token(SyntaxKind.IdentifierToken, "&#102;als&#101;", "false")
+            );
         }
 
         [Fact]
@@ -82,10 +115,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertTokens("@true", Token(SyntaxKind.IdentifierToken, "@true"));
             AssertTokens("@false", Token(SyntaxKind.IdentifierToken, "@false"));
 
-            AssertTokens("&#64;global", Token(SyntaxKind.IdentifierToken, "&#64;global", "@global"));
-            AssertTokens("&#64;operator", Token(SyntaxKind.IdentifierToken, "&#64;operator", "@operator"));
-            AssertTokens("&#64;explicit", Token(SyntaxKind.IdentifierToken, "&#64;explicit", "@explicit"));
-            AssertTokens("&#64;implicit", Token(SyntaxKind.IdentifierToken, "&#64;implicit", "@implicit"));
+            AssertTokens(
+                "&#64;global",
+                Token(SyntaxKind.IdentifierToken, "&#64;global", "@global")
+            );
+            AssertTokens(
+                "&#64;operator",
+                Token(SyntaxKind.IdentifierToken, "&#64;operator", "@operator")
+            );
+            AssertTokens(
+                "&#64;explicit",
+                Token(SyntaxKind.IdentifierToken, "&#64;explicit", "@explicit")
+            );
+            AssertTokens(
+                "&#64;implicit",
+                Token(SyntaxKind.IdentifierToken, "&#64;implicit", "@implicit")
+            );
             AssertTokens("&#64;ref", Token(SyntaxKind.IdentifierToken, "&#64;ref", "@ref"));
             AssertTokens("&#64;out", Token(SyntaxKind.IdentifierToken, "&#64;out", "@out"));
             AssertTokens("&#64;true", Token(SyntaxKind.IdentifierToken, "&#64;true", "@true"));
@@ -95,10 +140,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestLexUnicodeEscapeKeywords()
         {
-            AssertTokens("\\u0067lobal", Token(SyntaxKind.IdentifierToken, "\\u0067lobal", "global"));
-            AssertTokens("\\u006Fperator", Token(SyntaxKind.IdentifierToken, "\\u006Fperator", "operator"));
-            AssertTokens("\\u0065xplicit", Token(SyntaxKind.IdentifierToken, "\\u0065xplicit", "explicit"));
-            AssertTokens("\\u0069mplicit", Token(SyntaxKind.IdentifierToken, "\\u0069mplicit", "implicit"));
+            AssertTokens(
+                "\\u0067lobal",
+                Token(SyntaxKind.IdentifierToken, "\\u0067lobal", "global")
+            );
+            AssertTokens(
+                "\\u006Fperator",
+                Token(SyntaxKind.IdentifierToken, "\\u006Fperator", "operator")
+            );
+            AssertTokens(
+                "\\u0065xplicit",
+                Token(SyntaxKind.IdentifierToken, "\\u0065xplicit", "explicit")
+            );
+            AssertTokens(
+                "\\u0069mplicit",
+                Token(SyntaxKind.IdentifierToken, "\\u0069mplicit", "implicit")
+            );
             AssertTokens("\\u0072ef", Token(SyntaxKind.IdentifierToken, "\\u0072ef", "ref"));
             AssertTokens("\\u006Fut", Token(SyntaxKind.IdentifierToken, "\\u006Fut", "out"));
             AssertTokens("\\u0074rue", Token(SyntaxKind.IdentifierToken, "\\u0074rue", "true"));
@@ -110,14 +167,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestLexUnicodeEscapeKeywordsWithEntities()
         {
             // BREAK: Dev11 treats these as verbatim identifiers.
-            AssertTokens("&#92;u0067lobal", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u0067lobal"));
-            AssertTokens("&#92;u006Fperator", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u006Fperator"));
-            AssertTokens("&#92;u0065xplicit", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u0065xplicit"));
-            AssertTokens("&#92;u0069mplicit", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u0069mplicit"));
-            AssertTokens("&#92;u0072ef", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u0072ef"));
-            AssertTokens("&#92;u006Fut", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u006Fut"));
-            AssertTokens("&#92;u0074rue", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u0074rue"));
-            AssertTokens("&#92;u0066alse", Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"), Token(SyntaxKind.IdentifierToken, "u0066alse"));
+            AssertTokens(
+                "&#92;u0067lobal",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u0067lobal")
+            );
+            AssertTokens(
+                "&#92;u006Fperator",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u006Fperator")
+            );
+            AssertTokens(
+                "&#92;u0065xplicit",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u0065xplicit")
+            );
+            AssertTokens(
+                "&#92;u0069mplicit",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u0069mplicit")
+            );
+            AssertTokens(
+                "&#92;u0072ef",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u0072ef")
+            );
+            AssertTokens(
+                "&#92;u006Fut",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u006Fut")
+            );
+            AssertTokens(
+                "&#92;u0074rue",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u0074rue")
+            );
+            AssertTokens(
+                "&#92;u0066alse",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#92;", "\\"),
+                Token(SyntaxKind.IdentifierToken, "u0066alse")
+            );
         }
 
         [Fact]
@@ -152,7 +241,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertTokens("&#91;", Token(SyntaxKind.OpenBracketToken, "&#91;", "["));
             AssertTokens("&#93;", Token(SyntaxKind.CloseBracketToken, "&#93;", "]"));
             AssertTokens("&#63;", Token(SyntaxKind.QuestionToken, "&#63;", "?"));
-            AssertTokens("&#63;&#63;", Token(SyntaxKind.QuestionToken, "&#63;", "?"), Token(SyntaxKind.QuestionToken, "&#63;", "?"));
+            AssertTokens(
+                "&#63;&#63;",
+                Token(SyntaxKind.QuestionToken, "&#63;", "?"),
+                Token(SyntaxKind.QuestionToken, "&#63;", "?")
+            );
             AssertTokens("&#42;", Token(SyntaxKind.AsteriskToken, "&#42;", "*"));
             AssertTokens("&#60;", Token(SyntaxKind.LessThanToken, "&#60;", "<"));
             AssertTokens("&#62;", Token(SyntaxKind.GreaterThanToken, "&#62;", ">"));
@@ -166,12 +259,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestLexPunctuationSequences()
         {
             AssertTokens(":::", Token(SyntaxKind.ColonColonToken), Token(SyntaxKind.ColonToken));
-            AssertTokens("::::", Token(SyntaxKind.ColonColonToken), Token(SyntaxKind.ColonColonToken));
-            AssertTokens(":::::", Token(SyntaxKind.ColonColonToken), Token(SyntaxKind.ColonColonToken), Token(SyntaxKind.ColonToken));
+            AssertTokens(
+                "::::",
+                Token(SyntaxKind.ColonColonToken),
+                Token(SyntaxKind.ColonColonToken)
+            );
+            AssertTokens(
+                ":::::",
+                Token(SyntaxKind.ColonColonToken),
+                Token(SyntaxKind.ColonColonToken),
+                Token(SyntaxKind.ColonToken)
+            );
 
             // No null-coalescing in crefs
-            AssertTokens("???", Token(SyntaxKind.QuestionToken), Token(SyntaxKind.QuestionToken), Token(SyntaxKind.QuestionToken));
-            AssertTokens("????", Token(SyntaxKind.QuestionToken), Token(SyntaxKind.QuestionToken), Token(SyntaxKind.QuestionToken), Token(SyntaxKind.QuestionToken));
+            AssertTokens(
+                "???",
+                Token(SyntaxKind.QuestionToken),
+                Token(SyntaxKind.QuestionToken),
+                Token(SyntaxKind.QuestionToken)
+            );
+            AssertTokens(
+                "????",
+                Token(SyntaxKind.QuestionToken),
+                Token(SyntaxKind.QuestionToken),
+                Token(SyntaxKind.QuestionToken),
+                Token(SyntaxKind.QuestionToken)
+            );
         }
 
         [Fact]
@@ -237,8 +350,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertTokens("<<", Token(SyntaxKind.BadToken, "<"), Token(SyntaxKind.BadToken, "<"));
             AssertTokens("<=", Token(SyntaxKind.BadToken, "<"), Token(SyntaxKind.EqualsToken));
             AssertTokens(">", Token(SyntaxKind.GreaterThanToken));
-            AssertTokens(">>", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken));
-            AssertTokens(">>>", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken));
+            AssertTokens(
+                ">>",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken)
+            );
+            AssertTokens(
+                ">>>",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken)
+            );
             AssertTokens(">=", Token(SyntaxKind.GreaterThanEqualsToken));
             AssertTokens("=", Token(SyntaxKind.EqualsToken));
             AssertTokens("==", Token(SyntaxKind.EqualsEqualsToken));
@@ -268,12 +390,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertTokens("&#60;=", Token(SyntaxKind.LessThanEqualsToken, "&#60;=", "<="));
             AssertTokens("&#60;&#61;", Token(SyntaxKind.LessThanEqualsToken, "&#60;&#61;", "<="));
             AssertTokens("&#62;", Token(SyntaxKind.GreaterThanToken, "&#62;", ">"));
-            AssertTokens(">&#62;", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken, "&#62;", ">"));
-            AssertTokens("&#62;>", Token(SyntaxKind.GreaterThanToken, "&#62;", ">"), Token(SyntaxKind.GreaterThanToken));
-            AssertTokens("&#62;&#62;", Token(SyntaxKind.GreaterThanToken, "&#62;", ">"), Token(SyntaxKind.GreaterThanToken, "&#62;", ">"));
+            AssertTokens(
+                ">&#62;",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken, "&#62;", ">")
+            );
+            AssertTokens(
+                "&#62;>",
+                Token(SyntaxKind.GreaterThanToken, "&#62;", ">"),
+                Token(SyntaxKind.GreaterThanToken)
+            );
+            AssertTokens(
+                "&#62;&#62;",
+                Token(SyntaxKind.GreaterThanToken, "&#62;", ">"),
+                Token(SyntaxKind.GreaterThanToken, "&#62;", ">")
+            );
             AssertTokens("&#62;=", Token(SyntaxKind.GreaterThanEqualsToken, "&#62;=", ">="));
             AssertTokens(">&#61;", Token(SyntaxKind.GreaterThanEqualsToken, ">&#61;", ">="));
-            AssertTokens("&#62;&#61;", Token(SyntaxKind.GreaterThanEqualsToken, "&#62;&#61;", ">="));
+            AssertTokens(
+                "&#62;&#61;",
+                Token(SyntaxKind.GreaterThanEqualsToken, "&#62;&#61;", ">=")
+            );
             AssertTokens("&#61;", Token(SyntaxKind.EqualsToken, "&#61;", "="));
             AssertTokens("=&#61;", Token(SyntaxKind.EqualsEqualsToken, "=&#61;", "=="));
             AssertTokens("&#61;=", Token(SyntaxKind.EqualsEqualsToken, "&#61;=", "=="));
@@ -281,7 +418,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertTokens("&#33;", Token(SyntaxKind.ExclamationToken, "&#33;", "!"));
             AssertTokens("!&#61;", Token(SyntaxKind.ExclamationEqualsToken, "!&#61;", "!="));
             AssertTokens("&#33;=", Token(SyntaxKind.ExclamationEqualsToken, "&#33;=", "!="));
-            AssertTokens("&#33;&#61;", Token(SyntaxKind.ExclamationEqualsToken, "&#33;&#61;", "!="));
+            AssertTokens(
+                "&#33;&#61;",
+                Token(SyntaxKind.ExclamationEqualsToken, "&#33;&#61;", "!=")
+            );
         }
 
         [Fact]
@@ -289,38 +429,134 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             AssertTokens("+++", Token(SyntaxKind.PlusPlusToken), Token(SyntaxKind.PlusToken));
             AssertTokens("++++", Token(SyntaxKind.PlusPlusToken), Token(SyntaxKind.PlusPlusToken));
-            AssertTokens("+++++", Token(SyntaxKind.PlusPlusToken), Token(SyntaxKind.PlusPlusToken), Token(SyntaxKind.PlusToken));
+            AssertTokens(
+                "+++++",
+                Token(SyntaxKind.PlusPlusToken),
+                Token(SyntaxKind.PlusPlusToken),
+                Token(SyntaxKind.PlusToken)
+            );
 
             AssertTokens("---", Token(SyntaxKind.MinusMinusToken), Token(SyntaxKind.MinusToken));
-            AssertTokens("----", Token(SyntaxKind.MinusMinusToken), Token(SyntaxKind.MinusMinusToken));
-            AssertTokens("-----", Token(SyntaxKind.MinusMinusToken), Token(SyntaxKind.MinusMinusToken), Token(SyntaxKind.MinusToken));
+            AssertTokens(
+                "----",
+                Token(SyntaxKind.MinusMinusToken),
+                Token(SyntaxKind.MinusMinusToken)
+            );
+            AssertTokens(
+                "-----",
+                Token(SyntaxKind.MinusMinusToken),
+                Token(SyntaxKind.MinusMinusToken),
+                Token(SyntaxKind.MinusToken)
+            );
 
             AssertTokens("===", Token(SyntaxKind.EqualsEqualsToken), Token(SyntaxKind.EqualsToken));
-            AssertTokens("====", Token(SyntaxKind.EqualsEqualsToken), Token(SyntaxKind.EqualsEqualsToken));
-            AssertTokens("=====", Token(SyntaxKind.EqualsEqualsToken), Token(SyntaxKind.EqualsEqualsToken), Token(SyntaxKind.EqualsToken));
+            AssertTokens(
+                "====",
+                Token(SyntaxKind.EqualsEqualsToken),
+                Token(SyntaxKind.EqualsEqualsToken)
+            );
+            AssertTokens(
+                "=====",
+                Token(SyntaxKind.EqualsEqualsToken),
+                Token(SyntaxKind.EqualsEqualsToken),
+                Token(SyntaxKind.EqualsToken)
+            );
 
-            AssertTokens("&lt;&lt;&lt;", Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"), Token(SyntaxKind.LessThanToken, "&lt;", "<"));
-            AssertTokens("&lt;&lt;&lt;&lt;", Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"), Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"));
-            AssertTokens("&lt;&lt;&lt;&lt;&lt;", Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"), Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"), Token(SyntaxKind.LessThanToken, "&lt;", "<"));
+            AssertTokens(
+                "&lt;&lt;&lt;",
+                Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"),
+                Token(SyntaxKind.LessThanToken, "&lt;", "<")
+            );
+            AssertTokens(
+                "&lt;&lt;&lt;&lt;",
+                Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"),
+                Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<")
+            );
+            AssertTokens(
+                "&lt;&lt;&lt;&lt;&lt;",
+                Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"),
+                Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"),
+                Token(SyntaxKind.LessThanToken, "&lt;", "<")
+            );
 
-            AssertTokens(">>>", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken));
-            AssertTokens(">>>>", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken));
-            AssertTokens(">>>>>", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken));
+            AssertTokens(
+                ">>>",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken)
+            );
+            AssertTokens(
+                ">>>>",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken)
+            );
+            AssertTokens(
+                ">>>>>",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken)
+            );
 
-            AssertTokens("!!=", Token(SyntaxKind.ExclamationToken), Token(SyntaxKind.ExclamationEqualsToken));
-            AssertTokens("&lt;&lt;=", Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"), Token(SyntaxKind.EqualsToken));
-            AssertTokens(">>=", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanEqualsToken)); //fixed up by parser
-            AssertTokens(">>>=", Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanToken), Token(SyntaxKind.GreaterThanEqualsToken)); //fixed up by parser
+            AssertTokens(
+                "!!=",
+                Token(SyntaxKind.ExclamationToken),
+                Token(SyntaxKind.ExclamationEqualsToken)
+            );
+            AssertTokens(
+                "&lt;&lt;=",
+                Token(SyntaxKind.LessThanLessThanToken, "&lt;&lt;", "<<"),
+                Token(SyntaxKind.EqualsToken)
+            );
+            AssertTokens(
+                ">>=",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanEqualsToken)
+            ); //fixed up by parser
+            AssertTokens(
+                ">>>=",
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanToken),
+                Token(SyntaxKind.GreaterThanEqualsToken)
+            ); //fixed up by parser
 
-            AssertTokens("!==", Token(SyntaxKind.ExclamationEqualsToken), Token(SyntaxKind.EqualsToken));
-            AssertTokens("&lt;==", Token(SyntaxKind.LessThanEqualsToken, "&lt;=", "<="), Token(SyntaxKind.EqualsToken));
-            AssertTokens(">==", Token(SyntaxKind.GreaterThanEqualsToken), Token(SyntaxKind.EqualsToken));
+            AssertTokens(
+                "!==",
+                Token(SyntaxKind.ExclamationEqualsToken),
+                Token(SyntaxKind.EqualsToken)
+            );
+            AssertTokens(
+                "&lt;==",
+                Token(SyntaxKind.LessThanEqualsToken, "&lt;=", "<="),
+                Token(SyntaxKind.EqualsToken)
+            );
+            AssertTokens(
+                ">==",
+                Token(SyntaxKind.GreaterThanEqualsToken),
+                Token(SyntaxKind.EqualsToken)
+            );
 
             AssertTokens("{", Token(SyntaxKind.LessThanToken, "{", "<"));
             AssertTokens("{{", Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"));
-            AssertTokens("{{{", Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"), Token(SyntaxKind.LessThanToken, "{", "<"));
-            AssertTokens("{{{{", Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"), Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"));
-            AssertTokens("{{{{{", Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"), Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"), Token(SyntaxKind.LessThanToken, "{", "<"));
+            AssertTokens(
+                "{{{",
+                Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"),
+                Token(SyntaxKind.LessThanToken, "{", "<")
+            );
+            AssertTokens(
+                "{{{{",
+                Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"),
+                Token(SyntaxKind.LessThanLessThanToken, "{{", "<<")
+            );
+            AssertTokens(
+                "{{{{{",
+                Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"),
+                Token(SyntaxKind.LessThanLessThanToken, "{{", "<<"),
+                Token(SyntaxKind.LessThanToken, "{", "<")
+            );
         }
 
         [Fact]
@@ -330,21 +566,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             // Bad xml entities
             AssertTokens("&", Token(SyntaxKind.XmlEntityLiteralToken, "&"));
-            AssertTokens("&&", Token(SyntaxKind.XmlEntityLiteralToken, "&"), Token(SyntaxKind.XmlEntityLiteralToken, "&"));
+            AssertTokens(
+                "&&",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&"),
+                Token(SyntaxKind.XmlEntityLiteralToken, "&")
+            );
             AssertTokens("&;", Token(SyntaxKind.XmlEntityLiteralToken, "&;"));
             AssertTokens("&a;", Token(SyntaxKind.XmlEntityLiteralToken, "&a;"));
             AssertTokens("&#;", Token(SyntaxKind.XmlEntityLiteralToken, "&#;"));
             AssertTokens("&#x;", Token(SyntaxKind.XmlEntityLiteralToken, "&#x;"));
-            AssertTokens("&#a;", Token(SyntaxKind.XmlEntityLiteralToken, "&#"), Token(SyntaxKind.IdentifierToken, "a"), Token(SyntaxKind.BadToken, ";"));
-            AssertTokens("&#xg;", Token(SyntaxKind.XmlEntityLiteralToken, "&#x"), Token(SyntaxKind.IdentifierToken, "g"), Token(SyntaxKind.BadToken, ";"));
+            AssertTokens(
+                "&#a;",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#"),
+                Token(SyntaxKind.IdentifierToken, "a"),
+                Token(SyntaxKind.BadToken, ";")
+            );
+            AssertTokens(
+                "&#xg;",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#x"),
+                Token(SyntaxKind.IdentifierToken, "g"),
+                Token(SyntaxKind.BadToken, ";")
+            );
 
             // Overflowing entities
-            AssertTokens("&#99999999999999999999;", Token(SyntaxKind.XmlEntityLiteralToken, "&#99999999999999999999;"));
-            AssertTokens("&#x99999999999999999999;", Token(SyntaxKind.XmlEntityLiteralToken, "&#x99999999999999999999;"));
+            AssertTokens(
+                "&#99999999999999999999;",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#99999999999999999999;")
+            );
+            AssertTokens(
+                "&#x99999999999999999999;",
+                Token(SyntaxKind.XmlEntityLiteralToken, "&#x99999999999999999999;")
+            );
 
             // Long but not overflowing entities
-            AssertTokens("&#00000000000000000097;", Token(SyntaxKind.IdentifierToken, "&#00000000000000000097;", "a"));
-            AssertTokens("&#x00000000000000000061;", Token(SyntaxKind.IdentifierToken, "&#x00000000000000000061;", "a"));
+            AssertTokens(
+                "&#00000000000000000097;",
+                Token(SyntaxKind.IdentifierToken, "&#00000000000000000097;", "a")
+            );
+            AssertTokens(
+                "&#x00000000000000000061;",
+                Token(SyntaxKind.IdentifierToken, "&#x00000000000000000061;", "a")
+            );
         }
 
         [Fact]
@@ -364,52 +626,71 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact(Skip = "530523")]
         public void TestLexNewline()
         {
-            AssertTokens(@"A
+            AssertTokens(
+                @"A
 .B",
                 Token(SyntaxKind.IdentifierToken, "A"),
                 Token(SyntaxKind.DotToken),
-                Token(SyntaxKind.IdentifierToken, "B"));
+                Token(SyntaxKind.IdentifierToken, "B")
+            );
 
-            AssertTokens(@"A&#10;.B",
+            AssertTokens(
+                @"A&#10;.B",
                 Token(SyntaxKind.IdentifierToken, "A"),
                 Token(SyntaxKind.DotToken),
-                Token(SyntaxKind.IdentifierToken, "B"));
+                Token(SyntaxKind.IdentifierToken, "B")
+            );
         }
 
         [WorkItem(530523, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530523")]
         [Fact(Skip = "530523")]
         public void TestLexEntityInTrivia()
         {
-            AssertTokens(@"A&#32;.B",
+            AssertTokens(
+                @"A&#32;.B",
                 Token(SyntaxKind.IdentifierToken, "A"),
                 Token(SyntaxKind.DotToken),
-                Token(SyntaxKind.IdentifierToken, "B"));
+                Token(SyntaxKind.IdentifierToken, "B")
+            );
         }
 
         [WorkItem(530523, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530523")]
         [Fact(Skip = "530523")]
         public void TestLexCSharpTrivia()
         {
-            AssertTokens(@"A //comment
+            AssertTokens(
+                @"A //comment
 .B",
                 Token(SyntaxKind.IdentifierToken, "A"),
                 Token(SyntaxKind.DotToken),
-                Token(SyntaxKind.IdentifierToken, "B"));
+                Token(SyntaxKind.IdentifierToken, "B")
+            );
 
-            AssertTokens(@"A /*comment*/.B",
+            AssertTokens(
+                @"A /*comment*/.B",
                 Token(SyntaxKind.IdentifierToken, "A"),
                 Token(SyntaxKind.DotToken),
-                Token(SyntaxKind.IdentifierToken, "B"));
+                Token(SyntaxKind.IdentifierToken, "B")
+            );
         }
 
         internal override IEnumerable<InternalSyntax.SyntaxToken> GetTokens(string text)
         {
             Assert.DoesNotContain("'", text, StringComparison.Ordinal);
-            using (var lexer = new InternalSyntax.Lexer(SourceText.From(text + "'"), TestOptions.RegularWithDocumentationComments))
+            using (
+                var lexer = new InternalSyntax.Lexer(
+                    SourceText.From(text + "'"),
+                    TestOptions.RegularWithDocumentationComments
+                )
+            )
             {
                 while (true)
                 {
-                    var token = lexer.Lex(InternalSyntax.LexerMode.XmlNameQuote | InternalSyntax.LexerMode.XmlDocCommentStyleSingleLine | InternalSyntax.LexerMode.XmlDocCommentLocationInterior);
+                    var token = lexer.Lex(
+                        InternalSyntax.LexerMode.XmlNameQuote
+                            | InternalSyntax.LexerMode.XmlDocCommentStyleSingleLine
+                            | InternalSyntax.LexerMode.XmlDocCommentLocationInterior
+                    );
 
                     if (token.Kind == SyntaxKind.SingleQuoteToken)
                     {

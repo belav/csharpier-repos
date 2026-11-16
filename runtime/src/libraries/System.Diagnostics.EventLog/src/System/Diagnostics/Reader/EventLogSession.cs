@@ -16,7 +16,7 @@ namespace System.Diagnostics.Eventing.Reader
         Default = 0,
         Negotiate = 1,
         Kerberos = 2,
-        Ntlm = 3
+        Ntlm = 3,
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace System.Diagnostics.Eventing.Reader
     public enum PathType
     {
         LogName = 1,
-        FilePath = 2
+        FilePath = 2,
     }
 
     /// <summary>
@@ -63,7 +63,11 @@ namespace System.Diagnostics.Eventing.Reader
                 {
                     // Create the SYSTEM render context
                     // Call the EvtCreateRenderContext to get the renderContextHandleSystem, so that we can get the system/values/user properties.
-                    this.renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextSystem);
+                    this.renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(
+                        0,
+                        null,
+                        UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextSystem
+                    );
                 }
             }
         }
@@ -75,7 +79,11 @@ namespace System.Diagnostics.Eventing.Reader
                 if (this.renderContextHandleUser.IsInvalid)
                 {
                     // Create the USER render context
-                    this.renderContextHandleUser = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextUser);
+                    this.renderContextHandleUser = NativeWrapper.EvtCreateRenderContext(
+                        0,
+                        null,
+                        UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextUser
+                    );
                 }
             }
         }
@@ -87,12 +95,15 @@ namespace System.Diagnostics.Eventing.Reader
         }
 
         public EventLogSession(string server)
-            :
-            this(server, null, null, (SecureString)null, SessionAuthentication.Default)
-        {
-        }
+            : this(server, null, null, (SecureString)null, SessionAuthentication.Default) { }
 
-        public EventLogSession(string server, string domain, string user, SecureString password, SessionAuthentication logOnType)
+        public EventLogSession(
+            string server,
+            string domain,
+            string user,
+            SecureString password,
+            SessionAuthentication logOnType
+        )
         {
             server ??= "localhost";
 
@@ -113,9 +124,16 @@ namespace System.Diagnostics.Eventing.Reader
             try
             {
                 if (password != null)
-                    erLogin.Password.SetMemory(SecureStringMarshal.SecureStringToCoTaskMemUnicode(password));
+                    erLogin.Password.SetMemory(
+                        SecureStringMarshal.SecureStringToCoTaskMemUnicode(password)
+                    );
                 // Open a session using the erLogin structure.
-                Handle = NativeWrapper.EvtOpenSession(UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin, ref erLogin, 0, 0);
+                Handle = NativeWrapper.EvtOpenSession(
+                    UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin,
+                    ref erLogin,
+                    0,
+                    0
+                );
             }
             finally
             {
@@ -139,12 +157,10 @@ namespace System.Diagnostics.Eventing.Reader
                     throw new InvalidOperationException();
             }
 
-            if (this.renderContextHandleSystem != null &&
-                !this.renderContextHandleSystem.IsInvalid)
+            if (this.renderContextHandleSystem != null && !this.renderContextHandleSystem.IsInvalid)
                 this.renderContextHandleSystem.Dispose();
 
-            if (this.renderContextHandleUser != null &&
-                !this.renderContextHandleUser.IsInvalid)
+            if (this.renderContextHandleUser != null && !this.renderContextHandleUser.IsInvalid)
                 this.renderContextHandleUser.Dispose();
 
             if (Handle != null && !Handle.IsInvalid)
@@ -175,8 +191,7 @@ namespace System.Diagnostics.Eventing.Reader
                     string s = NativeWrapper.EvtNextPublisherId(ProviderEnum, ref finish);
                     if (finish == false)
                         namesList.Add(s);
-                }
-                while (finish == false);
+                } while (finish == false);
 
                 return namesList;
             }
@@ -195,8 +210,7 @@ namespace System.Diagnostics.Eventing.Reader
                     string s = NativeWrapper.EvtNextChannelPath(channelEnum, ref finish);
                     if (finish == false)
                         namesList.Add(s);
-                }
-                while (finish == false);
+                } while (finish == false);
 
                 return namesList;
             }
@@ -214,7 +228,13 @@ namespace System.Diagnostics.Eventing.Reader
             this.ExportLog(path, pathType, query, targetFilePath, false);
         }
 
-        public void ExportLog(string path, PathType pathType, string query, string targetFilePath, bool tolerateQueryErrors)
+        public void ExportLog(
+            string path,
+            PathType pathType,
+            string query,
+            string targetFilePath,
+            bool tolerateQueryErrors
+        )
         {
             ArgumentNullException.ThrowIfNull(path);
             ArgumentNullException.ThrowIfNull(targetFilePath);
@@ -228,15 +248,41 @@ namespace System.Diagnostics.Eventing.Reader
             if (tolerateQueryErrors == false)
                 NativeWrapper.EvtExportLog(this.Handle, path, query, targetFilePath, (int)flag);
             else
-                NativeWrapper.EvtExportLog(this.Handle, path, query, targetFilePath, (int)flag | (int)UnsafeNativeMethods.EvtExportLogFlags.EvtExportLogTolerateQueryErrors);
+                NativeWrapper.EvtExportLog(
+                    this.Handle,
+                    path,
+                    query,
+                    targetFilePath,
+                    (int)flag
+                        | (int)UnsafeNativeMethods.EvtExportLogFlags.EvtExportLogTolerateQueryErrors
+                );
         }
 
-        public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath)
+        public void ExportLogAndMessages(
+            string path,
+            PathType pathType,
+            string query,
+            string targetFilePath
+        )
         {
-            this.ExportLogAndMessages(path, pathType, query, targetFilePath, false, CultureInfo.CurrentCulture);
+            this.ExportLogAndMessages(
+                path,
+                pathType,
+                query,
+                targetFilePath,
+                false,
+                CultureInfo.CurrentCulture
+            );
         }
 
-        public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath, bool tolerateQueryErrors, CultureInfo targetCultureInfo)
+        public void ExportLogAndMessages(
+            string path,
+            PathType pathType,
+            string query,
+            string targetFilePath,
+            bool tolerateQueryErrors,
+            CultureInfo targetCultureInfo
+        )
         {
             ExportLog(path, pathType, query, targetFilePath, tolerateQueryErrors);
             // Ignore the CultureInfo, pass 0 to use the calling thread's locale

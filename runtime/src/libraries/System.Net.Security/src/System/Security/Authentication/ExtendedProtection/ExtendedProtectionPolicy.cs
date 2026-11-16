@@ -20,18 +20,26 @@ namespace System.Security.Authentication.ExtendedProtection
         private readonly ProtectionScenario _protectionScenario;
         private readonly ChannelBinding? _customChannelBinding;
 
-        public ExtendedProtectionPolicy(PolicyEnforcement policyEnforcement,
-                                        ProtectionScenario protectionScenario,
-                                        ServiceNameCollection? customServiceNames)
+        public ExtendedProtectionPolicy(
+            PolicyEnforcement policyEnforcement,
+            ProtectionScenario protectionScenario,
+            ServiceNameCollection? customServiceNames
+        )
         {
             if (policyEnforcement == PolicyEnforcement.Never)
             {
-                throw new ArgumentException(SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever, nameof(policyEnforcement));
+                throw new ArgumentException(
+                    SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever,
+                    nameof(policyEnforcement)
+                );
             }
 
             if (customServiceNames != null && customServiceNames.Count == 0)
             {
-                throw new ArgumentException(SR.security_ExtendedProtectionPolicy_NoEmptyServiceNameCollection, nameof(customServiceNames));
+                throw new ArgumentException(
+                    SR.security_ExtendedProtectionPolicy_NoEmptyServiceNameCollection,
+                    nameof(customServiceNames)
+                );
             }
 
             _policyEnforcement = policyEnforcement;
@@ -39,20 +47,30 @@ namespace System.Security.Authentication.ExtendedProtection
             _customServiceNames = customServiceNames;
         }
 
-        public ExtendedProtectionPolicy(PolicyEnforcement policyEnforcement,
-                                        ProtectionScenario protectionScenario,
-                                        ICollection? customServiceNames)
-            : this(policyEnforcement, protectionScenario,
-                   customServiceNames == null ? (ServiceNameCollection?)null : new ServiceNameCollection(customServiceNames))
-        {
-        }
+        public ExtendedProtectionPolicy(
+            PolicyEnforcement policyEnforcement,
+            ProtectionScenario protectionScenario,
+            ICollection? customServiceNames
+        )
+            : this(
+                policyEnforcement,
+                protectionScenario,
+                customServiceNames == null
+                    ? (ServiceNameCollection?)null
+                    : new ServiceNameCollection(customServiceNames)
+            ) { }
 
-        public ExtendedProtectionPolicy(PolicyEnforcement policyEnforcement,
-                                        ChannelBinding customChannelBinding)
+        public ExtendedProtectionPolicy(
+            PolicyEnforcement policyEnforcement,
+            ChannelBinding customChannelBinding
+        )
         {
             if (policyEnforcement == PolicyEnforcement.Never)
             {
-                throw new ArgumentException(SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever, nameof(policyEnforcement));
+                throw new ArgumentException(
+                    SR.security_ExtendedProtectionPolicy_UseDifferentConstructorForNever,
+                    nameof(policyEnforcement)
+                );
             }
             ArgumentNullException.ThrowIfNull(customChannelBinding);
 
@@ -68,7 +86,11 @@ namespace System.Security.Authentication.ExtendedProtection
             _protectionScenario = ProtectionScenario.TransportSelected;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected ExtendedProtectionPolicy(SerializationInfo info, StreamingContext context)
         {

@@ -4,18 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System.ComponentModel;
     using System.Security.Permissions;
 
-    [
-    ToolboxItem(false),
-    SupportsEventValidation,
-    ]
+    [ToolboxItem(false), SupportsEventValidation]
     /// <devdoc>
     ///    <para>Constructs a table used for pager rows for DetailsView, GridView, and FormView</para>
     /// </devdoc>
-    internal sealed class PagerTable : Table {
-    }
+    internal sealed class PagerTable : Table { }
 }

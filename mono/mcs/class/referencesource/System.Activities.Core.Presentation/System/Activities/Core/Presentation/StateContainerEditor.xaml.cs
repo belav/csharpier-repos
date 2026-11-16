@@ -6,14 +6,19 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Internal.PropertyEditing;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.Services;
     using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Controls;
@@ -22,11 +27,6 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using System.Activities.Presentation.FreeFormEditing;
-    using System.Activities.Statements;
-    using System.Runtime;
-    using System.Activities.Presentation.Internal.PropertyEditing;
-    using System.Globalization;
 
     // The StateContainerEditor contains a FreeFormPanel that implements free form editing behaviors
     // for States and Transitions among them. An instance of StateMachineDesigner and an instance of
@@ -35,7 +35,8 @@ namespace System.Activities.Core.Presentation
     partial class StateContainerEditor : IAutoConnectContainer, IAutoSplitContainer
     {
         // Used to find the destination state when pasting transition.
-        private static Dictionary<ModelItem, string> modelItemToGuid = new Dictionary<ModelItem, string>();
+        private static Dictionary<ModelItem, string> modelItemToGuid =
+            new Dictionary<ModelItem, string>();
         internal static ModelItem CopiedTransitionDestinationState { get; set; }
 
         // Flag to indicate whether the editor has been populated
@@ -105,15 +106,19 @@ namespace System.Activities.Core.Presentation
 
         // Constants
         const double startSymbolTopMargin = 10.0;
+
         // Default size of the state container editor when it is inside of the state designer
         const double DefaultWidthForState = 100;
         const double DefaultHeightForState = 25;
+
         // Default size of the state container editor when it is inside of the state machine designer
         const double DefaultWidthForStateMachine = 600;
         const double DefaultHeightForStateMachine = 600;
+
         // Default size of the state designer
         const double DefaultStateDesignerWidth = 114;
         const double DefaultStateDesignerHeight = 61;
+
         // Default size of the initial / final node
         const double InitialNodeWidth = 60;
         const double InitialNodeHeight = 75;
@@ -131,57 +136,75 @@ namespace System.Activities.Core.Presentation
         private const string TriggerNameToolTip = "Trigger: {0}";
         private const string TransitionNameToolTip = "Transition: {0}";
 
-        public static readonly DependencyProperty StateContainerWidthProperty = DependencyProperty.Register(
-            "StateContainerWidth",
-            typeof(double),
-            typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata(DefaultWidthForState));
+        public static readonly DependencyProperty StateContainerWidthProperty =
+            DependencyProperty.Register(
+                "StateContainerWidth",
+                typeof(double),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata(DefaultWidthForState)
+            );
 
-        public static readonly DependencyProperty StateContainerHeightProperty = DependencyProperty.Register(
-            "StateContainerHeight",
-            typeof(double),
-            typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata(DefaultHeightForState));
+        public static readonly DependencyProperty StateContainerHeightProperty =
+            DependencyProperty.Register(
+                "StateContainerHeight",
+                typeof(double),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata(DefaultHeightForState)
+            );
 
-        public static readonly DependencyProperty PanelMinWidthProperty = DependencyProperty.Register(
-            "PanelMinWidth",
-            typeof(double),
-            typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty PanelMinWidthProperty =
+            DependencyProperty.Register(
+                "PanelMinWidth",
+                typeof(double),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata()
+            );
 
-        public static readonly DependencyProperty PanelMinHeightProperty = DependencyProperty.Register(
-            "PanelMinHeight",
-            typeof(double),
-            typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty PanelMinHeightProperty =
+            DependencyProperty.Register(
+                "PanelMinHeight",
+                typeof(double),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata()
+            );
 
-        public static readonly DependencyProperty ConnectorModelItemProperty = DependencyProperty.RegisterAttached(
-            "ConnectorModelItem",
-            typeof(ModelItem),
-            typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty ConnectorModelItemProperty =
+            DependencyProperty.RegisterAttached(
+                "ConnectorModelItem",
+                typeof(ModelItem),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata()
+            );
 
-        public static readonly DependencyProperty ConnectionPointsProperty = DependencyProperty.RegisterAttached(
-            "ConnectionPoints",
-            typeof(List<ConnectionPoint>),
-            typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty ConnectionPointsProperty =
+            DependencyProperty.RegisterAttached(
+                "ConnectionPoints",
+                typeof(List<ConnectionPoint>),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata()
+            );
 
         public static readonly DependencyProperty ModelItemProperty = DependencyProperty.Register(
             "ModelItem",
             typeof(ModelItem),
             typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata());
+            new FrameworkPropertyMetadata()
+        );
 
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(
             "IsReadOnly",
-            typeof(bool), typeof(StateContainerEditor),
-            new FrameworkPropertyMetadata(false));
+            typeof(bool),
+            typeof(StateContainerEditor),
+            new FrameworkPropertyMetadata(false)
+        );
 
-        public static readonly DependencyProperty IsStateMachineContainerProperty = DependencyProperty.Register(
-           "IsStateMachineContainer",
-           typeof(bool), typeof(StateContainerEditor),
-           new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty IsStateMachineContainerProperty =
+            DependencyProperty.Register(
+                "IsStateMachineContainer",
+                typeof(bool),
+                typeof(StateContainerEditor),
+                new FrameworkPropertyMetadata(false)
+            );
 
         public StateContainerEditor()
         {
@@ -193,7 +216,11 @@ namespace System.Activities.Core.Presentation
             this.transitionModelItemsRemoved = new List<ModelItem>();
 
             Binding readOnlyBinding = new Binding();
-            readOnlyBinding.RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(DesignerView), 1);
+            readOnlyBinding.RelativeSource = new RelativeSource(
+                RelativeSourceMode.FindAncestor,
+                typeof(DesignerView),
+                1
+            );
             readOnlyBinding.Path = new PropertyPath(DesignerView.IsReadOnlyProperty);
             readOnlyBinding.Mode = BindingMode.OneWay;
             this.SetBinding(IsReadOnlyProperty, readOnlyBinding);
@@ -202,9 +229,12 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.ShouldInitialize())
                 {
-                    WorkflowViewElement parent = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(this);
+                    WorkflowViewElement parent =
+                        VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(this);
                     this.ModelItem = parent.ModelItem;
-                    this.StateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(this.ModelItem);
+                    this.StateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(
+                        this.ModelItem
+                    );
                     this.Context = parent.Context;
                     this.compositeViewEvents = parent;
                     if (this.compositeViewEvents != null)
@@ -257,27 +287,22 @@ namespace System.Activities.Core.Presentation
 
         internal FreeFormPanel Panel
         {
-            get
-            {
-                return this.panel;
-            }
+            get { return this.panel; }
         }
 
         ViewStateService ViewStateService
         {
             get
             {
-                ViewStateService viewStateService = this.Context.Services.GetService<ViewStateService>();
+                ViewStateService viewStateService =
+                    this.Context.Services.GetService<ViewStateService>();
                 return viewStateService;
             }
         }
 
         DesignerView DesignerView
         {
-            get
-            {
-                return this.Context.Services.GetService<DesignerView>();
-            }
+            get { return this.Context.Services.GetService<DesignerView>(); }
         }
 
         SubscribeContextCallback<Selection> OnSelectionChangedCallback
@@ -286,7 +311,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.onSelectionChangedCallback == null)
                 {
-                    this.onSelectionChangedCallback = new SubscribeContextCallback<Selection>(this.OnSelectionChanged);
+                    this.onSelectionChangedCallback = new SubscribeContextCallback<Selection>(
+                        this.OnSelectionChanged
+                    );
                 }
 
                 return this.onSelectionChangedCallback;
@@ -335,18 +362,9 @@ namespace System.Activities.Core.Presentation
             private set { SetValue(IsStateMachineContainerProperty, value); }
         }
 
+        public EditingContext Context { get; set; }
 
-        public EditingContext Context
-        {
-            get;
-            set;
-        }
-
-        ModelItem StateMachineModelItem
-        {
-            get;
-            set;
-        }
+        ModelItem StateMachineModelItem { get; set; }
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -361,44 +379,76 @@ namespace System.Activities.Core.Presentation
             // Keep track of the outmost editor, which may not be accessible by traversing the visual tree when the designer is deleted.
             this.stateMachineContainerEditor = this.GetStateMachineContainerEditor();
 
-            this.panel.LocationChanged += new LocationChangedEventHandler(OnFreeFormPanelLocationChanged);
-            this.panel.ConnectorMoved += new ConnectorMovedEventHandler(OnFreeFormPanelConnectorMoved);
+            this.panel.LocationChanged += new LocationChangedEventHandler(
+                OnFreeFormPanelLocationChanged
+            );
+            this.panel.ConnectorMoved += new ConnectorMovedEventHandler(
+                OnFreeFormPanelConnectorMoved
+            );
             this.panel.LayoutUpdated += new EventHandler(OnFreeFormPanelLayoutUpdated);
-            this.panel.RequiredSizeChanged += new RequiredSizeChangedEventHandler(OnFreeFormPanelRequiredSizeChanged);
+            this.panel.RequiredSizeChanged += new RequiredSizeChangedEventHandler(
+                OnFreeFormPanelRequiredSizeChanged
+            );
 
-            this.ViewStateService.ViewStateChanged += new ViewStateChangedEventHandler(OnViewStateChanged);
+            this.ViewStateService.ViewStateChanged += new ViewStateChangedEventHandler(
+                OnViewStateChanged
+            );
 
             if (this.ModelItem.ItemType == typeof(StateMachine))
             {
                 // Only StateMachine supports "States" collection
                 IsStateMachineContainer = true;
-                this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection.CollectionChanged += new NotifyCollectionChangedEventHandler(OnStateCollectionChanged);
-                this.ModelItem.PropertyChanged += new PropertyChangedEventHandler(this.OnModelPropertyChanged);
-                ModelTreeManager modelTreeManager = this.Context.Services.GetService<ModelTreeManager>();
-                modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(this.OnEditingScopeCompleted);
+                this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
+                    .CollectionChanged += new NotifyCollectionChangedEventHandler(
+                    OnStateCollectionChanged
+                );
+                this.ModelItem.PropertyChanged += new PropertyChangedEventHandler(
+                    this.OnModelPropertyChanged
+                );
+                ModelTreeManager modelTreeManager =
+                    this.Context.Services.GetService<ModelTreeManager>();
+                modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(
+                    this.OnEditingScopeCompleted
+                );
 
-                foreach (ModelItem modelItem in this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection)
+                foreach (
+                    ModelItem modelItem in this.ModelItem
+                        .Properties[StateMachineDesigner.StatesPropertyName]
+                        .Collection
+                )
                 {
                     if (modelItem.ItemType == typeof(State))
                     {
-                        ModelItemCollection transitions = modelItem.Properties[StateDesigner.TransitionsPropertyName].Collection;
+                        ModelItemCollection transitions = modelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection;
                         if (!this.listenedTransitionCollections.Contains(transitions))
                         {
-                            transitions.CollectionChanged += new NotifyCollectionChangedEventHandler(this.OnTransitionCollectionChanged);
+                            transitions.CollectionChanged +=
+                                new NotifyCollectionChangedEventHandler(
+                                    this.OnTransitionCollectionChanged
+                                );
                             this.listenedTransitionCollections.Add(transitions);
                         }
                     }
                 }
             }
 
-
-            object widthViewState = this.ViewStateService.RetrieveViewState(this.ModelItem, StateContainerWidthViewStateKey);
+            object widthViewState = this.ViewStateService.RetrieveViewState(
+                this.ModelItem,
+                StateContainerWidthViewStateKey
+            );
             if (widthViewState != null)
             {
                 this.StateContainerWidth = (double)widthViewState;
             }
 
-            object heightViewState = this.ViewStateService.RetrieveViewState(this.ModelItem, StateContainerHeightViewStateKey);
+            object heightViewState = this.ViewStateService.RetrieveViewState(
+                this.ModelItem,
+                StateContainerHeightViewStateKey
+            );
             if (heightViewState != null)
             {
                 this.StateContainerHeight = (double)heightViewState;
@@ -411,7 +461,9 @@ namespace System.Activities.Core.Presentation
             if (this.ModelItem.ItemType == typeof(StateMachine))
             {
                 this.AddInitialNode();
-                this.AddStateVisuals(this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection);
+                this.AddStateVisuals(
+                    this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection
+                );
             }
         }
 
@@ -423,31 +475,60 @@ namespace System.Activities.Core.Presentation
             {
                 element.MouseEnter -= new MouseEventHandler(OnChildElementMouseEnter);
                 element.MouseLeave -= new MouseEventHandler(OnChildElementMouseLeave);
-                ((FrameworkElement)element).SizeChanged -= new SizeChangedEventHandler(OnChildElementSizeChanged);
+                ((FrameworkElement)element).SizeChanged -= new SizeChangedEventHandler(
+                    OnChildElementSizeChanged
+                );
             }
             this.modelItemToUIElement.Clear();
-            this.panel.LocationChanged -= new LocationChangedEventHandler(OnFreeFormPanelLocationChanged);
-            this.panel.ConnectorMoved -= new ConnectorMovedEventHandler(OnFreeFormPanelConnectorMoved);
+            this.panel.LocationChanged -= new LocationChangedEventHandler(
+                OnFreeFormPanelLocationChanged
+            );
+            this.panel.ConnectorMoved -= new ConnectorMovedEventHandler(
+                OnFreeFormPanelConnectorMoved
+            );
             this.panel.LayoutUpdated -= new EventHandler(OnFreeFormPanelLayoutUpdated);
-            this.panel.RequiredSizeChanged -= new RequiredSizeChangedEventHandler(OnFreeFormPanelRequiredSizeChanged);
-            this.ViewStateService.ViewStateChanged -= new ViewStateChangedEventHandler(OnViewStateChanged);
+            this.panel.RequiredSizeChanged -= new RequiredSizeChangedEventHandler(
+                OnFreeFormPanelRequiredSizeChanged
+            );
+            this.ViewStateService.ViewStateChanged -= new ViewStateChangedEventHandler(
+                OnViewStateChanged
+            );
 
             if (this.ModelItem.ItemType == typeof(StateMachine))
             {
                 // Only StateMachine supports "States" collection
-                this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection.CollectionChanged -= new NotifyCollectionChangedEventHandler(OnStateCollectionChanged);
-                this.ModelItem.PropertyChanged -= new PropertyChangedEventHandler(this.OnModelPropertyChanged);
-                ModelTreeManager modelTreeManager = this.Context.Services.GetService<ModelTreeManager>();
-                modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(this.OnEditingScopeCompleted);
+                this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
+                    .CollectionChanged -= new NotifyCollectionChangedEventHandler(
+                    OnStateCollectionChanged
+                );
+                this.ModelItem.PropertyChanged -= new PropertyChangedEventHandler(
+                    this.OnModelPropertyChanged
+                );
+                ModelTreeManager modelTreeManager =
+                    this.Context.Services.GetService<ModelTreeManager>();
+                modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(
+                    this.OnEditingScopeCompleted
+                );
 
-                foreach (ModelItem modelItem in this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection)
+                foreach (
+                    ModelItem modelItem in this.ModelItem
+                        .Properties[StateMachineDesigner.StatesPropertyName]
+                        .Collection
+                )
                 {
                     if (modelItem.ItemType == typeof(State))
                     {
-                        ModelItemCollection transitions = modelItem.Properties[StateDesigner.TransitionsPropertyName].Collection;
+                        ModelItemCollection transitions = modelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection;
                         if (this.listenedTransitionCollections.Contains(transitions))
                         {
-                            transitions.CollectionChanged -= new NotifyCollectionChangedEventHandler(this.OnTransitionCollectionChanged);
+                            transitions.CollectionChanged -=
+                                new NotifyCollectionChangedEventHandler(
+                                    this.OnTransitionCollectionChanged
+                                );
                             this.listenedTransitionCollections.Remove(transitions);
                         }
                     }
@@ -455,7 +536,10 @@ namespace System.Activities.Core.Presentation
             }
 
             // stateMachineContainerEditor will be null when dropping a State into a WorkflowItemPresenter.
-            if (this.ModelItem.ItemType == typeof(State) && this.stateMachineContainerEditor != null)
+            if (
+                this.ModelItem.ItemType == typeof(State)
+                && this.stateMachineContainerEditor != null
+            )
             {
                 this.stateMachineContainerEditor = null;
             }
@@ -481,7 +565,10 @@ namespace System.Activities.Core.Presentation
             this.initialNode.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
             double startHeight = this.initialNode.DesiredSize.Height;
             double startWidth = this.initialNode.DesiredSize.Width;
-            object locationOfShape = this.ViewStateService.RetrieveViewState(this.ModelItem, StateContainerEditor.ShapeLocationViewStateKey);
+            object locationOfShape = this.ViewStateService.RetrieveViewState(
+                this.ModelItem,
+                StateContainerEditor.ShapeLocationViewStateKey
+            );
             if (locationOfShape != null)
             {
                 Point locationPt = (Point)locationOfShape;
@@ -490,8 +577,16 @@ namespace System.Activities.Core.Presentation
             // If the view state is missing, place the initial node in the top middle.
             else
             {
-                Point startPoint = new Point(this.panel.MinWidth / 2, startSymbolTopMargin + startHeight / 2);
-                Point startLocation = SnapVisualToGrid(this.initialNode, startPoint, new Point(-1, -1), false);
+                Point startPoint = new Point(
+                    this.panel.MinWidth / 2,
+                    startSymbolTopMargin + startHeight / 2
+                );
+                Point startLocation = SnapVisualToGrid(
+                    this.initialNode,
+                    startPoint,
+                    new Point(-1, -1),
+                    false
+                );
                 FreeFormPanel.SetLocation(this.initialNode, startLocation);
                 this.internalViewStateChange = true;
                 this.StoreShapeLocationViewState(this.ModelItem, startLocation);
@@ -502,14 +597,21 @@ namespace System.Activities.Core.Presentation
 
         void AddInitialNodeConnector(UIElement initialStateView)
         {
-            Fx.Assert(this.ModelItem.ItemType == typeof(StateMachine), "Only StateMachine should have initial state.");
-            List<Connector> attachedConnectors = StateContainerEditor.GetAttachedConnectors(this.initialNode);
+            Fx.Assert(
+                this.ModelItem.ItemType == typeof(StateMachine),
+                "Only StateMachine should have initial state."
+            );
+            List<Connector> attachedConnectors = StateContainerEditor.GetAttachedConnectors(
+                this.initialNode
+            );
             if (attachedConnectors.Count == 0)
             {
-                ConnectionPoint sourceConnectionPoint = StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(
-                    this.initialNode,
-                    StateContainerEditor.GetEmptyConnectionPoints(this.initialNode),
-                    EdgeLocation.Bottom);
+                ConnectionPoint sourceConnectionPoint =
+                    StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(
+                        this.initialNode,
+                        StateContainerEditor.GetEmptyConnectionPoints(this.initialNode),
+                        EdgeLocation.Bottom
+                    );
 
                 Point srcLocation = FreeFormPanel.GetLocation(this.initialNode);
                 Size srcSize = FreeFormPanel.GetChildSize(this.initialNode);
@@ -531,16 +633,20 @@ namespace System.Activities.Core.Presentation
                     destConnectorEdge = EdgeLocation.Left;
                 }
 
-                ConnectionPoint destinationConnectionPoint = StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(
-                    initialStateView,
-                    StateContainerEditor.GetEmptyConnectionPoints(initialStateView),
-                    destConnectorEdge);
+                ConnectionPoint destinationConnectionPoint =
+                    StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(
+                        initialStateView,
+                        StateContainerEditor.GetEmptyConnectionPoints(initialStateView),
+                        destConnectorEdge
+                    );
 
-                this.AddConnector(this.initialNode,
+                this.AddConnector(
+                    this.initialNode,
                     initialStateView,
                     this.ModelItem,
                     sourceConnectionPoint,
-                    destinationConnectionPoint);
+                    destinationConnectionPoint
+                );
             }
         }
 
@@ -553,7 +659,9 @@ namespace System.Activities.Core.Presentation
             UIElement element;
             if (!this.modelItemToUIElement.TryGetValue(model, out element))
             {
-                element = this.Context.Services.GetService<VirtualizedContainerService>().GetContainer(model, this);
+                element = this
+                    .Context.Services.GetService<VirtualizedContainerService>()
+                    .GetContainer(model, this);
                 if (element is VirtualizedContainerService.VirtualizingContainer)
                 {
                     // Fix bug 183698 - if the container does not contain other states, the minwidth should
@@ -561,23 +669,35 @@ namespace System.Activities.Core.Presentation
                     // If a child state was previously expanded, the container's min size would be set
                     // to its expanded size via ContainerService.GetHintSize in GetContainer() method.
                     // But if the item is a simple state, its min size should be reset to the default minimum.
-                    ((VirtualizedContainerService.VirtualizingContainer)element).MinWidth = DefaultStateDesignerWidth;
-                    ((VirtualizedContainerService.VirtualizingContainer)element).MinHeight = DefaultStateDesignerHeight;
+                    ((VirtualizedContainerService.VirtualizingContainer)element).MinWidth =
+                        DefaultStateDesignerWidth;
+                    ((VirtualizedContainerService.VirtualizingContainer)element).MinHeight =
+                        DefaultStateDesignerHeight;
                 }
                 else
                 {
-                    Fx.Assert(false, "We expect GetContainer always returns a VirtualizingContainer.");
+                    Fx.Assert(
+                        false,
+                        "We expect GetContainer always returns a VirtualizingContainer."
+                    );
                 }
-
 
                 element.MouseEnter += new MouseEventHandler(OnChildElementMouseEnter);
                 element.MouseLeave += new MouseEventHandler(OnChildElementMouseLeave);
-                ((FrameworkElement)element).SizeChanged += new SizeChangedEventHandler(OnChildElementSizeChanged);
+                ((FrameworkElement)element).SizeChanged += new SizeChangedEventHandler(
+                    OnChildElementSizeChanged
+                );
                 this.modelItemToUIElement.Add(model, element);
                 this.PopulateConnectionPoints(element);
 
-                object locationOfShape = this.ViewStateService.RetrieveViewState(model, ShapeLocationViewStateKey);
-                object sizeOfShape = this.ViewStateService.RetrieveViewState(model, ShapeSizeViewStateKey);
+                object locationOfShape = this.ViewStateService.RetrieveViewState(
+                    model,
+                    ShapeLocationViewStateKey
+                );
+                object sizeOfShape = this.ViewStateService.RetrieveViewState(
+                    model,
+                    ShapeSizeViewStateKey
+                );
                 if (locationOfShape != null)
                 {
                     Point locationPt = (Point)locationOfShape;
@@ -588,7 +708,8 @@ namespace System.Activities.Core.Presentation
                 {
                     Size size = (Size)sizeOfShape;
                     FreeFormPanel.SetChildSize(element, size);
-                    VirtualizedContainerService.VirtualizingContainer virtualizingContainer = element as VirtualizedContainerService.VirtualizingContainer;
+                    VirtualizedContainerService.VirtualizingContainer virtualizingContainer =
+                        element as VirtualizedContainerService.VirtualizingContainer;
                     if (virtualizingContainer != null)
                     {
                         virtualizingContainer.MinWidth = size.Width;
@@ -619,27 +740,36 @@ namespace System.Activities.Core.Presentation
             }
 
             // We need to wait until after the state visuals are added and displayed.
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
-            {
-                if (!suppressAddingConnectorsWhenAddingStateVisuals && this.populated)
+            this.Dispatcher.BeginInvoke(
+                DispatcherPriority.Loaded,
+                new Action(() =>
                 {
-                    ModelItem stateMachineModelItem = null;
-                    foreach (UIElement view in viewsAdded)
+                    if (!suppressAddingConnectorsWhenAddingStateVisuals && this.populated)
                     {
-                        ModelItem stateModelItem = StateContainerEditor.GetModelItemFromView(view);
-                        this.AddChildTransitionVisualsToStateMachineEditor(stateModelItem);
-                        if (stateMachineModelItem == null)
+                        ModelItem stateMachineModelItem = null;
+                        foreach (UIElement view in viewsAdded)
                         {
-                            stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(stateModelItem);
-                        }
-                        if (stateMachineModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].Value == stateModelItem)
-                        {
-                            this.AddInitialNodeConnector(view);
+                            ModelItem stateModelItem = StateContainerEditor.GetModelItemFromView(
+                                view
+                            );
+                            this.AddChildTransitionVisualsToStateMachineEditor(stateModelItem);
+                            if (stateMachineModelItem == null)
+                            {
+                                stateMachineModelItem =
+                                    StateContainerEditor.GetStateMachineModelItem(stateModelItem);
+                            }
+                            if (
+                                stateMachineModelItem
+                                    .Properties[StateMachineDesigner.InitialStatePropertyName]
+                                    .Value == stateModelItem
+                            )
+                            {
+                                this.AddInitialNodeConnector(view);
+                            }
                         }
                     }
-                }
-            }));
-
+                })
+            );
         }
 
         void RemoveStateVisual(UIElement removedStateDesigner)
@@ -676,25 +806,34 @@ namespace System.Activities.Core.Presentation
                 this.Remove(connector);
             }
 
-            ModelItem modelItem = ((VirtualizedContainerService.VirtualizingContainer)removedStateDesigner).ModelItem;
+            ModelItem modelItem = (
+                (VirtualizedContainerService.VirtualizingContainer)removedStateDesigner
+            ).ModelItem;
             this.modelItemToUIElement.Remove(modelItem);
             removedStateDesigner.MouseEnter -= new MouseEventHandler(OnChildElementMouseEnter);
             removedStateDesigner.MouseLeave -= new MouseEventHandler(OnChildElementMouseLeave);
-            ((FrameworkElement)removedStateDesigner).SizeChanged -= new SizeChangedEventHandler(OnChildElementSizeChanged);
+            ((FrameworkElement)removedStateDesigner).SizeChanged -= new SizeChangedEventHandler(
+                OnChildElementSizeChanged
+            );
 
             this.panel.Children.Remove(removedStateDesigner);
 
             // deselect removed item
             if (this.Context != null)
             {
-                HashSet<ModelItem> selectedItems = new HashSet<ModelItem>(this.Context.Items.GetValue<Selection>().SelectedObjects);
+                HashSet<ModelItem> selectedItems = new HashSet<ModelItem>(
+                    this.Context.Items.GetValue<Selection>().SelectedObjects
+                );
                 if (selectedItems.Contains(modelItem))
                 {
                     Selection.Toggle(this.Context, modelItem);
                 }
             }
 
-            object locationOfShape = this.ViewStateService.RetrieveViewState(modelItem, StateContainerEditor.ShapeLocationViewStateKey);
+            object locationOfShape = this.ViewStateService.RetrieveViewState(
+                modelItem,
+                StateContainerEditor.ShapeLocationViewStateKey
+            );
             if (locationOfShape != null)
             {
                 this.shapeLocations.Remove((Point)locationOfShape);
@@ -707,8 +846,12 @@ namespace System.Activities.Core.Presentation
 
         void AddTransitionVisual(ModelItem transitionModelItem)
         {
-            ModelItem sourceState = StateContainerEditor.GetParentStateModelItemForTransition(transitionModelItem);
-            ModelItem destinationState = transitionModelItem.Properties[TransitionDesigner.ToPropertyName].Value;
+            ModelItem sourceState = StateContainerEditor.GetParentStateModelItemForTransition(
+                transitionModelItem
+            );
+            ModelItem destinationState = transitionModelItem
+                .Properties[TransitionDesigner.ToPropertyName]
+                .Value;
             UIElement sourceDesigner = this.modelItemToUIElement[sourceState];
             UIElement destinationDesigner = this.modelItemToUIElement[destinationState];
             if (sourceDesigner.IsDescendantOf(this) && destinationDesigner.IsDescendantOf(this))
@@ -729,13 +872,21 @@ namespace System.Activities.Core.Presentation
         {
             Fx.Assert(stateModelItem.ItemType == typeof(State), "The ModelItem should be a State.");
             List<ModelItem> transitions = new List<ModelItem>();
-            transitions.AddRange(stateModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection);
+            transitions.AddRange(
+                stateModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection
+            );
             this.GetStateMachineContainerEditor().AddTransitionVisuals(transitions);
         }
 
-        Connector CreateConnector(ConnectionPoint srcConnPoint, ConnectionPoint destConnPoint, PointCollection points, ModelItem connectorModelItem)
+        Connector CreateConnector(
+            ConnectionPoint srcConnPoint,
+            ConnectionPoint destConnPoint,
+            PointCollection points,
+            ModelItem connectorModelItem
+        )
         {
-            bool isTransition = connectorModelItem != null && connectorModelItem.ItemType == typeof(Transition);
+            bool isTransition =
+                connectorModelItem != null && connectorModelItem.ItemType == typeof(Transition);
             Connector connector;
             if (isTransition)
             {
@@ -755,17 +906,27 @@ namespace System.Activities.Core.Presentation
                 SetConnectorStartDotToolTip(connector.StartDot, connectorModelItem);
                 connector.HighlightOnHover = true;
                 connector.ToolTip = new StateConnectionPointToolTip();
-                connector.StartDot.MouseDown += new MouseButtonEventHandler(OnConnectorStartDotMouseDown);
-                connector.StartDot.MouseUp += new MouseButtonEventHandler(OnConnectorStartDotMouseUp);
+                connector.StartDot.MouseDown += new MouseButtonEventHandler(
+                    OnConnectorStartDotMouseDown
+                );
+                connector.StartDot.MouseUp += new MouseButtonEventHandler(
+                    OnConnectorStartDotMouseUp
+                );
             }
             AutomationProperties.SetName(connector, SR.ConnectionAutomationPropertiesName);
-            connector.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(OnConnectorGotKeyboardFocus);
-            connector.RequestBringIntoView += new RequestBringIntoViewEventHandler(OnConnectorRequestBringIntoView);
+            connector.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(
+                OnConnectorGotKeyboardFocus
+            );
+            connector.RequestBringIntoView += new RequestBringIntoViewEventHandler(
+                OnConnectorRequestBringIntoView
+            );
             connector.GotFocus += new RoutedEventHandler(OnConnectorGotFocus);
             connector.MouseDoubleClick += new MouseButtonEventHandler(OnConnectorMouseDoubleClick);
             connector.MouseDown += new MouseButtonEventHandler(OnConnectorMouseDown);
             connector.KeyDown += new KeyEventHandler(OnConnectorKeyDown);
-            connector.ContextMenuOpening += new ContextMenuEventHandler(OnConnectorContextMenuOpening);
+            connector.ContextMenuOpening += new ContextMenuEventHandler(
+                OnConnectorContextMenuOpening
+            );
             SetConnectorSrcDestConnectionPoints(connector, srcConnPoint, destConnPoint);
             StateContainerEditor.SetConnectorModelItem(connector, connectorModelItem);
             connector.Unloaded += new RoutedEventHandler(OnConnectorUnloaded);
@@ -774,10 +935,22 @@ namespace System.Activities.Core.Presentation
 
             if (connectorModelItem.ItemType == typeof(Transition))
             {
-                int srcConnectionPointIndex = StateContainerEditor.GetConnectionPoints(srcConnPoint.ParentDesigner).IndexOf(srcConnPoint);
-                int destConnectionPointIndex = StateContainerEditor.GetConnectionPoints(destConnPoint.ParentDesigner).IndexOf(destConnPoint);
-                this.ViewStateService.StoreViewState(connectorModelItem, SrcConnectionPointIndexStateKey, srcConnectionPointIndex);
-                this.ViewStateService.StoreViewState(connectorModelItem, DestConnectionPointIndexStateKey, destConnectionPointIndex);
+                int srcConnectionPointIndex = StateContainerEditor
+                    .GetConnectionPoints(srcConnPoint.ParentDesigner)
+                    .IndexOf(srcConnPoint);
+                int destConnectionPointIndex = StateContainerEditor
+                    .GetConnectionPoints(destConnPoint.ParentDesigner)
+                    .IndexOf(destConnPoint);
+                this.ViewStateService.StoreViewState(
+                    connectorModelItem,
+                    SrcConnectionPointIndexStateKey,
+                    srcConnectionPointIndex
+                );
+                this.ViewStateService.StoreViewState(
+                    connectorModelItem,
+                    DestConnectionPointIndexStateKey,
+                    destConnectionPointIndex
+                );
             }
 
             return connector;
@@ -787,12 +960,23 @@ namespace System.Activities.Core.Presentation
         {
             // For a VirtualizedContainer ModelItem, if it is newly created, its View is null.
             // Otherwise its View is still the old view which does not belong to the current stateContainerEditor.
-            if (item != null && (item.View == null || DragDropHelper.GetCompositeView((WorkflowViewElement)item.View) != (UIElement)this))
+            if (
+                item != null
+                && (
+                    item.View == null
+                    || DragDropHelper.GetCompositeView((WorkflowViewElement)item.View)
+                        != (UIElement)this
+                )
+            )
             {
                 UIElement element;
-                if (modelItemToUIElement.TryGetValue(item, out element) && element is VirtualizedContainerService.VirtualizingContainer)
+                if (
+                    modelItemToUIElement.TryGetValue(item, out element)
+                    && element is VirtualizedContainerService.VirtualizingContainer
+                )
                 {
-                    VirtualizedContainerService.VirtualizingContainer container = element as VirtualizedContainerService.VirtualizingContainer;
+                    VirtualizedContainerService.VirtualizingContainer container =
+                        element as VirtualizedContainerService.VirtualizingContainer;
                     container.Populate();
                 }
             }
@@ -804,7 +988,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (!this.isRightToLeft.HasValue)
                 {
-                    this.isRightToLeft = FreeFormPanelUtilities.IsRightToLeft(this.stateContainerGrid);
+                    this.isRightToLeft = FreeFormPanelUtilities.IsRightToLeft(
+                        this.stateContainerGrid
+                    );
                 }
 
                 return this.isRightToLeft.Value;
@@ -813,47 +999,76 @@ namespace System.Activities.Core.Presentation
 
         static bool IsViewStateValid(PointCollection locationPts)
         {
-            return locationPts.All<Point>((p) => { return p.X.IsNoLessThan(0) && p.Y.IsNoLessThan(0); });
+            return locationPts.All<Point>(
+                (p) =>
+                {
+                    return p.X.IsNoLessThan(0) && p.Y.IsNoLessThan(0);
+                }
+            );
         }
 
         // Create a connector from the view state of the connector model item
         Connector CreateConnectorByConnectorModelItemViewState(
             UIElement source,
             UIElement dest,
-            ModelItem connectorModelItem)
+            ModelItem connectorModelItem
+        )
         {
             Connector connector = null;
-            object connectorLocation = this.ViewStateService.RetrieveViewState(connectorModelItem, ConnectorLocationViewStateKey);
+            object connectorLocation = this.ViewStateService.RetrieveViewState(
+                connectorModelItem,
+                ConnectorLocationViewStateKey
+            );
             PointCollection locationPts = connectorLocation as PointCollection;
             if (locationPts != null)
             {
-                ConnectionPoint srcConnPoint = null, destConnPoint = null;
+                ConnectionPoint srcConnPoint = null,
+                    destConnPoint = null;
                 if (connectorModelItem.ItemType == typeof(Transition))
                 {
-                    object srcConnPointIndex = this.ViewStateService.RetrieveViewState(connectorModelItem, SrcConnectionPointIndexStateKey);
-                    object destConnPointIndex = this.ViewStateService.RetrieveViewState(connectorModelItem, DestConnectionPointIndexStateKey);
+                    object srcConnPointIndex = this.ViewStateService.RetrieveViewState(
+                        connectorModelItem,
+                        SrcConnectionPointIndexStateKey
+                    );
+                    object destConnPointIndex = this.ViewStateService.RetrieveViewState(
+                        connectorModelItem,
+                        DestConnectionPointIndexStateKey
+                    );
 
                     if (srcConnPointIndex != null)
                     {
                         List<ConnectionPoint> srcConnPoints = GetConnectionPoints(source);
-                        ConnectionPoint viewStateSrcConnPoint = srcConnPoints.ElementAt((int)srcConnPointIndex);
+                        ConnectionPoint viewStateSrcConnPoint = srcConnPoints.ElementAt(
+                            (int)srcConnPointIndex
+                        );
 
                         if (viewStateSrcConnPoint != null)
                         {
                             srcConnPoint = viewStateSrcConnPoint;
                         }
                     }
-                    else if (connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value != null)
+                    else if (
+                        connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value
+                        != null
+                    )
                     {
-                        srcConnPoint = StateContainerEditor.GetSrcConnectionPointForSharedTrigger(source, connectorModelItem);
+                        srcConnPoint = StateContainerEditor.GetSrcConnectionPointForSharedTrigger(
+                            source,
+                            connectorModelItem
+                        );
                     }
 
                     if (destConnPointIndex != null)
                     {
                         List<ConnectionPoint> destConnPoints = GetConnectionPoints(dest);
-                        ConnectionPoint viewStateDestConnPoint = destConnPoints.ElementAt((int)destConnPointIndex);
+                        ConnectionPoint viewStateDestConnPoint = destConnPoints.ElementAt(
+                            (int)destConnPointIndex
+                        );
 
-                        if (viewStateDestConnPoint != null && GetEmptyConnectionPoints(dest).Contains(viewStateDestConnPoint))
+                        if (
+                            viewStateDestConnPoint != null
+                            && GetEmptyConnectionPoints(dest).Contains(viewStateDestConnPoint)
+                        )
                         {
                             destConnPoint = viewStateDestConnPoint;
                         }
@@ -872,7 +1087,12 @@ namespace System.Activities.Core.Presentation
                 bool shouldReroute = false;
                 if (srcConnPoint == null && destConnPoint == null)
                 {
-                    StateContainerEditor.GetEmptySrcDestConnectionPoints(source, dest, out srcConnPoint, out destConnPoint);
+                    StateContainerEditor.GetEmptySrcDestConnectionPoints(
+                        source,
+                        dest,
+                        out srcConnPoint,
+                        out destConnPoint
+                    );
                     shouldReroute = true;
                 }
                 else if (srcConnPoint == null && destConnPoint != null)
@@ -880,7 +1100,11 @@ namespace System.Activities.Core.Presentation
                     List<ConnectionPoint> srcConnectionPoints = GetEmptyConnectionPoints(source);
                     if (srcConnectionPoints.Count > 0)
                     {
-                        srcConnPoint = StateContainerEditor.GetClosestConnectionPointNotOfType(destConnPoint, srcConnectionPoints, ConnectionPointKind.Incoming);
+                        srcConnPoint = StateContainerEditor.GetClosestConnectionPointNotOfType(
+                            destConnPoint,
+                            srcConnectionPoints,
+                            ConnectionPointKind.Incoming
+                        );
                     }
                     shouldReroute = true;
                 }
@@ -889,7 +1113,11 @@ namespace System.Activities.Core.Presentation
                     List<ConnectionPoint> destConnectionPoints = GetEmptyConnectionPoints(dest);
                     if (destConnectionPoints.Count > 0)
                     {
-                        destConnPoint = StateContainerEditor.GetClosestConnectionPointNotOfType(srcConnPoint, destConnectionPoints, ConnectionPointKind.Outgoing);
+                        destConnPoint = StateContainerEditor.GetClosestConnectionPointNotOfType(
+                            srcConnPoint,
+                            destConnectionPoints,
+                            ConnectionPointKind.Outgoing
+                        );
                     }
                     shouldReroute = true;
                 }
@@ -897,69 +1125,130 @@ namespace System.Activities.Core.Presentation
                 {
                     if (shouldReroute || !IsViewStateValid(locationPts))
                     {
-                        PointCollection connectorPoints = new PointCollection(ConnectorRouter.Route(this.panel, srcConnPoint, destConnPoint));
-                        this.ViewStateService.StoreViewState(connectorModelItem, ConnectorLocationViewStateKey, connectorPoints);
-                        connector = CreateConnector(srcConnPoint, destConnPoint, connectorPoints, connectorModelItem);
+                        PointCollection connectorPoints = new PointCollection(
+                            ConnectorRouter.Route(this.panel, srcConnPoint, destConnPoint)
+                        );
+                        this.ViewStateService.StoreViewState(
+                            connectorModelItem,
+                            ConnectorLocationViewStateKey,
+                            connectorPoints
+                        );
+                        connector = CreateConnector(
+                            srcConnPoint,
+                            destConnPoint,
+                            connectorPoints,
+                            connectorModelItem
+                        );
                     }
                     else
                     {
-                        connector = this.CreateConnector(srcConnPoint, destConnPoint, locationPts, connectorModelItem);
+                        connector = this.CreateConnector(
+                            srcConnPoint,
+                            destConnPoint,
+                            locationPts,
+                            connectorModelItem
+                        );
                     }
-
                 }
             }
             return connector;
         }
 
-        PointCollection CreatePointCollectionForAutoConnectOrAutoSplit(UIElement sourceDesigner,
+        PointCollection CreatePointCollectionForAutoConnectOrAutoSplit(
+            UIElement sourceDesigner,
             UIElement destinationDesigner,
             ModelItem connectorModelItem,
             ref ConnectionPoint sourceConnectionPoint,
-            ref ConnectionPoint destinationConnectionPoint)
+            ref ConnectionPoint destinationConnectionPoint
+        )
         {
             PointCollection points = null;
-            if (this.activeSrcConnectionPointForAutoSplit != null && this.activeSrcConnectionPointForAutoSplit.ParentDesigner == sourceDesigner)
+            if (
+                this.activeSrcConnectionPointForAutoSplit != null
+                && this.activeSrcConnectionPointForAutoSplit.ParentDesigner == sourceDesigner
+            )
             {
                 sourceConnectionPoint = this.activeSrcConnectionPointForAutoSplit;
                 this.activeSrcConnectionPointForAutoSplit = null;
-                destinationConnectionPoint = StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(destinationDesigner, StateContainerEditor.GetEmptyConnectionPoints(destinationDesigner), this.entryEdgeForAutoSplit);
+                destinationConnectionPoint =
+                    StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(
+                        destinationDesigner,
+                        StateContainerEditor.GetEmptyConnectionPoints(destinationDesigner),
+                        this.entryEdgeForAutoSplit
+                    );
             }
-            else if (this.activeSrcConnectionPoint != null && this.activeSrcConnectionPoint.ParentDesigner == sourceDesigner)
+            else if (
+                this.activeSrcConnectionPoint != null
+                && this.activeSrcConnectionPoint.ParentDesigner == sourceDesigner
+            )
             {
                 sourceConnectionPoint = this.activeSrcConnectionPoint;
                 this.activeSrcConnectionPoint = null;
             }
             else
             {
-                if (connectorModelItem.ItemType == typeof(Transition) && connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value != null)
+                if (
+                    connectorModelItem.ItemType == typeof(Transition)
+                    && connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value
+                        != null
+                )
                 {
-                    sourceConnectionPoint = StateContainerEditor.GetSrcConnectionPointForSharedTrigger(sourceDesigner, connectorModelItem);
+                    sourceConnectionPoint =
+                        StateContainerEditor.GetSrcConnectionPointForSharedTrigger(
+                            sourceDesigner,
+                            connectorModelItem
+                        );
                 }
             }
 
-            if (this.activeDestConnectionPointForAutoSplit != null && this.activeDestConnectionPointForAutoSplit.ParentDesigner == destinationDesigner)
+            if (
+                this.activeDestConnectionPointForAutoSplit != null
+                && this.activeDestConnectionPointForAutoSplit.ParentDesigner == destinationDesigner
+            )
             {
                 destinationConnectionPoint = this.activeDestConnectionPointForAutoSplit;
                 this.activeDestConnectionPointForAutoSplit = null;
-                sourceConnectionPoint = StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(sourceDesigner, StateContainerEditor.GetEmptyConnectionPoints(sourceDesigner), this.exitEdgeForAutoSplit);
+                sourceConnectionPoint =
+                    StateContainerEditor.GetConnectionPointClosestToEdgeMidPoint(
+                        sourceDesigner,
+                        StateContainerEditor.GetEmptyConnectionPoints(sourceDesigner),
+                        this.exitEdgeForAutoSplit
+                    );
             }
 
             if (sourceConnectionPoint != null && destinationConnectionPoint == null)
             {
-                destinationConnectionPoint = StateContainerEditor.GetClosestDestConnectionPoint(sourceConnectionPoint, destinationDesigner);
+                destinationConnectionPoint = StateContainerEditor.GetClosestDestConnectionPoint(
+                    sourceConnectionPoint,
+                    destinationDesigner
+                );
             }
             else if (sourceConnectionPoint == null && destinationConnectionPoint != null)
             {
-                sourceConnectionPoint = StateContainerEditor.GetClosestSrcConnectionPoint(sourceDesigner, destinationConnectionPoint);
+                sourceConnectionPoint = StateContainerEditor.GetClosestSrcConnectionPoint(
+                    sourceDesigner,
+                    destinationConnectionPoint
+                );
             }
             else if (sourceConnectionPoint == null && destinationConnectionPoint == null)
             {
-                StateContainerEditor.GetEmptySrcDestConnectionPoints(sourceDesigner, destinationDesigner, out sourceConnectionPoint, out destinationConnectionPoint);
+                StateContainerEditor.GetEmptySrcDestConnectionPoints(
+                    sourceDesigner,
+                    destinationDesigner,
+                    out sourceConnectionPoint,
+                    out destinationConnectionPoint
+                );
             }
 
             if (sourceConnectionPoint != null && destinationConnectionPoint != null)
             {
-                points = new PointCollection(ConnectorRouter.Route(this.panel, sourceConnectionPoint, destinationConnectionPoint));
+                points = new PointCollection(
+                    ConnectorRouter.Route(
+                        this.panel,
+                        sourceConnectionPoint,
+                        destinationConnectionPoint
+                    )
+                );
             }
             return points;
         }
@@ -971,7 +1260,8 @@ namespace System.Activities.Core.Presentation
             UIElement destinationDesigner,
             ModelItem connectorModelItem,
             ConnectionPoint sourceConnectionPoint = null,
-            ConnectionPoint destinationConnectionPoint = null)
+            ConnectionPoint destinationConnectionPoint = null
+        )
         {
             // Check whether connector already exists.
             // If users programmatically add state with transition to the stateMachine, AddConnector will be called twice for one connectorModelItem.
@@ -980,14 +1270,34 @@ namespace System.Activities.Core.Presentation
                 return;
             }
 
-            Connector connector = CreateConnectorByConnectorModelItemViewState(sourceDesigner, destinationDesigner, connectorModelItem);
+            Connector connector = CreateConnectorByConnectorModelItemViewState(
+                sourceDesigner,
+                destinationDesigner,
+                connectorModelItem
+            );
             if (connector == null)
             {
-                PointCollection connectorPoints = this.CreatePointCollectionForAutoConnectOrAutoSplit(sourceDesigner, destinationDesigner, connectorModelItem, ref sourceConnectionPoint, ref destinationConnectionPoint);
+                PointCollection connectorPoints =
+                    this.CreatePointCollectionForAutoConnectOrAutoSplit(
+                        sourceDesigner,
+                        destinationDesigner,
+                        connectorModelItem,
+                        ref sourceConnectionPoint,
+                        ref destinationConnectionPoint
+                    );
                 if (connectorPoints != null)
                 {
-                    connector = CreateConnector(sourceConnectionPoint, destinationConnectionPoint, connectorPoints, connectorModelItem);
-                    this.ViewStateService.StoreViewState(connectorModelItem, ConnectorLocationViewStateKey, connectorPoints);
+                    connector = CreateConnector(
+                        sourceConnectionPoint,
+                        destinationConnectionPoint,
+                        connectorPoints,
+                        connectorModelItem
+                    );
+                    this.ViewStateService.StoreViewState(
+                        connectorModelItem,
+                        ConnectorLocationViewStateKey,
+                        connectorPoints
+                    );
                 }
             }
             if (connector != null)
@@ -999,7 +1309,9 @@ namespace System.Activities.Core.Presentation
         void Remove(Connector connector)
         {
             ConnectionPoint srcConnectionPoint = FreeFormPanel.GetSourceConnectionPoint(connector);
-            ConnectionPoint destConnectionPoint = FreeFormPanel.GetDestinationConnectionPoint(connector);
+            ConnectionPoint destConnectionPoint = FreeFormPanel.GetDestinationConnectionPoint(
+                connector
+            );
             // Update ConnectionPoints
             srcConnectionPoint.AttachedConnectors.Remove(connector);
             destConnectionPoint.AttachedConnectors.Remove(connector);
@@ -1013,17 +1325,27 @@ namespace System.Activities.Core.Presentation
 
             if (connector is ConnectorWithStartDot)
             {
-                connector.StartDot.MouseDown -= new MouseButtonEventHandler(OnConnectorStartDotMouseDown);
-                connector.StartDot.MouseUp -= new MouseButtonEventHandler(OnConnectorStartDotMouseUp);
+                connector.StartDot.MouseDown -= new MouseButtonEventHandler(
+                    OnConnectorStartDotMouseDown
+                );
+                connector.StartDot.MouseUp -= new MouseButtonEventHandler(
+                    OnConnectorStartDotMouseUp
+                );
             }
 
-            connector.GotKeyboardFocus -= new KeyboardFocusChangedEventHandler(OnConnectorGotKeyboardFocus);
-            connector.RequestBringIntoView -= new RequestBringIntoViewEventHandler(OnConnectorRequestBringIntoView);
+            connector.GotKeyboardFocus -= new KeyboardFocusChangedEventHandler(
+                OnConnectorGotKeyboardFocus
+            );
+            connector.RequestBringIntoView -= new RequestBringIntoViewEventHandler(
+                OnConnectorRequestBringIntoView
+            );
             connector.GotFocus -= new RoutedEventHandler(OnConnectorGotFocus);
             connector.MouseDoubleClick -= new MouseButtonEventHandler(OnConnectorMouseDoubleClick);
             connector.MouseDown -= new MouseButtonEventHandler(OnConnectorMouseDown);
             connector.KeyDown -= new KeyEventHandler(OnConnectorKeyDown);
-            connector.ContextMenuOpening -= new ContextMenuEventHandler(OnConnectorContextMenuOpening);
+            connector.ContextMenuOpening -= new ContextMenuEventHandler(
+                OnConnectorContextMenuOpening
+            );
             connector.Unloaded -= new RoutedEventHandler(OnConnectorUnloaded);
         }
 
@@ -1031,7 +1353,11 @@ namespace System.Activities.Core.Presentation
 
         #region ConnectionPoint
 
-        MultiBinding GetConnectionPointBinding(FrameworkElement element, double widthFraction, double heightFraction)
+        MultiBinding GetConnectionPointBinding(
+            FrameworkElement element,
+            double widthFraction,
+            double heightFraction
+        )
         {
             Fx.Assert(element != null, "FrameworkElement is null.");
             MultiBinding bindings = new MultiBinding();
@@ -1044,19 +1370,38 @@ namespace System.Activities.Core.Presentation
             bindings.Bindings.Add(sizeBinding);
             bindings.Bindings.Add(locationBinding);
             bindings.Converter = new ConnectionPointConverter();
-            bindings.ConverterParameter = new List<Object> { widthFraction, heightFraction, element.Margin };
+            bindings.ConverterParameter = new List<Object>
+            {
+                widthFraction,
+                heightFraction,
+                element.Margin,
+            };
             return bindings;
         }
 
         //widthFraction and heightFraction determine the location of the ConnectionPoint on the UIElement.
-        ConnectionPoint CreateConnectionPoint(UIElement element, double widthFraction, double heightFraction, EdgeLocation location, ConnectionPointKind type)
+        ConnectionPoint CreateConnectionPoint(
+            UIElement element,
+            double widthFraction,
+            double heightFraction,
+            EdgeLocation location,
+            ConnectionPointKind type
+        )
         {
             ConnectionPoint connectionPoint = new ConnectionPoint();
             connectionPoint.EdgeLocation = location;
             connectionPoint.PointType = type;
             connectionPoint.ParentDesigner = element;
             connectionPoint.IsEnabled = false;
-            BindingOperations.SetBinding(connectionPoint, ConnectionPoint.LocationProperty, GetConnectionPointBinding(element as FrameworkElement, widthFraction, heightFraction));
+            BindingOperations.SetBinding(
+                connectionPoint,
+                ConnectionPoint.LocationProperty,
+                GetConnectionPointBinding(
+                    element as FrameworkElement,
+                    widthFraction,
+                    heightFraction
+                )
+            );
             return connectionPoint;
         }
 
@@ -1067,7 +1412,10 @@ namespace System.Activities.Core.Presentation
 
             const double connectionPointRatio = 0.05;
             ConnectionPointKind connectionPointType = ConnectionPointKind.Default;
-            if (view is VirtualizedContainerService.VirtualizingContainer && IsFinalState(((VirtualizedContainerService.VirtualizingContainer)view).ModelItem))
+            if (
+                view is VirtualizedContainerService.VirtualizingContainer
+                && IsFinalState(((VirtualizedContainerService.VirtualizingContainer)view).ModelItem)
+            )
             {
                 connectionPointType = ConnectionPointKind.Incoming;
             }
@@ -1078,10 +1426,42 @@ namespace System.Activities.Core.Presentation
 
             for (int ii = 1; ii <= ConnectionPointNum; ii++)
             {
-                connectionPoints.Add(CreateConnectionPoint(view, 1, ii * connectionPointRatio, EdgeLocation.Right, connectionPointType));
-                connectionPoints.Add(CreateConnectionPoint(view, 0, ii * connectionPointRatio, EdgeLocation.Left, connectionPointType));
-                connectionPoints.Add(CreateConnectionPoint(view, ii * connectionPointRatio, 0, EdgeLocation.Top, connectionPointType));
-                connectionPoints.Add(CreateConnectionPoint(view, ii * connectionPointRatio, 1, EdgeLocation.Bottom, connectionPointType));
+                connectionPoints.Add(
+                    CreateConnectionPoint(
+                        view,
+                        1,
+                        ii * connectionPointRatio,
+                        EdgeLocation.Right,
+                        connectionPointType
+                    )
+                );
+                connectionPoints.Add(
+                    CreateConnectionPoint(
+                        view,
+                        0,
+                        ii * connectionPointRatio,
+                        EdgeLocation.Left,
+                        connectionPointType
+                    )
+                );
+                connectionPoints.Add(
+                    CreateConnectionPoint(
+                        view,
+                        ii * connectionPointRatio,
+                        0,
+                        EdgeLocation.Top,
+                        connectionPointType
+                    )
+                );
+                connectionPoints.Add(
+                    CreateConnectionPoint(
+                        view,
+                        ii * connectionPointRatio,
+                        1,
+                        EdgeLocation.Bottom,
+                        connectionPointType
+                    )
+                );
             }
 
             StateContainerEditor.SetConnectionPoints(view, connectionPoints);
@@ -1099,14 +1479,18 @@ namespace System.Activities.Core.Presentation
                     return connectionPointsToShow;
                 }
                 // Don't allow creating more than one connectors from the initial node.
-                if ((StateContainerEditor.GetOutgoingConnectors(element).Count > 0) && !this.IsMovingStartOfConnectorFromInitialNode())
+                if (
+                    (StateContainerEditor.GetOutgoingConnectors(element).Count > 0)
+                    && !this.IsMovingStartOfConnectorFromInitialNode()
+                )
                 {
                     return connectionPointsToShow;
                 }
             }
             else if (element is VirtualizedContainerService.VirtualizingContainer)
             {
-                VirtualizedContainerService.VirtualizingContainer container = (VirtualizedContainerService.VirtualizingContainer)element;
+                VirtualizedContainerService.VirtualizingContainer container =
+                    (VirtualizedContainerService.VirtualizingContainer)element;
 
                 // Don't allow setting final state as the initial state
                 if (IsFinalState(container.ModelItem) && this.IsCreatingConnectorFromInitialNode())
@@ -1120,16 +1504,32 @@ namespace System.Activities.Core.Presentation
                 }
             }
 
-            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(element);
+            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(
+                element
+            );
             if (isCreatingConnector)
             {
-                connectionPointsToShow.AddRange(connectionPoints.Where<ConnectionPoint>(
-                    (p) => { return p.PointType != ConnectionPointKind.Outgoing && p.AttachedConnectors.Count == 0; }));
+                connectionPointsToShow.AddRange(
+                    connectionPoints.Where<ConnectionPoint>(
+                        (p) =>
+                        {
+                            return p.PointType != ConnectionPointKind.Outgoing
+                                && p.AttachedConnectors.Count == 0;
+                        }
+                    )
+                );
             }
             else
             {
-                connectionPointsToShow.AddRange(connectionPoints.Where<ConnectionPoint>(
-                    (p) => { return p.PointType != ConnectionPointKind.Incoming && p.AttachedConnectors.Count == 0; }));
+                connectionPointsToShow.AddRange(
+                    connectionPoints.Where<ConnectionPoint>(
+                        (p) =>
+                        {
+                            return p.PointType != ConnectionPointKind.Incoming
+                                && p.AttachedConnectors.Count == 0;
+                        }
+                    )
+                );
             }
 
             return connectionPointsToShow;
@@ -1137,12 +1537,21 @@ namespace System.Activities.Core.Presentation
 
         private void RemoveConnectionPointsAdorner(UIElement adornedElement)
         {
-            IEnumerable<Adorner> adornersRemoved = RemoveAdorner(adornedElement, typeof(ConnectionPointsAdorner));
-            Fx.Assert(adornersRemoved.Count() <= 1, "There should be at most one ConnectionPointsAdorner");
+            IEnumerable<Adorner> adornersRemoved = RemoveAdorner(
+                adornedElement,
+                typeof(ConnectionPointsAdorner)
+            );
+            Fx.Assert(
+                adornersRemoved.Count() <= 1,
+                "There should be at most one ConnectionPointsAdorner"
+            );
             if (adornersRemoved.Count() == 1)
             {
                 ConnectionPointsAdorner adorner = (ConnectionPointsAdorner)adornersRemoved.First();
-                Fx.Assert(object.Equals(this.activeConnectionPointsAdorner, adorner), "The adorner removed should be the same as the active adorner.");
+                Fx.Assert(
+                    object.Equals(this.activeConnectionPointsAdorner, adorner),
+                    "The adorner removed should be the same as the active adorner."
+                );
                 this.activeConnectionPointsAdorner = null;
                 foreach (ConnectionPoint connectionPoint in adorner.ConnectionPoints)
                 {
@@ -1157,7 +1566,9 @@ namespace System.Activities.Core.Presentation
 
         private List<ConnectionPoint> GetAvailableConnectionPoint(UIElement designer)
         {
-            List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>(StateContainerEditor.GetConnectionPoints(designer));
+            List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>(
+                StateContainerEditor.GetConnectionPoints(designer)
+            );
             List<ConnectionPoint> usedConnectionPoints = new List<ConnectionPoint>();
             foreach (ConnectionPoint connectionPoint in connectionPoints.Reverse<ConnectionPoint>())
             {
@@ -1179,7 +1590,12 @@ namespace System.Activities.Core.Presentation
             {
                 foreach (ConnectionPoint usedConnectionPoint in usedConnectionPoints)
                 {
-                    if (DesignerGeometryHelper.ManhattanDistanceBetweenPoints(usedConnectionPoint.Location, connectionPoint.Location) < ConnectionPointMargin)
+                    if (
+                        DesignerGeometryHelper.ManhattanDistanceBetweenPoints(
+                            usedConnectionPoint.Location,
+                            connectionPoint.Location
+                        ) < ConnectionPointMargin
+                    )
                     {
                         connectionPoints.Remove(connectionPoint);
                         break;
@@ -1189,19 +1605,26 @@ namespace System.Activities.Core.Presentation
             return connectionPoints;
         }
 
-
         private void UpdateActiveConnectionPoint(MouseEventArgs e)
         {
-            List<ConnectionPoint> connectionPoints = GetAvailableConnectionPoint(this.activeConnectionPointsAdorner.AdornedElement);
+            List<ConnectionPoint> connectionPoints = GetAvailableConnectionPoint(
+                this.activeConnectionPointsAdorner.AdornedElement
+            );
             Point mousePosition = e.GetPosition(this.GetStateMachineContainerEditor());
             double minDist;
-            ConnectionPoint closestConnectionPoint = ConnectionPoint.GetClosestConnectionPoint(connectionPoints, mousePosition, out minDist);
+            ConnectionPoint closestConnectionPoint = ConnectionPoint.GetClosestConnectionPoint(
+                connectionPoints,
+                mousePosition,
+                out minDist
+            );
             if (closestConnectionPoint == null)
             {
                 return;
             }
 
-            foreach (ConnectionPoint connectionPoint in this.activeConnectionPointsAdorner.ConnectionPoints)
+            foreach (
+                ConnectionPoint connectionPoint in this.activeConnectionPointsAdorner.ConnectionPoints
+            )
             {
                 if (object.Equals(connectionPoint, closestConnectionPoint))
                 {
@@ -1233,7 +1656,9 @@ namespace System.Activities.Core.Presentation
                 if (senderElement is VirtualizedContainerService.VirtualizingContainer)
                 {
                     VirtualizedContainerService.VirtualizingContainer stateDesigner =
-                        VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(Mouse.DirectlyOver as DependencyObject);
+                        VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                            Mouse.DirectlyOver as DependencyObject
+                        );
                     // We don't want to show the connection points if the mouse is not directly over this state
                     if (stateDesigner != senderElement)
                     {
@@ -1247,7 +1672,9 @@ namespace System.Activities.Core.Presentation
                 if (this.ModelItem.ItemType == typeof(State))
                 {
                     VirtualizedContainerService.VirtualizingContainer parent =
-                        VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(this);
+                        VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                            this
+                        );
                     this.RemoveConnectionPointsAdorner(parent);
                 }
             }
@@ -1258,10 +1685,22 @@ namespace System.Activities.Core.Presentation
             bool isSelected = false;
             if (element is VirtualizedContainerService.VirtualizingContainer)
             {
-                isSelected = (((Selection)this.Context.Items.GetValue<Selection>()).SelectedObjects as ICollection<ModelItem>).Contains(((VirtualizedContainerService.VirtualizingContainer)element).ModelItem);
+                isSelected = (
+                    ((Selection)this.Context.Items.GetValue<Selection>()).SelectedObjects
+                    as ICollection<ModelItem>
+                ).Contains(((VirtualizedContainerService.VirtualizingContainer)element).ModelItem);
             }
-            ConnectionPointsAdorner connectionPointsAdorner = new StateMachineConnectionPointsAdorner(element, ConnectionPointsToShow(element), isSelected);
-            if ((element is VirtualizedContainerService.VirtualizingContainer) && ((VirtualizedContainerService.VirtualizingContainer)element).ModelItem.ItemType == typeof(State))
+            ConnectionPointsAdorner connectionPointsAdorner =
+                new StateMachineConnectionPointsAdorner(
+                    element,
+                    ConnectionPointsToShow(element),
+                    isSelected
+                );
+            if (
+                (element is VirtualizedContainerService.VirtualizingContainer)
+                && ((VirtualizedContainerService.VirtualizingContainer)element).ModelItem.ItemType
+                    == typeof(State)
+            )
             {
                 connectionPointsAdorner.ToolTip = SR.TransitionConnectionPointTooltip;
             }
@@ -1275,9 +1714,15 @@ namespace System.Activities.Core.Presentation
             adornerLayer.Add(connectionPointsAdorner);
             // The outmostEditor should handle all the connection point related events for all its descendants
             StateContainerEditor stateMachineContainer = this.GetStateMachineContainerEditor();
-            connectionPointsAdorner.MouseDown += new MouseButtonEventHandler(stateMachineContainer.OnConnectionPointMouseDown);
-            connectionPointsAdorner.MouseUp += new MouseButtonEventHandler(stateMachineContainer.OnConnectionPointMouseUp);
-            connectionPointsAdorner.MouseLeave += new MouseEventHandler(stateMachineContainer.OnConnectionPointMouseLeave);
+            connectionPointsAdorner.MouseDown += new MouseButtonEventHandler(
+                stateMachineContainer.OnConnectionPointMouseDown
+            );
+            connectionPointsAdorner.MouseUp += new MouseButtonEventHandler(
+                stateMachineContainer.OnConnectionPointMouseUp
+            );
+            connectionPointsAdorner.MouseLeave += new MouseEventHandler(
+                stateMachineContainer.OnConnectionPointMouseLeave
+            );
 
             this.activeConnectionPointsAdorner = connectionPointsAdorner;
         }
@@ -1287,15 +1732,21 @@ namespace System.Activities.Core.Presentation
             bool removeConnectionPointsAdorner = true;
             if (Mouse.DirectlyOver != null)
             {
-                removeConnectionPointsAdorner = !typeof(ConnectionPointsAdorner).IsAssignableFrom(Mouse.DirectlyOver.GetType());
+                removeConnectionPointsAdorner = !typeof(ConnectionPointsAdorner).IsAssignableFrom(
+                    Mouse.DirectlyOver.GetType()
+                );
             }
             if (removeConnectionPointsAdorner)
             {
                 this.RemoveConnectionPointsAdorner(sender as UIElement);
 
                 // Add connection points adorner to its containing state
-                VirtualizedContainerService.VirtualizingContainer stateDesigner = VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(this);
-                StateContainerEditor parentContainer = VisualTreeUtils.FindVisualAncestor<StateContainerEditor>(stateDesigner);
+                VirtualizedContainerService.VirtualizingContainer stateDesigner =
+                    VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                        this
+                    );
+                StateContainerEditor parentContainer =
+                    VisualTreeUtils.FindVisualAncestor<StateContainerEditor>(stateDesigner);
                 if (stateDesigner != null && parentContainer != null && !parentContainer.IsReadOnly)
                 {
                     this.AddConnectionPointsAdorner(stateDesigner);
@@ -1305,7 +1756,8 @@ namespace System.Activities.Core.Presentation
 
         void OnChildElementSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            VirtualizedContainerService.VirtualizingContainer view = sender as VirtualizedContainerService.VirtualizingContainer;
+            VirtualizedContainerService.VirtualizingContainer view =
+                sender as VirtualizedContainerService.VirtualizingContainer;
 
             if (view != null)
             {
@@ -1313,7 +1765,11 @@ namespace System.Activities.Core.Presentation
                 // Using internalViewStateChange flag for that purpose.
                 this.internalViewStateChange = true;
                 ModelItem storageModelItem = view.ModelItem;
-                this.ViewStateService.StoreViewState(storageModelItem, ShapeSizeViewStateKey, ((UIElement)sender).DesiredSize);
+                this.ViewStateService.StoreViewState(
+                    storageModelItem,
+                    ShapeSizeViewStateKey,
+                    ((UIElement)sender).DesiredSize
+                );
                 this.internalViewStateChange = false;
             }
         }
@@ -1336,7 +1792,6 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
         }
 
-
         void OnConnectorMouseDown(object sender, MouseButtonEventArgs e)
         {
             Connector connector = (Connector)sender;
@@ -1350,11 +1805,15 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
         }
 
-
         void OnConnectorUnloaded(object sender, RoutedEventArgs e)
         {
             ModelItem primarySelection = this.Context.Items.GetValue<Selection>().PrimarySelection;
-            if (object.Equals(primarySelection, StateContainerEditor.GetConnectorModelItem(sender as DependencyObject)))
+            if (
+                object.Equals(
+                    primarySelection,
+                    StateContainerEditor.GetConnectorModelItem(sender as DependencyObject)
+                )
+            )
             {
                 if (primarySelection != null)
                 {
@@ -1381,7 +1840,10 @@ namespace System.Activities.Core.Presentation
         {
             Connector connector = e.Source as Connector;
 
-            if (this.panel.connectorEditor == null || !connector.Equals(this.panel.connectorEditor.Connector))
+            if (
+                this.panel.connectorEditor == null
+                || !connector.Equals(this.panel.connectorEditor.Connector)
+            )
             {
                 this.panel.RemoveConnectorEditor();
                 this.panel.connectorEditor = new ConnectorEditor(this.panel, connector);
@@ -1390,7 +1852,9 @@ namespace System.Activities.Core.Presentation
             if (this.panel.Children.Contains(connector))
             {
                 this.updatingSelectedConnector = true;
-                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(connector);
+                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                    connector
+                );
                 Selection newSelection = new Selection();
                 if (connectorModelItem != null && connectorModelItem.ItemType == typeof(Transition))
                 {
@@ -1403,9 +1867,14 @@ namespace System.Activities.Core.Presentation
                 if (connectorModelItem.ItemType == typeof(Transition))
                 {
                     // Populate the source and destination States's View if it is still in Virtualized mode.
-                    ModelItem destinationState = connectorModelItem.Properties[TransitionDesigner.ToPropertyName].Value;
+                    ModelItem destinationState = connectorModelItem
+                        .Properties[TransitionDesigner.ToPropertyName]
+                        .Value;
                     PopulateVirtualizingContainer(destinationState);
-                    ModelItem sourceState = StateContainerEditor.GetParentStateModelItemForTransition(connectorModelItem);
+                    ModelItem sourceState =
+                        StateContainerEditor.GetParentStateModelItemForTransition(
+                            connectorModelItem
+                        );
                     PopulateVirtualizingContainer(sourceState);
 
                     // Assign its destination State's View on the connector model item for copy/paste function.
@@ -1420,7 +1889,11 @@ namespace System.Activities.Core.Presentation
         {
             // If selection changed, remove ConnectorEditor if existed.
             // Only if the selection changed is caused by adding ConnectorEditor when OnConnectorGotFocus.
-            if (!this.updatingSelectedConnector && this.panel != null && this.panel.connectorEditor != null)
+            if (
+                !this.updatingSelectedConnector
+                && this.panel != null
+                && this.panel.connectorEditor != null
+            )
             {
                 this.panel.RemoveConnectorEditor();
             }
@@ -1430,7 +1903,9 @@ namespace System.Activities.Core.Presentation
         {
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
-                this.DesignerView.MakeRootDesigner(StateContainerEditor.GetConnectorModelItem(sender as DependencyObject));
+                this.DesignerView.MakeRootDesigner(
+                    StateContainerEditor.GetConnectorModelItem(sender as DependencyObject)
+                );
                 e.Handled = true;
             }
         }
@@ -1439,7 +1914,9 @@ namespace System.Activities.Core.Presentation
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(sender as DependencyObject);
+                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                    sender as DependencyObject
+                );
                 if (connectorModelItem != null && connectorModelItem.ItemType == typeof(Transition))
                 {
                     this.DesignerView.MakeRootDesigner(connectorModelItem);
@@ -1461,15 +1938,24 @@ namespace System.Activities.Core.Presentation
         void OnConnectionPointMouseDown(object sender, MouseButtonEventArgs e)
         {
             UIElement srcElement = ((Adorner)sender).AdornedElement as UIElement;
-            this.activeSrcConnectionPoint = ConnectionPointHitTest(srcElement, e.GetPosition(this.panel));
+            this.activeSrcConnectionPoint = ConnectionPointHitTest(
+                srcElement,
+                e.GetPosition(this.panel)
+            );
 
-            if (this.activeSrcConnectionPoint != null &&
-                !this.activeSrcConnectionPoint.ParentDesigner.IsKeyboardFocusWithin)
+            if (
+                this.activeSrcConnectionPoint != null
+                && !this.activeSrcConnectionPoint.ParentDesigner.IsKeyboardFocusWithin
+            )
             {
                 // If a floating annotation is visible, it needs to lose the keyboard focus
                 // to hide itself again (bug 200739). Therefore, selecting the src connection
                 // point would give the keyboard focus back to its source parent state.
-                Keyboard.Focus(VirtualizedContainerService.TryGetVirtualizedElement(this.activeSrcConnectionPoint.ParentDesigner));
+                Keyboard.Focus(
+                    VirtualizedContainerService.TryGetVirtualizedElement(
+                        this.activeSrcConnectionPoint.ParentDesigner
+                    )
+                );
             }
 
             e.Handled = true;
@@ -1486,10 +1972,21 @@ namespace System.Activities.Core.Presentation
             UIElement dest = ((Adorner)sender).AdornedElement as UIElement;
             if (this.activeSrcConnectionPoint != null)
             {
-                ConnectionPoint destConnectionPoint = ConnectionPointHitTest(dest, e.GetPosition(this.panel));
-                if (destConnectionPoint != null && !this.activeSrcConnectionPoint.Equals(destConnectionPoint))
+                ConnectionPoint destConnectionPoint = ConnectionPointHitTest(
+                    dest,
+                    e.GetPosition(this.panel)
+                );
+                if (
+                    destConnectionPoint != null
+                    && !this.activeSrcConnectionPoint.Equals(destConnectionPoint)
+                )
                 {
-                    ConnectorCreationResult result = CreateConnectorGesture(this.activeSrcConnectionPoint, destConnectionPoint, null, false);
+                    ConnectorCreationResult result = CreateConnectorGesture(
+                        this.activeSrcConnectionPoint,
+                        destConnectionPoint,
+                        null,
+                        false
+                    );
                     if (result != ConnectorCreationResult.Success)
                     {
                         StateContainerEditor.ReportConnectorCreationError(result);
@@ -1511,7 +2008,10 @@ namespace System.Activities.Core.Presentation
 
         #region FreeFormPanelEventHandlers
 
-        void OnFreeFormPanelLocationChanged(object sender, System.Activities.Presentation.FreeFormEditing.LocationChangedEventArgs e)
+        void OnFreeFormPanelLocationChanged(
+            object sender,
+            System.Activities.Presentation.FreeFormEditing.LocationChangedEventArgs e
+        )
         {
             Fx.Assert(sender is UIElement, "Sender should be of type UIElement");
             Connector movedConnector = sender as Connector;
@@ -1520,10 +2020,22 @@ namespace System.Activities.Core.Presentation
                 //ViewState is undoable only when a user gesture moves a connector. If the FreeFormPanel routes a connector,
                 //the change is not undoable.
                 bool isUndoableViewState = false;
-                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(movedConnector);
-                PointCollection existingViewState = this.ViewStateService.RetrieveViewState(connectorModelItem, ConnectorLocationViewStateKey) as PointCollection;
-                if (existingViewState != null && existingViewState.Count > 0 && movedConnector.Points.Count > 0
-                    && existingViewState[0].Equals(movedConnector.Points[0]) && existingViewState[existingViewState.Count - 1].Equals(movedConnector.Points[movedConnector.Points.Count - 1]))
+                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                    movedConnector
+                );
+                PointCollection existingViewState =
+                    this.ViewStateService.RetrieveViewState(
+                        connectorModelItem,
+                        ConnectorLocationViewStateKey
+                    ) as PointCollection;
+                if (
+                    existingViewState != null
+                    && existingViewState.Count > 0
+                    && movedConnector.Points.Count > 0
+                    && existingViewState[0].Equals(movedConnector.Points[0])
+                    && existingViewState[existingViewState.Count - 1]
+                        .Equals(movedConnector.Points[movedConnector.Points.Count - 1])
+                )
                 {
                     isUndoableViewState = true;
                 }
@@ -1541,7 +2053,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        void UpdateStateMachineOnConnectorMoved(ConnectionPoint knownConnectionPoint, Point newPoint, Connector movedConnector, bool isConnectorStartMoved)
+        void UpdateStateMachineOnConnectorMoved(
+            ConnectionPoint knownConnectionPoint,
+            Point newPoint,
+            Connector movedConnector,
+            bool isConnectorStartMoved
+        )
         {
             HitTestResult hitTestResult = VisualTreeHelper.HitTest(this.panel, newPoint);
             if (hitTestResult == null)
@@ -1555,7 +2072,10 @@ namespace System.Activities.Core.Presentation
             //The case where the Connector is dropped on a ConnectionPoint.
             if (this.lastConnectionPointMouseUpElement != null)
             {
-                newConnectionPoint = StateContainerEditor.ConnectionPointHitTest(this.lastConnectionPointMouseUpElement, newPoint);
+                newConnectionPoint = StateContainerEditor.ConnectionPointHitTest(
+                    this.lastConnectionPointMouseUpElement,
+                    newPoint
+                );
                 if (newConnectionPoint != null)
                 {
                     newViewElement = this.lastConnectionPointMouseUpElement;
@@ -1566,7 +2086,9 @@ namespace System.Activities.Core.Presentation
             //The case where the link is dropped on a shape.
             if (newViewElement == null)
             {
-                newViewElement = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(hitTestResult.VisualHit);
+                newViewElement = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(
+                    hitTestResult.VisualHit
+                );
             }
 
             if (newViewElement != null)
@@ -1583,25 +2105,52 @@ namespace System.Activities.Core.Presentation
                         {
                             if (newConnectionPoint == null)
                             {
-                                result = CreateConnectorGesture(knownConnectionPoint, newViewElement, movedConnector, false);
+                                result = CreateConnectorGesture(
+                                    knownConnectionPoint,
+                                    newViewElement,
+                                    movedConnector,
+                                    false
+                                );
                             }
                             else
                             {
-                                result = CreateConnectorGesture(knownConnectionPoint, newConnectionPoint, movedConnector, false);
+                                result = CreateConnectorGesture(
+                                    knownConnectionPoint,
+                                    newConnectionPoint,
+                                    movedConnector,
+                                    false
+                                );
                             }
                         }
                         else
                         {
                             // Don't allow moving the start of the initial node connector to a state
-                            if (!(newViewElement is StateDesigner && StateContainerEditor.IsConnectorFromInitialNode(movedConnector)))
+                            if (
+                                !(
+                                    newViewElement is StateDesigner
+                                    && StateContainerEditor.IsConnectorFromInitialNode(
+                                        movedConnector
+                                    )
+                                )
+                            )
                             {
                                 if (newConnectionPoint == null)
                                 {
-                                    result = CreateConnectorGesture(newViewElement, knownConnectionPoint, movedConnector, true);
+                                    result = CreateConnectorGesture(
+                                        newViewElement,
+                                        knownConnectionPoint,
+                                        movedConnector,
+                                        true
+                                    );
                                 }
                                 else
                                 {
-                                    result = CreateConnectorGesture(newConnectionPoint, knownConnectionPoint, movedConnector, true);
+                                    result = CreateConnectorGesture(
+                                        newConnectionPoint,
+                                        knownConnectionPoint,
+                                        movedConnector,
+                                        true
+                                    );
                                 }
                             }
                         }
@@ -1632,15 +2181,32 @@ namespace System.Activities.Core.Presentation
                 if (!e.NewConnectorLocation[0].Equals(movedConnector.Points[0]))
                 {
                     // source moved
-                    ConnectionPoint destConnPoint = FreeFormPanel.GetDestinationConnectionPoint(movedConnector);
-                    UpdateStateMachineOnConnectorMoved(destConnPoint, e.NewConnectorLocation[0], movedConnector, true);
+                    ConnectionPoint destConnPoint = FreeFormPanel.GetDestinationConnectionPoint(
+                        movedConnector
+                    );
+                    UpdateStateMachineOnConnectorMoved(
+                        destConnPoint,
+                        e.NewConnectorLocation[0],
+                        movedConnector,
+                        true
+                    );
                 }
-                else if (!e.NewConnectorLocation[newEndConnectorPointIndex].Equals(movedConnector.Points[movedEndConnectorPointIndex]))
+                else if (
+                    !e.NewConnectorLocation[newEndConnectorPointIndex]
+                        .Equals(movedConnector.Points[movedEndConnectorPointIndex])
+                )
                 {
                     // destination moved
-                    ConnectionPoint srcConnPoint = FreeFormPanel.GetSourceConnectionPoint(movedConnector);
+                    ConnectionPoint srcConnPoint = FreeFormPanel.GetSourceConnectionPoint(
+                        movedConnector
+                    );
                     Point destPoint = e.NewConnectorLocation[newEndConnectorPointIndex];
-                    UpdateStateMachineOnConnectorMoved(srcConnPoint, destPoint, movedConnector, false);
+                    UpdateStateMachineOnConnectorMoved(
+                        srcConnPoint,
+                        destPoint,
+                        movedConnector,
+                        false
+                    );
                 }
 
                 this.selectedConnector = movedConnector;
@@ -1651,7 +2217,10 @@ namespace System.Activities.Core.Presentation
         // Cases included: 1. create a connector, select it and undo, 2. move a connector from one shape to another.
         void OnFreeFormPanelLayoutUpdated(object sender, EventArgs e)
         {
-            if (this.selectedConnector != null && !this.panel.Children.Contains(this.selectedConnector))
+            if (
+                this.selectedConnector != null
+                && !this.panel.Children.Contains(this.selectedConnector)
+            )
             {
                 this.ClearSelectedConnector();
             }
@@ -1660,23 +2229,27 @@ namespace System.Activities.Core.Presentation
         void OnFreeFormPanelRequiredSizeChanged(object sender, RequiredSizeChangedEventArgs e)
         {
             this.requiredSize = e.NewRequiredSize;
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                if (this.requiredSize.Width > this.StateContainerWidth)
+            Dispatcher.BeginInvoke(
+                new Action(() =>
                 {
-                    this.ViewStateService.StoreViewState(
-                        this.ModelItem,
-                        StateContainerEditor.StateContainerWidthViewStateKey,
-                        this.requiredSize.Width);
-                }
-                if (this.requiredSize.Height > this.StateContainerHeight)
-                {
-                    this.ViewStateService.StoreViewState(
-                        this.ModelItem,
-                        StateContainerEditor.StateContainerHeightViewStateKey,
-                        this.requiredSize.Height);
-                }
-            }));
+                    if (this.requiredSize.Width > this.StateContainerWidth)
+                    {
+                        this.ViewStateService.StoreViewState(
+                            this.ModelItem,
+                            StateContainerEditor.StateContainerWidthViewStateKey,
+                            this.requiredSize.Width
+                        );
+                    }
+                    if (this.requiredSize.Height > this.StateContainerHeight)
+                    {
+                        this.ViewStateService.StoreViewState(
+                            this.ModelItem,
+                            StateContainerEditor.StateContainerHeightViewStateKey,
+                            this.requiredSize.Height
+                        );
+                    }
+                })
+            );
         }
 
         #endregion
@@ -1685,7 +2258,11 @@ namespace System.Activities.Core.Presentation
 
         void OnStateContainerGridMouseLeave(object sender, MouseEventArgs e)
         {
-            bool endLinkCreation = !IsVisualHit(sender as UIElement, sender as UIElement, e.GetPosition(sender as IInputElement));
+            bool endLinkCreation = !IsVisualHit(
+                sender as UIElement,
+                sender as UIElement,
+                e.GetPosition(sender as IInputElement)
+            );
             if (endLinkCreation)
             {
                 RemoveAdorner(this.panel, typeof(ConnectorCreationAdorner));
@@ -1697,7 +2274,11 @@ namespace System.Activities.Core.Presentation
         {
             if (this.activeSrcConnectionPoint != null)
             {
-                Point[] points = ConnectorRouter.Route(this.panel, this.activeSrcConnectionPoint, e);
+                Point[] points = ConnectorRouter.Route(
+                    this.panel,
+                    this.activeSrcConnectionPoint,
+                    e
+                );
                 if (points == null)
                 {
                     e.Handled = true;
@@ -1709,7 +2290,10 @@ namespace System.Activities.Core.Presentation
                 // Add new adorner.
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.panel);
                 Fx.Assert(adornerLayer != null, "Adorner Layer does not exist");
-                ConnectorCreationAdorner newAdorner = new ConnectorCreationAdorner(this.panel, segments);
+                ConnectorCreationAdorner newAdorner = new ConnectorCreationAdorner(
+                    this.panel,
+                    segments
+                );
                 adornerLayer.Add(newAdorner);
                 e.Handled = true;
             }
@@ -1728,7 +2312,13 @@ namespace System.Activities.Core.Presentation
                 AutoScrollHelper.AutoScroll(e, this, 1);
             }
             // Reconnecting connector
-            else if (this.panel.connectorEditor != null && (this.panel.connectorEditor.IsConnectorEndBeingMoved || this.panel.connectorEditor.IsConnectorStartBeingMoved))
+            else if (
+                this.panel.connectorEditor != null
+                && (
+                    this.panel.connectorEditor.IsConnectorEndBeingMoved
+                    || this.panel.connectorEditor.IsConnectorStartBeingMoved
+                )
+            )
             {
                 AutoScrollHelper.AutoScroll(e, this, 1);
             }
@@ -1736,12 +2326,24 @@ namespace System.Activities.Core.Presentation
 
         void OnStateContainerGridPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            VirtualizedContainerService.VirtualizingContainer destElement = VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(e.OriginalSource as DependencyObject);
-            if (destElement != null && destElement.IsPopulated && destElement.Child is StateDesigner)
+            VirtualizedContainerService.VirtualizingContainer destElement =
+                VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                    e.OriginalSource as DependencyObject
+                );
+            if (
+                destElement != null
+                && destElement.IsPopulated
+                && destElement.Child is StateDesigner
+            )
             {
                 if (this.activeSrcConnectionPoint != null)
                 {
-                    ConnectorCreationResult result = this.CreateConnectorGesture(this.activeSrcConnectionPoint, destElement, null, false);
+                    ConnectorCreationResult result = this.CreateConnectorGesture(
+                        this.activeSrcConnectionPoint,
+                        destElement,
+                        null,
+                        false
+                    );
                     if (result != ConnectorCreationResult.Success)
                     {
                         StateContainerEditor.ReportConnectorCreationError(result);
@@ -1759,32 +2361,53 @@ namespace System.Activities.Core.Presentation
         void SetEndPointsAndInvalidateViewState(Connector connector, Vector offset, bool offsetSrc)
         {
             ConnectionPoint srcConnectionPoint = FreeFormPanel.GetSourceConnectionPoint(connector);
-            ConnectionPoint destConnectionPoint = FreeFormPanel.GetDestinationConnectionPoint(connector);
-            Point src, dest;
+            ConnectionPoint destConnectionPoint = FreeFormPanel.GetDestinationConnectionPoint(
+                connector
+            );
+            Point src,
+                dest;
             if (offsetSrc)
             {
-                src = Point.Add(FreeFormPanel.GetLocationRelativeToOutmostPanel(srcConnectionPoint), offset);
+                src = Point.Add(
+                    FreeFormPanel.GetLocationRelativeToOutmostPanel(srcConnectionPoint),
+                    offset
+                );
                 dest = FreeFormPanel.GetLocationRelativeToOutmostPanel(destConnectionPoint);
             }
             else
             {
                 src = FreeFormPanel.GetLocationRelativeToOutmostPanel(srcConnectionPoint);
-                dest = Point.Add(FreeFormPanel.GetLocationRelativeToOutmostPanel(destConnectionPoint), offset);
+                dest = Point.Add(
+                    FreeFormPanel.GetLocationRelativeToOutmostPanel(destConnectionPoint),
+                    offset
+                );
             }
             PointCollection points = new PointCollection();
             Point invalidPoint = new Point(-1, -1);
             points.Add(src);
             points.Add(invalidPoint); // this invalidates the view state
             points.Add(dest);
-            this.StoreConnectorLocationViewState(StateContainerEditor.GetConnectorModelItem(connector), points, true);
+            this.StoreConnectorLocationViewState(
+                StateContainerEditor.GetConnectorModelItem(connector),
+                points,
+                true
+            );
         }
 
-        void OffsetConnectorViewState(UIElement view, Point oldLocation, Point newLocation, bool offsetNonContainedConnectors)
+        void OffsetConnectorViewState(
+            UIElement view,
+            Point oldLocation,
+            Point newLocation,
+            bool offsetNonContainedConnectors
+        )
         {
             // There is no need to do anything for the StartSymbol
             if (view is VirtualizedContainerService.VirtualizingContainer)
             {
-                Vector offset = new Vector(newLocation.X - oldLocation.X, newLocation.Y - oldLocation.Y);
+                Vector offset = new Vector(
+                    newLocation.X - oldLocation.X,
+                    newLocation.Y - oldLocation.Y
+                );
 
                 // connectors whose dest points are outside the state and the src points are inside/on the state
                 HashSet<Connector> outgoingConnectors = new HashSet<Connector>();
@@ -1815,7 +2438,9 @@ namespace System.Activities.Core.Presentation
                 {
                     if (incomingConnectors.Contains(connector))
                     {
-                        containedTransitions.Add(StateContainerEditor.GetConnectorModelItem(connector));
+                        containedTransitions.Add(
+                            StateContainerEditor.GetConnectorModelItem(connector)
+                        );
                         outgoingConnectors.Remove(connector);
                         incomingConnectors.Remove(connector);
                     }
@@ -1842,17 +2467,21 @@ namespace System.Activities.Core.Presentation
                     }
                 }
                 else
-                {                    
+                {
                     HashSet<ModelItem> nonSelfTransitions = new HashSet<ModelItem>();
 
                     foreach (Connector connector in incomingConnectors)
                     {
-                        nonSelfTransitions.Add(StateContainerEditor.GetConnectorModelItem(connector));
+                        nonSelfTransitions.Add(
+                            StateContainerEditor.GetConnectorModelItem(connector)
+                        );
                     }
-                    
+
                     foreach (Connector connector in outgoingConnectors)
                     {
-                        nonSelfTransitions.Add(StateContainerEditor.GetConnectorModelItem(connector));
+                        nonSelfTransitions.Add(
+                            StateContainerEditor.GetConnectorModelItem(connector)
+                        );
                     }
 
                     // Store ViewState for all non-self transitions to support undo/redo.
@@ -1863,18 +2492,26 @@ namespace System.Activities.Core.Presentation
 
         void OnStateContainerGridDrop(object sender, DragEventArgs e)
         {
-            ModelItemHelper.TryCreateImmediateEditingScopeAndExecute(this.ModelItem.GetEditingContext(), System.Activities.Presentation.SR.CollectionAddEditingScopeDescription, (es) =>
-            {
-                this.DoStateContainerGridDrop(e, AutoConnectDirections.None, null);
-                if (es != null)
+            ModelItemHelper.TryCreateImmediateEditingScopeAndExecute(
+                this.ModelItem.GetEditingContext(),
+                System.Activities.Presentation.SR.CollectionAddEditingScopeDescription,
+                (es) =>
                 {
-                    es.Complete();
+                    this.DoStateContainerGridDrop(e, AutoConnectDirections.None, null);
+                    if (es != null)
+                    {
+                        es.Complete();
+                    }
                 }
-            });
+            );
         }
 
         // Returns the last dropped item - used for auto-connect and auto-split where only one item is allowed
-        ModelItem DoStateContainerGridDrop(DragEventArgs e, AutoConnectDirections autoConnectDirection, Connector connectorToSplit)
+        ModelItem DoStateContainerGridDrop(
+            DragEventArgs e,
+            AutoConnectDirections autoConnectDirection,
+            Connector connectorToSplit
+        )
         {
             ModelItem droppedModelItem = null;
             e.Effects = DragDropEffects.None;
@@ -1883,7 +2520,8 @@ namespace System.Activities.Core.Presentation
             e.Handled = true;
             List<ModelItem> modelItemsToSelect = new List<ModelItem>();
 
-            Dictionary<WorkflowViewElement, Point> relativeLocations = DragDropHelper.GetDraggedViewElementRelativeLocations(e);
+            Dictionary<WorkflowViewElement, Point> relativeLocations =
+                DragDropHelper.GetDraggedViewElementRelativeLocations(e);
             foreach (object droppedObject in droppedObjects)
             {
                 if (droppedObject != null)
@@ -1904,21 +2542,37 @@ namespace System.Activities.Core.Presentation
                         anchorPoint.Offset(-relativeLocations[view].X, -relativeLocations[view].Y);
                     }
 
-                    StateContainerEditor srcContainer = droppedModelItem != null
-                        ? DragDropHelper.GetCompositeView(droppedModelItem.View as WorkflowViewElement) as StateContainerEditor
-                        : null;
+                    StateContainerEditor srcContainer =
+                        droppedModelItem != null
+                            ? DragDropHelper.GetCompositeView(
+                                droppedModelItem.View as WorkflowViewElement
+                            ) as StateContainerEditor
+                            : null;
                     bool externalDrop = false;
-                    if (droppedModelItem != null && srcContainer != null && srcContainer.Equals(this))
+                    if (
+                        droppedModelItem != null
+                        && srcContainer != null
+                        && srcContainer.Equals(this)
+                    )
                     {
                         // Internal move
-                        PerformInternalMove(this.modelItemToUIElement[droppedModelItem], e.GetPosition(this.panel), anchorPoint, autoConnectDirection, connectorToSplit);
+                        PerformInternalMove(
+                            this.modelItemToUIElement[droppedModelItem],
+                            e.GetPosition(this.panel),
+                            anchorPoint,
+                            autoConnectDirection,
+                            connectorToSplit
+                        );
                     }
                     else
                     {
                         // External model Item drop
                         if (droppedModelItem != null)
                         {
-                            if (droppedModelItem.ItemType == typeof(State) && this.ModelItem.ItemType == typeof(StateMachine))
+                            if (
+                                droppedModelItem.ItemType == typeof(State)
+                                && this.ModelItem.ItemType == typeof(StateMachine)
+                            )
                             {
                                 this.InsertState(droppedModelItem);
                                 externalDrop = true;
@@ -1938,11 +2592,13 @@ namespace System.Activities.Core.Presentation
                             }
                             else if (droppedObject.GetType() == typeof(FinalState))
                             {
-                                droppedModelItem = InsertState(new State()
-                                {
-                                    DisplayName = DefaultFinalStateDisplayName,
-                                    IsFinal = true
-                                });
+                                droppedModelItem = InsertState(
+                                    new State()
+                                    {
+                                        DisplayName = DefaultFinalStateDisplayName,
+                                        IsFinal = true,
+                                    }
+                                );
                             }
                         }
                         if (droppedModelItem != null)
@@ -1958,38 +2614,72 @@ namespace System.Activities.Core.Presentation
                                 view = droppedModelItem.View as WorkflowViewElement;
                                 if (view == null)
                                 {
-                                    view = this.Context.Services.GetService<ViewService>().GetView(droppedModelItem) as WorkflowViewElement;
+                                    view =
+                                        this.Context.Services.GetService<ViewService>()
+                                            .GetView(droppedModelItem) as WorkflowViewElement;
                                     ViewUtilities.MeasureView(view as WorkflowViewElement, true);
                                 }
                             }
                             // If drag anchor point is beyond the size of the shape being dropped,
-                            if (anchorPoint.X > view.DesiredSize.Width || anchorPoint.Y > view.DesiredSize.Height)
+                            if (
+                                anchorPoint.X > view.DesiredSize.Width
+                                || anchorPoint.Y > view.DesiredSize.Height
+                            )
                             {
                                 isAnchorPointValid = false;
                             }
                             Point shapeLocation;
                             if (autoConnectDirection != AutoConnectDirections.None)
                             {
-                                shapeLocation = this.CalculateDropLocationForAutoConnect(autoConnectDirection, new Size(DefaultStateDesignerWidth, DefaultStateDesignerHeight));
+                                shapeLocation = this.CalculateDropLocationForAutoConnect(
+                                    autoConnectDirection,
+                                    new Size(DefaultStateDesignerWidth, DefaultStateDesignerHeight)
+                                );
                             }
                             else
                             {
-                                shapeLocation = StateContainerEditor.SnapVisualToGrid(view, e.GetPosition(this.panel), anchorPoint, isAnchorPointValid);
+                                shapeLocation = StateContainerEditor.SnapVisualToGrid(
+                                    view,
+                                    e.GetPosition(this.panel),
+                                    anchorPoint,
+                                    isAnchorPointValid
+                                );
                             }
                             if (connectorToSplit != null)
                             {
-                                shapeLocation = this.CalculateDropLocationForAutoSplit(e.GetPosition(this.panel), shapeLocation, connectorToSplit, new Size(DefaultStateDesignerWidth, DefaultStateDesignerHeight));
+                                shapeLocation = this.CalculateDropLocationForAutoSplit(
+                                    e.GetPosition(this.panel),
+                                    shapeLocation,
+                                    connectorToSplit,
+                                    new Size(DefaultStateDesignerWidth, DefaultStateDesignerHeight)
+                                );
                             }
-                            object viewState = this.ViewStateService.RetrieveViewState(droppedModelItem, ShapeLocationViewStateKey);
+                            object viewState = this.ViewStateService.RetrieveViewState(
+                                droppedModelItem,
+                                ShapeLocationViewStateKey
+                            );
                             if (externalDrop)
                             {
-                                Fx.Assert(viewState != null, "item dropped from external should already have view states");
-                                Fx.Assert(droppedModelItem.View != null, "item dropped from extenal should already have view");
-                                VirtualizedContainerService.VirtualizingContainer container = VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(droppedModelItem.View);
+                                Fx.Assert(
+                                    viewState != null,
+                                    "item dropped from external should already have view states"
+                                );
+                                Fx.Assert(
+                                    droppedModelItem.View != null,
+                                    "item dropped from extenal should already have view"
+                                );
+                                VirtualizedContainerService.VirtualizingContainer container =
+                                    VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                                        droppedModelItem.View
+                                    );
                                 Fx.Assert(container != null, "container should not be null");
                                 Point oldLocation = (Point)viewState;
-                                oldLocation = srcContainer.panel.GetLocationRelativeToOutmostPanel(oldLocation);
-                                Point newLocation = this.panel.GetLocationRelativeToOutmostPanel(shapeLocation);
+                                oldLocation = srcContainer.panel.GetLocationRelativeToOutmostPanel(
+                                    oldLocation
+                                );
+                                Point newLocation = this.panel.GetLocationRelativeToOutmostPanel(
+                                    shapeLocation
+                                );
                                 // To make sure the connectors are still connected to the connection points
                                 OffsetConnectorViewState(container, oldLocation, newLocation, true);
                             }
@@ -2000,7 +2690,8 @@ namespace System.Activities.Core.Presentation
             }
 
             DragDropHelper.SetDragDropMovedViewElements(e, new WorkflowViewElement[] { });
-            this.Dispatcher.BeginInvoke(() =>
+            this.Dispatcher.BeginInvoke(
+                () =>
                 {
                     bool first = true;
                     foreach (ModelItem modelItem in modelItemsToSelect)
@@ -2017,19 +2708,39 @@ namespace System.Activities.Core.Presentation
                         }
                     }
                 },
-                DispatcherPriority.ApplicationIdle);
+                DispatcherPriority.ApplicationIdle
+            );
 
             return droppedModelItem;
         }
 
-        Point CalculateDropLocationForAutoConnect(AutoConnectDirections autoConnectDirection, Size droppedSize)
+        Point CalculateDropLocationForAutoConnect(
+            AutoConnectDirections autoConnectDirection,
+            Size droppedSize
+        )
         {
-            return AutoConnectHelper.CalculateDropLocation(droppedSize, this.Panel.CurrentAutoConnectTarget, autoConnectDirection, this.shapeLocations);
+            return AutoConnectHelper.CalculateDropLocation(
+                droppedSize,
+                this.Panel.CurrentAutoConnectTarget,
+                autoConnectDirection,
+                this.shapeLocations
+            );
         }
 
-        Point CalculateDropLocationForAutoSplit(Point mousePosition, Point originalDropLocation, Connector connector, Size droppedSize)
+        Point CalculateDropLocationForAutoSplit(
+            Point mousePosition,
+            Point originalDropLocation,
+            Connector connector,
+            Size droppedSize
+        )
         {
-            return AutoSplitHelper.CalculateDropLocation(mousePosition, originalDropLocation, connector, droppedSize, this.shapeLocations);
+            return AutoSplitHelper.CalculateDropLocation(
+                mousePosition,
+                originalDropLocation,
+                connector,
+                droppedSize,
+                this.shapeLocations
+            );
         }
 
         void OnStateContainerGridDragEnter(object sender, DragEventArgs e)
@@ -2061,16 +2772,24 @@ namespace System.Activities.Core.Presentation
         private bool IsDropAllowed(DragEventArgs e)
         {
             // Considering multiple items drag&drop, use ModelItemsDataFormat instead.
-            IEnumerable<ModelItem> modelItems = e.Data.GetData(DragDropHelper.ModelItemsDataFormat) as IEnumerable<ModelItem>;
+            IEnumerable<ModelItem> modelItems =
+                e.Data.GetData(DragDropHelper.ModelItemsDataFormat) as IEnumerable<ModelItem>;
             if (modelItems != null)
             {
                 foreach (ModelItem modelItem in modelItems)
                 {
-                    if (modelItem.ItemType == typeof(StartNode) && modelItem == this.initialModelItem)
+                    if (
+                        modelItem.ItemType == typeof(StartNode)
+                        && modelItem == this.initialModelItem
+                    )
                     {
                         // StartNode of current StateMachine allow to drop.
                     }
-                    else if (modelItem.ItemType == typeof(State) && this.IsStateMachineContainer && StateContainerEditor.AreInSameStateMachine(modelItem, this.ModelItem))
+                    else if (
+                        modelItem.ItemType == typeof(State)
+                        && this.IsStateMachineContainer
+                        && StateContainerEditor.AreInSameStateMachine(modelItem, this.ModelItem)
+                    )
                     {
                         // When FinalState has been dropped into a StateMachine, it becomes a State instead. So ignore FinalState type.
                         // State within the same StateMachine allow to drop.
@@ -2083,7 +2802,16 @@ namespace System.Activities.Core.Presentation
 
                 return true;
             }
-            else if (this.ModelItem.ItemType == typeof(StateMachine) && DragDropHelper.AllowDrop(e.Data, this.Context, typeof(State), typeof(FinalState), typeof(StartNode)))
+            else if (
+                this.ModelItem.ItemType == typeof(StateMachine)
+                && DragDropHelper.AllowDrop(
+                    e.Data,
+                    this.Context,
+                    typeof(State),
+                    typeof(FinalState),
+                    typeof(StartNode)
+                )
+            )
             {
                 // Only allow State, FinalState, StartNode to drop into a StateMachine from tool box.
                 return true;
@@ -2095,10 +2823,14 @@ namespace System.Activities.Core.Presentation
         void KeyboardMove(Key key)
         {
             Vector moveDir = FreeFormPanel.CalculateMovement(key, this.IsRightToLeft);
-            
+
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
-                foreach (ModelItem selectedModelItem in this.Context.Items.GetValue<Selection>().SelectedObjects)
+                foreach (
+                    ModelItem selectedModelItem in this
+                        .Context.Items.GetValue<Selection>()
+                        .SelectedObjects
+                )
                 {
                     UIElement shapeToMove = this.modelItemToUIElement[selectedModelItem];
                     Point currentLocation = FreeFormPanel.GetLocation(shapeToMove);
@@ -2110,7 +2842,13 @@ namespace System.Activities.Core.Presentation
                     {
                         continue;
                     }
-                    PerformInternalMove(shapeToMove, newLocation, null, AutoConnectDirections.None, null);
+                    PerformInternalMove(
+                        shapeToMove,
+                        newLocation,
+                        null,
+                        AutoConnectDirections.None,
+                        null
+                    );
                 }
                 es.Complete();
             }
@@ -2126,22 +2864,40 @@ namespace System.Activities.Core.Presentation
             }
 
             Selection currentSelection = this.Context.Items.GetValue<Selection>();
-            if (e.Key == Key.Delete && this.selectedConnector != null && currentSelection.SelectionCount <= 1)
+            if (
+                e.Key == Key.Delete
+                && this.selectedConnector != null
+                && currentSelection.SelectionCount <= 1
+            )
             {
                 // process the delete if only the connector is selected
                 ModelItem primarySelection = currentSelection.PrimarySelection;
                 //Delete connector
-                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(this.selectedConnector);
-                if (object.Equals(primarySelection, connectorModelItem) ||
+                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                    this.selectedConnector
+                );
+                if (
+                    object.Equals(primarySelection, connectorModelItem)
+                    ||
                     // Delete initial link
-                    primarySelection == null && connectorModelItem != null && connectorModelItem.ItemType != typeof(Transition))
+                    primarySelection == null
+                        && connectorModelItem != null
+                        && connectorModelItem.ItemType != typeof(Transition)
+                )
                 {
                     this.DeleteConnectorModelItem(this.selectedConnector);
                     e.Handled = true;
                 }
             }
-            else if ((new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
-                && currentSelection.SelectedObjects.All<ModelItem>((p) => { return this.modelItemToUIElement.ContainsKey(p); }))
+            else if (
+                (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
+                && currentSelection.SelectedObjects.All<ModelItem>(
+                    (p) =>
+                    {
+                        return this.modelItemToUIElement.ContainsKey(p);
+                    }
+                )
+            )
             {
                 this.KeyboardMove(e.Key);
                 e.Handled = true;
@@ -2160,7 +2916,11 @@ namespace System.Activities.Core.Presentation
         string GenerateStateName()
         {
             HashSet<String> existingStateNames = new HashSet<string>();
-            foreach (ModelItem stateModelItem in this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection)
+            foreach (
+                ModelItem stateModelItem in this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
+            )
             {
                 existingStateNames.Add(((State)stateModelItem.GetCurrentValue()).DisplayName);
             }
@@ -2170,7 +2930,12 @@ namespace System.Activities.Core.Presentation
 
             do
             {
-                name = string.Format(CultureInfo.CurrentUICulture, "{0}{1}", DefaultStateDisplayName, ++suffix);
+                name = string.Format(
+                    CultureInfo.CurrentUICulture,
+                    "{0}{1}",
+                    DefaultStateDisplayName,
+                    ++suffix
+                );
             } while (existingStateNames.Contains<string>(name));
 
             return name;
@@ -2184,7 +2949,10 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                Fx.Assert(this.ModelItem.ItemType == typeof(State), "ModelItem type should be State.");
+                Fx.Assert(
+                    this.ModelItem.ItemType == typeof(State),
+                    "ModelItem type should be State."
+                );
                 StateDesigner designer = VisualTreeUtils.FindVisualAncestor<StateDesigner>(this);
                 FreeFormPanel panel = designer.GetStateMachineFreeFormPanel();
                 return VisualTreeUtils.FindVisualAncestor<StateContainerEditor>(panel);
@@ -2211,32 +2979,54 @@ namespace System.Activities.Core.Presentation
         bool IsCreatingConnector()
         {
             StateContainerEditor stateMachineContainer = this.GetStateMachineContainerEditor();
-            return (stateMachineContainer.activeSrcConnectionPoint != null || (stateMachineContainer.panel.connectorEditor != null && stateMachineContainer.panel.connectorEditor.IsConnectorEndBeingMoved));
+            return (
+                stateMachineContainer.activeSrcConnectionPoint != null
+                || (
+                    stateMachineContainer.panel.connectorEditor != null
+                    && stateMachineContainer.panel.connectorEditor.IsConnectorEndBeingMoved
+                )
+            );
         }
 
         bool IsCreatingConnectorFromInitialNode()
         {
             StateContainerEditor stateMachineContainer = this.GetStateMachineContainerEditor();
-            return (stateMachineContainer.activeSrcConnectionPoint != null && stateMachineContainer.activeSrcConnectionPoint.ParentDesigner is StartSymbol) ||
-                (stateMachineContainer.panel.connectorEditor != null && stateMachineContainer.panel.connectorEditor.IsConnectorEndBeingMoved &&
-                stateMachineContainer.panel.connectorEditor.Connector != null &&
-                IsConnectorFromInitialNode(stateMachineContainer.panel.connectorEditor.Connector));
+            return (
+                    stateMachineContainer.activeSrcConnectionPoint != null
+                    && stateMachineContainer.activeSrcConnectionPoint.ParentDesigner is StartSymbol
+                )
+                || (
+                    stateMachineContainer.panel.connectorEditor != null
+                    && stateMachineContainer.panel.connectorEditor.IsConnectorEndBeingMoved
+                    && stateMachineContainer.panel.connectorEditor.Connector != null
+                    && IsConnectorFromInitialNode(
+                        stateMachineContainer.panel.connectorEditor.Connector
+                    )
+                );
         }
 
         bool IsMovingStartOfConnectorFromInitialNode()
         {
             StateContainerEditor stateMachineContainer = this.GetStateMachineContainerEditor();
-            return (stateMachineContainer.panel.connectorEditor != null && stateMachineContainer.panel.connectorEditor.IsConnectorStartBeingMoved &&
-                stateMachineContainer.panel.connectorEditor.Connector != null &&
-                IsConnectorFromInitialNode(stateMachineContainer.panel.connectorEditor.Connector));
+            return (
+                stateMachineContainer.panel.connectorEditor != null
+                && stateMachineContainer.panel.connectorEditor.IsConnectorStartBeingMoved
+                && stateMachineContainer.panel.connectorEditor.Connector != null
+                && IsConnectorFromInitialNode(stateMachineContainer.panel.connectorEditor.Connector)
+            );
         }
 
         bool IsMovingStartOfConnectorForTransition()
         {
             StateContainerEditor stateMachineContainer = this.GetStateMachineContainerEditor();
-            return (stateMachineContainer.panel.connectorEditor != null && stateMachineContainer.panel.connectorEditor.IsConnectorStartBeingMoved &&
-                stateMachineContainer.panel.connectorEditor.Connector != null &&
-                GetConnectorModelItem(stateMachineContainer.panel.connectorEditor.Connector).ItemType == typeof(Transition));
+            return (
+                stateMachineContainer.panel.connectorEditor != null
+                && stateMachineContainer.panel.connectorEditor.IsConnectorStartBeingMoved
+                && stateMachineContainer.panel.connectorEditor.Connector != null
+                && GetConnectorModelItem(
+                    stateMachineContainer.panel.connectorEditor.Connector
+                ).ItemType == typeof(Transition)
+            );
         }
 
         void InvalidateMeasureForStateMachinePanel()
@@ -2244,7 +3034,13 @@ namespace System.Activities.Core.Presentation
             this.GetStateMachineContainerEditor().panel.InvalidateMeasure();
         }
 
-        void PerformInternalMove(UIElement movedElement, Point newPoint, Point? shapeAnchorPoint, AutoConnectDirections autoConnectDirection, Connector connectorToSplit)
+        void PerformInternalMove(
+            UIElement movedElement,
+            Point newPoint,
+            Point? shapeAnchorPoint,
+            AutoConnectDirections autoConnectDirection,
+            Connector connectorToSplit
+        )
         {
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
@@ -2254,24 +3050,42 @@ namespace System.Activities.Core.Presentation
                 Size size = FreeFormPanel.GetChildSize(movedElement);
                 if (autoConnectDirection != AutoConnectDirections.None)
                 {
-                    newLocation = this.CalculateDropLocationForAutoConnect(autoConnectDirection, size);
+                    newLocation = this.CalculateDropLocationForAutoConnect(
+                        autoConnectDirection,
+                        size
+                    );
                 }
                 else if (shapeAnchorPoint.HasValue)
                 {
-                    newLocation = SnapVisualToGrid(movedElement, newPoint, shapeAnchorPoint.Value, true);
+                    newLocation = SnapVisualToGrid(
+                        movedElement,
+                        newPoint,
+                        shapeAnchorPoint.Value,
+                        true
+                    );
                 }
                 else
                 {
-                    Fx.Assert(newPoint.X.IsNoLessThan(0) && newPoint.Y.IsNoLessThan(0),
-                        "newPoint is negative");
+                    Fx.Assert(
+                        newPoint.X.IsNoLessThan(0) && newPoint.Y.IsNoLessThan(0),
+                        "newPoint is negative"
+                    );
                     newLocation = newPoint;
                 }
                 if (connectorToSplit != null)
                 {
-                    newLocation = this.CalculateDropLocationForAutoSplit(newPoint, newLocation, connectorToSplit, size);
+                    newLocation = this.CalculateDropLocationForAutoSplit(
+                        newPoint,
+                        newLocation,
+                        connectorToSplit,
+                        size
+                    );
                 }
                 ModelItem modelItem = GetModelItemFromView(movedElement);
-                object viewState = this.ViewStateService.RetrieveViewState(modelItem, ShapeLocationViewStateKey);
+                object viewState = this.ViewStateService.RetrieveViewState(
+                    modelItem,
+                    ShapeLocationViewStateKey
+                );
                 if (viewState != null)
                 {
                     Point oldLocation = (Point)viewState;
@@ -2304,14 +3118,23 @@ namespace System.Activities.Core.Presentation
 
         bool ShouldInitialize()
         {
-            WorkflowViewElement parent = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(this);
-            return parent != null && parent.ModelItem != null && (parent.ModelItem.ItemType == typeof(StateMachine) && parent.ShowExpanded ||
-                   parent.ModelItem.ItemType == typeof(State) && !parent.IsRootDesigner);
+            WorkflowViewElement parent = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(
+                this
+            );
+            return parent != null
+                && parent.ModelItem != null
+                && (
+                    parent.ModelItem.ItemType == typeof(StateMachine) && parent.ShowExpanded
+                    || parent.ModelItem.ItemType == typeof(State) && !parent.IsRootDesigner
+                );
         }
 
         void ClearSelectedConnector()
         {
-            if (this.panel.connectorEditor != null && this.panel.connectorEditor.Connector == this.selectedConnector)
+            if (
+                this.panel.connectorEditor != null
+                && this.panel.connectorEditor.Connector == this.selectedConnector
+            )
             {
                 this.panel.RemoveConnectorEditor();
             }
@@ -2322,12 +3145,19 @@ namespace System.Activities.Core.Presentation
 
         #region AutoConnect
 
-        public void DoAutoConnect(DragEventArgs e, UIElement targetElement, AutoConnectDirections direction)
+        public void DoAutoConnect(
+            DragEventArgs e,
+            UIElement targetElement,
+            AutoConnectDirections direction
+        )
         {
             UIElement sourceElement = targetElement;
             bool immediatelyCommit = ModelItemHelper.CanCreateImmediateEditingScope(this.ModelItem);
 
-            using (EditingScope scope = (EditingScope)this.ModelItem.BeginEdit(SR.AutoConnect, immediatelyCommit))
+            using (
+                EditingScope scope = (EditingScope)
+                    this.ModelItem.BeginEdit(SR.AutoConnect, immediatelyCommit)
+            )
             {
                 ModelItem connectorModelItem = null;
                 Point location = e.GetPosition(sourceElement);
@@ -2339,16 +3169,29 @@ namespace System.Activities.Core.Presentation
 
                 if (connectorModelItem != null)
                 {
-                    EdgeLocation edgeLocation = AutoConnectHelper.AutoConnectDirection2EdgeLocation(direction);
-                    this.GetStateMachineContainerEditor().activeSrcConnectionPoint = this.GetSourceConnectionPointForAutoConnect(sourceElement, edgeLocation);
+                    EdgeLocation edgeLocation = AutoConnectHelper.AutoConnectDirection2EdgeLocation(
+                        direction
+                    );
+                    this.GetStateMachineContainerEditor().activeSrcConnectionPoint =
+                        this.GetSourceConnectionPointForAutoConnect(sourceElement, edgeLocation);
                     ModelItem sourceModelItem = TryGetModelItemFromView(sourceElement);
                     Fx.Assert(sourceModelItem != null, "sourceModelItem");
 
                     // add a custom change inside a new editing scope since current editing scope an immediate editing scope
-                    using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.AutoConnect, false))
+                    using (
+                        EditingScope es = (EditingScope)
+                            this.ModelItem.BeginEdit(SR.AutoConnect, false)
+                    )
                     {
-                        es.Changes.Add(new StoreAutoConnectorViewStateChange(
-                            this.ModelItem, sourceModelItem, droppedModelItem, connectorModelItem, edgeLocation));
+                        es.Changes.Add(
+                            new StoreAutoConnectorViewStateChange(
+                                this.ModelItem,
+                                sourceModelItem,
+                                droppedModelItem,
+                                connectorModelItem,
+                                edgeLocation
+                            )
+                        );
                         es.Complete();
                     }
                     scope.Complete();
@@ -2360,7 +3203,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        private ModelItem DoAutoConnect(UIElement sourceElement, ModelItem droppedModelItem, Transition transitionToCopy, int insertIndex = InvalidIndex)
+        private ModelItem DoAutoConnect(
+            UIElement sourceElement,
+            ModelItem droppedModelItem,
+            Transition transitionToCopy,
+            int insertIndex = InvalidIndex
+        )
         {
             ModelItem sourceModelItem = TryGetModelItemFromView(sourceElement);
             if (sourceModelItem != null && droppedModelItem.ItemType == typeof(State))
@@ -2370,8 +3218,10 @@ namespace System.Activities.Core.Presentation
                     ModelItem stateMachineModelItem = GetStateMachineModelItem(sourceModelItem);
                     Transition transition = new Transition
                     {
-                        DisplayName = StateContainerEditor.GenerateTransitionName(stateMachineModelItem),
-                        To = droppedModelItem.GetCurrentValue() as State
+                        DisplayName = StateContainerEditor.GenerateTransitionName(
+                            stateMachineModelItem
+                        ),
+                        To = droppedModelItem.GetCurrentValue() as State,
                     };
                     if (transitionToCopy != null)
                     {
@@ -2383,11 +3233,15 @@ namespace System.Activities.Core.Presentation
                     ModelItem trasitionModelItem = null;
                     if (insertIndex >= 0)
                     {
-                        trasitionModelItem = sourceModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection.Insert(insertIndex, transition);
+                        trasitionModelItem = sourceModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection.Insert(insertIndex, transition);
                     }
                     else
                     {
-                        trasitionModelItem = sourceModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection.Add(transition);
+                        trasitionModelItem = sourceModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection.Add(transition);
                     }
                     Fx.Assert(trasitionModelItem != null, "trasitionModelItem");
                     return trasitionModelItem;
@@ -2395,7 +3249,8 @@ namespace System.Activities.Core.Presentation
                 // auto-connect from the initial node
                 else if (sourceModelItem.ItemType == typeof(StartNode))
                 {
-                    this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].SetValue(droppedModelItem);
+                    this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName]
+                        .SetValue(droppedModelItem);
                     return this.ModelItem;
                 }
             }
@@ -2420,37 +3275,64 @@ namespace System.Activities.Core.Presentation
                 return AutoConnectDirections.None;
             }
 
-            if (targetElement is VirtualizedContainerService.VirtualizingContainer && IsFinalState(((VirtualizedContainerService.VirtualizingContainer)targetElement).ModelItem))
+            if (
+                targetElement is VirtualizedContainerService.VirtualizingContainer
+                && IsFinalState(
+                    ((VirtualizedContainerService.VirtualizingContainer)targetElement).ModelItem
+                )
+            )
             {
                 return AutoConnectDirections.None;
             }
 
             if (targetElement is StartSymbol && this.ModelItem.ItemType == typeof(StateMachine))
             {
-                if (this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].Value != null)
+                if (
+                    this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName].Value
+                    != null
+                )
                 {
                     return AutoConnectDirections.None;
                 }
 
                 // Should not allow auto-connecting a final state to the start symbol
                 IEnumerable<ModelItem> draggedModelItems = DragDropHelper.GetDraggedModelItems(e);
-                if ((draggedModelItems.Count<ModelItem>() == 1 && StateContainerEditor.IsFinalState(draggedModelItems.First<ModelItem>()))
-                    || types[0] == typeof(FinalState))
+                if (
+                    (
+                        draggedModelItems.Count<ModelItem>() == 1
+                        && StateContainerEditor.IsFinalState(draggedModelItems.First<ModelItem>())
+                    )
+                    || types[0] == typeof(FinalState)
+                )
                 {
                     return AutoConnectDirections.None;
                 }
             }
 
-            return AutoConnectDirections.Top | AutoConnectDirections.Bottom | AutoConnectDirections.Left | AutoConnectDirections.Right;
+            return AutoConnectDirections.Top
+                | AutoConnectDirections.Bottom
+                | AutoConnectDirections.Left
+                | AutoConnectDirections.Right;
         }
 
-        private ConnectionPoint GetSourceConnectionPointForAutoConnect(UIElement designer, EdgeLocation edgeLocation)
+        private ConnectionPoint GetSourceConnectionPointForAutoConnect(
+            UIElement designer,
+            EdgeLocation edgeLocation
+        )
         {
             List<ConnectionPoint> connectionPoints = this.GetAvailableConnectionPoint(designer);
-            return GetConnectionPointClosestToEdgeMidPoint(designer, connectionPoints, edgeLocation);
+            return GetConnectionPointClosestToEdgeMidPoint(
+                designer,
+                connectionPoints,
+                edgeLocation
+            );
         }
 
-        static ConnectionPoint GetConnectionPointClosestToEdgeMidPoint(UIElement designer, List<ConnectionPoint> connectionPoints, EdgeLocation edgeLocation)
+        static ConnectionPoint GetConnectionPointClosestToEdgeMidPoint(
+            UIElement designer,
+            List<ConnectionPoint> connectionPoints,
+            EdgeLocation edgeLocation
+        )
         {
             Point midPoint = new Point(-1, -1);
             Point location = FreeFormPanel.GetLocation(designer);
@@ -2473,7 +3355,11 @@ namespace System.Activities.Core.Presentation
             if (connectionPoints.Count > 0)
             {
                 double dist;
-                return ConnectionPoint.GetClosestConnectionPoint(connectionPoints, midPoint, out dist);
+                return ConnectionPoint.GetClosestConnectionPoint(
+                    connectionPoints,
+                    midPoint,
+                    out dist
+                );
             }
             return null;
         }
@@ -2488,7 +3374,9 @@ namespace System.Activities.Core.Presentation
             }
             else if (sourceElement is VirtualizedContainerService.VirtualizingContainer)
             {
-                sourceModelItem = ((VirtualizedContainerService.VirtualizingContainer)sourceElement).ModelItem;
+                sourceModelItem = (
+                    (VirtualizedContainerService.VirtualizingContainer)sourceElement
+                ).ModelItem;
             }
             return sourceModelItem;
         }
@@ -2504,10 +3392,18 @@ namespace System.Activities.Core.Presentation
             private object NewViewState { get; set; }
             private bool ShouldCreateConnector { get; set; }
 
-            public override string Description { get { return SR.AutoConnect; } }
+            public override string Description
+            {
+                get { return SR.AutoConnect; }
+            }
 
             public StoreAutoConnectorViewStateChange(
-                ModelItem stateMachine, ModelItem srcModelItem, ModelItem desModelItem, ModelItem addedModelItem, EdgeLocation edgeLocatioin)
+                ModelItem stateMachine,
+                ModelItem srcModelItem,
+                ModelItem desModelItem,
+                ModelItem addedModelItem,
+                EdgeLocation edgeLocatioin
+            )
             {
                 this.StateMachine = stateMachine;
                 this.SrcModelItem = srcModelItem;
@@ -2517,9 +3413,7 @@ namespace System.Activities.Core.Presentation
                 this.ShouldCreateConnector = true;
             }
 
-            private StoreAutoConnectorViewStateChange()
-            {
-            }
+            private StoreAutoConnectorViewStateChange() { }
 
             public override bool Apply()
             {
@@ -2536,8 +3430,16 @@ namespace System.Activities.Core.Presentation
                     ConnectionPoint srcConnectionPoint = null;
                     ConnectionPoint desConnectionPoint = null;
                     PointCollection points = editor.CreatePointCollectionForAutoConnectOrAutoSplit(
-                        srcElement, desElement, this.SrcModelItem, ref srcConnectionPoint, ref desConnectionPoint);
-                    this.OldViewState = editor.ViewStateService.RetrieveViewState(this.ViewStateOwnerModelItem, ConnectorLocationViewStateKey);
+                        srcElement,
+                        desElement,
+                        this.SrcModelItem,
+                        ref srcConnectionPoint,
+                        ref desConnectionPoint
+                    );
+                    this.OldViewState = editor.ViewStateService.RetrieveViewState(
+                        this.ViewStateOwnerModelItem,
+                        ConnectorLocationViewStateKey
+                    );
                     this.NewViewState = points;
 
                     // compare old and new values, if they're the same, return false
@@ -2546,9 +3448,11 @@ namespace System.Activities.Core.Presentation
                         return false;
                     }
 
-                    if (this.OldViewState != null
+                    if (
+                        this.OldViewState != null
                         && this.NewViewState != null
-                        && points.SequenceEqual(this.OldViewState as PointCollection))
+                        && points.SequenceEqual(this.OldViewState as PointCollection)
+                    )
                     {
                         return false;
                     }
@@ -2556,7 +3460,11 @@ namespace System.Activities.Core.Presentation
                     this.ShouldCreateConnector = false;
                 }
 
-                editor.ViewStateService.StoreViewState(this.ViewStateOwnerModelItem, ConnectorLocationViewStateKey, this.NewViewState);
+                editor.ViewStateService.StoreViewState(
+                    this.ViewStateOwnerModelItem,
+                    ConnectorLocationViewStateKey,
+                    this.NewViewState
+                );
                 return true;
             }
 
@@ -2571,7 +3479,7 @@ namespace System.Activities.Core.Presentation
                     DstModelItem = this.DstModelItem,
                     OldViewState = this.NewViewState,
                     NewViewState = this.OldViewState,
-                    ShouldCreateConnector = false
+                    ShouldCreateConnector = false,
                 };
             }
         }
@@ -2586,10 +3494,15 @@ namespace System.Activities.Core.Presentation
             {
                 return false;
             }
-            ModelItem draggedModelItem = e.Data.GetData(DragDropHelper.ModelItemDataFormat) as ModelItem;
+            ModelItem draggedModelItem =
+                e.Data.GetData(DragDropHelper.ModelItemDataFormat) as ModelItem;
             if (draggedModelItem != null && this.modelItemToUIElement.ContainsKey(draggedModelItem))
             {
-                if (StateContainerEditor.GetAttachedConnectors(this.modelItemToUIElement[draggedModelItem]).Count > 0)
+                if (
+                    StateContainerEditor
+                        .GetAttachedConnectors(this.modelItemToUIElement[draggedModelItem])
+                        .Count > 0
+                )
                 {
                     return false;
                 }
@@ -2613,27 +3526,55 @@ namespace System.Activities.Core.Presentation
         {
             bool immediatelyCommit = ModelItemHelper.CanCreateImmediateEditingScope(this.ModelItem);
 
-            using (EditingScope scope = (EditingScope)this.ModelItem.BeginEdit(SR.AutoSplit, immediatelyCommit))
+            using (
+                EditingScope scope = (EditingScope)
+                    this.ModelItem.BeginEdit(SR.AutoSplit, immediatelyCommit)
+            )
             {
-                ModelItem droppedModelItem = this.DoStateContainerGridDrop(e, AutoConnectDirections.None, connector);
+                ModelItem droppedModelItem = this.DoStateContainerGridDrop(
+                    e,
+                    AutoConnectDirections.None,
+                    connector
+                );
                 bool autoSplit = false;
-                ConnectionPoint sourceConnectionPoint = FreeFormPanel.GetSourceConnectionPoint(connector);
-                ConnectionPoint destinationConnectionPoint = FreeFormPanel.GetDestinationConnectionPoint(connector);
+                ConnectionPoint sourceConnectionPoint = FreeFormPanel.GetSourceConnectionPoint(
+                    connector
+                );
+                ConnectionPoint destinationConnectionPoint =
+                    FreeFormPanel.GetDestinationConnectionPoint(connector);
                 if (droppedModelItem != null)
                 {
-                    ModelItem oldConnectorModelItem = StateContainerEditor.GetConnectorModelItem(connector);
+                    ModelItem oldConnectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                        connector
+                    );
                     int index = this.DeleteConnectorModelItem(connector);
-                    bool autoConnected = this.DoAutoConnect(sourceConnectionPoint.ParentDesigner,
-                        droppedModelItem, oldConnectorModelItem.GetCurrentValue() as Transition, index) != null;
+                    bool autoConnected =
+                        this.DoAutoConnect(
+                            sourceConnectionPoint.ParentDesigner,
+                            droppedModelItem,
+                            oldConnectorModelItem.GetCurrentValue() as Transition,
+                            index
+                        ) != null;
                     if (autoConnected)
                     {
-                        ModelItem destinationModelItem = ((VirtualizedContainerService.VirtualizingContainer)destinationConnectionPoint.ParentDesigner).ModelItem;
-                        ModelItem stateMachineModelItem = GetStateMachineModelItem(destinationModelItem);
-                        droppedModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection.Add(new Transition()
-                        {
-                            DisplayName = StateContainerEditor.GenerateTransitionName(stateMachineModelItem),
-                            To = destinationModelItem.GetCurrentValue() as State
-                        });
+                        ModelItem destinationModelItem = (
+                            (VirtualizedContainerService.VirtualizingContainer)
+                                destinationConnectionPoint.ParentDesigner
+                        ).ModelItem;
+                        ModelItem stateMachineModelItem = GetStateMachineModelItem(
+                            destinationModelItem
+                        );
+                        droppedModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection.Add(
+                                new Transition()
+                                {
+                                    DisplayName = StateContainerEditor.GenerateTransitionName(
+                                        stateMachineModelItem
+                                    ),
+                                    To = destinationModelItem.GetCurrentValue() as State,
+                                }
+                            );
                         autoSplit = true;
                     }
                 }
@@ -2645,10 +3586,18 @@ namespace System.Activities.Core.Presentation
                     // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
-                    this.Context.Services.GetService<ModelTreeManager>().AddToCurrentEditingScope(new SuppressAddingConnectorWhenAddingStateVisual());
+                    this.Context.Services.GetService<ModelTreeManager>()
+                        .AddToCurrentEditingScope(
+                            new SuppressAddingConnectorWhenAddingStateVisual()
+                        );
                     this.activeSrcConnectionPointForAutoSplit = sourceConnectionPoint;
                     this.activeDestConnectionPointForAutoSplit = destinationConnectionPoint;
-                    AutoSplitHelper.CalculateEntryExitEdges(e.GetPosition(this.panel), connector, out this.entryEdgeForAutoSplit, out this.exitEdgeForAutoSplit);
+                    AutoSplitHelper.CalculateEntryExitEdges(
+                        e.GetPosition(this.panel),
+                        connector,
+                        out this.entryEdgeForAutoSplit,
+                        out this.exitEdgeForAutoSplit
+                    );
                     scope.Complete();
                 }
                 else
@@ -2666,10 +3615,7 @@ namespace System.Activities.Core.Presentation
         {
             public override string Description
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public override bool Apply()
@@ -2690,7 +3636,7 @@ namespace System.Activities.Core.Presentation
             CannotCreateTransitionFromAncestorToDescendant,
             CannotSetCompositeStateAsInitialState,
             CannotSetFinalStateAsInitialState,
-            OtherFailure
+            OtherFailure,
         }
     }
 }

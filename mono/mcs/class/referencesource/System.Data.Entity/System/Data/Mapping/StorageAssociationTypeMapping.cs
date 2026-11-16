@@ -9,16 +9,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Data.Metadata.Edm;
+using System.Text;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Represents the Mapping metadata for an association type map in CS space.
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following
-    /// --Mapping 
+    /// --Mapping
     ///   --EntityContainerMapping ( CNorthwind-->SNorthwind )
     ///     --EntitySetMapping
     ///       --EntityTypeMapping
@@ -35,7 +36,7 @@ namespace System.Data.Mapping {
     ///               --ScalarPropertyMap
     ///               --ScalarProperyMap
     ///           --ScalarPropertyMap
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
     ///           --EndPropertyMap
@@ -43,19 +44,24 @@ namespace System.Data.Mapping {
     ///             --ScalarProperyMap
     ///           --EndPropertyMap
     ///             --ScalarPropertyMap
-    /// This class represents the metadata for all association Type map elements in the 
-    /// above example. Users can access the table mapping fragments under the 
+    /// This class represents the metadata for all association Type map elements in the
+    /// above example. Users can access the table mapping fragments under the
     /// association type mapping through this class.
     /// </example>
-    internal class StorageAssociationTypeMapping : StorageTypeMapping {
+    internal class StorageAssociationTypeMapping : StorageTypeMapping
+    {
         #region Constructors
         /// <summary>
         /// Construct the new AssociationTypeMapping object.
         /// </summary>
         /// <param name="relation">Represents the Association Type metadata object</param>
         /// <param name="setMapping">Set Mapping that contains this Type mapping </param>
-        internal StorageAssociationTypeMapping(AssociationType relation, StorageSetMapping setMapping)
-            : base(setMapping) {
+        internal StorageAssociationTypeMapping(
+            AssociationType relation,
+            StorageSetMapping setMapping
+        )
+            : base(setMapping)
+        {
             this.m_relation = relation;
         }
         #endregion
@@ -73,9 +79,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal AssociationType AssociationType
         {
-            get {
-                return this.m_relation;
-            }
+            get { return this.m_relation; }
         }
 
         /// <summary>
@@ -83,22 +87,20 @@ namespace System.Data.Mapping {
         /// Since Association types dont participate in Inheritance, This can only
         /// be one type.
         /// </summary>
-        internal override ReadOnlyCollection<EdmType> Types {
-            get {
-                return new ReadOnlyCollection<EdmType>(new AssociationType[] { m_relation });
-            }
+        internal override ReadOnlyCollection<EdmType> Types
+        {
+            get { return new ReadOnlyCollection<EdmType>(new AssociationType[] { m_relation }); }
         }
 
         /// <summary>
         /// a list of TypeMetadatas for which the mapping holds true for
         /// not only the type specified but the sub-types of that type as well.
-        /// Since Association types dont participate in Inheritance, an Empty list 
+        /// Since Association types dont participate in Inheritance, an Empty list
         /// is returned here.
         /// </summary>
-        internal override ReadOnlyCollection<EdmType> IsOfTypes {
-            get {
-                return new List<EdmType>().AsReadOnly();
-            }
+        internal override ReadOnlyCollection<EdmType> IsOfTypes
+        {
+            get { return new List<EdmType>().AsReadOnly(); }
         }
         #endregion
 
@@ -108,7 +110,8 @@ namespace System.Data.Mapping {
         /// Will be removed shortly.
         /// </summary>
         /// <param name="index"></param>
-        internal override void Print(int index) {
+        internal override void Print(int index)
+        {
             StorageEntityContainerMapping.GetPrettyPrintString(ref index);
             StringBuilder sb = new StringBuilder();
             sb.Append("AssociationTypeMapping");
@@ -117,7 +120,8 @@ namespace System.Data.Mapping {
             sb.Append(this.m_relation.Name);
             sb.Append("   ");
             Console.WriteLine(sb.ToString());
-            foreach (StorageMappingFragment fragment in MappingFragments) {
+            foreach (StorageMappingFragment fragment in MappingFragments)
+            {
                 fragment.Print(index + 5);
             }
         }

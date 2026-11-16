@@ -41,23 +41,31 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         private const string ProcessProjectCancellation = nameof(ProcessProjectCancellation);
         private const string ActiveFileEnqueue = nameof(ActiveFileEnqueue);
         private const string ActiveFileProcessDocument = nameof(ActiveFileProcessDocument);
-        private const string ActiveFileProcessDocumentCancellation = nameof(ActiveFileProcessDocumentCancellation);
+        private const string ActiveFileProcessDocumentCancellation = nameof(
+            ActiveFileProcessDocumentCancellation
+        );
 
         public static void LogRegistration(int correlationId, Workspace workspace)
         {
-            Logger.Log(FunctionId.WorkCoordinatorRegistrationService_Register, KeyValueLogMessage.Create(m =>
-            {
-                m[Id] = correlationId;
-                m[Kind] = workspace.Kind;
-            }));
+            Logger.Log(
+                FunctionId.WorkCoordinatorRegistrationService_Register,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                    m[Kind] = workspace.Kind;
+                })
+            );
         }
 
         public static void LogUnregistration(int correlationId)
         {
-            Logger.Log(FunctionId.WorkCoordinatorRegistrationService_Unregister, KeyValueLogMessage.Create(m =>
-            {
-                m[Id] = correlationId;
-            }));
+            Logger.Log(
+                FunctionId.WorkCoordinatorRegistrationService_Unregister,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                })
+            );
         }
 
         public static void LogReanalyze(
@@ -65,36 +73,58 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             IIncrementalAnalyzer analyzer,
             int documentCount,
             string languages,
-            bool highPriority)
+            bool highPriority
+        )
         {
-            Logger.Log(FunctionId.WorkCoordinatorRegistrationService_Reanalyze, KeyValueLogMessage.Create(m =>
-            {
-                m[Id] = correlationId;
-                m[Analyzer] = analyzer.ToString();
-                m[DocumentCount] = documentCount;
-                m[HighPriority] = highPriority;
-                m[Languages] = languages;
-            }));
+            Logger.Log(
+                FunctionId.WorkCoordinatorRegistrationService_Reanalyze,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                    m[Analyzer] = analyzer.ToString();
+                    m[DocumentCount] = documentCount;
+                    m[HighPriority] = highPriority;
+                    m[Languages] = languages;
+                })
+            );
         }
 
-        public static void LogAnalyzers(int correlationId, Workspace workspace, ImmutableArray<IIncrementalAnalyzer> reordered, bool onlyHighPriorityAnalyzer)
+        public static void LogAnalyzers(
+            int correlationId,
+            Workspace workspace,
+            ImmutableArray<IIncrementalAnalyzer> reordered,
+            bool onlyHighPriorityAnalyzer
+        )
         {
             if (onlyHighPriorityAnalyzer)
             {
                 LogAnalyzersWorker(
-                    FunctionId.IncrementalAnalyzerProcessor_ActiveFileAnalyzers, FunctionId.IncrementalAnalyzerProcessor_ActiveFileAnalyzer,
-                    correlationId, workspace, reordered);
+                    FunctionId.IncrementalAnalyzerProcessor_ActiveFileAnalyzers,
+                    FunctionId.IncrementalAnalyzerProcessor_ActiveFileAnalyzer,
+                    correlationId,
+                    workspace,
+                    reordered
+                );
             }
             else
             {
                 LogAnalyzersWorker(
-                    FunctionId.IncrementalAnalyzerProcessor_Analyzers, FunctionId.IncrementalAnalyzerProcessor_Analyzer,
-                    correlationId, workspace, reordered);
+                    FunctionId.IncrementalAnalyzerProcessor_Analyzers,
+                    FunctionId.IncrementalAnalyzerProcessor_Analyzer,
+                    correlationId,
+                    workspace,
+                    reordered
+                );
             }
         }
 
         private static void LogAnalyzersWorker(
-            FunctionId analyzersId, FunctionId analyzerId, int correlationId, Workspace workspace, ImmutableArray<IIncrementalAnalyzer> reordered)
+            FunctionId analyzersId,
+            FunctionId analyzerId,
+            int correlationId,
+            Workspace workspace,
+            ImmutableArray<IIncrementalAnalyzer> reordered
+        )
         {
             if (workspace.Kind == WorkspaceKind.Preview)
             {
@@ -102,58 +132,90 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
 
             // log registered analyzers.
-            Logger.Log(analyzersId, KeyValueLogMessage.Create(m =>
-            {
-                m[Id] = correlationId;
-                m[AnalyzerCount] = reordered.Length;
-            }, LogLevel.Debug));
+            Logger.Log(
+                analyzersId,
+                KeyValueLogMessage.Create(
+                    m =>
+                    {
+                        m[Id] = correlationId;
+                        m[AnalyzerCount] = reordered.Length;
+                    },
+                    LogLevel.Debug
+                )
+            );
 
             foreach (var analyzer in reordered)
             {
-                Logger.Log(analyzerId, KeyValueLogMessage.Create(m =>
-                {
-                    m[Id] = correlationId;
-                    m[Analyzer] = analyzer.ToString();
-                }, LogLevel.Debug));
+                Logger.Log(
+                    analyzerId,
+                    KeyValueLogMessage.Create(
+                        m =>
+                        {
+                            m[Id] = correlationId;
+                            m[Analyzer] = analyzer.ToString();
+                        },
+                        LogLevel.Debug
+                    )
+                );
             }
         }
 
         public static void LogWorkCoordinatorShutdownTimeout(int correlationId)
         {
-            Logger.Log(FunctionId.WorkCoordinator_ShutdownTimeout, KeyValueLogMessage.Create(m =>
-            {
-                m[Id] = correlationId;
-            }));
-        }
-
-        public static void LogWorkspaceEvent(CountLogAggregator<WorkspaceChangeKind> logAggregator, WorkspaceChangeKind kind)
-            => logAggregator.IncreaseCount(kind);
-
-        public static void LogWorkCoordinatorShutdown(int correlationId, CountLogAggregator<WorkspaceChangeKind> logAggregator)
-        {
-            Logger.Log(FunctionId.WorkCoordinator_Shutdown, KeyValueLogMessage.Create(m =>
-            {
-                m[Id] = correlationId;
-
-                foreach (var kv in logAggregator)
+            Logger.Log(
+                FunctionId.WorkCoordinator_ShutdownTimeout,
+                KeyValueLogMessage.Create(m =>
                 {
-                    var change = kv.Key.ToString();
-                    m[change] = kv.Value.GetCount();
-                }
-            }));
+                    m[Id] = correlationId;
+                })
+            );
         }
 
-        public static void LogGlobalOperation(CountLogAggregator<object> logAggregator)
-            => logAggregator.IncreaseCount(GlobalOperation);
+        public static void LogWorkspaceEvent(
+            CountLogAggregator<WorkspaceChangeKind> logAggregator,
+            WorkspaceChangeKind kind
+        ) => logAggregator.IncreaseCount(kind);
 
-        public static void LogActiveFileEnqueue(CountLogAggregator<object> logAggregator)
-            => logAggregator.IncreaseCount(ActiveFileEnqueue);
+        public static void LogWorkCoordinatorShutdown(
+            int correlationId,
+            CountLogAggregator<WorkspaceChangeKind> logAggregator
+        )
+        {
+            Logger.Log(
+                FunctionId.WorkCoordinator_Shutdown,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
 
-        public static void LogWorkItemEnqueue(CountLogAggregator<object> logAggregator, ProjectId _)
-            => logAggregator.IncreaseCount(ProjectEnqueue);
+                    foreach (var kv in logAggregator)
+                    {
+                        var change = kv.Key.ToString();
+                        m[change] = kv.Value.GetCount();
+                    }
+                })
+            );
+        }
+
+        public static void LogGlobalOperation(CountLogAggregator<object> logAggregator) =>
+            logAggregator.IncreaseCount(GlobalOperation);
+
+        public static void LogActiveFileEnqueue(CountLogAggregator<object> logAggregator) =>
+            logAggregator.IncreaseCount(ActiveFileEnqueue);
 
         public static void LogWorkItemEnqueue(
-            CountLogAggregator<object> logAggregator, string language, DocumentId? documentId, InvocationReasons reasons, bool lowPriority, SyntaxPath? activeMember, bool added)
+            CountLogAggregator<object> logAggregator,
+            ProjectId _
+        ) => logAggregator.IncreaseCount(ProjectEnqueue);
+
+        public static void LogWorkItemEnqueue(
+            CountLogAggregator<object> logAggregator,
+            string language,
+            DocumentId? documentId,
+            InvocationReasons reasons,
+            bool lowPriority,
+            SyntaxPath? activeMember,
+            bool added
+        )
         {
             logAggregator.IncreaseCount(language);
             logAggregator.IncreaseCount(added ? NewWorkItem : UpdateWorkItem);
@@ -175,49 +237,63 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
         }
 
-        public static void LogHigherPriority(CountLogAggregator<object> logAggregator, Guid documentId)
+        public static void LogHigherPriority(
+            CountLogAggregator<object> logAggregator,
+            Guid documentId
+        )
         {
             logAggregator.IncreaseCount(HigherPriority);
             logAggregator.IncreaseCount(ValueTuple.Create(HigherPriority, documentId));
         }
 
-        public static void LogResetStates(CountLogAggregator<object> logAggregator)
-            => logAggregator.IncreaseCount(ResetStates);
+        public static void LogResetStates(CountLogAggregator<object> logAggregator) =>
+            logAggregator.IncreaseCount(ResetStates);
 
-        public static void LogIncrementalAnalyzerProcessorStatistics(int correlationId, Solution solution, CountLogAggregator<object> logAggregator, ImmutableArray<IIncrementalAnalyzer> analyzers)
+        public static void LogIncrementalAnalyzerProcessorStatistics(
+            int correlationId,
+            Solution solution,
+            CountLogAggregator<object> logAggregator,
+            ImmutableArray<IIncrementalAnalyzer> analyzers
+        )
         {
-            Logger.Log(FunctionId.IncrementalAnalyzerProcessor_Shutdown, KeyValueLogMessage.Create(m =>
-            {
-                var solutionHash = GetSolutionHash(solution);
-
-                m[Id] = correlationId;
-                m[SolutionHash] = solutionHash.ToString();
-
-                var statMap = new Dictionary<string, List<int>>();
-                foreach (var (key, counter) in logAggregator)
+            Logger.Log(
+                FunctionId.IncrementalAnalyzerProcessor_Shutdown,
+                KeyValueLogMessage.Create(m =>
                 {
-                    if (key is string stringKey)
-                    {
-                        m[stringKey] = counter.GetCount();
-                    }
-                    else if (key is ValueTuple<string, Guid> propertyNameAndId)
-                    {
-                        var list = statMap.GetOrAdd(propertyNameAndId.Item1, _ => new List<int>());
-                        list.Add(counter.GetCount());
-                    }
-                    else
-                    {
-                        throw ExceptionUtilities.Unreachable();
-                    }
-                }
+                    var solutionHash = GetSolutionHash(solution);
 
-                foreach (var (propertyName, propertyValues) in statMap)
-                {
-                    var result = StatisticResult.FromList(propertyValues);
+                    m[Id] = correlationId;
+                    m[SolutionHash] = solutionHash.ToString();
 
-                    result.WriteTelemetryPropertiesTo(m, prefix: propertyName);
-                }
-            }));
+                    var statMap = new Dictionary<string, List<int>>();
+                    foreach (var (key, counter) in logAggregator)
+                    {
+                        if (key is string stringKey)
+                        {
+                            m[stringKey] = counter.GetCount();
+                        }
+                        else if (key is ValueTuple<string, Guid> propertyNameAndId)
+                        {
+                            var list = statMap.GetOrAdd(
+                                propertyNameAndId.Item1,
+                                _ => new List<int>()
+                            );
+                            list.Add(counter.GetCount());
+                        }
+                        else
+                        {
+                            throw ExceptionUtilities.Unreachable();
+                        }
+                    }
+
+                    foreach (var (propertyName, propertyValues) in statMap)
+                    {
+                        var result = StatisticResult.FromList(propertyValues);
+
+                        result.WriteTelemetryPropertiesTo(m, prefix: propertyName);
+                    }
+                })
+            );
 
             foreach (var analyzer in analyzers)
             {
@@ -235,19 +311,29 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             return 0;
         }
 
-        public static void LogProcessCloseDocument(CountLogAggregator<object> logAggregator, Guid documentId)
+        public static void LogProcessCloseDocument(
+            CountLogAggregator<object> logAggregator,
+            Guid documentId
+        )
         {
             logAggregator.IncreaseCount(CloseDocument);
             logAggregator.IncreaseCount(ValueTuple.Create(CloseDocument, documentId));
         }
 
-        public static void LogProcessOpenDocument(CountLogAggregator<object> logAggregator, Guid documentId)
+        public static void LogProcessOpenDocument(
+            CountLogAggregator<object> logAggregator,
+            Guid documentId
+        )
         {
             logAggregator.IncreaseCount(OpenDocument);
             logAggregator.IncreaseCount(ValueTuple.Create(OpenDocument, documentId));
         }
 
-        public static void LogProcessActiveFileDocument(CountLogAggregator<object> logAggregator, Guid _, bool processed)
+        public static void LogProcessActiveFileDocument(
+            CountLogAggregator<object> logAggregator,
+            Guid _,
+            bool processed
+        )
         {
             if (processed)
             {
@@ -259,7 +345,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
         }
 
-        public static void LogProcessDocument(CountLogAggregator<object> logAggregator, Guid documentId, bool processed)
+        public static void LogProcessDocument(
+            CountLogAggregator<object> logAggregator,
+            Guid documentId,
+            bool processed
+        )
         {
             if (processed)
             {
@@ -273,10 +363,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             logAggregator.IncreaseCount(ValueTuple.Create(ProcessDocument, documentId));
         }
 
-        public static void LogProcessDocumentNotExist(CountLogAggregator<object> logAggregator)
-            => logAggregator.IncreaseCount(DocumentNotExist);
+        public static void LogProcessDocumentNotExist(CountLogAggregator<object> logAggregator) =>
+            logAggregator.IncreaseCount(DocumentNotExist);
 
-        public static void LogProcessProject(CountLogAggregator<object> logAggregator, Guid projectId, bool processed)
+        public static void LogProcessProject(
+            CountLogAggregator<object> logAggregator,
+            Guid projectId,
+            bool processed
+        )
         {
             if (processed)
             {
@@ -290,7 +384,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             logAggregator.IncreaseCount(ValueTuple.Create(ProcessProject, projectId));
         }
 
-        public static void LogProcessProjectNotExist(CountLogAggregator<object> logAggregator)
-            => logAggregator.IncreaseCount(ProjectNotExist);
+        public static void LogProcessProjectNotExist(CountLogAggregator<object> logAggregator) =>
+            logAggregator.IncreaseCount(ProjectNotExist);
     }
 }

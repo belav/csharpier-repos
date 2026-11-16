@@ -19,9 +19,8 @@ public class FormatterMappingsTest
         var options = new FormatterMappings();
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(
-            "format",
-            () => options.GetMediaTypeMappingForFormat(format)
+        Assert.Throws<ArgumentException>("format", () =>
+            options.GetMediaTypeMappingForFormat(format)
         );
     }
 

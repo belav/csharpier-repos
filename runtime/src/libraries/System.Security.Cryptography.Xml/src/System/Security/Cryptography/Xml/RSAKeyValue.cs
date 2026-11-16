@@ -75,15 +75,31 @@ namespace System.Security.Cryptography.Xml
         {
             RSAParameters rsaParams = _key.ExportParameters(false);
 
-            XmlElement keyValueElement = xmlDocument.CreateElement(KeyValueElementName, SignedXml.XmlDsigNamespaceUrl);
-            XmlElement rsaKeyValueElement = xmlDocument.CreateElement(RSAKeyValueElementName, SignedXml.XmlDsigNamespaceUrl);
+            XmlElement keyValueElement = xmlDocument.CreateElement(
+                KeyValueElementName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            XmlElement rsaKeyValueElement = xmlDocument.CreateElement(
+                RSAKeyValueElementName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
 
-            XmlElement modulusElement = xmlDocument.CreateElement(ModulusElementName, SignedXml.XmlDsigNamespaceUrl);
-            modulusElement.AppendChild(xmlDocument.CreateTextNode(Convert.ToBase64String(rsaParams.Modulus!)));
+            XmlElement modulusElement = xmlDocument.CreateElement(
+                ModulusElementName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            modulusElement.AppendChild(
+                xmlDocument.CreateTextNode(Convert.ToBase64String(rsaParams.Modulus!))
+            );
             rsaKeyValueElement.AppendChild(modulusElement);
 
-            XmlElement exponentElement = xmlDocument.CreateElement(ExponentElementName, SignedXml.XmlDsigNamespaceUrl);
-            exponentElement.AppendChild(xmlDocument.CreateTextNode(Convert.ToBase64String(rsaParams.Exponent!)));
+            XmlElement exponentElement = xmlDocument.CreateElement(
+                ExponentElementName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            exponentElement.AppendChild(
+                xmlDocument.CreateTextNode(Convert.ToBase64String(rsaParams.Exponent!))
+            );
             rsaKeyValueElement.AppendChild(exponentElement);
 
             keyValueElement.AppendChild(rsaKeyValueElement);
@@ -113,33 +129,71 @@ namespace System.Security.Cryptography.Xml
                 throw new ArgumentNullException(nameof(value));
             }
 
-            if (value.LocalName != KeyValueElementName
-                || value.NamespaceURI != SignedXml.XmlDsigNamespaceUrl)
+            if (
+                value.LocalName != KeyValueElementName
+                || value.NamespaceURI != SignedXml.XmlDsigNamespaceUrl
+            )
             {
-                throw new CryptographicException(SR.Format(SR.WrongRootElement, KeyValueElementName, SignedXml.XmlDsigNamespaceUrl));
+                throw new CryptographicException(
+                    SR.Format(
+                        SR.WrongRootElement,
+                        KeyValueElementName,
+                        SignedXml.XmlDsigNamespaceUrl
+                    )
+                );
             }
 
             const string xmlDsigNamespacePrefix = "dsig";
-            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(value.OwnerDocument.NameTable);
+            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(
+                value.OwnerDocument.NameTable
+            );
             xmlNamespaceManager.AddNamespace(xmlDsigNamespacePrefix, SignedXml.XmlDsigNamespaceUrl);
 
-            XmlNode? rsaKeyValueElement = value.SelectSingleNode($"{xmlDsigNamespacePrefix}:{RSAKeyValueElementName}", xmlNamespaceManager);
+            XmlNode? rsaKeyValueElement = value.SelectSingleNode(
+                $"{xmlDsigNamespacePrefix}:{RSAKeyValueElementName}",
+                xmlNamespaceManager
+            );
             if (rsaKeyValueElement == null)
             {
-                throw new CryptographicException(SR.Format(SR.MustContainChildElement, KeyValueElementName, RSAKeyValueElementName));
+                throw new CryptographicException(
+                    SR.Format(
+                        SR.MustContainChildElement,
+                        KeyValueElementName,
+                        RSAKeyValueElementName
+                    )
+                );
             }
 
             try
             {
-                Key.ImportParameters(new RSAParameters
-                {
-                    Modulus = Convert.FromBase64String(rsaKeyValueElement.SelectSingleNode($"{xmlDsigNamespacePrefix}:{ModulusElementName}", xmlNamespaceManager)!.InnerText),
-                    Exponent = Convert.FromBase64String(rsaKeyValueElement.SelectSingleNode($"{xmlDsigNamespacePrefix}:{ExponentElementName}", xmlNamespaceManager)!.InnerText)
-                });
+                Key.ImportParameters(
+                    new RSAParameters
+                    {
+                        Modulus = Convert.FromBase64String(
+                            rsaKeyValueElement
+                                .SelectSingleNode(
+                                    $"{xmlDsigNamespacePrefix}:{ModulusElementName}",
+                                    xmlNamespaceManager
+                                )!
+                                .InnerText
+                        ),
+                        Exponent = Convert.FromBase64String(
+                            rsaKeyValueElement
+                                .SelectSingleNode(
+                                    $"{xmlDsigNamespacePrefix}:{ExponentElementName}",
+                                    xmlNamespaceManager
+                                )!
+                                .InnerText
+                        ),
+                    }
+                );
             }
             catch (Exception ex)
             {
-                throw new CryptographicException($"An error occurred parsing the {ModulusElementName} and {ExponentElementName} elements", ex);
+                throw new CryptographicException(
+                    $"An error occurred parsing the {ModulusElementName} and {ExponentElementName} elements",
+                    ex
+                );
             }
         }
     }

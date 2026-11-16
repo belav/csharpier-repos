@@ -6,16 +6,19 @@ namespace System.ServiceModel.Syndication
 {
     using System.IO;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class SyndicationElementExtension
     {
         XmlBuffer buffer;
         int bufferElementIndex;
+
         // extensionData and extensionDataWriter are only present on the send side
         object extensionData;
         ExtensionDataWriter extensionDataWriter;
@@ -32,7 +35,9 @@ namespace System.ServiceModel.Syndication
             this.outerName = xmlReader.LocalName;
             this.outerNamespace = xmlReader.NamespaceURI;
             this.buffer = new XmlBuffer(int.MaxValue);
-            using (XmlDictionaryWriter writer = this.buffer.OpenSection(XmlDictionaryReaderQuotas.Max))
+            using (
+                XmlDictionaryWriter writer = this.buffer.OpenSection(XmlDictionaryReaderQuotas.Max)
+            )
             {
                 writer.WriteStartElement(Rss20Constants.ExtensionWrapperTag);
                 writer.WriteNode(xmlReader, false);
@@ -44,45 +49,64 @@ namespace System.ServiceModel.Syndication
         }
 
         public SyndicationElementExtension(object dataContractExtension)
-            : this(dataContractExtension, (XmlObjectSerializer) null)
-        {
-        }
+            : this(dataContractExtension, (XmlObjectSerializer)null) { }
 
-        public SyndicationElementExtension(object dataContractExtension, XmlObjectSerializer dataContractSerializer)
-            : this(null, null, dataContractExtension, dataContractSerializer)
-        {
-        }
+        public SyndicationElementExtension(
+            object dataContractExtension,
+            XmlObjectSerializer dataContractSerializer
+        )
+            : this(null, null, dataContractExtension, dataContractSerializer) { }
 
-        public SyndicationElementExtension(string outerName, string outerNamespace, object dataContractExtension)
-            : this(outerName, outerNamespace, dataContractExtension, null)
-        {
-        }
+        public SyndicationElementExtension(
+            string outerName,
+            string outerNamespace,
+            object dataContractExtension
+        )
+            : this(outerName, outerNamespace, dataContractExtension, null) { }
 
-        public SyndicationElementExtension(string outerName, string outerNamespace, object dataContractExtension, XmlObjectSerializer dataContractSerializer)
+        public SyndicationElementExtension(
+            string outerName,
+            string outerNamespace,
+            object dataContractExtension,
+            XmlObjectSerializer dataContractSerializer
+        )
         {
             if (dataContractExtension == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("dataContractExtension");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "dataContractExtension"
+                );
             }
             if (outerName == string.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.OuterNameOfElementExtensionEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.OuterNameOfElementExtensionEmpty)
+                );
             }
             if (dataContractSerializer == null)
             {
-                dataContractSerializer = new DataContractSerializer(dataContractExtension.GetType());
+                dataContractSerializer = new DataContractSerializer(
+                    dataContractExtension.GetType()
+                );
             }
             this.outerName = outerName;
             this.outerNamespace = outerNamespace;
             this.extensionData = dataContractExtension;
-            this.extensionDataWriter = new ExtensionDataWriter(this.extensionData, dataContractSerializer, this.outerName, this.outerNamespace);
+            this.extensionDataWriter = new ExtensionDataWriter(
+                this.extensionData,
+                dataContractSerializer,
+                this.outerName,
+                this.outerNamespace
+            );
         }
 
         public SyndicationElementExtension(object xmlSerializerExtension, XmlSerializer serializer)
         {
             if (xmlSerializerExtension == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("xmlSerializerExtension");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlSerializerExtension"
+                );
             }
             if (serializer == null)
             {
@@ -92,7 +116,12 @@ namespace System.ServiceModel.Syndication
             this.extensionDataWriter = new ExtensionDataWriter(this.extensionData, serializer);
         }
 
-        internal SyndicationElementExtension(XmlBuffer buffer, int bufferElementIndex, string outerName, string outerNamespace)
+        internal SyndicationElementExtension(
+            XmlBuffer buffer,
+            int bufferElementIndex,
+            string outerName,
+            string outerNamespace
+        )
         {
             this.buffer = buffer;
             this.bufferElementIndex = bufferElementIndex;
@@ -135,13 +164,16 @@ namespace System.ServiceModel.Syndication
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
             }
-            if (this.extensionData != null && typeof(TExtension).IsAssignableFrom(extensionData.GetType()))
+            if (
+                this.extensionData != null
+                && typeof(TExtension).IsAssignableFrom(extensionData.GetType())
+            )
             {
-                return (TExtension) this.extensionData;
+                return (TExtension)this.extensionData;
             }
             using (XmlReader reader = GetReader())
             {
-                return (TExtension) serializer.ReadObject(reader, false);
+                return (TExtension)serializer.ReadObject(reader, false);
             }
         }
 
@@ -151,13 +183,16 @@ namespace System.ServiceModel.Syndication
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
             }
-            if (this.extensionData != null && typeof(TExtension).IsAssignableFrom(extensionData.GetType()))
+            if (
+                this.extensionData != null
+                && typeof(TExtension).IsAssignableFrom(extensionData.GetType())
+            )
             {
-                return (TExtension) this.extensionData;
+                return (TExtension)this.extensionData;
             }
             using (XmlReader reader = GetReader())
             {
-                return (TExtension) serializer.Deserialize(reader);
+                return (TExtension)serializer.Deserialize(reader);
             }
         }
 
@@ -203,7 +238,11 @@ namespace System.ServiceModel.Syndication
             if (this.buffer == null)
             {
                 this.buffer = new XmlBuffer(int.MaxValue);
-                using (XmlDictionaryWriter writer = this.buffer.OpenSection(XmlDictionaryReaderQuotas.Max))
+                using (
+                    XmlDictionaryWriter writer = this.buffer.OpenSection(
+                        XmlDictionaryReaderQuotas.Max
+                    )
+                )
                 {
                     writer.WriteStartElement(Rss20Constants.ExtensionWrapperTag);
                     this.WriteTo(writer);
@@ -217,8 +256,14 @@ namespace System.ServiceModel.Syndication
 
         void EnsureOuterNameAndNs()
         {
-            Fx.Assert(this.extensionDataWriter != null, "outer name is null only for datacontract and xmlserializer cases");
-            this.extensionDataWriter.ComputeOuterNameAndNs(out this.outerName, out this.outerNamespace);
+            Fx.Assert(
+                this.extensionDataWriter != null,
+                "outer name is null only for datacontract and xmlserializer cases"
+            );
+            this.extensionDataWriter.ComputeOuterNameAndNs(
+                out this.outerName,
+                out this.outerNamespace
+            );
         }
 
         // this class holds the extension data and the associated serializer (either DataContractSerializer or XmlSerializer but not both)
@@ -230,7 +275,12 @@ namespace System.ServiceModel.Syndication
             readonly string outerNamespace;
             readonly XmlSerializer xmlSerializer;
 
-            public ExtensionDataWriter(object extensionData, XmlObjectSerializer dataContractSerializer, string outerName, string outerNamespace)
+            public ExtensionDataWriter(
+                object extensionData,
+                XmlObjectSerializer dataContractSerializer,
+                string outerName,
+                string outerNamespace
+            )
             {
                 Fx.Assert(extensionData != null && dataContractSerializer != null, "null check");
                 this.dataContractSerializer = dataContractSerializer;
@@ -250,7 +300,14 @@ namespace System.ServiceModel.Syndication
             {
                 if (this.xmlSerializer != null)
                 {
-                    Fx.Assert((this.dataContractSerializer == null && this.outerName == null && this.outerNamespace == null), "Xml serializer cannot have outer name, ns");
+                    Fx.Assert(
+                        (
+                            this.dataContractSerializer == null
+                            && this.outerName == null
+                            && this.outerNamespace == null
+                        ),
+                        "Xml serializer cannot have outer name, ns"
+                    );
                     this.xmlSerializer.Serialize(writer, this.extensionData);
                 }
                 else
@@ -273,15 +330,23 @@ namespace System.ServiceModel.Syndication
             {
                 if (this.outerName != null)
                 {
-                    Fx.Assert(this.xmlSerializer == null, "outer name is not null for data contract extension only");
+                    Fx.Assert(
+                        this.xmlSerializer == null,
+                        "outer name is not null for data contract extension only"
+                    );
                     name = this.outerName;
                     ns = this.outerNamespace;
                 }
                 else if (this.dataContractSerializer != null)
                 {
-                    Fx.Assert(this.xmlSerializer == null, "only one of xmlserializer or datacontract serializer can be present");
+                    Fx.Assert(
+                        this.xmlSerializer == null,
+                        "only one of xmlserializer or datacontract serializer can be present"
+                    );
                     XsdDataContractExporter dcExporter = new XsdDataContractExporter();
-                    XmlQualifiedName qName = dcExporter.GetRootElementName(this.extensionData.GetType());
+                    XmlQualifiedName qName = dcExporter.GetRootElementName(
+                        this.extensionData.GetType()
+                    );
                     if (qName != null)
                     {
                         name = qName.Name;
@@ -295,9 +360,14 @@ namespace System.ServiceModel.Syndication
                 }
                 else
                 {
-                    Fx.Assert(this.dataContractSerializer == null, "only one of xmlserializer or datacontract serializer can be present");
+                    Fx.Assert(
+                        this.dataContractSerializer == null,
+                        "only one of xmlserializer or datacontract serializer can be present"
+                    );
                     XmlReflectionImporter importer = new XmlReflectionImporter();
-                    XmlTypeMapping typeMapping = importer.ImportTypeMapping(this.extensionData.GetType());
+                    XmlTypeMapping typeMapping = importer.ImportTypeMapping(
+                        this.extensionData.GetType()
+                    );
                     if (typeMapping != null && !string.IsNullOrEmpty(typeMapping.ElementName))
                     {
                         name = typeMapping.ElementName;

@@ -449,8 +449,8 @@ internal sealed class ParameterBindingMethodCache
             return (null, 0);
         }
 
-        var nonNullableParameterType =
-            Nullable.GetUnderlyingType(parameter.ParameterType) ?? parameter.ParameterType;
+        var nonNullableParameterType = Nullable.GetUnderlyingType(parameter.ParameterType)
+            ?? parameter.ParameterType;
         var (method, paramCount) = _bindAsyncMethodCallCache.GetOrAdd(
             nonNullableParameterType,
             Finder

@@ -26,23 +26,15 @@ namespace System.Data.EntityClient
         /// <summary>
         /// Constructs the EntityAdapter object without a connection object
         /// </summary>
-        public EntityAdapter()
-        {
-        }
+        public EntityAdapter() { }
 
         /// <summary>
         /// Gets or sets the map connection used by this adapter.
         /// </summary>
         DbConnection IEntityAdapter.Connection
         {
-            get
-            {
-                return this.Connection;
-            }
-            set
-            {
-                this.Connection = (EntityConnection)value;
-            }
+            get { return this.Connection; }
+            set { this.Connection = (EntityConnection)value; }
         }
 
         /// <summary>
@@ -50,14 +42,8 @@ namespace System.Data.EntityClient
         /// </summary>
         public EntityConnection Connection
         {
-            get
-            {
-                return _connection;
-            }
-            set
-            {
-                _connection = value;
-            }
+            get { return _connection; }
+            set { _connection = value; }
         }
 
         /// <summary>
@@ -65,14 +51,8 @@ namespace System.Data.EntityClient
         /// </summary>
         public bool AcceptChangesDuringUpdate
         {
-            get
-            {
-                return this._acceptChangesDuringUpdate;
-            }
-            set
-            {
-                this._acceptChangesDuringUpdate = value;
-            }
+            get { return this._acceptChangesDuringUpdate; }
+            set { this._acceptChangesDuringUpdate = value; }
         }
 
         /// <summary>
@@ -81,14 +61,8 @@ namespace System.Data.EntityClient
         /// </summary>
         Int32? IEntityAdapter.CommandTimeout
         {
-            get
-            {
-                return this._commandTimeout;
-            }
-            set
-            {
-                this._commandTimeout = value;
-            }
+            get { return this._commandTimeout; }
+            set { this._commandTimeout = value; }
         }
 
         /// <summary>
@@ -99,24 +73,36 @@ namespace System.Data.EntityClient
         public Int32 Update(IEntityStateManager entityCache)
         {
             EntityUtil.CheckArgumentNull(entityCache, "entityCache");
-            if (!IsStateManagerDirty(entityCache)) { return 0; }
+            if (!IsStateManagerDirty(entityCache))
+            {
+                return 0;
+            }
 
             // Check that we have a connection before we proceed
             if (_connection == null)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_NoConnectionForAdapter);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_NoConnectionForAdapter
+                );
             }
 
             // Check that the store connection is available
-            if (_connection.StoreProviderFactory == null || this._connection.StoreConnection == null)
+            if (
+                _connection.StoreProviderFactory == null
+                || this._connection.StoreConnection == null
+            )
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_NoStoreConnectionForUpdate);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_NoStoreConnectionForUpdate
+                );
             }
 
             // Check that the connection is open before we proceed
             if (ConnectionState.Open != _connection.State)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_ClosedConnectionForUpdate);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_ClosedConnectionForUpdate
+                );
             }
 
             return UpdateTranslator.Update(entityCache, this);
@@ -133,8 +119,11 @@ namespace System.Data.EntityClient
             bool hasChanges = false;
             // this call to GetCacheEntries is constant time (the ObjectStateManager implementation
             // maintains an explicit list of entries in each state)
-            foreach (ObjectStateEntry entry in entityCache.GetEntityStateEntries(
-                EntityState.Added | EntityState.Deleted | EntityState.Modified))
+            foreach (
+                ObjectStateEntry entry in entityCache.GetEntityStateEntries(
+                    EntityState.Added | EntityState.Deleted | EntityState.Modified
+                )
+            )
             {
                 hasChanges = true;
                 break;

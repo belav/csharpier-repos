@@ -261,9 +261,8 @@ public class RazorViewTest
             v.Write("layout-content" + Environment.NewLine);
             v.RenderBodyPublic();
         });
-        var pageFactoryResult = new RazorPageFactoryResult(
-            new CompiledViewDescriptor(),
-            () => layout
+        var pageFactoryResult = new RazorPageFactoryResult(new CompiledViewDescriptor(), () =>
+            layout
         );
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         pageFactory.Setup(p => p.CreateFactory(LayoutPath)).Returns(pageFactoryResult);
@@ -580,8 +579,8 @@ public class RazorViewTest
             .Verifiable();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -632,8 +631,8 @@ public class RazorViewTest
             .Verifiable();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -686,8 +685,8 @@ public class RazorViewTest
             .Verifiable();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -715,20 +714,14 @@ public class RazorViewTest
             v.HtmlEncoder = htmlEncoder;
             v.WriteLiteral("body-content");
             v.Layout = LayoutPath;
-            v.DefineSection(
-                "head",
-                async () =>
-                {
-                    await v.Output.WriteAsync("head-content");
-                }
-            );
-            v.DefineSection(
-                "foot",
-                async () =>
-                {
-                    await v.Output.WriteAsync("foot-content");
-                }
-            );
+            v.DefineSection("head", async () =>
+            {
+                await v.Output.WriteAsync("head-content");
+            });
+            v.DefineSection("foot", async () =>
+            {
+                await v.Output.WriteAsync("foot-content");
+            });
         });
         var layout = new TestableRazorPage(v =>
         {
@@ -812,8 +805,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page "
@@ -837,27 +830,21 @@ public class RazorViewTest
         {
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "~/Shared/Layout1.cshtml";
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteAsync("page-section-content");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteAsync("page-section-content");
+            });
         });
         var nestedLayout = new TestableRazorPage(v =>
         {
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "~/Shared/Layout2.cshtml";
             v.RenderBodyPublic();
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("layout-section-content");
-                    await v.RenderSectionAsync("foo");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("layout-section-content");
+                await v.RenderSectionAsync("foo");
+            });
         })
         {
             Path = "/Shared/Layout1.cshtml",
@@ -918,27 +905,21 @@ public class RazorViewTest
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "NestedLayout";
             v.WriteLiteral("Page body content that will not be written");
-            v.DefineSection(
-                "sectionA",
-                async () =>
-                {
-                    await v.Output.WriteAsync("page-section-content");
-                }
-            );
+            v.DefineSection("sectionA", async () =>
+            {
+                await v.Output.WriteAsync("page-section-content");
+            });
         });
         var nestedLayout = new TestableRazorPage(v =>
         {
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "Layout";
             v.WriteLiteral("Nested layout content that will not be written");
-            v.DefineSection(
-                "sectionB",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("layout-section-content");
-                    await v.RenderSectionAsync("sectionA");
-                }
-            );
+            v.DefineSection("sectionB", async () =>
+            {
+                await v.Output.WriteLineAsync("layout-section-content");
+                await v.RenderSectionAsync("sectionA");
+            });
         });
         nestedLayout.Path = "NestedLayout";
         var baseLayout = new TestableRazorPage(v =>
@@ -994,13 +975,10 @@ public class RazorViewTest
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "~/Shared/Layout1.cshtml";
             v.WriteLiteral("BodyContent");
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("foo-content");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("foo-content");
+            });
         });
         var nestedLayout = new TestableRazorPage(v =>
         {
@@ -1008,13 +986,10 @@ public class RazorViewTest
             v.Layout = "~/Shared/Layout2.cshtml";
             v.Write("NestedLayout" + Environment.NewLine);
             v.RenderBodyPublic();
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.RenderSectionAsync("foo");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.RenderSectionAsync("foo");
+            });
         })
         {
             Path = "/Shared/Layout1.cshtml",
@@ -1053,8 +1028,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page at "
@@ -1073,13 +1048,10 @@ public class RazorViewTest
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "~/Shared/Layout1.cshtml";
             v.WriteLiteral("BodyContent");
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("foo-content");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("foo-content");
+            });
         })
         {
             Path = "Page",
@@ -1091,13 +1063,10 @@ public class RazorViewTest
             v.Layout = "~/Shared/Layout2.cshtml";
             v.Write("NestedLayout" + Environment.NewLine);
             v.RenderBodyPublic();
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("dont-render-inner-foo");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("dont-render-inner-foo");
+            });
         })
         {
             Path = "/Shared/Layout1.cshtml",
@@ -1133,8 +1102,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page at "
@@ -1173,8 +1142,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
         Assert.Equal(
             $"RenderBody has not been called for the page at '{LayoutPath}'. To ignore call IgnoreBody().",
@@ -1201,13 +1170,10 @@ public class RazorViewTest
         var page = new TestableRazorPage(v =>
         {
             v.HtmlEncoder = htmlEncoder;
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("foo-content");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("foo-content");
+            });
             v.Layout = "~/Shared/Layout1.cshtml";
             v.WriteLiteral("body-content");
         });
@@ -1280,13 +1246,10 @@ public class RazorViewTest
         var page = new TestableRazorPage(v =>
         {
             v.HtmlEncoder = htmlEncoder;
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("foo-content");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("foo-content");
+            });
             v.Layout = "Layout1.cshtml";
             v.WriteLiteral("body-content");
         })
@@ -1380,8 +1343,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -1438,8 +1401,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
 
         // Assert
@@ -1466,13 +1429,10 @@ public class RazorViewTest
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "~/Shared/Layout1.cshtml";
             v.WriteLiteral("BodyContent");
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync("foo-content");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync("foo-content");
+            });
         });
         var nestedLayout = new TestableRazorPage(v =>
         {
@@ -1480,15 +1440,12 @@ public class RazorViewTest
             v.Layout = "~/Shared/Layout2.cshtml";
             v.Write("NestedLayout" + Environment.NewLine);
             v.RenderBodyPublic();
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    await v.Output.WriteLineAsync(
-                        htmlEncoder.Encode(v.RenderSection("foo").ToString())
-                    );
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                await v.Output.WriteLineAsync(
+                    htmlEncoder.Encode(v.RenderSection("foo").ToString())
+                );
+            });
         });
         nestedLayout.Path = "~/Shared/Layout1.cshtml";
 
@@ -1550,15 +1507,12 @@ public class RazorViewTest
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "layout-1";
             v.WriteLiteral("body content" + Environment.NewLine);
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    v.WriteLiteral("section-content-1" + Environment.NewLine);
-                    await v.FlushAsync();
-                    v.WriteLiteral("section-content-2");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                v.WriteLiteral("section-content-1" + Environment.NewLine);
+                await v.FlushAsync();
+                v.WriteLiteral("section-content-2");
+            });
         });
 
         var layout1 = new TestableRazorPage(v =>
@@ -1615,15 +1569,12 @@ public class RazorViewTest
         {
             v.HtmlEncoder = htmlEncoder;
             v.Layout = "layout-1";
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    v.WriteLiteral("section-content-1" + Environment.NewLine);
-                    await v.FlushAsync();
-                    v.WriteLiteral("section-content-2");
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                v.WriteLiteral("section-content-1" + Environment.NewLine);
+                await v.FlushAsync();
+                v.WriteLiteral("section-content-2");
+            });
         });
 
         var layout1 = new TestableRazorPage(v =>
@@ -1691,8 +1642,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -1708,14 +1659,11 @@ public class RazorViewTest
         {
             v.Path = "/Views/TestPath/Test.cshtml";
             v.HtmlEncoder = new HtmlTestEncoder();
-            v.DefineSection(
-                "foo",
-                async () =>
-                {
-                    v.Output.WriteLine("foo-content");
-                    await v.FlushAsync();
-                }
-            );
+            v.DefineSection("foo", async () =>
+            {
+                v.Output.WriteLine("foo-content");
+                await v.FlushAsync();
+            });
             v.Layout = "~/Shared/Layout1.cshtml";
             v.WriteLiteral("body-content");
         });
@@ -1745,8 +1693,8 @@ public class RazorViewTest
         var viewContext = CreateViewContext(view);
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => view.RenderAsync(viewContext)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            view.RenderAsync(viewContext)
         );
         Assert.Equal(expected, ex.Message);
     }

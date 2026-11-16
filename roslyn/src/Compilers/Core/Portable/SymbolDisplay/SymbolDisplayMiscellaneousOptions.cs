@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
         None = 0,
 
         /// <summary>
-        /// Uses keywords for predefined types. 
+        /// Uses keywords for predefined types.
         /// For example, "int" instead of "System.Int32" in C#
         /// or "Integer" instead of "System.Integer" in Visual Basic.
         /// </summary>

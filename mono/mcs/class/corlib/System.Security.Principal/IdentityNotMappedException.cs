@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,46 +26,41 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace System.Security.Principal {
+namespace System.Security.Principal
+{
+    [Serializable]
+    [ComVisible(false)]
+    public sealed class IdentityNotMappedException : SystemException
+    {
+        private IdentityReferenceCollection _coll;
 
-	[Serializable]
-	[ComVisible (false)]
-	public sealed class IdentityNotMappedException : SystemException {
+        public IdentityNotMappedException()
+            : base(Locale.GetText("Couldn't translate some identities.")) { }
 
-		private IdentityReferenceCollection _coll;
+        public IdentityNotMappedException(string message)
+            : base(message) { }
 
-		public IdentityNotMappedException ()
-			: base (Locale.GetText ("Couldn't translate some identities."))
-		{
-		}
+        public IdentityNotMappedException(string message, Exception inner)
+            : base(message, inner) { }
 
-		public IdentityNotMappedException (string message)
-			: base (message)
-		{
-		}
+        public IdentityReferenceCollection UnmappedIdentities
+        {
+            get
+            {
+                if (_coll == null)
+                    _coll = new IdentityReferenceCollection();
+                return _coll;
+            }
+        }
 
-		public IdentityNotMappedException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
-
-		public IdentityReferenceCollection UnmappedIdentities {
-			get {
-				if (_coll == null)
-					_coll = new IdentityReferenceCollection ();
-				return _coll;
-			}
-		}
-
-		[MonoTODO ("not implemented")]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-		}
-	}
+        [MonoTODO("not implemented")]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) { }
+    }
 }
-

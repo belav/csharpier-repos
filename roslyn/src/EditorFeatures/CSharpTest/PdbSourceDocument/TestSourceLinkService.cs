@@ -20,7 +20,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             _sourceFilePath = sourceFilePath;
         }
 
-        public Task<PdbFilePathResult?> GetPdbFilePathAsync(string dllPath, PEReader peReader, bool useDefaultSymbolServers, CancellationToken cancellationToken)
+        public Task<PdbFilePathResult?> GetPdbFilePathAsync(
+            string dllPath,
+            PEReader peReader,
+            bool useDefaultSymbolServers,
+            CancellationToken cancellationToken
+        )
         {
             if (_pdbFilePath is null)
             {
@@ -30,14 +35,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             return Task.FromResult<PdbFilePathResult?>(new PdbFilePathResult(_pdbFilePath));
         }
 
-        public Task<SourceFilePathResult?> GetSourceFilePathAsync(string url, string relativePath, CancellationToken cancellationToken)
+        public Task<SourceFilePathResult?> GetSourceFilePathAsync(
+            string url,
+            string relativePath,
+            CancellationToken cancellationToken
+        )
         {
             if (_sourceFilePath is null)
             {
                 return Task.FromResult<SourceFilePathResult?>(null);
             }
 
-            return Task.FromResult<SourceFilePathResult?>(new SourceFilePathResult(_sourceFilePath));
+            return Task.FromResult<SourceFilePathResult?>(
+                new SourceFilePathResult(_sourceFilePath)
+            );
         }
     }
 }

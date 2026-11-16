@@ -1,14 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="XPathNodeType.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">sdub</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.XPath {
+namespace System.Xml.XPath
+{
     using System;
 
-    public enum XPathNodeType {
+    public enum XPathNodeType
+    {
         Root,
         Element,
         Attribute,

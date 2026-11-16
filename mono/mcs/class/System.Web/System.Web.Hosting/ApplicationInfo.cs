@@ -1,6 +1,6 @@
 //
 // System.Web.Hosting.ApplicationInfo
-// 
+//
 // Author:
 //	Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,32 +28,35 @@
 //
 using System;
 
-namespace System.Web.Hosting {
-	[Serializable]
-	public sealed class ApplicationInfo {
-		string id;
-		string physical_path;
-		string virtual_path;
+namespace System.Web.Hosting
+{
+    [Serializable]
+    public sealed class ApplicationInfo
+    {
+        string id;
+        string physical_path;
+        string virtual_path;
 
-		internal ApplicationInfo (string id, string phys, string virt)
-		{
-			this.id = id;
-			this.physical_path = phys;
-			this.virtual_path = virt;
-		}
+        internal ApplicationInfo(string id, string phys, string virt)
+        {
+            this.id = id;
+            this.physical_path = phys;
+            this.virtual_path = virt;
+        }
 
-		public string ID {
-			get { return id; }
-		}
+        public string ID
+        {
+            get { return id; }
+        }
 
-		public string PhysicalPath {
-			get { return physical_path; }
-		}
+        public string PhysicalPath
+        {
+            get { return physical_path; }
+        }
 
-		public string VirtualPath {
-			get { return virtual_path; }
-		}
-	}
+        public string VirtualPath
+        {
+            get { return virtual_path; }
+        }
+    }
 }
-
-

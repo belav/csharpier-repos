@@ -13,9 +13,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public abstract class StrongNameProvider
     {
-        protected StrongNameProvider()
-        {
-        }
+        protected StrongNameProvider() { }
 
         public abstract override int GetHashCode();
         public abstract override bool Equals(object? other);
@@ -30,11 +28,20 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Signs the contents of <paramref name="peBlob"/> using <paramref name="peBuilder"/> and <paramref name="privateKey"/>.
         /// </summary>
-        internal abstract void SignBuilder(ExtendedPEBuilder peBuilder, BlobBuilder peBlob, RSAParameters privateKey);
+        internal abstract void SignBuilder(
+            ExtendedPEBuilder peBuilder,
+            BlobBuilder peBlob,
+            RSAParameters privateKey
+        );
 
         /// <summary>
         /// Create a <see cref="StrongNameKeys"/> for the provided information.
         /// </summary>
-        internal abstract StrongNameKeys CreateKeys(string? keyFilePath, string? keyContainerName, bool hasCounterSignature, CommonMessageProvider messageProvider);
+        internal abstract StrongNameKeys CreateKeys(
+            string? keyFilePath,
+            string? keyContainerName,
+            bool hasCounterSignature,
+            CommonMessageProvider messageProvider
+        );
     }
 }

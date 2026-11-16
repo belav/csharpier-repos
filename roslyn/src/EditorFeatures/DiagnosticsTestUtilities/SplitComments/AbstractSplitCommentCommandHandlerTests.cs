@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
             string? expectedOutputMarkup,
             Action callback,
             bool enabled,
-            bool useTabs)
+            bool useTabs
+        )
         {
             if (useTabs)
             {
@@ -62,20 +63,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
 
             var snapshotSpans = new List<SnapshotSpan>();
             foreach (var selection in originalSelections)
-                snapshotSpans.Add(new SnapshotSpan(originalSnapshot, new Span(selection.Start, selection.Length)));
+                snapshotSpans.Add(
+                    new SnapshotSpan(originalSnapshot, new Span(selection.Start, selection.Length))
+                );
 
             view.SetMultiSelection(snapshotSpans);
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler = workspace.ExportProvider.GetCommandHandler<SplitCommentCommandHandler>(nameof(SplitCommentCommandHandler));
-            if (!commandHandler.ExecuteCommand(new ReturnKeyCommandArgs(view, view.TextBuffer), TestCommandExecutionContext.Create()))
+            var commandHandler =
+                workspace.ExportProvider.GetCommandHandler<SplitCommentCommandHandler>(
+                    nameof(SplitCommentCommandHandler)
+                );
+            if (
+                !commandHandler.ExecuteCommand(
+                    new ReturnKeyCommandArgs(view, view.TextBuffer),
+                    TestCommandExecutionContext.Create()
+                )
+            )
             {
                 callback();
             }
 
             if (expectedOutputMarkup != null)
             {
-                MarkupTestFile.GetSpans(expectedOutputMarkup, out var expectedOutput, out var expectedSpans);
+                MarkupTestFile.GetSpans(
+                    expectedOutputMarkup,
+                    out var expectedOutput,
+                    out var expectedSpans
+                );
 
                 Assert.Equal(expectedOutput, view.TextBuffer.CurrentSnapshot.AsText().ToString());
 
@@ -94,25 +109,38 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
         /// this known test infrastructure issue. This bug does not represent a product
         /// failure.
         /// </summary>
-        protected void TestHandled(string inputMarkup, string expectedOutputMarkup, bool enabled = true, bool useTabs = false)
+        protected void TestHandled(
+            string inputMarkup,
+            string expectedOutputMarkup,
+            bool enabled = true,
+            bool useTabs = false
+        )
         {
             TestWorker(
-                inputMarkup, expectedOutputMarkup,
+                inputMarkup,
+                expectedOutputMarkup,
                 callback: () =>
                 {
                     Assert.True(false, "Should not reach here.");
-                }, enabled, useTabs);
+                },
+                enabled,
+                useTabs
+            );
         }
 
         protected void TestNotHandled(string inputMarkup, bool enabled = true, bool useTabs = false)
         {
             var notHandled = false;
             TestWorker(
-                inputMarkup, null,
+                inputMarkup,
+                null,
                 callback: () =>
                 {
                     notHandled = true;
-                }, enabled, useTabs);
+                },
+                enabled,
+                useTabs
+            );
 
             Assert.True(notHandled);
         }

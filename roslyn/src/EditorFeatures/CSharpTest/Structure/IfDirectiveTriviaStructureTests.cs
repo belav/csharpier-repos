@@ -13,94 +13,102 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeStructureTests<IfDirectiveTriviaSyntax>
+public sealed class IfDirectiveTriviaStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<IfDirectiveTriviaSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new IfDirectiveTriviaStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new IfDirectiveTriviaStructureProvider();
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
     public async Task TestEnabledIfDisabledElifDisabledElse()
     {
         var code = """
-                #$$if true
-                {|span:class C
-                {
-                }|}
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                #endif
-                """;
+            #$$if true
+            {|span:class C
+            {
+            }|}
+            #elif false
+            class D
+            {
+            }
+            #else
+            class E
+            {
+            }
+            #endif
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
     public async Task TestDisabledIfEnabledElifDisabledElse()
     {
         var code = """
-                #$$if false
-                class C
-                {
-                }
-                #elif true
-                {|span:class D
-                {
-                }|}
-                #else
-                class E
-                {
-                }
-                #endif
-                """;
+            #$$if false
+            class C
+            {
+            }
+            #elif true
+            {|span:class D
+            {
+            }|}
+            #else
+            class E
+            {
+            }
+            #endif
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
     public async Task TestDisabledIfDisabledElifEnabledElse()
     {
         var code = """
-                #$$if false
-                class C
-                {
-                }
-                #elif false
-                class D
-                {
-                }
-                #else
-                {|span:class E
-                {
-                }|}
-                #endif
-                """;
+            #$$if false
+            class C
+            {
+            }
+            #elif false
+            class D
+            {
+            }
+            #else
+            {|span:class E
+            {
+            }|}
+            #endif
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
     public async Task TestEmptyEnabledRegion()
     {
         var code = """
-                #$$if true
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                #endif
-                """;
+            #$$if true
+            #elif false
+            class D
+            {
+            }
+            #else
+            class E
+            {
+            }
+            #endif
+            """;
 
         await VerifyBlockSpansAsync(code);
     }
@@ -109,11 +117,11 @@ public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeSt
     public async Task TestMissingEndif1()
     {
         var code = """
-                #$$if true
-                class C
-                {
-                }
-                """;
+            #$$if true
+            class C
+            {
+            }
+            """;
 
         await VerifyBlockSpansAsync(code);
     }
@@ -122,41 +130,43 @@ public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeSt
     public async Task TestMissingEndif2()
     {
         var code = """
-                #$$if true
-                {|span:class C
-                {
-                }|}
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                """;
+            #$$if true
+            {|span:class C
+            {
+            }|}
+            #elif false
+            class D
+            {
+            }
+            #else
+            class E
+            {
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
     public async Task TestMissingEndif3()
     {
         var code = """
-                #$$if false
-                class C
-                {
-                }
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                """;
+            #$$if false
+            class C
+            {
+            }
+            #elif false
+            class D
+            {
+            }
+            #else
+            class E
+            {
+            }
+            """;
 
         await VerifyBlockSpansAsync(code);
     }

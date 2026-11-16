@@ -11,9 +11,7 @@ namespace System.ServiceModel
     {
         static T[] instance;
 
-        EmptyArray()
-        {
-        }
+        EmptyArray() { }
 
         internal static T[] Instance
         {
@@ -60,16 +58,11 @@ namespace System.ServiceModel
     {
         static object[] instance = new object[0];
 
-        EmptyArray()
-        {
-        }
+        EmptyArray() { }
 
         internal static object[] Instance
         {
-            get
-            {
-                return instance;
-            }
+            get { return instance; }
         }
 
         internal static object[] Allocate(int n)

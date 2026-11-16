@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,41 +32,41 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class UdpTransportSettings
-	{
-		internal UdpTransportSettings ()
-		{
-			DuplicateMessageHistoryLength = 4112;
-			MaxBufferPoolSize = 0x80000;
-			MaxMulticastRetransmitCount = 2;
-			MaxPendingMessageCount = 32;
-			MaxReceivedMessageSize = 0xFFE7;
-			MaxUnicastRetransmitCount = 1;
-			SocketReceiveBufferSize = 0x10000;
-			TimeToLive = 1;
-		}
+    public class UdpTransportSettings
+    {
+        internal UdpTransportSettings()
+        {
+            DuplicateMessageHistoryLength = 4112;
+            MaxBufferPoolSize = 0x80000;
+            MaxMulticastRetransmitCount = 2;
+            MaxPendingMessageCount = 32;
+            MaxReceivedMessageSize = 0xFFE7;
+            MaxUnicastRetransmitCount = 1;
+            SocketReceiveBufferSize = 0x10000;
+            TimeToLive = 1;
+        }
 
-		internal UdpTransportSettings (UdpTransportSettings source)
-		{
-			DuplicateMessageHistoryLength = source.DuplicateMessageHistoryLength;
-			MaxBufferPoolSize = source.MaxBufferPoolSize;
-			MaxMulticastRetransmitCount = source.MaxMulticastRetransmitCount;
-			MaxPendingMessageCount = source.MaxPendingMessageCount;
-			MaxReceivedMessageSize = source.MaxReceivedMessageSize;
-			MaxUnicastRetransmitCount = source.MaxUnicastRetransmitCount;
-			MulticastInterfaceId = source.MulticastInterfaceId;
-			SocketReceiveBufferSize = source.SocketReceiveBufferSize;
-			TimeToLive = source.TimeToLive;
-		}
+        internal UdpTransportSettings(UdpTransportSettings source)
+        {
+            DuplicateMessageHistoryLength = source.DuplicateMessageHistoryLength;
+            MaxBufferPoolSize = source.MaxBufferPoolSize;
+            MaxMulticastRetransmitCount = source.MaxMulticastRetransmitCount;
+            MaxPendingMessageCount = source.MaxPendingMessageCount;
+            MaxReceivedMessageSize = source.MaxReceivedMessageSize;
+            MaxUnicastRetransmitCount = source.MaxUnicastRetransmitCount;
+            MulticastInterfaceId = source.MulticastInterfaceId;
+            SocketReceiveBufferSize = source.SocketReceiveBufferSize;
+            TimeToLive = source.TimeToLive;
+        }
 
-		public int DuplicateMessageHistoryLength { get; set; }
-		public long MaxBufferPoolSize { get; set; }
-		public int MaxMulticastRetransmitCount { get; set; }
-		public int MaxPendingMessageCount { get; set; }
-		public long MaxReceivedMessageSize { get; set; }
-		public int MaxUnicastRetransmitCount { get; set; }
-		public string MulticastInterfaceId { get; set; }
-		public int SocketReceiveBufferSize { get; set; }
-		public int TimeToLive { get; set; }
-	}
+        public int DuplicateMessageHistoryLength { get; set; }
+        public long MaxBufferPoolSize { get; set; }
+        public int MaxMulticastRetransmitCount { get; set; }
+        public int MaxPendingMessageCount { get; set; }
+        public long MaxReceivedMessageSize { get; set; }
+        public int MaxUnicastRetransmitCount { get; set; }
+        public string MulticastInterfaceId { get; set; }
+        public int SocketReceiveBufferSize { get; set; }
+        public int TimeToLive { get; set; }
+    }
 }

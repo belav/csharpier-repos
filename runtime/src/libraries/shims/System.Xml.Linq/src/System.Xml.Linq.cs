@@ -16,14 +16,26 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XName))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XNamespace))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XNode))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XNodeDocumentOrderComparer))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XNodeEqualityComparer))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.Linq.XNodeDocumentOrderComparer)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.Linq.XNodeEqualityComparer)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XObject))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XObjectChange))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XObjectChangeEventArgs))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XProcessingInstruction))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XStreamingElement))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.Linq.XObjectChangeEventArgs)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.Linq.XProcessingInstruction)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.Linq.XStreamingElement)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Linq.XText))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.Schema.Extensions))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XPath.Extensions))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XPath.XDocumentExtensions))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.XPath.XDocumentExtensions)
+)]

@@ -28,7 +28,8 @@ public sealed class NullableValueTypeListComparer<TElement> : ValueComparer<IEnu
         : base(
             (a, b) => Compare(a, b, (ValueComparer<TElement?>)elementComparer),
             o => GetHashCode(o, (ValueComparer<TElement?>)elementComparer),
-            source => Snapshot(source, (ValueComparer<TElement?>)elementComparer))
+            source => Snapshot(source, (ValueComparer<TElement?>)elementComparer)
+        )
     {
         ElementComparer = elementComparer;
     }
@@ -38,7 +39,11 @@ public sealed class NullableValueTypeListComparer<TElement> : ValueComparer<IEnu
     /// </summary>
     public ValueComparer ElementComparer { get; }
 
-    private static bool Compare(IEnumerable<TElement?>? a, IEnumerable<TElement?>? b, ValueComparer<TElement?> elementComparer)
+    private static bool Compare(
+        IEnumerable<TElement?>? a,
+        IEnumerable<TElement?>? b,
+        ValueComparer<TElement?> elementComparer
+    )
     {
         if (ReferenceEquals(a, b))
         {
@@ -92,10 +97,17 @@ public sealed class NullableValueTypeListComparer<TElement> : ValueComparer<IEnu
         throw new InvalidOperationException(
             CoreStrings.BadListType(
                 (a is IList<TElement?> ? b : a).GetType().ShortDisplayName(),
-                typeof(IList<>).MakeGenericType(elementComparer.Type.MakeNullable()).ShortDisplayName()));
+                typeof(IList<>)
+                    .MakeGenericType(elementComparer.Type.MakeNullable())
+                    .ShortDisplayName()
+            )
+        );
     }
 
-    private static int GetHashCode(IEnumerable<TElement?> source, ValueComparer<TElement?> elementComparer)
+    private static int GetHashCode(
+        IEnumerable<TElement?> source,
+        ValueComparer<TElement?> elementComparer
+    )
     {
         var hash = new HashCode();
 
@@ -107,14 +119,21 @@ public sealed class NullableValueTypeListComparer<TElement> : ValueComparer<IEnu
         return hash.ToHashCode();
     }
 
-    private static IList<TElement?> Snapshot(IEnumerable<TElement?> source, ValueComparer<TElement?> elementComparer)
+    private static IList<TElement?> Snapshot(
+        IEnumerable<TElement?> source,
+        ValueComparer<TElement?> elementComparer
+    )
     {
         if (source is not IList<TElement?> sourceList)
         {
             throw new InvalidOperationException(
                 CoreStrings.BadListType(
                     source.GetType().ShortDisplayName(),
-                    typeof(IList<>).MakeGenericType(elementComparer.Type.MakeNullable()).ShortDisplayName()));
+                    typeof(IList<>)
+                        .MakeGenericType(elementComparer.Type.MakeNullable())
+                        .ShortDisplayName()
+                )
+            );
         }
 
         if (sourceList.IsReadOnly)
@@ -131,9 +150,10 @@ public sealed class NullableValueTypeListComparer<TElement> : ValueComparer<IEnu
         }
         else
         {
-            var snapshot = source is List<TElement?> || sourceList.IsReadOnly
-                ? new List<TElement?>(sourceList.Count)
-                : (IList<TElement?>)Activator.CreateInstance(source.GetType())!;
+            var snapshot =
+                source is List<TElement?> || sourceList.IsReadOnly
+                    ? new List<TElement?>(sourceList.Count)
+                    : (IList<TElement?>)Activator.CreateInstance(source.GetType())!;
 
             foreach (var e in sourceList)
             {

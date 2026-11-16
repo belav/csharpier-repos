@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.IdentityModel;
     using System.IdentityModel.Protocols.WSTrust;
     using System.Security.Claims;
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
-    using System.IdentityModel;
 
     /// <summary>
     /// Defines the inputs and outputs to the <see cref="WSTrustServiceContract.DispatchRequest"/> method.
@@ -84,5 +84,5 @@ namespace System.ServiceModel.Security
             get { return trustNamespace; }
             set { trustNamespace = value; }
         }
-    }    
+    }
 }

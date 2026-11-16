@@ -28,7 +28,8 @@ public record DatabaseFacadeDependencies : IDatabaseFacadeDependencies
         ICoreSingletonOptions coreOptions,
         IAsyncQueryProvider queryProvider,
         IAdHocMapper adHocMapper,
-        ITypeMappingSource typeMappingSource)
+        ITypeMappingSource typeMappingSource
+    )
     {
         TransactionManager = transactionManager;
         DatabaseCreator = databaseCreator;

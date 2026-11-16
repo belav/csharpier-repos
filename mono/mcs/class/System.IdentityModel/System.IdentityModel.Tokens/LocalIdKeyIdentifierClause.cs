@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,59 +27,61 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Policy;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public class LocalIdKeyIdentifierClause : SecurityKeyIdentifierClause
-	{
-		public LocalIdKeyIdentifierClause (string localId)
-			: this (localId, null)
-		{
-		}
+    public class LocalIdKeyIdentifierClause : SecurityKeyIdentifierClause
+    {
+        public LocalIdKeyIdentifierClause(string localId)
+            : this(localId, null) { }
 
-		public LocalIdKeyIdentifierClause (string localId, Type ownerType)
-			: this (localId, null, 0, ownerType)
-		{
-		}
+        public LocalIdKeyIdentifierClause(string localId, Type ownerType)
+            : this(localId, null, 0, ownerType) { }
 
-		public LocalIdKeyIdentifierClause (string localId, byte [] derivationNonce, int derivationLength, Type ownerType)
-			: base (localId, derivationNonce, derivationLength)
-		{
-			local_id = localId;
-			owner_type =ownerType;
-		}
+        public LocalIdKeyIdentifierClause(
+            string localId,
+            byte[] derivationNonce,
+            int derivationLength,
+            Type ownerType
+        )
+            : base(localId, derivationNonce, derivationLength)
+        {
+            local_id = localId;
+            owner_type = ownerType;
+        }
 
-		string local_id;
-		Type owner_type;
+        string local_id;
+        Type owner_type;
 
-		public string LocalId {
-			get { return local_id; }
-		}
+        public string LocalId
+        {
+            get { return local_id; }
+        }
 
-		public Type OwnerType {
-			get { return owner_type; }
-		}
+        public Type OwnerType
+        {
+            get { return owner_type; }
+        }
 
-		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			if (keyIdentifierClause == null)
-				throw new ArgumentNullException ("keyIdentifierClause");
-			LocalIdKeyIdentifierClause c =
-				keyIdentifierClause as LocalIdKeyIdentifierClause;
-			return c != null && Matches (c.LocalId, c.OwnerType);
-		}
+        public override bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            if (keyIdentifierClause == null)
+                throw new ArgumentNullException("keyIdentifierClause");
+            LocalIdKeyIdentifierClause c = keyIdentifierClause as LocalIdKeyIdentifierClause;
+            return c != null && Matches(c.LocalId, c.OwnerType);
+        }
 
-		public bool Matches (string localId, Type ownerType)
-		{
-			return local_id == localId && (owner_type == null || owner_type == ownerType);
-		}
+        public bool Matches(string localId, Type ownerType)
+        {
+            return local_id == localId && (owner_type == null || owner_type == ownerType);
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
 }

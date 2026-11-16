@@ -9,11 +9,15 @@ namespace System.Globalization.Tests
 {
     public static class CharUnicodeInfoTestData
     {
-        private static readonly Lazy<List<CharUnicodeInfoTestCase>> s_testCases = new Lazy<List<CharUnicodeInfoTestCase>>(() =>
+        private static readonly Lazy<List<CharUnicodeInfoTestCase>> s_testCases = new Lazy<
+            List<CharUnicodeInfoTestCase>
+        >(() =>
         {
             List<CharUnicodeInfoTestCase> testCases = new List<CharUnicodeInfoTestCase>();
             string fileName = "UnicodeData.txt";
-            Stream stream = typeof(CharUnicodeInfoTestData).GetTypeInfo().Assembly.GetManifestResourceStream(fileName);
+            Stream stream = typeof(CharUnicodeInfoTestData)
+                .GetTypeInfo()
+                .Assembly.GetManifestResourceStream(fileName);
             using (StreamReader reader = new StreamReader(stream))
             {
                 while (!reader.EndOfStream)
@@ -27,6 +31,7 @@ namespace System.Globalization.Tests
         public static List<CharUnicodeInfoTestCase> TestCases => s_testCases.Value;
 
         private static int s_rangeMinCodePoint;
+
         private static void Parse(List<CharUnicodeInfoTestCase> testCases, string line)
         {
             // Data is in the format:
@@ -44,8 +49,10 @@ namespace System.Globalization.Tests
             string charName = data[1];
             string charCategoryString = data[2];
             string numericValueString = data[8];
-            StrongBidiCategory bidiCategory = data[4] == "L" ? StrongBidiCategory.StrongLeftToRight :
-                                              data[4] == "R" || data[4] == "AL" ? StrongBidiCategory.StrongRightToLeft : StrongBidiCategory.Other;
+            StrongBidiCategory bidiCategory =
+                data[4] == "L" ? StrongBidiCategory.StrongLeftToRight
+                : data[4] == "R" || data[4] == "AL" ? StrongBidiCategory.StrongRightToLeft
+                : StrongBidiCategory.Other;
 
             int codePoint = int.Parse(charValueString, NumberStyles.HexNumber);
             Parse(testCases, codePoint, charCategoryString, numericValueString, bidiCategory);
@@ -57,16 +64,29 @@ namespace System.Globalization.Tests
             else if (charName.EndsWith("Last>"))
             {
                 // Assumes that we have already found a range start
-                for (int rangeCodePoint = s_rangeMinCodePoint + 1; rangeCodePoint < codePoint; rangeCodePoint++)
+                for (
+                    int rangeCodePoint = s_rangeMinCodePoint + 1;
+                    rangeCodePoint < codePoint;
+                    rangeCodePoint++
+                )
                 {
                     // Assumes that all code points in the range have the same numeric value
                     // and general category
-                    Parse(testCases, rangeCodePoint, charCategoryString, numericValueString, bidiCategory);
+                    Parse(
+                        testCases,
+                        rangeCodePoint,
+                        charCategoryString,
+                        numericValueString,
+                        bidiCategory
+                    );
                 }
             }
         }
 
-        private static Dictionary<string, UnicodeCategory> s_unicodeCategories = new Dictionary<string, UnicodeCategory>
+        private static Dictionary<string, UnicodeCategory> s_unicodeCategories = new Dictionary<
+            string,
+            UnicodeCategory
+        >
         {
             ["Pe"] = UnicodeCategory.ClosePunctuation,
             ["Pc"] = UnicodeCategory.ConnectorPunctuation,
@@ -98,23 +118,34 @@ namespace System.Globalization.Tests
             ["Mc"] = UnicodeCategory.SpacingCombiningMark,
             ["Cs"] = UnicodeCategory.Surrogate,
             ["Lt"] = UnicodeCategory.TitlecaseLetter,
-            ["Lu"] = UnicodeCategory.UppercaseLetter
+            ["Lu"] = UnicodeCategory.UppercaseLetter,
         };
 
-        private static void Parse(List<CharUnicodeInfoTestCase> testCases, int codePoint, string charCategoryString, string numericValueString, StrongBidiCategory bidiCategory)
+        private static void Parse(
+            List<CharUnicodeInfoTestCase> testCases,
+            int codePoint,
+            string charCategoryString,
+            string numericValueString,
+            StrongBidiCategory bidiCategory
+        )
         {
-            string codeValueRepresentation = codePoint > char.MaxValue ? char.ConvertFromUtf32(codePoint) : ((char)codePoint).ToString();
+            string codeValueRepresentation =
+                codePoint > char.MaxValue
+                    ? char.ConvertFromUtf32(codePoint)
+                    : ((char)codePoint).ToString();
             double numericValue = ParseNumericValueString(numericValueString);
             UnicodeCategory generalCategory = s_unicodeCategories[charCategoryString];
 
-            testCases.Add(new CharUnicodeInfoTestCase()
-            {
-                Utf32CodeValue = codeValueRepresentation,
-                GeneralCategory = generalCategory,
-                NumericValue = numericValue,
-                CodePoint = codePoint,
-                BidiCategory = bidiCategory
-            });
+            testCases.Add(
+                new CharUnicodeInfoTestCase()
+                {
+                    Utf32CodeValue = codeValueRepresentation,
+                    GeneralCategory = generalCategory,
+                    NumericValue = numericValue,
+                    CodePoint = codePoint,
+                    BidiCategory = bidiCategory,
+                }
+            );
         }
 
         private static double ParseNumericValueString(string numericValueString)

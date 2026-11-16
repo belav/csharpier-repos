@@ -2,44 +2,47 @@
 #region Using directives
 
 using System;
-using System.IO;
-using System.Xml;
-using System.Text;
-using System.Threading;
-using System.Reflection;
 using System.Collections;
-using System.Diagnostics;
-using System.Runtime.Remoting;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
-using System.Workflow.Runtime;
-using System.Workflow.Runtime.Hosting;
+using System.Configuration;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Ipc;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
+using System.Security.AccessControl;
+using System.Security.Permissions;
+using System.Security.Principal;
+using System.Text;
+using System.Threading;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
 using System.Workflow.ComponentModel.Design;
 using System.Workflow.ComponentModel.Serialization;
-using System.Runtime.Serialization.Formatters;
-using System.Runtime.Remoting.Channels.Ipc;
-using System.Configuration;
-using System.Security.Permissions;
-using System.Globalization;
+using System.Workflow.Runtime;
+using System.Workflow.Runtime.Hosting;
+using System.Xml;
 using Microsoft.Win32;
-using System.Security.AccessControl;
-using System.Security.Principal;
 #endregion
 
 namespace System.Workflow.Runtime.DebugEngine
 {
     internal static class RegistryKeys
     {
-        internal static readonly string ProductRootRegKey = @"SOFTWARE\Microsoft\Net Framework Setup\NDP\v3.0\Setup\Windows Workflow Foundation";
+        internal static readonly string ProductRootRegKey =
+            @"SOFTWARE\Microsoft\Net Framework Setup\NDP\v3.0\Setup\Windows Workflow Foundation";
         internal static readonly string DebuggerSubKey = ProductRootRegKey + @"\Debugger";
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class DebugController : MarshalByRefObject
     {
         #region Data members
@@ -74,7 +77,7 @@ namespace System.Workflow.Runtime.DebugEngine
         {
             // Spawn off a separate thread to that does RevertToSelf and adjusts DACLs.
             // This is because RevertToSelf terminates client impersonation on the thread
-            // that calls it. We do not want to change that on the current thread when 
+            // that calls it. We do not want to change that on the current thread when
             // the runtime is hosted inside ASP.net for example.
             Exception workerThreadException = null;
             ProcessSecurity processSecurity = new ProcessSecurity();
@@ -85,7 +88,8 @@ namespace System.Workflow.Runtime.DebugEngine
                 workerThreadException = e;
             };
 
-            workerThread.Start(); workerThread.Join();
+            workerThread.Start();
+            workerThread.Join();
             if (workerThreadException != null)
                 throw workerThreadException;
         }
@@ -106,7 +110,14 @@ namespace System.Workflow.Runtime.DebugEngine
                     // Get the DACL for process token. Add TOKEN_QUERY permissions for the Administrators group.
                     // Set the updated DACL for process token.
                     RawAcl tokenDacl = GetCurrentProcessTokenDacl();
-                    CommonAce adminsGroupAceForToken = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, NativeMethods.TOKEN_QUERY, new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null), false, null);
+                    CommonAce adminsGroupAceForToken = new CommonAce(
+                        AceFlags.None,
+                        AceQualifier.AccessAllowed,
+                        NativeMethods.TOKEN_QUERY,
+                        new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null),
+                        false,
+                        null
+                    );
                     int i = FindIndexInDacl(adminsGroupAceForToken, tokenDacl);
                     if (i != -1)
                         tokenDacl.InsertAce(i, adminsGroupAceForToken);
@@ -131,25 +142,48 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     hProcess = NativeMethods.GetCurrentProcess();
 
-                    if (!NativeMethods.OpenProcessToken(hProcess, NativeMethods.TOKEN_ALL_ACCESS, out hProcessToken))
+                    if (
+                        !NativeMethods.OpenProcessToken(
+                            hProcess,
+                            NativeMethods.TOKEN_ALL_ACCESS,
+                            out hProcessToken
+                        )
+                    )
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
 
                     // Get security descriptor associated with the kernel object, read the DACL and return
                     // that to the caller.
                     uint returnLength;
 
-                    NativeMethods.GetKernelObjectSecurity(hProcessToken, NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION, IntPtr.Zero, 0, out returnLength);
+                    NativeMethods.GetKernelObjectSecurity(
+                        hProcessToken,
+                        NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                        IntPtr.Zero,
+                        0,
+                        out returnLength
+                    );
                     int lasterror = Marshal.GetLastWin32Error(); //#pragma warning disable 56523 doesnt recognize 56523
 
                     securityDescriptorPtr = Marshal.AllocCoTaskMem((int)returnLength);
 
-                    if (!NativeMethods.GetKernelObjectSecurity(hProcessToken, NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION, securityDescriptorPtr, returnLength, out returnLength))
+                    if (
+                        !NativeMethods.GetKernelObjectSecurity(
+                            hProcessToken,
+                            NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                            securityDescriptorPtr,
+                            returnLength,
+                            out returnLength
+                        )
+                    )
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
 
                     byte[] sdBytes = new byte[returnLength];
                     Marshal.Copy(securityDescriptorPtr, sdBytes, 0, (int)returnLength);
 
-                    RawSecurityDescriptor rawSecurityDescriptor = new RawSecurityDescriptor(sdBytes, 0);
+                    RawSecurityDescriptor rawSecurityDescriptor = new RawSecurityDescriptor(
+                        sdBytes,
+                        0
+                    );
 
                     return rawSecurityDescriptor.DiscretionaryAcl;
                 }
@@ -167,6 +201,7 @@ namespace System.Workflow.Runtime.DebugEngine
                         Marshal.FreeCoTaskMem(securityDescriptorPtr);
                 }
             }
+
             private void SetCurrentProcessTokenDacl(RawAcl dacl)
             {
                 IntPtr hProcess = IntPtr.Zero;
@@ -176,33 +211,69 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     hProcess = NativeMethods.GetCurrentProcess();
 
-                    if (!NativeMethods.OpenProcessToken(hProcess, NativeMethods.TOKEN_ALL_ACCESS, out hProcessToken))
+                    if (
+                        !NativeMethods.OpenProcessToken(
+                            hProcess,
+                            NativeMethods.TOKEN_ALL_ACCESS,
+                            out hProcessToken
+                        )
+                    )
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
 
                     // Get security descriptor associated with the kernel object and modify it.
                     uint returnLength;
 
-                    NativeMethods.GetKernelObjectSecurity(hProcessToken, NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION, IntPtr.Zero, 0, out returnLength);
+                    NativeMethods.GetKernelObjectSecurity(
+                        hProcessToken,
+                        NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                        IntPtr.Zero,
+                        0,
+                        out returnLength
+                    );
                     int lasterror = Marshal.GetLastWin32Error(); //#pragma warning disable 56523 doesnt recognize 56523
 
                     securityDescriptorPtr = Marshal.AllocCoTaskMem((int)returnLength);
 
-                    if (!NativeMethods.GetKernelObjectSecurity(hProcessToken, NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION, securityDescriptorPtr, returnLength, out returnLength))
+                    if (
+                        !NativeMethods.GetKernelObjectSecurity(
+                            hProcessToken,
+                            NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                            securityDescriptorPtr,
+                            returnLength,
+                            out returnLength
+                        )
+                    )
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
 
                     byte[] sdBytes = new byte[returnLength];
                     Marshal.Copy(securityDescriptorPtr, sdBytes, 0, (int)returnLength);
 
-                    RawSecurityDescriptor rawSecurityDescriptor = new RawSecurityDescriptor(sdBytes, 0);
+                    RawSecurityDescriptor rawSecurityDescriptor = new RawSecurityDescriptor(
+                        sdBytes,
+                        0
+                    );
                     rawSecurityDescriptor.DiscretionaryAcl = dacl;
 
                     sdBytes = new byte[rawSecurityDescriptor.BinaryLength];
                     rawSecurityDescriptor.GetBinaryForm(sdBytes, 0);
                     Marshal.FreeCoTaskMem(securityDescriptorPtr);
-                    securityDescriptorPtr = Marshal.AllocCoTaskMem(rawSecurityDescriptor.BinaryLength);
-                    Marshal.Copy(sdBytes, 0, securityDescriptorPtr, rawSecurityDescriptor.BinaryLength);
+                    securityDescriptorPtr = Marshal.AllocCoTaskMem(
+                        rawSecurityDescriptor.BinaryLength
+                    );
+                    Marshal.Copy(
+                        sdBytes,
+                        0,
+                        securityDescriptorPtr,
+                        rawSecurityDescriptor.BinaryLength
+                    );
 
-                    if (!NativeMethods.SetKernelObjectSecurity(hProcessToken, NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION, securityDescriptorPtr))
+                    if (
+                        !NativeMethods.SetKernelObjectSecurity(
+                            hProcessToken,
+                            NativeMethods.SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                            securityDescriptorPtr
+                        )
+                    )
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
                 }
                 finally
@@ -217,7 +288,6 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     if (securityDescriptorPtr != IntPtr.Zero)
                         Marshal.FreeCoTaskMem(securityDescriptorPtr);
-
                 }
             }
 
@@ -229,24 +299,38 @@ namespace System.Workflow.Runtime.DebugEngine
                 int i = 0;
                 for (i = 0; i < dacl.Count; i++)
                 {
-                    if (dacl[i] is CommonAce && ((CommonAce)dacl[i]).SecurityIdentifier.Value == newAce.SecurityIdentifier.Value && dacl[i].AceType == newAce.AceType)
+                    if (
+                        dacl[i] is CommonAce
+                        && ((CommonAce)dacl[i]).SecurityIdentifier.Value
+                            == newAce.SecurityIdentifier.Value
+                        && dacl[i].AceType == newAce.AceType
+                    )
                     {
                         i = -1;
                         break;
                     }
 
-                    if (newAce.AceType == AceType.AccessDenied && dacl[i].AceType == AceType.AccessDenied && !newAce.IsInherited && !dacl[i].IsInherited)
+                    if (
+                        newAce.AceType == AceType.AccessDenied
+                        && dacl[i].AceType == AceType.AccessDenied
+                        && !newAce.IsInherited
+                        && !dacl[i].IsInherited
+                    )
                         continue;
 
                     if (newAce.AceType == AceType.AccessDenied && !newAce.IsInherited)
                         break;
 
-                    if (newAce.AceType == AceType.AccessAllowed && dacl[i].AceType == AceType.AccessAllowed && !newAce.IsInherited && !dacl[i].IsInherited)
+                    if (
+                        newAce.AceType == AceType.AccessAllowed
+                        && dacl[i].AceType == AceType.AccessAllowed
+                        && !newAce.IsInherited
+                        && !dacl[i].IsInherited
+                    )
                         continue;
 
                     if (newAce.AceType == AceType.AccessAllowed && !newAce.IsInherited)
                         break;
-
                 }
 
                 return i;
@@ -287,9 +371,9 @@ namespace System.Workflow.Runtime.DebugEngine
 
         public override object InitializeLifetimeService()
         {
-            // We can't use a sponser because VS doesn't like to be attached when the lease renews itself - the 
-            // debugee gets an Access Violation and VS freezes. Returning null implies that the proxy shim will be 
-            // deleted only when the App Domain unloads. However, we will have disconnected the shim so no 
+            // We can't use a sponser because VS doesn't like to be attached when the lease renews itself - the
+            // debugee gets an Access Violation and VS freezes. Returning null implies that the proxy shim will be
+            // deleted only when the App Domain unloads. However, we will have disconnected the shim so no
             // one will be able to attach to it and the same proxy is used everytime a debugger attaches.
             return null;
         }
@@ -298,9 +382,23 @@ namespace System.Workflow.Runtime.DebugEngine
 
         #region Attach and Detach methods
 
-        internal void Attach(Guid programId, int attachTimeout, int detachPingInterval, out string hostName, out string uri, out int controllerThreadId, out bool isSynchronousAttach)
+        internal void Attach(
+            Guid programId,
+            int attachTimeout,
+            int detachPingInterval,
+            out string hostName,
+            out string uri,
+            out int controllerThreadId,
+            out bool isSynchronousAttach
+        )
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.Attach(): programId = {0}", programId));
+            Debug.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "WDE: DebugController.Attach(): programId = {0}",
+                    programId
+                )
+            );
             lock (this.syncRoot)
             {
                 hostName = String.Empty;
@@ -314,7 +412,6 @@ namespace System.Workflow.Runtime.DebugEngine
                 if (this.isZombie)
                     return;
 
-
                 // Race condition:
                 // The isAttached flat along with lock(this) catch the ---- where a debugger may have detached which
                 // we haven't detected yet and another debugger may have attached, so we force detach from the first
@@ -322,26 +419,31 @@ namespace System.Workflow.Runtime.DebugEngine
                 if (this.isAttached)
                     Detach();
 
-
                 this.isAttached = true;
 
                 this.programId = programId;
                 this.debugControllerThread = new DebugControllerThread();
                 this.instanceTable = new InstanceTable(this.debugControllerThread.ManagedThreadId);
                 this.typeToGuid = new Dictionary<Type, Guid>();
-                this.xomlHashToGuid = new Dictionary<byte[], Guid>((IEqualityComparer<byte[]>)new DigestComparer());
+                this.xomlHashToGuid = new Dictionary<byte[], Guid>(
+                    (IEqualityComparer<byte[]>)new DigestComparer()
+                );
 
                 this.debugControllerThread.RunThread(this.instanceTable);
 
                 // Publish our MBR object.
                 IDictionary providerProperties = new Hashtable();
                 providerProperties["typeFilterLevel"] = "Full";
-                BinaryServerFormatterSinkProvider sinkProvider = new BinaryServerFormatterSinkProvider(providerProperties, null);
+                BinaryServerFormatterSinkProvider sinkProvider =
+                    new BinaryServerFormatterSinkProvider(providerProperties, null);
 
                 Hashtable channelProperties = new Hashtable();
                 channelProperties["name"] = string.Empty;
                 channelProperties["portName"] = this.programId.ToString();
-                SecurityIdentifier si = new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null);
+                SecurityIdentifier si = new SecurityIdentifier(
+                    WellKnownSidType.BuiltinAdministratorsSid,
+                    null
+                );
                 IdentityReference idRef = si.Translate(typeof(NTAccount));
                 channelProperties["authorizedGroup"] = idRef.ToString();
                 this.channel = new IpcChannel(channelProperties, null, sinkProvider);
@@ -355,19 +457,25 @@ namespace System.Workflow.Runtime.DebugEngine
                 isSynchronousAttach = !this.isServiceContainerStarting;
 
                 this.attachTimeout = attachTimeout;
-                this.attachTimer = new Timer(AttachTimerCallback, null, attachTimeout, detachPingInterval);
+                this.attachTimer = new Timer(
+                    AttachTimerCallback,
+                    null,
+                    attachTimeout,
+                    detachPingInterval
+                );
             }
         }
 
         private void Detach()
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.Detach():"));
+            Debug.WriteLine(
+                string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.Detach():")
+            );
 
             using (new DebuggerThreadMarker())
             {
                 lock (this.syncRoot)
                 {
-
                     AppDomain.CurrentDomain.AssemblyLoad -= OnAssemblyLoad;
 
                     // See comments in Attach().
@@ -412,7 +520,9 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     if (!this.serviceContainer.IsZombie)
                     {
-                        foreach (WorkflowInstance instance in this.serviceContainer.GetLoadedWorkflows())
+                        foreach (
+                            WorkflowInstance instance in this.serviceContainer.GetLoadedWorkflows()
+                        )
                         {
                             WorkflowExecutor executor = instance.GetWorkflowResourceUNSAFE();
                             using (executor.ExecutorLock.Enter())
@@ -423,7 +533,8 @@ namespace System.Workflow.Runtime.DebugEngine
                         }
 
                         this.serviceContainer.WorkflowExecutorInitializing -= InstanceInitializing;
-                        this.serviceContainer.DefinitionDispenser.WorkflowDefinitionLoaded -= ScheduleTypeLoaded;
+                        this.serviceContainer.DefinitionDispenser.WorkflowDefinitionLoaded -=
+                            ScheduleTypeLoaded;
                     }
                 }
             }
@@ -431,7 +542,12 @@ namespace System.Workflow.Runtime.DebugEngine
 
         private void AttachTimerCallback(object state)
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.AttachTimerCallback():"));
+            Debug.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "WDE: DebugController.AttachTimerCallback():"
+                )
+            );
 
             try
             {
@@ -443,8 +559,8 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     if (!Debugger.IsAttached)
                     {
-                        // The debugger had attached and has now detached, so cleanup, or Attach() was called on the 
-                        // Program Node, but the process of attach failed thereafter and so we were never actually 
+                        // The debugger had attached and has now detached, so cleanup, or Attach() was called on the
+                        // Program Node, but the process of attach failed thereafter and so we were never actually
                         // debugged.
                         this.attachTimer.Change(Timeout.Infinite, Timeout.Infinite);
                         Detach();
@@ -459,7 +575,9 @@ namespace System.Workflow.Runtime.DebugEngine
 
         private void OnDomainUnload(object sender, System.EventArgs e)
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.OnDomainUnload():"));
+            Debug.WriteLine(
+                string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.OnDomainUnload():")
+            );
 
             Stop(null, default(WorkflowRuntimeEventArgs));
         }
@@ -479,27 +597,49 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     try
                     {
-                        RegistryKey debugEngineSubKey = Registry.LocalMachine.OpenSubKey(RegistryKeys.DebuggerSubKey);
+                        RegistryKey debugEngineSubKey = Registry.LocalMachine.OpenSubKey(
+                            RegistryKeys.DebuggerSubKey
+                        );
                         if (debugEngineSubKey != null)
                         {
-                            string controllerConduitTypeName = debugEngineSubKey.GetValue(ControllerConduitTypeName, String.Empty) as string;
-                            if (!String.IsNullOrEmpty(controllerConduitTypeName) && Type.GetType(controllerConduitTypeName) != null)
-                                this.controllerConduit = Activator.GetObject(Type.GetType(controllerConduitTypeName), url.AbsolutePath) as IWorkflowDebugger;
+                            string controllerConduitTypeName =
+                                debugEngineSubKey.GetValue(ControllerConduitTypeName, String.Empty)
+                                as string;
+                            if (
+                                !String.IsNullOrEmpty(controllerConduitTypeName)
+                                && Type.GetType(controllerConduitTypeName) != null
+                            )
+                                this.controllerConduit =
+                                    Activator.GetObject(
+                                        Type.GetType(controllerConduitTypeName),
+                                        url.AbsolutePath
+                                    ) as IWorkflowDebugger;
                         }
                     }
                     catch { }
 
                     if (this.controllerConduit == null)
                     {
-                        const string controllerConduitTypeFormat = "Microsoft.Workflow.DebugEngine.ControllerConduit, Microsoft.Workflow.DebugController, Version={0}.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+                        const string controllerConduitTypeFormat =
+                            "Microsoft.Workflow.DebugEngine.ControllerConduit, Microsoft.Workflow.DebugController, Version={0}.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
 
                         // Try versions 12.0.0.0, 11.0.0.0, 10.0.0.0
                         Type controllerConduitType = null;
-                        for (int version = 12; controllerConduitType == null && version >= 10; --version)
+                        for (
+                            int version = 12;
+                            controllerConduitType == null && version >= 10;
+                            --version
+                        )
                         {
                             try
                             {
-                                controllerConduitType = Type.GetType(string.Format(CultureInfo.InvariantCulture, controllerConduitTypeFormat, version));
+                                controllerConduitType = Type.GetType(
+                                    string.Format(
+                                        CultureInfo.InvariantCulture,
+                                        controllerConduitTypeFormat,
+                                        version
+                                    )
+                                );
                             }
                             catch (TypeLoadException)
                             {
@@ -509,65 +649,99 @@ namespace System.Workflow.Runtime.DebugEngine
 
                         if (controllerConduitType != null)
                         {
-                            this.controllerConduit = Activator.GetObject(controllerConduitType, url.AbsolutePath) as IWorkflowDebugger;
+                            this.controllerConduit =
+                                Activator.GetObject(controllerConduitType, url.AbsolutePath)
+                                as IWorkflowDebugger;
                         }
                     }
-                    Debug.Assert(this.controllerConduit != null, "Failed to create Controller Conduit");
+                    Debug.Assert(
+                        this.controllerConduit != null,
+                        "Failed to create Controller Conduit"
+                    );
                     if (this.controllerConduit == null)
                         return;
 
                     this.eventLock = new object();
 
                     // Race Condition:
-                    // We hook up to the AssemblyLoad event, the Schedule events and Instance events handler 
-                    // before we iterate over all loaded assemblies. This means that we need to deal with duplicates in the 
+                    // We hook up to the AssemblyLoad event, the Schedule events and Instance events handler
+                    // before we iterate over all loaded assemblies. This means that we need to deal with duplicates in the
                     // debugee.
 
                     // Race Condition:
                     // Further the order in which we hook up handlers/iterate is important to avoid ----s if the events fire
-                    // before the iterations complete. We need to hook and iterate over the assemblies, then the schedule 
+                    // before the iterations complete. We need to hook and iterate over the assemblies, then the schedule
                     // types and finally the instances. This guarantees that we always have all the assemblies when we load
                     // schedules types and we always have all the schedule types when we load instances.
 
                     AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoad;
                     foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
                     {
-                        if (!assembly.IsDynamic
+                        if (
+                            !assembly.IsDynamic
                             && !(assembly is System.Reflection.Emit.AssemblyBuilder)
-                            && !(string.IsNullOrEmpty(assembly.Location)))
+                            && !(string.IsNullOrEmpty(assembly.Location))
+                        )
                         {
-                            this.controllerConduit.AssemblyLoaded(this.programId, assembly.Location, assembly.GlobalAssemblyCache);
+                            this.controllerConduit.AssemblyLoaded(
+                                this.programId,
+                                assembly.Location,
+                                assembly.GlobalAssemblyCache
+                            );
                         }
                     }
-                    this.serviceContainer.DefinitionDispenser.WorkflowDefinitionLoaded += ScheduleTypeLoaded;
+                    this.serviceContainer.DefinitionDispenser.WorkflowDefinitionLoaded +=
+                        ScheduleTypeLoaded;
 
                     // In here we load all schedule types defined as they are - with no dynamic updates
                     ReadOnlyCollection<Type> types;
                     ReadOnlyCollection<Activity> values;
-                    this.serviceContainer.DefinitionDispenser.GetWorkflowTypes(out types, out values);
+                    this.serviceContainer.DefinitionDispenser.GetWorkflowTypes(
+                        out types,
+                        out values
+                    );
                     for (int i = 0; i < types.Count; i++)
                     {
                         Type scheduleType = types[i];
                         Activity rootActivity = values[i];
-                        LoadExistingScheduleType(GetScheduleTypeId(scheduleType), scheduleType, false, rootActivity);
+                        LoadExistingScheduleType(
+                            GetScheduleTypeId(scheduleType),
+                            scheduleType,
+                            false,
+                            rootActivity
+                        );
                     }
 
                     ReadOnlyCollection<byte[]> keys;
-                    this.serviceContainer.DefinitionDispenser.GetWorkflowDefinitions(out keys, out values);
+                    this.serviceContainer.DefinitionDispenser.GetWorkflowDefinitions(
+                        out keys,
+                        out values
+                    );
                     for (int i = 0; i < keys.Count; i++)
                     {
                         byte[] scheduleDefHash = keys[i];
                         Activity rootActivity = values[i];
-                        Activity workflowDefinition = (Activity)rootActivity.GetValue(Activity.WorkflowDefinitionProperty);
+                        Activity workflowDefinition = (Activity)
+                            rootActivity.GetValue(Activity.WorkflowDefinitionProperty);
                         ArrayList changeActions = null;
                         if (workflowDefinition != null)
-                            changeActions = (ArrayList)workflowDefinition.GetValue(WorkflowChanges.WorkflowChangeActionsProperty);
-                        LoadExistingScheduleType(GetScheduleTypeId(scheduleDefHash), rootActivity.GetType(), (changeActions != null && changeActions.Count != 0), rootActivity);
+                            changeActions = (ArrayList)
+                                workflowDefinition.GetValue(
+                                    WorkflowChanges.WorkflowChangeActionsProperty
+                                );
+                        LoadExistingScheduleType(
+                            GetScheduleTypeId(scheduleDefHash),
+                            rootActivity.GetType(),
+                            (changeActions != null && changeActions.Count != 0),
+                            rootActivity
+                        );
                     }
 
                     this.serviceContainer.WorkflowExecutorInitializing += InstanceInitializing;
 
-                    foreach (WorkflowInstance instance in this.serviceContainer.GetLoadedWorkflows())
+                    foreach (
+                        WorkflowInstance instance in this.serviceContainer.GetLoadedWorkflows()
+                    )
                     {
                         WorkflowExecutor executor = instance.GetWorkflowResourceUNSAFE();
                         using (executor.ExecutorLock.Enter())
@@ -581,11 +755,17 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch (Exception e)
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
-                Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: Failure in DebugController.AttachToConduit: {0}, Call stack:{1}", e.Message, e.StackTrace));
+                Debug.WriteLine(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "WDE: Failure in DebugController.AttachToConduit: {0}, Call stack:{1}",
+                        e.Message,
+                        e.StackTrace
+                    )
+                );
             }
-
         }
 
         #endregion
@@ -594,7 +774,12 @@ namespace System.Workflow.Runtime.DebugEngine
 
         private void Start(object source, WorkflowRuntimeEventArgs e)
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.ServiceContainerStarted():"));
+            Debug.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "WDE: DebugController.ServiceContainerStarted():"
+                )
+            );
 
             this.isZombie = false;
             this.isAttached = false;
@@ -610,13 +795,23 @@ namespace System.Workflow.Runtime.DebugEngine
             // Note that when we publish the program node, if the debugger is attached, isAttached will be set to true
             // when the debugger calls Attach() on the Program Node!
 
-            while (published && this.isAttached && !this.eventConduitAttached.WaitOne(attachTimeout, false));
+            while (
+                published
+                && this.isAttached
+                && !this.eventConduitAttached.WaitOne(attachTimeout, false)
+            )
+                ;
             this.isServiceContainerStarting = false;
         }
 
         private void Stop(object source, WorkflowRuntimeEventArgs e)
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "WDE: DebugController.ServiceContainerStopped():"));
+            Debug.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "WDE: DebugController.ServiceContainerStopped():"
+                )
+            );
 
             try
             {
@@ -647,19 +842,27 @@ namespace System.Workflow.Runtime.DebugEngine
             }
         }
 
-
         private void OnInstanceEvent(object sender, WorkflowExecutor.WorkflowExecutionEventArgs e)
         {
             switch (e.EventType)
             {
                 case WorkflowEventInternal.Completed:
-                    InstanceCompleted(sender, new WorkflowEventArgs(((WorkflowExecutor)sender).WorkflowInstance));
+                    InstanceCompleted(
+                        sender,
+                        new WorkflowEventArgs(((WorkflowExecutor)sender).WorkflowInstance)
+                    );
                     break;
                 case WorkflowEventInternal.Terminated:
-                    InstanceTerminated(sender, new WorkflowEventArgs(((WorkflowExecutor)sender).WorkflowInstance));
+                    InstanceTerminated(
+                        sender,
+                        new WorkflowEventArgs(((WorkflowExecutor)sender).WorkflowInstance)
+                    );
                     break;
                 case WorkflowEventInternal.Unloaded:
-                    InstanceUnloaded(sender, new WorkflowEventArgs(((WorkflowExecutor)sender).WorkflowInstance));
+                    InstanceUnloaded(
+                        sender,
+                        new WorkflowEventArgs(((WorkflowExecutor)sender).WorkflowInstance)
+                    );
                     break;
                 case WorkflowEventInternal.Changed:
                     OnWorkflowChanged(sender, e);
@@ -671,7 +874,10 @@ namespace System.Workflow.Runtime.DebugEngine
                     OnHandlerInvoked(sender, e);
                     break;
                 case WorkflowEventInternal.ActivityStatusChange:
-                    OnActivityStatusChanged(sender, (WorkflowExecutor.ActivityStatusChangeEventArgs)e);
+                    OnActivityStatusChanged(
+                        sender,
+                        (WorkflowExecutor.ActivityStatusChangeEventArgs)e
+                    );
                     break;
                 case WorkflowEventInternal.ActivityExecuting:
                     OnActivityExecuting(sender, (WorkflowExecutor.ActivityExecutingEventArgs)e);
@@ -681,8 +887,10 @@ namespace System.Workflow.Runtime.DebugEngine
             }
         }
 
-
-        private void InstanceInitializing(object sender, WorkflowRuntime.WorkflowExecutorInitializingEventArgs e)
+        private void InstanceInitializing(
+            object sender,
+            WorkflowRuntime.WorkflowExecutorInitializingEventArgs e
+        )
         {
             try
             {
@@ -693,7 +901,7 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -706,7 +914,7 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -719,7 +927,7 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -733,7 +941,7 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -744,23 +952,40 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 if (args.WorkflowType != null)
                 {
-                    Activity rootActivity = ((WorkflowRuntime)sender).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowType);
-                    LoadExistingScheduleType(GetScheduleTypeId(args.WorkflowType), args.WorkflowType, false, rootActivity);
+                    Activity rootActivity = (
+                        (WorkflowRuntime)sender
+                    ).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowType);
+                    LoadExistingScheduleType(
+                        GetScheduleTypeId(args.WorkflowType),
+                        args.WorkflowType,
+                        false,
+                        rootActivity
+                    );
                 }
                 else
                 {
-                    Activity rootActivity = ((WorkflowRuntime)sender).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
-                    LoadExistingScheduleType(GetScheduleTypeId(args.WorkflowDefinitionHashCode), rootActivity.GetType(), false, rootActivity);
+                    Activity rootActivity = (
+                        (WorkflowRuntime)sender
+                    ).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
+                    LoadExistingScheduleType(
+                        GetScheduleTypeId(args.WorkflowDefinitionHashCode),
+                        rootActivity.GetType(),
+                        false,
+                        rootActivity
+                    );
                 }
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
 
-        private void OnActivityExecuting(object sender, WorkflowExecutor.ActivityExecutingEventArgs eventArgs)
+        private void OnActivityExecuting(
+            object sender,
+            WorkflowExecutor.ActivityExecutingEventArgs eventArgs
+        )
         {
             if (this.isZombie || !this.isAttached)
                 return;
@@ -774,18 +999,37 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     // When the activity starts executing, update its handler list for stepping.
                     EnumerateEventHandlersForActivity(scheduleTypeId, eventArgs.Activity);
-                    this.controllerConduit.BeforeActivityStatusChanged(this.programId, scheduleTypeId, workflowCoreRuntime.InstanceID, eventArgs.Activity.QualifiedName, GetHierarchicalId(eventArgs.Activity), eventArgs.Activity.ExecutionStatus, GetContextId(eventArgs.Activity));
-                    this.controllerConduit.ActivityStatusChanged(this.programId, scheduleTypeId, workflowCoreRuntime.InstanceID, eventArgs.Activity.QualifiedName, GetHierarchicalId(eventArgs.Activity), eventArgs.Activity.ExecutionStatus, GetContextId(eventArgs.Activity));
+                    this.controllerConduit.BeforeActivityStatusChanged(
+                        this.programId,
+                        scheduleTypeId,
+                        workflowCoreRuntime.InstanceID,
+                        eventArgs.Activity.QualifiedName,
+                        GetHierarchicalId(eventArgs.Activity),
+                        eventArgs.Activity.ExecutionStatus,
+                        GetContextId(eventArgs.Activity)
+                    );
+                    this.controllerConduit.ActivityStatusChanged(
+                        this.programId,
+                        scheduleTypeId,
+                        workflowCoreRuntime.InstanceID,
+                        eventArgs.Activity.QualifiedName,
+                        GetHierarchicalId(eventArgs.Activity),
+                        eventArgs.Activity.ExecutionStatus,
+                        GetContextId(eventArgs.Activity)
+                    );
                 }
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
 
-        private void OnActivityStatusChanged(object sender, WorkflowExecutor.ActivityStatusChangeEventArgs eventArgs)
+        private void OnActivityStatusChanged(
+            object sender,
+            WorkflowExecutor.ActivityStatusChangeEventArgs eventArgs
+        )
         {
             if (this.isZombie || !this.isAttached)
                 return;
@@ -805,13 +1049,29 @@ namespace System.Workflow.Runtime.DebugEngine
                     if (eventArgs.Activity.ExecutionStatus == ActivityExecutionStatus.Executing)
                         EnumerateEventHandlersForActivity(scheduleTypeId, eventArgs.Activity);
 
-                    this.controllerConduit.BeforeActivityStatusChanged(this.programId, scheduleTypeId, workflowCoreRuntime.InstanceID, eventArgs.Activity.QualifiedName, GetHierarchicalId(eventArgs.Activity), eventArgs.Activity.ExecutionStatus, GetContextId(eventArgs.Activity));
-                    this.controllerConduit.ActivityStatusChanged(this.programId, scheduleTypeId, workflowCoreRuntime.InstanceID, eventArgs.Activity.QualifiedName, GetHierarchicalId(eventArgs.Activity), eventArgs.Activity.ExecutionStatus, GetContextId(eventArgs.Activity));
+                    this.controllerConduit.BeforeActivityStatusChanged(
+                        this.programId,
+                        scheduleTypeId,
+                        workflowCoreRuntime.InstanceID,
+                        eventArgs.Activity.QualifiedName,
+                        GetHierarchicalId(eventArgs.Activity),
+                        eventArgs.Activity.ExecutionStatus,
+                        GetContextId(eventArgs.Activity)
+                    );
+                    this.controllerConduit.ActivityStatusChanged(
+                        this.programId,
+                        scheduleTypeId,
+                        workflowCoreRuntime.InstanceID,
+                        eventArgs.Activity.QualifiedName,
+                        GetHierarchicalId(eventArgs.Activity),
+                        eventArgs.Activity.ExecutionStatus,
+                        GetContextId(eventArgs.Activity)
+                    );
                 }
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -833,12 +1093,17 @@ namespace System.Workflow.Runtime.DebugEngine
                 lock (this.eventLock)
                 {
                     IWorkflowCoreRuntime workflowCoreRuntime = sender as IWorkflowCoreRuntime;
-                    this.controllerConduit.HandlerInvoked(this.programId, workflowCoreRuntime.InstanceID, NativeMethods.GetCurrentThreadId(), GetHierarchicalId(workflowCoreRuntime.CurrentActivity));
+                    this.controllerConduit.HandlerInvoked(
+                        this.programId,
+                        workflowCoreRuntime.InstanceID,
+                        NativeMethods.GetCurrentThreadId(),
+                        GetHierarchicalId(workflowCoreRuntime.CurrentActivity)
+                    );
                 }
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -855,22 +1120,36 @@ namespace System.Workflow.Runtime.DebugEngine
                     IWorkflowCoreRuntime workflowCoreRuntime = (IWorkflowCoreRuntime)sender;
 
                     // Get cached old root activity.
-                    Activity oldRootActivity = this.instanceTable.GetRootActivity(workflowCoreRuntime.InstanceID);
+                    Activity oldRootActivity = this.instanceTable.GetRootActivity(
+                        workflowCoreRuntime.InstanceID
+                    );
 
                     Guid scheduleTypeId = workflowCoreRuntime.InstanceID; // From now on we will treat the instance id as a dynamic schedule type id.
-                    LoadExistingScheduleType(scheduleTypeId, oldRootActivity.GetType(), true, oldRootActivity);
+                    LoadExistingScheduleType(
+                        scheduleTypeId,
+                        oldRootActivity.GetType(),
+                        true,
+                        oldRootActivity
+                    );
 
                     // And now reload the instance.
-                    this.instanceTable.UpdateRootActivity(workflowCoreRuntime.InstanceID, oldRootActivity);
+                    this.instanceTable.UpdateRootActivity(
+                        workflowCoreRuntime.InstanceID,
+                        oldRootActivity
+                    );
 
                     // The DE will update the schedule type on the thread that is running the instance.
                     // DE should be called after the instance table entry is replaced.
-                    this.controllerConduit.InstanceDynamicallyUpdated(this.programId, workflowCoreRuntime.InstanceID, scheduleTypeId);
+                    this.controllerConduit.InstanceDynamicallyUpdated(
+                        this.programId,
+                        workflowCoreRuntime.InstanceID,
+                        scheduleTypeId
+                    );
                 }
             }
             catch
             {
-                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches 
+                // Don't throw exceptions to the Runtime. Ignore exceptions that may occur if the debugger detaches
                 // and closes the remoting channel.
             }
         }
@@ -879,7 +1158,7 @@ namespace System.Workflow.Runtime.DebugEngine
 
         #region Helper methods and properties
 
-        // Callers of this method should acquire the executor lock only if they 
+        // Callers of this method should acquire the executor lock only if they
         // are not being called in the runtime thread.(bug 17231).
         private void LoadExistingInstance(WorkflowInstance instance, bool attaching)
         {
@@ -893,12 +1172,21 @@ namespace System.Workflow.Runtime.DebugEngine
             // If we are just attaching, need to LoadExistingScheduleType with the dynamic definition and type
             // since the OnDynamicUpdateEvent has never been executed.
             if (attaching && runtimeService.IsDynamicallyUpdated)
-                LoadExistingScheduleType(scheduleTypeId, rootActivity.GetType(), true, rootActivity);
+                LoadExistingScheduleType(
+                    scheduleTypeId,
+                    rootActivity.GetType(),
+                    true,
+                    rootActivity
+                );
 
             // Add to the InstanceTable before firing the DE event !
             this.instanceTable.AddInstance(instance.InstanceId, rootActivity);
 
-            this.controllerConduit.InstanceCreated(this.programId, instance.InstanceId, scheduleTypeId);
+            this.controllerConduit.InstanceCreated(
+                this.programId,
+                instance.InstanceId,
+                scheduleTypeId
+            );
 
             // Take a lock so that SetInitialActivityStatus is always called before next status events.
             lock (this.eventLock)
@@ -917,14 +1205,21 @@ namespace System.Workflow.Runtime.DebugEngine
                     else
 #endif
                     UpdateActivityStatus(scheduleTypeId, instance.InstanceId, activity);
-
                 }
 
-                ActivityExecutionContext rootExecutionContext = new ActivityExecutionContext(rootActivity);
-                foreach (ActivityExecutionContext executionContext in DebugController.WalkExecutionContextTree(rootExecutionContext))
+                ActivityExecutionContext rootExecutionContext = new ActivityExecutionContext(
+                    rootActivity
+                );
+                foreach (
+                    ActivityExecutionContext executionContext in DebugController.WalkExecutionContextTree(
+                        rootExecutionContext
+                    )
+                )
                 {
                     Activity instanceActivity = executionContext.Activity;
-                    foreach (Activity childInstance in DebugController.WalkActivityTree(instanceActivity))
+                    foreach (
+                        Activity childInstance in DebugController.WalkActivityTree(instanceActivity)
+                    )
                     {
                         UpdateActivityStatus(scheduleTypeId, instance.InstanceId, childInstance);
                     }
@@ -946,9 +1241,16 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 Activity contextActivity = ContextActivityUtils.ContextActivity(activity);
                 int context = ContextActivityUtils.ContextId(contextActivity);
-                this.controllerConduit.SetInitialActivityStatus(this.programId, scheduleTypeId, instanceId, activity.QualifiedName, GetHierarchicalId(activity), activity.ExecutionStatus, context);
+                this.controllerConduit.SetInitialActivityStatus(
+                    this.programId,
+                    scheduleTypeId,
+                    instanceId,
+                    activity.QualifiedName,
+                    GetHierarchicalId(activity),
+                    activity.ExecutionStatus,
+                    context
+                );
             }
-
         }
 
         private static IEnumerable WalkActivityTree(Activity rootActivity)
@@ -977,9 +1279,17 @@ namespace System.Workflow.Runtime.DebugEngine
 
             yield return rootContext;
 
-            foreach (ActivityExecutionContext executionContext in rootContext.ExecutionContextManager.ExecutionContexts)
+            foreach (
+                ActivityExecutionContext executionContext in rootContext
+                    .ExecutionContextManager
+                    .ExecutionContexts
+            )
             {
-                foreach (ActivityExecutionContext nestedContext in WalkExecutionContextTree(executionContext))
+                foreach (
+                    ActivityExecutionContext nestedContext in WalkExecutionContextTree(
+                        executionContext
+                    )
+                )
                     yield return nestedContext;
             }
             yield break;
@@ -992,7 +1302,12 @@ namespace System.Workflow.Runtime.DebugEngine
             this.instanceTable.RemoveInstance(instance.InstanceId);
         }
 
-        private void LoadExistingScheduleType(Guid scheduleTypeId, Type scheduleType, bool isDynamic, Activity rootActivity)
+        private void LoadExistingScheduleType(
+            Guid scheduleTypeId,
+            Type scheduleType,
+            bool isDynamic,
+            Activity rootActivity
+        )
         {
             if (rootActivity == null)
                 throw new InvalidOperationException();
@@ -1005,14 +1320,28 @@ namespace System.Workflow.Runtime.DebugEngine
                     serializer.Serialize(xmlWriter, rootActivity);
                     string fileName = null;
                     string md5Digest = null;
-                    Attribute[] attributes = scheduleType.GetCustomAttributes(typeof(WorkflowMarkupSourceAttribute), false) as Attribute[];
+                    Attribute[] attributes =
+                        scheduleType.GetCustomAttributes(
+                            typeof(WorkflowMarkupSourceAttribute),
+                            false
+                        ) as Attribute[];
                     if (attributes != null && attributes.Length == 1)
                     {
                         fileName = ((WorkflowMarkupSourceAttribute)attributes[0]).FileName;
                         md5Digest = ((WorkflowMarkupSourceAttribute)attributes[0]).MD5Digest;
                     }
 
-                    this.controllerConduit.ScheduleTypeLoaded(this.programId, scheduleTypeId, scheduleType.Assembly.FullName, fileName, md5Digest, isDynamic, scheduleType.FullName, scheduleType.Name, stringWriter.ToString());
+                    this.controllerConduit.ScheduleTypeLoaded(
+                        this.programId,
+                        scheduleTypeId,
+                        scheduleType.Assembly.FullName,
+                        fileName,
+                        md5Digest,
+                        isDynamic,
+                        scheduleType.FullName,
+                        scheduleType.Name,
+                        stringWriter.ToString()
+                    );
                 }
             }
         }
@@ -1026,7 +1355,13 @@ namespace System.Workflow.Runtime.DebugEngine
 
                 Activity contextActivity = ContextActivityUtils.ContextActivity(activity);
                 int context = ContextActivityUtils.ContextId(contextActivity);
-                iterationId = activity.Name + ((context > 1 && activity == contextActivity) ? "(" + context + ")" : string.Empty);
+                iterationId =
+                    activity.Name
+                    + (
+                        (context > 1 && activity == contextActivity)
+                            ? "(" + context + ")"
+                            : string.Empty
+                    );
 
                 id = (id.Length > 0) ? iterationId + "." + id : iterationId;
 
@@ -1048,10 +1383,18 @@ namespace System.Workflow.Runtime.DebugEngine
 
             if (workflowCoreRuntime.IsDynamicallyUpdated)
                 return workflowCoreRuntime.InstanceID;
-            else if (string.IsNullOrEmpty(rootActivity.GetValue(Activity.WorkflowXamlMarkupProperty) as string))
+            else if (
+                string.IsNullOrEmpty(
+                    rootActivity.GetValue(Activity.WorkflowXamlMarkupProperty) as string
+                )
+            )
                 return GetScheduleTypeId(rootActivity.GetType());
             else
-                return GetScheduleTypeId(rootActivity.GetValue(WorkflowDefinitionDispenser.WorkflowDefinitionHashCodeProperty) as byte[]);
+                return GetScheduleTypeId(
+                    rootActivity.GetValue(
+                        WorkflowDefinitionDispenser.WorkflowDefinitionHashCodeProperty
+                    ) as byte[]
+                );
         }
 
         private Guid GetScheduleTypeId(Type scheduleType)
@@ -1086,11 +1429,15 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 try
                 {
-                    this.controllerConduit.AssemblyLoaded(this.programId, args.LoadedAssembly.Location, args.LoadedAssembly.GlobalAssemblyCache);
+                    this.controllerConduit.AssemblyLoaded(
+                        this.programId,
+                        args.LoadedAssembly.Location,
+                        args.LoadedAssembly.GlobalAssemblyCache
+                    );
                 }
                 catch
                 {
-                    // Don't throw exceptions to the CLR. Ignore exceptions that may occur if the debugger detaches 
+                    // Don't throw exceptions to the CLR. Ignore exceptions that may occur if the debugger detaches
                     // and closes the remoting channel.
                 }
             }
@@ -1099,33 +1446,69 @@ namespace System.Workflow.Runtime.DebugEngine
         private void EnumerateEventHandlersForActivity(Guid scheduleTypeId, Activity activity)
         {
             List<ActivityHandlerDescriptor> handlerMethods = new List<ActivityHandlerDescriptor>();
-            MethodInfo getInvocationListMethod = activity.GetType().GetMethod("System.Workflow.ComponentModel.IDependencyObjectAccessor.GetInvocationList", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+            MethodInfo getInvocationListMethod = activity
+                .GetType()
+                .GetMethod(
+                    "System.Workflow.ComponentModel.IDependencyObjectAccessor.GetInvocationList",
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.FlattenHierarchy
+                );
 
-            foreach (EventInfo eventInfo in activity.GetType().GetEvents(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
+            foreach (
+                EventInfo eventInfo in activity
+                    .GetType()
+                    .GetEvents(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.FlattenHierarchy
+                    )
+            )
             {
-                DependencyProperty dependencyEvent = DependencyProperty.FromName(eventInfo.Name, activity.GetType());
+                DependencyProperty dependencyEvent = DependencyProperty.FromName(
+                    eventInfo.Name,
+                    activity.GetType()
+                );
 
                 if (dependencyEvent != null)
                 {
                     try
                     {
-                        MethodInfo boundGetInvocationListMethod = getInvocationListMethod.MakeGenericMethod(new Type[] { dependencyEvent.PropertyType });
-                        foreach (Delegate handler in (boundGetInvocationListMethod.Invoke(activity, new object[] { dependencyEvent }) as Delegate[]))
+                        MethodInfo boundGetInvocationListMethod =
+                            getInvocationListMethod.MakeGenericMethod(
+                                new Type[] { dependencyEvent.PropertyType }
+                            );
+                        foreach (
+                            Delegate handler in (
+                                boundGetInvocationListMethod.Invoke(
+                                    activity,
+                                    new object[] { dependencyEvent }
+                                ) as Delegate[]
+                            )
+                        )
                         {
                             MethodInfo handlerMethodInfo = handler.Method;
                             ActivityHandlerDescriptor handlerMethod;
-                            handlerMethod.Name = handlerMethodInfo.DeclaringType.FullName + "." + handlerMethodInfo.Name;
+                            handlerMethod.Name =
+                                handlerMethodInfo.DeclaringType.FullName
+                                + "."
+                                + handlerMethodInfo.Name;
                             handlerMethod.Token = handlerMethodInfo.MetadataToken;
                             handlerMethods.Add(handlerMethod);
                         }
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
 
-            this.controllerConduit.UpdateHandlerMethodsForActivity(this.programId, scheduleTypeId, activity.QualifiedName, handlerMethods);
+            this.controllerConduit.UpdateHandlerMethodsForActivity(
+                this.programId,
+                scheduleTypeId,
+                activity.QualifiedName,
+                handlerMethods
+            );
         }
 
         #endregion

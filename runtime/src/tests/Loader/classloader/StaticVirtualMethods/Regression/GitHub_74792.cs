@@ -25,23 +25,29 @@ public class Program
     }
 }
 
-public interface ILogic{
-    abstract static void Run();
+public interface ILogic
+{
+    static abstract void Run();
 }
 
-public class L1 : ILogic{
-    public static void Run(){
+public class L1 : ILogic
+{
+    public static void Run()
+    {
         Console.WriteLine("L1");
     }
 }
 
-public class L2 : ILogic{
-    public static void Run(){
+public class L2 : ILogic
+{
+    public static void Run()
+    {
         Console.WriteLine("L2");
     }
 }
 
-struct G<T> where T : ILogic
+struct G<T>
+    where T : ILogic
 {
     public void Test()
     {

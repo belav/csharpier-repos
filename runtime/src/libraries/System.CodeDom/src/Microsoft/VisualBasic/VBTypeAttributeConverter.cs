@@ -11,7 +11,8 @@ namespace Microsoft.VisualBasic
 
         public static VBTypeAttributeConverter Default { get; } = new VBTypeAttributeConverter();
         protected override string[] Names { get; } = new[] { "Public", "Friend" };
-        protected override object[] Values { get; } = new object[] { TypeAttributes.Public, TypeAttributes.NotPublic };
+        protected override object[] Values { get; } =
+            new object[] { TypeAttributes.Public, TypeAttributes.NotPublic };
         protected override object DefaultValue => TypeAttributes.Public;
     }
 }

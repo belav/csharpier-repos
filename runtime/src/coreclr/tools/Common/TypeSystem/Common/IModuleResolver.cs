@@ -8,6 +8,10 @@ namespace Internal.TypeSystem
     public interface IModuleResolver
     {
         ModuleDesc ResolveAssembly(AssemblyName name, bool throwIfNotFound = true);
-        ModuleDesc ResolveModule(IAssemblyDesc referencingModule, string fileName, bool throwIfNotFound = true);
+        ModuleDesc ResolveModule(
+            IAssemblyDesc referencingModule,
+            string fileName,
+            bool throwIfNotFound = true
+        );
     }
 }

@@ -21,11 +21,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         {
             // The native compiler does not optimize this case; Roslyn does. We know
             // that the result of boxing default(int?) to object is the same as casting
-            // literal null to object, so we do not need to allocate space on the stack 
+            // literal null to object, so we do not need to allocate space on the stack
             // for the nullable int, initialize it, and then box that to a null ref.
 
-            string[] sources = {
-@"class Program
+            string[] sources =
+            {
+                @"class Program
 {
     static void Main()
     {
@@ -33,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
     }
 }
 ",
-
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -42,18 +42,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
     }
 }
 ",
-
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         System.Console.WriteLine((object)(int?)null);
     }
 }
-"};
+",
+            };
 
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldnull
@@ -74,11 +75,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         {
             // The native compiler does not optimize this case; Roslyn does. We know
             // that the result of boxing default(int?) to object is the same as casting
-            // literal null to object, so we do not need to allocate space on the stack 
+            // literal null to object, so we do not need to allocate space on the stack
             // for the nullable int, initialize it, and then box that to a null ref.
 
-            string[] sources = {
-@"class Program
+            string[] sources =
+            {
+                @"class Program
 {
     static void Main()
     {
@@ -86,18 +88,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
     }
 }
 ",
-
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         System.Console.WriteLine((object)(int?)123);
     }
 }
-"};
+",
+            };
 
             string expectedOutput = "123";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       13 (0xd)
   .maxstack  1
   IL_0000:  ldc.i4.s   123
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             // A built-in nullable conversion whose argument is known to always be null
             // can simply be optimized away to be the null result.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static long? M()
@@ -131,7 +135,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (long? V_0)
@@ -154,7 +159,8 @@ class Program
             // and then converting that to nullable, without generating the nullable source
             // or checking to see if it has a value.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static long? M(int x)
@@ -165,7 +171,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -185,7 +192,8 @@ class Program
             // A user-defined nullable conversion whose argument is known to always be null
             // can simply be optimized away to be the null result.
 
-            string source = @"
+            string source =
+                @"
 struct S
 {
     public static implicit operator S(int x) { return new S(); }
@@ -200,7 +208,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (S? V_0)
@@ -221,7 +230,8 @@ class Program
             // A user-defined nullable conversion whose argument is known to never be null
             // can have the nullable ctor, temporary store and value test optimized away.
 
-            string source = @"
+            string source =
+                @"
 struct S
 {
     public static implicit operator S(int x) { return new S(); }
@@ -254,7 +264,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -262,7 +273,8 @@ class Program
   IL_0006:  newobj     ""S?..ctor(S)""
   IL_000b:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -270,7 +282,8 @@ class Program
   IL_0006:  ret
 }";
 
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -292,7 +305,8 @@ class Program
             // A unary operator whose argument is known to always be null
             // can simply be optimized away to be the null result.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static int? M()
@@ -303,7 +317,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (int? V_0)
@@ -315,9 +330,10 @@ class Program
 
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
-// (6,16): warning CS0458: The result of the expression is always 'null' of type 'int?'
-//         return ~(new int?());
-Diagnostic(ErrorCode.WRN_AlwaysNull, "~(new int?())").WithArguments("int?"));
+                // (6,16): warning CS0458: The result of the expression is always 'null' of type 'int?'
+                //         return ~(new int?());
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "~(new int?())").WithArguments("int?")
+            );
             comp.VerifyIL("Program.M", expectedIL);
         }
 
@@ -338,7 +354,8 @@ Diagnostic(ErrorCode.WRN_AlwaysNull, "~(new int?())").WithArguments("int?"));
             // Fortunately, the warning logic does not do a deep analysis; it only
             // reports a single warning.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static object M()
@@ -349,7 +366,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldnull
@@ -358,9 +376,10 @@ class Program
 
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
-    // (6,17): warning CS0458: The result of the expression is always 'null' of type 'int?'
-    //         return ~-(new short?());
-    Diagnostic(ErrorCode.WRN_AlwaysNull, "-(new short?())").WithArguments("int?"));
+                // (6,17): warning CS0458: The result of the expression is always 'null' of type 'int?'
+                //         return ~-(new short?());
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "-(new short?())").WithArguments("int?")
+            );
             comp.VerifyIL("Program.M", expectedIL);
         }
 
@@ -370,7 +389,8 @@ class Program
             // A unary operator whose argument is known to never be null
             // can be optimized to avoid the null check.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static int N() { return 123; }
@@ -383,7 +403,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   IL_0000:  call       ""int Program.N()""
@@ -406,7 +427,8 @@ class Program
             // two unary operations and a boxing. As you can see, we eliminate
             // all the null checks and the "new S?" ctor.
 
-            string source = @"
+            string source =
+                @"
 struct S
 {
   public static S operator +(S s) { return s; }
@@ -424,7 +446,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       17 (0x11)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -442,7 +465,7 @@ class Program
         [Fact]
         public void TestLiftedUnaryOpOnTopOfLifted()
         {
-            // Here's an optimization that the dev10 compiler does not do. If we have a 
+            // Here's an optimization that the dev10 compiler does not do. If we have a
             // lifted unary operator "on top" of another lifted operation, then the unary
             // operation can be "distributed" to both branches of the underlying lifted operation.
             //
@@ -450,7 +473,7 @@ class Program
             //
             // return -(N1() + N2());
             //
-            // Where N1() and N2() return int?. The dev10 compiler does this in two steps: first it 
+            // Where N1() and N2() return int?. The dev10 compiler does this in two steps: first it
             // computes the int? result of the addition, and then it does a fully lifted negation:
             //
             // int? t1 = N1();
@@ -465,16 +488,17 @@ class Program
             // which is the same as distributing the conversion to the consequence and alternative:
             //
             // return (t1.HasValue && t2.HasValue ? - new int?(t1.Value + t2.Value) ): - ( new int?() ) )
-            // 
+            //
             // and now we can optimize the consequence and alternative down to
             //
             // return (t1.HasValue && t2.HasValue ? new int?(-(t1.Value + t2.Value) ): new int?() )
             //
-            // And the int? t3 disappears entirely. 
+            // And the int? t3 disappears entirely.
             //
             // This optimization has the nice property that it composes well with itself, as we'll see.
 
-            string source = @"
+            string source =
+                @"
 struct S
 {
   public static S operator -(S s) { return s; }
@@ -503,7 +527,8 @@ class Program
 ";
             string expectedOutput = "";
 
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       61 (0x3d)
   .maxstack  2
   .locals init (int? V_0,
@@ -533,7 +558,8 @@ class Program
   IL_003c:  ret
 }
 ";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       74 (0x4a)
   .maxstack  2
   .locals init (S? V_0,
@@ -600,7 +626,8 @@ class Program
             // The dev10 compiler does this optimization *only* on i++ and not on expressions
             // like N1() * N2() + 1 or sh+=1;
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static int? N1() { return 1; }
@@ -632,7 +659,8 @@ class Program
 ";
             string expectedOutput = "";
 
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       62 (0x3e)
   .maxstack  2
   .locals init (int? V_0,
@@ -663,7 +691,8 @@ class Program
   IL_003d:  ret
 }";
 
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       48 (0x30)
   .maxstack  3
   .locals init (short? V_0,
@@ -687,7 +716,8 @@ class Program
   IL_002a:  stsfld     ""short? Program.sh""
   IL_002f:  ret
 }";
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size       48 (0x30)
   .maxstack  2
   .locals init (short? V_0,
@@ -711,7 +741,8 @@ class Program
   IL_002a:  stsfld     ""short? Program.sh""
   IL_002f:  ret
 }";
-            string expectedIL4 = @"{
+            string expectedIL4 =
+                @"{
   // Code size       48 (0x30)
   .maxstack  2
   .locals init (short? V_0,
@@ -754,7 +785,8 @@ class Program
             // "comparing null with S? always produces false" -- it incorrectly warns
             // that it produces a null of type bool? !  Roslyn does not reproduce this bug.
 
-            string source = @"
+            string source =
+                @"
 struct S // User-defined relational ops
 {
   public static bool operator ==(S x, S y) { return true; }
@@ -807,13 +839,15 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedILTrue = @"{
+            string expectedILTrue =
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  ret
 }";
-            string expectedILFalse = @"{
+            string expectedILFalse =
+                @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.0
@@ -822,12 +856,15 @@ class Program
 
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
-// (25,16): warning CS0464: Comparing with null of type 'decimal?' always produces 'false'
-//         return ((int?)null) < new decimal?();
-Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < new decimal?()").WithArguments("decimal?"),
-// (37,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
-//         return ((S?)null) < new S?();
-Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?()").WithArguments("S?"));
+                // (25,16): warning CS0464: Comparing with null of type 'decimal?' always produces 'false'
+                //         return ((int?)null) < new decimal?();
+                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < new decimal?()")
+                    .WithArguments("decimal?"),
+                // (37,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
+                //         return ((S?)null) < new S?();
+                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?()")
+                    .WithArguments("S?")
+            );
             comp.VerifyIL("Program.M1", expectedILTrue);
             comp.VerifyIL("Program.M2", expectedILFalse);
             comp.VerifyIL("Program.M3", expectedILFalse);
@@ -843,7 +880,8 @@ Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?()").WithArguments(
         {
             // We can optimize this away to simply evaluating N() for its side effects
             // and returning false.
-            string source = @"
+            string source =
+                @"
 struct S {}
 class Program
 {
@@ -856,7 +894,8 @@ class Program
 }
 ";
             string expectedOutput = "123";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""S Program.N()""
@@ -875,7 +914,8 @@ class Program
             // An ==, !=, <, >, <= or >= operation where both operands
             // are not null simply drops the lifting logic entirely.
 
-            string source = @"
+            string source =
+                @"
 struct S // User-defined relational ops
 {
   public static bool operator ==(S x, S y) { return true; }
@@ -928,7 +968,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  call       ""int Program.N1()""
@@ -936,7 +977,8 @@ class Program
   IL_000a:  ceq
   IL_000c:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       17 (0x11)
   .maxstack  2
   IL_0000:  call       ""double Program.N3()""
@@ -947,7 +989,8 @@ class Program
   IL_000e:  ceq
   IL_0010:  ret
 }";
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size       21 (0x15)
   .maxstack  2
   IL_0000:  call       ""int Program.N1()""
@@ -957,7 +1000,8 @@ class Program
   IL_0014:  ret
 }
 ";
-            string expectedIL4 = @"{
+            string expectedIL4 =
+                @"{
   // Code size       16 (0x10)
   .maxstack  2
   IL_0000:  call       ""S Program.N5()""
@@ -965,7 +1009,8 @@ class Program
   IL_000a:  call       ""bool S.op_Equality(S, S)""
   IL_000f:  ret
 }";
-            string expectedIL5 = @"{
+            string expectedIL5 =
+                @"{
   // Code size       16 (0x10)
   .maxstack  2
   IL_0000:  call       ""S Program.N5()""
@@ -973,7 +1018,8 @@ class Program
   IL_000a:  call       ""bool S.op_Inequality(S, S)""
   IL_000f:  ret
 }";
-            string expectedIL6 = @"{
+            string expectedIL6 =
+                @"{
   // Code size       16 (0x10)
   .maxstack  2
   IL_0000:  call       ""S Program.N5()""
@@ -1007,7 +1053,8 @@ class Program
             // we do that) Roslyn will report warnings for
             // new S() == null and new S() != null.
 
-            string source = @"
+            string source =
+                @"
 struct S // User-defined relational ops
 {
   public static bool operator ==(S x, S y) { return true; }
@@ -1053,7 +1100,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""int Program.N1()""
@@ -1061,7 +1109,8 @@ class Program
   IL_0006:  ldc.i4.0
   IL_0007:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""short Program.N2()""
@@ -1069,7 +1118,8 @@ class Program
   IL_0006:  ldc.i4.1
   IL_0007:  ret
 }";
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""decimal Program.N3()""
@@ -1077,7 +1127,8 @@ class Program
   IL_0006:  ldc.i4.0
   IL_0007:  ret
 }";
-            string expectedIL4 = @"{
+            string expectedIL4 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""S Program.N4()""
@@ -1085,7 +1136,8 @@ class Program
   IL_0006:  ldc.i4.0
   IL_0007:  ret
 }";
-            string expectedIL5 = @"{
+            string expectedIL5 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""S Program.N4()""
@@ -1095,41 +1147,69 @@ class Program
 }";
             string expectedIL6 = expectedIL4;
 
-            CompileAndVerify(source, expectedOutput: expectedOutput, options: TestOptions.ReleaseExe.WithWarningLevel(4)).VerifyDiagnostics(
-                // (21,16): warning CS0472: The result of the expression is always 'false' since a value of type 'int' is never equal to 'null' of type 'short?'
-                //         return new int?(N1()) == new short?();
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "new int?(N1()) == new short?()").WithArguments("false", "int", "short?").WithLocation(21, 16),
-                // (25,16): warning CS0472: The result of the expression is always 'true' since a value of type 'double' is never equal to 'null' of type 'double?'
-                //         return default(double?) != new short?(N2());
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "default(double?) != new short?(N2())").WithArguments("true", "double", "double?").WithLocation(25, 16),
-                // (29,16): warning CS0464: Comparing with null of type 'int?' always produces 'false'
-                //         return ((int?)null) < new decimal?(N3());
-                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < new decimal?(N3())").WithArguments("int?").WithLocation(29, 16),
-                // (41,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
-                //         return ((S?)null) < new S?(N4());
-                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?(N4())").WithArguments("S?").WithLocation(41, 16)
+            CompileAndVerify(
+                    source,
+                    expectedOutput: expectedOutput,
+                    options: TestOptions.ReleaseExe.WithWarningLevel(4)
+                )
+                .VerifyDiagnostics(
+                    // (21,16): warning CS0472: The result of the expression is always 'false' since a value of type 'int' is never equal to 'null' of type 'short?'
+                    //         return new int?(N1()) == new short?();
+                    Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "new int?(N1()) == new short?()")
+                        .WithArguments("false", "int", "short?")
+                        .WithLocation(21, 16),
+                    // (25,16): warning CS0472: The result of the expression is always 'true' since a value of type 'double' is never equal to 'null' of type 'double?'
+                    //         return default(double?) != new short?(N2());
+                    Diagnostic(
+                            ErrorCode.WRN_NubExprIsConstBool,
+                            "default(double?) != new short?(N2())"
+                        )
+                        .WithArguments("true", "double", "double?")
+                        .WithLocation(25, 16),
+                    // (29,16): warning CS0464: Comparing with null of type 'int?' always produces 'false'
+                    //         return ((int?)null) < new decimal?(N3());
+                    Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < new decimal?(N3())")
+                        .WithArguments("int?")
+                        .WithLocation(29, 16),
+                    // (41,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
+                    //         return ((S?)null) < new S?(N4());
+                    Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?(N4())")
+                        .WithArguments("S?")
+                        .WithLocation(41, 16)
                 );
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
                 // (21,16): warning CS0472: The result of the expression is always 'false' since a value of type 'int' is never equal to 'null' of type 'short?'
                 //         return new int?(N1()) == new short?();
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "new int?(N1()) == new short?()").WithArguments("false", "int", "short?").WithLocation(21, 16),
+                Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "new int?(N1()) == new short?()")
+                    .WithArguments("false", "int", "short?")
+                    .WithLocation(21, 16),
                 // (25,16): warning CS0472: The result of the expression is always 'true' since a value of type 'double' is never equal to 'null' of type 'double?'
                 //         return default(double?) != new short?(N2());
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "default(double?) != new short?(N2())").WithArguments("true", "double", "double?").WithLocation(25, 16),
+                Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "default(double?) != new short?(N2())")
+                    .WithArguments("true", "double", "double?")
+                    .WithLocation(25, 16),
                 // (29,16): warning CS0464: Comparing with null of type 'int?' always produces 'false'
                 //         return ((int?)null) < new decimal?(N3());
-                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < new decimal?(N3())").WithArguments("int?").WithLocation(29, 16),
+                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < new decimal?(N3())")
+                    .WithArguments("int?")
+                    .WithLocation(29, 16),
                 // (33,16): warning CS8073: The result of the expression is always 'false' since a value of type 'S' is never equal to 'null' of type 'S?'
                 //         return new S?() == new S?(N4());
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "new S?() == new S?(N4())").WithArguments("false", "S", "S?").WithLocation(33, 16),
+                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "new S?() == new S?(N4())")
+                    .WithArguments("false", "S", "S?")
+                    .WithLocation(33, 16),
                 // (37,16): warning CS8073: The result of the expression is always 'true' since a value of type 'S' is never equal to 'null' of type 'S?'
                 //         return default(S?) != new S?(N4());
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "default(S?) != new S?(N4())").WithArguments("true", "S", "S?").WithLocation(37, 16),
+                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "default(S?) != new S?(N4())")
+                    .WithArguments("true", "S", "S?")
+                    .WithLocation(37, 16),
                 // (41,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
                 //         return ((S?)null) < new S?(N4());
-                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?(N4())").WithArguments("S?").WithLocation(41, 16)
-                );
+                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < new S?(N4())")
+                    .WithArguments("S?")
+                    .WithLocation(41, 16)
+            );
             comp.VerifyIL("Program.M1", expectedIL1);
             comp.VerifyIL("Program.M2", expectedIL2);
             comp.VerifyIL("Program.M3", expectedIL3);
@@ -1144,14 +1224,15 @@ class Program
             // An <, >, <= or >= operation where one operand is null and the
             // other is unknown is always false; we can skip the lifting and
             // generate the side effect.
-            // 
-            // An == or != operation where one operand is null and the other is 
+            //
+            // An == or != operation where one operand is null and the other is
             // unknown turns into a call to HasValue.
             //
             // As mentioned above, the native compiler gets one of the warnings wrong;
             // Roslyn gets it right.
 
-            string source = @"
+            string source =
+                @"
 struct S // User-defined relational ops
 {
   public static bool operator ==(S x, S y) { return true; }
@@ -1197,7 +1278,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       17 (0x11)
   .maxstack  2
   .locals init (int? V_0)
@@ -1220,7 +1302,8 @@ class Program
             // TODO:
             // TODO: return N2().HasValue();
 
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       48 (0x30)
   .maxstack  1
   .locals init (short? V_0,
@@ -1243,7 +1326,8 @@ class Program
   IL_002a:  call       ""bool double?.HasValue.get""
   IL_002f:  ret
 }";
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""decimal? Program.N3()""
@@ -1251,7 +1335,8 @@ class Program
   IL_0006:  ldc.i4.0
   IL_0007:  ret
 }";
-            string expectedIL4 = @"{
+            string expectedIL4 =
+                @"{
   // Code size       17 (0x11)
   .maxstack  2
   .locals init (S? V_0)
@@ -1263,7 +1348,8 @@ class Program
   IL_000e:  ceq
   IL_0010:  ret
 }";
-            string expectedIL5 = @"{
+            string expectedIL5 =
+                @"{
   // Code size       14 (0xe)
   .maxstack  1
   .locals init (S? V_0)
@@ -1273,7 +1359,8 @@ class Program
   IL_0008:  call       ""bool S?.HasValue.get""
   IL_000d:  ret
 }";
-            string expectedIL6 = @"{
+            string expectedIL6 =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  call       ""S? Program.N4()""
@@ -1284,12 +1371,13 @@ class Program
 
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
-// (29,16): warning CS0464: Comparing with null of type 'int?' always produces 'false'
-//         return ((int?)null) < N3();
-Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < N3()").WithArguments("int?"),
-// (41,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
-//         return ((S?)null) < N4();
-Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < N4()").WithArguments("S?")
+                // (29,16): warning CS0464: Comparing with null of type 'int?' always produces 'false'
+                //         return ((int?)null) < N3();
+                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((int?)null) < N3()")
+                    .WithArguments("int?"),
+                // (41,16): warning CS0464: Comparing with null of type 'S?' always produces 'false'
+                //         return ((S?)null) < N4();
+                Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < N4()").WithArguments("S?")
             );
             comp.VerifyIL("Program.M1", expectedIL1);
             comp.VerifyIL("Program.M2", expectedIL2);
@@ -1306,20 +1394,21 @@ Diagnostic(ErrorCode.WRN_CmpAlwaysFalse, "((S?)null) < N4()").WithArguments("S?"
             // is definitely not null, but know nothing about the other, then
             // we make a slight modification to the code generation. For example,
             // suppose X() and Y() return int?. For "return X() < Y();" we would generate:
-            // int? x = X(); 
+            // int? x = X();
             // int? y = Y();
             // return x.GetValueOrDefault() < y.GetValueOrDefault() ? x.HasValue & y.HasValue : false;
-            // 
+            //
             // But suppose Z() returns int. For X() < Z(), rather than converting Z() to int? and doing the
             // same codegen as before, we simplify the codegen to:
             //
-            // int? x = X(); 
+            // int? x = X();
             // int z = Z();
             // return x.GetValueOrDefault() < z ? x.HasValue : false;
             //
             // We apply this same pattern to all lifted comparison operators.
 
-            string source = @"
+            string source =
+                @"
 struct S // User-defined relational ops
 {
     public static bool operator ==(S x, S y) { return true; }
@@ -1368,7 +1457,8 @@ class Program
 
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       31 (0x1f)
   .maxstack  2
   .locals init (int? V_0,
@@ -1389,7 +1479,8 @@ class Program
 
             // TODO: We do a worse job than the native compiler here. Find out why.
 
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       72 (0x48)
   .maxstack  2
   .locals init (decimal? V_0,
@@ -1421,7 +1512,8 @@ class Program
   IL_0046:  and
   IL_0047:  ret
 }";
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size       37 (0x25)
   .maxstack  2
   .locals init (S V_0,
@@ -1441,7 +1533,8 @@ class Program
   IL_001f:  call       ""bool S.op_Equality(S, S)""
   IL_0024:  ret
 }";
-            string expectedIL4 = @"{
+            string expectedIL4 =
+                @"{
   // Code size       37 (0x25)
   .maxstack  2
   .locals init (S V_0,
@@ -1461,7 +1554,8 @@ class Program
   IL_001f:  call       ""bool S.op_Inequality(S, S)""
   IL_0024:  ret
 }";
-            string expectedIL5 = @"{
+            string expectedIL5 =
+                @"{
   // Code size       37 (0x25)
   .maxstack  2
   .locals init (S V_0,
@@ -1502,7 +1596,7 @@ class Program
             //
             // return (double?)(N1() + N2());
             //
-            // Where N1 and N2 return int?. The dev10 compiler does this in two steps: first it 
+            // Where N1 and N2 return int?. The dev10 compiler does this in two steps: first it
             // computes the int? result of the addition, and then it converts that int? to double?
             // with a lifted conversion. Basically, it generates:
             //
@@ -1518,16 +1612,17 @@ class Program
             // Is the same as distributing the conversion to the consequence and alternative:
             //
             // (t1.HasValue && t2.HasValue ? (double?)( new int?(t1.Value + t2.Value) ): (double?) ( new int?() ) )
-            // 
+            //
             // And now we can optimize the consequence and alternative down to
             //
             // (t1.HasValue && t2.HasValue ? new double?((double)(t1.Value + t2.Value) ): new double?() )
             //
-            // And the int? t3 disappears entirely. 
+            // And the int? t3 disappears entirely.
             //
-            // This optimization has the nice property that it composes well with itself. 
+            // This optimization has the nice property that it composes well with itself.
 
-            string source = @"
+            string source =
+                @"
 struct S
 {
   public static S operator -(S s) { return s; }
@@ -1558,7 +1653,8 @@ class Program
 ";
             string expectedOutput = "";
 
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       61 (0x3d)
   .maxstack  2
   .locals init (int? V_0,
@@ -1587,7 +1683,8 @@ class Program
   IL_0037:  newobj     ""long?..ctor(long)""
   IL_003c:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       48 (0x30)
   .maxstack  1
   .locals init (S? V_0,
@@ -1619,7 +1716,8 @@ class Program
         {
             // x & y and x | y are null if both operands are null.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static bool? M1()
@@ -1634,7 +1732,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (bool? V_0)
@@ -1654,7 +1753,7 @@ class Program
         public void TestNullableBoolBinOpsBothNotNull()
         {
             // x & y and x | y can be reduced to their non-lifted forms
-            // if both operands are known to be non-null. 
+            // if both operands are known to be non-null.
             //
             // Roslyn does a slightly better job than the native compiler here.
             // The native compiler effectively generates code as though you'd written:
@@ -1667,7 +1766,8 @@ class Program
             //
             // return new bool?(N() | N() & N())
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static bool N() { return true; }
@@ -1679,7 +1779,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       23 (0x17)
   .maxstack  3
   IL_0000:  call       ""bool Program.N()""
@@ -1699,10 +1800,11 @@ class Program
         [Fact]
         public void TestNullableBoolBinOpsOneNull()
         {
-            // codegen for x & y and x | y can be simplified if one operand is known to be null, 
+            // codegen for x & y and x | y can be simplified if one operand is known to be null,
             // and simplified even further if the other operand is known to be non-null.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static bool? N() { return false; }
@@ -1752,7 +1854,8 @@ class Program
 
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       27 (0x1b)
   .maxstack  1
   .locals init (bool? V_0,
@@ -1770,7 +1873,8 @@ class Program
   IL_001a:  ret
 }";
             string expectedIL2 = expectedIL1;
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size       27 (0x1b)
   .maxstack  1
   .locals init (bool? V_0,
@@ -1788,7 +1892,8 @@ class Program
   IL_001a:  ret
 }";
             string expectedIL4 = expectedIL3;
-            string expectedIL5 = @"{
+            string expectedIL5 =
+                @"{
   // Code size       24 (0x18)
   .maxstack  1
   .locals init (bool? V_0)
@@ -1803,7 +1908,8 @@ class Program
   IL_0017:  ret
 }";
             string expectedIL6 = expectedIL5;
-            string expectedIL7 = @"{
+            string expectedIL7 =
+                @"{
   // Code size       24 (0x18)
   .maxstack  1
   .locals init (bool? V_0)
@@ -1836,10 +1942,11 @@ class Program
         public void TestNullableBoolBinOpsOneNonNull()
         {
             // Codegen for x & y and x | y can be simplified if one operand is known to be non null.
-            // Note that we have already considered the case where one operand is null and the 
+            // Note that we have already considered the case where one operand is null and the
             // other is non null, in the test case above.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static bool? N() { return false; }
@@ -1865,7 +1972,8 @@ class Program
 
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       22 (0x16)
   .maxstack  2
   .locals init (bool? V_0)
@@ -1879,7 +1987,8 @@ class Program
   IL_0014:  ldloc.0
   IL_0015:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       22 (0x16)
   .maxstack  1
   .locals init (bool? V_0)
@@ -1893,7 +2002,8 @@ class Program
   IL_0014:  ldloc.0
   IL_0015:  ret
 }";
-            string expectedIL3 = @"{
+            string expectedIL3 =
+                @"{
   // Code size       22 (0x16)
   .maxstack  2
   .locals init (bool? V_0)
@@ -1907,7 +2017,8 @@ class Program
   IL_0010:  newobj     ""bool?..ctor(bool)""
   IL_0015:  ret
 }";
-            string expectedIL4 = @"{
+            string expectedIL4 =
+                @"{
   // Code size       22 (0x16)
   .maxstack  1
   .locals init (bool? V_0)
@@ -1934,9 +2045,10 @@ class Program
         public void TestNullableBinOpsBothAlwaysNull()
         {
             // x op y is null if both ops are null for the binary operators
-            // * / % + - << >> and for non-bool & ^ | 
+            // * / % + - << >> and for non-bool & ^ |
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static long? M1()
@@ -1951,7 +2063,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (long? V_0)
@@ -1960,7 +2073,8 @@ class Program
   IL_0008:  ldloc.0
   IL_0009:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .locals init (decimal? V_0)
@@ -1972,12 +2086,15 @@ class Program
 
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
-// (6,16): warning CS0458: The result of the expression is always 'null' of type 'long?'
-//         return new int?() + new long?();
-Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?() + new long?()").WithArguments("long?"),
-// (10,16): warning CS0458: The result of the expression is always 'null' of type 'decimal?'
-//         return (short?)null * default(decimal?);
-Diagnostic(ErrorCode.WRN_AlwaysNull, "(short?)null * default(decimal?)").WithArguments("decimal?"));
+                // (6,16): warning CS0458: The result of the expression is always 'null' of type 'long?'
+                //         return new int?() + new long?();
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?() + new long?()")
+                    .WithArguments("long?"),
+                // (10,16): warning CS0458: The result of the expression is always 'null' of type 'decimal?'
+                //         return (short?)null * default(decimal?);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "(short?)null * default(decimal?)")
+                    .WithArguments("decimal?")
+            );
             comp.VerifyIL("Program.M1", expectedIL1);
             comp.VerifyIL("Program.M2", expectedIL2);
         }
@@ -1986,11 +2103,12 @@ Diagnostic(ErrorCode.WRN_AlwaysNull, "(short?)null * default(decimal?)").WithArg
         public void TestNullableBinOpsBothNonNull()
         {
             // Lifted x op y is generated as non-lifted if both operands are known to be non-null
-            // for operators * / % + - << >> and for non-bool & ^ | 
+            // for operators * / % + - << >> and for non-bool & ^ |
             //
             // Roslyn does a far better job of this optimization than the native compiler.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static int N() { return 1; }
@@ -2013,7 +2131,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       77 (0x4d)
   .maxstack  3
   IL_0000:  call       ""int Program.N()""
@@ -2053,10 +2172,11 @@ class Program
         [Fact]
         public void TestNullableBinOpsOneNull()
         {
-            // If we have null + N() or null + new int?(B()) 
+            // If we have null + N() or null + new int?(B())
             // then we simply generate M() as a side effect and result in null.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static int? N() { return 1; }
@@ -2074,7 +2194,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       16 (0x10)
   .maxstack  1
   .locals init (int? V_0)
@@ -2085,7 +2206,8 @@ class Program
   IL_000e:  ldloc.0
   IL_000f:  ret
 }";
-            string expectedIL2 = @"{
+            string expectedIL2 =
+                @"{
   // Code size       16 (0x10)
   .maxstack  1
   .locals init (int? V_0)
@@ -2099,12 +2221,14 @@ class Program
 
             var comp = CompileAndVerify(source, expectedOutput: expectedOutput);
             comp.VerifyDiagnostics(
-// (9,16): warning CS0458: The result of the expression is always 'null' of type 'int?'
-//         return new int?() + N();
-Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?() + N()").WithArguments("int?"),
-// (13,16): warning CS0458: The result of the expression is always 'null' of type 'int?'
-//         return new int?(B()) * default(int?);
-Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?(B()) * default(int?)").WithArguments("int?"));
+                // (9,16): warning CS0458: The result of the expression is always 'null' of type 'int?'
+                //         return new int?() + N();
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?() + N()").WithArguments("int?"),
+                // (13,16): warning CS0458: The result of the expression is always 'null' of type 'int?'
+                //         return new int?(B()) * default(int?);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?(B()) * default(int?)")
+                    .WithArguments("int?")
+            );
             comp.VerifyIL("Program.M1", expectedIL1);
             comp.VerifyIL("Program.M2", expectedIL2);
         }
@@ -2115,7 +2239,8 @@ Diagnostic(ErrorCode.WRN_AlwaysNull, "new int?(B()) * default(int?)").WithArgume
             // If one side of the nullable binop is non-null then we skip calling HasValue and GetValueOrDefault
             // on that side.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static int B() { return 1; }
@@ -2132,7 +2257,8 @@ class Program
 }
 ";
             string expectedOutput = "";
-            string expectedIL1 = @"{
+            string expectedIL1 =
+                @"{
   // Code size       46 (0x2e)
   .maxstack  2
   .locals init (int V_0,
@@ -2162,7 +2288,8 @@ class Program
             // TODO: We will clean this up in a later checkin.
             // TODO: When we do so, add tests for ++ -- +=, etc.
 
-            string expectedIL2 = @"
+            string expectedIL2 =
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -2197,7 +2324,8 @@ class Program
             // If one side of the nullable binop is non-null then we skip calling HasValue and GetValueOrDefault
             // on that side.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main() 
@@ -2215,7 +2343,9 @@ class Program
 }
 ";
 
-            var comp = CompileAndVerify(source, expectedOutput: @"
+            var comp = CompileAndVerify(
+                    source,
+                    expectedOutput: @"
 42
 42
 -42
@@ -2223,9 +2353,11 @@ class Program
 0
 0
 42
-42")
-                .VerifyIL("Program.Main",
- @"
+42"
+                )
+                .VerifyIL(
+                    "Program.Main",
+                    @"
 {
   // Code size      349 (0x15d)
   .maxstack  3
@@ -2345,7 +2477,8 @@ class Program
   IL_0152:  box        ""int?""
   IL_0157:  call       ""void System.Console.WriteLine(object)""
   IL_015c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
@@ -2354,7 +2487,8 @@ class Program
             // If one side of the nullable binop is non-null then we skip calling HasValue and GetValueOrDefault
             // on that side.
 
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main() 
@@ -2371,7 +2505,9 @@ class Program
 }
 ";
 
-            var comp = CompileAndVerify(source, expectedOutput: @"
+            var comp = CompileAndVerify(
+                    source,
+                    expectedOutput: @"
 42
 42
 -42
@@ -2379,9 +2515,11 @@ class Program
 0
 0
 42
-42")
-                .VerifyIL("Program.Main",
- @"
+42"
+                )
+                .VerifyIL(
+                    "Program.Main",
+                    @"
 {
   // Code size       97 (0x61)
   .maxstack  2
@@ -2412,7 +2550,8 @@ class Program
   IL_0056:  box        ""int""
   IL_005b:  call       ""void System.Console.WriteLine(object)""
   IL_0060:  ret
-}");
+}"
+                );
         }
     }
 }

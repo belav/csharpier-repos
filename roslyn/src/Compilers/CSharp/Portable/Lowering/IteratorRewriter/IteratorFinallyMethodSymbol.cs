@@ -21,13 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// 2) control flow goes out of try scope by conditionally or unconditionally branching outside of one ore more try/finally frames.
     /// 3) enumerator is disposed by the owner.
     /// 4) enumerator is being disposed after an exception.
-    /// 
-    /// It is easier to manage partial or complete finalization when every finally is factored out as a separate method. 
-    /// 
-    /// NOTE: Finally is a private void nonvirtual instance method with no parameters. 
+    ///
+    /// It is easier to manage partial or complete finalization when every finally is factored out as a separate method.
+    ///
+    /// NOTE: Finally is a private void nonvirtual instance method with no parameters.
     ///       It is a valid JIT inlining target as long as JIT may consider inlining profitable.
     /// </summary>
-    internal sealed class IteratorFinallyMethodSymbol : SynthesizedInstanceMethodSymbol, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class IteratorFinallyMethodSymbol
+        : SynthesizedInstanceMethodSymbol,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly IteratorStateMachine _stateMachineType;
         private readonly string _name;
@@ -43,10 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
@@ -61,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MethodKind MethodKind
@@ -144,12 +140,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override TypeWithAnnotations ReturnTypeWithAnnotations
         {
-            get { return TypeWithAnnotations.Create(ContainingAssembly.GetSpecialType(SpecialType.System_Void)); }
+            get
+            {
+                return TypeWithAnnotations.Create(
+                    ContainingAssembly.GetSpecialType(SpecialType.System_Void)
+                );
+            }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
@@ -253,9 +256,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
-            return _stateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(localPosition, localTree);
+            return _stateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(
+                localPosition,
+                localTree
+            );
         }
 
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
     }
 }

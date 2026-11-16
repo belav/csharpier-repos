@@ -7,8 +7,10 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.Console
 {
-    internal sealed class FormatterOptionsMonitor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TOptions> :
-        IOptionsMonitor<TOptions>
+    internal sealed class FormatterOptionsMonitor<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TOptions
+    > : IOptionsMonitor<TOptions>
         where TOptions : ConsoleFormatterOptions
     {
         private readonly TOptions _options;

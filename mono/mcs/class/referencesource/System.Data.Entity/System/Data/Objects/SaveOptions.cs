@@ -17,6 +17,6 @@ namespace System.Data.Objects
     {
         None = 0,
         AcceptAllChangesAfterSave = 1,
-        DetectChangesBeforeSave = 2
+        DetectChangesBeforeSave = 2,
     }
 }

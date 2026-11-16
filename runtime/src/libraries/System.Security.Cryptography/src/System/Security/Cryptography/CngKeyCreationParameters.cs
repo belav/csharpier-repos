@@ -48,11 +48,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngProvider Provider
         {
-            get
-            {
-                return _provider;
-            }
-
+            get { return _provider; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);

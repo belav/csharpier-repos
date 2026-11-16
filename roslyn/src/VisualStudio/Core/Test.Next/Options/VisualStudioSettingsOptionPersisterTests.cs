@@ -28,8 +28,8 @@ public class VisualStudioSettingsOptionPersisterTests
     {
         public event PropertyChangedAsyncEventHandler? SettingChangedAsync;
 
-        public void TriggerSettingChanged(string storageName)
-            => SettingChangedAsync?.Invoke(this, new PropertyChangedEventArgs(storageName));
+        public void TriggerSettingChanged(string storageName) =>
+            SettingChangedAsync?.Invoke(this, new PropertyChangedEventArgs(storageName));
     }
 
     private class MockSettingsManager : ISettingsManager
@@ -39,8 +39,7 @@ public class VisualStudioSettingsOptionPersisterTests
 
         public readonly MockSettingsSubset Subset = new();
 
-        public ISettingsSubset GetSubset(string namePattern)
-            => Subset;
+        public ISettingsSubset GetSubset(string namePattern) => Subset;
 
         public GetValueResult TryGetValue<T>(string name, out T value)
         {
@@ -55,114 +54,186 @@ public class VisualStudioSettingsOptionPersisterTests
             return Task.CompletedTask;
         }
 
-        public ISettingsList GetOrCreateList(string name, bool isMachineLocal)
-            => throw new NotImplementedException();
+        public ISettingsList GetOrCreateList(string name, bool isMachineLocal) =>
+            throw new NotImplementedException();
 
-        public T GetValueOrDefault<T>(string name, T defaultValue = default!)
-            => throw new NotImplementedException();
+        public T GetValueOrDefault<T>(string name, T defaultValue = default!) =>
+            throw new NotImplementedException();
 
-        public string[] NamesStartingWith(string prefix)
-            => throw new NotImplementedException();
+        public string[] NamesStartingWith(string prefix) => throw new NotImplementedException();
 
-        public void SetOnlineStore(IAsyncStringStorage store)
-            => throw new NotImplementedException();
+        public void SetOnlineStore(IAsyncStringStorage store) =>
+            throw new NotImplementedException();
 
-        public void SetSharedStore(IAsyncStringStorage store)
-            => throw new NotImplementedException();
+        public void SetSharedStore(IAsyncStringStorage store) =>
+            throw new NotImplementedException();
     }
 
     public enum E
     {
         A,
-        B
+        B,
     }
 
-    private static readonly ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> s_noFallbacks =
-        ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>>.Empty;
+    private static readonly ImmutableDictionary<
+        string,
+        Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+    > s_noFallbacks = ImmutableDictionary<
+        string,
+        Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+    >.Empty;
 
-    private static readonly NamingStylePreferences s_nonDefaultNamingStylePreferences = OptionsTestHelpers.GetNonDefaultNamingStylePreference();
+    private static readonly NamingStylePreferences s_nonDefaultNamingStylePreferences =
+        OptionsTestHelpers.GetNonDefaultNamingStylePreference();
 
-    private static (object? value, object? storageValue) GetSomeOptionValue(Type optionType)
-        => optionType == typeof(bool) ? (true, true) :
-           optionType == typeof(string) ? ("str", "str") :
-           optionType == typeof(int) ? (1, 1) :
-           optionType == typeof(long) ? (1L, 1L) :
-           optionType == typeof(bool?) ? (true, true) :
-           optionType == typeof(int?) ? (1, 1) :
-           optionType == typeof(long?) ? (1L, 1L) :
-           optionType == typeof(E) ? (E.A, (int)E.A) :
-           optionType == typeof(E?) ? (E.A, (int)E.A) :
-           optionType == typeof(NamingStylePreferences) ? (s_nonDefaultNamingStylePreferences, s_nonDefaultNamingStylePreferences.CreateXElement().ToString()) :
-           optionType == typeof(CodeStyleOption2<bool>) ? (new CodeStyleOption2<bool>(false, NotificationOption2.Warning), new CodeStyleOption2<bool>(false, NotificationOption2.Warning).ToXElement().ToString()) :
-           optionType == typeof(ImmutableArray<bool>) ? (ImmutableArray.Create(true, false), new[] { true, false }) :
-           optionType == typeof(ImmutableArray<int>) ? (ImmutableArray.Create(0, 1), new[] { 0, 1 }) :
-           optionType == typeof(ImmutableArray<long>) ? (ImmutableArray.Create(0L, 1L), new[] { 0L, 1L }) :
-           optionType == typeof(ImmutableArray<string>) ? (ImmutableArray.Create("a", "b"), new[] { "a", "b" }) :
-           throw ExceptionUtilities.UnexpectedValue(optionType);
+    private static (object? value, object? storageValue) GetSomeOptionValue(Type optionType) =>
+        optionType == typeof(bool) ? (true, true)
+        : optionType == typeof(string) ? ("str", "str")
+        : optionType == typeof(int) ? (1, 1)
+        : optionType == typeof(long) ? (1L, 1L)
+        : optionType == typeof(bool?) ? (true, true)
+        : optionType == typeof(int?) ? (1, 1)
+        : optionType == typeof(long?) ? (1L, 1L)
+        : optionType == typeof(E) ? (E.A, (int)E.A)
+        : optionType == typeof(E?) ? (E.A, (int)E.A)
+        : optionType == typeof(NamingStylePreferences)
+            ? (
+                s_nonDefaultNamingStylePreferences,
+                s_nonDefaultNamingStylePreferences.CreateXElement().ToString()
+            )
+        : optionType == typeof(CodeStyleOption2<bool>)
+            ? (
+                new CodeStyleOption2<bool>(false, NotificationOption2.Warning),
+                new CodeStyleOption2<bool>(false, NotificationOption2.Warning)
+                    .ToXElement()
+                    .ToString()
+            )
+        : optionType == typeof(ImmutableArray<bool>)
+            ? (ImmutableArray.Create(true, false), new[] { true, false })
+        : optionType == typeof(ImmutableArray<int>) ? (ImmutableArray.Create(0, 1), new[] { 0, 1 })
+        : optionType == typeof(ImmutableArray<long>)
+            ? (ImmutableArray.Create(0L, 1L), new[] { 0L, 1L })
+        : optionType == typeof(ImmutableArray<string>)
+            ? (ImmutableArray.Create("a", "b"), new[] { "a", "b" })
+        : throw ExceptionUtilities.UnexpectedValue(optionType);
 
-    private static Type GetStorageType(Type optionType)
-        => optionType.IsEnum ? typeof(int) :
-           (Nullable.GetUnderlyingType(optionType)?.IsEnum == true) ? typeof(int?) :
-           optionType == typeof(NamingStylePreferences) ? typeof(string) :
-           typeof(ICodeStyleOption2).IsAssignableFrom(optionType) ? typeof(string) :
-           optionType == typeof(ImmutableArray<string>) ? typeof(string[]) :
-           optionType == typeof(ImmutableArray<bool>) ? typeof(bool[]) :
-           optionType == typeof(ImmutableArray<int>) ? typeof(int[]) :
-           optionType == typeof(ImmutableArray<long>) ? typeof(long[]) :
-           optionType;
+    private static Type GetStorageType(Type optionType) =>
+        optionType.IsEnum ? typeof(int)
+        : (Nullable.GetUnderlyingType(optionType)?.IsEnum == true) ? typeof(int?)
+        : optionType == typeof(NamingStylePreferences) ? typeof(string)
+        : typeof(ICodeStyleOption2).IsAssignableFrom(optionType) ? typeof(string)
+        : optionType == typeof(ImmutableArray<string>) ? typeof(string[])
+        : optionType == typeof(ImmutableArray<bool>) ? typeof(bool[])
+        : optionType == typeof(ImmutableArray<int>) ? typeof(int[])
+        : optionType == typeof(ImmutableArray<long>) ? typeof(long[])
+        : optionType;
 
-    private static bool IsDefaultImmutableArray(object array)
-        => (bool)array.GetType().GetMethod("get_IsDefault").Invoke(array, Array.Empty<object>())!;
+    private static bool IsDefaultImmutableArray(object array) =>
+        (bool)array.GetType().GetMethod("get_IsDefault").Invoke(array, Array.Empty<object>())!;
 
     [Fact]
     public void SettingsChangeEvent()
     {
-        var exportProvider = VisualStudioTestCompositions.LanguageServices.ExportProviderFactory.CreateExportProvider();
-        var fallbacks = exportProvider.GetExports<IVisualStudioStorageReadFallback, OptionNameMetadata>().ToImmutableDictionary(item => item.Metadata.ConfigName, item => item);
+        var exportProvider =
+            VisualStudioTestCompositions.LanguageServices.ExportProviderFactory.CreateExportProvider();
+        var fallbacks = exportProvider
+            .GetExports<IVisualStudioStorageReadFallback, OptionNameMetadata>()
+            .ToImmutableDictionary(item => item.Metadata.ConfigName, item => item);
 
         var refreshedOptions = new List<(OptionKey2, object?)>();
         var settingsManager = new MockSettingsManager();
-        var persister = new VisualStudioSettingsOptionPersister((optionKey, newValue) => refreshedOptions.Add((optionKey, newValue)), fallbacks, settingsManager);
+        var persister = new VisualStudioSettingsOptionPersister(
+            (optionKey, newValue) => refreshedOptions.Add((optionKey, newValue)),
+            fallbacks,
+            settingsManager
+        );
         var optionKey = new OptionKey2(CSharpFormattingOptions2.NewLineBeforeOpenBrace);
 
         // one flag is set:
 
-        settingsManager.GetValueImpl = (name, type) => name switch
-        {
-            "TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousTypes" => (GetValueResult.Success, false),
-            _ => (GetValueResult.Missing, null),
-        };
+        settingsManager.GetValueImpl = (name, type) =>
+            name switch
+            {
+                "TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousTypes" => (
+                    GetValueResult.Success,
+                    false
+                ),
+                _ => (GetValueResult.Missing, null),
+            };
 
-        Assert.True(persister.TryFetch(optionKey, "TextEditor.CSharp.Specific.csharp_new_line_before_open_brace", out var value));
-        Assert.Equal(value, CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue & ~NewLineBeforeOpenBracePlacement.AnonymousTypes);
+        Assert.True(
+            persister.TryFetch(
+                optionKey,
+                "TextEditor.CSharp.Specific.csharp_new_line_before_open_brace",
+                out var value
+            )
+        );
+        Assert.Equal(
+            value,
+            CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue
+                & ~NewLineBeforeOpenBracePlacement.AnonymousTypes
+        );
 
-        // Settings manager receives an option update (e.g. roaming options have been retrieved from online storage) and 
+        // Settings manager receives an option update (e.g. roaming options have been retrieved from online storage) and
         // triggers option change event.
 
-        settingsManager.GetValueImpl = (name, type) => name switch
-        {
-            "TextEditor.CSharp.Specific.NewLinesForBracesInMethods" => (GetValueResult.Success, false),
-            _ => (GetValueResult.Missing, null),
-        };
+        settingsManager.GetValueImpl = (name, type) =>
+            name switch
+            {
+                "TextEditor.CSharp.Specific.NewLinesForBracesInMethods" => (
+                    GetValueResult.Success,
+                    false
+                ),
+                _ => (GetValueResult.Missing, null),
+            };
 
-        settingsManager.Subset.TriggerSettingChanged("TextEditor.CSharp.Specific.NewLinesForBracesInMethods");
+        settingsManager.Subset.TriggerSettingChanged(
+            "TextEditor.CSharp.Specific.NewLinesForBracesInMethods"
+        );
 
-        Assert.Equal((optionKey, CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue & ~NewLineBeforeOpenBracePlacement.Methods), refreshedOptions.Single());
+        Assert.Equal(
+            (
+                optionKey,
+                CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue
+                    & ~NewLineBeforeOpenBracePlacement.Methods
+            ),
+            refreshedOptions.Single()
+        );
         refreshedOptions.Clear();
 
         // Settings manager receives another option update -- the primary option is set now
 
-        settingsManager.GetValueImpl = (name, type) => name switch
-        {
-            "TextEditor.CSharp.Specific.csharp_new_line_before_open_brace" => (GetValueResult.Success, NewLineBeforeOpenBracePlacement.Accessors | NewLineBeforeOpenBracePlacement.LambdaExpressionBody),
-            "TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousTypes" => (GetValueResult.Success, false),
-            "TextEditor.CSharp.Specific.NewLinesForBracesInMethods" => (GetValueResult.Success, true),
-            _ => (GetValueResult.Missing, null),
-        };
+        settingsManager.GetValueImpl = (name, type) =>
+            name switch
+            {
+                "TextEditor.CSharp.Specific.csharp_new_line_before_open_brace" => (
+                    GetValueResult.Success,
+                    NewLineBeforeOpenBracePlacement.Accessors
+                        | NewLineBeforeOpenBracePlacement.LambdaExpressionBody
+                ),
+                "TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousTypes" => (
+                    GetValueResult.Success,
+                    false
+                ),
+                "TextEditor.CSharp.Specific.NewLinesForBracesInMethods" => (
+                    GetValueResult.Success,
+                    true
+                ),
+                _ => (GetValueResult.Missing, null),
+            };
 
-        settingsManager.Subset.TriggerSettingChanged("TextEditor.CSharp.Specific.csharp_new_line_before_open_brace");
+        settingsManager.Subset.TriggerSettingChanged(
+            "TextEditor.CSharp.Specific.csharp_new_line_before_open_brace"
+        );
 
-        Assert.Equal((optionKey, NewLineBeforeOpenBracePlacement.Accessors | NewLineBeforeOpenBracePlacement.LambdaExpressionBody), refreshedOptions.Single());
+        Assert.Equal(
+            (
+                optionKey,
+                NewLineBeforeOpenBracePlacement.Accessors
+                    | NewLineBeforeOpenBracePlacement.LambdaExpressionBody
+            ),
+            refreshedOptions.Single()
+        );
         refreshedOptions.Clear();
     }
 
@@ -184,18 +255,25 @@ public class VisualStudioSettingsOptionPersisterTests
             typeof(ImmutableArray<bool>),
             typeof(ImmutableArray<int>),
             typeof(ImmutableArray<long>),
-            typeof(ImmutableArray<string>))]
-        Type optionType)
+            typeof(ImmutableArray<string>)
+        )]
+            Type optionType
+    )
     {
         var (optionValue, storageValue) = GetSomeOptionValue(optionType);
         var defaultValue = OptionsTestHelpers.GetDifferentValue(optionType, optionValue);
 
         var mockManager = new MockSettingsManager()
         {
-            GetValueImpl = (_, _) => (GetValueResult.Success, storageValue)
+            GetValueImpl = (_, _) => (GetValueResult.Success, storageValue),
         };
 
-        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(mockManager, "key", optionType, defaultValue);
+        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(
+            mockManager,
+            "key",
+            optionType,
+            defaultValue
+        );
         Assert.True(result.HasValue);
         Assert.Equal(optionValue, result.Value);
     }
@@ -208,8 +286,9 @@ public class VisualStudioSettingsOptionPersisterTests
             GetValueResult.IncompatibleType,
             GetValueResult.ObsoleteFormat,
             GetValueResult.UnknownError,
-            GetValueResult.Corrupt)]
-        GetValueResult specializedTypeResult,
+            GetValueResult.Corrupt
+        )]
+            GetValueResult specializedTypeResult,
         [CombinatorialValues(
             typeof(bool),
             typeof(string),
@@ -225,18 +304,29 @@ public class VisualStudioSettingsOptionPersisterTests
             typeof(ImmutableArray<bool>),
             typeof(ImmutableArray<int>),
             typeof(ImmutableArray<long>),
-            typeof(ImmutableArray<string>))]
-        Type optionType)
+            typeof(ImmutableArray<string>)
+        )]
+            Type optionType
+    )
     {
         var (optionValue, storageValue) = GetSomeOptionValue(optionType);
         var storageType = GetStorageType(optionType);
 
         var mockManager = new MockSettingsManager()
         {
-            GetValueImpl = (_, type) => (type == storageType ? specializedTypeResult : GetValueResult.Success, storageValue)
+            GetValueImpl = (_, type) =>
+                (
+                    type == storageType ? specializedTypeResult : GetValueResult.Success,
+                    storageValue
+                ),
         };
 
-        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(mockManager, "key", optionType, optionValue);
+        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(
+            mockManager,
+            "key",
+            optionType,
+            optionValue
+        );
 
         // we should not fall back to object if the manager tells us bool value is missing or invalid in any way:
         Assert.False(result.HasValue);
@@ -257,16 +347,25 @@ public class VisualStudioSettingsOptionPersisterTests
         var mockManager = new MockSettingsManager()
         {
             GetValueImpl = (_, _) => (GetValueResult.Success, serializedValue),
-            SetValueImpl = (name, value) => newValue = value
+            SetValueImpl = (name, value) => newValue = value,
         };
 
         // read
-        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(mockManager, "key", type, defaultValue: null);
+        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(
+            mockManager,
+            "key",
+            type,
+            defaultValue: null
+        );
         Assert.True(result.HasValue);
         Assert.True(IsDefaultImmutableArray(result.Value!));
 
         // write
-        var persister = new VisualStudioSettingsOptionPersister((_, _) => { }, s_noFallbacks, mockManager);
+        var persister = new VisualStudioSettingsOptionPersister(
+            (_, _) => { },
+            s_noFallbacks,
+            mockManager
+        );
         persister.PersistAsync("key", defaultArray).Wait();
 
         Assert.True(newValue.HasValue);
@@ -276,10 +375,22 @@ public class VisualStudioSettingsOptionPersisterTests
     public static IEnumerable<object?[]> GetRoundtripTestCases()
     {
         var value1 = new CodeStyleOption2<int>(1, NotificationOption2.Warning);
-        yield return new object?[] { value1, value1.ToXElement().ToString(), new CodeStyleOption2<int>(0, NotificationOption2.None), typeof(CodeStyleOption2<int>) };
+        yield return new object?[]
+        {
+            value1,
+            value1.ToXElement().ToString(),
+            new CodeStyleOption2<int>(0, NotificationOption2.None),
+            typeof(CodeStyleOption2<int>),
+        };
 
         var value2 = s_nonDefaultNamingStylePreferences;
-        yield return new object?[] { value2, value2.CreateXElement().ToString(), NamingStylePreferences.Empty, typeof(NamingStylePreferences) };
+        yield return new object?[]
+        {
+            value2,
+            value2.CreateXElement().ToString(),
+            NamingStylePreferences.Empty,
+            typeof(NamingStylePreferences),
+        };
 
         yield return new object?[] { E.B, (int)E.B, E.B, typeof(E) };
         yield return new object?[] { null, null, E.B, typeof(E?) };
@@ -295,16 +406,25 @@ public class VisualStudioSettingsOptionPersisterTests
         var mockManager = new MockSettingsManager()
         {
             GetValueImpl = (_, _) => (GetValueResult.Success, serializedValue),
-            SetValueImpl = (name, value) => newValue = value
+            SetValueImpl = (name, value) => newValue = value,
         };
 
         // read
-        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(mockManager, "key", type, defaultValue);
+        var result = VisualStudioSettingsOptionPersister.TryReadOptionValue(
+            mockManager,
+            "key",
+            type,
+            defaultValue
+        );
         Assert.True(result.HasValue);
         Assert.Equal(value, result.Value);
 
         // write
-        var persister = new VisualStudioSettingsOptionPersister((_, _) => { }, s_noFallbacks, mockManager);
+        var persister = new VisualStudioSettingsOptionPersister(
+            (_, _) => { },
+            s_noFallbacks,
+            mockManager
+        );
         persister.PersistAsync("key", value).Wait();
 
         Assert.True(newValue.HasValue);

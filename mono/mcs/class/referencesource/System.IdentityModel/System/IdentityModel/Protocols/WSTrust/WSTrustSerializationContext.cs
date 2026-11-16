@@ -21,18 +21,22 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Initializes an instance <see cref="WSTrustSerializationContext"/>
         /// </summary>
         public WSTrustSerializationContext()
-            : this(SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager())
-        {
-        }
+            : this(
+                SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager()
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustSerializationContext"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollectionManager">The security token handler collection manager.</param>
-        public WSTrustSerializationContext(SecurityTokenHandlerCollectionManager securityTokenHandlerCollectionManager)
-            : this(securityTokenHandlerCollectionManager, EmptySecurityTokenResolver.Instance, EmptySecurityTokenResolver.Instance)
-        {
-        }
+        public WSTrustSerializationContext(
+            SecurityTokenHandlerCollectionManager securityTokenHandlerCollectionManager
+        )
+            : this(
+                securityTokenHandlerCollectionManager,
+                EmptySecurityTokenResolver.Instance,
+                EmptySecurityTokenResolver.Instance
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustSerializationContext"/>
@@ -49,21 +53,31 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// The <see cref="SecurityTokenResolver"/> used to resolve security token references found in the
         /// UseKey element of RST messages as well as the RenewTarget element found in RST messages.
         /// </param>
-        public WSTrustSerializationContext(SecurityTokenHandlerCollectionManager securityTokenHandlerCollectionManager, SecurityTokenResolver securityTokenResolver, SecurityTokenResolver useKeyTokenResolver)
+        public WSTrustSerializationContext(
+            SecurityTokenHandlerCollectionManager securityTokenHandlerCollectionManager,
+            SecurityTokenResolver securityTokenResolver,
+            SecurityTokenResolver useKeyTokenResolver
+        )
         {
             if (securityTokenHandlerCollectionManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenHandlerCollectionManager");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandlerCollectionManager"
+                );
             }
 
             if (securityTokenResolver == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenResolver");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenResolver"
+                );
             }
 
             if (useKeyTokenResolver == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("useKeyTokenResolver");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "useKeyTokenResolver"
+                );
             }
 
             this.securityTokenHandlerCollectionManager = securityTokenHandlerCollectionManager;
@@ -107,7 +121,12 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenHandlerCollection SecurityTokenHandlers
         {
-            get { return this.securityTokenHandlerCollectionManager[SecurityTokenHandlerCollectionManager.Usage.Default]; }
+            get
+            {
+                return this.securityTokenHandlerCollectionManager[
+                    SecurityTokenHandlerCollectionManager.Usage.Default
+                ];
+            }
         }
     }
 }

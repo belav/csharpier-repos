@@ -46,91 +46,123 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         #region OptionsBuilder<T> extensions.
         [Fact]
         public async Task Configure_T() =>
-            await VerifyAgainstBaselineUsingFile("Configure_T.generated.txt", GetConfigureSource("section"), extType: ExtensionClassType.ServiceCollection);
+            await VerifyAgainstBaselineUsingFile(
+                "Configure_T.generated.txt",
+                GetConfigureSource("section"),
+                extType: ExtensionClassType.ServiceCollection
+            );
 
         [Fact]
         public async Task Configure_T_name() =>
-            await VerifyAgainstBaselineUsingFile("Configure_T_name.generated.txt", GetConfigureSource(@""""", section"), extType: ExtensionClassType.ServiceCollection);
+            await VerifyAgainstBaselineUsingFile(
+                "Configure_T_name.generated.txt",
+                GetConfigureSource(@""""", section"),
+                extType: ExtensionClassType.ServiceCollection
+            );
 
         [Fact]
         public async Task Configure_T_BinderOptions() =>
-            await VerifyAgainstBaselineUsingFile("Configure_T_BinderOptions.generated.txt", GetConfigureSource("section, _ => { }"), extType: ExtensionClassType.ServiceCollection);
+            await VerifyAgainstBaselineUsingFile(
+                "Configure_T_BinderOptions.generated.txt",
+                GetConfigureSource("section, _ => { }"),
+                extType: ExtensionClassType.ServiceCollection
+            );
 
         [Fact]
         public async Task Configure_T_name_BinderOptions() =>
-            await VerifyAgainstBaselineUsingFile("Configure_T_name_BinderOptions.generated.txt", GetConfigureSource(@""""", section, _ => { }"), extType: ExtensionClassType.ServiceCollection);
+            await VerifyAgainstBaselineUsingFile(
+                "Configure_T_name_BinderOptions.generated.txt",
+                GetConfigureSource(@""""", section, _ => { }"),
+                extType: ExtensionClassType.ServiceCollection
+            );
 
         [Theory]
-        [InlineData("OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(config: section, services: services);")]
-        [InlineData("""OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(name: "", config: section, services: services);""")]
-        [InlineData("OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(configureBinder: _ => { }, config: section, services: services);")]
-        [InlineData("""OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(configureBinder: _ => { }, config: section, name: "", services: services);""")]
-        [InlineData("""OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(name: "", services: services, configureBinder: _ => { }, config: section);""")]
+        [InlineData(
+            "OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(config: section, services: services);"
+        )]
+        [InlineData(
+            """OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(name: "", config: section, services: services);"""
+        )]
+        [InlineData(
+            "OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(configureBinder: _ => { }, config: section, services: services);"
+        )]
+        [InlineData(
+            """OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(configureBinder: _ => { }, config: section, name: "", services: services);"""
+        )]
+        [InlineData(
+            """OptionsConfigurationServiceCollectionExtensions.Configure<MyClass>(name: "", services: services, configureBinder: _ => { }, config: section);"""
+        )]
         public async Task Configure_T_NamedParameters_OutOfOrder(string row)
         {
             string source = $$"""
-                    using System.Collections.Generic;
-                    using Microsoft.Extensions.Configuration;
-                    using Microsoft.Extensions.DependencyInjection;
-                    
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            ConfigurationBuilder configurationBuilder = new();
-                            IConfiguration config = configurationBuilder.Build();
-                            IConfigurationSection section = config.GetSection("MySection");
-                            ServiceCollection services = new();
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
+                using Microsoft.Extensions.DependencyInjection;
 
-                            {{row}}
-                        }
-                    
-                        public class MyClass
-                        {
-                            public string MyString { get; set; }
-                            public int MyInt { get; set; }
-                            public List<int> MyList { get; set; }
-                            public Dictionary<string, string> MyDictionary { get; set; }
-                        }
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfiguration config = configurationBuilder.Build();
+                        IConfigurationSection section = config.GetSection("MySection");
+                        ServiceCollection services = new();
+
+                        {{row}}
                     }
-                    """;
+
+                    public class MyClass
+                    {
+                        public string MyString { get; set; }
+                        public int MyInt { get; set; }
+                        public List<int> MyList { get; set; }
+                        public Dictionary<string, string> MyDictionary { get; set; }
+                    }
+                }
+                """;
 
             await VerifyThatSourceIsGenerated(source);
         }
 
         [Theory]
-        [InlineData("OptionsBuilderConfigurationExtensions.Bind(config: config, optionsBuilder: optionsBuilder);")]
-        [InlineData("OptionsBuilderConfigurationExtensions.Bind(configureBinder: _ => { }, config: config, optionsBuilder: optionsBuilder);")]
-        [InlineData("OptionsBuilderConfigurationExtensions.Bind(config: config, configureBinder: _ => { }, optionsBuilder: optionsBuilder);")]
+        [InlineData(
+            "OptionsBuilderConfigurationExtensions.Bind(config: config, optionsBuilder: optionsBuilder);"
+        )]
+        [InlineData(
+            "OptionsBuilderConfigurationExtensions.Bind(configureBinder: _ => { }, config: config, optionsBuilder: optionsBuilder);"
+        )]
+        [InlineData(
+            "OptionsBuilderConfigurationExtensions.Bind(config: config, configureBinder: _ => { }, optionsBuilder: optionsBuilder);"
+        )]
         public async Task Bind_T_NamedParameters_OutOfOrder(string row)
         {
             string source = $$"""
-                    using System.Collections.Generic;
-                    using Microsoft.Extensions.Configuration;
-                    using Microsoft.Extensions.DependencyInjection;
-                    using Microsoft.Extensions.Options;
-                    
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            ConfigurationBuilder configurationBuilder = new();
-                            IConfiguration config = configurationBuilder.Build();
-                            var services = new ServiceCollection();
-                            OptionsBuilder<MyClass> optionsBuilder = new(services, "");
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
+                using Microsoft.Extensions.DependencyInjection;
+                using Microsoft.Extensions.Options;
 
-                            {{row}}
-                        }
-                    
-                        public class MyClass
-                        {
-                            public string MyString { get; set; }
-                            public int MyInt { get; set; }
-                            public List<int> MyList { get; set; }
-                            public Dictionary<string, string> MyDictionary { get; set; }
-                        }
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        ConfigurationBuilder configurationBuilder = new();
+                        IConfiguration config = configurationBuilder.Build();
+                        var services = new ServiceCollection();
+                        OptionsBuilder<MyClass> optionsBuilder = new(services, "");
+
+                        {{row}}
                     }
-                    """;
+
+                    public class MyClass
+                    {
+                        public string MyString { get; set; }
+                        public int MyInt { get; set; }
+                        public List<int> MyList { get; set; }
+                        public Dictionary<string, string> MyDictionary { get; set; }
+                    }
+                }
+                """;
 
             await VerifyThatSourceIsGenerated(source);
         }
@@ -165,13 +197,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         [Fact]
         public async Task Bind_T()
         {
-            await VerifyAgainstBaselineUsingFile("Bind_T.generated.txt", GetBindSource(), extType: ExtensionClassType.OptionsBuilder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind_T.generated.txt",
+                GetBindSource(),
+                extType: ExtensionClassType.OptionsBuilder
+            );
         }
 
         [Fact]
         public async Task Bind_T_BinderOptions()
         {
-            await VerifyAgainstBaselineUsingFile("Bind_T_BinderOptions.generated.txt", GetBindSource(", _ => { }"), extType: ExtensionClassType.OptionsBuilder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind_T_BinderOptions.generated.txt",
+                GetBindSource(", _ => { }"),
+                extType: ExtensionClassType.OptionsBuilder
+            );
         }
 
         [Fact]
@@ -201,8 +241,16 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 }
                 """;
 
-            await VerifyAgainstBaselineUsingFile("BindConfiguration.generated.txt", GetSource(), extType: ExtensionClassType.OptionsBuilder);
-            await VerifyAgainstBaselineUsingFile("BindConfiguration.generated.txt", GetSource(@", _ => { }"), extType: ExtensionClassType.OptionsBuilder);
+            await VerifyAgainstBaselineUsingFile(
+                "BindConfiguration.generated.txt",
+                GetSource(),
+                extType: ExtensionClassType.OptionsBuilder
+            );
+            await VerifyAgainstBaselineUsingFile(
+                "BindConfiguration.generated.txt",
+                GetSource(@", _ => { }"),
+                extType: ExtensionClassType.OptionsBuilder
+            );
         }
         #endregion OptionsBuilder<T> extensions.
     }

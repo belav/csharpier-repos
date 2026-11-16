@@ -18,35 +18,54 @@ namespace System.Security.Cryptography.X509Certificates
             _decoded = true;
         }
 
-        public X509SubjectKeyIdentifierExtension(AsnEncodedData encodedSubjectKeyIdentifier, bool critical)
-            : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical)
-        {
-        }
+        public X509SubjectKeyIdentifierExtension(
+            AsnEncodedData encodedSubjectKeyIdentifier,
+            bool critical
+        )
+            : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical) { }
 
         public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical)
-            : this((ReadOnlySpan<byte>)(subjectKeyIdentifier ?? throw new ArgumentNullException(nameof(subjectKeyIdentifier))), critical)
-        {
-        }
+            : this(
+                (ReadOnlySpan<byte>)(
+                    subjectKeyIdentifier
+                    ?? throw new ArgumentNullException(nameof(subjectKeyIdentifier))
+                ),
+                critical
+            ) { }
 
-        public X509SubjectKeyIdentifierExtension(ReadOnlySpan<byte> subjectKeyIdentifier, bool critical)
-            : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(subjectKeyIdentifier), critical, skipCopy: true)
-        {
-        }
+        public X509SubjectKeyIdentifierExtension(
+            ReadOnlySpan<byte> subjectKeyIdentifier,
+            bool critical
+        )
+            : base(
+                Oids.SubjectKeyIdentifierOid,
+                EncodeExtension(subjectKeyIdentifier),
+                critical,
+                skipCopy: true
+            ) { }
 
         public X509SubjectKeyIdentifierExtension(PublicKey key, bool critical)
-            : this(key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical)
-        {
-        }
+            : this(key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical) { }
 
-        public X509SubjectKeyIdentifierExtension(PublicKey key, X509SubjectKeyIdentifierHashAlgorithm algorithm, bool critical)
-            : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(key, algorithm), critical, skipCopy: true)
-        {
-        }
+        public X509SubjectKeyIdentifierExtension(
+            PublicKey key,
+            X509SubjectKeyIdentifierHashAlgorithm algorithm,
+            bool critical
+        )
+            : base(
+                Oids.SubjectKeyIdentifierOid,
+                EncodeExtension(key, algorithm),
+                critical,
+                skipCopy: true
+            ) { }
 
         public X509SubjectKeyIdentifierExtension(string subjectKeyIdentifier, bool critical)
-            : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(subjectKeyIdentifier), critical, skipCopy: true)
-        {
-        }
+            : base(
+                Oids.SubjectKeyIdentifierOid,
+                EncodeExtension(subjectKeyIdentifier),
+                critical,
+                skipCopy: true
+            ) { }
 
         public string? SubjectKeyIdentifier
         {
@@ -91,7 +110,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         private void Decode(byte[] rawData)
         {
-            X509Pal.Instance.DecodeX509SubjectKeyIdentifierExtension(rawData, out _subjectKeyIdentifierBytes);
+            X509Pal.Instance.DecodeX509SubjectKeyIdentifierExtension(
+                rawData,
+                out _subjectKeyIdentifierBytes
+            );
             _subjectKeyIdentifierString = _subjectKeyIdentifierBytes.ToHexStringUpper();
             _decoded = true;
         }
@@ -112,7 +134,10 @@ namespace System.Security.Cryptography.X509Certificates
             return EncodeExtension(subjectKeyIdentifiedBytes);
         }
 
-        private static byte[] EncodeExtension(PublicKey key, X509SubjectKeyIdentifierHashAlgorithm algorithm)
+        private static byte[] EncodeExtension(
+            PublicKey key,
+            X509SubjectKeyIdentifierHashAlgorithm algorithm
+        )
         {
             ArgumentNullException.ThrowIfNull(key);
 
@@ -120,8 +145,15 @@ namespace System.Security.Cryptography.X509Certificates
             return EncodeExtension(subjectKeyIdentifier);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required by RFC3280")]
-        private static byte[] GenerateSubjectKeyIdentifierFromPublicKey(PublicKey key, X509SubjectKeyIdentifierHashAlgorithm algorithm)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is required by RFC3280"
+        )]
+        private static byte[] GenerateSubjectKeyIdentifierFromPublicKey(
+            PublicKey key,
+            X509SubjectKeyIdentifierHashAlgorithm algorithm
+        )
         {
             switch (algorithm)
             {
@@ -129,26 +161,29 @@ namespace System.Security.Cryptography.X509Certificates
                     return SHA1.HashData(key.EncodedKeyValue.RawData);
 
                 case X509SubjectKeyIdentifierHashAlgorithm.ShortSha1:
-                    {
-                        Span<byte> sha1 = stackalloc byte[SHA1.HashSizeInBytes];
-                        int written = SHA1.HashData(key.EncodedKeyValue.RawData, sha1);
-                        Debug.Assert(written == SHA1.HashSizeInBytes);
+                {
+                    Span<byte> sha1 = stackalloc byte[SHA1.HashSizeInBytes];
+                    int written = SHA1.HashData(key.EncodedKeyValue.RawData, sha1);
+                    Debug.Assert(written == SHA1.HashSizeInBytes);
 
-                        //  ShortSha1: The keyIdentifier is composed of a four bit type field with
-                        //  the value 0100 followed by the least significant 60 bits of the
-                        //  SHA-1 hash of the value of the BIT STRING subjectPublicKey
-                        // (excluding the tag, length, and number of unused bit string bits)
-                        byte[] shortSha1 = sha1.Slice(SHA1.HashSizeInBytes - 8).ToArray();
-                        shortSha1[0] &= 0x0f;
-                        shortSha1[0] |= 0x40;
-                        return shortSha1;
-                    }
+                    //  ShortSha1: The keyIdentifier is composed of a four bit type field with
+                    //  the value 0100 followed by the least significant 60 bits of the
+                    //  SHA-1 hash of the value of the BIT STRING subjectPublicKey
+                    // (excluding the tag, length, and number of unused bit string bits)
+                    byte[] shortSha1 = sha1.Slice(SHA1.HashSizeInBytes - 8).ToArray();
+                    shortSha1[0] &= 0x0f;
+                    shortSha1[0] |= 0x40;
+                    return shortSha1;
+                }
 
                 case X509SubjectKeyIdentifierHashAlgorithm.CapiSha1:
                     return X509Pal.Instance.ComputeCapiSha1OfPublicKey(key);
 
                 default:
-                    throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, algorithm), nameof(algorithm));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_EnumIllegalVal, algorithm),
+                        nameof(algorithm)
+                    );
             }
         }
     }

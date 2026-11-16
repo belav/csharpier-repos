@@ -24,39 +24,41 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests
             }
         }
 
-        internal static InlineRenameReplacementKind GetExpectedInlineRenameReplacementKind(FSharpInlineRenameReplacementKind kind)
+        internal static InlineRenameReplacementKind GetExpectedInlineRenameReplacementKind(
+            FSharpInlineRenameReplacementKind kind
+        )
         {
             switch (kind)
             {
                 case FSharpInlineRenameReplacementKind.NoConflict:
-                    {
-                        return InlineRenameReplacementKind.NoConflict;
-                    }
+                {
+                    return InlineRenameReplacementKind.NoConflict;
+                }
 
                 case FSharpInlineRenameReplacementKind.ResolvedReferenceConflict:
-                    {
-                        return InlineRenameReplacementKind.ResolvedReferenceConflict;
-                    }
+                {
+                    return InlineRenameReplacementKind.ResolvedReferenceConflict;
+                }
 
                 case FSharpInlineRenameReplacementKind.ResolvedNonReferenceConflict:
-                    {
-                        return InlineRenameReplacementKind.ResolvedNonReferenceConflict;
-                    }
+                {
+                    return InlineRenameReplacementKind.ResolvedNonReferenceConflict;
+                }
 
                 case FSharpInlineRenameReplacementKind.UnresolvedConflict:
-                    {
-                        return InlineRenameReplacementKind.UnresolvedConflict;
-                    }
+                {
+                    return InlineRenameReplacementKind.UnresolvedConflict;
+                }
 
                 case FSharpInlineRenameReplacementKind.Complexified:
-                    {
-                        return InlineRenameReplacementKind.Complexified;
-                    }
+                {
+                    return InlineRenameReplacementKind.Complexified;
+                }
 
                 default:
-                    {
-                        throw ExceptionUtilities.UnexpectedValue(kind);
-                    }
+                {
+                    throw ExceptionUtilities.UnexpectedValue(kind);
+                }
             }
         }
 

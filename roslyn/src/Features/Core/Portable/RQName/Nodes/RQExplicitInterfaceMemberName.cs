@@ -6,7 +6,10 @@ using Microsoft.CodeAnalysis.Features.RQName.SimpleTree;
 
 namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 {
-    internal class RQExplicitInterfaceMemberName(RQType interfaceType, RQOrdinaryMethodPropertyOrEventName name) : RQMethodPropertyOrEventName
+    internal class RQExplicitInterfaceMemberName(
+        RQType interfaceType,
+        RQOrdinaryMethodPropertyOrEventName name
+    ) : RQMethodPropertyOrEventName
     {
         public readonly RQType InterfaceType = interfaceType;
         public readonly RQOrdinaryMethodPropertyOrEventName Name = name;
@@ -16,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             get { return Name.OrdinaryNameValue; }
         }
 
-        public override SimpleGroupNode ToSimpleTree()
-            => new(RQNameStrings.IntfExplName, InterfaceType.ToSimpleTree(), Name.ToSimpleTree());
+        public override SimpleGroupNode ToSimpleTree() =>
+            new(RQNameStrings.IntfExplName, InterfaceType.ToSimpleTree(), Name.ToSimpleTree());
     }
 }

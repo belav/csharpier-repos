@@ -18,7 +18,12 @@ namespace System.Globalization
         /// The following constructor is designed to be called from CompareInfo to get the
         /// the sort key of specific string for synthetic culture
         /// </summary>
-        internal SortKey(CompareInfo compareInfo, string str, CompareOptions options, byte[] keyData)
+        internal SortKey(
+            CompareInfo compareInfo,
+            string str,
+            CompareOptions options,
+            byte[] keyData
+        )
         {
             _keyData = keyData;
             _compareInfo = compareInfo;
@@ -60,10 +65,12 @@ namespace System.Globalization
         }
 
         public override bool Equals([NotNullWhen(true)] object? value) =>
-            value is SortKey other && new ReadOnlySpan<byte>(_keyData).SequenceEqual(other._keyData);
+            value is SortKey other
+            && new ReadOnlySpan<byte>(_keyData).SequenceEqual(other._keyData);
 
         public override int GetHashCode() => _compareInfo.GetHashCode(_string, _options);
 
-        public override string ToString() => $"SortKey - {_compareInfo.Name}, {_options}, {_string}";
+        public override string ToString() =>
+            $"SortKey - {_compareInfo.Name}, {_options}, {_string}";
     }
 }

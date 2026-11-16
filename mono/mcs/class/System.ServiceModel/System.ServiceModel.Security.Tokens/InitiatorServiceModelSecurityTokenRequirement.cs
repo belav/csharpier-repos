@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,35 +32,39 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public sealed class InitiatorServiceModelSecurityTokenRequirement
-		: ServiceModelSecurityTokenRequirement
-	{
-		public InitiatorServiceModelSecurityTokenRequirement ()
-		{
-			Properties [ServiceModelSecurityTokenRequirement.IsInitiatorProperty] = true;
-		}
+    public sealed class InitiatorServiceModelSecurityTokenRequirement
+        : ServiceModelSecurityTokenRequirement
+    {
+        public InitiatorServiceModelSecurityTokenRequirement()
+        {
+            Properties[ServiceModelSecurityTokenRequirement.IsInitiatorProperty] = true;
+        }
 
-		public EndpointAddress TargetAddress {
-			get {
-				EndpointAddress ret;
-				TryGetProperty<EndpointAddress> (TargetAddressProperty, out ret);
-				return ret;
-			}
-			set { Properties [TargetAddressProperty] = value; }
-		}
+        public EndpointAddress TargetAddress
+        {
+            get
+            {
+                EndpointAddress ret;
+                TryGetProperty<EndpointAddress>(TargetAddressProperty, out ret);
+                return ret;
+            }
+            set { Properties[TargetAddressProperty] = value; }
+        }
 
-		public Uri Via {
-			get {
-				Uri ret;
-				TryGetProperty<Uri> (ViaProperty, out ret);
-				return ret;
-			}
-			set { Properties [ViaProperty] = value; }
-		}
+        public Uri Via
+        {
+            get
+            {
+                Uri ret;
+                TryGetProperty<Uri>(ViaProperty, out ret);
+                return ret;
+            }
+            set { Properties[ViaProperty] = value; }
+        }
 
-		public override string ToString ()
-		{
-			return Dump ();
-		}
-	}
+        public override string ToString()
+        {
+            return Dump();
+        }
+    }
 }

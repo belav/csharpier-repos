@@ -23,28 +23,53 @@ namespace System.ServiceModel.ComIntegration
         static WindowsIdentity processIdentity;
         static object lockObject = new object();
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        public static SafeHandle GetTokenInformation(SafeCloseHandle token, TOKEN_INFORMATION_CLASS infoClass)
+        public static SafeHandle GetTokenInformation(
+            SafeCloseHandle token,
+            TOKEN_INFORMATION_CLASS infoClass
+        )
         {
             uint length;
-            if (!SafeNativeMethods.GetTokenInformation(token, infoClass, SafeHGlobalHandle.InvalidHandle, 0, out length))
+            if (
+                !SafeNativeMethods.GetTokenInformation(
+                    token,
+                    infoClass,
+                    SafeHGlobalHandle.InvalidHandle,
+                    0,
+                    out length
+                )
+            )
             {
                 int error = Marshal.GetLastWin32Error();
                 if (error != (int)Win32Error.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
+                    );
                 }
             }
             SafeHandle buffer = SafeHGlobalHandle.AllocHGlobal(length);
             try
             {
-                if (!SafeNativeMethods.GetTokenInformation(token, infoClass, buffer, length, out length))
+                if (
+                    !SafeNativeMethods.GetTokenInformation(
+                        token,
+                        infoClass,
+                        buffer,
+                        length,
+                        out length
+                    )
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
+                    );
                 }
             }
             catch
@@ -57,8 +82,12 @@ namespace System.ServiceModel.ComIntegration
 
         internal static bool IsAtleastImpersonationToken(SafeCloseHandle token)
         {
-            using (SafeHandle buffer =
-                GetTokenInformation(token, TOKEN_INFORMATION_CLASS.TokenImpersonationLevel))
+            using (
+                SafeHandle buffer = GetTokenInformation(
+                    token,
+                    TOKEN_INFORMATION_CLASS.TokenImpersonationLevel
+                )
+            )
             {
                 int level = Marshal.ReadInt32(buffer.DangerousGetHandle());
                 if (level < (int)SecurityImpersonationLevel.Impersonation)
@@ -70,8 +99,9 @@ namespace System.ServiceModel.ComIntegration
 
         internal static bool IsPrimaryToken(SafeCloseHandle token)
         {
-            using (SafeHandle buffer =
-                GetTokenInformation(token, TOKEN_INFORMATION_CLASS.TokenType))
+            using (
+                SafeHandle buffer = GetTokenInformation(token, TOKEN_INFORMATION_CLASS.TokenType)
+            )
             {
                 int level = Marshal.ReadInt32(buffer.DangerousGetHandle());
                 return (level == (int)TokenType.TokenPrimary);
@@ -80,8 +110,12 @@ namespace System.ServiceModel.ComIntegration
 
         internal static LUID GetModifiedIDLUID(SafeCloseHandle token)
         {
-            using (SafeHandle buffer =
-                GetTokenInformation(token, TOKEN_INFORMATION_CLASS.TokenStatistics))
+            using (
+                SafeHandle buffer = GetTokenInformation(
+                    token,
+                    TOKEN_INFORMATION_CLASS.TokenStatistics
+                )
+            )
             {
                 TOKEN_STATISTICS tokenStats = (TOKEN_STATISTICS)
                     Marshal.PtrToStructure(buffer.DangerousGetHandle(), typeof(TOKEN_STATISTICS));
@@ -102,14 +136,28 @@ namespace System.ServiceModel.ComIntegration
                     {
                         try
                         {
-                            if (!SafeNativeMethods.ImpersonateAnonymousUserOnCurrentThread(SafeNativeMethods.GetCurrentThread()))
+                            if (
+                                !SafeNativeMethods.ImpersonateAnonymousUserOnCurrentThread(
+                                    SafeNativeMethods.GetCurrentThread()
+                                )
+                            )
                             {
                                 int error = Marshal.GetLastWin32Error();
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.ImpersonateAnonymousTokenFailed, error)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new Win32Exception(
+                                        error,
+                                        SR.GetString(SR.ImpersonateAnonymousTokenFailed, error)
+                                    )
+                                );
                             }
                             isImpersonating = true;
                             bool revertSuccess;
-                            bool isSuccess = SafeNativeMethods.OpenCurrentThreadToken(SafeNativeMethods.GetCurrentThread(), TokenAccessLevels.Query, true, out tokenHandle);
+                            bool isSuccess = SafeNativeMethods.OpenCurrentThreadToken(
+                                SafeNativeMethods.GetCurrentThread(),
+                                TokenAccessLevels.Query,
+                                true,
+                                out tokenHandle
+                            );
                             if (!isSuccess)
                             {
                                 int error = Marshal.GetLastWin32Error();
@@ -120,12 +168,19 @@ namespace System.ServiceModel.ComIntegration
                                     error = Marshal.GetLastWin32Error();
 
                                     //this requires a failfast since failure to revert impersonation compromises security
-                                    DiagnosticUtility.FailFast("RevertToSelf() failed with " + error);
+                                    DiagnosticUtility.FailFast(
+                                        "RevertToSelf() failed with " + error
+                                    );
                                 }
                                 isImpersonating = false;
 
                                 Utility.CloseInvalidOutSafeHandle(tokenHandle);
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.OpenThreadTokenFailed, error)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new Win32Exception(
+                                        error,
+                                        SR.GetString(SR.OpenThreadTokenFailed, error)
+                                    )
+                                );
                             }
 
                             revertSuccess = SafeNativeMethods.RevertToSelf();
@@ -140,7 +195,9 @@ namespace System.ServiceModel.ComIntegration
 
                             using (tokenHandle)
                             {
-                                anonymousIdentity = new WindowsIdentity(tokenHandle.DangerousGetHandle());
+                                anonymousIdentity = new WindowsIdentity(
+                                    tokenHandle.DangerousGetHandle()
+                                );
                             }
                         }
                         finally
@@ -153,7 +210,9 @@ namespace System.ServiceModel.ComIntegration
                                     int error = Marshal.GetLastWin32Error();
 
                                     //this requires a failfast since failure to revert impersonation compromises security
-                                    DiagnosticUtility.FailFast("RevertToSelf() failed with " + error);
+                                    DiagnosticUtility.FailFast(
+                                        "RevertToSelf() failed with " + error
+                                    );
                                 }
                             }
                         }
@@ -170,19 +229,26 @@ namespace System.ServiceModel.ComIntegration
 
         public static WindowsIdentity GetProcessIdentity()
         {
-
             SafeCloseHandle tokenHandle = null;
             lock (lockObject)
             {
-
                 try
                 {
-                    bool isSuccess = SafeNativeMethods.GetCurrentProcessToken(SafeNativeMethods.GetCurrentProcess(), TokenAccessLevels.Query, out tokenHandle);
+                    bool isSuccess = SafeNativeMethods.GetCurrentProcessToken(
+                        SafeNativeMethods.GetCurrentProcess(),
+                        TokenAccessLevels.Query,
+                        out tokenHandle
+                    );
                     if (!isSuccess)
                     {
                         int error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(tokenHandle);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.OpenProcessTokenFailed, error)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(
+                                error,
+                                SR.GetString(SR.OpenProcessTokenFailed, error)
+                            )
+                        );
                     }
                     processIdentity = new WindowsIdentity(tokenHandle.DangerousGetHandle());
                 }
@@ -198,15 +264,21 @@ namespace System.ServiceModel.ComIntegration
 
     internal sealed class ComPlusAuthorization
     {
-
         string[] serviceRoleMembers = null;
         string[] contractRoleMembers = null;
         string[] operationRoleMembers = null;
         CommonSecurityDescriptor securityDescriptor = null;
-        static SecurityIdentifier sidAdministrators = new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null);
+        static SecurityIdentifier sidAdministrators = new SecurityIdentifier(
+            WellKnownSidType.BuiltinAdministratorsSid,
+            null
+        );
         Dictionary<LUID, bool> accessCheckCache = new Dictionary<LUID, bool>();
 
-        public ComPlusAuthorization(string[] serviceRoleMembers, string[] contractRoleMembers, string[] operationRoleMembers)
+        public ComPlusAuthorization(
+            string[] serviceRoleMembers,
+            string[] contractRoleMembers,
+            string[] operationRoleMembers
+        )
         {
             this.serviceRoleMembers = serviceRoleMembers;
             this.contractRoleMembers = contractRoleMembers;
@@ -228,7 +300,14 @@ namespace System.ServiceModel.ComIntegration
                 {
                     name = new NTAccount(userName);
                     sid = (SecurityIdentifier)name.Translate(typeof(SecurityIdentifier));
-                    ace = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, (int)ComRights.EXECUTE, sid, false, null);
+                    ace = new CommonAce(
+                        AceFlags.None,
+                        AceQualifier.AccessAllowed,
+                        (int)ComRights.EXECUTE,
+                        sid,
+                        false,
+                        null
+                    );
                     acl.InsertAce(index, ace);
                     index++;
                 }
@@ -239,7 +318,14 @@ namespace System.ServiceModel.ComIntegration
                 {
                     name = new NTAccount(userName);
                     sid = (SecurityIdentifier)name.Translate(typeof(SecurityIdentifier));
-                    ace = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, (int)ComRights.EXECUTE, sid, false, null);
+                    ace = new CommonAce(
+                        AceFlags.None,
+                        AceQualifier.AccessAllowed,
+                        (int)ComRights.EXECUTE,
+                        sid,
+                        false,
+                        null
+                    );
                     acl.InsertAce(index, ace);
                     index++;
                 }
@@ -250,14 +336,28 @@ namespace System.ServiceModel.ComIntegration
                 {
                     name = new NTAccount(userName);
                     sid = (SecurityIdentifier)name.Translate(typeof(SecurityIdentifier));
-                    ace = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, (int)ComRights.EXECUTE, sid, false, null);
+                    ace = new CommonAce(
+                        AceFlags.None,
+                        AceQualifier.AccessAllowed,
+                        (int)ComRights.EXECUTE,
+                        sid,
+                        false,
+                        null
+                    );
                     acl.InsertAce(index, ace);
                     index++;
                 }
             }
             DiscretionaryAcl dacl = new DiscretionaryAcl(true, false, acl);
-            securityDescriptor = new CommonSecurityDescriptor(true, false, ControlFlags.DiscretionaryAclPresent, sidAdministrators, sidAdministrators, null, dacl);
-
+            securityDescriptor = new CommonSecurityDescriptor(
+                true,
+                false,
+                ControlFlags.DiscretionaryAclPresent,
+                sidAdministrators,
+                sidAdministrators,
+                null,
+                dacl
+            );
         }
 
         private bool IsAccessCached(LUID luidModifiedID, out bool isAccessAllowed)
@@ -289,6 +389,7 @@ namespace System.ServiceModel.ComIntegration
                 accessCheckCache[luidModifiedID] = isAccessAllowed;
             }
         }
+
         private void CheckAccess(WindowsIdentity clientIdentity, out bool IsAccessAllowed)
         {
             if (null == securityDescriptor)
@@ -305,30 +406,49 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (SecurityUtils.IsPrimaryToken(clientIdentityToken))
                 {
-                    if (!SafeNativeMethods.DuplicateTokenEx(clientIdentityToken,
-                                                                        TokenAccessLevels.Query,
-                                                                        IntPtr.Zero,
-                                                                        SecurityImpersonationLevel.Identification,
-                                                                        TokenType.TokenImpersonation,
-                                                                        out ImpersonationToken))
+                    if (
+                        !SafeNativeMethods.DuplicateTokenEx(
+                            clientIdentityToken,
+                            TokenAccessLevels.Query,
+                            IntPtr.Zero,
+                            SecurityImpersonationLevel.Identification,
+                            TokenType.TokenImpersonation,
+                            out ImpersonationToken
+                        )
+                    )
                     {
                         int error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(ImpersonationToken);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.DuplicateTokenExFailed, error)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(
+                                error,
+                                SR.GetString(SR.DuplicateTokenExFailed, error)
+                            )
+                        );
                     }
                 }
                 GENERIC_MAPPING GenericMapping = new GENERIC_MAPPING();
                 PRIVILEGE_SET PrivilegeSet = new PRIVILEGE_SET();
                 uint PrivilegeSetLength = (uint)Marshal.SizeOf(PrivilegeSet);
                 uint GrantedAccess = 0;
-                if (!SafeNativeMethods.AccessCheck(BinaryForm, (ImpersonationToken != null) ? ImpersonationToken : clientIdentityToken,
-                    (int)ComRights.EXECUTE, GenericMapping, out PrivilegeSet,
-                    ref PrivilegeSetLength, out GrantedAccess, out IsAccessAllowed))
+                if (
+                    !SafeNativeMethods.AccessCheck(
+                        BinaryForm,
+                        (ImpersonationToken != null) ? ImpersonationToken : clientIdentityToken,
+                        (int)ComRights.EXECUTE,
+                        GenericMapping,
+                        out PrivilegeSet,
+                        ref PrivilegeSetLength,
+                        out GrantedAccess,
+                        out IsAccessAllowed
+                    )
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error, SR.GetString(SR.AccessCheckFailed, error)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(error, SR.GetString(SR.AccessCheckFailed, error))
+                    );
                 }
-
             }
             finally
             {
@@ -339,35 +459,23 @@ namespace System.ServiceModel.ComIntegration
 
         public string[] ServiceRoleMembers
         {
-            get
-            {
-                return serviceRoleMembers;
-            }
+            get { return serviceRoleMembers; }
         }
         public string[] ContractRoleMembers
         {
-            get
-            {
-                return contractRoleMembers;
-            }
+            get { return contractRoleMembers; }
         }
         public string[] OperationRoleMembers
         {
-            get
-            {
-                return operationRoleMembers;
-            }
+            get { return operationRoleMembers; }
         }
         public CommonSecurityDescriptor SecurityDescriptor
         {
-            get
-            {
-                return securityDescriptor;
-            }
+            get { return securityDescriptor; }
         }
+
         public bool IsAuthorizedForOperation(WindowsIdentity clientIdentity)
         {
-
             bool IsAccessAllowed = false;
 
             if (null == clientIdentity)
@@ -387,7 +495,9 @@ namespace System.ServiceModel.ComIntegration
                 }
             }
 
-            LUID luidModified = SecurityUtils.GetModifiedIDLUID(new SafeCloseHandle(clientIdentity.Token, false));
+            LUID luidModified = SecurityUtils.GetModifiedIDLUID(
+                new SafeCloseHandle(clientIdentity.Token, false)
+            );
 
             if (IsAccessCached(luidModified, out IsAccessAllowed))
                 return IsAccessAllowed;
@@ -398,10 +508,12 @@ namespace System.ServiceModel.ComIntegration
 
             return IsAccessAllowed;
         }
-
     }
 
-    internal sealed class ComPlusServerSecurity : IContextSecurityPerimeter, IServerSecurity, IDisposable
+    internal sealed class ComPlusServerSecurity
+        : IContextSecurityPerimeter,
+            IServerSecurity,
+            IDisposable
     {
         WindowsIdentity clientIdentity = null;
         IntPtr oldSecurityObject = IntPtr.Zero;
@@ -449,10 +561,12 @@ namespace System.ServiceModel.ComIntegration
                 throw;
             }
         }
+
         ~ComPlusServerSecurity()
         {
             Dispose(false);
         }
+
         public bool GetPerimeterFlag()
         {
             return shouldUseCallContext;
@@ -463,8 +577,7 @@ namespace System.ServiceModel.ComIntegration
             shouldUseCallContext = flag;
         }
 
-        public void QueryBlanket
-        (
+        public void QueryBlanket(
             IntPtr authnSvc,
             IntPtr authzSvc,
             IntPtr serverPrincipalName,
@@ -533,7 +646,7 @@ namespace System.ServiceModel.ComIntegration
 
         public int ImpersonateClient()
         {
-            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.  Also, 
+            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.  Also,
             // we don't want CLR to set the ErrorInfo object.
 
             int hresult = HR.E_FAIL;
@@ -545,7 +658,7 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (SecurityException)
             {
-                // Special case anonymous impersonation failure. 
+                // Special case anonymous impersonation failure.
                 // Unmanaged callers to ImpersonateClient expect this hresult.
                 hresult = HR.RPC_NT_BINDING_HAS_NO_AUTH;
             }
@@ -556,9 +669,10 @@ namespace System.ServiceModel.ComIntegration
             }
             return hresult;
         }
+
         public int RevertToSelf()
         {
-            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.  Also, 
+            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.  Also,
             // we don't want CLR to set the ErrorInfo object.
 
             int hresult = HR.E_FAIL;
@@ -578,10 +692,12 @@ namespace System.ServiceModel.ComIntegration
             }
             return hresult;
         }
+
         public bool IsImpersonating()
         {
             return isImpersonating;
         }
+
         void IDisposable.Dispose()
         {
             Dispose(true);
@@ -612,7 +728,5 @@ namespace System.ServiceModel.ComIntegration
                     impersonateContext.Dispose();
             }
         }
-
     }
-
 }

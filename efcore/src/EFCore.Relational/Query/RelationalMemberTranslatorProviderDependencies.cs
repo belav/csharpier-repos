@@ -47,7 +47,8 @@ public sealed record RelationalMemberTranslatorProviderDependencies
     [EntityFrameworkInternal]
     public RelationalMemberTranslatorProviderDependencies(
         ISqlExpressionFactory sqlExpressionFactory,
-        IEnumerable<IMemberTranslatorPlugin> plugins)
+        IEnumerable<IMemberTranslatorPlugin> plugins
+    )
     {
         SqlExpressionFactory = sqlExpressionFactory;
         Plugins = plugins;

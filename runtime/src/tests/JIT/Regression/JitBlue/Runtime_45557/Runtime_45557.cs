@@ -36,18 +36,19 @@ namespace Runtime_45557
         private readonly Dictionary<Type, int> _typeToIndex;
         private readonly ImmutableArray<Type> _types;
         private readonly ImmutableArray<Func<Object, Object>> _typeReaders;
- 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]          // this needs to get inlined to cause the failure
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] // this needs to get inlined to cause the failure
         public ObjectBinderSnapshot(
             Dictionary<Type, int> typeToIndex,
             List<Type> types,
-            List<Func<Object, Object>> typeReaders)
+            List<Func<Object, Object>> typeReaders
+        )
         {
             _typeToIndex = new Dictionary<Type, int>(typeToIndex);
-            _types = types.ToImmutableArray();                      // stack variable here would go live
-            _typeReaders = typeReaders.ToImmutableArray();          // it would get erroneously killed in GC info here
-            GC.Collect();                                           // try to cause a crash by collecting the variable
-            Console.WriteLine($"{_types.Length}");                  // use the collected variable; should crash (most of the time, depending on GC behavior)
+            _types = types.ToImmutableArray(); // stack variable here would go live
+            _typeReaders = typeReaders.ToImmutableArray(); // it would get erroneously killed in GC info here
+            GC.Collect(); // try to cause a crash by collecting the variable
+            Console.WriteLine($"{_types.Length}"); // use the collected variable; should crash (most of the time, depending on GC behavior)
         }
 
         public string SomeValue => _types.ToString();
@@ -56,13 +57,13 @@ namespace Runtime_45557
     internal static class ObjectBinder
     {
         private static readonly object s_gate = new();
- 
+
         private static ObjectBinderSnapshot? s_lastSnapshot = null;
- 
+
         private static readonly Dictionary<Type, int> s_typeToIndex = new();
         private static readonly List<Type> s_types = new();
         private static readonly List<Func<Object, Object>> s_typeReaders = new();
- 
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static ObjectBinderSnapshot GetSnapshot()
         {
@@ -70,9 +71,13 @@ namespace Runtime_45557
             {
                 if (s_lastSnapshot == null)
                 {
-                    s_lastSnapshot = new ObjectBinderSnapshot(s_typeToIndex, s_types, s_typeReaders);
+                    s_lastSnapshot = new ObjectBinderSnapshot(
+                        s_typeToIndex,
+                        s_types,
+                        s_typeReaders
+                    );
                 }
- 
+
                 return s_lastSnapshot.Value;
             }
         }

@@ -12,6 +12,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Definitions
 {
     internal interface IXamlGoToDefinitionService : ILanguageService
     {
-        Task<ImmutableArray<XamlDefinition>> GetDefinitionsAsync(TextDocument document, int position, CancellationToken cancellationToken);
+        Task<ImmutableArray<XamlDefinition>> GetDefinitionsAsync(
+            TextDocument document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

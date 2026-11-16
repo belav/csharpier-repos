@@ -8,7 +8,8 @@ namespace System.Globalization.Tests
 {
     public class ThaiBuddhistCalendarGetDayOfYear
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> GetDayOfYear_TestData()
         {
@@ -22,7 +23,10 @@ namespace System.Globalization.Tests
         [MemberData(nameof(GetDayOfYear_TestData))]
         public void GetDayOfYear(DateTime time)
         {
-            Assert.Equal(new GregorianCalendar().GetDayOfYear(time), new ThaiBuddhistCalendar().GetDayOfYear(time));
+            Assert.Equal(
+                new GregorianCalendar().GetDayOfYear(time),
+                new ThaiBuddhistCalendar().GetDayOfYear(time)
+            );
         }
     }
 }

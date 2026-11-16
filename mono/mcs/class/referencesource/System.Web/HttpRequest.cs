@@ -10,7 +10,8 @@
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -33,17 +34,19 @@ namespace System.Web {
     using System.Web.Util;
 
     // enumeration of dynamic server variables
-    internal enum DynamicServerVariable {
+    internal enum DynamicServerVariable
+    {
         AUTH_TYPE = 1,
         AUTH_USER = 2,
         PATH_INFO = 3,
         PATH_TRANSLATED = 4,
         QUERY_STRING = 5,
-        SCRIPT_NAME = 6
+        SCRIPT_NAME = 6,
     };
 
-    internal enum HttpVerb {
-        Unparsed = 0,   // must be 0 so that it's zero-init value is Unparsed
+    internal enum HttpVerb
+    {
+        Unparsed = 0, // must be 0 so that it's zero-init value is Unparsed
         Unknown,
         GET,
         PUT,
@@ -53,7 +56,6 @@ namespace System.Web {
         DELETE,
     }
 
-
     /// <devdoc>
     ///    <para>
     ///       Enables
@@ -61,7 +63,8 @@ namespace System.Web {
     ///       elements supplied by a client.
     ///    </para>
     /// </devdoc>
-    public sealed class HttpRequest {
+    public sealed class HttpRequest
+    {
         // worker request
         [DoNotReset]
         private HttpWorkerRequest _wr;
@@ -76,16 +79,16 @@ namespace System.Web {
         private String _requestType;
         private VirtualPath _path;
         private String _rewrittenUrl;
-        private bool   _computePathInfo;
+        private bool _computePathInfo;
         private VirtualPath _filePath;
         private VirtualPath _currentExecutionFilePath;
         private VirtualPath _pathInfo;
         private String _queryStringText;
-        private bool   _queryStringOverriden;
+        private bool _queryStringOverriden;
         private byte[] _queryStringBytes;
         private String _pathTranslated;
         private String _contentType;
-        private int    _contentLength = -1;
+        private int _contentLength = -1;
         private String _clientTarget;
         private String[] _acceptTypes;
         private String[] _userLanguages;
@@ -97,6 +100,7 @@ namespace System.Web {
         private bool _tlsTokenBindingInfoResolved;
         private ITlsTokenBindingInfo _tlsTokenBindingInfo;
         private WindowsIdentity _logonUserIdentity;
+
         [DoNotReset]
         private RequestContext _requestContext;
         private string _rawUrl;
@@ -111,6 +115,7 @@ namespace System.Web {
         private HttpHeaderCollection _headers;
         private HttpServerVarsCollection _serverVariables;
         private HttpCookieCollection _cookies;
+
         [DoNotReset] // we can't reset this field when transitioning to WebSockets because it's our only remaining reference to the response cookies collection
         private HttpCookieCollection _storedResponseCookies;
         private HttpFileCollection _files;
@@ -129,27 +134,28 @@ namespace System.Web {
         private bool _filterApplied;
 
         // Input validation
-        #pragma warning disable 0649
+#pragma warning disable 0649
         private SimpleBitVector32 _flags;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         // const masks into the BitVector32
-        private const int needToValidateQueryString     = 0x0001;
-        private const int needToValidateForm            = 0x0002;
-        private const int needToValidateCookies         = 0x0004;
-        private const int needToValidateHeaders         = 0x0008;
+        private const int needToValidateQueryString = 0x0001;
+        private const int needToValidateForm = 0x0002;
+        private const int needToValidateCookies = 0x0004;
+        private const int needToValidateHeaders = 0x0008;
         private const int needToValidateServerVariables = 0x0010;
-        private const int contentEncodingResolved       = 0x0020;
-        private const int needToValidatePostedFiles     = 0x0040;
-        private const int needToValidateRawUrl          = 0x0080;
-        private const int needToValidatePath            = 0x0100;
-        private const int needToValidatePathInfo        = 0x0200;
-        private const int hasValidateInputBeenCalled    = 0x8000;
+        private const int contentEncodingResolved = 0x0020;
+        private const int needToValidatePostedFiles = 0x0040;
+        private const int needToValidateRawUrl = 0x0080;
+        private const int needToValidatePath = 0x0100;
+        private const int needToValidatePathInfo = 0x0200;
+        private const int hasValidateInputBeenCalled = 0x8000;
         private const int needToValidateCookielessHeader = 0x10000;
-        // True if granular request validation is enabled (validationmode >= 4.5); false if all collections validated eagerly.
-        private const int granularValidationEnabled     = 0x40000000;
-        // True if request validation is suppressed (validationMode == 0.0); false if validation can be enabled via a call to ValidateInput().
-        private const int requestValidationSuppressed   = unchecked((int)0x80000000);
 
+        // True if granular request validation is enabled (validationmode >= 4.5); false if all collections validated eagerly.
+        private const int granularValidationEnabled = 0x40000000;
+
+        // True if request validation is suppressed (validationMode == 0.0); false if validation can be enabled via a call to ValidateInput().
+        private const int requestValidationSuppressed = unchecked((int)0x80000000);
 
         // Browser caps one-time evaluator objects
         internal static object s_browserLock = new object();
@@ -161,7 +167,8 @@ namespace System.Web {
          *
          * @param wr HttpWorkerRequest
          */
-        internal HttpRequest(HttpWorkerRequest wr, HttpContext context) {
+        internal HttpRequest(HttpWorkerRequest wr, HttpContext context)
+        {
             _wr = wr;
             _context = context;
         }
@@ -178,7 +185,8 @@ namespace System.Web {
         ///       Initializes an HttpRequest object.
         ///    </para>
         /// </devdoc>
-        public HttpRequest(String filename, String url, String queryString) {
+        public HttpRequest(String filename, String url, String queryString)
+        {
             _wr = null;
             _pathTranslated = filename;
             _httpMethod = "GET";
@@ -191,7 +199,8 @@ namespace System.Web {
             PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_EXECUTING);
         }
 
-        internal HttpRequest(VirtualPath virtualPath, String queryString) {
+        internal HttpRequest(VirtualPath virtualPath, String queryString)
+        {
             _wr = null;
             _pathTranslated = virtualPath.MapPath();
             _httpMethod = "GET";
@@ -204,62 +213,74 @@ namespace System.Web {
             PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_EXECUTING);
         }
 
-        internal bool NeedToInsertEntityBody {
+        internal bool NeedToInsertEntityBody
+        {
             get { return _needToInsertEntityBody; }
             set { _needToInsertEntityBody = value; }
         }
 
-        internal void SetRawContent(HttpRawUploadedContent rawContent) {
+        internal void SetRawContent(HttpRawUploadedContent rawContent)
+        {
             Debug.Assert(rawContent != null);
-            if (rawContent.Length > 0) {
+            if (rawContent.Length > 0)
+            {
                 NeedToInsertEntityBody = true;
             }
             _rawContent = rawContent;
         }
 
-        internal byte[] EntityBody { get { return NeedToInsertEntityBody ? _rawContent.GetAsByteArray() : null; } }
+        internal byte[] EntityBody
+        {
+            get { return NeedToInsertEntityBody ? _rawContent.GetAsByteArray() : null; }
+        }
 
-        internal string ClientTarget {
-            get {
-                return (_clientTarget == null) ? String.Empty : _clientTarget;
-            }
-            set {
+        internal string ClientTarget
+        {
+            get { return (_clientTarget == null) ? String.Empty : _clientTarget; }
+            set
+            {
                 _clientTarget = value;
                 // force re-create of browser caps
                 _browsercaps = null;
             }
         }
 
-        internal HttpContext Context {
+        internal HttpContext Context
+        {
             get { return _context; }
             set { _context = value; }
         }
 
-        public RequestContext RequestContext {
-            get {
+        public RequestContext RequestContext
+        {
+            get
+            {
                 // Create an empty request context if we don't have one set
-                if (_requestContext == null) {
+                if (_requestContext == null)
+                {
                     HttpContext context = Context ?? HttpContext.Current;
-                    _requestContext = new RequestContext(new HttpContextWrapper(context), new RouteData());
+                    _requestContext = new RequestContext(
+                        new HttpContextWrapper(context),
+                        new RouteData()
+                    );
                 }
                 return _requestContext;
             }
-            set {
-                _requestContext = value;
-            }
+            set { _requestContext = value; }
         }
 
-        private bool HasTransitionedToWebSocketRequest {
-            get {
-                return (Context != null && Context.HasWebSocketRequestTransitionCompleted);
-            }
+        private bool HasTransitionedToWebSocketRequest
+        {
+            get { return (Context != null && Context.HasWebSocketRequestTransitionCompleted); }
         }
 
         /*
          * internal response object
          */
-        internal HttpResponse Response {
-            get {
+        internal HttpResponse Response
+        {
+            get
+            {
                 if (_context == null)
                     return null;
                 return _context.Response;
@@ -270,12 +291,16 @@ namespace System.Web {
          * Public property to determine if request is local
          */
 
-        public bool IsLocal {
-            get {
-                if (_wr != null) {
+        public bool IsLocal
+        {
+            get
+            {
+                if (_wr != null)
+                {
                     return _wr.IsLocal();
                 }
-                else {
+                else
+                {
                     return false;
                 }
             }
@@ -284,20 +309,15 @@ namespace System.Web {
         /*
          *  Cleanup code
          */
-        internal void Dispose() {
+        internal void Dispose()
+        {
             if (_serverVariables != null)
-                _serverVariables.Dispose();  // disconnect from request
+                _serverVariables.Dispose(); // disconnect from request
 
             if (_rawContent != null)
-                _rawContent.Dispose();  // remove temp file with uploaded content
+                _rawContent.Dispose(); // remove temp file with uploaded content
 
-	    // 
-
-
-
-
-
-
+            //
         }
 
         //
@@ -305,7 +325,8 @@ namespace System.Web {
         // properties
         //
 
-        internal static String[] ParseMultivalueHeader(String s) {
+        internal static String[] ParseMultivalueHeader(String s)
+        {
             int l = (s != null) ? s.Length : 0;
             if (l == 0)
                 return null;
@@ -315,17 +336,18 @@ namespace System.Web {
             ArrayList values = new ArrayList();
             int i = 0;
 
-            while (i < l) {
+            while (i < l)
+            {
                 // find next ,
                 int ci = s.IndexOf(',', i);
                 if (ci < 0)
                     ci = l;
 
                 // append corresponding server value
-                values.Add(s.Substring(i, ci-i));
+                values.Add(s.Substring(i, ci - i));
 
                 // move to next
-                i = ci+1;
+                i = ci + 1;
 
                 // skip leading space
                 if (i < l && s[i] == ' ')
@@ -347,16 +369,19 @@ namespace System.Web {
         // Query string collection support
         //
 
-        private void FillInQueryStringCollection() {
+        private void FillInQueryStringCollection()
+        {
             // try from raw bytes when available (better for globalization)
 
             byte[] rawQueryString = this.QueryStringBytes;
 
-            if (rawQueryString != null) {
+            if (rawQueryString != null)
+            {
                 if (rawQueryString.Length != 0)
                     _queryString.FillFromEncodedBytes(rawQueryString, QueryStringEncoding);
             }
-            else if (!(String.IsNullOrEmpty(this.QueryStringText))) {
+            else if (!(String.IsNullOrEmpty(this.QueryStringText)))
+            {
                 _queryString.FillFromString(this.QueryStringText, true, QueryStringEncoding);
             }
         }
@@ -365,7 +390,8 @@ namespace System.Web {
         // Form collection support
         //
 
-        private void FillInFormCollection() {
+        private void FillInFormCollection()
+        {
             if (_wr == null)
                 return;
 
@@ -376,11 +402,18 @@ namespace System.Web {
             if (contentType == null)
                 return;
 
-            if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless) {
+            if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless)
+            {
                 return;
             }
 
-            if (StringUtil.StringStartsWithIgnoreCase(contentType, "application/x-www-form-urlencoded")) {
+            if (
+                StringUtil.StringStartsWithIgnoreCase(
+                    contentType,
+                    "application/x-www-form-urlencoded"
+                )
+            )
+            {
                 // regular urlencoded form
 
                 byte[] formBytes = null;
@@ -389,24 +422,31 @@ namespace System.Web {
                 if (content != null)
                     formBytes = content.GetAsByteArray();
 
-                if (formBytes != null) {
-                    try {
+                if (formBytes != null)
+                {
+                    try
+                    {
                         _form.FillFromEncodedBytes(formBytes, ContentEncoding);
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         // could be thrown because of malformed data
                         throw new HttpException(SR.GetString(SR.Invalid_urlencoded_form_data), e);
                     }
                 }
             }
-            else if (StringUtil.StringStartsWithIgnoreCase(contentType, "multipart/form-data")) {
+            else if (StringUtil.StringStartsWithIgnoreCase(contentType, "multipart/form-data"))
+            {
                 // multipart form
 
                 MultipartContentElement[] elements = GetMultipartContent();
 
-                if (elements != null) {
-                    for (int i = 0; i < elements.Length; i++) {
-                        if (elements[i].IsFormItem) {
+                if (elements != null)
+                {
+                    for (int i = 0; i < elements.Length; i++)
+                    {
+                        if (elements[i].IsFormItem)
+                        {
                             _form.ThrowIfMaxHttpCollectionKeysExceeded();
                             _form.Add(elements[i].Name, elements[i].GetAsString(ContentEncoding));
                         }
@@ -419,16 +459,19 @@ namespace System.Web {
         // Headers collection support
         //
 
-        private void FillInHeadersCollection() {
+        private void FillInHeadersCollection()
+        {
             if (_wr == null)
                 return;
 
             // known headers
 
-            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++) {
+            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++)
+            {
                 String h = _wr.GetKnownRequestHeader(i);
 
-                if (!String.IsNullOrEmpty(h)) {
+                if (!String.IsNullOrEmpty(h))
+                {
                     String name = HttpWorkerRequest.GetKnownRequestHeaderName(i);
                     _headers.SynchronizeHeader(name, h);
                 }
@@ -438,7 +481,8 @@ namespace System.Web {
 
             String[][] hh = _wr.GetUnknownRequestHeaders();
 
-            if (hh != null) {
+            if (hh != null)
+            {
                 for (int i = 0; i < hh.Length; i++)
                     _headers.SynchronizeHeader(hh[i][0], hh[i][1]);
             }
@@ -448,11 +492,13 @@ namespace System.Web {
         // Server variables collection support
         //
 
-        private static String ServerVariableNameFromHeader(String header) {
-            return("HTTP_" + header.ToUpper(CultureInfo.InvariantCulture).Replace('-', '_'));
+        private static String ServerVariableNameFromHeader(String header)
+        {
+            return ("HTTP_" + header.ToUpper(CultureInfo.InvariantCulture).Replace('-', '_'));
         }
 
-        private String CombineAllHeaders(bool asRaw) {
+        private String CombineAllHeaders(bool asRaw)
+        {
             if (_wr == null)
                 return String.Empty;
 
@@ -460,19 +506,24 @@ namespace System.Web {
 
             // known headers
 
-            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++) {
+            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++)
+            {
                 String h = _wr.GetKnownRequestHeader(i);
 
-                if (!String.IsNullOrEmpty(h)) {
+                if (!String.IsNullOrEmpty(h))
+                {
                     String name;
                     if (!asRaw)
-                        name = HttpWorkerRequest.GetServerVariableNameFromKnownRequestHeaderIndex(i);
+                        name = HttpWorkerRequest.GetServerVariableNameFromKnownRequestHeaderIndex(
+                            i
+                        );
                     else
                         name = HttpWorkerRequest.GetKnownRequestHeaderName(i);
 
-                    if (name != null) {
+                    if (name != null)
+                    {
                         sb.Append(name);
-                        sb.Append(asRaw ? ": " : ":");  // for ASP compat don't add space
+                        sb.Append(asRaw ? ": " : ":"); // for ASP compat don't add space
                         sb.Append(h);
                         sb.Append("\r\n");
                     }
@@ -483,15 +534,17 @@ namespace System.Web {
 
             String[][] hh = _wr.GetUnknownRequestHeaders();
 
-            if (hh != null) {
-                for (int i = 0; i < hh.Length; i++) {
+            if (hh != null)
+            {
+                for (int i = 0; i < hh.Length; i++)
+                {
                     String name = hh[i][0];
 
                     if (!asRaw)
                         name = ServerVariableNameFromHeader(name);
 
                     sb.Append(name);
-                    sb.Append(asRaw ? ": " : ":");  // for ASP compat don't add space
+                    sb.Append(asRaw ? ": " : ":"); // for ASP compat don't add space
                     sb.Append(hh[i][1]);
                     sb.Append("\r\n");
                 }
@@ -501,10 +554,12 @@ namespace System.Web {
         }
 
         // callback to calculate dynamic server variable
-        internal String CalcDynamicServerVariable(DynamicServerVariable var) {
+        internal String CalcDynamicServerVariable(DynamicServerVariable var)
+        {
             String value = null;
 
-            switch (var) {
+            switch (var)
+            {
                 case DynamicServerVariable.AUTH_TYPE:
                     if (_context.User != null && _context.User.Identity.IsAuthenticated)
                         value = _context.User.Identity.AuthenticationType;
@@ -534,43 +589,47 @@ namespace System.Web {
             return value;
         }
 
-        private void AddServerVariableToCollection(String name, DynamicServerVariable var) {
+        private void AddServerVariableToCollection(String name, DynamicServerVariable var)
+        {
             // dynamic server var
             _serverVariables.AddDynamic(name, var);
         }
 
-        private void AddServerVariableToCollection(String name, String value) {
+        private void AddServerVariableToCollection(String name, String value)
+        {
             if (value == null)
                 value = String.Empty;
             // static server var
             _serverVariables.AddStatic(name, value);
         }
 
-        private void AddServerVariableToCollection(String name) {
+        private void AddServerVariableToCollection(String name)
+        {
             // static server var from worker request
             _serverVariables.AddStatic(name, _wr.GetServerVariable(name));
         }
 
-        internal void FillInServerVariablesCollection() {
+        internal void FillInServerVariablesCollection()
+        {
             if (_wr == null)
                 return;
 
             //  Add from hardcoded list
 
-            AddServerVariableToCollection("ALL_HTTP",           CombineAllHeaders(false));
-            AddServerVariableToCollection("ALL_RAW",            CombineAllHeaders(true));
+            AddServerVariableToCollection("ALL_HTTP", CombineAllHeaders(false));
+            AddServerVariableToCollection("ALL_RAW", CombineAllHeaders(true));
 
             AddServerVariableToCollection("APPL_MD_PATH");
 
             AddServerVariableToCollection("APPL_PHYSICAL_PATH", _wr.GetAppPathTranslated());
 
-            AddServerVariableToCollection("AUTH_TYPE",          DynamicServerVariable.AUTH_TYPE);
-            AddServerVariableToCollection("AUTH_USER",          DynamicServerVariable.AUTH_USER);
+            AddServerVariableToCollection("AUTH_TYPE", DynamicServerVariable.AUTH_TYPE);
+            AddServerVariableToCollection("AUTH_USER", DynamicServerVariable.AUTH_USER);
 
             AddServerVariableToCollection("AUTH_PASSWORD");
 
             AddServerVariableToCollection("LOGON_USER");
-            AddServerVariableToCollection("REMOTE_USER",        DynamicServerVariable.AUTH_USER);
+            AddServerVariableToCollection("REMOTE_USER", DynamicServerVariable.AUTH_USER);
 
             AddServerVariableToCollection("CERT_COOKIE");
             AddServerVariableToCollection("CERT_FLAGS");
@@ -583,9 +642,9 @@ namespace System.Web {
             AddServerVariableToCollection("CERT_SUBJECT");
 
             String clString = _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderContentLength);
-            AddServerVariableToCollection("CONTENT_LENGTH",     (clString != null) ? clString : "0");
+            AddServerVariableToCollection("CONTENT_LENGTH", (clString != null) ? clString : "0");
 
-            AddServerVariableToCollection("CONTENT_TYPE",       this.ContentType);
+            AddServerVariableToCollection("CONTENT_TYPE", this.ContentType);
 
             AddServerVariableToCollection("GATEWAY_INTERFACE");
 
@@ -598,43 +657,48 @@ namespace System.Web {
             AddServerVariableToCollection("INSTANCE_ID");
             AddServerVariableToCollection("INSTANCE_META_PATH");
 
-            AddServerVariableToCollection("LOCAL_ADDR",         _wr.GetLocalAddress());
+            AddServerVariableToCollection("LOCAL_ADDR", _wr.GetLocalAddress());
 
-            AddServerVariableToCollection("PATH_INFO",          DynamicServerVariable.PATH_INFO);
-            AddServerVariableToCollection("PATH_TRANSLATED",    DynamicServerVariable.PATH_TRANSLATED);
+            AddServerVariableToCollection("PATH_INFO", DynamicServerVariable.PATH_INFO);
+            AddServerVariableToCollection("PATH_TRANSLATED", DynamicServerVariable.PATH_TRANSLATED);
 
-            AddServerVariableToCollection("QUERY_STRING",       DynamicServerVariable.QUERY_STRING);
+            AddServerVariableToCollection("QUERY_STRING", DynamicServerVariable.QUERY_STRING);
 
-            AddServerVariableToCollection("REMOTE_ADDR",        this.UserHostAddress);
-            AddServerVariableToCollection("REMOTE_HOST",        this.UserHostName);
+            AddServerVariableToCollection("REMOTE_ADDR", this.UserHostAddress);
+            AddServerVariableToCollection("REMOTE_HOST", this.UserHostName);
 
             AddServerVariableToCollection("REMOTE_PORT");
 
-            AddServerVariableToCollection("REQUEST_METHOD",     this.HttpMethod);
+            AddServerVariableToCollection("REQUEST_METHOD", this.HttpMethod);
 
-            AddServerVariableToCollection("SCRIPT_NAME",        DynamicServerVariable.SCRIPT_NAME);
+            AddServerVariableToCollection("SCRIPT_NAME", DynamicServerVariable.SCRIPT_NAME);
 
-            AddServerVariableToCollection("SERVER_NAME",        _wr.GetServerName());
-            AddServerVariableToCollection("SERVER_PORT",        _wr.GetLocalPortAsString());
+            AddServerVariableToCollection("SERVER_NAME", _wr.GetServerName());
+            AddServerVariableToCollection("SERVER_PORT", _wr.GetLocalPortAsString());
 
             AddServerVariableToCollection("SERVER_PORT_SECURE", _wr.IsSecure() ? "1" : "0");
 
-            AddServerVariableToCollection("SERVER_PROTOCOL",    _wr.GetHttpVersion());
+            AddServerVariableToCollection("SERVER_PROTOCOL", _wr.GetHttpVersion());
             AddServerVariableToCollection("SERVER_SOFTWARE");
 
-            AddServerVariableToCollection("URL",                DynamicServerVariable.SCRIPT_NAME);
+            AddServerVariableToCollection("URL", DynamicServerVariable.SCRIPT_NAME);
 
             // Add all headers in HTTP_XXX format
 
-            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++) {
+            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++)
+            {
                 String h = _wr.GetKnownRequestHeader(i);
                 if (!String.IsNullOrEmpty(h))
-                    AddServerVariableToCollection(HttpWorkerRequest.GetServerVariableNameFromKnownRequestHeaderIndex(i), h);
+                    AddServerVariableToCollection(
+                        HttpWorkerRequest.GetServerVariableNameFromKnownRequestHeaderIndex(i),
+                        h
+                    );
             }
 
             String[][] hh = _wr.GetUnknownRequestHeaders();
 
-            if (hh != null) {
+            if (hh != null)
+            {
                 for (int i = 0; i < hh.Length; i++)
                     AddServerVariableToCollection(ServerVariableNameFromHeader(hh[i][0]), hh[i][1]);
             }
@@ -644,32 +708,38 @@ namespace System.Web {
         // Cookies collection support
         //
 
-        internal static HttpCookie CreateCookieFromString(String s) {
+        internal static HttpCookie CreateCookieFromString(String s)
+        {
             HttpCookie c = new HttpCookie();
 
             int l = (s != null) ? s.Length : 0;
             int i = 0;
-            int ai, ei;
+            int ai,
+                ei;
             bool firstValue = true;
             int numValues = 1;
 
             // Format: cookiename[=key1=val2&key2=val2&...]
 
-            while (i < l) {
+            while (i < l)
+            {
                 //  find next &
                 ai = s.IndexOf('&', i);
                 if (ai < 0)
                     ai = l;
 
                 // first value might contain cookie name before =
-                if (firstValue) {
+                if (firstValue)
+                {
                     ei = s.IndexOf('=', i);
 
-                    if (ei >= 0 && ei < ai) {
-                        c.Name = s.Substring(i, ei-i);
-                        i = ei+1;
+                    if (ei >= 0 && ei < ai)
+                    {
+                        c.Name = s.Substring(i, ei - i);
+                        i = ei + 1;
                     }
-                    else if (ai == l) {
+                    else if (ai == l)
+                    {
                         // the whole cookie is just a name
                         c.Name = s;
                         break;
@@ -681,28 +751,35 @@ namespace System.Web {
                 // find '='
                 ei = s.IndexOf('=', i);
 
-                if (ei < 0 && ai == l && numValues == 0) {
+                if (ei < 0 && ai == l && numValues == 0)
+                {
                     // simple cookie with simple value
-                    c.Value = s.Substring(i, l-i);
+                    c.Value = s.Substring(i, l - i);
                 }
-                else if (ei >= 0 && ei < ai) {
+                else if (ei >= 0 && ei < ai)
+                {
                     // key=value
-                    c.Values.Add(s.Substring(i, ei-i), s.Substring(ei+1, ai-ei-1));
+                    c.Values.Add(s.Substring(i, ei - i), s.Substring(ei + 1, ai - ei - 1));
                     numValues++;
                 }
-                else {
+                else
+                {
                     // value without key
-                    c.Values.Add(null, s.Substring(i, ai-i));
+                    c.Values.Add(null, s.Substring(i, ai - i));
                     numValues++;
                 }
 
-                i = ai+1;
+                i = ai + 1;
             }
 
             return c;
         }
 
-        internal void FillInCookiesCollection(HttpCookieCollection cookieCollection, bool includeResponse) {
+        internal void FillInCookiesCollection(
+            HttpCookieCollection cookieCollection,
+            bool includeResponse
+        )
+        {
             if (_wr == null)
                 return;
 
@@ -718,10 +795,12 @@ namespace System.Web {
 
             HttpCookie lastCookie = null;
 
-            while (i < l) {
+            while (i < l)
+            {
                 // find next ';' (don't look to ',' as per 91884)
                 j = i;
-                while (j < l) {
+                while (j < l)
+                {
                     ch = s[j];
                     if (ch == ';')
                         break;
@@ -729,8 +808,8 @@ namespace System.Web {
                 }
 
                 // create cookie form string
-                String cookieString = s.Substring(i, j-i).Trim();
-                i = j+1; // next cookie start
+                String cookieString = s.Substring(i, j - i).Trim();
+                i = j + 1; // next cookie start
 
                 if (cookieString.Length == 0)
                     continue;
@@ -738,11 +817,13 @@ namespace System.Web {
                 HttpCookie cookie = CreateCookieFromString(cookieString);
 
                 // some cookies starting with '$' are really attributes of the last cookie
-                if (lastCookie != null) {
+                if (lastCookie != null)
+                {
                     String name = cookie.Name;
 
                     // add known attribute to the last cookie (if any)
-                    if (name != null && name.Length > 0 && name[0] == '$') {
+                    if (name != null && name.Length > 0 && name[0] == '$')
+                    {
                         if (StringUtil.EqualsIgnoreCase(name, "$Path"))
                             lastCookie.Path = cookie.Value;
                         else if (StringUtil.EqualsIgnoreCase(name, "$Domain"))
@@ -760,16 +841,23 @@ namespace System.Web {
             }
 
             // Append response cookies
-            if (includeResponse) {
+            if (includeResponse)
+            {
                 // If we have a reference to the response cookies collection, use it directly
                 // rather than going through the Response object (which might not be available, e.g.
                 // if we have already transitioned to a WebSockets request).
                 HttpCookieCollection storedResponseCookies = _storedResponseCookies;
-                if (storedResponseCookies == null && !HasTransitionedToWebSocketRequest && Response != null) {
+                if (
+                    storedResponseCookies == null
+                    && !HasTransitionedToWebSocketRequest
+                    && Response != null
+                )
+                {
                     storedResponseCookies = Response.GetCookiesNoCreate();
                 }
 
-                if (storedResponseCookies != null) {
+                if (storedResponseCookies != null)
+                {
                     cookieCollection.Append(storedResponseCookies);
                 }
 
@@ -778,12 +866,14 @@ namespace System.Web {
             }
         }
 
-        internal void StoreReferenceToResponseCookies(HttpCookieCollection responseCookies) {
+        internal void StoreReferenceToResponseCookies(HttpCookieCollection responseCookies)
+        {
             _storedResponseCookies = responseCookies;
         }
 
         // Params collection support
-        private void FillInParamsCollection() {
+        private void FillInParamsCollection()
+        {
             _params.Add(this.QueryString);
             _params.Add(this.Form);
             _params.Add(this.Cookies);
@@ -794,7 +884,8 @@ namespace System.Web {
         // Files collection support
         //
 
-        private void FillInFilesCollection() {
+        private void FillInFilesCollection()
+        {
             if (_wr == null)
                 return;
 
@@ -805,8 +896,10 @@ namespace System.Web {
             if (elements == null)
                 return;
 
-            for (int i = 0; i < elements.Length; i++) {
-                if (elements[i].IsFile) {
+            for (int i = 0; i < elements.Length; i++)
+            {
+                if (elements[i].IsFile)
+                {
                     HttpPostedFile p = elements[i].GetAsPostedFile();
                     _files.AddFile(elements[i].Name, p);
                 }
@@ -820,7 +913,8 @@ namespace System.Web {
         /*
          * Get attribute off header value
          */
-        private static String GetAttributeFromHeader(String headerValue, String attrName) {
+        private static String GetAttributeFromHeader(String headerValue, String attrName)
+        {
             if (headerValue == null)
                 return null;
 
@@ -830,16 +924,25 @@ namespace System.Web {
             // find properly separated attribute name
             int i = 1; // start searching from 1
 
-            while (i < l) {
-                i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(headerValue, attrName, i, CompareOptions.IgnoreCase);
+            while (i < l)
+            {
+                i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                    headerValue,
+                    attrName,
+                    i,
+                    CompareOptions.IgnoreCase
+                );
                 if (i < 0)
                     break;
-                if (i+k >= l)
+                if (i + k >= l)
                     break;
 
-                char chPrev = headerValue[i-1];
-                char chNext = headerValue[i+k];
-                if ((chPrev == ';' || chPrev == ',' || Char.IsWhiteSpace(chPrev)) && (chNext == '=' || Char.IsWhiteSpace(chNext)))
+                char chPrev = headerValue[i - 1];
+                char chNext = headerValue[i + k];
+                if (
+                    (chPrev == ';' || chPrev == ',' || Char.IsWhiteSpace(chPrev))
+                    && (chNext == '=' || Char.IsWhiteSpace(chNext))
+                )
                     break;
 
                 i += k;
@@ -865,17 +968,20 @@ namespace System.Web {
 
             int j;
 
-            if (i < l && headerValue[i] == '"') {
-                if (i == l-1)
+            if (i < l && headerValue[i] == '"')
+            {
+                if (i == l - 1)
                     return null;
-                j = headerValue.IndexOf('"', i+1);
-                if (j < 0 || j == i+1)
+                j = headerValue.IndexOf('"', i + 1);
+                if (j < 0 || j == i + 1)
                     return null;
 
-                attrValue = headerValue.Substring(i+1, j-i-1).Trim();
+                attrValue = headerValue.Substring(i + 1, j - i - 1).Trim();
             }
-            else {
-                for (j = i; j < l; j++) {
+            else
+            {
+                for (j = i; j < l; j++)
+                {
                     if (headerValue[j] == ' ' || headerValue[j] == ',')
                         break;
                 }
@@ -883,7 +989,7 @@ namespace System.Web {
                 if (j == i)
                     return null;
 
-                attrValue = headerValue.Substring(i, j-i).Trim();
+                attrValue = headerValue.Substring(i, j - i).Trim();
             }
 
             return attrValue;
@@ -892,22 +998,28 @@ namespace System.Web {
         /*
          * In case content-type header contains encoding it should override the config
          */
-        private Encoding GetEncodingFromHeaders() {
-
-            if (UserAgent != null && CultureInfo.InvariantCulture.CompareInfo.IsPrefix(UserAgent, "UP")) {
+        private Encoding GetEncodingFromHeaders()
+        {
+            if (
+                UserAgent != null
+                && CultureInfo.InvariantCulture.CompareInfo.IsPrefix(UserAgent, "UP")
+            )
+            {
                 String postDataCharset = Headers["x-up-devcap-post-charset"];
-                if (!String.IsNullOrEmpty(postDataCharset)) {
-                    try {
+                if (!String.IsNullOrEmpty(postDataCharset))
+                {
+                    try
+                    {
                         return Encoding.GetEncoding(postDataCharset);
                     }
-                    catch {
+                    catch
+                    {
                         // Exception may be thrown when charset is not valid.
                         // In this case, do nothing, and let the framework
                         // use the configured RequestEncoding setting.
                     }
                 }
             }
-
 
             if (!_wr.HasEntityBody())
                 return null;
@@ -922,10 +1034,12 @@ namespace System.Web {
 
             Encoding encoding = null;
 
-            try {
+            try
+            {
                 encoding = Encoding.GetEncoding(charSet);
             }
-            catch {
+            catch
+            {
                 // bad encoding string throws an exception that needs to be consumed
             }
 
@@ -935,38 +1049,58 @@ namespace System.Web {
         /*
          * Read entire raw content as byte array
          */
-        private HttpRawUploadedContent GetEntireRawContent() {
+        private HttpRawUploadedContent GetEntireRawContent()
+        {
             if (_wr == null)
                 return null;
 
-            if (_rawContent != null) {
+            if (_rawContent != null)
+            {
                 // if _rawContent was set by HttpBufferlessInputStream, then we will apply the filter here
-                if (_installedFilter != null && !_filterApplied) {
-                    ApplyFilter(ref _rawContent, RuntimeConfig.GetConfig(_context).HttpRuntime.RequestLengthDiskThresholdBytes);
+                if (_installedFilter != null && !_filterApplied)
+                {
+                    ApplyFilter(
+                        ref _rawContent,
+                        RuntimeConfig
+                            .GetConfig(_context)
+                            .HttpRuntime.RequestLengthDiskThresholdBytes
+                    );
                 }
                 return _rawContent;
             }
 
-            if (_readEntityBodyMode == ReadEntityBodyMode.None) {
+            if (_readEntityBodyMode == ReadEntityBodyMode.None)
+            {
                 _readEntityBodyMode = ReadEntityBodyMode.Classic;
             }
-            else if (_readEntityBodyMode == ReadEntityBodyMode.Buffered) {
+            else if (_readEntityBodyMode == ReadEntityBodyMode.Buffered)
+            {
                 // _rawContent should have been set already
-                throw new InvalidOperationException(SR.GetString(SR.Invalid_operation_with_get_buffered_input_stream));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Invalid_operation_with_get_buffered_input_stream)
+                );
             }
-            else if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless) {
-                throw new HttpException(SR.GetString(SR.Incompatible_with_get_bufferless_input_stream));
+            else if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless)
+            {
+                throw new HttpException(
+                    SR.GetString(SR.Incompatible_with_get_bufferless_input_stream)
+                );
             }
 
             // enforce the limit
             HttpRuntimeSection cfg = RuntimeConfig.GetConfig(_context).HttpRuntime;
             int limit = cfg.MaxRequestLengthBytes;
-            if (ContentLength > limit) {
-                if ( !(_wr is IIS7WorkerRequest) ) {
+            if (ContentLength > limit)
+            {
+                if (!(_wr is IIS7WorkerRequest))
+                {
                     Response.CloseConnectionAfterError();
                 }
-                throw new HttpException(SR.GetString(SR.Max_request_length_exceeded),
-                                        null, WebEventCodes.RuntimeErrorPostTooLarge);
+                throw new HttpException(
+                    SR.GetString(SR.Max_request_length_exceeded),
+                    null,
+                    WebEventCodes.RuntimeErrorPostTooLarge
+                );
             }
 
             // threshold to go to file
@@ -975,25 +1109,32 @@ namespace System.Web {
 
             // read the preloaded content
 
-            HttpRawUploadedContent rawContent = new HttpRawUploadedContent(fileThreshold, ContentLength);
+            HttpRawUploadedContent rawContent = new HttpRawUploadedContent(
+                fileThreshold,
+                ContentLength
+            );
 
             byte[] preloadedContent = _wr.GetPreloadedEntityBody();
 
-            if (preloadedContent != null) {
+            if (preloadedContent != null)
+            {
                 _wr.UpdateRequestCounters(preloadedContent.Length);
                 rawContent.AddBytes(preloadedContent, 0, preloadedContent.Length);
             }
 
             // read the remaing content
 
-            if (!_wr.IsEntireEntityBodyIsPreloaded()) {
-                int remainingBytes = (ContentLength > 0) ? ContentLength - rawContent.Length : Int32.MaxValue;
+            if (!_wr.IsEntireEntityBodyIsPreloaded())
+            {
+                int remainingBytes =
+                    (ContentLength > 0) ? ContentLength - rawContent.Length : Int32.MaxValue;
 
                 HttpApplication app = _context.ApplicationInstance;
                 byte[] buf = (app != null) ? app.EntityBuffer : new byte[8 * 1024];
                 int numBytesRead = rawContent.Length;
 
-                while (remainingBytes > 0) {
+                while (remainingBytes > 0)
+                {
                     int bytesToRead = buf.Length;
                     if (bytesToRead > remainingBytes)
                         bytesToRead = remainingBytes;
@@ -1009,15 +1150,20 @@ namespace System.Web {
                     remainingBytes -= bytesRead;
                     numBytesRead += bytesRead;
 
-                    if (numBytesRead > limit) {
-                        throw new HttpException(SR.GetString(SR.Max_request_length_exceeded),
-                                    null, WebEventCodes.RuntimeErrorPostTooLarge);
+                    if (numBytesRead > limit)
+                    {
+                        throw new HttpException(
+                            SR.GetString(SR.Max_request_length_exceeded),
+                            null,
+                            WebEventCodes.RuntimeErrorPostTooLarge
+                        );
                     }
 
                     // Fail synchrously if receiving the request content takes too long
                     // RequestTimeoutManager is not efficient in case of ThreadPool starvation
                     // as the timer callback doing Thread.Abort may not trigger for a long time
-                    if (remainingBytes > 0 && _context.HasTimeoutExpired) {
+                    if (remainingBytes > 0 && _context.HasTimeoutExpired)
+                    {
                         throw new HttpException(SR.GetString(SR.Request_timed_out));
                     }
                 }
@@ -1026,7 +1172,8 @@ namespace System.Web {
             rawContent.DoneAddingBytes();
 
             // filter content
-            if (_installedFilter != null) {
+            if (_installedFilter != null)
+            {
                 ApplyFilter(ref rawContent, fileThreshold);
             }
 
@@ -1034,33 +1181,44 @@ namespace System.Web {
             return _rawContent;
         }
 
-        private void ApplyFilter(ref HttpRawUploadedContent rawContent, int fileThreshold) {
-            if (_installedFilter != null) {
+        private void ApplyFilter(ref HttpRawUploadedContent rawContent, int fileThreshold)
+        {
+            if (_installedFilter != null)
+            {
                 _filterApplied = true;
-                if (rawContent.Length > 0) {
-                    try {
-                        try {
+                if (rawContent.Length > 0)
+                {
+                    try
+                    {
+                        try
+                        {
                             _filterSource.SetContent(rawContent);
-                            
-                            HttpRawUploadedContent filteredRawContent = new HttpRawUploadedContent(fileThreshold, rawContent.Length);
+
+                            HttpRawUploadedContent filteredRawContent = new HttpRawUploadedContent(
+                                fileThreshold,
+                                rawContent.Length
+                            );
                             HttpApplication app = _context.ApplicationInstance;
                             byte[] buf = (app != null) ? app.EntityBuffer : new byte[8 * 1024];
-                            
-                            for (;;) {
+
+                            for (; ; )
+                            {
                                 int bytesRead = _installedFilter.Read(buf, 0, buf.Length);
                                 if (bytesRead == 0)
                                     break;
                                 filteredRawContent.AddBytes(buf, 0, bytesRead);
                             }
-                            
+
                             filteredRawContent.DoneAddingBytes();
                             rawContent = filteredRawContent;
                         }
-                        finally {
+                        finally
+                        {
                             _filterSource.SetContent(null);
                         }
                     }
-                    catch { // Protect against exception filters
+                    catch
+                    { // Protect against exception filters
                         throw;
                     }
                 }
@@ -1070,7 +1228,8 @@ namespace System.Web {
         /*
          * Get multipart posted content as array of elements
          */
-        private MultipartContentElement[] GetMultipartContent() {
+        private MultipartContentElement[] GetMultipartContent()
+        {
             // already parsed
             if (_multipartContentElements != null)
                 return _multipartContentElements;
@@ -1086,7 +1245,12 @@ namespace System.Web {
                 return new MultipartContentElement[0];
 
             // do the parsing
-            _multipartContentElements = HttpMultipartContentTemplateParser.Parse(content, content.Length, boundary, ContentEncoding);
+            _multipartContentElements = HttpMultipartContentTemplateParser.Parse(
+                content,
+                content.Length,
+                boundary,
+                ContentEncoding
+            );
             return _multipartContentElements;
         }
 
@@ -1094,7 +1258,8 @@ namespace System.Web {
          * Get boundary for the posted multipart content as byte array
          */
 
-        private byte[] GetMultipartBoundary() {
+        private byte[] GetMultipartBoundary()
+        {
             // extract boundary value
             String b = GetAttributeFromHeader(ContentType, "boundary");
             if (b == null)
@@ -1113,7 +1278,8 @@ namespace System.Web {
         /*
          * Add response cookie to request collection (can override existing)
          */
-        internal void AddResponseCookie(HttpCookie cookie) {
+        internal void AddResponseCookie(HttpCookie cookie)
+        {
             // cookies collection
 
             if (_cookies != null)
@@ -1121,7 +1287,8 @@ namespace System.Web {
 
             // cookies also go to parameters collection
 
-            if (_params != null) {
+            if (_params != null)
+            {
                 _params.MakeReadWrite();
                 _params.Add(cookie.Name, cookie.Value);
                 _params.MakeReadOnly();
@@ -1131,17 +1298,23 @@ namespace System.Web {
         /*
          * Clear any cookies response might've added
          */
-        internal void ResetCookies() {
+        internal void ResetCookies()
+        {
             // cookies collection
 
-            if (_cookies != null) {
+            if (_cookies != null)
+            {
                 _cookies.Reset();
-                FillInCookiesCollection(_cookies, true /*includeResponse*/);
+                FillInCookiesCollection(
+                    _cookies,
+                    true /*includeResponse*/
+                );
             }
 
             // cookies also go to parameters collection
 
-            if (_params != null) {
+            if (_params != null)
+            {
                 _params.MakeReadWrite();
                 _params.Reset();
                 FillInParamsCollection();
@@ -1156,10 +1329,13 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>Indicates the HTTP data transfer method used by client (GET, POST). This property is read-only.</para>
         /// </devdoc>
-        public String HttpMethod {
-            get {
+        public String HttpMethod
+        {
+            get
+            {
                 // Directly from worker request
-                if (_httpMethod == null) {
+                if (_httpMethod == null)
+                {
                     Debug.Assert(_wr != null);
                     _httpMethod = _wr.GetHttpVerbName();
                 }
@@ -1168,39 +1344,50 @@ namespace System.Web {
             }
         }
 
-        internal HttpVerb HttpVerb {
-            get {
-                if (_httpVerb == HttpVerb.Unparsed) {
+        internal HttpVerb HttpVerb
+        {
+            get
+            {
+                if (_httpVerb == HttpVerb.Unparsed)
+                {
                     _httpVerb = HttpVerb.Unknown;
                     string method = HttpMethod;
-                    if (method != null) {
-                        switch (method.Length) {
+                    if (method != null)
+                    {
+                        switch (method.Length)
+                        {
                             case 3:
-                                if (method == "GET") {
+                                if (method == "GET")
+                                {
                                     _httpVerb = HttpVerb.GET;
                                 }
-                                else if (method == "PUT") {
+                                else if (method == "PUT")
+                                {
                                     _httpVerb = HttpVerb.PUT;
                                 }
                                 break;
 
                             case 4:
-                                if (method == "POST") {
+                                if (method == "POST")
+                                {
                                     _httpVerb = HttpVerb.POST;
                                 }
-                                else if (method == "HEAD") {
+                                else if (method == "HEAD")
+                                {
                                     _httpVerb = HttpVerb.HEAD;
                                 }
                                 break;
 
                             case 5:
-                                if (method == "DEBUG") {
+                                if (method == "DEBUG")
+                                {
                                     _httpVerb = HttpVerb.DEBUG;
                                 }
                                 break;
 
                             case 6:
-                                if (method == "DELETE") {
+                                if (method == "DELETE")
+                                {
                                     _httpVerb = HttpVerb.DELETE;
                                 }
                                 break;
@@ -1213,10 +1400,9 @@ namespace System.Web {
         }
 
         // Check whether this is a DEBUG verb request
-        internal bool IsDebuggingRequest {
-            get {
-                return (HttpVerb == HttpVerb.DEBUG);
-            }
+        internal bool IsDebuggingRequest
+        {
+            get { return (HttpVerb == HttpVerb.DEBUG); }
         }
 
         /*
@@ -1227,14 +1413,10 @@ namespace System.Web {
         ///    Indicates the HTTP data transfer method used by client
         ///    (GET, POST).
         /// </devdoc>
-        public String RequestType {
-            get {
-                return(_requestType != null) ? _requestType : this.HttpMethod;
-            }
-
-            set {
-                _requestType = value;
-            }
+        public String RequestType
+        {
+            get { return (_requestType != null) ? _requestType : this.HttpMethod; }
+            set { _requestType = value; }
         }
 
         /*
@@ -1244,11 +1426,16 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>Indicates the MIME content type of incoming request. This property is read-only.</para>
         /// </devdoc>
-        public String ContentType {
-            get {
-                if (_contentType == null) {
+        public String ContentType
+        {
+            get
+            {
+                if (_contentType == null)
+                {
                     if (_wr != null)
-                        _contentType = _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderContentType);
+                        _contentType = _wr.GetKnownRequestHeader(
+                            HttpWorkerRequest.HeaderContentType
+                        );
 
                     if (_contentType == null)
                         _contentType = String.Empty;
@@ -1256,33 +1443,35 @@ namespace System.Web {
 
                 return _contentType;
             }
-
-            set {
-                _contentType = value;
-            }
+            set { _contentType = value; }
         }
-
-
 
         /// <devdoc>
         ///    <para>Indicates the content length of incoming request. This property is read-only.</para>
         /// </devdoc>
-        public int ContentLength {
-            get {
-                if (_contentLength == -1) {
-                    if (_wr != null) {
+        public int ContentLength
+        {
+            get
+            {
+                if (_contentLength == -1)
+                {
+                    if (_wr != null)
+                    {
                         String s = _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderContentLength);
 
-                        if (s != null) {
-                            try {
+                        if (s != null)
+                        {
+                            try
+                            {
                                 _contentLength = Int32.Parse(s, CultureInfo.InvariantCulture);
                             }
-                            catch {
-                            }
+                            catch { }
                         }
-                        else {
+                        else
+                        {
                             // no content-length header, but there is data
-                            if (_wr.IsEntireEntityBodyIsPreloaded()) {
+                            if (_wr.IsEntireEntityBodyIsPreloaded())
+                            {
                                 byte[] preloadedContent = _wr.GetPreloadedEntityBody();
 
                                 if (preloadedContent != null)
@@ -1303,9 +1492,12 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>Indicates the character set of data supplied by client. This property is read-only.</para>
         /// </devdoc>
-        public Encoding ContentEncoding {
-            get {
-                if(_flags[contentEncodingResolved] && _encoding != null) {
+        public Encoding ContentEncoding
+        {
+            get
+            {
+                if (_flags[contentEncodingResolved] && _encoding != null)
+                {
                     return _encoding;
                 }
 
@@ -1313,28 +1505,34 @@ namespace System.Web {
 
                 // DevDiv #351560 - UTF-7 is dangerous and should be forbidden by default.
                 // The application developer can choose to allow it if desired.
-                if (_encoding is UTF7Encoding && !AppSettings.AllowUtf7RequestContentEncoding) {
+                if (_encoding is UTF7Encoding && !AppSettings.AllowUtf7RequestContentEncoding)
+                {
                     _encoding = null;
                 }
 
-                if (_encoding == null) {
+                if (_encoding == null)
+                {
                     // WOS 1953542: No Event Is Logged When App Config is Corrupt
-                    GlobalizationSection globConfig = RuntimeConfig.GetLKGConfig(_context).Globalization;
+                    GlobalizationSection globConfig = RuntimeConfig
+                        .GetLKGConfig(_context)
+                        .Globalization;
                     _encoding = globConfig.RequestEncoding;
                 }
 
                 _flags.Set(contentEncodingResolved);
                 return _encoding;
             }
-
-            set {
+            set
+            {
                 _encoding = value;
                 _flags.Set(contentEncodingResolved);
             }
         }
 
-        internal Encoding QueryStringEncoding {
-            get {
+        internal Encoding QueryStringEncoding
+        {
+            get
+            {
                 Encoding e = ContentEncoding;
                 // query string is never unicode - use utf-8 if instead
                 return e.Equals(Encoding.Unicode) ? Encoding.UTF8 : e;
@@ -1348,11 +1546,16 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>Returns a string array of client-supported MIME accept types. This property is read-only.</para>
         /// </devdoc>
-        public String[] AcceptTypes {
-            get {
-                if (_acceptTypes == null) {
+        public String[] AcceptTypes
+        {
+            get
+            {
+                if (_acceptTypes == null)
+                {
                     if (_wr != null)
-                        _acceptTypes = ParseMultivalueHeader(_wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderAccept));
+                        _acceptTypes = ParseMultivalueHeader(
+                            _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderAccept)
+                        );
                 }
 
                 return _acceptTypes;
@@ -1360,23 +1563,30 @@ namespace System.Web {
         }
 
         // Is the request authenticated?
-        public bool IsAuthenticated {
-            get {
-                return(_context.User != null && _context.User.Identity != null && _context.User.Identity.IsAuthenticated);
+        public bool IsAuthenticated
+        {
+            get
+            {
+                return (
+                    _context.User != null
+                    && _context.User.Identity != null
+                    && _context.User.Identity.IsAuthenticated
+                );
             }
         }
 
         // Is using HTTPS?
         //    Indicates whether the HTTP connection is secure (that is, HTTPS). This property is read-only.
-        public bool IsSecureConnection {
-            get {
+        public bool IsSecureConnection
+        {
+            get
+            {
                 if (_wr != null)
                     return _wr.IsSecure();
                 else
                     return false;
             }
         }
-
 
         /*
          * Virtual path corresponding to the requested Url
@@ -1386,10 +1596,13 @@ namespace System.Web {
         ///    <para>Indicates the virtual path of the current
         ///       request, including the path PathInfo. This property is read-only.</para>
         /// </devdoc>
-        public String Path {
-            get {
+        public String Path
+        {
+            get
+            {
                 string path = GetUnvalidatedPath();
-                if (_flags[needToValidatePath]) {
+                if (_flags[needToValidatePath])
+                {
                     _flags.Clear(needToValidatePath);
                     ValidateString(path, null, RequestValidationSource.Path);
                 }
@@ -1397,16 +1610,21 @@ namespace System.Web {
             }
         }
 
-        internal VirtualPath PathObject {
-            get {
-                if (_path == null) {
+        internal VirtualPath PathObject
+        {
+            get
+            {
+                if (_path == null)
+                {
                     // Directly from worker request
 
                     Debug.Assert(_wr != null);
 
                     // Don't allow malformed paths for security reasons
-                    _path = VirtualPath.Create(_wr.GetUriPath(),
-                        VirtualPathOptions.AllowAbsolutePath);
+                    _path = VirtualPath.Create(
+                        _wr.GetUriPath(),
+                        VirtualPathOptions.AllowAbsolutePath
+                    );
                 }
 
                 return _path;
@@ -1414,20 +1632,24 @@ namespace System.Web {
         }
 
         // Gets the Path property but does not hook up validation.
-        internal string GetUnvalidatedPath() {
+        internal string GetUnvalidatedPath()
+        {
             return PathObject.VirtualPathString;
         }
 
         [DoNotReset]
         private string _anonymousId;
 
-        public string AnonymousID {
+        public string AnonymousID
+        {
             get { return _anonymousId; }
             internal set { _anonymousId = value; }
         }
 
-        internal String PathWithQueryString {
-            get {
+        internal String PathWithQueryString
+        {
+            get
+            {
                 String qs = QueryStringText;
                 return (!String.IsNullOrEmpty(qs)) ? (Path + "?" + qs) : Path;
             }
@@ -1436,14 +1658,18 @@ namespace System.Web {
         // The virtual file path where the client browsers think we are.
         // However, in the case of cookieless session, ClientFilePath does *not* include the session id.
         private VirtualPath _clientFilePath;
-        internal VirtualPath ClientFilePath {
-            get {
-                if (_clientFilePath == null) {
+        internal VirtualPath ClientFilePath
+        {
+            get
+            {
+                if (_clientFilePath == null)
+                {
                     string uri = RawUrl;
 
                     // remove query string if it exists
                     int qsIndex = uri.IndexOf('?');
-                    if (qsIndex > -1) {
+                    if (qsIndex > -1)
+                    {
                         uri = uri.Substring(0, qsIndex);
                     }
                     _clientFilePath = VirtualPath.Create(uri, VirtualPathOptions.AllowAbsolutePath);
@@ -1452,9 +1678,7 @@ namespace System.Web {
                 Debug.Trace("ClientUrl", "*** ClientFilePath --> " + _clientFilePath + " ***");
                 return _clientFilePath;
             }
-            set {
-                _clientFilePath = value;
-            }
+            set { _clientFilePath = value; }
         }
 
         // The base dir of the client virtual file path.
@@ -1467,14 +1691,19 @@ namespace System.Web {
         // the request is   ClientBaseDir   FilePathObject (FilePathObject.Parent)
         // 1. /app/sub/     /app/sub/       /app/
         // 2. /app/sub      /app/           /app/
-        internal VirtualPath ClientBaseDir {
-            get {
-                if (_clientBaseDir == null) {
+        internal VirtualPath ClientBaseDir
+        {
+            get
+            {
+                if (_clientBaseDir == null)
+                {
                     // client virtual path before the last '/'
-                    if (ClientFilePath.HasTrailingSlash) {
+                    if (ClientFilePath.HasTrailingSlash)
+                    {
                         _clientBaseDir = ClientFilePath;
                     }
-                    else {
+                    else
+                    {
                         _clientBaseDir = ClientFilePath.Parent;
                     }
                 }
@@ -1491,29 +1720,35 @@ namespace System.Web {
         ///    <para>Indicates the virtual path of the current request, but without the PathInfo.
         ///         This property is read-only.</para>
         /// </devdoc>
-        public String FilePath {
-            get {
-                return VirtualPath.GetVirtualPathString(FilePathObject);
-            }
+        public String FilePath
+        {
+            get { return VirtualPath.GetVirtualPathString(FilePathObject); }
         }
 
-        internal VirtualPath FilePathObject {
-            get {
-                if (_filePath != null) {
+        internal VirtualPath FilePathObject
+        {
+            get
+            {
+                if (_filePath != null)
+                {
                     return _filePath;
                 }
 
-                if (!_computePathInfo) {
+                if (!_computePathInfo)
+                {
                     // Directly from worker request
 
-                    if (_wr != null) {
+                    if (_wr != null)
+                    {
                         _filePath = _wr.GetFilePathObject();
                     }
-                    else {
+                    else
+                    {
                         _filePath = PathObject;
                     }
                 }
-                else if (_context != null) {
+                else if (_context != null)
+                {
                     // From config
                     //
                     //          RAID#93378
@@ -1526,17 +1761,22 @@ namespace System.Web {
 
                     _filePath = PathObject;
 
-                    int filePathLen = _context.GetFilePathData().Path.VirtualPathStringNoTrailingSlash.Length;
+                    int filePathLen = _context
+                        .GetFilePathData()
+                        .Path.VirtualPathStringNoTrailingSlash.Length;
 
                     // case could be wrong in config (_path has the correct case)
                     string path = Path;
                     int pathLength = path.Length;
                     // If path is extensionless, _filePath should be equal to path--trailing slash should not be removed.
-                    if (pathLength != filePathLen
-                        && (pathLength - filePathLen != 1
-                            || path[pathLength-1] != '/'
-                            || path.IndexOf('.') > -1)
+                    if (
+                        pathLength != filePathLen
+                        && (
+                            pathLength - filePathLen != 1
+                            || path[pathLength - 1] != '/'
+                            || path.IndexOf('.') > -1
                         )
+                    )
                         _filePath = VirtualPath.CreateAbsolute(Path.Substring(0, filePathLen));
                 }
 
@@ -1550,20 +1790,20 @@ namespace System.Web {
          * currently executing virtual path
          */
 
-        public string CurrentExecutionFilePath {
-            get {
-                return CurrentExecutionFilePathObject.VirtualPathString;
-            }
+        public string CurrentExecutionFilePath
+        {
+            get { return CurrentExecutionFilePathObject.VirtualPathString; }
         }
 
-        public string CurrentExecutionFilePathExtension {
-            get {
-                return UrlPath.GetExtension(CurrentExecutionFilePathObject.VirtualPathString);
-            }
+        public string CurrentExecutionFilePathExtension
+        {
+            get { return UrlPath.GetExtension(CurrentExecutionFilePathObject.VirtualPathString); }
         }
 
-        internal VirtualPath CurrentExecutionFilePathObject {
-            get {
+        internal VirtualPath CurrentExecutionFilePathObject
+        {
+            get
+            {
                 if (_currentExecutionFilePath != null)
                     return _currentExecutionFilePath;
 
@@ -1571,28 +1811,30 @@ namespace System.Web {
             }
         }
 
-        internal VirtualPath SwitchCurrentExecutionFilePath(VirtualPath path) {
+        internal VirtualPath SwitchCurrentExecutionFilePath(VirtualPath path)
+        {
             VirtualPath oldPath = _currentExecutionFilePath;
             _currentExecutionFilePath = path;
             return oldPath;
         }
 
-
         // Same as CurrentExecutionFilePath, but made relative to the application root,
         // so it is application-agnostic.
-        public string AppRelativeCurrentExecutionFilePath {
-            get {
-                return UrlPath.MakeVirtualPathAppRelative(CurrentExecutionFilePath);
-            }
+        public string AppRelativeCurrentExecutionFilePath
+        {
+            get { return UrlPath.MakeVirtualPathAppRelative(CurrentExecutionFilePath); }
         }
 
         // Path-info corresponding to the requested Url
         //    Indicates additional path information for a resource with a URL extension. i.e. for the URL
         //       /virdir/page.html/tail, the PathInfo value is /tail. This property is read-only.</para>
-        public String PathInfo {
-            get {
+        public String PathInfo
+        {
+            get
+            {
                 string pathInfo = GetUnvalidatedPathInfo();
-                if (_flags[needToValidatePathInfo]) {
+                if (_flags[needToValidatePathInfo])
+                {
                     _flags.Clear(needToValidatePathInfo);
                     ValidateString(pathInfo, null, RequestValidationSource.PathInfo);
                 }
@@ -1600,21 +1842,27 @@ namespace System.Web {
             }
         }
 
-        internal VirtualPath PathInfoObject {
-            get {
-                if (_pathInfo != null) {
+        internal VirtualPath PathInfoObject
+        {
+            get
+            {
+                if (_pathInfo != null)
+                {
                     return _pathInfo;
                 }
 
-                if (!_computePathInfo) {
+                if (!_computePathInfo)
+                {
                     // Directly from worker request
 
-                    if (_wr != null) {
+                    if (_wr != null)
+                    {
                         _pathInfo = VirtualPath.CreateAbsoluteAllowNull(_wr.GetPathInfo());
                     }
                 }
 
-                if (_pathInfo == null && _context != null) {
+                if (_pathInfo == null && _context != null)
+                {
                     VirtualPath path = PathObject;
                     int pathLength = path.VirtualPathString.Length;
                     VirtualPath filePath = FilePathObject;
@@ -1622,10 +1870,14 @@ namespace System.Web {
 
                     if (filePath == null)
                         _pathInfo = path;
-                    else if (path == null || pathLength <= filePathLength )
+                    else if (path == null || pathLength <= filePathLength)
                         _pathInfo = null;
-                    else {
-                        string pathInfoString = path.VirtualPathString.Substring(filePathLength, pathLength - filePathLength);
+                    else
+                    {
+                        string pathInfoString = path.VirtualPathString.Substring(
+                            filePathLength,
+                            pathLength - filePathLength
+                        );
                         _pathInfo = VirtualPath.CreateAbsolute(pathInfoString);
                     }
                 }
@@ -1635,7 +1887,8 @@ namespace System.Web {
         }
 
         // Gets the PathInfo property but does not hook up validation.
-        internal string GetUnvalidatedPathInfo() {
+        internal string GetUnvalidatedPathInfo()
+        {
             VirtualPath pathInfoObject = PathInfoObject;
             return (pathInfoObject == null) ? String.Empty : pathInfoObject.VirtualPathString;
         }
@@ -1649,18 +1902,24 @@ namespace System.Web {
         ///       to
         ///       the requested URL. This property is read-only.</para>
         /// </devdoc>
-        public String PhysicalPath {
-            get {
+        public String PhysicalPath
+        {
+            get
+            {
                 String path = PhysicalPathInternal;
                 InternalSecurityPermissions.PathDiscovery(path).Demand();
                 return path;
             }
         }
 
-        internal String PhysicalPathInternal {
-            get {
-                if (_pathTranslated == null) {
-                    if (!_computePathInfo) {
+        internal String PhysicalPathInternal
+        {
+            get
+            {
+                if (_pathTranslated == null)
+                {
+                    if (!_computePathInfo)
+                    {
                         // Directly from worker request
                         Debug.Assert(_wr != null);
                         _pathTranslated = _wr.GetFilePathTranslated();
@@ -1668,7 +1927,8 @@ namespace System.Web {
                             _pathTranslated = HttpRuntime.GetRelaxedMapPathResult(_pathTranslated);
                     }
 
-                    if (_pathTranslated == null && _wr != null) {
+                    if (_pathTranslated == null && _wr != null)
+                    {
                         // Compute after rewrite
                         _pathTranslated = HostingEnvironment.MapPathInternal(FilePath);
                     }
@@ -1686,16 +1946,14 @@ namespace System.Web {
         ///    <para>Gets the
         ///       virtual path to the currently executing server application.</para>
         /// </devdoc>
-        public String ApplicationPath {
-            get {
-                return HttpRuntime.AppDomainAppVirtualPath;
-            }
+        public String ApplicationPath
+        {
+            get { return HttpRuntime.AppDomainAppVirtualPath; }
         }
 
-        internal VirtualPath ApplicationPathObject {
-            get {
-                return HttpRuntime.AppDomainAppVirtualPathObject;
-            }
+        internal VirtualPath ApplicationPathObject
+        {
+            get { return HttpRuntime.AppDomainAppVirtualPathObject; }
         }
 
         /*
@@ -1706,8 +1964,10 @@ namespace System.Web {
         ///    <para>Gets the physical
         ///       file system path of currently executing server application.</para>
         /// </devdoc>
-        public String PhysicalApplicationPath {
-            get {
+        public String PhysicalApplicationPath
+        {
+            get
+            {
                 InternalSecurityPermissions.AppPathDiscovery.Demand();
 
                 if (_wr != null)
@@ -1725,8 +1985,10 @@ namespace System.Web {
         ///    <para>Gets the client
         ///       browser's raw User Agent String.</para>
         /// </devdoc>
-        public String UserAgent {
-            get {
+        public String UserAgent
+        {
+            get
+            {
                 if (_wr != null)
                     return _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderUserAgent);
                 else
@@ -1742,11 +2004,16 @@ namespace System.Web {
         ///    <para>Gets a
         ///       sorted array of client language preferences.</para>
         /// </devdoc>
-        public String[] UserLanguages {
-            get {
-                if (_userLanguages == null) {
+        public String[] UserLanguages
+        {
+            get
+            {
+                if (_userLanguages == null)
+                {
                     if (_wr != null)
-                        _userLanguages = ParseMultivalueHeader(_wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderAcceptLanguage));
+                        _userLanguages = ParseMultivalueHeader(
+                            _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderAcceptLanguage)
+                        );
                 }
 
                 return _userLanguages;
@@ -1755,28 +2022,32 @@ namespace System.Web {
 
         // Browser caps
         //    Provides information about incoming client's browser capabilities.
-        public HttpBrowserCapabilities Browser {
-            get {
-                if(_browsercaps != null) {
+        public HttpBrowserCapabilities Browser
+        {
+            get
+            {
+                if (_browsercaps != null)
+                {
                     return _browsercaps;
                 }
 
-                if (! s_browserCapsEvaled) {
-                    lock (s_browserLock) {
-                        if (! s_browserCapsEvaled) {
+                if (!s_browserCapsEvaled)
+                {
+                    lock (s_browserLock)
+                    {
+                        if (!s_browserCapsEvaled)
+                        {
                             HttpCapabilitiesBase.GetBrowserCapabilities(this);
                         }
                         s_browserCapsEvaled = true;
                     }
                 }
 
-                _browsercaps = (HttpBrowserCapabilities)HttpCapabilitiesBase.GetBrowserCapabilities(this);
+                _browsercaps = (HttpBrowserCapabilities)
+                    HttpCapabilitiesBase.GetBrowserCapabilities(this);
                 return _browsercaps;
             }
-
-            set {
-                _browsercaps = value;
-            }
+            set { _browsercaps = value; }
         }
 
         /*
@@ -1787,8 +2058,10 @@ namespace System.Web {
         ///    <para>Gets the
         ///       DNS name of remote client.</para>
         /// </devdoc>
-        public String UserHostName {
-            get {
+        public String UserHostName
+        {
+            get
+            {
                 String s = (_wr != null) ? _wr.GetRemoteName() : null;
                 if (String.IsNullOrEmpty(s))
                     s = UserHostAddress;
@@ -1804,8 +2077,10 @@ namespace System.Web {
         ///    <para>Gets the
         ///       IP host address of remote client.</para>
         /// </devdoc>
-        public String UserHostAddress {
-            get {
+        public String UserHostAddress
+        {
+            get
+            {
                 if (_wr != null)
                     return _wr.GetRemoteAddress();
                 else
@@ -1821,30 +2096,35 @@ namespace System.Web {
         ///    <para>Gets the URI requsted by the client, which may include PathInfo and QueryString if it exists.
         ///    This value is unaffected by any URL rewriting or routing that may occur on the server.</para>
         /// </devdoc>
-        public String RawUrl {
-            get {
+        public String RawUrl
+        {
+            get
+            {
                 EnsureRawUrl();
 
-                if (_flags[needToValidateRawUrl]) {
+                if (_flags[needToValidateRawUrl])
+                {
                     _flags.Clear(needToValidateRawUrl);
                     ValidateString(_rawUrl, null, RequestValidationSource.RawUrl);
                 }
                 return _rawUrl;
             }
-            internal set {
-                _rawUrl = value;
-            }
+            internal set { _rawUrl = value; }
         }
 
         // Populates the RawUrl property but does not hook up validation.
-        internal string EnsureRawUrl() {
-            if (_rawUrl == null) {
+        internal string EnsureRawUrl()
+        {
+            if (_rawUrl == null)
+            {
                 String url;
 
-                if (_wr != null) {
+                if (_wr != null)
+                {
                     url = _wr.GetRawUrl();
                 }
-                else {
+                else
+                {
                     String p = this.GetUnvalidatedPath();
                     String qs = this.QueryStringText;
 
@@ -1866,17 +2146,24 @@ namespace System.Web {
         // Security note: This property has not been sanitized and should not
         // be used for making decisions at runtime. It should only be used for
         // logging or other innocuous things.
-        internal String UrlInternal {
-            get {
+        internal String UrlInternal
+        {
+            get
+            {
                 string q = QueryStringText;
                 if (!String.IsNullOrEmpty(q))
-                    q = "?" + HttpEncoder.CollapsePercentUFromStringInternal(q, QueryStringEncoding);
+                    q =
+                        "?"
+                        + HttpEncoder.CollapsePercentUFromStringInternal(q, QueryStringEncoding);
 
                 // Get server name and port from Host header?  Or the old way?
-                if (AppSettings.UseHostHeaderForRequestUrl) {
+                if (AppSettings.UseHostHeaderForRequestUrl)
+                {
                     string serverAndPort = _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderHost);
-                    try {
-                        if (!String.IsNullOrEmpty(serverAndPort)) {
+                    try
+                    {
+                        if (!String.IsNullOrEmpty(serverAndPort))
+                        {
                             // RFC 2732 (Section 2 for format, section 3 for update of RFC 2396 [HTTP 1.1]) mandates that
                             // IPv6 addresses in the host header be enclosed in []'s already.  Se we don't need to do the
                             // same check for a ---- IPv6 address as we do with _wr.GetServerName() below.
@@ -1884,27 +2171,41 @@ namespace System.Web {
                             _url = new Uri(u);
                             return u;
                         }
-                    } catch (UriFormatException) { /* Do nothing, leave _url null.  Backup plan will kick in below. */ }
+                    }
+                    catch (UriFormatException)
+                    { /* Do nothing, leave _url null.  Backup plan will kick in below. */
+                    }
                 }
 
                 // If for some reason the Host Header failed to produce a valid Url, fall back on the old way of doing it.
                 String serverName = _wr.GetServerName();
                 if (serverName.IndexOf(':') >= 0 && serverName[0] != '[')
                     serverName = "[" + serverName + "]"; // IPv6
-                if (_wr.GetLocalPortAsString() == "80") {
+                if (_wr.GetLocalPortAsString() == "80")
+                {
                     return _wr.GetProtocol() + "://" + serverName + Path + q;
                 }
-                else {
-                    return _wr.GetProtocol() + "://" + serverName + ":" + _wr.GetLocalPortAsString() + Path + q;
+                else
+                {
+                    return _wr.GetProtocol()
+                        + "://"
+                        + serverName
+                        + ":"
+                        + _wr.GetLocalPortAsString()
+                        + Path
+                        + q;
                 }
             }
         }
 
         // The current request's Url
         //    Gets Information regarding URL of current request.
-        public Uri Url {
-            get {
-                if (_url == null && _wr != null) {
+        public Uri Url
+        {
+            get
+            {
+                if (_url == null && _wr != null)
+                {
                     // The Path is accessed in a deferred way to preserve the execution order that existed
                     // before the code in BuildUrl was factored out of this property.
                     // While evaluating the Path immediately would probably not have an impact on regular execution
@@ -1918,53 +2219,80 @@ namespace System.Web {
             }
         }
 
-        internal Uri BuildUrl(Func<string> pathAccessor) {
+        internal Uri BuildUrl(Func<string> pathAccessor)
+        {
             Uri url = null;
             string q = QueryStringText;
             if (!String.IsNullOrEmpty(q))
                 q = "?" + HttpEncoder.CollapsePercentUFromStringInternal(q, QueryStringEncoding);
 
             // Get server name and port from Host header?  Or the old way?
-            if (AppSettings.UseHostHeaderForRequestUrl) {
+            if (AppSettings.UseHostHeaderForRequestUrl)
+            {
                 string serverAndPort = _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderHost);
-                try {
-                    if (!String.IsNullOrEmpty(serverAndPort)) {
+                try
+                {
+                    if (!String.IsNullOrEmpty(serverAndPort))
+                    {
                         // RFC 2732 (Section 2 for format, section 3 for update of RFC 2396 [HTTP 1.1]) mandates that
                         // IPv6 addresses in the host header be enclosed in []'s already.  Se we don't need to do the
                         // same check for a ---- IPv6 address as we do with _wr.GetServerName() below.
-                        url = UriUtil.BuildUri(_wr.GetProtocol(), Uri.UnescapeDataString(serverAndPort), null /* port */, pathAccessor(), q);
+                        url = UriUtil.BuildUri(
+                            _wr.GetProtocol(),
+                            Uri.UnescapeDataString(serverAndPort),
+                            null /* port */
+                            ,
+                            pathAccessor(),
+                            q
+                        );
                     }
                 }
-                catch (UriFormatException) { /* Do nothing, leave _url null.  Backup plan will kick in below. */ }
+                catch (UriFormatException)
+                { /* Do nothing, leave _url null.  Backup plan will kick in below. */
+                }
             }
 
             // If for some reason the Host Header failed to produce a valid Url, fall back on the old way of doing it.
-            if (url == null) {
+            if (url == null)
+            {
                 String serverName = _wr.GetServerName();
                 if (serverName.IndexOf(':') >= 0 && serverName[0] != '[')
                     serverName = "[" + serverName + "]"; // IPv6
 
-                url = UriUtil.BuildUri(_wr.GetProtocol(), Uri.UnescapeDataString(serverName), _wr.GetLocalPortAsString(), pathAccessor(), q);
+                url = UriUtil.BuildUri(
+                    _wr.GetProtocol(),
+                    Uri.UnescapeDataString(serverName),
+                    _wr.GetLocalPortAsString(),
+                    pathAccessor(),
+                    q
+                );
             }
             return url;
         }
 
         // Url of the Http referrer
         /// Gets information regarding the URL of the client's previous request that linked to the current URL.
-        public Uri UrlReferrer {
-            get {
-                if (_referrer == null) {
-                    if (_wr != null) {
+        public Uri UrlReferrer
+        {
+            get
+            {
+                if (_referrer == null)
+                {
+                    if (_wr != null)
+                    {
                         String r = _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderReferer);
 
-                        if (!String.IsNullOrEmpty(r)) {
-                            try {
+                        if (!String.IsNullOrEmpty(r))
+                        {
+                            try
+                            {
                                 if (r.IndexOf("://", StringComparison.Ordinal) >= 0)
                                     _referrer = new Uri(r);
-                                 else
+                                else
                                     _referrer = new Uri(this.Url, r);
                             }
-                            catch (HttpException) {
+                            catch (HttpException)
+                            {
                                 // malformed referrer shouldn't crash the request
                                 _referrer = null;
                             }
@@ -1977,8 +2305,10 @@ namespace System.Web {
         }
 
         // special case for perf in output cache module
-        internal String IfModifiedSince {
-            get {
+        internal String IfModifiedSince
+        {
+            get
+            {
                 if (_wr == null)
                     return null;
                 return _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderIfModifiedSince);
@@ -1986,8 +2316,10 @@ namespace System.Web {
         }
 
         // special case for perf in output cache module
-        internal String IfNoneMatch {
-            get {
+        internal String IfNoneMatch
+        {
+            get
+            {
                 if (_wr == null)
                     return null;
                 return _wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderIfNoneMatch);
@@ -1996,8 +2328,10 @@ namespace System.Web {
 
         // Params collection - combination of query string, form, server vars
         //    Gets a combined collection of QueryString+Form+ ServerVariable+Cookies.
-        public NameValueCollection Params {
-            get {
+        public NameValueCollection Params
+        {
+            get
+            {
                 if (HttpRuntime.HasAspNetHostingPermission(AspNetHostingPermissionLevel.Low))
                     return GetParams();
                 else
@@ -2007,12 +2341,15 @@ namespace System.Web {
 
         // Used in integrated pipeline mode to invalidate the params collection
         // after a change is made to the headers or server variables
-        internal void InvalidateParams() {
+        internal void InvalidateParams()
+        {
             _params = null;
         }
 
-        private NameValueCollection GetParams() {
-            if (_params == null) {
+        private NameValueCollection GetParams()
+        {
+            if (_params == null)
+            {
                 _params = new HttpValueCollection(64);
                 FillInParamsCollection();
                 _params.MakeReadOnly();
@@ -2020,17 +2357,18 @@ namespace System.Web {
             return _params;
         }
 
-        [AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Low)]
+        [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Low)]
         private NameValueCollection GetParamsWithDemand()
         {
             return GetParams();
         }
 
-
         // Default property that goes through the collections
         //      QueryString, Form, Cookies, ClientCertificate and ServerVariables
-        public String this[String key] {
-            get {
+        public String this[String key]
+        {
+            get
+            {
                 String s;
 
                 s = QueryString[key];
@@ -2054,20 +2392,26 @@ namespace System.Web {
         }
 
         // Query string as String (private)
-        internal String QueryStringText {
-            get {
-                if (_queryStringText == null) {
-                    if (_wr != null) {
+        internal String QueryStringText
+        {
+            get
+            {
+                if (_queryStringText == null)
+                {
+                    if (_wr != null)
+                    {
                         // if raw bytes available use them
                         byte[] rawQueryString = this.QueryStringBytes;
 
-                        if (rawQueryString != null) {
+                        if (rawQueryString != null)
+                        {
                             if (rawQueryString.Length > 0)
                                 _queryStringText = QueryStringEncoding.GetString(rawQueryString);
                             else
                                 _queryStringText = String.Empty;
                         }
-                        else {
+                        else
+                        {
                             _queryStringText = _wr.GetQueryString();
                         }
                     }
@@ -2081,14 +2425,15 @@ namespace System.Web {
 
                 return _queryStringText;
             }
-
-            set {
+            set
+            {
                 // override the query string
                 _queryStringText = value;
                 _queryStringOverriden = true;
 
-                if (_queryString != null) {
-                    _params=null;
+                if (_queryString != null)
+                {
+                    _params = null;
                     _queryString.MakeReadWrite();
                     _queryString.Reset();
                     FillInQueryStringCollection();
@@ -2099,12 +2444,15 @@ namespace System.Web {
         }
 
         // Query string as byte[] (private) -- for parsing
-        internal byte[] QueryStringBytes {
-            get {
+        internal byte[] QueryStringBytes
+        {
+            get
+            {
                 if (_queryStringOverriden)
                     return null;
 
-                if (_queryStringBytes == null) {
+                if (_queryStringBytes == null)
+                {
                     if (_wr != null)
                         _queryStringBytes = _wr.GetQueryStringRawBytes();
                 }
@@ -2116,11 +2464,14 @@ namespace System.Web {
         // Query string collection
         //    <para>Gets the collection of QueryString variables.</para>
         //
-        public NameValueCollection QueryString {
-            get {
+        public NameValueCollection QueryString
+        {
+            get
+            {
                 EnsureQueryString();
 
-                if (_flags[needToValidateQueryString]) {
+                if (_flags[needToValidateQueryString])
+                {
                     _flags.Clear(needToValidateQueryString);
                     ValidateHttpValueCollection(_queryString, RequestValidationSource.QueryString);
                 }
@@ -2130,8 +2481,10 @@ namespace System.Web {
         }
 
         // Populates the QueryString property but does not hook up validation.
-        internal HttpValueCollection EnsureQueryString() {
-            if (_queryString == null) {
+        internal HttpValueCollection EnsureQueryString()
+        {
+            if (_queryString == null)
+            {
                 _queryString = new HttpValueCollection();
 
                 if (_wr != null)
@@ -2143,17 +2496,21 @@ namespace System.Web {
             return _queryString;
         }
 
-        internal bool HasQueryString {
-            get {
+        internal bool HasQueryString
+        {
+            get
+            {
                 if (_queryString != null)
                     return (_queryString.Count > 0);
 
                 byte[] rawQueryString = this.QueryStringBytes;
 
-                if (rawQueryString != null) {
+                if (rawQueryString != null)
+                {
                     return (rawQueryString.Length > 0);
                 }
-                else {
+                else
+                {
                     return (QueryStringText.Length > 0);
                 }
             }
@@ -2161,11 +2518,14 @@ namespace System.Web {
 
         // Form collection
         ///    Gets a collection of Form variables.
-        public NameValueCollection Form {
-            get {
+        public NameValueCollection Form
+        {
+            get
+            {
                 EnsureForm();
 
-                if (_flags[needToValidateForm]) {
+                if (_flags[needToValidateForm])
+                {
                     _flags.Clear(needToValidateForm);
                     ValidateHttpValueCollection(_form, RequestValidationSource.Form);
                 }
@@ -2175,8 +2535,10 @@ namespace System.Web {
         }
 
         // Populates the Form property but does not hook up validation.
-        internal HttpValueCollection EnsureForm() {
-            if (_form == null) {
+        internal HttpValueCollection EnsureForm()
+        {
+            if (_form == null)
+            {
                 _form = new HttpValueCollection();
 
                 if (_wr != null)
@@ -2188,24 +2550,30 @@ namespace System.Web {
             return _form;
         }
 
-        internal bool HasForm {
-            get {
-                if (_form != null) {
+        internal bool HasForm
+        {
+            get
+            {
+                if (_form != null)
+                {
                     return (_form.Count > 0);
                 }
-                else {
-                    if (_wr != null && !_wr.HasEntityBody()) {
+                else
+                {
+                    if (_wr != null && !_wr.HasEntityBody())
+                    {
                         return false;
                     }
-                    else {
+                    else
+                    {
                         return (Form.Count > 0);
                     }
                 }
             }
         }
 
-
-        internal HttpValueCollection SwitchForm(HttpValueCollection form) {
+        internal HttpValueCollection SwitchForm(HttpValueCollection form)
+        {
             HttpValueCollection oldForm = _form;
             _form = form;
             Unvalidated.InvalidateForm();
@@ -2214,31 +2582,40 @@ namespace System.Web {
 
         // Headers collection
         //    Gets a collection of HTTP headers.
-        public NameValueCollection Headers {
-            get {
+        public NameValueCollection Headers
+        {
+            get
+            {
                 EnsureHeaders();
 
-                if (_flags[needToValidateHeaders]) {
+                if (_flags[needToValidateHeaders])
+                {
                     _flags.Clear(needToValidateHeaders);
                     ValidateHttpValueCollection(_headers, RequestValidationSource.Headers);
                 }
-                if (_flags[needToValidateCookielessHeader]) {
+                if (_flags[needToValidateCookielessHeader])
+                {
                     _flags.Clear(needToValidateCookielessHeader);
-                    ValidateCookielessHeaderIfRequiredByConfig(_headers[CookielessHelperClass.COOKIELESS_SESSION_FILTER_HEADER]);
+                    ValidateCookielessHeaderIfRequiredByConfig(
+                        _headers[CookielessHelperClass.COOKIELESS_SESSION_FILTER_HEADER]
+                    );
                 }
                 return _headers;
             }
         }
 
         // Populates the Headers property but does not hook up validation.
-        internal HttpHeaderCollection EnsureHeaders() {
-            if (_headers == null) {
+        internal HttpHeaderCollection EnsureHeaders()
+        {
+            if (_headers == null)
+            {
                 _headers = new HttpHeaderCollection(_wr, this, 8);
 
                 if (_wr != null)
                     FillInHeadersCollection();
 
-                if (!(_wr is IIS7WorkerRequest)) {
+                if (!(_wr is IIS7WorkerRequest))
+                {
                     _headers.MakeReadOnly();
                 }
             }
@@ -2247,9 +2624,12 @@ namespace System.Web {
         }
 
         // Allows access to request collections that have not gone through request validation
-        public UnvalidatedRequestValues Unvalidated {
-            get {
-                if (_unvalidatedRequestValues == null) {
+        public UnvalidatedRequestValues Unvalidated
+        {
+            get
+            {
+                if (_unvalidatedRequestValues == null)
+                {
                     _unvalidatedRequestValues = new UnvalidatedRequestValues(this);
                 }
                 return _unvalidatedRequestValues;
@@ -2258,8 +2638,10 @@ namespace System.Web {
 
         // Server vars collection
         // Gets a collection of web server variables.
-        public NameValueCollection ServerVariables {
-            get {
+        public NameValueCollection ServerVariables
+        {
+            get
+            {
                 if (HttpRuntime.HasAspNetHostingPermission(AspNetHostingPermissionLevel.Low))
                     return GetServerVars();
                 else
@@ -2267,11 +2649,12 @@ namespace System.Web {
             }
         }
 
-        internal NameValueCollection GetServerVarsWithoutDemand() {
+        internal NameValueCollection GetServerVarsWithoutDemand()
+        {
             return GetServerVars();
         }
 
-        [AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Low)]
+        [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Low)]
         private NameValueCollection GetServerVarsWithDemand()
         {
             return GetServerVars();
@@ -2279,19 +2662,23 @@ namespace System.Web {
 
         private NameValueCollection GetServerVars()
         {
-            if (_serverVariables == null) {
+            if (_serverVariables == null)
+            {
                 _serverVariables = new HttpServerVarsCollection(_wr, this);
 
-                if ( !(_wr is IIS7WorkerRequest) ) {
+                if (!(_wr is IIS7WorkerRequest))
+                {
                     _serverVariables.MakeReadOnly();
                 }
             }
             return _serverVariables;
         }
 
-        internal void SetSkipAuthorization(bool value) {
+        internal void SetSkipAuthorization(bool value)
+        {
             IIS7WorkerRequest wr = _wr as IIS7WorkerRequest;
-            if (wr == null) {
+            if (wr == null)
+            {
                 return;
             }
 
@@ -2299,17 +2686,21 @@ namespace System.Web {
             // If value is false, remove server variable by setting value to null.
             // Don't create server variable collection if it's not created yet.
 
-            if (_serverVariables == null) {
+            if (_serverVariables == null)
+            {
                 wr.SetServerVariable("IS_LOGIN_PAGE", value ? "1" : null);
             }
-            else {
+            else
+            {
                 _serverVariables.SetNoDemand("IS_LOGIN_PAGE", value ? "1" : null);
             }
         }
 
-        internal void SetDynamicCompression(bool enable) {
+        internal void SetDynamicCompression(bool enable)
+        {
             IIS7WorkerRequest wr = _wr as IIS7WorkerRequest;
-            if (wr == null) {
+            if (wr == null)
+            {
                 return;
             }
 
@@ -2317,37 +2708,47 @@ namespace System.Web {
             // If "enable" is false, set server variable to "0" to disable.
             // Don't create server variable collection if it's not created yet.
 
-            if (_serverVariables == null) {
+            if (_serverVariables == null)
+            {
                 wr.SetServerVariable("IIS_EnableDynamicCompression", enable ? null : "0");
             }
-            else {
+            else
+            {
                 _serverVariables.SetNoDemand("IIS_EnableDynamicCompression", enable ? null : "0");
             }
         }
 
         // WOS 1526602: ASP.Net v2.0: Response.AppendToLog does not work properly in integrated mode
-        internal void AppendToLogQueryString(string logData) {
+        internal void AppendToLogQueryString(string logData)
+        {
             IIS7WorkerRequest wr = _wr as IIS7WorkerRequest;
-            if (wr == null ||  String.IsNullOrEmpty(logData)) {
+            if (wr == null || String.IsNullOrEmpty(logData))
+            {
                 return;
             }
 
             // Don't create server variable collection if it's not created yet.
-            if (_serverVariables == null) {
+            if (_serverVariables == null)
+            {
                 string currentLogData = wr.GetServerVariable("LOG_QUERY_STRING");
-                if (String.IsNullOrEmpty(currentLogData)) {
+                if (String.IsNullOrEmpty(currentLogData))
+                {
                     wr.SetServerVariable("LOG_QUERY_STRING", QueryStringText + logData);
                 }
-                else {
+                else
+                {
                     wr.SetServerVariable("LOG_QUERY_STRING", currentLogData + logData);
                 }
             }
-            else {
+            else
+            {
                 string currentLogData = _serverVariables.Get("LOG_QUERY_STRING");
-                if (String.IsNullOrEmpty(currentLogData)) {
+                if (String.IsNullOrEmpty(currentLogData))
+                {
                     _serverVariables.SetNoDemand("LOG_QUERY_STRING", QueryStringText + logData);
                 }
-                else {
+                else
+                {
                     _serverVariables.SetNoDemand("LOG_QUERY_STRING", currentLogData + logData);
                 }
             }
@@ -2355,11 +2756,14 @@ namespace System.Web {
 
         // Cookie collection associated with current request
         //    Gets a collection of client's cookie variables.
-        public HttpCookieCollection Cookies {
-            get {
+        public HttpCookieCollection Cookies
+        {
+            get
+            {
                 EnsureCookies();
 
-                if (_flags[needToValidateCookies]) {
+                if (_flags[needToValidateCookies])
+                {
                     _flags.Clear(needToValidateCookies);
                     ValidateCookieCollection(_cookies);
                 }
@@ -2369,12 +2773,17 @@ namespace System.Web {
         }
 
         // Populates the Cookies property but does not hook up validation.
-        internal HttpCookieCollection EnsureCookies() {
-            if (_cookies == null) {
+        internal HttpCookieCollection EnsureCookies()
+        {
+            if (_cookies == null)
+            {
                 _cookies = new HttpCookieCollection(null, false);
 
                 if (_wr != null)
-                    FillInCookiesCollection(_cookies, true /*includeResponse*/);
+                    FillInCookiesCollection(
+                        _cookies,
+                        true /*includeResponse*/
+                    );
 
                 if (HasTransitionedToWebSocketRequest) // cookies can't be modified after the WebSocket handshake is complete
                     _cookies.MakeReadOnly();
@@ -2385,11 +2794,14 @@ namespace System.Web {
 
         // File collection associated with current request
         // Gets the collection of client-uploaded files (Multipart MIME format).
-        public HttpFileCollection Files {
-            get {
+        public HttpFileCollection Files
+        {
+            get
+            {
                 EnsureFiles();
 
-                if (_flags[needToValidatePostedFiles]) {
+                if (_flags[needToValidatePostedFiles])
+                {
                     _flags.Clear(needToValidatePostedFiles);
                     ValidatePostedFileCollection(_files);
                 }
@@ -2399,10 +2811,14 @@ namespace System.Web {
         }
 
         // Populates the Files property but does not hook up validation.
-        internal HttpFileCollection EnsureFiles() {
-            if (_files == null) {
+        internal HttpFileCollection EnsureFiles()
+        {
+            if (_files == null)
+            {
                 if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless)
-                    throw new HttpException(SR.GetString(SR.Incompatible_with_get_bufferless_input_stream));
+                    throw new HttpException(
+                        SR.GetString(SR.Incompatible_with_get_bufferless_input_stream)
+                    );
 
                 _files = new HttpFileCollection();
 
@@ -2415,25 +2831,28 @@ namespace System.Web {
 
         // Stream to read raw content
         //   Provides access to the raw contents of the incoming HTTP entity body.
-        public Stream InputStream {
-            get {
-                if (_inputStream == null) {
+        public Stream InputStream
+        {
+            get
+            {
+                if (_inputStream == null)
+                {
                     if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless)
-                        throw new HttpException(SR.GetString(SR.Incompatible_with_get_bufferless_input_stream));
+                        throw new HttpException(
+                            SR.GetString(SR.Incompatible_with_get_bufferless_input_stream)
+                        );
 
                     HttpRawUploadedContent rawContent = null;
 
                     if (_wr != null)
                         rawContent = GetEntireRawContent();
 
-                    if (rawContent != null) {
-                        _inputStream = new HttpInputStream(
-                                                          rawContent,
-                                                          0,
-                                                          rawContent.Length
-                                                          );
+                    if (rawContent != null)
+                    {
+                        _inputStream = new HttpInputStream(rawContent, 0, rawContent.Length);
                     }
-                    else {
+                    else
+                    {
                         _inputStream = new HttpInputStream(null, 0, 0);
                     }
                 }
@@ -2444,18 +2863,23 @@ namespace System.Web {
 
         // ASP classic compat
         //       Gets the number of bytes in the current input stream.
-        public int TotalBytes {
-            get {
+        public int TotalBytes
+        {
+            get
+            {
                 Stream s = (_readEntityBodyStream != null) ? _readEntityBodyStream : InputStream;
-                return(s != null) ? (int)s.Length : 0;
+                return (s != null) ? (int)s.Length : 0;
             }
         }
 
         // ASP classic compat
         //  Performs a binary read of a specified number of bytes from the current input stream.
-        public byte[] BinaryRead(int count) {
+        public byte[] BinaryRead(int count)
+        {
             if (_readEntityBodyMode == ReadEntityBodyMode.Bufferless)
-                throw new HttpException(SR.GetString(SR.Incompatible_with_get_bufferless_input_stream));
+                throw new HttpException(
+                    SR.GetString(SR.Incompatible_with_get_bufferless_input_stream)
+                );
 
             if (count < 0 || count > TotalBytes)
                 throw new ArgumentOutOfRangeException("count");
@@ -2466,7 +2890,8 @@ namespace System.Web {
             byte[] buffer = new byte[count];
             int c = InputStream.Read(buffer, 0, count);
 
-            if (c != count) {
+            if (c != count)
+            {
                 byte[] b2 = new byte[c];
                 if (c > 0)
                     Array.Copy(buffer, b2, c);
@@ -2478,8 +2903,10 @@ namespace System.Web {
 
         // Filtering of the input
         //   Gets or sets a filter to use when reading the current input stream.
-        public Stream Filter {
-            get {
+        public Stream Filter
+        {
+            get
+            {
                 if (_installedFilter != null)
                     return _installedFilter;
 
@@ -2488,22 +2915,27 @@ namespace System.Web {
 
                 return _filterSource;
             }
-
-            set {
-                if (_filterSource == null)  // have to use the source -- null means source wasn't ever asked for
+            set
+            {
+                if (_filterSource == null) // have to use the source -- null means source wasn't ever asked for
                     throw new HttpException(SR.GetString(SR.Invalid_request_filter));
 
                 _installedFilter = value;
             }
         }
 
-
         // Client Certificate
         //    Gets information on the current request's client security certificate.
-        public HttpClientCertificate ClientCertificate {
-            [AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Low)]
-            get {
-                if (_clientCertificate == null) {
+        public HttpClientCertificate ClientCertificate
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.Low
+            )]
+            get
+            {
+                if (_clientCertificate == null)
+                {
                     _clientCertificate = CreateHttpClientCertificateWithAssert();
                 }
 
@@ -2511,22 +2943,44 @@ namespace System.Web {
             }
         }
 
-        [PermissionSet(SecurityAction.Assert, Unrestricted=true)]
-        HttpClientCertificate CreateHttpClientCertificateWithAssert() {
+        [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
+        HttpClientCertificate CreateHttpClientCertificateWithAssert()
+        {
             return new HttpClientCertificate(_context);
         }
 
-
         //    Gets LOGON_USER as WindowsIdentity
-        public WindowsIdentity LogonUserIdentity {
-            [AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Medium)]
-            get {
-                if (_logonUserIdentity == null) {
-                    if (_wr != null) {
-                        if (_wr is IIS7WorkerRequest && _context.NotificationContext != null &&
-                            ((_context.NotificationContext.CurrentNotification == RequestNotification.AuthenticateRequest && !_context.NotificationContext.IsPostNotification)
-                             || (_context.NotificationContext.CurrentNotification < RequestNotification.AuthenticateRequest))) {
-                            throw new InvalidOperationException(SR.GetString(SR.Invalid_before_authentication));
+        public WindowsIdentity LogonUserIdentity
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.Medium
+            )]
+            get
+            {
+                if (_logonUserIdentity == null)
+                {
+                    if (_wr != null)
+                    {
+                        if (
+                            _wr is IIS7WorkerRequest
+                            && _context.NotificationContext != null
+                            && (
+                                (
+                                    _context.NotificationContext.CurrentNotification
+                                        == RequestNotification.AuthenticateRequest
+                                    && !_context.NotificationContext.IsPostNotification
+                                )
+                                || (
+                                    _context.NotificationContext.CurrentNotification
+                                    < RequestNotification.AuthenticateRequest
+                                )
+                            )
+                        )
+                        {
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.Invalid_before_authentication)
+                            );
                         }
 
                         _logonUserIdentity = _wr.GetLogonUserIdentity();
@@ -2537,19 +2991,23 @@ namespace System.Web {
             }
         }
 
-        private bool GranularValidationEnabled {
+        private bool GranularValidationEnabled
+        {
             get { return _flags[granularValidationEnabled]; }
         }
 
-        private bool RequestValidationSuppressed {
+        private bool RequestValidationSuppressed
+        {
             get { return _flags[requestValidationSuppressed]; }
         }
 
         //  Validate that the input from the browser is safe.
-        public void ValidateInput() {
+        public void ValidateInput()
+        {
             // It doesn't make sense to call this multiple times per request.
             // Additionally, if validation was suppressed, no-op now.
-            if (ValidateInputWasCalled || RequestValidationSuppressed) {
+            if (ValidateInputWasCalled || RequestValidationSuppressed)
+            {
                 return;
             }
 
@@ -2566,63 +3024,80 @@ namespace System.Web {
             _flags.Set(needToValidateHeaders);
         }
 
-        internal bool ValidateInputWasCalled {
-            get {
-                return _flags[hasValidateInputBeenCalled];
-            }
+        internal bool ValidateInputWasCalled
+        {
+            get { return _flags[hasValidateInputBeenCalled]; }
         }
 
         // There are a few situations where we do not want to validate the request ever:
-        private bool CanValidateRequest() {
-            if (_wr == null) {
+        private bool CanValidateRequest()
+        {
+            if (_wr == null)
+            {
                 return false;
             }
 
             // 1. State server requests
-            if (_wr is StateHttpWorkerRequest) {
+            if (_wr is StateHttpWorkerRequest)
+            {
                 return false;
             }
 
             // 2. DevDiv2 162442: When IIS has already rejected the request and we are inside logrequest or end request
-            if (_wr is IIS7WorkerRequest &&
-                (_context.Response.StatusCode == 404 || _context.Response.StatusCode == 400) &&
-                (_context.NotificationContext != null) &&
-                (_context.NotificationContext.CurrentNotification == RequestNotification.LogRequest ||
-                _context.NotificationContext.CurrentNotification == RequestNotification.EndRequest)) {
+            if (
+                _wr is IIS7WorkerRequest
+                && (_context.Response.StatusCode == 404 || _context.Response.StatusCode == 400)
+                && (_context.NotificationContext != null)
+                && (
+                    _context.NotificationContext.CurrentNotification
+                        == RequestNotification.LogRequest
+                    || _context.NotificationContext.CurrentNotification
+                        == RequestNotification.EndRequest
+                )
+            )
+            {
                 return false;
             }
 
             return true;
         }
 
-        internal void ValidateInputIfRequiredByConfig() {
+        internal void ValidateInputIfRequiredByConfig()
+        {
             // Do we need to enable request validation?
             RuntimeConfig config = RuntimeConfig.GetConfig(Context);
             HttpRuntimeSection runtimeSection = config.HttpRuntime;
 
             //////////////////////////////////////////////////////////////////////
             // Perform Path & QueryString validation checks for non-state_server requests
-            if (CanValidateRequest()) {
+            if (CanValidateRequest())
+            {
                 string requestUrl = Path;
 
                 //////////////////////////////////////////////////////////////////
                 // Verify the URL & QS lengths
-                if (requestUrl.Length > runtimeSection.MaxUrlLength) {
+                if (requestUrl.Length > runtimeSection.MaxUrlLength)
+                {
                     throw new HttpException(400, SR.GetString(SR.Url_too_long));
                 }
-                if (QueryStringText.Length > runtimeSection.MaxQueryStringLength) {
+                if (QueryStringText.Length > runtimeSection.MaxQueryStringLength)
+                {
                     throw new HttpException(400, SR.GetString(SR.QueryString_too_long));
                 }
 
                 //////////////////////////////////////////////////////////////////
                 // Verify that the URL does not contain invalid chars
-                char [] invalidChars = runtimeSection.RequestPathInvalidCharactersArray;
-                if (invalidChars != null && invalidChars.Length > 0) {
+                char[] invalidChars = runtimeSection.RequestPathInvalidCharactersArray;
+                if (invalidChars != null && invalidChars.Length > 0)
+                {
                     int index = requestUrl.IndexOfAny(invalidChars);
-                    if (index >= 0) {
+                    if (index >= 0)
+                    {
                         string invalidString = new string(requestUrl[index], 1);
-                        throw new HttpException(400, SR.GetString(SR.Dangerous_input_detected,
-                                                                  "Request.Path", invalidString));
+                        throw new HttpException(
+                            400,
+                            SR.GetString(SR.Dangerous_input_detected, "Request.Path", invalidString)
+                        );
                     }
                     _flags.Set(needToValidateCookielessHeader);
                 }
@@ -2630,40 +3105,52 @@ namespace System.Web {
 
             // only enable request validation for the entire pipeline in v4.0+ of the framework
             Version requestValidationMode = runtimeSection.RequestValidationMode;
-            if (requestValidationMode == VersionUtil.Framework00) {
+            if (requestValidationMode == VersionUtil.Framework00)
+            {
                 // DevDiv #412689: <httpRuntime requestValidationMode="0.0" /> should suppress validation for
                 // the entire request, even if a call to ValidateInput() takes place. The request path
                 // characters and cookieless header (see 'needToValidateCookielessHeader') are still validated
                 // if necessary. These can be suppressed via <httpRuntime requestPathInvalidChars="" />.
                 _flags[requestValidationSuppressed] = true;
             }
-            else if (requestValidationMode >= VersionUtil.Framework40) {
+            else if (requestValidationMode >= VersionUtil.Framework40)
+            {
                 ValidateInput();
 
                 // Mode v4.5+ implies granular request validation
-                if (requestValidationMode >= VersionUtil.Framework45) {
+                if (requestValidationMode >= VersionUtil.Framework45)
+                {
                     EnableGranularRequestValidation();
                 }
             }
         }
 
-        internal void ValidateCookielessHeaderIfRequiredByConfig(string header) {
+        internal void ValidateCookielessHeaderIfRequiredByConfig(string header)
+        {
             if (string.IsNullOrEmpty(header))
                 return;
             if (!CanValidateRequest())
                 return;
             // Verify that the header does not contain invalid chars
-            char [] invalidChars = RuntimeConfig.GetConfig(Context).HttpRuntime.RequestPathInvalidCharactersArray;
-            if (invalidChars != null && invalidChars.Length > 0) {
+            char[] invalidChars = RuntimeConfig
+                .GetConfig(Context)
+                .HttpRuntime.RequestPathInvalidCharactersArray;
+            if (invalidChars != null && invalidChars.Length > 0)
+            {
                 int index = header.IndexOfAny(invalidChars);
-                if (index >= 0) {
+                if (index >= 0)
+                {
                     string invalidString = new string(header[index], 1);
-                    throw new HttpException(400, SR.GetString(SR.Dangerous_input_detected, "Request.Path", invalidString));
+                    throw new HttpException(
+                        400,
+                        SR.GetString(SR.Dangerous_input_detected, "Request.Path", invalidString)
+                    );
                 }
             }
         }
 
-        private static string RemoveNullCharacters(string s) {
+        private static string RemoveNullCharacters(string s)
+        {
             if (s == null)
                 return null;
 
@@ -2674,8 +3161,12 @@ namespace System.Web {
             return s;
         }
 
-        private void ValidateString(string value, string collectionKey, RequestValidationSource requestCollection) {
-
+        private void ValidateString(
+            string value,
+            string collectionKey,
+            RequestValidationSource requestCollection
+        )
+        {
             value = RemoveNullCharacters(value);
 
             // Only provide the HttpContext if this is an actual HttpRequest; pass null
@@ -2683,66 +3174,103 @@ namespace System.Web {
             HttpContext contextToProvide = (HasTransitionedToWebSocketRequest) ? null : Context;
 
             int validationFailureIndex;
-            if (!RequestValidator.Current.IsValidRequestString(contextToProvide, value, requestCollection, collectionKey, out validationFailureIndex)) {
+            if (
+                !RequestValidator.Current.IsValidRequestString(
+                    contextToProvide,
+                    value,
+                    requestCollection,
+                    collectionKey,
+                    out validationFailureIndex
+                )
+            )
+            {
                 // Display only the piece of the string that caused the problem, padded by on each side
                 string detectedString = collectionKey + "=\"";
                 int startIndex = validationFailureIndex - 10;
-                if (startIndex <= 0) {
+                if (startIndex <= 0)
+                {
                     startIndex = 0;
                 }
-                else {
+                else
+                {
                     // Start with "..." to show that this is not the beginning
                     detectedString += "...";
                 }
                 int endIndex = validationFailureIndex + 20;
-                if (endIndex >= value.Length) {
+                if (endIndex >= value.Length)
+                {
                     endIndex = value.Length;
                     detectedString += value.Substring(startIndex, endIndex - startIndex) + "\"";
                 }
-                else {
+                else
+                {
                     detectedString += value.Substring(startIndex, endIndex - startIndex) + "...\"";
                 }
 
                 string collectionName = GetRequestValidationSourceName(requestCollection);
-                throw new HttpRequestValidationException(SR.GetString(SR.Dangerous_input_detected,
-                    collectionName, detectedString));
+                throw new HttpRequestValidationException(
+                    SR.GetString(SR.Dangerous_input_detected, collectionName, detectedString)
+                );
             }
         }
 
-        internal void EnableGranularRequestValidation() {
+        internal void EnableGranularRequestValidation()
+        {
             _flags[granularValidationEnabled] = true;
         }
 
-        private static string GetRequestValidationSourceName(RequestValidationSource requestCollection) {
-            switch (requestCollection) {
-                case RequestValidationSource.Cookies: return "Request.Cookies";
-                case RequestValidationSource.Files: return "Request.Files";
-                case RequestValidationSource.Form: return "Request.Form";
-                case RequestValidationSource.Headers: return "Request.Headers";
-                case RequestValidationSource.Path: return "Request.Path";
-                case RequestValidationSource.PathInfo: return "Request.PathInfo";
-                case RequestValidationSource.QueryString: return "Request.QueryString";
-                case RequestValidationSource.RawUrl: return "Request.RawUrl";
+        private static string GetRequestValidationSourceName(
+            RequestValidationSource requestCollection
+        )
+        {
+            switch (requestCollection)
+            {
+                case RequestValidationSource.Cookies:
+                    return "Request.Cookies";
+                case RequestValidationSource.Files:
+                    return "Request.Files";
+                case RequestValidationSource.Form:
+                    return "Request.Form";
+                case RequestValidationSource.Headers:
+                    return "Request.Headers";
+                case RequestValidationSource.Path:
+                    return "Request.Path";
+                case RequestValidationSource.PathInfo:
+                    return "Request.PathInfo";
+                case RequestValidationSource.QueryString:
+                    return "Request.QueryString";
+                case RequestValidationSource.RawUrl:
+                    return "Request.RawUrl";
 
                 default:
                     return "Request." + requestCollection.ToString();
             }
         }
 
-        private void ValidateHttpValueCollection(HttpValueCollection collection, RequestValidationSource requestCollection) {
-            if (GranularValidationEnabled) {
+        private void ValidateHttpValueCollection(
+            HttpValueCollection collection,
+            RequestValidationSource requestCollection
+        )
+        {
+            if (GranularValidationEnabled)
+            {
                 // Granular request validation is enabled - validate collection entries only as they're accessed.
-                collection.EnableGranularValidation((key, value) => ValidateString(value, key, requestCollection));
+                collection.EnableGranularValidation(
+                    (key, value) => ValidateString(value, key, requestCollection)
+                );
             }
-            else {
+            else
+            {
                 // Granular request validation is disabled - eagerly validate all collection entries.
                 int c = collection.Count;
 
-                for (int i = 0; i < c; i++) {
+                for (int i = 0; i < c; i++)
+                {
                     String key = collection.GetKey(i);
 
                     // Certain fields shouldn't go through validation - see comments in KeyIsCandidateForValidation for more information.
-                    if (!HttpValueCollection.KeyIsCandidateForValidation(key)) {
+                    if (!HttpValueCollection.KeyIsCandidateForValidation(key))
+                    {
                         continue;
                     }
 
@@ -2754,16 +3282,22 @@ namespace System.Web {
             }
         }
 
-        private void ValidateCookieCollection(HttpCookieCollection cc) {
-            if (GranularValidationEnabled) {
+        private void ValidateCookieCollection(HttpCookieCollection cc)
+        {
+            if (GranularValidationEnabled)
+            {
                 // Granular request validation is enabled - validate collection entries only as they're accessed.
-                cc.EnableGranularValidation((key, value) => ValidateString(value, key, RequestValidationSource.Cookies));
+                cc.EnableGranularValidation(
+                    (key, value) => ValidateString(value, key, RequestValidationSource.Cookies)
+                );
             }
-            else {
+            else
+            {
                 // Granular request validation is disabled - eagerly validate all collection entries.
                 int c = cc.Count;
 
-                for (int i = 0; i < c; i++) {
+                for (int i = 0; i < c; i++)
+                {
                     String key = cc.GetKey(i);
                     String val = cc.Get(i).Value;
 
@@ -2773,27 +3307,35 @@ namespace System.Web {
             }
         }
 
-        private void ValidatePostedFileCollection(HttpFileCollection col) {
-            if (GranularValidationEnabled) {
+        private void ValidatePostedFileCollection(HttpFileCollection col)
+        {
+            if (GranularValidationEnabled)
+            {
                 // Granular request validation is enabled - validate collection entries only as they're accessed.
-                col.EnableGranularValidation((key, value) => ValidateString(value, "filename", RequestValidationSource.Files));
+                col.EnableGranularValidation(
+                    (key, value) => ValidateString(value, "filename", RequestValidationSource.Files)
+                );
             }
-            else {
+            else
+            {
                 // Granular request validation is disabled - eagerly validate all collection entries.
-                for (int i = 0; i < col.Count; i++) {
+                for (int i = 0; i < col.Count; i++)
+                {
                     string filename = col[i].FileName;
                     ValidateString(filename, "filename", RequestValidationSource.Files);
                 }
             }
         }
 
-        internal void ClearReferencesForWebSocketProcessing() {
+        internal void ClearReferencesForWebSocketProcessing()
+        {
             bool needToRevalidateInputs = ValidateInputWasCalled;
 
             // everything not marked [DoNotReset] should be eligible for garbage collection
             ReflectionUtil.Reset(this);
 
-            if (needToRevalidateInputs) {
+            if (needToRevalidateInputs)
+            {
                 ValidateInput();
             }
         }
@@ -2811,9 +3353,11 @@ namespace System.Web {
         ///       coordinate values.
         ///    </para>
         /// </devdoc>
-        public int[] MapImageCoordinates(String imageFieldName) {
+        public int[] MapImageCoordinates(String imageFieldName)
+        {
             var coords = MapImageCoordinatatesInternal(imageFieldName, HttpVerb, QueryString, Form);
-            if (coords != null) {
+            if (coords != null)
+            {
                 return new[] { (int)coords[0], (int)coords[1] };
             }
             return null;
@@ -2832,16 +3376,24 @@ namespace System.Web {
         ///       coordinate values.
         ///    </para>
         /// </devdoc>
-        public double[] MapRawImageCoordinates(String imageFieldName) {
+        public double[] MapRawImageCoordinates(String imageFieldName)
+        {
             return MapImageCoordinatatesInternal(imageFieldName, HttpVerb, QueryString, Form);
         }
 
-        internal static double[] MapImageCoordinatatesInternal(string imageFieldName, HttpVerb verb, NameValueCollection queryString, NameValueCollection form) {
+        internal static double[] MapImageCoordinatatesInternal(
+            string imageFieldName,
+            HttpVerb verb,
+            NameValueCollection queryString,
+            NameValueCollection form
+        )
+        {
             // Select collection where to look according to verb
 
             NameValueCollection c = null;
 
-            switch (verb) {
+            switch (verb)
+            {
                 case HttpVerb.GET:
                 case HttpVerb.HEAD:
                     c = queryString;
@@ -2859,18 +3411,26 @@ namespace System.Web {
 
             double[] ret = null;
 
-            try {
+            try
+            {
                 string x = c[imageFieldName + ".x"];
                 string y = c[imageFieldName + ".y"];
 
                 double xVal;
                 double yVal;
 
-                if (x != null && y != null && HttpUtility.TryParseCoordinates(x, out xVal) && HttpUtility.TryParseCoordinates(y, out yVal)) {
+                if (
+                    x != null
+                    && y != null
+                    && HttpUtility.TryParseCoordinates(x, out xVal)
+                    && HttpUtility.TryParseCoordinates(y, out yVal)
+                )
+                {
                     ret = new[] { xVal, yVal };
                 }
             }
-            catch {
+            catch
+            {
                 // eat parsing exceptions
             }
 
@@ -2886,21 +3446,26 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>Saves an HTTP request to disk.</para>
         /// </devdoc>
-        public void SaveAs(String filename, bool includeHeaders) {
+        public void SaveAs(String filename, bool includeHeaders)
+        {
             // NDPWhidbey 14376
-            if (!System.IO.Path.IsPathRooted(filename)) {
+            if (!System.IO.Path.IsPathRooted(filename))
+            {
                 HttpRuntimeSection config = RuntimeConfig.GetConfig(_context).HttpRuntime;
-                if (config.RequireRootedSaveAsPath) {
+                if (config.RequireRootedSaveAsPath)
+                {
                     throw new HttpException(SR.GetString(SR.SaveAs_requires_rooted_path, filename));
                 }
             }
 
             FileStream f = new FileStream(filename, FileMode.Create);
 
-            try {
+            try
+            {
                 // headers
 
-                if (includeHeaders) {
+                if (includeHeaders)
+                {
                     TextWriter w = new StreamWriter(f);
 
                     w.Write(this.HttpMethod + " " + this.Path);
@@ -2909,14 +3474,16 @@ namespace System.Web {
                     if (!String.IsNullOrEmpty(qs))
                         w.Write("?" + qs);
 
-                    if (_wr != null) {
+                    if (_wr != null)
+                    {
                         // real request -- add protocol
                         w.Write(" " + _wr.GetHttpVersion() + "\r\n");
 
                         // headers
                         w.Write(CombineAllHeaders(true));
                     }
-                    else {
+                    else
+                    {
                         // manufactured request
                         w.Write("\r\n");
                     }
@@ -2931,7 +3498,8 @@ namespace System.Web {
                 s.WriteTo(f);
                 f.Flush();
             }
-            finally {
+            finally
+            {
                 f.Close();
             }
         }
@@ -2947,54 +3515,73 @@ namespace System.Web {
         ///       Maps the given virtual path to a physical path.
         ///    </para>
         /// </devdoc>
-        public String MapPath(String virtualPath) {
+        public String MapPath(String virtualPath)
+        {
             return MapPath(VirtualPath.CreateAllowNull(virtualPath));
         }
 
-        internal String MapPath(VirtualPath virtualPath) {
-            if (_wr != null) {
-                return MapPath(virtualPath, FilePathObject, true/*allowCrossAppMapping*/);
+        internal String MapPath(VirtualPath virtualPath)
+        {
+            if (_wr != null)
+            {
+                return MapPath(
+                    virtualPath,
+                    FilePathObject,
+                    true /*allowCrossAppMapping*/
+                );
             }
-            else {
+            else
+            {
                 return virtualPath.MapPath();
             }
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Maps the given virtual path to a physical path.
         ///    </para>
         /// </devdoc>
-        public String MapPath(string virtualPath, string baseVirtualDir, bool allowCrossAppMapping) {
+        public String MapPath(string virtualPath, string baseVirtualDir, bool allowCrossAppMapping)
+        {
             VirtualPath baseVirtualDirObject;
-            if (String.IsNullOrEmpty(baseVirtualDir)) {
+            if (String.IsNullOrEmpty(baseVirtualDir))
+            {
                 // If no base is passed in, use the request's base dir (VSWhidbey 539063)
                 baseVirtualDirObject = FilePathObject;
             }
-            else {
+            else
+            {
                 // We need to ensure a trailing slash to match v1.x behavior (VSWhidbey 539063)
                 baseVirtualDirObject = VirtualPath.CreateTrailingSlash(baseVirtualDir);
             }
 
-            return MapPath(VirtualPath.CreateAllowNull(virtualPath),
-                baseVirtualDirObject, allowCrossAppMapping);
+            return MapPath(
+                VirtualPath.CreateAllowNull(virtualPath),
+                baseVirtualDirObject,
+                allowCrossAppMapping
+            );
         }
 
-        internal String MapPath(VirtualPath virtualPath, VirtualPath baseVirtualDir, bool allowCrossAppMapping) {
+        internal String MapPath(
+            VirtualPath virtualPath,
+            VirtualPath baseVirtualDir,
+            bool allowCrossAppMapping
+        )
+        {
             if (_wr == null)
                 throw new HttpException(SR.GetString(SR.Cannot_map_path_without_context));
 
             // treat null as "."
 
-            // 
+            //
             if (virtualPath == null)
                 virtualPath = VirtualPath.Create(".");
 
             VirtualPath originalVirtualPath = virtualPath; // remember for patch-up at the end
 
             // Combine it with the base if one was passed in
-            if (baseVirtualDir != null) {
+            if (baseVirtualDir != null)
+            {
                 virtualPath = baseVirtualDir.Combine(virtualPath);
             }
 
@@ -3004,10 +3591,13 @@ namespace System.Web {
             string realPath = virtualPath.MapPathInternal();
 
             // patch up the result for Everett combatibility (VSWhidbey 319826)
-            if (virtualPath.VirtualPathString == "/" &&
-                originalVirtualPath.VirtualPathString != "/" &&
-                !originalVirtualPath.HasTrailingSlash &&
-                UrlPath.PathEndsWithExtraSlash(realPath)) {
+            if (
+                virtualPath.VirtualPathString == "/"
+                && originalVirtualPath.VirtualPathString != "/"
+                && !originalVirtualPath.HasTrailingSlash
+                && UrlPath.PathEndsWithExtraSlash(realPath)
+            )
+            {
                 realPath = realPath.Substring(0, realPath.Length - 1);
             }
 
@@ -3015,7 +3605,12 @@ namespace System.Web {
             return realPath;
         }
 
-        internal void InternalRewritePath(VirtualPath newPath, String newQueryString, bool rebaseClientPath) {
+        internal void InternalRewritePath(
+            VirtualPath newPath,
+            String newQueryString,
+            bool rebaseClientPath
+        )
+        {
             // clear things that depend on path
             _pathTranslated = null;
             _pathInfo = null;
@@ -3030,7 +3625,8 @@ namespace System.Web {
             // remember the new path
             _path = newPath;
 
-            if (rebaseClientPath) {
+            if (rebaseClientPath)
+            {
                 _clientBaseDir = null;
                 _clientFilePath = newPath;
             }
@@ -3049,13 +3645,23 @@ namespace System.Web {
                 _rewrittenUrl += "?" + q;
 
             IIS7WorkerRequest iis7WorkerRequest = _wr as IIS7WorkerRequest;
-            if (iis7WorkerRequest != null) {
-                iis7WorkerRequest.RewriteNotifyPipeline(_path.VirtualPathString, newQueryString, rebaseClientPath);
+            if (iis7WorkerRequest != null)
+            {
+                iis7WorkerRequest.RewriteNotifyPipeline(
+                    _path.VirtualPathString,
+                    newQueryString,
+                    rebaseClientPath
+                );
             }
         }
 
-        internal void InternalRewritePath(VirtualPath newFilePath, VirtualPath newPathInfo,
-            String newQueryString, bool setClientFilePath) {
+        internal void InternalRewritePath(
+            VirtualPath newFilePath,
+            VirtualPath newPathInfo,
+            String newQueryString,
+            bool setClientFilePath
+        )
+        {
             // clear things that depend on path
             _pathTranslated = (_wr != null) ? newFilePath.MapPathInternal() : null;
             _pathInfo = newPathInfo;
@@ -3067,13 +3673,18 @@ namespace System.Web {
             // to ensure we cache the original request Url in Url Mapping scenarios.
             string temp = RawUrl;
 
-            if (newPathInfo == null) {
+            if (newPathInfo == null)
+            {
                 _path = newFilePath;
             }
-            else {
+            else
+            {
                 // Combine the file path and the pathInfo to get the path.  Note that we can't call
                 // newFilePath.Combine here, since the rules are very different here (VSWhidbey 498926, 528055)
-                string newFullPathString = newFilePath.VirtualPathStringWhicheverAvailable + "/" + newPathInfo.VirtualPathString;
+                string newFullPathString =
+                    newFilePath.VirtualPathStringWhicheverAvailable
+                    + "/"
+                    + newPathInfo.VirtualPathString;
                 _path = VirtualPath.Create(newFullPathString);
             }
 
@@ -3089,59 +3700,77 @@ namespace System.Web {
             // no need to calculate any paths
             _computePathInfo = false;
 
-            if (setClientFilePath) {
+            if (setClientFilePath)
+            {
                 _clientFilePath = newFilePath;
             }
 
             IIS7WorkerRequest iis7WorkerRequest = _wr as IIS7WorkerRequest;
-            if (iis7WorkerRequest != null) {
-                String newPath = (_path != null && _path.VirtualPathString != null) ? _path.VirtualPathString : String.Empty;
+            if (iis7WorkerRequest != null)
+            {
+                String newPath =
+                    (_path != null && _path.VirtualPathString != null)
+                        ? _path.VirtualPathString
+                        : String.Empty;
                 iis7WorkerRequest.RewriteNotifyPipeline(newPath, newQueryString, setClientFilePath);
             }
         }
 
-        internal String RewrittenUrl {
+        internal String RewrittenUrl
+        {
             get { return _rewrittenUrl; }
         }
 
-        internal string FetchServerVariable(string variable) {
+        internal string FetchServerVariable(string variable)
+        {
             return _wr.GetServerVariable(variable);
         }
 
         // Used by IIS7WorkerRequest.SynchronizeServerVariables to update server variables in the collection
-        internal void SynchronizeServerVariable(String name, String value) {
-            if (name == "IS_LOGIN_PAGE") {
+        internal void SynchronizeServerVariable(String name, String value)
+        {
+            if (name == "IS_LOGIN_PAGE")
+            {
                 bool skipAuth = (value != null && value != "0") ? true : false;
-                _context.SetSkipAuthorizationNoDemand(skipAuth, true /*managedOnly*/);
+                _context.SetSkipAuthorizationNoDemand(
+                    skipAuth,
+                    true /*managedOnly*/
+                );
             }
             // populate the server variables collection if necessary
             HttpServerVarsCollection serverVars = ServerVariables as HttpServerVarsCollection;
-            if (serverVars != null) {
+            if (serverVars != null)
+            {
                 serverVars.SynchronizeServerVariable(name, value);
             }
         }
 
         // Used by IIS7WorkerRequest.SynchronizeServerVariables to update server variables in the collection
-        internal void SynchronizeHeader(String name, String value) {
-
+        internal void SynchronizeHeader(String name, String value)
+        {
             // populate the headers collection if necessary
             HttpHeaderCollection headers = Headers as HttpHeaderCollection;
-            if (headers != null) {
+            if (headers != null)
+            {
                 headers.SynchronizeHeader(name, value);
             }
 
             // if a header changes, the server variable also needs to be updated
             // populate the server variables collection if necessary
             HttpServerVarsCollection serverVars = ServerVariables as HttpServerVarsCollection;
-            if (serverVars != null) {
-                string svName = "HTTP_" + name.ToUpper(CultureInfo.InvariantCulture).Replace('-', '_');
+            if (serverVars != null)
+            {
+                string svName =
+                    "HTTP_" + name.ToUpper(CultureInfo.InvariantCulture).Replace('-', '_');
                 serverVars.SynchronizeServerVariable(svName, value);
             }
         }
 
-        public ChannelBinding HttpChannelBinding {
+        public ChannelBinding HttpChannelBinding
+        {
             [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
-            get {
+            get
+            {
                 if (_wr is IIS7WorkerRequest)
                     return ((IIS7WorkerRequest)_wr).HttpChannelBindingToken;
                 else if (_wr is ISAPIWorkerRequestInProc)
@@ -3161,11 +3790,15 @@ namespace System.Web {
         // do not hold, this API will return null. This API could also return
         // null if the client doesn't support the TLS token binding protocol or
         // if the server has disabled support for the protocol.
-        public ITlsTokenBindingInfo TlsTokenBindingInfo {
-            get {
-                if (!_tlsTokenBindingInfoResolved) {
+        public ITlsTokenBindingInfo TlsTokenBindingInfo
+        {
+            get
+            {
+                if (!_tlsTokenBindingInfoResolved)
+                {
                     IIS7WorkerRequest iis7wr = _wr as IIS7WorkerRequest;
-                    if (iis7wr != null) {
+                    if (iis7wr != null)
+                    {
                         _tlsTokenBindingInfo = iis7wr.GetTlsTokenBindingInfo(); // could return null
                     }
                     _tlsTokenBindingInfoResolved = true;
@@ -3180,12 +3813,15 @@ namespace System.Web {
         // If you want to provide IIS with a copy of the request entity previously read by ASP.NET,
         // call the InsertEntityBody overload that takes no arguments.
         [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-        public void InsertEntityBody(byte[] buffer, int offset, int count) {
+        public void InsertEntityBody(byte[] buffer, int offset, int count)
+        {
             EnsureHasNotTransitionedToWebSocket();
 
             IIS7WorkerRequest wr = _wr as IIS7WorkerRequest;
             if (wr == null)
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             if (buffer == null)
                 throw new ArgumentNullException("buffer");
             if (offset < 0)
@@ -3193,7 +3829,9 @@ namespace System.Web {
             if (count < 0)
                 throw new ArgumentOutOfRangeException("count");
             if (buffer.Length - offset < count)
-                throw new ArgumentException(SR.GetString(SR.InvalidOffsetOrCount, "offset", "count"));
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidOffsetOrCount, "offset", "count")
+                );
 
             wr.InsertEntityBody(buffer, offset, count);
             NeedToInsertEntityBody = false;
@@ -3204,10 +3842,13 @@ namespace System.Web {
         // read the request entity.  This method provides IIS with a copy of the request entity that ASP.NET
         // previously read.  For example, this is useful for scenarios where a native handler may need to access the
         // request entity after it has been read by ASP.NET.
-        public void InsertEntityBody() {
+        public void InsertEntityBody()
+        {
             IIS7WorkerRequest wr = _wr as IIS7WorkerRequest;
             if (wr == null)
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             byte[] buffer = EntityBody;
             if (buffer == null)
                 return;
@@ -3219,7 +3860,10 @@ namespace System.Web {
         // read.  Used to avoid the exception thrown by GetBufferlessInputStream,
         // GetBufferedInputStream, Form, Files, InputStream, and BinaryRead when the
         // entity has already been read by an incompatible method.
-        public ReadEntityBodyMode ReadEntityBodyMode { get { return _readEntityBodyMode; } }
+        public ReadEntityBodyMode ReadEntityBodyMode
+        {
+            get { return _readEntityBodyMode; }
+        }
 
         // GetBufferlessInputStream allows the caller to read the request entity bytes directly off the wire, either
         // synchronously or asynchronously.  The bytes are not buffered, and once read, neither ASP.NET nor IIS have a
@@ -3231,18 +3875,36 @@ namespace System.Web {
         // Throws HttpException if the entity has already been read and stored via Form, Files, InputStream, or GetBufferedInputStream.
         // To avoid this exception, first call Request.ReadEntityBodyMode.
         // Throws HttpException from Read/BeginRead/EndRead if the client disconnects while the entity is being read.
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId="Bufferless", Justification = "Name is from the spec")]
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
-          Justification = "This method does additional work which causes very big side-effects")]        
-        public Stream GetBufferlessInputStream() {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Bufferless",
+            Justification = "Name is from the spec"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does additional work which causes very big side-effects"
+        )]
+        public Stream GetBufferlessInputStream()
+        {
             return GetInputStream(persistEntityBody: false);
         }
 
         // Same as GetBufferlessInputStream, but with the option of disabling system.web/httpRuntime/maxRequestLength.
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId="Bufferless", Justification = "Name is from the spec")]
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
-          Justification = "This method does additional work which causes very big side-effects")]        
-        public Stream GetBufferlessInputStream(bool disableMaxRequestLength) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Bufferless",
+            Justification = "Name is from the spec"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does additional work which causes very big side-effects"
+        )]
+        public Stream GetBufferlessInputStream(bool disableMaxRequestLength)
+        {
             return GetInputStream(false, disableMaxRequestLength);
         }
 
@@ -3252,27 +3914,49 @@ namespace System.Web {
         // Throws HttpException if the entity has already been read by Form, Files, InputStream, or GetBufferlessInputStream.
         // To avoid this exception, first call Request.ReadEntityBodyMode.
         // Throws HttpException from Read/BeginRead/EndRead if the client disconnects while the entity is being read.
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId="Buffered", Justification = "Name is from the spec")]
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
-          Justification = "This method does additional work which causes very big side-effects")]
-        public Stream GetBufferedInputStream() {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Buffered",
+            Justification = "Name is from the spec"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does additional work which causes very big side-effects"
+        )]
+        public Stream GetBufferedInputStream()
+        {
             return GetInputStream(persistEntityBody: true);
         }
-        
-        private Stream GetInputStream(bool persistEntityBody, bool disableMaxRequestLength = false) {
+
+        private Stream GetInputStream(bool persistEntityBody, bool disableMaxRequestLength = false)
+        {
             EnsureHasNotTransitionedToWebSocket();
 
-            ReadEntityBodyMode requestedMode = (persistEntityBody) ? ReadEntityBodyMode.Buffered : ReadEntityBodyMode.Bufferless;
+            ReadEntityBodyMode requestedMode =
+                (persistEntityBody) ? ReadEntityBodyMode.Buffered : ReadEntityBodyMode.Bufferless;
             ReadEntityBodyMode currentMode = _readEntityBodyMode;
-            if (currentMode == ReadEntityBodyMode.None) {
+            if (currentMode == ReadEntityBodyMode.None)
+            {
                 _readEntityBodyMode = requestedMode;
-                _readEntityBodyStream = new HttpBufferlessInputStream(_context, persistEntityBody, disableMaxRequestLength);                
+                _readEntityBodyStream = new HttpBufferlessInputStream(
+                    _context,
+                    persistEntityBody,
+                    disableMaxRequestLength
+                );
             }
-            else if (currentMode == ReadEntityBodyMode.Classic) {
+            else if (currentMode == ReadEntityBodyMode.Classic)
+            {
                 throw new HttpException(SR.GetString(SR.Incompatible_with_input_stream));
             }
-            else if (currentMode != requestedMode) {
-                throw new HttpException((persistEntityBody) ? SR.GetString(SR.Incompatible_with_get_bufferless_input_stream) : SR.GetString(SR.Incompatible_with_get_buffered_input_stream));
+            else if (currentMode != requestedMode)
+            {
+                throw new HttpException(
+                    (persistEntityBody)
+                        ? SR.GetString(SR.Incompatible_with_get_bufferless_input_stream)
+                        : SR.GetString(SR.Incompatible_with_get_buffered_input_stream)
+                );
             }
             return _readEntityBodyStream;
         }
@@ -3282,22 +3966,29 @@ namespace System.Web {
         /// </summary>
         /// <remarks>
         /// This method requires that the application be using the IIS integrated mode pipeline.
-        /// 
+        ///
         /// This method is thread-safe. Any thread may call it at any time.
         /// </remarks>
-        public void Abort() {
+        public void Abort()
+        {
             IIS7WorkerRequest wr = _wr as IIS7WorkerRequest;
-            if (wr != null) {
+            if (wr != null)
+            {
                 wr.AbortConnection();
             }
-            else {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+            else
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
         }
 
         // helper that throws an exception if we have transitioned the current request to a WebSocket request
-        internal void EnsureHasNotTransitionedToWebSocket() {
-            if (Context != null) {
+        internal void EnsureHasNotTransitionedToWebSocket()
+        {
+            if (Context != null)
+            {
                 Context.EnsureHasNotTransitionedToWebSocket();
             }
         }
@@ -3311,25 +4002,26 @@ namespace System.Web {
         /// default timeout of 110 seconds, the TimedOutToken will be tripped no earlier than 110 seconds after we
         /// started processing the request. The application developer can change the ScriptTimeout property if he
         /// so chooses, and as long as we haven't yet tripped this token we will respect the new timeout value.
-        /// 
+        ///
         /// Currently we only provide 15 second granularity on this token, so using the default timeout period of
         /// 110 seconds this means that we'll actually trip the token sometime between 110 - 125 seconds after we
         /// started processing the request. We may improve this resolution in the future.
-        /// 
+        ///
         /// Even though this property is thread-safe, there are restrictions on its use. Please see the remarks
         /// on HttpResponse.ClientDisconnectToken for caveats and best practices when consuming CancellationToken
         /// properties provided by ASP.NET intrinsics.
-        /// 
+        ///
         /// This property is meaningless once WebSockets request processing has started.
         /// </remarks>
-        public CancellationToken TimedOutToken {
-            get {
+        public CancellationToken TimedOutToken
+        {
+            get
+            {
                 EnsureHasNotTransitionedToWebSocket();
 
                 HttpContext context = Context;
                 return (context != null) ? context.TimedOutToken : default(CancellationToken);
             }
         }
-
     }
 }

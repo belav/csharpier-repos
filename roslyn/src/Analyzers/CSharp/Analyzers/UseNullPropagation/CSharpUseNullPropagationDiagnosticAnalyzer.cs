@@ -14,8 +14,8 @@ using Microsoft.CodeAnalysis.UseNullPropagation;
 namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseNullPropagationDiagnosticAnalyzer :
-        AbstractUseNullPropagationDiagnosticAnalyzer<
+    internal class CSharpUseNullPropagationDiagnosticAnalyzer
+        : AbstractUseNullPropagationDiagnosticAnalyzer<
             SyntaxKind,
             ExpressionSyntax,
             StatementSyntax,
@@ -26,22 +26,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
             ElementAccessExpressionSyntax,
             MemberAccessExpressionSyntax,
             IfStatementSyntax,
-            ExpressionStatementSyntax>
+            ExpressionStatementSyntax
+        >
     {
         protected override SyntaxKind IfStatementSyntaxKind => SyntaxKind.IfStatement;
 
-        protected override bool ShouldAnalyze(Compilation compilation)
-            => compilation.LanguageVersion() >= LanguageVersion.CSharp6;
+        protected override bool ShouldAnalyze(Compilation compilation) =>
+            compilation.LanguageVersion() >= LanguageVersion.CSharp6;
 
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
-        protected override bool IsInExpressionTree(SemanticModel semanticModel, SyntaxNode node, INamedTypeSymbol? expressionTypeOpt, CancellationToken cancellationToken)
-            => node.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken);
+        protected override bool IsInExpressionTree(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            INamedTypeSymbol? expressionTypeOpt,
+            CancellationToken cancellationToken
+        ) => node.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken);
 
         protected override bool TryAnalyzePatternCondition(
-            ISyntaxFacts syntaxFacts, ExpressionSyntax conditionNode,
-            [NotNullWhen(true)] out ExpressionSyntax? conditionPartToCheck, out bool isEquals)
+            ISyntaxFacts syntaxFacts,
+            ExpressionSyntax conditionNode,
+            [NotNullWhen(true)] out ExpressionSyntax? conditionPartToCheck,
+            out bool isEquals
+        )
         {
             conditionPartToCheck = null;
             isEquals = true;
@@ -69,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
         protected override bool TryGetPartsOfIfStatement(
             IfStatementSyntax ifStatement,
             [NotNullWhen(true)] out ExpressionSyntax? condition,
-            [NotNullWhen(true)] out StatementSyntax? trueStatement)
+            [NotNullWhen(true)] out StatementSyntax? trueStatement
+        )
         {
             // has to be of the form:
             //

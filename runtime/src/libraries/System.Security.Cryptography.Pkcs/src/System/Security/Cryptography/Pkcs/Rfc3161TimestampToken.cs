@@ -22,9 +22,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public Rfc3161TimestampTokenInfo TokenInfo { get; private set; } = null!;
 
-        private Rfc3161TimestampToken()
-        {
-        }
+        private Rfc3161TimestampToken() { }
 
         /// <summary>
         /// Get a SignedCms representation of the RFC3161 Timestamp Token.
@@ -46,7 +44,15 @@ namespace System.Security.Cryptography.Pkcs
 
             if (signerCert != null)
             {
-                if (CheckCertificate(signerCert, _signerInfo, in _essCertId, in _essCertIdV2, TokenInfo))
+                if (
+                    CheckCertificate(
+                        signerCert,
+                        _signerInfo,
+                        in _essCertId,
+                        in _essCertIdV2,
+                        TokenInfo
+                    )
+                )
                 {
                     return signerCert;
                 }
@@ -62,7 +68,15 @@ namespace System.Security.Cryptography.Pkcs
 
             foreach (X509Certificate2 candidate in extraCandidates)
             {
-                if (CheckCertificate(candidate, _signerInfo, in _essCertId, in _essCertIdV2, TokenInfo))
+                if (
+                    CheckCertificate(
+                        candidate,
+                        _signerInfo,
+                        in _essCertId,
+                        in _essCertIdV2,
+                        TokenInfo
+                    )
+                )
                 {
                     return candidate;
                 }
@@ -74,7 +88,8 @@ namespace System.Security.Cryptography.Pkcs
         public bool VerifySignatureForData(
             ReadOnlySpan<byte> data,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
-            X509Certificate2Collection? extraCandidates = null)
+            X509Certificate2Collection? extraCandidates = null
+        )
         {
             signerCertificate = null;
 
@@ -98,7 +113,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<byte> hash,
             HashAlgorithmName hashAlgorithm,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
-            X509Certificate2Collection? extraCandidates = null)
+            X509Certificate2Collection? extraCandidates = null
+        )
         {
             signerCertificate = null;
 
@@ -122,7 +138,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<byte> hash,
             Oid hashAlgorithmId,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
-            X509Certificate2Collection? extraCandidates = null)
+            X509Certificate2Collection? extraCandidates = null
+        )
         {
             if (hashAlgorithmId is null)
             {
@@ -154,7 +171,8 @@ namespace System.Security.Cryptography.Pkcs
         public bool VerifySignatureForSignerInfo(
             SignerInfo signerInfo,
             [NotNullWhen(true)] out X509Certificate2? signerCertificate,
-            X509Certificate2Collection? extraCandidates = null)
+            X509Certificate2Collection? extraCandidates = null
+        )
         {
             if (signerInfo is null)
             {
@@ -164,14 +182,14 @@ namespace System.Security.Cryptography.Pkcs
             return VerifySignatureForData(
                 signerInfo.GetSignatureMemory().Span,
                 out signerCertificate,
-                extraCandidates);
+                extraCandidates
+            );
         }
 
         internal bool VerifyHash(ReadOnlySpan<byte> hash, string? hashAlgorithmId)
         {
-            return
-                hash.SequenceEqual(TokenInfo.GetMessageHash().Span) &&
-                hashAlgorithmId == TokenInfo.HashAlgorithmId.Value;
+            return hash.SequenceEqual(TokenInfo.GetMessageHash().Span)
+                && hashAlgorithmId == TokenInfo.HashAlgorithmId.Value;
         }
 
         private bool VerifyData(ReadOnlySpan<byte> data)
@@ -194,7 +212,8 @@ namespace System.Security.Cryptography.Pkcs
                 // Something we understood, but is bigger than 512-bit.
                 // Allocate at runtime, trip in a debug build so we can re-evaluate this.
                 Debug.Fail(
-                    $"TryGetHashAndReset did not fit in {stackSpan.Length} for hash {hashAlgorithmId.Value}");
+                    $"TryGetHashAndReset did not fit in {stackSpan.Length} for hash {hashAlgorithmId.Value}"
+                );
 
                 return VerifyHash(hasher.GetHashAndReset(), hashAlgorithmId.Value);
             }
@@ -205,7 +224,8 @@ namespace System.Security.Cryptography.Pkcs
             SignerInfo signer,
             in EssCertId? certId,
             in EssCertIdV2? certId2,
-            Rfc3161TimestampTokenInfo tokenInfo)
+            Rfc3161TimestampTokenInfo tokenInfo
+        )
         {
             Debug.Assert(tsaCertificate != null);
             Debug.Assert(signer != null);
@@ -222,8 +242,10 @@ namespace System.Security.Cryptography.Pkcs
             //
             // Accuracy is ignored here, for better replicability in user code.
 
-            if (tsaCertificate.NotAfter < tokenInfo.Timestamp ||
-                tsaCertificate.NotBefore > tokenInfo.Timestamp)
+            if (
+                tsaCertificate.NotAfter < tokenInfo.Timestamp
+                || tsaCertificate.NotBefore > tokenInfo.Timestamp
+            )
             {
                 return false;
             }
@@ -285,15 +307,17 @@ namespace System.Security.Cryptography.Pkcs
                     signer.CheckSignature(new X509Certificate2Collection(tsaCertificate), true);
                     return true;
                 }
-                catch (CryptographicException)
-                {
-                }
+                catch (CryptographicException) { }
             }
 
             return false;
         }
 
-        public static bool TryDecode(ReadOnlyMemory<byte> encodedBytes, [NotNullWhen(true)] out Rfc3161TimestampToken? token, out int bytesConsumed)
+        public static bool TryDecode(
+            ReadOnlyMemory<byte> encodedBytes,
+            [NotNullWhen(true)] out Rfc3161TimestampToken? token,
+            out int bytesConsumed
+        )
         {
             bytesConsumed = 0;
             token = null;
@@ -303,10 +327,7 @@ namespace System.Security.Cryptography.Pkcs
                 AsnValueReader reader = new AsnValueReader(encodedBytes.Span, AsnEncodingRules.BER);
                 int bytesActuallyRead = reader.PeekEncodedValue().Length;
 
-                ContentInfoAsn.Decode(
-                    ref reader,
-                    encodedBytes,
-                    out ContentInfoAsn contentInfo);
+                ContentInfoAsn.Decode(ref reader, encodedBytes, out ContentInfoAsn contentInfo);
 
                 // https://tools.ietf.org/html/rfc3161#section-2.4.2
                 //
@@ -366,19 +387,25 @@ namespace System.Security.Cryptography.Pkcs
 
                 X509Certificate2? signerCert = signer.Certificate;
 
-                if (signerCert == null &&
-                    signer.SignerIdentifier.Type == SubjectIdentifierType.IssuerAndSerialNumber)
+                if (
+                    signerCert == null
+                    && signer.SignerIdentifier.Type == SubjectIdentifierType.IssuerAndSerialNumber
+                )
                 {
                     // If the cert wasn't provided, but the identifier was IssuerAndSerialNumber,
                     // and the ESSCertId(V2) has specified an issuerSerial value, ensure it's a match.
-                    X509IssuerSerial issuerSerial = (X509IssuerSerial)signer.SignerIdentifier.Value!;
+                    X509IssuerSerial issuerSerial = (X509IssuerSerial)
+                        signer.SignerIdentifier.Value!;
 
                     if (certId.HasValue && certId.Value.IssuerSerial != null)
                     {
-                        if (!IssuerAndSerialMatch(
-                            certId.Value.IssuerSerial.Value,
-                            issuerSerial.IssuerName,
-                            issuerSerial.SerialNumber))
+                        if (
+                            !IssuerAndSerialMatch(
+                                certId.Value.IssuerSerial.Value,
+                                issuerSerial.IssuerName,
+                                issuerSerial.SerialNumber
+                            )
+                        )
                         {
                             return false;
                         }
@@ -386,20 +413,31 @@ namespace System.Security.Cryptography.Pkcs
 
                     if (certId2.HasValue && certId2.Value.IssuerSerial != null)
                     {
-                        if (!IssuerAndSerialMatch(
-                            certId2.Value.IssuerSerial.Value,
-                            issuerSerial.IssuerName,
-                            issuerSerial.SerialNumber))
+                        if (
+                            !IssuerAndSerialMatch(
+                                certId2.Value.IssuerSerial.Value,
+                                issuerSerial.IssuerName,
+                                issuerSerial.SerialNumber
+                            )
+                        )
                         {
                             return false;
                         }
                     }
                 }
 
-                if (Rfc3161TimestampTokenInfo.TryDecode(cms.ContentInfo.Content, out Rfc3161TimestampTokenInfo? tokenInfo, out _))
+                if (
+                    Rfc3161TimestampTokenInfo.TryDecode(
+                        cms.ContentInfo.Content,
+                        out Rfc3161TimestampTokenInfo? tokenInfo,
+                        out _
+                    )
+                )
                 {
-                    if (signerCert != null &&
-                        !CheckCertificate(signerCert, signer, in certId, in certId2, tokenInfo))
+                    if (
+                        signerCert != null
+                        && !CheckCertificate(signerCert, signer, in certId, in certId2, tokenInfo)
+                    )
                     {
                         return false;
                     }
@@ -417,12 +455,8 @@ namespace System.Security.Cryptography.Pkcs
                     return true;
                 }
             }
-            catch (AsnContentException)
-            {
-            }
-            catch (CryptographicException)
-            {
-            }
+            catch (AsnContentException) { }
+            catch (CryptographicException) { }
 
             return false;
         }
@@ -430,7 +464,8 @@ namespace System.Security.Cryptography.Pkcs
         private static bool IssuerAndSerialMatch(
             CadesIssuerSerial issuerSerial,
             string issuerDirectoryName,
-            string serialNumber)
+            string serialNumber
+        )
         {
             GeneralNameAsn[] issuerNames = issuerSerial.Issuer;
 
@@ -446,7 +481,10 @@ namespace System.Security.Cryptography.Pkcs
                 return false;
             }
 
-            if (issuerDirectoryName != new X500DistinguishedName(requiredName.DirectoryName.Value.ToArray()).Name)
+            if (
+                issuerDirectoryName
+                != new X500DistinguishedName(requiredName.DirectoryName.Value.ToArray()).Name
+            )
             {
                 return false;
             }
@@ -457,7 +495,8 @@ namespace System.Security.Cryptography.Pkcs
         private static bool IssuerAndSerialMatch(
             CadesIssuerSerial issuerSerial,
             ReadOnlySpan<byte> issuerDirectoryName,
-            ReadOnlySpan<byte> serialNumber)
+            ReadOnlySpan<byte> serialNumber
+        )
         {
             GeneralNameAsn[] issuerNames = issuerSerial.Issuer;
 
@@ -481,7 +520,11 @@ namespace System.Security.Cryptography.Pkcs
             return serialNumber.SequenceEqual(issuerSerial.SerialNumber.Span);
         }
 
-        private static bool CertMatchesIds(X509Certificate2 signerCert, in EssCertId? certId, in EssCertIdV2? certId2)
+        private static bool CertMatchesIds(
+            X509Certificate2 signerCert,
+            in EssCertId? certId,
+            in EssCertIdV2? certId2
+        )
         {
             Debug.Assert(signerCert != null);
             Debug.Assert(certId.HasValue || certId2.HasValue);
@@ -491,9 +534,11 @@ namespace System.Security.Cryptography.Pkcs
             {
                 Span<byte> thumbprint = stackalloc byte[20];
 
-                if (!signerCert.TryGetCertHash(HashAlgorithmName.SHA1, thumbprint, out int written) ||
-                    written != thumbprint.Length ||
-                    !thumbprint.SequenceEqual(certId.Value.Hash.Span))
+                if (
+                    !signerCert.TryGetCertHash(HashAlgorithmName.SHA1, thumbprint, out int written)
+                    || written != thumbprint.Length
+                    || !thumbprint.SequenceEqual(certId.Value.Hash.Span)
+                )
                 {
                     return false;
                 }
@@ -503,10 +548,13 @@ namespace System.Security.Cryptography.Pkcs
                     serialNumber = signerCert.GetSerialNumber();
                     Array.Reverse(serialNumber);
 
-                    if (!IssuerAndSerialMatch(
-                        certId.Value.IssuerSerial.Value,
-                        signerCert.IssuerName.RawData,
-                        serialNumber))
+                    if (
+                        !IssuerAndSerialMatch(
+                            certId.Value.IssuerSerial.Value,
+                            signerCert.IssuerName.RawData,
+                            serialNumber
+                        )
+                    )
                     {
                         return false;
                     }
@@ -530,7 +578,8 @@ namespace System.Security.Cryptography.Pkcs
                     else
                     {
                         Debug.Fail(
-                            $"TryGetCertHash did not fit in {thumbprint.Length} for hash {certId2.Value.HashAlgorithm.Algorithm}");
+                            $"TryGetCertHash did not fit in {thumbprint.Length} for hash {certId2.Value.HashAlgorithm.Algorithm}"
+                        );
 
                         thumbprint = signerCert.GetCertHash(alg);
                     }
@@ -553,10 +602,13 @@ namespace System.Security.Cryptography.Pkcs
                         Array.Reverse(serialNumber);
                     }
 
-                    if (!IssuerAndSerialMatch(
-                        certId2.Value.IssuerSerial.Value,
-                        signerCert.IssuerName.RawData,
-                        serialNumber))
+                    if (
+                        !IssuerAndSerialMatch(
+                            certId2.Value.IssuerSerial.Value,
+                            signerCert.IssuerName.RawData,
+                            serialNumber
+                        )
+                    )
                     {
                         return false;
                     }
@@ -566,7 +618,11 @@ namespace System.Security.Cryptography.Pkcs
             return true;
         }
 
-        private static bool TryGetCertIds(SignerInfo signer, out EssCertId? certId, out EssCertIdV2? certId2)
+        private static bool TryGetCertIds(
+            SignerInfo signer,
+            out EssCertId? certId,
+            out EssCertIdV2? certId2
+        )
         {
             // RFC 5035 says that SigningCertificateV2 (contains ESSCertIDv2) is a signed
             // attribute, with OID 1.2.840.113549.1.9.16.2.47, and that it must not be multiply defined.
@@ -580,9 +636,11 @@ namespace System.Security.Cryptography.Pkcs
             {
                 string? setOid = attrSet.Oid?.Value;
 
-                if (setOid != null &&
-                    setOid != Oids.SigningCertificate &&
-                    setOid != Oids.SigningCertificateV2)
+                if (
+                    setOid != null
+                    && setOid != Oids.SigningCertificate
+                    && setOid != Oids.SigningCertificateV2
+                )
                 {
                     continue;
                 }
@@ -602,7 +660,8 @@ namespace System.Security.Cryptography.Pkcs
                         {
                             SigningCertificateAsn signingCert = SigningCertificateAsn.Decode(
                                 attr.RawData,
-                                AsnEncodingRules.BER);
+                                AsnEncodingRules.BER
+                            );
 
                             if (signingCert.Certs.Length < 1)
                             {
@@ -629,7 +688,8 @@ namespace System.Security.Cryptography.Pkcs
                         {
                             SigningCertificateV2Asn signingCert = SigningCertificateV2Asn.Decode(
                                 attr.RawData,
-                                AsnEncodingRules.BER);
+                                AsnEncodingRules.BER
+                            );
 
                             if (signingCert.Certs.Length < 1)
                             {

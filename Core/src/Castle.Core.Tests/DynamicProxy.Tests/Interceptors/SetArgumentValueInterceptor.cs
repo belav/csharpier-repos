@@ -14,20 +14,20 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	public sealed class SetArgumentValueInterceptor : IInterceptor
-	{
-		private int index;
-		private object value;
+    public sealed class SetArgumentValueInterceptor : IInterceptor
+    {
+        private int index;
+        private object value;
 
-		public SetArgumentValueInterceptor(int index, object value)
-		{
-			this.index = index;
-			this.value = value;
-		}
+        public SetArgumentValueInterceptor(int index, object value)
+        {
+            this.index = index;
+            this.value = value;
+        }
 
-		public void Intercept(IInvocation invocation)
-		{
-			invocation.SetArgumentValue(index, value);
-		}
-	}
+        public void Intercept(IInvocation invocation)
+        {
+            invocation.SetArgumentValue(index, value);
+        }
+    }
 }

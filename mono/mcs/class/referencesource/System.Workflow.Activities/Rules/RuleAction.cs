@@ -1,14 +1,14 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Text;
 using System.CodeDom;
-using System.Reflection;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Text;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
 using System.Workflow.ComponentModel.Serialization;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -63,7 +63,6 @@ namespace System.Workflow.Activities.Rules
         }
     }
 
-
     [Serializable]
     public class RuleUpdateAction : RuleAction
     {
@@ -74,9 +73,7 @@ namespace System.Workflow.Activities.Rules
             this.path = path;
         }
 
-        public RuleUpdateAction()
-        {
-        }
+        public RuleUpdateAction() { }
 
         public string Path
         {
@@ -93,7 +90,10 @@ namespace System.Workflow.Activities.Rules
 
             if (path == null)
             {
-                ValidationError error = new ValidationError(Messages.NullUpdate, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullUpdate,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = this;
                 validator.AddError(error);
                 success = false;
@@ -111,7 +111,10 @@ namespace System.Workflow.Activities.Rules
                         if (i < parts.Length - 1)
                         {
                             // The "*" occurred in the middle of the path, which is a no-no.
-                            ValidationError error = new ValidationError(Messages.InvalidWildCardInPathQualifier, ErrorNumbers.Error_InvalidWildCardInPathQualifier);
+                            ValidationError error = new ValidationError(
+                                Messages.InvalidWildCardInPathQualifier,
+                                ErrorNumbers.Error_InvalidWildCardInPathQualifier
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = this;
                             validator.AddError(error);
                             success = false;
@@ -132,7 +135,11 @@ namespace System.Workflow.Activities.Rules
                     while (currentType.IsArray)
                         currentType = currentType.GetElementType();
 
-                    BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
+                    BindingFlags bindingFlags =
+                        BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.FlattenHierarchy;
                     if (validator.AllowInternalMembers(currentType))
                         bindingFlags |= BindingFlags.NonPublic;
                     FieldInfo field = currentType.GetField(parts[i], bindingFlags);
@@ -149,8 +156,15 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            string message = string.Format(CultureInfo.CurrentCulture, Messages.UpdateUnknownFieldOrProperty, parts[i]);
-                            ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidUpdate);
+                            string message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.UpdateUnknownFieldOrProperty,
+                                parts[i]
+                            );
+                            ValidationError error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_InvalidUpdate
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = this;
                             validator.AddError(error);
                             success = false;
@@ -161,7 +175,10 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                ValidationError error = new ValidationError(Messages.UpdateNotThis, ErrorNumbers.Error_InvalidUpdate);
+                ValidationError error = new ValidationError(
+                    Messages.UpdateNotThis,
+                    ErrorNumbers.Error_InvalidUpdate
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = this;
                 validator.AddError(error);
                 success = false;
@@ -194,7 +211,9 @@ namespace System.Workflow.Activities.Rules
         {
 #pragma warning disable 56506
             RuleUpdateAction other = obj as RuleUpdateAction;
-            return ((other != null) && (string.Equals(this.Path, other.Path, StringComparison.Ordinal)));
+            return (
+                (other != null) && (string.Equals(this.Path, other.Path, StringComparison.Ordinal))
+            );
 #pragma warning restore 56506
         }
 
@@ -219,9 +238,7 @@ namespace System.Workflow.Activities.Rules
             this.codeDomStatement = new CodeExpressionStatement(codeDomExpression);
         }
 
-        public RuleStatementAction()
-        {
-        }
+        public RuleStatementAction() { }
 
         public CodeStatement CodeDomStatement
         {
@@ -236,7 +253,10 @@ namespace System.Workflow.Activities.Rules
 
             if (codeDomStatement == null)
             {
-                ValidationError error = new ValidationError(Messages.NullStatement, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullStatement,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = this;
                 validator.AddError(error);
                 return false;
@@ -283,7 +303,10 @@ namespace System.Workflow.Activities.Rules
         {
 #pragma warning disable 56506
             RuleStatementAction other = obj as RuleStatementAction;
-            return ((other != null) && (CodeDomStatementWalker.Match(CodeDomStatement, other.CodeDomStatement)));
+            return (
+                (other != null)
+                && (CodeDomStatementWalker.Match(CodeDomStatement, other.CodeDomStatement))
+            );
 #pragma warning restore 56506
         }
 

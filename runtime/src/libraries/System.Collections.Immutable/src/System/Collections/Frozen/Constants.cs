@@ -43,48 +43,56 @@ namespace System.Collections.Frozen
         /// </remarks>
         public static bool IsKnownComparable<T>() =>
             // This list covers all of the IComparable<T> value types in Corelib that aren't containers (like ValueTuple).
-            typeof(T) == typeof(bool) ||
-            typeof(T) == typeof(sbyte) ||
-            typeof(T) == typeof(byte) ||
-            typeof(T) == typeof(char) ||
-            typeof(T) == typeof(short) ||
-            typeof(T) == typeof(ushort) ||
-            typeof(T) == typeof(int) ||
-            typeof(T) == typeof(uint) ||
-            typeof(T) == typeof(long) ||
-            typeof(T) == typeof(ulong) ||
-            typeof(T) == typeof(decimal) ||
-            typeof(T) == typeof(float) ||
-            typeof(T) == typeof(double) ||
-            typeof(T) == typeof(decimal) ||
-            typeof(T) == typeof(TimeSpan) ||
-            typeof(T) == typeof(DateTime) ||
-            typeof(T) == typeof(DateTimeOffset) ||
-            typeof(T) == typeof(Guid) ||
+            typeof(T) == typeof(bool)
+            || typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(byte)
+            || typeof(T) == typeof(char)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(int)
+            || typeof(T) == typeof(uint)
+            || typeof(T) == typeof(long)
+            || typeof(T) == typeof(ulong)
+            || typeof(T) == typeof(decimal)
+            || typeof(T) == typeof(float)
+            || typeof(T) == typeof(double)
+            || typeof(T) == typeof(decimal)
+            || typeof(T) == typeof(TimeSpan)
+            || typeof(T) == typeof(DateTime)
+            || typeof(T) == typeof(DateTimeOffset)
+            || typeof(T) == typeof(Guid)
+            ||
 #if NETCOREAPP3_0_OR_GREATER
-            typeof(T) == typeof(Rune) ||
+            typeof(T) == typeof(Rune)
+            ||
 #endif
 #if NET5_0_OR_GREATER
-            typeof(T) == typeof(Half) ||
-            typeof(T) == typeof(nint) ||
-            typeof(T) == typeof(nuint) ||
+            typeof(T) == typeof(Half)
+            || typeof(T) == typeof(nint)
+            || typeof(T) == typeof(nuint)
+            ||
 #endif
 #if NET6_0_OR_GREATER
-            typeof(T) == typeof(DateOnly) ||
-            typeof(T) == typeof(TimeOnly) ||
+            typeof(T) == typeof(DateOnly)
+            || typeof(T) == typeof(TimeOnly)
+            ||
 #endif
 #if NET7_0_OR_GREATER
-            typeof(T) == typeof(Int128) ||
-            typeof(T) == typeof(UInt128) ||
+            typeof(T) == typeof(Int128)
+            || typeof(T) == typeof(UInt128)
+            ||
 #endif
             typeof(T).IsEnum;
 
         // for these types GetHashCode returns their value casted to int, so when we receive a Dictionary/HashSet where there are key
         // we know that all hash codes are unique and we can avoid some work later
-        internal static bool KeysAreHashCodes<T>()
-            => typeof(T) == typeof(int) || typeof(T) == typeof(uint)
-            || typeof(T) == typeof(short) || typeof(T) == typeof(ushort)
-            || typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte)
+        internal static bool KeysAreHashCodes<T>() =>
+            typeof(T) == typeof(int)
+            || typeof(T) == typeof(uint)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(byte)
+            || typeof(T) == typeof(sbyte)
             || ((typeof(T) == typeof(nint) || typeof(T) == typeof(nuint)) && IntPtr.Size == 4);
     }
 }

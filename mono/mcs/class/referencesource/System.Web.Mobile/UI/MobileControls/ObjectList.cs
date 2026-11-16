@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectList.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -11,11 +11,11 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing.Design;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -30,14 +30,29 @@ namespace System.Web.UI.MobileControls
         DefaultEvent("ItemCommand"),
         DefaultProperty("DataSource"),
         Designer(typeof(System.Web.UI.Design.MobileControls.ObjectListDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerObjectListAdapter)),
-        Editor(typeof(System.Web.UI.Design.MobileControls.ObjectListComponentEditor), typeof(ComponentEditor)),
-        ToolboxData("<{0}:ObjectList runat=\"server\" LabelStyle-StyleReference=\"title\" CommandStyle-StyleReference=\"subcommand\"></{0}:ObjectList>"),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerObjectListAdapter)
+        ),
+        Editor(
+            typeof(System.Web.UI.Design.MobileControls.ObjectListComponentEditor),
+            typeof(ComponentEditor)
+        ),
+        ToolboxData(
+            "<{0}:ObjectList runat=\"server\" LabelStyle-StyleReference=\"title\" CommandStyle-StyleReference=\"subcommand\"></{0}:ObjectList>"
+        ),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ObjectList : PagedControl, INamingContainer, ITemplateable, IPostBackEventHandler
     {
         private static readonly Object EventItemDataBind = new Object();
@@ -70,10 +85,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.SelectMoreCommand"]/*' />
         public static String SelectMoreCommand
         {
-            get
-            {
-                return "More";
-            }
+            get { return "More"; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.DataSource"]/*' />
@@ -84,16 +96,13 @@ namespace System.Web.UI.MobileControls
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.ObjectList_DataSource)
         ]
-        public virtual Object DataSource 
+        public virtual Object DataSource
         {
-            get 
-            {
-                return _dataSource;
-            }
-            set 
+            get { return _dataSource; }
+            set
             {
                 _dataSource = value;
-                // _allFields and _resolvedDataSource need to be recalculated.  
+                // _allFields and _resolvedDataSource need to be recalculated.
                 _allFields = null;
                 _resolvedDataSource = null;
             }
@@ -105,26 +114,28 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.List_DataMember),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataMemberConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.DataMemberConverter)
+            )
         ]
         public virtual String DataMember
         {
-            get 
+            get
             {
                 String s = (String)ViewState["DataMember"];
                 return s == null ? String.Empty : s;
             }
-            set 
-            {
-                ViewState["DataMember"] = value;
-            }
+            set { ViewState["DataMember"] = value; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.Fields"]/*' />
         [
             Bindable(false),
             DefaultValue(null),
-            Editor(typeof(System.Web.UI.Design.MobileControls.FieldCollectionEditor), typeof(UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.MobileControls.FieldCollectionEditor),
+                typeof(UITypeEditor)
+            ),
             MergableProperty(false),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.ObjectList_Fields),
@@ -171,7 +182,10 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.Commands"]/*' />
         [
             Bindable(false),
-            Editor(typeof(System.Web.UI.Design.MobileControls.CommandCollectionEditor), typeof(UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.MobileControls.CommandCollectionEditor),
+                typeof(UITypeEditor)
+            ),
             MergableProperty(false),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.ObjectList_Commands),
@@ -200,14 +214,14 @@ namespace System.Web.UI.MobileControls
             MobileSysDescription(SR.ObjectList_LabelField),
             TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataFieldConverter))
         ]
-        public String LabelField 
+        public String LabelField
         {
-            get 
+            get
             {
                 String s = (String)ViewState["LabelField"];
                 return (s != null) ? s : String.Empty;
             }
-            set 
+            set
             {
                 ViewState["LabelField"] = value;
                 InvalidateDisplayFieldIndices();
@@ -220,38 +234,39 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.ObjectList_DefaultCommand),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DefaultCommandConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.DefaultCommandConverter)
+            )
         ]
         public String DefaultCommand
         {
-            get 
+            get
             {
                 String s = (String)ViewState["DefaultCommand"];
                 return (s != null) ? s : String.Empty;
             }
-            set 
-            {
-                ViewState["DefaultCommand"] = value;
-            }
+            set { ViewState["DefaultCommand"] = value; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.TableFields"]/*' />
         [
             Bindable(true),
             DefaultValue(""),
-            Editor(typeof(System.Web.UI.Design.MobileControls.TableFieldsEditor),
-                typeof(UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.MobileControls.TableFieldsEditor),
+                typeof(UITypeEditor)
+            ),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.ObjectList_TableFields)
         ]
-        public String TableFields 
+        public String TableFields
         {
-            get 
+            get
             {
                 String s = (String)ViewState["TableFields"];
                 return (s != null) ? s : String.Empty;
             }
-            set 
+            set
             {
                 ViewState["TableFields"] = value;
                 InvalidateDisplayFieldIndices();
@@ -266,27 +281,29 @@ namespace System.Web.UI.MobileControls
         ]
         public int SelectedIndex
         {
-            get 
-            {
-                return _selectedIndex;
-            }
-            set 
+            get { return _selectedIndex; }
+            set
             {
                 if (value == -1 && ViewMode != ObjectListViewMode.List)
                 {
                     throw new Exception(
-                        SR.GetString(SR.ObjectList_MustBeInListModeToClearSelectedIndex));
-                }                
+                        SR.GetString(SR.ObjectList_MustBeInListModeToClearSelectedIndex)
+                    );
+                }
                 int itemCount = ItemCount > 0 ? ItemCount : Items.Count;
                 if (value < -1)
                 {
-                    throw new ArgumentOutOfRangeException("SelectedIndex",
-                        SR.GetString(SR.ObjectList_SelectedIndexTooSmall, value));
+                    throw new ArgumentOutOfRangeException(
+                        "SelectedIndex",
+                        SR.GetString(SR.ObjectList_SelectedIndexTooSmall, value)
+                    );
                 }
                 else if (itemCount > 0 && value >= itemCount)
                 {
-                    throw new ArgumentOutOfRangeException("SelectedIndex",
-                        SR.GetString(SR.ObjectList_SelectedIndexTooBig, value, itemCount));
+                    throw new ArgumentOutOfRangeException(
+                        "SelectedIndex",
+                        SR.GetString(SR.ObjectList_SelectedIndexTooBig, value, itemCount)
+                    );
                 }
                 // End of guard clauses.
 
@@ -305,17 +322,17 @@ namespace System.Web.UI.MobileControls
         ]
         public ObjectListItem Selection
         {
-            get 
+            get
             {
                 if (SelectedIndex == -1)
                 {
                     return null;
                 }
-                EnsureItemLoaded (SelectedIndex);
+                EnsureItemLoaded(SelectedIndex);
                 int selectedIndex = TranslateVirtualItemIndex(SelectedIndex);
                 if (selectedIndex >= 0 && selectedIndex < Items.Count)
                 {
-                    Debug.Assert (Items[selectedIndex].Selected);
+                    Debug.Assert(Items[selectedIndex].Selected);
                     return Items[selectedIndex];
                 }
                 else
@@ -376,13 +393,13 @@ namespace System.Web.UI.MobileControls
                             _allFields = _fields;
                         }
                     }
-                    else 
+                    else
                     {
                         if (_fields == null)
                         {
                             _allFields = _autoGeneratedFields;
                         }
-                        else 
+                        else
                         {
                             int count = _fields.Count + _autoGeneratedFields.Count;
 
@@ -437,7 +454,9 @@ namespace System.Web.UI.MobileControls
                 EnsureChildControls();
                 if (ViewMode != ObjectListViewMode.Details)
                 {
-                    throw new Exception(SR.GetString(SR.ObjectList_MustBeInDetailsModeToGetDetails));
+                    throw new Exception(
+                        SR.GetString(SR.ObjectList_MustBeInDetailsModeToGetDetails)
+                    );
                 }
                 return Selection;
             }
@@ -498,9 +517,10 @@ namespace System.Web.UI.MobileControls
             for (int pos = 0; pos < length; )
             {
                 int nextSemicolon = tableFields.IndexOf(';', pos);
-                String fieldName = (nextSemicolon == -1) ? 
-                    tableFields.Substring(pos) :
-                    tableFields.Substring(pos, nextSemicolon - pos);
+                String fieldName =
+                    (nextSemicolon == -1)
+                        ? tableFields.Substring(pos)
+                        : tableFields.Substring(pos, nextSemicolon - pos);
                 tableFieldIndexList.Add(GetFieldIndex(fieldName));
                 pos = nextSemicolon == -1 ? length : nextSemicolon + 1;
             }
@@ -518,8 +538,7 @@ namespace System.Web.UI.MobileControls
             int index = AllFields.IndexOf(field);
             if (index == -1)
             {
-                throw new ArgumentException(SR.GetString(
-                                        SR.ObjectList_FieldNotFound, field));
+                throw new ArgumentException(SR.GetString(SR.ObjectList_FieldNotFound, field));
             }
             return index;
         }
@@ -532,7 +551,7 @@ namespace System.Web.UI.MobileControls
                 if (obj is ObjectListField)
                 {
                     Fields.Add((ObjectListField)obj);
-                } 
+                }
                 else if (obj is ObjectListCommand)
                 {
                     Commands.Add((ObjectListCommand)obj);
@@ -550,15 +569,17 @@ namespace System.Web.UI.MobileControls
             {
                 if (_resolvedDataSource == null)
                 {
-                    _resolvedDataSource = 
-                        DataSourceHelper.GetResolvedDataSource(DataSource, DataMember);
+                    _resolvedDataSource = DataSourceHelper.GetResolvedDataSource(
+                        DataSource,
+                        DataMember
+                    );
                 }
                 return _resolvedDataSource;
             }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.CreateChildControls"]/*' />
-        protected override void CreateChildControls() 
+        protected override void CreateChildControls()
         {
             Controls.Clear();
             if (ViewState[_itemCountViewStateKey] != null)
@@ -567,7 +588,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        private void CreateChildControls(bool doDataBind) 
+        private void CreateChildControls(bool doDataBind)
         {
             if (IsTemplated)
             {
@@ -578,7 +599,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.DataBind"]/*' />
-        public override void DataBind() 
+        public override void DataBind()
         {
             // Do our own databinding
             OnDataBinding(EventArgs.Empty);
@@ -586,9 +607,9 @@ namespace System.Web.UI.MobileControls
             // Contained items will be databound after they have been created,
             // so we don't want to walk the hierarchy here.
         }
-        
+
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.OnDataBinding"]/*' />
-        protected override void OnDataBinding(EventArgs e) 
+        protected override void OnDataBinding(EventArgs e)
         {
             base.OnDataBinding(e);
 
@@ -603,27 +624,28 @@ namespace System.Web.UI.MobileControls
                 CreateAutoGeneratedFields(ResolvedDataSource);
             }
 
-            if ((AllFields == null || AllFields.Count == 0) 
-                && MobilePage != null 
-                && !MobilePage.DesignMode)
+            if (
+                (AllFields == null || AllFields.Count == 0)
+                && MobilePage != null
+                && !MobilePage.DesignMode
+            )
             {
-                throw new Exception(
-                    SR.GetString(SR.ObjectList_MustHaveOneOrMoreFields));
+                throw new Exception(SR.GetString(SR.ObjectList_MustHaveOneOrMoreFields));
             }
-            
+
             CreateItems(ResolvedDataSource);
-            
+
             if (!_loadingItems)
             {
                 // To clear the selected index, the ViewMode must be list.
                 ViewMode = ObjectListViewMode.List;
-                SelectedIndex = -1;    
+                SelectedIndex = -1;
             }
             else
             {
                 SelectItemIfLoaded(SelectedIndex);
             }
-            
+
             CreateChildControls(true);
         }
 
@@ -647,13 +669,18 @@ namespace System.Web.UI.MobileControls
             {
                 if (i > 0)
                 {
-                    CreateControlItem(MobileListItemType.SeparatorItem, 
-                                      separatorTemplate, 
-                                      doDataBind);
+                    CreateControlItem(
+                        MobileListItemType.SeparatorItem,
+                        separatorTemplate,
+                        doDataBind
+                    );
                 }
-                AddItemAsControl(i, items[i], 
-                                   ((i & 1) == 1) ? alternatingItemTemplate : itemTemplate, 
-                                   doDataBind);
+                AddItemAsControl(
+                    i,
+                    items[i],
+                    ((i & 1) == 1) ? alternatingItemTemplate : itemTemplate,
+                    doDataBind
+                );
             }
             CreateControlItem(MobileListItemType.FooterItem, footerTemplate, doDataBind);
         }
@@ -661,16 +688,17 @@ namespace System.Web.UI.MobileControls
         private void AddItemAsControl(
             int itemIndex,
             MobileListItem item,
-            ITemplate itemTemplate, 
-            bool doDataBind)
+            ITemplate itemTemplate,
+            bool doDataBind
+        )
         {
             if (itemTemplate != null)
             {
                 // No need to do it again, since CreateItems already does it.
-                item.Controls.Clear();                
+                item.Controls.Clear();
                 item.ID = null;
                 Controls.Add(item);
-                CheckedInstantiateTemplate (itemTemplate, item, this);
+                CheckedInstantiateTemplate(itemTemplate, item, this);
                 if (doDataBind)
                 {
                     item.DataBind();
@@ -679,9 +707,10 @@ namespace System.Web.UI.MobileControls
         }
 
         private void CreateControlItem(
-            MobileListItemType itemType, 
-            ITemplate itemTemplate, 
-            bool doDataBind)
+            MobileListItemType itemType,
+            ITemplate itemTemplate,
+            bool doDataBind
+        )
         {
             if (itemTemplate != null)
             {
@@ -701,11 +730,11 @@ namespace System.Web.UI.MobileControls
 
             if (detailsTemplate != null)
             {
-                if (!Controls.Contains (Selection))
+                if (!Controls.Contains(Selection))
                 {
-                    Controls.Add (Selection);
+                    Controls.Add(Selection);
                 }
-                CheckedInstantiateTemplate (detailsTemplate, Selection, this);
+                CheckedInstantiateTemplate(detailsTemplate, Selection, this);
                 if (doDataBind)
                 {
                     Selection.DataBind();
@@ -714,16 +743,16 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.CreateItems"]/*' />
-        protected virtual void CreateItems(IEnumerable dataSource) 
+        protected virtual void CreateItems(IEnumerable dataSource)
         {
-            Debug.Assert (dataSource != null, "dataSource is null");
+            Debug.Assert(dataSource != null, "dataSource is null");
 
             Items.Clear();
 
             int count = 0;
             IEnumerator enumerator;
 
-            if(_storedDataValid  && _firstDataItem != null)
+            if (_storedDataValid && _firstDataItem != null)
             {
                 enumerator = _storedEnumerator;
                 ObjectListItem item = CreateItem(_firstDataItem);
@@ -739,7 +768,7 @@ namespace System.Web.UI.MobileControls
                 enumerator = dataSource.GetEnumerator();
             }
 
-            while(enumerator.MoveNext())
+            while (enumerator.MoveNext())
             {
                 Object dataItem = enumerator.Current;
                 ObjectListItem item = CreateItem(dataItem);
@@ -753,7 +782,7 @@ namespace System.Web.UI.MobileControls
         protected virtual ObjectListItem CreateItem(Object dataItem)
         {
             ObjectListItem item = new ObjectListItem(this, dataItem);
-            
+
             // Set fields.
 
             IObjectListFieldCollection allFields = AllFields;
@@ -786,20 +815,22 @@ namespace System.Web.UI.MobileControls
                 int lastVisibleItem = firstVisibleItem + pageSize - 1;
                 int itemIndex = 0;
                 int separatorIndex = 0;
-                foreach(Control ctl in Controls)
+                foreach (Control ctl in Controls)
                 {
                     MobileListItem item = ctl as MobileListItem;
                     if (item != null)
                     {
                         if (item.ItemType == MobileListItemType.ListItem)
                         {
-                            item.Visible = itemIndex >= firstVisibleItem && itemIndex <= lastVisibleItem;
+                            item.Visible =
+                                itemIndex >= firstVisibleItem && itemIndex <= lastVisibleItem;
                             itemIndex++;
                         }
                         else if (item.ItemType == MobileListItemType.SeparatorItem)
                         {
-                            item.Visible = separatorIndex >= firstVisibleItem && 
-                                                separatorIndex < lastVisibleItem;
+                            item.Visible =
+                                separatorIndex >= firstVisibleItem
+                                && separatorIndex < lastVisibleItem;
                             separatorIndex++;
                         }
                     }
@@ -824,8 +855,9 @@ namespace System.Web.UI.MobileControls
 
             if (dataSource is ITypedList)
             {
-                propertyDescriptors = 
-                    ((ITypedList)dataSource).GetItemProperties(new PropertyDescriptor[0]);
+                propertyDescriptors = ((ITypedList)dataSource).GetItemProperties(
+                    new PropertyDescriptor[0]
+                );
             }
 
             if (propertyDescriptors == null)
@@ -837,9 +869,9 @@ namespace System.Web.UI.MobileControls
                     StoreEnumerator(enumerator, sampleItem);
                     if (IsBindableType(sampleItem.GetType()))
                     {
-                        list.Add(CreateAutoGeneratedField(
-                                        SR.GetString(SR.ObjectList_ItemTitle), 
-                                        null));
+                        list.Add(
+                            CreateAutoGeneratedField(SR.GetString(SR.ObjectList_ItemTitle), null)
+                        );
                     }
                     else
                     {
@@ -855,8 +887,8 @@ namespace System.Web.UI.MobileControls
                     if (IsBindableType(pd.PropertyType))
                     {
                         String title;
-                        ObjectListTitleAttribute attr = 
-                            (ObjectListTitleAttribute)pd.Attributes[typeof(ObjectListTitleAttribute)];
+                        ObjectListTitleAttribute attr = (ObjectListTitleAttribute)
+                            pd.Attributes[typeof(ObjectListTitleAttribute)];
                         if (attr != null)
                         {
                             title = attr.Title;
@@ -875,7 +907,7 @@ namespace System.Web.UI.MobileControls
 
         ///  Caches the fact that we have already consumed the first item from the enumeration
         ///  and must use it first during our item creation.
-        internal void StoreEnumerator(IEnumerator enumerator, object firstDataItem) 
+        internal void StoreEnumerator(IEnumerator enumerator, object firstDataItem)
         {
             _storedEnumerator = enumerator;
             _firstDataItem = firstDataItem;
@@ -884,10 +916,12 @@ namespace System.Web.UI.MobileControls
 
         private bool IsBindableType(Type type)
         {
-            return(type.IsPrimitive ||
-                   (type == typeof(String)) ||
-                   (type == typeof(DateTime)) ||
-                   (type == typeof(Decimal)));
+            return (
+                type.IsPrimitive
+                || (type == typeof(String))
+                || (type == typeof(DateTime))
+                || (type == typeof(Decimal))
+            );
         }
 
         private ObjectListField CreateAutoGeneratedField(String title, String dataField)
@@ -908,7 +942,8 @@ namespace System.Web.UI.MobileControls
 
         Object SaveAutoFieldsState()
         {
-            int autoGeneratedCount = (_autoGeneratedFields != null) ? _autoGeneratedFields.Count : 0;
+            int autoGeneratedCount =
+                (_autoGeneratedFields != null) ? _autoGeneratedFields.Count : 0;
             if (autoGeneratedCount != 0)
             {
                 Object[] fieldStates = new Object[autoGeneratedCount];
@@ -935,7 +970,7 @@ namespace System.Web.UI.MobileControls
                 {
                     ObjectListField field = new ObjectListField();
                     ((IStateManager)field).TrackViewState();
-                    ((IStateManager)field).LoadViewState (fieldState);
+                    ((IStateManager)field).LoadViewState(fieldState);
                     list.Add(field);
                 }
                 _autoGeneratedFields = new ObjectListFieldCollection(this, list);
@@ -972,7 +1007,6 @@ namespace System.Web.UI.MobileControls
                     return 0;
                 }
             }
-            
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -984,23 +1018,17 @@ namespace System.Web.UI.MobileControls
             MobileCategory(SR.Category_Action),
             MobileSysDescription(SR.ObjectList_OnItemDataBind)
         ]
-        public event ObjectListDataBindEventHandler ItemDataBind 
+        public event ObjectListDataBindEventHandler ItemDataBind
         {
-            add
-            {
-                Events.AddHandler(EventItemDataBind, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventItemDataBind, value);
-            }
+            add { Events.AddHandler(EventItemDataBind, value); }
+            remove { Events.RemoveHandler(EventItemDataBind, value); }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.OnItemDataBind"]/*' />
-        protected virtual void OnItemDataBind(ObjectListDataBindEventArgs e) 
+        protected virtual void OnItemDataBind(ObjectListDataBindEventArgs e)
         {
-            ObjectListDataBindEventHandler onItemDataBindHandler = 
-                (ObjectListDataBindEventHandler)Events[EventItemDataBind];
+            ObjectListDataBindEventHandler onItemDataBindHandler = (ObjectListDataBindEventHandler)
+                Events[EventItemDataBind];
             if (onItemDataBindHandler != null)
             {
                 onItemDataBindHandler(this, e);
@@ -1008,26 +1036,18 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.ItemCommand"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.ObjectList_OnItemCommand)
-        ]
-        public event ObjectListCommandEventHandler ItemCommand 
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.ObjectList_OnItemCommand)]
+        public event ObjectListCommandEventHandler ItemCommand
         {
-            add
-            {
-                Events.AddHandler(EventItemCommand, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventItemCommand, value);
-            }
+            add { Events.AddHandler(EventItemCommand, value); }
+            remove { Events.RemoveHandler(EventItemCommand, value); }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.OnItemCommand"]/*' />
-        protected virtual void OnItemCommand(ObjectListCommandEventArgs e) 
+        protected virtual void OnItemCommand(ObjectListCommandEventArgs e)
         {
-            ObjectListCommandEventHandler onItemCommandHandler = (ObjectListCommandEventHandler)Events[EventItemCommand];
+            ObjectListCommandEventHandler onItemCommandHandler = (ObjectListCommandEventHandler)
+                Events[EventItemCommand];
             if (onItemCommandHandler != null)
             {
                 onItemCommandHandler(this, e);
@@ -1035,26 +1055,18 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.ItemSelect"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.ObjectList_OnItemSelect)
-        ]
-        public event ObjectListSelectEventHandler ItemSelect 
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.ObjectList_OnItemSelect)]
+        public event ObjectListSelectEventHandler ItemSelect
         {
-            add
-            {
-                Events.AddHandler(EventItemSelect, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventItemSelect, value);
-            }
+            add { Events.AddHandler(EventItemSelect, value); }
+            remove { Events.RemoveHandler(EventItemSelect, value); }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.OnItemSelect"]/*' />
-        protected virtual void OnItemSelect(ObjectListSelectEventArgs e) 
+        protected virtual void OnItemSelect(ObjectListSelectEventArgs e)
         {
-            ObjectListSelectEventHandler onItemSelectHandler = (ObjectListSelectEventHandler)Events[EventItemSelect];
+            ObjectListSelectEventHandler onItemSelectHandler = (ObjectListSelectEventHandler)
+                Events[EventItemSelect];
             if (onItemSelectHandler != null)
             {
                 onItemSelectHandler(this, e);
@@ -1069,10 +1081,7 @@ namespace System.Web.UI.MobileControls
         ]
         public bool HasItemCommandHandler
         {
-            get
-            {
-                return Events[EventItemCommand] != null;
-            }
+            get { return Events[EventItemCommand] != null; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.ShowItemCommands"]/*' />
@@ -1080,23 +1089,17 @@ namespace System.Web.UI.MobileControls
             MobileCategory(SR.Category_Action),
             MobileSysDescription(SR.ObjectList_OnShowItemCommands)
         ]
-        public event ObjectListShowCommandsEventHandler ShowItemCommands 
+        public event ObjectListShowCommandsEventHandler ShowItemCommands
         {
-            add 
-            {
-                Events.AddHandler(EventShowItemCommands, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventShowItemCommands, value);
-            }
+            add { Events.AddHandler(EventShowItemCommands, value); }
+            remove { Events.RemoveHandler(EventShowItemCommands, value); }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.OnShowItemCommands"]/*' />
-        protected virtual void OnShowItemCommands(ObjectListShowCommandsEventArgs e) 
+        protected virtual void OnShowItemCommands(ObjectListShowCommandsEventArgs e)
         {
-            ObjectListShowCommandsEventHandler onShowItemCommandsHandler
-                = (ObjectListShowCommandsEventHandler)Events[EventShowItemCommands];
+            ObjectListShowCommandsEventHandler onShowItemCommandsHandler =
+                (ObjectListShowCommandsEventHandler)Events[EventShowItemCommands];
             if (onShowItemCommandsHandler != null)
             {
                 onShowItemCommandsHandler(this, e);
@@ -1104,13 +1107,13 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.OnBubbleEvent"]/*' />
-        protected override bool OnBubbleEvent(Object sender, EventArgs e) 
+        protected override bool OnBubbleEvent(Object sender, EventArgs e)
         {
             bool handled = false;
 
             if (e is CommandEventArgs)
             {
-                if (e is ObjectListCommandEventArgs) 
+                if (e is ObjectListCommandEventArgs)
                 {
                     OnItemCommand((ObjectListCommandEventArgs)e);
                     handled = true;
@@ -1132,7 +1135,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.RaiseDefaultItemEvent"]/*' />
         public void RaiseDefaultItemEvent(int itemIndex)
         {
-            EnsureItemLoaded (itemIndex);
+            EnsureItemLoaded(itemIndex);
             int itemCollIndex = TranslateVirtualItemIndex(itemIndex);
             SelectedIndex = itemIndex;
             OnItemCommand(new ObjectListCommandEventArgs(Items[itemCollIndex], DefaultCommand));
@@ -1141,12 +1144,13 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.SelectListItem"]/*' />
         public bool SelectListItem(int itemIndex, bool selectMore)
         {
-            EnsureItemLoaded (itemIndex);
+            EnsureItemLoaded(itemIndex);
             int itemCollIndex = TranslateVirtualItemIndex(itemIndex);
 
             ObjectListSelectEventArgs args = new ObjectListSelectEventArgs(
-                                                        Items[itemCollIndex], 
-                                                        selectMore);
+                Items[itemCollIndex],
+                selectMore
+            );
             SelectedIndex = itemIndex;
             OnItemSelect(args);
             return args.UseDefaultHandling;
@@ -1155,9 +1159,9 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.PreShowItemCommands"]/*' />
         public void PreShowItemCommands(int itemIndex)
         {
-            // Called just before commands are shown for a given item. We call 
+            // Called just before commands are shown for a given item. We call
             // an event handler that can modify (or even replace) the commands collection,
-            // but first we mark the collection, and save it off, so that we can 
+            // but first we mark the collection, and save it off, so that we can
             // save the state of the collection at this point.
 
             if (_commands != null)
@@ -1168,8 +1172,10 @@ namespace System.Web.UI.MobileControls
 
             SelectedIndex = itemIndex;
 
-            ObjectListShowCommandsEventArgs eventArgs = 
-                new ObjectListShowCommandsEventArgs(Selection, Commands);
+            ObjectListShowCommandsEventArgs eventArgs = new ObjectListShowCommandsEventArgs(
+                Selection,
+                Commands
+            );
             OnShowItemCommands(eventArgs);
             if (eventArgs.Commands != _commands)
             {
@@ -1179,11 +1185,15 @@ namespace System.Web.UI.MobileControls
 
         private void EnsureItemLoaded(int virtualIndex)
         {
-            Debug.Assert (virtualIndex >= 0, "virtualIndex < 0");
-            if (ItemCount > 0 &&
-                    (_items == null || 
-                    virtualIndex < Items.BaseIndex || 
-                    Items.Count <= virtualIndex - Items.BaseIndex))
+            Debug.Assert(virtualIndex >= 0, "virtualIndex < 0");
+            if (
+                ItemCount > 0
+                && (
+                    _items == null
+                    || virtualIndex < Items.BaseIndex
+                    || Items.Count <= virtualIndex - Items.BaseIndex
+                )
+            )
             {
                 OnLoadItems(new LoadItemsEventArgs(virtualIndex, 1));
             }
@@ -1193,7 +1203,7 @@ namespace System.Web.UI.MobileControls
         {
             Debug.Assert(ItemCount > 0 || Items.BaseIndex == 0);
 
-            // Translate virtual index to true index within collection.            
+            // Translate virtual index to true index within collection.
             // If custom pagination is off, virtual index is the true index.
             return virtualIndex - Items.BaseIndex;
         }
@@ -1243,7 +1253,7 @@ namespace System.Web.UI.MobileControls
             Object baseState = base.SavePrivateViewState();
             if (ViewMode != ObjectListViewMode.List || _selectedIndexDirty)
             {
-                return new Triplet(baseState, (int) ViewMode, SelectedIndex);
+                return new Triplet(baseState, (int)ViewMode, SelectedIndex);
             }
             else if (baseState != null)
             {
@@ -1260,21 +1270,21 @@ namespace System.Web.UI.MobileControls
                 Triplet stateTriplet = state as Triplet;
                 if (stateTriplet != null)
                 {
-                    base.LoadPrivateViewState (stateTriplet.First);
+                    base.LoadPrivateViewState(stateTriplet.First);
                     ObjectListViewMode originalViewMode = _viewMode;
-                    
+
                     // use private field because property get calls CreateChildControls.
-                    _viewMode = (ObjectListViewMode) stateTriplet.Second;
-                    
+                    _viewMode = (ObjectListViewMode)stateTriplet.Second;
+
                     // use property to insure we load items if necessary and set selected index dirty.
                     SelectedIndex = (int)stateTriplet.Third;
-                    
+
                     bool viewModeChanged = (originalViewMode != _viewMode);
                     if (ChildControlsCreated && viewModeChanged)
                     {
                         // This is before items loaded in LVS, so we only do this if
                         // child controls already created in init (e.g., no VS.)
-                        CreateChildControls (true);
+                        CreateChildControls(true);
                     }
                 }
                 else
@@ -1285,14 +1295,18 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.SaveViewState"]/*' />
-        protected override Object SaveViewState() 
+        protected override Object SaveViewState()
         {
-            Object baseState, fieldsState, autoFieldsState, commandsState, itemsState;
-        
-            Debug.Assert (Items != null, "get_Items should initialize Items collection.");
+            Object baseState,
+                fieldsState,
+                autoFieldsState,
+                commandsState,
+                itemsState;
+
+            Debug.Assert(Items != null, "get_Items should initialize Items collection.");
             int count = Items.Count;
             // HasControls implies DataBound on this or a prev req (but not converse).
-            if (count > 0 || HasControls()) 
+            if (count > 0 || HasControls())
             {
                 ViewState[_itemCountViewStateKey] = count;
             }
@@ -1302,18 +1316,20 @@ namespace System.Web.UI.MobileControls
             commandsState = (_commands != null) ? ((IStateManager)_commands).SaveViewState() : null;
             itemsState = (_items != null) ? ((IStateManager)_items).SaveViewState() : null;
 
-            if (itemsState != null || 
-                fieldsState != null || 
-                autoFieldsState != null || 
-                commandsState != null )
+            if (
+                itemsState != null
+                || fieldsState != null
+                || autoFieldsState != null
+                || commandsState != null
+            )
             {
                 return new Object[5]
-                { 
-                    baseState, 
-                    fieldsState, 
-                    autoFieldsState, 
-                    commandsState, 
-                    itemsState
+                {
+                    baseState,
+                    fieldsState,
+                    autoFieldsState,
+                    commandsState,
+                    itemsState,
                 };
             }
             else if (baseState != null)
@@ -1324,11 +1340,11 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.LoadViewState"]/*' />
-        protected override void LoadViewState(Object savedState) 
+        protected override void LoadViewState(Object savedState)
         {
             // copy locally (can change during Fields.LVS).
             bool ignoreFieldsItemsViewModeViewState = _ignoreFieldsItemsViewModeViewState;
-            if (savedState != null) 
+            if (savedState != null)
             {
                 Object[] state = (Object[])savedState;
                 base.LoadViewState(state[0]);
@@ -1337,13 +1353,13 @@ namespace System.Web.UI.MobileControls
                 {
                     // Always load items after loading fields, because field changes can wipe out
                     // items!
-                    if(!ignoreFieldsItemsViewModeViewState)
+                    if (!ignoreFieldsItemsViewModeViewState)
                     {
                         ((IStateManager)Fields).LoadViewState(state[1]);
                         LoadAutoFieldsState(state[2]);
                     }
                     ((IStateManager)Commands).LoadViewState(state[3]);
-                    if(!ignoreFieldsItemsViewModeViewState)
+                    if (!ignoreFieldsItemsViewModeViewState)
                     {
                         ((IStateManager)Items).LoadViewState(state[4]);
                         SelectItemIfLoaded(SelectedIndex);
@@ -1360,16 +1376,14 @@ namespace System.Web.UI.MobileControls
         ]
         public ObjectListViewMode ViewMode
         {
-            get
-            {
-                return _viewMode;
-            }
+            get { return _viewMode; }
             set
-            {   
+            {
                 if (SelectedIndex == -1 && value != ObjectListViewMode.List)
                 {
-                    throw new Exception(SR.GetString(
-                        SR.ObjectList_CannotSetViewModeWithNoSelectedItem));
+                    throw new Exception(
+                        SR.GetString(SR.ObjectList_CannotSetViewModeWithNoSelectedItem)
+                    );
                 }
                 if (value == ObjectListViewMode.List)
                 {
@@ -1396,10 +1410,7 @@ namespace System.Web.UI.MobileControls
                 String detailsCommandText = (String)ViewState["DetailsCommandText"];
                 return detailsCommandText != null ? detailsCommandText : String.Empty;
             }
-            set
-            {
-                ViewState["DetailsCommandText"] = value;
-            }
+            set { ViewState["DetailsCommandText"] = value; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.BackCommandText"]/*' />
@@ -1414,13 +1425,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String backCommandText = (String) ViewState["BackCommandText"];
+                String backCommandText = (String)ViewState["BackCommandText"];
                 return backCommandText != null ? backCommandText : String.Empty;
             }
-            set
-            {
-                ViewState["BackCommandText"] = value;
-            }
+            set { ViewState["BackCommandText"] = value; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.MoreText"]/*' />
@@ -1438,10 +1446,7 @@ namespace System.Web.UI.MobileControls
                 String moreText = (String)ViewState["MoreText"];
                 return moreText != null ? moreText : String.Empty;
             }
-            set
-            {
-                ViewState["MoreText"] = value;
-            }
+            set { ViewState["MoreText"] = value; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.CommandStyle"]/*' />
@@ -1463,10 +1468,7 @@ namespace System.Web.UI.MobileControls
                 }
                 return _commandStyle;
             }
-            set
-            {
-                _commandStyle = value;
-            }
+            set { _commandStyle = value; }
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.LabelStyle"]/*' />
@@ -1489,10 +1491,7 @@ namespace System.Web.UI.MobileControls
                 }
                 return _labelStyle;
             }
-            set
-            {
-                _labelStyle = value;
-            }
+            set { _labelStyle = value; }
         }
 
         internal override void InvalidateParentStyles()
@@ -1550,12 +1549,12 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IPostBackEventHandler implementation
-        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-        #endregion 
+        #endregion
     }
-
 
     /*
      * Control builder for object lists.
@@ -1564,19 +1563,27 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectListControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ObjectListControlBuilder : MobileControlBuilder
     {
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectListControlBuilder.GetChildControlType"]/*' />
-        public override Type GetChildControlType(String tagName, IDictionary attributes) 
+        public override Type GetChildControlType(String tagName, IDictionary attributes)
         {
-            if (String.Compare(tagName, "Field", StringComparison.OrdinalIgnoreCase) == 0) 
+            if (String.Compare(tagName, "Field", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return typeof(ObjectListField);
             }
-            else if (String.Compare(tagName, "Command", StringComparison.OrdinalIgnoreCase) == 0) 
+            else if (String.Compare(tagName, "Command", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return typeof(ObjectListCommand);
             }

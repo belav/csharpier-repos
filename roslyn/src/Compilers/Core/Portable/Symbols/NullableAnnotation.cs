@@ -22,10 +22,12 @@ namespace Microsoft.CodeAnalysis
         /// </list>
         /// </summary>
         None = 0,
+
         /// <summary>
         /// The expression is not annotated (does not have a ?).
         /// </summary>
         NotAnnotated,
+
         /// <summary>
         /// The expression is annotated (does have a ?).
         /// </summary>

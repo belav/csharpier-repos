@@ -21,9 +21,7 @@ namespace System.ServiceModel.Discovery
         IAnnouncementInnerClient innerClient;
 
         public AnnouncementClient()
-            : this("*")
-        {
-        }
+            : this("*") { }
 
         public AnnouncementClient(string endpointConfigurationName)
         {
@@ -34,7 +32,8 @@ namespace System.ServiceModel.Discovery
 
             AnnouncementEndpoint announcementEndpoint =
                 ConfigurationUtility.LookupEndpointFromClientSection<AnnouncementEndpoint>(
-                endpointConfigurationName);
+                    endpointConfigurationName
+                );
 
             Initialize(announcementEndpoint);
         }
@@ -59,7 +58,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalAnnounceOnlineCompleted += value;
             }
-
             remove
             {
                 this.InternalAnnounceOnlineCompleted -= value;
@@ -80,7 +78,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalAnnounceOfflineCompleted += value;
             }
-
             remove
             {
                 this.InternalAnnounceOfflineCompleted -= value;
@@ -104,7 +101,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalClosed += value;
             }
-
             remove
             {
                 this.InternalClosed -= value;
@@ -125,7 +121,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalClosing += value;
             }
-
             remove
             {
                 this.InternalClosing -= value;
@@ -146,7 +141,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalFaulted += value;
             }
-
             remove
             {
                 this.InternalFaulted -= value;
@@ -167,7 +161,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalOpened += value;
             }
-
             remove
             {
                 this.InternalOpened -= value;
@@ -188,7 +181,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalOpening += value;
             }
-
             remove
             {
                 this.InternalOpening -= value;
@@ -207,11 +199,7 @@ namespace System.ServiceModel.Discovery
 
         public DiscoveryMessageSequenceGenerator MessageSequenceGenerator
         {
-            get
-            {
-                return this.innerClient.DiscoveryMessageSequenceGenerator;
-            }
-
+            get { return this.innerClient.DiscoveryMessageSequenceGenerator; }
             set
             {
                 if (value == null)
@@ -220,7 +208,9 @@ namespace System.ServiceModel.Discovery
                 }
                 if (((ICommunicationObject)this).State != CommunicationState.Created)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.DiscoverySetMessageSequenceInvalidState));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR2.DiscoverySetMessageSequenceInvalidState)
+                    );
                 }
                 this.innerClient.DiscoveryMessageSequenceGenerator = value;
             }
@@ -228,61 +218,43 @@ namespace System.ServiceModel.Discovery
 
         public ChannelFactory ChannelFactory
         {
-            get
-            {
-                return InnerClient.ChannelFactory;
-            }
+            get { return InnerClient.ChannelFactory; }
         }
 
         public ClientCredentials ClientCredentials
         {
-            get
-            {
-                return InnerClient.ClientCredentials;
-            }
+            get { return InnerClient.ClientCredentials; }
         }
 
         public ServiceEndpoint Endpoint
         {
-            get
-            {
-                return InnerClient.Endpoint;
-            }
+            get { return InnerClient.Endpoint; }
         }
 
         public IClientChannel InnerChannel
         {
-            get
-            {
-                return InnerClient.InnerChannel;
-            }
+            get { return InnerClient.InnerChannel; }
         }
 
         CommunicationState ICommunicationObject.State
         {
-            get
-            {
-                return InnerCommunicationObject.State;
-            }
+            get { return InnerCommunicationObject.State; }
         }
 
         IAnnouncementInnerClient InnerClient
         {
-            get
-            {
-                return this.innerClient;
-            }
+            get { return this.innerClient; }
         }
 
         ICommunicationObject InnerCommunicationObject
         {
-            get
-            {
-                return InnerClient.InnerCommunicationObject;
-            }
+            get { return InnerClient.InnerCommunicationObject; }
         }
 
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         [Fx.Tag.InheritThrows(From = "Open", FromDeclaringType = typeof(ICommunicationObject))]
         public void Open()
         {
@@ -298,7 +270,10 @@ namespace System.ServiceModel.Discovery
 
         [Fx.Tag.Throws(typeof(CommunicationException), "Inherits from Channel exception contract")]
         [Fx.Tag.Throws(typeof(TimeoutException), "Inherits from Channel exception contract")]
-        public void AnnounceOnlineAsync(EndpointDiscoveryMetadata discoveryMetadata, object userState)
+        public void AnnounceOnlineAsync(
+            EndpointDiscoveryMetadata discoveryMetadata,
+            object userState
+        )
         {
             if (discoveryMetadata == null)
             {
@@ -320,7 +295,10 @@ namespace System.ServiceModel.Discovery
 
         [Fx.Tag.Throws(typeof(CommunicationException), "Inherits from Channel exception contract")]
         [Fx.Tag.Throws(typeof(TimeoutException), "Inherits from Channel exception contract")]
-        public void AnnounceOfflineAsync(EndpointDiscoveryMetadata discoveryMetadata, object userState)
+        public void AnnounceOfflineAsync(
+            EndpointDiscoveryMetadata discoveryMetadata,
+            object userState
+        )
         {
             if (discoveryMetadata == null)
             {
@@ -367,7 +345,11 @@ namespace System.ServiceModel.Discovery
 
         [Fx.Tag.Throws(typeof(CommunicationException), "Inherits from Channel exception contract")]
         [Fx.Tag.Throws(typeof(TimeoutException), "Inherits from Channel exception contract")]
-        public IAsyncResult BeginAnnounceOnline(EndpointDiscoveryMetadata discoveryMetadata, AsyncCallback callback, object state)
+        public IAsyncResult BeginAnnounceOnline(
+            EndpointDiscoveryMetadata discoveryMetadata,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (discoveryMetadata == null)
             {
@@ -390,18 +372,32 @@ namespace System.ServiceModel.Discovery
         [Fx.Tag.Throws(typeof(AggregateException), "Inherits from Task exception contract")]
         public Task AnnounceOnlineTaskAsync(EndpointDiscoveryMetadata discoveryMetadata)
         {
-            return Task.Factory.FromAsync<EndpointDiscoveryMetadata>(this.BeginAnnounceOnline, this.EndAnnounceOnline, discoveryMetadata, /* state */ null);
+            return Task.Factory.FromAsync<EndpointDiscoveryMetadata>(
+                this.BeginAnnounceOnline,
+                this.EndAnnounceOnline,
+                discoveryMetadata, /* state */
+                null
+            );
         }
 
         [Fx.Tag.Throws(typeof(AggregateException), "Inherits from Task exception contract")]
         public Task AnnounceOfflineTaskAsync(EndpointDiscoveryMetadata discoveryMetadata)
         {
-            return Task.Factory.FromAsync<EndpointDiscoveryMetadata>(this.BeginAnnounceOffline, this.EndAnnounceOffline, discoveryMetadata, /* state */ null);
+            return Task.Factory.FromAsync<EndpointDiscoveryMetadata>(
+                this.BeginAnnounceOffline,
+                this.EndAnnounceOffline,
+                discoveryMetadata, /* state */
+                null
+            );
         }
 
         [Fx.Tag.Throws(typeof(CommunicationException), "Inherits from Channel exception contract")]
         [Fx.Tag.Throws(typeof(TimeoutException), "Inherits from Channel exception contract")]
-        public IAsyncResult BeginAnnounceOffline(EndpointDiscoveryMetadata discoveryMetadata, AsyncCallback callback, object state)
+        public IAsyncResult BeginAnnounceOffline(
+            EndpointDiscoveryMetadata discoveryMetadata,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (discoveryMetadata == null)
             {
@@ -421,21 +417,30 @@ namespace System.ServiceModel.Discovery
             InnerClient.EndByeOperation(result);
         }
 
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         [Fx.Tag.InheritThrows(From = "Close", FromDeclaringType = typeof(ICommunicationObject))]
         public void Close()
         {
             ((ICommunicationObject)this).Close();
         }
 
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         [Fx.Tag.InheritThrows(From = "Open", FromDeclaringType = typeof(ICommunicationObject))]
         void ICommunicationObject.Open()
         {
             InnerCommunicationObject.Open();
         }
 
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         [Fx.Tag.InheritThrows(From = "Open", FromDeclaringType = typeof(ICommunicationObject))]
         void ICommunicationObject.Open(TimeSpan timeout)
         {
@@ -449,7 +454,11 @@ namespace System.ServiceModel.Discovery
         }
 
         [Fx.Tag.InheritThrows(From = "BeginOpen", FromDeclaringType = typeof(ICommunicationObject))]
-        IAsyncResult ICommunicationObject.BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerCommunicationObject.BeginOpen(timeout, callback, state);
         }
@@ -460,28 +469,44 @@ namespace System.ServiceModel.Discovery
             InnerCommunicationObject.EndOpen(result);
         }
 
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         [Fx.Tag.InheritThrows(From = "Close", FromDeclaringType = typeof(ICommunicationObject))]
         void ICommunicationObject.Close()
         {
             InnerCommunicationObject.Close();
         }
 
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         [Fx.Tag.InheritThrows(From = "Close", FromDeclaringType = typeof(ICommunicationObject))]
         void ICommunicationObject.Close(TimeSpan timeout)
         {
             InnerCommunicationObject.Close(timeout);
         }
 
-        [Fx.Tag.InheritThrows(From = "BeginClose", FromDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.InheritThrows(
+            From = "BeginClose",
+            FromDeclaringType = typeof(ICommunicationObject)
+        )]
         IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
         {
             return InnerCommunicationObject.BeginClose(callback, state);
         }
 
-        [Fx.Tag.InheritThrows(From = "BeginClose", FromDeclaringType = typeof(ICommunicationObject))]
-        IAsyncResult ICommunicationObject.BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        [Fx.Tag.InheritThrows(
+            From = "BeginClose",
+            FromDeclaringType = typeof(ICommunicationObject)
+        )]
+        IAsyncResult ICommunicationObject.BeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerCommunicationObject.BeginClose(timeout, callback, state);
         }
@@ -505,7 +530,10 @@ namespace System.ServiceModel.Discovery
 
         void Initialize(AnnouncementEndpoint announcementEndpoint)
         {
-            if (announcementEndpoint.Binding != null && announcementEndpoint.Binding.MessageVersion.Addressing == AddressingVersion.None)
+            if (
+                announcementEndpoint.Binding != null
+                && announcementEndpoint.Binding.MessageVersion.Addressing == AddressingVersion.None
+            )
             {
                 throw FxTrace.Exception.Argument(
                     "announcementEndpoint",
@@ -514,10 +542,15 @@ namespace System.ServiceModel.Discovery
                         AddressingVersion.None,
                         this.GetType().Name,
                         AddressingVersion.WSAddressing10,
-                        AddressingVersion.WSAddressingAugust2004));
+                        AddressingVersion.WSAddressingAugust2004
+                    )
+                );
             }
 
-            this.innerClient = announcementEndpoint.DiscoveryVersion.Implementation.CreateAnnouncementInnerClient(announcementEndpoint);            
+            this.innerClient =
+                announcementEndpoint.DiscoveryVersion.Implementation.CreateAnnouncementInnerClient(
+                    announcementEndpoint
+                );
         }
 
         void RaiseEvent(EventHandler handler, EventArgs e)
@@ -581,7 +614,10 @@ namespace System.ServiceModel.Discovery
                 if (DiscoveryUtility.IsCompatible(OperationContext.Current, clientChannel))
                 {
                     // reuse the same context
-                    this.originalMessageId = OperationContext.Current.OutgoingMessageHeaders.MessageId;
+                    this.originalMessageId = OperationContext
+                        .Current
+                        .OutgoingMessageHeaders
+                        .MessageId;
                 }
                 else
                 {
@@ -604,7 +640,8 @@ namespace System.ServiceModel.Discovery
                 }
                 else
                 {
-                    OperationContext.Current.OutgoingMessageHeaders.MessageId = this.originalMessageId;
+                    OperationContext.Current.OutgoingMessageHeaders.MessageId =
+                        this.originalMessageId;
                 }
             }
         }

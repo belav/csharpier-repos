@@ -10,7 +10,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class MsmqTransportElement : MsmqElementBase
     {
-        [ConfigurationProperty(ConfigurationStrings.MaxPoolSize, DefaultValue = MsmqDefaults.MaxPoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPoolSize,
+            DefaultValue = MsmqDefaults.MaxPoolSize
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPoolSize
         {
@@ -18,7 +21,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxPoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.QueueTransferProtocol, DefaultValue = MsmqDefaults.QueueTransferProtocol)]
+        [ConfigurationProperty(
+            ConfigurationStrings.QueueTransferProtocol,
+            DefaultValue = MsmqDefaults.QueueTransferProtocol
+        )]
         [ServiceModelEnumValidator(typeof(QueueTransferProtocolHelper))]
         public QueueTransferProtocol QueueTransferProtocol
         {
@@ -26,7 +32,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.QueueTransferProtocol] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseActiveDirectory, DefaultValue = MsmqDefaults.UseActiveDirectory)]
+        [ConfigurationProperty(
+            ConfigurationStrings.UseActiveDirectory,
+            DefaultValue = MsmqDefaults.UseActiveDirectory
+        )]
         public bool UseActiveDirectory
         {
             get { return (bool)base[ConfigurationStrings.UseActiveDirectory]; }
@@ -42,7 +51,6 @@ namespace System.ServiceModel.Configuration
         {
             return new MsmqTransportBindingElement();
         }
-
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
@@ -71,12 +79,18 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
             MsmqTransportBindingElement binding = bindingElement as MsmqTransportBindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPoolSize, binding.MaxPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.QueueTransferProtocol, binding.QueueTransferProtocol);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseActiveDirectory, binding.UseActiveDirectory);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxPoolSize,
+                binding.MaxPoolSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.QueueTransferProtocol,
+                binding.QueueTransferProtocol
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.UseActiveDirectory,
+                binding.UseActiveDirectory
+            );
         }
     }
 }
-
-
-

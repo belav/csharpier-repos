@@ -373,8 +373,8 @@ public class CookieConsentTests
                 Assert.True(feature.HasConsent);
                 Assert.True(feature.CanTrack);
 
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Cookies.Append("Test", "Value")
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Cookies.Append("Test", "Value")
                 );
 
                 await context.Response.WriteAsync("Granted.");

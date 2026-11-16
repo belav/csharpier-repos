@@ -10,10 +10,7 @@ public class SqliteMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Geometry)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Geometry).Metadata;
 
         Assert.Null(property.GetSrid());
 

@@ -92,10 +92,7 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void Validate_Resolution()
         {
-            LongValidator v = new LongValidator(20000L,
-                                 50000L,
-                                 false,
-                                 3000L);
+            LongValidator v = new LongValidator(20000L, 50000L, false, 3000L);
 
             AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(40000L));
         }

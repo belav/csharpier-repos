@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Threading;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Threading;
 
     sealed class ChannelBindingMessageProperty : IDisposable, IMessageProperty
     {
@@ -29,14 +29,14 @@ namespace System.ServiceModel.Channels
             this.ownsCleanup = ownsCleanup;
         }
 
-        public static string Name { get { return propertyName; } }
+        public static string Name
+        {
+            get { return propertyName; }
+        }
 
         bool IsDisposed
         {
-            get
-            {
-                return this.refCount <= 0;
-            }
+            get { return this.refCount <= 0; }
         }
 
         public ChannelBinding ChannelBinding
@@ -58,7 +58,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out property);
         }
 
-        public static bool TryGet(MessageProperties properties, out ChannelBindingMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out ChannelBindingMessageProperty property
+        )
         {
             if (properties == null)
             {
@@ -130,7 +133,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
     }

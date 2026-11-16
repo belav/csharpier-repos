@@ -11,12 +11,16 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-[ExportStatelessLspService(typeof(DidCloseHandler), ProtocolConstants.TypeScriptLanguageContract), Shared]
+[
+    ExportStatelessLspService(
+        typeof(DidCloseHandler),
+        ProtocolConstants.TypeScriptLanguageContract
+    ),
+    Shared
+]
 internal class VSTypeScriptDidCloseHandler : DidCloseHandler
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptDidCloseHandler()
-    {
-    }
+    public VSTypeScriptDidCloseHandler() { }
 }

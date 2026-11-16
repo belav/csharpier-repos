@@ -483,23 +483,20 @@ public partial class DefaultProblemDetailsWriterTest
         );
         Assert.NotNull(problemDetails);
 
-        Assert.Collection(
-            problemDetails.Extensions,
-            (extension) =>
-            {
-                Assert.Equal("Extension", extension.Key);
-                var expectedExtension = JsonSerializer.SerializeToElement(
-                    customExtensionData,
-                    options.SerializerOptions
-                );
-                var value = Assert.IsType<JsonElement>(extension.Value);
+        Assert.Collection(problemDetails.Extensions, (extension) =>
+        {
+            Assert.Equal("Extension", extension.Key);
+            var expectedExtension = JsonSerializer.SerializeToElement(
+                customExtensionData,
+                options.SerializerOptions
+            );
+            var value = Assert.IsType<JsonElement>(extension.Value);
 
-                Assert.Equal(
-                    expectedExtension.GetProperty("data").GetString(),
-                    value.GetProperty("data").GetString()
-                );
-            }
-        );
+            Assert.Equal(
+                expectedExtension.GetProperty("data").GetString(),
+                value.GetProperty("data").GetString()
+            );
+        });
     }
 
     [Fact]

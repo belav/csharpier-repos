@@ -13,11 +13,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerStringAggregateMethodTranslator : IAggregateMethodCallTranslator
 {
-    private static readonly MethodInfo StringConcatMethod
-        = typeof(string).GetRuntimeMethod(nameof(string.Concat), new[] { typeof(IEnumerable<string>) })!;
+    private static readonly MethodInfo StringConcatMethod = typeof(string).GetRuntimeMethod(
+        nameof(string.Concat),
+        new[] { typeof(IEnumerable<string>) }
+    )!;
 
-    private static readonly MethodInfo StringJoinMethod
-        = typeof(string).GetRuntimeMethod(nameof(string.Join), new[] { typeof(string), typeof(IEnumerable<string>) })!;
+    private static readonly MethodInfo StringJoinMethod = typeof(string).GetRuntimeMethod(
+        nameof(string.Join),
+        new[] { typeof(string), typeof(IEnumerable<string>) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -30,7 +34,8 @@ public class SqlServerStringAggregateMethodTranslator : IAggregateMethodCallTran
     /// </summary>
     public SqlServerStringAggregateMethodTranslator(
         ISqlExpressionFactory sqlExpressionFactory,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _typeMappingSource = typeMappingSource;
@@ -46,12 +51,15 @@ public class SqlServerStringAggregateMethodTranslator : IAggregateMethodCallTran
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         // Docs: https://docs.microsoft.com/sql/t-sql/functions/string-agg-transact-sql
 
-        if (source.Selector is not SqlExpression sqlExpression
-            || (method != StringJoinMethod && method != StringConcatMethod))
+        if (
+            source.Selector is not SqlExpression sqlExpression
+            || (method != StringJoinMethod && method != StringConcatMethod)
+        )
         {
             return null;
         }
@@ -67,7 +75,8 @@ public class SqlServerStringAggregateMethodTranslator : IAggregateMethodCallTran
                     typeof(string),
                     resultTypeMapping.StoreTypeNameBase,
                     unicode: true,
-                    size: 4000);
+                    size: 4000
+                );
             }
             else if (resultTypeMapping is { IsUnicode: false, Size: < 8000 })
             {
@@ -75,7 +84,8 @@ public class SqlServerStringAggregateMethodTranslator : IAggregateMethodCallTran
                     typeof(string),
                     resultTypeMapping.StoreTypeNameBase,
                     unicode: false,
-                    size: 8000);
+                    size: 8000
+                );
             }
         }
 
@@ -85,28 +95,33 @@ public class SqlServerStringAggregateMethodTranslator : IAggregateMethodCallTran
         {
             sqlExpression = _sqlExpressionFactory.Coalesce(
                 sqlExpression,
-                _sqlExpressionFactory.Constant(string.Empty, typeof(string)));
+                _sqlExpressionFactory.Constant(string.Empty, typeof(string))
+            );
         }
 
         // STRING_AGG returns null when there are no rows (or non-null values), but string.Join returns an empty string.
-        return
-            _sqlExpressionFactory.Coalesce(
-                SqlServerExpression.AggregateFunctionWithOrdering(
-                    _sqlExpressionFactory,
-                    "STRING_AGG",
-                    new[]
-                    {
-                        sqlExpression,
-                        _sqlExpressionFactory.ApplyTypeMapping(
-                            method == StringJoinMethod ? arguments[0] : _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
-                            sqlExpression.TypeMapping)
-                    },
-                    source,
-                    enumerableArgumentIndex: 0,
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { false, true },
-                    typeof(string)),
-                _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
-                resultTypeMapping);
+        return _sqlExpressionFactory.Coalesce(
+            SqlServerExpression.AggregateFunctionWithOrdering(
+                _sqlExpressionFactory,
+                "STRING_AGG",
+                new[]
+                {
+                    sqlExpression,
+                    _sqlExpressionFactory.ApplyTypeMapping(
+                        method == StringJoinMethod
+                            ? arguments[0]
+                            : _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
+                        sqlExpression.TypeMapping
+                    ),
+                },
+                source,
+                enumerableArgumentIndex: 0,
+                nullable: true,
+                argumentsPropagateNullability: new[] { false, true },
+                typeof(string)
+            ),
+            _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
+            resultTypeMapping
+        );
     }
 }

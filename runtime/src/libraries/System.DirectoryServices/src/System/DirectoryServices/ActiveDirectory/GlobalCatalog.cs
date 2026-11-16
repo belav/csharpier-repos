@@ -15,12 +15,14 @@ namespace System.DirectoryServices.ActiveDirectory
 
         #region constructors
         internal GlobalCatalog(DirectoryContext context, string globalCatalogName)
-            : base(context, globalCatalogName)
-        { }
+            : base(context, globalCatalogName) { }
 
-        internal GlobalCatalog(DirectoryContext context, string globalCatalogName, DirectoryEntryManager directoryEntryMgr)
-            : base(context, globalCatalogName, directoryEntryMgr)
-        { }
+        internal GlobalCatalog(
+            DirectoryContext context,
+            string globalCatalogName,
+            DirectoryEntryManager directoryEntryMgr
+        )
+            : base(context, globalCatalogName, directoryEntryMgr) { }
         #endregion constructors
 
         #region public methods
@@ -44,7 +46,11 @@ namespace System.DirectoryServices.ActiveDirectory
             // target should be a server
             if (!(context.isServer()))
             {
-                throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFound, context.Name), typeof(GlobalCatalog), context.Name);
+                throw new ActiveDirectoryObjectNotFoundException(
+                    SR.Format(SR.GCNotFound, context.Name),
+                    typeof(GlobalCatalog),
+                    context.Name
+                );
             }
 
             //  work with copy of the context
@@ -56,17 +62,41 @@ namespace System.DirectoryServices.ActiveDirectory
                 // by binding to root dse and getting the "dnsHostName" attribute
                 // (also check that the "isGlobalCatalogReady" attribute is true)
                 directoryEntryMgr = new DirectoryEntryManager(context);
-                DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+                DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(
+                    context,
+                    WellKnownDN.RootDSE
+                );
                 if (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectory))
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFound, context.Name), typeof(GlobalCatalog), context.Name);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.GCNotFound, context.Name),
+                        typeof(GlobalCatalog),
+                        context.Name
+                    );
                 }
 
-                gcDnsName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.DnsHostName)!;
-                isGlobalCatalog = (bool)bool.Parse((string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.IsGlobalCatalogReady)!);
+                gcDnsName = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.DnsHostName
+                    )!;
+                isGlobalCatalog = (bool)
+                    bool.Parse(
+                        (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.IsGlobalCatalogReady
+                            )!
+                    );
                 if (!isGlobalCatalog)
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFound, context.Name), typeof(GlobalCatalog), context.Name);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.GCNotFound, context.Name),
+                        typeof(GlobalCatalog),
+                        context.Name
+                    );
                 }
             }
             catch (COMException e)
@@ -75,7 +105,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 if (errorCode == unchecked((int)0x8007203a))
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFound, context.Name), typeof(GlobalCatalog), context.Name);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.GCNotFound, context.Name),
+                        typeof(GlobalCatalog),
+                        context.Name
+                    );
                 }
                 else
                 {
@@ -136,7 +170,11 @@ namespace System.DirectoryServices.ActiveDirectory
             return FindOneWithCredentialValidation(context, null, flag);
         }
 
-        public static new GlobalCatalog FindOne(DirectoryContext context, string siteName, LocatorOptions flag)
+        public static new GlobalCatalog FindOne(
+            DirectoryContext context,
+            string siteName,
+            LocatorOptions flag
+        )
         {
             if (context == null)
             {
@@ -209,7 +247,9 @@ namespace System.DirectoryServices.ActiveDirectory
             CheckIfDisabled();
 
             // bind to the server object
-            DirectoryEntry serverNtdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
+            DirectoryEntry serverNtdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                NtdsaObjectName
+            );
 
             // reset the NTDSDSA_OPT_IS_GC flag on the "options" property
             int options = 0;
@@ -262,7 +302,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     throw ExceptionHelper.GetExceptionFromCOMException(context, e);
                 }
-                _ = Utils.GetNewDirectoryContext(Name, DirectoryContextType.DirectoryServer, context);
+                _ = Utils.GetNewDirectoryContext(
+                    Name,
+                    DirectoryContextType.DirectoryServer,
+                    context
+                );
                 _schema = new ActiveDirectorySchema(context, schemaNC);
             }
 
@@ -290,7 +334,11 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal static new GlobalCatalog FindOneWithCredentialValidation(DirectoryContext context, string? siteName, LocatorOptions flag)
+        internal static new GlobalCatalog FindOneWithCredentialValidation(
+            DirectoryContext context,
+            string? siteName,
+            LocatorOptions flag
+        )
         {
             GlobalCatalog gc;
             bool retry = false;
@@ -317,7 +365,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else
                     {
-                        throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFoundInForest, context.Name), typeof(GlobalCatalog), null);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.Format(SR.GCNotFoundInForest, context.Name),
+                            typeof(GlobalCatalog),
+                            null
+                        );
                     }
                 }
                 else
@@ -336,7 +388,12 @@ namespace System.DirectoryServices.ActiveDirectory
             if (retry)
             {
                 credsValidated = false;
-                gc = FindOneInternal(context, context.Name, siteName, flag | LocatorOptions.ForceRediscovery);
+                gc = FindOneInternal(
+                    context,
+                    context.Name,
+                    siteName,
+                    flag | LocatorOptions.ForceRediscovery
+                );
                 try
                 {
                     ValidateCredential(gc, context);
@@ -347,7 +404,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (e.ErrorCode == unchecked((int)0x8007203a))
                     {
                         // server is down
-                        throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFoundInForest, context.Name), typeof(GlobalCatalog), null);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.Format(SR.GCNotFoundInForest, context.Name),
+                            typeof(GlobalCatalog),
+                            null
+                        );
                     }
                     else
                     {
@@ -366,7 +427,12 @@ namespace System.DirectoryServices.ActiveDirectory
             return gc;
         }
 
-        internal static new GlobalCatalog FindOneInternal(DirectoryContext context, string? forestName, string? siteName, LocatorOptions flag)
+        internal static new GlobalCatalog FindOneInternal(
+            DirectoryContext context,
+            string? forestName,
+            string? siteName,
+            LocatorOptions flag
+        )
         {
             DomainControllerInfo domainControllerInfo;
             int errorCode = 0;
@@ -377,7 +443,20 @@ namespace System.DirectoryServices.ActiveDirectory
             }
 
             // check that the flags passed have only the valid bits set
-            if (((long)flag & (~((long)LocatorOptions.AvoidSelf | (long)LocatorOptions.ForceRediscovery | (long)LocatorOptions.KdcRequired | (long)LocatorOptions.TimeServerRequired | (long)LocatorOptions.WriteableRequired))) != 0)
+            if (
+                (
+                    (long)flag
+                    & (
+                        ~(
+                            (long)LocatorOptions.AvoidSelf
+                            | (long)LocatorOptions.ForceRediscovery
+                            | (long)LocatorOptions.KdcRequired
+                            | (long)LocatorOptions.TimeServerRequired
+                            | (long)LocatorOptions.WriteableRequired
+                        )
+                    )
+                ) != 0
+            )
             {
                 throw new ArgumentException(SR.InvalidFlags, nameof(flag));
             }
@@ -386,12 +465,22 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 // get the dns name of the logged on forest
                 DomainControllerInfo tempDomainControllerInfo;
-                int error = Locator.DsGetDcNameWrapper(null, DirectoryContext.GetLoggedOnDomain(), null, (long)PrivateLocatorFlags.DirectoryServicesRequired, out tempDomainControllerInfo);
+                int error = Locator.DsGetDcNameWrapper(
+                    null,
+                    DirectoryContext.GetLoggedOnDomain(),
+                    null,
+                    (long)PrivateLocatorFlags.DirectoryServicesRequired,
+                    out tempDomainControllerInfo
+                );
 
                 if (error == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                 {
                     // throw not found exception
-                    throw new ActiveDirectoryObjectNotFoundException(SR.ContextNotAssociatedWithDomain, typeof(GlobalCatalog), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.ContextNotAssociatedWithDomain,
+                        typeof(GlobalCatalog),
+                        null
+                    );
                 }
                 else if (error != 0)
                 {
@@ -403,11 +492,25 @@ namespace System.DirectoryServices.ActiveDirectory
             }
 
             // call DsGetDcName
-            errorCode = Locator.DsGetDcNameWrapper(null, forestName, siteName, (long)flag | (long)(PrivateLocatorFlags.GCRequired | PrivateLocatorFlags.DirectoryServicesRequired), out domainControllerInfo);
+            errorCode = Locator.DsGetDcNameWrapper(
+                null,
+                forestName,
+                siteName,
+                (long)flag
+                    | (long)(
+                        PrivateLocatorFlags.GCRequired
+                        | PrivateLocatorFlags.DirectoryServicesRequired
+                    ),
+                out domainControllerInfo
+            );
 
             if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
             {
-                throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.GCNotFoundInForest, forestName), typeof(GlobalCatalog), null);
+                throw new ActiveDirectoryObjectNotFoundException(
+                    SR.Format(SR.GCNotFoundInForest, forestName),
+                    typeof(GlobalCatalog),
+                    null
+                );
             }
             // this can only occur when flag is being explicitly passed (since the flags that we pass internally are valid)
             if (errorCode == NativeMethods.ERROR_INVALID_FLAGS)
@@ -425,12 +528,19 @@ namespace System.DirectoryServices.ActiveDirectory
             string globalCatalogName = domainControllerInfo.DomainControllerName.Substring(2);
 
             // create a new context object for the global catalog
-            DirectoryContext gcContext = Utils.GetNewDirectoryContext(globalCatalogName, DirectoryContextType.DirectoryServer, context);
+            DirectoryContext gcContext = Utils.GetNewDirectoryContext(
+                globalCatalogName,
+                DirectoryContextType.DirectoryServer,
+                context
+            );
 
             return new GlobalCatalog(gcContext, globalCatalogName);
         }
 
-        internal static GlobalCatalogCollection FindAllInternal(DirectoryContext context, string? siteName)
+        internal static GlobalCatalogCollection FindAllInternal(
+            DirectoryContext context,
+            string? siteName
+        )
         {
             ArrayList gcList = new ArrayList();
 
@@ -439,9 +549,25 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(siteName));
             }
 
-            foreach (string gcName in Utils.GetReplicaList(context, null /* not specific to any partition */, siteName, false /* isDefaultNC */, false /* isADAM */, true /* mustBeGC */))
+            foreach (
+                string gcName in Utils.GetReplicaList(
+                    context,
+                    null /* not specific to any partition */
+                    ,
+                    siteName,
+                    false /* isDefaultNC */
+                    ,
+                    false /* isADAM */
+                    ,
+                    true /* mustBeGC */
+                )
+            )
             {
-                DirectoryContext gcContext = Utils.GetNewDirectoryContext(gcName, DirectoryContextType.DirectoryServer, context);
+                DirectoryContext gcContext = Utils.GetNewDirectoryContext(
+                    gcName,
+                    DirectoryContextType.DirectoryServer,
+                    context
+                );
                 gcList.Add(new GlobalCatalog(gcContext, gcName));
             }
 

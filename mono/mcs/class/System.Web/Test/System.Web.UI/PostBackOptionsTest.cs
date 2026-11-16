@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.PostBackOptions.cs 
+// Tests for System.Web.UI.PostBackOptions.cs
 //
 // Author:
 //	Igor Zelmanovich (igorz@mainsoft.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,77 +28,88 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
+using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-	[TestFixture]
-	public class PostBackOptionsTest
-	{
-		[Test]
-		public void Constructors () {
-			Control c = new WebControl(HtmlTextWriterTag.A);
-			c.Page = new Page ();
-			PostBackOptions options=new PostBackOptions(c);
-			Assert.IsFalse (options.PerformValidation);
-			Assert.IsFalse (options.AutoPostBack);
-			Assert.IsFalse (options.TrackFocus);
-			Assert.IsTrue (options.ClientSubmit);
-			// MSDN: The default value is true, BUT FALSE
-			Assert.IsFalse (options.RequiresJavaScriptProtocol);
-			// MSDN: The default value is an empty string (""), BUT NULL
-			Assert.AreEqual (null, options.Argument);
-			// MSDN: The default value is an empty string (""), BUT NULL
-			Assert.AreEqual (null, options.ActionUrl);
-			// MSDN: The default value is an empty string (""), BUT NULL
-			Assert.AreEqual (null, options.ValidationGroup);
+    [TestFixture]
+    public class PostBackOptionsTest
+    {
+        [Test]
+        public void Constructors()
+        {
+            Control c = new WebControl(HtmlTextWriterTag.A);
+            c.Page = new Page();
+            PostBackOptions options = new PostBackOptions(c);
+            Assert.IsFalse(options.PerformValidation);
+            Assert.IsFalse(options.AutoPostBack);
+            Assert.IsFalse(options.TrackFocus);
+            Assert.IsTrue(options.ClientSubmit);
+            // MSDN: The default value is true, BUT FALSE
+            Assert.IsFalse(options.RequiresJavaScriptProtocol);
+            // MSDN: The default value is an empty string (""), BUT NULL
+            Assert.AreEqual(null, options.Argument);
+            // MSDN: The default value is an empty string (""), BUT NULL
+            Assert.AreEqual(null, options.ActionUrl);
+            // MSDN: The default value is an empty string (""), BUT NULL
+            Assert.AreEqual(null, options.ValidationGroup);
 
-			options = new PostBackOptions (c, null);
-			Assert.IsFalse (options.PerformValidation);
-			Assert.IsFalse (options.AutoPostBack);
-			Assert.IsFalse (options.TrackFocus);
-			Assert.IsTrue (options.ClientSubmit);
-			Assert.IsFalse (options.RequiresJavaScriptProtocol);
-			Assert.AreEqual (null, options.Argument);
-			Assert.AreEqual (null, options.ActionUrl);
-			Assert.AreEqual (null, options.ValidationGroup);
+            options = new PostBackOptions(c, null);
+            Assert.IsFalse(options.PerformValidation);
+            Assert.IsFalse(options.AutoPostBack);
+            Assert.IsFalse(options.TrackFocus);
+            Assert.IsTrue(options.ClientSubmit);
+            Assert.IsFalse(options.RequiresJavaScriptProtocol);
+            Assert.AreEqual(null, options.Argument);
+            Assert.AreEqual(null, options.ActionUrl);
+            Assert.AreEqual(null, options.ValidationGroup);
 
-			options = new PostBackOptions (c, null, null, false, false, false, false, false, null);
-			Assert.IsFalse (options.PerformValidation);
-			Assert.IsFalse (options.AutoPostBack);
-			Assert.IsFalse (options.TrackFocus);
-			Assert.IsFalse (options.ClientSubmit);
-			Assert.IsFalse (options.RequiresJavaScriptProtocol);
-			Assert.AreEqual (null, options.Argument);
-			Assert.AreEqual (null, options.ActionUrl);
-			Assert.AreEqual (null, options.ValidationGroup);
+            options = new PostBackOptions(c, null, null, false, false, false, false, false, null);
+            Assert.IsFalse(options.PerformValidation);
+            Assert.IsFalse(options.AutoPostBack);
+            Assert.IsFalse(options.TrackFocus);
+            Assert.IsFalse(options.ClientSubmit);
+            Assert.IsFalse(options.RequiresJavaScriptProtocol);
+            Assert.AreEqual(null, options.Argument);
+            Assert.AreEqual(null, options.ActionUrl);
+            Assert.AreEqual(null, options.ValidationGroup);
 
-			options = new PostBackOptions (c, "ARG");
-			Assert.IsFalse (options.PerformValidation);
-			Assert.IsFalse (options.AutoPostBack);
-			Assert.IsFalse (options.TrackFocus);
-			Assert.IsTrue (options.ClientSubmit);
-			Assert.IsFalse (options.RequiresJavaScriptProtocol);
-			Assert.AreEqual ("ARG", options.Argument);
-			Assert.AreEqual (null, options.ActionUrl);
-			Assert.AreEqual (null, options.ValidationGroup);
+            options = new PostBackOptions(c, "ARG");
+            Assert.IsFalse(options.PerformValidation);
+            Assert.IsFalse(options.AutoPostBack);
+            Assert.IsFalse(options.TrackFocus);
+            Assert.IsTrue(options.ClientSubmit);
+            Assert.IsFalse(options.RequiresJavaScriptProtocol);
+            Assert.AreEqual("ARG", options.Argument);
+            Assert.AreEqual(null, options.ActionUrl);
+            Assert.AreEqual(null, options.ValidationGroup);
 
-			options = new PostBackOptions (c, "ARG", "Page.aspx", true, true, false, false, false, "VG");
-			Assert.IsFalse (options.PerformValidation);
-			Assert.IsTrue (options.AutoPostBack);
-			Assert.IsFalse (options.TrackFocus);
-			Assert.IsFalse (options.ClientSubmit);
-			Assert.IsTrue (options.RequiresJavaScriptProtocol);
-			Assert.AreEqual ("ARG", options.Argument);
-			Assert.AreEqual ("Page.aspx", options.ActionUrl);
-			Assert.AreEqual ("VG", options.ValidationGroup);
-		}
-	}
+            options = new PostBackOptions(
+                c,
+                "ARG",
+                "Page.aspx",
+                true,
+                true,
+                false,
+                false,
+                false,
+                "VG"
+            );
+            Assert.IsFalse(options.PerformValidation);
+            Assert.IsTrue(options.AutoPostBack);
+            Assert.IsFalse(options.TrackFocus);
+            Assert.IsFalse(options.ClientSubmit);
+            Assert.IsTrue(options.RequiresJavaScriptProtocol);
+            Assert.AreEqual("ARG", options.Argument);
+            Assert.AreEqual("Page.aspx", options.ActionUrl);
+            Assert.AreEqual("VG", options.ValidationGroup);
+        }
+    }
 }

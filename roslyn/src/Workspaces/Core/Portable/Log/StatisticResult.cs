@@ -9,7 +9,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
-    internal readonly struct StatisticResult(int max, int min, double mean, int range, int? mode, int count)
+    internal readonly struct StatisticResult(
+        int max,
+        int min,
+        double mean,
+        int range,
+        int? mode,
+        int count
+    )
     {
         public static StatisticResult FromList(List<int> values)
         {
@@ -72,9 +79,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// <summary>
         /// Writes out these statistics to a property bag for sending to telemetry.
         /// </summary>
-        /// <param name="prefix">The prefix given to any properties written. A period is used to delimit between the 
+        /// <param name="prefix">The prefix given to any properties written. A period is used to delimit between the
         /// prefix and the value.</param>
-        public void WriteTelemetryPropertiesTo(Dictionary<string, object?> properties, string prefix)
+        public void WriteTelemetryPropertiesTo(
+            Dictionary<string, object?> properties,
+            string prefix
+        )
         {
             prefix += ".";
 

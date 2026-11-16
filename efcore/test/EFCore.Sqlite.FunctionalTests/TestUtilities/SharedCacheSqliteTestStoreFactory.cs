@@ -7,10 +7,8 @@ public class SharedCacheSqliteTestStoreFactory : SqliteTestStoreFactory
 {
     public static new SharedCacheSqliteTestStoreFactory Instance { get; } = new();
 
-    protected SharedCacheSqliteTestStoreFactory()
-    {
-    }
+    protected SharedCacheSqliteTestStoreFactory() { }
 
-    public override TestStore GetOrCreate(string storeName)
-        => SqliteTestStore.GetOrCreate(storeName, sharedCache: true);
+    public override TestStore GetOrCreate(string storeName) =>
+        SqliteTestStore.GetOrCreate(storeName, sharedCache: true);
 }

@@ -6,14 +6,32 @@ using System.Security.Permissions;
 namespace System.ServiceProcess
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class ServiceControllerPermission : ResourcePermissionBase
     {
         public ServiceControllerPermission() { }
-        public ServiceControllerPermission(PermissionState state) : base(state) { }
-        public ServiceControllerPermission(ServiceControllerPermissionAccess permissionAccess, string machineName, string serviceName) { }
-        public ServiceControllerPermission(ServiceControllerPermissionEntry[] permissionAccessEntries) { }
-        public ServiceControllerPermissionEntryCollection PermissionEntries { get => null; }
+
+        public ServiceControllerPermission(PermissionState state)
+            : base(state) { }
+
+        public ServiceControllerPermission(
+            ServiceControllerPermissionAccess permissionAccess,
+            string machineName,
+            string serviceName
+        ) { }
+
+        public ServiceControllerPermission(
+            ServiceControllerPermissionEntry[] permissionAccessEntries
+        ) { }
+
+        public ServiceControllerPermissionEntryCollection PermissionEntries
+        {
+            get => null;
+        }
     }
 }

@@ -8,19 +8,19 @@ using System;
 using System.Reflection;
 using System.Xml.Xsl.Qil;
 
-namespace System.Xml.Xsl.IlGen {
-
+namespace System.Xml.Xsl.IlGen
+{
     /// <summary>
     /// Several annotations are created and attached to Qil nodes during the optimization and code generation phase.
     /// </summary>
-    internal class XmlILAnnotation : ListBase<object> {
+    internal class XmlILAnnotation : ListBase<object>
+    {
         private object annPrev;
         private MethodInfo funcMethod;
         private int argPos;
         private IteratorDescriptor iterInfo;
         private XmlILConstructInfo constrInfo;
         private OptimizerPatterns optPatt;
-
 
         //-----------------------------------------------
         // Constructor
@@ -29,10 +29,12 @@ namespace System.Xml.Xsl.IlGen {
         /// <summary>
         /// Create and initialize XmlILAnnotation for the specified node.
         /// </summary>
-        public static XmlILAnnotation Write(QilNode nd) {
+        public static XmlILAnnotation Write(QilNode nd)
+        {
             XmlILAnnotation ann = nd.Annotation as XmlILAnnotation;
 
-            if (ann == null) {
+            if (ann == null)
+            {
                 ann = new XmlILAnnotation(nd.Annotation);
                 nd.Annotation = ann;
             }
@@ -40,10 +42,10 @@ namespace System.Xml.Xsl.IlGen {
             return ann;
         }
 
-        private XmlILAnnotation(object annPrev) {
+        private XmlILAnnotation(object annPrev)
+        {
             this.annPrev = annPrev;
         }
-
 
         //-----------------------------------------------
         // Annotations
@@ -53,7 +55,8 @@ namespace System.Xml.Xsl.IlGen {
         /// User-defined functions and global variables and parameters are bound to Clr MethodInfo objects.
         /// Attached to Function, global Let, and global Parameter nodes.
         /// </summary>
-        public MethodInfo FunctionBinding {
+        public MethodInfo FunctionBinding
+        {
             get { return this.funcMethod; }
             set { this.funcMethod = value; }
         }
@@ -62,7 +65,8 @@ namespace System.Xml.Xsl.IlGen {
         /// Function arguments are tracked by position.
         /// Attached to function Parameter nodes.
         /// </summary>
-        public int ArgumentPosition {
+        public int ArgumentPosition
+        {
             get { return this.argPos; }
             set { this.argPos = value; }
         }
@@ -72,7 +76,8 @@ namespace System.Xml.Xsl.IlGen {
         /// For/Let node is referenced.
         /// Attached to For and Let nodes.
         /// </summary>
-        public IteratorDescriptor CachedIteratorDescriptor {
+        public IteratorDescriptor CachedIteratorDescriptor
+        {
             get { return this.iterInfo; }
             set { this.iterInfo = value; }
         }
@@ -81,7 +86,8 @@ namespace System.Xml.Xsl.IlGen {
         /// Contains information about how this expression will be constructed by ILGen.
         /// Attached to any kind of Qil node.
         /// </summary>
-        public XmlILConstructInfo ConstructInfo {
+        public XmlILConstructInfo ConstructInfo
+        {
             get { return this.constrInfo; }
             set { this.constrInfo = value; }
         }
@@ -90,11 +96,11 @@ namespace System.Xml.Xsl.IlGen {
         /// Contains patterns that the subtree rooted at this node matches.
         /// Attached to any kind of Qil node.
         /// </summary>
-        public OptimizerPatterns Patterns {
+        public OptimizerPatterns Patterns
+        {
             get { return this.optPatt; }
             set { this.optPatt = value; }
         }
-
 
         //-----------------------------------------------
         // ListBase implementation
@@ -103,32 +109,37 @@ namespace System.Xml.Xsl.IlGen {
         /// <summary>
         /// Return the count of sub-annotations maintained by this annotation.
         /// </summary>
-        public override int Count {
+        public override int Count
+        {
             get { return (this.annPrev != null) ? 3 : 2; }
         }
 
         /// <summary>
         /// Return the annotation at the specified index.
         /// </summary>
-        public override object this[int index] {
-            get {
-                if (this.annPrev != null) {
+        public override object this[int index]
+        {
+            get
+            {
+                if (this.annPrev != null)
+                {
                     if (index == 0)
                         return this.annPrev;
 
                     index--;
                 }
 
-                switch (index) {
-                    case 0: return this.constrInfo;
-                    case 1: return this.optPatt;
+                switch (index)
+                {
+                    case 0:
+                        return this.constrInfo;
+                    case 1:
+                        return this.optPatt;
                 }
 
                 throw new IndexOutOfRangeException();
             }
-            set {
-                throw new NotSupportedException();
-            }
+            set { throw new NotSupportedException(); }
         }
     }
 }

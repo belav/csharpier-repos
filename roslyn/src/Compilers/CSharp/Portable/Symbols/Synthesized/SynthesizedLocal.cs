@@ -44,12 +44,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = null
 #endif
-            )
+        )
         {
             Debug.Assert(!type.IsVoidType());
             Debug.Assert(!kind.IsLongLived() || syntaxOpt != null);
             Debug.Assert(refKind != RefKind.Out);
-            Debug.Assert(containingMethodOpt is null || containingMethodOpt.DeclaringCompilation is not null);
+            Debug.Assert(
+                containingMethodOpt is null || containingMethodOpt.DeclaringCompilation is not null
+            );
 
             _containingMethodOpt = containingMethodOpt;
             _type = type;
@@ -71,13 +73,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         internal sealed override LocalSymbol WithSynthesizedLocalKindAndSyntax(
-            SynthesizedLocalKind kind, SyntaxNode syntax
+            SynthesizedLocalKind kind,
+            SyntaxNode syntax
 #if DEBUG
             ,
             [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = null
 #endif
-            )
+        )
         {
             return new SynthesizedLocal(
                 _containingMethodOpt,
@@ -92,7 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 createdAtLineNumber,
                 createdAtFilePath
 #endif
-                );
+            );
         }
 
         public sealed override RefKind RefKind
@@ -142,12 +145,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override ImmutableArray<Location> Locations
         {
-            get { return (_syntaxOpt == null) ? ImmutableArray<Location>.Empty : ImmutableArray.Create(_syntaxOpt.GetLocation()); }
+            get
+            {
+                return (_syntaxOpt == null)
+                    ? ImmutableArray<Location>.Empty
+                    : ImmutableArray.Create(_syntaxOpt.GetLocation());
+            }
         }
 
         public sealed override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get { return (_syntaxOpt == null) ? ImmutableArray<SyntaxReference>.Empty : ImmutableArray.Create(_syntaxOpt.GetReference()); }
+            get
+            {
+                return (_syntaxOpt == null)
+                    ? ImmutableArray<SyntaxReference>.Empty
+                    : ImmutableArray.Create(_syntaxOpt.GetReference());
+            }
         }
 
         internal sealed override SyntaxNode GetDeclaratorSyntax()
@@ -156,8 +169,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return _syntaxOpt;
         }
 
-        internal override bool HasSourceLocation
-            => _syntaxOpt != null;
+        internal override bool HasSourceLocation => _syntaxOpt != null;
 
         public sealed override bool IsImplicitlyDeclared
         {
@@ -187,18 +199,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override ScopedKind Scope => ScopedKind.None;
 
-        internal sealed override ConstantValue GetConstantValue(SyntaxNode node, LocalSymbol inProgress, BindingDiagnosticBag diagnostics)
+        internal sealed override ConstantValue GetConstantValue(
+            SyntaxNode node,
+            LocalSymbol inProgress,
+            BindingDiagnosticBag diagnostics
+        )
         {
             return null;
         }
 
-        internal sealed override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(BoundExpression boundInitValue)
+        internal sealed override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
+            BoundExpression boundInitValue
+        )
         {
             return ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
         }
 
 #if DEBUG
         private static int _nextSequence = 0;
+
         // Produce a token that helps distinguish one variable from another when debugging
         private readonly int _sequence = System.Threading.Interlocked.Increment(ref _nextSequence);
 

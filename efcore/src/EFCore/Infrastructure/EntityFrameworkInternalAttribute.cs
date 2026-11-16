@@ -11,15 +11,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 /// </summary>
 [AttributeUsage(
     AttributeTargets.Enum
-    | AttributeTargets.Class
-    | AttributeTargets.Struct
-    | AttributeTargets.Interface
-    | AttributeTargets.Event
-    | AttributeTargets.Field
-    | AttributeTargets.Method
-    | AttributeTargets.Delegate
-    | AttributeTargets.Property
-    | AttributeTargets.Constructor)]
-public sealed class EntityFrameworkInternalAttribute : Attribute
-{
-}
+        | AttributeTargets.Class
+        | AttributeTargets.Struct
+        | AttributeTargets.Interface
+        | AttributeTargets.Event
+        | AttributeTargets.Field
+        | AttributeTargets.Method
+        | AttributeTargets.Delegate
+        | AttributeTargets.Property
+        | AttributeTargets.Constructor
+)]
+public sealed class EntityFrameworkInternalAttribute : Attribute { }

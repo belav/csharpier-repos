@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,28 +30,19 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-	[Serializable]
-	public class UntrustedRecipientException : Exception
-	{
-		public UntrustedRecipientException ()
-			: this ("the InfoCard user cancelled the operation.")
-		{
-		}
+    [Serializable]
+    public class UntrustedRecipientException : Exception
+    {
+        public UntrustedRecipientException()
+            : this("the InfoCard user cancelled the operation.") { }
 
-		public UntrustedRecipientException (string message)
-			: this (message, null)
-		{
-		}
+        public UntrustedRecipientException(string message)
+            : this(message, null) { }
 
-		protected UntrustedRecipientException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected UntrustedRecipientException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public UntrustedRecipientException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-	}
+        public UntrustedRecipientException(string message, Exception innerException)
+            : base(message, innerException) { }
+    }
 }

@@ -10,7 +10,7 @@ using Microsoft.Internal;
 namespace System.ComponentModel.Composition.Hosting
 {
     /// <summary>
-    ///     A mutable collection of <see cref="ComposablePartCatalog"/>s.  
+    ///     A mutable collection of <see cref="ComposablePartCatalog"/>s.
     /// </summary>
     /// <remarks>
     ///     This type is thread safe.
@@ -26,19 +26,25 @@ namespace System.ComponentModel.Composition.Hosting
             this._notifyCatalog = composablePartCatalog as INotifyComposablePartCatalogChanged;
             try
             {
-                if(this._notifyCatalog != null)
+                if (this._notifyCatalog != null)
                 {
                     this._notifyCatalog.Changing += this.OnCatalogChanging;
                 }
 
-                var compositionOptions = CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe | CompositionOptions.ExportCompositionService;
-                var compositionContainer = new CompositionContainer(composablePartCatalog, compositionOptions);
-    
+                var compositionOptions =
+                    CompositionOptions.DisableSilentRejection
+                    | CompositionOptions.IsThreadSafe
+                    | CompositionOptions.ExportCompositionService;
+                var compositionContainer = new CompositionContainer(
+                    composablePartCatalog,
+                    compositionOptions
+                );
+
                 this._compositionContainer = compositionContainer;
             }
             catch
             {
-                if(this._notifyCatalog != null)
+                if (this._notifyCatalog != null)
                 {
                     this._notifyCatalog.Changing -= this.OnCatalogChanging;
                 }
@@ -56,7 +62,7 @@ namespace System.ComponentModel.Composition.Hosting
         public void Dispose()
         {
             Assumes.NotNull(this._compositionContainer);
-            
+
             // Delegates are cool there is no concern if you try to remove an item from them and they don't exist
             if (this._notifyCatalog != null)
             {

@@ -5,7 +5,6 @@ using System;
 using System.Numerics;
 using System.Reflection;
 using System.Reflection.Runtime.General;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Runtime.Augments;
 
@@ -13,8 +12,13 @@ namespace Internal.Reflection.Execution
 {
     static class NativeFormatEnumInfo
     {
-        public static void GetEnumValuesAndNames(MetadataReader reader, TypeDefinitionHandle typeDefHandle,
-            out object[] unsortedBoxedValues, out string[] unsortedNames, out bool isFlags)
+        public static void GetEnumValuesAndNames(
+            MetadataReader reader,
+            TypeDefinitionHandle typeDefHandle,
+            out object[] unsortedBoxedValues,
+            out string[] unsortedNames,
+            out bool isFlags
+        )
         {
             TypeDefinition typeDef = reader.GetTypeDefinition(typeDefHandle);
 
@@ -43,14 +47,43 @@ namespace Internal.Reflection.Execution
                     var handle = field.DefaultValue;
                     unsortedBoxedValues[i] = handle.HandleType switch
                     {
-                        HandleType.ConstantSByteValue => (object)(byte)handle.ToConstantSByteValueHandle(reader).GetConstantSByteValue(reader).Value,
-                        HandleType.ConstantByteValue => handle.ToConstantByteValueHandle(reader).GetConstantByteValue(reader).Value,
-                        HandleType.ConstantInt16Value => (ushort)handle.ToConstantInt16ValueHandle(reader).GetConstantInt16Value(reader).Value,
-                        HandleType.ConstantUInt16Value => handle.ToConstantUInt16ValueHandle(reader).GetConstantUInt16Value(reader).Value,
-                        HandleType.ConstantInt32Value => (uint)handle.ToConstantInt32ValueHandle(reader).GetConstantInt32Value(reader).Value,
-                        HandleType.ConstantUInt32Value => handle.ToConstantUInt32ValueHandle(reader).GetConstantUInt32Value(reader).Value,
-                        HandleType.ConstantInt64Value => (ulong)handle.ToConstantInt64ValueHandle(reader).GetConstantInt64Value(reader).Value,
-                        HandleType.ConstantUInt64Value => handle.ToConstantUInt64ValueHandle(reader).GetConstantUInt64Value(reader).Value,
+                        HandleType.ConstantSByteValue => (object)
+                            (byte)
+                                handle
+                                    .ToConstantSByteValueHandle(reader)
+                                    .GetConstantSByteValue(reader)
+                                    .Value,
+                        HandleType.ConstantByteValue => handle
+                            .ToConstantByteValueHandle(reader)
+                            .GetConstantByteValue(reader)
+                            .Value,
+                        HandleType.ConstantInt16Value => (ushort)
+                            handle
+                                .ToConstantInt16ValueHandle(reader)
+                                .GetConstantInt16Value(reader)
+                                .Value,
+                        HandleType.ConstantUInt16Value => handle
+                            .ToConstantUInt16ValueHandle(reader)
+                            .GetConstantUInt16Value(reader)
+                            .Value,
+                        HandleType.ConstantInt32Value => (uint)
+                            handle
+                                .ToConstantInt32ValueHandle(reader)
+                                .GetConstantInt32Value(reader)
+                                .Value,
+                        HandleType.ConstantUInt32Value => handle
+                            .ToConstantUInt32ValueHandle(reader)
+                            .GetConstantUInt32Value(reader)
+                            .Value,
+                        HandleType.ConstantInt64Value => (ulong)
+                            handle
+                                .ToConstantInt64ValueHandle(reader)
+                                .GetConstantInt64Value(reader)
+                                .Value,
+                        HandleType.ConstantUInt64Value => handle
+                            .ToConstantUInt64ValueHandle(reader)
+                            .GetConstantUInt64Value(reader)
+                            .Value,
                         _ => throw new InvalidOperationException(), // unreachable - we would have thrown InvalidOperationException earlier
                     };
                     i++;

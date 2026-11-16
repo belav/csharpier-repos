@@ -12,8 +12,10 @@ namespace System.Data
     /// Represents a collection of constraints for a <see cref='System.Data.DataTable'/>.
     /// </summary>
     [DefaultEvent(nameof(CollectionChanged))]
-    [Editor("Microsoft.VSDesigner.Data.Design.ConstraintsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.ConstraintsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed class ConstraintCollection : InternalDataCollectionBase
     {
         private readonly DataTable _table;
@@ -117,7 +119,9 @@ namespace System.Data
             {
                 if (addUniqueWhenAddingForeign)
                 {
-                    UniqueConstraint? key = fk.RelatedTable.Constraints.FindKeyConstraint(fk.RelatedColumnsReference);
+                    UniqueConstraint? key = fk.RelatedTable.Constraints.FindKeyConstraint(
+                        fk.RelatedColumnsReference
+                    );
                     if (key == null)
                     {
                         if (constraint.ConstraintName.Length == 0)
@@ -133,7 +137,9 @@ namespace System.Data
             }
             BaseAdd(constraint);
             ArrayAdd(constraint);
-            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Add, constraint));
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Add, constraint)
+            );
 
             if (constraint is UniqueConstraint)
             {
@@ -177,9 +183,17 @@ namespace System.Data
         /// specified parent and child
         /// columns and adds the constraint to the collection.
         /// </summary>
-        public Constraint Add(string? name, DataColumn primaryKeyColumn, DataColumn foreignKeyColumn)
+        public Constraint Add(
+            string? name,
+            DataColumn primaryKeyColumn,
+            DataColumn foreignKeyColumn
+        )
         {
-            ForeignKeyConstraint constraint = new ForeignKeyConstraint(name, primaryKeyColumn, foreignKeyColumn);
+            ForeignKeyConstraint constraint = new ForeignKeyConstraint(
+                name,
+                primaryKeyColumn,
+                foreignKeyColumn
+            );
             Add(constraint);
             return constraint;
         }
@@ -188,9 +202,17 @@ namespace System.Data
         /// Constructs a new <see cref='System.Data.ForeignKeyConstraint'/> with the specified parent columns and
         ///    child columns and adds the constraint to the collection.
         /// </summary>
-        public Constraint Add(string? name, DataColumn[] primaryKeyColumns, DataColumn[] foreignKeyColumns)
+        public Constraint Add(
+            string? name,
+            DataColumn[] primaryKeyColumns,
+            DataColumn[] foreignKeyColumns
+        )
         {
-            ForeignKeyConstraint constraint = new ForeignKeyConstraint(name, primaryKeyColumns, foreignKeyColumns);
+            ForeignKeyConstraint constraint = new ForeignKeyConstraint(
+                name,
+                primaryKeyColumns,
+                foreignKeyColumns
+            );
             Add(constraint);
             return constraint;
         }
@@ -215,7 +237,6 @@ namespace System.Data
                 }
             }
         }
-
 
         private void AddUniqueConstraint(UniqueConstraint constraint)
         {
@@ -266,14 +287,8 @@ namespace System.Data
         /// </summary>
         public event CollectionChangeEventHandler? CollectionChanged
         {
-            add
-            {
-                _onCollectionChanged += value;
-            }
-            remove
-            {
-                _onCollectionChanged -= value;
-            }
+            add { _onCollectionChanged += value; }
+            remove { _onCollectionChanged -= value; }
         }
 
         /// <summary>
@@ -323,7 +338,12 @@ namespace System.Data
         /// <summary>
         /// BaseGroupSwitch will intelligently remove and add tables from the collection.
         /// </summary>
-        private void BaseGroupSwitch(Constraint[] oldArray, int oldLength, Constraint[] newArray, int newLength)
+        private void BaseGroupSwitch(
+            Constraint[] oldArray,
+            int oldLength,
+            Constraint[] newArray,
+            int newLength
+        )
         {
             // We're doing a smart diff of oldArray and newArray to find out what
             // should be removed.  We'll pass through oldArray and see if it exists
@@ -536,7 +556,11 @@ namespace System.Data
             for (int i = 0; i < constraintCount; i++)
             {
                 UniqueConstraint? constraint = (List[i] as UniqueConstraint);
-                if ((null != constraint) && (constraint.Key.ColumnsReference.Length == 1) && (constraint.Key.ColumnsReference[0] == column))
+                if (
+                    (null != constraint)
+                    && (constraint.Key.ColumnsReference.Length == 1)
+                    && (constraint.Key.ColumnsReference[0] == column)
+                )
                     return constraint;
             }
             return null;
@@ -545,15 +569,20 @@ namespace System.Data
         /// <summary>
         /// Returns a matching constraint object.
         /// </summary>
-        internal ForeignKeyConstraint? FindForeignKeyConstraint(DataColumn[] parentColumns, DataColumn[] childColumns)
+        internal ForeignKeyConstraint? FindForeignKeyConstraint(
+            DataColumn[] parentColumns,
+            DataColumn[] childColumns
+        )
         {
             int constraintCount = List.Count;
             for (int i = 0; i < constraintCount; i++)
             {
                 ForeignKeyConstraint? constraint = (List[i] as ForeignKeyConstraint);
-                if ((null != constraint) &&
-                    CompareArrays(constraint.ParentKey.ColumnsReference, parentColumns) &&
-                    CompareArrays(constraint.ChildKey.ColumnsReference, childColumns))
+                if (
+                    (null != constraint)
+                    && CompareArrays(constraint.ParentKey.ColumnsReference, parentColumns)
+                    && CompareArrays(constraint.ChildKey.ColumnsReference, childColumns)
+                )
                     return constraint;
             }
             return null;
@@ -565,7 +594,8 @@ namespace System.Data
             if (a1.Length != a2.Length)
                 return false;
 
-            int i, j;
+            int i,
+                j;
             for (i = 0; i < a1.Length; i++)
             {
                 bool check = false;
@@ -626,7 +656,12 @@ namespace System.Data
                 for (int i = 0; i < constraintCount; i++)
                 {
                     Constraint constraint = (Constraint)List[i]!;
-                    int result = NamesEqual(constraint.ConstraintName, constraintName, false, _table.Locale);
+                    int result = NamesEqual(
+                        constraint.ConstraintName,
+                        constraintName,
+                        false,
+                        _table.Locale
+                    );
                     if (result == 1)
                         return i;
 
@@ -669,9 +704,14 @@ namespace System.Data
             int constraintCount = List.Count;
             for (int i = 0; i < constraintCount; i++)
             {
-                if (NamesEqual(name, ((Constraint)List[i]!).ConstraintName, true, _table.Locale) != 0)
+                if (
+                    NamesEqual(name, ((Constraint)List[i]!).ConstraintName, true, _table.Locale)
+                    != 0
+                )
                 {
-                    throw ExceptionBuilder.DuplicateConstraintName(((Constraint)List[i]!).ConstraintName);
+                    throw ExceptionBuilder.DuplicateConstraintName(
+                        ((Constraint)List[i]!).ConstraintName
+                    );
                 }
             }
             if (NamesEqual(name, MakeName(_defaultNameIndex), true, _table.Locale) != 0)
@@ -700,7 +740,9 @@ namespace System.Data
                     Table.PrimaryKey = null;
                 }
 
-                OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, constraint));
+                OnCollectionChanged(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Remove, constraint)
+                );
             }
         }
 
@@ -738,8 +780,7 @@ namespace System.Data
                 do
                 {
                     _defaultNameIndex--;
-                } while (_defaultNameIndex > 1 &&
-                         !Contains(MakeName(_defaultNameIndex - 1)));
+                } while (_defaultNameIndex > 1 && !Contains(MakeName(_defaultNameIndex - 1)));
             }
         }
 
@@ -749,7 +790,8 @@ namespace System.Data
                 return;
 
             int colCount;
-            DataColumn[] parents, childs;
+            DataColumn[] parents,
+                childs;
             for (int i = 0; i < _delayLoadingConstraints.Length; i++)
             {
                 if (_delayLoadingConstraints[i] is UniqueConstraint)
@@ -779,7 +821,10 @@ namespace System.Data
                         }
                         continue;
                     }
-                    UniqueConstraint newConstraint = new UniqueConstraint(constr._constraintName, parents);
+                    UniqueConstraint newConstraint = new UniqueConstraint(
+                        constr._constraintName,
+                        parents
+                    );
                     if (FindConstraint(newConstraint) == null)
                         Add(newConstraint);
                 }
@@ -806,12 +851,21 @@ namespace System.Data
                     for (int j = 0; j < colCount; j++)
                     {
                         if (constr._parentTableNamespace == null)
-                            parents[j] = _table.DataSet.Tables[constr._parentTableName]!.Columns[constr._parentColumnNames[j]]!;
+                            parents[j] = _table.DataSet.Tables[constr._parentTableName]!.Columns[
+                                constr._parentColumnNames[j]
+                            ]!;
                         else
-                            parents[j] = _table.DataSet.Tables[constr._parentTableName, constr._parentTableNamespace]!.Columns[constr._parentColumnNames[j]]!;
+                            parents[j] = _table.DataSet.Tables[
+                                constr._parentTableName,
+                                constr._parentTableNamespace
+                            ]!.Columns[constr._parentColumnNames[j]]!;
                         childs[j] = _table.Columns[constr._childColumnNames[j]]!;
                     }
-                    ForeignKeyConstraint newConstraint = new ForeignKeyConstraint(constr._constraintName, parents, childs);
+                    ForeignKeyConstraint newConstraint = new ForeignKeyConstraint(
+                        constr._constraintName,
+                        parents,
+                        childs
+                    );
                     newConstraint.AcceptRejectRule = constr._acceptRejectRule;
                     newConstraint.DeleteRule = constr._deleteRule;
                     newConstraint.UpdateRule = constr._updateRule;

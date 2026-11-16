@@ -4,34 +4,30 @@
 namespace System.ServiceModel.PeerResolvers
 {
     using System;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel.Configuration;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
 
     public class PeerCustomResolverSettings
     {
         EndpointAddress address;
         Binding binding;
-        string bindingSection, bindingConfiguration;
+        string bindingSection,
+            bindingConfiguration;
         PeerResolver resolver;
 
         public PeerCustomResolverSettings() { }
+
         public EndpointAddress Address
         {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
+            get { return address; }
+            set { address = value; }
         }
         public Binding Binding
         {
@@ -39,57 +35,46 @@ namespace System.ServiceModel.PeerResolvers
             {
                 if (binding == null)
                 {
-                    if (!String.IsNullOrEmpty(this.bindingSection) && !String.IsNullOrEmpty(this.bindingConfiguration))
-                        binding = ConfigLoader.LookupBinding(this.bindingSection, this.bindingConfiguration);
+                    if (
+                        !String.IsNullOrEmpty(this.bindingSection)
+                        && !String.IsNullOrEmpty(this.bindingConfiguration)
+                    )
+                        binding = ConfigLoader.LookupBinding(
+                            this.bindingSection,
+                            this.bindingConfiguration
+                        );
                 }
                 return binding;
             }
-            set
-            {
-                binding = value;
-            }
+            set { binding = value; }
         }
         public bool IsBindingSpecified
         {
             get
             {
-                return ((this.binding != null) || (!String.IsNullOrEmpty(this.bindingSection) && !String.IsNullOrEmpty(this.bindingConfiguration)));
+                return (
+                    (this.binding != null)
+                    || (
+                        !String.IsNullOrEmpty(this.bindingSection)
+                        && !String.IsNullOrEmpty(this.bindingConfiguration)
+                    )
+                );
             }
         }
         public PeerResolver Resolver
         {
-            get
-            {
-                return resolver;
-            }
-            set
-            {
-                resolver = value;
-            }
+            get { return resolver; }
+            set { resolver = value; }
         }
         internal string BindingSection
         {
-            get
-            {
-                return bindingSection;
-            }
-            set
-            {
-                bindingSection = value;
-            }
+            get { return bindingSection; }
+            set { bindingSection = value; }
         }
         internal string BindingConfiguration
         {
-            get
-            {
-                return bindingConfiguration;
-            }
-            set
-            {
-                bindingConfiguration = value;
-            }
+            get { return bindingConfiguration; }
+            set { bindingConfiguration = value; }
         }
-
     }
-
 }

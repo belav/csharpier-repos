@@ -1,53 +1,54 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlControlAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Security.Permissions;
+using System.Text;
+using System.Web.Security;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Web.Security;
-using System.Text;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * WmlControlAdapter base class contains wml specific methods.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlControlAdapter : System.Web.UI.MobileControls.Adapters.ControlAdapter
     {
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.PageAdapter"]/*' />
         protected WmlPageAdapter PageAdapter
         {
-            get
-            {
-                return ((WmlPageAdapter)Page.Adapter);
-            }
+            get { return ((WmlPageAdapter)Page.Adapter); }
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.FormAdapter"]/*' />
         protected WmlFormAdapter FormAdapter
         {
-            get
-            {
-                return (WmlFormAdapter)Control.Form.Adapter;
-            }
+            get { return (WmlFormAdapter)Control.Form.Adapter; }
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.Render"]/*' />
@@ -63,13 +64,15 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderLink"]/*' />
-        protected void RenderLink(WmlMobileTextWriter writer, 
-                                  String targetUrl, 
-                                  String softkeyLabel, 
-                                  bool implicitSoftkeyLabel,
-                                  bool mapToSoftkey, 
-                                  String text, 
-                                  bool breakAfter)
+        protected void RenderLink(
+            WmlMobileTextWriter writer,
+            String targetUrl,
+            String softkeyLabel,
+            bool implicitSoftkeyLabel,
+            bool mapToSoftkey,
+            String text,
+            bool breakAfter
+        )
         {
             RenderBeginLink(writer, targetUrl, softkeyLabel, implicitSoftkeyLabel, mapToSoftkey);
             writer.RenderText(text);
@@ -77,11 +80,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderBeginLink"]/*' />
-        protected void RenderBeginLink(WmlMobileTextWriter writer, 
-                                       String targetUrl, 
-                                       String softkeyLabel, 
-                                       bool implicitSoftkeyLabel,
-                                       bool mapToSoftkey)
+        protected void RenderBeginLink(
+            WmlMobileTextWriter writer,
+            String targetUrl,
+            String softkeyLabel,
+            bool implicitSoftkeyLabel,
+            bool mapToSoftkey
+        )
         {
             if (mapToSoftkey && !writer.IsValidSoftkeyLabel(softkeyLabel))
             {
@@ -98,7 +103,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
 
             String postback = DeterminePostBack(targetUrl);
-            
+
             if (postback != null)
             {
                 writer.RenderBeginPostBack(softkeyLabel, implicitSoftkeyLabel, mapToSoftkey);
@@ -114,19 +119,26 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else
                 {
-                    bool absoluteUrl = ( (targetUrl.StartsWith("http:", StringComparison.Ordinal)) || (targetUrl.StartsWith("https:", StringComparison.Ordinal)) );
+                    bool absoluteUrl = (
+                        (targetUrl.StartsWith("http:", StringComparison.Ordinal))
+                        || (targetUrl.StartsWith("https:", StringComparison.Ordinal))
+                    );
                     // AUI 3652
                     targetUrl = Control.ResolveUrl(targetUrl);
-                    bool queryStringWritten = targetUrl.IndexOf('?') != -1; 
+                    bool queryStringWritten = targetUrl.IndexOf('?') != -1;
                     IDictionary dictionary = PageAdapter.CookielessDataDictionary;
                     String formsAuthCookieName = FormsAuthentication.FormsCookieName;
-                    if((dictionary != null) && (!absoluteUrl) && (Control.MobilePage.Adapter.PersistCookielessData))
+                    if (
+                        (dictionary != null)
+                        && (!absoluteUrl)
+                        && (Control.MobilePage.Adapter.PersistCookielessData)
+                    )
                     {
                         StringBuilder sb = new StringBuilder(targetUrl);
 
-                        foreach(String name in dictionary.Keys)
+                        foreach (String name in dictionary.Keys)
                         {
-                            if(queryStringWritten)
+                            if (queryStringWritten)
                             {
                                 sb.Append("&amp;");
                             }
@@ -136,11 +148,14 @@ namespace System.Web.UI.MobileControls.Adapters
                                 queryStringWritten = true;
                             }
 
-                            if(name.Equals(formsAuthCookieName) && Device.CanRenderOneventAndPrevElementsTogether )
+                            if (
+                                name.Equals(formsAuthCookieName)
+                                && Device.CanRenderOneventAndPrevElementsTogether
+                            )
                             {
                                 sb.Append(name);
                                 sb.Append("=$(");
-                                sb.Append(writer.MapClientIDToShortName("__facn",false));
+                                sb.Append(writer.MapClientIDToShortName("__facn", false));
                                 sb.Append(")");
                             }
                             else
@@ -154,11 +169,13 @@ namespace System.Web.UI.MobileControls.Adapters
                     }
                 }
 
-                writer.RenderBeginHyperlink(targetUrl, 
-                                            false, 
-                                            softkeyLabel, 
-                                            implicitSoftkeyLabel, 
-                                            mapToSoftkey);
+                writer.RenderBeginHyperlink(
+                    targetUrl,
+                    false,
+                    softkeyLabel,
+                    implicitSoftkeyLabel,
+                    mapToSoftkey
+                );
             }
         }
 
@@ -166,10 +183,16 @@ namespace System.Web.UI.MobileControls.Adapters
         protected void RenderEndLink(WmlMobileTextWriter writer, String targetUrl, bool breakAfter)
         {
             String postback = DeterminePostBack(targetUrl);
-            
+
             if (postback != null)
             {
-                writer.RenderEndPostBack(Control.UniqueID, postback, WmlPostFieldType.Normal, false, breakAfter);
+                writer.RenderEndPostBack(
+                    Control.UniqueID,
+                    postback,
+                    WmlPostFieldType.Normal,
+                    false,
+                    breakAfter
+                );
             }
             else
             {
@@ -182,18 +205,20 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             String postback = null;
             String prefix = Constants.FormIDPrefix;
-            if (target.StartsWith(prefix, StringComparison.Ordinal))     //  link to another form
+            if (target.StartsWith(prefix, StringComparison.Ordinal)) //  link to another form
             {
                 String formID = target.Substring(prefix.Length);
                 Form form = Control.ResolveFormReference(formID);
                 Form thisForm = Control.Form;
-                
+
                 //  must postback to forms not rendered in deck (not visible) or links to same form,
                 // as long as it's safe to do so.
-                if (form == thisForm ||
-                    !PageAdapter.IsFormRendered(form) || 
-                    thisForm.HasDeactivateHandler() ||
-                    form.HasActivateHandler())
+                if (
+                    form == thisForm
+                    || !PageAdapter.IsFormRendered(form)
+                    || thisForm.HasDeactivateHandler()
+                    || form.HasActivateHandler()
+                )
                 {
                     postback = form.UniqueID;
                 }
@@ -206,10 +231,18 @@ namespace System.Web.UI.MobileControls.Adapters
             WmlMobileTextWriter writer,
             String softkeyLabel,
             String text,
-            bool breakAfter)
+            bool breakAfter
+        )
         {
-            RenderPostBackEvent(writer, null, softkeyLabel, true,
-                                text, breakAfter, WmlPostFieldType.Submit);
+            RenderPostBackEvent(
+                writer,
+                null,
+                softkeyLabel,
+                true,
+                text,
+                breakAfter,
+                WmlPostFieldType.Submit
+            );
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderPostBackEvent"]/*' />
@@ -219,10 +252,18 @@ namespace System.Web.UI.MobileControls.Adapters
             String softkeyLabel,
             bool mapToSoftkey,
             String text,
-            bool breakAfter)
+            bool breakAfter
+        )
         {
-            RenderPostBackEvent(writer, argument, softkeyLabel, mapToSoftkey,
-                                text, breakAfter, WmlPostFieldType.Normal);
+            RenderPostBackEvent(
+                writer,
+                argument,
+                softkeyLabel,
+                mapToSoftkey,
+                text,
+                breakAfter,
+                WmlPostFieldType.Normal
+            );
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderPostBackEvent1"]/*' />
@@ -233,7 +274,8 @@ namespace System.Web.UI.MobileControls.Adapters
             bool mapToSoftkey,
             String text,
             bool breakAfter,
-            WmlPostFieldType postBackType)
+            WmlPostFieldType postBackType
+        )
         {
             bool implicitSoftkeyLabel = false;
             if (mapToSoftkey)
@@ -280,7 +322,8 @@ namespace System.Web.UI.MobileControls.Adapters
         //  SECONDARY UI SUPPORT
         /////////////////////////////////////////////////////////////////////////
 
-        internal const int NotSecondaryUIInit = -1;  // For initialization of private consts in derived classes.
+        internal const int NotSecondaryUIInit = -1; // For initialization of private consts in derived classes.
+
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.NotSecondaryUI"]/*' />
         protected static readonly int NotSecondaryUI = NotSecondaryUIInit;
 
@@ -289,7 +332,7 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             get
             {
-                if (Control == null || Control.Form == null) 
+                if (Control == null || Control.Form == null)
                 {
                     return NotSecondaryUI;
                 }
@@ -298,10 +341,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     return ((WmlFormAdapter)Control.Form.Adapter).GetSecondaryUIMode(Control);
                 }
             }
-            set
-            {
-                ((WmlFormAdapter)Control.Form.Adapter).SetSecondaryUIMode(Control, value);
-            }
+            set { ((WmlFormAdapter)Control.Form.Adapter).SetSecondaryUIMode(Control, value); }
         }
 
         /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.ExitSecondaryUIMode"]/*' />
@@ -323,7 +363,7 @@ namespace System.Web.UI.MobileControls.Adapters
         public override Object SaveAdapterState()
         {
             int mode = SecondaryUIMode;
-            if (mode != NotSecondaryUI) 
+            if (mode != NotSecondaryUI)
             {
                 return mode;
             }
@@ -334,21 +374,3 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

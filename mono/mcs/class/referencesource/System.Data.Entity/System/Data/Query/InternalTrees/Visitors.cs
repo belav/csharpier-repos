@@ -13,12 +13,12 @@ namespace System.Data.Query.InternalTrees
     using pc = System.Data.Query.PlanCompiler; // To be able to use PlanCompiler.Assert instead of Debug.Assert in this class.
 
     /// <summary>
-    /// Simple implemenation of the BasicOpVisitor interface. 
+    /// Simple implemenation of the BasicOpVisitor interface.
     /// </summary>
     internal abstract class BasicOpVisitor
     {
         /// <summary>
-        /// Default constructor. 
+        /// Default constructor.
         /// </summary>
         internal BasicOpVisitor() { }
 
@@ -55,6 +55,7 @@ namespace System.Data.Query.InternalTrees
         {
             n.Op.Accept(this, n);
         }
+
         /// <summary>
         /// Default node visitor
         /// </summary>
@@ -103,6 +104,7 @@ namespace System.Data.Query.InternalTrees
         {
             VisitRelOpDefault(op, n);
         }
+
         /// <summary>
         /// Default handler for all SetOps
         /// </summary>
@@ -143,7 +145,9 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The Node that references the Op</param>
         public virtual void Visit(Op op, Node n)
         {
-            throw new NotSupportedException(System.Data.Entity.Strings.Iqt_General_UnsupportedOp(op.GetType().FullName));
+            throw new NotSupportedException(
+                System.Data.Entity.Strings.Iqt_General_UnsupportedOp(op.GetType().FullName)
+            );
         }
 
         #region ScalarOps
@@ -381,6 +385,7 @@ namespace System.Data.Query.InternalTrees
         {
             VisitScalarOpDefault(op, n);
         }
+
         /// <summary>
         /// Visitor pattern method for SoftCastOp
         /// </summary>
@@ -736,6 +741,7 @@ namespace System.Data.Query.InternalTrees
         {
             VisitPhysicalOpDefault(op, n);
         }
+
         /// <summary>
         /// Visitor pattern method for SingleStreamNestOp
         /// </summary>
@@ -745,6 +751,7 @@ namespace System.Data.Query.InternalTrees
         {
             VisitNestOp(op, n);
         }
+
         /// <summary>
         /// Visitor pattern method for MultistreamNestOp
         /// </summary>
@@ -769,7 +776,7 @@ namespace System.Data.Query.InternalTrees
         #region visitor helpers
 
         /// <summary>
-        /// Simply iterates over all children, and manages any updates 
+        /// Simply iterates over all children, and manages any updates
         /// </summary>
         /// <param name="n">The current node</param>
         protected virtual void VisitChildren(Node n)
@@ -841,7 +848,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all AncillaryOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all AncillaryOps
         /// </summary>
         /// <param name="op">the AncillaryOp</param>
@@ -880,7 +887,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all PhysicalOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all PhysicalOps
         /// </summary>
         /// <param name="op">the PhysicalOp</param>
@@ -906,7 +913,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all NestOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all NestOps
         /// </summary>
         /// <param name="op">the NestOp</param>
@@ -927,6 +934,7 @@ namespace System.Data.Query.InternalTrees
         {
             return VisitNestOp(op, n);
         }
+
         /// <summary>
         /// MultiStreamNestOp
         /// </summary>
@@ -946,7 +954,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all RelOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all RelOps
         /// </summary>
         /// <param name="op">the RelOp</param>
@@ -998,7 +1006,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all JoinOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all JoinOps.
         /// </summary>
         /// <param name="op">the JoinOp</param>
@@ -1059,7 +1067,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all SetOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all SetOps.
         /// </summary>
         /// <param name="op">the SetOp</param>
@@ -1138,7 +1146,6 @@ namespace System.Data.Query.InternalTrees
             return VisitRelOpDefault(op, n);
         }
 
-
         /// <summary>
         /// GroupByOp
         /// </summary>
@@ -1183,6 +1190,7 @@ namespace System.Data.Query.InternalTrees
         {
             return VisitRelOpDefault(op, n);
         }
+
         /// <summary>
         /// ScanTableOp
         /// </summary>
@@ -1230,7 +1238,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all SortOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle ConstrainedSortOp/SortOp.
         /// </summary>
         /// <param name="op">the SetOp</param>
@@ -1280,7 +1288,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all ScalarOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all ScalarOps
         /// </summary>
         /// <param name="op">the ScalarOp</param>
@@ -1587,6 +1595,7 @@ namespace System.Data.Query.InternalTrees
         {
             return VisitScalarOpDefault(op, n);
         }
+
         /// <summary>
         /// RelPropertyOp
         /// </summary>
@@ -1635,6 +1644,7 @@ namespace System.Data.Query.InternalTrees
         {
             return VisitScalarOpDefault(op, n);
         }
+
         public virtual TResultType Visit(NavigateOp op, Node n)
         {
             return VisitScalarOpDefault(op, n);
@@ -1651,7 +1661,7 @@ namespace System.Data.Query.InternalTrees
         #region visitor helpers
 
         /// <summary>
-        /// Simply iterates over all children, and manages any updates 
+        /// Simply iterates over all children, and manages any updates
         /// </summary>
         /// <param name="n">The current node</param>
         protected override void VisitChildren(Node n)
@@ -1691,7 +1701,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all AncillaryOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all AncillaryOps
         /// </summary>
         /// <param name="op">the AncillaryOp</param>
@@ -1708,7 +1718,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all PhysicalOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all PhysicalOps
         /// </summary>
         /// <param name="op">the PhysicalOp</param>
@@ -1725,7 +1735,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all RelOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all RelOps
         /// </summary>
         /// <param name="op">the RelOp</param>
@@ -1741,7 +1751,7 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// A default processor for all ScalarOps.
-        /// 
+        ///
         /// Allows new visitors to just override this to handle all ScalarOps
         /// </summary>
         /// <param name="op">the ScalarOp</param>
@@ -1752,6 +1762,5 @@ namespace System.Data.Query.InternalTrees
             return VisitDefault(n);
         }
         #endregion
-
     }
 }

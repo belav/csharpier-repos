@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace System
 {
-	public static partial class AdminHelpers
-	{
-		public unsafe static bool IsProcessElevated() => true;
-	}
+    public static partial class AdminHelpers
+    {
+        public static unsafe bool IsProcessElevated() => true;
+    }
 }

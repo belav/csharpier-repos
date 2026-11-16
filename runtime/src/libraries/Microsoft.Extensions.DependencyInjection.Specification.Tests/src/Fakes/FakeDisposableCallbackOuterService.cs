@@ -6,12 +6,16 @@ using System.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
-    public class FakeDisposableCallbackOuterService : FakeDisposableCallbackService, IFakeOuterService
+    public class FakeDisposableCallbackOuterService
+        : FakeDisposableCallbackService,
+            IFakeOuterService
     {
         public FakeDisposableCallbackOuterService(
             IFakeService singleService,
             IEnumerable<IFakeMultipleService> multipleServices,
-            FakeDisposeCallback callback) : base(callback)
+            FakeDisposeCallback callback
+        )
+            : base(callback)
         {
             SingleService = singleService;
             MultipleServices = multipleServices.ToArray();

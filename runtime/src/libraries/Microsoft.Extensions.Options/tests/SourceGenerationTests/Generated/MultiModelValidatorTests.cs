@@ -12,16 +12,9 @@ public class MultiModelValidatorTests
     [Fact]
     public void Invalid()
     {
-        var secondModel = new SecondModel
-        {
-            P3 = "1234",
-        };
+        var secondModel = new SecondModel { P3 = "1234" };
 
-        var firstModel = new FirstModel
-        {
-            P1 = "1234",
-            P2 = secondModel,
-        };
+        var firstModel = new FirstModel { P1 = "1234", P2 = secondModel };
 
         var validator = default(MultiValidator);
         var vr = validator.Validate("MultiModelValidator", firstModel);
@@ -32,18 +25,14 @@ public class MultiModelValidatorTests
     [Fact]
     public void Valid()
     {
-        var secondModel = new SecondModel
-        {
-            P3 = "12345",
-        };
+        var secondModel = new SecondModel { P3 = "12345" };
 
-        var firstModel = new FirstModel
-        {
-            P1 = "12345",
-            P2 = secondModel,
-        };
+        var firstModel = new FirstModel { P1 = "12345", P2 = secondModel };
 
         var validator = default(MultiValidator);
-        Assert.Equal(ValidateOptionsResult.Success, validator.Validate("MultiModelValidator", firstModel));
+        Assert.Equal(
+            ValidateOptionsResult.Success,
+            validator.Validate("MultiModelValidator", firstModel)
+        );
     }
 }

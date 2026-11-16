@@ -19,7 +19,8 @@ public class RelationalQueryTranslationPreprocessorFactory : IQueryTranslationPr
     /// </summary>
     public RelationalQueryTranslationPreprocessorFactory(
         QueryTranslationPreprocessorDependencies dependencies,
-        RelationalQueryTranslationPreprocessorDependencies relationalDependencies)
+        RelationalQueryTranslationPreprocessorDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -41,6 +42,12 @@ public class RelationalQueryTranslationPreprocessorFactory : IQueryTranslationPr
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryTranslationPreprocessor Create(QueryCompilationContext queryCompilationContext)
-        => new RelationalQueryTranslationPreprocessor(Dependencies, RelationalDependencies, queryCompilationContext);
+    public virtual QueryTranslationPreprocessor Create(
+        QueryCompilationContext queryCompilationContext
+    ) =>
+        new RelationalQueryTranslationPreprocessor(
+            Dependencies,
+            RelationalDependencies,
+            queryCompilationContext
+        );
 }

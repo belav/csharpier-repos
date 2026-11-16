@@ -9,7 +9,7 @@ internal static partial class Interop
         {
             AT_KEYEXCHANGE = 1,
             AT_SIGNATURE = 2,
-            CERT_NCRYPT_KEY_SPEC = -1,  // Special sentinel indicating that an api returned an NCrypt key rather than a CAPI key
+            CERT_NCRYPT_KEY_SPEC = -1, // Special sentinel indicating that an api returned an NCrypt key rather than a CAPI key
         }
     }
 }

@@ -26,13 +26,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Data.Services {
-	[Flags]
-	public enum UpdateOperations
-	{
-		None = 0,
-		Add = 1,
-		Change = 2,
-		Delete = 4
-	}
+namespace System.Data.Services
+{
+    [Flags]
+    public enum UpdateOperations
+    {
+        None = 0,
+        Add = 1,
+        Change = 2,
+        Delete = 4,
+    }
 }

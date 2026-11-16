@@ -12,11 +12,18 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static IList<SymbolDisplayPart> GetPreambleParts(
             INamedTypeSymbol namedType,
             SemanticModel semanticModel,
-            int position)
+            int position
+        )
         {
             var result = new List<SymbolDisplayPart>();
 
-            result.AddRange(namedType.ToMinimalDisplayParts(semanticModel, position, MinimallyQualifiedWithoutTypeParametersFormat));
+            result.AddRange(
+                namedType.ToMinimalDisplayParts(
+                    semanticModel,
+                    position,
+                    MinimallyQualifiedWithoutTypeParametersFormat
+                )
+            );
             result.Add(Punctuation(SyntaxKind.LessThanToken));
 
             return result;
@@ -24,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
         private static IList<SymbolDisplayPart> GetPostambleParts()
         {
-            return SpecializedCollections.SingletonList(
-                Punctuation(SyntaxKind.GreaterThanToken));
+            return SpecializedCollections.SingletonList(Punctuation(SyntaxKind.GreaterThanToken));
         }
     }
 }

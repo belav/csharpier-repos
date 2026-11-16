@@ -13,6 +13,9 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.OrganizeImports
     {
         /// <returns>Returns the rewritten document, or the document passed in if no changes were made. If cancellation
         /// was observed, it returns null.</returns>
-        Task<Document> RemoveUnnecessaryNamespacesAsync(Document document, CancellationToken cancellationToken);
+        Task<Document> RemoveUnnecessaryNamespacesAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

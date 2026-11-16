@@ -93,11 +93,17 @@ namespace System.Xml.Xsl
             }
             else
             {
-                XmlTextReaderImpl readerImpl = new XmlTextReaderImpl(baseUri, stream, _xmlNameTable!);
+                XmlTextReaderImpl readerImpl = new XmlTextReaderImpl(
+                    baseUri,
+                    stream,
+                    _xmlNameTable!
+                );
                 readerImpl.EntityHandling = _entityHandling;
                 readerImpl.Namespaces = _namespaces;
                 readerImpl.Normalization = _normalization;
-                readerImpl.DtdProcessing = _prohibitDtd ? DtdProcessing.Prohibit : DtdProcessing.Parse;
+                readerImpl.DtdProcessing = _prohibitDtd
+                    ? DtdProcessing.Prohibit
+                    : DtdProcessing.Parse;
                 readerImpl.WhitespaceHandling = _whitespaceHandling;
                 readerImpl.XmlResolver = _xmlResolver;
                 reader = readerImpl;
@@ -113,7 +119,10 @@ namespace System.Xml.Xsl
 
         public XmlNameTable NameTable
         {
-            get { return _xmlReaderSettings != null ? _xmlReaderSettings.NameTable! : _xmlNameTable!; }
+            get
+            {
+                return _xmlReaderSettings != null ? _xmlReaderSettings.NameTable! : _xmlNameTable!;
+            }
         }
     }
 }

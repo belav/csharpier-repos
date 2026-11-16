@@ -13,20 +13,24 @@ namespace System.IdentityModel.Tokens
         byte[] symmetricKey;
 
         public InMemorySymmetricSecurityKey(byte[] symmetricKey)
-            : this(symmetricKey, true)
-        {
-        }
+            : this(symmetricKey, true) { }
 
         public InMemorySymmetricSecurityKey(byte[] symmetricKey, bool cloneBuffer)
         {
             if (symmetricKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("symmetricKey"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("symmetricKey")
+                );
             }
 
             if (symmetricKey.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SymmetricKeyLengthTooShort, symmetricKey.Length)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SymmetricKeyLengthTooShort, symmetricKey.Length)
+                    )
+                );
             }
             this.keySize = symmetricKey.Length * 8;
 
@@ -56,9 +60,22 @@ namespace System.IdentityModel.Tokens
             return CryptoHelper.WrapKey(this.symmetricKey, keyData, algorithm);
         }
 
-        public override byte[] GenerateDerivedKey(string algorithm, byte[] label, byte[] nonce, int derivedKeyLength, int offset)
+        public override byte[] GenerateDerivedKey(
+            string algorithm,
+            byte[] label,
+            byte[] nonce,
+            int derivedKeyLength,
+            int offset
+        )
         {
-            return CryptoHelper.GenerateDerivedKey(this.symmetricKey, algorithm, label, nonce, derivedKeyLength, offset);
+            return CryptoHelper.GenerateDerivedKey(
+                this.symmetricKey,
+                algorithm,
+                label,
+                nonce,
+                derivedKeyLength,
+                offset
+            );
         }
 
         public override ICryptoTransform GetDecryptionTransform(string algorithm, byte[] iv)

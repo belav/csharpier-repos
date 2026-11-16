@@ -5,8 +5,8 @@
 namespace System.Activities
 {
     using System.Runtime;
-    using System.Threading;
     using System.Security;
+    using System.Threading;
 
     static class ActivityDefaults
     {

@@ -34,11 +34,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
         // This member is serialized and deserialized with no change.
         public int Member1 { get; private set; }
 
-        // The value of this field is set and reset during and 
+        // The value of this field is set and reset during and
         // after serialization.
         public string Member2 { get; private set; }
 
-        // This field is not serialized. The OnDeserializedAttribute 
+        // This field is not serialized. The OnDeserializedAttribute
         // is used to set the member value after serialization.
         [JsonIgnore]
         public string Member3 { get; private set; }
@@ -46,9 +46,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
         // This field is set to null, but populated after deserialization.
         public string Member4 { get; private set; }
 
-        public SerializationEventTestObjectWithConstructor(int member1,
+        public SerializationEventTestObjectWithConstructor(
+            int member1,
             string member2,
-            string member4)
+            string member4
+        )
         {
             Member1 = member1;
             Member2 = member2;

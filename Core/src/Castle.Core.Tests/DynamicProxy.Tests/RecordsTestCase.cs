@@ -13,36 +13,37 @@
 // limitations under the License.
 
 using Castle.DynamicProxy.Tests.Records;
-
 using NUnit.Framework;
 
 namespace Castle.DynamicProxy.Tests
 {
-	[TestFixture]
-	public class RecordsTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void Can_proxy_empty_record()
-		{
-			_ = generator.CreateClassProxy<EmptyRecord>(new StandardInterceptor());
-		}
+    [TestFixture]
+    public class RecordsTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void Can_proxy_empty_record()
+        {
+            _ = generator.CreateClassProxy<EmptyRecord>(new StandardInterceptor());
+        }
 
-		[Test]
-		public void Can_proxy_record_derived_from_empty_record()
-		{
-			_ = generator.CreateClassProxy<DerivedFromEmptyRecord>(new StandardInterceptor());
-		}
+        [Test]
+        public void Can_proxy_record_derived_from_empty_record()
+        {
+            _ = generator.CreateClassProxy<DerivedFromEmptyRecord>(new StandardInterceptor());
+        }
 
-		[Test]
-		public void Can_proxy_empty_generic_record()
-		{
-			_ = generator.CreateClassProxy<EmptyGenericRecord<object>>(new StandardInterceptor());
-		}
+        [Test]
+        public void Can_proxy_empty_generic_record()
+        {
+            _ = generator.CreateClassProxy<EmptyGenericRecord<object>>(new StandardInterceptor());
+        }
 
-		[Test]
-		public void Can_proxy_record_derived_from_empty_generic_record()
-		{
-			_ = generator.CreateClassProxy<DerivedFromEmptyGenericRecord>(new StandardInterceptor());
-		}
-	}
+        [Test]
+        public void Can_proxy_record_derived_from_empty_generic_record()
+        {
+            _ = generator.CreateClassProxy<DerivedFromEmptyGenericRecord>(
+                new StandardInterceptor()
+            );
+        }
+    }
 }

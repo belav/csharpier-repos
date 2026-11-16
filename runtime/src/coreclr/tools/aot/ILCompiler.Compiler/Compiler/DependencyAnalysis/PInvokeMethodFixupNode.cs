@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
-
 using Internal.IL.Stubs;
 using Internal.Runtime;
 using Internal.Text;
@@ -32,12 +31,15 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append("__pinvoke_");
             _pInvokeMethodData.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -57,7 +59,10 @@ namespace ILCompiler.DependencyAnalysis
 
             // Entry point name
             string entryPointName = _pInvokeMethodData.EntryPointName;
-            if (factory.Target.IsWindows && entryPointName.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+            if (
+                factory.Target.IsWindows
+                && entryPointName.StartsWith("#", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // Windows-specific ordinal import
                 // CLR-compatible behavior: Strings that can't be parsed as a signed integer are treated as zero.
@@ -80,18 +85,32 @@ namespace ILCompiler.DependencyAnalysis
             int flags = 0;
 
             int charsetFlags = (int)_pInvokeMethodData.CharSetMangling;
-            Debug.Assert((charsetFlags & MethodFixupCellFlagsConstants.CharSetMask) == charsetFlags);
+            Debug.Assert(
+                (charsetFlags & MethodFixupCellFlagsConstants.CharSetMask) == charsetFlags
+            );
             charsetFlags &= MethodFixupCellFlagsConstants.CharSetMask;
             flags |= charsetFlags;
 
-            int? objcFunction = MarshalHelpers.GetObjectiveCMessageSendFunction(factory.Target, _pInvokeMethodData.ModuleData.ModuleName, _pInvokeMethodData.EntryPointName);
+            int? objcFunction = MarshalHelpers.GetObjectiveCMessageSendFunction(
+                factory.Target,
+                _pInvokeMethodData.ModuleData.ModuleName,
+                _pInvokeMethodData.EntryPointName
+            );
             if (objcFunction.HasValue)
             {
                 flags |= MethodFixupCellFlagsConstants.IsObjectiveCMessageSendMask;
 
-                int objcFunctionFlags = objcFunction.Value << MethodFixupCellFlagsConstants.ObjectiveCMessageSendFunctionShift;
-                Debug.Assert((objcFunctionFlags & MethodFixupCellFlagsConstants.ObjectiveCMessageSendFunctionMask) == objcFunctionFlags);
-                objcFunctionFlags &= MethodFixupCellFlagsConstants.ObjectiveCMessageSendFunctionMask;
+                int objcFunctionFlags =
+                    objcFunction.Value
+                    << MethodFixupCellFlagsConstants.ObjectiveCMessageSendFunctionShift;
+                Debug.Assert(
+                    (
+                        objcFunctionFlags
+                        & MethodFixupCellFlagsConstants.ObjectiveCMessageSendFunctionMask
+                    ) == objcFunctionFlags
+                );
+                objcFunctionFlags &=
+                    MethodFixupCellFlagsConstants.ObjectiveCMessageSendFunctionMask;
                 flags |= objcFunctionFlags;
             }
 
@@ -104,7 +123,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _pInvokeMethodData.CompareTo(((PInvokeMethodFixupNode)other)._pInvokeMethodData, comparer);
+            return _pInvokeMethodData.CompareTo(
+                ((PInvokeMethodFixupNode)other)._pInvokeMethodData,
+                comparer
+            );
         }
     }
 
@@ -117,22 +139,30 @@ namespace ILCompiler.DependencyAnalysis
         public PInvokeMethodData(PInvokeLazyFixupField pInvokeLazyFixupField)
         {
             PInvokeMetadata metadata = pInvokeLazyFixupField.PInvokeMetadata;
-            ModuleDesc declaringModule = ((MetadataType)pInvokeLazyFixupField.TargetMethod.OwningType).Module;
+            ModuleDesc declaringModule = (
+                (MetadataType)pInvokeLazyFixupField.TargetMethod.OwningType
+            ).Module;
 
             CustomAttributeValue<TypeDesc>? decodedAttr = null;
 
             // Look for DefaultDllImportSearchPath on the method
             if (pInvokeLazyFixupField.TargetMethod is EcmaMethod method)
             {
-                decodedAttr = method.GetDecodedCustomAttribute("System.Runtime.InteropServices", "DefaultDllImportSearchPathsAttribute");
+                decodedAttr = method.GetDecodedCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "DefaultDllImportSearchPathsAttribute"
+                );
             }
 
             // If the attribute it wasn't found on the method, look for it on the assembly
             if (!decodedAttr.HasValue && declaringModule.Assembly is EcmaAssembly asm)
             {
                 // We look for [assembly:DefaultDllImportSearchPaths(...)]
-                var attrHandle = asm.MetadataReader.GetCustomAttributeHandle(asm.AssemblyDefinition.GetCustomAttributes(),
-                    "System.Runtime.InteropServices", "DefaultDllImportSearchPathsAttribute");
+                var attrHandle = asm.MetadataReader.GetCustomAttributeHandle(
+                    asm.AssemblyDefinition.GetCustomAttributes(),
+                    "System.Runtime.InteropServices",
+                    "DefaultDllImportSearchPathsAttribute"
+                );
                 if (!attrHandle.IsNil)
                 {
                     var attr = asm.MetadataReader.GetCustomAttribute(attrHandle);
@@ -141,14 +171,20 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             DllImportSearchPath? dllImportSearchPath = default;
-            if (decodedAttr.HasValue
+            if (
+                decodedAttr.HasValue
                 && decodedAttr.Value.FixedArguments.Length == 1
-                && decodedAttr.Value.FixedArguments[0].Value is int searchPath)
+                && decodedAttr.Value.FixedArguments[0].Value is int searchPath
+            )
             {
                 dllImportSearchPath = (DllImportSearchPath)searchPath;
             }
 
-            ModuleData = new PInvokeModuleData(metadata.Module, dllImportSearchPath, declaringModule);
+            ModuleData = new PInvokeModuleData(
+                metadata.Module,
+                dllImportSearchPath,
+                declaringModule
+            );
 
             EntryPointName = metadata.Name;
 
@@ -161,7 +197,7 @@ namespace ILCompiler.DependencyAnalysis
                     CharSet.Ansi => true,
                     CharSet.Unicode => false,
                     CharSet.Auto => false,
-                    _ => true
+                    _ => true,
                 };
 
                 charSetMangling = isAnsi ? CharSet.Ansi : CharSet.Unicode;
@@ -171,9 +207,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public bool Equals(PInvokeMethodData other)
         {
-            return ModuleData.Equals(other.ModuleData) &&
-                EntryPointName == other.EntryPointName &&
-                CharSetMangling == other.CharSetMangling;
+            return ModuleData.Equals(other.ModuleData)
+                && EntryPointName == other.EntryPointName
+                && CharSetMangling == other.CharSetMangling;
         }
 
         public override bool Equals(object obj)
@@ -188,7 +224,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public int CompareTo(PInvokeMethodData other, CompilerComparer comparer)
         {
-            var entryPointCompare = StringComparer.Ordinal.Compare(EntryPointName, other.EntryPointName);
+            var entryPointCompare = StringComparer.Ordinal.Compare(
+                EntryPointName,
+                other.EntryPointName
+            );
             if (entryPointCompare != 0)
                 return entryPointCompare;
 

@@ -36,11 +36,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public static string LocationToolTip { get; } = ServicesVSResources.Location;
         public static string LocationAutomationName { get; } = ServicesVSResources.Location;
 
-        private void OnSettingChanged(object sender, System.EventArgs e)
-            => LocationValue = GetLocationString(_setting.Location);
+        private void OnSettingChanged(object sender, System.EventArgs e) =>
+            LocationValue = GetLocationString(_setting.Location);
 
-        private static string GetLocationString(SettingLocation? location)
-            => location?.LocationKind switch
+        private static string GetLocationString(SettingLocation? location) =>
+            location?.LocationKind switch
             {
                 LocationKind.EditorConfig or LocationKind.GlobalConfig => location.Path!,
                 _ => ServicesVSResources.Visual_Studio_Settings,

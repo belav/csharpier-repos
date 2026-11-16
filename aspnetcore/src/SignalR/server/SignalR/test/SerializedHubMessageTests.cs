@@ -22,9 +22,8 @@ public class SerializedHubMessageTests
         var serialized = message.GetSerializedMessage(protocol);
 
         Assert.Equal(DummyHubProtocol.DummySerialization, serialized.ToArray());
-        Assert.Collection(
-            protocol.GetWrittenMessages(),
-            actualMessage => Assert.Same(invocation, actualMessage)
+        Assert.Collection(protocol.GetWrittenMessages(), actualMessage =>
+            Assert.Same(invocation, actualMessage)
         );
     }
 
@@ -44,9 +43,8 @@ public class SerializedHubMessageTests
         Assert.Equal(DummyHubProtocol.DummySerialization, serialized.ToArray());
 
         // We should still only have written one message
-        Assert.Collection(
-            protocol.GetWrittenMessages(),
-            actualMessage => Assert.Same(invocation, actualMessage)
+        Assert.Collection(protocol.GetWrittenMessages(), actualMessage =>
+            Assert.Same(invocation, actualMessage)
         );
     }
 

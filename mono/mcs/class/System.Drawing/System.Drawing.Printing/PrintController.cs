@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,28 +27,24 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Drawing.Printing {
+namespace System.Drawing.Printing
+{
+    public abstract class PrintController
+    {
+        public virtual bool IsPreview
+        {
+            get { return false; }
+        }
 
-	public abstract class PrintController {
+        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
 
-		public virtual bool IsPreview { 
-			get { return false; }
-		}
-		public virtual void OnEndPage (PrintDocument document, PrintPageEventArgs e)
-		{
-		}
+        public virtual void OnStartPrint(PrintDocument document, PrintEventArgs e) { }
 
-		public virtual void OnStartPrint (PrintDocument document, PrintEventArgs e)
-		{
-		}
+        public virtual void OnEndPrint(PrintDocument document, PrintEventArgs e) { }
 
-		public virtual void OnEndPrint (PrintDocument document, PrintEventArgs e)
-		{
-		}
-
-		public virtual Graphics OnStartPage (PrintDocument document, PrintPageEventArgs e)
-		{
-			return null;
-		}
-	}
+        public virtual Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
+        {
+            return null;
+        }
+    }
 }

@@ -31,8 +31,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.integeregererface.integeregererface05.integeregererface05
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -62,8 +60,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.integeregererface.integeregererface12.integeregererface12
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -75,9 +71,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public interface Parent
     {
-        int Foo(
-        [Optional]
-        dynamic i);
+        int Foo([Optional] dynamic i);
     }
 
     public class Test
@@ -95,8 +89,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.integeregererface.integeregererface13.integeregererface13
 {
@@ -110,11 +102,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     public interface Parent
     {
         int Foo(
-        [Optional]
-        dynamic i, [Optional]
-        dynamic j, [Optional]
-        float ? f, [Optional]
-        decimal ? d);
+            [Optional] dynamic i,
+            [Optional] dynamic j,
+            [Optional] float? f,
+            [Optional] decimal? d
+        );
     }
 
     public class Test
@@ -132,8 +124,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.integeregererface.integeregererface16.integeregererface16
 {
@@ -172,8 +162,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.integeregererface.integeregererface17.integeregererface17
 {

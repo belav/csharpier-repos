@@ -18,23 +18,25 @@ namespace RenderingPlayground
             Add(new ContentView("Processes"));
             Add(new ContentView(""));
 
-            var table = new TableView<Process>
-            {
-                Items = processes
-            };
+            var table = new TableView<Process> { Items = processes };
             table.AddColumn(p => p.Id, new ContentView("PID".Underline()));
             table.AddColumn(p => Name(p), new ContentView("COMMAND".Underline()));
             table.AddColumn(p => p.PrivilegedProcessorTime, new ContentView("TIME".Underline()));
             table.AddColumn(p => p.Threads.Count, new ContentView("#TH".Underline()));
-            table.AddColumn(p => p.PrivateMemorySize64.Abbreviate(), new ContentView("MEM".Underline()));
-            table.AddColumn(p =>
-            {
+            table.AddColumn(
+                p => p.PrivateMemorySize64.Abbreviate(),
+                new ContentView("MEM".Underline())
+            );
+            table.AddColumn(
+                p =>
+                {
 #pragma warning disable CS0618 // Type or member is obsolete
-                var usage = p.TrackCpuUsage().First();
+                    var usage = p.TrackCpuUsage().First();
 #pragma warning restore CS0618 // Type or member is obsolete
-                return $"{usage.UsageTotal:P}";
-            }, new ContentView("CPU".Underline()));
-
+                    return $"{usage.UsageTotal:P}";
+                },
+                new ContentView("CPU".Underline())
+            );
 
             Add(table);
 
@@ -51,13 +53,7 @@ namespace RenderingPlayground
 
     internal static class IntExtensions
     {
-        private static readonly string[] _suffixes = {
-            "b",
-            "K",
-            "M",
-            "G",
-            "T"
-        };
+        private static readonly string[] _suffixes = { "b", "K", "M", "G", "T" };
 
         public static string Abbreviate(this long value)
         {
@@ -88,11 +84,13 @@ namespace RenderingPlayground
             {
                 var currentCpuTime = process.TotalProcessorTime - trackingStartedAt;
 
-                var usageSinceLastCheck = (currentCpuTime - previousCpuTime).TotalSeconds /
-                                          (processorCount * DateTime.UtcNow.Subtract(lastCheckedAt).TotalSeconds);
+                var usageSinceLastCheck =
+                    (currentCpuTime - previousCpuTime).TotalSeconds
+                    / (processorCount * DateTime.UtcNow.Subtract(lastCheckedAt).TotalSeconds);
 
-                var usageTotal = currentCpuTime.TotalSeconds /
-                                 (processorCount * DateTime.UtcNow.Subtract(StartTime).TotalSeconds);
+                var usageTotal =
+                    currentCpuTime.TotalSeconds
+                    / (processorCount * DateTime.UtcNow.Subtract(StartTime).TotalSeconds);
 
                 lastCheckedAt = DateTime.UtcNow;
 

@@ -73,7 +73,10 @@ namespace System.ComponentModel.Composition.Registration
             Attribute importAttribute;
 
             // Infer from Type when not explicitly set.
-            bool asMany = (!_asManySpecified) ? type != s_stringType && typeof(IEnumerable).IsAssignableFrom(type) : _asMany;
+            bool asMany =
+                (!_asManySpecified)
+                    ? type != s_stringType && typeof(IEnumerable).IsAssignableFrom(type)
+                    : _asMany;
             if (!asMany)
             {
                 importAttribute = new ImportAttribute(_contractName, _contractType)
@@ -81,7 +84,7 @@ namespace System.ComponentModel.Composition.Registration
                     AllowDefault = _allowDefault,
                     AllowRecomposition = _allowRecomposition,
                     RequiredCreationPolicy = _requiredCreationPolicy,
-                    Source = _source
+                    Source = _source,
                 };
             }
             else
@@ -90,7 +93,7 @@ namespace System.ComponentModel.Composition.Registration
                 {
                     AllowRecomposition = _allowRecomposition,
                     RequiredCreationPolicy = _requiredCreationPolicy,
-                    Source = _source
+                    Source = _source,
                 };
             }
 

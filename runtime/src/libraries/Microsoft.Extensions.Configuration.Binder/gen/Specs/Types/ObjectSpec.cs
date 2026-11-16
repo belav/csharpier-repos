@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             ObjectInstantiationStrategy instantiationStrategy,
             ImmutableEquatableArray<PropertySpec>? properties,
             ImmutableEquatableArray<ParameterSpec>? constructorParameters,
-            string? initExceptionMessage) : base(type)
+            string? initExceptionMessage
+        )
+            : base(type)
         {
             InstantiationStrategy = instantiationStrategy;
             Properties = properties;

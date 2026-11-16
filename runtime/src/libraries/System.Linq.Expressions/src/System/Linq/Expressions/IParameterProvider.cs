@@ -18,9 +18,6 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Gets the number of parameter expressions of the node.
         /// </summary>
-        int ParameterCount
-        {
-            get;
-        }
+        int ParameterCount { get; }
     }
 }

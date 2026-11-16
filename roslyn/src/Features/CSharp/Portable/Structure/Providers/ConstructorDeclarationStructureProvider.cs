@@ -9,21 +9,29 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class ConstructorDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<ConstructorDeclarationSyntax>
+    internal class ConstructorDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<ConstructorDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             ConstructorDeclarationSyntax constructorDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(constructorDeclaration, ref spans, options);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                constructorDeclaration,
+                ref spans,
+                options
+            );
 
             // fault tolerance
-            if (constructorDeclaration.Body == null ||
-                constructorDeclaration.Body.OpenBraceToken.IsMissing ||
-                constructorDeclaration.Body.CloseBraceToken.IsMissing)
+            if (
+                constructorDeclaration.Body == null
+                || constructorDeclaration.Body.OpenBraceToken.IsMissing
+                || constructorDeclaration.Body.CloseBraceToken.IsMissing
+            )
             {
                 return;
             }
@@ -34,16 +42,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             // Check IsNode to compress blank lines after this node if it is the last child of the parent.
             //
             // Whitespace between constructors is collapsed in Metadata as Source.
-            var compressEmptyLines = options.IsMetadataAsSource
+            var compressEmptyLines =
+                options.IsMetadataAsSource
                 && (!nextSibling.IsNode || nextSibling.IsKind(SyntaxKind.ConstructorDeclaration));
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                constructorDeclaration,
-                constructorDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
-                compressEmptyLines: compressEmptyLines,
-                autoCollapse: true,
-                type: BlockTypes.Member,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    constructorDeclaration,
+                    constructorDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
+                    compressEmptyLines: compressEmptyLines,
+                    autoCollapse: true,
+                    type: BlockTypes.Member,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

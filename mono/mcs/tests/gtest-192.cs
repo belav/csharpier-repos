@@ -4,13 +4,17 @@
 // to an error
 //
 using System;
-[assembly:CLSCompliant(true)]
+
+[assembly: CLSCompliant(true)]
+
 [CLSCompliant(true)]
-public enum X {
-       A,
-       a
+public enum X
+{
+    A,
+    a,
 }
 
-class xX {
-       public static void Main () {}
+class xX
+{
+    public static void Main() { }
 }

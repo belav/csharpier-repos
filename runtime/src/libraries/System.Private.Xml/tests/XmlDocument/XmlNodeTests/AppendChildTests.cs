@@ -44,7 +44,9 @@ namespace System.Xml.XmlDocumentTests
             var xmlDocument2 = new XmlDocument();
             xmlDocument2.LoadXml("<b attr2='test2' />");
 
-            AssertExtensions.Throws<ArgumentException>(null, () => xmlDocument2.DocumentElement.AppendChild(xmlDocument1.DocumentElement));
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                xmlDocument2.DocumentElement.AppendChild(xmlDocument1.DocumentElement)
+            );
         }
 
         [Fact]
@@ -55,7 +57,9 @@ namespace System.Xml.XmlDocumentTests
 
             var text = xmlDocument.CreateTextNode("text");
 
-            Assert.Throws<InvalidOperationException>(() => xmlDocument.DocumentElement.FirstChild.AppendChild(text));
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.FirstChild.AppendChild(text)
+            );
         }
 
         [Fact]
@@ -66,7 +70,9 @@ namespace System.Xml.XmlDocumentTests
 
             var text = xmlDocument.CreateTextNode("text");
 
-            Assert.Throws<InvalidOperationException>(() => xmlDocument.DocumentElement.FirstChild.AppendChild(text));
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.FirstChild.AppendChild(text)
+            );
         }
 
         [Fact]
@@ -77,7 +83,9 @@ namespace System.Xml.XmlDocumentTests
 
             var text = xmlDocument.CreateTextNode("text");
 
-            Assert.Throws<InvalidOperationException>(() => xmlDocument.DocumentElement.FirstChild.AppendChild(text));
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.FirstChild.AppendChild(text)
+            );
         }
     }
 }

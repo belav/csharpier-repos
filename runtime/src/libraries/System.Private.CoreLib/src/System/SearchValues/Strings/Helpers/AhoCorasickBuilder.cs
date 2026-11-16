@@ -19,7 +19,11 @@ namespace System.Buffers
         private ValueListBuilder<int> _parents;
         private IndexOfAnyAsciiSearcher.AsciiState _startingAsciiChars;
 
-        public AhoCorasickBuilder(ReadOnlySpan<string> values, bool ignoreCase, ref HashSet<string>? unreachableValues)
+        public AhoCorasickBuilder(
+            ReadOnlySpan<string> values,
+            bool ignoreCase,
+            ref HashSet<string>? unreachableValues
+        )
         {
             Debug.Assert(!values.IsEmpty);
             Debug.Assert(!string.IsNullOrEmpty(values[0]));
@@ -196,7 +200,9 @@ namespace System.Buffers
         // to quickly skip to the next possible starting location in the input.
         private void GenerateStartingAsciiCharsBitmap()
         {
-            scoped ValueListBuilder<char> startingChars = new ValueListBuilder<char>(stackalloc char[128]);
+            scoped ValueListBuilder<char> startingChars = new ValueListBuilder<char>(
+                stackalloc char[128]
+            );
 
             foreach (string value in _values)
             {
@@ -215,7 +221,10 @@ namespace System.Buffers
 
             if (Ascii.IsValid(startingChars.AsSpan()))
             {
-                IndexOfAnyAsciiSearcher.ComputeAsciiState(startingChars.AsSpan(), out _startingAsciiChars);
+                IndexOfAnyAsciiSearcher.ComputeAsciiState(
+                    startingChars.AsSpan(),
+                    out _startingAsciiChars
+                );
             }
 
             startingChars.Dispose();

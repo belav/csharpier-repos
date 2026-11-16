@@ -12,10 +12,10 @@ namespace System.Net.Http.Tests
         {
             var exception = new HttpRequestException();
             Assert.Null(exception.StatusCode);
-            
+
             exception = new HttpRequestException("message");
             Assert.Null(exception.StatusCode);
-            
+
             exception = new HttpRequestException("message", new InvalidOperationException());
             Assert.Null(exception.StatusCode);
         }
@@ -23,7 +23,11 @@ namespace System.Net.Http.Tests
         [Fact]
         public void StoresStatusCode()
         {
-            var exception = new HttpRequestException("message", null, HttpStatusCode.InternalServerError);
+            var exception = new HttpRequestException(
+                "message",
+                null,
+                HttpStatusCode.InternalServerError
+            );
             Assert.Equal(HttpStatusCode.InternalServerError, exception.StatusCode);
         }
 

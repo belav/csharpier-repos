@@ -22,7 +22,15 @@ namespace System.Web.Http.WebHost.Routing
             // Mixed mode app with Web API generating URLs to other APIs
             var url = GetUrlHelperForMixedApp(whichRoute);
 
-            string generatedUrl = url.Route("apiroute2", new { controller = "something", action = "someaction", id = 789 });
+            string generatedUrl = url.Route(
+                "apiroute2",
+                new
+                {
+                    controller = "something",
+                    action = "someaction",
+                    id = 789,
+                }
+            );
 
             Assert.Equal("$APP$/SOMEAPP/api/something/someaction", generatedUrl);
         }
@@ -36,7 +44,15 @@ namespace System.Web.Http.WebHost.Routing
             // Mixed mode app with Web API generating URLs to other non-API routes
             var url = GetUrlHelperForMixedApp(whichRoute);
 
-            string generatedUrl = url.Route("webroute1", new { controller = "something", action = "someaction", id = 789 });
+            string generatedUrl = url.Route(
+                "webroute1",
+                new
+                {
+                    controller = "something",
+                    action = "someaction",
+                    id = 789,
+                }
+            );
 
             Assert.Equal("$APP$/SOMEAPP/something/someaction/789", generatedUrl);
         }
@@ -69,7 +85,17 @@ namespace System.Web.Http.WebHost.Routing
             // Note: This is generating a URL the "hard" way because it's simulating what a regular MVC
             // app would do when generating a URL. If we went through the Web API functionality it wouldn't
             // be testing what would really happen in a mixed app.
-            VirtualPathData virtualPathData = routes.GetVirtualPath(requestContext, new RouteValueDictionary(new { controller = "something", action = "someaction", id = 789 }));
+            VirtualPathData virtualPathData = routes.GetVirtualPath(
+                requestContext,
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "something",
+                        action = "someaction",
+                        id = 789,
+                    }
+                )
+            );
 
             Assert.NotNull(virtualPathData);
 
@@ -92,7 +118,18 @@ namespace System.Web.Http.WebHost.Routing
             // Note: This is generating a URL the "hard" way because it's simulating what a regular MVC
             // app would do when generating a URL. If we went through the Web API functionality it wouldn't
             // be testing what would really happen in a mixed app.
-            VirtualPathData virtualPathData = routes.GetVirtualPath(requestContext, new RouteValueDictionary(new { controller = "something", action = "someotheraction", id = 789, httproute = true }));
+            VirtualPathData virtualPathData = routes.GetVirtualPath(
+                requestContext,
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "something",
+                        action = "someotheraction",
+                        id = 789,
+                        httproute = true,
+                    }
+                )
+            );
 
             Assert.NotNull(virtualPathData);
 
@@ -106,14 +143,24 @@ namespace System.Web.Http.WebHost.Routing
         [InlineData("httpRoute")]
         [InlineData("HTTPROUTE")]
         [InlineData("hTtProuTE")]
-        public void UrlHelper_DoesntAddDuplicateHttpRoute_ForHttpRouteInDifferentCasing(string httpRoute)
+        public void UrlHelper_DoesntAddDuplicateHttpRoute_ForHttpRouteInDifferentCasing(
+            string httpRoute
+        )
         {
             // Mixed mode app with MVC generating URLs to Web APIs
             RouteCollection routes;
             RequestContext requestContext;
             var url = GetUrlHelperForMixedApp(WhichRoute.ApiRoute1, out routes, out requestContext);
 
-            string generatedUrl = url.Route("apiroute1", new Dictionary<string, object> { { "controller", "something" }, { "id", 789 }, { httpRoute, true } });
+            string generatedUrl = url.Route(
+                "apiroute1",
+                new Dictionary<string, object>
+                {
+                    { "controller", "something" },
+                    { "id", 789 },
+                    { httpRoute, true },
+                }
+            );
 
             Assert.Equal("$APP$/SOMEAPP/api/something/789", generatedUrl);
         }
@@ -125,7 +172,11 @@ namespace System.Web.Http.WebHost.Routing
             return GetUrlHelperForMixedApp(whichRoute, out routes, out requestContext);
         }
 
-        private static UrlHelper GetUrlHelperForMixedApp(WhichRoute whichRoute, out RouteCollection routes, out RequestContext requestContext)
+        private static UrlHelper GetUrlHelperForMixedApp(
+            WhichRoute whichRoute,
+            out RouteCollection routes,
+            out RequestContext requestContext
+        )
         {
             routes = new RouteCollection();
 
@@ -134,15 +185,29 @@ namespace System.Web.Http.WebHost.Routing
             var mockHttpRequest = new Mock<HttpRequestBase>();
             mockHttpRequest.SetupGet<string>(x => x.ApplicationPath).Returns("/SOMEAPP/");
             var mockHttpResponse = new Mock<HttpResponseBase>();
-            mockHttpResponse.Setup<string>(x => x.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(x => "$APP$" + x);
-            mockHttpContext.SetupGet<HttpRequestBase>(x => x.Request).Returns(mockHttpRequest.Object);
-            mockHttpContext.SetupGet<HttpResponseBase>(x => x.Response).Returns(mockHttpResponse.Object);
+            mockHttpResponse
+                .Setup<string>(x => x.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns<string>(x => "$APP$" + x);
+            mockHttpContext
+                .SetupGet<HttpRequestBase>(x => x.Request)
+                .Returns(mockHttpRequest.Object);
+            mockHttpContext
+                .SetupGet<HttpResponseBase>(x => x.Response)
+                .Returns(mockHttpResponse.Object);
             request.Properties["MS_HttpContext"] = mockHttpContext.Object;
 
             // Set up routes
             var hostedRoutes = new HostedHttpRouteCollection(routes);
-            Route apiRoute1 = routes.MapHttpRoute("apiroute1", "api/{controller}/{id}", new { action = "someaction" });
-            Route apiRoute2 = routes.MapHttpRoute("apiroute2", "api/{controller}/{action}", new { id = 789 });
+            Route apiRoute1 = routes.MapHttpRoute(
+                "apiroute1",
+                "api/{controller}/{id}",
+                new { action = "someaction" }
+            );
+            Route apiRoute2 = routes.MapHttpRoute(
+                "apiroute2",
+                "api/{controller}/{action}",
+                new { id = 789 }
+            );
             Route webRoute1 = routes.MapRoute("webroute1", "{controller}/{action}/{id}");
             request.SetConfiguration(new HttpConfiguration(hostedRoutes));
 

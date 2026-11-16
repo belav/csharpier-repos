@@ -11,9 +11,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
 {
     internal static class ServiceProviderExtensions
     {
-        public static T GetMefService<T>(this IServiceProvider serviceProvider) where T : class
+        public static T GetMefService<T>(this IServiceProvider serviceProvider)
+            where T : class
         {
-            var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
+            var componentModel = (IComponentModel)
+                serviceProvider.GetService(typeof(SComponentModel));
             return componentModel.GetService<T>();
         }
     }

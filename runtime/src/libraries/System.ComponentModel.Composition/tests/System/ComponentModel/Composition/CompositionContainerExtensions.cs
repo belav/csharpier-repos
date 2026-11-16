@@ -61,14 +61,21 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        public static void AddAndComposeExportedValue<T>(this CompositionContainer container, T exportedValue)
+        public static void AddAndComposeExportedValue<T>(
+            this CompositionContainer container,
+            T exportedValue
+        )
         {
             var batch = new CompositionBatch();
             batch.AddExportedValue<T>(exportedValue);
             container.Compose(batch);
         }
 
-        public static void AddAndComposeExportedValue<T>(this CompositionContainer container, string contractName, T exportedValue)
+        public static void AddAndComposeExportedValue<T>(
+            this CompositionContainer container,
+            string contractName,
+            T exportedValue
+        )
         {
             var batch = new CompositionBatch();
             batch.AddExportedValue<T>(contractName, exportedValue);
@@ -91,7 +98,12 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        public static ComposablePart AddExportedValue(this CompositionBatch batch, string contractName, Type contractType, object exportedValue)
+        public static ComposablePart AddExportedValue(
+            this CompositionBatch batch,
+            string contractName,
+            Type contractType,
+            object exportedValue
+        )
         {
             string typeIdentity = AttributedModelServices.GetTypeIdentity(contractType);
 

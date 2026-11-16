@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.SecurityRoleAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,52 +31,60 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface, AllowMultiple=true)]
-	[ComVisible(false)]
-	public sealed class SecurityRoleAttribute : Attribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Method
+            | AttributeTargets.Interface,
+        AllowMultiple = true
+    )]
+    [ComVisible(false)]
+    public sealed class SecurityRoleAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        string description;
+        bool everyone;
+        string role;
 
-		string description;
-		bool everyone;
-		string role;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public SecurityRoleAttribute(string role)
+            : this(role, false) { }
 
-		public SecurityRoleAttribute (string role)
-			: this (role, false)
-		{
-		}
+        public SecurityRoleAttribute(string role, bool everyone)
+        {
+            this.description = String.Empty;
+            this.everyone = everyone;
+            this.role = role;
+        }
 
-		public SecurityRoleAttribute (string role, bool everyone)
-		{
-			this.description = String.Empty;
-			this.everyone = everyone;
-			this.role = role;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
 
-		public string Description {
-			get { return description; }
-			set { description = value; }
-		}
+        public string Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
 
-		public string Role {
-			get { return role; }
-			set { role = value; }
-		}
+        public bool SetEveryoneAccess
+        {
+            get { return everyone; }
+            set { everyone = value; }
+        }
 
-		public bool SetEveryoneAccess {
-			get { return everyone; }
-			set { everyone = value; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

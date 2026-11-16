@@ -27,7 +27,12 @@ namespace System.Net.Http.Handlers
         private long _bytesSent;
         private long? _totalBytesToSend;
 
-        public ProgressStream(Stream innerStream, ProgressMessageHandler handler, HttpRequestMessage request, HttpResponseMessage response)
+        public ProgressStream(
+            Stream innerStream,
+            ProgressMessageHandler handler,
+            HttpRequestMessage request,
+            HttpResponseMessage response
+        )
             : base(innerStream)
         {
             Contract.Assert(handler != null);
@@ -61,7 +66,12 @@ namespace System.Net.Http.Handlers
             return byteRead;
         }
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             int readCount = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
             ReportBytesReceived(readCount, userState: null);
@@ -69,7 +79,13 @@ namespace System.Net.Http.Handlers
         }
 
 #if !NETSTANDARD1_3 // BeginX and EndX are not supported on Streams in netstandard1.3
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerStream.BeginRead(buffer, offset, count, callback, state);
         }
@@ -94,16 +110,35 @@ namespace System.Net.Http.Handlers
             ReportBytesSent(1, userState: null);
         }
 
-       public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             await InnerStream.WriteAsync(buffer, offset, count, cancellationToken);
             ReportBytesSent(count, userState: null);
         }
 
 #if !NETSTANDARD1_3 // BeginX and EndX are not supported on Streams in netstandard1.3
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ProgressWriteAsyncResult(InnerStream, this, buffer, offset, count, callback, state);
+            return new ProgressWriteAsyncResult(
+                InnerStream,
+                this,
+                buffer,
+                offset,
+                count,
+                callback,
+                state
+            );
         }
 
         public override void EndWrite(IAsyncResult asyncResult)
@@ -124,7 +159,10 @@ namespace System.Net.Http.Handlers
                 }
 
                 // We only pass the request as it is guaranteed to be non-null (the response may be null)
-                _handler.OnHttpRequestProgress(_request, new HttpProgressEventArgs(percentage, userState, _bytesSent, _totalBytesToSend));
+                _handler.OnHttpRequestProgress(
+                    _request,
+                    new HttpProgressEventArgs(percentage, userState, _bytesSent, _totalBytesToSend)
+                );
             }
         }
 
@@ -140,7 +178,15 @@ namespace System.Net.Http.Handlers
                 }
 
                 // We only pass the request as it is guaranteed to be non-null (the response may be null)
-                _handler.OnHttpResponseProgress(_request, new HttpProgressEventArgs(percentage, userState, _bytesReceived, _totalBytesToReceive));
+                _handler.OnHttpResponseProgress(
+                    _request,
+                    new HttpProgressEventArgs(
+                        percentage,
+                        userState,
+                        _bytesReceived,
+                        _totalBytesToReceive
+                    )
+                );
             }
         }
     }

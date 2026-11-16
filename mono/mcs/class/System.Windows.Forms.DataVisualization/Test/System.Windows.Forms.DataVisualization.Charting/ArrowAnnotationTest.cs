@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,48 +29,47 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {
-	[TestFixture]
-	public class ArrowAnnotationTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			ArrowAnnotation aa = new ArrowAnnotation ();
+    [TestFixture]
+    public class ArrowAnnotationTest
+    {
+        [Test]
+        public void Constructor()
+        {
+            ArrowAnnotation aa = new ArrowAnnotation();
 
-			Assert.AreEqual (5, aa.ArrowSize, "A1");
-			Assert.AreEqual (ArrowStyle.Simple, aa.ArrowStyle, "A2");
-		}
+            Assert.AreEqual(5, aa.ArrowSize, "A1");
+            Assert.AreEqual(ArrowStyle.Simple, aa.ArrowStyle, "A2");
+        }
 
-		[Test]
-		public void ArrowSizeProperty ()
-		{
-			ArrowAnnotation aa = new ArrowAnnotation ();
+        [Test]
+        public void ArrowSizeProperty()
+        {
+            ArrowAnnotation aa = new ArrowAnnotation();
 
-			Assert.AreEqual (5, aa.ArrowSize, "A1");
+            Assert.AreEqual(5, aa.ArrowSize, "A1");
 
-			aa.ArrowSize = 3;
-			Assert.AreEqual (3, aa.ArrowSize, "A2");
-		}
+            aa.ArrowSize = 3;
+            Assert.AreEqual(3, aa.ArrowSize, "A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void ArrowSizePropertyAOORE ()
-		{
-			ArrowAnnotation aa = new ArrowAnnotation ();
-			
-			aa.ArrowSize = 0;
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ArrowSizePropertyAOORE()
+        {
+            ArrowAnnotation aa = new ArrowAnnotation();
 
+            aa.ArrowSize = 0;
+        }
 
-		[Test]
-		public void ArrowStyleProperty ()
-		{
-			ArrowAnnotation aa = new ArrowAnnotation ();
+        [Test]
+        public void ArrowStyleProperty()
+        {
+            ArrowAnnotation aa = new ArrowAnnotation();
 
-			Assert.AreEqual (ArrowStyle.Simple, aa.ArrowStyle, "A1");
+            Assert.AreEqual(ArrowStyle.Simple, aa.ArrowStyle, "A1");
 
-			aa.ArrowStyle = ArrowStyle.DoubleArrow;
-			Assert.AreEqual (ArrowStyle.DoubleArrow, aa.ArrowStyle, "A2");
-		}
-	}
+            aa.ArrowStyle = ArrowStyle.DoubleArrow;
+            Assert.AreEqual(ArrowStyle.DoubleArrow, aa.ArrowStyle, "A2");
+        }
+    }
 }

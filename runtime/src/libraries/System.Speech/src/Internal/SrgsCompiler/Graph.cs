@@ -106,7 +106,10 @@ namespace System.Speech.Internal.SrgsCompiler
             RemoveEpsilonStates();
             if (Count != cStates)
             {
-                System.Diagnostics.Trace.WriteLine("Grammar compiler, additional Epsilons could have been removed :" + (cStates - Count).ToString(CultureInfo.InvariantCulture));
+                System.Diagnostics.Trace.WriteLine(
+                    "Grammar compiler, additional Epsilons could have been removed :"
+                        + (cStates - Count).ToString(CultureInfo.InvariantCulture)
+                );
                 //System.Diagnostics.Debug.Assert (_states.Count == cStates);
             }
             // Remove duplicate transitions.
@@ -120,13 +123,16 @@ namespace System.Speech.Internal.SrgsCompiler
             //System.Diagnostics.Debug.Assert (_states.Count == cStates);
             if (Count != cStates)
             {
-                System.Diagnostics.Trace.WriteLine("Grammar compiler, additional Epsilons could have been removed post merge transition :" + (cStates - Count).ToString(CultureInfo.InvariantCulture));
+                System.Diagnostics.Trace.WriteLine(
+                    "Grammar compiler, additional Epsilons could have been removed post merge transition :"
+                        + (cStates - Count).ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             // Verify the transition weights are normalized.
             foreach (State state in this)
             {
-                double flSumWeights = 0.0f;                        // Compute the sum of the weights.
+                double flSumWeights = 0.0f; // Compute the sum of the weights.
                 int cArcs = 0;
 
                 foreach (Arc arc in state.OutArcs)
@@ -189,7 +195,7 @@ namespace System.Speech.Internal.SrgsCompiler
             System.Diagnostics.Debug.Assert(srcState != null);
             //System.Diagnostics.Debug.Assert (srcState.InArcs.IsEmpty);
             System.Diagnostics.Debug.Assert(srcState.OutArcs.IsEmpty);
-            DeleteState(srcState);  // Delete state from handle table
+            DeleteState(srcState); // Delete state from handle table
         }
 
         /// <summary>
@@ -229,7 +235,7 @@ namespace System.Speech.Internal.SrgsCompiler
             System.Diagnostics.Debug.Assert(srcState != null);
             System.Diagnostics.Debug.Assert(srcState.InArcs.IsEmpty);
             //System.Diagnostics.Debug.Assert (srcState.OutArcs.IsEmpty);
-            DeleteState(srcState);  // Delete state from handle table
+            DeleteState(srcState); // Delete state from handle table
         }
 
         #endregion
@@ -239,10 +245,7 @@ namespace System.Speech.Internal.SrgsCompiler
 #if DEBUG
         internal State First
         {
-            get
-            {
-                return _startState;
-            }
+            get { return _startState; }
         }
 
         internal int Count
@@ -293,7 +296,11 @@ namespace System.Speech.Internal.SrgsCompiler
             for (State state = First, nextState = null; state != null; state = nextState)
             {
                 nextState = state.Next;
-                if (state.InArcs.CountIsOne && state.InArcs.First.IsEpsilonTransition && (state != state.Rule._firstState))
+                if (
+                    state.InArcs.CountIsOne
+                    && state.InArcs.First.IsEpsilonTransition
+                    && (state != state.Rule._firstState)
+                )
                 {
                     // State has a single input epsilon transition and is not the rule initial state.
                     Arc epsilonArc = state.InArcs.First;
@@ -322,7 +329,11 @@ namespace System.Speech.Internal.SrgsCompiler
                     }
                 }
                 // Optimize output epsilon transition, if possible
-                else if ((state.OutArcs.CountIsOne) && state.OutArcs.First.IsEpsilonTransition && (state != state.Rule._firstState))
+                else if (
+                    (state.OutArcs.CountIsOne)
+                    && state.OutArcs.First.IsEpsilonTransition
+                    && (state != state.Rule._firstState)
+                )
                 {
                     // State has a single output epsilon transition
                     Arc epsilonArc = state.OutArcs.First;
@@ -330,7 +341,10 @@ namespace System.Speech.Internal.SrgsCompiler
                     // Attempt to move properties referencing EpsilonArc to the left.
                     // Optimization can only be applied when the epsilon arc is not referenced by any properties
                     // and when the arc does not connect RuleInitialState to null.
-                    if (!((state == state.Rule._firstState) && (epsilonArc.End == null)) && MoveSemanticTagLeft(epsilonArc))
+                    if (
+                        !((state == state.Rule._firstState) && (epsilonArc.End == null))
+                        && MoveSemanticTagLeft(epsilonArc)
+                    )
                     {
                         // Delete the output epsilon transition
                         State pEpsilonEndState = epsilonArc.End;
@@ -347,6 +361,7 @@ namespace System.Speech.Internal.SrgsCompiler
             }
         }
 #endif
+
         /// <summary>
         /// Description:
         ///     Remove duplicate transitions starting from the same state, or ending at the same state.
@@ -498,9 +513,9 @@ namespace System.Speech.Internal.SrgsCompiler
                 arcsToMerge.Sort(Arc.CompareForDuplicateInputTransitions);
 
                 refArc = null;
-                Arc commonArc = null;                   // Common property-less transition to merge into
+                Arc commonArc = null; // Common property-less transition to merge into
                 State commonStartState = null;
-                bool fCommonStartStateChanged = false;      // Did CommonStartState change and need re-optimization?
+                bool fCommonStartStateChanged = false; // Did CommonStartState change and need re-optimization?
 
                 foreach (Arc arc in arcsToMerge)
                 {
@@ -542,7 +557,7 @@ namespace System.Speech.Internal.SrgsCompiler
                                     arcOut.Weight *= commonArc.Weight;
                                 }
 
-                                fCommonStartStateChanged = true;  // Output transitions of CommonStartState changed.
+                                fCommonStartStateChanged = true; // Output transitions of CommonStartState changed.
                             }
 
                             // Multiply the weights of transitions from DuplicateStartState by DuplicateArc.Weight.
@@ -551,12 +566,15 @@ namespace System.Speech.Internal.SrgsCompiler
                                 arcOut.Weight *= duplicatedArc.Weight;
                             }
 
-                            duplicatedArc.Weight += commonArc.Weight;// Merge duplicate arc weight with common arc
+                            duplicatedArc.Weight += commonArc.Weight; // Merge duplicate arc weight with common arc
                             Arc.CopyTags(commonArc, duplicatedArc, Direction.Left);
-                            DeleteTransition(commonArc);    // Delete successive duplicate transitions
+                            DeleteTransition(commonArc); // Delete successive duplicate transitions
 
                             // Move outputs of duplicate state to common state; Delete duplicate state
-                            MoveInputTransitionsAndDeleteState(commonStartState, duplicatedStartState);
+                            MoveInputTransitionsAndDeleteState(
+                                commonStartState,
+                                duplicatedStartState
+                            );
                         }
 
                         // Label first property-less transition as CommonArc
@@ -640,9 +658,9 @@ namespace System.Speech.Internal.SrgsCompiler
                 arcsToMerge.Sort(Arc.CompareForDuplicateOutputTransitions);
 
                 refArc = null;
-                Arc commonArc = null;                   // Common property-less transition to merge into
+                Arc commonArc = null; // Common property-less transition to merge into
                 State commonEndState = null;
-                bool fCommonEndStateChanged = false;      // Did CommonEndState change and need re-optimization?
+                bool fCommonEndStateChanged = false; // Did CommonEndState change and need re-optimization?
 
                 foreach (Arc arc in arcsToMerge)
                 {
@@ -670,7 +688,10 @@ namespace System.Speech.Internal.SrgsCompiler
                     // Attempt to move properties referencing duplicate arc to the right.
                     // Optimization can only be applied when the duplicate arc is not referenced by any properties
                     // and the duplicate end state is not the RuleInitalState.
-                    if ((duplicatedEndState != duplicatedEndState.Rule._firstState) && MoveSemanticTagRight(duplicatedArc))
+                    if (
+                        (duplicatedEndState != duplicatedEndState.Rule._firstState)
+                        && MoveSemanticTagRight(duplicatedArc)
+                    )
                     {
                         // duplicatedArc != commonArc
                         if (commonArc != null)
@@ -684,7 +705,7 @@ namespace System.Speech.Internal.SrgsCompiler
                                     arcOut.Weight *= commonArc.Weight;
                                 }
 
-                                fCommonEndStateChanged = true;  // Output transitions of CommonEndState changed.
+                                fCommonEndStateChanged = true; // Output transitions of CommonEndState changed.
                             }
 
                             // Multiply the weights of transitions from DuplicateEndState by DuplicateArc.Weight.
@@ -693,9 +714,9 @@ namespace System.Speech.Internal.SrgsCompiler
                                 arcOut.Weight *= duplicatedArc.Weight;
                             }
 
-                            duplicatedArc.Weight += commonArc.Weight;// Merge duplicate arc weight with common arc
+                            duplicatedArc.Weight += commonArc.Weight; // Merge duplicate arc weight with common arc
                             Arc.CopyTags(commonArc, duplicatedArc, Direction.Right);
-                            DeleteTransition(commonArc);    // Delete successive duplicate transitions
+                            DeleteTransition(commonArc); // Delete successive duplicate transitions
 
                             // Move outputs of duplicate state to common state; Delete duplicate state
                             MoveOutputTransitionsAndDeleteState(commonEndState, duplicatedEndState);
@@ -741,7 +762,11 @@ namespace System.Speech.Internal.SrgsCompiler
             // Cannot move ownership across RuleRef (to maintain semantics of $$ in SemanticTag JScript).
             // Cannot move semantic tag to special transition.  (SREngine may return multiple result arcs for the transition.)
             Arc previousArc = startState.InArcs.First;
-            if ((startState.InArcs.CountIsOne) && (startState.OutArcs.CountIsOne) && CanTagsBeMoved(previousArc, arc))
+            if (
+                (startState.InArcs.CountIsOne)
+                && (startState.OutArcs.CountIsOne)
+                && CanTagsBeMoved(previousArc, arc)
+            )
             {
                 // Move semantic tag ownership to the previous arc.
                 Arc.CopyTags(arc, previousArc, Direction.Left);
@@ -775,7 +800,11 @@ namespace System.Speech.Internal.SrgsCompiler
             // Cannot move ownership across RuleRef (to maintain semantics of $$ in SemanticTag JScript).
             // Cannot move semantic tag to special transition.  (SREngine may return multiple result arcs for the transition.)
             Arc pNextArc = endState.OutArcs.First;
-            if ((endState.InArcs.CountIsOne) && (endState.OutArcs.CountIsOne) && CanTagsBeMoved(arc, pNextArc))
+            if (
+                (endState.InArcs.CountIsOne)
+                && (endState.OutArcs.CountIsOne)
+                && CanTagsBeMoved(arc, pNextArc)
+            )
             {
                 // Move semantic tag ownership to the next arc.
                 Arc.CopyTags(arc, pNextArc, Direction.Right);
@@ -794,7 +823,9 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         internal static bool CanTagsBeMoved(Arc start, Arc end)
         {
-            return (start.RuleRef == null) && (end.RuleRef == null) && (end.SpecialTransitionIndex == 0);
+            return (start.RuleRef == null)
+                && (end.RuleRef == null)
+                && (end.SpecialTransitionIndex == 0);
         }
 
         /// <summary>
@@ -952,6 +983,7 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 _states = states;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public State[] AKeys
             {

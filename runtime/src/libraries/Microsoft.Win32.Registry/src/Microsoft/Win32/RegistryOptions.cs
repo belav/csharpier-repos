@@ -8,7 +8,7 @@ namespace Microsoft.Win32
     [Flags]
     public enum RegistryOptions
     {
-        None = Interop.Advapi32.RegistryOptions.REG_OPTION_NON_VOLATILE,       // 0x0000
-        Volatile = Interop.Advapi32.RegistryOptions.REG_OPTION_VOLATILE,      // 0x0001
+        None = Interop.Advapi32.RegistryOptions.REG_OPTION_NON_VOLATILE, // 0x0000
+        Volatile = Interop.Advapi32.RegistryOptions.REG_OPTION_VOLATILE, // 0x0001
     }
 }

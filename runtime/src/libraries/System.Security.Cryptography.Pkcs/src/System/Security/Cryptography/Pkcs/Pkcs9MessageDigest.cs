@@ -14,14 +14,10 @@ namespace System.Security.Cryptography.Pkcs
         //
 
         public Pkcs9MessageDigest()
-            : base(Oids.MessageDigestOid.CopyOid())
-        {
-        }
+            : base(Oids.MessageDigestOid.CopyOid()) { }
 
         internal Pkcs9MessageDigest(ReadOnlySpan<byte> rawData)
-            : base(Oids.MessageDigestOid.CopyOid(), rawData)
-        {
-        }
+            : base(Oids.MessageDigestOid.CopyOid(), rawData) { }
 
         //
         // Public properties.
@@ -29,10 +25,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public byte[] MessageDigest
         {
-            get
-            {
-                return _lazyMessageDigest ??= Decode(RawData);
-            }
+            get { return _lazyMessageDigest ??= Decode(RawData); }
         }
 
         public override void CopyFrom(AsnEncodedData asnEncodedData)

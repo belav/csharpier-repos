@@ -24,12 +24,12 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum ForestTrustDomainStatus
-	{
-		Enabled,
-		SidAdminDisabled,
-		SidConflictDisabled,
-		NetBiosNameAdminDisabled = 4,
-		NetBiosNameConflictDisabled = 8
-	}
+    public enum ForestTrustDomainStatus
+    {
+        Enabled,
+        SidAdminDisabled,
+        SidConflictDisabled,
+        NetBiosNameAdminDisabled = 4,
+        NetBiosNameConflictDisabled = 8,
+    }
 }

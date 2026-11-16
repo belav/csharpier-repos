@@ -1,5 +1,5 @@
 //
-// ControlCollectionCas.cs 
+// ControlCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.ControlCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
@@ -36,57 +34,62 @@ using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ControlCollectionCas : AspNetHostingMinimal
+    {
+        private Control control;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ControlCollectionCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            control = new Control();
+        }
 
-		private Control control;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            // note: using the same control (as owner) to add results
+            // in killing the ms runtime with a stackoverflow - FDBK36722
+            ControlCollection cc = new ControlCollection(new Control());
+            Assert.AreEqual(0, cc.Count, "Count");
+            Assert.IsFalse(cc.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse(cc.IsSynchronized, "IsSynchronized");
+            Assert.IsNotNull(cc.SyncRoot, "SyncRoot");
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			control = new Control ();
-		}
+            cc.Add(control);
+            Assert.IsNotNull(cc[0], "this[int]");
+            cc.Clear();
+            cc.AddAt(0, control);
+            Assert.IsTrue(cc.Contains(control), "Contains");
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			// note: using the same control (as owner) to add results 
-			// in killing the ms runtime with a stackoverflow - FDBK36722
-			ControlCollection cc = new ControlCollection (new Control ());
-			Assert.AreEqual (0, cc.Count, "Count");
-			Assert.IsFalse (cc.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (cc.IsSynchronized, "IsSynchronized");
-			Assert.IsNotNull (cc.SyncRoot, "SyncRoot");
+            cc.CopyTo(new Control[1], 0);
+            Assert.IsNotNull(cc.GetEnumerator(), "GetEnumerator");
+            Assert.AreEqual(0, cc.IndexOf(control), "IndexOf");
+            cc.RemoveAt(0);
+            cc.Remove(control);
+        }
 
-			cc.Add (control);
-			Assert.IsNotNull (cc[0], "this[int]");
-			cc.Clear ();
-			cc.AddAt (0, control);
-			Assert.IsTrue (cc.Contains (control), "Contains");
+        // LinkDemand
 
-			cc.CopyTo (new Control[1], 0);
-			Assert.IsNotNull (cc.GetEnumerator (), "GetEnumerator");
-			Assert.AreEqual (0, cc.IndexOf (control), "IndexOf");
-			cc.RemoveAt (0);
-			cc.Remove (control);
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(Control) });
+            Assert.IsNotNull(ci, ".ctor(Control)");
+            return ci.Invoke(new object[1] { control });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Control) });
-			Assert.IsNotNull (ci, ".ctor(Control)");
-			return ci.Invoke (new object[1] { control });
-		}
-
-		public override Type Type {
-			get { return typeof (ControlCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(ControlCollection); }
+        }
+    }
 }

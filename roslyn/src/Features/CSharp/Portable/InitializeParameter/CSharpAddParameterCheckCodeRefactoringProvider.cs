@@ -14,57 +14,84 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.AddParameterCheck), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.AddParameterCheck
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.ChangeSignature)]
-    internal sealed class CSharpAddParameterCheckCodeRefactoringProvider :
-        AbstractAddParameterCheckCodeRefactoringProvider<
+    internal sealed class CSharpAddParameterCheckCodeRefactoringProvider
+        : AbstractAddParameterCheckCodeRefactoringProvider<
             BaseTypeDeclarationSyntax,
             ParameterSyntax,
             StatementSyntax,
             ExpressionSyntax,
             BinaryExpressionSyntax,
-            CSharpSimplifierOptions>
+            CSharpSimplifierOptions
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddParameterCheckCodeRefactoringProvider()
-        {
-        }
+        public CSharpAddParameterCheckCodeRefactoringProvider() { }
 
-        protected override bool IsFunctionDeclaration(SyntaxNode node)
-            => InitializeParameterHelpers.IsFunctionDeclaration(node);
+        protected override bool IsFunctionDeclaration(SyntaxNode node) =>
+            InitializeParameterHelpers.IsFunctionDeclaration(node);
 
-        protected override SyntaxNode GetBody(SyntaxNode functionDeclaration)
-            => InitializeParameterHelpers.GetBody(functionDeclaration);
+        protected override SyntaxNode GetBody(SyntaxNode functionDeclaration) =>
+            InitializeParameterHelpers.GetBody(functionDeclaration);
 
-        protected override void InsertStatement(SyntaxEditor editor, SyntaxNode functionDeclaration, bool returnsVoid, SyntaxNode? statementToAddAfter, StatementSyntax statement)
-            => InitializeParameterHelpers.InsertStatement(editor, functionDeclaration, returnsVoid, statementToAddAfter, statement);
+        protected override void InsertStatement(
+            SyntaxEditor editor,
+            SyntaxNode functionDeclaration,
+            bool returnsVoid,
+            SyntaxNode? statementToAddAfter,
+            StatementSyntax statement
+        ) =>
+            InitializeParameterHelpers.InsertStatement(
+                editor,
+                functionDeclaration,
+                returnsVoid,
+                statementToAddAfter,
+                statement
+            );
 
-        protected override bool IsImplicitConversion(Compilation compilation, ITypeSymbol source, ITypeSymbol destination)
-            => InitializeParameterHelpers.IsImplicitConversion(compilation, source, destination);
+        protected override bool IsImplicitConversion(
+            Compilation compilation,
+            ITypeSymbol source,
+            ITypeSymbol destination
+        ) => InitializeParameterHelpers.IsImplicitConversion(compilation, source, destination);
 
         protected override bool CanOffer(SyntaxNode body)
         {
             if (InitializeParameterHelpers.IsExpressionBody(body))
             {
-                return InitializeParameterHelpers.TryConvertExpressionBodyToStatement(body,
+                return InitializeParameterHelpers.TryConvertExpressionBodyToStatement(
+                    body,
                     semicolonToken: Token(SyntaxKind.SemicolonToken),
                     createReturnStatementForExpression: false,
-                    statement: out var _);
+                    statement: out var _
+                );
             }
 
             return true;
         }
 
-        protected override bool PrefersThrowExpression(CSharpSimplifierOptions options)
-            => options.PreferThrowExpression.Value;
+        protected override bool PrefersThrowExpression(CSharpSimplifierOptions options) =>
+            options.PreferThrowExpression.Value;
 
-        protected override string EscapeResourceString(string input)
-            => input.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        protected override string EscapeResourceString(string input) =>
+            input.Replace("\\", "\\\\").Replace("\"", "\\\"");
 
-        protected override StatementSyntax CreateParameterCheckIfStatement(ExpressionSyntax condition, StatementSyntax ifTrueStatement, CSharpSimplifierOptions options)
+        protected override StatementSyntax CreateParameterCheckIfStatement(
+            ExpressionSyntax condition,
+            StatementSyntax ifTrueStatement,
+            CSharpSimplifierOptions options
+        )
         {
-            var withBlock = options.PreferBraces.Value == CodeAnalysis.CodeStyle.PreferBracesPreference.Always;
+            var withBlock =
+                options.PreferBraces.Value == CodeAnalysis.CodeStyle.PreferBracesPreference.Always;
             var singleLine = options.AllowEmbeddedStatementsOnSameLine.Value;
             var closeParenToken = Token(SyntaxKind.CloseParenToken);
             if (withBlock)
@@ -87,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                 condition: condition,
                 closeParenToken: closeParenToken,
                 statement: ifTrueStatement,
-                @else: null);
+                @else: null
+            );
         }
     }
 }

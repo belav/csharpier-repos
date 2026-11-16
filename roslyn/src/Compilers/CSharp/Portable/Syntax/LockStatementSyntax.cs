@@ -8,8 +8,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class LockStatementSyntax
     {
-        public LockStatementSyntax Update(SyntaxToken lockKeyword, SyntaxToken openParenToken, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement)
-            => Update(AttributeLists, lockKeyword, openParenToken, expression, closeParenToken, statement);
+        public LockStatementSyntax Update(
+            SyntaxToken lockKeyword,
+            SyntaxToken openParenToken,
+            ExpressionSyntax expression,
+            SyntaxToken closeParenToken,
+            StatementSyntax statement
+        ) =>
+            Update(
+                AttributeLists,
+                lockKeyword,
+                openParenToken,
+                expression,
+                closeParenToken,
+                statement
+            );
     }
 }
 
@@ -17,7 +30,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static LockStatementSyntax LockStatement(SyntaxToken lockKeyword, SyntaxToken openParenToken, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement)
-            => LockStatement(attributeLists: default, lockKeyword, openParenToken, expression, closeParenToken, statement);
+        public static LockStatementSyntax LockStatement(
+            SyntaxToken lockKeyword,
+            SyntaxToken openParenToken,
+            ExpressionSyntax expression,
+            SyntaxToken closeParenToken,
+            StatementSyntax statement
+        ) =>
+            LockStatement(
+                attributeLists: default,
+                lockKeyword,
+                openParenToken,
+                expression,
+                closeParenToken,
+                statement
+            );
     }
 }

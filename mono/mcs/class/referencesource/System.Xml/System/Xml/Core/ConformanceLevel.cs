@@ -5,9 +5,10 @@
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml {
-
-    public enum ConformanceLevel {
+namespace System.Xml
+{
+    public enum ConformanceLevel
+    {
         // With conformance level Auto an XmlReader or XmlWriter automatically determines whether in incoming XML is an XML fragment or document.
         Auto = 0,
 

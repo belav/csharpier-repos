@@ -31,36 +31,32 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {
-	[ComVisible(true)]
-	public class PropertyTabChangedEventArgs : EventArgs
-	{
-		#region Local Variables
-		private PropertyTab old_tab;
-		private PropertyTab new_tab;
-		#endregion	// Local Variables
+    [ComVisible(true)]
+    public class PropertyTabChangedEventArgs : EventArgs
+    {
+        #region Local Variables
+        private PropertyTab old_tab;
+        private PropertyTab new_tab;
+        #endregion	// Local Variables
 
-		#region Constructor
-		public PropertyTabChangedEventArgs ( PropertyTab oldTab , PropertyTab newTab )
-		{
-			old_tab = oldTab;
-			new_tab = newTab;
-		}
-		#endregion	// Constructor
+        #region Constructor
+        public PropertyTabChangedEventArgs(PropertyTab oldTab, PropertyTab newTab)
+        {
+            old_tab = oldTab;
+            new_tab = newTab;
+        }
+        #endregion	// Constructor
 
-		#region Public Instance Properties
-		public PropertyTab NewTab
-		{
-			get {
-				return new_tab;
-			}
-		}
+        #region Public Instance Properties
+        public PropertyTab NewTab
+        {
+            get { return new_tab; }
+        }
 
-		public PropertyTab OldTab
-		{
-			get {
-				return old_tab;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public PropertyTab OldTab
+        {
+            get { return old_tab; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

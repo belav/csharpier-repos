@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,19 +27,18 @@
 using System;
 using System.Collections;
 #if STATIC
-using Type=IKVM.Reflection.Type;
+using Type = IKVM.Reflection.Type;
 #endif
 
 class TypeSorter : IComparer
 {
-	public int Compare (object first, object second)
-	{
-		Type type1 = first as Type;
-		Type type2 = second as Type;
-		if (type1 == null || type2 == null)
-			throw new ArgumentException ("invalid comparison");
+    public int Compare(object first, object second)
+    {
+        Type type1 = first as Type;
+        Type type2 = second as Type;
+        if (type1 == null || type2 == null)
+            throw new ArgumentException("invalid comparison");
 
-		return String.Compare (type1.FullName, type2.FullName);
-	}
+        return String.Compare(type1.FullName, type2.FullName);
+    }
 }
-

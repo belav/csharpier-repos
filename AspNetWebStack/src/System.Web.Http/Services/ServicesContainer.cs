@@ -9,13 +9,13 @@ using System.Web.Http.Properties;
 
 namespace System.Web.Http.Controllers
 {
-    // This is common to both per-controller and global config. 
+    // This is common to both per-controller and global config.
     // It facilitates sharing all the mutation operations between them.
     public abstract class ServicesContainer : IDisposable
     {
         // Wrapped/composite versions of the exception service interfaces designed for consumption in catch blocks.
         // See ExceptionServices.GetLogger/Handler for how these internal services are used.
-        // These instances must be stored separately and not provided via GetService because existing stores for 
+        // These instances must be stored separately and not provided via GetService because existing stores for
         // GetService do not provide concurrency control and these two wrappers are potentially initialized late.
         internal readonly Lazy<IExceptionLogger> ExceptionServicesLogger;
         internal readonly Lazy<IExceptionHandler> ExceptionServicesHandler;
@@ -31,24 +31,26 @@ namespace System.Web.Http.Controllers
         public abstract IEnumerable<object> GetServices(Type serviceType);
 
         // critical method for mutation operations (Add,Insert,Clear,Replace, etc)
-        // This is used for multi-services. 
+        // This is used for multi-services.
         // There are other abstract methods to mutate the single services.
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "expose for mutation")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1002:DoNotExposeGenericLists",
+            Justification = "expose for mutation"
+        )]
         protected abstract List<object> GetServiceInstances(Type serviceType);
 
-        protected virtual void ResetCache(Type serviceType)
-        {
-        }
+        protected virtual void ResetCache(Type serviceType) { }
 
         /// <summary>
-        /// Determine whether the service type should be fetched with GetService or GetServices. 
+        /// Determine whether the service type should be fetched with GetService or GetServices.
         /// </summary>
         /// <param name="serviceType">type of service to query</param>
         /// <returns>true iff the service is singular. </returns>
         public abstract bool IsSingleService(Type serviceType);
 
         /// <summary>
-        /// Adds a service to the end of services list for the given service type. 
+        /// Adds a service to the end of services list for the given service type.
         /// </summary>
         /// <param name="serviceType">The service type.</param>
         /// <param name="service">The service instance.</param>
@@ -69,7 +71,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Removes all the service instances of the given service type. 
+        /// Removes all the service instances of the given service type.
         /// </summary>
         /// <param name="serviceType">The service type to clear from the services list.</param>
         public virtual void Clear(Type serviceType)
@@ -140,7 +142,12 @@ namespace System.Web.Http.Controllers
             }
             if (!serviceType.IsAssignableFrom(service.GetType()))
             {
-                throw Error.Argument("service", SRResources.Common_TypeMustDriveFromType, service.GetType().Name, serviceType.Name);
+                throw Error.Argument(
+                    "service",
+                    SRResources.Common_TypeMustDriveFromType,
+                    service.GetType().Name,
+                    serviceType.Name
+                );
             }
 
             List<object> instances = GetServiceInstances(serviceType);
@@ -173,10 +180,17 @@ namespace System.Web.Http.Controllers
             }
 
             object[] filteredServices = services.Where(svc => svc != null).ToArray();
-            object incorrectlyTypedService = filteredServices.FirstOrDefault(svc => !serviceType.IsAssignableFrom(svc.GetType()));
+            object incorrectlyTypedService = filteredServices.FirstOrDefault(svc =>
+                !serviceType.IsAssignableFrom(svc.GetType())
+            );
             if (incorrectlyTypedService != null)
             {
-                throw Error.Argument("services", SRResources.Common_TypeMustDriveFromType, incorrectlyTypedService.GetType().Name, serviceType.Name);
+                throw Error.Argument(
+                    "services",
+                    SRResources.Common_TypeMustDriveFromType,
+                    incorrectlyTypedService.GetType().Name,
+                    serviceType.Name
+                );
             }
 
             List<object> instances = GetServiceInstances(serviceType);
@@ -260,11 +274,11 @@ namespace System.Web.Http.Controllers
 
         /// <summary>
         /// Replaces all existing services for the given service type with the given
-        /// service instance. This works for both singular and plural services. 
+        /// service instance. This works for both singular and plural services.
         /// </summary>
         /// <param name="serviceType">The service type.</param>
         /// <param name="service">The service instance.</param>
-        /// <inheritdoc/>        
+        /// <inheritdoc/>
         public void Replace(Type serviceType, object service)
         {
             // Check this early, so we don't call RemoveAll before Insert would catch the null service.
@@ -275,7 +289,12 @@ namespace System.Web.Http.Controllers
 
             if ((service != null) && (!serviceType.IsAssignableFrom(service.GetType())))
             {
-                throw Error.Argument("service", SRResources.Common_TypeMustDriveFromType, service.GetType().Name, serviceType.Name);
+                throw Error.Argument(
+                    "service",
+                    SRResources.Common_TypeMustDriveFromType,
+                    service.GetType().Name,
+                    serviceType.Name
+                );
             }
 
             if (IsSingleService(serviceType))
@@ -316,11 +335,17 @@ namespace System.Web.Http.Controllers
         }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed.")]
-        [SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly", Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed.")]
-        public virtual void Dispose()
-        {
-        }
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1063:ImplementIDisposableCorrectly",
+            Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed."
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1816:CallGCSuppressFinalizeCorrectly",
+            Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed."
+        )]
+        public virtual void Dispose() { }
 
         private IExceptionLogger CreateExceptionServicesLogger()
         {

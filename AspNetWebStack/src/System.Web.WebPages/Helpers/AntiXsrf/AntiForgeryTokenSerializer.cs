@@ -18,13 +18,23 @@ namespace System.Web.Helpers.AntiXsrf
             _cryptoSystem = cryptoSystem;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Failures are homogenized; caller handles appropriately.")]
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "MemoryStream is safe for multi-dispose.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Failures are homogenized; caller handles appropriately."
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2202:Do not dispose objects multiple times",
+            Justification = "MemoryStream is safe for multi-dispose."
+        )]
         public AntiForgeryToken Deserialize(string serializedToken)
         {
             try
             {
-                using (MemoryStream stream = new MemoryStream(_cryptoSystem.Unprotect(serializedToken)))
+                using (
+                    MemoryStream stream = new MemoryStream(_cryptoSystem.Unprotect(serializedToken))
+                )
                 {
                     using (BinaryReader reader = new BinaryReader(stream))
                     {
@@ -67,8 +77,13 @@ namespace System.Web.Helpers.AntiXsrf
             }
 
             AntiForgeryToken deserializedToken = new AntiForgeryToken();
-            byte[] securityTokenBytes = reader.ReadBytes(AntiForgeryToken.SecurityTokenBitLength / 8);
-            deserializedToken.SecurityToken = new BinaryBlob(AntiForgeryToken.SecurityTokenBitLength, securityTokenBytes);
+            byte[] securityTokenBytes = reader.ReadBytes(
+                AntiForgeryToken.SecurityTokenBitLength / 8
+            );
+            deserializedToken.SecurityToken = new BinaryBlob(
+                AntiForgeryToken.SecurityTokenBitLength,
+                securityTokenBytes
+            );
             deserializedToken.IsSessionToken = reader.ReadBoolean();
 
             if (!deserializedToken.IsSessionToken)
@@ -77,7 +92,10 @@ namespace System.Web.Helpers.AntiXsrf
                 if (isClaimsBased)
                 {
                     byte[] claimUidBytes = reader.ReadBytes(AntiForgeryToken.ClaimUidBitLength / 8);
-                    deserializedToken.ClaimUid = new BinaryBlob(AntiForgeryToken.ClaimUidBitLength, claimUidBytes);
+                    deserializedToken.ClaimUid = new BinaryBlob(
+                        AntiForgeryToken.ClaimUidBitLength,
+                        claimUidBytes
+                    );
                 }
                 else
                 {
@@ -97,7 +115,11 @@ namespace System.Web.Helpers.AntiXsrf
             return deserializedToken;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "MemoryStream is safe for multi-dispose.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2202:Do not dispose objects multiple times",
+            Justification = "MemoryStream is safe for multi-dispose."
+        )]
         public string Serialize(AntiForgeryToken token)
         {
             Contract.Assert(token != null);
@@ -114,12 +136,16 @@ namespace System.Web.Helpers.AntiXsrf
                     {
                         if (token.ClaimUid != null)
                         {
-                            writer.Write(true /* isClaimsBased */);
+                            writer.Write(
+                                true /* isClaimsBased */
+                            );
                             writer.Write(token.ClaimUid.GetData());
                         }
                         else
                         {
-                            writer.Write(false /* isClaimsBased */);
+                            writer.Write(
+                                false /* isClaimsBased */
+                            );
                             writer.Write(token.Username);
                         }
 

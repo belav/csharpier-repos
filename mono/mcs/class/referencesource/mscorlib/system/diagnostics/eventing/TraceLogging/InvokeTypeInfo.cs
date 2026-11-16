@@ -15,20 +15,19 @@ namespace System.Diagnostics.Tracing
     /// <typeparam name="ContainerType">
     /// Type from which to read values.
     /// </typeparam>
-    internal sealed class InvokeTypeInfo<ContainerType>
-        : TraceLoggingTypeInfo<ContainerType>
+    internal sealed class InvokeTypeInfo<ContainerType> : TraceLoggingTypeInfo<ContainerType>
     {
         private readonly PropertyAnalysis[] properties;
         private readonly PropertyAccessor<ContainerType>[] accessors;
 
-        public InvokeTypeInfo(
-            TypeAnalysis typeAnalysis)
+        public InvokeTypeInfo(TypeAnalysis typeAnalysis)
             : base(
                 typeAnalysis.name,
                 typeAnalysis.level,
                 typeAnalysis.opcode,
                 typeAnalysis.keywords,
-                typeAnalysis.tags)
+                typeAnalysis.tags
+            )
         {
             if (typeAnalysis.properties.Length != 0)
             {
@@ -44,7 +43,8 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             var groupCollector = collector.AddGroup(name);
             if (this.properties != null)
@@ -59,17 +59,12 @@ namespace System.Diagnostics.Tracing
                         propertyFormat = propertyAttribute.Format;
                     }
 
-                    property.typeInfo.WriteMetadata(
-                        groupCollector,
-                        property.name,
-                        propertyFormat);
+                    property.typeInfo.WriteMetadata(groupCollector, property.name, propertyFormat);
                 }
             }
         }
 
-        public override void WriteData(
-            TraceLoggingDataCollector collector,
-            ref ContainerType value)
+        public override void WriteData(TraceLoggingDataCollector collector, ref ContainerType value)
         {
             if (this.accessors != null)
             {
@@ -98,15 +93,11 @@ namespace System.Diagnostics.Tracing
             return null;
         }
 
-        public override void WriteObjectData(
-            TraceLoggingDataCollector collector,
-            object valueObj)
+        public override void WriteObjectData(TraceLoggingDataCollector collector, object valueObj)
         {
             if (this.accessors != null)
             {
-                var value = valueObj == null
-                    ? default(ContainerType)
-                    : (ContainerType)valueObj;
+                var value = valueObj == null ? default(ContainerType) : (ContainerType)valueObj;
                 this.WriteData(collector, ref value);
             }
         }

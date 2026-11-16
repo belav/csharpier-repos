@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     // The IConfigSectionHandler interface defines the contract that all configuration
     // section handlers must implement in order to participate in the resolution of
     // configuration settings.
@@ -21,8 +21,8 @@ namespace System.Configuration {
     // directory is layered over config in a parent directory),
     // so, IConfigSectionHandler is supplied with the parent config
     // as well as any number of XML fragments.
-    public interface IConfigurationSectionHandler {
-
+    public interface IConfigurationSectionHandler
+    {
         // Create
         //
         // @param parent the object inherited from parent path
@@ -43,6 +43,5 @@ namespace System.Configuration {
         // in is not altered: if a modification must be made,
         // then it must be cloned before it is modified.
         object Create(Object parent, Object configContext, System.Xml.XmlNode section);
-
     }
 }

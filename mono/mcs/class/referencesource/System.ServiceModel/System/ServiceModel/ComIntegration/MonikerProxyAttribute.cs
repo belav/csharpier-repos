@@ -14,7 +14,9 @@ namespace System.ServiceModel.ComIntegration
         {
             if (serverType != typeof(ServiceMoniker))
             {
-                throw Fx.AssertAndThrow("MonikerProxyAttribute can only be used for the service Moniker");
+                throw Fx.AssertAndThrow(
+                    "MonikerProxyAttribute can only be used for the service Moniker"
+                );
             }
             return MonikerBuilder.CreateMonikerInstance();
         }
@@ -23,7 +25,9 @@ namespace System.ServiceModel.ComIntegration
         {
             if (serverType != typeof(ServiceMoniker))
             {
-                throw Fx.AssertAndThrow("MonikerProxyAttribute can only be used for the service Moniker");
+                throw Fx.AssertAndThrow(
+                    "MonikerProxyAttribute can only be used for the service Moniker"
+                );
             }
             return MonikerBuilder.CreateMonikerInstance();
         }

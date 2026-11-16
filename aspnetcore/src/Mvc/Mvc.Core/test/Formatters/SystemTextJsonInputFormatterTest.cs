@@ -76,15 +76,12 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
         // Act
         await formatter.ReadAsync(formatterContext);
 
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k),
-            kvp =>
-            {
-                Assert.Equal("$[1]", kvp.Key);
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.StartsWith("''' is an invalid start of a value", error.ErrorMessage);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k), kvp =>
+        {
+            Assert.Equal("$[1]", kvp.Key);
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.StartsWith("''' is an invalid start of a value", error.ErrorMessage);
+        });
     }
 
     [Fact]

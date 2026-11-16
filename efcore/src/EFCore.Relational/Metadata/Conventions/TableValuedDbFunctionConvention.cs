@@ -19,7 +19,8 @@ public class TableValuedDbFunctionConvention : IModelFinalizingConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public TableValuedDbFunctionConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -38,7 +39,8 @@ public class TableValuedDbFunctionConvention : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var function in modelBuilder.Metadata.GetDbFunctions())
         {
@@ -50,8 +52,7 @@ public class TableValuedDbFunctionConvention : IModelFinalizingConvention
     ///     Called when an <see cref="IConventionDbFunction" /> is added to the model.
     /// </summary>
     /// <param name="dbFunctionBuilder">The builder for the <see cref="IConventionDbFunction" />.</param>
-    private static void ProcessDbFunctionAdded(
-        IConventionDbFunctionBuilder dbFunctionBuilder)
+    private static void ProcessDbFunctionAdded(IConventionDbFunctionBuilder dbFunctionBuilder)
     {
         var function = dbFunctionBuilder.Metadata;
         if (function.IsScalar)
@@ -64,14 +65,19 @@ public class TableValuedDbFunctionConvention : IModelFinalizingConvention
         {
             throw new InvalidOperationException(
                 RelationalStrings.DbFunctionInvalidIQueryableReturnType(
-                    function.ModelName, function.ReturnType.ShortDisplayName()));
+                    function.ModelName,
+                    function.ReturnType.ShortDisplayName()
+                )
+            );
         }
 
         var model = function.Model;
         var entityType = model.FindEntityType(elementType);
-        if (entityType?.IsOwned() == true
+        if (
+            entityType?.IsOwned() == true
             || model.IsOwned(elementType)
-            || (entityType == null && model.FindEntityTypes(elementType).Any()))
+            || (entityType == null && model.FindEntityTypes(elementType).Any())
+        )
         {
             return;
         }

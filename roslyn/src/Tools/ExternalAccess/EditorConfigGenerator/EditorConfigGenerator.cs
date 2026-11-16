@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.EditorConfigGenerator
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorConfigGenerator(IGlobalOptionService globalOptions,
-            EditorConfigOptionsGenerator optionsGenerator)
+        public EditorConfigGenerator(
+            IGlobalOptionService globalOptions,
+            EditorConfigOptionsGenerator optionsGenerator
+        )
         {
             _globalOptions = globalOptions;
             _editorConfigGenerator = optionsGenerator;

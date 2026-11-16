@@ -28,22 +28,51 @@ namespace System.Xml
 
             public override object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn)
             {
-                if ((ofObjectToReturn is null || ofObjectToReturn == typeof(Stream) || ofObjectToReturn == typeof(object))
-                    && absoluteUri.Scheme == "file")
+                if (
+                    (
+                        ofObjectToReturn is null
+                        || ofObjectToReturn == typeof(Stream)
+                        || ofObjectToReturn == typeof(object)
+                    )
+                    && absoluteUri.Scheme == "file"
+                )
                 {
-                    return new FileStream(absoluteUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, 1);
+                    return new FileStream(
+                        absoluteUri.LocalPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        1
+                    );
                 }
 
                 throw new XmlException(SR.Xml_UnsupportedClass, string.Empty);
             }
 
-            public override Task<object> GetEntityAsync(Uri absoluteUri, string? role, Type? ofObjectToReturn)
+            public override Task<object> GetEntityAsync(
+                Uri absoluteUri,
+                string? role,
+                Type? ofObjectToReturn
+            )
             {
-                if (ofObjectToReturn == null || ofObjectToReturn == typeof(Stream) || ofObjectToReturn == typeof(object))
+                if (
+                    ofObjectToReturn == null
+                    || ofObjectToReturn == typeof(Stream)
+                    || ofObjectToReturn == typeof(object)
+                )
                 {
                     if (absoluteUri.Scheme == "file")
                     {
-                        return Task.FromResult<object>(new FileStream(absoluteUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, 1, useAsync: true));
+                        return Task.FromResult<object>(
+                            new FileStream(
+                                absoluteUri.LocalPath,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.Read,
+                                1,
+                                useAsync: true
+                            )
+                        );
                     }
                 }
 

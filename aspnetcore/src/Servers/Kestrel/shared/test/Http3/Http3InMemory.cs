@@ -1228,8 +1228,7 @@ internal class TestMultiplexedConnectionContext
         var testStreamContext = new TestStreamContext(canRead: true, canWrite: false, _testBase);
         testStreamContext.Initialize(streamId: 3);
 
-        var stream =
-            _testBase.OnCreateServerControlStream?.Invoke(testStreamContext)
+        var stream = _testBase.OnCreateServerControlStream?.Invoke(testStreamContext)
             ?? new Http3ControlStream(_testBase, testStreamContext);
         ToClientAcceptQueue.Writer.WriteAsync(stream);
         return new ValueTask<ConnectionContext>(stream.StreamContext);

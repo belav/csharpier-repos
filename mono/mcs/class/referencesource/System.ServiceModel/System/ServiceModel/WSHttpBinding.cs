@@ -4,7 +4,6 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -17,12 +16,13 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-
+    using System.Text;
     using System.Xml;
 
     public class WSHttpBinding : WSHttpBindingBase
     {
-        static readonly MessageSecurityVersion WSMessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+        static readonly MessageSecurityVersion WSMessageSecurityVersion =
+            MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
 
         WSHttpSecurity security = new WSHttpSecurity();
 
@@ -33,14 +33,10 @@ namespace System.ServiceModel
         }
 
         public WSHttpBinding()
-            : base()
-        {
-        }
+            : base() { }
 
         public WSHttpBinding(SecurityMode securityMode)
-            : this(securityMode, false)
-        {
-        }
+            : this(securityMode, false) { }
 
         public WSHttpBinding(SecurityMode securityMode, bool reliableSessionEnabled)
             : base(reliableSessionEnabled)
@@ -72,7 +68,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.security = value;
             }
@@ -80,14 +78,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            WSHttpBindingCollectionElement section = WSHttpBindingCollectionElement.GetBindingCollectionElement();
+            WSHttpBindingCollectionElement section =
+                WSHttpBindingCollectionElement.GetBindingCollectionElement();
             WSHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.WSHttpBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.WSHttpBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -95,12 +99,24 @@ namespace System.ServiceModel
             }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingParameterCollection parameters)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingParameterCollection parameters
+        )
         {
-            if ((security.Mode == SecurityMode.Transport) &&
-                security.Transport.ClientCredentialType == HttpClientCredentialType.InheritedFromHost)
+            if (
+                (security.Mode == SecurityMode.Transport)
+                && security.Transport.ClientCredentialType
+                    == HttpClientCredentialType.InheritedFromHost
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.HttpClientCredentialTypeInvalid, security.Transport.ClientCredentialType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpClientCredentialTypeInvalid,
+                            security.Transport.ClientCredentialType
+                        )
+                    )
+                );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -111,20 +127,31 @@ namespace System.ServiceModel
             if (ReliableSession.Enabled)
             {
                 if (this.security.Mode == SecurityMode.Transport)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.WSHttpDoesNotSupportRMWithHttps)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.WSHttpDoesNotSupportRMWithHttps)
+                        )
+                    );
             }
 
             return base.CreateBindingElements();
         }
 
         // if you make changes here, see also WS2007HttpBinding.TryCreate()
-        internal static bool TryCreate(SecurityBindingElement sbe, TransportBindingElement transport, ReliableSessionBindingElement rsbe, TransactionFlowBindingElement tfbe, out Binding binding)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            TransportBindingElement transport,
+            ReliableSessionBindingElement rsbe,
+            TransactionFlowBindingElement tfbe,
+            out Binding binding
+        )
         {
             bool isReliableSession = (rsbe != null);
             binding = null;
 
             // reverse GetTransport
-            HttpTransportSecurity transportSecurity = WSHttpSecurity.GetDefaultHttpTransportSecurity();
+            HttpTransportSecurity transportSecurity =
+                WSHttpSecurity.GetDefaultHttpTransportSecurity();
             UnifiedSecurityMode mode;
             if (!GetSecurityModeFromTransport(transport, transportSecurity, out mode))
             {
@@ -134,7 +161,10 @@ namespace System.ServiceModel
             HttpsTransportBindingElement httpsBinding = transport as HttpsTransportBindingElement;
             if (httpsBinding != null && httpsBinding.MessageSecurityVersion != null)
             {
-                if (httpsBinding.MessageSecurityVersion.SecurityPolicyVersion != WSMessageSecurityVersion.SecurityPolicyVersion)
+                if (
+                    httpsBinding.MessageSecurityVersion.SecurityPolicyVersion
+                    != WSMessageSecurityVersion.SecurityPolicyVersion
+                )
                 {
                     return false;
                 }
@@ -155,12 +185,19 @@ namespace System.ServiceModel
                 binding = wsHttpBinding;
             }
 
-            if (rsbe != null && rsbe.ReliableMessagingVersion != ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                rsbe != null
+                && rsbe.ReliableMessagingVersion
+                    != ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 return false;
             }
 
-            if (tfbe != null && tfbe.TransactionProtocol != TransactionProtocol.WSAtomicTransactionOctober2004)
+            if (
+                tfbe != null
+                && tfbe.TransactionProtocol != TransactionProtocol.WSAtomicTransactionOctober2004
+            )
             {
                 return false;
             }
@@ -172,7 +209,9 @@ namespace System.ServiceModel
         {
             if (security.Mode == SecurityMode.None || security.Mode == SecurityMode.Message)
             {
-                this.HttpTransport.ExtendedProtectionPolicy = security.Transport.ExtendedProtectionPolicy;
+                this.HttpTransport.ExtendedProtectionPolicy = security
+                    .Transport
+                    .ExtendedProtectionPolicy;
                 return this.HttpTransport;
             }
             else
@@ -182,13 +221,22 @@ namespace System.ServiceModel
             }
         }
 
-        internal static bool GetSecurityModeFromTransport(TransportBindingElement transport, HttpTransportSecurity transportSecurity, out UnifiedSecurityMode mode)
+        internal static bool GetSecurityModeFromTransport(
+            TransportBindingElement transport,
+            HttpTransportSecurity transportSecurity,
+            out UnifiedSecurityMode mode
+        )
         {
             mode = UnifiedSecurityMode.None;
             if (transport is HttpsTransportBindingElement)
             {
-                mode = UnifiedSecurityMode.Transport | UnifiedSecurityMode.TransportWithMessageCredential;
-                WSHttpSecurity.ApplyTransportSecurity((HttpsTransportBindingElement)transport, transportSecurity);
+                mode =
+                    UnifiedSecurityMode.Transport
+                    | UnifiedSecurityMode.TransportWithMessageCredential;
+                WSHttpSecurity.ApplyTransportSecurity(
+                    (HttpsTransportBindingElement)transport,
+                    transportSecurity
+                );
             }
             else if (transport is HttpTransportBindingElement)
             {
@@ -201,9 +249,13 @@ namespace System.ServiceModel
             return true;
         }
 
-        internal static bool TryGetAllowCookiesFromTransport(TransportBindingElement transport, out bool allowCookies)
+        internal static bool TryGetAllowCookiesFromTransport(
+            TransportBindingElement transport,
+            out bool allowCookies
+        )
         {
-            HttpTransportBindingElement httpTransportBindingElement = transport as HttpTransportBindingElement;
+            HttpTransportBindingElement httpTransportBindingElement =
+                transport as HttpTransportBindingElement;
             if (httpTransportBindingElement == null)
             {
                 allowCookies = false;
@@ -218,16 +270,36 @@ namespace System.ServiceModel
 
         protected override SecurityBindingElement CreateMessageSecurity()
         {
-            return security.CreateMessageSecurity(this.ReliableSession.Enabled, WSMessageSecurityVersion);
+            return security.CreateMessageSecurity(
+                this.ReliableSession.Enabled,
+                WSMessageSecurityVersion
+            );
         }
 
         // if you make changes here, see also WS2007HttpBinding.TryCreateSecurity()
-        static bool TryCreateSecurity(SecurityBindingElement sbe, UnifiedSecurityMode mode, HttpTransportSecurity transportSecurity, bool isReliableSession, out WSHttpSecurity security)
+        static bool TryCreateSecurity(
+            SecurityBindingElement sbe,
+            UnifiedSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            bool isReliableSession,
+            out WSHttpSecurity security
+        )
         {
-            if (!WSHttpSecurity.TryCreate(sbe, mode, transportSecurity, isReliableSession, out security))
+            if (
+                !WSHttpSecurity.TryCreate(
+                    sbe,
+                    mode,
+                    transportSecurity,
+                    isReliableSession,
+                    out security
+                )
+            )
                 return false;
             // the last check: make sure that security binding element match the incoming security
-            return SecurityElement.AreBindingsMatching(security.CreateMessageSecurity(isReliableSession, WSMessageSecurityVersion), sbe);
+            return SecurityElement.AreBindingsMatching(
+                security.CreateMessageSecurity(isReliableSession, WSMessageSecurityVersion),
+                sbe
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

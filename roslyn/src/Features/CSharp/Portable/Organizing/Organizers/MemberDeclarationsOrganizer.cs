@@ -19,13 +19,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
     {
         public static SyntaxList<MemberDeclarationSyntax> Organize(
             SyntaxList<MemberDeclarationSyntax> members,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            // Break the list of members up into groups based on the PP 
+            // Break the list of members up into groups based on the PP
             // directives between them.
             var groups = members.SplitNodesOnPreprocessorBoundaries(cancellationToken);
 
-            // Go into each group and organize them.  We'll then have a list of 
+            // Go into each group and organize them.  We'll then have a list of
             // lists.  Flatten that list and return that.
             var sortedGroups = groups.Select(OrganizeMemberGroup).Flatten().ToList();
 
@@ -39,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 
         private static void TransferTrivia<TSyntaxNode>(
             IList<TSyntaxNode> originalList,
-            IList<TSyntaxNode> finalList) where TSyntaxNode : SyntaxNode
+            IList<TSyntaxNode> finalList
+        )
+            where TSyntaxNode : SyntaxNode
         {
             Debug.Assert(originalList.Count == finalList.Count);
 
@@ -70,7 +73,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
             }
         }
 
-        private static void FixupOriginalFirstNode<TSyntaxNode>(IList<TSyntaxNode> originalList, IList<TSyntaxNode> finalList) where TSyntaxNode : SyntaxNode
+        private static void FixupOriginalFirstNode<TSyntaxNode>(
+            IList<TSyntaxNode> originalList,
+            IList<TSyntaxNode> finalList
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // Now, find the original node in the final list.
             var originalFirstNode = originalList[0];
@@ -83,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
             // lines before the first node in the final list.
             var blankLines = originalNodeAtThatIndex.GetLeadingBlankLines();
 
-            originalFirstNode = originalFirstNode.GetNodeWithoutLeadingBannerAndPreprocessorDirectives()
+            originalFirstNode = originalFirstNode
+                .GetNodeWithoutLeadingBannerAndPreprocessorDirectives()
                 .WithPrependedLeadingTrivia(blankLines);
 
             finalList[indexInFinalList] = originalFirstNode;
@@ -91,23 +99,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 
         private static void CopyBanner<TSyntaxNode>(
             IList<TSyntaxNode> originalList,
-            IList<TSyntaxNode> finalList) where TSyntaxNode : SyntaxNode
+            IList<TSyntaxNode> finalList
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // First. Strip any pp directives or banners on the first node.  They
             // have to stay at the top of the list.
             var banner = originalList[0].GetLeadingBannerAndPreprocessorDirectives();
 
-            // Now, we want to remove any blank lines from the new first node and then 
-            // reattach the banner. 
+            // Now, we want to remove any blank lines from the new first node and then
+            // reattach the banner.
             var finalFirstNode = finalList[0];
             finalFirstNode = finalFirstNode.GetNodeWithoutLeadingBlankLines();
-            finalFirstNode = finalFirstNode.WithLeadingTrivia(banner.Concat(finalFirstNode.GetLeadingTrivia()));
+            finalFirstNode = finalFirstNode.WithLeadingTrivia(
+                banner.Concat(finalFirstNode.GetLeadingTrivia())
+            );
 
             // Place the updated first node back in the result list
             finalList[0] = finalFirstNode;
         }
 
-        private static IList<MemberDeclarationSyntax> OrganizeMemberGroup(IList<MemberDeclarationSyntax> members)
+        private static IList<MemberDeclarationSyntax> OrganizeMemberGroup(
+            IList<MemberDeclarationSyntax> members
+        )
         {
             if (members.Count > 1)
             {
@@ -118,7 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 if (!finalList.SequenceEqual(initialList))
                 {
                     // Ok, we wanted to reorder the list.  But we're definitely not done right now.
-                    // While most of the list will look fine, we will have issues with the first 
+                    // While most of the list will look fine, we will have issues with the first
                     // node.  First, we don't want to move any pp directives or banners that are on
                     // the first node.  Second, it can often be the case that the node doesn't even
                     // have any trivia.  We want to follow the user's style.  So we find the node that

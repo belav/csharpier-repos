@@ -97,7 +97,9 @@ namespace Microsoft.Extensions.Http
     /// }
     /// </code>
     /// </example>
-    public interface ITypedHttpClientFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient>
+    public interface ITypedHttpClientFactory<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
+    >
     {
         /// <summary>
         /// Creates a typed client given an associated <see cref="HttpClient"/>.

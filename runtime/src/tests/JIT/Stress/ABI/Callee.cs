@@ -14,10 +14,12 @@ namespace ABIStress
     {
         private static readonly MethodInfo s_memoryMarshalCreateReadOnlySpanMethod =
             typeof(MemoryMarshal).GetMethod("CreateReadOnlySpan").MakeGenericMethod(typeof(byte));
-        private static readonly MethodInfo s_hashCodeAddBytesMethod =
-            typeof(HashCode).GetMethod("AddBytes");
-        private static readonly MethodInfo s_hashCodeToHashCodeMethod =
-            typeof(HashCode).GetMethod("ToHashCode");
+        private static readonly MethodInfo s_hashCodeAddBytesMethod = typeof(HashCode).GetMethod(
+            "AddBytes"
+        );
+        private static readonly MethodInfo s_hashCodeToHashCodeMethod = typeof(HashCode).GetMethod(
+            "ToHashCode"
+        );
 
         public Callee(string name, List<TypeEx> parameters)
         {
@@ -38,13 +40,21 @@ namespace ABIStress
                 return;
 
             Method = new DynamicMethod(
-                Name, typeof(int), Parameters.Select(t => t.Type).ToArray(), typeof(Program));
+                Name,
+                typeof(int),
+                Parameters.Select(t => t.Type).ToArray(),
+                typeof(Program)
+            );
 
             ILGenerator g = Method.GetILGenerator();
             LocalBuilder hashCode = g.DeclareLocal(typeof(HashCode));
 
             if (Config.Verbose)
-                Program.EmitDumpValues("Callee's incoming args", g, Parameters.Select((t, i) => new ArgValue(t, i)));
+                Program.EmitDumpValues(
+                    "Callee's incoming args",
+                    g,
+                    Parameters.Select((t, i) => new ArgValue(t, i))
+                );
 
             g.Emit(OpCodes.Ldloca, hashCode);
             g.Emit(OpCodes.Initobj, typeof(HashCode));
@@ -78,7 +88,9 @@ namespace ABIStress
 
         private static ModuleBuilder s_delegateTypesModule;
         private static ConstructorInfo s_unmanagedFunctionPointerCtor =
-            typeof(UnmanagedFunctionPointerAttribute).GetConstructor(new[] { typeof(CallingConvention) });
+            typeof(UnmanagedFunctionPointerAttribute).GetConstructor(
+                new[] { typeof(CallingConvention) }
+            );
 
         public void EmitPInvokeDelegateTypes()
         {
@@ -89,33 +101,52 @@ namespace ABIStress
 
             if (s_delegateTypesModule == null)
             {
-                AssemblyBuilder delegates = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("ABIStress_Delegates"), AssemblyBuilderAccess.RunAndCollect);
+                AssemblyBuilder delegates = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("ABIStress_Delegates"),
+                    AssemblyBuilderAccess.RunAndCollect
+                );
                 s_delegateTypesModule = delegates.DefineDynamicModule("ABIStress_Delegates");
             }
 
             foreach (CallingConvention cc in Program.Abi.PInvokeConventions)
             {
                 // This code is based on DelegateHelpers.cs in System.Linq.Expressions.Compiler
-                TypeBuilder tb =
-                    s_delegateTypesModule.DefineType(
-                        $"{Name}_Delegate_{cc}",
-                        TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.AutoClass,
-                        typeof(MulticastDelegate));
+                TypeBuilder tb = s_delegateTypesModule.DefineType(
+                    $"{Name}_Delegate_{cc}",
+                    TypeAttributes.Class
+                        | TypeAttributes.Public
+                        | TypeAttributes.Sealed
+                        | TypeAttributes.AutoClass,
+                    typeof(MulticastDelegate)
+                );
 
                 tb.DefineConstructor(
-                    MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.RTSpecialName,
-                    CallingConventions.Standard,
-                    new[] { typeof(object), typeof(IntPtr) })
-                  .SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+                        MethodAttributes.Public
+                            | MethodAttributes.HideBySig
+                            | MethodAttributes.RTSpecialName,
+                        CallingConventions.Standard,
+                        new[] { typeof(object), typeof(IntPtr) }
+                    )
+                    .SetImplementationFlags(
+                        MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                    );
 
                 tb.DefineMethod(
-                    "Invoke",
-                    MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual,
-                    typeof(int),
-                    Parameters.Select(t => t.Type).ToArray())
-                  .SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+                        "Invoke",
+                        MethodAttributes.Public
+                            | MethodAttributes.HideBySig
+                            | MethodAttributes.NewSlot
+                            | MethodAttributes.Virtual,
+                        typeof(int),
+                        Parameters.Select(t => t.Type).ToArray()
+                    )
+                    .SetImplementationFlags(
+                        MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                    );
 
-                tb.SetCustomAttribute(new CustomAttributeBuilder(s_unmanagedFunctionPointerCtor, new object[] { cc }));
+                tb.SetCustomAttribute(
+                    new CustomAttributeBuilder(s_unmanagedFunctionPointerCtor, new object[] { cc })
+                );
                 PInvokeDelegateTypes.Add(cc, tb.CreateType());
             }
         }

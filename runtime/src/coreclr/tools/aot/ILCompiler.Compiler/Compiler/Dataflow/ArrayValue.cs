@@ -7,7 +7,6 @@ using System.Text;
 using ILCompiler.Dataflow;
 using ILLink.Shared.DataFlow;
 using Internal.TypeSystem;
-
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 #nullable enable
@@ -19,9 +18,12 @@ namespace ILLink.Shared.TrimAnalysis
         public static MultiValue Create(MultiValue size, TypeDesc elementType)
         {
             MultiValue result = MultiValueLattice.Top;
-            foreach (var sizeValue in size.AsEnumerable ())
+            foreach (var sizeValue in size.AsEnumerable())
             {
-                result = MultiValueLattice.Meet(result, new MultiValue(new ArrayValue(sizeValue, elementType)));
+                result = MultiValueLattice.Meet(
+                    result,
+                    new MultiValue(new ArrayValue(sizeValue, elementType))
+                );
             }
 
             return result;
@@ -77,7 +79,10 @@ namespace ILLink.Shared.TrimAnalysis
             // As such we can rely on the values to be immutable, and thus if the counts are equal
             // then the arrays are equal if items from one can be directly found in the other.
             foreach (var kvp in IndexValues)
-                if (!otherArr.IndexValues.TryGetValue(kvp.Key, out ValueBasicBlockPair value) || !kvp.Value.Equals(value))
+                if (
+                    !otherArr.IndexValues.TryGetValue(kvp.Key, out ValueBasicBlockPair value)
+                    || !kvp.Value.Equals(value)
+                )
                     return false;
 
             return true;
@@ -92,12 +97,15 @@ namespace ILLink.Shared.TrimAnalysis
                 // Since it's possible to store a reference to array as one of its own elements
                 // simple deep copy could lead to endless recursion.
                 // So instead we simply disallow arrays as element values completely - and treat that case as "too complex to analyze".
-                foreach (SingleValue v in kvp.Value.Value.AsEnumerable ())
+                foreach (SingleValue v in kvp.Value.Value.AsEnumerable())
                 {
                     System.Diagnostics.Debug.Assert(v is not ArrayValue);
                 }
 #endif
-                newValue.IndexValues.Add(kvp.Key, new ValueBasicBlockPair(kvp.Value.Value.DeepCopy(), kvp.Value.BasicBlockIndex));
+                newValue.IndexValues.Add(
+                    kvp.Key,
+                    new ValueBasicBlockPair(kvp.Value.Value.DeepCopy(), kvp.Value.BasicBlockIndex)
+                );
             }
 
             return newValue;
@@ -123,7 +131,7 @@ namespace ILLink.Shared.TrimAnalysis
                 result.Append(element.Key);
                 result.Append(",(");
                 bool firstValue = true;
-                foreach (var v in element.Value.Value.AsEnumerable ())
+                foreach (var v in element.Value.Value.AsEnumerable())
                 {
                     if (firstValue)
                     {

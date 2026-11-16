@@ -9,11 +9,16 @@ namespace System.Globalization.Tests
     public class CultureInfoEnglishName
     {
         // Android has its own ICU, which doesn't 100% map to UsingLimitedCultures
-        public static bool SupportFullGlobalizationData => PlatformDetection.IsNotUsingLimitedCultures || PlatformDetection.IsAndroid;
+        public static bool SupportFullGlobalizationData =>
+            PlatformDetection.IsNotUsingLimitedCultures || PlatformDetection.IsAndroid;
 
         public static IEnumerable<object[]> EnglishName_TestData()
         {
-            yield return new object[] { CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.EnglishName };
+            yield return new object[]
+            {
+                CultureInfo.CurrentCulture.Name,
+                CultureInfo.CurrentCulture.EnglishName,
+            };
 
             if (SupportFullGlobalizationData || PlatformDetection.IsHybridGlobalizationOnOSX)
             {
@@ -41,12 +46,17 @@ namespace System.Globalization.Tests
         public void ChineseNeutralEnglishName()
         {
             CultureInfo ci = new CultureInfo("zh-Hans");
-            Assert.True(ci.EnglishName == "Chinese (Simplified)" || ci.EnglishName == "Chinese, Simplified",
-                        $"'{ci.EnglishName}' not equal to `Chinese (Simplified)` nor `Chinese, Simplified`");
+            Assert.True(
+                ci.EnglishName == "Chinese (Simplified)" || ci.EnglishName == "Chinese, Simplified",
+                $"'{ci.EnglishName}' not equal to `Chinese (Simplified)` nor `Chinese, Simplified`"
+            );
 
             ci = new CultureInfo("zh-HanT");
-            Assert.True(ci.EnglishName == "Chinese (Traditional)" || ci.EnglishName == "Chinese, Traditional",
-                        $"'{ci.EnglishName}' not equal to `Chinese (Traditional)` nor `Chinese, Traditional`");
+            Assert.True(
+                ci.EnglishName == "Chinese (Traditional)"
+                    || ci.EnglishName == "Chinese, Traditional",
+                $"'{ci.EnglishName}' not equal to `Chinese (Traditional)` nor `Chinese, Traditional`"
+            );
         }
     }
 }

@@ -49,8 +49,10 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(count);
 
             if (chars.Length - index < count)
-                throw new ArgumentOutOfRangeException(nameof(chars),
-                      SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             // Just call the pointer version
             int result = -1;
@@ -73,8 +75,14 @@ namespace System.Text
             return _encoding.GetByteCount(chars, count, this);
         }
 
-        public override unsafe int GetBytes(char[] chars, int charIndex, int charCount,
-                                            byte[] bytes, int byteIndex, bool flush)
+        public override unsafe int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            bool flush
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentNullException.ThrowIfNull(bytes);
@@ -83,12 +91,16 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(charCount);
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars),
-                      SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (byteIndex < 0 || byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex),
-                     SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
 
             int byteCount = bytes.Length - byteIndex;
 
@@ -97,11 +109,22 @@ namespace System.Text
             fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
 
                 // Remember that charCount is # to decode, not size of array.
-                return GetBytes(pChars + charIndex, charCount,
-                                pBytes + byteIndex, byteCount, flush);
+                return GetBytes(
+                    pChars + charIndex,
+                    charCount,
+                    pBytes + byteIndex,
+                    byteCount,
+                    flush
+                );
         }
 
-        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount, bool flush)
+        public override unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            bool flush
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentNullException.ThrowIfNull(bytes);
@@ -117,9 +140,18 @@ namespace System.Text
 
         // This method is used when your output buffer might not be large enough for the entire result.
         // Just call the pointer version.  (This gets bytes)
-        public override unsafe void Convert(char[] chars, int charIndex, int charCount,
-                                            byte[] bytes, int byteIndex, int byteCount, bool flush,
-                                            out int charsUsed, out int bytesUsed, out bool completed)
+        public override unsafe void Convert(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentNullException.ThrowIfNull(bytes);
@@ -131,29 +163,48 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(byteCount);
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars),
-                      SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (bytes.Length - byteIndex < byteCount)
-                throw new ArgumentOutOfRangeException(nameof(bytes),
-                      SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             // Just call the pointer version (can't do this for non-msft encoders)
             fixed (char* pChars = &MemoryMarshal.GetReference((Span<char>)chars))
             {
                 fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
                 {
-                    Convert(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, flush,
-                        out charsUsed, out bytesUsed, out completed);
+                    Convert(
+                        pChars + charIndex,
+                        charCount,
+                        pBytes + byteIndex,
+                        byteCount,
+                        flush,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    );
                 }
             }
         }
 
         // This is the version that uses pointers.  We call the base encoding worker function
         // after setting our appropriate internal variables.  This is getting bytes
-        public override unsafe void Convert(char* chars, int charCount,
-                                            byte* bytes, int byteCount, bool flush,
-                                            out int charsUsed, out int bytesUsed, out bool completed)
+        public override unsafe void Convert(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentNullException.ThrowIfNull(bytes);
@@ -202,7 +253,8 @@ namespace System.Text
             // that all data has been converted and that this instance is indistinguishable from a
             // freshly-reset instance.
 
-            completed = (charsUsed == charCount)
+            completed =
+                (charsUsed == charCount)
                 && (!flush || !this.HasState)
                 && (_fallbackBuffer is null || _fallbackBuffer.Remaining == 0);
         }
@@ -221,7 +273,9 @@ namespace System.Text
         /// <summary>
         /// States whether a call to <see cref="Encoding.GetBytes(char*, int, byte*, int, EncoderNLS)"/> must first drain data on this <see cref="EncoderNLS"/> instance.
         /// </summary>
-        internal bool HasLeftoverData => _charLeftOver != default || (_fallbackBuffer is not null && _fallbackBuffer.Remaining > 0);
+        internal bool HasLeftoverData =>
+            _charLeftOver != default
+            || (_fallbackBuffer is not null && _fallbackBuffer.Remaining > 0);
 
         // Anything left in our encoder?
         internal virtual bool HasState => _charLeftOver != (char)0;
@@ -232,7 +286,10 @@ namespace System.Text
             _mustFlush = false;
         }
 
-        internal int DrainLeftoverDataForGetByteCount(ReadOnlySpan<char> chars, out int charsConsumed)
+        internal int DrainLeftoverDataForGetByteCount(
+            ReadOnlySpan<char> chars,
+            out int charsConsumed
+        )
         {
             // Quick check: we _should not_ have leftover fallback data from a previous invocation,
             // as we'd end up consuming any such data and would corrupt whatever Convert call happens
@@ -240,7 +297,13 @@ namespace System.Text
 
             if (_fallbackBuffer is not null && _fallbackBuffer.Remaining > 0)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_EncoderFallbackNotEmpty, Encoding.EncodingName, _fallbackBuffer.GetType()));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_EncoderFallbackNotEmpty,
+                        Encoding.EncodingName,
+                        _fallbackBuffer.GetType()
+                    )
+                );
             }
 
             // If we have a leftover high surrogate from a previous operation, consume it now.
@@ -285,7 +348,10 @@ namespace System.Text
                     Debug.Assert(_encoding is not null);
                     if (_encoding.TryGetByteCount(rune, out int byteCount))
                     {
-                        Debug.Assert(byteCount >= 0, "Encoding shouldn't have returned a negative byte count.");
+                        Debug.Assert(
+                            byteCount >= 0,
+                            "Encoding shouldn't have returned a negative byte count."
+                        );
                         return byteCount;
                     }
                     else
@@ -310,7 +376,12 @@ namespace System.Text
             }
         }
 
-        internal bool TryDrainLeftoverDataForGetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, out int charsConsumed, out int bytesWritten)
+        internal bool TryDrainLeftoverDataForGetBytes(
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes,
+            out int charsConsumed,
+            out int bytesWritten
+        )
         {
             // We may have a leftover high surrogate data from a previous invocation, or we may have leftover
             // data in the fallback buffer, or we may have neither, but we will never have both. Check for these

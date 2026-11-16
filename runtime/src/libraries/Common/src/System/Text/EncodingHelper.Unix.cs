@@ -12,7 +12,10 @@ namespace System.Text
             string? charset = GetCharset();
             if (charset != null)
             {
-                try { return Encoding.GetEncoding(charset); }
+                try
+                {
+                    return Encoding.GetEncoding(charset);
+                }
                 catch { }
             }
             return null;
@@ -37,7 +40,8 @@ namespace System.Text
             foreach (string envVar in s_localeEnvVars)
             {
                 locale = Environment.GetEnvironmentVariable(envVar);
-                if (!string.IsNullOrWhiteSpace(locale)) break;
+                if (!string.IsNullOrWhiteSpace(locale))
+                    break;
             }
 
             // If we found one, try to parse it.
@@ -53,9 +57,11 @@ namespace System.Text
                     int atPos = locale.IndexOf('@', dotPos + 1);
 
                     // return the charset from the locale, stripping off everything else
-                    string charset = atPos < dotPos ?
-                        locale.Substring(dotPos) :                // no modifier
-                        locale.Substring(dotPos, atPos - dotPos); // has modifier
+                    string charset =
+                        atPos < dotPos
+                            ? locale.Substring(dotPos)
+                            : // no modifier
+                            locale.Substring(dotPos, atPos - dotPos); // has modifier
                     return charset.ToLowerInvariant();
                 }
             }

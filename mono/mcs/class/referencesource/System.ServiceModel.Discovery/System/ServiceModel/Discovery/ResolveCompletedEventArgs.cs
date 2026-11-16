@@ -12,7 +12,12 @@ namespace System.ServiceModel.Discovery
     {
         ResolveResponse result;
 
-        internal ResolveCompletedEventArgs(Exception error, bool cancelled, object userState, ResolveResponse result)
+        internal ResolveCompletedEventArgs(
+            Exception error,
+            bool cancelled,
+            object userState,
+            ResolveResponse result
+        )
             : base(error, cancelled, userState)
         {
             this.result = result;

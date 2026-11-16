@@ -21,10 +21,23 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly CommonMessageProvider _messageProvider;
         internal readonly bool IsScriptCommandLineParser;
-        private static readonly char[] s_searchPatternTrimChars = new char[] { '\t', '\n', '\v', '\f', '\r', ' ', '\x0085', '\x00a0' };
+        private static readonly char[] s_searchPatternTrimChars = new char[]
+        {
+            '\t',
+            '\n',
+            '\v',
+            '\f',
+            '\r',
+            ' ',
+            '\x0085',
+            '\x00a0',
+        };
         internal const string ErrorLogOptionFormat = "<file>[,version={1|1.0|2|2.1}]";
 
-        internal CommandLineParser(CommonMessageProvider messageProvider, bool isScriptCommandLineParser)
+        internal CommandLineParser(
+            CommonMessageProvider messageProvider,
+            bool isScriptCommandLineParser
+        )
         {
             RoslynDebug.Assert(messageProvider != null);
             _messageProvider = messageProvider;
@@ -44,7 +57,8 @@ namespace Microsoft.CodeAnalysis
         {
             return new StreamReader(
                 new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read),
-                               detectEncodingFromByteOrderMarks: true);
+                detectEncodingFromByteOrderMarks: true
+            );
         }
 
         /// <summary>
@@ -54,7 +68,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="fileNamePattern">File name pattern. May contain wildcards '*' (matches zero or more characters) and '?' (matches any character).</param>
         /// <param name="searchOption">Specifies whether to search the specified <paramref name="directory"/> only, or all its subdirectories as well.</param>
         /// <returns>Sequence of file paths.</returns>
-        internal virtual IEnumerable<string> EnumerateFiles(string? directory, string fileNamePattern, SearchOption searchOption)
+        internal virtual IEnumerable<string> EnumerateFiles(
+            string? directory,
+            string fileNamePattern,
+            SearchOption searchOption
+        )
         {
             if (directory is null)
             {
@@ -65,7 +83,12 @@ namespace Microsoft.CodeAnalysis
             return Directory.EnumerateFiles(directory, fileNamePattern, searchOption);
         }
 
-        internal abstract CommandLineArguments CommonParse(IEnumerable<string> args, string baseDirectory, string? sdkDirectory, string? additionalReferenceDirectories);
+        internal abstract CommandLineArguments CommonParse(
+            IEnumerable<string> args,
+            string baseDirectory,
+            string? sdkDirectory,
+            string? additionalReferenceDirectories
+        );
 
         /// <summary>
         /// Parses a command line.
@@ -75,7 +98,12 @@ namespace Microsoft.CodeAnalysis
         /// <param name="sdkDirectory">The directory to search for mscorlib, or null if not available.</param>
         /// <param name="additionalReferenceDirectories">A string representing additional reference paths.</param>
         /// <returns>a <see cref="CommandLineArguments"/> object representing the parsed command line.</returns>
-        public CommandLineArguments Parse(IEnumerable<string> args, string baseDirectory, string? sdkDirectory, string? additionalReferenceDirectories)
+        public CommandLineArguments Parse(
+            IEnumerable<string> args,
+            string baseDirectory,
+            string? sdkDirectory,
+            string? additionalReferenceDirectories
+        )
         {
             return CommonParse(args, baseDirectory, sdkDirectory, additionalReferenceDirectories);
         }
@@ -83,17 +111,20 @@ namespace Microsoft.CodeAnalysis
         internal static bool IsOptionName(string optionName, ReadOnlyMemory<char> value) =>
             IsOptionName(optionName, value.Span);
 
-        internal static bool IsOptionName(string shortOptionName, string longOptionName, ReadOnlyMemory<char> value) =>
-            IsOptionName(shortOptionName, value) || IsOptionName(longOptionName, value);
+        internal static bool IsOptionName(
+            string shortOptionName,
+            string longOptionName,
+            ReadOnlyMemory<char> value
+        ) => IsOptionName(shortOptionName, value) || IsOptionName(longOptionName, value);
 
         /// <summary>
         /// Determines if a <see cref="ReadOnlySpan{Char}"/> is equal to the provided option name
         /// </summary>
         /// <remarks>
-        /// Prefer this over the Equals methods on <see cref="ReadOnlySpan{Char}"/>. The 
+        /// Prefer this over the Equals methods on <see cref="ReadOnlySpan{Char}"/>. The
         /// <see cref="StringComparison.InvariantCultureIgnoreCase"/> implementation allocates a <see cref="String"/>.
         /// The 99% case here is that we are dealing with an ASCII string that matches the input hence
-        /// it's worth special casing that here and falling back to the more complicated comparison 
+        /// it's worth special casing that here and falling back to the more complicated comparison
         /// when dealing with non-ASCII input
         /// </remarks>
         internal static bool IsOptionName(string optionName, ReadOnlySpan<char> value)
@@ -132,13 +163,26 @@ namespace Microsoft.CodeAnalysis
         internal static bool IsOption(ReadOnlySpan<char> arg) =>
             arg.Length > 0 && (arg[0] == '/' || arg[0] == '-');
 
-        internal static bool IsOption(string optionName, string arg, out ReadOnlyMemory<char> name, out ReadOnlyMemory<char>? value) =>
-            TryParseOption(arg, out name, out value) &&
-            IsOptionName(optionName, name);
+        internal static bool IsOption(
+            string optionName,
+            string arg,
+            out ReadOnlyMemory<char> name,
+            out ReadOnlyMemory<char>? value
+        ) => TryParseOption(arg, out name, out value) && IsOptionName(optionName, name);
 
-        internal static bool TryParseOption(string arg, [NotNullWhen(true)] out string? name, out string? value)
+        internal static bool TryParseOption(
+            string arg,
+            [NotNullWhen(true)] out string? name,
+            out string? value
+        )
         {
-            if (TryParseOption(arg, out ReadOnlyMemory<char> nameMemory, out ReadOnlyMemory<char>? valueMemory))
+            if (
+                TryParseOption(
+                    arg,
+                    out ReadOnlyMemory<char> nameMemory,
+                    out ReadOnlyMemory<char>? valueMemory
+                )
+            )
             {
                 name = nameMemory.ToString().ToLowerInvariant();
                 value = valueMemory?.ToString();
@@ -150,7 +194,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        internal static bool TryParseOption(string arg, out ReadOnlyMemory<char> name, out ReadOnlyMemory<char>? value)
+        internal static bool TryParseOption(
+            string arg,
+            out ReadOnlyMemory<char> name,
+            out ReadOnlyMemory<char>? value
+        )
         {
             if (!IsOption(arg))
             {
@@ -205,7 +253,8 @@ namespace Microsoft.CodeAnalysis
             ReadOnlyMemory<char> arg,
             IList<Diagnostic> diagnostics,
             string? baseDirectory,
-            out bool diagnosticAlreadyReported)
+            out bool diagnosticAlreadyReported
+        )
         {
             diagnosticAlreadyReported = false;
 
@@ -218,7 +267,11 @@ namespace Microsoft.CodeAnalysis
                     return null;
                 }
 
-                string? path = ParseGenericPathToFile(parts[0].ToString(), diagnostics, baseDirectory);
+                string? path = ParseGenericPathToFile(
+                    parts[0].ToString(),
+                    diagnostics,
+                    baseDirectory
+                );
                 if (path is null)
                 {
                     // ParseGenericPathToFile already reported the failure, so the caller should not
@@ -236,11 +289,20 @@ namespace Microsoft.CodeAnalysis
                     string versionParameterDesignator = "version" + ParameterNameValueSeparator;
                     int versionParameterDesignatorLength = versionParameterDesignator.Length;
 
-                    if (!(
-                            part.Length > versionParameterDesignatorLength &&
-                            part.Substring(0, versionParameterDesignatorLength).Equals(versionParameterDesignator, StringComparison.OrdinalIgnoreCase) &&
-                            SarifVersionFacts.TryParse(part.Substring(versionParameterDesignatorLength), out sarifVersion)
-                        ))
+                    if (
+                        !(
+                            part.Length > versionParameterDesignatorLength
+                            && part.Substring(0, versionParameterDesignatorLength)
+                                .Equals(
+                                    versionParameterDesignator,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            && SarifVersionFacts.TryParse(
+                                part.Substring(versionParameterDesignatorLength),
+                                out sarifVersion
+                            )
+                        )
+                    )
                     {
                         return null;
                     }
@@ -264,7 +326,8 @@ namespace Microsoft.CodeAnalysis
             string? baseDirectory,
             out string? outputFileName,
             out string? outputDirectory,
-            out string invalidPath)
+            out string invalidPath
+        )
         {
             outputFileName = null;
             outputDirectory = null;
@@ -275,14 +338,14 @@ namespace Microsoft.CodeAnalysis
             {
                 try
                 {
-                    // Windows 10 and earlier placed restrictions on file names that originally appeared as device 
-                    // names. For example COM1, PRN, CON, AUX, etc ... Files could not be created with those names even 
-                    // with extensions like .txt. When those restricted names are passed to GetFullPath the 
+                    // Windows 10 and earlier placed restrictions on file names that originally appeared as device
+                    // names. For example COM1, PRN, CON, AUX, etc ... Files could not be created with those names even
+                    // with extensions like .txt. When those restricted names are passed to GetFullPath the
                     // runtime will escape them with \\.\. For example GetFullPath("aux.txt") will return "\\.\aux.txt".
                     // The compiler detects these illegal names and bails out early
                     //
                     // Windows 11 removed this restriction though and hence the names are now legal. Cannot find documentation
-                    // to support this but experimentally it can be validated. 
+                    // to support this but experimentally it can be validated.
                     resolvedPath = Path.GetFullPath(resolvedPath);
                     // preserve possible invalid path info for diagnostic purpose
                     invalidPath = resolvedPath;
@@ -302,10 +365,13 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            if (resolvedPath == null ||
+            if (
+                resolvedPath == null
+                ||
                 // NUL-terminated, non-empty, valid Unicode strings
-                !MetadataHelpers.IsValidMetadataIdentifier(outputDirectory) ||
-                !MetadataHelpers.IsValidMetadataIdentifier(outputFileName))
+                !MetadataHelpers.IsValidMetadataIdentifier(outputDirectory)
+                || !MetadataHelpers.IsValidMetadataIdentifier(outputFileName)
+            )
             {
                 outputFileName = null;
             }
@@ -335,7 +401,10 @@ namespace Microsoft.CodeAnalysis
             return string.Empty;
         }
 
-        protected ImmutableArray<KeyValuePair<string, string>> ParsePathMap(string pathMap, IList<Diagnostic> errors)
+        protected ImmutableArray<KeyValuePair<string, string>> ParsePathMap(
+            string pathMap,
+            IList<Diagnostic> errors
+        )
         {
             if (pathMap.IsEmpty())
             {
@@ -354,7 +423,9 @@ namespace Microsoft.CodeAnalysis
                 var kv = SplitWithDoubledSeparatorEscaping(kEqualsV, '=');
                 if (kv.Length != 2)
                 {
-                    errors.Add(Diagnostic.Create(_messageProvider, _messageProvider.ERR_InvalidPathMap));
+                    errors.Add(
+                        Diagnostic.Create(_messageProvider, _messageProvider.ERR_InvalidPathMap)
+                    );
                     continue;
                 }
 
@@ -363,7 +434,9 @@ namespace Microsoft.CodeAnalysis
 
                 if (from.Length == 0 || to.Length == 0)
                 {
-                    errors.Add(Diagnostic.Create(_messageProvider, _messageProvider.ERR_InvalidPathMap));
+                    errors.Add(
+                        Diagnostic.Create(_messageProvider, _messageProvider.ERR_InvalidPathMap)
+                    );
                 }
                 else
                 {
@@ -424,38 +497,67 @@ namespace Microsoft.CodeAnalysis
             IList<Diagnostic> errors,
             string? baseDirectory,
             out string? outputFileName,
-            out string? outputDirectory)
+            out string? outputDirectory
+        )
         {
             string unquoted = RemoveQuotesAndSlashes(value);
-            ParseAndNormalizeFile(unquoted, baseDirectory, out outputFileName, out outputDirectory, out string? invalidPath);
-            if (outputFileName == null ||
-                !MetadataHelpers.IsValidAssemblyOrModuleName(outputFileName))
+            ParseAndNormalizeFile(
+                unquoted,
+                baseDirectory,
+                out outputFileName,
+                out outputDirectory,
+                out string? invalidPath
+            );
+            if (
+                outputFileName == null
+                || !MetadataHelpers.IsValidAssemblyOrModuleName(outputFileName)
+            )
             {
-                errors.Add(Diagnostic.Create(_messageProvider, _messageProvider.FTL_InvalidInputFileName, invalidPath));
+                errors.Add(
+                    Diagnostic.Create(
+                        _messageProvider,
+                        _messageProvider.FTL_InvalidInputFileName,
+                        invalidPath
+                    )
+                );
                 outputFileName = null;
                 outputDirectory = baseDirectory;
             }
         }
 
-        internal string? ParsePdbPath(
-            string value,
-            IList<Diagnostic> errors,
-            string? baseDirectory)
+        internal string? ParsePdbPath(string value, IList<Diagnostic> errors, string? baseDirectory)
         {
             string? pdbPath = null;
 
             string unquoted = RemoveQuotesAndSlashes(value);
-            ParseAndNormalizeFile(unquoted, baseDirectory, out string? outputFileName, out string? outputDirectory, out string? invalidPath);
-            if (outputFileName == null ||
-                PathUtilities.ChangeExtension(outputFileName, extension: null).Length == 0)
+            ParseAndNormalizeFile(
+                unquoted,
+                baseDirectory,
+                out string? outputFileName,
+                out string? outputDirectory,
+                out string? invalidPath
+            );
+            if (
+                outputFileName == null
+                || PathUtilities.ChangeExtension(outputFileName, extension: null).Length == 0
+            )
             {
-                errors.Add(Diagnostic.Create(_messageProvider, _messageProvider.FTL_InvalidInputFileName, invalidPath));
+                errors.Add(
+                    Diagnostic.Create(
+                        _messageProvider,
+                        _messageProvider.FTL_InvalidInputFileName,
+                        invalidPath
+                    )
+                );
             }
             else
             {
                 // If outputDirectory were null, then outputFileName would be null (see ParseAndNormalizeFile)
                 Debug.Assert(outputDirectory is object);
-                pdbPath = Path.ChangeExtension(Path.Combine(outputDirectory, outputFileName), ".pdb");
+                pdbPath = Path.ChangeExtension(
+                    Path.Combine(outputDirectory, outputFileName),
+                    ".pdb"
+                );
             }
 
             return pdbPath;
@@ -465,16 +567,29 @@ namespace Microsoft.CodeAnalysis
             string unquoted,
             IList<Diagnostic> errors,
             string? baseDirectory,
-            bool generateDiagnostic = true)
+            bool generateDiagnostic = true
+        )
         {
             string? genericPath = null;
 
-            ParseAndNormalizeFile(unquoted, baseDirectory, out string? outputFileName, out string? outputDirectory, out string? invalidPath);
+            ParseAndNormalizeFile(
+                unquoted,
+                baseDirectory,
+                out string? outputFileName,
+                out string? outputDirectory,
+                out string? invalidPath
+            );
             if (string.IsNullOrWhiteSpace(outputFileName))
             {
                 if (generateDiagnostic)
                 {
-                    errors.Add(Diagnostic.Create(_messageProvider, _messageProvider.FTL_InvalidInputFileName, invalidPath));
+                    errors.Add(
+                        Diagnostic.Create(
+                            _messageProvider,
+                            _messageProvider.FTL_InvalidInputFileName,
+                            invalidPath
+                        )
+                    );
                 }
             }
             else
@@ -492,7 +607,8 @@ namespace Microsoft.CodeAnalysis
             ArrayBuilder<string> processedArgs,
             List<string>? scriptArgsOpt,
             string? baseDirectory,
-            List<string>? responsePaths = null)
+            List<string>? responsePaths = null
+        )
         {
             bool parsingScriptArgs = false;
             bool sourceFileSeen = false;
@@ -556,7 +672,13 @@ namespace Microsoft.CodeAnalysis
                             string? directory = PathUtilities.GetDirectoryName(resolvedPath);
                             if (directory is null)
                             {
-                                diagnostics.Add(Diagnostic.Create(_messageProvider, _messageProvider.FTL_InvalidInputFileName, path));
+                                diagnostics.Add(
+                                    Diagnostic.Create(
+                                        _messageProvider,
+                                        _messageProvider.FTL_InvalidInputFileName,
+                                        path
+                                    )
+                                );
                             }
                             else
                             {
@@ -566,7 +688,13 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        diagnostics.Add(Diagnostic.Create(_messageProvider, _messageProvider.FTL_InvalidInputFileName, path));
+                        diagnostics.Add(
+                            Diagnostic.Create(
+                                _messageProvider,
+                                _messageProvider.FTL_InvalidInputFileName,
+                                path
+                            )
+                        );
                     }
                 }
                 else
@@ -601,7 +729,8 @@ namespace Microsoft.CodeAnalysis
                                     removeHashComments: true,
                                     stringBuilder.Builder,
                                     splitList,
-                                    out _);
+                                    out _
+                                );
                             }
                             break;
                         }
@@ -619,7 +748,8 @@ namespace Microsoft.CodeAnalysis
                                 removeHashComments: true,
                                 stringBuilder.Builder,
                                 splitList,
-                                out _);
+                                out _
+                            );
                             lineBufferLength = 0;
                         }
                         else
@@ -638,7 +768,13 @@ namespace Microsoft.CodeAnalysis
                 }
                 catch (Exception)
                 {
-                    diagnostics.Add(Diagnostic.Create(_messageProvider, _messageProvider.ERR_OpenResponseFile, fullPath));
+                    diagnostics.Add(
+                        Diagnostic.Create(
+                            _messageProvider,
+                            _messageProvider.ERR_OpenResponseFile,
+                            fullPath
+                        )
+                    );
                     return;
                 }
 
@@ -646,7 +782,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     var newArg = splitList[i];
                     // Ignores /noconfig option specified in a response file
-                    if (!string.Equals(newArg, "/noconfig", StringComparison.OrdinalIgnoreCase) && !string.Equals(newArg, "-noconfig", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !string.Equals(newArg, "/noconfig", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(newArg, "-noconfig", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         argsIndex++;
                         if (argsIndex < args.Count)
@@ -660,7 +799,12 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        diagnostics.Add(Diagnostic.Create(_messageProvider, _messageProvider.WRN_NoConfigNotOnCommandLine));
+                        diagnostics.Add(
+                            Diagnostic.Create(
+                                _messageProvider,
+                                _messageProvider.WRN_NoConfigNotOnCommandLine
+                            )
+                        );
                     }
                 }
 
@@ -673,7 +817,12 @@ namespace Microsoft.CodeAnalysis
             var arguments = new List<string>();
             foreach (string line in lines)
             {
-                arguments.AddRange(CommandLineUtilities.SplitCommandLineIntoArguments(line, removeHashComments: true));
+                arguments.AddRange(
+                    CommandLineUtilities.SplitCommandLineIntoArguments(
+                        line,
+                        removeHashComments: true
+                    )
+                );
             }
 
             return arguments;
@@ -710,7 +859,8 @@ namespace Microsoft.CodeAnalysis
             out bool containsShared,
             out string? keepAliveValue,
             out string? pipeName,
-            [NotNullWhen(false)] out string? errorMessage)
+            [NotNullWhen(false)] out string? errorMessage
+        )
         {
             containsShared = false;
             keepAliveValue = null;
@@ -776,7 +926,12 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            static bool isClientArgsOption(string arg, string optionName, out bool hasValue, out string? optionValue)
+            static bool isClientArgsOption(
+                string arg,
+                string optionName,
+                out bool hasValue,
+                out string? optionValue
+            )
             {
                 hasValue = false;
                 optionValue = null;
@@ -807,7 +962,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal static string MismatchedVersionErrorText => CodeAnalysisResources.MismatchedVersion;
+        internal static string MismatchedVersionErrorText =>
+            CodeAnalysisResources.MismatchedVersion;
 
         private static readonly char[] s_resourceSeparators = { ',' };
 
@@ -819,7 +975,8 @@ namespace Microsoft.CodeAnalysis
             out string? fullPath,
             out string? fileName,
             out string resourceName,
-            out string? accessibility)
+            out string? accessibility
+        )
         {
             filePath = null;
             fullPath = null;
@@ -829,7 +986,12 @@ namespace Microsoft.CodeAnalysis
 
             // resource descriptor is: "<filePath>[,<string name>[,public|private]]"
             var parts = ArrayBuilder<ReadOnlyMemory<char>>.GetInstance();
-            ParseSeparatedStrings(resourceDescriptor, s_resourceSeparators, removeEmptyEntries: false, parts);
+            ParseSeparatedStrings(
+                resourceDescriptor,
+                s_resourceSeparators,
+                removeEmptyEntries: false,
+                parts
+            );
 
             int offset = 0;
 
@@ -837,9 +999,7 @@ namespace Microsoft.CodeAnalysis
 
             if (skipLeadingSeparators)
             {
-                for (; offset < length && parts[offset].Length == 0; offset++)
-                {
-                }
+                for (; offset < length && parts[offset].Length == 0; offset++) { }
 
                 length -= offset;
             }
@@ -877,11 +1037,17 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// See <see cref="CommandLineUtilities.SplitCommandLineIntoArguments(string, bool)"/> 
+        /// See <see cref="CommandLineUtilities.SplitCommandLineIntoArguments(string, bool)"/>
         /// </summary>
-        public static IEnumerable<string> SplitCommandLineIntoArguments(string commandLine, bool removeHashComments)
+        public static IEnumerable<string> SplitCommandLineIntoArguments(
+            string commandLine,
+            bool removeHashComments
+        )
         {
-            return CommandLineUtilities.SplitCommandLineIntoArguments(commandLine, removeHashComments);
+            return CommandLineUtilities.SplitCommandLineIntoArguments(
+                commandLine,
+                removeHashComments
+            );
         }
 
         /// <summary>
@@ -889,30 +1055,27 @@ namespace Microsoft.CodeAnalysis
         /// compat behavior with the native compiler.
         /// </summary>
         /// <remarks>
-        /// Mimics the function RemoveQuotes from the native C# compiler.  The native VB equivalent of this 
-        /// function is called RemoveQuotesAndSlashes.  It has virtually the same behavior except for a few 
-        /// quirks in error cases.  
+        /// Mimics the function RemoveQuotes from the native C# compiler.  The native VB equivalent of this
+        /// function is called RemoveQuotesAndSlashes.  It has virtually the same behavior except for a few
+        /// quirks in error cases.
         /// </remarks>
         [return: NotNullIfNotNull(parameterName: nameof(arg))]
         internal static string? RemoveQuotesAndSlashes(string? arg) =>
-            arg is not null
-                ? RemoveQuotesAndSlashes(arg.AsMemory())
-                : null;
+            arg is not null ? RemoveQuotesAndSlashes(arg.AsMemory()) : null;
 
         internal static string RemoveQuotesAndSlashes(ReadOnlyMemory<char> argMemory) =>
             RemoveQuotesAndSlashesEx(argMemory).ToString();
 
         internal static string? RemoveQuotesAndSlashes(ReadOnlyMemory<char>? argMemory) =>
-            argMemory is { } m
-                ? RemoveQuotesAndSlashesEx(m).ToString()
-                : null;
+            argMemory is { } m ? RemoveQuotesAndSlashesEx(m).ToString() : null;
 
-        internal static ReadOnlyMemory<char>? RemoveQuotesAndSlashesEx(ReadOnlyMemory<char>? argMemory) =>
-            argMemory is { } m
-                ? RemoveQuotesAndSlashesEx(m)
-                : null;
+        internal static ReadOnlyMemory<char>? RemoveQuotesAndSlashesEx(
+            ReadOnlyMemory<char>? argMemory
+        ) => argMemory is { } m ? RemoveQuotesAndSlashesEx(m) : null;
 
-        internal static ReadOnlyMemory<char> RemoveQuotesAndSlashesEx(ReadOnlyMemory<char> argMemory)
+        internal static ReadOnlyMemory<char> RemoveQuotesAndSlashesEx(
+            ReadOnlyMemory<char> argMemory
+        )
         {
             if (removeFastPath(argMemory) is { } m)
             {
@@ -970,7 +1133,7 @@ namespace Microsoft.CodeAnalysis
                     Debug.Assert(slashCount >= 0);
 
                     // If there is an odd number of slashes then the quote is escaped and hence a part
-                    // of the output.  Otherwise it is a normal quote and can be ignored. 
+                    // of the output.  Otherwise it is a normal quote and can be ignored.
                     if (slashCount == 1)
                     {
                         // The quote is escaped so eat it.
@@ -990,9 +1153,9 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            // The 99% case when using MSBuild is that at worst a path has quotes at the start and 
-            // end of the string but no where else. When that happens there is no need to allocate 
-            // a new string here and instead we can just do a simple Slice on the existing 
+            // The 99% case when using MSBuild is that at worst a path has quotes at the start and
+            // end of the string but no where else. When that happens there is no need to allocate
+            // a new string here and instead we can just do a simple Slice on the existing
             // ReadOnlyMemory object.
             //
             // This removes one of the largest allocation paths during command line parsing
@@ -1034,7 +1197,10 @@ namespace Microsoft.CodeAnalysis
             return builder.ToArrayAndFree().Select(static x => x.ToString());
         }
 
-        internal static void ParseSeparatedPathsEx(ReadOnlyMemory<char>? str, ArrayBuilder<ReadOnlyMemory<char>> builder)
+        internal static void ParseSeparatedPathsEx(
+            ReadOnlyMemory<char>? str,
+            ArrayBuilder<ReadOnlyMemory<char>> builder
+        )
         {
             ParseSeparatedStrings(str, s_pathSeparators, removeEmptyEntries: true, builder);
             for (var i = 0; i < builder.Count; i++)
@@ -1046,7 +1212,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Split a string by a set of separators, taking quotes into account.
         /// </summary>
-        internal static void ParseSeparatedStrings(ReadOnlyMemory<char>? strMemory, char[] separators, bool removeEmptyEntries, ArrayBuilder<ReadOnlyMemory<char>> builder)
+        internal static void ParseSeparatedStrings(
+            ReadOnlyMemory<char>? strMemory,
+            char[] separators,
+            bool removeEmptyEntries,
+            ArrayBuilder<ReadOnlyMemory<char>> builder
+        )
         {
             if (strMemory is null)
             {
@@ -1084,14 +1255,24 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal IEnumerable<string> ResolveRelativePaths(IEnumerable<string> paths, string baseDirectory, IList<Diagnostic> errors)
+        internal IEnumerable<string> ResolveRelativePaths(
+            IEnumerable<string> paths,
+            string baseDirectory,
+            IList<Diagnostic> errors
+        )
         {
             foreach (var path in paths)
             {
                 string? resolvedPath = FileUtilities.ResolveRelativePath(path, baseDirectory);
                 if (resolvedPath == null)
                 {
-                    errors.Add(Diagnostic.Create(_messageProvider, _messageProvider.FTL_InvalidInputFileName, path));
+                    errors.Add(
+                        Diagnostic.Create(
+                            _messageProvider,
+                            _messageProvider.FTL_InvalidInputFileName,
+                            path
+                        )
+                    );
                 }
                 else
                 {
@@ -1100,13 +1281,21 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private protected CommandLineSourceFile ToCommandLineSourceFile(string resolvedPath, bool isInputRedirected = false)
+        private protected CommandLineSourceFile ToCommandLineSourceFile(
+            string resolvedPath,
+            bool isInputRedirected = false
+        )
         {
             bool isScriptFile;
             if (IsScriptCommandLineParser)
             {
-                ReadOnlyMemory<char> extension = PathUtilities.GetExtension(resolvedPath.AsMemory());
-                isScriptFile = !extension.Span.Equals(RegularFileExtension.AsSpan(), StringComparison.OrdinalIgnoreCase);
+                ReadOnlyMemory<char> extension = PathUtilities.GetExtension(
+                    resolvedPath.AsMemory()
+                );
+                isScriptFile = !extension.Span.Equals(
+                    RegularFileExtension.AsSpan(),
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
             else
             {
@@ -1118,7 +1307,12 @@ namespace Microsoft.CodeAnalysis
             return new CommandLineSourceFile(resolvedPath, isScriptFile, isInputRedirected);
         }
 
-        internal void ParseFileArgument(ReadOnlyMemory<char> arg, string? baseDirectory, ArrayBuilder<string> filePathBuilder, IList<Diagnostic> errors)
+        internal void ParseFileArgument(
+            ReadOnlyMemory<char> arg,
+            string? baseDirectory,
+            ArrayBuilder<string> filePathBuilder,
+            IList<Diagnostic> errors
+        )
         {
             Debug.Assert(IsScriptCommandLineParser || !arg.StartsWith('-') && !arg.StartsWith('@'));
 
@@ -1131,7 +1325,14 @@ namespace Microsoft.CodeAnalysis
             int wildcard = path.IndexOfAny(s_wildcards);
             if (wildcard != -1)
             {
-                foreach (var file in ExpandFileNamePattern(path, baseDirectory, SearchOption.TopDirectoryOnly, errors))
+                foreach (
+                    var file in ExpandFileNamePattern(
+                        path,
+                        baseDirectory,
+                        SearchOption.TopDirectoryOnly,
+                        errors
+                    )
+                )
                 {
                     filePathBuilder.Add(file);
                 }
@@ -1141,7 +1342,13 @@ namespace Microsoft.CodeAnalysis
                 string? resolvedPath = FileUtilities.ResolveRelativePath(path, baseDirectory);
                 if (resolvedPath == null)
                 {
-                    errors.Add(Diagnostic.Create(MessageProvider, (int)MessageProvider.FTL_InvalidInputFileName, path));
+                    errors.Add(
+                        Diagnostic.Create(
+                            MessageProvider,
+                            (int)MessageProvider.FTL_InvalidInputFileName,
+                            path
+                        )
+                    );
                 }
                 else
                 {
@@ -1150,7 +1357,12 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private protected void ParseSeparatedFileArgument(ReadOnlyMemory<char> value, string? baseDirectory, ArrayBuilder<string> filePathBuilder, IList<Diagnostic> errors)
+        private protected void ParseSeparatedFileArgument(
+            ReadOnlyMemory<char> value,
+            string? baseDirectory,
+            ArrayBuilder<string> filePathBuilder,
+            IList<Diagnostic> errors
+        )
         {
             var pathBuilder = ArrayBuilder<ReadOnlyMemory<char>>.GetInstance();
             ParseSeparatedPathsEx(value, pathBuilder);
@@ -1166,7 +1378,11 @@ namespace Microsoft.CodeAnalysis
             pathBuilder.Free();
         }
 
-        private protected IEnumerable<string> ParseSeparatedFileArgument(string value, string? baseDirectory, IList<Diagnostic> errors)
+        private protected IEnumerable<string> ParseSeparatedFileArgument(
+            string value,
+            string? baseDirectory,
+            IList<Diagnostic> errors
+        )
         {
             var builder = ArrayBuilder<string>.GetInstance();
             ParseSeparatedFileArgument(value.AsMemory(), baseDirectory, builder, errors);
@@ -1177,9 +1393,20 @@ namespace Microsoft.CodeAnalysis
             builder.Free();
         }
 
-        internal IEnumerable<CommandLineSourceFile> ParseRecurseArgument(string arg, string? baseDirectory, IList<Diagnostic> errors)
+        internal IEnumerable<CommandLineSourceFile> ParseRecurseArgument(
+            string arg,
+            string? baseDirectory,
+            IList<Diagnostic> errors
+        )
         {
-            foreach (var path in ExpandFileNamePattern(arg, baseDirectory, SearchOption.AllDirectories, errors))
+            foreach (
+                var path in ExpandFileNamePattern(
+                    arg,
+                    baseDirectory,
+                    SearchOption.AllDirectories,
+                    errors
+                )
+            )
             {
                 yield return ToCommandLineSourceFile(path);
             }
@@ -1187,9 +1414,16 @@ namespace Microsoft.CodeAnalysis
 
         internal static Encoding? TryParseEncodingName(string arg)
         {
-            if (!string.IsNullOrWhiteSpace(arg)
-                && long.TryParse(arg, NumberStyles.None, CultureInfo.InvariantCulture, out long codepage)
-                && (codepage > 0))
+            if (
+                !string.IsNullOrWhiteSpace(arg)
+                && long.TryParse(
+                    arg,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out long codepage
+                )
+                && (codepage > 0)
+            )
             {
                 try
                 {
@@ -1225,22 +1459,23 @@ namespace Microsoft.CodeAnalysis
             string path,
             string? baseDirectory,
             SearchOption searchOption,
-            IList<Diagnostic> errors)
+            IList<Diagnostic> errors
+        )
         {
             string? directory = PathUtilities.GetDirectoryName(path);
             string pattern = PathUtilities.GetFileName(path);
 
-            var resolvedDirectoryPath = string.IsNullOrEmpty(directory) ?
-                baseDirectory :
-                FileUtilities.ResolveRelativePath(directory, baseDirectory);
+            var resolvedDirectoryPath = string.IsNullOrEmpty(directory)
+                ? baseDirectory
+                : FileUtilities.ResolveRelativePath(directory, baseDirectory);
 
             IEnumerator<string>? enumerator = null;
             try
             {
                 bool yielded = false;
 
-                // NOTE: Directory.EnumerateFiles(...) surprisingly treats pattern "." the 
-                //       same way as "*"; as we don't expect anything to be found by this 
+                // NOTE: Directory.EnumerateFiles(...) surprisingly treats pattern "." the
+                //       same way as "*"; as we don't expect anything to be found by this
                 //       pattern, let's just not search in this case
                 pattern = pattern.Trim(s_searchPatternTrimChars);
                 bool singleDotPattern = string.Equals(pattern, ".", StringComparison.Ordinal);
@@ -1254,7 +1489,12 @@ namespace Microsoft.CodeAnalysis
                         {
                             if (enumerator == null)
                             {
-                                enumerator = EnumerateFiles(resolvedDirectoryPath, pattern, searchOption).GetEnumerator();
+                                enumerator = EnumerateFiles(
+                                        resolvedDirectoryPath,
+                                        pattern,
+                                        searchOption
+                                    )
+                                    .GetEnumerator();
                             }
 
                             if (!enumerator.MoveNext())
@@ -1272,12 +1512,21 @@ namespace Microsoft.CodeAnalysis
                         if (resolvedPath != null)
                         {
                             // just in case EnumerateFiles returned a relative path
-                            resolvedPath = FileUtilities.ResolveRelativePath(resolvedPath, baseDirectory);
+                            resolvedPath = FileUtilities.ResolveRelativePath(
+                                resolvedPath,
+                                baseDirectory
+                            );
                         }
 
                         if (resolvedPath == null)
                         {
-                            errors.Add(Diagnostic.Create(MessageProvider, (int)MessageProvider.FTL_InvalidInputFileName, path));
+                            errors.Add(
+                                Diagnostic.Create(
+                                    MessageProvider,
+                                    (int)MessageProvider.FTL_InvalidInputFileName,
+                                    path
+                                )
+                            );
                             break;
                         }
 
@@ -1297,7 +1546,13 @@ namespace Microsoft.CodeAnalysis
                     else
                     {
                         // handling wildcard in file spec
-                        errors.Add(Diagnostic.Create(MessageProvider, (int)MessageProvider.ERR_FileNotFound, path));
+                        errors.Add(
+                            Diagnostic.Create(
+                                MessageProvider,
+                                (int)MessageProvider.ERR_FileNotFound,
+                                path
+                            )
+                        );
                     }
                 }
             }
@@ -1310,11 +1565,23 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal abstract void GenerateErrorForNoFilesFoundInRecurse(string path, IList<Diagnostic> errors);
+        internal abstract void GenerateErrorForNoFilesFoundInRecurse(
+            string path,
+            IList<Diagnostic> errors
+        );
 
-        internal ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(string? fullPath, out Dictionary<string, ReportDiagnostic> diagnosticOptions, IList<Diagnostic> diagnostics)
+        internal ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(
+            string? fullPath,
+            out Dictionary<string, ReportDiagnostic> diagnosticOptions,
+            IList<Diagnostic> diagnostics
+        )
         {
-            return RuleSet.GetDiagnosticOptionsFromRulesetFile(fullPath, out diagnosticOptions, diagnostics, _messageProvider);
+            return RuleSet.GetDiagnosticOptionsFromRulesetFile(
+                fullPath,
+                out diagnosticOptions,
+                diagnostics,
+                _messageProvider
+            );
         }
 
         /// <summary>
@@ -1405,7 +1672,8 @@ namespace Microsoft.CodeAnalysis
         /// When mapping a path we find the first key in the array that is a prefix of the path.
         /// If multiple keys are prefixes of the path we want to use the longest (more specific) one for the mapping.
         /// </summary>
-        internal static ImmutableArray<KeyValuePair<string, string>> SortPathMap(ImmutableArray<KeyValuePair<string, string>> pathMap)
-            => pathMap.Sort((x, y) => -x.Key.Length.CompareTo(y.Key.Length));
+        internal static ImmutableArray<KeyValuePair<string, string>> SortPathMap(
+            ImmutableArray<KeyValuePair<string, string>> pathMap
+        ) => pathMap.Sort((x, y) => -x.Key.Length.CompareTo(y.Key.Length));
     }
 }

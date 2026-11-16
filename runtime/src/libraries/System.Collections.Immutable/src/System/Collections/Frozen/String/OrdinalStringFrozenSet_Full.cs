@@ -11,10 +11,9 @@ namespace System.Collections.Frozen
             string[] entries,
             IEqualityComparer<string> comparer,
             int minimumLength,
-            int maximumLengthDiff)
-            : base(entries, comparer, minimumLength, maximumLengthDiff)
-        {
-        }
+            int maximumLengthDiff
+        )
+            : base(entries, comparer, minimumLength, maximumLengthDiff) { }
 
         // This override is necessary to force the jit to emit the code in such a way that it
         // avoids virtual dispatch overhead when calling the Equals/GetHashCode methods. Don't
@@ -22,6 +21,8 @@ namespace System.Collections.Frozen
         private protected override int FindItemIndex(string item) => base.FindItemIndex(item);
 
         private protected override bool Equals(string? x, string? y) => string.Equals(x, y);
-        private protected override int GetHashCode(string s) => Hashing.GetHashCodeOrdinal(s.AsSpan());
+
+        private protected override int GetHashCode(string s) =>
+            Hashing.GetHashCodeOrdinal(s.AsSpan());
     }
 }

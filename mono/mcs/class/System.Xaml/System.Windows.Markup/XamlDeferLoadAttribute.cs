@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,26 +30,28 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[AttributeUsageAttribute(AttributeTargets.Class|AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public sealed class XamlDeferLoadAttribute : Attribute
-	{
-		public XamlDeferLoadAttribute (string loaderType, string contentType)
-		{
-			LoaderTypeName = loaderType;
-			ContentTypeName = contentType;
-		}
+    [AttributeUsageAttribute(
+        AttributeTargets.Class | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class XamlDeferLoadAttribute : Attribute
+    {
+        public XamlDeferLoadAttribute(string loaderType, string contentType)
+        {
+            LoaderTypeName = loaderType;
+            ContentTypeName = contentType;
+        }
 
-		public XamlDeferLoadAttribute (Type loaderType, Type contentType)
-		{
-			LoaderType = loaderType;
-			ContentType = contentType;
-		}
-		
-		public Type ContentType { get; private set; }
-		public string ContentTypeName { get; private set; }
-		public Type LoaderType { get; private set; }
-		public string LoaderTypeName { get; private set; }
+        public XamlDeferLoadAttribute(Type loaderType, Type contentType)
+        {
+            LoaderType = loaderType;
+            ContentType = contentType;
+        }
 
-	}
+        public Type ContentType { get; private set; }
+        public string ContentTypeName { get; private set; }
+        public Type LoaderType { get; private set; }
+        public string LoaderTypeName { get; private set; }
+    }
 }
-

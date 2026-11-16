@@ -30,7 +30,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             public override SubjectIdentifier RecipientIdentifier =>
                 new SubjectIdentifier(
                     _asn.RecipientEncryptedKeys[_index].Rid.IssuerAndSerialNumber,
-                    _asn.RecipientEncryptedKeys[_index].Rid.RKeyId?.SubjectKeyIdentifier);
+                    _asn.RecipientEncryptedKeys[_index].Rid.RKeyId?.SubjectKeyIdentifier
+                );
 
             public override int Version => _asn.Version;
 
@@ -42,7 +43,9 @@ namespace Internal.Cryptography.Pal.AnyOS
 
                     if (!rid.RKeyId.HasValue)
                     {
-                        throw new InvalidOperationException(SR.Cryptography_Cms_Key_Agree_Date_Not_Available);
+                        throw new InvalidOperationException(
+                            SR.Cryptography_Cms_Key_Agree_Date_Not_Available
+                        );
                     }
 
                     if (!rid.RKeyId.Value.Date.HasValue)
@@ -67,7 +70,9 @@ namespace Internal.Cryptography.Pal.AnyOS
                     if (!rid.RKeyId.HasValue)
                     {
                         // Yes, "date" (Windows compat)
-                        throw new InvalidOperationException(SR.Cryptography_Cms_Key_Agree_Date_Not_Available);
+                        throw new InvalidOperationException(
+                            SR.Cryptography_Cms_Key_Agree_Date_Not_Available
+                        );
                     }
 
                     if (!rid.RKeyId.Value.Other.HasValue)
@@ -83,8 +88,13 @@ namespace Internal.Cryptography.Pal.AnyOS
                         rawData = rid.RKeyId.Value.Other.Value.KeyAttr!.Value.Span;
                     }
 
-                    Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(oid, rawData);
-                    AsnEncodedDataCollection values = new AsnEncodedDataCollection(pkcs9AttributeObject);
+                    Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(
+                        oid,
+                        rawData
+                    );
+                    AsnEncodedDataCollection values = new AsnEncodedDataCollection(
+                        pkcs9AttributeObject
+                    );
                     return new CryptographicAttributeObject(oid, values);
                 }
             }

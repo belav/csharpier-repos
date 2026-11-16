@@ -15,18 +15,21 @@ namespace System.Text.Json.SourceGeneration
 {
     internal static class RoslynExtensions
     {
-        public static LanguageVersion? GetLanguageVersion(this Compilation compilation)
-            => compilation is CSharpCompilation csc ? csc.LanguageVersion : null;
+        public static LanguageVersion? GetLanguageVersion(this Compilation compilation) =>
+            compilation is CSharpCompilation csc ? csc.LanguageVersion : null;
 
-        public static INamedTypeSymbol? GetBestTypeByMetadataName(this Compilation compilation, Type type)
+        public static INamedTypeSymbol? GetBestTypeByMetadataName(
+            this Compilation compilation,
+            Type type
+        )
         {
             Debug.Assert(!type.IsArray, "Resolution logic only capable of handling named types.");
             Debug.Assert(type.FullName != null);
             return compilation.GetBestTypeByMetadataName(type.FullName);
         }
 
-        public static Location? GetLocation(this ISymbol typeSymbol)
-            => typeSymbol.Locations.Length > 0 ? typeSymbol.Locations[0] : null;
+        public static Location? GetLocation(this ISymbol typeSymbol) =>
+            typeSymbol.Locations.Length > 0 ? typeSymbol.Locations[0] : null;
 
         public static Location? GetLocation(this AttributeData attributeData)
         {
@@ -37,13 +40,16 @@ namespace System.Text.Json.SourceGeneration
         /// <summary>
         /// Returns true if the specified location is contained in one of the syntax trees in the compilation.
         /// </summary>
-        public static bool ContainsLocation(this Compilation compilation, Location location)
-            => location.SourceTree != null && compilation.ContainsSyntaxTree(location.SourceTree);
+        public static bool ContainsLocation(this Compilation compilation, Location location) =>
+            location.SourceTree != null && compilation.ContainsSyntaxTree(location.SourceTree);
 
         /// <summary>
         /// Removes any type metadata that is erased at compile time, such as NRT annotations and tuple labels.
         /// </summary>
-        public static ITypeSymbol EraseCompileTimeMetadata(this Compilation compilation, ITypeSymbol type)
+        public static ITypeSymbol EraseCompileTimeMetadata(
+            this Compilation compilation,
+            ITypeSymbol type
+        )
         {
             if (type.NullableAnnotation is NullableAnnotation.Annotated)
             {
@@ -59,8 +65,8 @@ namespace System.Text.Json.SourceGeneration
                         return type;
                     }
 
-                    ImmutableArray<ITypeSymbol> erasedElements = namedType.TupleElements
-                        .Select(e => compilation.EraseCompileTimeMetadata(e.Type))
+                    ImmutableArray<ITypeSymbol> erasedElements = namedType
+                        .TupleElements.Select(e => compilation.EraseCompileTimeMetadata(e.Type))
                         .ToImmutableArray();
 
                     type = compilation.CreateTupleTypeSymbol(erasedElements);
@@ -77,8 +83,11 @@ namespace System.Text.Json.SourceGeneration
 
                     if (containingType?.IsGenericType == true)
                     {
-                        containingType = (INamedTypeSymbol)compilation.EraseCompileTimeMetadata(containingType);
-                        type = namedType = containingType.GetTypeMembers().First(t => t.Name == namedType.Name && t.Arity == namedType.Arity);
+                        containingType = (INamedTypeSymbol)
+                            compilation.EraseCompileTimeMetadata(containingType);
+                        type = namedType = containingType
+                            .GetTypeMembers()
+                            .First(t => t.Name == namedType.Name && t.Arity == namedType.Arity);
                     }
 
                     if (typeArguments.Length > 0)
@@ -95,26 +104,51 @@ namespace System.Text.Json.SourceGeneration
             return type;
         }
 
-        public static bool CanUseDefaultConstructorForDeserialization(this ITypeSymbol type, out IMethodSymbol? constructorInfo)
+        public static bool CanUseDefaultConstructorForDeserialization(
+            this ITypeSymbol type,
+            out IMethodSymbol? constructorInfo
+        )
         {
-            if (type.IsAbstract || type.TypeKind is TypeKind.Interface || type is not INamedTypeSymbol namedType)
+            if (
+                type.IsAbstract
+                || type.TypeKind is TypeKind.Interface
+                || type is not INamedTypeSymbol namedType
+            )
             {
                 constructorInfo = null;
                 return false;
             }
 
-            constructorInfo = namedType.GetExplicitlyDeclaredInstanceConstructors().FirstOrDefault(ctor => ctor.DeclaredAccessibility is Accessibility.Public && ctor.Parameters.Length == 0);
+            constructorInfo = namedType
+                .GetExplicitlyDeclaredInstanceConstructors()
+                .FirstOrDefault(ctor =>
+                    ctor.DeclaredAccessibility is Accessibility.Public
+                    && ctor.Parameters.Length == 0
+                );
             return constructorInfo != null || type.IsValueType;
         }
 
-        public static IEnumerable<IMethodSymbol> GetExplicitlyDeclaredInstanceConstructors(this INamedTypeSymbol type)
-            => type.Constructors.Where(ctor => !ctor.IsStatic && !(ctor.IsImplicitlyDeclared && type.IsValueType && ctor.Parameters.Length == 0));
+        public static IEnumerable<IMethodSymbol> GetExplicitlyDeclaredInstanceConstructors(
+            this INamedTypeSymbol type
+        ) =>
+            type.Constructors.Where(ctor =>
+                !ctor.IsStatic
+                && !(ctor.IsImplicitlyDeclared && type.IsValueType && ctor.Parameters.Length == 0)
+            );
 
-        public static bool ContainsAttribute(this ISymbol memberInfo, INamedTypeSymbol? attributeType)
-            => attributeType != null && memberInfo.GetAttributes().Any(attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType));
+        public static bool ContainsAttribute(
+            this ISymbol memberInfo,
+            INamedTypeSymbol? attributeType
+        ) =>
+            attributeType != null
+            && memberInfo
+                .GetAttributes()
+                .Any(attr =>
+                    SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+                );
 
-        public static bool IsVirtual(this ISymbol symbol)
-            => symbol.IsVirtual || symbol.IsOverride || symbol.IsAbstract;
+        public static bool IsVirtual(this ISymbol symbol) =>
+            symbol.IsVirtual || symbol.IsOverride || symbol.IsAbstract;
 
         public static bool IsAssignableFrom(this ITypeSymbol? baseType, ITypeSymbol? type)
         {
@@ -131,7 +165,11 @@ namespace System.Text.Json.SourceGeneration
                 }
             }
 
-            for (INamedTypeSymbol? current = type as INamedTypeSymbol; current != null; current = current.BaseType)
+            for (
+                INamedTypeSymbol? current = type as INamedTypeSymbol;
+                current != null;
+                current = current.BaseType
+            )
             {
                 if (SymbolEqualityComparer.Default.Equals(baseType, current))
                 {
@@ -142,7 +180,10 @@ namespace System.Text.Json.SourceGeneration
             return false;
         }
 
-        public static INamedTypeSymbol? GetCompatibleGenericBaseType(this ITypeSymbol type, INamedTypeSymbol? baseType)
+        public static INamedTypeSymbol? GetCompatibleGenericBaseType(
+            this ITypeSymbol type,
+            INamedTypeSymbol? baseType
+        )
         {
             if (baseType is null)
             {
@@ -162,7 +203,11 @@ namespace System.Text.Json.SourceGeneration
                 }
             }
 
-            for (INamedTypeSymbol? current = type as INamedTypeSymbol; current != null; current = current.BaseType)
+            for (
+                INamedTypeSymbol? current = type as INamedTypeSymbol;
+                current != null;
+                current = current.BaseType
+            )
             {
                 if (IsMatchingGenericType(current, baseType))
                 {
@@ -174,24 +219,44 @@ namespace System.Text.Json.SourceGeneration
 
             static bool IsMatchingGenericType(INamedTypeSymbol candidate, INamedTypeSymbol baseType)
             {
-                return candidate.IsGenericType && SymbolEqualityComparer.Default.Equals(candidate.ConstructedFrom, baseType);
+                return candidate.IsGenericType
+                    && SymbolEqualityComparer.Default.Equals(candidate.ConstructedFrom, baseType);
             }
         }
 
-        public static bool IsGenericTypeDefinition(this ITypeSymbol type)
-            => type is INamedTypeSymbol { IsGenericType: true } namedType && SymbolEqualityComparer.Default.Equals(namedType, namedType.ConstructedFrom);
+        public static bool IsGenericTypeDefinition(this ITypeSymbol type) =>
+            type is INamedTypeSymbol { IsGenericType: true } namedType
+            && SymbolEqualityComparer.Default.Equals(namedType, namedType.ConstructedFrom);
 
         public static bool IsNumberType(this ITypeSymbol type)
         {
-            return type.SpecialType is
-                SpecialType.System_SByte or SpecialType.System_Int16 or SpecialType.System_Int32 or SpecialType.System_Int64 or
-                SpecialType.System_Byte or SpecialType.System_UInt16 or SpecialType.System_UInt32 or SpecialType.System_UInt64 or
-                SpecialType.System_Single or SpecialType.System_Double or SpecialType.System_Decimal;
+            return type.SpecialType
+                is SpecialType.System_SByte
+                    or SpecialType.System_Int16
+                    or SpecialType.System_Int32
+                    or SpecialType.System_Int64
+                    or SpecialType.System_Byte
+                    or SpecialType.System_UInt16
+                    or SpecialType.System_UInt32
+                    or SpecialType.System_UInt64
+                    or SpecialType.System_Single
+                    or SpecialType.System_Double
+                    or SpecialType.System_Decimal;
         }
 
-        public static bool IsNullableValueType(this ITypeSymbol type, [NotNullWhen(true)] out ITypeSymbol? elementType)
+        public static bool IsNullableValueType(
+            this ITypeSymbol type,
+            [NotNullWhen(true)] out ITypeSymbol? elementType
+        )
         {
-            if (type.IsValueType && type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T })
+            if (
+                type.IsValueType
+                && type
+                    is INamedTypeSymbol
+                    {
+                        OriginalDefinition.SpecialType: SpecialType.System_Nullable_T
+                    }
+            )
             {
                 elementType = ((INamedTypeSymbol)type).TypeArguments[0];
                 return true;
@@ -211,11 +276,13 @@ namespace System.Text.Json.SourceGeneration
         {
             Debug.Assert(member is IFieldSymbol or IPropertySymbol);
             Debug.Assert(otherMember is IFieldSymbol or IPropertySymbol);
-            return member.Name == otherMember.Name && member.ContainingType.IsAssignableFrom(otherMember.ContainingType);
+            return member.Name == otherMember.Name
+                && member.ContainingType.IsAssignableFrom(otherMember.ContainingType);
         }
 
-        public static bool MemberNameNeedsAtSign(this ISymbol symbol)
-            => SyntaxFacts.GetKeywordKind(symbol.Name) != SyntaxKind.None || SyntaxFacts.GetContextualKeywordKind(symbol.Name) != SyntaxKind.None;
+        public static bool MemberNameNeedsAtSign(this ISymbol symbol) =>
+            SyntaxFacts.GetKeywordKind(symbol.Name) != SyntaxKind.None
+            || SyntaxFacts.GetContextualKeywordKind(symbol.Name) != SyntaxKind.None;
 
         public static INamedTypeSymbol[] GetSortedTypeHierarchy(this ITypeSymbol type)
         {
@@ -227,7 +294,11 @@ namespace System.Text.Json.SourceGeneration
             if (type.TypeKind != TypeKind.Interface)
             {
                 var list = new List<INamedTypeSymbol>();
-                for (INamedTypeSymbol? current = namedType; current != null; current = current.BaseType)
+                for (
+                    INamedTypeSymbol? current = namedType;
+                    current != null;
+                    current = current.BaseType
+                )
                 {
                     list.Add(current);
                 }
@@ -239,7 +310,11 @@ namespace System.Text.Json.SourceGeneration
                 // Interface hierarchies support multiple inheritance.
                 // For consistency with class hierarchy resolution order,
                 // sort topologically from most derived to least derived.
-                return JsonHelpers.TraverseGraphWithTopologicalSort<INamedTypeSymbol>(namedType, static t => t.AllInterfaces, SymbolEqualityComparer.Default);
+                return JsonHelpers.TraverseGraphWithTopologicalSort<INamedTypeSymbol>(
+                    namedType,
+                    static t => t.AllInterfaces,
+                    SymbolEqualityComparer.Default
+                );
             }
         }
 

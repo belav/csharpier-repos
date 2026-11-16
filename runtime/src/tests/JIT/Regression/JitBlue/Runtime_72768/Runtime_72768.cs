@@ -12,16 +12,16 @@ using Xunit;
 // Reduced from 177.2 KiB to 1.0 KiB in 00:04:15
 // Hits JIT assert in Release:
 // Assertion failed '!comp->opts.compJitEarlyExpandMDArrays' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Lowering nodeinfo' (IL size 111; hash 0xade6b36b; FullOpts)
-// 
+//
 //     File: D:\a\_work\1\s\src\coreclr\jit\lower.cpp Line: 264
-// 
+//
 public class Program
 {
     public static int PASS = 100;
     public static int FAIL = 0;
     public static IRuntime s_rt;
     public static bool s_1;
-    public static bool[, ] s_12;
+    public static bool[,] s_12;
     public static int s_22;
     public static byte[] s_27;
     public static ushort s_33;
@@ -32,9 +32,7 @@ public class Program
     {
         try
         {
-            try
-            {
-            }
+            try { }
             finally
             {
                 if (s_12[0, 0])
