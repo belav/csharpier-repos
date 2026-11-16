@@ -298,14 +298,13 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
 
             Action<BinderOptions>? configureOptions = options =>
                 options.BindNonPublicProperties = true;
-            string GetNestedObjectPayload(string propName) =>
-                $$"""
-                    {
-                        "{{propName}}": {
-                            "Value": 1
-                        }
+            string GetNestedObjectPayload(string propName) => $$"""
+                {
+                    "{{propName}}": {
+                        "Value": 1
                     }
-                    """;
+                }
+                """;
 
             configuration = TestHelpers.GetConfigurationFromJsonString(
                 GetNestedObjectPayload("item1")

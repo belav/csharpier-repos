@@ -193,16 +193,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     Sources =
                     {
                         """
-                            class C
+                        class C
+                        {
+                            void M(object o)
                             {
-                                void M(object o)
+                                if (o is not string s)
                                 {
-                                    if (o is not string s)
-                                    {
-                                    }
                                 }
                             }
-                            """,
+                        }
+                        """,
                     },
                 },
                 CodeActionIndex = 1,

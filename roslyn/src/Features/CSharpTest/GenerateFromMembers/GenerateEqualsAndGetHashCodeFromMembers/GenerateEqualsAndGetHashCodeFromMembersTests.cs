@@ -3120,15 +3120,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            public class Class1
-                            {
-                                [|int i;|]
+                        public class Class1
+                        {
+                            [|int i;|]
 
-                                public void F()
-                                {
-                                }
+                            public void F()
+                            {
                             }
-                            """,
+                        }
+                        """,
                     },
                     ExpectedDiagnostics =
                     {
@@ -3159,27 +3159,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            public class Class1
+                        public class Class1
+                        {
+                            int i;
+
+                            public override System.Boolean Equals(System.Object obj)
                             {
-                                int i;
-
-                                public override System.Boolean Equals(System.Object obj)
-                                {
-                                    Class1 @class = obj as Class1;
-                                    return !ReferenceEquals(@class, null) &&
-                                           i == @class.i;
-                                }
-
-                                public void F()
-                                {
-                                }
-
-                                public override System.Int32 GetHashCode()
-                                {
-                                    return 165851236 + EqualityComparer<System.Int32>.Default.GetHashCode(i);
-                                }
+                                Class1 @class = obj as Class1;
+                                return !ReferenceEquals(@class, null) &&
+                                       i == @class.i;
                             }
-                            """,
+
+                            public void F()
+                            {
+                            }
+
+                            public override System.Int32 GetHashCode()
+                            {
+                                return 165851236 + EqualityComparer<System.Int32>.Default.GetHashCode(i);
+                            }
+                        }
+                        """,
                     },
                     ExpectedDiagnostics =
                     {
@@ -4155,19 +4155,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
-                            {
-                                int bar;
-                                [||]
-                            }
-                            """,
+                        partial class Goo
+                        {
+                            int bar;
+                            [||]
+                        }
+                        """,
                         """
-                            partial class Goo
-                            {
+                        partial class Goo
+                        {
 
 
-                            }
-                            """,
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -4175,29 +4175,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
+                        partial class Goo
+                        {
+                            int bar;
+
+                            public override bool Equals(object obj)
                             {
-                                int bar;
-
-                                public override bool Equals(object obj)
-                                {
-                                    return obj is Goo goo &&
-                                           bar == goo.bar;
-                                }
-
-                                public override int GetHashCode()
-                                {
-                                    return 999205674 + bar.GetHashCode();
-                                }
+                                return obj is Goo goo &&
+                                       bar == goo.bar;
                             }
-                            """,
+
+                            public override int GetHashCode()
+                            {
+                                return 999205674 + bar.GetHashCode();
+                            }
+                        }
+                        """,
                         """
-                            partial class Goo
-                            {
+                        partial class Goo
+                        {
 
 
-                            }
-                            """,
+                        }
+                        """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4215,19 +4215,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
-                            {
-                                int bar;
+                        partial class Goo
+                        {
+                            int bar;
 
-                            }
-                            """,
+                        }
+                        """,
                         """
-                            partial class Goo
-                            {
+                        partial class Goo
+                        {
 
-                            [||]
-                            }
-                            """,
+                        [||]
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -4235,27 +4235,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
-                            {
-                                int bar;
+                        partial class Goo
+                        {
+                            int bar;
 
-                            }
-                            """,
+                        }
+                        """,
                         """
-                            partial class Goo
+                        partial class Goo
+                        {
+                            public override bool Equals(object obj)
                             {
-                                public override bool Equals(object obj)
-                                {
-                                    return obj is Goo goo &&
-                                           bar == goo.bar;
-                                }
-
-                                public override int GetHashCode()
-                                {
-                                    return 999205674 + bar.GetHashCode();
-                                }
+                                return obj is Goo goo &&
+                                       bar == goo.bar;
                             }
-                            """,
+
+                            public override int GetHashCode()
+                            {
+                                return 999205674 + bar.GetHashCode();
+                            }
+                        }
+                        """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4273,19 +4273,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
-                            {
+                        partial class Goo
+                        {
 
-                            [||]
-                            }
-                            """,
+                        [||]
+                        }
+                        """,
                         """
-                            partial class Goo
-                            {
-                                int bar;
+                        partial class Goo
+                        {
+                            int bar;
 
-                            }
-                            """,
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -4293,27 +4293,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
+                        partial class Goo
+                        {
+                            public override bool Equals(object obj)
                             {
-                                public override bool Equals(object obj)
-                                {
-                                    return obj is Goo goo &&
-                                           bar == goo.bar;
-                                }
-
-                                public override int GetHashCode()
-                                {
-                                    return 999205674 + bar.GetHashCode();
-                                }
+                                return obj is Goo goo &&
+                                       bar == goo.bar;
                             }
-                            """,
+
+                            public override int GetHashCode()
+                            {
+                                return 999205674 + bar.GetHashCode();
+                            }
+                        }
+                        """,
                         """
-                            partial class Goo
-                            {
-                                int bar;
+                        partial class Goo
+                        {
+                            int bar;
 
-                            }
-                            """,
+                        }
+                        """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4331,19 +4331,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
-                            {
+                        partial class Goo
+                        {
 
 
-                            }
-                            """,
+                        }
+                        """,
                         """
-                            partial class Goo
-                            {
-                                int bar;
-                            [||]
-                            }
-                            """,
+                        partial class Goo
+                        {
+                            int bar;
+                        [||]
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -4351,29 +4351,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                            partial class Goo
-                            {
+                        partial class Goo
+                        {
 
 
-                            }
-                            """,
+                        }
+                        """,
                         """
-                            partial class Goo
+                        partial class Goo
+                        {
+                            int bar;
+
+                            public override bool Equals(object obj)
                             {
-                                int bar;
-
-                                public override bool Equals(object obj)
-                                {
-                                    return obj is Goo goo &&
-                                           bar == goo.bar;
-                                }
-
-                                public override int GetHashCode()
-                                {
-                                    return 999205674 + bar.GetHashCode();
-                                }
+                                return obj is Goo goo &&
+                                       bar == goo.bar;
                             }
-                            """,
+
+                            public override int GetHashCode()
+                            {
+                                return 999205674 + bar.GetHashCode();
+                            }
+                        }
+                        """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),

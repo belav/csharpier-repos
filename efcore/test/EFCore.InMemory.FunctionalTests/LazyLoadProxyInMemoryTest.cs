@@ -11,8 +11,7 @@ public class LazyLoadProxyInMemoryTest
     public LazyLoadProxyInMemoryTest(LoadInMemoryFixture fixture)
         : base(fixture) { }
 
-    protected override string SerializedBlogs2 =>
-        """
+    protected override string SerializedBlogs2 => """
 {
   "$id": "1",
   "$values": [
@@ -275,8 +274,7 @@ public class LazyLoadProxyInMemoryTest
 }
 """;
 
-    protected override string SerializedBlogs1 =>
-        """
+    protected override string SerializedBlogs1 => """
 [
   {
     "Writer": {

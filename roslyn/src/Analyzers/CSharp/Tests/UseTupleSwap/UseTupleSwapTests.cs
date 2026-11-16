@@ -433,10 +433,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                     Sources =
                     {
                         """
-                            [|var|] temp = args[0];
-                            args[0] = args[1];
-                            args[1] = temp;
-                            """,
+                        [|var|] temp = args[0];
+                        args[0] = args[1];
+                        args[1] = temp;
+                        """,
                     },
                     OutputKind = OutputKind.ConsoleApplication,
                 },

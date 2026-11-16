@@ -345,31 +345,31 @@ class Program
         [InlineData(
             "(/* Middle1 */ obj$$ect)1",
             """
-                1 as
-                /* Middle1 */ object
-                """
+            1 as
+            /* Middle1 */ object
+            """
         )]
         [InlineData("(obj$$ect /* Middle2 */ )1", "1 as object /* Middle2 */ ")]
         [InlineData("(obj$$ect) /* Middle3 */ 1", "/* Middle3 */ 1 as object")]
         [InlineData(
             "/* Leading */ (/* Middle1 */ obj$$ect /* Middle2 */ ) /* Middle3 */ 1 /* Trailing */",
             """
-                /* Leading */ /* Middle3 */ 1 as
-                /* Middle1 */ object /* Middle2 */  /* Trailing */
-                """
+            /* Leading */ /* Middle3 */ 1 as
+            /* Middle1 */ object /* Middle2 */  /* Trailing */
+            """
         )]
         [InlineData(
             """
-                ($$
-                object
-                )
-                1
-                """,
+            ($$
+            object
+            )
+            1
+            """,
             """
 
-                1 as
-                object
-                """
+            1 as
+            object
+            """
         )]
         public async Task ConvertFromExplicitToAs_Trivia(string cast, string asExpression)
         {

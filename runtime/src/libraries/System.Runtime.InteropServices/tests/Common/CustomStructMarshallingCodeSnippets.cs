@@ -19,8 +19,9 @@ namespace Microsoft.Interop.UnitTests
         private static readonly string UsingSystemRuntimeInteropServicesMarshalling =
             "using System.Runtime.InteropServices.Marshalling;";
 
-        public static string NonBlittableUserDefinedType(bool defineNativeMarshalling = true) =>
-            $$"""
+        public static string NonBlittableUserDefinedType(
+            bool defineNativeMarshalling = true
+        ) => $$"""
                 {{(
                     defineNativeMarshalling
                         ? "[{|#10:NativeMarshalling(typeof(Marshaller))|}]"

@@ -2056,17 +2056,17 @@ public class UseCollectionExpressionForFluentTests
                 Sources =
                 {
                     """
-                        using System.Linq;
-                        using System.Collections.Generic;
+                    using System.Linq;
+                    using System.Collections.Generic;
 
-                        class C
+                    class C
+                    {
+                        void M()
                         {
-                            void M()
-                            {
-                                List<List<int>> list = [new[] { 1, 2, 3 }.ToList()];
-                            }
+                            List<List<int>> list = [new[] { 1, 2, 3 }.ToList()];
                         }
-                        """,
+                    }
+                    """,
                 },
                 ExpectedDiagnostics =
                 {

@@ -407,12 +407,12 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
             {
                 "TaskTestActionAwaited",
                 """
-                    async Task<Todo> TaskTestActionAwaited()
-                    {
-                        await Task.Yield();
-                        return new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };
-                    }
-                    """,
+                async Task<Todo> TaskTestActionAwaited()
+                {
+                    await Task.Yield();
+                    return new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };
+                }
+                """,
             };
 
             yield return new[]
@@ -424,12 +424,12 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
             {
                 "ValueTaskTestActionAwaited",
                 """
-                    async ValueTask<Todo> ValueTaskTestActionAwaited()
-                    {
-                        await Task.Yield();
-                        return new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };
-                    }
-                    """,
+                async ValueTask<Todo> ValueTaskTestActionAwaited()
+                {
+                    await Task.Yield();
+                    return new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };
+                }
+                """,
             };
         }
     }

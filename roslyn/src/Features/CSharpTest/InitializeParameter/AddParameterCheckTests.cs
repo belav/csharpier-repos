@@ -2149,19 +2149,19 @@ class Program
                     Sources =
                     {
                         """
-                            using System;
+                        using System;
 
-                            class C
+                        class C
+                        {
+                            public C(string s)
                             {
-                                public C(string s)
+                                if (s is null)
                                 {
-                                    if (s is null)
-                                    {
-                                        throw new ArgumentNullException(nameof(s));
-                                    }
+                                    throw new ArgumentNullException(nameof(s));
                                 }
                             }
-                            """,
+                        }
+                        """,
                     },
                     InheritanceMode = StateInheritanceMode.Explicit,
                 },

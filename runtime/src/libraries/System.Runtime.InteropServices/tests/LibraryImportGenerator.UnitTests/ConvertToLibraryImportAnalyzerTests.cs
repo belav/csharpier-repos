@@ -232,18 +232,17 @@ namespace LibraryImportGenerator.UnitTests
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
-        private static string DllImportWithType(string typeName) =>
-            $$"""
-                using System.Runtime.InteropServices;
-                unsafe partial class Test
-                {
-                    [DllImport("DoesNotExist")]
-                    public static extern void {|#0:Method_Parameter|}({{typeName}} p);
+        private static string DllImportWithType(string typeName) => $$"""
+            using System.Runtime.InteropServices;
+            unsafe partial class Test
+            {
+                [DllImport("DoesNotExist")]
+                public static extern void {|#0:Method_Parameter|}({{typeName}} p);
 
-                    [DllImport("DoesNotExist")]
-                    public static extern {{typeName}} {|#1:Method_Return|}();
-                }
-                """;
+                [DllImport("DoesNotExist")]
+                public static extern {{typeName}} {|#1:Method_Return|}();
+            }
+            """;
 
         [Fact]
         public async Task BestFitMapping_True_NoDiagnostic()

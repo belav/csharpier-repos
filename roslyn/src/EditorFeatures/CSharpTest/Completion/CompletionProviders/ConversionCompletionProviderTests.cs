@@ -165,8 +165,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("c$$", false)]
         [InlineData(
             """
-                "c.$$
-                """,
+            "c.$$
+            """,
             false
         )]
         [InlineData("c?.$$", true)]

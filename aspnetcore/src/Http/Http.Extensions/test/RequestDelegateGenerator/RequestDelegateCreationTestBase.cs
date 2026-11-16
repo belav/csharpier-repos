@@ -364,8 +364,7 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
     internal static string GetMapActionString(
         string sources,
         string className = "TestMapActions"
-    ) =>
-        $$"""
+    ) => $$"""
 #nullable enable
 using System;
 using System.Collections.Generic;

@@ -27,8 +27,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.BasicParametersAndModifiers(
             string typeName,
             string preDeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -54,8 +53,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.BasicParametersAndModifiersNoRef(
             string typeName,
             string preDeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -82,8 +80,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.BasicParameterByValue(
             string typeName,
             string preDeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -109,8 +106,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string modifier,
             string typeName,
             string preDeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -136,8 +132,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.BasicReturnType(
             string typeName,
             string preDeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -162,8 +157,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string typeName,
             string marshallerTypeName,
             string preDeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -191,8 +185,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 """;
         string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionCountInfoParametersAndModifiers(
             string collectionType
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -225,8 +218,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionParametersAndModifiers(
             string collectionType,
             string marshallerType
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -261,8 +253,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionReturnValueLength(
             string collectionType,
             string marshallerType
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -290,8 +281,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionOutConstantLength(
             string collectionType,
             string predeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -319,8 +309,7 @@ namespace ComInterfaceGenerator.Unit.Tests
         string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionReturnConstantLength(
             string collectionType,
             string predeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
@@ -348,8 +337,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string collectionType,
             string elementMarshaller,
             string predeclaration
-        ) =>
-            $$"""
+        ) => $$"""
                 using System.Runtime.CompilerServices;
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;

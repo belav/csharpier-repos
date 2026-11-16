@@ -29,8 +29,7 @@ internal static class RequestDelegateGeneratorSources
         $@"System.CodeDom.Compiler.GeneratedCodeAttribute(""{typeof(RequestDelegateGeneratorSources).Assembly.FullName}"", ""{typeof(RequestDelegateGeneratorSources).Assembly.GetName().Version}"")";
     public static string GeneratedCodeAttribute => $"[{GeneratedCodeConstructor}]";
 
-    public static string ContentTypeConstantsType =>
-        $$"""
+    public static string ContentTypeConstantsType => $$"""
     {{GeneratedCodeAttribute}}
     file static class GeneratedMetadataConstants
     {
@@ -42,8 +41,7 @@ internal static class RequestDelegateGeneratorSources
 
 """;
 
-    public static string PopulateEndpointMetadataMethod =>
-        """
+    public static string PopulateEndpointMetadataMethod => """
         private static void PopulateMetadataForEndpoint<T>(MethodInfo method, EndpointBuilder builder)
             where T : IEndpointMetadataProvider
         {
@@ -51,8 +49,7 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string PopulateEndpointParameterMetadataMethod =>
-        """
+    public static string PopulateEndpointParameterMetadataMethod => """
         private static void PopulateMetadataForParameter<T>(ParameterInfo parameter, EndpointBuilder builder)
             where T : IEndpointParameterMetadataProvider
         {
@@ -60,8 +57,7 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string TryResolveBodyAsyncMethod =>
-        """
+    public static string TryResolveBodyAsyncMethod => """
         private static async ValueTask<(bool, T?)> TryResolveBodyAsync<T>(HttpContext httpContext, LogOrThrowExceptionHelper logOrThrowExceptionHelper, bool allowEmpty, string parameterTypeName, string parameterName, JsonTypeInfo<T> jsonTypeInfo, bool isInferred = false)
         {
             var feature = httpContext.Features.Get<Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature>();
@@ -119,8 +115,7 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string TryResolveFormAsyncMethod =>
-        """
+    public static string TryResolveFormAsyncMethod => """
         private static async Task<(bool, object?)> TryResolveFormAsync(
             HttpContext httpContext,
             LogOrThrowExceptionHelper logOrThrowExceptionHelper,
@@ -167,20 +162,17 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string TryParseExplicitMethod =>
-        """
+    public static string TryParseExplicitMethod => """
         private static bool TryParseExplicit<T>(string? s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out T result) where T: IParsable<T>
             => T.TryParse(s, provider, out result);
 """;
 
-    public static string ExecuteAsyncExplicitMethod =>
-        """
+    public static string ExecuteAsyncExplicitMethod => """
         private static Task ExecuteAsyncExplicit(IResult result, HttpContext httpContext)
             => result.ExecuteAsync(httpContext);
 """;
 
-    public static string BindAsyncMethod =>
-        """
+    public static string BindAsyncMethod => """
         private static ValueTask<T?> BindAsync<T>(HttpContext context, ParameterInfo parameter)
             where T : class, IBindableFromHttpContext<T>
         {
@@ -188,8 +180,7 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string ResolveFromRouteOrQueryMethod =>
-        """
+    public static string ResolveFromRouteOrQueryMethod => """
         private static Func<HttpContext, StringValues> ResolveFromRouteOrQuery(string parameterName, IEnumerable<string>? routeParameterNames)
         {
             return routeParameterNames?.Contains(parameterName, StringComparer.OrdinalIgnoreCase) == true
@@ -198,8 +189,7 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string ResolveJsonBodyOrServiceMethod =>
-        """
+    public static string ResolveJsonBodyOrServiceMethod => """
         private static Func<HttpContext, bool, ValueTask<(bool, T?)>> ResolveJsonBodyOrService<T>(LogOrThrowExceptionHelper logOrThrowExceptionHelper, string parameterTypeName, string parameterName, JsonSerializerOptions jsonSerializerOptions, IServiceProviderIsService? serviceProviderIsService = null)
         {
             if (serviceProviderIsService is not null)
@@ -214,8 +204,7 @@ internal static class RequestDelegateGeneratorSources
         }
 """;
 
-    public static string LogOrThrowExceptionHelperClass =>
-        $$"""
+    public static string LogOrThrowExceptionHelperClass => $$"""
     {{GeneratedCodeAttribute}}
     file sealed class LogOrThrowExceptionHelper
     {
@@ -550,8 +539,7 @@ file sealed class AntiforgeryMetadata : IAntiforgeryMetadata
         string helperMethods,
         string helperTypes,
         ImmutableHashSet<string> verbs
-    ) =>
-        $$"""
+    ) => $$"""
 {{SourceHeader}}
 
 namespace System.Runtime.CompilerServices

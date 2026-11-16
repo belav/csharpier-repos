@@ -241,21 +241,21 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
         var markups = new string[]
         {
             """
-                class A
+            class A
+            {
+                void {|method:M|}()
                 {
-                    void {|method:M|}()
-                    {
-                    }
                 }
-                """,
+            }
+            """,
             """
-                class B
+            class B
+            {
+                void {|method:M|}()
                 {
-                    void {|method:M|}()
-                    {
-                    }
                 }
-                """,
+            }
+            """,
         };
 
         await using var testLspServer = await CreateTestLspServerAsync(

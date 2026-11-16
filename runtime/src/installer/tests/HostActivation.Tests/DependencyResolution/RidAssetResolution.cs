@@ -48,15 +48,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 }
             }
 
-            public override string ToString() =>
-                $"""
-                    {nameof(Rid)}: {(Rid ?? "<null>")}
-                    {nameof(UseRidGraph)}: {(UseRidGraph.HasValue ? UseRidGraph : "<null>")}
-                    {nameof(HasRidGraph)}: {HasRidGraph}
-                    [computed]
-                      {nameof(ShouldUseRidGraph)}: {ShouldUseRidGraph}
-                      {nameof(ShouldUseFallbackRid)}: {ShouldUseFallbackRid}
-                    """;
+            public override string ToString() => $"""
+                {nameof(Rid)}: {(Rid ?? "<null>")}
+                {nameof(UseRidGraph)}: {(UseRidGraph.HasValue ? UseRidGraph : "<null>")}
+                {nameof(HasRidGraph)}: {HasRidGraph}
+                [computed]
+                  {nameof(ShouldUseRidGraph)}: {ShouldUseRidGraph}
+                  {nameof(ShouldUseFallbackRid)}: {ShouldUseFallbackRid}
+                """;
         };
 
         public class ResolvedPaths

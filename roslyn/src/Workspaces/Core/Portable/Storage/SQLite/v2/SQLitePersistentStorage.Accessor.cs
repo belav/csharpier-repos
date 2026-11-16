@@ -86,12 +86,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 return;
 
-                string GetSelectRowIdQuery(Database database) =>
-                    $"""
-                        select rowid from {database.GetName()}.{TableName} where
-                        {string.Join(" and ", _primaryKeyColumns.Select(k => $"{k.name} = ?"))}
-                        limit 1
-                        """;
+                string GetSelectRowIdQuery(Database database) => $"""
+                    select rowid from {database.GetName()}.{TableName} where
+                    {string.Join(" and ", _primaryKeyColumns.Select(k => $"{k.name} = ?"))}
+                    limit 1
+                    """;
             }
 
             /// <summary>

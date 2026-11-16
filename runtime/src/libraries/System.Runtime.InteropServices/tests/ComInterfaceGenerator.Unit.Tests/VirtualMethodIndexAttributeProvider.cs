@@ -66,12 +66,11 @@ namespace ComInterfaceGenerator.Unit.Tests
             Type? stringMarshallingCustomType = null
         ) => "";
 
-        public string AdditionalUserRequiredInterfaces(string userDefinedInterfaceName) =>
-            """
-                partial interface INativeAPI : IUnmanagedInterfaceType
-                {
-                    static unsafe void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation => null;
-                }
-                """;
+        public string AdditionalUserRequiredInterfaces(string userDefinedInterfaceName) => """
+            partial interface INativeAPI : IUnmanagedInterfaceType
+            {
+                static unsafe void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation => null;
+            }
+            """;
     }
 }
