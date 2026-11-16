@@ -32,7 +32,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
         IHostEnvironment hostEnvironment,
         ILogger<CertificatePathWatcher> logger
     )
-        : this(hostEnvironment.ContentRootPath, logger, dir => Directory.Exists(dir)
+        : this(hostEnvironment.ContentRootPath, logger, dir =>
+            Directory.Exists(dir)
                 ? new PhysicalFileProvider(dir, ExclusionFilters.None)
                 {
                     // Force polling because it monitors both symlinks and their targets,
@@ -40,7 +41,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
                     UseActivePolling = true,
                     UsePollingFileWatcher = true,
                 }
-                : null) { }
+                : null
+        ) { }
 
     /// <remarks>
     /// For testing.

@@ -235,7 +235,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.Join(
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                outer.Join(
                     inner.AsQueryable(),
                     e => e.name,
                     e => e.name,
@@ -247,7 +248,8 @@ namespace System.Linq.Tests
                             total = or.total,
                         },
                     new AnagramEqualityComparer()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -261,7 +263,8 @@ namespace System.Linq.Tests
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                outer
                     .AsQueryable()
                     .Join(
                         inner,
@@ -275,7 +278,8 @@ namespace System.Linq.Tests
                                 total = or.total,
                             },
                         new AnagramEqualityComparer()
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -303,7 +307,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .Join(
                         inner.AsQueryable(),
@@ -317,7 +322,8 @@ namespace System.Linq.Tests
                                 total = or.total,
                             },
                         new AnagramEqualityComparer()
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -345,7 +351,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .Join(
                         inner.AsQueryable(),
@@ -359,7 +366,8 @@ namespace System.Linq.Tests
                                 total = or.total,
                             },
                         new AnagramEqualityComparer()
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -420,7 +428,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.Join(
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                outer.Join(
                     inner.AsQueryable(),
                     e => e.name,
                     e => e.name,
@@ -431,7 +440,8 @@ namespace System.Linq.Tests
                             orderID = or.orderID,
                             total = or.total,
                         }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -445,7 +455,8 @@ namespace System.Linq.Tests
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                outer
                     .AsQueryable()
                     .Join(
                         inner,
@@ -458,7 +469,8 @@ namespace System.Linq.Tests
                                 orderID = or.orderID,
                                 total = or.total,
                             }
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -486,7 +498,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .Join(
                         inner.AsQueryable(),
@@ -499,7 +512,8 @@ namespace System.Linq.Tests
                                 orderID = or.orderID,
                                 total = or.total,
                             }
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -527,7 +541,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .Join(
                         inner.AsQueryable(),
@@ -540,7 +555,8 @@ namespace System.Linq.Tests
                                 orderID = or.orderID,
                                 total = or.total,
                             }
-                    ));
+                    )
+            );
         }
 
         [Fact]

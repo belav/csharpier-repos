@@ -309,13 +309,13 @@ public class ValueConverterSelector : IValueConverterSelector
 
             if (providerClrType == null || providerClrType == typeof(long))
             {
-                yield return _converters.GetOrAdd((modelClrType, typeof(long)), k => k.ModelClrType
-                    == typeof(DateTime)
-                        ? DateTimeToBinaryConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(long)), k =>
+                    k.ModelClrType == typeof(DateTime) ? DateTimeToBinaryConverter.DefaultInfo
                     : k.ModelClrType == typeof(DateTimeOffset)
                         ? DateTimeOffsetToBinaryConverter.DefaultInfo
                     : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToTicksConverter.DefaultInfo
-                    : TimeOnlyToTicksConverter.DefaultInfo);
+                    : TimeOnlyToTicksConverter.DefaultInfo
+                );
             }
 
             if (providerClrType == null || providerClrType == typeof(byte[]))

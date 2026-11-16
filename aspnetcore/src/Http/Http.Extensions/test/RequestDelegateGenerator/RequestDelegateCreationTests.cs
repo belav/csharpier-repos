@@ -129,7 +129,8 @@ app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
         var endpoints = GetEndpointsFromCompilation(compilation);
 
         await VerifyAgainstBaselineUsingFile(compilation);
-        VerifyStaticEndpointModels(results, endpointModels => Assert.Collection(
+        VerifyStaticEndpointModels(results, endpointModels =>
+            Assert.Collection(
                 endpointModels,
                 endpointModel =>
                 {
@@ -162,7 +163,8 @@ app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
                         }
                     );
                 }
-            ));
+            )
+        );
 
         Assert.Equal(3, endpoints.Length);
         var httpContext = CreateHttpContext();

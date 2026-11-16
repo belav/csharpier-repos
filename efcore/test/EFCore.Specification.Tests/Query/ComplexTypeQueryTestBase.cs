@@ -128,7 +128,8 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Complex_type_equals_constant(bool async) =>
-        AssertQuery(async, ss => ss.Set<Customer>()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     c.ShippingAddress
                     == new Address
@@ -137,7 +138,8 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
                         ZipCode = 38654,
                         Country = new Country { FullName = "United States", Code = "US" },
                     }
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -399,7 +401,8 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Struct_complex_type_equals_constant(bool async) =>
-        AssertQuery(async, ss => ss.Set<ValuedCustomer>()
+        AssertQuery(async, ss =>
+            ss.Set<ValuedCustomer>()
                 .Where(c =>
                     c.ShippingAddress
                     == new AddressStruct
@@ -408,7 +411,8 @@ public abstract class ComplexTypeQueryTestBase<TFixture> : QueryTestBase<TFixtur
                         ZipCode = 38654,
                         Country = new CountryStruct { FullName = "United States", Code = "US" },
                     }
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

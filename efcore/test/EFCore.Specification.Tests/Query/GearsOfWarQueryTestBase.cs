@@ -621,14 +621,16 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Bitwise_projects_values_in_select(bool async) =>
-        AssertFirst(async, ss => ss.Set<Gear>()
+        AssertFirst(async, ss =>
+            ss.Set<Gear>()
                 .Where(g => (g.Rank & MilitaryRank.Corporal) == MilitaryRank.Corporal)
                 .Select(b => new
                 {
                     BitwiseTrue = (b.Rank & MilitaryRank.Corporal) == MilitaryRank.Corporal,
                     BitwiseFalse = (b.Rank & MilitaryRank.Corporal) == MilitaryRank.Sergeant,
                     BitwiseValue = b.Rank & MilitaryRank.Corporal,
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1570,7 +1572,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_left_join_firstordefault_boolean(bool async) =>
-        AssertQuery(async, ss => ss.Set<Gear>()
+        AssertQuery(async, ss =>
+            ss.Set<Gear>()
                 .Where(g =>
                     g.HasSoulPatch
                     && (
@@ -1582,7 +1585,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         .OrderBy(w => w.Id)
                         .FirstOrDefault()
                         .IsAutomatic
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -6890,9 +6894,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         var isAutomatic = true;
 
         return AssertQuery(async, ss =>
-            from g in ss.Set<Gear>()
-            from w in g.Weapons.Where(ww => ww.IsAutomatic == isAutomatic).DefaultIfEmpty()
-            select new
+            from g in ss.Set<Gear>() from w in g.Weapons.Where(ww => ww.IsAutomatic == isAutomatic).DefaultIfEmpty() select new
             {
                 g.Nickname,
                 g.FullName,
@@ -6910,9 +6912,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         var isAutomatic = true;
 
         return AssertQuery(async, ss =>
-            from g in ss.Set<Gear>()
-            from w in g.Weapons.Where(ww => ww.IsAutomatic != isAutomatic).DefaultIfEmpty()
-            select new
+            from g in ss.Set<Gear>() from w in g.Weapons.Where(ww => ww.IsAutomatic != isAutomatic).DefaultIfEmpty() select new
             {
                 g.Nickname,
                 g.FullName,
@@ -6930,9 +6930,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         var prm = 1;
 
         return AssertQuery(async, ss =>
-            from g in ss.Set<Gear>()
-            from w in g.Weapons.Where(ww => ww.Id > prm).DefaultIfEmpty()
-            select new
+            from g in ss.Set<Gear>() from w in g.Weapons.Where(ww => ww.Id > prm).DefaultIfEmpty() select new
             {
                 g.Nickname,
                 g.FullName,
@@ -7433,7 +7431,9 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Group_by_over_projection_with_multiple_properties_accessed_thru_navigation(
         bool async
-    ) => AssertQuery(async, ss => ss.Set<Gear>()
+    ) =>
+        AssertQuery(async, ss =>
+            ss.Set<Gear>()
                 .Select(g => new
                 {
                     g.Nickname,
@@ -7442,7 +7442,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     SquadName = g.Squad.Name,
                 })
                 .GroupBy(x => x.CityOfBirthName)
-                .Select(g => g.Key));
+                .Select(g => g.Key)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -7696,7 +7697,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_inner_source_custom_projection_followed_by_filter(bool async) =>
-        AssertQuery(async, ss => from ll in ss.Set<LocustLeader>() join h in ss.Set<Faction>()
+        AssertQuery(async, ss =>
+            from ll in ss.Set<LocustLeader>() join h in ss.Set<Faction>()
                 .OfType<LocustHorde>()
                 .Select(f => new
                 {
@@ -7704,7 +7706,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     f.CommanderName,
                     f.Name,
                 })
-                on ll.Name equals h.CommanderName where h.IsEradicated != true select h);
+                on ll.Name equals h.CommanderName where h.IsEradicated != true select h
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -8652,7 +8655,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projecting_property_converted_to_nullable_with_comparison(bool async) =>
-        AssertQuery(async, ss => ss.Set<CogTag>()
+        AssertQuery(async, ss =>
+            ss.Set<CogTag>()
                 .Select(x => new
                 {
                     x.Note,
@@ -8665,7 +8669,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         }
                         : null,
                 })
-                .Where(x => x.Nullable.SquadId == 1));
+                .Where(x => x.Nullable.SquadId == 1)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -8708,7 +8713,9 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projecting_property_converted_to_nullable_with_addition_and_final_projection(
         bool async
-    ) => AssertQuery(async, ss => ss.Set<CogTag>()
+    ) =>
+        AssertQuery(async, ss =>
+            ss.Set<CogTag>()
                 .Select(x => new
                 {
                     x.Note,
@@ -8722,12 +8729,14 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         : null,
                 })
                 .Where(x => x.Nullable.Nickname != null)
-                .Select(x => new { x.Note, Value = x.Nullable.SquadId + 1 }));
+                .Select(x => new { x.Note, Value = x.Nullable.SquadId + 1 })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projecting_property_converted_to_nullable_with_conditional(bool async) =>
-        AssertQueryScalar(async, ss => ss.Set<CogTag>()
+        AssertQueryScalar(async, ss =>
+            ss.Set<CogTag>()
                 .Select(x => new
                 {
                     x.Note,
@@ -8740,7 +8749,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         }
                         : null,
                 })
-                .Select(x => x.Note != "K.I.A." ? x.Nullable.SquadId : -1));
+                .Select(x => x.Note != "K.I.A." ? x.Nullable.SquadId : -1)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

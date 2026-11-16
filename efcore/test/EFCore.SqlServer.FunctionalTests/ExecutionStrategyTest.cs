@@ -25,13 +25,15 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
     public void Handles_commit_failure(bool realFailure)
     {
         // Use all overloads of ExecuteInTransaction
-        Test_commit_failure(realFailure, (e, db) => e.ExecuteInTransaction(
+        Test_commit_failure(realFailure, (e, db) =>
+            e.ExecuteInTransaction(
                 () =>
                 {
                     db.SaveChanges(false);
                 },
                 () => db.Products.AsNoTracking().Any()
-            ));
+            )
+        );
 
         Test_commit_failure(realFailure, (e, db) =>
             e.ExecuteInTransaction(
@@ -40,14 +42,16 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        Test_commit_failure(realFailure, (e, db) => e.ExecuteInTransaction(
+        Test_commit_failure(realFailure, (e, db) =>
+            e.ExecuteInTransaction(
                 db,
                 c =>
                 {
                     c.SaveChanges(false);
                 },
                 c => c.Products.AsNoTracking().Any()
-            ));
+            )
+        );
 
         Test_commit_failure(realFailure, (e, db) =>
             e.ExecuteInTransaction(
@@ -57,14 +61,16 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        Test_commit_failure(realFailure, (e, db) => e.ExecuteInTransaction(
+        Test_commit_failure(realFailure, (e, db) =>
+            e.ExecuteInTransaction(
                 () =>
                 {
                     db.SaveChanges(false);
                 },
                 () => db.Products.AsNoTracking().Any(),
                 IsolationLevel.Serializable
-            ));
+            )
+        );
 
         Test_commit_failure(realFailure, (e, db) =>
             e.ExecuteInTransaction(
@@ -74,7 +80,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        Test_commit_failure(realFailure, (e, db) => e.ExecuteInTransaction(
+        Test_commit_failure(realFailure, (e, db) =>
+            e.ExecuteInTransaction(
                 db,
                 c =>
                 {
@@ -82,7 +89,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 },
                 c => c.Products.AsNoTracking().Any(),
                 IsolationLevel.Serializable
-            ));
+            )
+        );
 
         Test_commit_failure(realFailure, (e, db) =>
             e.ExecuteInTransaction(
@@ -154,14 +162,16 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        await Test_commit_failure_async(realFailure, (e, db) => e.ExecuteInTransactionAsync(
+        await Test_commit_failure_async(realFailure, (e, db) =>
+            e.ExecuteInTransactionAsync(
                 async ct =>
                 {
                     await db.SaveChangesAsync(false);
                 },
                 ct => db.Products.AsNoTracking().AnyAsync(),
                 CancellationToken.None
-            ));
+            )
+        );
 
         await Test_commit_failure_async(realFailure, (e, db) =>
             e.ExecuteInTransactionAsync(
@@ -171,7 +181,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        await Test_commit_failure_async(realFailure, (e, db) => e.ExecuteInTransactionAsync(
+        await Test_commit_failure_async(realFailure, (e, db) =>
+            e.ExecuteInTransactionAsync(
                 db,
                 async (c, ct) =>
                 {
@@ -179,7 +190,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 },
                 (c, ct) => c.Products.AsNoTracking().AnyAsync(),
                 CancellationToken.None
-            ));
+            )
+        );
 
         await Test_commit_failure_async(realFailure, (e, db) =>
             e.ExecuteInTransactionAsync(
@@ -198,7 +210,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        await Test_commit_failure_async(realFailure, (e, db) => e.ExecuteInTransactionAsync(
+        await Test_commit_failure_async(realFailure, (e, db) =>
+            e.ExecuteInTransactionAsync(
                 async ct =>
                 {
                     await db.SaveChangesAsync(false, ct);
@@ -206,7 +219,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 ct => db.Products.AsNoTracking().AnyAsync(ct),
                 IsolationLevel.Serializable,
                 CancellationToken.None
-            ));
+            )
+        );
 
         await Test_commit_failure_async(realFailure, (e, db) =>
             e.ExecuteInTransactionAsync(
@@ -217,7 +231,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
             )
         );
 
-        await Test_commit_failure_async(realFailure, (e, db) => e.ExecuteInTransactionAsync(
+        await Test_commit_failure_async(realFailure, (e, db) =>
+            e.ExecuteInTransactionAsync(
                 db,
                 async (c, ct) =>
                 {
@@ -226,7 +241,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 (c, ct) => c.Products.AsNoTracking().AnyAsync(ct),
                 IsolationLevel.Serializable,
                 CancellationToken.None
-            ));
+            )
+        );
 
         await Test_commit_failure_async(realFailure, (e, db) =>
             e.ExecuteInTransactionAsync(

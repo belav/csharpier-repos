@@ -74,12 +74,14 @@ public static class FunctionalTestsServiceCollectionExtensions
         this IServiceCollection services,
         Action<ClaimsPrincipal> captureUser,
         string schemeName
-    ) => services.Configure<CookieAuthenticationOptions>(schemeName, o => o.Events.OnSigningIn =
-                context =>
-                {
-                    captureUser(context.Principal);
-                    return Task.CompletedTask;
-                });
+    ) =>
+        services.Configure<CookieAuthenticationOptions>(schemeName, o =>
+            o.Events.OnSigningIn = context =>
+            {
+                captureUser(context.Principal);
+                return Task.CompletedTask;
+            }
+        );
 
     public static IServiceCollection SetupEmailRequired(this IServiceCollection services) =>
         services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedEmail = true);

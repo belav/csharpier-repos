@@ -192,9 +192,12 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
             private static bool IsInHole(
                 ImmutableArray<SnapshotSpan> orderedHoleSpans,
                 ITextViewLine line
-            ) => orderedHoleSpans.BinarySearch(line.Start.Position, (ss, pos) => pos < ss.Start ? 1
+            ) =>
+                orderedHoleSpans.BinarySearch(line.Start.Position, (ss, pos) =>
+                    pos < ss.Start ? 1
                     : ss.Span.Contains(pos) ? 0
-                    : -1) >= 0;
+                    : -1
+                ) >= 0;
 
             private static bool IntersectsNonWhitespaceChar(
                 SnapshotPoint? intersectingCharSnapshotPoint

@@ -12,22 +12,26 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("options", () => new ConcurrencyLimiter(
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new ConcurrencyLimiter(
                     new ConcurrencyLimiterOptions
                     {
                         PermitLimit = -1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
                         QueueLimit = 1,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new ConcurrencyLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new ConcurrencyLimiter(
                     new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
                         QueueLimit = -1,
                     }
-                ));
+                )
+            );
         }
 
         [Fact]

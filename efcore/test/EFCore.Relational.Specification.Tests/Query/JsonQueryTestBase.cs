@@ -129,13 +129,15 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(async, ss => ss.Set<JsonEntityBasic>()
+                AssertQuery(async, ss =>
+                    ss.Set<JsonEntityBasic>()
                         .Select(x => new
                         {
                             x,
                             x.OwnedReferenceRoot,
                             x.OwnedCollectionRoot,
-                        }))
+                        })
+                )
             )
         ).Message;
 
@@ -2674,7 +2676,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Json_all_types_projection_individual_properties(bool async) =>
-        AssertQuery(async, ss => ss.Set<JsonEntityAllTypes>()
+        AssertQuery(async, ss =>
+            ss.Set<JsonEntityAllTypes>()
                 .Select(x => new
                 {
                     x.Reference.TestDefaultString,
@@ -2703,7 +2706,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     x.Reference.TestNullableEnum,
                     x.Reference.TestNullableEnumWithIntConverter,
                     x.Reference.TestNullableEnumWithConverterThatHandlesNulls,
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

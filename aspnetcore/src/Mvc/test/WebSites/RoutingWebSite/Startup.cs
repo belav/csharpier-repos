@@ -111,10 +111,12 @@ public class Startup
             endpoints.MapRazorPages();
         });
 
-        app.Map("/afterrouting", b => b.Run(c =>
+        app.Map("/afterrouting", b =>
+            b.Run(c =>
             {
                 return c.Response.WriteAsync("Hello from middleware after routing");
-            }));
+            })
+        );
     }
 
     protected virtual void ConfigureMvcOptions(MvcOptions options)

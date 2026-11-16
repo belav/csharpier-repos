@@ -3518,15 +3518,7 @@ class C
         private void TestCompoundAssignment(string source)
         {
             TestBoundTree(source, edges =>
-                from edge in edges
-                let node = edge.Value
-                where
-                    node != null
-                    && (
-                        node.Text == "eventAssignmentOperator"
-                        || node.Text == "compoundAssignmentOperator"
-                    )
-                select string.Join(
+                from edge in edges let node = edge.Value where node != null && (node.Text == "eventAssignmentOperator" || node.Text == "compoundAssignmentOperator") select string.Join(
                     " ",
                     from child in node.Children
                     where

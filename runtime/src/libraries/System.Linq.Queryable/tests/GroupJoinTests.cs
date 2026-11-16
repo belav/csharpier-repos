@@ -207,7 +207,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.GroupJoin(
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                outer.GroupJoin(
                     inner.AsQueryable(),
                     e => e.name,
                     e => e.name,
@@ -219,7 +220,8 @@ namespace System.Linq.Tests
                             total = arIE.Select(o => o.total).ToArray(),
                         },
                     new AnagramEqualityComparer()
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -233,7 +235,8 @@ namespace System.Linq.Tests
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                outer
                     .AsQueryable()
                     .GroupJoin(
                         inner,
@@ -247,7 +250,8 @@ namespace System.Linq.Tests
                                 total = arIE.Select(o => o.total).ToArray(),
                             },
                         new AnagramEqualityComparer()
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -275,7 +279,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .GroupJoin(
                         inner.AsQueryable(),
@@ -289,7 +294,8 @@ namespace System.Linq.Tests
                                 total = arIE.Select(o => o.total).ToArray(),
                             },
                         new AnagramEqualityComparer()
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -317,7 +323,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .GroupJoin(
                         inner.AsQueryable(),
@@ -331,7 +338,8 @@ namespace System.Linq.Tests
                                 total = arIE.Select(o => o.total).ToArray(),
                             },
                         new AnagramEqualityComparer()
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -392,7 +400,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.GroupJoin(
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                outer.GroupJoin(
                     inner.AsQueryable(),
                     e => e.name,
                     e => e.name,
@@ -403,7 +412,8 @@ namespace System.Linq.Tests
                             orderID = arIE.Select(o => o.orderID).ToArray(),
                             total = arIE.Select(o => o.total).ToArray(),
                         }
-                ));
+                )
+            );
         }
 
         [Fact]
@@ -417,7 +427,8 @@ namespace System.Linq.Tests
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                outer
                     .AsQueryable()
                     .GroupJoin(
                         inner,
@@ -430,7 +441,8 @@ namespace System.Linq.Tests
                                 orderID = arIE.Select(o => o.orderID).ToArray(),
                                 total = arIE.Select(o => o.total).ToArray(),
                             }
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -458,7 +470,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .GroupJoin(
                         inner.AsQueryable(),
@@ -471,7 +484,8 @@ namespace System.Linq.Tests
                                 orderID = arIE.Select(o => o.orderID).ToArray(),
                                 total = arIE.Select(o => o.total).ToArray(),
                             }
-                    ));
+                    )
+            );
         }
 
         [Fact]
@@ -499,7 +513,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                outer
                     .AsQueryable()
                     .GroupJoin(
                         inner.AsQueryable(),
@@ -512,7 +527,8 @@ namespace System.Linq.Tests
                                 orderID = arIE.Select(o => o.orderID).ToArray(),
                                 total = arIE.Select(o => o.total).ToArray(),
                             }
-                    ));
+                    )
+            );
         }
 
         [Fact]
