@@ -52,7 +52,8 @@ public class SequentialGuidEndToEndTest : IDisposable
 
             for (var i = 0; i < 50; i++)
             {
-                guids.Add((
+                guids.Add(
+                    (
                         await context.AddAsync(
                             new Pegasus
                             {
@@ -61,7 +62,10 @@ public class SequentialGuidEndToEndTest : IDisposable
                                 Id = Guid.NewGuid(),
                             }
                         )
-                    ).Entity.Id);
+                    )
+                        .Entity
+                        .Id
+                );
             }
 
             await context.SaveChangesAsync();
